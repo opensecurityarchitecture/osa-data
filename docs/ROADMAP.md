@@ -4,7 +4,7 @@
 
 OSA is uniquely positioned in the security architecture space. Unlike SABSA (strategic/business-focused) or O-ESA (policy-driven), **OSA provides operational, ready-to-use patterns** with control mappings. This is referenced in O'Reilly publications and has no direct open-source competitor.
 
-**Current state:** 27 patterns, 171 NIST 800-53 Rev 4 controls with ISO 17799/COBIT 4.1/PCI-DSS v2 mappings. ~1,700 daily visitors despite minimal maintenance.
+**Current state:** 27 patterns, 191 NIST 800-53 Rev 5 controls (including new PT and SR families) with ISO 17799/COBIT 4.1/PCI-DSS v2 mappings. ~1,700 daily visitors despite minimal maintenance.
 
 **Key opportunity:** The structured data we've extracted is the foundation for API-driven, AI-enhanced security architecture tooling.
 
@@ -235,7 +235,7 @@ Link patterns to threat models. Given a pattern, enumerate threats and mitigatio
 | `data/schema/pattern.schema.json` | JSON schema for patterns |
 | `data/schema/control.schema.json` | JSON schema for controls with Rev 5 fields |
 | `data/patterns/*.json` | 27 extracted patterns |
-| `data/controls/*.json` | 171 extracted controls |
+| `data/controls/*.json` | 191 NIST 800-53 Rev 5 controls |
 | `docs/DISCOVERY.md` | Phase 0 findings |
 | `docs/ROADMAP.md` | This file |
 

@@ -14,7 +14,7 @@ OSA provides **operational, ready-to-use security architecture patterns** with c
 osa-workspace/
 ├── data/
 │   ├── patterns/           # 27 security architecture patterns (JSON)
-│   ├── controls/           # 171 NIST 800-53 controls (JSON)
+│   ├── controls/           # 191 NIST 800-53 Rev 5 controls (JSON)
 │   └── schema/             # JSON schemas for validation
 │       ├── pattern.schema.json
 │       └── control.schema.json

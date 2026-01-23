@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensecurityarchitecture.org/schema/pattern.schema.json",
+  "title": "OSA Security Architecture Pattern",
+  "description": "Schema for Open Security Architecture patterns with NIST control mappings",
+  "type": "object",
+
+  "required": ["id", "title", "metadata", "controls"],
+
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+
+    "id": {
+      "type": "string",
+      "pattern": "^SP-[0-9]{3}(\\.[0-9]+)?$",
+      "description": "Pattern identifier (e.g., SP-011, SP-003.1)",
+      "examples": ["SP-011", "SP-003.1"]
+    },
+
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "URL-friendly identifier"
+    },
+
+    "joomla_id": {
+      "type": "integer",
+      "description": "Original Joomla article ID for reference"
+    },
+
+    "title": {
+      "type": "string",
+      "description": "Human-readable pattern title"
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Brief description/summary of the pattern"
+    },
+
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL on opensecurityarchitecture.org"
+    },
+
+    "metadata": {
+      "type": "object",
+      "required": ["release", "status"],
+      "properties": {
+        "release": {
+          "type": "string",
+          "description": "OSA release version (e.g., 08.02)"
+        },
+        "classification": {
+          "type": "string",
+          "description": "Pattern category/classification"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "published", "reserved", "deprecated"],
+          "description": "Publication status"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["pattern", "module"],
+          "default": "pattern",
+          "description": "Pattern type - modules are reusable components"
+        },
+        "datePublished": {
+          "type": "string",
+          "format": "date",
+          "description": "Original publication date"
+        },
+        "dateModified": {
+          "type": "string",
+          "format": "date",
+          "description": "Last modification date"
+        },
+        "authors": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pattern authors (pseudonyms)"
+        },
+        "reviewers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pattern reviewers (pseudonyms)"
+        }
+      }
+    },
+
+    "diagram": {
+      "type": "object",
+      "description": "Architecture diagram references",
+      "properties": {
+        "svg": {
+          "type": "string",
+          "description": "Path to SVG diagram (with hyperlinked controls)"
+        },
+        "png": {
+          "type": "string",
+          "description": "Path to PNG fallback"
+        }
+      }
+    },
+
+    "legend": {
+      "type": "string",
+      "description": "Explanation of the diagram and key control significance"
+    },
+
+    "content": {
+      "type": "object",
+      "description": "Main pattern content sections",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Full description of the pattern context and use case"
+        },
+        "keyControlAreas": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Key areas requiring control consideration"
+        },
+        "assumptions": {
+          "type": "string",
+          "description": "Assumptions made in the pattern"
+        },
+        "typicalChallenges": {
+          "type": "string",
+          "description": "Common implementation challenges"
+        },
+        "indications": {
+          "type": "string",
+          "description": "When to use this pattern"
+        },
+        "contraIndications": {
+          "type": "string",
+          "description": "When NOT to use this pattern"
+        },
+        "threatResistance": {
+          "type": "string",
+          "description": "Threats addressed by this pattern"
+        }
+      }
+    },
+
+    "examples": {
+      "type": "object",
+      "description": "Example implementations or services",
+      "additionalProperties": {
+        "type": "array",
+        "items": {"type": "string"}
+      }
+    },
+
+    "references": {
+      "type": "array",
+      "description": "External references and resources",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "note": {"type": "string"}
+        }
+      }
+    },
+
+    "relatedPatterns": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Related pattern IDs"
+    },
+
+    "relatedPatternNames": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Related pattern names (human-readable)"
+    },
+
+    "controls": {
+      "type": "array",
+      "description": "NIST 800-53 controls applicable to this pattern",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "family"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}-[0-9]{2}$",
+            "description": "NIST control identifier (e.g., AC-01)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Control name"
+          },
+          "family": {
+            "type": "string",
+            "enum": ["AC", "AT", "AU", "CA", "CM", "CP", "IA", "IR", "MA", "MP", "PE", "PL", "PM", "PS", "RA", "SA", "SC", "SI"],
+            "description": "NIST control family"
+          },
+          "emphasis": {
+            "type": "string",
+            "enum": ["critical", "important", "standard"],
+            "description": "Relative importance for this pattern"
+          }
+        }
+      }
+    },
+
+    "controlFamilySummary": {
+      "type": "object",
+      "description": "Count of controls by family",
+      "additionalProperties": {"type": "integer"}
+    },
+
+    "complianceMappings": {
+      "type": "object",
+      "description": "Mappings to other compliance frameworks",
+      "properties": {
+        "iso27002": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "ISO 27002 control references"
+        },
+        "pciDss": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "PCI-DSS requirement references"
+        },
+        "cobit": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "COBIT control references"
+        },
+        "nistCsf": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "NIST Cybersecurity Framework references"
+        },
+        "cisControls": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "CIS Controls references"
+        }
+      }
+    },
+
+    "threats": {
+      "type": "array",
+      "description": "Specific threats addressed (future: link to threat catalogue)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "mitigatedBy": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Control IDs that mitigate this threat"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "id": "SP-006",
+  "slug": "0802pattern006",
+  "joomla_id": 224,
+  "title": "Wireless- Private Network Pattern",
+  "description": "Security controls and architecture for a managed wireless private network as an extension of trusted network",
+  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/224-0802pattern006",
+  "metadata": {
+    "release": "08.02",
+    "classification": "",
+    "status": "published",
+    "type": "pattern",
+    "datePublished": "2008-07-23",
+    "dateModified": "2025-07-05",
+    "authors": [
+      "Spinoza"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/OSA_images/patterns/08_02_Pattern_006_02_Wireless_Private_Network.svg",
+    "png": "/images/OSA_images/patterns/08_02_Pattern_006_02_Wireless_Private_Network.png"
+  },
+  "content": {
+    "description": "",
+    "keyControlAreas": [],
+    "assumptions": "There is little value in utilising SSID hiding, obscure SSID names, or MAC layer controls, as to a determined attacker these strategies provide little protection. Instead all security should be provided by the appropriate level of authentication and encryption.<br/>Frequent scans for unauthorised access should be made, via automated mechanism where possible. Ensure that Network Intrusion Detection and Protection devices are deployed to cover traffic from Wireless network segments.<br/><br/>",
+    "typicalChallenges": "Authentication should be seamless if possible, which is why certificates offer a useful mechanism. Most operating systems will support the use of 802.1x challenges, and can integrate certificate issuance, renewal and revocation.<br/>Where possible you should use WPA-2 encryption since this has a much stronger form of encryption between the client and access point (AES rather than RC4 with frequent session key renewal), however this is not supported by all access points or wireless cards, and you may need to fall back to WPA. WEP should be treated as an unencrypted channel since there are well publicised attacks, and should be supplemented by use of a VPN which naturally decreases usability since it tends towards the Wireless Public Hotspot pattern.<br/>Try to ensure that the placement of Wireless Access points minimises the spread of signals beyond the perimter of the building or location to be covered.<br/><br/>",
+    "indications": "You should apply this pattern when providing Wireless Access to your private corporate or organisation network from clearly defined locations. This pattern does not cover Bluetooth or Infrared.<br/><br/>",
+    "contraIndications": "Environments where you need to provide guest access to a wide range of users and do not manage the endpoints. Any environment where security outweigh usability considerations, where you should still look to exclusive used of wired access to minimise denial of service, or the remote possibility that encryption may be broken, or that endpoint vulnerabilities will allow the attacker to piggyback onto an existing session.<br/><br/>",
+    "threatResistance": "Spoofing, eavesdropping, impersonation, unathorised access to computing resources.<br/><br/>"
+  },
+  "references": [],
+  "controls": [
+    {
+      "id": "AC-18",
+      "name": "Wireless Access Restrictions",
+      "family": "AC"
+    },
+    {
+      "id": "AC-19",
+      "name": "Access Control For Portable And Mobile Devices",
+      "family": "AC"
+    },
+    {
+      "id": "AT-01",
+      "name": "Security Awareness And Training Policy And Procedures",
+      "family": "AT"
+    },
+    {
+      "id": "AT-03",
+      "name": "Security Training",
+      "family": "AT"
+    },
+    {
+      "id": "AT-04",
+      "name": "Security Training Records",
+      "family": "AT"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification And Authentication",
+      "family": "IA"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR"
+    },
+    {
+      "id": "IR-07",
+      "name": "Incident Response Assistance",
+      "family": "IR"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use Of Cryptography",
+      "family": "SC"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 2,
+    "AT": 3,
+    "AU": 1,
+    "CA": 2,
+    "IA": 2,
+    "IR": 5,
+    "RA": 1,
+    "SC": 3
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

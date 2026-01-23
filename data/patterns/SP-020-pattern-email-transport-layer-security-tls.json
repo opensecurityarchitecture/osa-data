@@ -1,0 +1,84 @@
+{
+  "id": "SP-020",
+  "slug": "pattern-email-transport-layer-security-tls",
+  "joomla_id": 275,
+  "title": "Email Transport Layer Security (TLS) Pattern",
+  "description": "Email Transport Layer Security (TLS) Pattern depicting key controls, particularly for companies with many business partners",
+  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/275-pattern-email-transport-layer-security-tls",
+  "metadata": {
+    "release": "08.02",
+    "classification": "",
+    "status": "published",
+    "type": "pattern",
+    "datePublished": "2010-04-27",
+    "dateModified": "2025-07-05",
+    "authors": [
+      "Martin Sibler"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/OSA_images/patterns/08_02_Pattern_020_001_Email_TLS.svg",
+    "png": "/images/OSA_images/patterns/08_02_Pattern_020_001_Email_TLS.png"
+  },
+  "content": {
+    "description": "",
+    "keyControlAreas": [],
+    "assumptions": "Protection of the e-mail communication at the infrastructure level (gateway-to-gateway) provides sufficient protection. No end-to-end protection is required.<br/><br/>",
+    "typicalChallenges": "Not every mail gateway (MTA) of communication partners support TLS (Transport Layer Security). Furthermore, TLS might be supported but is not configured properly. Additional challenges exist if an e-mail outsourcer is involved in TLS connections. Not all MTA’s are able to meet the additional requirements that outsourcers might have in order to establish an Enforced TLS connection.<br/><br/>",
+    "indications": "Transparent solution that requires no end-user interaction in order to have protection of the e-mail communication. <br/><br/>",
+    "contraIndications": "E-mail communication must be protected from the senders computer to the receivers computer (end-2-end protection) to ensure that only the intended recipient has access to the information. <br/><br/>",
+    "threatResistance": "E-mail communication is protected over the Internet in order to prevent eavesdropping of confidential information. No end-2-end protection. A number of residual risks remain with this pattern:</p>\n<ul>\n<li>Confidentiality for e-mail communication is not guaranteed inside the company’s intranet. In addition confidentiality in an end-2-end communication can not be ensured if a third party (outsourcer) is providing the e-mail gateway functionality (MTA). In this case the TLS communication is terminated at the mail gateway of this third party and the e-mails can be read by the third party. It has to be ensured that e-mail communication is also protected from the third party to the companies internal mail server.</li>\n<li>Loss of availability- The risk that e-mail communication is blocked between business partners exists for Enforced TLS connections if encryption is not possible. Continuous monitoring of Enforced TLS connections is required to identify encryption failures. Procedures have to be in place to temporary remove the Enforced TLS policy in order to re-establish the e-mail communication until the technical difficulties have been resolved which caused the encryption failure.</li>\n<li>No 100% encryption guarantee. Opportunistic TLS does not guarantee 100% security – if encryption is not possible e-mails are sent in clear text. Therefore, monitoring of such connections is required to prove that appropriate protection is provided by Opportunistic TLS.</li>\n<li>TLS stack vulnerability- E-mail communication could be eavesdropped due to vulnerabilities in the TLS communication stack.</li>\n<li>Identification of MTA- In case of Opportunistic TLS the authentication of the receiving mail server (MTA) cannot be guaranteed as self-signed certificates are accepted.</li>\n</ul>\n<p><br/>"
+  },
+  "references": [],
+  "controls": [
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification And Authentication",
+      "family": "IA"
+    },
+    {
+      "id": "SA-05",
+      "name": "Information System Documentation",
+      "family": "SA"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use Of Cryptography",
+      "family": "SC"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 2,
+    "AU": 1,
+    "IA": 1,
+    "SA": 1,
+    "SC": 3
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

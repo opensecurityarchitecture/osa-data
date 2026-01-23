@@ -1,0 +1,241 @@
+{
+  "id": "SP-008",
+  "slug": "pattern-public-web-server",
+  "joomla_id": 222,
+  "title": "Public Web Server Pattern",
+  "description": "Security architecture and controls for public web server",
+  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/222-pattern-public-web-server",
+  "metadata": {
+    "release": "08.02",
+    "classification": "",
+    "status": "published",
+    "type": "pattern",
+    "datePublished": "2008-07-23",
+    "dateModified": "2025-07-05",
+    "authors": [
+      "Aurelius"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/OSA_images/patterns/08_02_Pattern_008_31_Public_WebServer.svg",
+    "png": "/images/OSA_images/patterns/08_02_Pattern_008_31_Public_WebServer.png"
+  },
+  "content": {
+    "description": "",
+    "keyControlAreas": [],
+    "assumptions": "</p>\n<ul>\n<li>RIA web application can built with any front end technology like AJAX, Java, Silverlight or FLEX/FLASH</li>\n<li>End user authentication can be strong (with physical token based OTP, SMS based OTP, or iTAN list) or just UID/PW (enhanced with SRP, or Digest)</li>\n<li>Web application state should not be stored on the client but only a pointer to the server side stored storage should be passed (encrypted) out to the client, for example as a cookie or as POST parameter</li>\n<li>All input validation that is done on the client needs to be redone on the server</li>\n</ul>\n<p>",
+    "typicalChallenges": "</p>\n<ul>\n<li>Malicious entities try to exploit software bugs in the Web server</li>\n<li>Denial of service (DoS) attacks may be directed to the Web server</li>\n<li>Compromises through command injection attacks</li>\n<li>The server may be used as a distribution point for attack tools, pornography, or illegally copied software.</li>\n<li>Man in the browser attacks</li>\n<li>Phising attacks</li>\n<li>Misconfigurations</li>\n</ul>\n<p>",
+    "indications": "",
+    "contraIndications": "",
+    "threatResistance": "</strong></p>\n<ul>\n<li>Compromises through command injection attacks</li>\n<li>Compromises through XSS attacks</li>\n<li>Compromises through buffer overflow attacks</li>\n<li>Compromises through access control violations</li>\n</ul>\n<p><strong>References</strong></p>\n<ul>\n<li><a href=\"http://csrc.nist.gov/publications/nistpubs/800-44-ver2/SP800-44v2.pdf\">NIST 800-44 Securing Public Web Server</a></li>\n<li><a href=\"http://www.owasp.org/index.php/Category:OWASP_Guide_Project\">OWASP Guide Project </a></li>\n<li><a href=\"http://msdn.microsoft.com/en-us/library/zdh19h94.aspx\">Microsoft's guide on \"Best Security Practices for Web Applications\" </a></li>\n</ul>\n<p><strong>Classification</strong>: Pattern</p>\n<p><strong>Release</strong>: 08.07</p>\n<p><strong>Authors</strong>: Aurelius</p>\n<p><strong>Reviewer</strong>: tbd</p>\n<h5>Control details</h5>\n<p><a href=\"/library/0802control-catalogue/23-08-02-ac-01\">AC-01 Access Control Policies and Procedures</a><br/><a href=\"/library/0802control-catalogue/25-08-02-ac-03\">AC-03 Access Enforcement</a><br/><a href=\"/library/0802control-catalogue/29-08-02-ac-07\">AC-07 Unsuccessful Login Attempts</a><br/><a href=\"/library/0802control-catalogue/31-08-02-ac-09\">AC-09 Previous Logon Notification</a><br/><a href=\"/library/0802control-catalogue/32-08-02-ac-10\">AC-10 Concurrent Session Control</a><br/><a href=\"/library/0802control-catalogue/33-08-02-ac-11\">AC-11 Session Lock</a><br/><a href=\"/library/0802control-catalogue/34-08-02-ac-12\">AC-12 Session Termination</a><br/><a href=\"/library/0802control-catalogue/172-08-02-au-03\">AU-03 Content Of Audit Records</a><br/><a href=\"/library/0802control-catalogue/176-08-02-au-07\">AU-07 Audit Reduction And Report Generation</a><br/><a href=\"/library/0802control-catalogue/161-08-02-ca-02\">CA-02 Security Assessments</a><br/><a href=\"/library/0802control-catalogue/163-08-02-ca-04\">CA-04 Security Certification</a><br/><a href=\"/library/0802control-catalogue/153-08-02-cm-02\">CM-02 Baseline Configuration</a><br/><a href=\"/library/0802control-catalogue/154-08-02-cm-03\">CM-03 Configuration Change Control</a><br/><a href=\"/library/0802control-catalogue/156-08-02-cm-05\">CM-05 Access Restrictions For Change</a><br/><a href=\"/library/0802control-catalogue/158-08-02-cm-07\">CM-07 Least Functionality</a><br/><a href=\"/library/0802control-catalogue/143-08-02-cp-02\">CP-02 Contingency Plan</a><br/><a href=\"/library/0802control-catalogue/144-08-02-cp-03\">CP-03 Contingency Training</a><br/><a href=\"/library/0802control-catalogue/147-08-02-cp-06\">CP-06 Alternate Storage Site</a><br/><a href=\"/library/0802control-catalogue/148-08-02-cp-07\">CP-07 Alternate Processing Site</a><br/><a href=\"/library/0802control-catalogue/150-08-02-cp-09\">CP-09 Information System Backup</a><br/><a href=\"/library/0802control-catalogue/151-08-02-cp-10\">CP-10 Information System Recovery And Reconstitution</a><br/><a href=\"/library/0802control-catalogue/181-08-02-ia-01\">IA-01 Identification And Authentication Policy And Procedures</a><br/><a href=\"/library/0802control-catalogue/136-08-02-ir-02\">IR-02 Incident Response Training</a><br/><a href=\"/library/0802control-catalogue/138-08-02-ir-04\">IR-04 Incident Handling</a><br/><a href=\"/library/0802control-catalogue/129-08-02-ma-02\">MA-02 Controlled Maintenance</a><br/><a href=\"/library/0802control-catalogue/131-08-02-ma-04\">MA-04 Remote Maintenance</a><br/><a href=\"/library/0802control-catalogue/133-08-02-ma-06\">MA-06 Timely Maintenance</a><br/><a href=\"/library/0802control-catalogue/90-08-02-pl-02\">PL-02 System Security Plan</a><br/><a href=\"/library/0802control-catalogue/86-08-02-ra-03\">RA-03 Risk Assessment</a><br/><a href=\"/library/0802control-catalogue/88-08-02-ra-05\">RA-05 Vulnerability Scanning</a><br/><a href=\"/library/0802control-catalogue/53-08-02-sa-03\">SA-03 Life Cycle Support</a><br/><a href=\"/library/0802control-catalogue/58-08-02-sa-08\">SA-08 Security Engineering Principles</a><br/><a href=\"/library/0802control-catalogue/60-08-02-sa-10\">SA-10 Developer Configuration Management</a><br/><a href=\"/library/0802control-catalogue/65-08-02-sc-05\">SC-05 Denial Of Service Protection</a><br/><a href=\"/library/0802control-catalogue/68-08-02-sc-08\">SC-08 Transmission Integrity</a><br/><a href=\"/library/0802control-catalogue/69-08-02-sc-09\">SC-09 Transmission Confidentiality</a><br/><a href=\"/library/0802control-catalogue/71-08-02-sc-11\">SC-11 Trusted Path</a><br/><a href=\"/library/0802control-catalogue/80-08-02-sc-20\">SC-20 Secure Name / Address Resolution Service (Authoritative Source)</a></p>\n</div>\n</article>"
+  },
+  "references": [],
+  "controls": [
+    {
+      "id": "AC-01",
+      "name": "Access Control Policies and Procedures",
+      "family": "AC"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Login Attempts",
+      "family": "AC"
+    },
+    {
+      "id": "AC-09",
+      "name": "Previous Logon Notification",
+      "family": "AC"
+    },
+    {
+      "id": "AC-10",
+      "name": "Concurrent Session Control",
+      "family": "AC"
+    },
+    {
+      "id": "AC-11",
+      "name": "Session Lock",
+      "family": "AC"
+    },
+    {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU"
+    },
+    {
+      "id": "AU-07",
+      "name": "Audit Reduction And Report Generation",
+      "family": "AU"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA"
+    },
+    {
+      "id": "CA-04",
+      "name": "Security Certification",
+      "family": "CA"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions For Change",
+      "family": "CM"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM"
+    },
+    {
+      "id": "CP-02",
+      "name": "Contingency Plan",
+      "family": "CP"
+    },
+    {
+      "id": "CP-03",
+      "name": "Contingency Training",
+      "family": "CP"
+    },
+    {
+      "id": "CP-06",
+      "name": "Alternate Storage Site",
+      "family": "CP"
+    },
+    {
+      "id": "CP-07",
+      "name": "Alternate Processing Site",
+      "family": "CP"
+    },
+    {
+      "id": "CP-09",
+      "name": "Information System Backup",
+      "family": "CP"
+    },
+    {
+      "id": "CP-10",
+      "name": "Information System Recovery And Reconstitution",
+      "family": "CP"
+    },
+    {
+      "id": "IA-01",
+      "name": "Identification And Authentication Policy And Procedures",
+      "family": "IA"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR"
+    },
+    {
+      "id": "MA-02",
+      "name": "Controlled Maintenance",
+      "family": "MA"
+    },
+    {
+      "id": "MA-04",
+      "name": "Remote Maintenance",
+      "family": "MA"
+    },
+    {
+      "id": "MA-06",
+      "name": "Timely Maintenance",
+      "family": "MA"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security Plan",
+      "family": "PL"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA"
+    },
+    {
+      "id": "SA-03",
+      "name": "Life Cycle Support",
+      "family": "SA"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security Engineering Principles",
+      "family": "SA"
+    },
+    {
+      "id": "SA-10",
+      "name": "Developer Configuration Management",
+      "family": "SA"
+    },
+    {
+      "id": "SC-05",
+      "name": "Denial Of Service Protection",
+      "family": "SC"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC"
+    },
+    {
+      "id": "SC-11",
+      "name": "Trusted Path",
+      "family": "SC"
+    },
+    {
+      "id": "SC-20",
+      "name": "Secure Name / Address Resolution Service (Authoritative Source)",
+      "family": "SC"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 7,
+    "AU": 2,
+    "CA": 2,
+    "CM": 4,
+    "CP": 6,
+    "IA": 1,
+    "IR": 2,
+    "MA": 3,
+    "PL": 1,
+    "RA": 2,
+    "SA": 3,
+    "SC": 5
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

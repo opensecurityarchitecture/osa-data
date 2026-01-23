@@ -1,0 +1,201 @@
+{
+  "id": "SP-016",
+  "slug": "sp-016-dmz-module",
+  "joomla_id": 286,
+  "title": "DMZ Module",
+  "description": "OpenSecurityArchitecture (OSA) distills the know-how of the security architecture community and provides readily usable patterns for your application. This is a free framework, developed and owned by the community.",
+  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/286-sp-016-dmz-module",
+  "metadata": {
+    "release": "08.02",
+    "classification": "",
+    "status": "published",
+    "type": "module",
+    "datePublished": "2010-07-31",
+    "dateModified": "2025-07-05",
+    "authors": [
+      "Russel and Tobias"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/OSA_images/patterns/08_02_Module_016_01_DMZ.svg",
+    "png": "/images/OSA_images/patterns/08_02_Module_016_01_DMZ.png"
+  },
+  "content": {
+    "description": "",
+    "keyControlAreas": [],
+    "assumptions": "1) Encryption should be used for sensitive traffic, it may be necessary to break the session at the gateway (bastion host) to inspect traffic depending on content monitoring requirements. 2) The internet is a bad place and you need to protect your trusted computing environment from it!<br/><br/>",
+    "typicalChallenges": "Skilled firewall administrators to ensure that firewall rules do not have errors that create holes. Skilled security and server engineers to implement and maintain hardened build for gateways.<br/>Remodel an existing environment rather than building up an environment from scratch. To remodel the following approach is recommended:</p>\n<ul>\n<li>Isolate in the DMZ those services that have an \"intermediate\" role, such as web frontends, antivirus-servers, content inspection servers, SSL VPN portals, Captive portals, etc.</li>\n<li>Plan traffic rules on the firewall layer to route only the a very restricted set of services, especially concerning the traffic from the DMZ to the internal network and from the internet to the DMZ. Make sure, that there is absolutely NO direct traffic from the internal network to the internet</li>\n<li>Optionally add intrusion prevention systems in mainly two strategic points: in front of server networks, to ensure in depth defense and isolation of the sensitive data. As well as between internal network and DMZ, to contain propagation of worms and fast spreading zero day attacks throughout the network and on the Net.</li>\n</ul>\n<p>",
+    "indications": "Organisation with secure computing environment that connects to untrusted networks.<br/><br/>",
+    "contraIndications": "Single user environment e.g. Home user.<br/><br/>",
+    "threatResistance": "Denial of Service, Network based attacks.<br/><br/>"
+  },
+  "references": [],
+  "controls": [
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Login Attempts",
+      "family": "AC"
+    },
+    {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU"
+    },
+    {
+      "id": "AU-04",
+      "name": "Audit Storage Capacity",
+      "family": "AU"
+    },
+    {
+      "id": "AU-05",
+      "name": "Response To Audit Processing Failures",
+      "family": "AU"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU"
+    },
+    {
+      "id": "AU-07",
+      "name": "Audit Reduction And Report Generation",
+      "family": "AU"
+    },
+    {
+      "id": "AU-08",
+      "name": "Time Stamps",
+      "family": "AU"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection Of Audit Information",
+      "family": "AU"
+    },
+    {
+      "id": "AU-10",
+      "name": "Non-Repudiation",
+      "family": "AU"
+    },
+    {
+      "id": "AU-11",
+      "name": "Audit Record Retention",
+      "family": "AU"
+    },
+    {
+      "id": "CA-03",
+      "name": "Information System Connections",
+      "family": "CA"
+    },
+    {
+      "id": "CA-04",
+      "name": "Security Certification",
+      "family": "CA"
+    },
+    {
+      "id": "CA-05",
+      "name": "Plan Of Action And Milestones",
+      "family": "CA"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA"
+    },
+    {
+      "id": "SC-05",
+      "name": "Denial Of Service Protection",
+      "family": "SC"
+    },
+    {
+      "id": "SC-10",
+      "name": "Network Disconnect",
+      "family": "SC"
+    },
+    {
+      "id": "SC-20",
+      "name": "Secure Name / Address Resolution Service (Authoritative Source)",
+      "family": "SC"
+    },
+    {
+      "id": "SC-21",
+      "name": "Secure Name / Address Resolution Service (Recursive Or Caching Resolver)",
+      "family": "SC"
+    },
+    {
+      "id": "SC-22",
+      "name": "Architecture And Provisioning For Name / Address Resolution Service",
+      "family": "SC"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts And Advisories",
+      "family": "SI"
+    },
+    {
+      "id": "SI-06",
+      "name": "Security Functionality Verification",
+      "family": "SI"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software And Information Integrity",
+      "family": "SI"
+    },
+    {
+      "id": "SI-08",
+      "name": "Spam Protection",
+      "family": "SI"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 4,
+    "AU": 10,
+    "CA": 3,
+    "CM": 1,
+    "RA": 1,
+    "SC": 6,
+    "SI": 6
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

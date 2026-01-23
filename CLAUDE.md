@@ -16,7 +16,7 @@ Contains structured JSON data for patterns and controls with compliance mappings
 
 ## Founder Context
 
-**Russ** — OSA founder, also founder of ADAvault.
+**Russ** — OSA founder.
 
 - 20+ years in technology for financial services
 - Security specialist background
@@ -96,13 +96,6 @@ osa-workspace/
     └── workflows/
         └── validate.yml         # CI validation
 ```
-
-## Relationship to AdaVault
-
-This project is **separate** from AdaVault work:
-- Different Cloudflare account
-- Weekend cadence (not weekday AdaVault time)
-- Hosted on AdaVault infrastructure but operationally independent
 
 ## Commands
 

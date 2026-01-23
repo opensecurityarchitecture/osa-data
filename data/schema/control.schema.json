@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensecurityarchitecture.org/schema/control.schema.json",
+  "title": "OSA Security Control",
+  "description": "Schema for NIST 800-53 security controls with multi-framework compliance mappings",
+  "type": "object",
+
+  "required": ["id", "name", "family", "family_name"],
+
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}-[0-9]{1,2}(\\([0-9]+\\))?$",
+      "description": "NIST control identifier (e.g., AC-01, AC-02(1) for enhancements)",
+      "examples": ["AC-01", "AC-02", "SC-07(5)"]
+    },
+
+    "name": {
+      "type": "string",
+      "description": "Control name/title"
+    },
+
+    "family": {
+      "type": "string",
+      "description": "Control family code",
+      "enum": [
+        "AC", "AT", "AU", "CA", "CM", "CP", "IA", "IR", "MA", "MP",
+        "PE", "PL", "PM", "PS", "RA", "SA", "SC", "SI",
+        "PT", "SR"
+      ]
+    },
+
+    "family_name": {
+      "type": "string",
+      "description": "Human-readable control family name",
+      "enum": [
+        "Access Control",
+        "Awareness and Training",
+        "Audit and Accountability",
+        "Assessment, Authorization, and Monitoring",
+        "Security Assessment and Authorization",
+        "Configuration Management",
+        "Contingency Planning",
+        "Identification and Authentication",
+        "Incident Response",
+        "Maintenance",
+        "Media Protection",
+        "Physical and Environmental Protection",
+        "Planning",
+        "Program Management",
+        "Personnel Security",
+        "Risk Assessment",
+        "System and Services Acquisition",
+        "System and Communications Protection",
+        "System and Information Integrity",
+        "Personally Identifiable Information Processing and Transparency",
+        "Supply Chain Risk Management"
+      ]
+    },
+
+    "control_class": {
+      "type": "string",
+      "enum": ["Technical", "Operational", "Management", ""],
+      "description": "Control classification"
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Full control description text"
+    },
+
+    "supplemental_guidance": {
+      "type": "string",
+      "description": "Additional guidance for implementing the control"
+    },
+
+    "enhancements": {
+      "type": "string",
+      "description": "Control enhancement descriptions (legacy format)"
+    },
+
+    "baseline_low": {
+      "type": "boolean",
+      "description": "Included in NIST Low baseline"
+    },
+
+    "baseline_moderate": {
+      "type": "boolean",
+      "description": "Included in NIST Moderate baseline"
+    },
+
+    "baseline_high": {
+      "type": "boolean",
+      "description": "Included in NIST High baseline"
+    },
+
+    "joomla_id": {
+      "type": "integer",
+      "description": "Original Joomla article ID for reference"
+    },
+
+    "nist_800_53": {
+      "type": "object",
+      "description": "NIST 800-53 version-specific information",
+      "properties": {
+        "rev4": {
+          "type": "object",
+          "description": "NIST 800-53 Revision 4 (withdrawn Sept 2021)",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Control ID in Rev 4"
+            },
+            "name": {
+              "type": "string",
+              "description": "Control name in Rev 4"
+            },
+            "withdrawn": {
+              "type": "boolean",
+              "description": "Whether this control was withdrawn in Rev 5"
+            },
+            "incorporated_into": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "If withdrawn, which Rev 5 controls incorporate this"
+            }
+          }
+        },
+        "rev5": {
+          "type": "object",
+          "description": "NIST 800-53 Revision 5 (current as of Sept 2020)",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Control ID in Rev 5"
+            },
+            "name": {
+              "type": "string",
+              "description": "Control name in Rev 5"
+            },
+            "description": {
+              "type": "string",
+              "description": "Control description in Rev 5"
+            },
+            "discussion": {
+              "type": "string",
+              "description": "Discussion/guidance in Rev 5 (replaces supplemental guidance)"
+            },
+            "related_controls": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Related control IDs"
+            },
+            "baseline_low": {"type": ["boolean", "null"]},
+            "baseline_moderate": {"type": ["boolean", "null"]},
+            "baseline_high": {"type": ["boolean", "null"]},
+            "baseline_privacy": {"type": ["boolean", "null"]},
+            "new_in_rev5": {
+              "type": "boolean",
+              "description": "True if this control is new in Rev 5"
+            },
+            "changes_from_rev4": {
+              "type": "string",
+              "description": "Summary of changes from Rev 4"
+            }
+          }
+        }
+      }
+    },
+
+    "iso17799": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Legacy ISO 17799 mappings (deprecated)"
+    },
+
+    "cobit41": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Legacy COBIT 4.1 mappings (deprecated)"
+    },
+
+    "pci_dss_v2": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Legacy PCI-DSS v2 mappings (deprecated)"
+    },
+
+    "compliance_mappings": {
+      "type": "object",
+      "description": "Current compliance framework mappings",
+      "properties": {
+        "iso_27001_2022": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "ISO 27001:2022 / ISO 27002:2022 control references"
+        },
+        "iso_27002_2022": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "ISO 27002:2022 control references (detailed)"
+        },
+        "cobit_2019": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "COBIT 2019 objective references"
+        },
+        "pci_dss_v4": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "PCI-DSS v4.0 requirement references"
+        },
+        "nist_csf_2": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "NIST Cybersecurity Framework 2.0 references"
+        },
+        "cis_controls_v8": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "CIS Controls v8 references"
+        },
+        "soc2_tsc": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "SOC 2 Trust Services Criteria references"
+        }
+      }
+    },
+
+    "patterns": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Pattern IDs that reference this control"
+    },
+
+    "metadata": {
+      "type": "object",
+      "description": "OSA-specific metadata",
+      "properties": {
+        "last_reviewed": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date this control was last reviewed for accuracy"
+        },
+        "review_notes": {
+          "type": "string",
+          "description": "Notes from last review"
+        },
+        "mapping_status": {
+          "type": "string",
+          "enum": ["complete", "partial", "pending", "not_applicable"],
+          "description": "Status of compliance mapping updates"
+        }
+      }
+    }
+  }
+}

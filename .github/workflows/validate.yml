@@ -1,0 +1,73 @@
+name: Validate JSON Data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**/*.json'
+      - 'scripts/validate_json.py'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'data/**/*.json'
+      - 'scripts/validate_json.py'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Validate JSON syntax
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          errors = 0
+          for p in Path('data').rglob('*.json'):
+              try:
+                  json.load(open(p))
+              except:
+                  print(f'Invalid JSON: {p}')
+                  errors += 1
+          exit(errors)
+          "
+
+      - name: Validate against schemas
+        run: python scripts/validate_json.py
+
+      - name: Check pattern manifest
+        run: |
+          python -c "
+          import json
+          manifest = json.load(open('data/patterns/_manifest.json'))
+          print(f\"Patterns in manifest: {manifest['total_patterns']}\")
+          from pathlib import Path
+          actual = len([f for f in Path('data/patterns').glob('*.json') if not f.name.startswith('_')])
+          print(f'Pattern files found: {actual}')
+          assert manifest['total_patterns'] == actual, 'Manifest count mismatch'
+          "
+
+      - name: Check control manifest
+        run: |
+          python -c "
+          import json
+          manifest = json.load(open('data/controls/_manifest.json'))
+          print(f\"Controls in manifest: {manifest['total_controls']}\")
+          from pathlib import Path
+          actual = len([f for f in Path('data/controls').glob('*.json') if not f.name.startswith('_')])
+          print(f'Control files found: {actual}')
+          assert manifest['total_controls'] == actual, 'Manifest count mismatch'
+          "

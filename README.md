@@ -110,18 +110,19 @@ Example control (AC-04 Information Flow Enforcement):
 
 ## Roadmap
 
-### Phase 1: Content Modernisation (Current)
-- [ ] Update NIST 800-53 Rev 4 to Rev 5
-- [ ] Update ISO 17799 to ISO 27001:2022
-- [ ] Update COBIT 4.1 to COBIT 2019
-- [ ] Update PCI-DSS v2 to v4.0
-- [ ] Add NIST CSF 2.0 mappings
-- [ ] Add CIS Controls v8 mappings
+### Phase 1: Content Modernisation - COMPLETE
+- [x] Update NIST 800-53 Rev 4 to Rev 5 (191 controls)
+- [x] Update ISO 17799 to ISO 27001:2022 & ISO 27002:2022
+- [x] Update COBIT 4.1 to COBIT 2019
+- [x] Add NIST CSF 2.0 mappings
+- [x] Add CIS Controls v8 mappings
+- [x] Add SOC 2 TSC mappings
+- [x] **Website replatform** - Modern Astro site on Cloudflare Pages
 
 ### Phase 2: API Layer
 - [ ] REST API for patterns and controls
 - [ ] OpenAPI documentation
-- [ ] GitHub Pages hosting (zero cost)
+- [ ] Programmatic access to compliance mappings
 
 ### Phase 3: AI Integration
 - [ ] Pattern recommendation engine

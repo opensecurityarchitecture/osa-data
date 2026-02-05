@@ -4,15 +4,20 @@ This workspace is for the modernisation of opensecurityarchitecture.org (OSA).
 
 ## Project Context
 
-**OSA** has been running since ~2008, developed actively for 4-5 years, then dormant. Despite minimal maintenance, it continues to receive traffic (~1,700 daily visitors). Pattern content was published in O'Reilly (Cloud Pattern). The site runs on Joomla 4.5.x, hosted via Cloudflare.
+**OSA** has been running since ~2008, developed actively for 4-5 years, then dormant. Despite minimal maintenance, it continues to receive traffic (~1,700 daily visitors). Pattern content was published in O'Reilly (Cloud Pattern).
+
+**Current platform**: Modern Astro site with Tailwind CSS, deployed via Cloudflare Pages from GitHub. Cut over from legacy Joomla on 2026-02-05.
 
 **Goal**: Modernise OSA as a weekend side project, with realistic targets to grow traffic and value.
 
-## GitHub Repository
+## GitHub Repositories
 
-**Repo**: https://github.com/opensecurityarchitecture/osa-data
+**osa-data**: https://github.com/opensecurityarchitecture/osa-data
+- Structured JSON data for patterns and controls with compliance mappings
 
-Contains structured JSON data for patterns and controls with compliance mappings.
+**osa-website**: https://github.com/opensecurityarchitecture/osa-website
+- Astro site source, deployed to Cloudflare Pages
+- Live at: https://www.opensecurityarchitecture.org
 
 ## Founder Context
 
@@ -48,9 +53,9 @@ Transform OSA from a static Joomla site into a modern, AI-powered security archi
 | 0 | Discovery - traffic analysis, content audit, security posture | Complete |
 | 1 | Data extraction - patterns to structured format | Complete |
 | 1.5 | Content modernisation - NIST Rev 5, compliance mappings | Complete |
+| 1.6 | Website replatform - Astro/Tailwind, Cloudflare Pages | **Complete** |
 | 2 | API layer - expose patterns via API | Not started |
 | 3 | AI integration - Claude-powered features | Not started |
-| 4 | Platform decision - Joomla refresh vs replatform | Not started |
 
 ## Current Data
 
@@ -138,8 +143,21 @@ git push origin main
   - /cms/* -> /
   - /jcms/* -> /
 
+### 2026-02-05 - Website Launch
+- **Site replatform complete**: Astro + Tailwind CSS on Cloudflare Pages
+- **Design system**: 5-color OSA palette (#FFFFFF, #00171F, #003459, #007EA7, #00A8E8)
+- **Full content migration**: Patterns, controls, frameworks, foundations, about, blog
+- **Framework mappings section**: ISO 27001, ISO 27002, COBIT 2019, CIS v8, NIST CSF 2.0, SOC 2
+- **SEO**: Sitemap generation, meta descriptions, 301 redirects for legacy URLs
+- **Mobile**: Responsive design with working hamburger menu
+- **Personas page**: Who Uses OSA with SVG avatars
+- **Cut over**: opensecurityarchitecture.org now serving new site
+- **Repos**:
+  - osa-data: Structured JSON data
+  - osa-website: Astro site source
+
 ### Next Session
 - PCI-DSS v4.0 mappings
-- Sitemap.xml generation
 - API layer (Phase 2)
 - Pattern-level compliance enrichment
+- Consider Google Search Console submission

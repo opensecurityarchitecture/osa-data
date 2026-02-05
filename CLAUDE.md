@@ -161,3 +161,20 @@ git push origin main
 - API layer (Phase 2)
 - Pattern-level compliance enrichment
 - Consider Google Search Console submission
+- Social/community building (see docs/SOCIAL-STRATEGY.md)
+
+## Backlog
+
+### Icon Set Modernisation (Validate First)
+- Old icons drove significant traffic - check if still valuable niche
+- Modern icon sets (Heroicons etc) don't cover security-specific symbols
+- If demand exists: modernise to SVG, consistent grid, OSA palette
+- Would enable dynamic diagram generation
+- **Action**: Check old analytics, validate demand before investing
+
+### Graph-Based Architecture Vision (Phase 3+)
+- Security architecture as graph: nodes (assets), edges (relationships)
+- Controls applied to both nodes and edges
+- Dynamic pattern generation based on system description
+- AI-powered conversational threat modelling
+- See detailed vision: docs/VISION-GRAPH-ARCHITECTURE.md

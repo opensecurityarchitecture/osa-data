@@ -3,17 +3,18 @@
   "slug": "pattern-data-security",
   "joomla_id": 259,
   "title": "Data Security Pattern",
-  "description": "Data security pattern to define security controls required to secure data or information processed by business services",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/259-pattern-data-security",
+  "description": "Security architecture for classifying, protecting, and controlling data throughout its lifecycle. Covers data classification schemes, encryption at rest and in transit, media handling, access enforcement, information flow controls, and data retention and disposal obligations.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-013",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
+    "release": "26.02",
+    "classification": "Data & Privacy",
     "status": "published",
     "type": "pattern",
     "datePublished": "2009-05-04",
-    "dateModified": "2025-07-05",
+    "dateModified": "2026-02-06",
     "authors": [
-      "Russell"
+      "Aurelius",
+      "Vitruvius"
     ],
     "reviewers": []
   },
@@ -22,181 +23,168 @@
     "png": "/images/OSA_images/patterns/08_02_Pattern_013_02_Data_Security.png"
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "None.<br/><br/>",
-    "typicalChallenges": "Management appetite. Selling in the organisation. Keeping it simple, and cutting through the complexity of environment. Building the right awareness and training campaign. Looking forward, the challenges to maintain data security are likely to get harder. The pace of technological change is quickening. The level and sophistication of external threats, such as e-crime, is increasing. Improving services will mean greater use of data within organisations and more data sharing.</p>\n<p>",
-    "indications": "Organizations who process Personally Identifiable Information (PII), are in regulated sectors (Health, Finance, Government etc) or process commercially sensitive information.</p>\n<p>",
-    "contraIndications": "Publically available information, freely available from many sources.</p>\n<p>",
-    "threatResistance": "To be determined.</p>\n<p>"
+    "description": "Data is the asset that organisations ultimately exist to protect. While perimeter defences, access controls, and monitoring capabilities are all essential, they exist in service of one fundamental objective: preventing unauthorised access to, modification of, or destruction of the organisation's data. The Data Security pattern addresses this directly by establishing a comprehensive framework for classifying data according to its sensitivity and business value, then applying proportionate controls across the entire data lifecycle -- from creation through processing, storage, transmission, and eventual disposal.\n\nThe pattern begins with data classification, which is the foundation upon which all other data security controls are built. Without a clear, consistently applied classification scheme, organisations cannot make rational decisions about protection levels. Classification must be practical -- schemes with too many tiers create confusion and inconsistent labelling, while oversimplified schemes fail to differentiate between data that requires fundamentally different protection. A three-to-four tier model (Public, Internal, Confidential, Restricted) is the pragmatic standard for most organisations. Each tier maps to specific handling requirements for storage, transmission, access, and disposal.\n\nAccess control is the enforcement mechanism for classification decisions. Data must be protected by role-based access controls implementing least privilege and separation of duties principles. Information flow enforcement ensures that data does not move between security domains without appropriate controls -- for example, preventing confidential data from being copied to uncontrolled external systems or transmitted over unencrypted channels. These controls must operate at the network layer (boundary protection, flow enforcement), the application layer (input validation, output handling), and the physical layer (media controls, facility access).\n\nCryptography is the technical backbone of data confidentiality and integrity. Data at rest must be encrypted where its classification warrants it, using validated cryptographic algorithms and properly managed keys. Data in transit requires transmission confidentiality and integrity controls -- TLS for application traffic, VPN or dedicated links for network-level protection. The choice of cryptographic controls should be risk-driven and aligned with current best practice; organisations should maintain cryptographic agility to respond to evolving threats including post-quantum computing considerations.\n\nThe pattern also addresses the full media lifecycle: how data is stored on physical and removable media, how media is labelled, how access to media is controlled, how media is transported between locations, and critically, how media is sanitised and disposed of when no longer needed. Data remnance -- the residual representation of data after attempted erasure -- is a persistent risk that requires deliberate sanitisation procedures. Privacy impact assessments ensure that data processing activities involving personal information are evaluated for compliance with data protection regulations before implementation.",
+    "keyControlAreas": [
+      "Access Enforcement and Least Privilege (AC-03, AC-05, AC-06): These controls form the primary barrier preventing unauthorised data access. Access enforcement (AC-03) ensures that every data access request is validated against the organisation's access control policy before being permitted. Separation of duties (AC-05) prevents any single individual from having sufficient access to compromise data integrity -- for example, the person who approves a payment should not be the same person who initiates it. Least privilege (AC-06) restricts each user, process, and system to the minimum access required for their function. Implementation requires a combination of role-based access control (RBAC), attribute-based access control (ABAC) for context-sensitive decisions, and regular access reviews to detect and remediate privilege creep. Privileged access to data stores (database administrators, storage administrators) requires enhanced controls including privileged access management tools, session recording, and just-in-time access provisioning.",
+      "Data Classification and Labelling (AC-15, AC-16, RA-02): Classification is the decision framework that drives all other data security controls. Security categorisation (RA-02) establishes the impact levels for data confidentiality, integrity, and availability -- typically using a scheme aligned with business risk appetite and regulatory requirements. Automated marking (AC-15) and automated labelling (AC-16) apply classification metadata to data objects programmatically, reducing reliance on user judgement for routine classification decisions. Modern data classification tools can inspect content, apply rules-based classification, and integrate with data loss prevention systems to enforce handling policies. Classification must be applied at the point of creation and maintained through the data lifecycle, including when data is copied, transformed, or aggregated.",
+      "Information Flow and Boundary Protection (AC-04, SC-07, AC-20): Data does not stay in one place. It flows between systems, networks, users, and organisations. Information flow enforcement (AC-04) controls these movements, ensuring data does not cross security boundaries without appropriate authorisation and protection. Boundary protection (SC-07) implements network-level controls at the perimeter and between internal security zones to restrict data movement. Use of external information systems (AC-20) addresses the risk of data being accessed from or stored on systems outside the organisation's direct control -- including personal devices, cloud services, and third-party platforms. Implementation requires data loss prevention (DLP) tools, network segmentation, API gateways with content inspection, and contractual controls for external data processing.",
+      "Cryptographic Protection (SC-08, SC-09, SC-13): Encryption is the last line of defence when other controls fail. Transmission integrity (SC-08) ensures data is not modified in transit, while transmission confidentiality (SC-09) prevents interception of sensitive data during transmission. Use of cryptography (SC-13) establishes the organisation's cryptographic standards for algorithms, key lengths, key management, and certificate lifecycle. Organisations should mandate TLS 1.2 or higher for all network communications, AES-256 for data at rest, and implement hardware security modules (HSMs) for key management in high-assurance environments. Cryptographic controls must cover all data states: at rest (disk encryption, database encryption, file-level encryption), in transit (TLS, IPsec, SSH), and in use (where feasible, through confidential computing or tokenisation).",
+      "Media Lifecycle Management (MP-02, MP-03, MP-04, MP-05, MP-06): Physical and removable media remain a significant data leakage vector. Media access (MP-02) restricts who can read from or write to removable media. Media labelling (MP-03) ensures physical media is marked with its classification level so handlers know what protection it requires. Media storage (MP-04) mandates appropriate physical protection for media based on its classification -- locked cabinets, climate-controlled vaults, or offsite secure storage. Media transport (MP-05) controls how media moves between locations, requiring encryption, tamper-evident packaging, and chain-of-custody documentation for sensitive data. Media sanitisation and disposal (MP-06) is critical: when data is no longer needed, the media must be sanitised to a standard appropriate to the classification level, using clearing, purging, or physical destruction as warranted.",
+      "Data Integrity and Quality (SI-09, SI-10, SI-12, SC-04): Data security is not only about confidentiality. Data integrity ensures that information is accurate, complete, and unmodified by unauthorised processes. Information input restrictions (SI-09) limit who can input data into systems and under what conditions, preventing unauthorised data modification. Information accuracy, completeness, validity, and authenticity controls (SI-10) validate data at input to prevent corruption, injection attacks, and processing errors. Information output handling and retention (SI-12) governs how data is presented, distributed, and retained -- ensuring outputs are handled according to their classification and that retention periods comply with legal and regulatory requirements. Information remnance protection (SC-04) addresses residual data in shared system resources such as memory, storage, and registers that could be exploited to access data from previous processes.",
+      "Risk Assessment and Privacy (RA-01, RA-02, RA-03, RA-04, PL-05): Data security controls must be proportionate to risk. Risk assessment policy (RA-01) establishes the framework for evaluating data security risks. Security categorisation (RA-02) determines the baseline protection level for each data type. Risk assessment (RA-03) identifies specific threats to data and evaluates the likelihood and impact of data compromise. Risk assessment update (RA-04) ensures assessments remain current as the threat landscape, data inventory, and regulatory environment change. Privacy impact assessment (PL-05) is essential for any processing of personal data, evaluating compliance with data protection regulations (GDPR, CCPA, LGPD) and identifying privacy risks before new processing activities begin."
+    ],
+    "assumptions": "The organisation has established a data classification scheme and personnel understand their obligations for classifying and handling data at each level. Data ownership is defined, with business data owners accountable for classification decisions and IT responsible for implementing technical controls. A cryptographic key management infrastructure exists or is planned. The organisation maintains a data inventory or is working toward one, covering structured and unstructured data across on-premises and cloud environments. Legal and regulatory data protection requirements have been identified and mapped to the classification scheme.",
+    "typicalChallenges": "Management appetite and organisational buy-in are the primary obstacles -- data security requires sustained investment and cultural change, not a one-time project. Selling data classification to business units that view labelling as overhead rather than protection requires demonstrating tangible risk reduction and regulatory compliance benefits. Keeping the classification scheme simple enough for consistent application while capturing meaningful differences in data sensitivity is a constant tension. The pace of technological change introduces new data vectors (cloud storage, SaaS applications, AI/ML training data, IoT telemetry) faster than policies can adapt. Shadow IT creates uncontrolled data repositories outside the security architecture. Data sprawl across hybrid and multi-cloud environments makes comprehensive inventory and consistent control application extremely difficult. Encryption key management at scale introduces operational complexity and availability risks. Data sharing with business partners and third parties requires balancing protection with usability. Improving services means greater use of data within organisations and more sharing externally, expanding the attack surface continuously. The level and sophistication of external threats, including targeted data exfiltration by advanced persistent threats and e-crime groups, is increasing.",
+    "indications": "Organisations that process Personally Identifiable Information (PII), operate in regulated sectors (financial services, healthcare, government, defence), process commercially sensitive information, handle payment card data subject to PCI DSS, or manage intellectual property that represents competitive advantage. Any organisation subject to data protection regulations including GDPR, CCPA, HIPAA, or sector-specific requirements. Organisations pursuing ISO 27001 certification where Annex A controls A.5.12-A.5.14 and A.8.10-A.8.12 require formal data classification and handling. Organisations that have experienced data breaches or near-misses and need to strengthen their data protection posture.",
+    "contraIndications": "Publicly available information that is freely available from multiple sources and carries no confidentiality, integrity, or regulatory obligation. Organisations that exclusively handle public-domain data with no personal information component. However, even in these cases, data integrity and availability controls typically remain relevant.",
+    "threatResistance": "Data exfiltration by external attackers through network intrusion, application exploitation, or supply chain compromise. Insider threats including malicious data theft by employees or contractors and negligent data exposure through mishandling. Ransomware and destructive malware targeting data availability and integrity. Man-in-the-middle attacks intercepting data in transit over untrusted networks. Unauthorised access to data at rest through stolen credentials, privilege escalation, or physical media theft. Data leakage through removable media, cloud synchronisation services, email, or printing. Residual data exposure from improperly sanitised media or decommissioned systems. Privacy violations from excessive data collection, unauthorised processing, or inadequate retention controls. Regulatory enforcement actions resulting from non-compliant data handling practices."
   },
-  "references": [],
-  "controls": [
+  "examples": {
+    "Data classification programs": [
+      "Microsoft Purview Information Protection with sensitivity labels and auto-classification",
+      "Boldon James Classifier for document and email classification",
+      "Titus (now OpenText) data classification and policy enforcement",
+      "AWS Macie for automated discovery and classification of sensitive data in S3"
+    ],
+    "Encryption and key management": [
+      "HashiCorp Vault for secrets management and encryption-as-a-service",
+      "AWS KMS / Azure Key Vault / GCP Cloud KMS for cloud-native key management",
+      "Thales CipherTrust for enterprise data encryption and tokenisation",
+      "VeraCrypt / BitLocker / FileVault for endpoint disk encryption"
+    ],
+    "Data loss prevention": [
+      "Microsoft Purview DLP across email, endpoints, and cloud apps",
+      "Symantec (Broadcom) DLP for network, endpoint, and cloud data protection",
+      "Zscaler Cloud DLP for inline inspection of cloud-bound traffic",
+      "Digital Guardian for data-aware endpoint and network DLP"
+    ],
+    "Media and data disposal": [
+      "Blancco for certified data erasure with audit trail",
+      "NIST SP 800-88 compliant media sanitisation procedures",
+      "Iron Mountain secure media destruction services",
+      "Degaussing equipment for magnetic media sanitisation"
+    ]
+  },
+  "references": [
     {
-      "id": "AC-02",
-      "name": "Account Management",
-      "family": "AC"
+      "title": "NIST SP 800-88 Rev 1: Guidelines for Media Sanitization",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-88/rev-1/final",
+      "note": "Definitive guidance on media sanitisation including clear, purge, and destroy methods mapped to data sensitivity levels. Essential reference for media disposal procedures."
     },
     {
-      "id": "AC-03",
-      "name": "Access Enforcement",
-      "family": "AC"
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls (MP, SC families)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "Authoritative control catalog. The Media Protection (MP) and System and Communications Protection (SC) families provide the detailed control specifications this pattern implements."
     },
     {
-      "id": "AC-04",
-      "name": "Information Flow Enforcement",
-      "family": "AC"
+      "title": "ISO 27002:2022 Sections 5.12-5.14, 8.10-8.12",
+      "url": "https://www.iso.org/standard/75652.html",
+      "note": "ISO guidance on information classification, labelling, information transfer, and data masking, deletion, and leakage prevention. Provides implementation guidance aligned with ISO 27001 Annex A."
     },
     {
-      "id": "AC-05",
-      "name": "Separation Of Duties",
-      "family": "AC"
+      "title": "NIST SP 800-175B Rev 1: Guideline for Using Cryptographic Standards",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-175b/rev-1/final",
+      "note": "Guidance on selecting and implementing cryptographic mechanisms including algorithm selection, key management, and protocol considerations for data protection."
     },
     {
-      "id": "AC-06",
-      "name": "Least Privilege",
-      "family": "AC"
+      "title": "PCI DSS v4.0.1 Requirements 3 and 4",
+      "url": "https://www.pcisecuritystandards.org/document_library/",
+      "note": "PCI DSS requirements for protecting stored account data (Requirement 3) and protecting cardholder data with strong cryptography during transmission (Requirement 4)."
     },
     {
-      "id": "AC-15",
-      "name": "Automated Marking",
-      "family": "AC"
-    },
-    {
-      "id": "AC-16",
-      "name": "Automated Labeling",
-      "family": "AC"
-    },
-    {
-      "id": "AC-20",
-      "name": "Use Of External Information Systems",
-      "family": "AC"
-    },
-    {
-      "id": "AT-02",
-      "name": "Security Awareness",
-      "family": "AT"
-    },
-    {
-      "id": "AT-03",
-      "name": "Security Training",
-      "family": "AT"
-    },
-    {
-      "id": "CA-07",
-      "name": "Continuous Monitoring",
-      "family": "CA"
-    },
-    {
-      "id": "CP-09",
-      "name": "Information System Backup",
-      "family": "CP"
-    },
-    {
-      "id": "IA-02",
-      "name": "User Identification And Authentication",
-      "family": "IA"
-    },
-    {
-      "id": "MP-02",
-      "name": "Media Access",
-      "family": "MP"
-    },
-    {
-      "id": "MP-03",
-      "name": "Media Labeling",
-      "family": "MP"
-    },
-    {
-      "id": "MP-04",
-      "name": "Media Storage",
-      "family": "MP"
-    },
-    {
-      "id": "MP-05",
-      "name": "Media Transport",
-      "family": "MP"
-    },
-    {
-      "id": "MP-06",
-      "name": "Media Sanitization And Disposal",
-      "family": "MP"
-    },
-    {
-      "id": "PE-03",
-      "name": "Physical Access Control",
-      "family": "PE"
-    },
-    {
-      "id": "PE-19",
-      "name": "Information Leakage",
-      "family": "PE"
-    },
-    {
-      "id": "PL-05",
-      "name": "Privacy Impact Assessment",
-      "family": "PL"
-    },
-    {
-      "id": "RA-01",
-      "name": "Risk Assessment Policy And Procedures",
-      "family": "RA"
-    },
-    {
-      "id": "RA-02",
-      "name": "Security Categorization",
-      "family": "RA"
-    },
-    {
-      "id": "RA-03",
-      "name": "Risk Assessment",
-      "family": "RA"
-    },
-    {
-      "id": "RA-04",
-      "name": "Risk Assessment Update",
-      "family": "RA"
-    },
-    {
-      "id": "SC-04",
-      "name": "Information Remnance",
-      "family": "SC"
-    },
-    {
-      "id": "SC-07",
-      "name": "Boundary Protection",
-      "family": "SC"
-    },
-    {
-      "id": "SC-08",
-      "name": "Transmission Integrity",
-      "family": "SC"
-    },
-    {
-      "id": "SC-09",
-      "name": "Transmission Confidentiality",
-      "family": "SC"
-    },
-    {
-      "id": "SC-13",
-      "name": "Use Of Cryptography",
-      "family": "SC"
-    },
-    {
-      "id": "SI-09",
-      "name": "Information Input Restrictions",
-      "family": "SI"
-    },
-    {
-      "id": "SI-10",
-      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
-      "family": "SI"
-    },
-    {
-      "id": "SI-12",
-      "name": "Information Output Handling And Retention",
-      "family": "SI"
+      "title": "ENISA Data Protection Engineering",
+      "url": "https://www.enisa.europa.eu/publications/data-protection-engineering",
+      "note": "European approach to engineering data protection into systems from the design phase, covering privacy-by-design principles and technical measures for data minimisation."
     }
+  ],
+  "relatedPatterns": ["SP-010", "SP-014", "SP-019", "SP-018", "SP-025"],
+  "relatedPatternNames": ["Identity Management", "Awareness and Training", "Secure Ad-Hoc File Exchange", "ISMS", "Advanced Monitoring and Detection"],
+  "threats": [
+    {
+      "id": "T-DS-001",
+      "name": "Data Exfiltration by External Attacker",
+      "mitigatedBy": ["AC-03", "AC-04", "SC-07", "SC-13"]
+    },
+    {
+      "id": "T-DS-002",
+      "name": "Insider Data Theft or Negligent Exposure",
+      "mitigatedBy": ["AC-05", "AC-06", "AC-04", "AT-02"]
+    },
+    {
+      "id": "T-DS-003",
+      "name": "Data Interception in Transit",
+      "mitigatedBy": ["SC-08", "SC-09", "SC-13"]
+    },
+    {
+      "id": "T-DS-004",
+      "name": "Improper Media Disposal Leading to Data Leakage",
+      "mitigatedBy": ["MP-06", "MP-04", "SC-04"]
+    },
+    {
+      "id": "T-DS-005",
+      "name": "Misclassification Leading to Inadequate Protection",
+      "mitigatedBy": ["RA-02", "AC-15", "AC-16", "AT-02"]
+    },
+    {
+      "id": "T-DS-006",
+      "name": "Unauthorised Data Access via Stolen Credentials",
+      "mitigatedBy": ["IA-02", "AC-02", "AC-06", "CA-07"]
+    },
+    {
+      "id": "T-DS-007",
+      "name": "Data Loss from Uncontrolled External Systems",
+      "mitigatedBy": ["AC-20", "SC-07", "AC-04"]
+    },
+    {
+      "id": "T-DS-008",
+      "name": "Data Integrity Compromise via Input Manipulation",
+      "mitigatedBy": ["SI-09", "SI-10", "AC-03"]
+    },
+    {
+      "id": "T-DS-009",
+      "name": "Regulatory Non-Compliance from Inadequate Data Handling",
+      "mitigatedBy": ["PL-05", "RA-01", "SI-12", "MP-03"]
+    },
+    {
+      "id": "T-DS-010",
+      "name": "Removable Media Theft or Loss",
+      "mitigatedBy": ["MP-02", "MP-05", "SC-13", "PE-03"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
+    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-05", "name": "Separation Of Duties", "family": "AC", "emphasis": "important"},
+    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-15", "name": "Automated Marking", "family": "AC", "emphasis": "important"},
+    {"id": "AC-16", "name": "Automated Labeling", "family": "AC", "emphasis": "important"},
+    {"id": "AC-20", "name": "Use Of External Information Systems", "family": "AC", "emphasis": "standard"},
+    {"id": "AT-02", "name": "Security Awareness", "family": "AT", "emphasis": "standard"},
+    {"id": "AT-03", "name": "Security Training", "family": "AT", "emphasis": "standard"},
+    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
+    {"id": "CP-09", "name": "Information System Backup", "family": "CP", "emphasis": "standard"},
+    {"id": "IA-02", "name": "User Identification And Authentication", "family": "IA", "emphasis": "important"},
+    {"id": "MP-02", "name": "Media Access", "family": "MP", "emphasis": "important"},
+    {"id": "MP-03", "name": "Media Labeling", "family": "MP", "emphasis": "standard"},
+    {"id": "MP-04", "name": "Media Storage", "family": "MP", "emphasis": "standard"},
+    {"id": "MP-05", "name": "Media Transport", "family": "MP", "emphasis": "standard"},
+    {"id": "MP-06", "name": "Media Sanitization And Disposal", "family": "MP", "emphasis": "important"},
+    {"id": "PE-03", "name": "Physical Access Control", "family": "PE", "emphasis": "standard"},
+    {"id": "PE-19", "name": "Information Leakage", "family": "PE", "emphasis": "standard"},
+    {"id": "PL-05", "name": "Privacy Impact Assessment", "family": "PL", "emphasis": "important"},
+    {"id": "RA-01", "name": "Risk Assessment Policy And Procedures", "family": "RA", "emphasis": "standard"},
+    {"id": "RA-02", "name": "Security Categorization", "family": "RA", "emphasis": "critical"},
+    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
+    {"id": "RA-04", "name": "Risk Assessment Update", "family": "RA", "emphasis": "standard"},
+    {"id": "SC-04", "name": "Information Remnance", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "important"},
+    {"id": "SC-08", "name": "Transmission Integrity", "family": "SC", "emphasis": "important"},
+    {"id": "SC-09", "name": "Transmission Confidentiality", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-13", "name": "Use Of Cryptography", "family": "SC", "emphasis": "important"},
+    {"id": "SI-09", "name": "Information Input Restrictions", "family": "SI", "emphasis": "standard"},
+    {"id": "SI-10", "name": "Information Accuracy, Completeness, Validity, And Authenticity", "family": "SI", "emphasis": "standard"},
+    {"id": "SI-12", "name": "Information Output Handling And Retention", "family": "SI", "emphasis": "important"}
   ],
   "controlFamilySummary": {
     "AC": 8,

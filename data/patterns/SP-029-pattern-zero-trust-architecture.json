@@ -1,0 +1,242 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-029",
+  "slug": "pattern-zero-trust-architecture",
+  "title": "Zero Trust Architecture",
+  "description": "Enterprise security architecture pattern that eliminates implicit trust, enforcing continuous verification of every user, device, and workload before granting access to any resource. Maps 51 NIST 800-53 controls to the five zero trust pillars: identity, device, network, application, and data.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-029",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Enterprise Architecture",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-06",
+    "dateModified": "2026-02-06",
+    "authors": ["Aurelius", "Vitruvius"],
+    "reviewers": [],
+    "provenance": "Derived from two decades of enterprise security architecture across financial services, where network-centric perimeter models repeatedly failed to contain lateral movement after initial compromise. Informed by NIST SP 800-207, CISA Zero Trust Maturity Model, and real-world migrations from legacy VPN-and-firewall architectures to identity-centric continuous verification."
+  },
+  "diagram": {
+    "svg": "/images/sp-029-diagram.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Zero Trust Architecture (ZTA) is a security model that assumes no user, device, or network segment is inherently trustworthy. Every access request is evaluated against identity, device posture, context, and risk signals before a policy decision is made. This pattern defines the architectural components, control mappings, and trust evaluation flows required to implement zero trust at enterprise scale.\n\nTraditional perimeter-based security -- firewalls at the edge, trusted internal networks, VPN tunnels for remote access -- fails when attackers breach the perimeter or when insiders act maliciously. Once inside the trusted zone, lateral movement is trivial. Zero trust eliminates this architectural weakness by treating every access request as if it originates from an untrusted network.\n\nThe architecture centres on three core components: a Policy Decision Point (PDP) that evaluates access requests against policy, a Policy Enforcement Point (PEP) that gates access to every resource, and a Trust Engine that continuously computes trust scores from identity, device, behaviour, and threat intelligence signals. These components work together to enforce the principle of least privilege dynamically, adapting access decisions in real-time as context changes.\n\nFour maturity levels provide a pragmatic adoption path: Enhanced Identity (MFA everywhere, SSO consolidation), Microsegmented Network (east-west controls, software-defined perimeters), Context-Aware Access (continuous authentication, risk-adaptive policies), and Full Zero Trust (automated enforcement, real-time trust scoring, self-healing responses). Most organisations are between levels one and two today.",
+    "keyControlAreas": [
+      "Identity Verification and Continuous Authentication (IA-02, IA-04, IA-05, IA-08, IA-12): Identity is the foundation of zero trust -- the new perimeter. IA-02 mandates multi-factor authentication for all users accessing any resource, eliminating single-factor password-only access that enables credential stuffing and phishing attacks. IA-04 manages identifier lifecycle including provisioning, de-provisioning, and preventing reuse of stale identities. IA-05 governs authenticator management: credential strength, rotation, and protection against compromise. IA-08 extends identity verification to non-organisational users -- contractors, partners, federated identities -- ensuring external access decisions are made with the same rigour as internal ones. IA-12 provides identity proofing, establishing that the person behind the credential is who they claim to be. Implementation requires consolidating identity providers, deploying phishing-resistant MFA (FIDO2/WebAuthn), and implementing continuous session re-evaluation rather than authenticate-once-trust-forever.",
+      "Access Control and Least Privilege Enforcement (AC-02, AC-03, AC-04, AC-05, AC-06, AC-07, AC-17, AC-20): Access control in zero trust is dynamic, context-aware, and enforced at every resource boundary. AC-02 manages accounts across their lifecycle with automated provisioning and just-in-time access. AC-03 enforces access based on policy -- not network location -- using attributes including identity, device posture, time, geolocation, and risk score. AC-04 controls information flow between security domains, preventing data movement that violates policy even when the user has legitimate access to both endpoints. AC-05 separates duties to prevent single-actor compromise of critical workflows. AC-06 enforces least privilege: users and services receive only the minimum access required for the current task, with privileges revoked immediately when no longer needed. AC-07 limits failed access attempts, feeding signals to the trust engine. AC-17 governs remote access -- in zero trust, all access is treated as remote, eliminating the privileged-internal-network assumption. AC-20 controls access from external systems and BYOD devices.",
+      "Network Segmentation and Microsegmentation (SC-07, SC-32, AC-04, SC-08, SC-39): Network controls in zero trust shift from perimeter firewalls to fine-grained microsegmentation. SC-07 enforces boundary protection at every trust boundary -- not just the network edge but between every workload, service, and data store. SC-32 creates system partitions that isolate components by function, sensitivity, and trust level. AC-04 controls information flow at the network layer, enforcing east-west traffic policies that prevent lateral movement even after a workload is compromised. SC-08 mandates encryption of all data in transit -- zero trust assumes the network is hostile, so TLS/mTLS is required for all communications including internal traffic. SC-39 provides process isolation, ensuring that compromised processes cannot access resources belonging to other trust domains. Implementation typically uses software-defined networking, service mesh (mTLS between services), and identity-aware proxies that replace traditional VPN concentrators.",
+      "Continuous Monitoring, Analytics, and Trust Scoring (SI-04, AU-02, AU-03, AU-06, AU-12, CA-07): Zero trust requires continuous visibility into all access patterns, device behaviour, and network flows. SI-04 provides real-time monitoring of systems for anomalous behaviour that may indicate compromise -- unusual access patterns, impossible travel, privilege escalation attempts. AU-02 defines auditable events: every access decision, policy evaluation, authentication event, and trust score change must be logged. AU-03 specifies record content: who, what, when, where, from which device, with what trust score, and what decision was made. AU-06 analyses audit records to detect patterns that indicate advanced persistent threats, credential compromise, or insider threat. AU-12 generates audit records at policy decision and enforcement points. CA-07 provides continuous monitoring that feeds the trust engine, enabling real-time policy adaptation. The trust engine aggregates signals from identity providers, EDR, SIEM, threat intelligence, and device management to compute dynamic trust scores that drive access decisions.",
+      "Device Trust and Endpoint Posture (CM-02, CM-06, CM-08, SI-07, CM-03): Device posture is a critical input to every access decision. CM-02 establishes baseline configurations that define a healthy endpoint: patched OS, active EDR, encrypted disk, no jailbreak/root. CM-06 enforces security configuration settings and validates them continuously -- not just at enrollment but at every access request. CM-08 maintains a real-time inventory of all devices, their ownership, compliance status, and last-seen posture. SI-07 verifies software and firmware integrity, detecting tampering that could indicate rootkit installation or supply chain compromise. CM-03 controls configuration changes, ensuring that devices that drift from baseline have their trust score reduced and access restricted until remediation. Unmanaged and non-compliant devices receive limited or no access -- they can reach a remediation portal but nothing else.",
+      "Data Protection and Classification (SC-13, SC-28, MP-02, AC-21, SI-12): Data is what zero trust ultimately protects. SC-13 mandates approved cryptographic mechanisms for protecting data at rest and in transit -- in a zero trust model, encryption is non-negotiable because no network segment is trusted. SC-28 protects data at rest with encryption keyed to the data classification and access policy. MP-02 restricts access to digital media containing sensitive data. AC-21 enables controlled information sharing between authorised parties while enforcing classification-based policy -- users can share within policy but the system prevents sharing that violates data governance rules. SI-12 governs information management and retention, ensuring data lifecycle controls are enforced regardless of where data resides. Implementation requires data classification (at minimum: public, internal, confidential, restricted), encryption everywhere, and DLP integration at policy enforcement points.",
+      "Policy Decision and Enforcement Architecture (AC-01, PL-02, PM-14, CA-02, SA-08): The policy engine is the brain of zero trust. AC-01 defines access control policy that governs all decisions -- this policy must be machine-readable, version-controlled, and continuously audited. PL-02 establishes the security architecture plan including trust boundaries, PDP/PEP placement, and integration patterns. PM-14 implements a continuous monitoring programme that tests and validates policy effectiveness. CA-02 provides security assessments of the zero trust architecture itself, ensuring that policy decisions are correct and enforcement points cannot be bypassed. SA-08 mandates security engineering principles in the design of PDP/PEP components: fail-closed design, separation of policy from enforcement, and resilience against single points of failure. The PDP evaluates each request against identity, device, context, and data sensitivity to produce an allow/deny/step-up decision. The PEP enforces that decision as close to the resource as possible.",
+      "Incident Response and Automated Containment (IR-04, IR-05, IR-06, IR-08, SC-07): Zero trust transforms incident response from manual containment to automated, policy-driven isolation. IR-04 handles incidents by automatically adjusting trust scores and access policies -- a compromised credential triggers immediate session revocation and re-authentication across all active sessions. IR-05 provides continuous incident monitoring through the trust engine, which correlates anomalous signals across identity, network, and endpoint telemetry. IR-06 automates incident reporting to SOC analysts with full context: the access decision chain, trust score history, and correlated events. IR-08 defines incident response plans specific to zero trust failure modes: PDP compromise, PEP bypass, trust engine poisoning, and identity provider breach. SC-07 enables dynamic boundary reconfiguration during incidents -- microsegmentation policies can be tightened in real-time to contain blast radius without manual firewall rule changes."
+    ],
+    "assumptions": "The organisation has consolidated identity providers to a manageable number (ideally one primary IdP with federation). Network infrastructure supports software-defined segmentation (not solely hardware-based ACLs). Endpoint management capability exists for corporate devices (MDM/UEM). Applications support modern authentication protocols (OAuth 2.0, OIDC, SAML). The organisation has defined data classification policies. Security operations capability exists to monitor and respond to trust engine signals. Executive sponsorship exists for the cultural shift from trusted-network to verify-everything.",
+    "typicalChallenges": "Legacy applications that require network-level trust and cannot support modern authentication protocols are the primary blocker -- they require application proxies or gateway translation layers. The cultural shift from 'inside the firewall means trusted' to 'verify everything' faces resistance from users accustomed to frictionless internal access. VPN replacement is politically difficult when remote access 'just works' for users. Microsegmentation at scale generates enormous policy complexity -- without automation, rule sets become unmanageable. Device diversity (corporate, BYOD, contractor, IoT) makes uniform posture enforcement impractical; tiered access models add design complexity. Trust engine tuning requires balancing security (low trust thresholds) against usability (constant re-authentication prompts). Cost of deployment is front-loaded while benefits accrue gradually, making business case justification difficult. Multi-cloud and hybrid environments complicate consistent policy enforcement across trust boundaries.",
+    "indications": "This pattern applies to any enterprise that has moved beyond the assumption that internal networks are safe. It is particularly relevant for organisations with significant remote or hybrid workforces, cloud-first or multi-cloud strategies, high-value data requiring granular access control, regulatory requirements for continuous monitoring and least privilege, a history of lateral movement in security incidents, merger or acquisition activity creating heterogeneous network environments, or contractor and third-party access that extends beyond the traditional perimeter.",
+    "contraIndications": "This pattern may be premature for organisations that lack basic security hygiene: if you do not have centralised identity management, asset inventory, or patch management, zero trust adds complexity without a foundation to build on. Air-gapped environments with strict physical access controls may derive limited benefit from the network-assumes-hostile model. Very small organisations (under 50 users) with simple network topologies may find the architectural overhead disproportionate to the risk reduction. Operational technology (OT) and industrial control systems often cannot support continuous authentication and may require purpose-built patterns (see SP-023).",
+    "threatResistance": "Zero Trust Architecture addresses the full spectrum of post-perimeter threats. Lateral movement after initial compromise is contained by microsegmentation and per-resource authentication (SC-07, SC-32, AC-03). Credential theft and replay attacks are mitigated by continuous authentication, short-lived tokens, and phishing-resistant MFA (IA-02, IA-05, SC-08). Insider threats are detected through behavioural analytics and anomaly detection in the trust engine (SI-04, AU-06). Privilege escalation is prevented by dynamic least privilege and just-in-time access (AC-06, AC-02). Man-in-the-middle attacks on internal networks are eliminated by mandatory mTLS for all communications (SC-08). Compromised endpoints are contained by continuous posture assessment that revokes access when devices drift from baseline (CM-02, CM-06). Data exfiltration through trusted channels is prevented by information flow enforcement and DLP at policy enforcement points (AC-04, AC-21). Session hijacking is mitigated by continuous session validation and context-aware re-authentication (AC-12, IA-02). API abuse is controlled by per-request authorisation at the PEP layer (AC-03, AC-04). Trust boundary bypass attempts are detected by monitoring PDP/PEP integrity and policy consistency checks (CA-07, SI-07)."
+  },
+  "examples": {
+    "Enhanced Identity (Level 1)": [
+      "Deploy MFA for all user access to SaaS applications and internal portals",
+      "Consolidate identity providers to single OIDC/SAML IdP with conditional access policies",
+      "Replace password-only VPN with certificate-based or FIDO2 authentication",
+      "Implement automated account lifecycle: joiner-mover-leaver provisioning via HR integration"
+    ],
+    "Microsegmented Network (Level 2)": [
+      "Deploy service mesh with mTLS between all microservices in Kubernetes clusters",
+      "Replace flat internal network with software-defined segments per application tier",
+      "Implement identity-aware proxy (BeyondCorp model) replacing traditional VPN",
+      "Enforce east-west traffic policies: database servers accept connections only from authorised application servers"
+    ],
+    "Context-Aware Access (Level 3)": [
+      "Risk-adaptive authentication: step-up to biometric when accessing financial data from new device",
+      "Device posture gates: block access to source code repositories from unmanaged or non-compliant endpoints",
+      "Geolocation and impossible travel detection: flag and challenge access from anomalous locations",
+      "Just-in-time privileged access: admin credentials issued for 4-hour windows with mandatory re-approval"
+    ],
+    "Full Zero Trust (Level 4)": [
+      "Real-time trust scoring: continuous computation from identity, device, network, and threat intelligence signals",
+      "Automated containment: compromised credential triggers immediate session revocation across all PEPs within seconds",
+      "Policy-as-code: all access policies version-controlled, peer-reviewed, and deployed through CI/CD pipeline",
+      "Self-healing responses: trust engine automatically isolates compromised segments and triggers remediation workflows"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-207: Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-207/final",
+      "note": "The foundational reference for zero trust architecture. Defines core components (PDP, PEP, trust engine), deployment models, and migration approaches. Essential reading for any ZTA implementation."
+    },
+    {
+      "title": "CISA Zero Trust Maturity Model v2.0",
+      "url": "https://www.cisa.gov/zero-trust-maturity-model",
+      "note": "Provides a practical maturity model across five pillars (identity, devices, networks, applications, data) with progression levels from traditional to optimal. Useful for assessing current state and planning roadmap."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. Rev 5 adds privacy controls and aligns with zero trust principles."
+    },
+    {
+      "title": "DoD Zero Trust Reference Architecture v2.0",
+      "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/ZTRAv2.0.pdf",
+      "note": "Department of Defense zero trust reference architecture. Provides detailed component architecture and data flows for high-assurance environments."
+    },
+    {
+      "title": "Google BeyondCorp: A New Approach to Enterprise Security",
+      "url": "https://research.google/pubs/pub43231/",
+      "note": "Google's seminal paper on eliminating the privileged corporate network. Describes the practical implementation that proved zero trust works at scale."
+    },
+    {
+      "title": "NIST SP 1800-35: Implementing a Zero Trust Architecture",
+      "url": "https://www.nccoe.nist.gov/projects/implementing-zero-trust-architecture",
+      "note": "NIST National Cybersecurity Center of Excellence practice guide with reference implementations from multiple vendors."
+    },
+    {
+      "title": "Forrester: Zero Trust eXtended (ZTX) Framework",
+      "url": "https://www.forrester.com/report/the-zero-trust-extended-ztx-ecosystem/RES137210",
+      "note": "Forrester originated the term 'Zero Trust' in 2010. The ZTX framework extends the model beyond network to include data, workloads, and automation."
+    },
+    {
+      "title": "UK NCSC: Zero Trust Architecture Design Principles",
+      "url": "https://www.ncsc.gov.uk/collection/zero-trust-architecture",
+      "note": "The UK National Cyber Security Centre's practical guidance on zero trust design principles, with a focus on pragmatic adoption rather than vendor-driven approaches."
+    }
+  ],
+  "relatedPatterns": ["SP-001", "SP-002", "SP-010", "SP-011", "SP-016", "SP-025", "SP-027", "SP-028"],
+  "relatedPatternNames": ["Client Module", "Server Module", "Identity Management", "Cloud Computing", "DMZ Module", "Advanced Monitoring and Detection", "Secure AI Integration", "Secure DevOps Pipeline"],
+  "threats": [
+    {
+      "id": "T-ZTA-001",
+      "name": "Lateral movement after perimeter breach",
+      "mitigatedBy": ["SC-07", "SC-32", "AC-03", "AC-04"]
+    },
+    {
+      "id": "T-ZTA-002",
+      "name": "Credential theft and replay attacks",
+      "mitigatedBy": ["IA-02", "IA-05", "SC-08", "AC-12"]
+    },
+    {
+      "id": "T-ZTA-003",
+      "name": "Insider threat and compromised trusted user",
+      "mitigatedBy": ["SI-04", "AU-06", "AC-05", "AC-06"]
+    },
+    {
+      "id": "T-ZTA-004",
+      "name": "Privilege escalation via over-provisioned access",
+      "mitigatedBy": ["AC-06", "AC-02", "CM-05", "AU-02"]
+    },
+    {
+      "id": "T-ZTA-005",
+      "name": "Man-in-the-middle on internal network",
+      "mitigatedBy": ["SC-08", "SC-13", "SC-23", "IA-08"]
+    },
+    {
+      "id": "T-ZTA-006",
+      "name": "Compromised endpoint accessing sensitive resources",
+      "mitigatedBy": ["CM-02", "CM-06", "SI-07", "CM-08"]
+    },
+    {
+      "id": "T-ZTA-007",
+      "name": "Session hijacking and token theft",
+      "mitigatedBy": ["AC-12", "IA-02", "SC-23", "SI-04"]
+    },
+    {
+      "id": "T-ZTA-008",
+      "name": "Data exfiltration through authorised channels",
+      "mitigatedBy": ["AC-04", "AC-21", "SI-04", "AU-06"]
+    },
+    {
+      "id": "T-ZTA-009",
+      "name": "Trust engine poisoning via manipulated signals",
+      "mitigatedBy": ["SI-07", "AU-09", "CA-07", "SC-07"]
+    },
+    {
+      "id": "T-ZTA-010",
+      "name": "Policy enforcement point bypass",
+      "mitigatedBy": ["CA-02", "SA-08", "SC-07", "SI-04"]
+    },
+    {
+      "id": "T-ZTA-011",
+      "name": "Identity provider compromise",
+      "mitigatedBy": ["IA-04", "IA-12", "SC-07", "IR-04"]
+    },
+    {
+      "id": "T-ZTA-012",
+      "name": "Shadow IT circumventing zero trust controls",
+      "mitigatedBy": ["CM-08", "AC-20", "SI-04", "PM-14"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-01", "name": "Policy and Procedures", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-05", "name": "Separation of Duties", "family": "AC", "emphasis": "important"},
+    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-07", "name": "Unsuccessful Logon Attempts", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "important"},
+    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "important"},
+    {"id": "AC-20", "name": "Use of External Systems", "family": "AC", "emphasis": "important"},
+    {"id": "AC-21", "name": "Information Sharing", "family": "AC", "emphasis": "important"},
+    {"id": "AT-01", "name": "Policy and Procedures", "family": "AT", "emphasis": "standard"},
+    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "standard"},
+    {"id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "standard"},
+    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "important"},
+    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-09", "name": "Protection of Audit Information", "family": "AU", "emphasis": "important"},
+    {"id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "important"},
+    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
+    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical"},
+    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
+    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "standard"},
+    {"id": "CM-05", "name": "Access Restrictions for Change", "family": "CM", "emphasis": "important"},
+    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
+    {"id": "CM-08", "name": "System Component Inventory", "family": "CM", "emphasis": "important"},
+    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical"},
+    {"id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "important"},
+    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "critical"},
+    {"id": "IA-08", "name": "Identification and Authentication (Non-Organizational Users)", "family": "IA", "emphasis": "important"},
+    {"id": "IA-12", "name": "Identity Proofing", "family": "IA", "emphasis": "important"},
+    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
+    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "important"},
+    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
+    {"id": "IR-08", "name": "Incident Response Plan", "family": "IR", "emphasis": "standard"},
+    {"id": "MP-02", "name": "Media Access", "family": "MP", "emphasis": "standard"},
+    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "important"},
+    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "important"},
+    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
+    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "important"},
+    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "important"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-13", "name": "Cryptographic Protection", "family": "SC", "emphasis": "important"},
+    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "important"},
+    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "important"},
+    {"id": "SC-32", "name": "System Partitioning", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-39", "name": "Process Isolation", "family": "SC", "emphasis": "standard"},
+    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "critical"},
+    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "important"},
+    {"id": "SI-12", "name": "Information Management and Retention", "family": "SI", "emphasis": "standard"}
+  ],
+  "controlFamilySummary": {
+    "AC": 11,
+    "AT": 3,
+    "AU": 5,
+    "CA": 2,
+    "CM": 5,
+    "IA": 5,
+    "IR": 4,
+    "MP": 1,
+    "PL": 1,
+    "PM": 1,
+    "RA": 2,
+    "SA": 1,
+    "SC": 7,
+    "SI": 3
+  }
+}

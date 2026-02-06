@@ -71,3 +71,11 @@ jobs:
           print(f'Control files found: {actual}')
           assert manifest['total_controls'] == actual, 'Manifest count mismatch'
           "
+
+      - name: Trigger website rebuild
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          gh api repos/opensecurityarchitecture/osa-website/dispatches \
+            -f event_type=data-updated
+        env:
+          GH_TOKEN: ${{ secrets.WEBSITE_DISPATCH_TOKEN }}

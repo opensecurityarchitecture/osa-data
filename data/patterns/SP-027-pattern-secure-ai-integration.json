@@ -1,0 +1,137 @@
+{
+  "id": "SP-027",
+  "slug": "pattern-secure-ai-integration",
+  "title": "Secure AI Integration Pattern",
+  "description": "Security architecture for integrating AI agents, LLMs, and autonomous multi-agent systems into enterprise environments. Covers agent identity, prompt security, data classification, tool authorisation, orchestration trust, and human-in-the-loop controls.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-027",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Application & Operations",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-06",
+    "dateModified": "2026-02-06",
+    "authors": [
+      "Aurelius"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "",
+    "png": ""
+  },
+  "content": {
+    "description": "Organisations are rapidly integrating AI agents into enterprise operations: code assistance, security analysis, document review, infrastructure management, and autonomous task execution. Unlike traditional software integrations, AI agents operate with a degree of autonomy, consume and produce unstructured data, and may chain actions across multiple systems. Multi-agent architectures (swarms) introduce additional coordination and trust challenges.\n\nThis pattern addresses the security architecture required to deploy AI agents safely within an enterprise, whether a single LLM assistant with tool access or a coordinated swarm of semi-autonomous agents operating across codebases, infrastructure, and external services.\n\nThe pattern is itself an example of what it describes: it was authored collaboratively between a human security architect and an AI agent with access to shell, file system, and remote servers, using the controls and principles documented here.",
+    "keyControlAreas": [
+      "Agent Identity & Authentication: How AI agents identify themselves to systems, manage API keys and tokens, and establish trust with the services they access. Includes agent-to-agent authentication in multi-agent architectures.",
+      "Data Classification for AI Contexts: Determining what information can safely enter an AI prompt or conversation context. PII, credentials, proprietary code, and classified data all require specific handling. Context windows create implicit data aggregation risk.",
+      "Prompt Security: Defence against prompt injection (direct and indirect), system prompt protection, output validation, and context poisoning. Tool outputs and user-supplied content are both injection vectors.",
+      "Tool & Action Authorisation: Defining what an AI agent can do -- read, write, execute, push, delete -- with approval gates for high-impact actions. Least privilege applied to agent capabilities. Distinguishing reversible from irreversible actions.",
+      "Agent Orchestration & Delegation Trust: Security of multi-agent coordination, delegation chains, task decomposition, and shared context. How trust propagates when one agent spawns another. Preventing privilege escalation through delegation.",
+      "Memory & Persistence Security: Securing persistent agent memory, conversation history, and cross-session context. Data retention policies, memory integrity, and isolation between sessions and tenants.",
+      "Model Supply Chain: Provider trust assessment, model provenance, dependency on third-party APIs, and the risk of model updates changing agent behaviour. API availability and degradation handling.",
+      "Human-in-the-Loop Controls: Defining approval checkpoints for destructive, external, or high-stakes actions. Balancing autonomy with oversight. Ensuring the human can understand and meaningfully review agent actions.",
+      "Audit & Observability: Comprehensive logging of agent actions, tool invocations, data access, and decision chains. Enabling forensic reconstruction of autonomous agent sessions. Anomaly detection for agent behaviour."
+    ],
+    "assumptions": "AI agents require API access to cloud-hosted model services (Anthropic, OpenAI, etc.) and operate over network connections subject to standard transport security controls. Some agents operate semi-autonomously with periodic human oversight rather than step-by-step approval. Multi-agent architectures coordinate via shared context, message passing, or orchestration layers. AI agents may access sensitive data including source code, infrastructure credentials, and personally identifiable information as part of legitimate operations. The threat landscape for AI systems is rapidly evolving; this pattern should be reviewed and updated at shorter intervals than traditional patterns.",
+    "typicalChallenges": "Prompt injection attacks via tool outputs, user content, or fetched web pages. Data leakage through model context windows or persistent memory. Difficulty auditing autonomous agent decisions and understanding AI reasoning chains. Managing credentials and secrets in AI-accessible environments without exposing them in conversation context. Ensuring meaningful human oversight without creating bottlenecks that negate the productivity benefits of AI assistance. Model hallucination leading to incorrect security decisions or fabricated outputs. Shadow AI: unauthorized use of AI tools outside governed channels. Vendor lock-in to specific model providers. Keeping pace with rapidly evolving AI capabilities and associated threat vectors.",
+    "indications": "Organisation uses AI assistants for code development, security analysis, or operational tasks. AI agents have access to production systems, source code, version control, or sensitive data. Multi-agent or swarm architectures are deployed or planned. Autonomous agent actions require governance and oversight frameworks. Organisation is building products or services that incorporate AI agents.",
+    "contraIndications": "Organisation has no AI integration plans and no exposure to AI-assisted tooling. AI usage is limited to isolated, non-sensitive tasks with no system access and no access to enterprise data.",
+    "threatResistance": "Prompt injection (direct system prompt override, indirect injection via tool outputs and fetched content). Data exfiltration through AI context or memory persistence. Unauthorised autonomous actions (privilege escalation, destructive operations). Model supply chain compromise (poisoned models, malicious fine-tuning). Session hijacking and context poisoning. Credential exposure in AI conversation contexts. Memory persistence attacks (planting false context for future sessions). Social engineering via AI-generated content. Denial of service through resource-intensive AI operations."
+  },
+  "references": [
+    {
+      "title": "OWASP Top 10 for Large Language Model Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "note": "Comprehensive taxonomy of LLM-specific vulnerabilities including prompt injection, data poisoning, and insecure output handling."
+    },
+    {
+      "title": "NIST AI Risk Management Framework (AI 100-1)",
+      "url": "https://www.nist.gov/artificial-intelligence/ai-risk-management-framework",
+      "note": "Voluntary framework for managing AI risks across the AI lifecycle."
+    },
+    {
+      "title": "MITRE ATLAS - Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/",
+      "note": "Knowledge base of adversary tactics and techniques against AI systems, modelled on ATT&CK."
+    },
+    {
+      "title": "Anthropic Usage Policy and Security Practices",
+      "url": "https://www.anthropic.com/policies",
+      "note": "Provider-side security commitments and responsible use guidelines."
+    },
+    {
+      "title": "EU AI Act",
+      "url": "https://artificialintelligenceact.eu/",
+      "note": "European regulatory framework for AI systems, including risk-based classification and compliance requirements."
+    }
+  ],
+  "relatedPatterns": ["SP-011", "SP-010", "SP-013", "SP-008", "SP-025", "SP-002"],
+  "relatedPatternNames": ["Cloud Computing", "Identity Management", "Data Security", "Public Web Server", "Advanced Monitoring and Detection", "Server Module"],
+  "controls": [
+    {"id": "AC-01", "name": "Access Control Policies and Procedures", "family": "AC"},
+    {"id": "AC-02", "name": "Account Management", "family": "AC"},
+    {"id": "AC-03", "name": "Access Enforcement", "family": "AC"},
+    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC"},
+    {"id": "AC-05", "name": "Separation Of Duties", "family": "AC"},
+    {"id": "AC-06", "name": "Least Privilege", "family": "AC"},
+    {"id": "AC-17", "name": "Remote Access", "family": "AC"},
+    {"id": "AT-01", "name": "Security Awareness And Training Policy And Procedures", "family": "AT"},
+    {"id": "AT-02", "name": "Security Awareness", "family": "AT"},
+    {"id": "AT-03", "name": "Security Training", "family": "AT"},
+    {"id": "AU-02", "name": "Auditable Events", "family": "AU"},
+    {"id": "AU-03", "name": "Content Of Audit Records", "family": "AU"},
+    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU"},
+    {"id": "CA-02", "name": "Security Assessments", "family": "CA"},
+    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA"},
+    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM"},
+    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM"},
+    {"id": "CM-07", "name": "Least Functionality", "family": "CM"},
+    {"id": "IA-02", "name": "User Identification And Authentication", "family": "IA"},
+    {"id": "IA-03", "name": "Device Identification And Authentication", "family": "IA"},
+    {"id": "IA-04", "name": "Identifier Management", "family": "IA"},
+    {"id": "IA-05", "name": "Authenticator Management", "family": "IA"},
+    {"id": "IR-01", "name": "Incident Response Policy And Procedures", "family": "IR"},
+    {"id": "IR-04", "name": "Incident Handling", "family": "IR"},
+    {"id": "IR-06", "name": "Incident Reporting", "family": "IR"},
+    {"id": "PS-06", "name": "Access Agreements", "family": "PS"},
+    {"id": "PS-07", "name": "Third-Party Personnel Security", "family": "PS"},
+    {"id": "RA-03", "name": "Risk Assessment", "family": "RA"},
+    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA"},
+    {"id": "SA-04", "name": "Acquisitions", "family": "SA"},
+    {"id": "SA-08", "name": "Security Engineering Principles", "family": "SA"},
+    {"id": "SA-09", "name": "External Information System Services", "family": "SA"},
+    {"id": "SA-11", "name": "Developer Security Testing", "family": "SA"},
+    {"id": "SC-04", "name": "Information Remnance", "family": "SC"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC"},
+    {"id": "SC-08", "name": "Transmission Integrity", "family": "SC"},
+    {"id": "SC-12", "name": "Cryptographic Key Establishment And Management", "family": "SC"},
+    {"id": "SC-13", "name": "Use Of Cryptography", "family": "SC"},
+    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI"},
+    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI"},
+    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI"},
+    {"id": "SI-10", "name": "Information Accuracy, Completeness, Validity, And Authenticity", "family": "SI"},
+    {"id": "SR-01", "name": "Policy and Procedures", "family": "SR"},
+    {"id": "SR-02", "name": "Supply Chain Risk Management Plan", "family": "SR"},
+    {"id": "SR-03", "name": "Supply Chain Controls and Processes", "family": "SR"},
+    {"id": "PT-02", "name": "Authority to Process Personally Identifiable Information", "family": "PT"},
+    {"id": "PT-03", "name": "Personally Identifiable Information Processing Purposes", "family": "PT"}
+  ],
+  "controlFamilySummary": {
+    "AC": 7,
+    "AT": 3,
+    "AU": 3,
+    "CA": 2,
+    "CM": 3,
+    "IA": 4,
+    "IR": 3,
+    "PS": 2,
+    "PT": 2,
+    "RA": 2,
+    "SA": 4,
+    "SC": 5,
+    "SI": 4,
+    "SR": 3
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

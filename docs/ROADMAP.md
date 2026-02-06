@@ -4,9 +4,9 @@
 
 OSA is uniquely positioned in the security architecture space. Unlike SABSA (strategic/business-focused) or O-ESA (policy-driven), **OSA provides operational, ready-to-use patterns** with control mappings. This is referenced in O'Reilly publications and has no direct open-source competitor.
 
-**Current state:** 27 patterns, 191 NIST 800-53 Rev 5 controls (including new PT and SR families) with ISO 17799/COBIT 4.1/PCI-DSS v2 mappings. ~1,700 daily visitors despite minimal maintenance.
+**Current state:** Live at opensecurityarchitecture.org on Astro/Cloudflare Pages. 27 patterns, 191 NIST 800-53 Rev 5 controls mapped to 7 compliance frameworks (ISO 27001:2022, ISO 27002:2022, COBIT 2019, CIS Controls v8, NIST CSF 2.0, SOC 2 TSC, PCI DSS v4.0.1). ~1,700 daily visitors.
 
-**Key opportunity:** The structured data we've extracted is the foundation for API-driven, AI-enhanced security architecture tooling.
+**Key opportunity:** OSA's structured control-to-framework graph is unique in the market. No other open-source project provides this cross-framework mapping. This is the foundation for AI-powered security architecture tooling that connects threats directly to auditable controls.
 
 ---
 
@@ -118,57 +118,86 @@ GET /api/v1/mappings?from=nist-800-53&to=iso-27001
 
 ## Phase 3: AI Integration
 
-### 3.1 Pattern Recommendation Engine
+### Business Model: Two-Layer Architecture
+
+OSA operates as two complementary layers:
+
+**Layer 1 - Open Source (free, forever)**
+- All patterns, controls, compliance mappings, icon library
+- JSON data, schemas, and static API
+- Self-hostable, forkable, community-owned
+- CC BY-SA 4.0 licence unchanged
+
+**Layer 2 - AI Platform (SaaS, tiered)**
+- Authenticated access via OAuth (GitHub, Google)
+- AI-powered threat modelling, control selection, gap analysis
+- Tiered: Personal (free, rate-limited) -> Team -> Enterprise
+- The AI layer consumes Layer 1 data but adds intelligence on top
+
+This model preserves OSA's 17-year open-source ethos while creating a sustainable revenue path. The open layer builds trust and community; the AI layer monetises the unique value.
+
+### 3.1 Controls-Aware Threat Modelling (Key Differentiator)
+
+Existing tools (STRIDE-GPT, Microsoft Threat Modeling Tool) produce generic threats with generic mitigations. OSA can close the full chain:
+
+```
+System description / codebase
+  -> STRIDE threat analysis
+    -> Threats mapped to specific NIST 800-53 controls
+      -> Controls cross-referenced to ISO 27001, PCI DSS, SOC 2, etc.
+        -> Auditor-ready evidence requirements
+```
+
+**Why this matters:** A CISO doesn't just need "implement input validation." They need "SI-10 (Information Input Validation), which maps to PCI DSS 6.5.1 and ISO 27002 8.28, and here's what your auditor will ask for."
+
+No other tool does this. OSA's structured control-to-framework graph is the moat.
+
+### 3.2 Pattern Recommendation Engine
 
 Given a system description or architecture diagram, recommend applicable patterns.
 
-**Example:**
 ```
 Input: "Cloud-hosted healthcare application with patient data"
 Output:
   - SP-011 Cloud Computing (54 controls)
   - SP-013 Data Security (33 controls)
   - Relevant HIPAA control overlay
+  - Threat model with controls mapped to compliance frameworks
 ```
 
-### 3.2 Control Selection Assistant
+### 3.3 Control Selection Assistant
 
-"I'm building a cloud-hosted healthcare application" -> Relevant controls from multiple frameworks with justification.
-
-### 3.3 Threat Modelling Integration
-
-Link patterns to threat models. Given a pattern, enumerate threats and mitigations.
+Conversational control selection: "I'm building a cloud-hosted payments platform" -> relevant controls from multiple frameworks with justification, gap analysis against current posture, and prioritised implementation roadmap.
 
 ### 3.4 Compliance Gap Analysis
 
-"Show me gaps between my current controls and PCI-DSS v4.0 requirements"
+"Show me gaps between my current controls and PCI-DSS v4.0.1 requirements" -> specific missing controls, remediation guidance, and effort estimates.
+
+### 3.5 MCP Server / API Integration
+
+Expose OSA AI capabilities as an MCP server so they compose with other tools (GitHub, Terraform, CI/CD). This is the composability play - but with OSA's structured data underneath rather than generic LLM output.
 
 ---
 
 ## Phase 4: Platform Evolution
 
-### 4.1 Decision: Joomla Refresh vs Replatform
+### 4.1 Replatform (DONE)
 
-**Keep Joomla if:**
-- Weekend maintenance cadence is acceptable
-- No need for complex user interactions
-- Content is primary value (not features)
+Migrated from Joomla to Astro + Tailwind CSS on Cloudflare Pages (Feb 2026). Static site generated from structured JSON data. Modern, fast, mobile-responsive.
 
-**Replatform if:**
-- Want modern developer experience
-- Need user accounts/submissions
-- Want to integrate AI features deeply
+### 4.2 Authentication & User Accounts
 
-**Replatform options:**
-- Headless CMS (Strapi, Directus) + Next.js/Astro frontend
-- Static site generator (Hugo, Astro) from JSON data
-- Full custom (overkill for content site)
+Required for AI layer (Phase 3). OAuth via GitHub/Google. Supports tiered access model:
+- Anonymous: full access to open-source content (Layer 1)
+- Authenticated Personal: AI features with rate limits
+- Team/Enterprise: higher limits, custom integrations, audit reporting
 
-### 4.2 Community Features
+### 4.3 Community Features
 
 - Pattern submission workflow
 - Discussion/comments on patterns
 - Usage analytics (which patterns are most viewed)
+- Community-contributed compliance mappings
 
 ---
 
@@ -216,11 +245,18 @@ Link patterns to threat models. Given a pattern, enumerate threats and mitigatio
 3. **Old team:** Reach out to Tobias, Spinoza, Phaedrus once foundation is solid
 4. **License:** CC BY-SA 4.0 (matches existing site terms)
 
-## Remaining Questions
+## Decisions Made (Phase 3+)
 
-1. **AI features:** Build into site, or separate tool/CLI that consumes the API?
-2. **Monetisation:** Keep fully free, or freemium model for AI features?
-3. **Community governance:** Open to external contributors, or maintain control?
+1. **Two-layer model:** Open source data layer (free forever) + AI SaaS layer (tiered)
+2. **Monetisation:** Freemium - AI features tiered from personal to enterprise
+3. **Threat modelling:** Controls-aware approach (OSA's differentiator vs generic STRIDE tools)
+4. **Replatform:** Astro + Cloudflare Pages (done)
+
+## Open Questions
+
+1. **Community governance:** Open to external contributors, or maintain control?
+2. **AI infrastructure:** Cloudflare Workers AI, or dedicated API service?
+3. **Enterprise features:** What do enterprise buyers need beyond higher rate limits?
 
 ---
 
@@ -260,4 +296,4 @@ Link patterns to threat models. Given a pattern, enumerate threats and mitigatio
 
 ---
 
-*Last updated: 2026-01-23*
+*Last updated: 2026-02-06*

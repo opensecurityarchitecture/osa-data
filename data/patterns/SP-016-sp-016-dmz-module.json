@@ -3,17 +3,18 @@
   "slug": "sp-016-dmz-module",
   "joomla_id": 286,
   "title": "DMZ Module",
-  "description": "OpenSecurityArchitecture (OSA) distills the know-how of the security architecture community and provides readily usable patterns for your application. This is a free framework, developed and owned by the community.",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/286-sp-016-dmz-module",
+  "description": "Security architecture for designing and operating a demilitarized zone (DMZ) network segment. Covers multi-tier firewall topologies, bastion host hardening, traffic inspection, DNS security, intrusion detection, audit logging, and the controlled exposure of services to untrusted networks.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-016",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
+    "release": "26.02",
+    "classification": "Network & Communications",
     "status": "published",
     "type": "module",
     "datePublished": "2010-07-31",
-    "dateModified": "2025-07-05",
+    "dateModified": "2026-02-06",
     "authors": [
-      "Russel and Tobias"
+      "Aurelius",
+      "Vitruvius"
     ],
     "reviewers": []
   },
@@ -22,171 +23,166 @@
     "png": "/images/OSA_images/patterns/08_02_Module_016_01_DMZ.png"
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "1) Encryption should be used for sensitive traffic, it may be necessary to break the session at the gateway (bastion host) to inspect traffic depending on content monitoring requirements. 2) The internet is a bad place and you need to protect your trusted computing environment from it!<br/><br/>",
-    "typicalChallenges": "Skilled firewall administrators to ensure that firewall rules do not have errors that create holes. Skilled security and server engineers to implement and maintain hardened build for gateways.<br/>Remodel an existing environment rather than building up an environment from scratch. To remodel the following approach is recommended:</p>\n<ul>\n<li>Isolate in the DMZ those services that have an \"intermediate\" role, such as web frontends, antivirus-servers, content inspection servers, SSL VPN portals, Captive portals, etc.</li>\n<li>Plan traffic rules on the firewall layer to route only the a very restricted set of services, especially concerning the traffic from the DMZ to the internal network and from the internet to the DMZ. Make sure, that there is absolutely NO direct traffic from the internal network to the internet</li>\n<li>Optionally add intrusion prevention systems in mainly two strategic points: in front of server networks, to ensure in depth defense and isolation of the sensitive data. As well as between internal network and DMZ, to contain propagation of worms and fast spreading zero day attacks throughout the network and on the Net.</li>\n</ul>\n<p>",
-    "indications": "Organisation with secure computing environment that connects to untrusted networks.<br/><br/>",
-    "contraIndications": "Single user environment e.g. Home user.<br/><br/>",
-    "threatResistance": "Denial of Service, Network based attacks.<br/><br/>"
+    "description": "The DMZ (Demilitarized Zone) is the foundational network security architecture pattern for any organisation that exposes services to untrusted networks. It creates a controlled buffer zone between the trusted internal network and the hostile internet, ensuring that no direct communication path exists between external attackers and internal systems. Every inbound connection terminates in the DMZ, where it is inspected, validated, and proxied before any interaction with internal resources occurs.\n\nThe classic DMZ architecture uses a multi-tier firewall topology. An external firewall faces the internet and permits only specific, tightly scoped traffic into the DMZ segment. An internal firewall separates the DMZ from the trusted network and enforces even more restrictive rules -- typically allowing only specific application-layer connections initiated by DMZ services toward defined internal targets. The critical design principle is that there must be absolutely no direct traffic path from the internet to the internal network. All traffic must be broken, inspected, and re-originated at the DMZ tier.\n\nWithin the DMZ, bastion hosts serve as hardened intermediary systems. These include web application frontends (reverse proxies, load balancers), mail relay servers, DNS resolvers, VPN concentrators, and content inspection services (antivirus scanning, web application firewalls). Each bastion host runs a minimal, hardened operating system configuration with only the services strictly required for its function. Attack surface reduction through least functionality is paramount -- every unnecessary service, port, protocol, and software package increases the risk of compromise.\n\nModern DMZ architectures must also account for encrypted traffic inspection. As TLS adoption has become near-universal, the ability to inspect traffic content for malicious payloads requires TLS termination or interception at the DMZ boundary. This introduces its own security considerations around certificate management, key protection, and the privacy implications of decrypting user traffic. Organisations must balance the security benefit of content inspection against regulatory and privacy constraints.\n\nComprehensive audit logging and monitoring are essential for DMZ operations. The DMZ is the most attacked segment of any network, and the ability to detect, investigate, and respond to incidents depends entirely on the quality and completeness of audit data. Every connection, every authentication attempt, every firewall rule hit, and every IDS/IPS alert must be logged, timestamped, and forwarded to a secure, centralised logging infrastructure that resides outside the DMZ itself.",
+    "keyControlAreas": [
+      "Information Flow and Access Control (AC-04, AC-06, AC-07, AC-12): These controls define what traffic can traverse the DMZ and how sessions are managed. Information flow enforcement (AC-04) is the most critical control for this pattern -- it governs the firewall rulesets that determine which traffic is permitted between network zones. Rules must be default-deny, permitting only explicitly authorised flows. Least privilege (AC-06) applies to both administrative access to DMZ systems and to the services exposed through them -- each system should run with minimum required permissions. Unsuccessful login attempts (AC-07) must trigger lockout and alerting on all DMZ-facing authentication services to resist brute-force attacks. Session termination (AC-12) ensures idle sessions are closed to prevent session hijacking and resource exhaustion. Implementation guidance: maintain a documented network flow matrix, review firewall rules quarterly, and automate rule validation against the approved flow policy.",
+      "Comprehensive Audit and Logging (AU-02, AU-03, AU-04, AU-05, AU-06, AU-07, AU-08, AU-09, AU-10, AU-11): The DMZ generates the highest volume and most security-critical audit data in the network. Auditable events (AU-02) must include all connection attempts (successful and failed), authentication events, firewall rule matches, IDS/IPS alerts, and administrative actions. Content of audit records (AU-03) must capture source/destination addresses, ports, protocols, timestamps, user identifiers, and action taken. Audit storage capacity (AU-04) must be sized for the high volume of DMZ traffic -- capacity exhaustion that stops logging is a critical vulnerability. Response to audit processing failures (AU-05) must ensure that logging failures generate immediate alerts and that systems fail securely rather than continuing to operate without audit. Audit monitoring and analysis (AU-06) and report generation (AU-07) enable real-time and forensic investigation of DMZ security events. Timestamps (AU-08) must be synchronised via NTP to enable correlation across systems. Protection of audit information (AU-09) requires that logs be forwarded to a secured collection point outside the DMZ where they cannot be tampered with by an attacker who compromises a DMZ host. Non-repudiation (AU-10) and audit record retention (AU-11) support forensic investigation and regulatory compliance.",
+      "System Hardening and Vulnerability Management (CM-07, RA-05, SI-07): DMZ systems are the most exposed in the network and must be hardened aggressively. Least functionality (CM-07) mandates that each DMZ host runs only the software and services strictly required for its function -- no development tools, no unnecessary network services, no default accounts, no sample applications. Vulnerability scanning (RA-05) must be performed frequently against DMZ systems (weekly or continuous), as they are the first targets for exploit attempts. Newly disclosed vulnerabilities in DMZ-facing services require expedited patching, often within hours rather than the standard patch cycle. Software and information integrity (SI-07) ensures that DMZ systems can detect unauthorised modifications to executables, configuration files, and critical data -- file integrity monitoring is essential on all DMZ hosts.",
+      "Malicious Content and Intrusion Detection (SI-03, SI-04, SI-08, SI-06): The DMZ is where malicious content entering the network should be detected and blocked. Malicious code protection (SI-03) requires antivirus and anti-malware scanning on all DMZ services that handle file transfers, email, or web content. Information system monitoring (SI-04) includes network-based intrusion detection/prevention systems (IDS/IPS) deployed at strategic points: between the internet and the DMZ, and between the DMZ and the internal network. This layered placement enables detection of both external attack attempts and lateral movement from compromised DMZ hosts. Spam protection (SI-08) is implemented on DMZ mail relay services. Security functionality verification (SI-06) provides ongoing assurance that security controls on DMZ systems are operating as intended -- automated health checks should verify firewall states, IDS signatures, and antivirus definitions regularly.",
+      "DNS Security (SC-20, SC-21, SC-22): DNS is a critical service in the DMZ and a frequent attack target. Authoritative DNS services (SC-20) exposed in the DMZ must be hardened, rate-limited, and protected against zone transfer attacks, DNS amplification, and cache poisoning. Recursive resolvers (SC-21) used by DMZ hosts for outbound resolution must validate responses (DNSSEC) and be isolated from authoritative services. Architecture and provisioning for DNS (SC-22) requires split-horizon DNS where external-facing and internal DNS namespaces are separated, preventing information disclosure about internal network topology. DNS logs should feed into the SIEM for detection of DNS tunnelling and command-and-control communication.",
+      "Network Resilience and Session Security (SC-05, SC-10, SC-23, CA-03): The DMZ must withstand denial-of-service attacks and maintain session integrity. DoS protection (SC-05) requires rate limiting, SYN flood protection, and ideally upstream DDoS mitigation services for internet-facing services. Network disconnect (SC-10) ensures sessions that exceed time limits or exhibit anomalous behaviour are terminated. Session authenticity (SC-23) protects against session hijacking and replay attacks on DMZ-hosted web applications and VPN services. Information system connections (CA-03) documents and authorises all connections between the DMZ and other network segments, ensuring every flow is known, approved, and monitored.",
+      "Security Assessment and Remediation (CA-04, CA-05, SI-05): DMZ security posture must be continuously assessed and improved. Security certification (CA-04) provides formal evaluation of DMZ architecture and configuration against security requirements before deployment and after significant changes. Plan of action and milestones (CA-05) tracks identified weaknesses and remediation timelines -- DMZ findings should receive accelerated remediation priority. Security alerts and advisories (SI-05) ensure the operations team receives and acts on vendor security advisories, CERT notifications, and threat intelligence relevant to DMZ technologies. Organisations should subscribe to advisory feeds for every technology deployed in the DMZ."
+    ],
+    "assumptions": "The organisation operates a network environment that connects to one or more untrusted networks, typically the internet. A multi-tier firewall architecture is available or planned, with physically or logically separate firewall instances for the external and internal DMZ boundaries. Encryption should be used for sensitive traffic; it may be necessary to break the session at the gateway (bastion host) to inspect traffic depending on content monitoring requirements. Skilled firewall administrators and security engineers are available to implement and maintain the hardened configuration. The organisation has or will establish a centralised logging and monitoring capability to consume DMZ audit data. Network segmentation principles are understood and supported by the network infrastructure.",
+    "typicalChallenges": "Skilled firewall administrators are essential to ensure that firewall rules do not contain errors that create security holes -- rule complexity grows over time and accumulated legacy rules are a common source of vulnerabilities. Skilled security and server engineers are needed to implement and maintain hardened builds for gateway and bastion host systems. Remodelling an existing flat or poorly segmented environment into a proper DMZ architecture is significantly more difficult than building from scratch. The recommended approach for remodelling is: first, isolate in the DMZ those services with an intermediate role (web frontends, antivirus servers, content inspection servers, SSL VPN portals, captive portals); second, plan traffic rules on the firewall layer to route only a very restricted set of services, especially concerning traffic from the DMZ to the internal network and from the internet to the DMZ, ensuring absolutely no direct traffic from the internal network to the internet; third, optionally add intrusion prevention systems at two strategic points -- in front of server networks for defence in depth and data isolation, and between the internal network and DMZ to contain propagation of worms and fast-spreading zero-day attacks. Managing encrypted traffic inspection at scale introduces certificate management complexity and privacy considerations. Cloud and hybrid architectures complicate traditional DMZ models, requiring adaptation of the pattern to virtual network constructs, cloud-native firewalls, and zero-trust network access approaches.",
+    "indications": "Any organisation with a secure computing environment that connects to untrusted networks. Organisations hosting internet-facing services (web applications, email, VPN, APIs). Environments requiring regulatory compliance that mandates network segmentation (PCI DSS, SWIFT CSP). Organisations with multiple security zones requiring controlled traffic flow between trust levels. Any environment where internal systems must be protected from direct exposure to internet-sourced threats.",
+    "contraIndications": "Single-user environments such as home users without server infrastructure. Very small organisations that consume only cloud-hosted SaaS services and have no on-premises servers or internet-facing infrastructure. Environments that have fully adopted zero-trust network access models where traditional perimeter-based DMZ concepts are replaced by identity-based micro-segmentation -- though even in these cases, the underlying principles of traffic inspection and zone separation remain relevant.",
+    "threatResistance": "Denial-of-service attacks targeting internet-facing services, including volumetric DDoS, application-layer floods, and protocol exploitation. Network-based attacks including port scanning, service enumeration, and exploitation of vulnerabilities in exposed services. Web application attacks such as SQL injection, cross-site scripting, and remote code execution targeting DMZ-hosted applications. Lateral movement from compromised DMZ hosts into the internal network. DNS-based attacks including cache poisoning, DNS tunnelling for command-and-control, and DNS amplification attacks. Malware delivery through web traffic, email attachments, or file transfer services hosted in the DMZ. Session hijacking and man-in-the-middle attacks against DMZ-hosted services. Brute-force and credential-stuffing attacks against authentication services exposed through the DMZ. Unauthorised network access through misconfigured firewall rules or undocumented network flows."
   },
-  "references": [],
-  "controls": [
+  "examples": {
+    "Firewall and network segmentation": [
+      "Palo Alto Networks Next-Generation Firewalls with App-ID for DMZ zone enforcement",
+      "Fortinet FortiGate firewalls with virtual domains (VDOMs) for DMZ segmentation",
+      "Cisco Firepower / ASA for multi-zone DMZ architecture",
+      "AWS VPC with public/private subnets, NACLs, and security groups as cloud DMZ equivalent"
+    ],
+    "Intrusion detection and prevention": [
+      "Suricata open-source IDS/IPS deployed at DMZ boundary points",
+      "Snort signature-based detection for DMZ traffic analysis",
+      "CrowdStrike Falcon for DMZ host-based detection and response",
+      "Palo Alto Cortex XDR for integrated DMZ network and endpoint detection"
+    ],
+    "Reverse proxy and web application firewall": [
+      "F5 BIG-IP ASM / NGINX App Protect for web application firewalling in DMZ",
+      "Cloudflare WAF and DDoS protection as external DMZ layer",
+      "ModSecurity with OWASP Core Rule Set on Apache/NGINX reverse proxies",
+      "AWS WAF / Azure Front Door WAF for cloud-hosted DMZ services"
+    ],
+    "DNS security": [
+      "BIND with DNSSEC validation for authoritative and recursive DMZ DNS",
+      "Infoblox DNS security with threat intelligence integration",
+      "Cisco Umbrella for DNS-layer security and C2 detection",
+      "PowerDNS with response policy zones for malicious domain blocking"
+    ]
+  },
+  "references": [
     {
-      "id": "AC-04",
-      "name": "Information Flow Enforcement",
-      "family": "AC"
+      "title": "NIST SP 800-41 Rev 1: Guidelines on Firewalls and Firewall Policy",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-41/rev-1/final",
+      "note": "NIST guidance on firewall types, architectures, and policy management. Covers DMZ design principles, firewall placement, and ruleset management."
     },
     {
-      "id": "AC-06",
-      "name": "Least Privilege",
-      "family": "AC"
+      "title": "NIST SP 800-123: Guide to General Server Security",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-123/final",
+      "note": "Guidance on hardening servers including bastion hosts in DMZ environments. Covers OS hardening, service minimisation, and security maintenance."
     },
     {
-      "id": "AC-07",
-      "name": "Unsuccessful Login Attempts",
-      "family": "AC"
+      "title": "CIS Benchmarks for Firewalls and Network Devices",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "note": "Detailed hardening benchmarks for Palo Alto, Cisco, Fortinet, and other firewall platforms commonly used in DMZ architectures."
     },
     {
-      "id": "AC-12",
-      "name": "Session Termination",
-      "family": "AC"
+      "title": "NIST SP 800-81 Rev 2: Secure Domain Name System (DNS) Deployment Guide",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-81/rev-2/final",
+      "note": "Comprehensive guidance on DNS security including DNSSEC, split-horizon DNS, and secure DNS architecture -- directly applicable to DMZ DNS services."
     },
     {
-      "id": "AU-02",
-      "name": "Auditable Events",
-      "family": "AU"
+      "title": "PCI DSS v4.0.1 Requirement 1: Network Security Controls",
+      "url": "https://www.pcisecuritystandards.org/document_library/",
+      "note": "PCI DSS requirements for network segmentation and DMZ controls protecting cardholder data environments. Mandates DMZ for internet-facing payment services."
     },
     {
-      "id": "AU-03",
-      "name": "Content Of Audit Records",
-      "family": "AU"
-    },
-    {
-      "id": "AU-04",
-      "name": "Audit Storage Capacity",
-      "family": "AU"
-    },
-    {
-      "id": "AU-05",
-      "name": "Response To Audit Processing Failures",
-      "family": "AU"
-    },
-    {
-      "id": "AU-06",
-      "name": "Audit Monitoring, Analysis, And Reporting",
-      "family": "AU"
-    },
-    {
-      "id": "AU-07",
-      "name": "Audit Reduction And Report Generation",
-      "family": "AU"
-    },
-    {
-      "id": "AU-08",
-      "name": "Time Stamps",
-      "family": "AU"
-    },
-    {
-      "id": "AU-09",
-      "name": "Protection Of Audit Information",
-      "family": "AU"
-    },
-    {
-      "id": "AU-10",
-      "name": "Non-Repudiation",
-      "family": "AU"
-    },
-    {
-      "id": "AU-11",
-      "name": "Audit Record Retention",
-      "family": "AU"
-    },
-    {
-      "id": "CA-03",
-      "name": "Information System Connections",
-      "family": "CA"
-    },
-    {
-      "id": "CA-04",
-      "name": "Security Certification",
-      "family": "CA"
-    },
-    {
-      "id": "CA-05",
-      "name": "Plan Of Action And Milestones",
-      "family": "CA"
-    },
-    {
-      "id": "CM-07",
-      "name": "Least Functionality",
-      "family": "CM"
-    },
-    {
-      "id": "RA-05",
-      "name": "Vulnerability Scanning",
-      "family": "RA"
-    },
-    {
-      "id": "SC-05",
-      "name": "Denial Of Service Protection",
-      "family": "SC"
-    },
-    {
-      "id": "SC-10",
-      "name": "Network Disconnect",
-      "family": "SC"
-    },
-    {
-      "id": "SC-20",
-      "name": "Secure Name / Address Resolution Service (Authoritative Source)",
-      "family": "SC"
-    },
-    {
-      "id": "SC-21",
-      "name": "Secure Name / Address Resolution Service (Recursive Or Caching Resolver)",
-      "family": "SC"
-    },
-    {
-      "id": "SC-22",
-      "name": "Architecture And Provisioning For Name / Address Resolution Service",
-      "family": "SC"
-    },
-    {
-      "id": "SC-23",
-      "name": "Session Authenticity",
-      "family": "SC"
-    },
-    {
-      "id": "SI-03",
-      "name": "Malicious Code Protection",
-      "family": "SI"
-    },
-    {
-      "id": "SI-04",
-      "name": "Information System Monitoring Tools And Techniques",
-      "family": "SI"
-    },
-    {
-      "id": "SI-05",
-      "name": "Security Alerts And Advisories",
-      "family": "SI"
-    },
-    {
-      "id": "SI-06",
-      "name": "Security Functionality Verification",
-      "family": "SI"
-    },
-    {
-      "id": "SI-07",
-      "name": "Software And Information Integrity",
-      "family": "SI"
-    },
-    {
-      "id": "SI-08",
-      "name": "Spam Protection",
-      "family": "SI"
+      "title": "SANS Institute: Designing and Building a DMZ",
+      "url": "https://www.sans.org/white-papers/",
+      "note": "Practical SANS guidance on DMZ architecture design including multi-homed firewalls, screened subnet configurations, and common DMZ design patterns."
     }
+  ],
+  "relatedPatterns": ["SP-004", "SP-009", "SP-011", "SP-013", "SP-025"],
+  "relatedPatternNames": ["Firewall Architecture", "Secure Internet Connection", "Network Segmentation", "Data Security", "Advanced Monitoring and Detection"],
+  "threats": [
+    {
+      "id": "T-DZ-001",
+      "name": "Denial of Service (Volumetric and Application-Layer)",
+      "mitigatedBy": ["SC-05", "SC-10", "SI-04"]
+    },
+    {
+      "id": "T-DZ-002",
+      "name": "Exploitation of Internet-Facing Service Vulnerabilities",
+      "mitigatedBy": ["CM-07", "RA-05", "SI-07", "SI-06"]
+    },
+    {
+      "id": "T-DZ-003",
+      "name": "Lateral Movement from Compromised DMZ Host",
+      "mitigatedBy": ["AC-04", "AC-06", "SI-04", "AU-06"]
+    },
+    {
+      "id": "T-DZ-004",
+      "name": "Malware Delivery via Web or Email Through DMZ",
+      "mitigatedBy": ["SI-03", "SI-04", "SI-08"]
+    },
+    {
+      "id": "T-DZ-005",
+      "name": "DNS Cache Poisoning and DNS Tunnelling",
+      "mitigatedBy": ["SC-20", "SC-21", "SC-22", "AU-06"]
+    },
+    {
+      "id": "T-DZ-006",
+      "name": "Brute-Force and Credential Stuffing Attacks",
+      "mitigatedBy": ["AC-07", "AC-12", "AU-02", "AU-06"]
+    },
+    {
+      "id": "T-DZ-007",
+      "name": "Firewall Rule Misconfiguration Allowing Bypass",
+      "mitigatedBy": ["AC-04", "CA-04", "CA-05", "AU-06"]
+    },
+    {
+      "id": "T-DZ-008",
+      "name": "Session Hijacking on DMZ-Hosted Services",
+      "mitigatedBy": ["SC-23", "SC-10", "AC-12"]
+    },
+    {
+      "id": "T-DZ-009",
+      "name": "Audit Log Tampering by Compromised DMZ Host",
+      "mitigatedBy": ["AU-09", "AU-05", "AU-04"]
+    },
+    {
+      "id": "T-DZ-010",
+      "name": "Zero-Day Exploitation of Unpatched DMZ Services",
+      "mitigatedBy": ["SI-05", "RA-05", "SI-04", "CM-07"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
+    {"id": "AC-07", "name": "Unsuccessful Login Attempts", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "standard"},
+    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-03", "name": "Content Of Audit Records", "family": "AU", "emphasis": "important"},
+    {"id": "AU-04", "name": "Audit Storage Capacity", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-05", "name": "Response To Audit Processing Failures", "family": "AU", "emphasis": "important"},
+    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-07", "name": "Audit Reduction And Report Generation", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-08", "name": "Time Stamps", "family": "AU", "emphasis": "important"},
+    {"id": "AU-09", "name": "Protection Of Audit Information", "family": "AU", "emphasis": "important"},
+    {"id": "AU-10", "name": "Non-Repudiation", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-11", "name": "Audit Record Retention", "family": "AU", "emphasis": "standard"},
+    {"id": "CA-03", "name": "Information System Connections", "family": "CA", "emphasis": "important"},
+    {"id": "CA-04", "name": "Security Certification", "family": "CA", "emphasis": "standard"},
+    {"id": "CA-05", "name": "Plan Of Action And Milestones", "family": "CA", "emphasis": "standard"},
+    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "critical"},
+    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "critical"},
+    {"id": "SC-05", "name": "Denial Of Service Protection", "family": "SC", "emphasis": "important"},
+    {"id": "SC-10", "name": "Network Disconnect", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-20", "name": "Secure Name / Address Resolution Service (Authoritative Source)", "family": "SC", "emphasis": "important"},
+    {"id": "SC-21", "name": "Secure Name / Address Resolution Service (Recursive Or Caching Resolver)", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-22", "name": "Architecture And Provisioning For Name / Address Resolution Service", "family": "SC", "emphasis": "important"},
+    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "standard"},
+    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
+    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "critical"},
+    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI", "emphasis": "important"},
+    {"id": "SI-06", "name": "Security Functionality Verification", "family": "SI", "emphasis": "standard"},
+    {"id": "SI-07", "name": "Software And Information Integrity", "family": "SI", "emphasis": "important"},
+    {"id": "SI-08", "name": "Spam Protection", "family": "SI", "emphasis": "standard"}
   ],
   "controlFamilySummary": {
     "AC": 4,

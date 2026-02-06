@@ -3,17 +3,18 @@
   "slug": "pattern-email-transport-layer-security-tls",
   "joomla_id": 275,
   "title": "Email Transport Layer Security (TLS) Pattern",
-  "description": "Email Transport Layer Security (TLS) Pattern depicting key controls, particularly for companies with many business partners",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/275-pattern-email-transport-layer-security-tls",
+  "description": "Security architecture for protecting email communication at the infrastructure level using gateway-to-gateway TLS encryption. Addresses opportunistic and enforced TLS modes, MTA authentication, certificate management, and monitoring for organisations with many business partner connections.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-020",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
+    "release": "26.02",
+    "classification": "Network & Communications",
     "status": "published",
     "type": "pattern",
     "datePublished": "2010-04-27",
-    "dateModified": "2025-07-05",
+    "dateModified": "2026-02-06",
     "authors": [
-      "Martin Sibler"
+      "Aurelius",
+      "Vitruvius"
     ],
     "reviewers": []
   },
@@ -22,55 +23,163 @@
     "png": "/images/OSA_images/patterns/08_02_Pattern_020_001_Email_TLS.png"
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "Protection of the e-mail communication at the infrastructure level (gateway-to-gateway) provides sufficient protection. No end-to-end protection is required.<br/><br/>",
-    "typicalChallenges": "Not every mail gateway (MTA) of communication partners support TLS (Transport Layer Security). Furthermore, TLS might be supported but is not configured properly. Additional challenges exist if an e-mail outsourcer is involved in TLS connections. Not all MTA’s are able to meet the additional requirements that outsourcers might have in order to establish an Enforced TLS connection.<br/><br/>",
-    "indications": "Transparent solution that requires no end-user interaction in order to have protection of the e-mail communication. <br/><br/>",
-    "contraIndications": "E-mail communication must be protected from the senders computer to the receivers computer (end-2-end protection) to ensure that only the intended recipient has access to the information. <br/><br/>",
-    "threatResistance": "E-mail communication is protected over the Internet in order to prevent eavesdropping of confidential information. No end-2-end protection. A number of residual risks remain with this pattern:</p>\n<ul>\n<li>Confidentiality for e-mail communication is not guaranteed inside the company’s intranet. In addition confidentiality in an end-2-end communication can not be ensured if a third party (outsourcer) is providing the e-mail gateway functionality (MTA). In this case the TLS communication is terminated at the mail gateway of this third party and the e-mails can be read by the third party. It has to be ensured that e-mail communication is also protected from the third party to the companies internal mail server.</li>\n<li>Loss of availability- The risk that e-mail communication is blocked between business partners exists for Enforced TLS connections if encryption is not possible. Continuous monitoring of Enforced TLS connections is required to identify encryption failures. Procedures have to be in place to temporary remove the Enforced TLS policy in order to re-establish the e-mail communication until the technical difficulties have been resolved which caused the encryption failure.</li>\n<li>No 100% encryption guarantee. Opportunistic TLS does not guarantee 100% security – if encryption is not possible e-mails are sent in clear text. Therefore, monitoring of such connections is required to prove that appropriate protection is provided by Opportunistic TLS.</li>\n<li>TLS stack vulnerability- E-mail communication could be eavesdropped due to vulnerabilities in the TLS communication stack.</li>\n<li>Identification of MTA- In case of Opportunistic TLS the authentication of the receiving mail server (MTA) cannot be guaranteed as self-signed certificates are accepted.</li>\n</ul>\n<p><br/>"
+    "description": "Email remains one of the most widely used communication channels in business, and one of the most vulnerable. Messages traverse the internet in clear text by default, passing through multiple mail transfer agents (MTAs) before reaching their destination. Any network observer along that path can read, modify, or inject messages. The Email TLS pattern addresses this by securing the transport layer between mail gateways, providing confidentiality and integrity protection for email in transit without requiring any action from end users.\n\nThe pattern operates at the SMTP level, using STARTTLS to upgrade plain-text MTA-to-MTA connections to TLS-encrypted sessions. It supports two modes: opportunistic TLS, where encryption is attempted but falls back to clear text if the receiving MTA does not support it, and enforced TLS, where the connection is refused if encryption cannot be established. Opportunistic TLS provides broad coverage with no delivery impact but cannot guarantee confidentiality. Enforced TLS guarantees encryption but risks blocking email delivery if the partner's MTA has a certificate issue, a misconfiguration, or a temporary failure. Most organisations use opportunistic TLS as the baseline and enforced TLS selectively for high-sensitivity business partners.\n\nThis is an infrastructure-level pattern -- it protects email between gateways, not end-to-end. Once a message arrives at the receiving MTA, it is decrypted and handled in clear text within the recipient's internal infrastructure. If a third-party email outsourcer operates the MTA, they have access to the decrypted message content. For organisations that require end-to-end confidentiality (sender to recipient), S/MIME or PGP-based encryption is needed in addition to or instead of this pattern. The Email TLS pattern is best understood as a baseline transport protection that covers the most exposed segment of the email delivery path.\n\nOrganisations with many business partners face particular challenges. Each enforced TLS connection is a point-to-point relationship that must be configured, tested, and monitored individually. Certificate changes, MTA upgrades, or network issues at the partner side can break enforced TLS connections without warning, causing email to queue or bounce. Continuous monitoring of TLS connection status is essential, along with operational procedures to temporarily relax enforcement when technical issues arise and re-enable it once resolved.\n\nModern email security has moved beyond basic TLS to include complementary standards: MTA-STS (RFC 8461) provides a mechanism for receiving domains to advertise their TLS policy and prevent downgrade attacks, DANE (RFC 7672) uses DNSSEC to bind certificates to domain names, and SMTP TLS Reporting (RFC 8460) enables receiving domains to report TLS connection failures back to senders. Together with SPF, DKIM, and DMARC for sender authentication, these standards form a layered email security architecture of which transport TLS is the foundation.",
+    "keyControlAreas": [
+      "Transport Encryption and Cryptographic Standards (SC-09, SC-13): Transmission confidentiality (SC-09) is the core control -- all email leaving the organisation should be encrypted in transit wherever possible. Use of cryptography (SC-13) governs which TLS versions and cipher suites are acceptable. Disable TLS 1.0 and 1.1; mandate TLS 1.2 as minimum with TLS 1.3 preferred. Configure strong cipher suites that provide forward secrecy (ECDHE). Ensure that the MTA's TLS implementation uses validated cryptographic libraries. For enforced TLS connections, require certificates from trusted CAs and verify the partner's certificate against their domain. For opportunistic TLS, accept self-signed certificates to maximise coverage but log and monitor the actual encryption state of all connections.",
+      "MTA Authentication and Boundary Protection (IA-03, SC-07): Device identification and authentication (IA-03) applies to the MTAs themselves -- in enforced TLS mode, both the sending and receiving MTA must present valid certificates to establish the encrypted channel. Certificate validation ensures you are communicating with the intended partner MTA, not a man-in-the-middle. Boundary protection (SC-07) governs the placement and configuration of mail gateways at the network perimeter. The mail gateway is a critical boundary device that mediates all inbound and outbound email; its TLS configuration directly determines the organisation's email transport security posture. Restrict SMTP relay access, implement connection-level controls, and ensure the mail gateway is hardened and regularly patched.",
+      "Information Flow and Access Control (AC-03, AC-04): Access enforcement (AC-03) controls who can configure TLS policies on the mail gateway -- this is a privileged operation that should be restricted to a small group of administrators with change control oversight. Information flow enforcement (AC-04) determines which email flows require enforced TLS versus opportunistic TLS. Policy should be risk-based: email to financial regulators, legal counsel, or partners exchanging sensitive data should use enforced TLS, while general business correspondence may use opportunistic TLS. Implement policy rules on the mail gateway that match destination domains to TLS enforcement levels.",
+      "Monitoring and Reporting (AU-06): Audit monitoring, analysis, and reporting (AU-06) is essential for operational effectiveness. Monitor all outbound email connections for TLS status: was TLS negotiated, which version and cipher suite was used, did certificate validation succeed. Alert on enforced TLS connection failures immediately -- these represent blocked email to business partners. For opportunistic TLS, track the percentage of connections that successfully negotiate encryption versus falling back to clear text. Generate periodic reports showing encryption coverage by partner domain. Use SMTP TLS Reporting (RFC 8460) where supported to receive failure reports from receiving domains. Feed monitoring data back into policy decisions about where to enable or mandate enforced TLS.",
+      "Documentation and Operational Procedures (SA-05): Information system documentation (SA-05) covers the operational procedures that make email TLS sustainable. Document all enforced TLS connections including partner domain, certificate details, renewal dates, and escalation contacts. Maintain runbooks for common failure scenarios: certificate expiry at partner, TLS negotiation failure, temporary enforcement relaxation and re-enablement. Document the decision criteria for when to enable enforced TLS for a new partner. Keep an inventory of all partner MTA certificates and their expiry dates, with automated alerting before expiry. For organisations using email outsourcers, document the TLS configuration between the outsourcer and the internal mail infrastructure."
+    ],
+    "assumptions": "Protection of email communication at the infrastructure level (gateway-to-gateway) provides sufficient protection for most business email. No end-to-end encryption is required for the general case, though it may be required for specific high-sensitivity communications. The organisation operates or contracts mail gateway (MTA) infrastructure that supports STARTTLS. Business partners' MTAs support TLS to a sufficient degree for opportunistic encryption to provide meaningful coverage. Certificate infrastructure (internal CA or public CA) is available for MTA certificate management. The organisation has operational capacity to monitor TLS connection status and respond to failures.",
+    "typicalChallenges": "Not every business partner's mail gateway supports TLS, and among those that do, many are misconfigured -- expired certificates, self-signed certificates, wrong hostnames, or outdated TLS versions. Enforced TLS connections require bilateral agreement and testing with each partner, which does not scale well when an organisation has hundreds of business partner domains. Email outsourcers add complexity: the TLS connection terminates at the outsourcer's MTA, meaning the outsourcer can read decrypted email content. Establishing enforced TLS through an outsourcer requires that the outsourcer's infrastructure meets the same requirements, which may not be configurable on a per-tenant basis. Not all MTAs support the additional requirements that outsourcers impose for enforced TLS establishment. Certificate lifecycle management across many partner connections is operationally demanding. Downgrade attacks against opportunistic TLS (stripping the STARTTLS advertisement) remain a risk without MTA-STS or DANE deployment.",
+    "indications": "Apply this pattern as a baseline for all organisations that send and receive email over the internet. It is a transparent solution that requires no end-user interaction and provides immediate confidentiality improvement for email in transit. It is particularly important for organisations with many business partners exchanging sensitive information (financial services, healthcare, legal, government), where regulatory requirements may mandate encryption of data in transit. Use enforced TLS selectively for high-sensitivity partner connections where both parties can commit to maintaining TLS capability. Combine with SPF, DKIM, and DMARC for a comprehensive email security posture.",
+    "contraIndications": "This pattern is insufficient when email communication must be protected end-to-end from the sender's workstation to the recipient's workstation -- for example, when email content must remain confidential even from the organisation's own mail administrators or email outsourcer. In such cases, use S/MIME or PGP-based message-level encryption. This pattern also does not protect email stored at rest on mail servers or in mailboxes. It is not a substitute for email content filtering, anti-malware scanning, or sender authentication (SPF/DKIM/DMARC), which address different threat categories.",
+    "threatResistance": "This pattern protects against eavesdropping on email in transit over the internet, preventing passive network observers from reading confidential business communications. Enforced TLS additionally resists active man-in-the-middle attacks by requiring certificate validation. A number of residual risks remain: confidentiality is not guaranteed within the company's intranet after the message arrives at the gateway. If a third-party outsourcer provides MTA functionality, they can read decrypted email unless a separate TLS connection protects the outsourcer-to-internal-server hop. Availability risk exists for enforced TLS connections -- email is blocked if encryption fails, requiring continuous monitoring and rapid response. Opportunistic TLS does not guarantee encryption and is vulnerable to downgrade attacks where an attacker strips the STARTTLS advertisement. TLS stack vulnerabilities could allow eavesdropping on otherwise encrypted connections. In opportunistic TLS mode, self-signed certificates are accepted, meaning MTA identity is not verified."
   },
-  "references": [],
+  "examples": {
+    "Mail gateway platforms with TLS support": [
+      "Microsoft Exchange Online with mandatory TLS 1.2 for Office 365 connectors and partner enforced TLS",
+      "Proofpoint Email Protection with per-domain TLS policy enforcement and monitoring",
+      "Cisco Email Security Appliance (ESA) with TLS policy tables and certificate management",
+      "Postfix MTA with tls_policy_maps for per-destination enforced TLS configuration"
+    ],
+    "Modern email security standards": [
+      "MTA-STS (RFC 8461) policy publication via DNS and HTTPS to prevent TLS downgrade attacks",
+      "DANE (RFC 7672) with TLSA DNS records for certificate pinning via DNSSEC",
+      "SMTP TLS Reporting (RFC 8460) for receiving TLS connection failure reports from partner domains",
+      "STARTTLS Everywhere (EFF) initiative promoting universal email transport encryption"
+    ],
+    "Monitoring and reporting tools": [
+      "Google Postmaster Tools showing TLS encryption rates for email sent to Gmail",
+      "Hardenize platform for monitoring MTA TLS configuration and certificate status",
+      "CheckTLS.com for testing and verifying TLS support on partner mail gateways"
+    ]
+  },
+  "references": [
+    {
+      "title": "RFC 8314: Cleartext Considered Obsolete (Use of TLS for Email)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc8314",
+      "note": "IETF standard declaring cleartext email protocols obsolete and mandating TLS for email submission and access protocols."
+    },
+    {
+      "title": "RFC 8461: SMTP MTA Strict Transport Security (MTA-STS)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc8461",
+      "note": "Standard for MTA-STS, allowing receiving domains to declare their TLS policy and prevent STARTTLS downgrade attacks."
+    },
+    {
+      "title": "RFC 7672: SMTP Security via Opportunistic DANE TLS",
+      "url": "https://datatracker.ietf.org/doc/html/rfc7672",
+      "note": "Defines DANE for SMTP, using DNSSEC-authenticated TLSA records to verify MTA certificates and prevent man-in-the-middle attacks."
+    },
+    {
+      "title": "NIST SP 800-177 Rev 1: Trustworthy Email",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-177/rev-1/final",
+      "note": "Comprehensive NIST guidance on email security including transport security (STARTTLS), sender authentication (SPF/DKIM/DMARC), and end-to-end encryption (S/MIME)."
+    },
+    {
+      "title": "M3AAWG TLS Best Practices",
+      "url": "https://www.m3aawg.org/sites/default/files/m3aawg-smtp-tls-v1.0.pdf",
+      "note": "Industry best practices from the Messaging, Malware and Mobile Anti-Abuse Working Group for SMTP TLS deployment and configuration."
+    },
+    {
+      "title": "NCSC Email Security and Anti-Spoofing Guidance",
+      "url": "https://www.ncsc.gov.uk/collection/email-security-and-anti-spoofing",
+      "note": "UK National Cyber Security Centre guidance on email security including TLS configuration, MTA-STS, and DMARC deployment."
+    }
+  ],
+  "relatedPatterns": ["SP-005", "SP-006", "SP-007", "SP-013", "SP-016", "SP-019"],
+  "relatedPatternNames": ["SOA Internal Service Usage", "Wireless Private Network", "Wireless Public Hotspot", "Data Security", "DMZ Module", "Secure Ad-Hoc File Exchange"],
+  "threats": [
+    {
+      "id": "T-ET-001",
+      "name": "Email Eavesdropping in Transit",
+      "mitigatedBy": ["SC-09", "SC-13"]
+    },
+    {
+      "id": "T-ET-002",
+      "name": "Man-in-the-Middle Attack on SMTP Connection",
+      "mitigatedBy": ["IA-03", "SC-13", "SC-07"]
+    },
+    {
+      "id": "T-ET-003",
+      "name": "STARTTLS Downgrade Attack",
+      "mitigatedBy": ["SC-09", "AU-06", "AC-04"]
+    },
+    {
+      "id": "T-ET-004",
+      "name": "MTA Impersonation via Forged Certificate",
+      "mitigatedBy": ["IA-03", "SC-13"]
+    },
+    {
+      "id": "T-ET-005",
+      "name": "Email Delivery Failure Due to Enforced TLS Misconfiguration",
+      "mitigatedBy": ["AU-06", "SA-05"]
+    },
+    {
+      "id": "T-ET-006",
+      "name": "Third-Party Outsourcer Access to Decrypted Email",
+      "mitigatedBy": ["AC-04", "SC-09", "SA-05"]
+    },
+    {
+      "id": "T-ET-007",
+      "name": "TLS Stack Vulnerability Exploitation",
+      "mitigatedBy": ["SC-13", "SC-07", "AU-06"]
+    },
+    {
+      "id": "T-ET-008",
+      "name": "Unauthorised Modification of TLS Policy Configuration",
+      "mitigatedBy": ["AC-03", "AU-06"]
+    }
+  ],
   "controls": [
     {
       "id": "AC-03",
       "name": "Access Enforcement",
-      "family": "AC"
+      "family": "AC",
+      "emphasis": "standard"
     },
     {
       "id": "AC-04",
       "name": "Information Flow Enforcement",
-      "family": "AC"
+      "family": "AC",
+      "emphasis": "important"
     },
     {
       "id": "AU-06",
       "name": "Audit Monitoring, Analysis, And Reporting",
-      "family": "AU"
+      "family": "AU",
+      "emphasis": "critical"
     },
     {
       "id": "IA-03",
       "name": "Device Identification And Authentication",
-      "family": "IA"
+      "family": "IA",
+      "emphasis": "critical"
     },
     {
       "id": "SA-05",
       "name": "Information System Documentation",
-      "family": "SA"
+      "family": "SA",
+      "emphasis": "important"
     },
     {
       "id": "SC-07",
       "name": "Boundary Protection",
-      "family": "SC"
+      "family": "SC",
+      "emphasis": "important"
     },
     {
       "id": "SC-09",
       "name": "Transmission Confidentiality",
-      "family": "SC"
+      "family": "SC",
+      "emphasis": "critical"
     },
     {
       "id": "SC-13",
       "name": "Use Of Cryptography",
-      "family": "SC"
+      "family": "SC",
+      "emphasis": "critical"
     }
   ],
   "controlFamilySummary": {

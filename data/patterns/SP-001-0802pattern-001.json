@@ -3,17 +3,18 @@
   "slug": "0802pattern-001",
   "joomla_id": 187,
   "title": "Client Module",
-  "description": "Client module depicting standard security controls. Used in other OSA security architecture patterns.",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/187-0802pattern-001",
+  "description": "Reusable security module defining the standard control baseline for client endpoints including desktops, laptops, and workstations. Referenced as a building block by other OSA patterns wherever a client device appears in the architecture.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-001",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
+    "release": "26.02",
+    "classification": "Infrastructure",
     "status": "published",
     "type": "module",
     "datePublished": "2008-01-19",
-    "dateModified": "2025-07-04",
+    "dateModified": "2026-02-06",
     "authors": [
-      "Russell"
+      "Aurelius",
+      "Vitruvius"
     ],
     "reviewers": []
   },
@@ -22,416 +23,215 @@
     "png": "/images/OSA_images/patterns/08_02_06_Pattern_001_Client_Module.png"
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "",
-    "typicalChallenges": "",
-    "indications": "This pattern module is referenced throughout OSA.<br/>",
-    "contraIndications": "",
-    "threatResistance": "TBD.<br/>"
+    "description": "The Client Module is a foundational building block in the OSA pattern library. Rather than being a standalone security architecture, it encapsulates the security controls that should be applied to any client endpoint -- desktops, laptops, workstations, and similar user-facing devices. Other OSA patterns reference this module wherever a client device appears in their architecture, ensuring consistent security baselines across different deployment scenarios.\n\nClient endpoints are among the most attacked surfaces in any organisation. They are where users interact with data, authenticate to services, browse the web, open email attachments, and connect removable media. Every major breach category -- phishing, ransomware, credential theft, insider threat, data exfiltration -- either originates at or passes through the client endpoint. The controls in this module address that reality across multiple dimensions: access control, system hardening, malware protection, audit logging, cryptographic services, vulnerability management, and incident response readiness.\n\nThe module covers 80 controls spanning 16 NIST 800-53 control families. Access control (AC) provides the authentication and session management foundation. Configuration management (CM) ensures endpoints are built from hardened baselines with least-functionality principles. System and information integrity (SI) addresses malware protection, patch management, and software integrity verification. Audit and accountability (AU) ensures that endpoint activity is logged, timestamped, and protected for forensic and compliance purposes.\n\nAs a module rather than a pattern, the Client Module is designed for composition. It does not prescribe network architecture, perimeter controls, or server-side protections -- those are handled by the patterns that reference it. This separation of concerns allows architects to reason about client security independently while ensuring that every pattern incorporating client endpoints inherits a proven, comprehensive control set. When the Client Module is updated, all referencing patterns benefit automatically.\n\nPractitioners implementing this module should pay particular attention to the interplay between endpoint hardening (CM-02, CM-06, CM-07), malware protection (SI-03), and vulnerability management (RA-05, SI-02). These three areas form the core defensive triad for client endpoints. Without all three operating effectively, the endpoint becomes a reliable entry point for adversaries.",
+    "keyControlAreas": [
+      "Access Control and Session Management (AC-03, AC-06, AC-07, AC-11, AC-12): Access enforcement and least privilege are the first line of defence on any client endpoint. AC-03 ensures that the operating system and applications enforce authorised access based on policy. AC-06 restricts users and processes to the minimum privileges necessary, preventing lateral movement and privilege escalation after initial compromise. AC-07 locks accounts or introduces delays after repeated failed login attempts, defending against brute-force and credential-stuffing attacks. AC-11 and AC-12 handle session lock and termination, ensuring that unattended workstations do not become open doors. Implementation typically involves Group Policy or MDM-enforced screen lock timeouts, idle session termination, and role-based access control at the OS level.",
+      "Configuration Management and Hardening (CM-02, CM-06, CM-07, CM-08): These controls define the security posture of the endpoint before it ever connects to the network. CM-02 establishes a baseline configuration -- a gold image or configuration-as-code template that every client is built from. CM-06 enforces specific security settings: disabled unnecessary services, restricted registry keys, hardened browser configurations, and enforced security policies. CM-07 applies least functionality by removing or disabling software, ports, protocols, and services that are not required for the user's role. CM-08 maintains an accurate inventory of all endpoint hardware and software components, which is essential for vulnerability management and licence compliance. Without strong configuration management, every other control operates on an uncertain foundation.",
+      "Malware Protection and Software Integrity (SI-03, SI-07, SI-06, SA-06, SA-07): Malware protection on the client endpoint must be multi-layered. SI-03 mandates anti-malware capabilities with automatic signature updates, real-time scanning, and behavioural detection. SI-07 verifies the integrity of software and firmware, detecting unauthorised modifications that could indicate rootkit installation or supply chain compromise. SI-06 provides runtime verification that security functions are operating correctly. SA-06 and SA-07 control software installation, restricting what users can install and ensuring that only authorised, licensed software runs on endpoints. Modern implementations combine traditional AV with EDR (endpoint detection and response), application whitelisting, and code signing verification.",
+      "Audit Logging and Accountability (AU-02, AU-03, AU-08, AU-09, AU-11): Comprehensive audit logging on client endpoints is essential for incident investigation, compliance evidence, and threat detection. AU-02 defines which events are auditable -- logon/logoff, privilege use, file access, process execution, configuration changes, and security-relevant application events. AU-03 specifies the content of each audit record: timestamp, source, event type, user identity, outcome, and affected object. AU-08 ensures accurate timestamps synchronized via NTP, critical for correlating events across distributed systems. AU-09 protects audit logs from tampering or deletion by local users or malware. AU-11 defines retention periods aligned with organisational and regulatory requirements. Logs should be forwarded to a central SIEM in near-real-time to survive endpoint compromise.",
+      "Vulnerability and Patch Management (RA-05, SI-02, SI-05): Client endpoints accumulate vulnerabilities rapidly through operating system flaws, browser vulnerabilities, application bugs, and driver issues. RA-05 requires regular vulnerability scanning to identify missing patches and misconfigurations. SI-02 mandates timely flaw remediation -- patching operating systems, browsers, productivity suites, and third-party applications within defined SLAs based on severity. SI-05 ensures that security alerts and advisories from vendors and CERTs are monitored and acted upon. The combination of scanning, patching, and advisory monitoring creates a continuous vulnerability management cycle. Organisations should target 24-48 hours for critical patches and 14 days for high-severity patches on client endpoints.",
+      "Cryptographic Services (SC-12, SC-13, IA-07): Client endpoints handle sensitive data in transit and at rest, requiring robust cryptographic capabilities. SC-12 covers cryptographic key establishment and management, including certificate lifecycle management for TLS, S/MIME, and disk encryption keys. SC-13 mandates the use of approved cryptographic algorithms and implementations -- this means TLS 1.2+ for network communications, AES-256 for disk encryption, and FIPS-validated or equivalent cryptographic modules where required. IA-07 ensures that cryptographic modules themselves authenticate correctly. Practical implementation includes full-disk encryption (BitLocker, FileVault), certificate-based authentication, and hardware TPM integration for key storage.",
+      "Incident Response Readiness (IR-04, IR-05, IR-06, IR-07): Every client endpoint is a potential incident source, and the module must support rapid detection, containment, and investigation. IR-04 covers incident handling procedures specific to endpoint events: malware detection, unauthorised access attempts, data loss indicators, and anomalous behaviour. IR-05 provides continuous incident monitoring through EDR telemetry and SIEM integration. IR-06 defines how endpoint incidents are reported and escalated. IR-07 ensures that incident response assistance is available -- whether through internal SOC, managed detection and response (MDR), or vendor support channels. Endpoints should be capable of remote isolation for containment without requiring physical access."
+    ],
+    "assumptions": "The organisation maintains a centralised endpoint management capability (MDM, SCCM, Intune, or equivalent) that can enforce configuration baselines and deploy patches. Network connectivity exists for log forwarding, signature updates, and remote management. Users operate with standard (non-administrative) privileges by default. The organisation has defined data classification policies that inform endpoint encryption and data handling controls. Hardware supports modern security features including TPM, Secure Boot, and virtualisation-based security where applicable.",
+    "typicalChallenges": "Endpoint diversity is the primary challenge: organisations typically support multiple OS versions, hardware generations, and form factors, making uniform baseline enforcement difficult. BYOD and hybrid work models blur the boundary between corporate and personal devices, complicating control enforcement. Users with legitimate needs for elevated privileges (developers, power users) resist least-functionality restrictions. Legacy applications may require insecure configurations or older runtime environments that conflict with hardening standards. Patch deployment across distributed, intermittently-connected endpoints introduces delays that leave vulnerability windows open. Audit log volumes from endpoints can overwhelm storage and SIEM capacity without careful event selection and filtering. Balancing security controls with user productivity and system performance is a constant tension -- overly aggressive malware scanning or restrictive application whitelisting can impair daily work.",
+    "indications": "This module should be referenced by any OSA pattern that includes a client endpoint device in its architecture. It applies to corporate desktops and laptops, developer workstations, kiosk systems, shared terminals, and any user-facing computing device that processes, stores, or transmits organisational data. It is particularly relevant when building patterns for remote access, cloud computing, wireless connectivity, and any scenario where endpoints connect to organisational services.",
+    "contraIndications": "This module is not designed for mobile devices (phones, tablets) which have fundamentally different OS architectures, management models, and threat profiles -- see the Mobile Device patterns instead. It does not cover server-class systems (see SP-002 Server Module) or network infrastructure devices. IoT and embedded devices with constrained operating systems require purpose-built control sets rather than this general-purpose client module. Thin clients and virtual desktop infrastructure (VDI) endpoints may require a subset of these controls, with server-side controls handling the remainder.",
+    "threatResistance": "The Client Module addresses the full spectrum of endpoint threats. Malware infection through phishing, drive-by downloads, and removable media is countered by SI-03 malware protection, CM-07 least functionality, and SA-06/SA-07 software restrictions. Credential theft and brute-force attacks are mitigated by AC-07 lockout, IA-02 strong authentication, and SC-13 cryptographic protections. Unauthorised data access is prevented by AC-03 access enforcement and AC-06 least privilege. Data loss through theft or loss of physical devices is addressed by SC-12/SC-13 disk encryption. Insider threats are detected through AU-02/AU-03 audit logging and SI-04 monitoring. Exploitation of unpatched vulnerabilities is reduced by RA-05 scanning and SI-02 patch management. Session hijacking and unattended access are prevented by AC-11 session lock and AC-12 session termination. Supply chain and software integrity attacks are detected by SI-07 integrity verification."
   },
-  "references": [],
-  "controls": [
-    {
-      "id": "AC-03",
-      "name": "Access enforcement",
-      "family": "AC"
-    },
-    {
-      "id": "AC-05",
-      "name": "Separation Of Duties",
-      "family": "AC"
-    },
-    {
-      "id": "AC-06",
-      "name": "Least privilege",
-      "family": "AC"
-    },
-    {
-      "id": "AC-07",
-      "name": "Unsuccessful login attempts",
-      "family": "AC"
-    },
-    {
-      "id": "AC-08",
-      "name": "System use notification",
-      "family": "AC"
-    },
-    {
-      "id": "AC-11",
-      "name": "Session Lock",
-      "family": "AC"
-    },
-    {
-      "id": "AC-12",
-      "name": "Session Termination",
-      "family": "AC"
-    },
-    {
-      "id": "AC-19",
-      "name": "Session Termination",
-      "family": "AC"
-    },
-    {
-      "id": "AT-02",
-      "name": "Security Awareness",
-      "family": "AT"
-    },
-    {
-      "id": "AT-03",
-      "name": "Security Training",
-      "family": "AT"
-    },
-    {
-      "id": "AT-04",
-      "name": "Security Training Records",
-      "family": "AT"
-    },
-    {
-      "id": "AU-02",
-      "name": "Auditable Events",
-      "family": "AU"
-    },
-    {
-      "id": "AU-03",
-      "name": "Content Of Audit Records",
-      "family": "AU"
-    },
-    {
-      "id": "AU-04",
-      "name": "Audit Storage Capacity",
-      "family": "AU"
-    },
-    {
-      "id": "AU-05",
-      "name": "Response To Audit Processing Failures",
-      "family": "AU"
-    },
-    {
-      "id": "AU-08",
-      "name": "Time Stamps",
-      "family": "AU"
-    },
-    {
-      "id": "AU-09",
-      "name": "Protection Of Audit Information",
-      "family": "AU"
-    },
-    {
-      "id": "AU-10",
-      "name": "Non-Repudiation",
-      "family": "AU"
-    },
-    {
-      "id": "AU-11",
-      "name": "Audit Record Retention",
-      "family": "AU"
-    },
-    {
-      "id": "CA-02",
-      "name": "Security Assessments",
-      "family": "CA"
-    },
-    {
-      "id": "CA-04",
-      "name": "Security Certification",
-      "family": "CA"
-    },
-    {
-      "id": "CA-06",
-      "name": "Security Accreditation",
-      "family": "CA"
-    },
-    {
-      "id": "CA-07",
-      "name": "Continuous Monitoring",
-      "family": "CA"
-    },
-    {
-      "id": "CM-02",
-      "name": "Baseline Configuration",
-      "family": "CM"
-    },
-    {
-      "id": "CM-03",
-      "name": "Configuration Change Control",
-      "family": "CM"
-    },
-    {
-      "id": "CM-04",
-      "name": "Monitoring Configuration Changes",
-      "family": "CM"
-    },
-    {
-      "id": "CM-05",
-      "name": "Access Restrictions For Change",
-      "family": "CM"
-    },
-    {
-      "id": "CM-06",
-      "name": "Configuration Settings",
-      "family": "CM"
-    },
-    {
-      "id": "CM-07",
-      "name": "Least Functionality",
-      "family": "CM"
-    },
-    {
-      "id": "CM-08",
-      "name": "Information System Component Inventory",
-      "family": "CM"
-    },
-    {
-      "id": "CP-03",
-      "name": "Contingency Training",
-      "family": "CP"
-    },
-    {
-      "id": "CP-04",
-      "name": "Contingency Plan Testing And Exercises",
-      "family": "CP"
-    },
-    {
-      "id": "CP-05",
-      "name": "Contingency Plan Update",
-      "family": "CP"
-    },
-    {
-      "id": "CP-09",
-      "name": "Information System Backup",
-      "family": "CP"
-    },
-    {
-      "id": "CP-10",
-      "name": "Information System Recovery And Reconstitution",
-      "family": "CP"
-    },
-    {
-      "id": "IA-02",
-      "name": "User Identification And Authentication",
-      "family": "IA"
-    },
-    {
-      "id": "IA-06",
-      "name": "Authenticator Feedback",
-      "family": "IA"
-    },
-    {
-      "id": "IA-07",
-      "name": "Cryptographic Module Authentication",
-      "family": "IA"
-    },
-    {
-      "id": "IR-02",
-      "name": "Incident Response Training",
-      "family": "IR"
-    },
-    {
-      "id": "IR-03",
-      "name": "Incident Response Testing And Exercises",
-      "family": "IR"
-    },
-    {
-      "id": "IR-04",
-      "name": "Incident Handling",
-      "family": "IR"
-    },
-    {
-      "id": "IR-05",
-      "name": "Incident Monitoring",
-      "family": "IR"
-    },
-    {
-      "id": "IR-06",
-      "name": "Incident Reporting",
-      "family": "IR"
-    },
-    {
-      "id": "IR-07",
-      "name": "Incident Response Assistance",
-      "family": "IR"
-    },
-    {
-      "id": "MA-02",
-      "name": "Controlled Maintenance",
-      "family": "MA"
-    },
-    {
-      "id": "MA-03",
-      "name": "Maintenance Tools",
-      "family": "MA"
-    },
-    {
-      "id": "MA-04",
-      "name": "Remote Maintenance",
-      "family": "MA"
-    },
-    {
-      "id": "MA-05",
-      "name": "Maintenance Personnel",
-      "family": "MA"
-    },
-    {
-      "id": "MA-06",
-      "name": "Timely Maintenance",
-      "family": "MA"
-    },
-    {
-      "id": "MP-02",
-      "name": "Media Access",
-      "family": "MP"
-    },
-    {
-      "id": "PL-04",
-      "name": "Rules Of Behavior",
-      "family": "PL"
-    },
-    {
-      "id": "PS-06",
-      "name": "Access Agreements",
-      "family": "PS"
-    },
-    {
-      "id": "RA-02",
-      "name": "Security Categorization",
-      "family": "RA"
-    },
-    {
-      "id": "RA-03",
-      "name": "Risk Assessment",
-      "family": "RA"
-    },
-    {
-      "id": "RA-04",
-      "name": "Risk Assessment Update",
-      "family": "RA"
-    },
-    {
-      "id": "RA-05",
-      "name": "Vulnerability Scanning",
-      "family": "RA"
-    },
-    {
-      "id": "SA-02",
-      "name": "Allocation Of Resources",
-      "family": "SA"
-    },
-    {
-      "id": "SA-03",
-      "name": "Life Cycle Support",
-      "family": "SA"
-    },
-    {
-      "id": "SA-04",
-      "name": "Acquisitions",
-      "family": "SA"
-    },
-    {
-      "id": "SA-05",
-      "name": "Information System Documentation",
-      "family": "SA"
-    },
-    {
-      "id": "SA-06",
-      "name": "Software Usage Restrictions",
-      "family": "SA"
-    },
-    {
-      "id": "SA-07",
-      "name": "User Installed Software",
-      "family": "SA"
-    },
-    {
-      "id": "SA-08",
-      "name": "Security Engineering Principles",
-      "family": "SA"
-    },
-    {
-      "id": "SC-03",
-      "name": "Security Function Isolation",
-      "family": "SC"
-    },
-    {
-      "id": "SC-04",
-      "name": "Information Remnance",
-      "family": "SC"
-    },
-    {
-      "id": "SC-05",
-      "name": "Denial Of Service Protection",
-      "family": "SC"
-    },
-    {
-      "id": "SC-06",
-      "name": "Resource Priority",
-      "family": "SC"
-    },
-    {
-      "id": "SC-11",
-      "name": "Trusted Path",
-      "family": "SC"
-    },
-    {
-      "id": "SC-12",
-      "name": "Cryptographic Key Establishment And Management",
-      "family": "SC"
-    },
-    {
-      "id": "SC-13",
-      "name": "Use Of Cryptography",
-      "family": "SC"
-    },
-    {
-      "id": "SC-14",
-      "name": "Public Access Protections",
-      "family": "SC"
-    },
-    {
-      "id": "SC-15",
-      "name": "Collaborative Computing",
-      "family": "SC"
-    },
-    {
-      "id": "SC-18",
-      "name": "Mobile Code",
-      "family": "SC"
-    },
-    {
-      "id": "SI-02",
-      "name": "Flaw Remediation",
-      "family": "SI"
-    },
-    {
-      "id": "SI-03",
-      "name": "Malicious Code Protection",
-      "family": "SI"
-    },
-    {
-      "id": "SI-04",
-      "name": "Information System Monitoring Tools And Techniques",
-      "family": "SI"
-    },
-    {
-      "id": "SI-05",
-      "name": "Security Alerts And Advisories",
-      "family": "SI"
-    },
-    {
-      "id": "SI-06",
-      "name": "Security Functionality Verification",
-      "family": "SI"
-    },
-    {
-      "id": "SI-07",
-      "name": "Software And Information Integrity",
-      "family": "SI"
-    },
-    {
-      "id": "SI-11",
-      "name": "Error Handling",
-      "family": "SI"
+  "examples": {
+    "Enterprise endpoint platforms": [
+      "Microsoft Endpoint Manager (Intune) enforcing Windows security baselines and compliance policies",
+      "CrowdStrike Falcon EDR for endpoint detection, response, and threat hunting",
+      "VMware Workspace ONE for unified endpoint management across OS types",
+      "Jamf Pro for macOS endpoint security configuration and compliance"
+    ],
+    "Hardening and configuration standards": [
+      "CIS Benchmarks for Windows 10/11 Enterprise providing detailed hardening settings",
+      "DISA STIGs (Security Technical Implementation Guides) for DoD endpoint compliance",
+      "Microsoft Security Compliance Toolkit for Group Policy baseline deployment",
+      "macOS Security Compliance Project (mSCP) for Apple endpoint hardening"
+    ],
+    "Endpoint protection and monitoring": [
+      "Microsoft Defender for Endpoint combining AV, EDR, and vulnerability management",
+      "SentinelOne Singularity for autonomous endpoint protection with rollback capability",
+      "Carbon Black Cloud for application control and endpoint behavioural monitoring",
+      "Splunk Universal Forwarder for comprehensive endpoint log collection to SIEM"
+    ],
+    "Vulnerability management": [
+      "Tenable Nessus for endpoint vulnerability scanning and compliance auditing",
+      "Qualys VMDR for continuous endpoint vulnerability detection and remediation tracking",
+      "WSUS or SCCM for Microsoft patch deployment across enterprise endpoints",
+      "Ivanti Patch Management for third-party application patching on endpoints"
+    ]
+  },
+  "references": [
+    {
+      "title": "CIS Benchmarks for Desktop Operating Systems",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "note": "Industry-standard hardening guides for Windows, macOS, and Linux desktop systems. Provides specific configuration settings mapped to security controls."
+    },
+    {
+      "title": "NIST SP 800-123: Guide to General Server Security",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-123/final",
+      "note": "While server-focused, sections on OS hardening, patch management, and access control apply equally to client endpoints. Foundational NIST guidance."
+    },
+    {
+      "title": "NIST SP 800-70: National Checklist Program for IT Products",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-70/rev-4/final",
+      "note": "Repository of security configuration checklists for operating systems and applications. Essential reference for implementing CM-02 baseline configurations."
+    },
+    {
+      "title": "Microsoft Security Baselines",
+      "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-guard/introduction-to-device-guard-virtualization-based-security-and-windows-defender-application-control",
+      "note": "Microsoft-recommended security configuration baselines for Windows endpoints including VBS, Credential Guard, and application control policies."
+    },
+    {
+      "title": "MITRE ATT&CK - Endpoint Techniques",
+      "url": "https://attack.mitre.org/matrices/enterprise/",
+      "note": "Comprehensive catalogue of adversary techniques targeting endpoints. Essential for understanding what threats the Client Module controls must resist."
+    },
+    {
+      "title": "NIST SP 800-46 Rev 2: Guide to Enterprise Telework, Remote Access, and BYOD Security",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-46/rev-2/final",
+      "note": "Guidance on securing client endpoints in remote access and BYOD scenarios, covering VPN, endpoint compliance checking, and data protection."
     }
+  ],
+  "relatedPatterns": ["SP-002", "SP-006", "SP-007", "SP-008", "SP-011", "SP-014", "SP-016", "SP-024", "SP-025"],
+  "relatedPatternNames": ["Server Module", "Wireless Private Network Pattern", "Wireless Public Hotspot Pattern", "Public Web Server Pattern", "Cloud Computing Pattern", "Awareness and Training Pattern", "DMZ Module", "iPhone Pattern", "Advanced Monitoring and Detection"],
+  "threats": [
+    {
+      "id": "T-CM-001",
+      "name": "Malware Infection via Phishing or Drive-By Download",
+      "mitigatedBy": ["SI-03", "CM-07", "SA-06", "SA-07", "SI-07"]
+    },
+    {
+      "id": "T-CM-002",
+      "name": "Credential Theft and Brute-Force Authentication Attack",
+      "mitigatedBy": ["AC-07", "IA-02", "AC-11", "SC-13"]
+    },
+    {
+      "id": "T-CM-003",
+      "name": "Exploitation of Unpatched Software Vulnerabilities",
+      "mitigatedBy": ["RA-05", "SI-02", "SI-05", "CM-02"]
+    },
+    {
+      "id": "T-CM-004",
+      "name": "Unauthorised Data Access and Privilege Escalation",
+      "mitigatedBy": ["AC-03", "AC-06", "AC-05", "CM-05"]
+    },
+    {
+      "id": "T-CM-005",
+      "name": "Data Loss from Device Theft or Physical Compromise",
+      "mitigatedBy": ["SC-12", "SC-13", "MP-02", "SC-04"]
+    },
+    {
+      "id": "T-CM-006",
+      "name": "Insider Threat and Unauthorised Activity",
+      "mitigatedBy": ["AU-02", "AU-03", "SI-04", "AC-06", "PL-04"]
+    },
+    {
+      "id": "T-CM-007",
+      "name": "Configuration Drift and Baseline Deviation",
+      "mitigatedBy": ["CM-02", "CM-03", "CM-04", "CM-06", "CA-07"]
+    },
+    {
+      "id": "T-CM-008",
+      "name": "Session Hijacking and Unattended Workstation Abuse",
+      "mitigatedBy": ["AC-11", "AC-12", "SC-11", "AU-10"]
+    },
+    {
+      "id": "T-CM-009",
+      "name": "Supply Chain Compromise and Software Integrity Tampering",
+      "mitigatedBy": ["SI-07", "SA-04", "SA-08", "SI-06"]
+    },
+    {
+      "id": "T-CM-010",
+      "name": "Audit Log Tampering and Evidence Destruction",
+      "mitigatedBy": ["AU-09", "AU-04", "AU-05", "AU-11"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-03", "name": "Access enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-05", "name": "Separation Of Duties", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-06", "name": "Least privilege", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-07", "name": "Unsuccessful login attempts", "family": "AC", "emphasis": "important"},
+    {"id": "AC-08", "name": "System use notification", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-11", "name": "Session Lock", "family": "AC", "emphasis": "important"},
+    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "important"},
+    {"id": "AC-19", "name": "Session Termination", "family": "AC", "emphasis": "standard"},
+    {"id": "AT-02", "name": "Security Awareness", "family": "AT", "emphasis": "standard"},
+    {"id": "AT-03", "name": "Security Training", "family": "AT", "emphasis": "standard"},
+    {"id": "AT-04", "name": "Security Training Records", "family": "AT", "emphasis": "standard"},
+    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-03", "name": "Content Of Audit Records", "family": "AU", "emphasis": "important"},
+    {"id": "AU-04", "name": "Audit Storage Capacity", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-05", "name": "Response To Audit Processing Failures", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-08", "name": "Time Stamps", "family": "AU", "emphasis": "important"},
+    {"id": "AU-09", "name": "Protection Of Audit Information", "family": "AU", "emphasis": "important"},
+    {"id": "AU-10", "name": "Non-Repudiation", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-11", "name": "Audit Record Retention", "family": "AU", "emphasis": "standard"},
+    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "standard"},
+    {"id": "CA-04", "name": "Security Certification", "family": "CA", "emphasis": "standard"},
+    {"id": "CA-06", "name": "Security Accreditation", "family": "CA", "emphasis": "standard"},
+    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
+    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
+    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
+    {"id": "CM-04", "name": "Monitoring Configuration Changes", "family": "CM", "emphasis": "important"},
+    {"id": "CM-05", "name": "Access Restrictions For Change", "family": "CM", "emphasis": "important"},
+    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
+    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "critical"},
+    {"id": "CM-08", "name": "Information System Component Inventory", "family": "CM", "emphasis": "important"},
+    {"id": "CP-03", "name": "Contingency Training", "family": "CP", "emphasis": "standard"},
+    {"id": "CP-04", "name": "Contingency Plan Testing And Exercises", "family": "CP", "emphasis": "standard"},
+    {"id": "CP-05", "name": "Contingency Plan Update", "family": "CP", "emphasis": "standard"},
+    {"id": "CP-09", "name": "Information System Backup", "family": "CP", "emphasis": "important"},
+    {"id": "CP-10", "name": "Information System Recovery And Reconstitution", "family": "CP", "emphasis": "standard"},
+    {"id": "IA-02", "name": "User Identification And Authentication", "family": "IA", "emphasis": "important"},
+    {"id": "IA-06", "name": "Authenticator Feedback", "family": "IA", "emphasis": "standard"},
+    {"id": "IA-07", "name": "Cryptographic Module Authentication", "family": "IA", "emphasis": "standard"},
+    {"id": "IR-02", "name": "Incident Response Training", "family": "IR", "emphasis": "standard"},
+    {"id": "IR-03", "name": "Incident Response Testing And Exercises", "family": "IR", "emphasis": "standard"},
+    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
+    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "important"},
+    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
+    {"id": "IR-07", "name": "Incident Response Assistance", "family": "IR", "emphasis": "standard"},
+    {"id": "MA-02", "name": "Controlled Maintenance", "family": "MA", "emphasis": "standard"},
+    {"id": "MA-03", "name": "Maintenance Tools", "family": "MA", "emphasis": "standard"},
+    {"id": "MA-04", "name": "Remote Maintenance", "family": "MA", "emphasis": "standard"},
+    {"id": "MA-05", "name": "Maintenance Personnel", "family": "MA", "emphasis": "standard"},
+    {"id": "MA-06", "name": "Timely Maintenance", "family": "MA", "emphasis": "standard"},
+    {"id": "MP-02", "name": "Media Access", "family": "MP", "emphasis": "standard"},
+    {"id": "PL-04", "name": "Rules Of Behavior", "family": "PL", "emphasis": "standard"},
+    {"id": "PS-06", "name": "Access Agreements", "family": "PS", "emphasis": "standard"},
+    {"id": "RA-02", "name": "Security Categorization", "family": "RA", "emphasis": "standard"},
+    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
+    {"id": "RA-04", "name": "Risk Assessment Update", "family": "RA", "emphasis": "standard"},
+    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "important"},
+    {"id": "SA-02", "name": "Allocation Of Resources", "family": "SA", "emphasis": "standard"},
+    {"id": "SA-03", "name": "Life Cycle Support", "family": "SA", "emphasis": "standard"},
+    {"id": "SA-04", "name": "Acquisitions", "family": "SA", "emphasis": "standard"},
+    {"id": "SA-05", "name": "Information System Documentation", "family": "SA", "emphasis": "standard"},
+    {"id": "SA-06", "name": "Software Usage Restrictions", "family": "SA", "emphasis": "important"},
+    {"id": "SA-07", "name": "User Installed Software", "family": "SA", "emphasis": "important"},
+    {"id": "SA-08", "name": "Security Engineering Principles", "family": "SA", "emphasis": "standard"},
+    {"id": "SC-03", "name": "Security Function Isolation", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-04", "name": "Information Remnance", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-05", "name": "Denial Of Service Protection", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-06", "name": "Resource Priority", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-11", "name": "Trusted Path", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-12", "name": "Cryptographic Key Establishment And Management", "family": "SC", "emphasis": "important"},
+    {"id": "SC-13", "name": "Use Of Cryptography", "family": "SC", "emphasis": "important"},
+    {"id": "SC-14", "name": "Public Access Protections", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-15", "name": "Collaborative Computing", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-18", "name": "Mobile Code", "family": "SC", "emphasis": "standard"},
+    {"id": "SI-02", "name": "Flaw Remediation", "family": "SI", "emphasis": "important"},
+    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
+    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "important"},
+    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI", "emphasis": "standard"},
+    {"id": "SI-06", "name": "Security Functionality Verification", "family": "SI", "emphasis": "standard"},
+    {"id": "SI-07", "name": "Software And Information Integrity", "family": "SI", "emphasis": "important"},
+    {"id": "SI-11", "name": "Error Handling", "family": "SI", "emphasis": "standard"}
   ],
   "controlFamilySummary": {
     "AC": 8,

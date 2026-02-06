@@ -3,17 +3,18 @@
   "slug": "pattern-secure-ad-hoc-file-exchange",
   "joomla_id": 276,
   "title": "Secure Ad-Hoc File Exchange Pattern",
-  "description": "Email Transport Layer Security (TLS) Pattern depicting key controls, particularly for companies with many business partners",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/276-pattern-secure-ad-hoc-file-exchange",
+  "description": "Security architecture for enabling secure, business-driven file sharing with external partners without pre-established federation. Covers encrypted file transfer, access control for external recipients, audit trails, strong authentication, boundary protection, and the balance between usability and data protection in ad-hoc collaboration scenarios.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-019",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
+    "release": "26.02",
+    "classification": "Application & Operations",
     "status": "published",
     "type": "pattern",
     "datePublished": "2010-04-30",
-    "dateModified": "2025-07-05",
+    "dateModified": "2026-02-06",
     "authors": [
-      "Tobias Christen"
+      "Aurelius",
+      "Vitruvius"
     ],
     "reviewers": []
   },
@@ -22,141 +23,160 @@
     "png": "/images/OSA_images/patterns/08_02_Pattern_019_002_Secure_File_Exchange.png"
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "As it has to be assumed that the data that is shared can be classified as confidential, strong encryption is required by most corporate security policies. Data on the move as well as data at rest should therefore be encrypted, and access control policies probably declare the “Need to know principal”. In an ad-hoc scenario it is unlikely that digital rights management solutions (with water marking, and copy prevention) would be required. However integrity assurance on a technical level (for example with hash-value comparison before and after transmission) can be added.<br/><br/>",
-    "typicalChallenges": "",
-    "indications": "The discussed pattern matches best if the following indicators can be found:</p>\n<ul>\n<li>Business driven: business decides ad-hoc when and where the solution is required/used</li>\n<li>Simplified user interface, allows also staff members with low IT affinity to use the solution</li>\n<li>Low integration costs</li>\n<li>Identity federation with partner is not established</li>\n<li>Business unit is data owner, IT does not act as data owner custodian, business unit staff members can decide who needs access, when and where</li>\n<li>Audit trail needs to be available</li>\n<li>Strong authentication for example with second authentication factor (after uid/pw) that is transmitted over SMS is likely to be required for sensitive data.</li>\n</ul>\n<p><br/><br/>",
-    "contraIndications": "Strong integration into document management workflow requires a single repository for internal and external collaboration. Real-time collaboration requirements would suggest a solution that includes collaborative editing and in-band update notification. <br/><br/>",
-    "threatResistance": ""
+    "description": "Organisations regularly need to share confidential files with external business partners, clients, regulators, or advisors on an ad-hoc basis -- that is, without a pre-established integrated document management system or identity federation arrangement in place. The Secure Ad-Hoc File Exchange pattern addresses this ubiquitous business requirement by providing a security architecture that enables controlled, encrypted, auditable file sharing while preventing the common alternative: staff sending sensitive files via unencrypted email, consumer-grade cloud storage, or USB drives.\n\nThe pattern is fundamentally business-driven. Unlike managed file transfer (MFT) solutions that are IT-provisioned and integration-heavy, the ad-hoc file exchange solution is designed for business users to operate directly. The business unit acts as data owner and decides who needs access, when, and to which files. The solution must therefore provide a simplified user interface that staff with low IT affinity can use reliably, while still enforcing the organisation's data protection and access control policies transparently.\n\nAt its core, the pattern implements a secure web-based portal or service where internal users upload files that external recipients can access after authenticating. Data must be encrypted both in transit (TLS) and at rest on the exchange platform. Access control is enforced through unique recipient identifiers and strong authentication -- for sensitive data, a second authentication factor delivered via an out-of-band channel (such as SMS or a separate email with a one-time code) is typically required. File access is time-limited, with automatic expiry and deletion after a defined retention period. Every access event is logged to provide a complete audit trail of who accessed what, when, and from where.\n\nThe architecture must address the boundary between the organisation's trusted network and the external partner's environment. The file exchange service typically sits in a DMZ or is hosted as a cloud service, accessible from the internet but with strict controls on the data flows between the exchange platform, the internal network, and external recipients. Boundary protection and information system connection controls ensure the exchange service does not become an uncontrolled bridge between internal systems and the internet.\n\nIntegrity assurance is an important secondary requirement. While digital rights management (DRM) with watermarking and copy prevention is unlikely in an ad-hoc scenario, technical integrity verification through hash-value comparison before and after transmission can be implemented to ensure files are not corrupted or tampered with during exchange. The pattern also requires contingency planning to ensure the file exchange service remains available for time-critical business transactions.",
+    "keyControlAreas": [
+      "Account and Access Management (AC-02, AC-07, AC-10, AC-12, AC-20): Managing external recipient accounts is central to this pattern. Account management (AC-02) governs the lifecycle of recipient accounts -- creation, provisioning, monitoring, and timely deactivation. Since recipients are external, accounts should be temporary with automatic expiry. Unsuccessful login attempts (AC-07) must trigger lockout to prevent brute-force attacks against the externally accessible authentication interface. Concurrent session control (AC-10) limits the number of simultaneous sessions per account, reducing the risk of credential sharing. Session termination (AC-12) ensures idle sessions are closed, particularly important for a service accessible over the internet. Use of external information systems (AC-20) addresses the risk that external recipients may access shared files from uncontrolled devices and networks, requiring compensating controls such as download restrictions, view-only modes, or DLP watermarking.",
+      "Cryptographic Protection and Boundary Security (SC-07, SC-09, SC-13): These controls ensure data remains confidential throughout the exchange process. Boundary protection (SC-07) governs the network positioning of the file exchange service, ensuring it is isolated from the internal network with controlled, monitored connections. The service should sit in a DMZ or be deployed as a hardened cloud service with no direct path to internal data stores. Transmission confidentiality (SC-09) mandates TLS encryption for all data in transit between the uploader, the exchange platform, and the recipient. Use of cryptography (SC-13) extends to data at rest on the exchange platform -- files must be encrypted using strong algorithms with proper key management. For highly sensitive exchanges, end-to-end encryption where only the intended recipient can decrypt the file provides the strongest protection.",
+      "Audit Trail and Monitoring (AU-04, AU-06): A complete audit trail is a core requirement for regulated and compliance-conscious file exchange. Auditable events (AU-04) must capture: file upload (who, when, what file, what classification), recipient account creation, authentication events (successful and failed), file download (who, when, from which IP), file expiry and deletion, and administrative actions. Audit monitoring, analysis, and reporting (AU-06) enables review of exchange activity for compliance purposes, security investigations, and detection of anomalous behaviour such as bulk downloads, access from unexpected geographies, or access attempts after account deactivation. Audit data must be retained according to the organisation's retention policy and regulatory requirements, and must be protected from tampering.",
+      "Security Assessment and Change Management (CA-02, CA-03, CM-03): The file exchange service represents a controlled connection point between the organisation and external entities and must be rigorously assessed. Security assessments (CA-02) should include penetration testing of the externally facing interface, code review of the exchange platform, and periodic evaluation of the cryptographic configuration. Information system connections (CA-03) documents the exchange service as an authorised external-facing connection with defined data flows, security controls, and residual risks. Configuration change control (CM-03) ensures changes to the exchange platform -- including software updates, configuration changes, and cryptographic updates -- are controlled, tested, and approved before deployment to prevent service disruption or security regression.",
+      "User Awareness and Training (AT-02, AT-03, AT-05): The security of ad-hoc file exchange depends heavily on user behaviour. Security awareness (AT-02) must cover: when to use the secure exchange service versus email; how to classify files before sharing; the importance of not sharing access credentials; and how to report suspicious activity. Security training (AT-03) should provide hands-on guidance for business users on the exchange platform's interface, including file upload, recipient management, and access monitoring. Contacts with security groups and associations (AT-05) keeps the organisation informed about emerging threats to file exchange services and best practices for secure file sharing.",
+      "Risk Assessment and Vulnerability Management (RA-03, RA-05): The internet-facing nature of the file exchange service makes it a high-value target. Risk assessment (RA-03) must evaluate the specific threats to the exchange platform including credential attacks, data interception, platform compromise, and insider misuse. The risk assessment should consider the classification level of data likely to be exchanged and ensure controls are proportionate. Vulnerability scanning (RA-05) must include the exchange platform in regular scan schedules, with particular attention to web application vulnerabilities (OWASP Top 10), TLS configuration weaknesses, and authentication bypass vulnerabilities. Externally facing services should receive more frequent scanning than internal systems.",
+      "Incident Response and Continuity (IR-04, IR-07, CP-02, CP-09, MA-02, MA-06): The file exchange service must be resilient and recoverable. Incident handling (IR-04) procedures must cover scenarios specific to the exchange platform: data breach via compromised recipient account, platform compromise, insider abuse of upload/download capabilities, and malware delivery through the exchange service. Incident response assistance (IR-07) ensures support is available for exchange-related security events. Contingency plan (CP-02) ensures the exchange service is included in business continuity planning, particularly for time-critical business processes that depend on secure file sharing. Information system backup (CP-09) protects exchange platform configuration and audit data. Controlled maintenance (MA-02) and timely maintenance (MA-06) ensure the platform receives security patches promptly without unplanned service disruption."
+    ],
+    "assumptions": "Shared data can be classified as confidential and therefore strong encryption is required by most corporate security policies. Data on the move as well as data at rest should be encrypted, and access control policies implement the need-to-know principle. In an ad-hoc scenario it is unlikely that digital rights management solutions (with watermarking and copy prevention) would be required, though integrity assurance on a technical level (for example with hash-value comparison before and after transmission) can be added. Identity federation with external partners is not established -- if it were, a more integrated solution would be appropriate. The business unit is the data owner and IT does not act as data custodian; business unit staff members decide who needs access, when, and to what. The organisation has a data classification scheme that users understand and apply when selecting files for external sharing.",
+    "typicalChallenges": "User adoption is the primary challenge -- if the secure exchange solution is even slightly less convenient than email or consumer cloud storage, users will bypass it. The interface must be genuinely simple with minimal steps between intent and action. Supporting external recipients who may have varying levels of technical capability, different email systems, and restrictive corporate firewalls that block certain file types or URLs adds complexity. Managing the lifecycle of temporary external accounts at scale, particularly for organisations with high volumes of ad-hoc sharing, requires automation to prevent orphaned accounts and stale data accumulation. Balancing security controls (strong authentication, access restrictions) with the frictionless experience that business users demand is a constant tension. Ensuring the exchange platform itself does not become a malware distribution vector requires content scanning on upload. Large file transfers may encounter practical limitations with web-based platforms, requiring chunked upload support or alternative protocols. Regulatory requirements may restrict where exchanged data can be stored geographically, constraining cloud deployment options. Integration with existing DLP tools to prevent exfiltration of data that should not be shared externally adds implementation complexity.",
+    "indications": "The pattern is best suited when the following indicators are present: the business drives ad-hoc decisions about when and where the solution is needed; a simplified user interface is required that allows staff with low IT affinity to use the solution; low integration costs are desired; identity federation with the external partner is not established; the business unit is the data owner and staff members decide who needs access, when, and where; an audit trail must be available for compliance; strong authentication (for example with a second factor transmitted via SMS) is likely required for sensitive data. Organisations in regulated sectors (financial services, legal, healthcare) that routinely share confidential documents with external parties. Any organisation that has identified uncontrolled file sharing via email or consumer cloud services as a data loss risk.",
+    "contraIndications": "Strong integration into a document management workflow that requires a single repository for internal and external collaboration -- in this case, a unified collaboration platform (SharePoint Online, Box, Google Workspace) with external sharing controls is more appropriate. Real-time collaboration requirements that demand collaborative editing and in-band update notification -- the ad-hoc exchange pattern is designed for file delivery, not co-authoring. Scenarios where identity federation is already established with the partner organisation, making direct access to shared workspaces more efficient. High-volume, automated file transfers between systems (B2B integration) -- these require managed file transfer (MFT) solutions with scheduling, protocol support, and system-level integration rather than a user-facing ad-hoc solution.",
+    "threatResistance": "Unauthorised access to shared files by unintended recipients through credential compromise, link sharing, or account reuse. Interception of sensitive data in transit between the exchange platform and external recipients on untrusted networks. Data leakage through uncontrolled file sharing channels when users bypass the secure exchange service. Brute-force and credential-stuffing attacks against the externally accessible authentication interface. Malware delivery through the exchange platform when external parties upload infected files. Platform compromise leading to bulk data exposure. Insider abuse where authorised users share data with unauthorised external parties. Data persistence on the exchange platform beyond its required retention period. Man-in-the-middle attacks during file upload or download. Loss of audit trail integrity undermining regulatory compliance evidence."
   },
-  "references": [],
-  "controls": [
+  "examples": {
+    "Secure file exchange platforms": [
+      "Kiteworks (formerly Accellion) secure file sharing and governance platform",
+      "Tresorit end-to-end encrypted file sharing for regulated industries",
+      "Citrix ShareFile for secure document exchange with external parties",
+      "FTAPI SecuTransfer for GDPR-compliant file exchange in European markets"
+    ],
+    "Enterprise collaboration with external sharing": [
+      "Microsoft SharePoint Online external sharing with conditional access policies",
+      "Box enterprise content management with external collaboration controls",
+      "Google Workspace shared drives with external access and DLP integration",
+      "Egnyte platform with content governance and external sharing policies"
+    ],
+    "Managed file transfer (MFT) for higher volume": [
+      "Axway MFT for enterprise managed file transfer with compliance controls",
+      "IBM Sterling File Gateway for B2B and ad-hoc file transfer",
+      "GoAnywhere MFT for secure file transfer with audit and compliance",
+      "Globalscape EFT for managed file transfer with DLP integration"
+    ],
+    "Encryption and secure delivery": [
+      "Virtru for email and file encryption with recipient access controls",
+      "Zix (now OpenText) for secure email and file delivery",
+      "PGP/GPG-based file encryption for manual secure file exchange",
+      "7-Zip AES-256 encrypted archives as lightweight secure file transfer"
+    ]
+  },
+  "references": [
     {
-      "id": "AC-02",
-      "name": "Account Management",
-      "family": "AC"
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls (AC, SC families)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "Authoritative control catalog providing the access control and system/communications protection specifications this pattern implements, including SC-07, SC-09, SC-13, and the AC family."
     },
     {
-      "id": "AC-07",
-      "name": "Unsuccessful Login Attempts",
-      "family": "AC"
+      "title": "NIST SP 800-175B Rev 1: Guideline for Using Cryptographic Standards",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-175b/rev-1/final",
+      "note": "Guidance on cryptographic algorithm selection, key management, and protocol configuration relevant to encrypting data at rest and in transit on the exchange platform."
     },
     {
-      "id": "AC-10",
-      "name": "Concurrent Session Control",
-      "family": "AC"
+      "title": "OWASP Application Security Verification Standard (ASVS)",
+      "url": "https://owasp.org/www-project-application-security-verification-standard/",
+      "note": "Web application security verification requirements applicable to the exchange platform's authentication, session management, access control, and cryptographic implementation."
     },
     {
-      "id": "AC-12",
-      "name": "Session Termination",
-      "family": "AC"
+      "title": "ISO 27002:2022 Section 5.14 (Information Transfer)",
+      "url": "https://www.iso.org/standard/75652.html",
+      "note": "ISO guidance on information transfer controls including transfer policies, agreements with external parties, electronic messaging, and confidentiality/non-disclosure agreements."
     },
     {
-      "id": "AC-20",
-      "name": "Use of External Information Systems",
-      "family": "AC"
+      "title": "GDPR Article 32: Security of Processing",
+      "url": "https://gdpr-info.eu/art-32-gdpr/",
+      "note": "EU data protection requirements for appropriate technical and organisational measures when processing personal data, including encryption and the ability to ensure ongoing confidentiality of processing systems."
     },
     {
-      "id": "AT-02",
-      "name": "Security Awareness",
-      "family": "AT"
-    },
-    {
-      "id": "AT-03",
-      "name": "Security Training",
-      "family": "AT"
-    },
-    {
-      "id": "AT-05",
-      "name": "Contacts With Security Groups And..",
-      "family": "AT"
-    },
-    {
-      "id": "AU-04",
-      "name": "Auditable Events",
-      "family": "AU"
-    },
-    {
-      "id": "AU-06",
-      "name": "Audit Monitoring, Analysis, And Reporting",
-      "family": "AU"
-    },
-    {
-      "id": "CA-02",
-      "name": "Security Assessments",
-      "family": "CA"
-    },
-    {
-      "id": "CA-03",
-      "name": "Information System Connections",
-      "family": "CA"
-    },
-    {
-      "id": "CM-03",
-      "name": "Configuration Change Control",
-      "family": "CM"
-    },
-    {
-      "id": "CP-02",
-      "name": "Contingency Plan",
-      "family": "CP"
-    },
-    {
-      "id": "CP-09",
-      "name": "Information System Backup",
-      "family": "CP"
-    },
-    {
-      "id": "IA-04",
-      "name": "Identifier Management",
-      "family": "IA"
-    },
-    {
-      "id": "IR-04",
-      "name": "Incident Handling",
-      "family": "IR"
-    },
-    {
-      "id": "IR-07",
-      "name": "Incident Response Assistance",
-      "family": "IR"
-    },
-    {
-      "id": "MA-02",
-      "name": "Controlled Maintenance",
-      "family": "MA"
-    },
-    {
-      "id": "MA-06",
-      "name": "Timley Maintenance",
-      "family": "MA"
-    },
-    {
-      "id": "RA-03",
-      "name": "Risk Assessment",
-      "family": "RA"
-    },
-    {
-      "id": "RA-05",
-      "name": "Vulnerability Scanning",
-      "family": "RA"
-    },
-    {
-      "id": "SC-07",
-      "name": "Boundary Protection",
-      "family": "SC"
-    },
-    {
-      "id": "SC-09",
-      "name": "Transmission Confidentiality",
-      "family": "SC"
-    },
-    {
-      "id": "SC-13",
-      "name": "Use Of Cryptography",
-      "family": "SC"
+      "title": "PCI DSS v4.0.1 Requirement 4: Protect Cardholder Data with Strong Cryptography During Transmission",
+      "url": "https://www.pcisecuritystandards.org/document_library/",
+      "note": "Requirements for encrypting cardholder data during transmission over open, public networks -- directly applicable when the file exchange involves payment card data."
     }
+  ],
+  "relatedPatterns": ["SP-013", "SP-016", "SP-014", "SP-010", "SP-018"],
+  "relatedPatternNames": ["Data Security", "DMZ Module", "Awareness and Training", "Identity Management", "ISMS"],
+  "threats": [
+    {
+      "id": "T-FX-001",
+      "name": "Unauthorised File Access via Credential Compromise",
+      "mitigatedBy": ["AC-02", "AC-07", "SC-13", "RA-05"]
+    },
+    {
+      "id": "T-FX-002",
+      "name": "Data Interception During File Transfer",
+      "mitigatedBy": ["SC-09", "SC-13", "SC-07"]
+    },
+    {
+      "id": "T-FX-003",
+      "name": "Bypass of Secure Exchange via Shadow IT Channels",
+      "mitigatedBy": ["AT-02", "AT-03", "AC-20"]
+    },
+    {
+      "id": "T-FX-004",
+      "name": "Brute-Force Attack on Exchange Authentication",
+      "mitigatedBy": ["AC-07", "AC-10", "AC-12", "AU-06"]
+    },
+    {
+      "id": "T-FX-005",
+      "name": "Malware Delivery via Uploaded Files",
+      "mitigatedBy": ["SC-07", "RA-05", "IR-04"]
+    },
+    {
+      "id": "T-FX-006",
+      "name": "Platform Compromise Leading to Bulk Data Exposure",
+      "mitigatedBy": ["RA-05", "CM-03", "SC-13", "CA-02"]
+    },
+    {
+      "id": "T-FX-007",
+      "name": "Insider Abuse of File Exchange Capabilities",
+      "mitigatedBy": ["AU-04", "AU-06", "AC-02", "AT-02"]
+    },
+    {
+      "id": "T-FX-008",
+      "name": "Data Persistence Beyond Retention Period",
+      "mitigatedBy": ["AC-02", "CP-09", "MA-02"]
+    },
+    {
+      "id": "T-FX-009",
+      "name": "Loss of Audit Trail Integrity",
+      "mitigatedBy": ["AU-04", "AU-06", "CP-09"]
+    },
+    {
+      "id": "T-FX-010",
+      "name": "Service Unavailability During Critical Business Exchange",
+      "mitigatedBy": ["CP-02", "MA-02", "MA-06", "IR-07"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-07", "name": "Unsuccessful Login Attempts", "family": "AC", "emphasis": "important"},
+    {"id": "AC-10", "name": "Concurrent Session Control", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-20", "name": "Use of External Information Systems", "family": "AC", "emphasis": "important"},
+    {"id": "AT-02", "name": "Security Awareness", "family": "AT", "emphasis": "important"},
+    {"id": "AT-03", "name": "Security Training", "family": "AT", "emphasis": "standard"},
+    {"id": "AT-05", "name": "Contacts With Security Groups And Associations", "family": "AT", "emphasis": "standard"},
+    {"id": "AU-04", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "important"},
+    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "important"},
+    {"id": "CA-03", "name": "Information System Connections", "family": "CA", "emphasis": "important"},
+    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "standard"},
+    {"id": "CP-02", "name": "Contingency Plan", "family": "CP", "emphasis": "standard"},
+    {"id": "CP-09", "name": "Information System Backup", "family": "CP", "emphasis": "standard"},
+    {"id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "important"},
+    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "standard"},
+    {"id": "IR-07", "name": "Incident Response Assistance", "family": "IR", "emphasis": "standard"},
+    {"id": "MA-02", "name": "Controlled Maintenance", "family": "MA", "emphasis": "standard"},
+    {"id": "MA-06", "name": "Timley Maintenance", "family": "MA", "emphasis": "standard"},
+    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
+    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "important"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-09", "name": "Transmission Confidentiality", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-13", "name": "Use Of Cryptography", "family": "SC", "emphasis": "critical"}
   ],
   "controlFamilySummary": {
     "AC": 5,

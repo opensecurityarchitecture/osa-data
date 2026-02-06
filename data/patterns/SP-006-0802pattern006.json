@@ -3,17 +3,18 @@
   "slug": "0802pattern006",
   "joomla_id": 224,
   "title": "Wireless- Private Network Pattern",
-  "description": "Security controls and architecture for a managed wireless private network as an extension of trusted network",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/224-0802pattern006",
+  "description": "Security architecture for deploying and managing enterprise wireless networks as trusted extensions of the corporate LAN, covering WPA2/WPA3 encryption, 802.1X certificate-based authentication, rogue access point detection, and wireless-specific incident response.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-006",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
+    "release": "26.02",
+    "classification": "Network & Communications",
     "status": "published",
     "type": "pattern",
     "datePublished": "2008-07-23",
-    "dateModified": "2025-07-05",
+    "dateModified": "2026-02-06",
     "authors": [
-      "Spinoza"
+      "Aurelius",
+      "Vitruvius"
     ],
     "reviewers": []
   },
@@ -22,110 +23,248 @@
     "png": "/images/OSA_images/patterns/08_02_Pattern_006_02_Wireless_Private_Network.png"
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "There is little value in utilising SSID hiding, obscure SSID names, or MAC layer controls, as to a determined attacker these strategies provide little protection. Instead all security should be provided by the appropriate level of authentication and encryption.<br/>Frequent scans for unauthorised access should be made, via automated mechanism where possible. Ensure that Network Intrusion Detection and Protection devices are deployed to cover traffic from Wireless network segments.<br/><br/>",
-    "typicalChallenges": "Authentication should be seamless if possible, which is why certificates offer a useful mechanism. Most operating systems will support the use of 802.1x challenges, and can integrate certificate issuance, renewal and revocation.<br/>Where possible you should use WPA-2 encryption since this has a much stronger form of encryption between the client and access point (AES rather than RC4 with frequent session key renewal), however this is not supported by all access points or wireless cards, and you may need to fall back to WPA. WEP should be treated as an unencrypted channel since there are well publicised attacks, and should be supplemented by use of a VPN which naturally decreases usability since it tends towards the Wireless Public Hotspot pattern.<br/>Try to ensure that the placement of Wireless Access points minimises the spread of signals beyond the perimter of the building or location to be covered.<br/><br/>",
-    "indications": "You should apply this pattern when providing Wireless Access to your private corporate or organisation network from clearly defined locations. This pattern does not cover Bluetooth or Infrared.<br/><br/>",
-    "contraIndications": "Environments where you need to provide guest access to a wide range of users and do not manage the endpoints. Any environment where security outweigh usability considerations, where you should still look to exclusive used of wired access to minimise denial of service, or the remote possibility that encryption may be broken, or that endpoint vulnerabilities will allow the attacker to piggyback onto an existing session.<br/><br/>",
-    "threatResistance": "Spoofing, eavesdropping, impersonation, unathorised access to computing resources.<br/><br/>"
+    "description": "The Wireless Private Network pattern addresses the security architecture for deploying managed wireless networks within corporate or organisational premises. Unlike public hotspots where the infrastructure is untrusted, a private wireless network is designed to function as a logical extension of the trusted wired LAN -- with the critical caveat that radio frequency transmission introduces attack surfaces that do not exist on copper or fibre.\n\nThe core security challenge is that wireless signals do not respect physical boundaries. A well-positioned access point inside a building will radiate signals outside it, creating an attack surface accessible from car parks, adjacent buildings, and public spaces. This makes encryption and authentication the primary security controls rather than physical access restrictions. The pattern mandates enterprise-grade encryption (WPA2-Enterprise minimum, WPA3-Enterprise preferred) combined with 802.1X port-based authentication using RADIUS and EAP-TLS with digital certificates. This eliminates the shared pre-shared key (PSK) vulnerability that plagues consumer and small business deployments.\n\nRogue access point detection is a critical operational requirement. Attackers may deploy unauthorised access points to lure corporate devices into connecting to malicious infrastructure (evil twin attacks), or employees may inadvertently create security gaps by connecting personal hotspots or consumer-grade access points. Continuous wireless spectrum monitoring, combined with network-level detection of unauthorised BSSID addresses, provides defence against these threats.\n\nThe pattern also addresses the network segmentation implications of wireless access. Even on a trusted private network, wireless segments should be treated with appropriate caution in firewall and VLAN design. Traffic from wireless segments should traverse network intrusion detection and prevention systems before reaching sensitive internal resources. This defence-in-depth approach ensures that a compromise of the wireless layer does not immediately grant unrestricted access to the entire corporate network.\n\nOperational security for private wireless includes regular vulnerability assessments of access point firmware and controller software, logging and monitoring of authentication events (successful and failed), physical security of access point hardware to prevent tampering, and incident response procedures specific to wireless security events such as deauthentication attacks, rogue AP detection, and suspected encryption compromise.",
+    "keyControlAreas": [
+      "Wireless Access and Device Control (AC-18, AC-19): These are the foundational access controls for this pattern. AC-18 governs wireless access restrictions including approved wireless technologies, authentication requirements, encryption standards, and usage constraints. Organisations should define which wireless protocols are permitted (WPA3-Enterprise, WPA2-Enterprise), explicitly prohibit legacy protocols (WEP, WPA-PSK in enterprise deployments), and specify connection requirements for corporate devices. AC-19 extends these controls to portable and mobile devices connecting to the wireless network, addressing device posture checks, MDM enrollment requirements, and restrictions on which device types may connect. Implementation should include 802.1X with EAP-TLS certificate-based authentication, MAC address logging (not filtering, which provides minimal security), and network access control (NAC) integration to verify device compliance before granting full network access.",
+      "Authentication and Device Identity (IA-02, IA-03): Strong authentication is the primary security mechanism for private wireless networks. IA-02 requires user identification and authentication via enterprise credentials integrated with 802.1X, ideally using certificate-based authentication where the device presents a machine certificate and the user authenticates via their directory credentials. IA-03 covers device identification and authentication, ensuring that only known, managed devices can connect. This typically involves machine certificates issued by the organisation's PKI, enrolled via MDM or Active Directory auto-enrollment. The combination of user and device authentication provides two-factor assurance that both the person and the endpoint are authorised. RADIUS server infrastructure must be properly secured and redundant, as it becomes a single point of failure for all wireless access.",
+      "Cryptographic Protection (SC-08, SC-09, SC-13): Encryption protects the confidentiality and integrity of data in transit over the wireless link. SC-08 (transmission integrity) and SC-09 (transmission confidentiality) are addressed through WPA2-Enterprise (AES-CCMP) or WPA3-Enterprise (AES-GCMP-256). SC-13 governs the overall use of cryptography, requiring FIPS-validated cryptographic modules where applicable and ensuring key management is properly handled. WPA3-Enterprise with 192-bit mode provides CNSA-grade encryption suitable for government and high-security environments. Organisations should ensure that access point firmware supports the required cryptographic standards, that session key rotation occurs at appropriate intervals, and that PMF (Protected Management Frames) is enabled to prevent deauthentication attacks.",
+      "Continuous Monitoring and Vulnerability Management (CA-07, RA-05, AU-02): Wireless networks require continuous monitoring beyond standard network monitoring. CA-07 encompasses continuous monitoring including wireless intrusion detection systems (WIDS) that scan for rogue access points, evil twin attacks, deauthentication floods, and other wireless-specific threats. RA-05 covers vulnerability scanning of access point firmware, wireless controller software, and RADIUS infrastructure. AU-02 defines auditable events for wireless: authentication successes and failures, rogue AP detections, RADIUS server events, channel utilisation anomalies, and client roaming events. Log data should feed into the organisation's SIEM for correlation with other security events.",
+      "Security Assessment and Compliance (CA-02): Regular security assessments (CA-02) of the wireless infrastructure should include penetration testing of wireless authentication, verification that encryption standards are enforced (not just configured), physical surveys to validate signal coverage and identify leakage beyond intended boundaries, and review of access point configurations for compliance with organisational policy. Assessments should verify that legacy protocols are actually disabled (not just deprioritised), that certificate revocation is functioning, and that the WIDS is detecting test rogue access points.",
+      "Incident Response for Wireless Events (IR-02, IR-04, IR-05, IR-06, IR-07): Wireless networks generate specific incident types that require dedicated response procedures. IR-04 (incident handling) should include playbooks for rogue access point detection and neutralisation, suspected encryption compromise, deauthentication attacks, unauthorised device connections, and wireless-based man-in-the-middle attempts. IR-05 (incident monitoring) covers the continuous tracking of wireless security events. IR-06 and IR-07 address the reporting chain and response assistance for wireless incidents, which may require specialist skills including RF analysis. IR-02 ensures that IT staff and security teams receive training specific to wireless threats and response techniques.",
+      "Awareness and Training for Wireless Security (AT-01, AT-03, AT-04): Users and IT staff require specific training on wireless security risks and organisational policy. AT-03 should include role-based training: end users need to understand the risks of connecting to unknown wireless networks (particularly when travelling), the importance of not sharing wireless credentials, and how to identify suspicious wireless behaviour. IT administrators need training on wireless security configuration, monitoring tools, and incident response for wireless events. AT-04 ensures training records demonstrate compliance with these requirements. AT-01 provides the policy foundation for the training program."
+    ],
+    "assumptions": "The organisation manages its own wireless infrastructure with enterprise-grade access points and controllers. A RADIUS server and PKI infrastructure are available for 802.1X EAP-TLS authentication, or the organisation has the capability to deploy them. Managed endpoint devices support 802.1X supplicants and can be enrolled with machine certificates. Network segmentation exists or can be implemented to isolate wireless traffic from sensitive internal segments until it has been inspected.",
+    "typicalChallenges": "Certificate lifecycle management is the most common operational challenge: certificate enrolment, renewal, and revocation must be automated as far as possible, since manual processes break down at scale and expired certificates cause service disruption. Most modern operating systems support 802.1X supplicants and can integrate with enterprise PKI for automatic certificate enrolment and renewal, but heterogeneous device environments (Windows, macOS, Linux, IoT) require careful per-platform configuration and testing. WPA3-Enterprise adoption may be constrained by legacy access points or client devices that do not support it, requiring a transitional period where WPA2-Enterprise remains available. WEP must never be used, as it is trivially broken with publicly available tools, and any environment still relying on WEP should treat the wireless segment as completely untrusted and require VPN overlay -- effectively degrading to the Public Hotspot pattern. Physical placement of access points requires balancing coverage requirements against signal leakage beyond the building perimeter. Guest wireless access should be provided on a separate SSID and VLAN with internet-only access, completely isolated from the corporate network.",
+    "indications": "Apply this pattern when providing wireless network access to corporate or organisational network resources from managed locations such as offices, campuses, and facilities where the organisation controls the wireless infrastructure. This is appropriate when the organisation manages the endpoint devices connecting to the network and can enforce configuration requirements including certificate enrollment and 802.1X supplicant configuration. This pattern does not cover Bluetooth, Infrared, or cellular connectivity.",
+    "contraIndications": "This pattern is not appropriate for environments where guest or unmanaged device access is the primary use case -- use a separate guest network or the Wireless Public Hotspot pattern instead. In environments with extreme security requirements where the risk of wireless eavesdropping or signal interception cannot be tolerated, wired-only access should be mandated. The pattern also does not apply where the organisation does not control the wireless infrastructure (airports, hotels, co-working spaces) -- the Public Hotspot pattern applies in those scenarios. Environments with significant RF interference or contested spectrum may find wireless unreliable for business-critical connectivity.",
+    "threatResistance": "This pattern provides resistance against wireless eavesdropping through WPA2/WPA3 enterprise encryption, preventing passive interception of corporate traffic over the air interface. Strong 802.1X authentication resists impersonation and unauthorised network access by requiring valid certificates and credentials. Rogue access point detection and wireless intrusion detection address evil twin attacks where adversaries set up fraudulent access points to intercept traffic. Device authentication prevents unauthorised or compromised devices from gaining network access. Network segmentation of wireless traffic limits lateral movement if a wireless client is compromised. The pattern does not fully mitigate denial-of-service attacks against the wireless medium (RF jamming, deauthentication floods with legacy protocols), though WPA3 Protected Management Frames significantly reduce deauthentication attack effectiveness."
   },
-  "references": [],
+  "examples": {
+    "Enterprise wireless deployments": [
+      "Cisco Catalyst wireless with ISE for 802.1X and device profiling",
+      "Aruba (HPE) wireless with ClearPass for network access control",
+      "Juniper Mist AI-driven wireless with RADIUS integration",
+      "Meraki cloud-managed wireless with Systems Manager MDM integration"
+    ],
+    "Authentication and certificate infrastructure": [
+      "Microsoft NPS (RADIUS) with Active Directory Certificate Services for EAP-TLS",
+      "FreeRADIUS with Let's Encrypt or internal CA for Linux environments",
+      "Cisco ISE with pxGrid for dynamic network segmentation based on identity",
+      "Eduroam federated 802.1X for multi-organisation campus environments"
+    ],
+    "Wireless monitoring and intrusion detection": [
+      "Cisco Wireless IPS for rogue AP detection and containment",
+      "AirMagnet Enterprise (NetAlly) for wireless security monitoring",
+      "Kismet open-source wireless network detector and sniffer",
+      "Ekahau for wireless site surveys and coverage validation"
+    ],
+    "Encryption and protocol standards": [
+      "WPA3-Enterprise 192-bit mode for government and high-security deployments",
+      "WPA2-Enterprise with AES-CCMP as minimum baseline",
+      "802.11w Protected Management Frames to prevent deauthentication attacks",
+      "RADIUS over TLS (RadSec) to secure authentication traffic between APs and RADIUS"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-153: Guidelines for Securing Wireless Local Area Networks (WLANs)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-153/final",
+      "note": "Primary NIST guidance on WLAN security covering threats, risk assessment, security architecture, and countermeasures for enterprise wireless deployments."
+    },
+    {
+      "title": "NIST SP 800-97: Establishing Wireless Robust Security Networks",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-97/final",
+      "note": "Detailed technical guidance on implementing 802.11i (WPA2) including 802.1X authentication, EAP methods, key management, and migration strategies."
+    },
+    {
+      "title": "CIS Benchmark for Cisco Wireless LAN Controller",
+      "url": "https://www.cisecurity.org/benchmark/cisco",
+      "note": "Configuration hardening benchmarks for enterprise wireless controllers covering authentication, encryption, SNMP, logging, and management access."
+    },
+    {
+      "title": "Wi-Fi Alliance WPA3 Specification",
+      "url": "https://www.wi-fi.org/discover-wi-fi/security",
+      "note": "Official specification for WPA3 including SAE (Simultaneous Authentication of Equals), 192-bit security mode, and Protected Management Frames."
+    },
+    {
+      "title": "SANS Wireless Security Audit Checklist",
+      "url": "https://www.sans.org/information-security-policy/",
+      "note": "Practical audit checklist for wireless security assessments covering policy, configuration, monitoring, and incident response readiness."
+    },
+    {
+      "title": "IEEE 802.1X-2020 Port-Based Network Access Control",
+      "url": "https://standards.ieee.org/standard/802_1X-2020.html",
+      "note": "The underlying standard for port-based network access control used in enterprise wireless authentication via RADIUS and EAP."
+    }
+  ],
+  "relatedPatterns": ["SP-001", "SP-007", "SP-015", "SP-016", "SP-024", "SP-025"],
+  "relatedPatternNames": ["Client Module", "Wireless Public Hotspot", "Consumer Devices for Enterprise", "DMZ Module", "iPhone Pattern", "Advanced Monitoring and Detection"],
+  "threats": [
+    {
+      "id": "T-WP-001",
+      "name": "Wireless Eavesdropping and Traffic Interception",
+      "mitigatedBy": ["SC-08", "SC-09", "SC-13"]
+    },
+    {
+      "id": "T-WP-002",
+      "name": "Rogue Access Point and Evil Twin Attacks",
+      "mitigatedBy": ["CA-07", "RA-05", "IR-04", "IR-05"]
+    },
+    {
+      "id": "T-WP-003",
+      "name": "Unauthorised Network Access via Wireless",
+      "mitigatedBy": ["AC-18", "IA-02", "IA-03", "AC-19"]
+    },
+    {
+      "id": "T-WP-004",
+      "name": "Credential Theft and Authentication Bypass",
+      "mitigatedBy": ["IA-02", "IA-03", "SC-13"]
+    },
+    {
+      "id": "T-WP-005",
+      "name": "Deauthentication and Denial-of-Service Attacks",
+      "mitigatedBy": ["CA-07", "IR-04", "IR-05", "IR-06"]
+    },
+    {
+      "id": "T-WP-006",
+      "name": "Device Spoofing and Impersonation",
+      "mitigatedBy": ["IA-03", "AC-18", "CA-07"]
+    },
+    {
+      "id": "T-WP-007",
+      "name": "Lateral Movement from Compromised Wireless Client",
+      "mitigatedBy": ["AC-18", "CA-07", "IR-04", "RA-05"]
+    },
+    {
+      "id": "T-WP-008",
+      "name": "Misconfigured or Unpatched Access Point Firmware",
+      "mitigatedBy": ["RA-05", "CA-02", "CA-07"]
+    },
+    {
+      "id": "T-WP-009",
+      "name": "Insider Deploying Unauthorised Wireless Infrastructure",
+      "mitigatedBy": ["CA-07", "AT-01", "AT-03", "IR-04"]
+    },
+    {
+      "id": "T-WP-010",
+      "name": "Delayed Detection and Response to Wireless Incidents",
+      "mitigatedBy": ["IR-02", "IR-04", "IR-05", "IR-06", "IR-07"]
+    }
+  ],
   "controls": [
     {
       "id": "AC-18",
       "name": "Wireless Access Restrictions",
-      "family": "AC"
+      "family": "AC",
+      "emphasis": "critical"
     },
     {
       "id": "AC-19",
       "name": "Access Control For Portable And Mobile Devices",
-      "family": "AC"
+      "family": "AC",
+      "emphasis": "important"
     },
     {
       "id": "AT-01",
       "name": "Security Awareness And Training Policy And Procedures",
-      "family": "AT"
+      "family": "AT",
+      "emphasis": "standard"
     },
     {
       "id": "AT-03",
       "name": "Security Training",
-      "family": "AT"
+      "family": "AT",
+      "emphasis": "standard"
     },
     {
       "id": "AT-04",
       "name": "Security Training Records",
-      "family": "AT"
+      "family": "AT",
+      "emphasis": "standard"
     },
     {
       "id": "AU-02",
       "name": "Auditable Events",
-      "family": "AU"
+      "family": "AU",
+      "emphasis": "important"
     },
     {
       "id": "CA-02",
       "name": "Security Assessments",
-      "family": "CA"
+      "family": "CA",
+      "emphasis": "important"
     },
     {
       "id": "CA-07",
       "name": "Continuous Monitoring",
-      "family": "CA"
+      "family": "CA",
+      "emphasis": "critical"
     },
     {
       "id": "IA-02",
       "name": "User Identification And Authentication",
-      "family": "IA"
+      "family": "IA",
+      "emphasis": "critical"
     },
     {
       "id": "IA-03",
       "name": "Device Identification And Authentication",
-      "family": "IA"
+      "family": "IA",
+      "emphasis": "critical"
     },
     {
       "id": "IR-02",
       "name": "Incident Response Training",
-      "family": "IR"
+      "family": "IR",
+      "emphasis": "standard"
     },
     {
       "id": "IR-04",
       "name": "Incident Handling",
-      "family": "IR"
+      "family": "IR",
+      "emphasis": "important"
     },
     {
       "id": "IR-05",
       "name": "Incident Monitoring",
-      "family": "IR"
+      "family": "IR",
+      "emphasis": "important"
     },
     {
       "id": "IR-06",
       "name": "Incident Reporting",
-      "family": "IR"
+      "family": "IR",
+      "emphasis": "standard"
     },
     {
       "id": "IR-07",
       "name": "Incident Response Assistance",
-      "family": "IR"
+      "family": "IR",
+      "emphasis": "standard"
     },
     {
       "id": "RA-05",
       "name": "Vulnerability Scanning",
-      "family": "RA"
+      "family": "RA",
+      "emphasis": "important"
     },
     {
       "id": "SC-08",
       "name": "Transmission Integrity",
-      "family": "SC"
+      "family": "SC",
+      "emphasis": "critical"
     },
     {
       "id": "SC-09",
       "name": "Transmission Confidentiality",
-      "family": "SC"
+      "family": "SC",
+      "emphasis": "important"
     },
     {
       "id": "SC-13",
       "name": "Use Of Cryptography",
-      "family": "SC"
+      "family": "SC",
+      "emphasis": "important"
     }
   ],
   "controlFamilySummary": {

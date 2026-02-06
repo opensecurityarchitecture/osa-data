@@ -3,17 +3,18 @@
   "slug": "sp-025-advanced-monitoring-and-detection",
   "joomla_id": 314,
   "title": "Advanced Monitoring and Detection",
-  "description": "OpenSecurityArchitecture (OSA) distills the know-how of the security architecture community and provides readily usable patterns for your application. This is a free framework, developed and owned by the community.",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/314-sp-025-advanced-monitoring-and-detection",
+  "description": "Security architecture for building advanced detection and response capabilities against sophisticated threats. Covers SIEM deployment, security operations centre design, continuous monitoring, threat intelligence integration, behavioural analytics, and incident response orchestration for detecting adversaries who have bypassed preventive controls.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-025",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
+    "release": "26.02",
+    "classification": "Application & Operations",
     "status": "published",
     "type": "pattern",
     "datePublished": "2013-06-08",
-    "dateModified": "2025-07-05",
+    "dateModified": "2026-02-06",
     "authors": [
-      "Vinylwasp"
+      "Aurelius",
+      "Vitruvius"
     ],
     "reviewers": []
   },
@@ -22,181 +23,173 @@
     "png": "/images/OSA_images/patterns/13_05_Pattern_025_07_Advanced_Monitoring.png"
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "This pattern assumes that primary defensive layers have failed, and a malicious attacker has entered the environment and established an initial foothold.</p>\n<p>",
-    "typicalChallenges": "This pattern leverages many common controls, however it requires a considerable increase in operational maturity to reach each of the target control objectives outlined in the CSIS Critical Controls for Effective Cyber Defense.<br/><br/>",
-    "indications": "You should apply this pattern if you believe you organisation may be likely target of a sophisticated blended attack charateristic of Advanced Persistent Threats.<br/><br/>",
-    "contraIndications": "You should not attempt to implement all elements of this pattern unless your organisation has high operational maturity with respect to change and configuration management. Key detective controls in this pattern are dependent on accurate configuration management data.<br/><br/>",
-    "threatResistance": "This pattern can assist in limiting the spread and impact of an advanced breach through early detection and response.<br/><br/>"
+    "description": "This pattern starts where preventive controls end. It assumes that a motivated, skilled adversary has penetrated the perimeter, compromised an endpoint, and established an initial foothold in the environment. The question is no longer whether the attacker can be kept out, but how quickly the organisation can detect their presence, understand the scope of compromise, and mount an effective response. Advanced monitoring and detection is the architectural discipline of building the sensors, analytics, processes, and people needed to answer that question in hours rather than months.\n\nThe foundation of this pattern is comprehensive visibility. You cannot detect what you cannot see. This means collecting and centralising security-relevant data from across the environment: network traffic metadata and full packet capture at key boundaries, endpoint telemetry (process execution, file system changes, registry modifications, network connections), authentication and authorisation events from identity systems, DNS query logs, email gateway logs, cloud service activity logs, and application-layer audit trails. The volume of data is enormous, and the architecture must handle ingestion, normalisation, correlation, and retention at scale without creating blind spots due to cost-driven log exclusions.\n\nSIEM (Security Information and Event Management) is the central nervous system, but a SIEM is only as good as the detection logic it runs and the analysts who investigate its output. Detection engineering must go beyond vendor-supplied correlation rules to include custom detections based on the organisation's specific threat model, ATT&CK-mapped detection coverage, and threat intelligence from sector-specific and commercial feeds. Behavioural analytics (UEBA -- User and Entity Behaviour Analytics) supplement rule-based detection by identifying anomalies in user activity, network traffic patterns, and data access that deviate from established baselines. Neither approach alone is sufficient; both must operate in concert.\n\nThe Security Operations Centre (SOC) operationalises detection capabilities. Whether internal, outsourced, or hybrid, the SOC must have defined triage procedures, escalation paths, investigation playbooks, and authority to take containment actions. Analyst burnout from alert fatigue is the single greatest operational risk -- if the SOC is drowning in false positives, real attacks will be missed. Detection engineering must be a continuous improvement loop: measure false positive rates, tune rules, retire ineffective detections, and invest analyst time in hunting activities where human intuition can find what automated rules miss.\n\nContinuous monitoring extends beyond security events to include configuration drift detection, vulnerability state awareness, and compliance posture monitoring. The goal is to maintain a real-time understanding of the environment's security state so that deviations from expected baselines trigger investigation. This requires tight integration between monitoring platforms, asset inventory, configuration management, and vulnerability management systems. An alert about suspicious lateral movement is far more actionable when the SOC can immediately determine whether the target system is a development workstation or a domain controller, whether it has known unpatched vulnerabilities, and what data it has access to.",
+    "keyControlAreas": [
+      "Security Event Monitoring and SIEM (AU-02, AU-06, SI-04): These controls form the core detection capability. Auditable events (AU-02) defines what must be logged across the environment -- authentication events, privilege escalation, process execution, network connections, file access, configuration changes, and administrative actions. The scope must cover endpoints, servers, network devices, cloud services, identity systems, and applications. Audit monitoring, analysis, and reporting (AU-06) requires centralising these logs into a SIEM platform with correlation rules, statistical baselines, and threat intelligence enrichment. Information system monitoring (SI-04) extends beyond log analysis to include network-based detection: IDS/IPS, network traffic analysis, DNS monitoring, and full packet capture at key network boundaries. Detection logic should be mapped to the MITRE ATT&CK framework to identify coverage gaps, and custom detections should be developed for organisation-specific attack scenarios that generic vendor rules will not catch.",
+      "Configuration Baseline and Drift Detection (CM-01, CM-02, CM-03, CM-05, CM-06): Advanced detection depends on knowing what 'normal' looks like. Configuration management policy (CM-01) establishes the governance framework. Baseline configurations (CM-02) define the expected state of systems -- operating system versions, installed software, running services, open ports, registry settings, and security configurations. Configuration change control (CM-03) ensures that all authorised changes are documented, enabling the SOC to distinguish legitimate changes from attacker activity. Access restrictions for change (CM-05) limits who can modify configurations, making unauthorised changes a high-fidelity detection signal. Configuration settings (CM-06) defines the security-relevant parameters that must be monitored for drift. File integrity monitoring tools should continuously compare production systems against approved baselines and alert on deviations. This is how you detect an attacker who has modified a system binary, installed a backdoor, or changed a firewall rule.",
+      "Vulnerability and Risk Intelligence (RA-01, RA-02, RA-03, RA-05): Effective detection requires understanding the attack surface. Risk assessment policy (RA-01) and security categorisation (RA-02) establish which systems matter most and what level of monitoring they require -- a compromise of a payment processing server demands a different response than a compromise of a test workstation. Risk assessment (RA-03) identifies the threats the organisation faces and the vulnerabilities that could be exploited, directly informing detection priorities. Vulnerability scanning (RA-05) provides continuous visibility into the patch state and configuration weaknesses across the environment. Vulnerability data should be integrated with the SIEM so that when an exploit attempt is detected, analysts can immediately determine whether the target is actually vulnerable -- dramatically reducing investigation time and enabling confident prioritisation of alerts.",
+      "Access and Identity Monitoring (AC-02, AC-04, AC-17, AC-18, AC-20): Compromised credentials and lateral movement through legitimate access channels are the primary tactics of advanced adversaries. Account management monitoring (AC-02) should detect anomalous account creation, privilege escalation, service account abuse, and dormant account activation. Information flow enforcement (AC-04) monitoring identifies data exfiltration through unexpected channels. Remote access monitoring (AC-17) should flag connections from unusual locations, at unusual times, or using unusual client configurations. Wireless access monitoring (AC-18) detects rogue access points and unauthorised wireless connections. Use of external information systems (AC-20) monitoring identifies data flowing to unsanctioned cloud services or personal devices. Identity-based detection is often the highest-value detection category because adversaries who have compromised credentials can operate within legitimate access channels that network-based controls will not flag.",
+      "Incident Response Integration (IR-01, IR-03, IR-05): Detection without response is academic. Incident response policy (IR-01) must define clear escalation paths from SOC detection through triage, investigation, containment, and remediation. Incident response testing (IR-03) should include regular exercises that test the full detection-to-response chain: inject simulated attack indicators into the environment and measure time to detect, time to triage, and time to contain. Incident monitoring (IR-05) maintains awareness of active incidents, tracks containment progress, and ensures that indicators of compromise from current incidents are fed back into detection systems to catch related activity. The SOC and incident response team must have pre-authorised containment actions -- the ability to isolate endpoints, disable accounts, or block network connections without waiting for management approval during an active attack.",
+      "Software and Information Integrity (SI-03, SI-06, SI-07): These controls detect compromise at the system level. Malicious code protection (SI-03) extends beyond traditional antivirus to include EDR (Endpoint Detection and Response) tools that monitor process behaviour, detect fileless malware, and provide forensic telemetry. Security functionality verification (SI-06) periodically validates that security controls are operating correctly -- verifying that logging agents are running, detection rules are firing, and security tools have not been tampered with. Software and information integrity (SI-07) uses cryptographic hashing and file integrity monitoring to detect unauthorised modifications to system files, application binaries, and configuration files. Integrity monitoring should cover boot processes, kernel modules, critical system libraries, and web application files where attackers commonly plant webshells.",
+      "System Architecture and Secure Development Practices (SA-03, SA-06, SA-07, SA-08): These controls ensure that the monitoring architecture itself is secure and sustainable. Life cycle support (SA-03) ensures monitoring tools and platforms are maintained and updated -- a SIEM running outdated correlation rules or unsupported software becomes a liability rather than an asset. Software usage restrictions (SA-06) and user installed software controls (SA-07) reduce the attack surface by limiting what can execute in the environment, making detection of unauthorised software more reliable. Security engineering principles (SA-08) guide the design of the monitoring architecture: defence in depth (multiple independent detection layers), fail-safe defaults (alert on monitoring gaps), separation of duties (SOC analysts cannot modify the systems they monitor), and resilience (monitoring infrastructure must survive the attacks it is designed to detect)."
+    ],
+    "assumptions": "This pattern assumes that primary defensive layers (perimeter security, endpoint protection, access controls) have already been implemented but are insufficient against sophisticated adversaries who can bypass preventive controls. The organisation has sufficient operational maturity in change and configuration management to establish meaningful baselines against which anomalies can be detected -- without accurate configuration data, many detective controls produce excessive false positives and become operationally useless. The organisation is prepared to invest in skilled analysts or managed detection services, as monitoring technology without qualified human analysis generates noise rather than intelligence. Log sources across the environment are available and can be centralised, and sufficient storage and processing capacity exists to retain and analyse security data at the required scale.",
+    "typicalChallenges": "The primary operational challenge is alert fatigue: SOC analysts overwhelmed by false positives will miss genuine attacks buried in the noise. Addressing this requires continuous detection engineering -- tuning rules, retiring ineffective detections, enriching alerts with context, and automating repetitive triage tasks through SOAR (Security Orchestration, Automation, and Response) platforms. The volume of log data can be enormous, and cost management for SIEM licensing (often based on ingestion volume) frequently leads to difficult decisions about which log sources to include. Excluding sources creates blind spots that sophisticated adversaries will exploit. Achieving operational maturity with respect to configuration management is a prerequisite for many detection capabilities; organisations that cannot maintain accurate baselines will struggle with change detection and anomaly-based alerting. Staffing the SOC with skilled analysts is a persistent industry-wide challenge, with high turnover rates driven by burnout, shift work, and competitive demand for experienced security analysts. Measuring detection effectiveness is difficult -- you can count alerts and incidents, but the metric that matters most (attacks that were not detected) is inherently unknowable without regular red team exercises and assumed-breach testing.",
+    "indications": "Apply this pattern if your organisation may be a likely target of sophisticated blended attacks characteristic of Advanced Persistent Threats (APTs). This includes organisations in financial services, government, defence, critical infrastructure, healthcare, technology, and any sector handling high-value intellectual property or personally identifiable information. Regulatory requirements increasingly mandate continuous monitoring capabilities (NIST CSF DE.CM, PCI DSS Requirement 10, SOC 2 CC7, ISO 27001 A.8.15-16). Organisations that have experienced a breach or near-miss should implement this pattern as a priority. Any organisation with more than a few hundred endpoints should have at minimum a managed detection and response (MDR) capability.",
+    "contraIndications": "Do not attempt to implement all elements of this pattern unless your organisation has high operational maturity with respect to change and configuration management. Key detective controls are dependent on accurate configuration management data -- without reliable baselines, anomaly detection generates unmanageable false positive volumes. Organisations at low security maturity should first establish basic controls (asset inventory, configuration management, centralised logging) before investing in advanced detection capabilities. Attempting to deploy a SIEM without the underlying data quality and staffing to operate it results in expensive infrastructure that provides little security value.",
+    "threatResistance": "This pattern is specifically designed to detect and limit the impact of advanced threats that bypass preventive controls. Advanced Persistent Threats (APTs) using multi-stage attack chains involving initial access, privilege escalation, lateral movement, and data exfiltration over extended dwell times. Living-off-the-land attacks that use legitimate system tools (PowerShell, WMI, PsExec) to avoid triggering signature-based detection. Credential-based attacks including pass-the-hash, Kerberoasting, and golden ticket attacks that operate within legitimate authentication channels. Insider threats where authorised users abuse their access for data theft or sabotage. Ransomware in its pre-encryption phases -- reconnaissance, lateral movement, and staging -- where early detection enables containment before encryption begins. Supply chain compromises where tampered updates or dependencies introduce backdoors. Zero-day exploitation where signature-based detection fails and behavioural analytics provide the primary detection mechanism. Data exfiltration through encrypted channels, DNS tunnelling, or steganography where network-based anomaly detection is required."
   },
-  "references": [],
-  "controls": [
+  "examples": {
+    "SIEM and security analytics platforms": [
+      "Splunk Enterprise Security for log aggregation, correlation, and security analytics",
+      "Microsoft Sentinel cloud-native SIEM with AI-driven analytics",
+      "Elastic Security (ELK Stack) for scalable log analysis and detection",
+      "Google Chronicle Security Operations for petabyte-scale security telemetry"
+    ],
+    "Endpoint detection and response (EDR)": [
+      "CrowdStrike Falcon for endpoint detection, response, and threat hunting",
+      "Microsoft Defender for Endpoint with advanced hunting queries",
+      "SentinelOne Singularity for autonomous endpoint protection and forensics",
+      "Carbon Black (VMware) for endpoint behavioural analysis"
+    ],
+    "Network detection and response (NDR)": [
+      "Darktrace Enterprise for AI-driven network anomaly detection",
+      "Vectra AI for network detection and response with ATT&CK mapping",
+      "Corelight for Zeek-based network security monitoring",
+      "ExtraHop Reveal(x) for network traffic analysis"
+    ],
+    "Threat intelligence and hunting": [
+      "MITRE ATT&CK framework for detection coverage mapping and adversary emulation",
+      "Recorded Future for automated threat intelligence integration",
+      "Mandiant Advantage for threat intelligence and incident response",
+      "VirusTotal Enterprise for malware analysis and indicator enrichment"
+    ]
+  },
+  "references": [
     {
-      "id": "AC-02",
-      "name": "Account Management",
-      "family": "AC"
+      "title": "MITRE ATT&CK Framework",
+      "url": "https://attack.mitre.org/",
+      "note": "The industry-standard knowledge base of adversary tactics, techniques, and procedures. Essential for mapping detection coverage, identifying gaps, developing detection rules, and conducting adversary emulation exercises."
     },
     {
-      "id": "AC-04",
-      "name": "Information Flow Enforcement",
-      "family": "AC"
+      "title": "NIST SP 800-137: Information Security Continuous Monitoring (ISCM)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-137/final",
+      "note": "Defines the ISCM process including establishing monitoring strategy, implementing monitoring programs, analysing data, and responding to findings. Provides the governance framework for continuous monitoring programs."
     },
     {
-      "id": "AC-17",
-      "name": "Remote Access",
-      "family": "AC"
+      "title": "NIST SP 800-92: Guide to Computer Security Log Management",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-92/final",
+      "note": "Practical guidance on log management infrastructure, policies, and operational procedures. Covers log generation, storage, analysis, and the technical challenges of centralised log management at enterprise scale."
     },
     {
-      "id": "AC-18",
-      "name": "Wireless Access Restrictions",
-      "family": "AC"
+      "title": "SANS SOC Survey and Operational Best Practices",
+      "url": "https://www.sans.org/white-papers/",
+      "note": "Annual survey data and practical guidance on SOC staffing, tooling, metrics, and operational maturity. Provides benchmarking data for SOC effectiveness across industries."
     },
     {
-      "id": "AC-20",
-      "name": "Use Of External Information Systems",
-      "family": "AC"
+      "title": "CIS Controls v8: Control 8 (Audit Log Management) and Control 13 (Network Monitoring and Defense)",
+      "url": "https://www.cisecurity.org/controls",
+      "note": "Prescriptive guidance on audit log collection, retention, and review (Control 8) and network monitoring, intrusion detection, and filtering (Control 13). Maps directly to the technical implementation of this pattern."
     },
     {
-      "id": "AT-01",
-      "name": "Security Awareness And Training Policy And Procedures",
-      "family": "AT"
+      "title": "Palantir Alerting and Detection Strategy Framework",
+      "url": "https://github.com/palantir/alerting-detection-strategy-framework",
+      "note": "Open-source framework for documenting, testing, and managing detection logic. Provides a structured approach to detection engineering that integrates with ATT&CK and supports detection lifecycle management."
     },
     {
-      "id": "AU-01",
-      "name": "Audit And Accountability Policy And Procedures",
-      "family": "AU"
-    },
-    {
-      "id": "AU-02",
-      "name": "Auditable Events",
-      "family": "AU"
-    },
-    {
-      "id": "AU-06",
-      "name": "Audit Monitoring, Analysis, And Reporting",
-      "family": "AU"
-    },
-    {
-      "id": "AU-09",
-      "name": "Protection Of Audit Information",
-      "family": "AU"
-    },
-    {
-      "id": "CA-02",
-      "name": "Security Assessments",
-      "family": "CA"
-    },
-    {
-      "id": "CM-01",
-      "name": "Configuration Management Policy And Procedures",
-      "family": "CM"
-    },
-    {
-      "id": "CM-02",
-      "name": "Baseline Configuration",
-      "family": "CM"
-    },
-    {
-      "id": "CM-03",
-      "name": "Configuration Change Control",
-      "family": "CM"
-    },
-    {
-      "id": "CM-05",
-      "name": "Access Restrictions For Change",
-      "family": "CM"
-    },
-    {
-      "id": "CM-06",
-      "name": "Configuration Settings",
-      "family": "CM"
-    },
-    {
-      "id": "CP-10",
-      "name": "Information System Recovery And Reconstitution",
-      "family": "CP"
-    },
-    {
-      "id": "IR-01",
-      "name": "Incident Response Policy And Procedures",
-      "family": "IR"
-    },
-    {
-      "id": "IR-03",
-      "name": "Incident Response Testing And Exercises",
-      "family": "IR"
-    },
-    {
-      "id": "IR-05",
-      "name": "Incident Monitoring",
-      "family": "IR"
-    },
-    {
-      "id": "RA-01",
-      "name": "Risk Assessment Policy And Procedures",
-      "family": "RA"
-    },
-    {
-      "id": "RA-02",
-      "name": "Security Categorization",
-      "family": "RA"
-    },
-    {
-      "id": "RA-03",
-      "name": "Risk Assessment",
-      "family": "RA"
-    },
-    {
-      "id": "RA-05",
-      "name": "Vulnerability Scanning",
-      "family": "RA"
-    },
-    {
-      "id": "SA-03",
-      "name": "Life Cycle Support",
-      "family": "SA"
-    },
-    {
-      "id": "SA-06",
-      "name": "Software Usage Restrictions",
-      "family": "SA"
-    },
-    {
-      "id": "SA-07",
-      "name": "User Installed Software",
-      "family": "SA"
-    },
-    {
-      "id": "SA-08",
-      "name": "Security Engineering Principles",
-      "family": "SA"
-    },
-    {
-      "id": "SC-07",
-      "name": "Boundary Protection",
-      "family": "SC"
-    },
-    {
-      "id": "SI-03",
-      "name": "Malicious Code Protection",
-      "family": "SI"
-    },
-    {
-      "id": "SI-04",
-      "name": "Information System Monitoring Tools And Techniques",
-      "family": "SI"
-    },
-    {
-      "id": "SI-06",
-      "name": "Security Functionality Verification",
-      "family": "SI"
-    },
-    {
-      "id": "SI-07",
-      "name": "Software And Information Integrity",
-      "family": "SI"
+      "title": "Verizon Data Breach Investigations Report (DBIR)",
+      "url": "https://www.verizon.com/business/resources/reports/dbir/",
+      "note": "Annual analysis of breach data showing detection timelines, attack patterns, and the gap between attacker dwell time and organisational detection capability. Essential evidence base for justifying monitoring investments."
     }
+  ],
+  "relatedPatterns": ["SP-004", "SP-014", "SP-018", "SP-023", "SP-026"],
+  "relatedPatternNames": ["Network Security", "Awareness and Training", "ISMS", "Industrial Control Systems", "PCI Full Environment"],
+  "threats": [
+    {
+      "id": "T-MD-001",
+      "name": "Advanced Persistent Threat (Multi-Stage Intrusion with Extended Dwell Time)",
+      "mitigatedBy": ["SI-04", "AU-06", "AU-02", "IR-05"]
+    },
+    {
+      "id": "T-MD-002",
+      "name": "Living-off-the-Land Attacks (Abuse of Legitimate System Tools)",
+      "mitigatedBy": ["SI-04", "CM-06", "AU-02", "SI-07"]
+    },
+    {
+      "id": "T-MD-003",
+      "name": "Credential-Based Attacks (Pass-the-Hash, Kerberoasting, Golden Ticket)",
+      "mitigatedBy": ["AC-02", "AU-06", "SI-04", "AC-04"]
+    },
+    {
+      "id": "T-MD-004",
+      "name": "Insider Threat (Data Theft or Sabotage by Authorised Users)",
+      "mitigatedBy": ["AU-02", "AU-06", "AC-02", "SI-04"]
+    },
+    {
+      "id": "T-MD-005",
+      "name": "Ransomware (Pre-Encryption Reconnaissance and Lateral Movement)",
+      "mitigatedBy": ["SI-03", "SI-04", "IR-05", "CM-02"]
+    },
+    {
+      "id": "T-MD-006",
+      "name": "Data Exfiltration via Encrypted Channels or Covert Channels",
+      "mitigatedBy": ["SC-07", "AC-04", "SI-04", "AU-06"]
+    },
+    {
+      "id": "T-MD-007",
+      "name": "Configuration Drift and Unauthorised System Changes",
+      "mitigatedBy": ["CM-02", "CM-03", "CM-06", "SI-07"]
+    },
+    {
+      "id": "T-MD-008",
+      "name": "Zero-Day Exploitation (Signature Evasion)",
+      "mitigatedBy": ["SI-04", "SI-06", "RA-05", "AU-06"]
+    },
+    {
+      "id": "T-MD-009",
+      "name": "Supply Chain Compromise (Tampered Updates or Backdoored Dependencies)",
+      "mitigatedBy": ["SI-07", "CM-05", "SA-08", "SI-04"]
+    },
+    {
+      "id": "T-MD-010",
+      "name": "Security Control Tampering or Evasion",
+      "mitigatedBy": ["SI-06", "AU-09", "SI-07", "CM-05"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
+    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "important"},
+    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-18", "name": "Wireless Access Restrictions", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-20", "name": "Use Of External Information Systems", "family": "AC", "emphasis": "standard"},
+    {"id": "AT-01", "name": "Security Awareness And Training Policy And Procedures", "family": "AT", "emphasis": "standard"},
+    {"id": "AU-01", "name": "Audit And Accountability Policy And Procedures", "family": "AU", "emphasis": "important"},
+    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-09", "name": "Protection Of Audit Information", "family": "AU", "emphasis": "important"},
+    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "standard"},
+    {"id": "CM-01", "name": "Configuration Management Policy And Procedures", "family": "CM", "emphasis": "standard"},
+    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
+    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
+    {"id": "CM-05", "name": "Access Restrictions For Change", "family": "CM", "emphasis": "important"},
+    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
+    {"id": "CP-10", "name": "Information System Recovery And Reconstitution", "family": "CP", "emphasis": "standard"},
+    {"id": "IR-01", "name": "Incident Response Policy And Procedures", "family": "IR", "emphasis": "important"},
+    {"id": "IR-03", "name": "Incident Response Testing And Exercises", "family": "IR", "emphasis": "important"},
+    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "critical"},
+    {"id": "RA-01", "name": "Risk Assessment Policy And Procedures", "family": "RA", "emphasis": "standard"},
+    {"id": "RA-02", "name": "Security Categorization", "family": "RA", "emphasis": "important"},
+    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
+    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "important"},
+    {"id": "SA-03", "name": "Life Cycle Support", "family": "SA", "emphasis": "standard"},
+    {"id": "SA-06", "name": "Software Usage Restrictions", "family": "SA", "emphasis": "standard"},
+    {"id": "SA-07", "name": "User Installed Software", "family": "SA", "emphasis": "standard"},
+    {"id": "SA-08", "name": "Security Engineering Principles", "family": "SA", "emphasis": "important"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "important"},
+    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
+    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "critical"},
+    {"id": "SI-06", "name": "Security Functionality Verification", "family": "SI", "emphasis": "important"},
+    {"id": "SI-07", "name": "Software And Information Integrity", "family": "SI", "emphasis": "important"}
   ],
   "controlFamilySummary": {
     "AC": 5,

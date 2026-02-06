@@ -2,7 +2,7 @@
 """
 Extract compliance framework mappings from Secure Controls Framework (SCF) spreadsheet.
 Maps NIST 800-53 R5 controls to ISO 27001:2022, ISO 27002:2022, COBIT 2019, CIS v8,
-NIST CSF 2.0, and SOC 2 TSC.
+NIST CSF 2.0, SOC 2 TSC, and PCI DSS v4.0.1.
 """
 
 import json
@@ -53,6 +53,7 @@ def extract_mappings() -> dict:
         'cis_v8': 'CIS\nCSC\n8.1',
         'nist_csf_2': 'NIST\nCSF\n2.0',
         'soc2_tsc': 'AICPA\nTSC 2017:2022 (used for SOC 2)',
+        'pci_dss_v4': 'PCI DSS\n4.0.1',
     }
 
     # Build reverse mapping: NIST control -> other frameworks
@@ -63,6 +64,7 @@ def extract_mappings() -> dict:
         'cis_controls_v8': set(),
         'nist_csf_2': set(),
         'soc2_tsc': set(),
+        'pci_dss_v4': set(),
     })
 
     print(f"Processing {len(df)} SCF controls...")
@@ -81,6 +83,7 @@ def extract_mappings() -> dict:
         cis = parse_control_list(row.get(columns['cis_v8']))
         csf = parse_control_list(row.get(columns['nist_csf_2']))
         soc2 = parse_control_list(row.get(columns['soc2_tsc']))
+        pci = parse_control_list(row.get(columns['pci_dss_v4']))
 
         # Map each NIST control to the other frameworks
         for nist_id in nist_controls:
@@ -96,6 +99,7 @@ def extract_mappings() -> dict:
             mappings[normalized_id]['cis_controls_v8'].update(cis)
             mappings[normalized_id]['nist_csf_2'].update(csf)
             mappings[normalized_id]['soc2_tsc'].update(soc2)
+            mappings[normalized_id]['pci_dss_v4'].update(pci)
 
     # Convert sets to sorted lists
     result = {}
@@ -168,6 +172,7 @@ def main():
             print(f"    CIS v8: {len(m['cis_controls_v8'])} refs")
             print(f"    NIST CSF 2.0: {len(m['nist_csf_2'])} refs")
             print(f"    SOC 2 TSC: {len(m['soc2_tsc'])} refs")
+            print(f"    PCI DSS v4.0.1: {len(m['pci_dss_v4'])} refs")
 
     print("\nUpdating control files...")
     updated, not_found = update_control_files(mappings)
@@ -181,6 +186,7 @@ def main():
     total_cis = sum(len(m['cis_controls_v8']) for m in mappings.values())
     total_csf = sum(len(m['nist_csf_2']) for m in mappings.values())
     total_soc2 = sum(len(m['soc2_tsc']) for m in mappings.values())
+    total_pci = sum(len(m['pci_dss_v4']) for m in mappings.values())
 
     print(f"\nMapping totals:")
     print(f"  ISO 27001:2022: {total_iso27001} references")
@@ -189,6 +195,7 @@ def main():
     print(f"  CIS Controls v8: {total_cis} references")
     print(f"  NIST CSF 2.0: {total_csf} references")
     print(f"  SOC 2 TSC: {total_soc2} references")
+    print(f"  PCI DSS v4.0.1: {total_pci} references")
 
 
 if __name__ == '__main__':

@@ -69,6 +69,7 @@ Transform OSA from a static Joomla site into a modern, AI-powered security archi
 | CIS Controls v8 mappings | 373 | Complete |
 | NIST CSF 2.0 mappings | 692 | Complete |
 | SOC 2 TSC mappings | 1,397 | Complete |
+| PCI DSS v4.0.1 mappings | 1,305 | Complete |
 
 ## Workspace Structure
 

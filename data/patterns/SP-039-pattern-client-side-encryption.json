@@ -1,0 +1,215 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-039",
+  "slug": "pattern-client-side-encryption",
+  "title": "Client-Side Encryption and Data Privacy",
+  "description": "Pattern for implementing client-side encryption to protect sensitive user data before it reaches the server. Covers browser-based cryptography via Web Crypto API, key lifecycle management, data anonymisation for aggregates, and the architectural separation of private encrypted data from shareable plaintext. Maps 30 NIST 800-53 controls with emphasis on cryptographic protection, key management, and privacy engineering.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-039",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Data Protection",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": ["Spinoza", "Vitruvius"],
+    "reviewers": [],
+    "provenance": "Derived from the practical implementation of client-side encryption on opensecurityarchitecture.org, where assessment maturity scores are encrypted with AES-256-GCM in the browser before reaching Cloudflare D1 storage. The server stores only opaque ciphertext it cannot decrypt. This pattern generalises the approach for any application handling sensitive user data -- health records, financial data, personal notes, survey responses -- where the service operator should not have access to the content. Draws on the Signal Protocol's principle that the service provider is a threat actor by default, and on the growing regulatory expectation (GDPR Article 25, DORA) that data protection is built into architecture, not bolted on."
+  },
+  "diagram": {
+    "svg": "/images/sp-039-diagram.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Client-Side Encryption inverts the traditional trust model for web applications. Instead of trusting the server to protect data at rest -- and accepting the risk that a breach, rogue insider, or lawful compulsion exposes everything -- the client encrypts data before it leaves the browser. The server stores ciphertext it cannot read. The user holds the only key.\n\nThe core architecture is straightforward. On first use, the client generates a symmetric encryption key using the Web Crypto API (AES-256-GCM is the standard choice: authenticated encryption providing both confidentiality and integrity). The key is exported as a JWK (JSON Web Key) and stored in the browser's localStorage. All sensitive data is encrypted with this key before any network request. The server receives, stores, and returns opaque ciphertext. The client decrypts on retrieval.\n\nThe encrypted payload follows a versioned format -- for example `enc:v1:{base64-iv}:{base64-ciphertext}` -- enabling the server to detect encrypted vs. legacy plaintext data without being able to read either. Each encryption operation generates a fresh 96-bit IV (Initialisation Vector) from the browser's cryptographic random number generator, ensuring that identical plaintext produces different ciphertext every time.\n\nThe critical architectural decision is what to encrypt and what to leave in plaintext. Not all data should be encrypted. Data needed for server-side operations -- aggregate statistics, search indexes, access control decisions, billing metrics -- must remain readable by the server. The pattern establishes a clean separation: private data (individual scores, notes, personal assessments) is encrypted; aggregate data (anonymous benchmark contributions, usage counts) is transmitted as plaintext in separate API calls under explicit user consent. This dual-path architecture gives users genuine privacy without sacrificing the application's ability to provide value from aggregated data.\n\nKey management is the hardest problem. The user's encryption key exists only in their browser's localStorage. Clearing browser data, switching devices, or losing the device means losing the key -- and with it, access to all encrypted data. This is a feature, not a bug: it means the service operator genuinely cannot recover user data, which is the entire point. But it demands that the application provides key export (download the JWK as a file) and key import (restore from backup file) prominently in the UI. Users must understand that key loss equals data loss, and the application must make backup easy and obvious.\n\nFor applications requiring multi-device access, the pattern extends to key wrapping: the user's data key is encrypted (wrapped) with a key derived from their passphrase using PBKDF2 or Argon2, and the wrapped key is stored on the server. The user enters their passphrase on each device to unwrap the data key. This adds a shared secret (the passphrase) but keeps the data key itself off the server in plaintext.\n\nGDPR Article 25 mandates 'data protection by design and by default'. Client-side encryption is the strongest possible implementation of this principle: the data controller literally cannot access the personal data, making most breach notification scenarios moot for the encrypted content. However, organisations must still document what metadata they can observe (IP addresses, timestamps, payload sizes, access patterns) and apply minimisation principles to that metadata too.",
+    "keyControlAreas": [
+      "Cryptographic Key Lifecycle (SC-12, SC-12(1), SC-13, SC-17): The entire security of client-side encryption rests on the key lifecycle. SC-12 governs key generation: keys must be generated using the Web Crypto API's `generateKey()` with approved algorithms (AES-256-GCM) and the browser's cryptographically secure random number generator -- never from Math.random() or user-derived values without proper key derivation. Key storage in localStorage is acceptable for single-device scenarios but must be documented as a risk: any JavaScript running in the same origin can read localStorage, making XSS the primary threat vector. SC-12(1) addresses key availability: the application must provide key export (JWK download) and key import (JWK upload with validation) to prevent data loss when browsers are cleared or devices are replaced. The export format must include algorithm metadata (`kty: oct`, `alg: A256GCM`) enabling validation on import. SC-13 mandates approved cryptographic algorithms: AES-256-GCM provides authenticated encryption (confidentiality + integrity + authenticity) in a single operation, which is critical because unauthenticated encryption (AES-CBC without HMAC) allows ciphertext manipulation. The 96-bit IV must be generated fresh for every encryption operation using `crypto.getRandomValues()`. SC-17 applies when key wrapping is used for multi-device access: the wrapped key stored server-side should use a key derived from the user's passphrase via an approved KDF (PBKDF2 with >=600,000 iterations or Argon2id), and the wrapping scheme should use AES-KW or AES-GCM.",
+      "Data Flow Separation and Access Enforcement (AC-03, AC-04, AC-21, SC-08, SC-28): The dual-path architecture requires rigorous enforcement of which data flows are encrypted and which are plaintext. AC-03 enforces access rules at the API layer: endpoints that accept encrypted data must store the ciphertext verbatim without parsing; endpoints that accept aggregate plaintext must validate that no personally identifiable information is included. AC-04 controls information flow between the two paths: the client is the enforcement boundary, and the application must never allow encrypted private data to flow into the plaintext aggregate path (or vice versa) without explicit user action. AC-21 governs information sharing decisions: when users choose to contribute data to an aggregate pool (e.g., anonymous benchmarks), the application must clearly explain what is shared, obtain explicit consent, and transmit only the minimum required data in plaintext -- never the encrypted payload. SC-08 protects both paths in transit with TLS, though for the encrypted path, TLS is defence-in-depth since the payload is already encrypted. SC-28 addresses protection at rest: the server stores ciphertext that it cannot decrypt, which is the strongest form of rest protection. However, the server must still protect the ciphertext from deletion, corruption, and unauthorised modification -- integrity even without confidentiality access. Database backups inherit the same protection: they contain ciphertext that is useless without the client-side key.",
+      "Privacy Engineering and Data Minimisation (PT-02, PT-03, PT-04, PM-25, SA-08): Client-side encryption is a privacy engineering pattern that must be situated within the organisation's broader privacy programme. PT-02 establishes the authority to process PII: with client-side encryption, the server processes encrypted PII that it cannot read, but it still processes metadata (timestamps, IP addresses, payload sizes, access frequency) that may constitute personal data under GDPR. PT-03 defines processing purposes: encrypted assessment data is processed solely for user self-service; plaintext benchmark data is processed for anonymous aggregation. These purposes must be documented and enforced. PT-04 governs consent: users must provide informed consent before any plaintext data leaves the client, with clear explanation of what the server can and cannot see. The privacy notice must distinguish between encrypted data (server stores but cannot read) and metadata (server can observe). PM-25 mandates PII minimisation: the aggregate data path must strip all identifying information before transmission -- only numeric scores, never names, notes, or organisational identifiers. SA-08 applies privacy by design principles: client-side encryption should be the default for all sensitive data (not opt-in), the key should be generated transparently, and the encryption should be invisible to the user experience while being documented for transparency.",
+      "Legacy Migration and Version Management (CM-03, CM-06, SA-10, SI-07): Introducing client-side encryption to an existing application with plaintext data requires careful migration. CM-03 governs change control: the migration from plaintext to encrypted storage is a high-impact change that must preserve backward compatibility. The versioned ciphertext format (`enc:v1:` prefix) enables the application to distinguish encrypted from legacy plaintext data and handle both correctly -- old data works as before and gets encrypted on next save. CM-06 defines configuration for the encryption scheme: algorithm (AES-256-GCM), IV length (96 bits), key size (256 bits), encoding (base64), and format version. These must be consistent across all clients and documented for interoperability. SA-10 requires configuration management of the client-side cryptographic code: the encryption/decryption module must be versioned, tested, and reviewed with the same rigour as server-side security code, despite running in the browser. SI-07 verifies the integrity of the cryptographic code delivered to the browser: if an attacker can modify the JavaScript (via compromised CDN, XSS, or supply chain attack), they can exfiltrate keys or bypass encryption entirely. Subresource Integrity (SRI) hashes, Content Security Policy (CSP), and minimising third-party script dependencies are essential mitigations.",
+      "Audit, Compliance, and Incident Response (AU-02, AU-03, AU-06, IR-04, IR-06): Client-side encryption creates a unique audit and compliance posture. AU-02 defines auditable events: key generation (timestamp, algorithm, browser fingerprint), encryption operations (count, not content), key export events, key import events, decryption failures (potential indicator of key mismatch or data corruption), and plaintext data sharing events (benchmark contributions). Note that the server cannot log the content of encrypted data by design. AU-03 specifies record content: audit records must include the operation type, timestamp, data version (enc:v1), payload size, and user identifier -- but never the plaintext content or the encryption key. AU-06 analyses encryption-specific anomalies: repeated decryption failures may indicate key corruption or a tampered ciphertext; a sudden switch from encrypted to plaintext payloads may indicate a bypassed client; unusually large payloads may indicate data exfiltration attempts. IR-04 addresses incident response: a server breach is significantly less impactful because the attacker obtains only ciphertext, but the incident response plan must still address metadata exposure, potential ciphertext manipulation, and the possibility that the attacker modified the JavaScript to capture future keys. IR-06 requires disclosure: even though encrypted data is unreadable, regulators may still require breach notification for the metadata exposure, depending on jurisdiction.",
+      "Browser Security and Client Integrity (SC-07, SI-07, SC-23, AT-02): The browser is the trust boundary, and its integrity determines the encryption's effectiveness. SC-07 defines the boundary: the application's origin (scheme + host + port) is the security perimeter within which the encryption key is accessible. Any JavaScript executing within this origin -- including injected scripts from XSS, compromised dependencies, or browser extensions -- can access localStorage and therefore the encryption key. SI-07 protects the integrity of the cryptographic code: Content Security Policy headers must restrict script sources to the application's own origin and trusted CDNs with SRI hashes; inline scripts must be eliminated or nonced; eval() must be forbidden. Third-party analytics, advertising, and chat widgets are particularly dangerous because they execute arbitrary code within the application's origin. SC-23 ensures session authenticity: the encryption key is scoped to the browser session via localStorage, and the application must never transmit the key to the server (not in headers, not in request bodies, not in error reports). AT-02 covers user awareness: users must understand that their encryption key is stored locally, that clearing browser data deletes it, that export is their responsibility, and that the service cannot recover their data. This is a fundamental shift from the 'forgot password' mental model and must be communicated clearly and repeatedly."
+    ],
+    "assumptions": "The target application runs in modern browsers that support the Web Crypto API (all major browsers since 2015: Chrome 37+, Firefox 34+, Safari 11+, Edge 12+). The data being encrypted is structured (JSON, form data) and can be serialised to a string before encryption. The server can store and return opaque string values without parsing them. Users have a single primary device or are willing to manually transfer their encryption key to additional devices. The application does not require server-side search or computation on encrypted data (if it does, techniques like homomorphic encryption or secure enclaves are needed -- see Contra-indications). The application's origin is protected by HTTPS and a strong Content Security Policy.",
+    "typicalChallenges": "The dominant challenge is key management UX. Users accustomed to 'forgot password' flows do not expect that losing their browser data means permanent data loss. The application must make key backup prominent, explain it clearly, and accept that some users will still lose their keys. Multi-device access is the second challenge: without key wrapping via a passphrase (which adds complexity and a shared secret), users must manually export and import their key file on each device. This is acceptable for low-frequency-of-change applications (assessments, configurations) but impractical for real-time collaborative tools. Server-side operations on encrypted data are impossible: you cannot search, sort, filter, or compute aggregates on ciphertext without additional cryptographic techniques (searchable encryption, homomorphic encryption) that add significant complexity and performance overhead. The current pattern uses the clean separation approach instead: anything the server needs to compute on is kept in plaintext (with user consent) or computed client-side. XSS remains the critical vulnerability: because the encryption key is in localStorage accessible to any script in the origin, a single XSS vulnerability defeats the entire encryption scheme. This makes CSP, SRI, and minimal third-party dependencies essential -- not optional. Performance is generally not a concern: AES-256-GCM via Web Crypto API processes megabytes per second even on mobile devices; the encryption/decryption overhead is invisible compared to network latency.",
+    "indications": "This pattern is indicated for any application that handles sensitive user data where the service operator should not -- or does not need to -- read the data. Specific indicators include: applications storing personal health information (patient journals, symptom trackers), financial data (personal budgets, portfolio analysis), security assessments (maturity scores, vulnerability data), personal notes and diaries, survey responses containing opinions or whistleblower reports, legal case notes, and any application where a data breach should not expose user content. It is particularly valuable for small teams and startups that cannot afford dedicated security operations: by making the data unreadable on the server, you eliminate the most damaging breach scenario even if your server security is imperfect. The pattern is also indicated when regulatory compliance (GDPR Article 25, HIPAA, DORA) requires demonstrable data protection by design, and when users or their organisations (CISOs, DPOs) require assurance that the service cannot access their data.",
+    "contraIndications": "Applications requiring server-side search, sorting, or filtering of encrypted data cannot use this pattern without additional cryptographic techniques (searchable encryption, order-preserving encryption) that significantly increase complexity and may weaken the security model. Real-time collaborative applications where multiple users need simultaneous access to the same encrypted data require a shared key distribution mechanism (e.g., group key management, key escrow via a trusted server component) that partially undermines the 'server cannot read data' guarantee. Applications where the service must perform computations on user data (recommendation engines, ML model training on user content, server-generated reports) need the data in plaintext on the server and should use traditional server-side encryption at rest instead. Applications targeting users who cannot manage a key file (elderly users, children, users with cognitive disabilities) may find the key loss risk unacceptable -- though passphrase-based key wrapping can mitigate this. If the threat model includes a compromised browser or malicious browser extensions, client-side encryption provides no protection because the attacker has access to the key and plaintext before encryption.",
+    "threatResistance": "Client-Side Encryption provides strong protection against the most common and damaging data breach scenarios. Server-side data breach is neutralised for encrypted content: attackers who compromise the database, backups, or server infrastructure obtain only ciphertext that is computationally infeasible to decrypt without the user's key (SC-12, SC-13, SC-28). Rogue insider access is eliminated: database administrators, support engineers, and system operators cannot read encrypted user data even with full database access (AC-03, AC-04). Lawful interception and compelled disclosure is limited: the service operator genuinely cannot produce plaintext in response to a subpoena or government request for encrypted data -- they can only produce the ciphertext (note: this may create legal complications in some jurisdictions). Man-in-the-middle attacks on the encrypted payload are defeated: even if TLS were compromised, the AES-GCM authenticated ciphertext cannot be read or tampered with without the key (SC-08, SC-13). Cloud provider access is prevented: the hosting provider (Cloudflare, AWS, Azure) stores only ciphertext and cannot access user content (SC-28). The primary residual risks are: XSS attacks that exfiltrate the key from localStorage (mitigated by CSP and SRI per SI-07); compromised JavaScript delivery that replaces the encryption code (mitigated by SRI and supply chain security per SA-10); and metadata exposure (timestamps, payload sizes, access patterns) that may reveal information about the user even without decrypting the content (mitigated by minimisation per PM-25)."
+  },
+  "examples": {
+    "Security Maturity Assessment Platform": [
+      "Generate AES-256-GCM key via Web Crypto API on first assessment; store JWK in localStorage",
+      "Encrypt all maturity scores and notes before PUT to server; server stores `enc:v1:{iv}:{ct}` verbatim",
+      "Decrypt on load: detect `enc:v1:` prefix, extract IV and ciphertext, decrypt via Web Crypto, render scores",
+      "Benchmark contribution path: user explicitly shares numeric-only scores (no notes, no identity) as plaintext in separate POST",
+      "Key backup panel on dashboard: Export downloads JWK file, Import validates kty/alg before replacing stored key"
+    ],
+    "Personal Health Journal": [
+      "Patient generates encryption key on registration; key stored in browser, never transmitted to server",
+      "Symptom entries, mood logs, and medication notes encrypted client-side before sync",
+      "Healthcare provider access via key sharing: patient exports key and provides to clinician directly (out-of-band)",
+      "Aggregate anonymised data (symptom frequency by age group) contributed with informed consent as plaintext",
+      "Multi-device access via passphrase-wrapped key: PBKDF2 derives wrapping key, AES-KW wraps data key, server stores wrapped key"
+    ],
+    "Whistleblower Reporting Platform": [
+      "Zero-knowledge architecture: report content encrypted with organisation's public key (asymmetric); reporter has no key to lose",
+      "Only designated compliance officers hold the private decryption key, stored on hardware security module",
+      "Server stores encrypted reports, metadata is minimised to timestamp and category only",
+      "Reporter identity never stored; authentication via anonymous token if follow-up is needed",
+      "Audit log records access to encrypted reports (who decrypted, when) without logging content"
+    ],
+    "Enterprise Survey and Feedback Tool": [
+      "Survey responses encrypted with per-respondent key derived from employee ID + survey-specific salt via PBKDF2",
+      "HR analytics receive only aggregate plaintext statistics (mean scores, distribution) computed client-side before submission",
+      "Individual responses recoverable only by the respondent from their own browser or exported key",
+      "Manager view shows anonymised team aggregates; cannot drill down to individual encrypted responses",
+      "Offboarding: encrypted responses remain in database but are irrecoverable after employee key is deleted"
+    ]
+  },
+  "references": [
+    {
+      "title": "W3C Web Crypto API Specification",
+      "url": "https://www.w3.org/TR/WebCryptoAPI/",
+      "note": "The W3C specification for browser-based cryptography. Defines the crypto.subtle interface for key generation, encryption, decryption, signing, and key import/export. The foundation for all client-side encryption implementations."
+    },
+    {
+      "title": "NIST SP 800-38D: Recommendation for GCM Mode",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-38d/final",
+      "note": "NIST specification for Galois/Counter Mode (GCM), the authenticated encryption mode used in AES-GCM. Covers IV requirements, tag length, and security properties."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. SC (System and Communications Protection) and PT (PII Processing and Transparency) families are primary."
+    },
+    {
+      "title": "GDPR Article 25: Data Protection by Design and by Default",
+      "url": "https://gdpr-info.eu/art-25-gdpr/",
+      "note": "EU regulation mandating that data protection is built into processing activities from the design stage. Client-side encryption is the strongest architectural implementation of this requirement."
+    },
+    {
+      "title": "Signal Protocol: Technical Documentation",
+      "url": "https://signal.org/docs/",
+      "note": "Signal pioneered the principle that the service operator should be unable to read user messages. While Signal uses a more complex protocol (Double Ratchet for end-to-end messaging), the trust model is the same: the server is an untrusted relay."
+    },
+    {
+      "title": "OWASP: Cryptographic Storage Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html",
+      "note": "OWASP guidance on implementing cryptographic storage correctly. Covers algorithm selection, key management, and common implementation mistakes."
+    },
+    {
+      "title": "OSA Blog: Client-Side Encryption — Protecting User Data You Never See",
+      "url": "https://www.opensecurityarchitecture.org/blog/client-side-encryption-protecting-user-data-you-never-see",
+      "note": "The practical implementation story behind this pattern, documenting how OSA implemented AES-256-GCM client-side encryption for security maturity assessments."
+    }
+  ],
+  "relatedPatterns": ["SP-013", "SP-032", "SP-033", "SP-029"],
+  "relatedPatternNames": ["Data Security", "Modern Authentication", "Passkey Authentication", "Zero Trust Architecture"],
+  "threats": [
+    {
+      "id": "T-CE-001",
+      "name": "Server-side data breach exposing user data at rest",
+      "mitigatedBy": ["SC-12", "SC-13", "SC-28"]
+    },
+    {
+      "id": "T-CE-002",
+      "name": "Rogue insider with database access reading sensitive records",
+      "mitigatedBy": ["AC-03", "AC-04", "SC-28", "AU-02"]
+    },
+    {
+      "id": "T-CE-003",
+      "name": "Cross-site scripting (XSS) exfiltrating encryption key from localStorage",
+      "mitigatedBy": ["SI-07", "SC-07", "SC-23"]
+    },
+    {
+      "id": "T-CE-004",
+      "name": "Compromised JavaScript delivery replacing encryption code",
+      "mitigatedBy": ["SI-07", "SA-10", "SC-08"]
+    },
+    {
+      "id": "T-CE-005",
+      "name": "Key loss from browser data clearing or device loss",
+      "mitigatedBy": ["SC-12", "CP-09", "AT-02"]
+    },
+    {
+      "id": "T-CE-006",
+      "name": "Metadata analysis inferring sensitive information from access patterns",
+      "mitigatedBy": ["PM-25", "PT-02", "AU-03"]
+    },
+    {
+      "id": "T-CE-007",
+      "name": "Man-in-the-middle intercepting encrypted payload in transit",
+      "mitigatedBy": ["SC-08", "SC-13", "SC-23"]
+    },
+    {
+      "id": "T-CE-008",
+      "name": "Lawful compulsion or government demand for user data",
+      "mitigatedBy": ["SC-12", "SC-13", "SC-28", "PT-02"]
+    },
+    {
+      "id": "T-CE-009",
+      "name": "Cloud provider or hosting infrastructure accessing stored data",
+      "mitigatedBy": ["SC-28", "SC-12", "AC-03"]
+    },
+    {
+      "id": "T-CE-010",
+      "name": "Ciphertext manipulation or corruption altering encrypted records",
+      "mitigatedBy": ["SC-13", "SI-07", "AU-06"]
+    },
+    {
+      "id": "T-CE-011",
+      "name": "Weak key derivation from user passphrase in multi-device scenarios",
+      "mitigatedBy": ["SC-12", "SC-13", "IA-05"]
+    },
+    {
+      "id": "T-CE-012",
+      "name": "Supply chain attack injecting malicious code into cryptographic dependencies",
+      "mitigatedBy": ["SA-10", "SI-07", "SR-03"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "important"},
+    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-21", "name": "Information Sharing", "family": "AC", "emphasis": "important"},
+    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important"},
+    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
+    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "standard"},
+    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "standard"},
+    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "standard"},
+    {"id": "CP-09", "name": "System Backup", "family": "CP", "emphasis": "important"},
+    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "standard"},
+    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "standard"},
+    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
+    {"id": "PM-25", "name": "Minimization of Personally Identifiable Information Used in Testing, Training, and Research", "family": "PM", "emphasis": "important"},
+    {"id": "PT-02", "name": "Authority to Process Personally Identifiable Information", "family": "PT", "emphasis": "important"},
+    {"id": "PT-03", "name": "Personally Identifiable Information Processing Purposes", "family": "PT", "emphasis": "important"},
+    {"id": "PT-04", "name": "Consent", "family": "PT", "emphasis": "critical"},
+    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "critical"},
+    {"id": "SA-10", "name": "Developer Configuration Management", "family": "SA", "emphasis": "important"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "important"},
+    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-13", "name": "Cryptographic Protection", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-17", "name": "Public Key Infrastructure Certificates", "family": "SC", "emphasis": "standard"},
+    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "important"},
+    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "critical"},
+    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "critical"},
+    {"id": "SR-03", "name": "Supply Chain Controls and Processes", "family": "SR", "emphasis": "important"}
+  ],
+  "controlFamilySummary": {
+    "AC": 3,
+    "AT": 1,
+    "AU": 3,
+    "CM": 2,
+    "CP": 1,
+    "IA": 1,
+    "IR": 2,
+    "PM": 1,
+    "PT": 3,
+    "SA": 2,
+    "SC": 6,
+    "SI": 1,
+    "SR": 1
+  }
+}

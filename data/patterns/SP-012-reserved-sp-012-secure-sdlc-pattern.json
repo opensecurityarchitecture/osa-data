@@ -1,33 +1,199 @@
 {
+  "$schema": "../schema/pattern.schema.json",
   "id": "SP-012",
-  "slug": "reserved-sp-012-secure-sdlc-pattern",
-  "joomla_id": 287,
-  "title": "Secure SDLC Pattern  (RESERVED for development)",
-  "description": "OpenSecurityArchitecture (OSA) distills the know-how of the security architecture community and provides readily usable patterns for your application. This is a free framework, developed and owned by the community.",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/287-reserved-sp-012-secure-sdlc-pattern",
+  "slug": "pattern-secure-sdlc",
+  "title": "Secure Software Development Lifecycle",
+  "description": "End-to-end secure SDLC pattern covering threat modelling in design, secure coding standards, static and dynamic analysis, software composition analysis, security testing gates, vulnerability management, and secure release processes. Focuses on embedding security into the development process rather than bolting it on afterwards, with practical guidance for development teams, security champions, and AppSec functions. Maps 34 NIST 800-53 controls across the full development lifecycle.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-012",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
-    "status": "reserved",
+    "release": "26.02",
+    "classification": "Application Security",
+    "status": "draft",
     "type": "pattern",
-    "datePublished": "2010-07-31",
-    "dateModified": "2025-07-05",
-    "authors": [
-      "Russell"
-    ],
-    "reviewers": []
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": ["Aurelius", "Vitruvius"],
+    "reviewers": [],
+    "provenance": "Derived from building application security programmes at financial market infrastructure where software directly processes trades, manages risk positions, and settles transactions worth billions daily. Informed by implementing secure SDLC across development teams ranging from 20 to 200+ engineers, establishing security champion programmes, and learning that the only security controls that survive contact with delivery pressure are the ones embedded in the pipeline itself."
+  },
+  "diagram": {
+    "svg": "/images/sp-012-diagram.svg",
+    "png": ""
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "",
-    "typicalChallenges": "",
-    "indications": "",
-    "contraIndications": "",
-    "threatResistance": ""
+    "description": "The Secure Software Development Lifecycle (SSDL) integrates security activities into every phase of software development, from requirements through design, implementation, testing, release, and maintenance. Its purpose is to identify and remediate security weaknesses as early as possible, where the cost of fixing them is lowest and the risk of shipping them to production is eliminated.\n\nThe economics of secure development are compelling but widely misunderstood. Fixing a vulnerability found in design costs a fraction of fixing the same vulnerability found in production. Yet most organisations still rely on penetration testing -- the last and most expensive phase -- as their primary security assurance mechanism. A mature SSDL shifts the majority of security activity left, into the phases where developers are already working, making security a natural part of development rather than an adversarial gate at the end.\n\nThe SSDL has six phases. Requirements and Design establishes security requirements derived from data classification, regulatory obligations, and threat context, then uses threat modelling to identify architectural weaknesses before any code is written. Implementation applies secure coding standards and uses IDE-integrated tools to catch vulnerabilities as developers type. Verification employs automated analysis -- static analysis (SAST), dynamic analysis (DAST), software composition analysis (SCA), and secrets scanning -- integrated into CI/CD pipelines so that insecure code cannot merge. Testing includes security-specific testing: abuse cases, authentication bypass attempts, injection testing, and authorization boundary validation. Release applies final security gates: compliance checks, vulnerability thresholds, licence compliance for dependencies, and sign-off from the security function. Maintenance covers vulnerability management for deployed software: patching, dependency updates, and responding to newly discovered vulnerabilities in components.\n\nTwo organisational models make SSDL work. The centralised model has a dedicated AppSec team that performs threat models, code reviews, and penetration tests -- this scales to about one AppSec engineer per 10-15 developers before becoming a bottleneck. The distributed model uses security champions embedded in development teams, supported by a smaller central AppSec team that provides tooling, training, and escalation -- this scales much further and builds security culture. Most mature organisations use a hybrid: security champions for day-to-day, central AppSec for high-risk reviews and tooling.\n\nThe relationship between SP-012 (Secure SDLC) and SP-028 (Secure DevOps Pipeline) is complementary: SP-028 focuses on the toolchain and automation, SP-012 focuses on the human process, governance, and security activities that the toolchain supports. Together they provide comprehensive coverage of modern software delivery security.",
+    "keyControlAreas": [
+      "Threat Modelling and Secure Design (SA-08, SA-11, SA-15, PL-08, RA-03): Security by design starts before code. SA-08 establishes security and privacy engineering principles: defence in depth, least privilege, fail-secure defaults, separation of duties, and minimising attack surface. These principles guide architectural decisions and provide the criteria against which designs are evaluated. SA-11 mandates developer testing and evaluation including security testing: threat modelling during design reviews using STRIDE, attack trees, or equivalent methodologies to identify threats at the architectural level. SA-15 defines the development process standards: when threat models must be produced (new services, major changes, new data flows), who participates (developer, architect, security champion), and what the outputs are (threat register, mitigations mapped to controls). PL-08 establishes the security architecture: reference architectures for common patterns (web application, API service, event-driven, microservices) that embed security controls by default. RA-03 performs risk assessment at the design phase: data classification determines security requirements, regulatory context determines compliance controls, and threat context determines the depth of security review required.",
+      "Secure Coding Standards and Developer Training (SA-08, SA-11, AT-03, SA-16, CM-04): Developers are the first line of defence. SA-08 defines secure coding standards: language-specific guidelines (OWASP Secure Coding Practices, SEI CERT standards) covering input validation, output encoding, authentication, session management, access control, cryptography, error handling, and logging. SA-11 requires that developers test their own code for security: unit tests that cover security-relevant behaviour (authentication bypass, authorization boundary, input validation edge cases), not just functional requirements. AT-03 provides role-based security training: annual secure coding training for all developers, advanced training for security champions, and just-in-time training triggered by common vulnerability findings in code reviews. SA-16 provides developer security resources: internal secure coding guidelines, approved cryptographic libraries, authentication/authorization frameworks, and reusable security components that make the secure way the easy way. CM-04 analyses security impact of changes: security-relevant code changes (authentication, authorization, cryptography, input handling) require review by a security champion or AppSec engineer before merge.",
+      "Static Analysis and Code Review (SA-11, CM-04, SA-15, RA-05, SI-10): Automated analysis catches what humans miss. SA-11 mandates static application security testing (SAST): tools integrated into CI/CD that scan source code for vulnerability patterns -- injection flaws, XSS, insecure deserialization, hardcoded credentials, and cryptographic misuse. SAST runs on every pull request, blocking merge when high-severity findings are confirmed. CM-04 requires security review of changes: pull request reviews include security considerations, and changes to security-sensitive code paths trigger mandatory review by a security champion. SA-15 defines SAST tool configuration: rule sets tuned to reduce false positives (the fastest way to make developers ignore security tooling), custom rules for organisation-specific patterns, and severity thresholds that distinguish blocking findings from advisory findings. RA-05 scans for vulnerabilities: SAST is one input to vulnerability management, with findings tracked, triaged, and remediated within defined SLAs. SI-10 validates information input: static analysis rules specifically targeting input validation weaknesses, ensuring that all external input is validated before use.",
+      "Software Composition Analysis and Supply Chain (SA-11, SR-03, SR-04, SA-04, RA-05): Most code in modern applications is third-party. SA-11 includes software composition analysis (SCA): tools that scan dependency manifests (package.json, requirements.txt, pom.xml, go.mod) to identify known vulnerabilities in third-party libraries. SR-03 establishes supply chain controls: approved package registries, dependency pinning, integrity verification (checksums, signatures), and policies for acceptable licence types. SR-04 provides supply chain provenance: tracking where dependencies come from, verifying publisher identity, and monitoring for dependency confusion or typosquatting attacks. SA-04 governs the acquisition process: security requirements for third-party components including vulnerability disclosure policies, patch SLAs, and end-of-life commitments. RA-05 monitors for new vulnerabilities: SCA runs continuously (not just at build time) to detect newly disclosed CVEs in deployed dependencies, triggering patching workflows for critical findings. Secrets scanning is a related capability: detecting API keys, passwords, and tokens accidentally committed to source repositories, with pre-commit hooks as the first line and CI scanning as the backstop.",
+      "Dynamic Analysis and Security Testing (SA-11, CA-08, RA-05, SI-06, SC-07): Test the running application. SA-11 mandates dynamic application security testing (DAST): automated scanning of deployed applications to identify runtime vulnerabilities -- injection points, authentication weaknesses, insecure headers, TLS configuration issues, and information disclosure. DAST runs against staging environments as part of the release pipeline. CA-08 conducts penetration testing: manual security testing for high-risk applications, performed by internal AppSec engineers or external specialists, targeting business logic flaws and complex attack chains that automated tools miss. RA-05 integrates dynamic findings into vulnerability management: DAST and penetration test findings are tracked alongside SAST and SCA findings with consistent severity classification and SLAs. SI-06 verifies functional security: testing that security controls work as designed -- authentication cannot be bypassed, authorization boundaries hold, rate limiting functions, and audit logging captures all security-relevant events. SC-07 tests boundary protection: verifying that network-level security controls (WAF rules, API gateway policies, CORS configuration) function correctly in the deployed environment.",
+      "Security Gates and Release Management (SA-11, CM-02, CM-03, SA-15, CA-02): Nothing ships without passing security checks. SA-11 defines security gate criteria for release: maximum acceptable vulnerability counts by severity (zero critical, limited high, tracked medium), SCA licence compliance, secrets scanning clean, and DAST baseline pass. CM-02 establishes secure baseline configurations for deployment: hardened container images, secure default configurations, and infrastructure-as-code templates that embed security controls. CM-03 governs configuration change control: release processes that include security sign-off for changes affecting security posture, with change classification determining the level of review required. SA-15 defines the development process security requirements: what evidence must be produced at each phase (threat model, SAST results, SCA report, DAST results, penetration test report) to demonstrate due diligence. CA-02 assesses control effectiveness: regular evaluation of whether security gates are functioning (are findings being detected, are they being remediated, are SLAs being met) with metrics reported to security governance.",
+      "Vulnerability Management and Maintenance (RA-05, SI-02, SA-11, CM-04, IR-06): Security doesn't stop at release. RA-05 mandates ongoing vulnerability monitoring: continuous scanning of deployed applications and their dependencies for newly discovered vulnerabilities, with automated alerting and triage workflows. SI-02 governs flaw remediation: defined SLAs for patching based on severity (critical: 24-48 hours, high: 7 days, medium: 30 days, low: 90 days), with exception processes for cases where immediate patching isn't feasible. SA-11 extends to maintenance: regression testing after patches to confirm fixes and ensure no new vulnerabilities are introduced. CM-04 analyses security impact of patches: ensuring that security patches don't break functionality and that dependency updates don't introduce new vulnerabilities. IR-06 covers vulnerability disclosure: processes for receiving vulnerability reports from external researchers, triaging them, coordinating fixes, and issuing advisories. Bug bounty programmes complement automated scanning by incentivising external researchers to find vulnerabilities that tools miss."
+    ],
+    "assumptions": "The organisation develops software (in-house or through contracted development). A CI/CD pipeline exists or is being established (see SP-028). Development teams use version control (Git). Some security awareness exists within the development organisation. Management supports the investment in security tooling and the acceptance of security gates that may slow delivery. Budget exists for SAST/DAST/SCA tooling (commercial or open-source).",
+    "typicalChallenges": "The greatest challenge is developer adoption: security tools that generate excessive false positives are quickly ignored, and security gates that block delivery without clear justification are circumvented. Tool tuning is essential -- invest time in configuring SAST rules, suppressing known false positives, and establishing severity thresholds that developers trust. Security champions are hard to recruit and retain: the role requires security interest plus development credibility, and champions often burn out if they become the sole security contact for their team. Threat modelling adoption is inconsistent: teams understand the value but struggle to find time during sprint planning, leading to threat models that are either skipped or produced as compliance artefacts rather than genuine design exercises. Legacy applications present the biggest gap: applying modern SSDL to new development is relatively straightforward, but retrofitting security into legacy codebases generates overwhelming finding volumes that paralyse remediation. Dependency management is a constant battle: modern applications have hundreds of transitive dependencies, vulnerability alerts arrive daily, and patching one dependency often breaks another. Measuring SSDL effectiveness is difficult: fewer production vulnerabilities could mean the process is working or that nobody is looking hard enough.",
+    "indications": "This pattern applies to every organisation that develops or commissions software. It is particularly critical for: organisations developing internet-facing applications, SaaS providers processing customer data, financial services firms subject to DORA's ICT risk management requirements, organisations subject to PCI DSS requirement 6 (develop and maintain secure systems), healthcare organisations developing systems that process patient data, organisations with regulatory obligations around software security (FCA, SEC, PRA), any organisation that has experienced a security incident caused by a software vulnerability, and organisations adopting DevOps or CI/CD who want to embed security from the start rather than retrofit it.",
+    "contraIndications": "Organisations that exclusively use SaaS products and do no custom development do not need a full SSDL -- but they should still assess the SSDL practices of their SaaS vendors (see SA-04). Very small development teams (1-3 developers) should prioritise automated tooling (SAST, SCA, secrets scanning) over process-heavy approaches like formal threat modelling -- a lightweight security checklist at design time may suffice. Organisations should not attempt to implement all SSDL practices simultaneously: start with the highest-value automated checks (SCA for known CVEs, secrets scanning, basic SAST) and mature incrementally.",
+    "threatResistance": "Secure SDLC prevents vulnerabilities from reaching production. Injection attacks (SQL, command, LDAP, XSS) are caught by SAST rules that detect unsanitised input flowing to dangerous sinks, and by DAST scans that probe for injection points in running applications (SA-11, SI-10). Known vulnerable dependencies are detected by SCA before deployment and monitored continuously post-deployment, preventing exploitation of published CVEs (SR-03, RA-05). Insecure authentication and session management flaws are identified through threat modelling (design phase), secure coding standards (implementation phase), and security testing (verification phase), providing multiple layers of defence (SA-08, SA-11). Supply chain attacks through compromised dependencies are mitigated by dependency pinning, integrity verification, and SCA monitoring that detects unexpected changes in package behaviour (SR-03, SR-04). Hardcoded credentials and secrets in source code are caught by pre-commit hooks and CI scanning before they reach the repository, preventing credential exposure through repository leaks (SA-11, IA-05). Business logic vulnerabilities -- the category that automated tools miss -- are addressed through threat modelling that identifies abuse cases and penetration testing that targets complex attack chains (SA-11, CA-08)."
   },
-  "references": [],
-  "controls": [],
-  "controlFamilySummary": {},
-  "$schema": "../schema/pattern.schema.json"
+  "examples": {
+    "Threat Modelling": [
+      "Conduct STRIDE threat model for new payment processing service: identify 12 threats across 4 trust boundaries, map to NIST controls, track mitigations in Jira",
+      "Establish lightweight threat modelling template: 30-minute session during sprint planning for any story touching authentication, authorization, or data handling",
+      "Train 15 security champions to facilitate threat modelling sessions independently, reducing central AppSec bottleneck",
+      "Integrate threat model outputs with CI/CD: custom SAST rules derived from identified threat scenarios"
+    ],
+    "Pipeline Security Gates": [
+      "Configure SAST (Semgrep/SonarQube) on all repositories: block PR merge on critical/high findings, advisory on medium",
+      "Deploy SCA (Snyk/Dependabot): automated PRs for vulnerable dependencies, block release for critical CVEs with known exploits",
+      "Implement secrets scanning (TruffleHog/GitLeaks): pre-commit hook plus CI backstop, immediate rotation workflow for detected secrets",
+      "Establish security gate dashboard: percentage of repos with SAST enabled, mean-time-to-remediate by severity, false positive rate trend"
+    ],
+    "Security Champion Programme": [
+      "Recruit one security champion per development team (12 champions across 80 developers): 10% time allocation, quarterly training",
+      "Champions conduct first-pass code reviews for security-sensitive changes, escalate complex issues to central AppSec",
+      "Monthly champion community of practice: share findings, discuss new vulnerability classes, review tool effectiveness",
+      "Champion-led security office hours: developers drop in with security questions, reducing AppSec team ticket volume by 40%"
+    ],
+    "Vulnerability Management": [
+      "Define SLAs: Critical 48h, High 7d, Medium 30d, Low 90d. Track compliance weekly, report to engineering leadership monthly",
+      "Implement automated dependency updates: Dependabot/Renovate PRs, auto-merge for patch versions with passing tests, manual review for major versions",
+      "Establish bug bounty programme (HackerOne/Bugcrowd): defined scope, responsive triage, 48-hour first response SLA, remediation within standard SLAs",
+      "Quarterly vulnerability trend report: new findings by source (SAST/DAST/SCA/pentest), mean-time-to-remediate trend, top recurring vulnerability classes"
+    ]
+  },
+  "references": [
+    {
+      "title": "OWASP Software Assurance Maturity Model (SAMM)",
+      "url": "https://owaspsamm.org/",
+      "note": "Maturity model for secure software development. Provides assessment criteria across governance, design, implementation, verification, and operations domains."
+    },
+    {
+      "title": "NIST SP 800-218: Secure Software Development Framework (SSDF)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-218/final",
+      "note": "NIST's secure software development framework defining practices for producing secure software. Aligns with Executive Order 14028 requirements."
+    },
+    {
+      "title": "OWASP Top 10",
+      "url": "https://owasp.org/www-project-top-ten/",
+      "note": "The industry-standard awareness document for web application security. Defines the most critical security risks that SSDL practices should address."
+    },
+    {
+      "title": "OWASP Application Security Verification Standard (ASVS)",
+      "url": "https://owasp.org/www-project-application-security-verification-standard/",
+      "note": "Comprehensive application security requirements and testing guide. Three verification levels provide graduated security assurance."
+    },
+    {
+      "title": "Microsoft Security Development Lifecycle (SDL)",
+      "url": "https://www.microsoft.com/en-us/securityengineering/sdl/",
+      "note": "Microsoft's long-established SDL practices. Pioneered many concepts now considered standard in secure development."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. System and Services Acquisition (SA) family is primary."
+    },
+    {
+      "title": "CISA: Software Bill of Materials (SBOM)",
+      "url": "https://www.cisa.gov/sbom",
+      "note": "CISA guidance on Software Bill of Materials. SBOMs provide transparency into software composition, enabling effective SCA and supply chain risk management."
+    }
+  ],
+  "relatedPatterns": ["SP-008", "SP-028", "SP-030", "SP-035"],
+  "relatedPatternNames": ["Public Web Server Pattern", "Secure DevOps Pipeline", "API Security", "Offensive Security Testing"],
+  "threats": [
+    {
+      "id": "T-SDLC-001",
+      "name": "Injection vulnerabilities (SQL, command, XSS) shipped to production",
+      "mitigatedBy": ["SA-11", "SI-10", "SA-08", "AT-03"]
+    },
+    {
+      "id": "T-SDLC-002",
+      "name": "Known vulnerable third-party dependencies deployed in production",
+      "mitigatedBy": ["SR-03", "RA-05", "SA-04", "SR-04"]
+    },
+    {
+      "id": "T-SDLC-003",
+      "name": "Hardcoded credentials or secrets committed to source repositories",
+      "mitigatedBy": ["SA-11", "IA-05", "SA-15", "CM-04"]
+    },
+    {
+      "id": "T-SDLC-004",
+      "name": "Insecure authentication or session management enabling account takeover",
+      "mitigatedBy": ["SA-08", "SA-11", "CA-08", "SC-07"]
+    },
+    {
+      "id": "T-SDLC-005",
+      "name": "Supply chain compromise through malicious dependency injection",
+      "mitigatedBy": ["SR-03", "SR-04", "SA-04", "SA-11"]
+    },
+    {
+      "id": "T-SDLC-006",
+      "name": "Business logic flaws missed by automated tools enabling fraud or data exposure",
+      "mitigatedBy": ["SA-11", "CA-08", "SA-08", "RA-03"]
+    },
+    {
+      "id": "T-SDLC-007",
+      "name": "Insecure deserialization enabling remote code execution",
+      "mitigatedBy": ["SA-11", "SI-10", "SA-08", "CM-02"]
+    },
+    {
+      "id": "T-SDLC-008",
+      "name": "Security misconfiguration in deployment (verbose errors, default credentials, unnecessary services)",
+      "mitigatedBy": ["CM-02", "CM-06", "SA-11", "RA-05"]
+    },
+    {
+      "id": "T-SDLC-009",
+      "name": "Insufficient logging enabling undetected exploitation of application vulnerabilities",
+      "mitigatedBy": ["AU-02", "AU-12", "SA-08", "SI-04"]
+    },
+    {
+      "id": "T-SDLC-010",
+      "name": "Delayed vulnerability remediation leaving known exposures in production",
+      "mitigatedBy": ["RA-05", "SI-02", "SA-11", "CM-04"]
+    }
+  ],
+  "controls": [
+    {"id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "important"},
+    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "standard"},
+    {"id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "standard"},
+    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
+    {"id": "CA-08", "name": "Penetration Testing", "family": "CA", "emphasis": "important"},
+    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
+    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
+    {"id": "CM-04", "name": "Impact Analyses", "family": "CM", "emphasis": "important"},
+    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "standard"},
+    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "important"},
+    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
+    {"id": "PL-08", "name": "Security and Privacy Architectures", "family": "PL", "emphasis": "important"},
+    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
+    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "critical"},
+    {"id": "SA-04", "name": "Acquisition Process", "family": "SA", "emphasis": "important"},
+    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "critical"},
+    {"id": "SA-11", "name": "Developer Testing and Evaluation", "family": "SA", "emphasis": "critical"},
+    {"id": "SA-15", "name": "Development Process, Standards, and Tools", "family": "SA", "emphasis": "critical"},
+    {"id": "SA-16", "name": "Developer-Provided Training", "family": "SA", "emphasis": "important"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "standard"},
+    {"id": "SI-02", "name": "Flaw Remediation", "family": "SI", "emphasis": "critical"},
+    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "standard"},
+    {"id": "SI-06", "name": "Security and Privacy Function Verification", "family": "SI", "emphasis": "important"},
+    {"id": "SI-10", "name": "Information Input Validation", "family": "SI", "emphasis": "critical"},
+    {"id": "SR-03", "name": "Supply Chain Controls and Processes", "family": "SR", "emphasis": "critical"},
+    {"id": "SR-04", "name": "Provenance", "family": "SR", "emphasis": "important"}
+  ],
+  "controlFamilySummary": {
+    "AT": 1,
+    "AU": 2,
+    "CA": 2,
+    "CM": 4,
+    "IA": 1,
+    "IR": 1,
+    "PL": 1,
+    "RA": 2,
+    "SA": 5,
+    "SC": 1,
+    "SI": 4,
+    "SR": 2
+  }
 }

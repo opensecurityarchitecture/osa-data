@@ -1,0 +1,201 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-033",
+  "slug": "pattern-passkey-authentication",
+  "title": "Passkey Authentication",
+  "description": "Deep-dive pattern for implementing phishing-resistant passwordless authentication using FIDO2 WebAuthn and passkeys. Covers platform authenticators, roaming authenticators, synced passkeys, credential lifecycle, and enterprise deployment strategies. Maps 36 NIST 800-53 controls with emphasis on cryptographic assurance and authenticator management.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-033",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Identity and Access Management",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": ["Aurelius", "Vitruvius"],
+    "reviewers": [],
+    "provenance": "Informed by enterprise FIDO2 deployments in financial services where phishing-resistant authentication was mandated by regulators, and by the rapid adoption of passkeys across consumer platforms (Apple, Google, Microsoft) that is now driving enterprise adoption. Draws on practical experience migrating from TOTP and push-notification MFA to hardware security keys and platform authenticators."
+  },
+  "diagram": {
+    "svg": "/images/sp-033-diagram.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Passkey Authentication represents the most significant shift in authentication since the introduction of passwords. Built on the FIDO2 standard -- which comprises the WebAuthn browser API and the CTAP2 client-to-authenticator protocol -- passkeys replace shared secrets (passwords) with public key cryptography. The user's private key never leaves the authenticator device, eliminating the entire class of credential theft attacks that dominate the threat landscape.\n\nThe core mechanism is simple. During registration, the authenticator generates a unique public-private key pair bound to the relying party's origin. The public key is sent to the server. The private key stays on the device, protected by the authenticator's secure element (TPM, Secure Enclave, hardware key). During authentication, the server sends a challenge, the authenticator signs it with the private key after local user verification (biometric or PIN), and the server verifies the signature against the stored public key. No shared secret ever crosses the network.\n\nThree authenticator types serve different use cases. Platform authenticators are built into the device -- Touch ID, Face ID, Windows Hello, Android biometrics -- offering frictionless authentication on that specific device. Roaming authenticators are external hardware keys (YubiKey, Titan, SoloKeys) that work across devices via USB, NFC, or Bluetooth, providing the highest assurance for privileged access. Synced passkeys (sometimes called multi-device credentials) synchronise private keys across a user's devices through the platform vendor's cloud (iCloud Keychain, Google Password Manager, Windows Hello) -- they sacrifice the hardware-binding property of device-bound credentials but dramatically improve usability by eliminating the per-device registration requirement.\n\nFor enterprise deployment, the security decision is which authenticator types to permit for which access levels. Device-bound passkeys (platform authenticators that do not sync, and hardware security keys) provide the highest assurance and are appropriate for privileged access, financial transactions, and high-classification data. Synced passkeys provide excellent phishing resistance with much better usability and are appropriate for the majority of workforce authentication. The pattern provides guidance for tiered authenticator policies, migration from password-based authentication, and integration with enterprise identity providers.",
+    "keyControlAreas": [
+      "Authenticator Credential Management (IA-05, IA-04, IA-02, IA-06): Passkey credential lifecycle requires careful management. IA-05 governs the full authenticator lifecycle: initial registration (binding a credential to a verified identity), credential metadata management (tracking which authenticators are registered, their type, last use, and attestation data), rotation (registering new credentials and revoking old ones), and revocation (removing credentials when devices are lost, compromised, or decommissioned). IA-04 manages the identifiers associated with passkey credentials: the credential ID is a unique handle per relying-party/authenticator combination, and the user handle links credentials to the user account without exposing personally identifiable information. IA-02 defines the authentication policy: which user verification methods are acceptable (biometric, PIN, presence-only), whether user verification is required or preferred, and which authenticator types satisfy which assurance levels. IA-06 governs authentication feedback: the system must not reveal whether a credential ID exists during authentication (preventing enumeration), and error messages must be generic. Implementation requires a credential management interface where users can register multiple passkeys, view registered credentials, and revoke lost devices -- with a secure recovery path when all credentials are lost.",
+      "Cryptographic Assurance and Key Protection (SC-12, SC-13, SC-17, SI-07): The security of passkeys rests entirely on the cryptographic implementation. SC-12 governs key generation and management: authenticators must generate key pairs using approved random number generators within their secure element, and private keys must never be exportable (for device-bound credentials) or must be protected by platform encryption (for synced credentials). SC-13 mandates approved cryptographic algorithms: WebAuthn supports ES256 (ECDSA with P-256) and RS256 (RSASSA-PKCS1-v1_5 with SHA-256); ES256 is preferred for its compact key size and strong security properties. SC-17 addresses the certificate infrastructure: FIDO attestation certificates chain to the authenticator manufacturer's root certificate, enabling the relying party to verify the authenticator model and its security properties during registration. SI-07 verifies software and firmware integrity of authenticators: FIDO Metadata Service (MDS) publishes security status for certified authenticators, including revocation of models with known vulnerabilities. Enterprises should consume MDS data to automatically adjust policy when authenticator vulnerabilities are discovered.",
+      "Registration and Ceremony Security (IA-12, IA-02, SC-23, AC-03): The registration ceremony is the critical trust establishment point. IA-12 requires identity proofing before credential registration: the user must prove their identity through an existing strong authentication method (or in-person verification for initial enrollment) before registering a passkey. If registration security is weak, attackers can register their own credentials to legitimate accounts. IA-02 defines the user verification requirement during registration: 'required' ensures biometric or PIN verification on the authenticator, establishing that the person registering is physically present. SC-23 protects the registration ceremony from replay and interception: the challenge is a cryptographic nonce with a short validity window, and the attestation response is bound to the specific origin (scheme + host + port), preventing registration on phishing sites. AC-03 enforces access control on the registration endpoint: only authenticated users can register new credentials, registration rate limits prevent credential stuffing of the registration flow, and administrative controls allow security teams to register credentials on behalf of users during onboarding. Attestation verification during registration enables the relying party to enforce authenticator type policies: accept only FIDO2 Certified authenticators, require specific authenticator models for privileged access, or distinguish between device-bound and synced credentials.",
+      "Authentication Ceremony and Phishing Resistance (SC-23, SC-08, IA-02, AC-07): The authentication ceremony provides cryptographic phishing resistance. SC-23 ensures session authenticity through the WebAuthn protocol: the authenticator signs the challenge along with the relying party ID (derived from the origin), the client data hash (including the origin URL), and a signature counter. If a user is tricked into visiting a phishing site (attacker.com instead of bank.com), the authenticator signs a challenge bound to attacker.com's origin, which the legitimate server rejects because the origin does not match. This is the fundamental advantage over passwords and OTP codes, which are origin-agnostic and can be phished and replayed. SC-08 protects the authentication flow with TLS, though WebAuthn's origin binding provides an additional layer even if TLS were compromised. IA-02 defines acceptable user verification: biometric verification provides continuous assurance of user presence, while PIN verification is a fallback. AC-07 handles failed authentication: signature verification failures, user verification failures, and credential not found errors must be rate-limited and logged. The signature counter incremented by the authenticator on each use enables detection of cloned credentials (if the counter value received is less than or equal to the stored value, the credential may have been cloned).",
+      "Enterprise Policy and Tiered Access (AC-01, AC-06, CM-06, PL-02, PM-12): Enterprise deployments require policy granularity. AC-01 defines the passkey policy: which authenticator types are accepted (platform, roaming, synced), minimum authenticator assurance level per resource sensitivity, attestation requirements, and user verification requirements. AC-06 implements tiered access through authenticator strength: standard workforce access may accept any passkey type, but privileged access management requires device-bound credentials (hardware security keys or non-synced platform authenticators). CM-06 enforces configuration settings on managed devices: ensuring platform authenticators are enabled, secure element is available, and biometric enrollment is completed. PL-02 documents the passkey deployment plan: phased rollout starting with IT and security teams, progressive enrollment campaigns, and timeline for password deprecation. PM-12 ensures the insider threat programme accounts for passkey-specific risks: synced credentials accessible from personal devices, registered credentials surviving offboarding if not revoked. Enterprise policy should distinguish between three tiers: Tier 1 (standard access) accepts all FIDO2 authenticator types including synced passkeys; Tier 2 (elevated access) requires device-bound credentials with user verification; Tier 3 (privileged access) requires hardware security keys with attestation verification.",
+      "Recovery and Fallback Mechanisms (IA-05, CP-02, IA-12, AC-14): Recovery from credential loss is the hardest problem in passwordless authentication. IA-05 mandates backup authenticator registration: users must register at least two credentials on different devices or authenticator types, ensuring that loss of a single device does not lock the user out. CP-02 includes passkey recovery in the contingency plan: what happens when a user loses all registered devices, how temporary access is granted during recovery, and how identity is re-verified before registering new credentials. IA-12 applies identity proofing to recovery: the recovery process must verify the user's identity with assurance equivalent to initial enrollment -- otherwise recovery becomes the weakest link that attackers target. AC-14 defines permitted actions without authentication during recovery transitions: the organisation may maintain a sealed recovery process (e.g., supervisor-verified in-person re-enrollment) that does not rely on any digital credential. Common anti-patterns to avoid: recovery via email/SMS OTP (downgrades to phishable factor), recovery codes stored by the user (reverts to shared secret), and self-service recovery without identity verification (enables account takeover).",
+      "Audit and Compliance (AU-02, AU-03, AU-06, CA-02): Passkey operations must be comprehensively audited. AU-02 defines auditable events: credential registration (including authenticator type, attestation, user verification method), successful and failed authentications (including signature counter values), credential revocation, recovery operations, and policy changes. AU-03 specifies record content: credential ID (never the private key), authenticator AAGUID (identifying the model), attestation trust path, user verification method used, signature counter, client origin, and IP address. AU-06 analyses passkey-specific anomalies: signature counter regression (potential credential cloning), registration from unexpected locations, rapid credential registration across many accounts (potential bulk attack), and authentication from authenticators that should have been revoked. CA-02 assesses the passkey deployment: testing that attestation verification is working, that revoked credentials are truly denied, that recovery processes maintain assurance level, and that tier policies are enforced correctly."
+    ],
+    "assumptions": "Applications support the WebAuthn API (all major browsers have supported it since 2019). Users have devices with platform authenticators (Touch ID, Face ID, Windows Hello, Android biometrics) or the organisation provides hardware security keys. The Identity Provider supports FIDO2/WebAuthn as an authentication method. User devices are running sufficiently recent operating systems to support passkeys (iOS 16+, Android 9+, macOS Ventura+, Windows 10 build 1903+). The organisation has a credential management interface or can build one. A recovery process exists for users who lose all registered credentials.",
+    "typicalChallenges": "The biggest challenge is the transition period: organisations cannot simply switch off passwords overnight, so they run dual authentication paths (passwords and passkeys) for months or years, during which the password path remains the weakest link. Synced passkeys create a new dependency on platform vendors (Apple, Google, Microsoft) for key synchronisation security and availability. Enterprise use of synced passkeys means credentials may reside on personal devices, complicating offboarding -- credential revocation at the relying party is essential but does not remove the synced credential from the user's device. Hardware security key deployment at scale requires logistics: procurement, distribution, replacement for lost keys, and user training. Some legacy enterprise applications cannot integrate WebAuthn and require proxy-based solutions. Users with accessibility needs may struggle with biometric verification; PIN-based user verification must be available as an alternative. Cross-platform passkey synchronisation between Apple and Google ecosystems is improving but not seamless. Attestation verification is operationally complex: maintaining trust stores, consuming FIDO MDS updates, and handling authenticators that do not provide attestation.",
+    "indications": "This pattern is indicated for any organisation seeking to eliminate phishing as a viable attack vector against their users. It is particularly relevant for: financial services organisations facing sophisticated phishing campaigns, organisations subject to regulatory requirements for phishing-resistant MFA (US Executive Order 14028, PCI DSS v4.0 requirement 8.4.2), organisations with high-value accounts requiring strong authentication (administrators, executives, developers with production access), consumer-facing services wanting to improve authentication UX while strengthening security, and organisations already deploying FIDO2 hardware keys that want to extend passwordless authentication to the broader workforce via synced passkeys.",
+    "contraIndications": "Organisations whose user base primarily uses devices that do not support WebAuthn (legacy browsers, very old operating systems) cannot deploy passkeys without first upgrading the device estate. Environments requiring authentication from shared or kiosk devices where biometric enrollment is impractical may need alternative approaches (though roaming authenticators work in this scenario). Organisations that require credential escrow or recovery through the IdP alone (without any user-side component) face challenges with the decentralised nature of passkey storage. If the threat model requires that no credential material ever leaves a certified hardware boundary, synced passkeys are inappropriate and only device-bound credentials (hardware keys, non-synced platform authenticators) should be used.",
+    "threatResistance": "Passkey Authentication provides the strongest available protection against credential-based attacks. Phishing attacks are cryptographically defeated: the authenticator binds the assertion to the relying party's origin, so credentials cannot be replayed on a different site even if the user is tricked into interacting with a phishing page (SC-23, IA-02). Credential stuffing and password spraying are eliminated: there are no passwords to stuff or spray (IA-05). Man-in-the-middle attacks are prevented: even if an attacker intercepts the authentication flow, they cannot forge the authenticator's signature (SC-13, SC-08). Credential theft from server breaches is neutralised: servers store only public keys, which are useless to attackers (SC-12). SIM swapping attacks that compromise SMS MFA are irrelevant: passkeys do not rely on phone numbers (IA-05). Push notification fatigue attacks (MFA bombing) are eliminated: passkeys require local user verification, not remote approval (IA-02). Credential cloning is detectable through signature counter validation for device-bound credentials and is prevented by secure element hardware for certified authenticators (SI-07). The remaining attack surface is primarily social engineering of the recovery process and compromise of the platform sync mechanism for synced passkeys."
+  },
+  "examples": {
+    "Consumer Service Deployment": [
+      "Offer passkey registration during login: 'Sign in faster with Face ID' prompt after successful password+MFA authentication",
+      "Support synced passkeys across Apple and Google ecosystems, enabling passwordless login from any user device",
+      "Implement conditional UI: browser auto-fills passkey credential if available, falls back to password field if not",
+      "Track passkey adoption metrics: registration rate, authentication success rate, password fallback rate"
+    ],
+    "Enterprise Workforce (Tiered Model)": [
+      "Tier 1 (all staff): Register synced passkey via company OIDC IdP, replaces password+TOTP for email, HR, and standard apps",
+      "Tier 2 (developers, finance): Require device-bound platform authenticator (Touch ID with non-synced credential) for code repos and financial systems",
+      "Tier 3 (admins, executives): Require FIDO2 hardware security key (YubiKey 5) with attestation verification for privileged access management",
+      "Enforce minimum two registered credentials per user: one platform authenticator + one hardware key for recovery"
+    ],
+    "Migration from Legacy MFA": [
+      "Phase 1: Enable passkey as optional additional authenticator alongside existing TOTP/push MFA",
+      "Phase 2: Passkey enrollment campaign with in-person support; track adoption to 80% threshold",
+      "Phase 3: Make passkey the default authentication method; TOTP available as temporary fallback with time limit",
+      "Phase 4: Deprecate TOTP and push MFA; passkey-only with hardware key recovery for credential loss"
+    ],
+    "High-Assurance Financial Transaction Signing": [
+      "Register device-bound platform authenticator specifically for transaction signing (separate from login credential)",
+      "Payment over threshold triggers WebAuthn assertion with transaction details in the challenge (what-you-see-is-what-you-sign)",
+      "Authenticator signs challenge containing recipient, amount, and timestamp; server verifies signature before executing transfer",
+      "Signature counter and user verification flag confirmed for every transaction; any anomaly blocks the transaction"
+    ]
+  },
+  "references": [
+    {
+      "title": "W3C Web Authentication (WebAuthn) Level 3",
+      "url": "https://www.w3.org/TR/webauthn-3/",
+      "note": "The W3C specification for the WebAuthn browser API. Defines the credential creation and assertion ceremonies, authenticator types, attestation formats, and extensions."
+    },
+    {
+      "title": "FIDO Alliance: Passkeys Overview",
+      "url": "https://fidoalliance.org/passkeys/",
+      "note": "The FIDO Alliance's overview of passkeys including multi-device credentials, synced passkeys, and the enterprise deployment model. Good starting point for understanding the ecosystem."
+    },
+    {
+      "title": "NIST SP 800-63B: Authentication and Lifecycle Management",
+      "url": "https://pages.nist.gov/800-63-3/sp800-63b.html",
+      "note": "NIST guidance on authenticator types and assurance levels. Classifies FIDO2 authenticators and defines requirements for AAL2 and AAL3."
+    },
+    {
+      "title": "FIDO Metadata Service (MDS)",
+      "url": "https://fidoalliance.org/metadata/",
+      "note": "Repository of authenticator security metadata including certification status, security key characteristics, and vulnerability notifications. Essential for enterprise attestation verification."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. IA (Identification and Authentication) and SC (System and Communications Protection) families are primary."
+    },
+    {
+      "title": "CTAP2 (Client to Authenticator Protocol)",
+      "url": "https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-20210615.html",
+      "note": "The protocol between the client platform and the authenticator device. Defines PIN/UV protocols, credential management, and authenticator configuration."
+    },
+    {
+      "title": "Apple: About the security of passkeys",
+      "url": "https://support.apple.com/en-gb/102195",
+      "note": "Apple's documentation on passkey security including iCloud Keychain synchronisation, end-to-end encryption, and HSM-backed escrow for recovery."
+    }
+  ],
+  "relatedPatterns": ["SP-010", "SP-029", "SP-032"],
+  "relatedPatternNames": ["Identity Management", "Zero Trust Architecture", "Modern Authentication"],
+  "threats": [
+    {
+      "id": "T-PA-001",
+      "name": "Phishing attack redirecting to credential harvesting site",
+      "mitigatedBy": ["SC-23", "IA-02", "SC-08"]
+    },
+    {
+      "id": "T-PA-002",
+      "name": "Server-side credential database breach",
+      "mitigatedBy": ["SC-12", "SC-13", "AU-09"]
+    },
+    {
+      "id": "T-PA-003",
+      "name": "Credential cloning from compromised authenticator",
+      "mitigatedBy": ["SI-07", "SC-12", "AU-06"]
+    },
+    {
+      "id": "T-PA-004",
+      "name": "MFA fatigue/bombing attacks on push notification",
+      "mitigatedBy": ["IA-02", "IA-05", "AU-06"]
+    },
+    {
+      "id": "T-PA-005",
+      "name": "SIM swapping to intercept SMS-based MFA",
+      "mitigatedBy": ["IA-05", "SC-12", "SC-13"]
+    },
+    {
+      "id": "T-PA-006",
+      "name": "Recovery process exploitation for account takeover",
+      "mitigatedBy": ["IA-12", "IA-05", "CP-02", "AU-02"]
+    },
+    {
+      "id": "T-PA-007",
+      "name": "Adversary-in-the-middle real-time phishing proxy",
+      "mitigatedBy": ["SC-23", "SC-08", "IA-02"]
+    },
+    {
+      "id": "T-PA-008",
+      "name": "Platform sync mechanism compromise exposing synced passkeys",
+      "mitigatedBy": ["SC-12", "SC-13", "CM-06", "AC-01"]
+    },
+    {
+      "id": "T-PA-009",
+      "name": "Rogue authenticator registration by insider or social engineering",
+      "mitigatedBy": ["IA-12", "AU-02", "AC-03", "PM-12"]
+    },
+    {
+      "id": "T-PA-010",
+      "name": "Downgrade attack forcing fallback to phishable authentication",
+      "mitigatedBy": ["AC-01", "CM-06", "SA-08", "AU-06"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-01", "name": "Policy and Procedures", "family": "AC", "emphasis": "important"},
+    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "important"},
+    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
+    {"id": "AC-07", "name": "Unsuccessful Logon Attempts", "family": "AC", "emphasis": "standard"},
+    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "important"},
+    {"id": "AC-14", "name": "Permitted Actions Without Identification or Authentication", "family": "AC", "emphasis": "standard"},
+    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "standard"},
+    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical"},
+    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "important"},
+    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important"},
+    {"id": "AU-09", "name": "Protection of Audit Information", "family": "AU", "emphasis": "standard"},
+    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
+    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
+    {"id": "CP-02", "name": "Contingency Plan", "family": "CP", "emphasis": "important"},
+    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical"},
+    {"id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "important"},
+    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "critical"},
+    {"id": "IA-06", "name": "Authentication Feedback", "family": "IA", "emphasis": "standard"},
+    {"id": "IA-12", "name": "Identity Proofing", "family": "IA", "emphasis": "critical"},
+    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "standard"},
+    {"id": "PM-12", "name": "Insider Threat Program", "family": "PM", "emphasis": "standard"},
+    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "important"},
+    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "important"},
+    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-13", "name": "Cryptographic Protection", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-17", "name": "Public Key Infrastructure Certificates", "family": "SC", "emphasis": "important"},
+    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "critical"},
+    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "important"}
+  ],
+  "controlFamilySummary": {
+    "AC": 6,
+    "AT": 1,
+    "AU": 4,
+    "CA": 1,
+    "CM": 1,
+    "CP": 1,
+    "IA": 5,
+    "PL": 1,
+    "PM": 1,
+    "SA": 1,
+    "SC": 4,
+    "SI": 1
+  }
+}

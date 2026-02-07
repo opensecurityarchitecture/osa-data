@@ -1,33 +1,197 @@
 {
+  "$schema": "../schema/pattern.schema.json",
   "id": "SP-015",
-  "slug": "pattern-using-consumer-devices-for-enterprise-environments",
-  "joomla_id": 267,
-  "title": "Using Consumer Devices for Enterprise Environments Pattern  (RESERVED for development)",
-  "description": "OpenSecurityArchitecture (OSA) distills the know-how of the security architecture community and provides readily usable patterns for your application. This is a free framework, developed and owned by the community.",
-  "url": "https://www.opensecurityarchitecture.org/library/patternlandscape/267-pattern-using-consumer-devices-for-enterprise-environments",
+  "slug": "pattern-secure-remote-working",
+  "title": "Secure Remote Working",
+  "description": "Comprehensive remote and hybrid working security pattern covering endpoint hardening, ZTNA and VPN architectures, BYOD and corporate device management, split tunnelling, endpoint compliance verification, home network security considerations, collaboration platform security, and data loss prevention for distributed workforces. Addresses the post-pandemic reality where the corporate perimeter is the device, not the network. Maps 32 NIST 800-53 controls across endpoint, network, identity, and data protection domains.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-015",
   "metadata": {
-    "release": "08.02",
-    "classification": "",
-    "status": "reserved",
+    "release": "26.02",
+    "classification": "Endpoint and Access Security",
+    "status": "draft",
     "type": "pattern",
-    "datePublished": "2010-01-03",
-    "dateModified": "2025-07-05",
-    "authors": [
-      "Russell"
-    ],
-    "reviewers": []
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": ["Aurelius", "Vitruvius"],
+    "reviewers": [],
+    "provenance": "Derived from securing remote access for financial market infrastructure operations teams where trading, clearing, and surveillance systems must be accessible from home environments without compromising the security posture that regulators expect. Informed by the rapid pivot to remote working during 2020 and the subsequent realisation that hybrid working is permanent, requiring architecture that treats every endpoint as untrusted regardless of location."
+  },
+  "diagram": {
+    "svg": "/images/sp-015-diagram.svg",
+    "png": ""
   },
   "content": {
-    "description": "",
-    "keyControlAreas": [],
-    "assumptions": "",
-    "typicalChallenges": "",
-    "indications": "",
-    "contraIndications": "",
-    "threatResistance": ""
+    "description": "Secure Remote Working addresses the security architecture for a workforce that operates from locations outside the traditional corporate perimeter -- home offices, co-working spaces, client sites, and in transit. The original SP-015 concept of 'consumer devices for enterprise environments' has evolved into a broader challenge: securing the entire distributed working model where the corporate network boundary is no longer the primary trust boundary.\n\nThe fundamental shift is architectural. In the traditional model, the network perimeter defined trust: devices inside the firewall were trusted, devices outside were not. Remote working eliminates this distinction. A corporate laptop on a home WiFi network is simultaneously inside the enterprise (logically, via VPN or ZTNA) and outside it (physically, on an untrusted network shared with IoT devices, gaming consoles, and family members' personal devices). The security architecture must treat every device as potentially compromised and every network as hostile, regardless of whether the user is in the office, at home, or in a coffee shop.\n\nThree device models exist, each with different security profiles. Corporate-managed devices (the gold standard) are fully controlled: MDM-enrolled, encrypted, patched, endpoint-protected, and compliant-checked before every access. BYOD (bring your own device) introduces personal devices that cannot be fully managed: the organisation can control the corporate workspace (containerisation, managed apps) but not the underlying device. Contractor/third-party devices are the highest risk: unknown device posture, unknown network, and limited ability to enforce controls. Each model requires different architectural approaches, and most organisations operate all three simultaneously.\n\nModern remote access has two architectural paradigms. Traditional VPN creates a network tunnel that extends the corporate network to the remote device -- simple to understand but architecturally flawed because it places a potentially compromised device directly on the corporate network. Zero Trust Network Access (ZTNA) brokers access to specific applications based on identity, device compliance, and contextual signals, without ever placing the device on the corporate network. ZTNA is the target architecture for most organisations, but the migration from VPN to ZTNA is incremental -- many organisations operate both in parallel during transition.\n\nRemote working security extends beyond network access. Endpoint hardening ensures devices are encrypted, patched, and protected. Collaboration platform security addresses the data that flows through Teams, Slack, Zoom, and email when people work from home. Data loss prevention prevents sensitive data from leaking through personal cloud storage, personal email, or screen captures. Physical security addresses the reality that corporate devices are now in uncontrolled physical environments -- unlocked laptops in shared households, confidential calls overheard in co-working spaces, screens visible in public places. The pattern must address all of these dimensions.",
+    "keyControlAreas": [
+      "Remote Access Architecture: VPN and ZTNA (AC-17, SC-07, SC-08, SC-12, IA-02): Remote access is the foundation. AC-17 governs remote access methods: authorised remote access technologies, connection requirements, and usage restrictions. Traditional VPN (IPsec or SSL/TLS) creates an encrypted tunnel from the device to the corporate network gateway. ZTNA (Zscaler, Cloudflare Access, Microsoft Entra Private Access) brokers per-application access based on identity and device posture, never exposing the corporate network. SC-07 enforces boundary protection: VPN split tunnelling decisions (full tunnel for security but impacts performance; split tunnel for performance but reduces visibility), ZTNA application segmentation, and firewall rules that restrict remote device access to only required services. SC-08 protects transmission confidentiality: all remote access uses encrypted tunnels (TLS 1.3, IPsec, WireGuard), with certificate-based authentication preferred over pre-shared keys. SC-12 manages cryptographic keys: VPN certificates, ZTNA trust certificates, and device identity certificates issued from a managed PKI. IA-02 authenticates remote users: phishing-resistant MFA (FIDO2/passkeys preferred) for all remote access, with conditional access policies that evaluate device compliance, location risk, and user risk signals before granting access.",
+      "Endpoint Hardening and Device Management (CM-02, CM-06, SC-28, SI-03, CM-08): The device is the new perimeter. CM-02 establishes baseline configurations for remote endpoints: full disk encryption (BitLocker, FileVault), host firewall enabled, screen lock timeout, USB device restrictions, and local admin rights removed. CM-06 enforces configuration settings through MDM (Intune, Jamf, Workspace ONE): compliance policies that verify encryption, OS version, patch level, and security agent presence before granting access. SC-28 protects information at rest: full disk encryption ensures data is protected if devices are lost or stolen -- the most common physical security risk for remote workers. SI-03 provides malicious code protection: EDR agents (CrowdStrike, SentinelOne, Microsoft Defender for Endpoint) on all managed endpoints, with cloud-based management that works regardless of network location. CM-08 maintains the system component inventory: every device that accesses corporate resources must be enrolled, tracked, and subject to lifecycle management including secure wipe at end of life or employee departure. Unmanaged devices should only access corporate resources through virtual desktop infrastructure (VDI) or browser-based application delivery, never through direct network access.",
+      "BYOD and Device Compliance (AC-19, CM-06, AC-20, SC-28, PE-17): BYOD requires architectural compromise. AC-19 controls access from mobile and personal devices: containerisation (Intune App Protection, Samsung Knox, Android Enterprise) that creates a managed corporate workspace on an unmanaged device, with data separation between personal and corporate. CM-06 enforces minimum device requirements: OS version, encryption enabled, no jailbreak/root, screen lock enabled, verified through device compliance checks at every access attempt. AC-20 governs use of external systems: personal devices accessing corporate resources must meet defined security baselines, with reduced access scope compared to fully managed devices (for example, email and collaboration but not access to sensitive systems). SC-28 protects corporate data on personal devices: app-level encryption for corporate data, remote wipe capability limited to corporate container only (not the entire personal device), and policies preventing copy/paste from corporate apps to personal apps. PE-17 addresses the alternate work site: guidance for home office physical security including screen privacy, device storage when not in use, and secure disposal of printed materials.",
+      "Network Security and Split Tunnelling (SC-07, AC-04, SC-08, SI-04, AC-17): Network decisions have cascading security implications. SC-07 defines the split tunnelling policy: full tunnel routes all traffic through the corporate gateway (maximum visibility and control, but impacts performance for cloud services and video conferencing); split tunnel routes only corporate-destined traffic through the gateway (better performance, but internet traffic bypasses corporate security controls); cloud-intelligent split tunnel routes traffic to sanctioned cloud services directly while tunnelling everything else (the modern compromise). AC-04 enforces information flow: DNS filtering and web proxy for remote devices (Zscaler, Netskope, Cloudflare Gateway) regardless of tunnel configuration, ensuring that security controls apply to all internet access from corporate devices. SC-08 protects data in transit: encrypted DNS (DoH/DoT), certificate pinning for corporate applications, and HSTS enforcement. SI-04 monitors remote endpoints: EDR telemetry and DNS query logs provide visibility into device behaviour regardless of network location -- essential when traffic doesn't traverse the corporate network. AC-17 restricts remote access: geo-blocking for remote access from high-risk countries, impossible-travel detection, and time-based access restrictions for sensitive systems.",
+      "Collaboration Platform Security (AC-22, SC-07, AU-02, SC-28, AC-04): Collaboration tools are the primary data channel for remote workers. AC-22 controls publicly accessible content: preventing accidental sharing of internal documents via public Teams/Slack channels, restricting external guest access to collaboration platforms, and applying data classification labels to shared content. SC-07 protects platform boundaries: federation controls (which external domains can communicate with internal Teams/Slack), meeting security (waiting rooms, lobby controls, recording notifications), and file sharing restrictions. AU-02 logs collaboration platform activity: message and file access auditing for compliance and investigation, meeting attendance records, and external sharing events. SC-28 protects collaboration data at rest: platform-level encryption (customer-managed keys where available), data residency controls for regulated data, and retention policies aligned with records management requirements. AC-04 controls information flow through collaboration platforms: DLP policies that detect and block sharing of sensitive data (credit card numbers, personal data, confidential classifications) through chat, file sharing, and meeting recordings.",
+      "Data Loss Prevention for Remote Workers (AC-04, MP-02, SC-28, SI-04, AC-19): Data leaves the building with the worker. AC-04 enforces DLP policies: endpoint DLP that monitors and controls data movement to USB drives, personal cloud storage, personal email, and print. Cloud DLP (Microsoft Purview, Netskope, Zscaler) that monitors data flowing through sanctioned and unsanctioned cloud services. MP-02 controls media access: USB storage restrictions (block, read-only, or encrypt-only), Bluetooth file transfer controls, and printer restrictions on remote devices. SC-28 protects data at rest on remote devices: encrypted local storage, time-limited offline access to sensitive documents, and automatic cache clearing for classified materials. SI-04 monitors for data exfiltration: anomaly detection on file download volumes, large email attachments to personal addresses, and unusual cloud storage synchronisation patterns. AC-19 restricts data access from personal devices: preventing download of sensitive documents to BYOD devices, enforcing view-only access for classified materials, and watermarking documents accessed from unmanaged devices.",
+      "Identity and Conditional Access (IA-02, AC-02, IA-05, CA-07, AC-06): Identity is the control plane for remote access. IA-02 authenticates remote users with phishing-resistant MFA: FIDO2 security keys or passkeys for high-value access, authenticator apps as minimum standard, SMS deprecated. Conditional access evaluates multiple signals: device compliance (is the device managed, encrypted, patched?), location (known network vs unknown, domestic vs international), user risk (sign-in risk score from identity protection), and application sensitivity (standard apps vs crown jewels). AC-02 manages accounts for remote access: dedicated admin accounts that cannot be used remotely (privileged access from PAWs only), service account restrictions, and contractor account lifecycle management. IA-05 manages authenticators: certificate-based device authentication (the device proves its identity, not just the user), token binding to prevent credential theft replay, and passwordless authentication roadmap. CA-07 provides continuous monitoring: session risk re-evaluation during long sessions, step-up authentication when risk signals change, and automatic session termination when device compliance lapses. AC-06 enforces least privilege: remote workers get access to the applications they need, not the entire network -- ZTNA's fundamental advantage over VPN."
+    ],
+    "assumptions": "The organisation has an identity provider capable of conditional access policies (Azure AD/Entra ID, Okta, or equivalent). MDM capability exists or is being deployed for corporate devices. Internet connectivity is available at remote locations (not always guaranteed -- consider offline access requirements). HR policies support remote and hybrid working. Budget exists for remote access infrastructure (VPN/ZTNA, MDM, endpoint protection). Users have been trained on remote working security expectations.",
+    "typicalChallenges": "The biggest challenge is user experience versus security: every additional security control (MFA prompts, VPN reconnection, compliance checks that block access) generates friction that users try to circumvent. Over-engineered security for remote access drives shadow IT -- users find unsanctioned ways to access what they need. BYOD programmes struggle with the boundary between corporate control and personal privacy: employees resist MDM on personal devices, particularly full device management. Split tunnelling decisions are politically charged: security teams want full tunnel for visibility, users want split tunnel for performance, and the right answer depends on the organisation's cloud adoption posture. Home network security is largely uncontrollable: corporate devices share networks with compromised IoT devices, family members' unpatched machines, and default-password routers. Endpoint compliance checking creates a chicken-and-egg problem: the device must connect to check compliance, but shouldn't connect if non-compliant. VPN to ZTNA migration is complex and lengthy: applications must be onboarded individually, and the transition period requires operating both architectures simultaneously. Printing and physical document security at home is difficult to enforce and easy to forget.",
+    "indications": "This pattern applies to every organisation with remote or hybrid workers -- which is now the majority. It is particularly critical for: financial services firms where regulators expect equivalent security controls regardless of work location, organisations processing sensitive personal data where GDPR breach risks increase with remote access, healthcare organisations accessing patient records remotely, legal and professional services firms handling confidential client materials, government organisations with classification requirements, any organisation that experienced security incidents during the 2020 rapid remote working deployment and needs to mature their architecture, and organisations migrating from VPN to ZTNA.",
+    "contraIndications": "Organisations where all work is performed on-premises with no remote access requirements do not need this pattern -- but such organisations are increasingly rare. Very small organisations (under 10 staff) may implement remote security through simpler means: managed laptops with full disk encryption, cloud-based identity with MFA, and cloud-native applications that don't require VPN -- essentially achieving ZTNA-like outcomes without formal ZTNA infrastructure. Organisations with extremely sensitive environments (classified government, air-gapped OT) may prohibit remote access entirely rather than architect security controls around it.",
+    "threatResistance": "Secure Remote Working addresses the expanded attack surface of distributed workforces. Credential phishing targeting remote workers is mitigated by phishing-resistant MFA (FIDO2/passkeys) and conditional access that detects anomalous sign-in patterns (IA-02, CA-07). Device theft or loss is mitigated by full disk encryption, remote wipe capability, and session tokens that expire without device compliance verification (SC-28, CM-06, AC-19). Man-in-the-middle attacks on untrusted networks are mitigated by encrypted tunnels, certificate-based authentication, and HSTS enforcement (SC-08, SC-12, AC-17). Data exfiltration through personal devices or cloud storage is mitigated by DLP policies, container separation on BYOD, and monitoring of data movement patterns (AC-04, AC-19, SI-04). Lateral movement from compromised remote endpoints is limited by ZTNA architecture that never places remote devices on the corporate network, combined with micro-segmentation of application access (SC-07, AC-06). Home network attacks (ARP poisoning, DNS hijacking, IoT-based lateral movement) are mitigated by endpoint isolation controls, encrypted DNS, and endpoint protection that operates independently of network security (SI-03, SC-08). Insider threat from remote workers is addressed through session monitoring, DLP, and behavioural analytics that detect anomalous data access patterns regardless of user location (SI-04, AU-02, AC-04)."
   },
-  "references": [],
-  "controls": [],
-  "controlFamilySummary": {},
-  "$schema": "../schema/pattern.schema.json"
+  "examples": {
+    "ZTNA Migration": [
+      "Deploy Cloudflare Access/Zscaler Private Access for top 20 internal applications: identity-aware proxy, device compliance check, per-app access policies",
+      "Migrate from full-tunnel VPN to ZTNA over 6 months: application-by-application onboarding, VPN as fallback, decommission VPN when 95% migrated",
+      "Implement conditional access: require compliant device + MFA for all remote access, block legacy authentication protocols, enforce location-based policies",
+      "Deploy always-on ZTNA client: replaces VPN client, transparent to users, automatically routes traffic based on destination"
+    ],
+    "Endpoint Hardening": [
+      "Configure Intune compliance policies: BitLocker required, Windows 11 minimum, patch level within 14 days, Defender for Endpoint active, firewall enabled",
+      "Deploy FileVault enforcement on macOS fleet via Jamf: recovery key escrowed, compliance verification every 4 hours, block access on non-compliance",
+      "Implement USB storage controls: block removable storage by default, exception process for approved encrypted USB devices, audit all USB connections",
+      "Establish secure build pipeline for remote laptops: automated OS deployment, pre-configured security settings, zero-touch enrolment for new devices"
+    ],
+    "BYOD Programme": [
+      "Deploy Intune App Protection for iOS/Android: corporate email and Teams in managed container, prevent copy/paste to personal apps, selective wipe on offboarding",
+      "Establish BYOD acceptable use policy: minimum OS version, screen lock required, no jailbreak, consent to limited management, corporate data stays in container",
+      "Deploy virtual desktop infrastructure (AVD/Citrix) for contractors: no data on device, session recording for sensitive environments, auto-disconnect on idle",
+      "Implement tiered access by device type: corporate device gets full access, BYOD gets email/Teams/SharePoint, unmanaged device gets browser-only via VDI"
+    ],
+    "Data Loss Prevention": [
+      "Deploy Microsoft Purview DLP: detect credit card numbers and personal data in email/Teams/SharePoint, block external sharing of Confidential-labelled documents",
+      "Implement endpoint DLP: alert on bulk file copy to USB/cloud storage, block upload of sensitive files to personal OneDrive/Google Drive/Dropbox",
+      "Configure sensitivity labels: auto-label documents containing PII, enforce encryption on Confidential labels, restrict sharing to internal recipients",
+      "Monitor data exfiltration indicators: unusual download volumes, large email attachments to personal addresses, printing spikes before employee departure"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-46 Rev 2: Guide to Enterprise Telework and Remote Access Security",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-46/rev-2/final",
+      "note": "NIST's comprehensive guide to securing telework. Covers remote access technologies, endpoint security, and policy considerations."
+    },
+    {
+      "title": "NCSC: Home Working - Preparing Your Organisation",
+      "url": "https://www.ncsc.gov.uk/collection/home-working",
+      "note": "UK NCSC guidance on securing remote working. Practical, non-prescriptive advice covering devices, networks, and user behaviour."
+    },
+    {
+      "title": "NIST SP 800-207: Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-207/final",
+      "note": "The foundational document for Zero Trust Architecture. Defines the principles that underpin ZTNA as the successor to VPN-based remote access."
+    },
+    {
+      "title": "Microsoft: Zero Trust Deployment Guide",
+      "url": "https://learn.microsoft.com/en-us/security/zero-trust/",
+      "note": "Practical Zero Trust implementation guidance for Microsoft environments including Entra ID conditional access, Intune compliance, and Microsoft Tunnel."
+    },
+    {
+      "title": "CIS Controls v8: Control 12 - Network Infrastructure Management",
+      "url": "https://www.cisecurity.org/controls/network-infrastructure-management",
+      "note": "CIS guidance on network security controls relevant to remote access architecture."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. Access Control (AC) and System and Communications Protection (SC) families are primary."
+    },
+    {
+      "title": "Gartner: Security Service Edge (SSE) Magic Quadrant",
+      "url": "https://www.gartner.com/reviews/market/security-service-edge",
+      "note": "Market landscape for ZTNA, CASB, and SWG solutions. Useful for evaluating vendors that deliver the remote access security stack."
+    }
+  ],
+  "relatedPatterns": ["SP-006", "SP-007", "SP-017", "SP-029", "SP-032"],
+  "relatedPatternNames": ["Wireless Private Network Pattern", "Wireless Public Hotspot Pattern", "Secure Network Zone Module", "Zero Trust Architecture", "Modern Authentication"],
+  "threats": [
+    {
+      "id": "T-RW-001",
+      "name": "Credential phishing targeting remote workers on unmanaged networks",
+      "mitigatedBy": ["IA-02", "CA-07", "AT-02", "SC-08"]
+    },
+    {
+      "id": "T-RW-002",
+      "name": "Device theft or loss exposing corporate data stored locally",
+      "mitigatedBy": ["SC-28", "CM-06", "AC-19", "MP-06"]
+    },
+    {
+      "id": "T-RW-003",
+      "name": "Man-in-the-middle attacks on untrusted WiFi networks",
+      "mitigatedBy": ["SC-08", "SC-12", "AC-17", "SC-07"]
+    },
+    {
+      "id": "T-RW-004",
+      "name": "Data exfiltration through personal devices or unsanctioned cloud storage",
+      "mitigatedBy": ["AC-04", "AC-19", "SI-04", "MP-02"]
+    },
+    {
+      "id": "T-RW-005",
+      "name": "Lateral movement from compromised remote endpoint into corporate network via VPN",
+      "mitigatedBy": ["SC-07", "AC-06", "AC-17", "SI-03"]
+    },
+    {
+      "id": "T-RW-006",
+      "name": "Home network compromise spreading to corporate device via IoT or family devices",
+      "mitigatedBy": ["SI-03", "CM-02", "SC-07", "CM-06"]
+    },
+    {
+      "id": "T-RW-007",
+      "name": "Shadow IT adoption due to overly restrictive remote access controls",
+      "mitigatedBy": ["AC-20", "SI-04", "AC-04", "PM-14"]
+    },
+    {
+      "id": "T-RW-008",
+      "name": "Unauthorised access from non-compliant or jailbroken personal devices",
+      "mitigatedBy": ["CM-06", "AC-19", "IA-02", "CA-07"]
+    },
+    {
+      "id": "T-RW-009",
+      "name": "Confidential information exposure through screen sharing, printing, or physical observation",
+      "mitigatedBy": ["PE-17", "AC-04", "SC-28", "AT-02"]
+    },
+    {
+      "id": "T-RW-010",
+      "name": "VPN credential compromise providing full network access to attacker",
+      "mitigatedBy": ["IA-02", "SC-07", "AC-17", "SI-04"]
+    }
+  ],
+  "controls": [
+    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
+    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
+    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-19", "name": "Access Control for Mobile Devices", "family": "AC", "emphasis": "critical"},
+    {"id": "AC-20", "name": "Use of External Systems", "family": "AC", "emphasis": "important"},
+    {"id": "AC-22", "name": "Publicly Accessible Content", "family": "AC", "emphasis": "standard"},
+    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important"},
+    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
+    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
+    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
+    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "critical"},
+    {"id": "CM-08", "name": "System Component Inventory", "family": "CM", "emphasis": "important"},
+    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical"},
+    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "important"},
+    {"id": "MP-02", "name": "Media Access", "family": "MP", "emphasis": "important"},
+    {"id": "MP-06", "name": "Media Sanitization", "family": "MP", "emphasis": "standard"},
+    {"id": "PE-17", "name": "Alternate Work Site", "family": "PE", "emphasis": "important"},
+    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "standard"},
+    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "critical"},
+    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "important"},
+    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "critical"},
+    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "critical"},
+    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "important"}
+  ],
+  "controlFamilySummary": {
+    "AC": 7,
+    "AT": 1,
+    "AU": 1,
+    "CA": 1,
+    "CM": 3,
+    "IA": 2,
+    "MP": 2,
+    "PE": 1,
+    "PM": 1,
+    "SC": 4,
+    "SI": 2
+  }
 }

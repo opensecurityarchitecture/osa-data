@@ -20,7 +20,7 @@
     "provenance": "Derived from hands-on experience conducting PCI DSS assessments of major card brand environments. The control selections and implementation guidance reflect lessons learned from real-world compliance programmes in payment processing infrastructure."
   },
   "diagram": {
-    "svg": "/images/OSA_images/patterns/13_05_Pattern_026_01_PCI_Full.svg",
+    "svg": "/images/patterns/13_05_Pattern_026_01_PCI_Full.svg",
     "png": "/images/OSA_images/patterns/13_05_Pattern_026_01_PCI_Full.png"
   },
   "content": {
@@ -98,93 +98,315 @@
       "note": "Comprehensive guidance on cryptographic key management including key generation, distribution, storage, rotation, and destruction. Directly applicable to PCI DSS Requirement 3 encryption key management."
     }
   ],
-  "relatedPatterns": ["SP-013", "SP-018", "SP-025", "SP-010", "SP-004"],
-  "relatedPatternNames": ["Data Security", "ISMS", "Advanced Monitoring and Detection", "Identity Management", "Network Security"],
+  "relatedPatterns": [
+    "SP-013",
+    "SP-018",
+    "SP-025",
+    "SP-010",
+    "SP-004"
+  ],
+  "relatedPatternNames": [
+    "Data Security",
+    "ISMS",
+    "Advanced Monitoring and Detection",
+    "Identity Management",
+    "Network Security"
+  ],
   "threats": [
     {
       "id": "T-PC-001",
       "name": "Cardholder Data Theft at Rest (Database Compromise, Backup Theft)",
-      "mitigatedBy": ["SC-13", "SC-12", "AC-06", "MP-06"]
+      "mitigatedBy": [
+        "SC-13",
+        "SC-12",
+        "AC-06",
+        "MP-06"
+      ]
     },
     {
       "id": "T-PC-002",
       "name": "Cardholder Data Interception in Transit (Network Sniffing, MITM)",
-      "mitigatedBy": ["SC-09", "SC-13", "SC-07", "SI-04"]
+      "mitigatedBy": [
+        "SC-09",
+        "SC-13",
+        "SC-07",
+        "SI-04"
+      ]
     },
     {
       "id": "T-PC-003",
       "name": "Web Application Attacks (SQL Injection, XSS, Magecart-style Skimming)",
-      "mitigatedBy": ["SI-07", "SI-06", "SI-09", "CM-02"]
+      "mitigatedBy": [
+        "SI-07",
+        "SI-06",
+        "SI-09",
+        "CM-02"
+      ]
     },
     {
       "id": "T-PC-004",
       "name": "POS Malware and Memory Scraping",
-      "mitigatedBy": ["SI-03", "CM-02", "SC-07", "SI-07"]
+      "mitigatedBy": [
+        "SI-03",
+        "CM-02",
+        "SC-07",
+        "SI-07"
+      ]
     },
     {
       "id": "T-PC-005",
       "name": "Exploitation of Default Credentials and Misconfigurations",
-      "mitigatedBy": ["CM-02", "CM-03", "AC-02", "AC-06"]
+      "mitigatedBy": [
+        "CM-02",
+        "CM-03",
+        "AC-02",
+        "AC-06"
+      ]
     },
     {
       "id": "T-PC-006",
       "name": "Insider Threat (Privileged User Data Exfiltration)",
-      "mitigatedBy": ["AC-06", "AU-02", "AU-06", "PS-03"]
+      "mitigatedBy": [
+        "AC-06",
+        "AU-02",
+        "AU-06",
+        "PS-03"
+      ]
     },
     {
       "id": "T-PC-007",
       "name": "Unpatched Vulnerabilities in CDE Systems",
-      "mitigatedBy": ["RA-05", "SI-02", "SI-05", "CM-08"]
+      "mitigatedBy": [
+        "RA-05",
+        "SI-02",
+        "SI-05",
+        "CM-08"
+      ]
     },
     {
       "id": "T-PC-008",
       "name": "Inadequate Network Segmentation (Scope Expansion)",
-      "mitigatedBy": ["SC-07", "CA-07", "CM-08", "RA-03"]
+      "mitigatedBy": [
+        "SC-07",
+        "CA-07",
+        "CM-08",
+        "RA-03"
+      ]
     },
     {
       "id": "T-PC-009",
       "name": "Audit Log Tampering or Gaps",
-      "mitigatedBy": ["AU-09", "AU-08", "AU-06", "AU-02"]
+      "mitigatedBy": [
+        "AU-09",
+        "AU-08",
+        "AU-06",
+        "AU-02"
+      ]
     },
     {
       "id": "T-PC-010",
       "name": "Physical Unauthorised Access to CDE Infrastructure",
-      "mitigatedBy": ["PE-03", "PE-07", "MP-03", "MP-06"]
+      "mitigatedBy": [
+        "PE-03",
+        "PE-07",
+        "MP-03",
+        "MP-06"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-18", "name": "Wireless Access Restrictions", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-19", "name": "Access Control For Portable And Mobile Devices", "family": "AC", "emphasis": "standard"},
-    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-08", "name": "Time Stamps", "family": "AU", "emphasis": "important"},
-    {"id": "AU-09", "name": "Protection Of Audit Information", "family": "AU", "emphasis": "important"},
-    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
-    {"id": "CM-08", "name": "Information System Component Inventory", "family": "CM", "emphasis": "important"},
-    {"id": "IR-01", "name": "Incident Response Policy And Procedures", "family": "IR", "emphasis": "important"},
-    {"id": "MP-03", "name": "Media Labeling", "family": "MP", "emphasis": "standard"},
-    {"id": "MP-06", "name": "Media Sanitization And Disposal", "family": "MP", "emphasis": "important"},
-    {"id": "PE-03", "name": "Physical Access Control", "family": "PE", "emphasis": "important"},
-    {"id": "PE-07", "name": "Visitor Control", "family": "PE", "emphasis": "standard"},
-    {"id": "PS-03", "name": "Personnel Screening", "family": "PS", "emphasis": "standard"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "critical"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-09", "name": "Transmission Confidentiality", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment And Management", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-13", "name": "Use Of Cryptography", "family": "SC", "emphasis": "critical"},
-    {"id": "SI-02", "name": "Flaw Remediation", "family": "SI", "emphasis": "important"},
-    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
-    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "important"},
-    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-06", "name": "Security Functionality Verification", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-07", "name": "Software And Information Integrity", "family": "SI", "emphasis": "important"},
-    {"id": "SI-09", "name": "Information Input Restrictions", "family": "SI", "emphasis": "standard"}
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-18",
+      "name": "Wireless Access Restrictions",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-19",
+      "name": "Access Control For Portable And Mobile Devices",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-08",
+      "name": "Time Stamps",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection Of Audit Information",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "Information System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-01",
+      "name": "Incident Response Policy And Procedures",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "MP-03",
+      "name": "Media Labeling",
+      "family": "MP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MP-06",
+      "name": "Media Sanitization And Disposal",
+      "family": "MP",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-07",
+      "name": "Visitor Control",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-03",
+      "name": "Personnel Screening",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment And Management",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use Of Cryptography",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts And Advisories",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-06",
+      "name": "Security Functionality Verification",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software And Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-09",
+      "name": "Information Input Restrictions",
+      "family": "SI",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 4,

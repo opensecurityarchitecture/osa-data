@@ -19,7 +19,7 @@
     "reviewers": []
   },
   "diagram": {
-    "svg": "/images/OSA_images/patterns/08_02_Pattern_011_15_Cloud_Computing.svg",
+    "svg": "/images/patterns/08_02_Pattern_011_15_Cloud_Computing.svg",
     "png": "/images/OSA_images/patterns/08_02_Pattern_011_15_Cloud_Computing.png"
   },
   "content": {
@@ -102,115 +102,449 @@
       "note": "Reference architecture defining cloud computing actors, activities, and their relationships. Useful for understanding the shared responsibility model and control boundaries."
     }
   ],
-  "relatedPatterns": ["SP-008", "SP-009", "SP-010", "SP-013", "SP-018", "SP-027"],
-  "relatedPatternNames": ["Public Web Server", "Secure Internet Connection", "Identity Management", "Data Security", "ISMS", "Secure AI Integration"],
+  "relatedPatterns": [
+    "SP-008",
+    "SP-009",
+    "SP-010",
+    "SP-013",
+    "SP-018",
+    "SP-027"
+  ],
+  "relatedPatternNames": [
+    "Public Web Server",
+    "Secure Internet Connection",
+    "Identity Management",
+    "Data Security",
+    "ISMS",
+    "Secure AI Integration"
+  ],
   "threats": [
     {
       "id": "T-CC-001",
       "name": "Cloud Resource Misconfiguration (Public Storage, Open Security Groups)",
-      "mitigatedBy": ["CM-02", "CM-04", "CA-07", "CM-03"]
+      "mitigatedBy": [
+        "CM-02",
+        "CM-04",
+        "CA-07",
+        "CM-03"
+      ]
     },
     {
       "id": "T-CC-002",
       "name": "Credential Compromise and Unauthorised Management Plane Access",
-      "mitigatedBy": ["IA-02", "IA-05", "AC-02", "AC-03"]
+      "mitigatedBy": [
+        "IA-02",
+        "IA-05",
+        "AC-02",
+        "AC-03"
+      ]
     },
     {
       "id": "T-CC-003",
       "name": "Data Exfiltration from Cloud Storage or Databases",
-      "mitigatedBy": ["AC-04", "SC-08", "SC-09", "AU-06"]
+      "mitigatedBy": [
+        "AC-04",
+        "SC-08",
+        "SC-09",
+        "AU-06"
+      ]
     },
     {
       "id": "T-CC-004",
       "name": "Insider Threat (Provider or Customer Personnel)",
-      "mitigatedBy": ["PS-06", "PS-07", "AC-13", "AU-06"]
+      "mitigatedBy": [
+        "PS-06",
+        "PS-07",
+        "AC-13",
+        "AU-06"
+      ]
     },
     {
       "id": "T-CC-005",
       "name": "Supply Chain Attack via Container Images or IaC Modules",
-      "mitigatedBy": ["SA-10", "SA-11", "SI-03", "CM-02"]
+      "mitigatedBy": [
+        "SA-10",
+        "SA-11",
+        "SI-03",
+        "CM-02"
+      ]
     },
     {
       "id": "T-CC-006",
       "name": "Cross-Tenant Isolation Failure",
-      "mitigatedBy": ["SC-02", "SC-03", "SC-04", "SA-09"]
+      "mitigatedBy": [
+        "SC-02",
+        "SC-03",
+        "SC-04",
+        "SA-09"
+      ]
     },
     {
       "id": "T-CC-007",
       "name": "Cryptojacking via Compromised Cloud Accounts",
-      "mitigatedBy": ["IA-02", "AC-02", "SI-04", "AU-06"]
+      "mitigatedBy": [
+        "IA-02",
+        "AC-02",
+        "SI-04",
+        "AU-06"
+      ]
     },
     {
       "id": "T-CC-008",
       "name": "Data Sovereignty Violation from Cross-Region Replication",
-      "mitigatedBy": ["AC-04", "SC-07", "SA-09", "CM-02"]
+      "mitigatedBy": [
+        "AC-04",
+        "SC-07",
+        "SA-09",
+        "CM-02"
+      ]
     },
     {
       "id": "T-CC-009",
       "name": "Denial of Service Against Cloud-Hosted Applications",
-      "mitigatedBy": ["SC-05", "SC-06", "CP-01", "SC-07"]
+      "mitigatedBy": [
+        "SC-05",
+        "SC-06",
+        "CP-01",
+        "SC-07"
+      ]
     },
     {
       "id": "T-CC-010",
       "name": "Vendor Lock-In and Cloud Provider Service Disruption",
-      "mitigatedBy": ["SA-04", "CP-01", "SA-09", "SA-02"]
+      "mitigatedBy": [
+        "SA-04",
+        "CP-01",
+        "SA-09",
+        "SA-02"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-01", "name": "Access Control Policies and Procedures", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "important"},
-    {"id": "AC-13", "name": "Supervision And Review -- Access Control", "family": "AC", "emphasis": "important"},
-    {"id": "AT-01", "name": "Security Awareness And Training Policy And Procedures", "family": "AT", "emphasis": "standard"},
-    {"id": "AT-02", "name": "Security Awareness", "family": "AT", "emphasis": "important"},
-    {"id": "AT-03", "name": "Security Training", "family": "AT", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "critical"},
-    {"id": "CA-01", "name": "Certification, Accreditation, And Security Assessment Policies And Procedures", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-03", "name": "Information System Connections", "family": "CA", "emphasis": "important"},
-    {"id": "CA-04", "name": "Security Certification", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-06", "name": "Security Accreditation", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical"},
-    {"id": "CM-01", "name": "Configuration Management Policy And Procedures", "family": "CM", "emphasis": "standard"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
-    {"id": "CM-04", "name": "Monitoring Configuration Changes", "family": "CM", "emphasis": "important"},
-    {"id": "CM-05", "name": "Access Restrictions For Change", "family": "CM", "emphasis": "important"},
-    {"id": "CP-01", "name": "Contingency Planning Policy And Procedures", "family": "CP", "emphasis": "standard"},
-    {"id": "IA-01", "name": "Identification And Authentication Policy And Procedures", "family": "IA", "emphasis": "standard"},
-    {"id": "IA-02", "name": "User Identification And Authentication", "family": "IA", "emphasis": "critical"},
-    {"id": "IA-03", "name": "Device Identification And Authentication", "family": "IA", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "important"},
-    {"id": "IR-01", "name": "Incident Response Policy And Procedures", "family": "IR", "emphasis": "standard"},
-    {"id": "PL-01", "name": "Security Planning Policy And Procedures", "family": "PL", "emphasis": "standard"},
-    {"id": "PS-06", "name": "Access Agreements", "family": "PS", "emphasis": "important"},
-    {"id": "PS-07", "name": "Third-Party Personnel Security", "family": "PS", "emphasis": "important"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-04", "name": "Risk Assessment Update", "family": "RA", "emphasis": "standard"},
-    {"id": "SA-01", "name": "System And Services Acquisition Policy And Procedures", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-02", "name": "Allocation Of Resources", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-03", "name": "Life Cycle Support", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-04", "name": "Acquisitions", "family": "SA", "emphasis": "important"},
-    {"id": "SA-05", "name": "Information System Documentation", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-09", "name": "External Information System Services", "family": "SA", "emphasis": "critical"},
-    {"id": "SA-10", "name": "Developer Configuration Management", "family": "SA", "emphasis": "important"},
-    {"id": "SA-11", "name": "Developer Security Testing", "family": "SA", "emphasis": "important"},
-    {"id": "SC-01", "name": "System And Communications Protection Policy And Procedures", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-02", "name": "Application Partitioning", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-03", "name": "Security Function Isolation", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-04", "name": "Information Remnance", "family": "SC", "emphasis": "important"},
-    {"id": "SC-05", "name": "Denial Of Service Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SC-06", "name": "Resource Priority", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SC-08", "name": "Transmission Integrity", "family": "SC", "emphasis": "important"},
-    {"id": "SC-09", "name": "Transmission Confidentiality", "family": "SC", "emphasis": "important"},
-    {"id": "SC-11", "name": "Trusted Path", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment And Management", "family": "SC", "emphasis": "important"},
-    {"id": "SC-18", "name": "Mobile Code", "family": "SC", "emphasis": "standard"},
-    {"id": "SI-02", "name": "Flaw Remediation", "family": "SI", "emphasis": "important"},
-    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
-    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "important"}
+    {
+      "id": "AC-01",
+      "name": "Access Control Policies and Procedures",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-13",
+      "name": "Supervision And Review -- Access Control",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-01",
+      "name": "Security Awareness And Training Policy And Procedures",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Security Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Security Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-01",
+      "name": "Certification, Accreditation, And Security Assessment Policies And Procedures",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-03",
+      "name": "Information System Connections",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-04",
+      "name": "Security Certification",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-06",
+      "name": "Security Accreditation",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-01",
+      "name": "Configuration Management Policy And Procedures",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-04",
+      "name": "Monitoring Configuration Changes",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions For Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-01",
+      "name": "Contingency Planning Policy And Procedures",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-01",
+      "name": "Identification And Authentication Policy And Procedures",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-01",
+      "name": "Incident Response Policy And Procedures",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PL-01",
+      "name": "Security Planning Policy And Procedures",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-06",
+      "name": "Access Agreements",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-07",
+      "name": "Third-Party Personnel Security",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-04",
+      "name": "Risk Assessment Update",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-01",
+      "name": "System And Services Acquisition Policy And Procedures",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-02",
+      "name": "Allocation Of Resources",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-03",
+      "name": "Life Cycle Support",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisitions",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-05",
+      "name": "Information System Documentation",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-09",
+      "name": "External Information System Services",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-10",
+      "name": "Developer Configuration Management",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-01",
+      "name": "System And Communications Protection Policy And Procedures",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-02",
+      "name": "Application Partitioning",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-03",
+      "name": "Security Function Isolation",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-04",
+      "name": "Information Remnance",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-05",
+      "name": "Denial Of Service Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-06",
+      "name": "Resource Priority",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-11",
+      "name": "Trusted Path",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment And Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-18",
+      "name": "Mobile Code",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "important"
+    }
   ],
   "controlFamilySummary": {
     "AC": 5,

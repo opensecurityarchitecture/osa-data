@@ -19,7 +19,7 @@
     "reviewers": []
   },
   "diagram": {
-    "svg": "/images/OSA_images/patterns/08_02_Pattern_008_31_Public_WebServer.svg",
+    "svg": "/images/patterns/08_02_Pattern_008_31_Public_WebServer.svg",
     "png": "/images/OSA_images/patterns/08_02_Pattern_008_31_Public_WebServer.png"
   },
   "content": {
@@ -102,99 +102,353 @@
       "note": "Quarterly analysis of DDoS attack trends, volumes, and vectors. Useful for calibrating SC-05 controls and understanding the current threat landscape for internet-facing infrastructure."
     }
   ],
-  "relatedPatterns": ["SP-003", "SP-005", "SP-009", "SP-011", "SP-014", "SP-016"],
-  "relatedPatternNames": ["Internal Web Server", "Network Firewall", "Secure Internet Connection", "Cloud Computing", "Awareness and Training", "Intrusion Detection"],
+  "relatedPatterns": [
+    "SP-003",
+    "SP-005",
+    "SP-009",
+    "SP-011",
+    "SP-014",
+    "SP-016"
+  ],
+  "relatedPatternNames": [
+    "Internal Web Server",
+    "Network Firewall",
+    "Secure Internet Connection",
+    "Cloud Computing",
+    "Awareness and Training",
+    "Intrusion Detection"
+  ],
   "threats": [
     {
       "id": "T-WS-001",
       "name": "SQL Injection and Command Injection",
-      "mitigatedBy": ["AC-03", "SA-08", "SA-10", "RA-05"]
+      "mitigatedBy": [
+        "AC-03",
+        "SA-08",
+        "SA-10",
+        "RA-05"
+      ]
     },
     {
       "id": "T-WS-002",
       "name": "Cross-Site Scripting (XSS) and Content Injection",
-      "mitigatedBy": ["SA-08", "CM-02", "CM-07", "RA-05"]
+      "mitigatedBy": [
+        "SA-08",
+        "CM-02",
+        "CM-07",
+        "RA-05"
+      ]
     },
     {
       "id": "T-WS-003",
       "name": "Distributed Denial of Service (DDoS)",
-      "mitigatedBy": ["SC-05", "CP-02", "CP-07", "CP-10"]
+      "mitigatedBy": [
+        "SC-05",
+        "CP-02",
+        "CP-07",
+        "CP-10"
+      ]
     },
     {
       "id": "T-WS-004",
       "name": "Credential Brute-Force and Stuffing Attacks",
-      "mitigatedBy": ["AC-07", "AC-10", "IA-01", "AU-03"]
+      "mitigatedBy": [
+        "AC-07",
+        "AC-10",
+        "IA-01",
+        "AU-03"
+      ]
     },
     {
       "id": "T-WS-005",
       "name": "Session Hijacking and Fixation",
-      "mitigatedBy": ["AC-11", "AC-12", "SC-08", "SC-09"]
+      "mitigatedBy": [
+        "AC-11",
+        "AC-12",
+        "SC-08",
+        "SC-09"
+      ]
     },
     {
       "id": "T-WS-006",
       "name": "Server Misconfiguration and Information Disclosure",
-      "mitigatedBy": ["CM-02", "CM-07", "CM-03", "RA-05"]
+      "mitigatedBy": [
+        "CM-02",
+        "CM-07",
+        "CM-03",
+        "RA-05"
+      ]
     },
     {
       "id": "T-WS-007",
       "name": "Supply Chain Compromise (Third-Party Dependencies)",
-      "mitigatedBy": ["SA-10", "SA-03", "CM-03", "RA-05"]
+      "mitigatedBy": [
+        "SA-10",
+        "SA-03",
+        "CM-03",
+        "RA-05"
+      ]
     },
     {
       "id": "T-WS-008",
       "name": "Cryptographic Failures (Weak TLS, Expired Certificates)",
-      "mitigatedBy": ["SC-08", "SC-09", "SC-11", "SC-20"]
+      "mitigatedBy": [
+        "SC-08",
+        "SC-09",
+        "SC-11",
+        "SC-20"
+      ]
     },
     {
       "id": "T-WS-009",
       "name": "Unauthorised Access to Administrative Interfaces",
-      "mitigatedBy": ["AC-03", "CM-05", "AC-07", "AU-03"]
+      "mitigatedBy": [
+        "AC-03",
+        "CM-05",
+        "AC-07",
+        "AU-03"
+      ]
     },
     {
       "id": "T-WS-010",
       "name": "Data Exfiltration Following Application Compromise",
-      "mitigatedBy": ["AU-07", "IR-04", "CP-09", "SC-08"]
+      "mitigatedBy": [
+        "AU-07",
+        "IR-04",
+        "CP-09",
+        "SC-08"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-01", "name": "Access Control Policies and Procedures", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-07", "name": "Unsuccessful Login Attempts", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-09", "name": "Previous Logon Notification", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-10", "name": "Concurrent Session Control", "family": "AC", "emphasis": "important"},
-    {"id": "AC-11", "name": "Session Lock", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "important"},
-    {"id": "AU-03", "name": "Content Of Audit Records", "family": "AU", "emphasis": "important"},
-    {"id": "AU-07", "name": "Audit Reduction And Report Generation", "family": "AU", "emphasis": "important"},
-    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-04", "name": "Security Certification", "family": "CA", "emphasis": "standard"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
-    {"id": "CM-05", "name": "Access Restrictions For Change", "family": "CM", "emphasis": "important"},
-    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "critical"},
-    {"id": "CP-02", "name": "Contingency Plan", "family": "CP", "emphasis": "important"},
-    {"id": "CP-03", "name": "Contingency Training", "family": "CP", "emphasis": "standard"},
-    {"id": "CP-06", "name": "Alternate Storage Site", "family": "CP", "emphasis": "standard"},
-    {"id": "CP-07", "name": "Alternate Processing Site", "family": "CP", "emphasis": "standard"},
-    {"id": "CP-09", "name": "Information System Backup", "family": "CP", "emphasis": "important"},
-    {"id": "CP-10", "name": "Information System Recovery And Reconstitution", "family": "CP", "emphasis": "important"},
-    {"id": "IA-01", "name": "Identification And Authentication Policy And Procedures", "family": "IA", "emphasis": "standard"},
-    {"id": "IR-02", "name": "Incident Response Training", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "MA-02", "name": "Controlled Maintenance", "family": "MA", "emphasis": "standard"},
-    {"id": "MA-04", "name": "Remote Maintenance", "family": "MA", "emphasis": "standard"},
-    {"id": "MA-06", "name": "Timely Maintenance", "family": "MA", "emphasis": "standard"},
-    {"id": "PL-02", "name": "System Security Plan", "family": "PL", "emphasis": "standard"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "critical"},
-    {"id": "SA-03", "name": "Life Cycle Support", "family": "SA", "emphasis": "important"},
-    {"id": "SA-08", "name": "Security Engineering Principles", "family": "SA", "emphasis": "important"},
-    {"id": "SA-10", "name": "Developer Configuration Management", "family": "SA", "emphasis": "important"},
-    {"id": "SC-05", "name": "Denial Of Service Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-08", "name": "Transmission Integrity", "family": "SC", "emphasis": "important"},
-    {"id": "SC-09", "name": "Transmission Confidentiality", "family": "SC", "emphasis": "important"},
-    {"id": "SC-11", "name": "Trusted Path", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-20", "name": "Secure Name / Address Resolution Service (Authoritative Source)", "family": "SC", "emphasis": "standard"}
+    {
+      "id": "AC-01",
+      "name": "Access Control Policies and Procedures",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Login Attempts",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-09",
+      "name": "Previous Logon Notification",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-10",
+      "name": "Concurrent Session Control",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-11",
+      "name": "Session Lock",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-07",
+      "name": "Audit Reduction And Report Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-04",
+      "name": "Security Certification",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions For Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-02",
+      "name": "Contingency Plan",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-03",
+      "name": "Contingency Training",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-06",
+      "name": "Alternate Storage Site",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-07",
+      "name": "Alternate Processing Site",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-09",
+      "name": "Information System Backup",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-10",
+      "name": "Information System Recovery And Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-01",
+      "name": "Identification And Authentication Policy And Procedures",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "MA-02",
+      "name": "Controlled Maintenance",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-04",
+      "name": "Remote Maintenance",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-06",
+      "name": "Timely Maintenance",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security Plan",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-03",
+      "name": "Life Cycle Support",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-10",
+      "name": "Developer Configuration Management",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-05",
+      "name": "Denial Of Service Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-11",
+      "name": "Trusted Path",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-20",
+      "name": "Secure Name / Address Resolution Service (Authoritative Source)",
+      "family": "SC",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 7,

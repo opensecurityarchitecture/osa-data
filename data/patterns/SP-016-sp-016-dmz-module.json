@@ -19,7 +19,7 @@
     "reviewers": []
   },
   "diagram": {
-    "svg": "/images/OSA_images/patterns/08_02_Module_016_01_DMZ.svg",
+    "svg": "/images/patterns/08_02_Module_016_01_DMZ.svg",
     "png": "/images/OSA_images/patterns/08_02_Module_016_01_DMZ.png"
   },
   "content": {
@@ -97,92 +97,305 @@
       "note": "Practical SANS guidance on DMZ architecture design including multi-homed firewalls, screened subnet configurations, and common DMZ design patterns."
     }
   ],
-  "relatedPatterns": ["SP-004", "SP-009", "SP-011", "SP-013", "SP-025"],
-  "relatedPatternNames": ["Firewall Architecture", "Secure Internet Connection", "Network Segmentation", "Data Security", "Advanced Monitoring and Detection"],
+  "relatedPatterns": [
+    "SP-004",
+    "SP-009",
+    "SP-011",
+    "SP-013",
+    "SP-025"
+  ],
+  "relatedPatternNames": [
+    "Firewall Architecture",
+    "Secure Internet Connection",
+    "Network Segmentation",
+    "Data Security",
+    "Advanced Monitoring and Detection"
+  ],
   "threats": [
     {
       "id": "T-DZ-001",
       "name": "Denial of Service (Volumetric and Application-Layer)",
-      "mitigatedBy": ["SC-05", "SC-10", "SI-04"]
+      "mitigatedBy": [
+        "SC-05",
+        "SC-10",
+        "SI-04"
+      ]
     },
     {
       "id": "T-DZ-002",
       "name": "Exploitation of Internet-Facing Service Vulnerabilities",
-      "mitigatedBy": ["CM-07", "RA-05", "SI-07", "SI-06"]
+      "mitigatedBy": [
+        "CM-07",
+        "RA-05",
+        "SI-07",
+        "SI-06"
+      ]
     },
     {
       "id": "T-DZ-003",
       "name": "Lateral Movement from Compromised DMZ Host",
-      "mitigatedBy": ["AC-04", "AC-06", "SI-04", "AU-06"]
+      "mitigatedBy": [
+        "AC-04",
+        "AC-06",
+        "SI-04",
+        "AU-06"
+      ]
     },
     {
       "id": "T-DZ-004",
       "name": "Malware Delivery via Web or Email Through DMZ",
-      "mitigatedBy": ["SI-03", "SI-04", "SI-08"]
+      "mitigatedBy": [
+        "SI-03",
+        "SI-04",
+        "SI-08"
+      ]
     },
     {
       "id": "T-DZ-005",
       "name": "DNS Cache Poisoning and DNS Tunnelling",
-      "mitigatedBy": ["SC-20", "SC-21", "SC-22", "AU-06"]
+      "mitigatedBy": [
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "AU-06"
+      ]
     },
     {
       "id": "T-DZ-006",
       "name": "Brute-Force and Credential Stuffing Attacks",
-      "mitigatedBy": ["AC-07", "AC-12", "AU-02", "AU-06"]
+      "mitigatedBy": [
+        "AC-07",
+        "AC-12",
+        "AU-02",
+        "AU-06"
+      ]
     },
     {
       "id": "T-DZ-007",
       "name": "Firewall Rule Misconfiguration Allowing Bypass",
-      "mitigatedBy": ["AC-04", "CA-04", "CA-05", "AU-06"]
+      "mitigatedBy": [
+        "AC-04",
+        "CA-04",
+        "CA-05",
+        "AU-06"
+      ]
     },
     {
       "id": "T-DZ-008",
       "name": "Session Hijacking on DMZ-Hosted Services",
-      "mitigatedBy": ["SC-23", "SC-10", "AC-12"]
+      "mitigatedBy": [
+        "SC-23",
+        "SC-10",
+        "AC-12"
+      ]
     },
     {
       "id": "T-DZ-009",
       "name": "Audit Log Tampering by Compromised DMZ Host",
-      "mitigatedBy": ["AU-09", "AU-05", "AU-04"]
+      "mitigatedBy": [
+        "AU-09",
+        "AU-05",
+        "AU-04"
+      ]
     },
     {
       "id": "T-DZ-010",
       "name": "Zero-Day Exploitation of Unpatched DMZ Services",
-      "mitigatedBy": ["SI-05", "RA-05", "SI-04", "CM-07"]
+      "mitigatedBy": [
+        "SI-05",
+        "RA-05",
+        "SI-04",
+        "CM-07"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
-    {"id": "AC-07", "name": "Unsuccessful Login Attempts", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "standard"},
-    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-03", "name": "Content Of Audit Records", "family": "AU", "emphasis": "important"},
-    {"id": "AU-04", "name": "Audit Storage Capacity", "family": "AU", "emphasis": "standard"},
-    {"id": "AU-05", "name": "Response To Audit Processing Failures", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-07", "name": "Audit Reduction And Report Generation", "family": "AU", "emphasis": "standard"},
-    {"id": "AU-08", "name": "Time Stamps", "family": "AU", "emphasis": "important"},
-    {"id": "AU-09", "name": "Protection Of Audit Information", "family": "AU", "emphasis": "important"},
-    {"id": "AU-10", "name": "Non-Repudiation", "family": "AU", "emphasis": "standard"},
-    {"id": "AU-11", "name": "Audit Record Retention", "family": "AU", "emphasis": "standard"},
-    {"id": "CA-03", "name": "Information System Connections", "family": "CA", "emphasis": "important"},
-    {"id": "CA-04", "name": "Security Certification", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-05", "name": "Plan Of Action And Milestones", "family": "CA", "emphasis": "standard"},
-    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "critical"},
-    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "critical"},
-    {"id": "SC-05", "name": "Denial Of Service Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SC-10", "name": "Network Disconnect", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-20", "name": "Secure Name / Address Resolution Service (Authoritative Source)", "family": "SC", "emphasis": "important"},
-    {"id": "SC-21", "name": "Secure Name / Address Resolution Service (Recursive Or Caching Resolver)", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-22", "name": "Architecture And Provisioning For Name / Address Resolution Service", "family": "SC", "emphasis": "important"},
-    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "standard"},
-    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
-    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI", "emphasis": "important"},
-    {"id": "SI-06", "name": "Security Functionality Verification", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-07", "name": "Software And Information Integrity", "family": "SI", "emphasis": "important"},
-    {"id": "SI-08", "name": "Spam Protection", "family": "SI", "emphasis": "standard"}
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Login Attempts",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-04",
+      "name": "Audit Storage Capacity",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-05",
+      "name": "Response To Audit Processing Failures",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-07",
+      "name": "Audit Reduction And Report Generation",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-08",
+      "name": "Time Stamps",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection Of Audit Information",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-10",
+      "name": "Non-Repudiation",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-11",
+      "name": "Audit Record Retention",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-03",
+      "name": "Information System Connections",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-04",
+      "name": "Security Certification",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-05",
+      "name": "Plan Of Action And Milestones",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-05",
+      "name": "Denial Of Service Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-10",
+      "name": "Network Disconnect",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-20",
+      "name": "Secure Name / Address Resolution Service (Authoritative Source)",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-21",
+      "name": "Secure Name / Address Resolution Service (Recursive Or Caching Resolver)",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-22",
+      "name": "Architecture And Provisioning For Name / Address Resolution Service",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts And Advisories",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-06",
+      "name": "Security Functionality Verification",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software And Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-08",
+      "name": "Spam Protection",
+      "family": "SI",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 4,

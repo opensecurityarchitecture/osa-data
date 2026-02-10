@@ -19,7 +19,7 @@
     "reviewers": []
   },
   "diagram": {
-    "svg": "/images/OSA_images/patterns/08_02_10_Pattern_002_Server_Module.svg",
+    "svg": "/images/patterns/08_02_10_Pattern_002_Server_Module.svg",
     "png": "/images/OSA_images/patterns/08_02_10_Pattern_002_Server_Module.png"
   },
   "content": {
@@ -102,151 +102,677 @@
       "note": "Defines the physical infrastructure tiers (I-IV) for data centre resilience. Directly relevant to the PE family controls covering power, cooling, and environmental protection for server infrastructure."
     }
   ],
-  "relatedPatterns": ["SP-001", "SP-008", "SP-011", "SP-013", "SP-016", "SP-018", "SP-023", "SP-025", "SP-026"],
-  "relatedPatternNames": ["Client Module", "Public Web Server Pattern", "Cloud Computing Pattern", "Data Security Pattern", "DMZ Module", "Information Security Management System (ISMS) Module", "Industrial Control Systems", "Advanced Monitoring and Detection", "PCI Full Environment"],
+  "relatedPatterns": [
+    "SP-001",
+    "SP-008",
+    "SP-011",
+    "SP-013",
+    "SP-016",
+    "SP-018",
+    "SP-023",
+    "SP-025",
+    "SP-026"
+  ],
+  "relatedPatternNames": [
+    "Client Module",
+    "Public Web Server Pattern",
+    "Cloud Computing Pattern",
+    "Data Security Pattern",
+    "DMZ Module",
+    "Information Security Management System (ISMS) Module",
+    "Industrial Control Systems",
+    "Advanced Monitoring and Detection",
+    "PCI Full Environment"
+  ],
   "threats": [
     {
       "id": "T-SM-001",
       "name": "Remote Exploitation of Unpatched Server Vulnerabilities",
-      "mitigatedBy": ["RA-05", "SI-02", "SI-05", "CM-07"]
+      "mitigatedBy": [
+        "RA-05",
+        "SI-02",
+        "SI-05",
+        "CM-07"
+      ]
     },
     {
       "id": "T-SM-002",
       "name": "Privilege Escalation and Lateral Movement",
-      "mitigatedBy": ["AC-06", "AC-05", "AC-03", "SC-02"]
+      "mitigatedBy": [
+        "AC-06",
+        "AC-05",
+        "AC-03",
+        "SC-02"
+      ]
     },
     {
       "id": "T-SM-003",
       "name": "Unauthorised Administrative Access",
-      "mitigatedBy": ["AC-07", "IA-02", "AC-10", "AU-06"]
+      "mitigatedBy": [
+        "AC-07",
+        "IA-02",
+        "AC-10",
+        "AU-06"
+      ]
     },
     {
       "id": "T-SM-004",
       "name": "Data Exfiltration from Server-Hosted Repositories",
-      "mitigatedBy": ["AU-02", "AU-06", "SI-04", "IR-05", "SC-13"]
+      "mitigatedBy": [
+        "AU-02",
+        "AU-06",
+        "SI-04",
+        "IR-05",
+        "SC-13"
+      ]
     },
     {
       "id": "T-SM-005",
       "name": "Ransomware and Destructive Malware Attack",
-      "mitigatedBy": ["SI-03", "CP-09", "CP-10", "SI-07", "CM-07"]
+      "mitigatedBy": [
+        "SI-03",
+        "CP-09",
+        "CP-10",
+        "SI-07",
+        "CM-07"
+      ]
     },
     {
       "id": "T-SM-006",
       "name": "Physical Compromise and Hardware Theft",
-      "mitigatedBy": ["PE-02", "PE-03", "PE-06", "SC-12", "SC-13"]
+      "mitigatedBy": [
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "SC-12",
+        "SC-13"
+      ]
     },
     {
       "id": "T-SM-007",
       "name": "Environmental Failure (Power, Cooling, Fire, Water)",
-      "mitigatedBy": ["PE-09", "PE-10", "PE-11", "PE-13", "PE-14", "PE-15"]
+      "mitigatedBy": [
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-13",
+        "PE-14",
+        "PE-15"
+      ]
     },
     {
       "id": "T-SM-008",
       "name": "Configuration Drift and Unauthorised System Changes",
-      "mitigatedBy": ["CM-02", "CM-03", "CM-04", "CM-06", "CA-07"]
+      "mitigatedBy": [
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-06",
+        "CA-07"
+      ]
     },
     {
       "id": "T-SM-009",
       "name": "Supply Chain Compromise and Software Integrity Tampering",
-      "mitigatedBy": ["SI-07", "SA-04", "SA-08", "SI-06"]
+      "mitigatedBy": [
+        "SI-07",
+        "SA-04",
+        "SA-08",
+        "SI-06"
+      ]
     },
     {
       "id": "T-SM-010",
       "name": "Audit Log Evasion and Forensic Evidence Destruction",
-      "mitigatedBy": ["AU-09", "AU-05", "AU-11", "AU-10"]
+      "mitigatedBy": [
+        "AU-09",
+        "AU-05",
+        "AU-11",
+        "AU-10"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-03", "name": "Access enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-05", "name": "Separation Of Duties", "family": "AC", "emphasis": "important"},
-    {"id": "AC-06", "name": "Least privilege", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-07", "name": "Unsuccessful login attempts", "family": "AC", "emphasis": "important"},
-    {"id": "AC-08", "name": "System use notification", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-09", "name": "Previous Logon Notification", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-10", "name": "Concurrent Session Control", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "important"},
-    {"id": "AT-03", "name": "Security Training", "family": "AT", "emphasis": "standard"},
-    {"id": "AT-04", "name": "Security Training Records", "family": "AT", "emphasis": "standard"},
-    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-03", "name": "Content Of Audit Records", "family": "AU", "emphasis": "important"},
-    {"id": "AU-04", "name": "Audit Storage Capacity", "family": "AU", "emphasis": "standard"},
-    {"id": "AU-05", "name": "Response To Audit Processing Failures", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-08", "name": "Time Stamps", "family": "AU", "emphasis": "important"},
-    {"id": "AU-09", "name": "Protection Of Audit Information", "family": "AU", "emphasis": "important"},
-    {"id": "AU-10", "name": "Non-Repudiation", "family": "AU", "emphasis": "standard"},
-    {"id": "AU-11", "name": "Audit Record Retention", "family": "AU", "emphasis": "standard"},
-    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-04", "name": "Security Certification", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-06", "name": "Security Accreditation", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
-    {"id": "CM-04", "name": "Monitoring Configuration Changes", "family": "CM", "emphasis": "important"},
-    {"id": "CM-05", "name": "Access Restrictions For Change", "family": "CM", "emphasis": "important"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
-    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "important"},
-    {"id": "CM-08", "name": "Information System Component Inventory", "family": "CM", "emphasis": "important"},
-    {"id": "CP-03", "name": "Contingency Training", "family": "CP", "emphasis": "standard"},
-    {"id": "CP-04", "name": "Contingency Plan Testing And Exercises", "family": "CP", "emphasis": "standard"},
-    {"id": "CP-05", "name": "Contingency Plan Update", "family": "CP", "emphasis": "standard"},
-    {"id": "CP-09", "name": "Information System Backup", "family": "CP", "emphasis": "important"},
-    {"id": "CP-10", "name": "Information System Recovery And Reconstitution", "family": "CP", "emphasis": "important"},
-    {"id": "IA-02", "name": "User Identification And Authentication", "family": "IA", "emphasis": "important"},
-    {"id": "IA-06", "name": "Authenticator Feedback", "family": "IA", "emphasis": "standard"},
-    {"id": "IA-07", "name": "Cryptographic Module Authentication", "family": "IA", "emphasis": "standard"},
-    {"id": "IR-02", "name": "Incident Response Training", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-03", "name": "Incident Response Testing And Exercises", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "important"},
-    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-07", "name": "Incident Response Assistance", "family": "IR", "emphasis": "standard"},
-    {"id": "MA-02", "name": "Controlled Maintenance", "family": "MA", "emphasis": "standard"},
-    {"id": "MA-03", "name": "Maintenance Tools", "family": "MA", "emphasis": "standard"},
-    {"id": "MA-04", "name": "Remote Maintenance", "family": "MA", "emphasis": "important"},
-    {"id": "MA-05", "name": "Maintenance Personnel", "family": "MA", "emphasis": "standard"},
-    {"id": "MA-06", "name": "Timely Maintenance", "family": "MA", "emphasis": "standard"},
-    {"id": "MP-02", "name": "Media Access", "family": "MP", "emphasis": "standard"},
-    {"id": "PE-02", "name": "Physical Access Authorizations", "family": "PE", "emphasis": "important"},
-    {"id": "PE-03", "name": "Physical Access Control", "family": "PE", "emphasis": "important"},
-    {"id": "PE-05", "name": "Access Control For Display Medium", "family": "PE", "emphasis": "standard"},
-    {"id": "PE-06", "name": "Monitoring Physical Access", "family": "PE", "emphasis": "important"},
-    {"id": "PE-09", "name": "Power Equipment And Power Cabling", "family": "PE", "emphasis": "standard"},
-    {"id": "PE-10", "name": "Emergency Shutoff", "family": "PE", "emphasis": "standard"},
-    {"id": "PE-11", "name": "Emergency Power", "family": "PE", "emphasis": "important"},
-    {"id": "PE-12", "name": "Emergency Lighting", "family": "PE", "emphasis": "standard"},
-    {"id": "PE-13", "name": "Fire Protection", "family": "PE", "emphasis": "important"},
-    {"id": "PE-14", "name": "Temperature And Humidity Controls", "family": "PE", "emphasis": "important"},
-    {"id": "PE-15", "name": "Water Damage Protection", "family": "PE", "emphasis": "standard"},
-    {"id": "PE-16", "name": "Delivery And Removal", "family": "PE", "emphasis": "standard"},
-    {"id": "RA-02", "name": "Security Categorization", "family": "RA", "emphasis": "standard"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-04", "name": "Risk Assessment Update", "family": "RA", "emphasis": "standard"},
-    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "important"},
-    {"id": "SA-02", "name": "Allocation Of Resources", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-03", "name": "Life Cycle Support", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-04", "name": "Acquisitions", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-05", "name": "Information System Documentation", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-06", "name": "Software Usage Restrictions", "family": "SA", "emphasis": "important"},
-    {"id": "SA-08", "name": "Security Engineering Principles", "family": "SA", "emphasis": "standard"},
-    {"id": "SC-02", "name": "Application Partitioning", "family": "SC", "emphasis": "important"},
-    {"id": "SC-03", "name": "Security Function Isolation", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-04", "name": "Information Remnance", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-05", "name": "Denial Of Service Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SC-06", "name": "Resource Priority", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-10", "name": "Network Disconnect", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment And Management", "family": "SC", "emphasis": "important"},
-    {"id": "SC-13", "name": "Use Of Cryptography", "family": "SC", "emphasis": "important"},
-    {"id": "SC-14", "name": "Public Access Protections", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-18", "name": "Mobile Code", "family": "SC", "emphasis": "standard"},
-    {"id": "SI-02", "name": "Flaw Remediation", "family": "SI", "emphasis": "important"},
-    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
-    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "important"},
-    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-06", "name": "Security Functionality Verification", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-07", "name": "Software And Information Integrity", "family": "SI", "emphasis": "important"},
-    {"id": "SI-10", "name": "Information Accuracy, Completeness, Validity, And Authenticity", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-11", "name": "Error Handling", "family": "SI", "emphasis": "standard"}
+    {
+      "id": "AC-03",
+      "name": "Access enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation Of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful login attempts",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-08",
+      "name": "System use notification",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-09",
+      "name": "Previous Logon Notification",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-10",
+      "name": "Concurrent Session Control",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Security Training",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-04",
+      "name": "Security Training Records",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-04",
+      "name": "Audit Storage Capacity",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-05",
+      "name": "Response To Audit Processing Failures",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-08",
+      "name": "Time Stamps",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection Of Audit Information",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-10",
+      "name": "Non-Repudiation",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-11",
+      "name": "Audit Record Retention",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-04",
+      "name": "Security Certification",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-06",
+      "name": "Security Accreditation",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-04",
+      "name": "Monitoring Configuration Changes",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions For Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "Information System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-03",
+      "name": "Contingency Training",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-04",
+      "name": "Contingency Plan Testing And Exercises",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-05",
+      "name": "Contingency Plan Update",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-09",
+      "name": "Information System Backup",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-10",
+      "name": "Information System Recovery And Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-06",
+      "name": "Authenticator Feedback",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-07",
+      "name": "Cryptographic Module Authentication",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-03",
+      "name": "Incident Response Testing And Exercises",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-07",
+      "name": "Incident Response Assistance",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-02",
+      "name": "Controlled Maintenance",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-03",
+      "name": "Maintenance Tools",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-04",
+      "name": "Remote Maintenance",
+      "family": "MA",
+      "emphasis": "important"
+    },
+    {
+      "id": "MA-05",
+      "name": "Maintenance Personnel",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-06",
+      "name": "Timely Maintenance",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MP-02",
+      "name": "Media Access",
+      "family": "MP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-02",
+      "name": "Physical Access Authorizations",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-05",
+      "name": "Access Control For Display Medium",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-06",
+      "name": "Monitoring Physical Access",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-09",
+      "name": "Power Equipment And Power Cabling",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-10",
+      "name": "Emergency Shutoff",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-11",
+      "name": "Emergency Power",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-12",
+      "name": "Emergency Lighting",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-13",
+      "name": "Fire Protection",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-14",
+      "name": "Temperature And Humidity Controls",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-15",
+      "name": "Water Damage Protection",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-16",
+      "name": "Delivery And Removal",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-02",
+      "name": "Security Categorization",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-04",
+      "name": "Risk Assessment Update",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-02",
+      "name": "Allocation Of Resources",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-03",
+      "name": "Life Cycle Support",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisitions",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-05",
+      "name": "Information System Documentation",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-06",
+      "name": "Software Usage Restrictions",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security Engineering Principles",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-02",
+      "name": "Application Partitioning",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-03",
+      "name": "Security Function Isolation",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-04",
+      "name": "Information Remnance",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-05",
+      "name": "Denial Of Service Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-06",
+      "name": "Resource Priority",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-10",
+      "name": "Network Disconnect",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment And Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use Of Cryptography",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-14",
+      "name": "Public Access Protections",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-18",
+      "name": "Mobile Code",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts And Advisories",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-06",
+      "name": "Security Functionality Verification",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software And Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-11",
+      "name": "Error Handling",
+      "family": "SI",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 8,

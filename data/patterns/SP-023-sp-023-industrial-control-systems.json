@@ -20,7 +20,7 @@
     "reviewers": []
   },
   "diagram": {
-    "svg": "/images/OSA_images/patterns/11_02_Pattern_023_01_Industrial_Control_Systems.svg",
+    "svg": "/images/patterns/11_02_Pattern_023_01_Industrial_Control_Systems.svg",
     "png": "/images/OSA_images/patterns/11_02_Pattern_023_01_Industrial_Control_Systems.png"
   },
   "content": {
@@ -105,108 +105,365 @@
       "note": "Mandatory cybersecurity standards for the North American bulk electric system. While sector-specific, the CIP framework provides a mature model for critical infrastructure protection applicable as reference to other sectors."
     }
   ],
-  "relatedPatterns": ["SP-004", "SP-007", "SP-009", "SP-019", "SP-025"],
-  "relatedPatternNames": ["Network Security", "Platform Security", "Physical Security", "Virtualisation", "Advanced Monitoring and Detection"],
+  "relatedPatterns": [
+    "SP-004",
+    "SP-007",
+    "SP-009",
+    "SP-019",
+    "SP-025"
+  ],
+  "relatedPatternNames": [
+    "Network Security",
+    "Platform Security",
+    "Physical Security",
+    "Virtualisation",
+    "Advanced Monitoring and Detection"
+  ],
   "threats": [
     {
       "id": "T-IC-001",
       "name": "Targeted ICS Malware (Stuxnet, TRITON, Industroyer-class)",
-      "mitigatedBy": ["SI-03", "SI-07", "CM-02", "SC-07"]
+      "mitigatedBy": [
+        "SI-03",
+        "SI-07",
+        "CM-02",
+        "SC-07"
+      ]
     },
     {
       "id": "T-IC-002",
       "name": "Process Integrity Manipulation (Setpoint Tampering, Logic Bombs)",
-      "mitigatedBy": ["CM-03", "CM-05", "CA-07", "AU-02"]
+      "mitigatedBy": [
+        "CM-03",
+        "CM-05",
+        "CA-07",
+        "AU-02"
+      ]
     },
     {
       "id": "T-IC-003",
       "name": "IT-to-OT Lateral Movement",
-      "mitigatedBy": ["SC-07", "AC-03", "AC-17", "IA-02"]
+      "mitigatedBy": [
+        "SC-07",
+        "AC-03",
+        "AC-17",
+        "IA-02"
+      ]
     },
     {
       "id": "T-IC-004",
       "name": "Industrial Protocol Exploitation (Modbus, DNP3 Command Injection)",
-      "mitigatedBy": ["SC-07", "SC-08", "CA-07", "SI-04 implied via CA-07"]
+      "mitigatedBy": [
+        "SC-07",
+        "SC-08",
+        "CA-07",
+        "SI-04 implied via CA-07"
+      ]
     },
     {
       "id": "T-IC-005",
       "name": "Ransomware Targeting OT Systems (EKANS/Snake, ICS-aware Variants)",
-      "mitigatedBy": ["CP-09", "CP-10", "SI-03", "SC-07"]
+      "mitigatedBy": [
+        "CP-09",
+        "CP-10",
+        "SI-03",
+        "SC-07"
+      ]
     },
     {
       "id": "T-IC-006",
       "name": "Unauthorised Remote Maintenance Access",
-      "mitigatedBy": ["AC-17", "MA-04", "IA-02", "AC-06"]
+      "mitigatedBy": [
+        "AC-17",
+        "MA-04",
+        "IA-02",
+        "AC-06"
+      ]
     },
     {
       "id": "T-IC-007",
       "name": "Supply Chain Compromise (Firmware Tampering, Counterfeit Components)",
-      "mitigatedBy": ["SI-02", "SI-05", "CM-02", "PE-03"]
+      "mitigatedBy": [
+        "SI-02",
+        "SI-05",
+        "CM-02",
+        "PE-03"
+      ]
     },
     {
       "id": "T-IC-008",
       "name": "Physical Tampering at Remote Unmanned Facilities",
-      "mitigatedBy": ["PE-03", "PE-04", "PE-06", "IA-03"]
+      "mitigatedBy": [
+        "PE-03",
+        "PE-04",
+        "PE-06",
+        "IA-03"
+      ]
     },
     {
       "id": "T-IC-009",
       "name": "Rogue Wireless Access Points in OT Environments",
-      "mitigatedBy": ["AC-18", "PE-03", "CA-07", "SC-07"]
+      "mitigatedBy": [
+        "AC-18",
+        "PE-03",
+        "CA-07",
+        "SC-07"
+      ]
     },
     {
       "id": "T-IC-010",
       "name": "Exploitation of Unpatched Legacy ICS Components",
-      "mitigatedBy": ["RA-05", "SI-02", "CM-07", "SC-07"]
+      "mitigatedBy": [
+        "RA-05",
+        "SI-02",
+        "CM-07",
+        "SC-07"
+      ]
     },
     {
       "id": "T-IC-011",
       "name": "Living-off-the-Land in OT Networks (Volt Typhoon-class APT)",
-      "mitigatedBy": ["CA-07", "AU-02", "SI-04", "AC-06"]
+      "mitigatedBy": [
+        "CA-07",
+        "AU-02",
+        "SI-04",
+        "AC-06"
+      ]
     },
     {
       "id": "T-IC-012",
       "name": "ICS-Specific Attack Toolkits (PIPEDREAM/INCONTROLLER, COSMICENERGY)",
-      "mitigatedBy": ["SC-07", "SI-03", "SI-07", "CM-02"]
+      "mitigatedBy": [
+        "SC-07",
+        "SI-03",
+        "SI-07",
+        "CM-02"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
-    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-18", "name": "Wireless Access Restrictions", "family": "AC", "emphasis": "important"},
-    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "important"},
-    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "standard"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-05", "name": "Access Restrictions For Change", "family": "CM", "emphasis": "important"},
-    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "important"},
-    {"id": "CP-02", "name": "Contingency Plan", "family": "CP", "emphasis": "important"},
-    {"id": "CP-09", "name": "Information System Backup", "family": "CP", "emphasis": "important"},
-    {"id": "CP-10", "name": "Information System Recovery And Reconstitution", "family": "CP", "emphasis": "important"},
-    {"id": "IA-02", "name": "User Identification And Authentication", "family": "IA", "emphasis": "important"},
-    {"id": "IA-03", "name": "Device Identification And Authentication", "family": "IA", "emphasis": "important"},
-    {"id": "IR-02", "name": "Incident Response Training", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "important"},
-    {"id": "IR-07", "name": "Incident Response Assistance", "family": "IR", "emphasis": "standard"},
-    {"id": "MA-02", "name": "Controlled Maintenance", "family": "MA", "emphasis": "standard"},
-    {"id": "MA-04", "name": "Remote Maintenance", "family": "MA", "emphasis": "important"},
-    {"id": "PE-03", "name": "Physical Access Control", "family": "PE", "emphasis": "important"},
-    {"id": "PE-04", "name": "Access Control For Transmission Medium", "family": "PE", "emphasis": "standard"},
-    {"id": "PE-06", "name": "Monitoring Physical Access", "family": "PE", "emphasis": "standard"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-08", "name": "Transmission Integrity", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-09", "name": "Transmission Confidentiality", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "standard"},
-    {"id": "SI-02", "name": "Flaw Remediation", "family": "SI", "emphasis": "important"},
-    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
-    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-07", "name": "Software And Information Integrity", "family": "SI", "emphasis": "important"},
-    {"id": "SI-10", "name": "Information Accuracy, Completeness, Validity, And Authenticity", "family": "SI", "emphasis": "standard"}
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-18",
+      "name": "Wireless Access Restrictions",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions For Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-02",
+      "name": "Contingency Plan",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-09",
+      "name": "Information System Backup",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-10",
+      "name": "Information System Recovery And Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-07",
+      "name": "Incident Response Assistance",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-02",
+      "name": "Controlled Maintenance",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-04",
+      "name": "Remote Maintenance",
+      "family": "MA",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-04",
+      "name": "Access Control For Transmission Medium",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-06",
+      "name": "Monitoring Physical Access",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts And Advisories",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software And Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
+      "family": "SI",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 4,

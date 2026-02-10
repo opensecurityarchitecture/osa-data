@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from commissioning and participating in CBEST assessments for UK financial services firms, where intelligence-led testing against live production environments revealed gaps that conventional penetration testing and compliance assessments consistently missed. Informed by the evolution from checkbox penetration testing to adversary simulation that tests the full detection and response chain."
   },
   "diagram": {
-    "svg": "/images/sp-035-diagram.svg",
+    "svg": "/images/sp-035-offensive-security-testing.svg",
     "png": ""
   },
   "content": {
@@ -105,90 +108,296 @@
       "note": "The UK National Cyber Security Centre's practical guidance on penetration testing including scoping, execution, and using results effectively."
     }
   ],
-  "relatedPatterns": ["SP-025", "SP-028", "SP-029", "SP-031", "SP-034"],
-  "relatedPatternNames": ["Advanced Monitoring and Detection", "Secure DevOps Pipeline", "Zero Trust Architecture", "Security Monitoring and Response", "Cyber Resilience"],
+  "relatedPatterns": [
+    "SP-025",
+    "SP-028",
+    "SP-029",
+    "SP-031",
+    "SP-034"
+  ],
+  "relatedPatternNames": [
+    "Advanced Monitoring and Detection",
+    "Secure DevOps Pipeline",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Cyber Resilience"
+  ],
   "threats": [
     {
       "id": "T-OST-001",
       "name": "Undetected vulnerabilities in internet-facing systems",
-      "mitigatedBy": ["CA-08", "RA-05", "CA-02"]
+      "mitigatedBy": [
+        "CA-08",
+        "RA-05",
+        "CA-02"
+      ]
     },
     {
       "id": "T-OST-002",
       "name": "Security controls that fail to detect real attack techniques",
-      "mitigatedBy": ["CA-08", "CA-07", "SI-04", "PM-14"]
+      "mitigatedBy": [
+        "CA-08",
+        "CA-07",
+        "SI-04",
+        "PM-14"
+      ]
     },
     {
       "id": "T-OST-003",
       "name": "Lateral movement paths through Active Directory misconfigurations",
-      "mitigatedBy": ["CA-08", "RA-05", "CM-06", "AC-06"]
+      "mitigatedBy": [
+        "CA-08",
+        "RA-05",
+        "CM-06",
+        "AC-06"
+      ]
     },
     {
       "id": "T-OST-004",
       "name": "Social engineering susceptibility across the workforce",
-      "mitigatedBy": ["CA-08", "AT-02", "AT-03", "PM-14"]
+      "mitigatedBy": [
+        "CA-08",
+        "AT-02",
+        "AT-03",
+        "PM-14"
+      ]
     },
     {
       "id": "T-OST-005",
       "name": "Incident response process failures under realistic pressure",
-      "mitigatedBy": ["IR-03", "IR-04", "CA-08", "PM-14"]
+      "mitigatedBy": [
+        "IR-03",
+        "IR-04",
+        "CA-08",
+        "PM-14"
+      ]
     },
     {
       "id": "T-OST-006",
       "name": "Compliance without actual security effectiveness",
-      "mitigatedBy": ["CA-02", "CA-08", "PM-14", "CA-07"]
+      "mitigatedBy": [
+        "CA-02",
+        "CA-08",
+        "PM-14",
+        "CA-07"
+      ]
     },
     {
       "id": "T-OST-007",
       "name": "Configuration drift degrading previously effective controls",
-      "mitigatedBy": ["CA-07", "CM-06", "RA-05", "PM-14"]
+      "mitigatedBy": [
+        "CA-07",
+        "CM-06",
+        "RA-05",
+        "PM-14"
+      ]
     },
     {
       "id": "T-OST-008",
       "name": "Supply chain compromise through trusted vendor access",
-      "mitigatedBy": ["CA-08", "PS-07", "SA-09", "RA-03"]
+      "mitigatedBy": [
+        "CA-08",
+        "PS-07",
+        "SA-09",
+        "RA-03"
+      ]
     },
     {
       "id": "T-OST-009",
       "name": "Privilege escalation from standard user to domain administrator",
-      "mitigatedBy": ["CA-08", "AC-06", "CM-06", "AU-06"]
+      "mitigatedBy": [
+        "CA-08",
+        "AC-06",
+        "CM-06",
+        "AU-06"
+      ]
     },
     {
       "id": "T-OST-010",
       "name": "Data exfiltration through unmonitored channels",
-      "mitigatedBy": ["CA-08", "SI-04", "AU-06", "SC-07"]
+      "mitigatedBy": [
+        "CA-08",
+        "SI-04",
+        "AU-06",
+        "SC-07"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-01", "name": "Policy and Procedures", "family": "AC", "emphasis": "important"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
-    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important"},
-    {"id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important"},
-    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "critical"},
-    {"id": "CA-05", "name": "Plan of Action and Milestones", "family": "CA", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical"},
-    {"id": "CA-08", "name": "Penetration Testing", "family": "CA", "emphasis": "critical"},
-    {"id": "CM-04", "name": "Impact Analyses", "family": "CM", "emphasis": "standard"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
-    {"id": "IR-03", "name": "Incident Response Testing", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "PL-04", "name": "Rules of Behavior", "family": "PL", "emphasis": "important"},
-    {"id": "PM-04", "name": "Plan of Action and Milestones Process", "family": "PM", "emphasis": "important"},
-    {"id": "PM-09", "name": "Risk Management Strategy", "family": "PM", "emphasis": "important"},
-    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "critical"},
-    {"id": "PM-16", "name": "Threat Awareness Program", "family": "PM", "emphasis": "critical"},
-    {"id": "PS-06", "name": "Access Agreements", "family": "PS", "emphasis": "important"},
-    {"id": "PS-07", "name": "External Personnel Security", "family": "PS", "emphasis": "important"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "critical"},
-    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "critical"},
-    {"id": "RA-07", "name": "Risk Response", "family": "RA", "emphasis": "important"},
-    {"id": "SA-09", "name": "External System Services", "family": "SA", "emphasis": "standard"},
-    {"id": "SA-11", "name": "Developer Testing and Evaluation", "family": "SA", "emphasis": "important"},
-    {"id": "SA-15", "name": "Development Process, Standards, and Tools", "family": "SA", "emphasis": "standard"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "important"}
+    {
+      "id": "AC-01",
+      "name": "Policy and Procedures",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-05",
+      "name": "Plan of Action and Milestones",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-08",
+      "name": "Penetration Testing",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-04",
+      "name": "Impact Analyses",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-03",
+      "name": "Incident Response Testing",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-04",
+      "name": "Rules of Behavior",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-04",
+      "name": "Plan of Action and Milestones Process",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-16",
+      "name": "Threat Awareness Program",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PS-06",
+      "name": "Access Agreements",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-07",
+      "name": "External Personnel Security",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-07",
+      "name": "Risk Response",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Testing and Evaluation",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-15",
+      "name": "Development Process, Standards, and Tools",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "important"
+    }
   ],
   "controlFamilySummary": {
     "AC": 2,

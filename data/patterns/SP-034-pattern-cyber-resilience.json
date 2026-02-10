@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from responding to and recovering from major cyber incidents in financial services, including ransomware events that tested every assumption about backup integrity and recovery speed. Informed by regulatory expectations (DORA, operational resilience frameworks) and the hard-won lesson that prevention eventually fails and recovery capability determines survival."
   },
   "diagram": {
-    "svg": "/images/sp-034-diagram.svg",
+    "svg": "/images/sp-034-cyber-resilience.svg",
     "png": ""
   },
   "content": {
@@ -100,108 +103,367 @@
       "note": "Financial services industry initiative for data vaulting and resiliency. Provides standards for immutable data vaulting and coordinated restoration that protect critical financial data."
     }
   ],
-  "relatedPatterns": ["SP-011", "SP-013", "SP-025", "SP-028", "SP-029", "SP-031"],
-  "relatedPatternNames": ["Cloud Computing", "Data Security", "Advanced Monitoring and Detection", "Secure DevOps Pipeline", "Zero Trust Architecture", "Security Monitoring and Response"],
+  "relatedPatterns": [
+    "SP-011",
+    "SP-013",
+    "SP-025",
+    "SP-028",
+    "SP-029",
+    "SP-031"
+  ],
+  "relatedPatternNames": [
+    "Cloud Computing",
+    "Data Security",
+    "Advanced Monitoring and Detection",
+    "Secure DevOps Pipeline",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response"
+  ],
   "threats": [
     {
       "id": "T-CR-001",
       "name": "Ransomware encrypting production data and systems",
-      "mitigatedBy": ["CP-09", "CP-06", "SC-28", "CP-10"]
+      "mitigatedBy": [
+        "CP-09",
+        "CP-06",
+        "SC-28",
+        "CP-10"
+      ]
     },
     {
       "id": "T-CR-002",
       "name": "Destructive wiper malware destroying systems beyond repair",
-      "mitigatedBy": ["CP-07", "CP-10", "SI-07", "CP-09"]
+      "mitigatedBy": [
+        "CP-07",
+        "CP-10",
+        "SI-07",
+        "CP-09"
+      ]
     },
     {
       "id": "T-CR-003",
       "name": "Backup infrastructure compromise rendering recovery impossible",
-      "mitigatedBy": ["SC-07", "AC-02", "CP-06", "SC-32"]
+      "mitigatedBy": [
+        "SC-07",
+        "AC-02",
+        "CP-06",
+        "SC-32"
+      ]
     },
     {
       "id": "T-CR-004",
       "name": "Domain controller compromise destroying identity infrastructure",
-      "mitigatedBy": ["IA-02", "AC-02", "CP-02", "CP-09"]
+      "mitigatedBy": [
+        "IA-02",
+        "AC-02",
+        "CP-02",
+        "CP-09"
+      ]
     },
     {
       "id": "T-CR-005",
       "name": "Supply chain attack corrupting trusted software repositories",
-      "mitigatedBy": ["SI-07", "SR-10", "SA-08", "CP-09"]
+      "mitigatedBy": [
+        "SI-07",
+        "SR-10",
+        "SA-08",
+        "CP-09"
+      ]
     },
     {
       "id": "T-CR-006",
       "name": "Insider sabotage of recovery infrastructure",
-      "mitigatedBy": ["AC-05", "AC-02", "AU-02", "CP-09"]
+      "mitigatedBy": [
+        "AC-05",
+        "AC-02",
+        "AU-02",
+        "CP-09"
+      ]
     },
     {
       "id": "T-CR-007",
       "name": "Coordinated attack on production and backup simultaneously",
-      "mitigatedBy": ["SC-07", "SC-32", "CP-06", "CP-07"]
+      "mitigatedBy": [
+        "SC-07",
+        "SC-32",
+        "CP-06",
+        "CP-07"
+      ]
     },
     {
       "id": "T-CR-008",
       "name": "Cloud provider outage affecting all hosted services",
-      "mitigatedBy": ["SC-36", "CP-07", "CP-08", "PM-30"]
+      "mitigatedBy": [
+        "SC-36",
+        "CP-07",
+        "CP-08",
+        "PM-30"
+      ]
     },
     {
       "id": "T-CR-009",
       "name": "Encryption key loss preventing access to encrypted backups",
-      "mitigatedBy": ["SC-12", "SC-13", "CP-09", "CP-06"]
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "CP-09",
+        "CP-06"
+      ]
     },
     {
       "id": "T-CR-010",
       "name": "Recovery failure due to untested or outdated procedures",
-      "mitigatedBy": ["CP-04", "IR-03", "PM-14", "CA-02"]
+      "mitigatedBy": [
+        "CP-04",
+        "IR-03",
+        "PM-14",
+        "CA-02"
+      ]
     },
     {
       "id": "T-CR-011",
       "name": "Circular dependency preventing system recovery sequence",
-      "mitigatedBy": ["CP-02", "CP-07", "SA-08", "PL-02"]
+      "mitigatedBy": [
+        "CP-02",
+        "CP-07",
+        "SA-08",
+        "PL-02"
+      ]
     },
     {
       "id": "T-CR-012",
       "name": "Third-party service failure cascading to critical operations",
-      "mitigatedBy": ["PM-30", "SA-09", "CP-08", "SC-36"]
+      "mitigatedBy": [
+        "PM-30",
+        "SA-09",
+        "CP-08",
+        "SC-36"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
-    {"id": "AC-05", "name": "Separation of Duties", "family": "AC", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
-    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
-    {"id": "CP-02", "name": "Contingency Plan", "family": "CP", "emphasis": "critical"},
-    {"id": "CP-04", "name": "Contingency Plan Testing", "family": "CP", "emphasis": "critical"},
-    {"id": "CP-06", "name": "Alternate Storage Site", "family": "CP", "emphasis": "critical"},
-    {"id": "CP-07", "name": "Alternate Processing Site", "family": "CP", "emphasis": "critical"},
-    {"id": "CP-08", "name": "Telecommunications Services", "family": "CP", "emphasis": "important"},
-    {"id": "CP-09", "name": "System Backup", "family": "CP", "emphasis": "critical"},
-    {"id": "CP-10", "name": "System Recovery and Reconstitution", "family": "CP", "emphasis": "critical"},
-    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "important"},
-    {"id": "IR-03", "name": "Incident Response Testing", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "IR-08", "name": "Incident Response Plan", "family": "IR", "emphasis": "important"},
-    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "important"},
-    {"id": "PM-08", "name": "Critical Infrastructure Plan", "family": "PM", "emphasis": "critical"},
-    {"id": "PM-09", "name": "Risk Management Strategy", "family": "PM", "emphasis": "important"},
-    {"id": "PM-11", "name": "Mission and Business Process Definition", "family": "PM", "emphasis": "important"},
-    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "important"},
-    {"id": "PM-30", "name": "Supply Chain Risk Management Strategy", "family": "PM", "emphasis": "important"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-09", "name": "Criticality Analysis", "family": "RA", "emphasis": "critical"},
-    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "critical"},
-    {"id": "SA-09", "name": "External System Services", "family": "SA", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "important"},
-    {"id": "SC-13", "name": "Cryptographic Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "important"},
-    {"id": "SC-32", "name": "System Partitioning", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-36", "name": "Distributed Processing and Storage", "family": "SC", "emphasis": "important"},
-    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-13", "name": "Predictable Failure Prevention", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-17", "name": "Fail-safe Procedures", "family": "SI", "emphasis": "important"},
-    {"id": "SR-10", "name": "Inspection of Systems or Components", "family": "SR", "emphasis": "standard"}
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-02",
+      "name": "Contingency Plan",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-04",
+      "name": "Contingency Plan Testing",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-06",
+      "name": "Alternate Storage Site",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-07",
+      "name": "Alternate Processing Site",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-08",
+      "name": "Telecommunications Services",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-09",
+      "name": "System Backup",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-10",
+      "name": "System Recovery and Reconstitution",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-03",
+      "name": "Incident Response Testing",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-08",
+      "name": "Incident Response Plan",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-08",
+      "name": "Critical Infrastructure Plan",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-11",
+      "name": "Mission and Business Process Definition",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-30",
+      "name": "Supply Chain Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-09",
+      "name": "Criticality Analysis",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-13",
+      "name": "Cryptographic Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-32",
+      "name": "System Partitioning",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-36",
+      "name": "Distributed Processing and Storage",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-13",
+      "name": "Predictable Failure Prevention",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-17",
+      "name": "Fail-safe Procedures",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-10",
+      "name": "Inspection of Systems or Components",
+      "family": "SR",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 2,

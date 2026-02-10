@@ -19,7 +19,7 @@
     "provenance": "Written collaboratively between a human security architect and an AI agent operating under the controls described in this pattern. The threat model, control selections, and implementation guidance are derived from direct operational experience of AI-assisted software engineering, security architecture, and infrastructure management."
   },
   "diagram": {
-    "svg": "/images/sp-027-diagram.svg",
+    "svg": "/images/sp-027-secure-ai-integration.svg",
     "png": ""
   },
   "content": {
@@ -113,118 +113,427 @@
       "note": "Extension of the SSDF specifically addressing generative AI, covering training data integrity, model validation, and AI-specific development practices."
     }
   ],
-  "relatedPatterns": ["SP-011", "SP-010", "SP-013", "SP-008", "SP-025", "SP-002"],
-  "relatedPatternNames": ["Cloud Computing", "Identity Management", "Data Security", "Public Web Server", "Advanced Monitoring and Detection", "Server Module"],
+  "relatedPatterns": [
+    "SP-011",
+    "SP-010",
+    "SP-013",
+    "SP-008",
+    "SP-025",
+    "SP-002"
+  ],
+  "relatedPatternNames": [
+    "Cloud Computing",
+    "Identity Management",
+    "Data Security",
+    "Public Web Server",
+    "Advanced Monitoring and Detection",
+    "Server Module"
+  ],
   "threats": [
     {
       "id": "T-AI-001",
       "name": "Direct Prompt Injection",
-      "mitigatedBy": ["SI-10", "SC-07", "AC-03"]
+      "mitigatedBy": [
+        "SI-10",
+        "SC-07",
+        "AC-03"
+      ]
     },
     {
       "id": "T-AI-002",
       "name": "Indirect Prompt Injection (via tool outputs, fetched content)",
-      "mitigatedBy": ["SI-10", "SI-03", "SC-07", "AC-04"]
+      "mitigatedBy": [
+        "SI-10",
+        "SI-03",
+        "SC-07",
+        "AC-04"
+      ]
     },
     {
       "id": "T-AI-003",
       "name": "Data Exfiltration via Context Window",
-      "mitigatedBy": ["AC-04", "SC-07", "PT-02", "AU-02"]
+      "mitigatedBy": [
+        "AC-04",
+        "SC-07",
+        "PT-02",
+        "AU-02"
+      ]
     },
     {
       "id": "T-AI-004",
       "name": "Credential Exposure in Conversation Context",
-      "mitigatedBy": ["IA-05", "SC-12", "SC-04", "AU-03"]
+      "mitigatedBy": [
+        "IA-05",
+        "SC-12",
+        "SC-04",
+        "AU-03"
+      ]
     },
     {
       "id": "T-AI-005",
       "name": "Unauthorised Autonomous Actions",
-      "mitigatedBy": ["AC-06", "AC-03", "AC-05", "CM-07"]
+      "mitigatedBy": [
+        "AC-06",
+        "AC-03",
+        "AC-05",
+        "CM-07"
+      ]
     },
     {
       "id": "T-AI-006",
       "name": "Privilege Escalation via Delegation Chain",
-      "mitigatedBy": ["AC-05", "AC-06", "AC-01", "AU-02"]
+      "mitigatedBy": [
+        "AC-05",
+        "AC-06",
+        "AC-01",
+        "AU-02"
+      ]
     },
     {
       "id": "T-AI-007",
       "name": "Memory Persistence Poisoning",
-      "mitigatedBy": ["SC-04", "CM-02", "SI-10", "AU-06"]
+      "mitigatedBy": [
+        "SC-04",
+        "CM-02",
+        "SI-10",
+        "AU-06"
+      ]
     },
     {
       "id": "T-AI-008",
       "name": "Model Supply Chain Compromise",
-      "mitigatedBy": ["SR-01", "SR-02", "SR-03", "SA-04", "SA-09"]
+      "mitigatedBy": [
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SA-04",
+        "SA-09"
+      ]
     },
     {
       "id": "T-AI-009",
       "name": "Shadow AI (Ungoverned Usage)",
-      "mitigatedBy": ["AC-01", "AT-02", "CM-07", "CA-07"]
+      "mitigatedBy": [
+        "AC-01",
+        "AT-02",
+        "CM-07",
+        "CA-07"
+      ]
     },
     {
       "id": "T-AI-010",
       "name": "AI-Amplified Social Engineering",
-      "mitigatedBy": ["AT-02", "AT-03", "SI-04", "IR-04"]
+      "mitigatedBy": [
+        "AT-02",
+        "AT-03",
+        "SI-04",
+        "IR-04"
+      ]
     },
     {
       "id": "T-AI-011",
       "name": "Model Hallucination Leading to Security Misconfiguration",
-      "mitigatedBy": ["SI-10", "CA-02", "SA-11", "AC-05"]
+      "mitigatedBy": [
+        "SI-10",
+        "CA-02",
+        "SA-11",
+        "AC-05"
+      ]
     },
     {
       "id": "T-AI-012",
       "name": "Provider-Side Data Retention and Logging",
-      "mitigatedBy": ["SA-09", "PT-02", "PT-03", "PS-07"]
+      "mitigatedBy": [
+        "SA-09",
+        "PT-02",
+        "PT-03",
+        "PS-07"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-01", "name": "Access Control Policies and Procedures", "family": "AC", "emphasis": "important"},
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-05", "name": "Separation Of Duties", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "standard"},
-    {"id": "AT-01", "name": "Security Awareness And Training Policy And Procedures", "family": "AT", "emphasis": "standard"},
-    {"id": "AT-02", "name": "Security Awareness", "family": "AT", "emphasis": "important"},
-    {"id": "AT-03", "name": "Security Training", "family": "AT", "emphasis": "important"},
-    {"id": "AU-02", "name": "Auditable Events", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-03", "name": "Content Of Audit Records", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-06", "name": "Audit Monitoring, Analysis, And Reporting", "family": "AU", "emphasis": "important"},
-    {"id": "CA-02", "name": "Security Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
-    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "critical"},
-    {"id": "IA-02", "name": "User Identification And Authentication", "family": "IA", "emphasis": "important"},
-    {"id": "IA-03", "name": "Device Identification And Authentication", "family": "IA", "emphasis": "important"},
-    {"id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "critical"},
-    {"id": "IR-01", "name": "Incident Response Policy And Procedures", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "important"},
-    {"id": "PS-06", "name": "Access Agreements", "family": "PS", "emphasis": "important"},
-    {"id": "PS-07", "name": "Third-Party Personnel Security", "family": "PS", "emphasis": "important"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Scanning", "family": "RA", "emphasis": "standard"},
-    {"id": "SA-04", "name": "Acquisitions", "family": "SA", "emphasis": "important"},
-    {"id": "SA-08", "name": "Security Engineering Principles", "family": "SA", "emphasis": "important"},
-    {"id": "SA-09", "name": "External Information System Services", "family": "SA", "emphasis": "critical"},
-    {"id": "SA-11", "name": "Developer Security Testing", "family": "SA", "emphasis": "important"},
-    {"id": "SC-04", "name": "Information Remnance", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-08", "name": "Transmission Integrity", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment And Management", "family": "SC", "emphasis": "important"},
-    {"id": "SC-13", "name": "Use Of Cryptography", "family": "SC", "emphasis": "standard"},
-    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "important"},
-    {"id": "SI-04", "name": "Information System Monitoring Tools And Techniques", "family": "SI", "emphasis": "important"},
-    {"id": "SI-05", "name": "Security Alerts And Advisories", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-10", "name": "Information Accuracy, Completeness, Validity, And Authenticity", "family": "SI", "emphasis": "critical"},
-    {"id": "SR-01", "name": "Policy and Procedures", "family": "SR", "emphasis": "important"},
-    {"id": "SR-02", "name": "Supply Chain Risk Management Plan", "family": "SR", "emphasis": "critical"},
-    {"id": "SR-03", "name": "Supply Chain Controls and Processes", "family": "SR", "emphasis": "important"},
-    {"id": "PT-02", "name": "Authority to Process Personally Identifiable Information", "family": "PT", "emphasis": "important"},
-    {"id": "PT-03", "name": "Personally Identifiable Information Processing Purposes", "family": "PT", "emphasis": "important"}
+    {
+      "id": "AC-01",
+      "name": "Access Control Policies and Procedures",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation Of Duties",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-01",
+      "name": "Security Awareness And Training Policy And Procedures",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Security Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Security Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-01",
+      "name": "Incident Response Policy And Procedures",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-06",
+      "name": "Access Agreements",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-07",
+      "name": "Third-Party Personnel Security",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisitions",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External Information System Services",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-04",
+      "name": "Information Remnance",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment And Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use Of Cryptography",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts And Advisories",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-01",
+      "name": "Policy and Procedures",
+      "family": "SR",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-02",
+      "name": "Supply Chain Risk Management Plan",
+      "family": "SR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-03",
+      "name": "Personally Identifiable Information Processing Purposes",
+      "family": "PT",
+      "emphasis": "important"
+    }
   ],
   "controlFamilySummary": {
     "AC": 7,

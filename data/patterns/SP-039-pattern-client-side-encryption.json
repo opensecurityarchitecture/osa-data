@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Spinoza", "Vitruvius"],
+    "authors": [
+      "Spinoza",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from the practical implementation of client-side encryption on opensecurityarchitecture.org, where assessment maturity scores are encrypted with AES-256-GCM in the browser before reaching Cloudflare D1 storage. The server stores only opaque ciphertext it cannot decrypt. This pattern generalises the approach for any application handling sensitive user data -- health records, financial data, personal notes, survey responses -- where the service operator should not have access to the content. Draws on the Signal Protocol's principle that the service provider is a threat actor by default, and on the growing regulatory expectation (GDPR Article 25, DORA) that data protection is built into architecture, not bolted on."
   },
   "diagram": {
-    "svg": "/images/sp-039-diagram.svg",
+    "svg": "/images/sp-039-client-side-encryption.svg",
     "png": ""
   },
   "content": {
@@ -98,104 +101,304 @@
       "note": "OWASP guidance on implementing cryptographic storage correctly. Covers algorithm selection, key management, and common implementation mistakes."
     },
     {
-      "title": "OSA Blog: Client-Side Encryption — Protecting User Data You Never See",
+      "title": "OSA Blog: Client-Side Encryption \u2014 Protecting User Data You Never See",
       "url": "https://www.opensecurityarchitecture.org/blog/client-side-encryption-protecting-user-data-you-never-see",
       "note": "The practical implementation story behind this pattern, documenting how OSA implemented AES-256-GCM client-side encryption for security maturity assessments."
     }
   ],
-  "relatedPatterns": ["SP-013", "SP-032", "SP-033", "SP-029"],
-  "relatedPatternNames": ["Data Security", "Modern Authentication", "Passkey Authentication", "Zero Trust Architecture"],
+  "relatedPatterns": [
+    "SP-013",
+    "SP-032",
+    "SP-033",
+    "SP-029"
+  ],
+  "relatedPatternNames": [
+    "Data Security",
+    "Modern Authentication",
+    "Passkey Authentication",
+    "Zero Trust Architecture"
+  ],
   "threats": [
     {
       "id": "T-CE-001",
       "name": "Server-side data breach exposing user data at rest",
-      "mitigatedBy": ["SC-12", "SC-13", "SC-28"]
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "SC-28"
+      ]
     },
     {
       "id": "T-CE-002",
       "name": "Rogue insider with database access reading sensitive records",
-      "mitigatedBy": ["AC-03", "AC-04", "SC-28", "AU-02"]
+      "mitigatedBy": [
+        "AC-03",
+        "AC-04",
+        "SC-28",
+        "AU-02"
+      ]
     },
     {
       "id": "T-CE-003",
       "name": "Cross-site scripting (XSS) exfiltrating encryption key from localStorage",
-      "mitigatedBy": ["SI-07", "SC-07", "SC-23"]
+      "mitigatedBy": [
+        "SI-07",
+        "SC-07",
+        "SC-23"
+      ]
     },
     {
       "id": "T-CE-004",
       "name": "Compromised JavaScript delivery replacing encryption code",
-      "mitigatedBy": ["SI-07", "SA-10", "SC-08"]
+      "mitigatedBy": [
+        "SI-07",
+        "SA-10",
+        "SC-08"
+      ]
     },
     {
       "id": "T-CE-005",
       "name": "Key loss from browser data clearing or device loss",
-      "mitigatedBy": ["SC-12", "CP-09", "AT-02"]
+      "mitigatedBy": [
+        "SC-12",
+        "CP-09",
+        "AT-02"
+      ]
     },
     {
       "id": "T-CE-006",
       "name": "Metadata analysis inferring sensitive information from access patterns",
-      "mitigatedBy": ["PM-25", "PT-02", "AU-03"]
+      "mitigatedBy": [
+        "PM-25",
+        "PT-02",
+        "AU-03"
+      ]
     },
     {
       "id": "T-CE-007",
       "name": "Man-in-the-middle intercepting encrypted payload in transit",
-      "mitigatedBy": ["SC-08", "SC-13", "SC-23"]
+      "mitigatedBy": [
+        "SC-08",
+        "SC-13",
+        "SC-23"
+      ]
     },
     {
       "id": "T-CE-008",
       "name": "Lawful compulsion or government demand for user data",
-      "mitigatedBy": ["SC-12", "SC-13", "SC-28", "PT-02"]
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "PT-02"
+      ]
     },
     {
       "id": "T-CE-009",
       "name": "Cloud provider or hosting infrastructure accessing stored data",
-      "mitigatedBy": ["SC-28", "SC-12", "AC-03"]
+      "mitigatedBy": [
+        "SC-28",
+        "SC-12",
+        "AC-03"
+      ]
     },
     {
       "id": "T-CE-010",
       "name": "Ciphertext manipulation or corruption altering encrypted records",
-      "mitigatedBy": ["SC-13", "SI-07", "AU-06"]
+      "mitigatedBy": [
+        "SC-13",
+        "SI-07",
+        "AU-06"
+      ]
     },
     {
       "id": "T-CE-011",
       "name": "Weak key derivation from user passphrase in multi-device scenarios",
-      "mitigatedBy": ["SC-12", "SC-13", "IA-05"]
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "IA-05"
+      ]
     },
     {
       "id": "T-CE-012",
       "name": "Supply chain attack injecting malicious code into cryptographic dependencies",
-      "mitigatedBy": ["SA-10", "SI-07", "SR-03"]
+      "mitigatedBy": [
+        "SA-10",
+        "SI-07",
+        "SR-03"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "important"},
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-21", "name": "Information Sharing", "family": "AC", "emphasis": "important"},
-    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
-    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "standard"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "standard"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "standard"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "standard"},
-    {"id": "CP-09", "name": "System Backup", "family": "CP", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "standard"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
-    {"id": "PM-25", "name": "Minimization of Personally Identifiable Information Used in Testing, Training, and Research", "family": "PM", "emphasis": "important"},
-    {"id": "PT-02", "name": "Authority to Process Personally Identifiable Information", "family": "PT", "emphasis": "important"},
-    {"id": "PT-03", "name": "Personally Identifiable Information Processing Purposes", "family": "PT", "emphasis": "important"},
-    {"id": "PT-04", "name": "Consent", "family": "PT", "emphasis": "critical"},
-    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "critical"},
-    {"id": "SA-10", "name": "Developer Configuration Management", "family": "SA", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "important"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-13", "name": "Cryptographic Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-17", "name": "Public Key Infrastructure Certificates", "family": "SC", "emphasis": "standard"},
-    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "important"},
-    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "critical"},
-    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "critical"},
-    {"id": "SR-03", "name": "Supply Chain Controls and Processes", "family": "SR", "emphasis": "important"}
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-21",
+      "name": "Information Sharing",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-09",
+      "name": "System Backup",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-25",
+      "name": "Minimization of Personally Identifiable Information Used in Testing, Training, and Research",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-03",
+      "name": "Personally Identifiable Information Processing Purposes",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-04",
+      "name": "Consent",
+      "family": "PT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-10",
+      "name": "Developer Configuration Management",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-13",
+      "name": "Cryptographic Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-17",
+      "name": "Public Key Infrastructure Certificates",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR",
+      "emphasis": "important"
+    }
   ],
   "controlFamilySummary": {
     "AC": 3,

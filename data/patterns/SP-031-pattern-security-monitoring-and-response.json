@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from building and operating security operations centres in financial services, including standing up 24/7 SOCs, deploying SIEM at scale, and integrating EDR with SOAR platforms. Informed by years of incident response across ransomware, APT, and insider threat scenarios where detection speed and response coordination determined outcome."
   },
   "diagram": {
-    "svg": "/images/sp-031-diagram.svg",
+    "svg": "/images/sp-031-security-monitoring-and-response.svg",
     "png": ""
   },
   "content": {
@@ -100,107 +103,363 @@
       "note": "Practical UK government guidance on SOC design, covering people, process, and technology considerations with a pragmatic approach to scaling."
     }
   ],
-  "relatedPatterns": ["SP-001", "SP-002", "SP-011", "SP-025", "SP-028", "SP-029", "SP-034"],
-  "relatedPatternNames": ["Client Module", "Server Module", "Cloud Computing", "Advanced Monitoring and Detection", "Secure DevOps Pipeline", "Zero Trust Architecture", "Cyber Resilience"],
+  "relatedPatterns": [
+    "SP-001",
+    "SP-002",
+    "SP-011",
+    "SP-025",
+    "SP-028",
+    "SP-029",
+    "SP-034"
+  ],
+  "relatedPatternNames": [
+    "Client Module",
+    "Server Module",
+    "Cloud Computing",
+    "Advanced Monitoring and Detection",
+    "Secure DevOps Pipeline",
+    "Zero Trust Architecture",
+    "Cyber Resilience"
+  ],
   "threats": [
     {
       "id": "T-SMR-001",
       "name": "Advanced persistent threat with extended dwell time",
-      "mitigatedBy": ["AU-06", "SI-04", "CA-07", "PM-16"]
+      "mitigatedBy": [
+        "AU-06",
+        "SI-04",
+        "CA-07",
+        "PM-16"
+      ]
     },
     {
       "id": "T-SMR-002",
       "name": "Ransomware deployment and encryption",
-      "mitigatedBy": ["SI-04", "IR-04", "CP-09", "CP-10"]
+      "mitigatedBy": [
+        "SI-04",
+        "IR-04",
+        "CP-09",
+        "CP-10"
+      ]
     },
     {
       "id": "T-SMR-003",
       "name": "Insider threat and data theft",
-      "mitigatedBy": ["AU-06", "AC-02", "PS-04", "SI-04"]
+      "mitigatedBy": [
+        "AU-06",
+        "AC-02",
+        "PS-04",
+        "SI-04"
+      ]
     },
     {
       "id": "T-SMR-004",
       "name": "Supply chain compromise via malicious update",
-      "mitigatedBy": ["SI-07", "SR-10", "RA-05", "SI-04"]
+      "mitigatedBy": [
+        "SI-07",
+        "SR-10",
+        "RA-05",
+        "SI-04"
+      ]
     },
     {
       "id": "T-SMR-005",
       "name": "Credential compromise and account takeover",
-      "mitigatedBy": ["AU-02", "AC-07", "IA-05", "SI-04"]
+      "mitigatedBy": [
+        "AU-02",
+        "AC-07",
+        "IA-05",
+        "SI-04"
+      ]
     },
     {
       "id": "T-SMR-006",
       "name": "Data exfiltration through authorised channels",
-      "mitigatedBy": ["SI-04", "AU-06", "AC-04", "SC-07"]
+      "mitigatedBy": [
+        "SI-04",
+        "AU-06",
+        "AC-04",
+        "SC-07"
+      ]
     },
     {
       "id": "T-SMR-007",
       "name": "Log tampering and evidence destruction",
-      "mitigatedBy": ["AU-09", "AU-05", "SI-07", "AU-04"]
+      "mitigatedBy": [
+        "AU-09",
+        "AU-05",
+        "SI-07",
+        "AU-04"
+      ]
     },
     {
       "id": "T-SMR-008",
       "name": "Alert fatigue causing missed critical detections",
-      "mitigatedBy": ["AU-07", "IR-05", "PM-14", "AT-03"]
+      "mitigatedBy": [
+        "AU-07",
+        "IR-05",
+        "PM-14",
+        "AT-03"
+      ]
     },
     {
       "id": "T-SMR-009",
       "name": "Living-off-the-land attacks evading signature detection",
-      "mitigatedBy": ["AU-06", "SI-04", "CA-07", "PM-16"]
+      "mitigatedBy": [
+        "AU-06",
+        "SI-04",
+        "CA-07",
+        "PM-16"
+      ]
     },
     {
       "id": "T-SMR-010",
       "name": "Cloud-native attacks bypassing on-premises monitoring",
-      "mitigatedBy": ["AU-02", "AU-12", "SI-04", "CA-07"]
+      "mitigatedBy": [
+        "AU-02",
+        "AU-12",
+        "SI-04",
+        "CA-07"
+      ]
     },
     {
       "id": "T-SMR-011",
       "name": "Lateral movement within trusted network zones",
-      "mitigatedBy": ["SI-04", "SC-07", "AU-06", "IR-04"]
+      "mitigatedBy": [
+        "SI-04",
+        "SC-07",
+        "AU-06",
+        "IR-04"
+      ]
     },
     {
       "id": "T-SMR-012",
       "name": "Detection evasion through encrypted channels",
-      "mitigatedBy": ["SI-04", "SC-07", "AU-02", "RA-05"]
+      "mitigatedBy": [
+        "SI-04",
+        "SC-07",
+        "AU-02",
+        "RA-05"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "important"},
-    {"id": "AC-07", "name": "Unsuccessful Logon Attempts", "family": "AC", "emphasis": "standard"},
-    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "standard"},
-    {"id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-04", "name": "Audit Log Storage Capacity", "family": "AU", "emphasis": "important"},
-    {"id": "AU-05", "name": "Response to Audit Logging Process Failures", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-07", "name": "Audit Record Reduction and Report Generation", "family": "AU", "emphasis": "important"},
-    {"id": "AU-08", "name": "Time Stamps", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-09", "name": "Protection of Audit Information", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "critical"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical"},
-    {"id": "CP-09", "name": "System Backup", "family": "CP", "emphasis": "important"},
-    {"id": "CP-10", "name": "System Recovery and Reconstitution", "family": "CP", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "standard"},
-    {"id": "IR-02", "name": "Incident Response Training", "family": "IR", "emphasis": "important"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "important"},
-    {"id": "IR-07", "name": "Incident Response Assistance", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-08", "name": "Incident Response Plan", "family": "IR", "emphasis": "important"},
-    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "standard"},
-    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "important"},
-    {"id": "PM-16", "name": "Threat Awareness Program", "family": "PM", "emphasis": "important"},
-    {"id": "PS-04", "name": "Personnel Termination", "family": "PS", "emphasis": "standard"},
-    {"id": "PS-07", "name": "External Personnel Security", "family": "PS", "emphasis": "standard"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-05", "name": "Security Alerts, Advisories, and Directives", "family": "SI", "emphasis": "important"},
-    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "important"},
-    {"id": "SR-10", "name": "Inspection of Systems or Components", "family": "SR", "emphasis": "standard"}
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Logon Attempts",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-04",
+      "name": "Audit Log Storage Capacity",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-05",
+      "name": "Response to Audit Logging Process Failures",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-07",
+      "name": "Audit Record Reduction and Report Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-08",
+      "name": "Time Stamps",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection of Audit Information",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-09",
+      "name": "System Backup",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-10",
+      "name": "System Recovery and Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-07",
+      "name": "Incident Response Assistance",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-08",
+      "name": "Incident Response Plan",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-16",
+      "name": "Threat Awareness Program",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-04",
+      "name": "Personnel Termination",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-07",
+      "name": "External Personnel Security",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts, Advisories, and Directives",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-10",
+      "name": "Inspection of Systems or Components",
+      "family": "SR",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 3,

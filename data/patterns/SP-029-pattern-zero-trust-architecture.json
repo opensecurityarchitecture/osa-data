@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-06",
     "dateModified": "2026-02-06",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from two decades of enterprise security architecture across financial services, where network-centric perimeter models repeatedly failed to contain lateral movement after initial compromise. Informed by NIST SP 800-207, CISA Zero Trust Maturity Model, and real-world migrations from legacy VPN-and-firewall architectures to identity-centric continuous verification."
   },
   "diagram": {
-    "svg": "/images/sp-029-diagram.svg",
+    "svg": "/images/sp-029-zero-trust-architecture.svg",
     "png": ""
   },
   "content": {
@@ -106,122 +109,455 @@
       "note": "The UK National Cyber Security Centre's practical guidance on zero trust design principles, with a focus on pragmatic adoption rather than vendor-driven approaches."
     }
   ],
-  "relatedPatterns": ["SP-001", "SP-002", "SP-010", "SP-011", "SP-016", "SP-025", "SP-027", "SP-028"],
-  "relatedPatternNames": ["Client Module", "Server Module", "Identity Management", "Cloud Computing", "DMZ Module", "Advanced Monitoring and Detection", "Secure AI Integration", "Secure DevOps Pipeline"],
+  "relatedPatterns": [
+    "SP-001",
+    "SP-002",
+    "SP-010",
+    "SP-011",
+    "SP-016",
+    "SP-025",
+    "SP-027",
+    "SP-028"
+  ],
+  "relatedPatternNames": [
+    "Client Module",
+    "Server Module",
+    "Identity Management",
+    "Cloud Computing",
+    "DMZ Module",
+    "Advanced Monitoring and Detection",
+    "Secure AI Integration",
+    "Secure DevOps Pipeline"
+  ],
   "threats": [
     {
       "id": "T-ZTA-001",
       "name": "Lateral movement after perimeter breach",
-      "mitigatedBy": ["SC-07", "SC-32", "AC-03", "AC-04"]
+      "mitigatedBy": [
+        "SC-07",
+        "SC-32",
+        "AC-03",
+        "AC-04"
+      ]
     },
     {
       "id": "T-ZTA-002",
       "name": "Credential theft and replay attacks",
-      "mitigatedBy": ["IA-02", "IA-05", "SC-08", "AC-12"]
+      "mitigatedBy": [
+        "IA-02",
+        "IA-05",
+        "SC-08",
+        "AC-12"
+      ]
     },
     {
       "id": "T-ZTA-003",
       "name": "Insider threat and compromised trusted user",
-      "mitigatedBy": ["SI-04", "AU-06", "AC-05", "AC-06"]
+      "mitigatedBy": [
+        "SI-04",
+        "AU-06",
+        "AC-05",
+        "AC-06"
+      ]
     },
     {
       "id": "T-ZTA-004",
       "name": "Privilege escalation via over-provisioned access",
-      "mitigatedBy": ["AC-06", "AC-02", "CM-05", "AU-02"]
+      "mitigatedBy": [
+        "AC-06",
+        "AC-02",
+        "CM-05",
+        "AU-02"
+      ]
     },
     {
       "id": "T-ZTA-005",
       "name": "Man-in-the-middle on internal network",
-      "mitigatedBy": ["SC-08", "SC-13", "SC-23", "IA-08"]
+      "mitigatedBy": [
+        "SC-08",
+        "SC-13",
+        "SC-23",
+        "IA-08"
+      ]
     },
     {
       "id": "T-ZTA-006",
       "name": "Compromised endpoint accessing sensitive resources",
-      "mitigatedBy": ["CM-02", "CM-06", "SI-07", "CM-08"]
+      "mitigatedBy": [
+        "CM-02",
+        "CM-06",
+        "SI-07",
+        "CM-08"
+      ]
     },
     {
       "id": "T-ZTA-007",
       "name": "Session hijacking and token theft",
-      "mitigatedBy": ["AC-12", "IA-02", "SC-23", "SI-04"]
+      "mitigatedBy": [
+        "AC-12",
+        "IA-02",
+        "SC-23",
+        "SI-04"
+      ]
     },
     {
       "id": "T-ZTA-008",
       "name": "Data exfiltration through authorised channels",
-      "mitigatedBy": ["AC-04", "AC-21", "SI-04", "AU-06"]
+      "mitigatedBy": [
+        "AC-04",
+        "AC-21",
+        "SI-04",
+        "AU-06"
+      ]
     },
     {
       "id": "T-ZTA-009",
       "name": "Trust engine poisoning via manipulated signals",
-      "mitigatedBy": ["SI-07", "AU-09", "CA-07", "SC-07"]
+      "mitigatedBy": [
+        "SI-07",
+        "AU-09",
+        "CA-07",
+        "SC-07"
+      ]
     },
     {
       "id": "T-ZTA-010",
       "name": "Policy enforcement point bypass",
-      "mitigatedBy": ["CA-02", "SA-08", "SC-07", "SI-04"]
+      "mitigatedBy": [
+        "CA-02",
+        "SA-08",
+        "SC-07",
+        "SI-04"
+      ]
     },
     {
       "id": "T-ZTA-011",
       "name": "Identity provider compromise",
-      "mitigatedBy": ["IA-04", "IA-12", "SC-07", "IR-04"]
+      "mitigatedBy": [
+        "IA-04",
+        "IA-12",
+        "SC-07",
+        "IR-04"
+      ]
     },
     {
       "id": "T-ZTA-012",
       "name": "Shadow IT circumventing zero trust controls",
-      "mitigatedBy": ["CM-08", "AC-20", "SI-04", "PM-14"]
+      "mitigatedBy": [
+        "CM-08",
+        "AC-20",
+        "SI-04",
+        "PM-14"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-01", "name": "Policy and Procedures", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-05", "name": "Separation of Duties", "family": "AC", "emphasis": "important"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-07", "name": "Unsuccessful Logon Attempts", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "important"},
-    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "important"},
-    {"id": "AC-20", "name": "Use of External Systems", "family": "AC", "emphasis": "important"},
-    {"id": "AC-21", "name": "Information Sharing", "family": "AC", "emphasis": "important"},
-    {"id": "AT-01", "name": "Policy and Procedures", "family": "AT", "emphasis": "standard"},
-    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "standard"},
-    {"id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "standard"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-09", "name": "Protection of Audit Information", "family": "AU", "emphasis": "important"},
-    {"id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "important"},
-    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "standard"},
-    {"id": "CM-05", "name": "Access Restrictions for Change", "family": "CM", "emphasis": "important"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
-    {"id": "CM-08", "name": "System Component Inventory", "family": "CM", "emphasis": "important"},
-    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical"},
-    {"id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "critical"},
-    {"id": "IA-08", "name": "Identification and Authentication (Non-Organizational Users)", "family": "IA", "emphasis": "important"},
-    {"id": "IA-12", "name": "Identity Proofing", "family": "IA", "emphasis": "important"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "important"},
-    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
-    {"id": "IR-08", "name": "Incident Response Plan", "family": "IR", "emphasis": "standard"},
-    {"id": "MP-02", "name": "Media Access", "family": "MP", "emphasis": "standard"},
-    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "important"},
-    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "important"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "important"},
-    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-13", "name": "Cryptographic Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "important"},
-    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "important"},
-    {"id": "SC-32", "name": "System Partitioning", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-39", "name": "Process Isolation", "family": "SC", "emphasis": "standard"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "important"},
-    {"id": "SI-12", "name": "Information Management and Retention", "family": "SI", "emphasis": "standard"}
+    {
+      "id": "AC-01",
+      "name": "Policy and Procedures",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Logon Attempts",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-20",
+      "name": "Use of External Systems",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-21",
+      "name": "Information Sharing",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-01",
+      "name": "Policy and Procedures",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection of Audit Information",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions for Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-08",
+      "name": "Identification and Authentication (Non-Organizational Users)",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-12",
+      "name": "Identity Proofing",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-08",
+      "name": "Incident Response Plan",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MP-02",
+      "name": "Media Access",
+      "family": "MP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-13",
+      "name": "Cryptographic Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-32",
+      "name": "System Partitioning",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-39",
+      "name": "Process Isolation",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-12",
+      "name": "Information Management and Retention",
+      "family": "SI",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 11,

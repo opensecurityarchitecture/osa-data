@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from building application security programmes at financial market infrastructure where software directly processes trades, manages risk positions, and settles transactions worth billions daily. Informed by implementing secure SDLC across development teams ranging from 20 to 200+ engineers, establishing security champion programmes, and learning that the only security controls that survive contact with delivery pressure are the ones embedded in the pipeline itself."
   },
   "diagram": {
-    "svg": "/images/sp-012-diagram.svg",
+    "svg": "/images/sp-012-secure-sdlc.svg",
     "png": ""
   },
   "content": {
@@ -100,87 +103,277 @@
       "note": "CISA guidance on Software Bill of Materials. SBOMs provide transparency into software composition, enabling effective SCA and supply chain risk management."
     }
   ],
-  "relatedPatterns": ["SP-008", "SP-028", "SP-030", "SP-035"],
-  "relatedPatternNames": ["Public Web Server Pattern", "Secure DevOps Pipeline", "API Security", "Offensive Security Testing"],
+  "relatedPatterns": [
+    "SP-008",
+    "SP-028",
+    "SP-030",
+    "SP-035"
+  ],
+  "relatedPatternNames": [
+    "Public Web Server Pattern",
+    "Secure DevOps Pipeline",
+    "API Security",
+    "Offensive Security Testing"
+  ],
   "threats": [
     {
       "id": "T-SDLC-001",
       "name": "Injection vulnerabilities (SQL, command, XSS) shipped to production",
-      "mitigatedBy": ["SA-11", "SI-10", "SA-08", "AT-03"]
+      "mitigatedBy": [
+        "SA-11",
+        "SI-10",
+        "SA-08",
+        "AT-03"
+      ]
     },
     {
       "id": "T-SDLC-002",
       "name": "Known vulnerable third-party dependencies deployed in production",
-      "mitigatedBy": ["SR-03", "RA-05", "SA-04", "SR-04"]
+      "mitigatedBy": [
+        "SR-03",
+        "RA-05",
+        "SA-04",
+        "SR-04"
+      ]
     },
     {
       "id": "T-SDLC-003",
       "name": "Hardcoded credentials or secrets committed to source repositories",
-      "mitigatedBy": ["SA-11", "IA-05", "SA-15", "CM-04"]
+      "mitigatedBy": [
+        "SA-11",
+        "IA-05",
+        "SA-15",
+        "CM-04"
+      ]
     },
     {
       "id": "T-SDLC-004",
       "name": "Insecure authentication or session management enabling account takeover",
-      "mitigatedBy": ["SA-08", "SA-11", "CA-08", "SC-07"]
+      "mitigatedBy": [
+        "SA-08",
+        "SA-11",
+        "CA-08",
+        "SC-07"
+      ]
     },
     {
       "id": "T-SDLC-005",
       "name": "Supply chain compromise through malicious dependency injection",
-      "mitigatedBy": ["SR-03", "SR-04", "SA-04", "SA-11"]
+      "mitigatedBy": [
+        "SR-03",
+        "SR-04",
+        "SA-04",
+        "SA-11"
+      ]
     },
     {
       "id": "T-SDLC-006",
       "name": "Business logic flaws missed by automated tools enabling fraud or data exposure",
-      "mitigatedBy": ["SA-11", "CA-08", "SA-08", "RA-03"]
+      "mitigatedBy": [
+        "SA-11",
+        "CA-08",
+        "SA-08",
+        "RA-03"
+      ]
     },
     {
       "id": "T-SDLC-007",
       "name": "Insecure deserialization enabling remote code execution",
-      "mitigatedBy": ["SA-11", "SI-10", "SA-08", "CM-02"]
+      "mitigatedBy": [
+        "SA-11",
+        "SI-10",
+        "SA-08",
+        "CM-02"
+      ]
     },
     {
       "id": "T-SDLC-008",
       "name": "Security misconfiguration in deployment (verbose errors, default credentials, unnecessary services)",
-      "mitigatedBy": ["CM-02", "CM-06", "SA-11", "RA-05"]
+      "mitigatedBy": [
+        "CM-02",
+        "CM-06",
+        "SA-11",
+        "RA-05"
+      ]
     },
     {
       "id": "T-SDLC-009",
       "name": "Insufficient logging enabling undetected exploitation of application vulnerabilities",
-      "mitigatedBy": ["AU-02", "AU-12", "SA-08", "SI-04"]
+      "mitigatedBy": [
+        "AU-02",
+        "AU-12",
+        "SA-08",
+        "SI-04"
+      ]
     },
     {
       "id": "T-SDLC-010",
       "name": "Delayed vulnerability remediation leaving known exposures in production",
-      "mitigatedBy": ["RA-05", "SI-02", "SA-11", "CM-04"]
+      "mitigatedBy": [
+        "RA-05",
+        "SI-02",
+        "SA-11",
+        "CM-04"
+      ]
     }
   ],
   "controls": [
-    {"id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "standard"},
-    {"id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "standard"},
-    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-08", "name": "Penetration Testing", "family": "CA", "emphasis": "important"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
-    {"id": "CM-04", "name": "Impact Analyses", "family": "CM", "emphasis": "important"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "standard"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "important"},
-    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "standard"},
-    {"id": "PL-08", "name": "Security and Privacy Architectures", "family": "PL", "emphasis": "important"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "critical"},
-    {"id": "SA-04", "name": "Acquisition Process", "family": "SA", "emphasis": "important"},
-    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "critical"},
-    {"id": "SA-11", "name": "Developer Testing and Evaluation", "family": "SA", "emphasis": "critical"},
-    {"id": "SA-15", "name": "Development Process, Standards, and Tools", "family": "SA", "emphasis": "critical"},
-    {"id": "SA-16", "name": "Developer-Provided Training", "family": "SA", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "standard"},
-    {"id": "SI-02", "name": "Flaw Remediation", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "standard"},
-    {"id": "SI-06", "name": "Security and Privacy Function Verification", "family": "SI", "emphasis": "important"},
-    {"id": "SI-10", "name": "Information Input Validation", "family": "SI", "emphasis": "critical"},
-    {"id": "SR-03", "name": "Supply Chain Controls and Processes", "family": "SR", "emphasis": "critical"},
-    {"id": "SR-04", "name": "Provenance", "family": "SR", "emphasis": "important"}
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-08",
+      "name": "Penetration Testing",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-04",
+      "name": "Impact Analyses",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PL-08",
+      "name": "Security and Privacy Architectures",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Testing and Evaluation",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-15",
+      "name": "Development Process, Standards, and Tools",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-16",
+      "name": "Developer-Provided Training",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-06",
+      "name": "Security and Privacy Function Verification",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Input Validation",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-04",
+      "name": "Provenance",
+      "family": "SR",
+      "emphasis": "important"
+    }
   ],
   "controlFamilySummary": {
     "AT": 1,

@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from managing security incidents at financial market infrastructure including exchanges, clearing houses, and central counterparties, where incident response timelines are measured in minutes and regulatory notification obligations are non-negotiable. Informed by building incident response processes that satisfied Bank of England, FCA, and IOSCO scrutiny, and by the hard lessons of real incidents where preparation -- or lack of it -- determined outcome."
   },
   "diagram": {
-    "svg": "/images/sp-036-diagram.svg",
+    "svg": "/images/sp-036-incident-response.svg",
     "png": ""
   },
   "content": {
@@ -106,104 +109,341 @@
       "note": "IOSCO guidance on cyber resilience for exchanges, clearing houses, and other financial market infrastructure. Defines incident response expectations for the financial sector."
     }
   ],
-  "relatedPatterns": ["SP-025", "SP-029", "SP-031", "SP-034", "SP-035"],
-  "relatedPatternNames": ["Advanced Monitoring and Detection", "Zero Trust Architecture", "Security Monitoring and Response", "Cyber Resilience", "Offensive Security Testing"],
+  "relatedPatterns": [
+    "SP-025",
+    "SP-029",
+    "SP-031",
+    "SP-034",
+    "SP-035"
+  ],
+  "relatedPatternNames": [
+    "Advanced Monitoring and Detection",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Cyber Resilience",
+    "Offensive Security Testing"
+  ],
   "threats": [
     {
       "id": "T-IR-001",
       "name": "Ransomware deployment requiring immediate containment and recovery",
-      "mitigatedBy": ["IR-04", "SC-07", "CP-10", "IR-08"]
+      "mitigatedBy": [
+        "IR-04",
+        "SC-07",
+        "CP-10",
+        "IR-08"
+      ]
     },
     {
       "id": "T-IR-002",
       "name": "Data breach requiring regulatory notification within defined timeframes",
-      "mitigatedBy": ["IR-06", "IR-04", "AU-06", "PM-14"]
+      "mitigatedBy": [
+        "IR-06",
+        "IR-04",
+        "AU-06",
+        "PM-14"
+      ]
     },
     {
       "id": "T-IR-003",
       "name": "Business email compromise with fraudulent financial transactions",
-      "mitigatedBy": ["IR-04", "IR-07", "AT-02", "AU-06"]
+      "mitigatedBy": [
+        "IR-04",
+        "IR-07",
+        "AT-02",
+        "AU-06"
+      ]
     },
     {
       "id": "T-IR-004",
       "name": "Advanced persistent threat with extended dwell time",
-      "mitigatedBy": ["IR-05", "AU-06", "SI-04", "CA-07"]
+      "mitigatedBy": [
+        "IR-05",
+        "AU-06",
+        "SI-04",
+        "CA-07"
+      ]
     },
     {
       "id": "T-IR-005",
       "name": "DDoS attack disrupting critical services",
-      "mitigatedBy": ["IR-04", "IR-08", "SC-07", "CP-08"]
+      "mitigatedBy": [
+        "IR-04",
+        "IR-08",
+        "SC-07",
+        "CP-08"
+      ]
     },
     {
       "id": "T-IR-006",
       "name": "Insider threat requiring evidence preservation for legal proceedings",
-      "mitigatedBy": ["AU-09", "IR-04", "PS-04", "AU-06"]
+      "mitigatedBy": [
+        "AU-09",
+        "IR-04",
+        "PS-04",
+        "AU-06"
+      ]
     },
     {
       "id": "T-IR-007",
       "name": "Supply chain compromise affecting trusted software",
-      "mitigatedBy": ["IR-04", "SI-07", "SR-10", "IR-06"]
+      "mitigatedBy": [
+        "IR-04",
+        "SI-07",
+        "SR-10",
+        "IR-06"
+      ]
     },
     {
       "id": "T-IR-008",
       "name": "Incident response failure due to untested or outdated plans",
-      "mitigatedBy": ["IR-02", "IR-03", "PM-14", "IR-08"]
+      "mitigatedBy": [
+        "IR-02",
+        "IR-03",
+        "PM-14",
+        "IR-08"
+      ]
     },
     {
       "id": "T-IR-009",
       "name": "Evidence destruction through premature containment actions",
-      "mitigatedBy": ["AU-09", "IR-04", "IR-02", "AT-03"]
+      "mitigatedBy": [
+        "AU-09",
+        "IR-04",
+        "IR-02",
+        "AT-03"
+      ]
     },
     {
       "id": "T-IR-010",
       "name": "Communication failure during crisis causing regulatory or reputational harm",
-      "mitigatedBy": ["IR-06", "IR-07", "PL-04", "PM-14"]
+      "mitigatedBy": [
+        "IR-06",
+        "IR-07",
+        "PL-04",
+        "PM-14"
+      ]
     },
     {
       "id": "T-IR-011",
       "name": "Repeat compromise due to incomplete eradication",
-      "mitigatedBy": ["IR-04", "SI-07", "CM-02", "RA-05"]
+      "mitigatedBy": [
+        "IR-04",
+        "SI-07",
+        "CM-02",
+        "RA-05"
+      ]
     },
     {
       "id": "T-IR-012",
       "name": "Cloud-specific incident requiring different tools and access models",
-      "mitigatedBy": ["IR-04", "IR-08", "AU-02", "SA-09"]
+      "mitigatedBy": [
+        "IR-04",
+        "IR-08",
+        "AU-02",
+        "SA-09"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "important"},
-    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important"},
-    {"id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "critical"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
-    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-09", "name": "Protection of Audit Information", "family": "AU", "emphasis": "critical"},
-    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
-    {"id": "CP-08", "name": "Telecommunications Services", "family": "CP", "emphasis": "standard"},
-    {"id": "CP-10", "name": "System Recovery and Reconstitution", "family": "CP", "emphasis": "important"},
-    {"id": "IR-01", "name": "Policy and Procedures", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-02", "name": "Incident Response Training", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-03", "name": "Incident Response Testing", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-05", "name": "Incident Monitoring", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-06", "name": "Incident Reporting", "family": "IR", "emphasis": "critical"},
-    {"id": "IR-07", "name": "Incident Response Assistance", "family": "IR", "emphasis": "important"},
-    {"id": "IR-08", "name": "Incident Response Plan", "family": "IR", "emphasis": "critical"},
-    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "standard"},
-    {"id": "PL-04", "name": "Rules of Behavior", "family": "PL", "emphasis": "important"},
-    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "critical"},
-    {"id": "PS-01", "name": "Personnel Security Policy and Procedures", "family": "PS", "emphasis": "standard"},
-    {"id": "PS-04", "name": "Personnel Termination", "family": "PS", "emphasis": "standard"},
-    {"id": "PS-07", "name": "External Personnel Security", "family": "PS", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "important"},
-    {"id": "SA-09", "name": "External System Services", "family": "SA", "emphasis": "standard"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "important"},
-    {"id": "SR-10", "name": "Inspection of Systems or Components", "family": "SR", "emphasis": "standard"}
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection of Audit Information",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-08",
+      "name": "Telecommunications Services",
+      "family": "CP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-10",
+      "name": "System Recovery and Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-01",
+      "name": "Policy and Procedures",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-03",
+      "name": "Incident Response Testing",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-07",
+      "name": "Incident Response Assistance",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-08",
+      "name": "Incident Response Plan",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PL-04",
+      "name": "Rules of Behavior",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PS-01",
+      "name": "Personnel Security Policy and Procedures",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-04",
+      "name": "Personnel Termination",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-07",
+      "name": "External Personnel Security",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-10",
+      "name": "Inspection of Systems or Components",
+      "family": "SR",
+      "emphasis": "standard"
+    }
   ],
   "controlFamilySummary": {
     "AC": 2,

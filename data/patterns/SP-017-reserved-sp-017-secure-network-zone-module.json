@@ -12,12 +12,15 @@
     "type": "module",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from designing and operating network zone architectures for financial market infrastructure where the blast radius of a network compromise must be contained to prevent disruption to trading, clearing, and settlement operations. Informed by building segmentation models that separated exchange operations from corporate networks, market surveillance from trading systems, and by evolving flat network architectures into zone-based models that satisfied regulatory expectations for operational resilience."
   },
   "diagram": {
-    "svg": "/images/sp-017-diagram.svg",
+    "svg": "/images/sp-017-secure-network-zone.svg",
     "png": ""
   },
   "content": {
@@ -100,84 +103,261 @@
       "note": "UK NCSC guidance on network security fundamentals including segmentation, monitoring, and access control."
     }
   ],
-  "relatedPatterns": ["SP-016", "SP-023", "SP-029", "SP-031", "SP-015"],
-  "relatedPatternNames": ["DMZ Module", "Industrial Control Systems", "Zero Trust Architecture", "Security Monitoring and Response", "Secure Remote Working"],
+  "relatedPatterns": [
+    "SP-016",
+    "SP-023",
+    "SP-029",
+    "SP-031",
+    "SP-015"
+  ],
+  "relatedPatternNames": [
+    "DMZ Module",
+    "Industrial Control Systems",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Secure Remote Working"
+  ],
   "threats": [
     {
       "id": "T-NZ-001",
       "name": "Lateral movement across flat network after initial compromise",
-      "mitigatedBy": ["SC-07", "AC-04", "SC-32", "SI-04"]
+      "mitigatedBy": [
+        "SC-07",
+        "AC-04",
+        "SC-32",
+        "SI-04"
+      ]
     },
     {
       "id": "T-NZ-002",
       "name": "Ransomware propagation across unsegmented network encrypting entire environment",
-      "mitigatedBy": ["SC-07", "SC-32", "SI-04", "IR-04"]
+      "mitigatedBy": [
+        "SC-07",
+        "SC-32",
+        "SI-04",
+        "IR-04"
+      ]
     },
     {
       "id": "T-NZ-003",
       "name": "Data exfiltration from data tier directly to internet due to missing egress controls",
-      "mitigatedBy": ["AC-04", "SC-07", "AU-02", "SI-04"]
+      "mitigatedBy": [
+        "AC-04",
+        "SC-07",
+        "AU-02",
+        "SI-04"
+      ]
     },
     {
       "id": "T-NZ-004",
       "name": "Rogue device placement on privileged network zone",
-      "mitigatedBy": ["IA-03", "CM-08", "SC-07", "SI-04"]
+      "mitigatedBy": [
+        "IA-03",
+        "CM-08",
+        "SC-07",
+        "SI-04"
+      ]
     },
     {
       "id": "T-NZ-005",
       "name": "Management plane compromise via unrestricted management access",
-      "mitigatedBy": ["SC-07", "SC-03", "AC-17", "AU-02"]
+      "mitigatedBy": [
+        "SC-07",
+        "SC-03",
+        "AC-17",
+        "AU-02"
+      ]
     },
     {
       "id": "T-NZ-006",
       "name": "Firewall rule bloat creating unintended connectivity paths between zones",
-      "mitigatedBy": ["CM-03", "CM-06", "AC-04", "CA-07"]
+      "mitigatedBy": [
+        "CM-03",
+        "CM-06",
+        "AC-04",
+        "CA-07"
+      ]
     },
     {
       "id": "T-NZ-007",
       "name": "Zone bypass through application-layer tunnelling (HTTP tunnels, DNS exfiltration)",
-      "mitigatedBy": ["SC-07", "SI-04", "AC-04", "AU-06"]
+      "mitigatedBy": [
+        "SC-07",
+        "SI-04",
+        "AC-04",
+        "AU-06"
+      ]
     },
     {
       "id": "T-NZ-008",
       "name": "Cloud security group misconfiguration exposing internal services to internet",
-      "mitigatedBy": ["CM-02", "CA-07", "SC-07", "CM-06"]
+      "mitigatedBy": [
+        "CM-02",
+        "CA-07",
+        "SC-07",
+        "CM-06"
+      ]
     },
     {
       "id": "T-NZ-009",
       "name": "VLAN hopping or other layer-2 attacks crossing zone boundaries",
-      "mitigatedBy": ["SC-07", "CM-06", "SC-08", "IA-03"]
+      "mitigatedBy": [
+        "SC-07",
+        "CM-06",
+        "SC-08",
+        "IA-03"
+      ]
     },
     {
       "id": "T-NZ-010",
       "name": "Compliance scope expansion due to inadequate network segmentation (PCI, SWIFT)",
-      "mitigatedBy": ["SC-07", "SC-32", "PL-02", "RA-03"]
+      "mitigatedBy": [
+        "SC-07",
+        "SC-32",
+        "PL-02",
+        "RA-03"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
-    {"id": "CM-08", "name": "System Component Inventory", "family": "CM", "emphasis": "important"},
-    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "standard"},
-    {"id": "IA-03", "name": "Device Identification and Authentication", "family": "IA", "emphasis": "important"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "standard"},
-    {"id": "PL-08", "name": "Security and Privacy Architectures", "family": "PL", "emphasis": "important"},
-    {"id": "PM-11", "name": "Mission and Business Process Definition", "family": "PM", "emphasis": "standard"},
-    {"id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "important"},
-    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "important"},
-    {"id": "SA-09", "name": "External System Services", "family": "SA", "emphasis": "standard"},
-    {"id": "SC-03", "name": "Security Function Isolation", "family": "SC", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "important"},
-    {"id": "SC-32", "name": "System Partitioning", "family": "SC", "emphasis": "critical"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "critical"}
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification and Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PL-08",
+      "name": "Security and Privacy Architectures",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-11",
+      "name": "Mission and Business Process Definition",
+      "family": "PM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-03",
+      "name": "Security Function Isolation",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-32",
+      "name": "System Partitioning",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    }
   ],
   "controlFamilySummary": {
     "AC": 2,

@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Informed by enterprise FIDO2 deployments in financial services where phishing-resistant authentication was mandated by regulators, and by the rapid adoption of passkeys across consumer platforms (Apple, Google, Microsoft) that is now driving enterprise adoption. Draws on practical experience migrating from TOTP and push-notification MFA to hardware security keys and platform authenticators."
   },
   "diagram": {
-    "svg": "/images/sp-033-diagram.svg",
+    "svg": "/images/sp-033-passkey-authentication.svg",
     "png": ""
   },
   "content": {
@@ -100,89 +103,281 @@
       "note": "Apple's documentation on passkey security including iCloud Keychain synchronisation, end-to-end encryption, and HSM-backed escrow for recovery."
     }
   ],
-  "relatedPatterns": ["SP-010", "SP-029", "SP-032"],
-  "relatedPatternNames": ["Identity Management", "Zero Trust Architecture", "Modern Authentication"],
+  "relatedPatterns": [
+    "SP-010",
+    "SP-029",
+    "SP-032"
+  ],
+  "relatedPatternNames": [
+    "Identity Management",
+    "Zero Trust Architecture",
+    "Modern Authentication"
+  ],
   "threats": [
     {
       "id": "T-PA-001",
       "name": "Phishing attack redirecting to credential harvesting site",
-      "mitigatedBy": ["SC-23", "IA-02", "SC-08"]
+      "mitigatedBy": [
+        "SC-23",
+        "IA-02",
+        "SC-08"
+      ]
     },
     {
       "id": "T-PA-002",
       "name": "Server-side credential database breach",
-      "mitigatedBy": ["SC-12", "SC-13", "AU-09"]
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "AU-09"
+      ]
     },
     {
       "id": "T-PA-003",
       "name": "Credential cloning from compromised authenticator",
-      "mitigatedBy": ["SI-07", "SC-12", "AU-06"]
+      "mitigatedBy": [
+        "SI-07",
+        "SC-12",
+        "AU-06"
+      ]
     },
     {
       "id": "T-PA-004",
       "name": "MFA fatigue/bombing attacks on push notification",
-      "mitigatedBy": ["IA-02", "IA-05", "AU-06"]
+      "mitigatedBy": [
+        "IA-02",
+        "IA-05",
+        "AU-06"
+      ]
     },
     {
       "id": "T-PA-005",
       "name": "SIM swapping to intercept SMS-based MFA",
-      "mitigatedBy": ["IA-05", "SC-12", "SC-13"]
+      "mitigatedBy": [
+        "IA-05",
+        "SC-12",
+        "SC-13"
+      ]
     },
     {
       "id": "T-PA-006",
       "name": "Recovery process exploitation for account takeover",
-      "mitigatedBy": ["IA-12", "IA-05", "CP-02", "AU-02"]
+      "mitigatedBy": [
+        "IA-12",
+        "IA-05",
+        "CP-02",
+        "AU-02"
+      ]
     },
     {
       "id": "T-PA-007",
       "name": "Adversary-in-the-middle real-time phishing proxy",
-      "mitigatedBy": ["SC-23", "SC-08", "IA-02"]
+      "mitigatedBy": [
+        "SC-23",
+        "SC-08",
+        "IA-02"
+      ]
     },
     {
       "id": "T-PA-008",
       "name": "Platform sync mechanism compromise exposing synced passkeys",
-      "mitigatedBy": ["SC-12", "SC-13", "CM-06", "AC-01"]
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "CM-06",
+        "AC-01"
+      ]
     },
     {
       "id": "T-PA-009",
       "name": "Rogue authenticator registration by insider or social engineering",
-      "mitigatedBy": ["IA-12", "AU-02", "AC-03", "PM-12"]
+      "mitigatedBy": [
+        "IA-12",
+        "AU-02",
+        "AC-03",
+        "PM-12"
+      ]
     },
     {
       "id": "T-PA-010",
       "name": "Downgrade attack forcing fallback to phishable authentication",
-      "mitigatedBy": ["AC-01", "CM-06", "SA-08", "AU-06"]
+      "mitigatedBy": [
+        "AC-01",
+        "CM-06",
+        "SA-08",
+        "AU-06"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-01", "name": "Policy and Procedures", "family": "AC", "emphasis": "important"},
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "important"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
-    {"id": "AC-07", "name": "Unsuccessful Logon Attempts", "family": "AC", "emphasis": "standard"},
-    {"id": "AC-12", "name": "Session Termination", "family": "AC", "emphasis": "important"},
-    {"id": "AC-14", "name": "Permitted Actions Without Identification or Authentication", "family": "AC", "emphasis": "standard"},
-    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "standard"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "important"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important"},
-    {"id": "AU-09", "name": "Protection of Audit Information", "family": "AU", "emphasis": "standard"},
-    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "important"},
-    {"id": "CP-02", "name": "Contingency Plan", "family": "CP", "emphasis": "important"},
-    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical"},
-    {"id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "critical"},
-    {"id": "IA-06", "name": "Authentication Feedback", "family": "IA", "emphasis": "standard"},
-    {"id": "IA-12", "name": "Identity Proofing", "family": "IA", "emphasis": "critical"},
-    {"id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "standard"},
-    {"id": "PM-12", "name": "Insider Threat Program", "family": "PM", "emphasis": "standard"},
-    {"id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "important"},
-    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "important"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-13", "name": "Cryptographic Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-17", "name": "Public Key Infrastructure Certificates", "family": "SC", "emphasis": "important"},
-    {"id": "SC-23", "name": "Session Authenticity", "family": "SC", "emphasis": "critical"},
-    {"id": "SI-07", "name": "Software, Firmware, and Information Integrity", "family": "SI", "emphasis": "important"}
+    {
+      "id": "AC-01",
+      "name": "Policy and Procedures",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Logon Attempts",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-14",
+      "name": "Permitted Actions Without Identification or Authentication",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection of Audit Information",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-02",
+      "name": "Contingency Plan",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-06",
+      "name": "Authentication Feedback",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-12",
+      "name": "Identity Proofing",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-12",
+      "name": "Insider Threat Program",
+      "family": "PM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-13",
+      "name": "Cryptographic Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-17",
+      "name": "Public Key Infrastructure Certificates",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    }
   ],
   "controlFamilySummary": {
     "AC": 6,

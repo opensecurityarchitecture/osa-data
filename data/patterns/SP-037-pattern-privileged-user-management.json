@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from implementing privileged access management across financial market infrastructure where a single compromised admin account could impact exchange operations, clearing systems, or settlement processes. Informed by deploying CyberArk and equivalent solutions at scale, building just-in-time access models that satisfied regulatory scrutiny, and by the painful reality that most serious breaches trace back to compromised privileged credentials."
   },
   "diagram": {
-    "svg": "/images/sp-037-diagram.svg",
+    "svg": "/images/sp-037-privileged-user-management.svg",
     "png": ""
   },
   "content": {
@@ -105,102 +108,329 @@
       "note": "Market landscape for PAM solutions. Useful for vendor evaluation and understanding the breadth of capability expected in enterprise PAM."
     }
   ],
-  "relatedPatterns": ["SP-010", "SP-029", "SP-031", "SP-032", "SP-033"],
-  "relatedPatternNames": ["Identity Management Pattern", "Zero Trust Architecture", "Security Monitoring and Response", "Modern Authentication", "Passkey Authentication"],
+  "relatedPatterns": [
+    "SP-010",
+    "SP-029",
+    "SP-031",
+    "SP-032",
+    "SP-033"
+  ],
+  "relatedPatternNames": [
+    "Identity Management Pattern",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Modern Authentication",
+    "Passkey Authentication"
+  ],
   "threats": [
     {
       "id": "T-PUM-001",
       "name": "Credential theft via pass-the-hash, Kerberoasting, or credential dumping",
-      "mitigatedBy": ["IA-05", "AC-02", "SC-28", "SI-04"]
+      "mitigatedBy": [
+        "IA-05",
+        "AC-02",
+        "SC-28",
+        "SI-04"
+      ]
     },
     {
       "id": "T-PUM-002",
       "name": "Lateral movement using compromised domain admin or cloud admin credentials",
-      "mitigatedBy": ["AC-02", "AC-06", "AC-17", "SI-04"]
+      "mitigatedBy": [
+        "AC-02",
+        "AC-06",
+        "AC-17",
+        "SI-04"
+      ]
     },
     {
       "id": "T-PUM-003",
       "name": "Privilege escalation through misconfigured IAM roles or group membership",
-      "mitigatedBy": ["AC-06", "CA-02", "CM-02", "AC-02"]
+      "mitigatedBy": [
+        "AC-06",
+        "CA-02",
+        "CM-02",
+        "AC-02"
+      ]
     },
     {
       "id": "T-PUM-004",
       "name": "Service account compromise enabling persistent access to critical systems",
-      "mitigatedBy": ["IA-05", "CM-02", "SA-04", "AC-02"]
+      "mitigatedBy": [
+        "IA-05",
+        "CM-02",
+        "SA-04",
+        "AC-02"
+      ]
     },
     {
       "id": "T-PUM-005",
       "name": "Insider threat from privileged administrators abusing legitimate access",
-      "mitigatedBy": ["AU-12", "AU-06", "PM-12", "AC-05"]
+      "mitigatedBy": [
+        "AU-12",
+        "AU-06",
+        "PM-12",
+        "AC-05"
+      ]
     },
     {
       "id": "T-PUM-006",
       "name": "Living-off-the-land attacks using legitimate admin tools (PowerShell, WMI)",
-      "mitigatedBy": ["SI-04", "AU-12", "AC-03", "CM-07"]
+      "mitigatedBy": [
+        "SI-04",
+        "AU-12",
+        "AC-03",
+        "CM-07"
+      ]
     },
     {
       "id": "T-PUM-007",
       "name": "Shared credential abuse where individual accountability cannot be established",
-      "mitigatedBy": ["IA-02", "IA-05", "AU-02", "AC-02"]
+      "mitigatedBy": [
+        "IA-02",
+        "IA-05",
+        "AU-02",
+        "AC-02"
+      ]
     },
     {
       "id": "T-PUM-008",
       "name": "Break-glass credential misuse for unauthorised access outside emergencies",
-      "mitigatedBy": ["AU-02", "AC-02", "IR-04", "PM-14"]
+      "mitigatedBy": [
+        "AU-02",
+        "AC-02",
+        "IR-04",
+        "PM-14"
+      ]
     },
     {
       "id": "T-PUM-009",
       "name": "Cloud IAM privilege escalation through role chaining or policy misconfiguration",
-      "mitigatedBy": ["AC-02", "AC-06", "SA-09", "CA-07"]
+      "mitigatedBy": [
+        "AC-02",
+        "AC-06",
+        "SA-09",
+        "CA-07"
+      ]
     },
     {
       "id": "T-PUM-010",
       "name": "PAM platform compromise giving adversary control of all vaulted credentials",
-      "mitigatedBy": ["SC-28", "SC-07", "IA-05", "CM-03"]
+      "mitigatedBy": [
+        "SC-28",
+        "SC-07",
+        "IA-05",
+        "CM-03"
+      ]
     },
     {
       "id": "T-PUM-011",
       "name": "Orphaned privileged accounts remaining active after personnel departure",
-      "mitigatedBy": ["AC-02", "PS-04", "PS-05", "IA-04"]
+      "mitigatedBy": [
+        "AC-02",
+        "PS-04",
+        "PS-05",
+        "IA-04"
+      ]
     },
     {
       "id": "T-PUM-012",
       "name": "Hardcoded credentials in source code or configuration files exposed via repository leak",
-      "mitigatedBy": ["IA-05", "SA-04", "CM-02", "SC-28"]
+      "mitigatedBy": [
+        "IA-05",
+        "SA-04",
+        "CM-02",
+        "SC-28"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "important"},
-    {"id": "AC-05", "name": "Separation of Duties", "family": "AC", "emphasis": "important"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical"},
-    {"id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important"},
-    {"id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "critical"},
-    {"id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "important"},
-    {"id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important"},
-    {"id": "CM-05", "name": "Access Restrictions for Change", "family": "CM", "emphasis": "important"},
-    {"id": "CM-07", "name": "Least Functionality", "family": "CM", "emphasis": "standard"},
-    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical"},
-    {"id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "important"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "critical"},
-    {"id": "IR-04", "name": "Incident Handling", "family": "IR", "emphasis": "important"},
-    {"id": "PE-03", "name": "Physical Access Control", "family": "PE", "emphasis": "standard"},
-    {"id": "PM-12", "name": "Insider Threat Program", "family": "PM", "emphasis": "important"},
-    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "important"},
-    {"id": "PS-04", "name": "Personnel Termination", "family": "PS", "emphasis": "important"},
-    {"id": "PS-05", "name": "Personnel Transfer", "family": "PS", "emphasis": "standard"},
-    {"id": "PS-07", "name": "External Personnel Security", "family": "PS", "emphasis": "important"},
-    {"id": "RA-05", "name": "Vulnerability Monitoring and Scanning", "family": "RA", "emphasis": "standard"},
-    {"id": "SA-04", "name": "Acquisition Process", "family": "SA", "emphasis": "important"},
-    {"id": "SA-09", "name": "External System Services", "family": "SA", "emphasis": "important"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "important"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "important"},
-    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "critical"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "critical"}
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions for Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-12",
+      "name": "Insider Threat Program",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-04",
+      "name": "Personnel Termination",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-05",
+      "name": "Personnel Transfer",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-07",
+      "name": "External Personnel Security",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    }
   ],
   "controlFamilySummary": {
     "AC": 5,

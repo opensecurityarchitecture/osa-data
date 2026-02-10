@@ -12,12 +12,15 @@
     "type": "pattern",
     "datePublished": "2026-02-07",
     "dateModified": "2026-02-07",
-    "authors": ["Aurelius", "Vitruvius"],
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
     "reviewers": [],
     "provenance": "Derived from securing remote access for financial market infrastructure operations teams where trading, clearing, and surveillance systems must be accessible from home environments without compromising the security posture that regulators expect. Informed by the rapid pivot to remote working during 2020 and the subsequent realisation that hybrid working is permanent, requiring architecture that treats every endpoint as untrusted regardless of location."
   },
   "diagram": {
-    "svg": "/images/sp-015-diagram.svg",
+    "svg": "/images/sp-015-secure-remote-working.svg",
     "png": ""
   },
   "content": {
@@ -100,86 +103,273 @@
       "note": "Market landscape for ZTNA, CASB, and SWG solutions. Useful for evaluating vendors that deliver the remote access security stack."
     }
   ],
-  "relatedPatterns": ["SP-006", "SP-007", "SP-017", "SP-029", "SP-032"],
-  "relatedPatternNames": ["Wireless Private Network Pattern", "Wireless Public Hotspot Pattern", "Secure Network Zone Module", "Zero Trust Architecture", "Modern Authentication"],
+  "relatedPatterns": [
+    "SP-006",
+    "SP-007",
+    "SP-017",
+    "SP-029",
+    "SP-032"
+  ],
+  "relatedPatternNames": [
+    "Wireless Private Network Pattern",
+    "Wireless Public Hotspot Pattern",
+    "Secure Network Zone Module",
+    "Zero Trust Architecture",
+    "Modern Authentication"
+  ],
   "threats": [
     {
       "id": "T-RW-001",
       "name": "Credential phishing targeting remote workers on unmanaged networks",
-      "mitigatedBy": ["IA-02", "CA-07", "AT-02", "SC-08"]
+      "mitigatedBy": [
+        "IA-02",
+        "CA-07",
+        "AT-02",
+        "SC-08"
+      ]
     },
     {
       "id": "T-RW-002",
       "name": "Device theft or loss exposing corporate data stored locally",
-      "mitigatedBy": ["SC-28", "CM-06", "AC-19", "MP-06"]
+      "mitigatedBy": [
+        "SC-28",
+        "CM-06",
+        "AC-19",
+        "MP-06"
+      ]
     },
     {
       "id": "T-RW-003",
       "name": "Man-in-the-middle attacks on untrusted WiFi networks",
-      "mitigatedBy": ["SC-08", "SC-12", "AC-17", "SC-07"]
+      "mitigatedBy": [
+        "SC-08",
+        "SC-12",
+        "AC-17",
+        "SC-07"
+      ]
     },
     {
       "id": "T-RW-004",
       "name": "Data exfiltration through personal devices or unsanctioned cloud storage",
-      "mitigatedBy": ["AC-04", "AC-19", "SI-04", "MP-02"]
+      "mitigatedBy": [
+        "AC-04",
+        "AC-19",
+        "SI-04",
+        "MP-02"
+      ]
     },
     {
       "id": "T-RW-005",
       "name": "Lateral movement from compromised remote endpoint into corporate network via VPN",
-      "mitigatedBy": ["SC-07", "AC-06", "AC-17", "SI-03"]
+      "mitigatedBy": [
+        "SC-07",
+        "AC-06",
+        "AC-17",
+        "SI-03"
+      ]
     },
     {
       "id": "T-RW-006",
       "name": "Home network compromise spreading to corporate device via IoT or family devices",
-      "mitigatedBy": ["SI-03", "CM-02", "SC-07", "CM-06"]
+      "mitigatedBy": [
+        "SI-03",
+        "CM-02",
+        "SC-07",
+        "CM-06"
+      ]
     },
     {
       "id": "T-RW-007",
       "name": "Shadow IT adoption due to overly restrictive remote access controls",
-      "mitigatedBy": ["AC-20", "SI-04", "AC-04", "PM-14"]
+      "mitigatedBy": [
+        "AC-20",
+        "SI-04",
+        "AC-04",
+        "PM-14"
+      ]
     },
     {
       "id": "T-RW-008",
       "name": "Unauthorised access from non-compliant or jailbroken personal devices",
-      "mitigatedBy": ["CM-06", "AC-19", "IA-02", "CA-07"]
+      "mitigatedBy": [
+        "CM-06",
+        "AC-19",
+        "IA-02",
+        "CA-07"
+      ]
     },
     {
       "id": "T-RW-009",
       "name": "Confidential information exposure through screen sharing, printing, or physical observation",
-      "mitigatedBy": ["PE-17", "AC-04", "SC-28", "AT-02"]
+      "mitigatedBy": [
+        "PE-17",
+        "AC-04",
+        "SC-28",
+        "AT-02"
+      ]
     },
     {
       "id": "T-RW-010",
       "name": "VPN credential compromise providing full network access to attacker",
-      "mitigatedBy": ["IA-02", "SC-07", "AC-17", "SI-04"]
+      "mitigatedBy": [
+        "IA-02",
+        "SC-07",
+        "AC-17",
+        "SI-04"
+      ]
     }
   ],
   "controls": [
-    {"id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "important"},
-    {"id": "AC-04", "name": "Information Flow Enforcement", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important"},
-    {"id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-19", "name": "Access Control for Mobile Devices", "family": "AC", "emphasis": "critical"},
-    {"id": "AC-20", "name": "Use of External Systems", "family": "AC", "emphasis": "important"},
-    {"id": "AC-22", "name": "Publicly Accessible Content", "family": "AC", "emphasis": "standard"},
-    {"id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important"},
-    {"id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "important"},
-    {"id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important"},
-    {"id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-06", "name": "Configuration Settings", "family": "CM", "emphasis": "critical"},
-    {"id": "CM-08", "name": "System Component Inventory", "family": "CM", "emphasis": "important"},
-    {"id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical"},
-    {"id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "important"},
-    {"id": "MP-02", "name": "Media Access", "family": "MP", "emphasis": "important"},
-    {"id": "MP-06", "name": "Media Sanitization", "family": "MP", "emphasis": "standard"},
-    {"id": "PE-17", "name": "Alternate Work Site", "family": "PE", "emphasis": "important"},
-    {"id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "standard"},
-    {"id": "SC-07", "name": "Boundary Protection", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-08", "name": "Transmission Confidentiality and Integrity", "family": "SC", "emphasis": "critical"},
-    {"id": "SC-12", "name": "Cryptographic Key Establishment and Management", "family": "SC", "emphasis": "important"},
-    {"id": "SC-28", "name": "Protection of Information at Rest", "family": "SC", "emphasis": "critical"},
-    {"id": "SI-03", "name": "Malicious Code Protection", "family": "SI", "emphasis": "critical"},
-    {"id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "important"}
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-19",
+      "name": "Access Control for Mobile Devices",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-20",
+      "name": "Use of External Systems",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-22",
+      "name": "Publicly Accessible Content",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "MP-02",
+      "name": "Media Access",
+      "family": "MP",
+      "emphasis": "important"
+    },
+    {
+      "id": "MP-06",
+      "name": "Media Sanitization",
+      "family": "MP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-17",
+      "name": "Alternate Work Site",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "important"
+    }
   ],
   "controlFamilySummary": {
     "AC": 7,

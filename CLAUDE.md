@@ -1,181 +1,104 @@
-# CLAUDE.md - Open Security Architecture Workspace
+# CLAUDE.md — osa-data
 
-This workspace is for the modernisation of opensecurityarchitecture.org (OSA).
+Structured JSON data for Open Security Architecture (OSA) patterns, NIST 800-53 controls, and compliance framework mappings. This is the **data layer** — the website reads from this repo via a symlink.
 
-## Project Context
+## Repositories
 
-**OSA** has been running since ~2008, developed actively for 4-5 years, then dormant. Despite minimal maintenance, it continues to receive traffic (~1,700 daily visitors). Pattern content was published in O'Reilly (Cloud Pattern).
+| Repo | Purpose | Visibility |
+|------|---------|------------|
+| [osa-data](https://github.com/opensecurityarchitecture/osa-data) | Patterns, controls, frameworks (this repo) | Public |
+| [osa-website](https://github.com/opensecurityarchitecture/osa-website) | Astro site, Cloudflare Pages | Public |
+| [osa-strategy](https://github.com/opensecurityarchitecture/osa-strategy) | Roadmap, metrics, contacts, social | **Private** |
 
-**Current platform**: Modern Astro site with Tailwind CSS, deployed via Cloudflare Pages from GitHub. Cut over from legacy Joomla on 2026-02-05.
+The website repo is checked out as a subdirectory at `./website/` and reads data via a symlink (`website/src/data -> ../..`). A push to osa-data triggers an osa-website rebuild via GitHub Actions dispatch.
 
-**Goal**: Modernise OSA as a weekend side project, with realistic targets to grow traffic and value.
+## Founders
 
-## GitHub Repositories
-
-**osa-data**: https://github.com/opensecurityarchitecture/osa-data
-- Structured JSON data for patterns and controls with compliance mappings
-
-**osa-website**: https://github.com/opensecurityarchitecture/osa-website
-- Astro site source, deployed to Cloudflare Pages
-- Live at: https://www.opensecurityarchitecture.org
-
-## Founder Context
-
-**Russ** — OSA founder.
-
-- 20+ years in technology for financial services
-- Security specialist background
-- Hands-on coder, deeply technical
-- Values: direct communication, quality over speed, long-term thinking
-
-**Communication style:** Direct, technical, no fluff.
-
-## Role Definition
-
-**Claude** — Technical partner for OSA modernisation.
-
-Working pattern: Weekend sessions, incremental progress, realistic scope.
-
-## Vision
-
-Transform OSA from a static Joomla site into a modern, AI-powered security architecture resource:
-
-1. **Structured pattern library** - Extract patterns to structured data (JSON/YAML)
-2. **API-driven** - Patterns accessible via API for tooling integration
-3. **AI-powered** - Claude integration for pattern recommendation, threat modelling assistance
-4. **NIST/compliance mapping** - Link patterns to control frameworks
-5. **Modern UX** - Whether Joomla refresh or full replatform TBD
-
-## Phased Approach
-
-| Phase | Focus | Status |
-|-------|-------|--------|
-| 0 | Discovery - traffic analysis, content audit, security posture | Complete |
-| 1 | Data extraction - patterns to structured format | Complete |
-| 1.5 | Content modernisation - NIST Rev 5, compliance mappings | Complete |
-| 1.6 | Website replatform - Astro/Tailwind, Cloudflare Pages | **Complete** |
-| 2 | API layer - expose patterns via API | Not started |
-| 3 | AI integration - Claude-powered features | Not started |
+| Name | Alias | Location | Focus |
+|------|-------|----------|-------|
+| Tobias Christen | Aurelius | Zurich | Enterprise security architecture, pattern design, product strategy |
+| Chris Lethaby | Vinylwasp | London | APT defence, CBEST, GRC, CIS Controls |
+| Russell Wing | Spinoza | London | Platform, NIST mappings, compliance frameworks, assessment |
+| Claude (AI) | Vitruvius | — | Pattern enrichment, new patterns, technical implementation |
 
 ## Current Data
 
-| Asset | Count | Status |
-|-------|-------|--------|
-| Security patterns | 27 | Extracted to JSON |
-| NIST 800-53 controls | 191 | Rev 5 updated |
-| ISO 27001:2022 mappings | 701 | Complete |
-| ISO 27002:2022 mappings | 411 | Complete |
-| COBIT 2019 mappings | 633 | Complete |
-| CIS Controls v8 mappings | 373 | Complete |
-| NIST CSF 2.0 mappings | 692 | Complete |
-| SOC 2 TSC mappings | 1,397 | Complete |
-| PCI DSS v4.0.1 mappings | 1,305 | Complete |
+- **43 security patterns** (SP-001 to SP-043) + SP-000 reference/style guide
+- **191 NIST 800-53 Rev 5 controls** across 20 families
+- **19 compliance frameworks** with 9,000+ cross-references
+- **1,251 control instances** across all patterns
 
-## Workspace Structure
+## Directory Structure
 
 ```
-osa-workspace/
-├── CLAUDE.md                    # This file
-├── README.md                    # Project documentation
-├── LICENSE                      # CC BY-SA 4.0
-├── data/
-│   ├── patterns/                # 27 security patterns (JSON)
-│   │   └── _manifest.json
-│   ├── controls/                # 191 NIST 800-53 controls (JSON)
-│   │   ├── _manifest.json
-│   │   └── _catalog.json
-│   └── schema/
-│       ├── pattern.schema.json
-│       └── control.schema.json
-├── docs/
-│   ├── DISCOVERY.md             # Phase 0 findings
-│   └── ROADMAP.md               # Detailed roadmap
-├── scripts/
-│   ├── extract_patterns.py
-│   ├── extract_controls_db.py
-│   ├── update_controls_schema.py
-│   ├── update_rev5_data.py
-│   ├── add_rev5_families.py
-│   ├── extract_compliance_mappings.py
-│   └── validate_json.py
-└── .github/
-    └── workflows/
-        └── validate.yml         # CI validation
+data/
+├── patterns/           # SP-NNN-descriptive-title.json
+│   └── _manifest.json  # Index of all patterns
+├── controls/           # NIST 800-53 Rev 5 (AC-01.json, etc.)
+│   ├── _manifest.json
+│   └── _catalog.json
+└── schema/
+    ├── pattern.schema.json
+    └── control.schema.json
 ```
+
+## Naming Conventions
+
+- **Pattern JSON**: `SP-NNN-descriptive-title.json` (e.g., `SP-029-zero-trust-architecture.json`)
+- **Pattern SVGs**: `sp-NNN-descriptive-title.svg` in `website/public/images/` (e.g., `sp-029-zero-trust-architecture.svg`)
+- **Control JSON**: `XX-NN.json` using NIST ID (e.g., `AC-01.json`, `SC-13.json`)
+- **Slugs**: lowercase, hyphenated, no `sp-NNN-` prefix (e.g., `zero-trust-architecture`)
+- **Pattern IDs**: `SP-NNN` format, zero-padded to 3 digits
+
+## Adding a New Pattern
+
+1. Create `data/patterns/SP-NNN-descriptive-title.json` following the schema
+2. Add entry to `data/patterns/_manifest.json`
+3. Create SVG diagram at `website/public/images/sp-NNN-descriptive-title.svg`
+4. That's it — the website reads the manifest and renders automatically
+
+## Pattern Schema Key Fields
+
+- `id`, `title`, `slug`, `description` — identity
+- `metadata.status` — `active`, `draft`, `published`, `reserved`, `deprecated`
+- `metadata.type` — `pattern`, `module`, `reference`
+- `metadata.authors` — use aliases (Aurelius, Vinylwasp, Spinoza, Vitruvius)
+- `controls[]` — NIST 800-53 control mappings with `emphasis` (critical/important/standard)
+- `threats[]` — threat catalogue with `mitigatedBy` control references
+- `content.keyControlAreas[]` — key areas with inline NIST references
+- `examples{}`, `references[]`, `relatedPatterns[]`
+
+## SVG Diagram Conventions
+
+- ViewBox: `960 x 720`
+- Palette: `#003459`, `#007EA7`, `#00A8E8`, `#00171F`, `#FFFFFF`
+- NIST badges: clickable `xlink:href` to `/controls/XX-NN`
+- Reference taglines: clickable links at bottom
+- White lozenge technique: `rect fill="white" opacity="0.9" rx="3"` behind arrow text
+- Icons from OSA icon library (`website/public/icons/`)
 
 ## Commands
 
 ```bash
-# Open workspace
-cd /Users/russellwing/osa-workspace
-
-# Validate all JSON
+# Validate all JSON against schemas
 python3 scripts/validate_json.py
 
-# Push to GitHub
-git push origin main
+# Website build (from workspace root)
+npm --prefix website run build
+
+# Website dev server
+npm --prefix website run dev
 ```
 
-## Session Log
+## CI/CD
 
-### 2026-01-23 - Project Kickoff
-- Discussed modernisation potential with Russ
-- Agreed weekend side hustle approach
-- Created this workspace
-- Completed Phase 0 discovery (traffic, content audit)
-- Extracted 27 patterns and 171 controls to JSON
+- **osa-data**: GitHub Actions validates all JSON against schemas on push
+- **osa-website**: Cloudflare Pages auto-deploys on push; also triggered by osa-data dispatch
+- **Cross-repo dispatch**: osa-data push → GitHub Actions → `repository_dispatch` → osa-website rebuild
 
-### 2026-01-23 - Content Modernisation (Evening Session)
-- Created GitHub org: opensecurityarchitecture
-- Created repo: osa-data
-- Updated all controls to NIST 800-53 Rev 5
-  - Added Rev 5 baselines and change details
-  - 95 controls with significant changes identified
-- Added new Rev 5 control families
-  - PT (Privacy): 8 controls
-  - SR (Supply Chain): 12 controls
-  - Total controls: 191
-- Added modern compliance mappings via SCF 2025.4
-  - ISO 27001:2022, ISO 27002:2022
-  - COBIT 2019, CIS Controls v8
-  - NIST CSF 2.0, SOC 2 TSC
-- Set up Cloudflare redirect rules for legacy paths
-  - /BB3/* -> /community/discussionforum
-  - /cms/* -> /
-  - /jcms/* -> /
+## What Goes Where
 
-### 2026-02-05 - Website Launch
-- **Site replatform complete**: Astro + Tailwind CSS on Cloudflare Pages
-- **Design system**: 5-color OSA palette (#FFFFFF, #00171F, #003459, #007EA7, #00A8E8)
-- **Full content migration**: Patterns, controls, frameworks, foundations, about, blog
-- **Framework mappings section**: ISO 27001, ISO 27002, COBIT 2019, CIS v8, NIST CSF 2.0, SOC 2
-- **SEO**: Sitemap generation, meta descriptions, 301 redirects for legacy URLs
-- **Mobile**: Responsive design with working hamburger menu
-- **Personas page**: Who Uses OSA with SVG avatars
-- **Cut over**: opensecurityarchitecture.org now serving new site
-- **Repos**:
-  - osa-data: Structured JSON data
-  - osa-website: Astro site source
-
-### Next Session
-- PCI-DSS v4.0 mappings
-- API layer (Phase 2)
-- Pattern-level compliance enrichment
-- Consider Google Search Console submission
-- Social/community building (see docs/SOCIAL-STRATEGY.md)
-
-## Backlog
-
-### Icon Set Modernisation (Validate First)
-- Old icons drove significant traffic - check if still valuable niche
-- Modern icon sets (Heroicons etc) don't cover security-specific symbols
-- If demand exists: modernise to SVG, consistent grid, OSA palette
-- Would enable dynamic diagram generation
-- **Action**: Check old analytics, validate demand before investing
-
-### Graph-Based Architecture Vision (Phase 3+)
-- Security architecture as graph: nodes (assets), edges (relationships)
-- Controls applied to both nodes and edges
-- Dynamic pattern generation based on system description
-- AI-powered conversational threat modelling
-- See detailed vision: docs/VISION-GRAPH-ARCHITECTURE.md
+- Pattern data, controls, schemas → **this repo** (osa-data)
+- Site source, SVGs, icons, JS, CSS → **osa-website**
+- Strategy, metrics, contacts, social plans → **osa-strategy** (private)
+- Personal session notes, preferences → your private `.claude/` memory (never committed)

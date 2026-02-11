@@ -1,0 +1,376 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-017",
+  "slug": "secure-network-zone",
+  "title": "Secure Network Zone Module",
+  "description": "Network segmentation and zone architecture module covering trust boundary design, micro-segmentation, firewall rule management, east-west traffic controls, zone classification, inter-zone policy enforcement, and network access control. Addresses the architectural foundation for containing lateral movement, enforcing least-privilege network access, and providing the segmentation layer that supports Zero Trust and defence-in-depth strategies. Maps 28 NIST 800-53 controls across network architecture, access control, monitoring, and configuration management domains.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-017",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Network Security",
+    "status": "draft",
+    "type": "module",
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from designing and operating network zone architectures for financial market infrastructure where the blast radius of a network compromise must be contained to prevent disruption to trading, clearing, and settlement operations. Informed by building segmentation models that separated exchange operations from corporate networks, market surveillance from trading systems, and by evolving flat network architectures into zone-based models that satisfied regulatory expectations for operational resilience."
+  },
+  "diagram": {
+    "svg": "/images/sp-017-secure-network-zone.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "The Secure Network Zone Module provides the architectural blueprint for dividing a network into zones of trust, each with defined security properties, access controls, and monitoring requirements. Network segmentation is the foundational control that limits an attacker's ability to move laterally after gaining initial access -- transforming what would be full network compromise into containment within a single zone.\n\nNetwork zones are defined by trust level, data classification, and function. A typical enterprise zone model includes: Internet-facing (DMZ) zones for services exposed to the public internet; application zones for internal business applications; data zones for databases and data stores with the highest classification; management zones for infrastructure management traffic (Active Directory, DNS, DHCP, monitoring); user zones for endpoint access segmented by business function or sensitivity; and restricted zones for regulatory-sensitive processing (PCI, SWIFT, trading systems). Each zone has defined ingress and egress rules, monitoring requirements, and permitted communication paths.\n\nThe evolution of network segmentation spans three generations. First-generation segmentation uses VLANs and firewall zones: coarse-grained, typically 5-15 zones, with perimeter firewalls controlling inter-zone traffic. This is the baseline and remains the reality for most organisations. Second-generation segmentation adds internal firewalls and more granular zones: separate zones for different application tiers (web, app, data), dedicated management zones, and tighter inter-zone policies. Third-generation segmentation introduces micro-segmentation: software-defined policies applied at the workload level (VMware NSX, Illumio, Guardicore), where every workload has its own security policy regardless of network location. Micro-segmentation is the target state for Zero Trust (SP-029) but the journey from flat networks to micro-segmentation is multi-year.\n\nThis module complements SP-016 (DMZ Module) which focuses specifically on the internet-facing demilitarised zone. SP-017 covers the complete internal zone architecture -- the much larger and more complex challenge of segmenting internal networks where most lateral movement occurs. Together they provide comprehensive network segmentation from edge to core.\n\nFirewall rule management is often the most operationally challenging aspect of zone architecture. Rule sets grow over years, become poorly documented, and accumulate technical debt. Rules added for temporary projects become permanent. Rules that reference IP addresses survive server decommissioning, creating rules that serve no purpose but nobody dares remove. Effective zone architecture requires not just initial design but ongoing governance: regular rule reviews, automated rule analysis, change management that links every rule to a business justification, and periodic re-certification of entire rule sets.",
+    "keyControlAreas": [
+      "Zone Architecture and Trust Boundary Design (SC-07, AC-04, PL-08, SC-32, SA-08): Zone design is the foundation. SC-07 defines boundary protection between zones: firewalls, security groups, or SDN policies that control all traffic crossing zone boundaries. Every inter-zone communication path must be explicitly permitted -- default deny is the fundamental principle. AC-04 enforces information flow between zones: defining which zones can communicate with which, on which protocols, and in which direction. The principle of minimal connectivity: zones should only be able to reach the zones they need, and only on the ports required. PL-08 establishes the security architecture: the zone model as a documented architecture artefact showing all zones, their trust levels, data classifications, and permitted communication paths. This architecture document is the authoritative reference against which firewall rules are validated. SC-32 partitions the system into zones: logical or physical separation of components into defined security domains. The granularity of partitioning is a design decision: too few zones provide insufficient containment, too many zones create operational complexity that leads to workarounds. SA-08 applies security engineering principles to zone design: defence in depth (multiple zones between the internet and crown jewels), least privilege (minimum connectivity between zones), and fail-secure (zone boundaries default to deny).",
+      "Firewall Rule Management and Policy Enforcement (SC-07, CM-03, CM-06, AC-04, AU-02): Firewall rules are the enforcement mechanism. SC-07 mandates managed interfaces at zone boundaries: every packet crossing a zone boundary is evaluated against the policy. Rules should be ordered from most specific to least specific, with explicit deny-all as the final rule. CM-03 governs firewall rule changes: every rule change requires a documented justification, approval from the zone owner and security team, testing before deployment, and rollback capability. Rule changes must reference the business requirement and have an expiry date where applicable. CM-06 defines firewall configuration standards: naming conventions, rule documentation requirements, logging configuration, and prohibited rule patterns (any-any, broad source ranges, insecure protocols). AC-04 validates that information flow enforcement matches the zone architecture: automated tools (Tufin, AlgoSec, FireMon) analyse rule sets to detect rules that violate zone policy, identify redundant or shadowed rules, and map actual connectivity against the intended architecture. AU-02 logs all firewall activity: permitted and denied connections at zone boundaries, providing the data for both operational troubleshooting and security investigation. High-value zone boundaries (data zones, management zones) should log all connections; lower-value boundaries may log only denied connections to manage volume.",
+      "Micro-Segmentation and Software-Defined Security (SC-07, AC-04, CM-02, SI-04, SC-03): Micro-segmentation extends zone controls to individual workloads. SC-07 at the micro-segmentation level applies boundary protection to every workload: each server, container, or serverless function has its own security policy defining which other workloads it can communicate with. AC-04 enforces workload-to-workload information flow: policies defined by application identity (not IP address), so security policy follows the workload regardless of where it runs. CM-02 establishes baseline communication profiles: learning mode observes normal traffic patterns, generates baseline policies, then enforcement mode blocks deviations. This application-aware approach is essential for cloud and container environments where IP addresses are ephemeral. SI-04 monitors east-west traffic: micro-segmentation platforms provide visibility into lateral traffic that traditional perimeter firewalls never see. Anomalous communication patterns -- a web server suddenly talking to a database it has never accessed, a workload attempting to reach the internet directly -- generate alerts. SC-03 provides security function isolation: the micro-segmentation control plane itself must be protected from the workloads it manages, ensuring that a compromised workload cannot modify its own security policy.",
+      "Network Access Control and Device Trust (IA-03, AC-17, CM-08, IA-02, SC-08): Devices must prove their identity and compliance before joining a zone. IA-03 authenticates devices connecting to the network: 802.1X for wired and wireless networks, ensuring that only authenticated and authorised devices receive network access and are placed in the correct zone. Unauthenticated devices are placed in a quarantine zone with limited connectivity. AC-17 governs remote access placement: VPN and ZTNA connections terminate in defined zones based on user role and device posture, not a single flat remote-access zone. CM-08 maintains the device inventory that maps devices to zones: every device has a designated zone, and devices appearing in unexpected zones generate alerts. IA-02 authenticates users in addition to devices: user identity determines which zone resources are accessible, providing a second layer of access control beyond network placement. SC-08 protects inter-zone traffic: encrypted tunnels (IPsec, MACsec) for sensitive inter-zone communications, particularly management traffic and traffic crossing physical site boundaries.",
+      "Zone Monitoring and Anomaly Detection (SI-04, AU-06, AU-02, CA-07, IR-04): Zones enable detection. SI-04 monitors traffic at zone boundaries: IDS/IPS at critical zone interfaces, network flow analysis (NetFlow/sFlow) for all inter-zone traffic, and full packet capture at high-value zone boundaries. AU-06 analyses zone traffic logs: baseline normal inter-zone communication patterns, then detect deviations -- new communication paths, unusual protocols, traffic volume changes, and connections to previously unused services. AU-02 defines logging requirements per zone: management zone logs all authentication events, data zone logs all access attempts, DMZ logs all inbound connections. CA-07 provides continuous monitoring of zone health: are all zone boundaries enforcing policy, have any rule changes bypassed the change management process, are monitoring tools functioning correctly. IR-04 uses zone architecture for incident containment: isolating a compromised zone (revoking its inter-zone connectivity) contains the incident while preserving evidence and maintaining operation of other zones. Zone architecture is what makes surgical containment possible rather than shutting down entire network segments.",
+      "Zone Classification and Data Flow Mapping (RA-03, SC-07, PM-11, AC-04, PL-02): Zones must be classified and documented. RA-03 assesses risk per zone: each zone has a classification based on the sensitivity of data it processes, its exposure to threats, and the impact of its compromise. Classification drives security requirements: restricted zones get the most controls, user zones get the baseline. SC-07 enforces protection proportional to zone classification: restricted zones have the tightest ingress/egress rules, the most monitoring, and the strictest change management. PM-11 defines the mission and business processes that map to zones: understanding which business functions depend on which zones enables impact assessment and recovery prioritisation. AC-04 documents permitted data flows: a data flow map showing how data moves between zones, what transforms it undergoes, and what controls protect it at each stage. This map is essential for compliance (PCI DSS network segmentation testing, GDPR data processing records) and for incident investigation. PL-02 captures zone architecture in the system security plan: the authoritative documentation of zone design, including the rationale for each zone boundary and the criteria for zone membership.",
+      "Cloud and Hybrid Zone Architecture (SC-07, AC-04, SA-09, CM-02, CA-07): Cloud environments require zone architecture adaptation. SC-07 in cloud contexts uses VPCs/VNets, security groups, network ACLs, and service endpoints as zone boundaries instead of physical firewalls. The principles are identical -- least privilege connectivity, default deny, explicit permit -- but the implementation is software-defined. AC-04 controls cross-VPC and cross-account information flow: VPC peering, transit gateways, and PrivateLink connections must be governed with the same rigour as physical firewall rules. SA-09 manages external cloud service boundaries: cloud services (SaaS, PaaS) that process corporate data create implicit zone boundary crossings that must be controlled through service endpoints, private connectivity, and IP restrictions. CM-02 establishes baseline configurations for cloud zone components: security group templates, network ACL standards, and infrastructure-as-code modules that embed zone architecture. CA-07 monitors cloud zone health: cloud-native tools (VPC Flow Logs, NSG Flow Logs) combined with cloud security posture management (CSPM) that detects zone boundary misconfigurations -- security groups allowing 0.0.0.0/0 ingress, VPCs with internet gateways that shouldn't have them, cross-account access that bypasses zone controls."
+    ],
+    "assumptions": "The organisation has network infrastructure that supports segmentation (managed switches with VLAN capability, firewalls or security groups at zone boundaries). An IP addressing scheme exists or can be redesigned to align with zone architecture. Network operations staff have the skills to manage firewall rules and troubleshoot inter-zone connectivity. A change management process exists for network changes. Network monitoring tools (flow analysis, IDS/IPS) are deployed or budgeted for. The organisation has documented which systems process which data classifications.",
+    "typicalChallenges": "The greatest challenge is legacy flat networks: re-architecting a flat network into zones requires careful planning, phased implementation, and extensive application dependency mapping to avoid breaking connectivity. Application dependency discovery is harder than expected -- undocumented inter-system communications surface only when you block them. Firewall rule set complexity grows exponentially: a 10-zone model has 90 potential inter-zone paths, each requiring explicit rules. Rule bloat accumulates over years as rules are added but rarely removed, leading to rule sets with thousands of rules where nobody understands the full picture. Micro-segmentation requires significant investment: the tooling is expensive, the learning/profiling period is lengthy, and the initial policy generation requires validation with application owners who may not understand their own applications' network requirements. Cloud and on-premises zone architectures often evolve independently, creating inconsistent segmentation models that require different management tools and skills. Network performance concerns: every zone boundary adds latency and potential bottlenecks, particularly for latency-sensitive applications. Zone boundary bypass: developers and operations teams request 'temporary' broad rules that become permanent, gradually eroding the zone model.",
+    "indications": "This pattern applies to every organisation with more than a trivially small network. It is particularly critical for: organisations with regulatory segmentation requirements (PCI DSS requires network segmentation for scope reduction), financial services firms where regulators expect defence-in-depth network architecture, organisations running mixed-trust workloads on shared infrastructure (production and development, corporate and operational technology), organisations implementing Zero Trust Architecture (SP-029) where network segmentation is a foundational control, data centre environments with multiple applications and data classifications, hybrid cloud environments where consistent segmentation must span on-premises and cloud, and any organisation that has experienced lateral movement during a security incident.",
+    "contraIndications": "Very small organisations (under 20 devices) may not need formal zone architecture -- a single flat network with endpoint protection and cloud-based security may suffice. Fully cloud-native organisations with no on-premises infrastructure may implement segmentation entirely through cloud-native controls (VPCs, security groups) without traditional firewall-based zone architecture. Organisations should not attempt micro-segmentation before achieving solid baseline segmentation (VLANs + firewalls) -- the fundamentals must work before adding complexity.",
+    "threatResistance": "Network zone architecture is the primary control for containing lateral movement. An attacker who gains initial access to a user zone cannot reach the data zone or management zone without crossing a zone boundary that detects and blocks the attempt (SC-07, AC-04). East-west movement between servers in the same tier is constrained by micro-segmentation that limits communication to known-good patterns (SC-07, SI-04). Ransomware propagation is limited to the zone where initial execution occurs -- zone boundaries prevent the encryption spread that turns a single-system incident into an enterprise-wide event (SC-07, SC-32). Data exfiltration is constrained by zone egress controls: data zones have no direct internet access, so exfiltration requires traversing multiple zone boundaries, each of which provides a detection opportunity (AC-04, AU-02). Rogue device placement (physical or virtual) is detected by network access control that authenticates devices and enforces zone placement (IA-03, CM-08). Management plane compromise is contained by isolating management traffic in dedicated zones with the strictest access controls and monitoring (SC-07, SC-03). Cloud resource misconfiguration exposing data to the internet is detected by continuous monitoring of zone boundary configurations (CA-07, CM-02). The key insight: zone architecture does not prevent initial compromise, but it dramatically limits what an attacker can do after gaining access, buying time for detection and response."
+  },
+  "examples": {
+    "Enterprise Zone Model": [
+      "Design 8-zone architecture: Internet/DMZ, External Services, Application Tier, Data Tier, Management, User (Corporate), User (Guest), Restricted/PCI",
+      "Implement zone boundaries: next-gen firewalls (Palo Alto/Fortinet) at all tier boundaries, default deny, application-aware rules with user identity correlation",
+      "Deploy network access control (802.1X): all wired ports authenticated, devices auto-placed in correct zone based on device certificate and user role",
+      "Document zone architecture: Visio/Lucidchart diagram showing all zones, trust levels, permitted flows, firewall locations, updated quarterly"
+    ],
+    "Firewall Rule Management": [
+      "Implement firewall rule lifecycle: request -> justify -> approve -> implement -> test -> document, with 12-month recertification for all rules",
+      "Deploy rule analysis tooling (Tufin/AlgoSec): weekly automated reports on shadowed rules, unused rules, overly permissive rules, and compliance violations",
+      "Conduct annual rule set review: remove 30% of legacy rules, tighten 20% from any-source to specific, convert 15% from IP-based to application-ID",
+      "Establish rule naming convention: RuleName = ZoneFrom-ZoneTo-Application-TicketRef, mandatory expiry date for temporary rules"
+    ],
+    "Micro-Segmentation": [
+      "Deploy Illumio/Guardicore in learning mode for 30 days on production application tier: map all workload-to-workload communications",
+      "Generate application dependency maps from flow data: validate with application owners, identify and document undocumented communications",
+      "Switch to enforcement mode for first application group: web servers can talk to app servers on port 8443 only, app servers to database on 5432 only",
+      "Extend micro-segmentation to container environment: Kubernetes network policies enforcing pod-to-pod communication restrictions"
+    ],
+    "Cloud Zone Architecture": [
+      "Design AWS multi-account zone model: separate accounts for production, staging, development, management -- Service Control Policies enforce boundaries",
+      "Configure VPC architecture: private subnets for applications, isolated subnets for databases, no internet gateways on data-tier VPCs",
+      "Deploy AWS Transit Gateway with route tables as zone enforcement: production VPCs cannot route to development, management VPC can reach all via specific ports",
+      "Implement CSPM (Prisma Cloud/Wiz): continuous monitoring for security group misconfigurations, public S3 buckets, overly permissive IAM policies"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. System and Communications Protection (SC) and Access Control (AC) families are primary."
+    },
+    {
+      "title": "NIST SP 800-125B: Secure Virtual Network Configuration for VM Protection",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-125b/final",
+      "note": "NIST guidance on virtual network segmentation. Covers virtual firewalls, network isolation, and security group configuration for virtualised environments."
+    },
+    {
+      "title": "PCI DSS v4.0: Network Segmentation Guidance",
+      "url": "https://www.pcisecuritystandards.org/",
+      "note": "PCI DSS network segmentation requirements and testing guidance. Demonstrates how zone architecture reduces compliance scope and protects cardholder data."
+    },
+    {
+      "title": "CIS Controls v8: Control 12 - Network Infrastructure Management",
+      "url": "https://www.cisecurity.org/controls/network-infrastructure-management",
+      "note": "CIS guidance on network security management including segmentation, firewall rules, and network access control."
+    },
+    {
+      "title": "Gartner: Micro-Segmentation Market Guide",
+      "url": "https://www.gartner.com/reviews/market/microsegmentation",
+      "note": "Market landscape for micro-segmentation solutions. Useful for vendor evaluation and understanding implementation approaches."
+    },
+    {
+      "title": "SANS: Network Segmentation and Micro-Segmentation",
+      "url": "https://www.sans.org/white-papers/",
+      "note": "SANS research on network segmentation strategies. Practical guidance on designing zone architectures and implementing micro-segmentation."
+    },
+    {
+      "title": "NCSC: Network Security Principles",
+      "url": "https://www.ncsc.gov.uk/collection/network-security",
+      "note": "UK NCSC guidance on network security fundamentals including segmentation, monitoring, and access control."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-016",
+    "SP-023",
+    "SP-029",
+    "SP-031",
+    "SP-015"
+  ],
+  "relatedPatternNames": [
+    "DMZ Module",
+    "Industrial Control Systems",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Secure Remote Working"
+  ],
+  "threats": [
+    {
+      "id": "T-NZ-001",
+      "name": "Lateral movement across flat network after initial compromise",
+      "mitigatedBy": [
+        "SC-07",
+        "AC-04",
+        "SC-32",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-NZ-002",
+      "name": "Ransomware propagation across unsegmented network encrypting entire environment",
+      "mitigatedBy": [
+        "SC-07",
+        "SC-32",
+        "SI-04",
+        "IR-04"
+      ]
+    },
+    {
+      "id": "T-NZ-003",
+      "name": "Data exfiltration from data tier directly to internet due to missing egress controls",
+      "mitigatedBy": [
+        "AC-04",
+        "SC-07",
+        "AU-02",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-NZ-004",
+      "name": "Rogue device placement on privileged network zone",
+      "mitigatedBy": [
+        "IA-03",
+        "CM-08",
+        "SC-07",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-NZ-005",
+      "name": "Management plane compromise via unrestricted management access",
+      "mitigatedBy": [
+        "SC-07",
+        "SC-03",
+        "AC-17",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-NZ-006",
+      "name": "Firewall rule bloat creating unintended connectivity paths between zones",
+      "mitigatedBy": [
+        "CM-03",
+        "CM-06",
+        "AC-04",
+        "CA-07"
+      ]
+    },
+    {
+      "id": "T-NZ-007",
+      "name": "Zone bypass through application-layer tunnelling (HTTP tunnels, DNS exfiltration)",
+      "mitigatedBy": [
+        "SC-07",
+        "SI-04",
+        "AC-04",
+        "AU-06"
+      ]
+    },
+    {
+      "id": "T-NZ-008",
+      "name": "Cloud security group misconfiguration exposing internal services to internet",
+      "mitigatedBy": [
+        "CM-02",
+        "CA-07",
+        "SC-07",
+        "CM-06"
+      ]
+    },
+    {
+      "id": "T-NZ-009",
+      "name": "VLAN hopping or other layer-2 attacks crossing zone boundaries",
+      "mitigatedBy": [
+        "SC-07",
+        "CM-06",
+        "SC-08",
+        "IA-03"
+      ]
+    },
+    {
+      "id": "T-NZ-010",
+      "name": "Compliance scope expansion due to inadequate network segmentation (PCI, SWIFT)",
+      "mitigatedBy": [
+        "SC-07",
+        "SC-32",
+        "PL-02",
+        "RA-03"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification and Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PL-08",
+      "name": "Security and Privacy Architectures",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-11",
+      "name": "Mission and Business Process Definition",
+      "family": "PM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-03",
+      "name": "Security Function Isolation",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-32",
+      "name": "System Partitioning",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 2,
+    "AU": 2,
+    "CA": 1,
+    "CM": 4,
+    "IA": 2,
+    "IR": 1,
+    "PL": 2,
+    "PM": 1,
+    "RA": 1,
+    "SA": 2,
+    "SC": 4,
+    "SI": 1
+  }
+}

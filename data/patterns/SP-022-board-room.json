@@ -1,0 +1,320 @@
+{
+  "id": "SP-022",
+  "slug": "board-room",
+  "joomla_id": 292,
+  "title": "Board of Directors Room",
+  "description": "Security architecture for protecting highly sensitive board-level communications and documents. Covers secure document distribution to board members using untrusted devices, strong authentication, cryptographic protection, non-repudiation, and resistance to endpoint compromise including trojans on personal computers.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-022",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Governance & People",
+    "status": "published",
+    "type": "pattern",
+    "datePublished": "2010-11-16",
+    "dateModified": "2026-02-06",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/patterns/08_02_Pattern_022_BoD_Room.svg",
+    "png": "/images/OSA_images/patterns/08_02_Pattern_022_BoD_Room.png"
+  },
+  "content": {
+    "description": "Board of directors communications represent some of the most sensitive information in any organisation. Board packs contain strategic plans, M&A proposals, financial results before public disclosure, legal opinions, personnel matters involving senior executives, and regulatory correspondence. A leak of board materials can move share prices, trigger regulatory investigations, compromise competitive advantage, or cause reputational damage. Yet board members themselves are often the weakest link in the security chain: they are typically non-technical, use personal devices, access materials from home networks, and expect simplicity above all else.\n\nThis pattern addresses the specific challenge of securely distributing and accessing board documents in an environment where the endpoint cannot be trusted. The original design assumed board members would read documents on personal computers that may be compromised by generic malware, and proposed a hardened USB device with a secure browser as the access mechanism. While the specific technology has evolved -- modern implementations use dedicated board portal applications (Diligent, BoardEffect, Nasdaq Boardvantage) with mobile device management -- the underlying security architecture remains relevant: protect the document at every stage from creation through distribution to consumption, and assume the access environment is hostile.\n\nThe pattern is built around a small, known user population (typically 10-30 board members plus board secretaries) which enables security controls that would not scale to larger populations. Hardware token distribution, individual key management, and personal onboarding are feasible at this scale. The board secretariat creates and uploads documents to a secured web application; board members authenticate with strong multi-factor credentials and access documents through a controlled viewing environment that resists data extraction.\n\nCryptographic controls are central to this pattern. Documents must be encrypted at rest and in transit. The viewing environment should prevent or deter local storage, printing, and screen capture where technically feasible. Non-repudiation controls ensure that document access is attributable to specific individuals -- critical for insider trading compliance and regulatory audit. The entire lifecycle from document creation through board review to archival or destruction must be covered by the security architecture.\n\nThe pattern also addresses the governance dimension: board document security is not just an IT problem. It requires policies approved by the board itself, handled by a trusted board secretariat function, and subject to periodic security review. The reputational and regulatory consequences of a board document leak are severe enough to justify investment that would be disproportionate for less sensitive use cases.",
+    "keyControlAreas": [
+      "Access Control and Account Management (AC-01, AC-02, AC-03): Given the extreme sensitivity of board materials, access control must be rigorous and granular. Access control policies (AC-01) should be board-approved and define who can create, upload, view, and administer board documents. Account management (AC-02) covers a small, well-defined population: board members, board secretaries, and a minimal number of IT administrators. Accounts should be individually provisioned with formal approval, promptly disabled when a director leaves the board, and subject to regular review -- at minimum after every board composition change. Access enforcement (AC-03) should implement need-to-know at the document level: not all board members need access to all materials (e.g., audit committee papers may be restricted to committee members). Role-based access should distinguish between full directors, committee-specific access, observers, and administrative roles.",
+      "Strong Authentication and Cryptographic Identity (IA-02, IA-04, IA-05, IA-07): Board portal authentication must go beyond passwords. Multi-factor authentication is mandatory, ideally using hardware tokens, certificate-based authentication, or biometric verification on managed devices. Identifier management (IA-04) ensures each board member has a unique, non-transferable identity. Authenticator management (IA-05) covers the lifecycle of tokens, certificates, or other credentials: secure distribution during onboarding, replacement procedures for lost devices, and prompt revocation when a member departs. Cryptographic module authentication (IA-07) ensures that the cryptographic components used for authentication and document protection meet appropriate standards (FIPS 140-2/3 for US-regulated entities). The authentication architecture should resist credential sharing -- a board member handing their token to an assistant should not grant that assistant access.",
+      "Transmission Security and Cryptographic Protection (SC-08, SC-09, SC-12, SC-17): All communications between the board member's device and the board portal must be encrypted. Transmission integrity (SC-08) ensures documents are not modified in transit. Transmission confidentiality (SC-09) prevents eavesdropping on board document content. These controls require TLS 1.2+ at minimum, with consideration of end-to-end encryption for the most sensitive materials. Cryptographic key management (SC-12) is critical: encryption keys for board documents must be properly generated, stored, rotated, and destroyed. PKI certificates (SC-17) used for authentication or document signing must be issued by a trusted authority with appropriate certificate lifecycle management. Where documents are encrypted at rest on the portal, key management must ensure that departed board members can no longer decrypt archived materials they previously accessed.",
+      "Comprehensive Audit and Non-Repudiation (AU-03, AU-08, AU-09, AU-10, AU-11): Board document access must be fully auditable with forensic-grade detail. Audit record content (AU-03) should capture who accessed which document, when, from what device, and what actions were taken (view, download, print). Timestamps (AU-08) must be accurate and synchronised to a trusted time source -- critical for insider trading investigations where minutes matter. Audit records must be protected from tampering (AU-09), including by IT administrators, since the insider threat at board level is an existential concern. Non-repudiation (AU-10) ensures that a board member cannot deny having accessed a document -- essential for regulatory compliance and fiduciary duty. Audit record retention (AU-11) must align with corporate governance requirements, which often mandate retention for years or decades. These audit logs may be subject to regulatory examination and must be preserved accordingly.",
+      "External System and Endpoint Controls (AC-20): Board members typically access documents from personal devices that the organisation does not manage. The architecture must assume these endpoints are compromised by generic malware. Controls include: using a dedicated secure application or hardened browser rather than the device's native browser; preventing document download to local storage where feasible; implementing document watermarking with the viewer's identity to deter photography or screen capture; session timeouts that automatically close documents after inactivity; and remote wipe capability for mobile applications if a device is lost or stolen. The trade-off between security and usability is particularly acute here: board members will not tolerate complex procedures, and the security architecture must be nearly invisible during normal use."
+    ],
+    "assumptions": "The user population is small and well-defined, typically 10-30 board members plus a small number of board secretaries and administrators. Board members will access documents from personal devices (laptops, tablets, smartphones) that the organisation does not manage and must assume may be compromised by generic malware. The computers used by board secretaries to create and upload documents are within the organisation's managed environment and are secured to an appropriate standard. The organisation can distribute hardware tokens or managed applications to board members during an onboarding process. Board materials are classified at the highest sensitivity level and justify security investment that would be disproportionate for general business use.",
+    "typicalChallenges": "The fundamental challenge is securing document access on endpoints the organisation does not control. Board members use personal laptops and tablets, often shared with family members, running consumer-grade security. They expect the same ease of use as reading email -- any friction in accessing board packs will result in complaints to the CEO and pressure to weaken controls. Technology literacy varies widely across the board: some directors are digitally fluent, others struggle with basic authentication procedures. Lost or forgotten tokens cause access failures at critical moments (the evening before a board meeting). Screen capture and photography cannot be technically prevented on unmanaged devices -- a director can always photograph their screen. Maintaining security awareness among a population that meets quarterly and views security as someone else's problem is difficult. The board secretariat must balance security procedures with the practical reality of tight timelines for distributing updated papers, sometimes hours before a meeting. Successor and emergency access procedures must exist for the scenario where the board secretary is unavailable and materials must be distributed urgently.",
+    "indications": "Use this pattern when distributing highly sensitive documents to a small group of senior stakeholders who access materials from personal, unmanaged devices. Applicable for board packs, audit committee papers, remuneration committee documents, M&A due diligence materials, and other governance documents where a leak would have material regulatory, financial, or reputational consequences. Appropriate where compliance requirements demand non-repudiation and detailed audit trails of who accessed what and when. Also applicable for similar small-group, high-sensitivity scenarios outside the boardroom: executive committee communications, regulatory correspondence, or legal privilege materials.",
+    "contraIndications": "This pattern is not suitable for large user populations -- the security model relies on individual provisioning, hardware token distribution, and personal onboarding that do not scale beyond tens of users. Not appropriate for ad-hoc collaboration where participants change frequently; the Realtime Collaboration pattern (SP-021) is more suitable for that scenario. Not applicable where all participants use organisation-managed devices with full endpoint security, as the pattern's core value proposition is protecting content on untrusted endpoints. The overhead of this pattern is not justified for documents at normal business sensitivity levels. Not suitable where real-time co-authoring is required -- this is a document distribution and viewing pattern, not a collaborative editing pattern.",
+    "threatResistance": "The pattern is specifically designed to resist generic trojan horse and keylogger malware on the endpoint where board members read documents. By using a dedicated secure application or hardened browser environment, the attack surface is reduced compared to accessing documents through the device's standard browser. The pattern defends against unauthorised document redistribution through access controls, watermarking, and download restrictions, though it cannot fully prevent a determined insider from photographing the screen. Eavesdropping on network communications is prevented through mandatory TLS encryption for all document transport. Credential theft is mitigated through multi-factor authentication with hardware tokens or certificates. The non-repudiation controls (AU-10) provide forensic evidence if board materials are leaked, supporting investigations and deterring misuse. Residual risks that this pattern acknowledges but cannot fully eliminate include: a board member taking screenshots or photographs of displayed documents; a board member deliberately sharing their secure access device with unauthorised persons; and a targeted, purpose-built trojan specifically designed to attack the board portal application rather than generic malware."
+  },
+  "examples": {
+    "Board portal platforms": [
+      "Diligent Boards (now Diligent One) with role-based access, audit trails, and remote wipe",
+      "Nasdaq Boardvantage with document-level permissions, annotations, and FIPS-validated encryption",
+      "BoardEffect with committee-specific workrooms, voting, and compliance reporting",
+      "Microsoft SharePoint with Azure Information Protection sensitivity labels restricted to board group"
+    ],
+    "Authentication mechanisms": [
+      "FIDO2 hardware security keys (YubiKey) distributed to each board member during onboarding",
+      "Certificate-based authentication on managed iPads issued specifically for board document access",
+      "Push-based MFA (Duo, Microsoft Authenticator) as a minimum where hardware tokens are not feasible",
+      "Biometric authentication (Face ID, fingerprint) on dedicated board portal mobile applications"
+    ],
+    "Document protection controls": [
+      "Dynamic watermarking showing viewer identity and timestamp on every displayed page",
+      "DRM-protected PDFs that prevent copy, print, and screen capture on supported platforms",
+      "Timed document access windows that automatically revoke access after the board meeting concludes",
+      "Secure document destruction with cryptographic verification after retention period expires"
+    ],
+    "Governance and audit": [
+      "Quarterly access review reports presented to the audit committee",
+      "Real-time alerts to board secretary when documents are accessed outside expected timeframes",
+      "Forensic audit trail with tamper-evident logging for regulatory examination readiness",
+      "Annual penetration testing of board portal by independent security firm"
+    ]
+  },
+  "references": [
+    {
+      "title": "NACD Director's Handbook on Cyber-Risk Oversight",
+      "url": "https://www.nacdonline.org/insights/publications/cyber-risk-oversight-handbook/",
+      "note": "National Association of Corporate Directors guidance on board-level cyber risk governance. Covers the board's role in cybersecurity oversight and the security of board communications themselves."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls (AU family)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "Authoritative reference for audit and accountability controls including non-repudiation (AU-10), audit record content (AU-03), and timestamp requirements (AU-08) critical to board document security."
+    },
+    {
+      "title": "SEC Guidance on Cybersecurity Disclosure and Board Oversight",
+      "url": "https://www.sec.gov/rules/final/2023/33-11216.pdf",
+      "note": "SEC rules requiring disclosure of cybersecurity governance including board oversight. Relevant because a breach of board communications would itself be a material cybersecurity incident requiring disclosure."
+    },
+    {
+      "title": "UK Corporate Governance Code",
+      "url": "https://www.frc.org.uk/library/standards-codes-policy/corporate-governance/uk-corporate-governance-code/",
+      "note": "Financial Reporting Council code establishing board responsibilities including the secure handling of board information and the role of the company secretary in managing board communications."
+    },
+    {
+      "title": "OWASP Application Security Verification Standard (ASVS)",
+      "url": "https://owasp.org/www-project-application-security-verification-standard/",
+      "note": "Security requirements for web applications applicable to board portal implementations. Covers authentication, session management, access control, cryptography, and audit logging."
+    },
+    {
+      "title": "FIPS 140-3: Security Requirements for Cryptographic Modules",
+      "url": "https://csrc.nist.gov/publications/detail/fips/140/3/final",
+      "note": "Standard for cryptographic module validation. Relevant for board portal implementations that use hardware security modules or validated cryptographic libraries for document encryption and authentication."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-010",
+    "SP-013",
+    "SP-014",
+    "SP-018",
+    "SP-021",
+    "SP-025"
+  ],
+  "relatedPatternNames": [
+    "Identity Management",
+    "Data Security",
+    "Awareness and Training",
+    "ISMS",
+    "Realtime Collaboration",
+    "Advanced Monitoring and Detection"
+  ],
+  "threats": [
+    {
+      "id": "T-BR-001",
+      "name": "Generic Trojan Horse on Board Member Endpoint",
+      "mitigatedBy": [
+        "AC-20",
+        "SC-08",
+        "SC-09"
+      ]
+    },
+    {
+      "id": "T-BR-002",
+      "name": "Unauthorised Access to Board Documents",
+      "mitigatedBy": [
+        "AC-02",
+        "AC-03",
+        "IA-02",
+        "IA-05"
+      ]
+    },
+    {
+      "id": "T-BR-003",
+      "name": "Board Document Leakage via Screen Capture or Photography",
+      "mitigatedBy": [
+        "AU-10",
+        "AU-03",
+        "AC-20"
+      ]
+    },
+    {
+      "id": "T-BR-004",
+      "name": "Credential Theft or Sharing (Token Handoff)",
+      "mitigatedBy": [
+        "IA-02",
+        "IA-05",
+        "IA-07"
+      ]
+    },
+    {
+      "id": "T-BR-005",
+      "name": "Eavesdropping on Document Transport",
+      "mitigatedBy": [
+        "SC-08",
+        "SC-09",
+        "SC-12"
+      ]
+    },
+    {
+      "id": "T-BR-006",
+      "name": "Insider Threat from Board Member or Secretary",
+      "mitigatedBy": [
+        "AU-10",
+        "AU-03",
+        "AU-09",
+        "AC-03"
+      ]
+    },
+    {
+      "id": "T-BR-007",
+      "name": "Audit Trail Tampering by Privileged Administrator",
+      "mitigatedBy": [
+        "AU-09",
+        "AU-11",
+        "AU-08"
+      ]
+    },
+    {
+      "id": "T-BR-008",
+      "name": "Targeted Attack on Board Portal Application",
+      "mitigatedBy": [
+        "AC-01",
+        "SC-17",
+        "IA-07"
+      ]
+    },
+    {
+      "id": "T-BR-009",
+      "name": "Cryptographic Key Compromise",
+      "mitigatedBy": [
+        "SC-12",
+        "SC-17",
+        "IA-07"
+      ]
+    },
+    {
+      "id": "T-BR-010",
+      "name": "Regulatory Non-Compliance from Insufficient Audit Evidence",
+      "mitigatedBy": [
+        "AU-03",
+        "AU-10",
+        "AU-11",
+        "AU-08"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-01",
+      "name": "Access Control Policies and Procedures",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-20",
+      "name": "Use Of External Information Systems",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-08",
+      "name": "Time Stamps",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection Of Audit Information",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-10",
+      "name": "Non-Repudiation",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-11",
+      "name": "Audit Record Retention",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-07",
+      "name": "Cryptographic Module Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment And Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-17",
+      "name": "Public Key Infrastructure Certificates",
+      "family": "SC",
+      "emphasis": "standard"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 4,
+    "AU": 5,
+    "IA": 4,
+    "SC": 4
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

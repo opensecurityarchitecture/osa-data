@@ -1,0 +1,165 @@
+{
+  "id": "SP-009",
+  "slug": "generic-pattern",
+  "joomla_id": 236,
+  "title": "Generic Pattern",
+  "description": "Foundational reference pattern illustrating how NIST 800-53 control families map to a generic computing architecture of clients, servers, and networks. Serves as the conceptual baseline from which all other OSA security patterns are derived.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-009",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Infrastructure",
+    "status": "published",
+    "type": "pattern",
+    "datePublished": "2008-10-16",
+    "dateModified": "2026-02-06",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/patterns/08_02_Pattern_009_02_Generic.svg",
+    "png": "/images/OSA_images/patterns/08_02_Pattern_009_02_Generic.png"
+  },
+  "content": {
+    "description": "The Generic Pattern is the conceptual foundation of the Open Security Architecture pattern library. It establishes the universal computing model -- client, network, host -- that underpins every other OSA pattern, and maps the complete set of NIST 800-53 control families to this architecture. Rather than prescribing specific controls for a specific scenario, this pattern demonstrates how the major security domains (access control, audit, identification, system protection, and so on) apply to any computing environment.\n\nThe model is deliberately simple. All computing systems involve a user interacting with a client device, which connects across a network to a host that provides resources or services. Hosts themselves can act as both clients and servers, creating chains of communication. This architecture echoes the original design philosophy of TCP/IP: intelligence resides in the endpoints and the application layer, while the network handles packet transport. Every OSA pattern -- from wireless hotspot security to cloud computing to industrial control systems -- is a specialisation of this generic model with environment-specific controls layered on top.\n\nThe value of this pattern is pedagogical and structural. For security architects new to control mapping, it provides a clear mental model of where different control families apply. Access control and identification/authentication operate primarily at the client and host boundaries. System and communications protection spans the network layer. Audit and accountability must be implemented across all three tiers. Configuration management, contingency planning, and risk assessment operate as cross-cutting concerns that affect the entire architecture. Understanding these mappings at the generic level makes it substantially easier to apply them to specific scenarios.\n\nThis pattern also serves as a completeness check. When designing security for a new system or environment, practitioners can use the Generic Pattern's control family mapping as a starting checklist: have we addressed access control at every boundary? Is audit logging comprehensive across client, network, and host? Are configuration baselines defined for all components? The pattern does not specify which individual controls to implement -- that depends on the system's risk profile, regulatory requirements, and operational context -- but it ensures that no major security domain is overlooked.\n\nFor practitioners working with the OSA pattern library, the Generic Pattern is the starting point. Identify the system or environment you are securing, select the most relevant specific pattern (or combination of patterns), and use the Generic Pattern as validation that your control coverage is complete across all architectural tiers.",
+    "keyControlAreas": [
+      "Access Control (AC family): Access control applies at every boundary in the generic architecture. At the client tier, it governs who can log in to workstations and what local resources they can reach. At the network tier, it manifests as firewall rules, network segmentation, and VPN policies. At the host/server tier, it controls access to applications, data, and administrative functions. The AC family encompasses account management, access enforcement, least privilege, separation of duties, session controls, and remote access policies. In any specific pattern derived from this generic model, the access control requirements will be the most heavily customised to the particular environment.",
+      "Identification and Authentication (IA family): Every entity in the computing model -- user, client device, server, service -- must be identified and authenticated before being granted access to resources. At the client boundary, this means user authentication (passwords, MFA, biometrics, certificates). For network communications, this includes mutual TLS, IPsec, and certificate-based device authentication. At the server tier, service accounts and system-to-system authentication must be managed. The IA family covers identifier management, authenticator management, and cryptographic module authentication. The strength of authentication required varies with the sensitivity of the resources being protected.",
+      "Audit and Accountability (AU family): Audit logging must be implemented across all three tiers of the generic architecture. Client-tier logging captures user actions, authentication events, and local security events. Network-tier logging records traffic flows, firewall decisions, and connection metadata. Host-tier logging captures application events, data access, administrative actions, and system state changes. The AU family covers what events to log, what content to include in records, how to protect audit data from tampering, time synchronisation across distributed systems, and retention requirements. A complete audit architecture enables reconstruction of security-relevant events across the full client-network-host path.",
+      "System and Communications Protection (SC family): The SC family addresses the security of data in transit and at rest, and the protection of system components from compromise. At the network tier, this means encryption of communications (TLS, IPsec), network segmentation, boundary protection, and denial-of-service protection. At the host tier, it covers application partitioning, memory protection, and cryptographic controls for stored data. At the client tier, it includes session encryption, secure boot, and trusted platform capabilities. Communications protection is the primary security concern at the network layer of the generic model, where data traverses infrastructure outside the direct control of either endpoint.",
+      "Configuration Management (CM family): Every component in the generic architecture -- client operating systems, network devices, server platforms, applications -- must have a defined security baseline configuration. The CM family covers baseline configuration, configuration change control, least functionality (disabling unnecessary services and ports), and software restriction policies. Configuration drift is one of the most common causes of security degradation over time: a system that was secure when deployed gradually weakens as patches are missed, unnecessary services are enabled, and temporary exceptions become permanent. Automated configuration monitoring and enforcement are essential for maintaining the security posture across the architecture.",
+      "Risk Assessment and Security Assessment (RA and CA families): These cross-cutting families apply to the entire generic architecture. Risk assessment identifies threats, vulnerabilities, and impacts across client, network, and host tiers to inform control selection and prioritisation. Security assessments and continuous monitoring verify that implemented controls are functioning as intended. Vulnerability scanning covers all tiers: client endpoint vulnerabilities, network device firmware, server operating systems, and application code. The generic model helps ensure that risk and vulnerability assessments are comprehensive -- it is common for organisations to focus scanning on servers while neglecting network devices or client endpoints."
+    ],
+    "assumptions": "All computing systems follow the fundamental client-network-host model, where users interact with client devices that communicate over networks to access resources on hosts. Hosts can act as both clients and servers in multi-tier architectures. The network layer is assumed to be untrusted and to simply transfer data packets -- security intelligence resides in the endpoints. The NIST 800-53 control framework provides a comprehensive and authoritative taxonomy of security controls applicable to this model. Specific control selection and implementation details are determined by the particular environment, risk profile, and regulatory context -- this generic pattern provides the structural mapping, not the implementation guidance.",
+    "typicalChallenges": "The primary challenge with the Generic Pattern is that its generality makes it insufficient on its own for any real-world implementation. Practitioners must move from the generic model to environment-specific patterns that provide actionable control guidance. The mapping of control families to architectural tiers can create a false sense of completeness if practitioners treat it as a checklist rather than a starting framework. Cross-cutting controls that span multiple tiers (incident response, contingency planning, security assessment) are harder to visualise in a tiered model and risk being under-addressed. The client-network-host model, while universal, does not naturally represent modern architectures such as serverless computing, container orchestration, or edge computing without interpretation. Organisations new to security architecture may find the gap between the generic model and actionable implementation guidance daunting without the more specific OSA patterns to bridge it.",
+    "indications": "Use the Generic Pattern as a starting point when designing security architecture for any new system or environment, before selecting more specific patterns. Valuable for training and education: it provides security architects with a mental model for where different control families apply in any computing architecture. Use it as a completeness validation tool after selecting specific patterns -- verify that all major control families have been addressed across client, network, and host tiers. Appropriate as a reference framework when conducting security architecture reviews or gap analyses. Useful for communicating security architecture concepts to non-specialist audiences who need to understand the relationship between controls and system components.",
+    "contraIndications": "The Generic Pattern should not be used as a standalone security architecture for any real-world system. It does not provide the environment-specific control selection, implementation guidance, or threat context needed for an actionable security design. Do not use it as a substitute for risk-based control selection -- the pattern shows where controls apply, not which controls to implement or to what depth. Not appropriate as a compliance mapping tool on its own; use the specific patterns with their detailed control lists for compliance purposes. If you already know which specific OSA pattern applies to your environment, start there rather than with the Generic Pattern.",
+    "threatResistance": "As a foundational reference pattern, the Generic Pattern does not directly mitigate specific threats. Instead, it provides the architectural framework for understanding where threat mitigations apply. The client tier faces endpoint threats: malware, credential theft, physical access, and social engineering. The network tier faces interception, man-in-the-middle, denial of service, and lateral movement threats. The host tier faces application-layer attacks, privilege escalation, data breach, and configuration exploitation. By mapping control families to these architectural tiers, the Generic Pattern ensures that threat analysis is comprehensive across the full attack surface. Specific threat resistance is provided by the specialised patterns derived from this generic model."
+  },
+  "examples": {
+    "Client tier implementations": [
+      "Corporate workstations with endpoint protection, disk encryption, and managed configuration baselines",
+      "Mobile devices with MDM enrollment, containerised corporate applications, and certificate-based authentication",
+      "Thin client or virtual desktop infrastructure (VDI) reducing the local attack surface",
+      "Browser-based clients with secure configuration policies and extension management"
+    ],
+    "Network tier implementations": [
+      "Segmented enterprise network with firewall-enforced zone boundaries and VLAN isolation",
+      "Zero trust network architecture with micro-segmentation and identity-based access",
+      "Encrypted site-to-site VPN tunnels for inter-office and cloud connectivity",
+      "Software-defined networking with centralised policy enforcement and traffic visibility"
+    ],
+    "Host tier implementations": [
+      "Hardened server operating systems with CIS benchmark configurations and automated patching",
+      "Container orchestration platforms (Kubernetes) with pod security policies and image scanning",
+      "Cloud IaaS instances with security groups, IAM roles, and cloud-native monitoring",
+      "Database servers with encryption at rest, query auditing, and privileged access management"
+    ],
+    "Cross-cutting security services": [
+      "SIEM platform aggregating logs from client, network, and host tiers for correlated analysis",
+      "Vulnerability management program scanning all three architectural tiers on regular cadence",
+      "Identity and access management (IAM) providing unified authentication across the architecture",
+      "Configuration management database (CMDB) tracking all assets across client, network, and host tiers"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls for Information Systems and Organizations",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The authoritative source for the control families mapped in this generic pattern. Provides detailed control descriptions, enhancements, and supplemental guidance for all 20 control families."
+    },
+    {
+      "title": "NIST SP 800-53A Rev 5: Assessing Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53a/rev-5/final",
+      "note": "Companion to SP 800-53 providing assessment procedures for each control. Essential for verifying that controls mapped through the generic model are actually effective in implementation."
+    },
+    {
+      "title": "NIST SP 800-37 Rev 2: Risk Management Framework for Information Systems and Organizations",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-37/rev-2/final",
+      "note": "The Risk Management Framework that provides the process context for applying controls from the generic pattern. Covers system categorisation, control selection, implementation, assessment, and authorisation."
+    },
+    {
+      "title": "NIST Cybersecurity Framework (CSF) 2.0",
+      "url": "https://www.nist.gov/cyberframework",
+      "note": "Higher-level framework that organises security functions into Govern, Identify, Protect, Detect, Respond, and Recover. Provides an alternative lens for understanding the control families in the generic pattern."
+    },
+    {
+      "title": "ISO/IEC 27001:2022 Information Security Management Systems",
+      "url": "https://www.iso.org/standard/27001",
+      "note": "International standard for information security management. Annex A controls map broadly to the same architectural tiers described in the generic pattern, enabling cross-framework alignment."
+    },
+    {
+      "title": "CIS Controls v8",
+      "url": "https://www.cisecurity.org/controls",
+      "note": "Prioritised set of security actions that can be mapped to the generic pattern's architectural tiers. Implementation Groups provide a maturity-based approach to control adoption across client, network, and host components."
+    },
+    {
+      "title": "Saltzer and Schroeder: The Protection of Information in Computer Systems (1975)",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "note": "Foundational paper establishing security design principles (least privilege, complete mediation, open design) that underpin the control families applied in the generic pattern. The client-network-host model reflects these principles."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-001",
+    "SP-002",
+    "SP-008",
+    "SP-011",
+    "SP-016",
+    "SP-018"
+  ],
+  "relatedPatternNames": [
+    "Client Module",
+    "Server Module",
+    "Public Web Server",
+    "Cloud Computing",
+    "DMZ Module",
+    "ISMS"
+  ],
+  "threats": [
+    {
+      "id": "T-GP-001",
+      "name": "Client Endpoint Compromise (Malware, Ransomware)"
+    },
+    {
+      "id": "T-GP-002",
+      "name": "Credential Theft and Unauthorised Authentication"
+    },
+    {
+      "id": "T-GP-003",
+      "name": "Network Interception and Man-in-the-Middle"
+    },
+    {
+      "id": "T-GP-004",
+      "name": "Denial of Service (Network and Application Layer)"
+    },
+    {
+      "id": "T-GP-005",
+      "name": "Lateral Movement Across Network Segments"
+    },
+    {
+      "id": "T-GP-006",
+      "name": "Privilege Escalation on Host Systems"
+    },
+    {
+      "id": "T-GP-007",
+      "name": "Data Breach via Application-Layer Exploitation"
+    },
+    {
+      "id": "T-GP-008",
+      "name": "Configuration Drift and Security Baseline Degradation"
+    },
+    {
+      "id": "T-GP-009",
+      "name": "Insider Threat (Malicious or Negligent)"
+    },
+    {
+      "id": "T-GP-010",
+      "name": "Supply Chain Compromise of System Components"
+    }
+  ],
+  "controls": [],
+  "controlFamilySummary": {},
+  "$schema": "../schema/pattern.schema.json"
+}

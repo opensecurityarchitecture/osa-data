@@ -1,0 +1,483 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-034",
+  "slug": "cyber-resilience",
+  "title": "Cyber Resilience",
+  "description": "Enterprise architecture pattern for designing systems that survive cyber attacks, maintain critical operations under degraded conditions, and recover rapidly. Covers graceful degradation, immutable infrastructure, isolated recovery environments, and business continuity integration. Maps 44 NIST 800-53 controls across prevention, absorption, adaptation, and recovery phases.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-034",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Enterprise Architecture",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from responding to and recovering from major cyber incidents in financial services, including ransomware events that tested every assumption about backup integrity and recovery speed. Informed by regulatory expectations (DORA, operational resilience frameworks) and the hard-won lesson that prevention eventually fails and recovery capability determines survival."
+  },
+  "diagram": {
+    "svg": "/images/sp-034-cyber-resilience.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Cyber Resilience is the capacity of an organisation to anticipate, withstand, recover from, and adapt to adverse cyber events. It goes beyond traditional security (preventing attacks) and traditional disaster recovery (restoring from backups) to address the reality that sophisticated adversaries will eventually breach preventive controls. The question is not whether you will be compromised, but whether your architecture allows you to continue operating and recover quickly when you are.\n\nThe pattern is built on four phases. Anticipation identifies critical business services, maps their dependencies, sets impact tolerances, and designs architectures that can absorb disruption. Withstanding maintains critical operations under attack through graceful degradation, isolation, and failover -- the system bends but does not break. Recovery restores full operations from a known-good state through immutable backups, isolated recovery environments, and tested restoration procedures. Adaptation feeds lessons from each incident back into the architecture, continuously improving resilience posture.\n\nThis is fundamentally an architecture problem, not a technology problem. A resilient system is designed from the ground up with failure modes in mind: critical services have no single points of failure, data stores have immutable backups that attackers cannot reach, identity systems can be rebuilt independently, and recovery procedures are tested regularly -- not just documented. The most common failure mode in real cyber incidents is not the initial compromise but the discovery during recovery that backups are corrupted, that no one knows the restoration sequence, or that the recovery environment depends on the same compromised infrastructure.\n\nThe pattern aligns with regulatory frameworks that increasingly mandate operational resilience: the EU Digital Operational Resilience Act (DORA), the UK PRA/FCA operational resilience framework, and the US Federal Financial Institutions Examination Council (FFIEC) business continuity guidance. These regulations recognise that financial stability depends not on preventing every attack but on ensuring critical services recover within defined impact tolerances.",
+    "keyControlAreas": [
+      "Critical Service Identification and Impact Tolerance (PM-08, PM-11, PL-02, RA-03, RA-09): Resilience starts with knowing what matters. PM-08 establishes a critical infrastructure plan that identifies the systems and services essential to the organisation's mission. PM-11 defines mission and business processes with their supporting technology dependencies, creating the map from business outcomes to infrastructure components. PL-02 documents the security architecture including trust boundaries, data flows, and single points of failure. RA-03 assesses risk to critical services: what threats are most likely, what is the impact of disruption, and where are the architectural weaknesses? RA-09 (criticality analysis) determines which components, if compromised, would cause the most damage -- these are the crown jewels that receive the highest resilience investment. The output is a tiered service catalogue with impact tolerances: Tier 1 services (e.g., payment processing) must recover within 2 hours, Tier 2 (e.g., customer portal) within 24 hours, Tier 3 (e.g., internal reporting) within 72 hours. Impact tolerances drive every subsequent architectural decision.",
+      "Resilient Architecture and Graceful Degradation (SA-08, SC-36, SC-07, SC-32, SI-13, SI-17): Architecture must be designed to absorb disruption. SA-08 applies resilience engineering principles: no single points of failure for critical services, blast radius containment through isolation, fail-safe defaults that maintain safety when components fail. SC-36 provides distributed processing and storage: critical services run across multiple availability zones or regions, with data replicated to ensure availability if one location is lost. SC-07 enforces boundary protection between resilience zones: if one zone is compromised, network segmentation prevents lateral movement to recovery infrastructure. SC-32 creates system partitions that isolate critical components: the backup infrastructure is in a separate trust domain from production, with separate credentials, separate network paths, and separate administrative access. SI-13 addresses predictable failure prevention: monitoring for early warning signs (disk degradation, certificate expiry, capacity limits) that could compound during an incident. SI-17 provides fail-safe procedures when automated systems fail: manual fallback processes for critical business functions, paper-based procedures for essential operations, and clear escalation paths when technology is unavailable. Graceful degradation means designing systems with progressive feature reduction: when under attack, non-essential features are shed to preserve core functionality.",
+      "Immutable Backup and Data Protection (CP-09, CP-06, SC-28, SI-07, SC-13): Backups are the last line of defence and must be treated as critical infrastructure. CP-09 mandates system backup with specific attention to integrity: backups must be immutable (write-once-read-many or append-only storage), stored in a separate trust domain with separate credentials, and regularly tested through actual restoration. CP-06 provides alternate storage sites: backup data must be geographically separated from production and accessible through independent network paths that do not traverse potentially compromised infrastructure. SC-28 protects data at rest: backup encryption with keys managed independently of the production key management system -- if the attacker compromises production encryption keys, backup data must remain protected. SI-07 verifies backup integrity: cryptographic hashes computed at backup time and verified before restoration, detecting tampering or corruption that would make restoration fail. SC-13 mandates approved cryptographic mechanisms for backup encryption. The 3-2-1-1-0 rule provides a practical target: three copies of data, on two different media types, one offsite, one immutable, zero errors in recovery testing. Ransomware specifically targets backup systems: the architecture must assume that backup credentials, backup servers, and backup network paths will be attacked.",
+      "Isolated Recovery Environment (CP-07, CP-10, CP-02, SC-07, AC-02): Recovery must happen from a clean, trusted environment. CP-07 provides an alternate processing site: an isolated recovery environment (sometimes called a clean room or cyber vault) that can reconstitute critical services independently of the production environment. CP-10 governs system recovery and reconstitution: the process of rebuilding systems from immutable images, verified backups, and trusted software repositories. CP-02 defines the contingency plan: step-by-step recovery procedures that have been tested and can be executed under the stress of an active incident. SC-07 enforces strict boundary protection around the recovery environment: air-gapped or network-isolated, accessible only through tightly controlled jump boxes, with no trust relationship to the production domain. AC-02 manages separate recovery accounts: recovery environment credentials are stored offline (printed, in a safe), not in the production directory service that may be compromised. The recovery environment must include: independent DNS, independent identity provider, independent certificate authority, network-isolated backup access, and pre-staged recovery tooling. Testing must validate that the recovery environment can actually reconstitute services without any dependency on the production environment.",
+      "Identity and Access Resilience (IA-02, IA-05, AC-02, CP-02, SC-12): Identity infrastructure is often the first and hardest thing to recover. IA-02 in the resilience context means maintaining the ability to authenticate users even when the primary identity provider is compromised. IA-05 addresses authenticator management during crisis: break-glass accounts with offline credentials, emergency access procedures that bypass normal authentication while maintaining auditability. AC-02 manages emergency account provisioning: predefined emergency accounts sealed in secure storage, used only during recovery, with full audit trails. CP-02 includes identity recovery in the contingency plan: how to rebuild Active Directory from backup, how to re-establish certificate trust, how to provision temporary access during rebuilding. SC-12 ensures cryptographic key recovery: backup of critical encryption keys (data encryption, TLS certificates, code signing) in offline key escrow, enabling service restoration without regenerating all cryptographic material. The most common recovery failure is circular dependency: you need Active Directory to access the backup system, but Active Directory is the thing you need to restore. Break this cycle by designing the recovery environment with independent identity.",
+      "Testing, Exercising, and Continuous Improvement (CP-04, IR-03, PM-14, CA-02, CA-07): Resilience that is not tested is theoretical. CP-04 mandates contingency plan testing: at minimum annual tabletop exercises, quarterly technical recovery tests for Tier 1 services, and periodic full-scale simulation exercises. IR-03 provides incident response testing through red team exercises, purple team collaboration, and scenario-based simulations that test detection, response, and recovery holistically. PM-14 ensures continuous testing and monitoring of resilience capabilities. CA-02 conducts control assessments of resilience architecture: verifying that backup immutability is actually enforced, that recovery environments are truly isolated, that recovery time objectives can actually be met. CA-07 provides continuous monitoring of resilience indicators: backup completion rates, backup age, recovery environment readiness, certificate expiry timelines, and capacity headroom. Every test should produce findings, and findings should drive architectural improvements. Organisations that treat resilience testing as a compliance checkbox rather than a genuine learning exercise discover their gaps during real incidents rather than before them.",
+      "Regulatory Alignment and Governance (PM-08, PM-09, PM-30, PL-02, SA-08): Cyber resilience is increasingly regulated. PM-08 establishes critical infrastructure plans aligned with regulatory requirements: DORA mandates ICT risk management frameworks with specific resilience requirements for financial entities. PM-09 develops the risk management strategy that balances resilience investment against organisational risk appetite. PM-30 provides supply chain risk management: understanding and managing resilience dependencies on third-party providers (cloud platforms, SaaS applications, managed services) whose failure could disrupt critical services. PL-02 documents resilience architecture in system security plans that demonstrate regulatory compliance. SA-08 applies security and privacy engineering principles to resilience design: defence in depth (multiple independent resilience mechanisms), least privilege (recovery access restricted to minimum necessary), and fail-safe defaults (systems fail to a safe state rather than an insecure one). Board-level reporting on resilience posture should include: recovery time objective vs actual recovery time in tests, backup integrity verification results, and resilience gap remediation progress."
+    ],
+    "assumptions": "The organisation has identified its critical business services and their technology dependencies. Executive sponsorship exists for resilience investment (resilience costs money upfront and pays off during incidents). IT operations teams have the skills to implement and maintain backup and recovery infrastructure. Network architecture supports the creation of isolated recovery environments. The organisation can tolerate the operational overhead of maintaining and testing recovery capabilities. Regulatory requirements for operational resilience are understood and prioritised.",
+    "typicalChallenges": "Cost is the primary barrier: resilient architecture requires investment in redundancy, backup infrastructure, recovery environments, and testing programmes that deliver no visible benefit until an incident occurs. Recovery testing disrupts production operations and requires dedicated time from teams already under pressure. Organisations discover circular dependencies during recovery exercises: the backup system depends on DNS which depends on Active Directory which is the thing being recovered. Cloud provider resilience is often assumed but not verified: multi-region deployments may share control plane dependencies that create correlated failures. Immutable backup storage increases cost and complexity compared to traditional backup approaches. The human factor is critical and often underestimated: recovery under the stress of an active incident with exhausted teams and executive pressure is fundamentally different from a planned test. Shadow IT and undocumented systems create recovery gaps: you cannot recover what you do not know exists. Third-party dependencies (SaaS providers, cloud platforms) may have their own resilience limitations that constrain your recovery timeline. Keeping recovery environments current and tested requires ongoing operational investment that competes with feature development.",
+    "indications": "This pattern is essential for any organisation where a prolonged technology outage would cause significant financial, reputational, or safety harm. It is particularly critical for: financial services organisations subject to DORA or operational resilience regulation, healthcare organisations where system availability affects patient safety, critical national infrastructure operators, organisations that have experienced (or closely observed peers experiencing) destructive cyber attacks, any organisation with high-value data that would be targeted by ransomware, and organisations with complex technology estates where recovery sequence and dependencies are not well understood.",
+    "contraIndications": "Very small organisations with simple technology environments and high tolerance for downtime may find the full resilience architecture disproportionate, though basic backup and recovery capability is always appropriate. Organisations in early startup phase where the entire technology estate can be rebuilt from code repositories in hours may prioritise development speed over resilience architecture. Environments that are entirely ephemeral and stateless (pure functions with no persistent data) have different resilience characteristics and may not need traditional backup and recovery.",
+    "threatResistance": "Cyber Resilience addresses the threats that preventive controls alone cannot fully mitigate. Ransomware that encrypts production data is neutralised by immutable backups in isolated storage that the attacker cannot reach or corrupt (CP-09, CP-06, SC-28). Destructive wiper malware that destroys systems is countered by the ability to reconstitute from immutable images in an isolated recovery environment (CP-07, CP-10). Supply chain attacks that compromise trusted software are contained by verified software repositories and integrity checking during recovery (SI-07, SR-10). Advanced persistent threats that compromise the domain controller are addressed by independent identity recovery capability and break-glass access (IA-02, AC-02, CP-02). Insider threats that sabotage backup infrastructure are mitigated by separation of duties, immutable storage, and multi-party authorisation for backup administration (AC-05, CP-09, AC-02). Cloud provider outages are addressed by multi-region architecture and provider-independent recovery capability (SC-36, CP-07). Coordinated attacks targeting both production and backup simultaneously are countered by air-gapped recovery environments with independent credentials (SC-07, AC-02). The fundamental architectural principle is that recovery infrastructure must exist in a separate trust domain that does not share credentials, network paths, or administrative access with the production environment."
+  },
+  "examples": {
+    "Immutable Backup Architecture": [
+      "Deploy immutable object storage (S3 Object Lock, Azure Immutable Blob) for all Tier 1 system backups with 30-day retention lock",
+      "Store backup encryption keys in offline HSM separate from production KMS; split knowledge across two administrators",
+      "Implement 3-2-1-1-0: three copies, two media types, one offsite, one immutable, zero untested restores",
+      "Automate daily backup integrity verification: hash comparison, test restore of random sample, alert on any failure"
+    ],
+    "Isolated Recovery Environment": [
+      "Build air-gapped recovery network with independent DNS, DHCP, and identity provider (standalone AD forest)",
+      "Pre-stage recovery tools: forensic imaging, malware scanning, system rebuild automation, communication tools",
+      "Store sealed break-glass credentials in physical safe: recovery admin accounts, backup decryption keys, ILO/IPMI access",
+      "Test quarterly: disconnect from production, boot recovery environment, restore Tier 1 services, validate functionality"
+    ],
+    "Graceful Degradation Design": [
+      "Design payment processing with circuit breakers: if fraud detection is unavailable, process with enhanced limits and manual review queue",
+      "Implement read-only mode for customer portal: if write path is compromised, customers can view accounts but not transact",
+      "Pre-configure static content fallback: if CMS is down, critical information pages served from CDN cache",
+      "Document manual fallback procedures: paper-based payment authorisation, phone-based customer verification, manual trade confirmation"
+    ],
+    "Resilience Testing Programme": [
+      "Monthly: automated backup restoration test for random Tier 1 system with recovery time measurement",
+      "Quarterly: tabletop exercise with business and IT leadership simulating ransomware scenario with decision points",
+      "Bi-annually: technical recovery exercise rebuilding Tier 1 services from scratch in isolated environment",
+      "Annually: full-scale simulation combining red team attack, SOC detection, incident response, and recovery execution"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-160 Vol 2: Developing Cyber-Resilient Systems",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-160/vol-2-rev-1/final",
+      "note": "The primary NIST reference for cyber resilience engineering. Defines resilience goals, objectives, and techniques that can be applied throughout the system lifecycle."
+    },
+    {
+      "title": "EU Digital Operational Resilience Act (DORA)",
+      "url": "https://www.digital-operational-resilience-act.com/",
+      "note": "The EU regulation mandating ICT risk management and operational resilience for financial entities. Effective January 2025, it sets specific requirements for ICT incident management, digital operational resilience testing, and third-party risk management."
+    },
+    {
+      "title": "Bank of England / PRA: Operational Resilience",
+      "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2021/march/operational-resilience",
+      "note": "The UK regulatory framework for operational resilience in financial services. Introduces the concept of impact tolerances for important business services."
+    },
+    {
+      "title": "NIST SP 800-34 Rev 1: Contingency Planning Guide",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-34/rev-1/final",
+      "note": "Comprehensive guidance on IT contingency planning including business impact analysis, recovery strategies, and plan testing."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. Contingency Planning (CP) and System and Information Integrity (SI) families are particularly relevant."
+    },
+    {
+      "title": "CISA: Ransomware Guide",
+      "url": "https://www.cisa.gov/stopransomware/ransomware-guide",
+      "note": "Practical guidance on ransomware prevention and recovery. Includes specific recommendations for backup architecture and recovery planning that align with this pattern."
+    },
+    {
+      "title": "Sheltered Harbor",
+      "url": "https://shelteredharbor.org/",
+      "note": "Financial services industry initiative for data vaulting and resiliency. Provides standards for immutable data vaulting and coordinated restoration that protect critical financial data."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-011",
+    "SP-013",
+    "SP-025",
+    "SP-028",
+    "SP-029",
+    "SP-031"
+  ],
+  "relatedPatternNames": [
+    "Cloud Computing",
+    "Data Security",
+    "Advanced Monitoring and Detection",
+    "Secure DevOps Pipeline",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response"
+  ],
+  "threats": [
+    {
+      "id": "T-CR-001",
+      "name": "Ransomware encrypting production data and systems",
+      "mitigatedBy": [
+        "CP-09",
+        "CP-06",
+        "SC-28",
+        "CP-10"
+      ]
+    },
+    {
+      "id": "T-CR-002",
+      "name": "Destructive wiper malware destroying systems beyond repair",
+      "mitigatedBy": [
+        "CP-07",
+        "CP-10",
+        "SI-07",
+        "CP-09"
+      ]
+    },
+    {
+      "id": "T-CR-003",
+      "name": "Backup infrastructure compromise rendering recovery impossible",
+      "mitigatedBy": [
+        "SC-07",
+        "AC-02",
+        "CP-06",
+        "SC-32"
+      ]
+    },
+    {
+      "id": "T-CR-004",
+      "name": "Domain controller compromise destroying identity infrastructure",
+      "mitigatedBy": [
+        "IA-02",
+        "AC-02",
+        "CP-02",
+        "CP-09"
+      ]
+    },
+    {
+      "id": "T-CR-005",
+      "name": "Supply chain attack corrupting trusted software repositories",
+      "mitigatedBy": [
+        "SI-07",
+        "SR-10",
+        "SA-08",
+        "CP-09"
+      ]
+    },
+    {
+      "id": "T-CR-006",
+      "name": "Insider sabotage of recovery infrastructure",
+      "mitigatedBy": [
+        "AC-05",
+        "AC-02",
+        "AU-02",
+        "CP-09"
+      ]
+    },
+    {
+      "id": "T-CR-007",
+      "name": "Coordinated attack on production and backup simultaneously",
+      "mitigatedBy": [
+        "SC-07",
+        "SC-32",
+        "CP-06",
+        "CP-07"
+      ]
+    },
+    {
+      "id": "T-CR-008",
+      "name": "Cloud provider outage affecting all hosted services",
+      "mitigatedBy": [
+        "SC-36",
+        "CP-07",
+        "CP-08",
+        "PM-30"
+      ]
+    },
+    {
+      "id": "T-CR-009",
+      "name": "Encryption key loss preventing access to encrypted backups",
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "CP-09",
+        "CP-06"
+      ]
+    },
+    {
+      "id": "T-CR-010",
+      "name": "Recovery failure due to untested or outdated procedures",
+      "mitigatedBy": [
+        "CP-04",
+        "IR-03",
+        "PM-14",
+        "CA-02"
+      ]
+    },
+    {
+      "id": "T-CR-011",
+      "name": "Circular dependency preventing system recovery sequence",
+      "mitigatedBy": [
+        "CP-02",
+        "CP-07",
+        "SA-08",
+        "PL-02"
+      ]
+    },
+    {
+      "id": "T-CR-012",
+      "name": "Third-party service failure cascading to critical operations",
+      "mitigatedBy": [
+        "PM-30",
+        "SA-09",
+        "CP-08",
+        "SC-36"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-02",
+      "name": "Contingency Plan",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-04",
+      "name": "Contingency Plan Testing",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-06",
+      "name": "Alternate Storage Site",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-07",
+      "name": "Alternate Processing Site",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-08",
+      "name": "Telecommunications Services",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-09",
+      "name": "System Backup",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-10",
+      "name": "System Recovery and Reconstitution",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-03",
+      "name": "Incident Response Testing",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-08",
+      "name": "Incident Response Plan",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-08",
+      "name": "Critical Infrastructure Plan",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-11",
+      "name": "Mission and Business Process Definition",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-30",
+      "name": "Supply Chain Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-09",
+      "name": "Criticality Analysis",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-13",
+      "name": "Cryptographic Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-32",
+      "name": "System Partitioning",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-36",
+      "name": "Distributed Processing and Storage",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-13",
+      "name": "Predictable Failure Prevention",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-17",
+      "name": "Fail-safe Procedures",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-10",
+      "name": "Inspection of Systems or Components",
+      "family": "SR",
+      "emphasis": "standard"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 2,
+    "AU": 1,
+    "CA": 2,
+    "CP": 6,
+    "IA": 2,
+    "IR": 3,
+    "PL": 1,
+    "PM": 5,
+    "RA": 2,
+    "SA": 2,
+    "SC": 6,
+    "SI": 3,
+    "SR": 1
+  }
+}

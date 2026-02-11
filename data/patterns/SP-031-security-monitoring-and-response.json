@@ -1,0 +1,480 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-031",
+  "slug": "security-monitoring-and-response",
+  "title": "Security Monitoring and Response",
+  "description": "End-to-end security operations pattern covering the full detection and response lifecycle: telemetry collection from endpoints, networks, and cloud; centralised correlation and analytics; orchestrated response and containment. Maps 48 NIST 800-53 controls across the collection, correlation, orchestration, and response pipeline.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-031",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Security Operations",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from building and operating security operations centres in financial services, including standing up 24/7 SOCs, deploying SIEM at scale, and integrating EDR with SOAR platforms. Informed by years of incident response across ransomware, APT, and insider threat scenarios where detection speed and response coordination determined outcome."
+  },
+  "diagram": {
+    "svg": "/images/sp-031-security-monitoring-and-response.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Security Monitoring and Response is the operational backbone of any security programme. Without the ability to detect threats and respond effectively, preventive controls are a single point of failure. This pattern defines the architecture for a complete detection and response pipeline: from raw telemetry at the edge through centralised correlation and analytics to orchestrated containment and recovery.\n\nThe pipeline has four stages. Collection gathers telemetry from every source that matters: endpoint detection and response (EDR) agents on workstations and servers, network sensors and flow data, cloud audit trails, application logs, identity provider events, and email/web gateway logs. Correlation brings these streams together in a Security Information and Event Management (SIEM) platform or data lake, normalising formats, enriching with context (asset inventory, threat intelligence, identity data), and applying detection logic -- rules, statistical baselines, and machine learning models. Orchestration coordinates the response through a Security Orchestration, Automation, and Response (SOAR) platform that executes playbooks: enriching alerts with additional context, deduplicating and prioritising, and routing to the right analyst or automated workflow. Response executes containment, eradication, and recovery actions -- isolating compromised hosts, revoking credentials, blocking indicators, preserving forensic evidence, and restoring services.\n\nThe pattern addresses the fundamental challenge of modern security operations: the volume of telemetry vastly exceeds human capacity to review it. A mid-size enterprise generates millions of log events per day. Without automation at every stage -- collection, normalisation, correlation, enrichment, triage, and response -- security teams drown in alerts while missing the signals that matter. This pattern provides the architectural framework to build detection and response capability that scales with the threat landscape.",
+    "keyControlAreas": [
+      "Telemetry Collection and Log Management (AU-02, AU-03, AU-04, AU-05, AU-08, AU-12, SI-04): The foundation of detection is comprehensive telemetry. AU-02 defines which events must be logged: authentication events, privilege escalation, data access, configuration changes, process execution, network connections, and failed actions. AU-03 specifies the content of each record: who, what, when, where, outcome, and contextual metadata. AU-04 ensures sufficient storage capacity for log retention -- under-provisioned log storage is a common failure that creates blind spots exactly when forensic data is needed. AU-05 defines responses when logging fails: alerts, failover to backup collectors, and in critical systems, halting operations rather than operating blind. AU-08 mandates time synchronisation across all sources using NTP with authenticated time sources -- without accurate timestamps, cross-source correlation is unreliable. AU-12 ensures audit record generation at the point of event occurrence. SI-04 provides real-time system monitoring including network intrusion detection, file integrity monitoring, and host-based anomaly detection. Implementation requires deploying collection agents (EDR, syslog forwarders, cloud log connectors), centralising to a log management platform, and ensuring retention meets both operational and compliance requirements.",
+      "Correlation, Analytics, and Detection Engineering (AU-06, AU-07, SI-04, CA-07, RA-05, PM-16): Raw telemetry becomes intelligence through correlation and analysis. AU-06 mandates review, analysis, and reporting of audit records -- the core SIEM function. This includes rule-based correlation (known attack patterns, sigma rules), statistical baselining (anomaly detection for user behaviour, network traffic, process execution), and threat hunting (hypothesis-driven investigation of telemetry). AU-07 provides audit record reduction and report generation: transforming millions of raw events into prioritised, actionable alerts. SI-04 at the analytics layer applies network behaviour analysis, protocol anomaly detection, and integration with threat intelligence feeds. CA-07 provides continuous monitoring that goes beyond point-in-time assessments to real-time security posture awareness. RA-05 integrates vulnerability scanning data into the correlation engine, enriching alerts with vulnerability context -- an exploit attempt against a known-vulnerable system is higher priority than one targeting a patched system. PM-16 maintains threat awareness: tracking adversary TTPs via MITRE ATT&CK, consuming threat intelligence, and updating detection logic as the threat landscape evolves. Detection engineering must be treated as a continuous discipline, not a one-time configuration.",
+      "Alert Triage, Enrichment, and Orchestration (IR-04, IR-05, IR-07, SI-05, PM-14): Orchestration bridges detection and response. IR-04 handles incident management including automated initial triage: when an alert fires, the SOAR platform enriches it with asset context (is this a crown jewel system?), identity context (is this a privileged account?), vulnerability context (is the target vulnerable?), and threat intelligence (is the indicator known malicious?). This enrichment transforms a raw alert into a decision-ready case. IR-05 provides continuous incident monitoring, correlating related alerts into coherent incidents rather than treating each alert in isolation. IR-07 delivers incident response assistance through automated playbooks and analyst decision support. SI-05 distributes security alerts and advisories from vendors and intelligence sources, integrating them into the triage workflow. PM-14 ensures testing and monitoring programmes validate that the detection and response pipeline works end-to-end -- regular purple team exercises, detection coverage assessments, and mean-time-to-detect/respond metrics.",
+      "Automated and Manual Response (IR-04, IR-06, IR-08, SC-07, AC-02, SI-04): Response must be fast enough to limit blast radius. IR-04 at the response layer executes containment actions: network isolation of compromised hosts via EDR or SDN policy, credential revocation through identity provider integration, blocking of malicious IPs/domains at firewall and proxy, and quarantine of malicious files. IR-06 automates incident reporting to stakeholders, regulators, and law enforcement where required. IR-08 defines incident response plans with specific playbooks for common scenarios: ransomware, business email compromise, data exfiltration, insider threat, and supply chain compromise. SC-07 enables dynamic boundary reconfiguration for containment -- automatically tightening network segmentation to isolate affected zones. AC-02 supports response through emergency account disablement and forced credential rotation. SI-04 provides ongoing monitoring during response to confirm containment effectiveness and detect attacker pivoting. The balance between automated and manual response depends on confidence: high-confidence, low-risk actions (blocking a known-malicious hash) should be fully automated; high-impact actions (isolating a production server) should require analyst approval.",
+      "Forensics, Evidence Preservation, and Recovery (AU-09, IR-04, CP-09, CP-10, SI-07): Post-incident activities ensure lessons are learned and evidence supports legal proceedings. AU-09 protects audit information from tampering -- immutable log stores, write-once-read-many archives, and cryptographic integrity verification ensure that forensic evidence is admissible and trustworthy. IR-04 includes post-incident analysis: root cause identification, timeline reconstruction, and identification of detection gaps. CP-09 provides system backup that enables recovery to a known-good state after containment. CP-10 covers system recovery and reconstitution: bringing affected systems back online safely, verifying they are clean, and monitoring them closely post-recovery. SI-07 verifies software and firmware integrity during recovery, ensuring that restored systems have not been tampered with. Every incident should produce updated detection rules, improved playbooks, and refined response procedures.",
+      "SOC Operations and Workforce (AT-02, AT-03, IR-02, PS-04, PS-07): People are the irreducible core of security operations. AT-02 provides security awareness across the organisation -- users are sensors too, and trained users report phishing, anomalous behaviour, and policy violations. AT-03 delivers role-based training for SOC analysts: tier 1 triage, tier 2 investigation, tier 3 threat hunting, and incident commander roles. IR-02 provides incident response training including tabletop exercises, simulation drills, and post-incident reviews. PS-04 governs personnel termination procedures, ensuring access revocation is immediate and monitored -- a disgruntled leaver with active credentials is a high-risk insider threat. PS-07 manages third-party personnel security for outsourced SOC functions including managed detection and response (MDR) providers.",
+      "Threat Intelligence Integration (PM-16, RA-03, RA-05, SI-05, SR-10): Threat intelligence transforms reactive detection into proactive defence. PM-16 establishes a threat awareness programme that consumes strategic, tactical, and operational intelligence. RA-03 uses threat intelligence to inform risk assessments: which adversary groups target your sector, what TTPs they use, and which of your assets are most likely targets. RA-05 integrates vulnerability intelligence into monitoring: correlating CVE data with asset inventory to prioritise detection for exploitable vulnerabilities. SI-05 distributes security alerts from vendors, ISACs, and government agencies. SR-10 extends monitoring into the supply chain, detecting compromised components and malicious updates before they reach production systems. Intelligence should feed directly into detection engineering: every new intelligence report should be evaluated for detection opportunities."
+    ],
+    "assumptions": "The organisation has committed to building or procuring security operations capability (in-house SOC, managed SOC, or hybrid). Network architecture supports centralised log collection (agents can reach collectors, bandwidth is sufficient). A log management or SIEM platform is deployed or planned. Endpoints support EDR agent deployment across the estate. Identity providers can emit authentication and authorisation events. Cloud environments expose audit trails via APIs. The organisation has or will develop incident response procedures and playbooks.",
+    "typicalChallenges": "Log volume is the first challenge: a single busy web server generates gigabytes of logs daily, and storage costs for multi-year retention are significant. Alert fatigue is endemic -- poorly tuned SIEM rules generate thousands of false positives that desensitise analysts and bury genuine threats. SIEM deployment often stalls at log collection without progressing to meaningful detection engineering. Correlating events across disparate sources requires normalisation that is never as clean as vendors promise. SOC analyst retention is an industry-wide problem: burnout from shift work, alert fatigue, and repetitive triage drives turnover above 30% annually in many organisations. Measuring SOC effectiveness is difficult -- mean-time-to-detect and mean-time-to-respond are useful but can be gamed. Cloud environments generate novel telemetry formats that traditional on-premises SIEM tools handle poorly. Encrypted traffic (TLS 1.3) limits network-based detection, shifting reliance to endpoint and identity telemetry. SOAR playbook maintenance requires ongoing engineering effort that is often underestimated. Executive expectations of 'real-time detection' clash with the reality that sophisticated adversaries operate within normal user behaviour patterns.",
+    "indications": "This pattern applies to any organisation that needs to detect and respond to security threats -- which in practice means every organisation. It is particularly critical for organisations in regulated industries (financial services, healthcare, critical infrastructure) where detection and response capabilities are mandated. Organisations with significant cloud workloads need cloud-native detection alongside traditional on-premises monitoring. Those experiencing rapid growth need scalable detection architecture before the estate outgrows ad-hoc monitoring. Any organisation that has suffered a breach where dwell time exceeded days should treat this pattern as urgent.",
+    "contraIndications": "Very small organisations (under 20 users) with simple IT environments may find a full SIEM/SOAR deployment disproportionate and should consider managed detection and response (MDR) services as an alternative. Organisations without basic preventive controls (patch management, endpoint protection, access control) should establish foundations before investing in advanced detection -- you need to reduce the noise floor before detection becomes effective. Air-gapped environments with no internet connectivity have a fundamentally different threat model and monitoring approach.",
+    "threatResistance": "Security Monitoring and Response directly addresses the detection and containment phases of the kill chain. Advanced persistent threats with long dwell times are detected through behavioural analytics and anomaly detection (AU-06, SI-04, CA-07). Ransomware is detected at multiple stages: initial access via phishing detection, lateral movement via network anomaly detection, and pre-encryption staging via endpoint behavioural monitoring (SI-04, IR-04). Insider threats are identified through user behaviour analytics that detect anomalous data access, privilege use, and working patterns (AU-06, AC-02, PS-04). Supply chain compromise is detected through software integrity monitoring and update verification (SI-07, SR-10). Credential theft and abuse is detected through impossible travel, anomalous authentication patterns, and failed logon monitoring (AU-02, AC-07, IA-05). Data exfiltration is detected through DLP integration, network flow analysis, and cloud access monitoring (AC-04, SI-04, AU-06). The key architectural principle is defence in depth for detection: no single detection mechanism catches everything, but layered collection, correlation, and analytics create overlapping detection zones that are extremely difficult for adversaries to evade simultaneously."
+  },
+  "examples": {
+    "Collection Layer": [
+      "Deploy EDR agents across all endpoints reporting to centralised console with telemetry forwarding to SIEM",
+      "Configure cloud audit trails (AWS CloudTrail, Azure Activity Log, GCP Audit Logs) streaming to log management platform",
+      "Implement network detection sensors at key choke points: internet egress, inter-zone boundaries, data centre core",
+      "Forward identity provider logs (Azure AD, Okta, on-premises AD) including authentication, MFA, conditional access events"
+    ],
+    "Correlation Layer": [
+      "Develop sigma-rule-based detection for MITRE ATT&CK techniques relevant to organisation's threat profile",
+      "Implement user behaviour analytics baseline: normal working hours, typical data volumes, usual application access patterns",
+      "Enrich alerts with asset criticality from CMDB: Crown Jewel systems trigger escalated alert priority",
+      "Correlate vulnerability scan data with IDS alerts: exploit attempts against confirmed-vulnerable systems auto-escalate"
+    ],
+    "Orchestration Layer": [
+      "Build SOAR playbook for phishing triage: extract IOCs, check reputation, search mailboxes for related messages, auto-quarantine",
+      "Implement alert deduplication: group related alerts into incidents using attack chain correlation across 30-minute windows",
+      "Auto-enrich every alert with: asset owner, business context, open vulnerabilities, recent changes, active tickets",
+      "Route alerts by type: malware to endpoint team, network anomalies to NOC/SOC, identity alerts to IAM team"
+    ],
+    "Response Layer": [
+      "Automated containment: EDR network isolation of host within 60 seconds of confirmed malware detection",
+      "Credential response: force password reset and revoke all active sessions for compromised accounts via IdP API",
+      "Network containment: automated firewall rule to block C2 IP across all egress points within 5 minutes of confirmation",
+      "Forensic preservation: automated memory dump and disk snapshot of compromised host before containment actions"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-61 Rev 2: Computer Security Incident Handling Guide",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final",
+      "note": "The foundational reference for incident response process. Defines preparation, detection, containment, eradication, recovery, and post-incident phases. Essential reading for SOC design."
+    },
+    {
+      "title": "MITRE ATT&CK Framework",
+      "url": "https://attack.mitre.org/",
+      "note": "The industry-standard knowledge base of adversary tactics, techniques, and procedures. Use ATT&CK to map detection coverage, identify gaps, and prioritise detection engineering."
+    },
+    {
+      "title": "NIST SP 800-92: Guide to Computer Security Log Management",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-92/final",
+      "note": "Comprehensive guidance on log management infrastructure, log sources, and log analysis. Covers practical challenges of log collection at enterprise scale."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. Audit and accountability (AU) and incident response (IR) families are particularly relevant."
+    },
+    {
+      "title": "Sigma Rules Project",
+      "url": "https://github.com/SigmaHQ/sigma",
+      "note": "Open-source detection rules in a generic format convertible to any SIEM. Community-maintained with thousands of rules mapped to MITRE ATT&CK techniques."
+    },
+    {
+      "title": "FIRST CSIRT Services Framework v2.1",
+      "url": "https://www.first.org/standards/frameworks/csirts/csirt_services_framework_v2.1",
+      "note": "Framework for defining and maturing computer security incident response team services. Useful for structuring SOC service catalogue and measuring maturity."
+    },
+    {
+      "title": "UK NCSC: Building a Security Operations Centre",
+      "url": "https://www.ncsc.gov.uk/collection/building-a-security-operations-centre",
+      "note": "Practical UK government guidance on SOC design, covering people, process, and technology considerations with a pragmatic approach to scaling."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-001",
+    "SP-002",
+    "SP-011",
+    "SP-025",
+    "SP-028",
+    "SP-029",
+    "SP-034"
+  ],
+  "relatedPatternNames": [
+    "Client Module",
+    "Server Module",
+    "Cloud Computing",
+    "Advanced Monitoring and Detection",
+    "Secure DevOps Pipeline",
+    "Zero Trust Architecture",
+    "Cyber Resilience"
+  ],
+  "threats": [
+    {
+      "id": "T-SMR-001",
+      "name": "Advanced persistent threat with extended dwell time",
+      "mitigatedBy": [
+        "AU-06",
+        "SI-04",
+        "CA-07",
+        "PM-16"
+      ]
+    },
+    {
+      "id": "T-SMR-002",
+      "name": "Ransomware deployment and encryption",
+      "mitigatedBy": [
+        "SI-04",
+        "IR-04",
+        "CP-09",
+        "CP-10"
+      ]
+    },
+    {
+      "id": "T-SMR-003",
+      "name": "Insider threat and data theft",
+      "mitigatedBy": [
+        "AU-06",
+        "AC-02",
+        "PS-04",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-SMR-004",
+      "name": "Supply chain compromise via malicious update",
+      "mitigatedBy": [
+        "SI-07",
+        "SR-10",
+        "RA-05",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-SMR-005",
+      "name": "Credential compromise and account takeover",
+      "mitigatedBy": [
+        "AU-02",
+        "AC-07",
+        "IA-05",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-SMR-006",
+      "name": "Data exfiltration through authorised channels",
+      "mitigatedBy": [
+        "SI-04",
+        "AU-06",
+        "AC-04",
+        "SC-07"
+      ]
+    },
+    {
+      "id": "T-SMR-007",
+      "name": "Log tampering and evidence destruction",
+      "mitigatedBy": [
+        "AU-09",
+        "AU-05",
+        "SI-07",
+        "AU-04"
+      ]
+    },
+    {
+      "id": "T-SMR-008",
+      "name": "Alert fatigue causing missed critical detections",
+      "mitigatedBy": [
+        "AU-07",
+        "IR-05",
+        "PM-14",
+        "AT-03"
+      ]
+    },
+    {
+      "id": "T-SMR-009",
+      "name": "Living-off-the-land attacks evading signature detection",
+      "mitigatedBy": [
+        "AU-06",
+        "SI-04",
+        "CA-07",
+        "PM-16"
+      ]
+    },
+    {
+      "id": "T-SMR-010",
+      "name": "Cloud-native attacks bypassing on-premises monitoring",
+      "mitigatedBy": [
+        "AU-02",
+        "AU-12",
+        "SI-04",
+        "CA-07"
+      ]
+    },
+    {
+      "id": "T-SMR-011",
+      "name": "Lateral movement within trusted network zones",
+      "mitigatedBy": [
+        "SI-04",
+        "SC-07",
+        "AU-06",
+        "IR-04"
+      ]
+    },
+    {
+      "id": "T-SMR-012",
+      "name": "Detection evasion through encrypted channels",
+      "mitigatedBy": [
+        "SI-04",
+        "SC-07",
+        "AU-02",
+        "RA-05"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Logon Attempts",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-04",
+      "name": "Audit Log Storage Capacity",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-05",
+      "name": "Response to Audit Logging Process Failures",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-07",
+      "name": "Audit Record Reduction and Report Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-08",
+      "name": "Time Stamps",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection of Audit Information",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-09",
+      "name": "System Backup",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-10",
+      "name": "System Recovery and Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-07",
+      "name": "Incident Response Assistance",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-08",
+      "name": "Incident Response Plan",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-16",
+      "name": "Threat Awareness Program",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-04",
+      "name": "Personnel Termination",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-07",
+      "name": "External Personnel Security",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts, Advisories, and Directives",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-10",
+      "name": "Inspection of Systems or Components",
+      "family": "SR",
+      "emphasis": "standard"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 3,
+    "AT": 2,
+    "AU": 9,
+    "CA": 1,
+    "CP": 2,
+    "IA": 1,
+    "IR": 6,
+    "PL": 1,
+    "PM": 2,
+    "PS": 2,
+    "RA": 2,
+    "SC": 1,
+    "SI": 3,
+    "SR": 1
+  }
+}

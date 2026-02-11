@@ -1,0 +1,450 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-037",
+  "slug": "privileged-user-management",
+  "title": "Privileged User Management",
+  "description": "Comprehensive privileged access management pattern covering credential vaulting, just-in-time access, session recording, standing privilege elimination, and break-glass procedures. Addresses the full lifecycle of privileged accounts from provisioning through monitoring to decommissioning, with emphasis on reducing the attack surface created by administrative access. Maps 38 NIST 800-53 controls across identity governance, credential management, access control, and monitoring domains.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-037",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Identity and Access Management",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from implementing privileged access management across financial market infrastructure where a single compromised admin account could impact exchange operations, clearing systems, or settlement processes. Informed by deploying CyberArk and equivalent solutions at scale, building just-in-time access models that satisfied regulatory scrutiny, and by the painful reality that most serious breaches trace back to compromised privileged credentials."
+  },
+  "diagram": {
+    "svg": "/images/sp-037-privileged-user-management.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Privileged User Management is the discipline of controlling, monitoring, and securing the accounts and credentials that have elevated access to systems, infrastructure, and data. Privileged accounts -- domain administrators, root accounts, database DBAs, cloud IAM roles, service accounts with broad permissions, and emergency break-glass credentials -- represent the most consequential access in any environment. A compromised standard user account is a problem; a compromised privileged account is a catastrophe.\n\nThe core challenge is that privileged access is both essential and dangerous. Systems must be administered, databases must be maintained, infrastructure must be configured, and emergencies must be handled. But every standing privileged account is an attack surface: a target for credential theft, a vector for lateral movement, and a tool for an adversary who has already gained initial access. The goal of privileged user management is not to eliminate privileged access -- that would be operationally impossible -- but to minimise its scope, duration, and exposure while maintaining full accountability for every privileged action.\n\nModern privileged access management (PAM) operates on several principles. First, credential vaulting: privileged credentials are stored in a hardened vault, never on endpoints or in scripts, and are rotated automatically after every use. Second, just-in-time (JIT) access: privileged access is granted on demand, for a specific scope and duration, and automatically revoked when the task is complete or the time window expires. Third, zero standing privileges (ZSP): the aspiration that no human or service account has permanent administrative access; all elevated access is ephemeral and auditable. Fourth, session isolation and recording: privileged sessions are brokered through a jump server or proxy that isolates the admin session from the endpoint, records all actions, and can terminate sessions in real time. Fifth, break-glass procedures: emergency access mechanisms that bypass normal approval workflows but generate maximum alerting and require post-use review.\n\nThe pattern applies across all infrastructure tiers: on-premises Active Directory and Unix/Linux systems, cloud IAM (AWS, Azure, GCP), SaaS platforms, databases, network devices, and operational technology. Each tier has specific challenges -- cloud IAM roles can be assumed programmatically, service accounts often have broader permissions than any human, and OT environments may have shared credentials on devices that cannot integrate with modern PAM tools -- but the principles remain constant: vault credentials, limit scope, limit duration, record everything, alert on anomalies.",
+    "keyControlAreas": [
+      "Credential Vaulting and Lifecycle Management (IA-05, AC-02, CM-03, SC-28, IA-04): The credential vault is the foundation of PAM. IA-05 governs authenticator management: privileged passwords stored in an enterprise vault (CyberArk, HashiCorp Vault, Delinea, BeyondTrust), encrypted at rest and in transit, with automatic rotation after every checkout or on a scheduled basis. No privileged credential should exist in plaintext: not in scripts, not in configuration files, not in documentation, not on sticky notes. AC-02 manages the privileged account inventory: every privileged account must be discovered, classified (human admin, service account, application account, emergency account), and assigned an owner. Discovery scanning must run continuously to detect new privileged accounts, privilege escalation, and shadow admin accounts. CM-03 controls configuration changes to the vault itself: vault configuration changes require dual approval, are logged, and are tested before deployment. SC-28 protects credentials at rest: vault storage uses HSM-backed encryption, master keys are split across multiple custodians, and backup vaults are equally protected. IA-04 manages the identifier lifecycle: privileged accounts are created through a formal request process, reviewed regularly, and disabled immediately when no longer required. Service accounts are the hardest to manage -- they proliferate, their owners leave, and their passwords are embedded in configurations that nobody wants to touch.",
+      "Just-In-Time Access and Zero Standing Privileges (AC-02, AC-06, AC-17, PE-03, CM-05): Just-in-time access transforms privileged access from a permanent state to a temporary event. AC-02 enables dynamic account provisioning: admin rights are added to a user's existing account (or a dedicated admin account is checked out) only when a specific task requires them, and removed automatically when the task is complete or the time window expires. AC-06 enforces least privilege: JIT requests must specify the scope (which systems, which actions, which data) and the duration (minimum necessary, not 'until I'm done'). AC-17 governs remote privileged access: administrative access through VPN, bastion hosts, or cloud consoles uses the same JIT model -- no standing remote admin access. PE-03 extends physical access controls to privileged environments: data centre access, console access, and out-of-band management access follow the same JIT principles. CM-05 restricts access to production configuration changes: changes require privileged access obtained through the JIT workflow, linking every change to an approved request. Zero standing privileges is the target state: no human account has permanent administrative rights. This is achievable for many systems (cloud IAM, modern AD, database access) but challenging for some legacy systems and all break-glass scenarios. Track the ratio of standing-to-JIT privileges as a maturity metric.",
+      "Session Brokering, Isolation, and Recording (AC-17, AU-02, AU-12, SI-04, AC-03): Privileged sessions must be isolated and recorded. AC-17 manages remote access sessions through a PAM proxy or jump server: administrators do not connect directly to target systems but through a brokered session that the PAM platform controls. AU-02 defines which privileged session events must be logged: every command entered, every file accessed, every configuration change, every database query. AU-12 generates the audit records: full session recording (video-style replay for RDP/VNC, command-level logging for SSH) stored immutably with the session metadata including who, when, why (linked to the access request), and from where. SI-04 monitors privileged sessions in real time: anomaly detection on command patterns, alerting on high-risk actions (adding users to admin groups, modifying security configurations, accessing crown jewel data), and the ability to terminate sessions immediately when policy violations are detected. AC-03 enforces command filtering: restricting which commands can be executed even within an approved privileged session, preventing accidental or deliberate actions outside the approved scope. Session recording serves three purposes: deterrence (admins behave differently when recorded), investigation (full timeline when incidents occur), and compliance (demonstrable evidence of privileged access controls for auditors).",
+      "Service Account and Application Credential Management (IA-05, AC-02, SA-04, CM-02, SC-12): Service accounts are the largest and least-managed privileged attack surface. IA-05 applies to service account credentials: passwords must be vaulted, rotated automatically, and never embedded in source code or configuration files. Application credentials should use short-lived tokens (OAuth client credentials, cloud IAM role assumption) rather than long-lived passwords wherever possible. AC-02 requires a complete inventory of service accounts with documented owners, purposes, and the systems they access. Every service account must have a human owner who is accountable for its use and who reviews its continued necessity. SA-04 addresses service account credentials in the acquisition process: new applications must be designed to retrieve credentials from the vault at runtime rather than storing them in configuration files. CM-02 establishes baseline configurations for service accounts: minimum required permissions, restricted logon types (service logon only, no interactive logon), and network restrictions limiting where the account can authenticate from. SC-12 governs cryptographic key management for service-to-service authentication: API keys, TLS certificates, and signing keys follow the same vault-and-rotate model as passwords. The most dangerous service accounts are those with domain admin or cloud admin equivalent permissions that were created years ago and whose original purpose is forgotten.",
+      "Break-Glass and Emergency Access (AC-02, AU-02, IR-04, PM-14, AC-06): Emergency access must work when everything else has failed. AC-02 defines break-glass account management: pre-provisioned emergency accounts stored in the vault with credentials sealed in a dual-custody process (two people required to retrieve). Break-glass accounts must work when the primary PAM platform is unavailable -- this means local accounts on critical systems, pre-positioned credentials on offline media, or hardware tokens in a physical safe. AU-02 ensures break-glass access generates maximum audit trail: alerts to the SOC, notifications to the CISO and security team, automatic creation of an incident ticket that requires review within 24 hours. IR-04 integrates break-glass access with incident response: break-glass credentials may be needed during a security incident precisely when the PAM platform is a target. PM-14 tests break-glass procedures regularly: quarterly tests that validate credentials work, alerts fire, and the post-use review process functions. AC-06 limits break-glass scope: even emergency accounts should not be global admin -- create tier-specific break-glass accounts (domain admin, cloud admin, network admin) rather than a single god account. Break-glass is a paradox: it must be easy enough to use in an emergency but controlled enough that it cannot be abused. The solution is ease of use combined with maximum visibility.",
+      "Privileged Access Governance and Reviews (AC-02, CA-02, AU-06, PM-12, AC-06): Governance ensures the PAM programme remains effective over time. AC-02 mandates regular access reviews: quarterly certification of all privileged accounts (human and service), with explicit re-approval or revocation. Reviews must cover: is the account still needed, does it still need this level of access, is the owner still appropriate, when was it last used. CA-02 assesses the effectiveness of PAM controls: are vault policies being followed, is JIT adoption increasing, what percentage of privileged access is still standing. AU-06 analyses privileged access audit records: trending privileged session frequency, identifying accounts that are checked out but never used (suggesting over-provisioning), detecting anomalous access patterns (admin access at unusual hours, from unusual locations, to unusual systems). PM-12 monitors the insider threat indicators that privileged access amplifies: data exfiltration by DBAs, configuration sabotage by disgruntled admins, and privilege abuse during notice periods. AC-06 enforces privilege separation: no single account should be able to both configure security controls and suppress the audit trail. The dual-admin principle ensures that critical privileged actions require two authorised individuals. Governance metrics should include: percentage of privileged access that is JIT vs standing, average privileged session duration, vault coverage (percentage of privileged accounts managed by PAM), and orphaned account count.",
+      "Cloud and Hybrid Privileged Access (AC-02, AC-17, SA-09, SC-07, IA-02): Cloud environments introduce distinct privileged access challenges. AC-02 manages cloud IAM roles: AWS root accounts locked with MFA and hardware tokens, Azure Global Admin similarly secured, GCP organisation admin roles assigned to break-glass accounts only. Cloud IAM allows programmatic privilege assumption that has no on-premises equivalent -- a compromised developer workstation with cached cloud credentials can assume admin roles instantly. AC-17 governs remote access to cloud management planes: cloud console access through the PAM broker, CLI access using temporary credentials from the vault, and API access using short-lived tokens. SA-09 manages third-party cloud services: SaaS platforms with admin consoles require the same PAM discipline as infrastructure -- vaulted credentials, JIT where supported, session recording where possible. SC-07 protects the boundary between cloud management planes and the corporate network: cloud admin access should not be possible from any endpoint, only from hardened privileged access workstations (PAWs). IA-02 enforces strong authentication for cloud privileged access: phishing-resistant MFA (FIDO2/passkeys) for all cloud admin access, with conditional access policies that restrict admin operations to compliant devices from known networks. Hybrid environments are the hardest: on-premises AD synced to Azure AD creates privilege escalation paths where cloud compromise leads to on-premises compromise and vice versa."
+    ],
+    "assumptions": "The organisation has an identity management capability that can enumerate and classify accounts (see SP-010). A credential vaulting solution is deployed or budgeted for. Network architecture supports session brokering through jump servers or PAM proxies. Systems support the concept of individual accountability -- shared admin credentials are being eliminated. Change management processes exist to link privileged access to approved changes. Security monitoring is in place to consume and alert on privileged access events (see SP-031). Management understands that PAM introduces operational friction by design and supports the trade-off.",
+    "typicalChallenges": "The most common challenge is cultural resistance: administrators who have had root or domain admin credentials for years resist having them vaulted and requiring checkout. Service account management is where PAM projects stall: thousands of service accounts with embedded credentials in legacy applications that nobody understands. Password rotation breaks things -- applications with hardcoded credentials fail when the vault rotates their password, requiring application remediation before onboarding. Legacy systems that do not support API-driven credential injection require manual or wrapper-based approaches. Cloud IAM adds complexity with multiple identity planes (AWS IAM, Azure AD, GCP IAM) each requiring different integration approaches. Operational Technology environments often have shared credentials on devices that cannot be integrated with PAM. JIT access creates latency: administrators must request and wait for access rather than connecting immediately, which meets resistance for incident response scenarios (hence break-glass). PAM platform availability becomes a single point of failure: if the vault is down, nobody can administer anything, making vault high availability and break-glass procedures essential. Vendor sprawl: many organisations end up with multiple PAM solutions across different technology tiers, creating management and coverage gaps.",
+    "indications": "This pattern applies to every organisation with systems that have administrative or root-level access -- which is every organisation. It is particularly critical for: organisations with regulatory obligations around privileged access (financial services, healthcare, government), environments where privileged access abuse could cause significant financial or operational harm (trading systems, payment systems, critical infrastructure), organisations that have experienced breaches involving compromised privileged credentials, environments with large numbers of administrative accounts (Active Directory, cloud IAM, database servers), organisations with significant outsourcing where third-party administrators need privileged access, any organisation implementing or operating Zero Trust Architecture (SP-029) where privileged access is a key control plane.",
+    "contraIndications": "There are no contraindications for privileged access management -- the question is one of scale and sophistication. Very small organisations (under 20 staff) may implement PAM through procedural controls (documented shared credential management, dual-custody for admin passwords) rather than deploying enterprise PAM tooling. Environments with very few systems may not justify the cost of a commercial PAM platform, but should still vault credentials using password managers and enforce MFA on all admin access. Organisations should not attempt to implement full ZSP in a single phase -- start with credential vaulting for the highest-risk accounts, then expand to JIT, then session recording, then ZSP as maturity grows.",
+    "threatResistance": "Privileged User Management directly addresses the most impactful attack techniques. Credential theft via pass-the-hash and Kerberoasting is mitigated by credential vaulting with automatic rotation that ensures stolen hashes expire before they can be exploited (IA-05, AC-02). Lateral movement using compromised admin credentials is limited by JIT access that ensures privileged credentials exist only during approved windows (AC-02, AC-06). Living-off-the-land attacks that abuse legitimate admin tools are detected through session recording and command monitoring that flags anomalous administrative behaviour (AU-12, SI-04). Privilege escalation through misconfigured cloud IAM roles is prevented by continuous discovery and access reviews that identify over-permissioned roles (AC-02, CA-02). Insider threat from privileged users is deterred by session recording and detected by behavioural analytics on privileged access patterns (AU-06, PM-12). Service account compromise -- one of the most common initial access vectors for advanced attackers -- is mitigated by vaulting service account credentials, rotating them automatically, and restricting their network and logon scope (IA-05, CM-02). The fundamental principle: if an attacker cannot obtain a privileged credential, cannot use it without detection, and cannot persist with it because it rotates, the value of compromising any single account is dramatically reduced."
+  },
+  "examples": {
+    "Credential Vaulting and Rotation": [
+      "Onboard all 350 domain admin, enterprise admin, and service accounts to CyberArk vault with automatic 24-hour rotation",
+      "Implement API-based credential retrieval for top 20 service accounts, eliminating hardcoded passwords from application configs",
+      "Deploy vault high availability: active-active across two data centres with RPO=0, tested monthly failover",
+      "Establish dual-custody master key management: 3-of-5 key custodians required for vault recovery"
+    ],
+    "Just-In-Time Access": [
+      "Replace standing domain admin access for 45 system administrators with JIT model: request via ServiceNow, auto-approve for BAU tasks, manager-approve for sensitive systems, 4-hour maximum session",
+      "Implement Azure PIM for cloud admin roles: Global Admin, Exchange Admin, Security Admin elevated on-demand with MFA challenge",
+      "Deploy JIT database admin access: DBA requests access to specific database for specific maintenance window, auto-revoke on expiry",
+      "Achieve 85% JIT coverage across all infrastructure tiers within 12 months (baseline: 10% JIT, 90% standing)"
+    ],
+    "Session Recording and Monitoring": [
+      "Deploy PSM (Privileged Session Manager): all RDP and SSH sessions to production systems brokered through jump servers with full session recording",
+      "Implement real-time command monitoring: alert on 'net group domain admins /add', 'rm -rf', 'DROP TABLE', and other high-risk commands",
+      "Create monthly privileged access reports for governance committee: session counts, anomalies detected, policy violations, JIT adoption trend",
+      "Integrate PAM session logs with SIEM: correlate privileged access with change tickets and alert on unlinked admin activity"
+    ],
+    "Break-Glass and Emergency Access": [
+      "Pre-position break-glass credentials for domain admin, AWS root, Azure Global Admin in sealed dual-custody envelopes in a physical safe, test quarterly",
+      "Configure break-glass alerts: immediate SMS to CISO and SOC lead, automatic P1 incident ticket, 24-hour mandatory review",
+      "Test break-glass during disaster recovery exercise: confirm credentials work, alerts fire, and post-use review completes within SLA",
+      "Document and drill the scenario: PAM platform unavailable during active security incident, responders need admin access immediately"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. Access Control (AC) and Identification and Authentication (IA) families are primary."
+    },
+    {
+      "title": "CyberArk: Privileged Access Management",
+      "url": "https://www.cyberark.com/products/privileged-access-manager/",
+      "note": "Market-leading PAM platform. Reference implementation for credential vaulting, session isolation, and JIT access patterns described in this pattern."
+    },
+    {
+      "title": "NIST SP 800-63B: Digital Identity Guidelines - Authentication",
+      "url": "https://pages.nist.gov/800-63-4/sp800-63b.html",
+      "note": "Authentication assurance levels and authenticator requirements. Relevant for privileged access authentication standards including MFA requirements."
+    },
+    {
+      "title": "Microsoft: Privileged Access Strategy",
+      "url": "https://learn.microsoft.com/en-us/security/privileged-access-workstations/overview",
+      "note": "Microsoft's enterprise privileged access strategy including PAWs, tiered admin model, and Azure PIM. Practical reference for Windows/Azure environments."
+    },
+    {
+      "title": "MITRE ATT&CK: Privilege Escalation Tactics",
+      "url": "https://attack.mitre.org/tactics/TA0004/",
+      "note": "Catalogue of privilege escalation techniques used by real-world adversaries. Essential reading for understanding what PAM controls are designed to prevent."
+    },
+    {
+      "title": "CIS Controls v8: Control 6 - Access Control Management",
+      "url": "https://www.cisecurity.org/controls/access-control-management",
+      "note": "CIS guidance on access control management including privileged access. Provides implementation groups aligned to organisational maturity."
+    },
+    {
+      "title": "HashiCorp Vault: Secrets Management",
+      "url": "https://www.hashicorp.com/products/vault",
+      "note": "Cloud-native secrets management platform. Reference implementation for dynamic secrets, short-lived credentials, and API-driven credential retrieval patterns."
+    },
+    {
+      "title": "Gartner: Privileged Access Management Magic Quadrant",
+      "url": "https://www.gartner.com/reviews/market/privileged-access-management",
+      "note": "Market landscape for PAM solutions. Useful for vendor evaluation and understanding the breadth of capability expected in enterprise PAM."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-010",
+    "SP-029",
+    "SP-031",
+    "SP-032",
+    "SP-033"
+  ],
+  "relatedPatternNames": [
+    "Identity Management Pattern",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Modern Authentication",
+    "Passkey Authentication"
+  ],
+  "threats": [
+    {
+      "id": "T-PUM-001",
+      "name": "Credential theft via pass-the-hash, Kerberoasting, or credential dumping",
+      "mitigatedBy": [
+        "IA-05",
+        "AC-02",
+        "SC-28",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-PUM-002",
+      "name": "Lateral movement using compromised domain admin or cloud admin credentials",
+      "mitigatedBy": [
+        "AC-02",
+        "AC-06",
+        "AC-17",
+        "SI-04"
+      ]
+    },
+    {
+      "id": "T-PUM-003",
+      "name": "Privilege escalation through misconfigured IAM roles or group membership",
+      "mitigatedBy": [
+        "AC-06",
+        "CA-02",
+        "CM-02",
+        "AC-02"
+      ]
+    },
+    {
+      "id": "T-PUM-004",
+      "name": "Service account compromise enabling persistent access to critical systems",
+      "mitigatedBy": [
+        "IA-05",
+        "CM-02",
+        "SA-04",
+        "AC-02"
+      ]
+    },
+    {
+      "id": "T-PUM-005",
+      "name": "Insider threat from privileged administrators abusing legitimate access",
+      "mitigatedBy": [
+        "AU-12",
+        "AU-06",
+        "PM-12",
+        "AC-05"
+      ]
+    },
+    {
+      "id": "T-PUM-006",
+      "name": "Living-off-the-land attacks using legitimate admin tools (PowerShell, WMI)",
+      "mitigatedBy": [
+        "SI-04",
+        "AU-12",
+        "AC-03",
+        "CM-07"
+      ]
+    },
+    {
+      "id": "T-PUM-007",
+      "name": "Shared credential abuse where individual accountability cannot be established",
+      "mitigatedBy": [
+        "IA-02",
+        "IA-05",
+        "AU-02",
+        "AC-02"
+      ]
+    },
+    {
+      "id": "T-PUM-008",
+      "name": "Break-glass credential misuse for unauthorised access outside emergencies",
+      "mitigatedBy": [
+        "AU-02",
+        "AC-02",
+        "IR-04",
+        "PM-14"
+      ]
+    },
+    {
+      "id": "T-PUM-009",
+      "name": "Cloud IAM privilege escalation through role chaining or policy misconfiguration",
+      "mitigatedBy": [
+        "AC-02",
+        "AC-06",
+        "SA-09",
+        "CA-07"
+      ]
+    },
+    {
+      "id": "T-PUM-010",
+      "name": "PAM platform compromise giving adversary control of all vaulted credentials",
+      "mitigatedBy": [
+        "SC-28",
+        "SC-07",
+        "IA-05",
+        "CM-03"
+      ]
+    },
+    {
+      "id": "T-PUM-011",
+      "name": "Orphaned privileged accounts remaining active after personnel departure",
+      "mitigatedBy": [
+        "AC-02",
+        "PS-04",
+        "PS-05",
+        "IA-04"
+      ]
+    },
+    {
+      "id": "T-PUM-012",
+      "name": "Hardcoded credentials in source code or configuration files exposed via repository leak",
+      "mitigatedBy": [
+        "IA-05",
+        "SA-04",
+        "CM-02",
+        "SC-28"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions for Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-02",
+      "name": "Identification and Authentication (Organizational Users)",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-12",
+      "name": "Insider Threat Program",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-04",
+      "name": "Personnel Termination",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-05",
+      "name": "Personnel Transfer",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PS-07",
+      "name": "External Personnel Security",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 5,
+    "AU": 3,
+    "CA": 2,
+    "CM": 4,
+    "IA": 3,
+    "IR": 1,
+    "PE": 1,
+    "PM": 2,
+    "PS": 3,
+    "RA": 1,
+    "SA": 2,
+    "SC": 3,
+    "SI": 1
+  }
+}

@@ -1,0 +1,483 @@
+{
+  "id": "SP-023",
+  "slug": "industrial-control-systems",
+  "joomla_id": 293,
+  "title": "Industrial Control Systems",
+  "description": "Security architecture for protecting industrial control systems (ICS), SCADA, and operational technology environments. Covers network segmentation between IT and OT, physical access to control equipment, secure remote maintenance, vulnerability management for legacy systems, and incident response for cyber-physical threats.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-023",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Infrastructure",
+    "status": "published",
+    "type": "pattern",
+    "datePublished": "2011-02-16",
+    "dateModified": "2026-02-06",
+    "authors": [
+      "Spinoza",
+      "James Pearce",
+      "Vitruvius"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/patterns/11_02_Pattern_023_01_Industrial_Control_Systems.svg",
+    "png": "/images/OSA_images/patterns/11_02_Pattern_023_01_Industrial_Control_Systems.png"
+  },
+  "content": {
+    "description": "Industrial Control Systems (ICS) represent a fundamentally different security domain from conventional IT. These systems -- encompassing SCADA (Supervisory Control and Data Acquisition), DCS (Distributed Control Systems), PLCs (Programmable Logic Controllers), RTUs (Remote Terminal Units), and HMIs (Human-Machine Interfaces) -- directly control physical processes. A compromise does not merely risk data loss; it risks equipment damage, environmental harm, production disruption, and in critical infrastructure sectors, threats to human safety. The convergence of IT and OT (Operational Technology) networks has dramatically expanded the attack surface, making ICS security a board-level concern for any organisation operating industrial automation.\n\nThe core challenge in ICS security is the collision between two fundamentally different engineering cultures. IT security prioritises confidentiality, operates on rapid patch cycles, and assumes systems will be refreshed every few years. OT engineering prioritises availability and safety, operates equipment with 15-30 year lifecycles, and treats any unscheduled downtime as a failure. Many ICS components run legacy operating systems that no longer receive security updates, use proprietary protocols that were never designed with security in mind (Modbus, DNP3, OPC Classic), and cannot tolerate the latency introduced by encryption or inline security controls. Security architecture for ICS must navigate these constraints rather than ignore them.\n\nNetwork segmentation is the single most important architectural control. The Purdue Enterprise Reference Architecture (ISA-95/IEC 62443) provides the standard model: distinct security zones from enterprise IT (Level 4-5) through a demilitarised zone (Level 3.5) down to the process control network (Level 3), supervisory control (Level 2), basic control (Level 1), and the physical process itself (Level 0). Traffic between zones must be strictly controlled, with industrial-aware firewalls and data diodes where unidirectional data flow is sufficient. Flat networks where an enterprise workstation can reach a PLC are architecturally indefensible.\n\nPhysical security takes on heightened importance in ICS environments. Control equipment is often distributed across large geographic areas -- substations, pump stations, wellheads, remote manufacturing sites -- making physical access control both critical and logistically challenging. Unmanned facilities require compensating controls such as tamper detection, video surveillance, and secure equipment enclosures. The physical and cyber domains are deeply intertwined: physical access to a PLC often means unrestricted ability to reprogram it, and cyber access to a safety instrumented system can disable physical safety interlocks.\n\nIncident response for ICS requires specialised capabilities that differ markedly from IT incident response. Forensic tools must understand industrial protocols. Containment actions must consider the physical consequences of isolating systems -- shutting down a compromised controller without understanding the process it governs can cause greater harm than the attack itself. Organisations must develop ICS-specific incident response plans, maintain relationships with sector-specific ISACs and government agencies (CISA ICS-CERT), and conduct regular exercises that include both IT security and OT engineering personnel.",
+    "keyControlAreas": [
+      "Network Segmentation and Boundary Protection (SC-07, AC-04; IEC 62443-3-3 SR 5.1, SR 5.2, SR 5.3): Boundary protection is the foundational architectural control for ICS environments, and the core of the IEC 62443 zones and conduits model. Implement network segmentation following the Purdue Enterprise Reference Architecture (ISA-95/IEC 62443) with industrial-aware firewalls between IT and OT zones. SR 5.1 (Network Segmentation) requires logical separation of control system networks into zones based on criticality and function, with physical segmentation (SR 5.1 RE 1) for the highest security levels. The DMZ between enterprise and process control networks should host historian servers, jump servers, and data replication services -- never allow direct connectivity from corporate networks to control system components. SR 5.2 (Zone Boundary Protection) mandates deny-by-default, allow-by-exception (RE 1) with fail-close behaviour (RE 3) at zone boundaries. Deploy data diodes for unidirectional data flows where the process network only needs to send telemetry outbound. SR 5.3 restricts general-purpose person-to-person communications within the control system network. Boundary protection extends to microsegmentation within the OT network to limit lateral movement between control system zones.",
+      "Access Control and Least Privilege (AC-03, AC-06, AC-17, AC-18; IEC 62443-3-3 SR 1.1, SR 1.13, SR 2.1, SR 2.2): Access enforcement in ICS must account for both logical and physical access paths. SR 1.1 (Human User Identification and Authentication) requires unique identification with multi-factor authentication for access via untrusted networks (RE 2) and all networks at higher security levels (RE 3). SR 2.1 (Authorization Enforcement) mandates role-based access control on all HMI and engineering workstations, with least privilege ensuring that operators cannot modify controller configurations and engineers cannot bypass safety systems without authorised change procedures. Dual approval (SR 2.1 RE 4) should be enforced for safety-critical configuration changes. Remote access via SR 1.13 (Access via Untrusted Networks) is particularly critical -- vendor remote maintenance sessions should use dedicated jump servers in the DMZ with multi-factor authentication, session recording, and time-limited access windows with explicit access request approval (RE 1). SR 1.6 and SR 2.2 (Wireless Access Management and Use Control) require tight control in OT environments; rogue wireless access points in a plant environment can bypass all network segmentation. Disable all unnecessary wireless capabilities on ICS components and conduct regular wireless surveys of facility perimeters.",
+      "Configuration and Change Management (CM-02, CM-03, CM-05, CM-07, CM-08; IEC 62443-3-3 SR 7.6, SR 7.7, SR 7.8): ICS environments require rigorous configuration management because unauthorised changes to controller logic or HMI configurations can have immediate physical consequences. SR 7.6 (Network and Security Configuration Settings) requires documented baseline configurations for all PLCs, RTUs, DCS controllers, HMIs, and engineering workstations -- including firmware versions, ladder logic programs, setpoint values, and network configurations, with machine-readable reporting (RE 1) at higher security levels. All changes must go through formal change control (CM-03) with OT engineering review, safety impact assessment, and rollback procedures tested before implementation. Access restrictions for change (CM-05) should ensure only authorised engineers can modify controller programs, and all modifications should be logged and auditable. SR 7.7 (Least Functionality) means removing unnecessary services, protocols, and software from ICS components -- disable unused communication ports, remove web servers from PLCs where not required, and restrict engineering software installation to designated workstations. SR 7.8 (Control System Component Inventory) requires maintaining a complete inventory of all ICS hardware and software assets, essential for vulnerability management and incident response in environments where undiscovered devices are a common finding.",
+      "Physical Security of Control Infrastructure (PE-03, PE-04, PE-06): Physical access control for ICS goes beyond server room locks. Control equipment is frequently distributed across large geographic areas -- substations, pump stations, remote sites -- each requiring proportionate physical protection. Implement layered physical access using fencing, locked cabinets, and access logging at unmanned facilities. Access control for transmission medium (PE-04) protects the cabling and wireless infrastructure connecting control systems; cable runs between buildings should be in secured conduit, and fibre optic connections should be used where electromagnetic interference or tapping is a concern. Physical access monitoring (PE-06) at remote sites should include tamper detection on control cabinets, CCTV with remote viewing capability, and intrusion detection systems that alert the control centre when facility access occurs outside normal maintenance windows.",
+      "Vulnerability and Patch Management (RA-05, SI-02, SI-05): Vulnerability management in ICS is fundamentally different from IT. Many ICS components cannot be patched without vendor qualification testing, scheduled maintenance windows may be months apart, and applying patches to running process control systems carries inherent risk. Vulnerability scanning (RA-05) must use ICS-aware tools that understand industrial protocols and will not crash sensitive controllers -- never run standard IT vulnerability scanners against production OT networks. Flaw remediation (SI-02) requires a risk-based approach: prioritise vulnerabilities that are remotely exploitable and affect components in higher Purdue levels first, use compensating controls (network segmentation, monitoring) for vulnerabilities that cannot be immediately patched, and coordinate all patching with OT engineering and production scheduling. Security alerts and advisories (SI-05) should include ICS-CERT advisories, vendor-specific notifications, and sector-specific threat intelligence feeds.",
+      "Incident Response for Cyber-Physical Systems (IR-02, IR-04, IR-05, IR-07): ICS incident response requires specialised capabilities beyond standard IT IR. Incident response training (IR-02) must include OT-specific scenarios -- responding to a compromised PLC, identifying manipulated process setpoints, and safely isolating control systems without causing process upsets. Incident handling (IR-04) procedures must account for the physical consequences of containment actions: disconnecting a compromised controller may cause a process to enter an unsafe state. Develop response playbooks for ICS-specific scenarios in collaboration with process engineers and safety personnel. Incident monitoring (IR-05) should correlate IT and OT security events to identify attacks that traverse the IT/OT boundary. Incident response assistance (IR-07) should include pre-established relationships with ICS-CERT, sector ISACs, ICS forensics specialists, and the control system vendor's security response team.",
+      "System Integrity and Malicious Code Protection (SI-03, SI-07, SI-10; IEC 62443-3-3 SR 3.2, SR 3.4, SR 3.5): ICS-targeted malware represents an existential threat to industrial operations. SR 3.2 (Malicious Code Protection) must account for the reality that traditional antivirus is often impractical on ICS endpoints -- compensating controls include application whitelisting, removable media scanning stations, and network-based malware detection at zone boundaries. SR 3.4 (Software and Information Integrity) requires mechanisms to detect unauthorised changes to controller firmware, ladder logic, and HMI configurations with automated notification (RE 1) when integrity violations occur. SR 3.5 (Input Validation) is critical for systems that accept commands via industrial protocols -- Modbus, DNP3, and OPC Classic were designed without authentication, making input validation at protocol gateways essential. Deterministic output (SR 3.6) ensures control systems produce predictable outputs even under degraded conditions, a safety-critical property unique to OT environments.",
+      "Continuous Monitoring and Audit (AU-02, CA-02, CA-07; IEC 62443-3-3 SR 2.8, SR 6.1, SR 6.2): Monitoring in ICS environments must cover both cybersecurity events and process anomalies that may indicate compromise. SR 2.8 (Auditable Events) should include authentication attempts on HMIs and engineering workstations, controller configuration changes, firmware uploads, new device connections to the OT network, and unusual process variable changes, with centralised audit trails (RE 1) at higher security levels. SR 6.2 (Continuous Monitoring) should deploy ICS-aware network monitoring tools that perform deep packet inspection of industrial protocols (Modbus, DNP3, EtherNet/IP, OPC UA) to detect anomalous commands or configuration changes. Passive monitoring is preferred over active scanning in production OT networks. SR 6.1 (Audit Log Accessibility) with programmatic access (RE 1) enables automated correlation of IT and OT security events. Security assessments (CA-02) should include regular penetration testing of the IT/OT boundary and tabletop exercises involving both cybersecurity and OT engineering teams.",
+      "Backup, Recovery, and Resilience (CP-09, CP-10; IEC 62443-3-3 SR 7.1, SR 7.3, SR 7.4): ICS resilience requires capabilities beyond standard IT disaster recovery. SR 7.3 (Control System Backup) must cover not just data but controller configurations, ladder logic programs, HMI screens, historian databases, and network device configurations, with backup verification (RE 1) and automation (RE 2). SR 7.4 (Control System Recovery and Reconstitution) must account for the physical consequences of recovery -- restoring a controller to a previous configuration while a process is running requires coordination with operations to prevent unsafe conditions. SR 7.1 (Denial of Service Protection) is critical because availability is the paramount concern in OT; even brief communication disruptions can cause process upsets, and ICS protocols have minimal built-in DoS resistance. Recovery procedures must be tested during maintenance windows with OT engineering oversight, and recovery time objectives must align with process safety requirements."
+    ],
+    "assumptions": "The organisation operates industrial automation equipment that uses standard networking technologies (TCP/IP over Ethernet) and has some degree of connectivity to the corporate IT network for management information and remote monitoring. Attacks on ICS enable real-world physical actions and are increasingly used by state-sponsored actors, criminal groups, and hacktivists to impact critical infrastructure. The knowledge and tools to attack ICS are becoming commoditised, with frameworks like Metasploit including ICS-specific modules. Financial motives for ICS attacks are growing due to the potential for extortion against high-value industrial processes. Management and monitoring of OT systems is increasingly provided by third-party vendors who supply equipment and supporting services, introducing additional supply chain risk.",
+    "typicalChallenges": "The most persistent challenge is the shortage of personnel with expertise spanning both cybersecurity and OT engineering -- ICS security requires understanding of industrial protocols, process safety, control theory, and cybersecurity principles simultaneously. Legacy ICS equipment often runs end-of-life operating systems (Windows XP, Windows Server 2003) and proprietary firmware that cannot be patched or upgraded without replacing hardware, creating permanent vulnerability exposure that must be mitigated through compensating controls. It can be difficult to distinguish system failures from behaviour under attack, making baseline behaviour profiling essential -- organisations must invest in OT network monitoring tools that can establish normal traffic patterns and alert on deviations. Vendor dependency is significant: many ICS components have restrictive licensing that prohibits installing third-party security software or modifying system configurations, and patching often requires vendor certification that lags months behind vulnerability disclosure. The cultural divide between IT and OT teams creates organisational friction -- OT engineers may view cybersecurity controls as threats to system availability, while IT security teams may not understand the safety implications of their recommended controls. Budget justification is challenging because ICS security investments protect against low-frequency, high-impact events where the return on investment is difficult to quantify until an incident occurs.",
+    "indications": "Any commercial or government organisation operating industrial automation equipment should implement this pattern. Typical applications include process control for production lines, energy generation and distribution (power plants, substations, smart grid), oil and gas (upstream, midstream, downstream), water and wastewater treatment, transportation infrastructure (rail signalling, traffic management, aviation), manufacturing, healthcare (building management, medical gas systems), shipping and port operations, mining, and emergency services. This pattern should apply in the majority of cases given the cost of securing versus the cost of equipment and the impact from process downtime or safety incidents. Regulatory drivers include NERC CIP for energy, TSA Security Directives for pipeline operations, NIS2 Directive for essential services in Europe, and sector-specific regulations for nuclear, water, and chemical facilities.",
+    "contraIndications": "This pattern may be inappropriate where the automated process has genuinely low impact if it operates outside specified tolerance levels, there are very low availability requirements, and there is verified certainty that the system is isolated with strong logical and physical access controls. First-generation panel-based equipment with no network connectivity and no use of commercial off-the-shelf software typically falls outside the scope of this pattern. However, the threshold for applying this pattern should be low -- even seemingly low-impact processes may have upstream or downstream dependencies that amplify the consequences of compromise, and air-gapped claims should be rigorously verified as true isolation is increasingly rare.",
+    "threatResistance": "This pattern addresses threats specific to the ICS/OT domain. Malicious code targeting industrial systems, including Stuxnet-class attacks that manipulate controller logic while displaying normal values to operators, and ransomware variants like EKANS/Snake specifically designed to kill ICS processes before encrypting systems. Compromise of process integrity through manipulation of setpoints, safety system bypasses, or injection of rogue commands via industrial protocols. Denial of service attacks against control networks that disrupt real-time process control communications. Man-in-the-middle attacks on unencrypted industrial protocols (Modbus TCP, DNP3) allowing command injection or telemetry manipulation. Insider threats from employees or third-party maintenance personnel with physical access to control equipment. Supply chain compromise through tampered firmware updates, counterfeit components, or compromised vendor remote access. Unauthorised wireless access through rogue access points deployed within the OT network perimeter. Reconnaissance and lateral movement from compromised IT networks into OT zones through inadequately segmented network architectures."
+  },
+  "examples": {
+    "ICS network monitoring and detection": [
+      "Claroty Continuous Threat Detection for OT network visibility",
+      "Dragos Platform for ICS/OT threat detection and response",
+      "Nozomi Networks Guardian for OT and IoT security monitoring",
+      "Microsoft Defender for IoT (formerly CyberX) for asset discovery and anomaly detection"
+    ],
+    "Network segmentation and boundary protection": [
+      "Fortinet FortiGate with OT-specific protocol awareness for IT/OT firewall",
+      "Waterfall Security data diodes for unidirectional gateway protection",
+      "Cisco Industrial Network Director for OT network segmentation management",
+      "Tofino Xenon industrial security appliance for zone-based protection"
+    ],
+    "ICS vulnerability and patch management": [
+      "Tenable OT Security (formerly Indegy) for ICS vulnerability assessment",
+      "Verve Security Center for OT asset management and patching",
+      "CISA ICS-CERT advisories for vulnerability intelligence",
+      "IEC 62443 compliance assessment programs"
+    ],
+    "Standards and frameworks": [
+      "IEC 62443 (ISA/IEC) series for industrial automation and control system security",
+      "NIST SP 800-82 Guide to ICS Security",
+      "NERC CIP standards for bulk electric system cyber security",
+      "MITRE ATT&CK for ICS framework for OT threat modelling"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-82 Rev 3: Guide to Operational Technology (OT) Security",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-82/rev-3/final",
+      "note": "The primary NIST guidance for securing ICS and OT environments. Covers ICS architecture, threats, vulnerabilities, risk management, and security controls with OT-specific tailoring guidance."
+    },
+    {
+      "title": "IEC 62443: Industrial Communication Networks - Network and System Security",
+      "url": "https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards",
+      "note": "The international standard series for industrial automation and control system cybersecurity. Defines security levels, zones, conduits, and requirements for asset owners, integrators, and component suppliers."
+    },
+    {
+      "title": "MITRE ATT&CK for ICS",
+      "url": "https://attack.mitre.org/matrices/ics/",
+      "note": "Threat-informed knowledge base of adversary tactics and techniques specific to ICS. Essential for understanding real-world attack patterns and building detection capabilities aligned to observed ICS threats."
+    },
+    {
+      "title": "CISA ICS-CERT Advisories",
+      "url": "https://www.cisa.gov/news-events/ics-advisories",
+      "note": "US government source for ICS vulnerability advisories, security alerts, and technical guidance. Covers all major ICS vendors and provides mitigation recommendations."
+    },
+    {
+      "title": "Dragos Year in Review: ICS/OT Cybersecurity Report",
+      "url": "https://www.dragos.com/year-in-review/",
+      "note": "Annual industry report on ICS/OT threat landscape, including active threat groups, vulnerability trends, and incident response findings from real-world OT engagements."
+    },
+    {
+      "title": "SANS ICS Security Resources",
+      "url": "https://www.sans.org/industrial-control-systems-security/",
+      "note": "Training courses, white papers, and community resources for ICS security practitioners. Includes the GICSP certification and regular ICS-focused webcasts."
+    },
+    {
+      "title": "NERC CIP Standards",
+      "url": "https://www.nerc.com/pa/Stand/Pages/CIPStandards.aspx",
+      "note": "Mandatory cybersecurity standards for the North American bulk electric system. While sector-specific, the CIP framework provides a mature model for critical infrastructure protection applicable as reference to other sectors."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-004",
+    "SP-007",
+    "SP-009",
+    "SP-019",
+    "SP-025"
+  ],
+  "relatedPatternNames": [
+    "Network Security",
+    "Platform Security",
+    "Physical Security",
+    "Virtualisation",
+    "Advanced Monitoring and Detection"
+  ],
+  "threats": [
+    {
+      "id": "T-IC-001",
+      "name": "Targeted ICS Malware (Stuxnet, TRITON, Industroyer-class)",
+      "mitigatedBy": [
+        "SI-03",
+        "SI-07",
+        "CM-02",
+        "SC-07"
+      ]
+    },
+    {
+      "id": "T-IC-002",
+      "name": "Process Integrity Manipulation (Setpoint Tampering, Logic Bombs)",
+      "mitigatedBy": [
+        "CM-03",
+        "CM-05",
+        "CA-07",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-IC-003",
+      "name": "IT-to-OT Lateral Movement",
+      "mitigatedBy": [
+        "SC-07",
+        "AC-03",
+        "AC-17",
+        "IA-02"
+      ]
+    },
+    {
+      "id": "T-IC-004",
+      "name": "Industrial Protocol Exploitation (Modbus, DNP3 Command Injection)",
+      "mitigatedBy": [
+        "SC-07",
+        "SC-08",
+        "CA-07",
+        "SI-04 implied via CA-07"
+      ]
+    },
+    {
+      "id": "T-IC-005",
+      "name": "Ransomware Targeting OT Systems (EKANS/Snake, ICS-aware Variants)",
+      "mitigatedBy": [
+        "CP-09",
+        "CP-10",
+        "SI-03",
+        "SC-07"
+      ]
+    },
+    {
+      "id": "T-IC-006",
+      "name": "Unauthorised Remote Maintenance Access",
+      "mitigatedBy": [
+        "AC-17",
+        "MA-04",
+        "IA-02",
+        "AC-06"
+      ]
+    },
+    {
+      "id": "T-IC-007",
+      "name": "Supply Chain Compromise (Firmware Tampering, Counterfeit Components)",
+      "mitigatedBy": [
+        "SI-02",
+        "SI-05",
+        "CM-02",
+        "PE-03"
+      ]
+    },
+    {
+      "id": "T-IC-008",
+      "name": "Physical Tampering at Remote Unmanned Facilities",
+      "mitigatedBy": [
+        "PE-03",
+        "PE-04",
+        "PE-06",
+        "IA-03"
+      ]
+    },
+    {
+      "id": "T-IC-009",
+      "name": "Rogue Wireless Access Points in OT Environments",
+      "mitigatedBy": [
+        "AC-18",
+        "PE-03",
+        "CA-07",
+        "SC-07"
+      ]
+    },
+    {
+      "id": "T-IC-010",
+      "name": "Exploitation of Unpatched Legacy ICS Components",
+      "mitigatedBy": [
+        "RA-05",
+        "SI-02",
+        "CM-07",
+        "SC-07"
+      ]
+    },
+    {
+      "id": "T-IC-011",
+      "name": "Living-off-the-Land in OT Networks (Volt Typhoon-class APT)",
+      "mitigatedBy": [
+        "CA-07",
+        "AU-02",
+        "SI-04",
+        "AC-06"
+      ]
+    },
+    {
+      "id": "T-IC-012",
+      "name": "ICS-Specific Attack Toolkits (PIPEDREAM/INCONTROLLER, COSMICENERGY)",
+      "mitigatedBy": [
+        "SC-07",
+        "SI-03",
+        "SI-07",
+        "CM-02"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-18",
+      "name": "Wireless Access Restrictions",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-05",
+      "name": "Access Restrictions For Change",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-02",
+      "name": "Contingency Plan",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-09",
+      "name": "Information System Backup",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-10",
+      "name": "Information System Recovery And Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-02",
+      "name": "Incident Response Training",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-05",
+      "name": "Incident Monitoring",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-07",
+      "name": "Incident Response Assistance",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-02",
+      "name": "Controlled Maintenance",
+      "family": "MA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MA-04",
+      "name": "Remote Maintenance",
+      "family": "MA",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-04",
+      "name": "Access Control For Transmission Medium",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PE-06",
+      "name": "Monitoring Physical Access",
+      "family": "PE",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-09",
+      "name": "Transmission Confidentiality",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts And Advisories",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software And Information Integrity",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
+      "family": "SI",
+      "emphasis": "standard"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 4,
+    "AU": 1,
+    "CA": 2,
+    "CM": 4,
+    "CP": 3,
+    "IA": 2,
+    "IR": 4,
+    "MA": 2,
+    "PE": 3,
+    "RA": 2,
+    "SC": 4,
+    "SI": 6
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

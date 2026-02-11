@@ -1,0 +1,165 @@
+{
+  "id": "SP-003",
+  "slug": "privacy-mobile-device",
+  "joomla_id": 190,
+  "title": "Privacy Mobile Device Pattern",
+  "description": "Security architecture for protecting personally identifiable information (PII) on mobile devices, addressing data minimisation, encryption at rest, secure transmission, consent management, and regulatory compliance for mobile processing of personal data.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-003",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Data & Privacy",
+    "status": "published",
+    "type": "pattern",
+    "datePublished": "2008-02-02",
+    "dateModified": "2026-02-06",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": []
+  },
+  "diagram": {
+    "svg": "/images/patterns/08_02_02_Pattern_003_Privacy_Mobile_Device.svg",
+    "png": "/images/OSA_images/patterns/08_02_02_Pattern_003_Privacy_Mobile_Device.png"
+  },
+  "content": {
+    "description": "The Privacy Mobile Device pattern addresses the specific privacy risks that arise when personally identifiable information (PII) is stored, processed, or transmitted on mobile devices. Mobile devices -- smartphones, tablets, and laptops -- are inherently higher risk for privacy than fixed infrastructure because they leave the physical security perimeter, are frequently lost or stolen, connect to untrusted networks, and may be shared between personal and corporate use in BYOD scenarios.\n\nPrivacy on mobile devices is not simply a subset of general mobile security. While security controls protect the device and its data from unauthorised access, privacy controls specifically address how personal data is collected, processed, stored, shared, and deleted in compliance with data protection regulations and the rights of data subjects. An organisation may have excellent device encryption and access controls but still violate privacy requirements by collecting excessive personal data, retaining it beyond its purpose, sharing it with unauthorised third parties, or failing to honour data subject access requests for data held on mobile devices.\n\nThe regulatory landscape makes this pattern increasingly critical. GDPR, CCPA/CPRA, LGPD, POPIA, and sector-specific regulations such as HIPAA all impose obligations on organisations that process personal data, regardless of where that processing occurs. When personal data is processed on mobile devices -- whether employee devices under BYOD policies or corporate-issued hardware -- the organisation remains the data controller and must demonstrate compliance. This includes maintaining records of processing activities that include mobile processing, implementing data protection by design and default in mobile applications, conducting Data Protection Impact Assessments (DPIAs) for high-risk mobile processing, and ensuring that data subject rights (access, rectification, erasure, portability) can be exercised for data held on mobile devices.\n\nData minimisation is the foundational privacy principle for mobile devices. Mobile applications should collect and store only the personal data strictly necessary for their function. Cached data, local databases, and temporary files on mobile devices must be managed with the same rigour as server-side data stores. Mobile applications that sync personal data from backend systems should implement selective sync rather than full dataset replication, ensuring that individual devices hold only the data needed for the user's immediate work.\n\nThe pattern also addresses the intersection of privacy with mobile device management (MDM). Organisations using MDM to manage corporate and BYOD devices must balance security monitoring with employee privacy expectations. Location tracking, application usage monitoring, personal data visibility during remote wipe operations, and the ability to read personal communications on BYOD devices all raise privacy concerns that must be addressed through transparent policies, proportionate monitoring, and technical controls that separate corporate and personal data (containerisation).",
+    "keyControlAreas": [
+      "Data Minimisation and Purpose Limitation: Mobile applications and device configurations should enforce the principle of collecting and retaining only the personal data necessary for the specified purpose. This means designing mobile apps to request minimal permissions, implementing selective data sync rather than full dataset replication to devices, setting automatic data retention and purging schedules for locally cached PII, and ensuring that when personal data is no longer needed on the device it is securely deleted rather than merely marked for overwrite. Organisations should audit mobile applications for data collection practices, including third-party SDKs and analytics frameworks that may collect personal data without the user's explicit knowledge.",
+      "Encryption and Data Protection at Rest: All personal data stored on mobile devices must be encrypted at rest using device-level full disk encryption and, where appropriate, application-level encryption for particularly sensitive data. Modern mobile operating systems (iOS, Android) provide hardware-backed encryption by default when a passcode is set, but organisations must verify this is enforced via MDM policy and that the encryption cannot be disabled. Application-level encryption provides defence in depth for high-sensitivity data (health records, financial data, biometric data) and protects against attacks where the device is unlocked but the specific application is not. Encryption key management should leverage hardware security modules (Secure Enclave, StrongBox) where available.",
+      "Secure Transmission of Personal Data: Personal data transmitted from mobile devices must be protected in transit using TLS 1.2 or higher with certificate pinning for high-sensitivity applications. Mobile apps should validate server certificates, implement certificate transparency checking, and fail closed if a secure connection cannot be established rather than falling back to unencrypted transmission. APIs that mobile apps connect to should implement mutual TLS where the sensitivity of the data warrants it. VPN usage should be mandated when accessing personal data over untrusted networks.",
+      "Consent Management and Data Subject Rights: Mobile applications that collect personal data must implement robust consent mechanisms that comply with applicable regulations. This includes granular consent for different processing purposes, easy withdrawal of consent, clear privacy notices presented at the point of collection, and mechanisms to honour data subject access requests (DSARs) for data held locally on devices. The organisation must be able to identify what personal data exists on which mobile devices and execute erasure requests that extend to mobile device storage, not just server-side databases.",
+      "BYOD Privacy and Corporate-Personal Separation: In BYOD environments, the organisation's MDM and security controls must not infringe on the employee's personal privacy. Containerisation solutions (Android Work Profile, iOS managed apps, Samsung Knox) separate corporate data from personal data, ensuring that remote wipe operations only affect the corporate container. MDM policies should be transparent about what data the organisation can and cannot access on personal devices. Location tracking, if used, must be proportionate and disclosed. The organisation's privacy policy for BYOD must clearly articulate the boundaries of monitoring and the employee's privacy rights.",
+      "Data Protection Impact Assessment for Mobile Processing: High-risk processing of personal data on mobile devices requires a DPIA under GDPR Article 35 and equivalent provisions in other regulations. Scenarios that trigger a DPIA include: mobile processing of special category data (health, biometric, genetic), large-scale processing of personal data on mobile devices, systematic monitoring of individuals via mobile apps, and use of new mobile technologies for personal data processing (AR, ML-based profiling, location analytics). The DPIA should evaluate the necessity and proportionality of mobile processing, identify risks to data subjects, and document the measures implemented to mitigate those risks."
+    ],
+    "assumptions": "The organisation processes PII or other regulated personal data on mobile devices and is subject to data protection legislation (GDPR, CCPA, HIPAA, or equivalent). Mobile device management infrastructure exists or can be deployed to enforce privacy-related device policies. The organisation has a data protection officer or equivalent function capable of advising on mobile privacy requirements. For BYOD scenarios, the organisation has the legal and contractual basis to apply containerisation and selective management to personal devices. Users have been informed about the personal data processing that occurs on their mobile devices and appropriate consent or legal basis has been established.",
+    "typicalChallenges": "The primary challenge is visibility: organisations often lack a complete inventory of what personal data exists on which mobile devices, making it difficult to respond to data subject requests or demonstrate compliance during audits. Data subject access requests and right-to-erasure requests are particularly complex when personal data may be cached on multiple mobile devices in offline-capable applications. BYOD environments create tension between the organisation's need to protect corporate data and the employee's expectation of personal privacy -- overly intrusive MDM policies drive shadow IT behaviour where employees avoid managed devices. Mobile application developers (both internal and third-party) frequently embed analytics and advertising SDKs that collect personal data without adequate privacy assessment, creating compliance exposure. Cross-border data transfer is complicated by mobile devices that travel internationally, potentially triggering data localisation requirements when a device containing EU personal data is carried to a non-adequate country. Secure deletion on mobile devices is not always straightforward -- flash storage wear levelling means that deleted data may persist in unallocated blocks, though modern hardware-backed encryption mitigates this by making the data unreadable when the key is destroyed.",
+    "indications": "Apply this pattern when the organisation processes personally identifiable information on mobile devices and is subject to data protection regulations such as GDPR, CCPA/CPRA, HIPAA, LGPD, POPIA, or sector-specific privacy requirements. This includes organisations in regulated industries (financial services, healthcare, legal, insurance) that handle client or patient PII on mobile devices, any organisation subject to California SB-1386 or its successor CCPA breach notification requirements, organisations deploying mobile applications that collect user data, and BYOD environments where corporate data containing PII coexists with personal data on employee-owned devices.",
+    "contraIndications": "This pattern is not necessary if the organisation does not process any PII or confidential personal information on mobile devices and has technical controls in place to prevent PII from reaching mobile endpoints. It does not apply to mobile devices used exclusively for non-sensitive corporate functions where no personal data is accessed or stored. Organisations that prohibit mobile device access to personal data systems and enforce this through network-level controls may not need this pattern, though they should still consider the residual risk of personal data in email, messaging, and cached web content on mobile devices.",
+    "threatResistance": "This pattern addresses the threat of unauthorised disclosure of personal data through device loss or theft, mitigated by encryption at rest and remote wipe capabilities. It resists privacy violations from excessive data collection by mobile applications through data minimisation principles and application privacy auditing. The pattern mitigates regulatory non-compliance risk from uncontrolled mobile processing of personal data by providing governance frameworks for mobile privacy. It addresses the threat of personal data interception in transit through mandatory TLS and VPN usage. In BYOD scenarios, it mitigates the risk of privacy infringement against employees through containerisation and transparent monitoring policies. It provides partial resistance against insider threats involving personal data exfiltration from mobile devices through DLP controls and application restrictions. The pattern does not fully mitigate targeted device exploitation by nation-state actors, though device encryption and hardening significantly raise the cost of such attacks."
+  },
+  "examples": {
+    "Mobile data protection platforms": [
+      "Microsoft Intune with app protection policies for PII-handling applications",
+      "VMware Workspace ONE with data loss prevention for mobile",
+      "Jamf Pro for Apple device management with privacy-respecting profiles",
+      "Samsung Knox containerisation for BYOD corporate-personal separation"
+    ],
+    "Privacy-focused mobile application design": [
+      "Apple App Tracking Transparency framework for consent management",
+      "Android Privacy Sandbox for limiting cross-app personal data sharing",
+      "OneTrust mobile SDK for in-app consent and preference management",
+      "Differential privacy in mobile analytics (Apple, Google implementations)"
+    ],
+    "Regulatory compliance for mobile": [
+      "HIPAA-compliant mobile clinical applications with encrypted local storage",
+      "PCI DSS mobile payment applications with tokenisation and P2PE",
+      "GDPR-compliant mobile CRM with right-to-erasure extending to offline cache",
+      "Financial services mobile apps with MiFID II communication recording compliance"
+    ],
+    "Mobile encryption and secure deletion": [
+      "iOS Data Protection with hardware-backed Secure Enclave encryption",
+      "Android hardware-backed Keystore with StrongBox for credential storage",
+      "Cryptographic erasure via key destruction for instant secure wipe",
+      "Application-level encryption for health records using SQLCipher"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-124 Rev 2: Guidelines for Managing the Security of Mobile Devices in the Enterprise",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-124/rev-2/final",
+      "note": "Primary NIST guidance on mobile device security including privacy considerations, device management, and data protection for enterprise mobile deployments."
+    },
+    {
+      "title": "ENISA Smartphone Secure Development Guidelines",
+      "url": "https://www.enisa.europa.eu/publications/smartphone-secure-development-guidelines",
+      "note": "European guidance on developing secure mobile applications with emphasis on data protection and privacy by design for smartphone platforms."
+    },
+    {
+      "title": "OWASP Mobile Application Security Verification Standard (MASVS)",
+      "url": "https://mas.owasp.org/MASVS/",
+      "note": "Industry standard for mobile application security testing including data storage, cryptography, authentication, and privacy requirements."
+    },
+    {
+      "title": "ICO Guidance: Data Protection and Mobile Devices",
+      "url": "https://ico.org.uk/for-organisations/sme-web-hub/",
+      "note": "UK Information Commissioner's Office practical guidance on GDPR compliance for organisations using mobile devices to process personal data."
+    },
+    {
+      "title": "NIST Privacy Framework v1.0",
+      "url": "https://www.nist.gov/privacy-framework",
+      "note": "NIST voluntary framework for improving privacy through enterprise risk management, applicable to mobile device processing of personal data."
+    },
+    {
+      "title": "EDPB Guidelines on Data Protection by Design and by Default",
+      "url": "https://edpb.europa.eu/our-work-tools/documents/public-consultations/2019/guidelines-42019-article-25-data-protection-design_en",
+      "note": "European Data Protection Board guidance on implementing data protection by design principles, directly applicable to mobile application development and deployment."
+    },
+    {
+      "title": "CIS Mobile Companion Guide",
+      "url": "https://www.cisecurity.org/controls/v8",
+      "note": "CIS Controls implementation guidance for mobile devices covering asset management, data protection, and secure configuration of mobile endpoints."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-001",
+    "SP-006",
+    "SP-007",
+    "SP-013",
+    "SP-015",
+    "SP-024"
+  ],
+  "relatedPatternNames": [
+    "Client Module",
+    "Wireless Private Network",
+    "Wireless Public Hotspot",
+    "Data Security",
+    "Consumer Devices for Enterprise",
+    "iPhone Pattern"
+  ],
+  "threats": [
+    {
+      "id": "T-PM-001",
+      "name": "Unauthorised Disclosure of PII Through Device Loss or Theft"
+    },
+    {
+      "id": "T-PM-002",
+      "name": "Excessive Personal Data Collection by Mobile Applications"
+    },
+    {
+      "id": "T-PM-003",
+      "name": "Personal Data Interception in Transit on Untrusted Networks"
+    },
+    {
+      "id": "T-PM-004",
+      "name": "Regulatory Non-Compliance for Mobile Processing of Personal Data"
+    },
+    {
+      "id": "T-PM-005",
+      "name": "Failure to Honour Data Subject Rights for Mobile-Held Data"
+    },
+    {
+      "id": "T-PM-006",
+      "name": "Employee Privacy Violation Through Excessive MDM Monitoring"
+    },
+    {
+      "id": "T-PM-007",
+      "name": "Personal Data Residue After Incomplete Device Wiping"
+    },
+    {
+      "id": "T-PM-008",
+      "name": "Cross-Border Data Transfer Violation via Mobile Device Travel"
+    },
+    {
+      "id": "T-PM-009",
+      "name": "Third-Party SDK Data Collection Without Adequate Consent"
+    },
+    {
+      "id": "T-PM-010",
+      "name": "Personal Data Exfiltration via Unmanaged Mobile Applications"
+    }
+  ],
+  "controls": [],
+  "controlFamilySummary": {},
+  "$schema": "../schema/pattern.schema.json"
+}

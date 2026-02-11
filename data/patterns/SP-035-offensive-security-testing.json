@@ -1,0 +1,417 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-035",
+  "slug": "offensive-security-testing",
+  "title": "Offensive Security Testing",
+  "description": "Governance and execution pattern for red teaming, blue teaming, purple teaming, and intelligence-led penetration testing (CBEST, TIBER-EU). Covers threat intelligence-led scoping, controlled attack simulation, detection validation, and continuous improvement. Maps 38 NIST 800-53 controls across assessment, testing, monitoring, and risk management domains.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-035",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Governance and Assurance",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-07",
+    "dateModified": "2026-02-07",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from commissioning and participating in CBEST assessments for UK financial services firms, where intelligence-led testing against live production environments revealed gaps that conventional penetration testing and compliance assessments consistently missed. Informed by the evolution from checkbox penetration testing to adversary simulation that tests the full detection and response chain."
+  },
+  "diagram": {
+    "svg": "/images/sp-035-offensive-security-testing.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Offensive Security Testing validates that security controls actually work against realistic adversaries, not just against compliance checklists. Traditional penetration testing -- a scoped assessment of known attack surfaces over a few weeks -- has value but fundamental limitations. It tests whether specific vulnerabilities exist, not whether the organisation can detect and respond to a determined attacker. Red teaming, purple teaming, and intelligence-led testing frameworks like CBEST and TIBER-EU fill this gap.\n\nThe pattern defines five testing approaches on a spectrum of maturity. Vulnerability assessment identifies known weaknesses through automated scanning and manual verification -- it answers 'what could be exploited?' Penetration testing attempts to exploit those weaknesses to demonstrate impact -- it answers 'can it be exploited and what happens?' Red teaming simulates a realistic adversary campaign with full tactics, techniques, and procedures against the live environment with minimal prior knowledge -- it answers 'can we detect and stop a determined attacker?' Blue teaming exercises focus on the defenders: detection, triage, containment, and recovery against simulated attacks -- it answers 'how effective is our SOC?' Purple teaming combines red and blue in collaborative exercises where attackers and defenders work together in real time to test and improve specific detection capabilities -- it answers 'what should we detect and can we?'\n\nIntelligence-led testing (CBEST in the UK, TIBER-EU across Europe, AASE in Hong Kong) adds a structured threat intelligence phase. A threat intelligence provider analyses the organisation's threat landscape and produces a targeted threat assessment. An independent red team then simulates the specific threat actors and scenarios identified in the intelligence report, attacking live production systems. The blue team is not informed. This tests not just technical controls but the entire detection, escalation, and response chain under realistic conditions.\n\nThe critical architectural principle is that testing must be continuous, not episodic. Annual penetration tests provide a point-in-time snapshot that decays within weeks as the environment changes. Continuous validation through automated breach and attack simulation (BAS), regular purple team exercises, and periodic red team engagements maintains assurance that controls remain effective as the threat landscape and the technology estate evolve.",
+    "keyControlAreas": [
+      "Penetration Testing and Vulnerability Assessment (CA-08, RA-05, RA-03, CA-02, SA-11): The foundation of offensive testing. CA-08 mandates penetration testing including: scope definition (which systems, which attack vectors, what rules of engagement), execution (attempting to exploit vulnerabilities in a controlled manner), reporting (findings with evidence, risk ratings, and remediation guidance), and remediation verification (retesting after fixes are applied). RA-05 provides vulnerability monitoring and scanning: continuous automated scanning of infrastructure, applications, and configurations to identify known weaknesses. RA-03 conducts risk assessments that inform testing priorities: test the highest-risk systems most frequently and most rigorously. CA-02 performs control assessments that validate whether security controls are correctly implemented and operating as intended. SA-11 covers developer testing and evaluation: security testing integrated into the development lifecycle including static analysis, dynamic analysis, and dependency scanning. Penetration testing must cover external attack surface (internet-facing systems), internal attack surface (assuming a compromised insider or phished user), application layer (business logic, authentication, authorisation), and social engineering (phishing, vishing, physical access).",
+      "Red Team Operations and Adversary Simulation (CA-08, PM-16, RA-03, SI-04, AT-03): Red teaming simulates realistic adversary campaigns. CA-08 at the red team level encompasses: objective-based testing (achieve specific goals such as accessing crown jewel data rather than finding all vulnerabilities), covert operations (the blue team is not informed, testing real detection capability), realistic TTPs (using techniques observed in real adversary campaigns against the organisation's sector), and full kill chain simulation (initial access, persistence, lateral movement, privilege escalation, data exfiltration). PM-16 informs red team scenarios with threat intelligence: current threat actor profiles, sector-specific attack campaigns, and TTPs from recent incidents. RA-03 identifies the scenarios to simulate: the risk assessment determines which threat actors and scenarios pose the greatest risk, and those become the red team objectives. SI-04 is tested implicitly: every red team action that is not detected reveals a monitoring gap. AT-03 provides role-based training for red team operators, blue team analysts, and exercise coordinators. Red team engagements must have clear rules of engagement including: scope boundaries (out-of-scope systems, prohibited actions), safety controls (deconfliction channels, emergency stop procedures), evidence requirements (logging all actions for post-exercise analysis), and legal authorisation (signed engagement letter from appropriate authority).",
+      "Purple Team Collaboration and Detection Validation (CA-08, CA-07, AU-06, SI-04, PM-14): Purple teaming is the most effective approach for rapidly improving detection capability. CA-08 in the purple team context means collaborative testing where the red team executes specific TTPs while the blue team attempts to detect and respond in real time, with immediate feedback on what was detected and what was missed. CA-07 provides continuous monitoring validation: each purple team exercise tests whether monitoring tools, correlation rules, and alert logic detect the executed techniques. AU-06 validates audit record analysis: can analysts identify the attack pattern in the log data? Are the right logs being collected? Is the data sufficient for investigation? SI-04 tests system monitoring effectiveness for specific attack techniques: does EDR detect the payload? Does the SIEM correlate the events? Does the alert reach an analyst within the target time? PM-14 ensures purple team findings feed back into detection engineering: every missed detection becomes a new detection rule, every slow response becomes a process improvement. Purple teams should work through the MITRE ATT&CK matrix systematically, testing detection coverage for each relevant technique and sub-technique, building a heat map of detection capability that drives investment priorities.",
+      "Intelligence-Led Testing: CBEST, TIBER-EU, and AASE (PM-16, RA-03, CA-08, IR-04, CA-02): Intelligence-led frameworks represent the highest maturity level. PM-16 provides the threat intelligence foundation: an accredited threat intelligence provider analyses the organisation's threat landscape including likely adversaries, their capabilities, their objectives, and their most probable attack paths. RA-03 translates intelligence into test scenarios: specific attack narratives that the red team will execute against live production systems. CA-08 governs the red team execution: testing against production with no prior notification to the blue team, simulating the intelligence-led scenarios over a multi-week campaign. IR-04 is tested holistically: the organisation's incident detection, escalation, and response processes are exercised under realistic conditions. CA-02 provides the assessment phase: after the exercise, the control team (who coordinated between red and blue) leads a detailed debrief comparing the red team's actions with the blue team's detections, identifying gaps and improvement actions. CBEST (Bank of England) tests UK systemic financial infrastructure. TIBER-EU (European Central Bank) provides a harmonised framework across EU member states. Both require accredited providers and follow structured phases: scoping, intelligence, testing, and closure with remediation plans.",
+      "Remediation Management and Continuous Improvement (CA-05, PM-04, RA-07, CM-04, SA-15): Findings without remediation waste the testing investment. CA-05 manages the plan of action and milestones: every finding from offensive testing becomes a tracked remediation item with owner, priority, target date, and verification criteria. PM-04 provides the plan of action and milestones process at the organisational level, aggregating findings across all testing activities. RA-07 defines risk responses: each finding is assessed and addressed through remediation (fix the vulnerability), mitigation (add compensating controls), acceptance (acknowledge the risk with executive sign-off), or transfer (insurance or outsourcing). CM-04 analyses security impact of changes: remediation actions are tested to verify they fix the vulnerability without introducing new issues. SA-15 ensures development processes incorporate lessons from offensive testing: patterns of vulnerability become secure coding standards, recurring issues become automated security gates. The remediation cycle must close the loop: findings are tracked until verified fixed by retesting, and systemic issues drive architectural changes rather than point fixes.",
+      "Automated Breach and Attack Simulation (CA-07, CA-08, SI-04, RA-05, PM-14): Continuous automated validation between human-led exercises. CA-07 provides continuous monitoring that includes automated attack simulation: BAS platforms continuously execute known attack techniques against production controls to verify they remain effective. CA-08 at the automated level runs scripted penetration scenarios on a scheduled basis: automated external scans, internal network sweeps, and application security tests that maintain a continuous security baseline. SI-04 is validated continuously: BAS platforms test whether EDR, SIEM, and email security detect simulated attacks, alerting when previously effective detections stop working (due to configuration drift, signature updates, or infrastructure changes). RA-05 integrates with BAS to test whether newly discovered vulnerabilities are detectable by existing controls. PM-14 uses BAS results to maintain confidence between manual assessments: if automated tests show consistent detection, the organisation can have higher confidence in its security posture. BAS does not replace human-led red teaming -- it maintains the baseline between engagements and provides early warning when controls degrade.",
+      "Legal, Ethical, and Governance Framework (PL-04, PS-06, PS-07, AC-01, PM-09): Offensive testing requires robust governance. PL-04 defines rules of behaviour for testing activities: what is permitted, what is prohibited, and how to handle unexpected findings (e.g., discovery of illegal content, evidence of ongoing compromise by a real adversary). PS-06 provides access agreements for testers: signed authorisation from appropriate authority (typically CISO or board), scope boundaries, data handling requirements, and confidentiality obligations. PS-07 governs external personnel security for third-party testing firms: vetting requirements, insurance, contractual obligations, and incident notification. AC-01 establishes access control policy for testing: testers receive controlled access, their activities are logged independently, and access is revoked immediately upon completion. PM-09 ensures the risk management strategy includes offensive testing as a core assurance activity, with appropriate budget allocation, executive reporting, and board-level visibility of findings."
+    ],
+    "assumptions": "Executive sponsorship exists for offensive testing including acceptance of controlled risk to live systems. The organisation has security operations capability (SOC) whose effectiveness can be tested. Budget is available for external testing providers (red team, threat intelligence, penetration testing). Legal authorisation for testing can be obtained from appropriate authority. The technology estate is sufficiently documented to define meaningful test scopes. Remediation capacity exists to address findings within reasonable timeframes. For intelligence-led testing: the organisation is of sufficient scale and criticality to warrant CBEST/TIBER-EU-level investment.",
+    "typicalChallenges": "Scope creep and scope gaps are mirror-image problems: testing too broadly increases risk and cost, while testing too narrowly creates a false sense of security. Rules of engagement that are too restrictive prevent realistic simulation, while rules that are too permissive create genuine risk to production systems. Red team findings can create political tension when they reveal that expensive security investments are not working as expected. The gap between finding vulnerabilities and fixing them is often measured in months, during which the organisation is knowingly exposed. Automated BAS tools require ongoing maintenance and tuning to avoid alert fatigue from simulated attacks. Intelligence-led testing is expensive (six-figure engagements) and resource-intensive, limiting frequency. Finding skilled red team operators is difficult; the talent market is extremely competitive. Testing cloud environments requires navigating cloud provider acceptable use policies and shared responsibility boundaries. Social engineering tests (phishing simulations) can damage employee trust if poorly communicated. Purple team exercises require mature relationships between red and blue teams; adversarial dynamics undermine collaboration.",
+    "indications": "This pattern is relevant for any organisation that wants evidence-based assurance of its security controls. It is essential for: financial services organisations subject to CBEST, TIBER-EU, or equivalent regulatory testing requirements, critical national infrastructure operators, organisations handling sensitive personal or financial data, entities that have suffered breaches and need to validate remediation effectiveness, organisations with mature security operations wanting to test and improve detection capability, and any organisation that relies on security compliance certifications and wants to validate that compliance translates to actual security.",
+    "contraIndications": "Organisations without basic security controls in place (no patching, no access control, no monitoring) will get limited value from offensive testing -- the findings will be obvious and overwhelming. Fix the fundamentals first. Very small organisations with simple environments may find a standard vulnerability assessment and basic penetration test sufficient, without the overhead of red team or intelligence-led testing. Organisations without the capacity to remediate findings should not invest in expensive testing that produces reports which sit unactioned. If your SOC does not exist yet, testing it is pointless -- build it first (see SP-031), then test it.",
+    "threatResistance": "Offensive Security Testing does not directly resist threats -- it validates that other controls do. Its value is meta-security: providing evidence-based assurance that the security architecture works as designed. By simulating real adversary techniques, it identifies gaps before real attackers exploit them. Specific validation includes: detection of initial access techniques (phishing, exploitation) validating controls from IA-02, SI-04, and AU-06. Detection of lateral movement validating SC-07, AC-04, and SI-04. Detection of privilege escalation validating AC-06, AU-02, and CM-06. Detection of data exfiltration validating AC-04, SI-04, and SC-07. Incident response effectiveness validating IR-04, IR-05, and IR-08. Recovery capability validating CP-09, CP-10, and CP-04. The ultimate measure of offensive testing effectiveness is reduced mean-time-to-detect and mean-time-to-respond in real incidents, and reduced blast radius when incidents occur."
+  },
+  "examples": {
+    "Penetration Testing Programme": [
+      "External penetration test annually: internet-facing systems, web applications, APIs, email security, perimeter controls",
+      "Internal penetration test annually: assume-breach starting point, Active Directory attack paths, lateral movement, privilege escalation",
+      "Application security testing per release: DAST against staging, SAST in CI/CD pipeline, manual review for critical changes",
+      "Wireless and physical penetration testing annually: rogue AP detection, badge cloning, tailgating, clean desk policy"
+    ],
+    "Red Team Campaign (CBEST/TIBER-EU Style)": [
+      "Phase 1 (Intelligence): Threat intelligence provider produces targeted assessment identifying 3 most likely adversary groups and their TTPs",
+      "Phase 2 (Scoping): Control team defines objectives: access customer PII database, compromise payment processing, exfiltrate trading algorithms",
+      "Phase 3 (Execution): Red team executes 4-week campaign using intelligence-led TTPs; blue team uninformed; control team monitors safety",
+      "Phase 4 (Closure): Joint debrief with red/blue/control teams; findings mapped to MITRE ATT&CK; remediation plan with 90-day targets"
+    ],
+    "Purple Team Exercise Series": [
+      "Session 1: Test detection for initial access techniques -- spear phishing (T1566), drive-by compromise (T1189), valid accounts (T1078)",
+      "Session 2: Test detection for persistence -- scheduled tasks (T1053), registry run keys (T1547), DLL side-loading (T1574)",
+      "Session 3: Test detection for credential access -- Kerberoasting (T1558), LSASS memory dump (T1003), password spraying (T1110)",
+      "Session 4: Test detection for lateral movement -- PsExec (T1569), WMI (T1047), RDP hijacking (T1563)"
+    ],
+    "Continuous Validation (BAS)": [
+      "Deploy BAS agents across network zones simulating lateral movement, C2 communication, and data exfiltration daily",
+      "Automated phishing simulation monthly: track click rates, credential submission rates, and reporting rates by department",
+      "Continuous external attack surface monitoring: discover new exposed services, test for known vulnerabilities, validate WAF rules",
+      "Weekly automated report: detection coverage score, new gaps identified, regression alerts where previously detected attacks now evade"
+    ]
+  },
+  "references": [
+    {
+      "title": "Bank of England: CBEST Intelligence-Led Testing",
+      "url": "https://www.bankofengland.co.uk/financial-stability/financial-sector-continuity/cbest-threat-intelligence-led-assessments",
+      "note": "The Bank of England's framework for intelligence-led penetration testing of UK systemic financial infrastructure. Defines the intelligence, testing, and remediation phases."
+    },
+    {
+      "title": "ECB: TIBER-EU Framework",
+      "url": "https://www.ecb.europa.eu/paym/cyber-resilience/tiber-eu/html/index.en.html",
+      "note": "The European Central Bank's framework for threat intelligence-based ethical red teaming. Harmonises intelligence-led testing across EU member states."
+    },
+    {
+      "title": "MITRE ATT&CK Framework",
+      "url": "https://attack.mitre.org/",
+      "note": "The industry-standard knowledge base for adversary tactics and techniques. Essential for scoping red team exercises, mapping purple team coverage, and reporting findings."
+    },
+    {
+      "title": "NIST SP 800-115: Technical Guide to Information Security Testing and Assessment",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-115/final",
+      "note": "NIST guidance on security testing methods including penetration testing, vulnerability scanning, and security assessment techniques."
+    },
+    {
+      "title": "PTES: Penetration Testing Execution Standard",
+      "url": "http://www.pentest-standard.org/",
+      "note": "Industry standard for penetration testing methodology covering pre-engagement, intelligence gathering, threat modelling, vulnerability analysis, exploitation, post-exploitation, and reporting."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. CA (Security Assessment and Authorization) and RA (Risk Assessment) families are primary."
+    },
+    {
+      "title": "CREST: Penetration Testing Procurement Guide",
+      "url": "https://www.crest-approved.org/buying-penetration-testing/",
+      "note": "Guidance from CREST (the accreditation body for UK penetration testing firms) on procuring effective penetration testing services. Useful for defining requirements and evaluating providers."
+    },
+    {
+      "title": "UK NCSC: Penetration Testing Guidance",
+      "url": "https://www.ncsc.gov.uk/guidance/penetration-testing",
+      "note": "The UK National Cyber Security Centre's practical guidance on penetration testing including scoping, execution, and using results effectively."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-025",
+    "SP-028",
+    "SP-029",
+    "SP-031",
+    "SP-034"
+  ],
+  "relatedPatternNames": [
+    "Advanced Monitoring and Detection",
+    "Secure DevOps Pipeline",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Cyber Resilience"
+  ],
+  "threats": [
+    {
+      "id": "T-OST-001",
+      "name": "Undetected vulnerabilities in internet-facing systems",
+      "mitigatedBy": [
+        "CA-08",
+        "RA-05",
+        "CA-02"
+      ]
+    },
+    {
+      "id": "T-OST-002",
+      "name": "Security controls that fail to detect real attack techniques",
+      "mitigatedBy": [
+        "CA-08",
+        "CA-07",
+        "SI-04",
+        "PM-14"
+      ]
+    },
+    {
+      "id": "T-OST-003",
+      "name": "Lateral movement paths through Active Directory misconfigurations",
+      "mitigatedBy": [
+        "CA-08",
+        "RA-05",
+        "CM-06",
+        "AC-06"
+      ]
+    },
+    {
+      "id": "T-OST-004",
+      "name": "Social engineering susceptibility across the workforce",
+      "mitigatedBy": [
+        "CA-08",
+        "AT-02",
+        "AT-03",
+        "PM-14"
+      ]
+    },
+    {
+      "id": "T-OST-005",
+      "name": "Incident response process failures under realistic pressure",
+      "mitigatedBy": [
+        "IR-03",
+        "IR-04",
+        "CA-08",
+        "PM-14"
+      ]
+    },
+    {
+      "id": "T-OST-006",
+      "name": "Compliance without actual security effectiveness",
+      "mitigatedBy": [
+        "CA-02",
+        "CA-08",
+        "PM-14",
+        "CA-07"
+      ]
+    },
+    {
+      "id": "T-OST-007",
+      "name": "Configuration drift degrading previously effective controls",
+      "mitigatedBy": [
+        "CA-07",
+        "CM-06",
+        "RA-05",
+        "PM-14"
+      ]
+    },
+    {
+      "id": "T-OST-008",
+      "name": "Supply chain compromise through trusted vendor access",
+      "mitigatedBy": [
+        "CA-08",
+        "PS-07",
+        "SA-09",
+        "RA-03"
+      ]
+    },
+    {
+      "id": "T-OST-009",
+      "name": "Privilege escalation from standard user to domain administrator",
+      "mitigatedBy": [
+        "CA-08",
+        "AC-06",
+        "CM-06",
+        "AU-06"
+      ]
+    },
+    {
+      "id": "T-OST-010",
+      "name": "Data exfiltration through unmonitored channels",
+      "mitigatedBy": [
+        "CA-08",
+        "SI-04",
+        "AU-06",
+        "SC-07"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-01",
+      "name": "Policy and Procedures",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-05",
+      "name": "Plan of Action and Milestones",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-08",
+      "name": "Penetration Testing",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-04",
+      "name": "Impact Analyses",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-03",
+      "name": "Incident Response Testing",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-04",
+      "name": "Rules of Behavior",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-04",
+      "name": "Plan of Action and Milestones Process",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-16",
+      "name": "Threat Awareness Program",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PS-06",
+      "name": "Access Agreements",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-07",
+      "name": "External Personnel Security",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-07",
+      "name": "Risk Response",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Testing and Evaluation",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-15",
+      "name": "Development Process, Standards, and Tools",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "important"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 2,
+    "AT": 2,
+    "AU": 2,
+    "CA": 4,
+    "CM": 2,
+    "IR": 2,
+    "PL": 1,
+    "PM": 4,
+    "PS": 2,
+    "RA": 3,
+    "SA": 3,
+    "SC": 1,
+    "SI": 1
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "id": "SP-028",
+  "slug": "secure-devops-pipeline",
+  "title": "Secure DevOps Pipeline Pattern",
+  "description": "Security architecture for CI/CD pipelines, DevSecOps practices, and software delivery automation. Covers pipeline infrastructure hardening, secrets management, software supply chain integrity, automated security testing, artifact signing, deployment gates, infrastructure as code governance, and compliance automation.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-028",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Application & Operations",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-06",
+    "dateModified": "2026-02-06",
+    "authors": [
+      "Aurelius",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from direct operational experience building and securing CI/CD pipelines for open source and commercial software products, including automated security gates, supply chain verification, artifact signing, and deployment automation across GitHub Actions, GitLab CI, and custom pipeline architectures."
+  },
+  "diagram": {
+    "svg": "/images/sp-028-secure-devops-pipeline.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Organisations are shipping software faster than ever. Continuous Integration and Continuous Delivery (CI/CD) pipelines have replaced manual build-test-deploy cycles with automated workflows that push code from commit to production in minutes. This velocity is a competitive advantage -- but without embedded security, it becomes a systemic risk multiplier. Every pipeline is an automated pathway to production, and every automated pathway to production is a potential attack vector.\n\nDevSecOps -- the integration of security practices into DevOps workflows -- addresses this by shifting security left into the development process and embedding it throughout the delivery pipeline. Rather than treating security as a gate at the end of development, DevSecOps makes security a continuous, automated, and developer-friendly property of the pipeline itself. Static analysis runs on every commit. Dependencies are verified against known vulnerability databases on every build. Container images are scanned before they enter registries. Infrastructure changes are validated against security policies before they are applied. Deployment to production requires both automated checks and human approval for high-impact changes.\n\nThis pattern identifies a maturity spectrum with four levels of pipeline security: (1) Basic pipelines with manual or ad-hoc security checks, where the primary risk is that security is bypassed entirely under delivery pressure; (2) Integrated pipelines with automated SAST, SCA, and container scanning embedded as pipeline stages, providing consistent coverage but potentially creating false-positive fatigue; (3) Policy-enforced pipelines where security gates are mandatory and cannot be bypassed, artifact integrity is verified cryptographically, and infrastructure changes are governed by policy-as-code; (4) Zero-trust pipelines where every component -- source code, dependencies, build environments, artifacts, and deployment targets -- has verified provenance, cryptographic attestation, and continuous compliance monitoring.\n\nThe pattern addresses the security architecture required to build, operate, and govern CI/CD pipelines at any point on this maturity spectrum. The threats, controls, and implementation guidance documented here are derived from direct operational experience building and securing software delivery pipelines. This pattern was developed alongside a production CI/CD system with automated security gates, supply chain verification, and deployment controls -- the principles described here were applied in practice before being codified.",
+    "keyControlAreas": [
+      "Pipeline Infrastructure Security (CM-02, CM-06, CM-07, SC-07): The pipeline itself is a high-value target -- an attacker who compromises the build environment can inject malicious code into every artifact it produces. Build environments must be hardened, ephemeral, and isolated. Use ephemeral build runners that are created fresh for each pipeline execution and destroyed afterwards, eliminating persistence of compromised state. Apply baseline configurations (CM-02) to build environments with minimal tooling installed -- only what the build requires. Network-isolate build environments (SC-07) so that compromised builds cannot reach internal systems or exfiltrate data. Self-hosted runners require particular attention: they must be patched, monitored, and treated as production infrastructure. Apply least functionality (CM-07) to pipeline orchestration platforms -- disable unused features, integrations, and plugins that expand the attack surface.",
+      "Source Code & Repository Governance (AC-03, AC-05, CM-03, AC-06): The source code repository is the root of trust for the entire pipeline. Enforce branch protection rules requiring code review by at least one reviewer who is not the commit author (AC-05, separation of duties). Require signed commits to establish author authenticity and detect tampering. Enforce access controls (AC-03) that prevent direct pushes to protected branches -- all changes must flow through pull/merge requests. Apply least privilege (AC-06) to repository permissions: most contributors need write access only to feature branches, not to main or release branches. Implement configuration change control (CM-03) for pipeline definition files (.github/workflows, .gitlab-ci.yml, Jenkinsfile) -- changes to pipeline configuration should require the same review rigour as application code, because a malicious pipeline change is functionally equivalent to a backdoor.",
+      "Secrets & Credential Management (IA-05, SC-12, SC-28): Secrets -- API keys, database credentials, signing keys, deployment tokens -- are the most common source of pipeline security breaches. Never embed secrets in source code, pipeline configuration files, build scripts, or container images. Use dedicated secrets management services (HashiCorp Vault, AWS Secrets Manager, GitHub Encrypted Secrets, GitLab CI Variables) that inject secrets at runtime and prevent them from appearing in build logs. Rotate secrets automatically on a defined schedule and immediately upon suspected exposure. Scope secrets to the minimum required context: a deployment token for staging should not have access to production. Protect signing keys (SC-12) with hardware security modules or cloud KMS where possible. Encrypt secrets at rest (SC-28) in all pipeline-accessible stores. Audit secret access -- know which pipeline runs accessed which secrets, and detect anomalous access patterns.",
+      "Software Supply Chain Integrity (SR-03, SR-04, SI-07, SA-11): Modern software is composed more than it is written -- a typical application may include hundreds of transitive dependencies, each a potential vector for supply chain attack. Implement Software Composition Analysis (SCA) to identify known vulnerabilities in direct and transitive dependencies. Pin dependency versions to prevent silent updates and use lock files to ensure reproducible builds. Generate Software Bills of Materials (SBOMs) for every release to enable downstream consumers to assess their exposure when new vulnerabilities are disclosed. Verify dependency provenance (SR-04) -- confirm that packages originate from their claimed sources and have not been tampered with. Implement dependency update automation (Dependabot, Renovate) to keep dependencies current, but require review before merging updates. For critical dependencies, evaluate the project's security posture: maintenance activity, vulnerability response history, and contributor verification.",
+      "Automated Security Testing (SA-11, RA-05, SI-07): Embed security testing as mandatory, automated pipeline stages that execute on every commit and cannot be bypassed. Static Application Security Testing (SAST) analyses source code for vulnerabilities without executing it -- run it early in the pipeline for fast feedback. Dynamic Application Security Testing (DAST) tests running applications for vulnerabilities including injection flaws, authentication issues, and configuration errors -- run it against deployed staging environments. Container image scanning checks base images and layers for known vulnerabilities and misconfigurations before images enter registries. Infrastructure as Code scanning validates Terraform, CloudFormation, Kubernetes manifests, and Helm charts against security policies before infrastructure changes are applied. Secret scanning detects accidentally committed credentials in code and build artifacts. Define clear policies for vulnerability severity thresholds: critical findings must block deployment, high findings should require explicit approval, and medium/low findings should be tracked and remediated within defined SLAs.",
+      "Artifact Integrity & Provenance (SI-07, CM-14, SR-04): Every build artifact -- container image, package, binary, deployment bundle -- should be signed and its provenance attested. Artifact signing (CM-14) using tools like Sigstore/Cosign, GPG, or cloud KMS-backed signing enables consumers to verify that artifacts have not been tampered with between build and deployment. Provenance attestation following frameworks like SLSA (Supply Chain Levels for Software Artifacts) provides a verifiable record of how an artifact was built: what source code, what build environment, what build process, and what inputs were used. Store artifacts in registries with access controls and immutability -- once published, a version should not be overwritten. Implement transparency logs (Sigstore Rekor) to create tamper-evident records of all signing operations. Verify artifact signatures and provenance before deployment -- a pipeline that deploys unsigned artifacts undermines the entire integrity chain.",
+      "Deployment Security & Environment Promotion (CM-03, CM-04, AC-05, CA-02): Deployments to production must be controlled, auditable, and reversible. Implement environment promotion gates that require artifacts to pass security checks in lower environments before reaching production. Require human approval (AC-05) for production deployments -- automated security checks establish minimum assurance, but a human must own the deployment decision for high-impact changes. Conduct security impact analysis (CM-04) for changes that affect authentication, authorisation, data handling, or infrastructure configuration. Use immutable deployment patterns (blue-green, canary, rolling) that enable rapid rollback if issues are detected post-deployment. Separate the roles of code author, code reviewer, and deployment approver to prevent a single compromised or malicious actor from pushing code through to production. Maintain deployment audit trails that record exactly what version was deployed to which environment, by whom, and when.",
+      "Infrastructure as Code Governance (CM-02, CM-06, SA-08, SA-10): Infrastructure as Code (IaC) treats infrastructure definitions as software -- subject to version control, peer review, automated testing, and policy enforcement. Apply security engineering principles (SA-08) to IaC: default-deny network policies, encryption in transit and at rest, minimal permissions. Scan IaC templates (Terraform, CloudFormation, Kubernetes manifests) for security misconfigurations before applying them -- tools like Checkov, tfsec, and kube-bench catch common issues such as public S3 buckets, overly permissive security groups, and containers running as root. Implement policy-as-code (OPA/Rego, Sentinel, Kyverno) to codify organisational security policies and enforce them automatically. Detect and alert on infrastructure drift -- when running infrastructure diverges from its declared state, it may indicate manual changes that bypassed controls or active compromise. Treat IaC repositories with the same governance as application code (SA-10): version control, branch protection, mandatory review.",
+      "Audit, Evidence & Compliance Automation (AU-02, AU-03, AU-12, CA-07): The pipeline generates rich audit data that serves both security monitoring and compliance evidence collection. Log every pipeline execution with: who triggered it, what source commit was built, what tests ran and their results, what artifacts were produced, what approvals were obtained, and what was deployed where (AU-02, AU-03). Automate audit record generation (AU-12) so that compliance evidence is a byproduct of normal pipeline operation, not a separate manual effort. Implement continuous monitoring (CA-07) with alerting for: pipeline failures in security stages, bypassed or overridden security gates, unusual deployment patterns, access from unexpected locations, and changes to pipeline configuration. Retain pipeline audit logs independently of the CI/CD platform -- if the platform is compromised, audit logs stored only within it may be tampered with. Map pipeline controls to compliance framework requirements (SOC 2, ISO 27001, PCI DSS) so that audit evidence collection is continuous and automated."
+    ],
+    "assumptions": "Organisations use automated CI/CD pipelines to build, test, and deploy software. Pipelines run on cloud-hosted or self-hosted infrastructure with access to source code repositories, artifact registries, secrets stores, and deployment targets. Development teams practice continuous integration with multiple daily commits merged to shared branches. Deployment targets range from cloud infrastructure (containers, serverless, VMs) to on-premises environments. Some organisations use managed CI/CD services (GitHub Actions, GitLab CI, Azure DevOps) while others operate self-hosted platforms (Jenkins, TeamCity, custom). The threat landscape for software supply chains is intensifying rapidly, with nation-state actors and criminal groups specifically targeting build systems and distribution channels. Pipeline security controls should be proportionate to the value and exposure of the software being delivered -- internal tools may accept lower assurance levels than customer-facing services or safety-critical systems.",
+    "typicalChallenges": "Balancing pipeline speed with security thoroughness is the central tension in DevSecOps: comprehensive security scanning adds latency that frustrates developers under delivery pressure, leading to pressure to weaken or bypass security gates. False positive management in automated security tools erodes developer trust -- when tools consistently flag non-issues, teams learn to ignore findings, including genuine vulnerabilities. Secrets sprawl across multiple systems (CI platform, cloud providers, container orchestrators, application configuration) makes comprehensive secrets management difficult. Dependency management at scale is operationally challenging: a single critical vulnerability in a widely-used library may affect hundreds of services simultaneously. Legacy pipeline migration is complex -- retrofitting security into existing pipelines risks breaking delivery flows and requires careful phasing. Pipeline-as-code introduces its own security risks: misconfigured workflows, excessive permissions in pipeline tokens, and insufficient isolation between pipeline stages. Developer experience must be prioritised: if security tools are difficult to use, produce noisy output, or lack clear remediation guidance, adoption will be superficial. Multi-cloud and hybrid environments create pipeline complexity with inconsistent tooling and security models across providers.",
+    "indications": "Organisation develops and deploys software through CI/CD pipelines. Multiple teams contribute to shared codebases with automated build and test processes. Software is deployed to cloud infrastructure, containers, or managed platforms. Organisation has compliance obligations requiring evidence of secure development and deployment practices (SOC 2, ISO 27001, PCI DSS, FedRAMP). Software supply chain security is a board-level concern or regulatory requirement. Organisation consumes significant open source dependencies. Infrastructure is managed as code (Terraform, CloudFormation, Kubernetes). Organisation is adopting or expanding DevOps practices and wants to integrate security without compromising delivery velocity.",
+    "contraIndications": "Organisation develops no software and operates no CI/CD pipelines. All software is procured as managed SaaS services with no custom development, build, or deployment activities. Note: this contra-indication is narrowing -- even organisations that primarily consume SaaS increasingly maintain custom integrations, scripts, and infrastructure-as-code that benefit from pipeline security practices.",
+    "threatResistance": "Supply chain attacks via compromised dependencies, malicious packages, and typosquatting targeting package registries. Pipeline poisoning through malicious modification of build configuration, injection of unauthorised build steps, or compromise of build infrastructure. Secret exposure through hardcoded credentials in source code, build logs, container images, or error messages. Artifact tampering between build and deployment, including man-in-the-middle attacks on artifact registries and unsigned deployment packages. Privilege escalation through overly permissive CI/CD service accounts and pipeline tokens with excessive scope. Unauthorised code injection via merge request manipulation, insufficient branch protection, or compromise of developer accounts. Infrastructure drift attacks where manual changes introduce vulnerabilities that bypass IaC governance. Container supply chain compromise through base image manipulation, malicious layers, or registry poisoning. Insider threats leveraging pipeline access to inject backdoors or exfiltrate sensitive data. Compliance evidence manipulation through falsified pipeline results or tampered audit logs. Dependency confusion and typosquatting attacks targeting private package namespaces. Deployment to production without security gate verification due to pipeline misconfiguration or deliberate bypass."
+  },
+  "examples": {
+    "Managed CI/CD Platforms": [
+      "GitHub Actions with branch protection, required reviews, and Dependabot",
+      "GitLab CI/CD with integrated SAST, DAST, container scanning, and dependency scanning",
+      "Azure DevOps Pipelines with Azure Key Vault integration and environment approvals",
+      "AWS CodePipeline with CodeBuild, ECR scanning, and IAM-scoped deployment roles"
+    ],
+    "Supply Chain & Artifact Security": [
+      "Sigstore (Cosign, Fulcio, Rekor) for keyless container image signing and transparency",
+      "SLSA framework implementation for build provenance attestation",
+      "Dependabot and Renovate for automated dependency updates with security advisory integration",
+      "Snyk, Grype, and Trivy for vulnerability scanning across dependencies and container images"
+    ],
+    "Policy & Infrastructure as Code": [
+      "Open Policy Agent (OPA) with Rego policies for admission control and pipeline governance",
+      "HashiCorp Sentinel policies for Terraform deployment guardrails",
+      "Checkov, tfsec, and KICS for Infrastructure as Code security scanning",
+      "Kyverno and Gatekeeper for Kubernetes policy enforcement"
+    ],
+    "Deployment & Runtime Security": [
+      "ArgoCD and Flux for GitOps-based deployment with audit trails and rollback",
+      "Kubernetes admission controllers enforcing signed image requirements",
+      "Istio and Linkerd service meshes providing mTLS and network policy enforcement",
+      "Falco and Sysdig for runtime container security monitoring"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-218 - Secure Software Development Framework (SSDF)",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "note": "Foundational NIST guidance for secure software development practices, including build integrity, dependency management, and vulnerability response. Maps directly to CI/CD security controls."
+    },
+    {
+      "title": "SLSA - Supply Chain Levels for Software Artifacts",
+      "url": "https://slsa.dev/",
+      "note": "Framework for software supply chain integrity with four assurance levels from basic build provenance to hermetic, reproducible builds. Provides concrete, incremental targets for pipeline hardening."
+    },
+    {
+      "title": "CIS Software Supply Chain Security Guide",
+      "url": "https://www.cisecurity.org/benchmark/software_supply_chain_security",
+      "note": "Comprehensive benchmark covering source code, build pipelines, dependencies, artifacts, and deployment with specific configuration guidance for major CI/CD platforms."
+    },
+    {
+      "title": "OWASP DevSecOps Guideline",
+      "url": "https://owasp.org/www-project-devsecops-guideline/",
+      "note": "Practical guidance for integrating security practices into DevOps pipelines, including tool selection, pipeline design, and cultural transformation."
+    },
+    {
+      "title": "CISA Secure Software Development Attestation Form",
+      "url": "https://www.cisa.gov/secure-software-attestation-form",
+      "note": "US federal requirement for software suppliers to attest to secure development practices. Drives adoption of SSDF practices across the software supply chain."
+    },
+    {
+      "title": "Sigstore - Software Signing for Everyone",
+      "url": "https://www.sigstore.dev/",
+      "note": "Open source project providing keyless signing, transparency logs, and verification for software artifacts. Adopted by major package registries and container platforms."
+    },
+    {
+      "title": "NIST SP 800-204D - Strategies for Integration of Software Supply Chain Security in DevSecOps CI/CD Pipelines",
+      "url": "https://csrc.nist.gov/pubs/sp/800/204/d/final",
+      "note": "Specific NIST guidance on embedding supply chain security controls in CI/CD pipelines, covering SBOM generation, artifact verification, and policy enforcement."
+    },
+    {
+      "title": "OpenSSF Scorecard",
+      "url": "https://securityscorecards.dev/",
+      "note": "Automated security health assessment for open source projects. Evaluates branch protection, dependency management, CI/CD practices, and vulnerability response across GitHub repositories."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-002",
+    "SP-008",
+    "SP-011",
+    "SP-012",
+    "SP-025",
+    "SP-027"
+  ],
+  "relatedPatternNames": [
+    "Server Module",
+    "Public Web Server",
+    "Cloud Computing",
+    "Secure SDLC",
+    "Advanced Monitoring and Detection",
+    "Secure AI Integration"
+  ],
+  "threats": [
+    {
+      "id": "T-DSO-001",
+      "name": "Supply Chain Attack via Compromised Dependency",
+      "mitigatedBy": [
+        "SR-03",
+        "SR-04",
+        "SI-07",
+        "SA-11"
+      ]
+    },
+    {
+      "id": "T-DSO-002",
+      "name": "Secret Exposure in Build Logs or Artifacts",
+      "mitigatedBy": [
+        "IA-05",
+        "SC-12",
+        "SC-28",
+        "AU-03"
+      ]
+    },
+    {
+      "id": "T-DSO-003",
+      "name": "Pipeline Poisoning (Malicious Build Step Injection)",
+      "mitigatedBy": [
+        "CM-03",
+        "AC-03",
+        "AC-05",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-DSO-004",
+      "name": "Artifact Tampering Between Build and Deployment",
+      "mitigatedBy": [
+        "SI-07",
+        "CM-14",
+        "SR-04",
+        "SC-08"
+      ]
+    },
+    {
+      "id": "T-DSO-005",
+      "name": "Privilege Escalation via CI/CD Service Accounts",
+      "mitigatedBy": [
+        "AC-06",
+        "AC-02",
+        "IA-05",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-DSO-006",
+      "name": "Unauthorised Code Injection via Merge Request",
+      "mitigatedBy": [
+        "AC-03",
+        "AC-05",
+        "CM-03",
+        "SA-11"
+      ]
+    },
+    {
+      "id": "T-DSO-007",
+      "name": "Infrastructure Drift from Declared State",
+      "mitigatedBy": [
+        "CM-02",
+        "CM-06",
+        "CA-07",
+        "SA-10"
+      ]
+    },
+    {
+      "id": "T-DSO-008",
+      "name": "Container Image Supply Chain Compromise",
+      "mitigatedBy": [
+        "SR-03",
+        "SI-07",
+        "CM-14",
+        "RA-05"
+      ]
+    },
+    {
+      "id": "T-DSO-009",
+      "name": "Insider Threat via Pipeline Access",
+      "mitigatedBy": [
+        "AC-05",
+        "AC-06",
+        "AU-02",
+        "AU-06"
+      ]
+    },
+    {
+      "id": "T-DSO-010",
+      "name": "Deployment Without Security Gate Verification",
+      "mitigatedBy": [
+        "CM-04",
+        "AC-05",
+        "CA-02",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-DSO-011",
+      "name": "Dependency Confusion and Typosquatting Attacks",
+      "mitigatedBy": [
+        "SR-03",
+        "SR-04",
+        "CM-07",
+        "SI-07"
+      ]
+    },
+    {
+      "id": "T-DSO-012",
+      "name": "Compliance Evidence Tampering",
+      "mitigatedBy": [
+        "AU-02",
+        "AU-03",
+        "AU-12",
+        "SI-07"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-01",
+      "name": "Access Control Policy And Procedures",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation Of Duties",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AT-02",
+      "name": "Security Awareness",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-03",
+      "name": "Security Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Security Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-04",
+      "name": "Security Impact Analysis",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-14",
+      "name": "Signed Components",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-01",
+      "name": "Incident Response Policy And Procedures",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisitions",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External Information System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-10",
+      "name": "Developer Configuration Management",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment And Management",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use Of Cryptography",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection Of Information At Rest",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "Information System Monitoring Tools And Techniques",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, And Information Integrity",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SR-01",
+      "name": "Policy and Procedures",
+      "family": "SR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SR-02",
+      "name": "Supply Chain Risk Management Plan",
+      "family": "SR",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-04",
+      "name": "Provenance",
+      "family": "SR",
+      "emphasis": "critical"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 6,
+    "AT": 2,
+    "AU": 4,
+    "CA": 2,
+    "CM": 6,
+    "IA": 3,
+    "IR": 2,
+    "RA": 2,
+    "SA": 5,
+    "SC": 5,
+    "SI": 5,
+    "SR": 4
+  },
+  "$schema": "../schema/pattern.schema.json"
+}

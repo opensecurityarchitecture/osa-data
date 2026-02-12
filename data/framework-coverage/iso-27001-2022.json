@@ -1,0 +1,1521 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "iso_27001_2022",
+  "framework_name": "ISO 27001:2022",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "4.1",
+      "title": "Understanding the organization and its context",
+      "controls": [
+        "RA-3",
+        "PM-8",
+        "PM-11"
+      ],
+      "coverage_pct": 70,
+      "rationale": "RA-3 covers risk context; PM-8/PM-11 cover mission/business process definition. ISO 27001 clause 4.1 requires broader organizational context analysis including external/internal issues beyond pure security risk.",
+      "gaps": "No direct SP 800-53 control for analyzing external/internal issues (political, economic, social factors) affecting ISMS. Organizational context determination is broader than security risk assessment."
+    },
+    {
+      "id": "4.2",
+      "title": "Understanding the needs and expectations of interested parties",
+      "controls": [
+        "PM-8",
+        "PM-11",
+        "SR-1",
+        "SR-2",
+        "SR-3"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-8 addresses critical infrastructure plan; PM-11 mission/business process definition; SR-1, SR-2, SR-3 address supply chain stakeholder relationships. These partially address stakeholder needs but ISO requires systematic identification of all interested parties and their requirements.",
+      "gaps": "SP 800-53 lacks explicit requirement to identify all interested parties (regulators, customers, partners) and their specific ISMS expectations. Stakeholder mapping and requirements analysis not directly covered."
+    },
+    {
+      "id": "4.3",
+      "title": "Determining the scope of the ISMS",
+      "controls": [
+        "PM-1",
+        "PM-7",
+        "PM-10"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-1 (information security program plan) and PM-10 (authorization process) help define boundaries. PM-7 helps identify system inventory. Scope definition is partially covered through system boundary concepts.",
+      "gaps": "SP 800-53 defines system boundaries per authorization but doesn't explicitly require ISMS scope statement. Multi-system/enterprise scope determination differs from individual system authorization boundaries."
+    },
+    {
+      "id": "4.4",
+      "title": "Information security management system",
+      "controls": [
+        "PM-1",
+        "PM-2",
+        "PM-3",
+        "PM-6"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM family establishes program-level controls. PM-1 defines program plan; PM-2 assigns roles; PM-3 covers resources; PM-6 measures effectiveness. Collectively these establish and maintain a security program.",
+      "gaps": "SP 800-53 doesn't use PDCA/process approach terminology. Continuous improvement cycle and ISMS as a formal management system with documented processes is implicit rather than explicit."
+    },
+    {
+      "id": "5.1",
+      "title": "Leadership and commitment",
+      "controls": [
+        "PM-1",
+        "PM-2",
+        "PM-13"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-1 requires senior official for security program; PM-2 assigns risk management roles; PM-13 addresses security workforce. Leadership accountability is addressed but ISO requires more explicit top management commitment.",
+      "gaps": "SP 800-53 doesn't explicitly require top management to demonstrate commitment through resource allocation, communication of importance, or ensuring ISMS achieves intended outcomes."
+    },
+    {
+      "id": "5.2",
+      "title": "Policy",
+      "controls": [
+        "PL-1",
+        "PM-1"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PL-1 directly requires security planning policy with management approval. PM-1 requires information security program plan. Policy establishment, approval, and communication well covered.",
+      "gaps": "Minor: ISO specifies policy must be 'appropriate to the purpose of the organization' and 'available as documented information' with specific distribution requirements."
+    },
+    {
+      "id": "5.3",
+      "title": "Organizational roles, responsibilities, and authorities",
+      "controls": [
+        "PM-2",
+        "PL-1",
+        "PS-1"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PM-2 directly assigns information security responsibilities. PL-1 covers planning roles. PS-1 covers personnel security roles. Role assignment well covered in SP 800-53.",
+      "gaps": "Minor: ISO emphasizes that top management must ensure responsibilities are assigned and communicated. SP 800-53 focuses more on specific role assignments than organizational communication of roles."
+    },
+    {
+      "id": "6.1",
+      "title": "Actions to address risks and opportunities",
+      "controls": [
+        "RA-1",
+        "RA-2",
+        "RA-3",
+        "PM-9",
+        "PM-28"
+      ],
+      "coverage_pct": 80,
+      "rationale": "RA family directly addresses risk assessment. PM-9 covers risk management strategy. RA-3 is comprehensive risk assessment. Risk identification and treatment well covered.",
+      "gaps": "ISO explicitly requires considering 'opportunities' alongside risks. SP 800-53 is risk-focused but doesn't explicitly address opportunities for improvement. Risk acceptance criteria less formalized."
+    },
+    {
+      "id": "6.1.3",
+      "title": "Information security risk treatment",
+      "controls": [
+        "RA-3",
+        "PM-9",
+        "CA-5",
+        "PM-4"
+      ],
+      "coverage_pct": 80,
+      "rationale": "RA-3 covers risk assessment; PM-9 risk strategy; CA-5 plan of action and milestones for risk treatment. Risk treatment planning is well addressed.",
+      "gaps": "ISO requires explicit Statement of Applicability (SoA) document. SP 800-53 doesn't have a direct SoA equivalent, though system security plans serve a similar purpose."
+    },
+    {
+      "id": "6.2",
+      "title": "Information security objectives and planning to achieve them",
+      "controls": [
+        "PM-1",
+        "PM-3",
+        "PM-6"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-1 includes program objectives; PM-3 addresses resource planning; PM-6 covers security measures of performance. Objective-setting partially covered.",
+      "gaps": "ISO requires measurable security objectives at relevant functions/levels with explicit plans (what, resources, responsible, completion, evaluation). SP 800-53 is less prescriptive about objective-setting methodology."
+    },
+    {
+      "id": "6.3",
+      "title": "Planning of changes",
+      "controls": [
+        "CM-3",
+        "CM-4",
+        "SA-10"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-3 covers configuration change control; CM-4 impact analysis; SA-10 developer change management. Change planning well addressed from technical perspective.",
+      "gaps": "ISO 6.3 is about planned changes to the ISMS itself (management system changes), not just technical changes. Organizational/process changes to the ISMS are not directly covered."
+    },
+    {
+      "id": "7.1",
+      "title": "Resources",
+      "controls": [
+        "PM-3",
+        "SA-3"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-3 directly addresses information security resources. SA-3 covers system development life cycle resources. Resource provision for security program covered.",
+      "gaps": "ISO requirement is broader - all resources needed for ISMS establishment, implementation, maintenance, and continual improvement. Budget allocation and resource planning less prescriptive in SP 800-53."
+    },
+    {
+      "id": "7.2",
+      "title": "Competence",
+      "controls": [
+        "PM-13",
+        "PM-16",
+        "AT-1",
+        "AT-2",
+        "AT-3"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PM-13 directly addresses security workforce/competence. AT-2/AT-3 cover awareness and training. PM-16 covers threat awareness. Competence requirements well addressed.",
+      "gaps": "Minor: ISO requires retaining documented evidence of competence (training records, certifications). While AT controls imply record-keeping, it's less explicit."
+    },
+    {
+      "id": "7.3",
+      "title": "Awareness",
+      "controls": [
+        "AT-1",
+        "AT-2",
+        "PM-13"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AT-2 directly covers security awareness training including policy awareness, roles/responsibilities, and consequences. Very well aligned with ISO requirement.",
+      "gaps": "Minimal gap. AT-2 covers awareness of policy, contribution to ISMS effectiveness, and implications of non-conformance."
+    },
+    {
+      "id": "7.4",
+      "title": "Communication",
+      "controls": [
+        "PM-1",
+        "PL-4",
+        "IR-7"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-1 includes communication aspects of security program; PL-4 covers rules of behavior communication; IR-7 covers incident reporting communication.",
+      "gaps": "ISO requires determining what, when, with whom, and how to communicate regarding ISMS. SP 800-53 lacks a systematic communication planning control. Internal/external communication strategy not explicitly required."
+    },
+    {
+      "id": "7.5",
+      "title": "Documented information",
+      "controls": [
+        "PL-2",
+        "PM-1",
+        "AU-1",
+        "AU-2",
+        "AU-3",
+        "AU-4",
+        "AU-5",
+        "AU-6",
+        "AU-7",
+        "AU-8",
+        "AU-9",
+        "AU-10",
+        "AU-11",
+        "AU-12",
+        "AU-13",
+        "AU-14",
+        "AU-15",
+        "AU-16"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PL-2 (system security plan) and PM-1 (program plan) address documentation. AU family covers audit records. Documentation requirements partially met.",
+      "gaps": "ISO has specific requirements for documented information control (creation, updating, version control, distribution, access, storage, disposal). SP 800-53 doesn't have a unified document management control."
+    },
+    {
+      "id": "8.1",
+      "title": "Operational planning and control",
+      "controls": [
+        "PL-2",
+        "PM-1",
+        "CA-2"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PL-2 covers system security plan implementation; PM-1 covers program implementation; CA-2 covers assessment of controls.",
+      "gaps": "ISO requires organizations to plan, implement, and control processes needed to meet requirements. Outsourced process control and documented evidence of process execution are gaps."
+    },
+    {
+      "id": "8.2",
+      "title": "Information security risk assessment",
+      "controls": [
+        "RA-3",
+        "RA-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "RA-3 directly covers risk assessment at planned intervals or when significant changes occur. RA-5 covers vulnerability assessment. Very well aligned.",
+      "gaps": "Minimal gap. RA-3 comprehensively covers risk assessment execution, though ISO emphasizes retaining documented results."
+    },
+    {
+      "id": "8.3",
+      "title": "Information security risk treatment",
+      "controls": [
+        "CA-5",
+        "PM-4",
+        "RA-3"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-5 (POA&M) addresses risk treatment plans. PM-4 tracks system-level plans. RA-3 includes risk response identification.",
+      "gaps": "Minor: ISO requires retaining documented results of risk treatment. POA&M process is close but doesn't perfectly map to ISO risk treatment plan format."
+    },
+    {
+      "id": "9.1",
+      "title": "Monitoring, measurement, analysis and evaluation",
+      "controls": [
+        "CA-7",
+        "PM-6",
+        "SI-4"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-7 (continuous monitoring) and PM-6 (measures of performance) directly address monitoring and measurement. SI-4 covers system monitoring.",
+      "gaps": "ISO requires determining what to monitor, methods, when, who analyzes results. PM-6 is less prescriptive about evaluation methods and timing."
+    },
+    {
+      "id": "9.2",
+      "title": "Internal audit",
+      "controls": [
+        "CA-2",
+        "CA-7",
+        "AU-6"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-2 covers security assessments (functionally equivalent to audits). CA-7 continuous monitoring. AU-6 audit review.",
+      "gaps": "ISO requires formal internal audit program with defined criteria, scope, frequency, methods, and auditor independence. CA-2 covers assessments but doesn't use audit terminology or require audit program management."
+    },
+    {
+      "id": "9.3",
+      "title": "Management review",
+      "controls": [
+        "PM-1",
+        "PM-6",
+        "CA-7"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-1 requires periodic program review; PM-6 covers performance measurement. These partially address management review.",
+      "gaps": "ISO specifies detailed management review inputs (audit results, stakeholder feedback, risk assessment changes, opportunities for improvement) and outputs (decisions, resource changes). SP 800-53 lacks formal management review structure."
+    },
+    {
+      "id": "10.1",
+      "title": "Continual improvement",
+      "controls": [
+        "PM-1",
+        "CA-7",
+        "PM-6"
+      ],
+      "coverage_pct": 60,
+      "rationale": "CA-7 continuous monitoring supports improvement; PM-6 measures effectiveness; PM-1 includes program updates.",
+      "gaps": "ISO requires explicit continual improvement processes for ISMS suitability, adequacy, and effectiveness. SP 800-53 supports continuous monitoring but doesn't explicitly require PDCA-style continual improvement methodology."
+    },
+    {
+      "id": "10.2",
+      "title": "Nonconformity and corrective action",
+      "controls": [
+        "CA-5",
+        "PM-4"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CA-5 (POA&M) addresses remediation of identified weaknesses. PM-4 tracks remediation plans.",
+      "gaps": "ISO requires formal nonconformity management including root cause analysis, corrective action implementation, and effectiveness review. POA&M process is close but lacks formal nonconformity management structure."
+    },
+    {
+      "id": "A.5.1",
+      "title": "Policies for information security",
+      "controls": [
+        "PL-1",
+        "PM-1",
+        "AC-1",
+        "AT-1",
+        "AU-1",
+        "CA-1",
+        "CM-1",
+        "CP-1",
+        "IA-1",
+        "IR-1",
+        "MA-1",
+        "MP-1",
+        "PE-1",
+        "PS-1",
+        "RA-1",
+        "SA-1",
+        "SC-1",
+        "SI-1"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SP 800-53 has extensive policy controls (-1 controls) for every family. PL-1 is the overarching planning policy. PM-1 establishes program plan. Comprehensive policy framework.",
+      "gaps": "Minimal gap. SP 800-53 policy requirements are more granular (per-family) while ISO expects a coherent policy set."
+    },
+    {
+      "id": "A.5.2",
+      "title": "Information security roles and responsibilities",
+      "controls": [
+        "PM-2",
+        "PS-1",
+        "PL-1",
+        "PM-10"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PM-2 directly assigns senior information security role. PS-1 covers personnel security roles. Well addressed.",
+      "gaps": "Minimal gap. ISO expects all security roles defined; SP 800-53 focuses on key roles."
+    },
+    {
+      "id": "A.5.3",
+      "title": "Segregation of duties",
+      "controls": [
+        "AC-5"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-5 directly addresses separation of duties. Comprehensive coverage.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.4",
+      "title": "Management responsibilities",
+      "controls": [
+        "PM-2",
+        "PM-13",
+        "PS-1",
+        "AT-1"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-2 covers management roles; PM-13 workforce management; PS-1 personnel policies. Management accountability addressed.",
+      "gaps": "ISO emphasizes management requiring personnel to apply security per policies. SP 800-53 is less explicit about management enforcement responsibility."
+    },
+    {
+      "id": "A.5.5",
+      "title": "Contact with authorities",
+      "controls": [
+        "IR-6",
+        "PM-15"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IR-6 covers incident reporting to authorities. PM-15 covers contacts with security groups/associations.",
+      "gaps": "Minor: ISO includes proactive relationship maintenance with authorities, not just incident reporting."
+    },
+    {
+      "id": "A.5.6",
+      "title": "Contact with special interest groups",
+      "controls": [
+        "PM-15",
+        "PM-16"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PM-15 directly covers contacts with security groups and associations. PM-16 covers threat awareness sharing.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.7",
+      "title": "Threat intelligence",
+      "controls": [
+        "PM-16",
+        "RA-3",
+        "RA-5",
+        "SI-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PM-16 addresses threat awareness program. SI-5 covers security alerts and advisories. RA-3/RA-5 include threat identification.",
+      "gaps": "Minimal gap. SP 800-53 is comprehensive on threat intelligence."
+    },
+    {
+      "id": "A.5.8",
+      "title": "Information security in project management",
+      "controls": [
+        "SA-3",
+        "SA-4",
+        "PM-7"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-3 covers security in SDLC; SA-4 acquisition security requirements; PM-7 enterprise architecture.",
+      "gaps": "ISO specifically requires security in ALL project management regardless of project type. SA controls focus on system/software projects specifically."
+    },
+    {
+      "id": "A.5.9",
+      "title": "Inventory of information and other associated assets",
+      "controls": [
+        "CM-8",
+        "PM-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-8 directly covers system component inventory. PM-5 covers system inventory.",
+      "gaps": "Minor: ISO includes 'information' assets and 'associated assets' (not just system components). Data inventory aspect less explicit."
+    },
+    {
+      "id": "A.5.10",
+      "title": "Acceptable use of information and other associated assets",
+      "controls": [
+        "PL-4",
+        "AC-20"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PL-4 directly covers rules of behavior / acceptable use. AC-20 covers use of external systems.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.11",
+      "title": "Return of assets",
+      "controls": [
+        "PS-4"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PS-4 covers personnel termination including return of organizational assets.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.12",
+      "title": "Classification of information",
+      "controls": [
+        "RA-2"
+      ],
+      "coverage_pct": 85,
+      "rationale": "RA-2 covers security categorization of information and systems. Well aligned.",
+      "gaps": "Minor: ISO uses classification levels; SP 800-53 uses FIPS 199 categorization. Conceptually similar but terminology/methodology differs."
+    },
+    {
+      "id": "A.5.13",
+      "title": "Labelling of information",
+      "controls": [
+        "MP-3",
+        "RA-2"
+      ],
+      "coverage_pct": 85,
+      "rationale": "MP-3 covers media marking/labeling. RA-2 supports categorization for labeling.",
+      "gaps": "Minor: ISO covers labeling of all information forms; MP-3 focuses on media."
+    },
+    {
+      "id": "A.5.14",
+      "title": "Information transfer",
+      "controls": [
+        "SC-7",
+        "SC-8",
+        "SC-12",
+        "AC-4",
+        "AC-20"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-7 boundary protection; SC-8 transmission confidentiality/integrity; AC-4 information flow enforcement; AC-20 external system use.",
+      "gaps": "Minor: ISO includes transfer agreements and policies for all forms (electronic, physical, verbal). SP 800-53 focuses on technical controls."
+    },
+    {
+      "id": "A.5.15",
+      "title": "Access control",
+      "controls": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-6",
+        "AC-17",
+        "AC-24"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC family is comprehensive. AC-1 policy; AC-2 account management; AC-3 access enforcement; AC-6 least privilege; AC-17 remote access.",
+      "gaps": "Minimal gap. SP 800-53 AC family is more detailed than ISO requirement."
+    },
+    {
+      "id": "A.5.16",
+      "title": "Identity management",
+      "controls": [
+        "IA-1",
+        "IA-2",
+        "IA-4",
+        "IA-5",
+        "IA-8",
+        "IA-12"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IA family comprehensively covers identification and authentication. IA-4 identifier management; IA-5 authenticator management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.17",
+      "title": "Authentication information",
+      "controls": [
+        "IA-5",
+        "IA-6"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IA-5 directly covers authenticator management (passwords, tokens, etc.). IA-6 covers authenticator feedback.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.18",
+      "title": "Access rights",
+      "controls": [
+        "AC-2",
+        "AC-6",
+        "AC-25"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-2 covers account management including provisioning, review, and revocation. AC-6 covers least privilege.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.19",
+      "title": "Information security in supplier relationships",
+      "controls": [
+        "SA-4",
+        "SA-9",
+        "SR-1",
+        "SR-2",
+        "SR-3"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-4 acquisition security requirements; SA-9 external system services; SR family covers supply chain risk.",
+      "gaps": "Minor: ISO emphasizes ongoing supplier relationship management and periodic review. SP 800-53 focuses more on acquisition-time requirements."
+    },
+    {
+      "id": "A.5.20",
+      "title": "Addressing information security within supplier agreements",
+      "controls": [
+        "SA-4",
+        "SA-9",
+        "SR-3"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-4 directly requires security requirements in acquisitions. SA-9 covers service agreements.",
+      "gaps": "Minor: ISO requires specific agreement terms for information protection. SA-4 is comprehensive but format differs."
+    },
+    {
+      "id": "A.5.21",
+      "title": "Managing information security in the ICT supply chain",
+      "controls": [
+        "SR-1",
+        "SR-2",
+        "SR-3",
+        "SR-5",
+        "SR-6",
+        "SR-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SR family comprehensively addresses supply chain risk management including ICT supply chain.",
+      "gaps": "Minimal gap. SP 800-53 SR family is well aligned with ISO supply chain requirements."
+    },
+    {
+      "id": "A.5.22",
+      "title": "Monitoring, review and change management of supplier services",
+      "controls": [
+        "SA-9",
+        "SR-6",
+        "CA-7"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-9 includes external service monitoring; SR-6 supplier assessments; CA-7 continuous monitoring.",
+      "gaps": "ISO requires regular monitoring and review of supplier service delivery, change management of supplier services. SP 800-53 is less prescriptive about ongoing supplier service monitoring cadence."
+    },
+    {
+      "id": "A.5.23",
+      "title": "Information security for use of cloud services",
+      "controls": [
+        "SA-9",
+        "AC-20",
+        "SC-7"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-9 covers external information system services (includes cloud); AC-20 external systems; SC-7 boundary protection.",
+      "gaps": "ISO 27001:2022 added cloud-specific control. SP 800-53 addresses cloud through general external service controls but lacks cloud-specific acquisition, use, management, and exit requirements. FedRAMP supplements this."
+    },
+    {
+      "id": "A.5.24",
+      "title": "Information security incident management planning and preparation",
+      "controls": [
+        "IR-1",
+        "IR-2",
+        "IR-3",
+        "IR-8"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IR-1 covers incident response policy; IR-2 training; IR-3 testing; IR-8 incident response plan. Comprehensive coverage.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.25",
+      "title": "Assessment and decision on information security events",
+      "controls": [
+        "IR-4",
+        "IR-5",
+        "IR-6"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IR-4 incident handling; IR-5 incident monitoring; IR-6 incident reporting. Well covered.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.26",
+      "title": "Response to information security incidents",
+      "controls": [
+        "IR-4",
+        "IR-6",
+        "IR-7"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IR-4 comprehensively covers incident response. IR-6 reporting; IR-7 assistance.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.27",
+      "title": "Learning from information security incidents",
+      "controls": [
+        "IR-3",
+        "IR-4",
+        "IR-6"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IR-3 includes lessons learned; IR-4 includes incident analysis. Post-incident review addressed.",
+      "gaps": "Minor: ISO emphasizes using incident knowledge to reduce future likelihood/impact systematically. SP 800-53 less prescriptive on knowledge management from incidents."
+    },
+    {
+      "id": "A.5.28",
+      "title": "Collection of evidence",
+      "controls": [
+        "IR-4",
+        "AU-3",
+        "AU-6",
+        "AU-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IR-4 includes evidence collection; AU-3 content of audit records; AU-6 audit review; AU-11 audit record retention.",
+      "gaps": "Minor: ISO focuses on digital forensics evidence handling for legal proceedings. SP 800-53 covers audit records but evidence handling for legal admissibility less explicit."
+    },
+    {
+      "id": "A.5.29",
+      "title": "Information security during disruption",
+      "controls": [
+        "CP-1",
+        "CP-2",
+        "CP-3",
+        "CP-4",
+        "CP-6",
+        "CP-7",
+        "CP-9",
+        "CP-10"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP family comprehensively covers continuity planning, testing, and recovery. Strong alignment.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.5.30",
+      "title": "ICT readiness for business continuity",
+      "controls": [
+        "CP-2",
+        "CP-7",
+        "CP-8",
+        "CP-9",
+        "CP-10",
+        "CP-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP family covers IT contingency planning including alternate processing, telecommunications, recovery.",
+      "gaps": "Minor: ISO emphasizes ICT readiness specifically supporting business continuity plans. SP 800-53 focuses on IT contingency but connection to broader BCP is implicit."
+    },
+    {
+      "id": "A.5.31",
+      "title": "Legal, statutory, regulatory and contractual requirements",
+      "controls": [
+        "PL-4",
+        "PM-1",
+        "SA-4"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PL-4 includes compliance obligations; PM-1 addresses regulatory compliance; SA-4 contractual requirements.",
+      "gaps": "ISO requires explicit identification and documentation of all legal/regulatory/contractual requirements. SP 800-53 lacks a dedicated legal compliance identification control. FISMA context assumes federal requirements."
+    },
+    {
+      "id": "A.5.32",
+      "title": "Intellectual property rights",
+      "controls": [],
+      "coverage_pct": 15,
+      "rationale": "No direct SP 800-53 control for intellectual property management.",
+      "gaps": "Significant gap. SP 800-53 does not address software licensing, copyright compliance, or IP protection. Requires supplementary organizational controls."
+    },
+    {
+      "id": "A.5.33",
+      "title": "Protection of records",
+      "controls": [
+        "AU-11",
+        "SI-12"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AU-11 covers audit record retention; SI-12 covers information management and retention.",
+      "gaps": "ISO requires protection of records from loss, destruction, falsification per legal/regulatory requirements. SP 800-53 covers retention but broader records management (classification, disposal schedules) less explicit."
+    },
+    {
+      "id": "A.5.34",
+      "title": "Privacy and protection of PII",
+      "controls": [
+        "PT-1",
+        "PT-2",
+        "PT-3",
+        "PT-4",
+        "PT-5",
+        "PT-6",
+        "PT-7",
+        "PT-8",
+        "PM-25",
+        "PM-26",
+        "PM-27"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PT family (added in Rev 5) directly addresses privacy. PM-25 minimization; PM-26 complaint management; PM-27 privacy reporting.",
+      "gaps": "Minor: ISO defers to ISO 27701 for full privacy coverage. SP 800-53 PT family is comprehensive for PII protection."
+    },
+    {
+      "id": "A.5.35",
+      "title": "Independent review of information security",
+      "controls": [
+        "CA-2",
+        "CA-7",
+        "PM-6"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-2 covers security assessments which serve as independent reviews. CA-7 continuous monitoring; PM-6 performance measurement.",
+      "gaps": "ISO requires independent review of the ISMS approach, not just technical control assessment. Management system review independence less explicit in SP 800-53."
+    },
+    {
+      "id": "A.5.36",
+      "title": "Compliance with policies, rules and standards",
+      "controls": [
+        "CA-2",
+        "AU-6",
+        "PM-6",
+        "CM-4"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-2 assesses compliance; AU-6 reviews audit records for compliance; PM-6 measures performance.",
+      "gaps": "Minor: ISO requires regular review that information processing complies with policies. SP 800-53 assessment approach differs from compliance checking methodology."
+    },
+    {
+      "id": "A.5.37",
+      "title": "Documented operating procedures",
+      "controls": [
+        "PL-2",
+        "SA-5",
+        "CM-1"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PL-2 covers system security plans documenting procedures; SA-5 system documentation; CM-1 configuration management procedures.",
+      "gaps": "ISO requires documented operating procedures for information processing facilities. SP 800-53 has family-specific procedures but no unified operating procedures control."
+    },
+    {
+      "id": "A.6.1",
+      "title": "Screening",
+      "controls": [
+        "PS-3"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PS-3 directly covers personnel screening before access is granted.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.6.2",
+      "title": "Terms and conditions of employment",
+      "controls": [
+        "PS-6",
+        "PL-4"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PS-6 covers access agreements; PL-4 covers rules of behavior. Employment terms for security covered.",
+      "gaps": "Minor: ISO includes security responsibilities in employment contracts. SP 800-53 focuses on access agreements rather than employment contract terms."
+    },
+    {
+      "id": "A.6.3",
+      "title": "Information security awareness, education and training",
+      "controls": [
+        "AT-2",
+        "AT-3",
+        "AT-4",
+        "PM-13"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AT-2 awareness training; AT-3 role-based training; AT-4 training records; PM-13 workforce program. Comprehensive coverage.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.6.4",
+      "title": "Disciplinary process",
+      "controls": [
+        "PS-8"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PS-8 covers personnel sanctions for security violations.",
+      "gaps": "ISO requires formal disciplinary process communicated to employees. PS-8 addresses sanctions but formal process establishment less detailed."
+    },
+    {
+      "id": "A.6.5",
+      "title": "Responsibilities after termination or change of employment",
+      "controls": [
+        "PS-4",
+        "PS-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PS-4 covers personnel termination; PS-5 covers personnel transfer. Both address ongoing responsibilities.",
+      "gaps": "Minimal gap. PS-4/PS-5 address access revocation and ongoing obligations."
+    },
+    {
+      "id": "A.6.6",
+      "title": "Confidentiality or non-disclosure agreements",
+      "controls": [
+        "PS-6"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PS-6 covers access agreements which include confidentiality requirements.",
+      "gaps": "ISO specifically requires NDAs reflecting organizational needs. PS-6 is broader (access agreements) and NDA specifics are less detailed."
+    },
+    {
+      "id": "A.6.7",
+      "title": "Remote working",
+      "controls": [
+        "AC-17",
+        "PE-17"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-17 directly covers remote access controls. PE-17 covers alternate work sites.",
+      "gaps": "Minor: ISO includes remote working security policies and risk considerations beyond technical access controls (physical environment, clean desk at home)."
+    },
+    {
+      "id": "A.6.8",
+      "title": "Information security event reporting",
+      "controls": [
+        "IR-6",
+        "IR-7"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IR-6 directly covers incident reporting. IR-7 covers incident response assistance.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.7.1",
+      "title": "Physical security perimeters",
+      "controls": [
+        "PE-3",
+        "PE-4"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PE-3 covers physical access control; PE-4 covers access control for transmission medium.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.7.2",
+      "title": "Physical entry",
+      "controls": [
+        "PE-2",
+        "PE-3",
+        "PE-6",
+        "PE-8"
+      ],
+      "coverage_pct": 95,
+      "rationale": "PE-2 physical access authorizations; PE-3 physical access control; PE-6 monitoring; PE-8 visitor access records.",
+      "gaps": "Minimal gap. Comprehensive physical entry controls."
+    },
+    {
+      "id": "A.7.3",
+      "title": "Securing offices, rooms and facilities",
+      "controls": [
+        "PE-3",
+        "PE-5"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PE-3 physical access control; PE-5 access control for output devices.",
+      "gaps": "Minor: ISO includes broader facility security design considerations."
+    },
+    {
+      "id": "A.7.4",
+      "title": "Physical security monitoring",
+      "controls": [
+        "PE-6",
+        "PE-8"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PE-6 directly covers monitoring physical access. PE-8 access logs.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.7.5",
+      "title": "Protecting against physical and environmental threats",
+      "controls": [
+        "PE-9",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15"
+      ],
+      "coverage_pct": 95,
+      "rationale": "PE family comprehensively covers environmental protections: power (PE-9,11), fire (PE-13), temperature (PE-14), water (PE-15).",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.7.6",
+      "title": "Working in secure areas",
+      "controls": [
+        "PE-2",
+        "PE-3",
+        "PE-7"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PE-2/PE-3 control access; PE-7 addresses visitor control in secure areas.",
+      "gaps": "Minor: ISO includes rules for working in secure areas (no cameras, supervised work). SP 800-53 less specific about behavioral controls in secure areas."
+    },
+    {
+      "id": "A.7.7",
+      "title": "Clear desk and clear screen",
+      "controls": [
+        "AC-11",
+        "MP-4"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-11 covers session lock (clear screen). MP-4 covers media storage.",
+      "gaps": "Minor: ISO explicitly addresses clear desk policy. AC-11 covers screen; desk policy is implied through MP controls but not explicitly stated."
+    },
+    {
+      "id": "A.7.8",
+      "title": "Equipment siting and protection",
+      "controls": [
+        "PE-1",
+        "PE-14",
+        "PE-18"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PE-14 covers environmental controls; PE-18 location of components. General equipment protection covered.",
+      "gaps": "ISO includes equipment placement to minimize unauthorized access and environmental hazards. SP 800-53 less specific about equipment siting methodology."
+    },
+    {
+      "id": "A.7.9",
+      "title": "Security of assets off-premises",
+      "controls": [
+        "AC-17",
+        "MP-5",
+        "SC-28"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-17 remote access; MP-5 media transport; SC-28 protection of information at rest.",
+      "gaps": "ISO covers all off-premises assets (laptops, paper, etc.). SP 800-53 covers media and remote access but physical asset protection off-site less comprehensive."
+    },
+    {
+      "id": "A.7.10",
+      "title": "Storage media",
+      "controls": [
+        "MP-1",
+        "MP-2",
+        "MP-3",
+        "MP-4",
+        "MP-5",
+        "MP-6",
+        "MP-7"
+      ],
+      "coverage_pct": 95,
+      "rationale": "MP family comprehensively covers media protection: policy (MP-1), access (MP-2), marking (MP-3), storage (MP-4), transport (MP-5), sanitization (MP-6), use (MP-7).",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.7.11",
+      "title": "Supporting utilities",
+      "controls": [
+        "PE-9",
+        "PE-10",
+        "PE-11",
+        "PE-12"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PE-9 power equipment protection; PE-10 emergency shutoff; PE-11 emergency power; PE-12 emergency lighting.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.7.12",
+      "title": "Cabling security",
+      "controls": [
+        "PE-4",
+        "PE-9"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PE-4 covers access control for transmission medium. PE-9 covers power equipment/cabling protection.",
+      "gaps": "Minor: ISO includes specific cabling security measures (protected routing, shielding). PE-4 is more general."
+    },
+    {
+      "id": "A.7.13",
+      "title": "Equipment maintenance",
+      "controls": [
+        "MA-1",
+        "MA-2",
+        "MA-3",
+        "MA-4",
+        "MA-5",
+        "MA-6"
+      ],
+      "coverage_pct": 95,
+      "rationale": "MA family comprehensively covers maintenance: policy (MA-1), controlled maintenance (MA-2), tools (MA-3), nonlocal (MA-4), personnel (MA-5), timely (MA-6).",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.7.14",
+      "title": "Secure disposal or re-use of equipment",
+      "controls": [
+        "MP-6",
+        "MP-7"
+      ],
+      "coverage_pct": 90,
+      "rationale": "MP-6 covers media sanitization; MP-7 covers media use restrictions.",
+      "gaps": "Minor: ISO includes all equipment disposal; SP 800-53 focuses on media specifically."
+    },
+    {
+      "id": "A.8.1",
+      "title": "User endpoint devices",
+      "controls": [
+        "AC-19",
+        "CM-7",
+        "SC-28"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-19 covers access control for mobile devices; CM-7 least functionality; SC-28 protection at rest.",
+      "gaps": "ISO covers all user endpoint devices holistically (BYOD, MDM, containerization). SP 800-53 addresses mobile and device management across multiple controls but no unified endpoint control."
+    },
+    {
+      "id": "A.8.2",
+      "title": "Privileged access rights",
+      "controls": [
+        "AC-6",
+        "AC-2(7)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-6 directly covers least privilege. AC-2(7) addresses privileged account management. Comprehensive coverage.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.3",
+      "title": "Information access restriction",
+      "controls": [
+        "AC-3",
+        "AC-4",
+        "AC-6"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-3 access enforcement; AC-4 information flow enforcement; AC-6 least privilege.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.4",
+      "title": "Access to source code",
+      "controls": [
+        "CM-5",
+        "AC-3",
+        "SA-10"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-5 covers access restrictions for change; AC-3 access enforcement; SA-10 developer configuration management.",
+      "gaps": "Minor: ISO specifically addresses source code access restrictions. SP 800-53 addresses through configuration management and access controls."
+    },
+    {
+      "id": "A.8.5",
+      "title": "Secure authentication",
+      "controls": [
+        "IA-2",
+        "IA-5",
+        "IA-8",
+        "IA-11"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IA-2 identification and authentication; IA-5 authenticator management; IA-8 non-organizational users; IA-11 re-authentication.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.6",
+      "title": "Capacity management",
+      "controls": [
+        "AU-4",
+        "CP-2",
+        "SC-5"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AU-4 covers audit log storage capacity; SC-5 denial of service protection; CP-2 contingency planning considers capacity.",
+      "gaps": "ISO requires proactive capacity management for all IT resources. SP 800-53 addresses capacity in specific contexts but lacks a general capacity planning control."
+    },
+    {
+      "id": "A.8.7",
+      "title": "Protection against malware",
+      "controls": [
+        "SI-3",
+        "SI-8"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SI-3 directly covers malicious code protection. SI-8 covers spam protection.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.8",
+      "title": "Management of technical vulnerabilities",
+      "controls": [
+        "RA-5",
+        "SI-2",
+        "SI-5"
+      ],
+      "coverage_pct": 95,
+      "rationale": "RA-5 vulnerability monitoring and scanning; SI-2 flaw remediation; SI-5 security alerts.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.9",
+      "title": "Configuration management",
+      "controls": [
+        "CM-1",
+        "CM-2",
+        "CM-3",
+        "CM-4",
+        "CM-5",
+        "CM-6",
+        "CM-7",
+        "CM-8",
+        "CM-9",
+        "CM-10",
+        "CM-11"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CM family comprehensively covers configuration management: baselines (CM-2), change control (CM-3), analysis (CM-4), settings (CM-6), least functionality (CM-7).",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.10",
+      "title": "Information deletion",
+      "controls": [
+        "MP-6",
+        "SI-12",
+        "SR-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "MP-6 media sanitization; SI-12 information management/retention.",
+      "gaps": "ISO specifically addresses information deletion when no longer required. SP 800-53 covers sanitization and retention but proactive deletion based on business need less explicit."
+    },
+    {
+      "id": "A.8.11",
+      "title": "Data masking",
+      "controls": [
+        "SI-19",
+        "PT-6",
+        "PT-7"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-19 covers de-identification. PT-6/PT-7 cover data processing minimization.",
+      "gaps": "ISO specifically addresses data masking techniques (pseudonymization, anonymization, masking). SP 800-53 Rev 5 added privacy controls but masking as a technique is less comprehensively addressed."
+    },
+    {
+      "id": "A.8.12",
+      "title": "Data leakage prevention",
+      "controls": [
+        "AC-4",
+        "PE-19",
+        "SC-7",
+        "SI-4"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-4 information flow enforcement; SC-7 boundary protection; SI-4 system monitoring; PE-19 information leakage.",
+      "gaps": "ISO specifically addresses DLP. SP 800-53 covers information flow and monitoring but integrated DLP as a concept is distributed across multiple controls."
+    },
+    {
+      "id": "A.8.13",
+      "title": "Information backup",
+      "controls": [
+        "CP-9",
+        "CP-6"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CP-9 directly covers information system backup. CP-6 alternate storage site.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.14",
+      "title": "Redundancy of information processing facilities",
+      "controls": [
+        "CP-6",
+        "CP-7",
+        "CP-8"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP-6 alternate storage; CP-7 alternate processing site; CP-8 telecommunications services.",
+      "gaps": "Minor: ISO focuses on redundancy for availability. CP controls focus on contingency which includes redundancy."
+    },
+    {
+      "id": "A.8.15",
+      "title": "Logging",
+      "controls": [
+        "AU-1",
+        "AU-2",
+        "AU-3",
+        "AU-4",
+        "AU-5",
+        "AU-6",
+        "AU-7",
+        "AU-8",
+        "AU-9",
+        "AU-10",
+        "AU-11",
+        "AU-12"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AU family comprehensively covers logging: events (AU-2), content (AU-3), storage (AU-4), response (AU-5), review (AU-6), reporting (AU-7), timestamps (AU-8), protection (AU-9), retention (AU-11).",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.16",
+      "title": "Monitoring activities",
+      "controls": [
+        "SI-4",
+        "AU-6",
+        "CA-7",
+        "IR-4"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SI-4 directly covers system monitoring. AU-6 audit review; CA-7 continuous monitoring; IR-4 incident handling.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.17",
+      "title": "Clock synchronization",
+      "controls": [
+        "AU-8"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AU-8 directly covers time stamps and clock synchronization.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.18",
+      "title": "Use of privileged utility programs",
+      "controls": [
+        "CM-7",
+        "CM-11",
+        "AC-6"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-7 least functionality restricts utilities; CM-11 user-installed software; AC-6 least privilege.",
+      "gaps": "Minor: ISO specifically addresses privileged utility programs. SP 800-53 addresses through general controls."
+    },
+    {
+      "id": "A.8.19",
+      "title": "Installation of software on operational systems",
+      "controls": [
+        "CM-5",
+        "CM-7",
+        "CM-11",
+        "SA-22"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-5 access restrictions for change; CM-7 least functionality; CM-11 user-installed software; SA-22 unsupported components.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.20",
+      "title": "Networks security",
+      "controls": [
+        "SC-7",
+        "SC-8",
+        "AC-4"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-7 boundary protection; SC-8 transmission confidentiality/integrity; AC-4 information flow.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.21",
+      "title": "Security of network services",
+      "controls": [
+        "SC-7",
+        "SC-8",
+        "SA-9"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-7/SC-8 cover network security. SA-9 covers external system services including network services.",
+      "gaps": "Minor: ISO requires security features, service levels, and management requirements for network services. Service level specifics less detailed in SP 800-53."
+    },
+    {
+      "id": "A.8.22",
+      "title": "Segregation of networks",
+      "controls": [
+        "SC-7",
+        "SC-32"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SC-7 boundary protection with segmentation. SC-32 system partitioning.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.23",
+      "title": "Web filtering",
+      "controls": [
+        "SC-7",
+        "SI-3",
+        "AC-4"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SC-7 boundary protection includes filtering; SI-3 malware protection; AC-4 information flow.",
+      "gaps": "ISO specifically addresses web filtering. SP 800-53 doesn't have a dedicated web filtering control; addressed through general boundary and content controls."
+    },
+    {
+      "id": "A.8.24",
+      "title": "Use of cryptography",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-28"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-12 cryptographic key management; SC-13 cryptographic protection; SC-28 protection of information at rest.",
+      "gaps": "Minimal gap. SP 800-53 cryptography controls are comprehensive."
+    },
+    {
+      "id": "A.8.25",
+      "title": "Secure development life cycle",
+      "controls": [
+        "SA-3",
+        "SA-8",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-17"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SA-3 system development life cycle; SA-8 security engineering; SA-10 developer config management; SA-11 developer testing; SA-15 development process/standards; SA-17 developer security architecture.",
+      "gaps": "Minimal gap. SP 800-53 SA family is comprehensive for secure development."
+    },
+    {
+      "id": "A.8.26",
+      "title": "Application security requirements",
+      "controls": [
+        "SA-4",
+        "SA-8"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-4 acquisition process / security requirements in acquisitions. SA-8 security engineering principles.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.27",
+      "title": "Secure system architecture and engineering principles",
+      "controls": [
+        "SA-8",
+        "SA-17",
+        "SC-7",
+        "SC-32"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-8 security engineering principles; SA-17 developer security architecture; SC-7/SC-32 architecture-level controls.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.28",
+      "title": "Secure coding",
+      "controls": [
+        "SA-11",
+        "SA-15",
+        "SA-16",
+        "SA-17"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-11 developer security testing; SA-15 development process standards; SA-16 developer-provided training; SA-17 security architecture.",
+      "gaps": "Minor: ISO specifically addresses secure coding practices. SP 800-53 addresses through development process and testing controls rather than explicit coding standards."
+    },
+    {
+      "id": "A.8.29",
+      "title": "Security testing in development and acceptance",
+      "controls": [
+        "SA-11",
+        "CA-2",
+        "SA-4"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-11 directly covers developer security testing. CA-2 security assessments. SA-4 includes testing requirements.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.30",
+      "title": "Outsourced development",
+      "controls": [
+        "SA-4",
+        "SA-9",
+        "SA-10",
+        "SA-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-4 acquisition requirements; SA-9 external system services; SA-10/SA-11 developer requirements apply to outsourced development.",
+      "gaps": "Minor: ISO specifically addresses outsourced development supervision and acceptance. SP 800-53 covers through general acquisition controls."
+    },
+    {
+      "id": "A.8.31",
+      "title": "Separation of development, test and production environments",
+      "controls": [
+        "CM-4",
+        "SA-11",
+        "SC-32"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-4 impact analysis (separate test environments); SA-11 developer testing environment; SC-32 system partitioning.",
+      "gaps": "Minor: ISO explicitly requires environment separation. SP 800-53 implies it through testing and partitioning controls but doesn't mandate specific environment separation."
+    },
+    {
+      "id": "A.8.32",
+      "title": "Change management",
+      "controls": [
+        "CM-3",
+        "CM-4",
+        "CM-5",
+        "SA-10"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CM-3 configuration change control; CM-4 impact analysis; CM-5 access restrictions for change; SA-10 developer configuration management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "A.8.33",
+      "title": "Test information",
+      "controls": [
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-11 covers testing. SA-15 development process standards.",
+      "gaps": "ISO specifically addresses protection of test data (anonymization, controlled access to production data used in testing). SP 800-53 lacks explicit test data management control."
+    },
+    {
+      "id": "A.8.34",
+      "title": "Protection of information systems during audit testing",
+      "controls": [
+        "CA-2",
+        "AU-6"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-2 covers security assessments including audit considerations. AU-6 audit review analysis.",
+      "gaps": "ISO requires that audit testing be planned and agreed to minimize business disruption. SP 800-53 assessment controls don't explicitly address protection of systems during audit activities."
+    }
+  ],
+  "summary": {
+    "total_clauses": 117,
+    "average_coverage": 83.8,
+    "full_count": 77,
+    "substantial_count": 34,
+    "partial_count": 5,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

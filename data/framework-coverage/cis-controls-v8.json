@@ -1,0 +1,1101 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "cis_controls_v8",
+  "framework_name": "CIS Controls v8",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "CIS 1",
+      "title": "Inventory and Control of Enterprise Assets",
+      "controls": [
+        "CM-8",
+        "CM-8(1)",
+        "CM-8(2)",
+        "CM-8(3)",
+        "PM-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-8 directly covers component inventory with automated discovery and tracking enhancements. PM-5 system inventory. Comprehensive asset management.",
+      "gaps": "Minimal gap. CIS 1 includes active/passive asset discovery; CM-8 enhancements cover this."
+    },
+    {
+      "id": "CIS 1.1",
+      "title": "Establish and Maintain Detailed Enterprise Asset Inventory",
+      "controls": [
+        "CM-8"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CM-8 directly requires system component inventory with detail.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 1.2",
+      "title": "Address Unauthorized Assets",
+      "controls": [
+        "CM-8(3)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-8(3) covers automated unauthorized component detection.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 1.3",
+      "title": "Utilize DHCP Logging to Update Enterprise Asset Inventory",
+      "controls": [
+        "AU-3",
+        "CM-8(1)"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AU-3 audit record content; CM-8(1) updates during various events. DHCP logging specific implementation not prescribed.",
+      "gaps": "SP 800-53 doesn't specifically address DHCP logging for inventory. General audit and inventory controls apply."
+    },
+    {
+      "id": "CIS 1.4",
+      "title": "Use Dynamic Host Configuration Protocol (DHCP) Logging",
+      "controls": [
+        "AU-3",
+        "SI-4"
+      ],
+      "coverage_pct": 65,
+      "rationale": "AU-3 audit content; SI-4 system monitoring. DHCP-specific logging not explicitly addressed.",
+      "gaps": "DHCP logging is a specific implementation technique not called out in SP 800-53."
+    },
+    {
+      "id": "CIS 1.5",
+      "title": "Use a Passive Asset Discovery Tool",
+      "controls": [
+        "CM-8(1)",
+        "CM-8(2)"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-8(1) updates during events; CM-8(2) automated maintenance. Passive discovery concept covered by automated inventory mechanisms.",
+      "gaps": "Specific passive discovery tooling not prescribed; general automated inventory mechanisms cover the intent."
+    },
+    {
+      "id": "CIS 2",
+      "title": "Inventory and Control of Software Assets",
+      "controls": [
+        "CM-7",
+        "CM-8",
+        "CM-10",
+        "CM-11",
+        "SA-22"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-7 least functionality; CM-8 component inventory (includes software); CM-10 software usage restrictions; CM-11 user-installed software; SA-22 unsupported components.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 2.1",
+      "title": "Establish and Maintain a Software Inventory",
+      "controls": [
+        "CM-8",
+        "CM-10"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-8 component inventory includes software; CM-10 software usage restrictions require inventory.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 2.2",
+      "title": "Ensure Authorized Software is Currently Supported",
+      "controls": [
+        "SA-22"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-22 directly addresses unsupported system components.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 2.3",
+      "title": "Address Unauthorized Software",
+      "controls": [
+        "CM-7",
+        "CM-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-7 least functionality (application whitelisting); CM-11 user-installed software restrictions.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 2.5",
+      "title": "Allowlist Authorized Software",
+      "controls": [
+        "CM-7(4)",
+        "CM-7(5)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CM-7(4) and CM-7(5) directly address application whitelisting/allowlisting.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 2.6",
+      "title": "Allowlist Authorized Libraries",
+      "controls": [
+        "CM-7(4)",
+        "CM-7(5)",
+        "SA-10"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-7 application allowlisting; SA-10 developer configuration management.",
+      "gaps": "CIS specifically addresses library-level allowlisting. SP 800-53 allowlisting is at application level; library-specific control less explicit."
+    },
+    {
+      "id": "CIS 2.7",
+      "title": "Allowlist Authorized Scripts",
+      "controls": [
+        "CM-7(4)",
+        "CM-7(5)"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-7(4)/(5) application allowlisting covers scripts conceptually.",
+      "gaps": "Script-specific allowlisting is a subset of application allowlisting. CM-7 enhancements cover the intent."
+    },
+    {
+      "id": "CIS 3",
+      "title": "Data Protection",
+      "controls": [
+        "SC-28",
+        "SC-8",
+        "MP-1",
+        "MP-2",
+        "MP-3",
+        "MP-4",
+        "MP-5",
+        "MP-6",
+        "MP-7",
+        "AC-4",
+        "RA-2",
+        "SI-12",
+        "PT-1",
+        "PT-2",
+        "PT-3",
+        "PT-4",
+        "PT-5",
+        "PT-6",
+        "PT-7",
+        "PT-8"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-28 data at rest; SC-8 data in transit; MP family media protection; AC-4 information flow; RA-2 data classification; PT family privacy.",
+      "gaps": "Minor: CIS 3 includes specific data management processes (inventory, disposal, flow diagrams). SP 800-53 covers protection mechanisms but data management lifecycle is distributed."
+    },
+    {
+      "id": "CIS 3.1",
+      "title": "Establish and Maintain a Data Management Process",
+      "controls": [
+        "SI-12",
+        "PM-1"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SI-12 information management; PM-1 security program includes data management.",
+      "gaps": "CIS requires specific data management process documentation. SP 800-53 addresses through various controls but no unified data management process control."
+    },
+    {
+      "id": "CIS 3.2",
+      "title": "Establish and Maintain a Data Inventory",
+      "controls": [
+        "RA-2",
+        "CM-8",
+        "PM-5"
+      ],
+      "coverage_pct": 70,
+      "rationale": "RA-2 security categorization requires data identification; CM-8 component inventory; PM-5 system inventory.",
+      "gaps": "CIS specifically requires data inventory. SP 800-53 categorizes data but doesn't require explicit data inventory/catalog."
+    },
+    {
+      "id": "CIS 3.3",
+      "title": "Configure Data Access Control Lists",
+      "controls": [
+        "AC-3",
+        "AC-6"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-3 access enforcement; AC-6 least privilege. Direct mapping.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 3.4",
+      "title": "Enforce Data Retention",
+      "controls": [
+        "SI-12",
+        "AU-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-12 information lifecycle; AU-11 audit record retention.",
+      "gaps": "CIS covers data retention broadly. SP 800-53 addresses retention for specific data types."
+    },
+    {
+      "id": "CIS 3.10",
+      "title": "Encrypt Sensitive Data in Transit",
+      "controls": [
+        "SC-8",
+        "SC-8(1)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SC-8 transmission confidentiality/integrity; SC-8(1) cryptographic protection. Direct mapping.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 3.11",
+      "title": "Encrypt Sensitive Data at Rest",
+      "controls": [
+        "SC-28",
+        "SC-28(1)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SC-28 protection of information at rest; SC-28(1) cryptographic protection. Direct mapping.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 4",
+      "title": "Secure Configuration of Enterprise Assets and Software",
+      "controls": [
+        "CM-2",
+        "CM-6",
+        "CM-7",
+        "CM-3",
+        "SC-7",
+        "SC-28"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CM-2 baseline configuration; CM-6 configuration settings; CM-7 least functionality; CM-3 change control. Comprehensive configuration management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 4.1",
+      "title": "Establish and Maintain a Secure Configuration Process",
+      "controls": [
+        "CM-1",
+        "CM-2",
+        "CM-6"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CM-1 configuration management policy; CM-2 baseline; CM-6 settings. Direct mapping.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 4.2",
+      "title": "Establish and Maintain a Secure Configuration Process for Network Infrastructure",
+      "controls": [
+        "CM-6",
+        "SC-7"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-6 configuration settings; SC-7 boundary protection configuration.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 4.7",
+      "title": "Manage Default Accounts on Enterprise Assets",
+      "controls": [
+        "AC-2",
+        "CM-6",
+        "IA-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-2 account management; CM-6 configuration settings (disable defaults); IA-5 authenticator management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 5",
+      "title": "Account Management",
+      "controls": [
+        "AC-2",
+        "AC-5",
+        "AC-6",
+        "IA-4",
+        "IA-5",
+        "IA-2"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-2 comprehensive account management; AC-5 separation of duties; AC-6 least privilege; IA-4 identifier management; IA-5 authenticator management.",
+      "gaps": "Minimal gap. SP 800-53 AC/IA families are comprehensive for account management."
+    },
+    {
+      "id": "CIS 5.1",
+      "title": "Establish and Maintain an Inventory of Accounts",
+      "controls": [
+        "AC-2"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-2 directly requires account inventory and management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 5.2",
+      "title": "Use Unique Passwords",
+      "controls": [
+        "IA-5",
+        "IA-5(1)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IA-5 authenticator management; IA-5(1) password-based authentication. Direct mapping.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 5.3",
+      "title": "Disable Dormant Accounts",
+      "controls": [
+        "AC-2(3)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-2(3) directly covers disabling inactive accounts.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 5.4",
+      "title": "Restrict Administrator Privileges to Dedicated Administrator Accounts",
+      "controls": [
+        "AC-6(5)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-6(5) privileged accounts. Direct mapping.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 6",
+      "title": "Access Control Management",
+      "controls": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-6",
+        "AC-17",
+        "AC-24"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC family comprehensively covers access control management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 6.1",
+      "title": "Establish an Access Granting Process",
+      "controls": [
+        "AC-2",
+        "AC-6"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-2 account management includes granting; AC-6 least privilege.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 6.2",
+      "title": "Establish an Access Revoking Process",
+      "controls": [
+        "AC-2",
+        "PS-4",
+        "PS-5"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-2 account deprovisioning; PS-4 termination; PS-5 transfer.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 6.3",
+      "title": "Require MFA for Externally-Exposed Applications",
+      "controls": [
+        "IA-2(1)",
+        "IA-2(2)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IA-2(1)/(2) multi-factor authentication for privileged and non-privileged accounts.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 6.4",
+      "title": "Require MFA for Remote Network Access",
+      "controls": [
+        "AC-17",
+        "IA-2(1)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AC-17 remote access with MFA; IA-2(1) multi-factor for privileged.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 6.5",
+      "title": "Require MFA for Administrative Access",
+      "controls": [
+        "IA-2(1)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IA-2(1) directly requires MFA for privileged accounts.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 7",
+      "title": "Continuous Vulnerability Management",
+      "controls": [
+        "RA-5",
+        "SI-2",
+        "SI-5",
+        "CA-7"
+      ],
+      "coverage_pct": 95,
+      "rationale": "RA-5 vulnerability monitoring/scanning; SI-2 flaw remediation; SI-5 security alerts; CA-7 continuous monitoring. Comprehensive vulnerability management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 7.1",
+      "title": "Establish and Maintain a Vulnerability Management Process",
+      "controls": [
+        "RA-5",
+        "SI-2"
+      ],
+      "coverage_pct": 95,
+      "rationale": "RA-5 directly establishes vulnerability management process.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 7.2",
+      "title": "Establish and Maintain a Remediation Process",
+      "controls": [
+        "SI-2",
+        "CA-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-2 flaw remediation; CA-5 POA&M for tracking remediation.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 7.4",
+      "title": "Perform Automated Application Patch Management",
+      "controls": [
+        "SI-2(1)",
+        "SI-2(2)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-2 flaw remediation with automated patching enhancements.",
+      "gaps": "Minor: CIS specifically addresses application-level patching automation."
+    },
+    {
+      "id": "CIS 7.5",
+      "title": "Perform Automated Vulnerability Scans of Internal Enterprise Assets",
+      "controls": [
+        "RA-5(2)",
+        "RA-5(5)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "RA-5 with automated scanning enhancements.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 7.7",
+      "title": "Remediate Detected Vulnerabilities",
+      "controls": [
+        "SI-2",
+        "CA-5",
+        "RA-5"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SI-2 flaw remediation; CA-5 plan of action; RA-5 vulnerability response.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 8",
+      "title": "Audit Log Management",
+      "controls": [
+        "AU-1",
+        "AU-2",
+        "AU-3",
+        "AU-4",
+        "AU-5",
+        "AU-6",
+        "AU-7",
+        "AU-8",
+        "AU-9",
+        "AU-10",
+        "AU-11",
+        "AU-12"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AU family comprehensively covers audit logging: events (AU-2), content (AU-3), capacity (AU-4), response (AU-5), review (AU-6), generation (AU-12).",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 8.1",
+      "title": "Establish and Maintain an Audit Log Management Process",
+      "controls": [
+        "AU-1",
+        "AU-2"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AU-1 audit policy; AU-2 event logging definition.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 8.2",
+      "title": "Collect Audit Logs",
+      "controls": [
+        "AU-2",
+        "AU-3",
+        "AU-12"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AU-2 auditable events; AU-3 content; AU-12 audit record generation.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 8.5",
+      "title": "Collect Detailed Audit Logs",
+      "controls": [
+        "AU-3",
+        "AU-3(1)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AU-3 audit record content with additional information enhancement.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 8.9",
+      "title": "Centralize Audit Logs",
+      "controls": [
+        "AU-6(4)",
+        "SI-4(2)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AU-6(4) central review and analysis; SI-4(2) automated real-time analysis tools.",
+      "gaps": "Minimal gap. Log centralization is implied by central review/analysis controls."
+    },
+    {
+      "id": "CIS 8.11",
+      "title": "Conduct Audit Log Reviews",
+      "controls": [
+        "AU-6",
+        "AU-6(1)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AU-6 audit review, analysis, and reporting with process integration.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 9",
+      "title": "Email and Web Browser Protections",
+      "controls": [
+        "SC-7",
+        "SI-3",
+        "SI-8",
+        "SC-18"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-7 boundary protection; SI-3 malware protection; SI-8 spam protection; SC-18 mobile code.",
+      "gaps": "SP 800-53 covers email/web security through general controls. CIS 9 is more prescriptive about specific email and browser hardening configurations."
+    },
+    {
+      "id": "CIS 9.1",
+      "title": "Ensure Use of Only Fully Supported Browsers and Email Clients",
+      "controls": [
+        "SA-22",
+        "CM-7"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-22 unsupported components; CM-7 least functionality.",
+      "gaps": "CIS is specific about browser/email client support. SP 800-53 addresses through general component support controls."
+    },
+    {
+      "id": "CIS 9.2",
+      "title": "Use DNS Filtering Services",
+      "controls": [
+        "SC-7",
+        "SC-20",
+        "SC-21"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SC-7 boundary protection; SC-20/SC-21 DNS security.",
+      "gaps": "CIS specifically addresses DNS filtering for malicious domains. SP 800-53 DNS controls focus on integrity (DNSSEC) rather than content filtering."
+    },
+    {
+      "id": "CIS 10",
+      "title": "Malware Defenses",
+      "controls": [
+        "SI-3",
+        "SI-3(1)",
+        "SI-3(2)",
+        "SI-4",
+        "SI-8"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SI-3 malicious code protection with comprehensive enhancements; SI-4 monitoring; SI-8 spam protection.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 10.1",
+      "title": "Deploy and Maintain Anti-Malware Software",
+      "controls": [
+        "SI-3"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SI-3 directly covers anti-malware deployment and maintenance.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 10.2",
+      "title": "Configure Automatic Anti-Malware Signature Updates",
+      "controls": [
+        "SI-3(2)"
+      ],
+      "coverage_pct": 95,
+      "rationale": "SI-3(2) covers automatic updates.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 10.4",
+      "title": "Configure Automatic Anti-Malware Scanning of Removable Media",
+      "controls": [
+        "SI-3(1)",
+        "MP-7"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-3(1) central management of anti-malware; MP-7 media use. Removable media scanning covered.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 10.7",
+      "title": "Use Behavior-Based Anti-Malware Software",
+      "controls": [
+        "SI-3",
+        "SI-4(4)"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-3 malware protection; SI-4(4) inbound/outbound analysis.",
+      "gaps": "CIS specifically addresses behavior-based detection. SP 800-53 covers through general malware and monitoring controls."
+    },
+    {
+      "id": "CIS 11",
+      "title": "Data Recovery",
+      "controls": [
+        "CP-9",
+        "CP-6",
+        "CP-10"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CP-9 system backup; CP-6 alternate storage; CP-10 system recovery. Comprehensive data recovery.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 11.1",
+      "title": "Establish and Maintain a Data Recovery Process",
+      "controls": [
+        "CP-9",
+        "CP-2"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CP-9 backup; CP-2 contingency plan including recovery procedures.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 11.2",
+      "title": "Perform Automated Backups",
+      "controls": [
+        "CP-9",
+        "CP-9(1)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP-9 backup with testing restoration enhancement.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 11.3",
+      "title": "Protect Recovery Data",
+      "controls": [
+        "CP-9",
+        "CP-6"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP-9 backup protection; CP-6 alternate storage site.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 11.4",
+      "title": "Establish and Maintain an Isolated Instance of Recovery Data",
+      "controls": [
+        "CP-6",
+        "CP-9"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-6 alternate storage site; CP-9 backup. Air-gapped/isolated backup concept supported.",
+      "gaps": "Minor: CIS specifically addresses isolated recovery data. CP-6 covers alternate storage but isolation level less explicit."
+    },
+    {
+      "id": "CIS 12",
+      "title": "Network Infrastructure Management",
+      "controls": [
+        "SC-7",
+        "CM-2",
+        "CM-6",
+        "CM-7",
+        "AC-4"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-7 boundary protection; CM-2 network baselines; CM-6 network settings; CM-7 least functionality; AC-4 information flow.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 12.1",
+      "title": "Ensure Network Infrastructure is Up-to-Date",
+      "controls": [
+        "SA-22",
+        "SI-2",
+        "CM-6"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-22 unsupported components; SI-2 flaw remediation; CM-6 configuration settings.",
+      "gaps": "Minor: CIS specifically addresses network device firmware/software currency. SP 800-53 addresses through general patching/support controls."
+    },
+    {
+      "id": "CIS 12.2",
+      "title": "Establish and Maintain a Secure Network Architecture",
+      "controls": [
+        "PL-8",
+        "SC-7",
+        "SC-32"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PL-8 security architecture; SC-7 boundary protection; SC-32 system partitioning.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 13",
+      "title": "Network Monitoring and Defense",
+      "controls": [
+        "SI-4",
+        "AU-6",
+        "SC-7",
+        "IR-4",
+        "CA-7"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-4 system monitoring; AU-6 audit review; SC-7 boundary protection; IR-4 incident handling; CA-7 continuous monitoring.",
+      "gaps": "Minimal gap. SP 800-53 monitoring and defense controls are comprehensive."
+    },
+    {
+      "id": "CIS 13.1",
+      "title": "Centralize Security Event Alerting",
+      "controls": [
+        "SI-4(5)",
+        "AU-6(4)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-4(5) system-generated alerts; AU-6(4) central review. Centralized alerting well covered.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 13.3",
+      "title": "Deploy a Network Intrusion Detection Solution",
+      "controls": [
+        "SI-4",
+        "SC-7(6)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-4 system monitoring includes NIDS; SC-7(6) response to recognized failures.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 13.6",
+      "title": "Collect Network Traffic Flow Logs",
+      "controls": [
+        "AU-3",
+        "SI-4(4)"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-3 audit content; SI-4(4) inbound/outbound communications traffic analysis.",
+      "gaps": "Minor: CIS specifically addresses network flow data. SP 800-53 covers through general monitoring."
+    },
+    {
+      "id": "CIS 13.8",
+      "title": "Deploy a Network Intrusion Prevention Solution",
+      "controls": [
+        "SC-7",
+        "SI-4(4)"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-7 boundary protection with traffic filtering; SI-4(4) traffic analysis.",
+      "gaps": "Minor: CIS specifically addresses inline prevention. SP 800-53 covers through general boundary and monitoring controls."
+    },
+    {
+      "id": "CIS 14",
+      "title": "Security Awareness and Skills Training",
+      "controls": [
+        "AT-1",
+        "AT-2",
+        "AT-3",
+        "AT-4",
+        "PM-13",
+        "PM-14"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AT family comprehensive: AT-1 policy; AT-2 awareness; AT-3 role-based training; AT-4 records; PM-13 workforce; PM-14 testing.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 14.1",
+      "title": "Establish and Maintain a Security Awareness Program",
+      "controls": [
+        "AT-1",
+        "AT-2",
+        "PM-13"
+      ],
+      "coverage_pct": 95,
+      "rationale": "AT-1/AT-2 awareness program; PM-13 workforce development.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 14.2",
+      "title": "Train Workforce Members to Recognize Social Engineering Attacks",
+      "controls": [
+        "AT-2(2)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AT-2(2) practical exercises including social engineering awareness.",
+      "gaps": "Minimal gap. SP 800-53 Rev 5 explicitly includes social engineering training."
+    },
+    {
+      "id": "CIS 14.5",
+      "title": "Train Workforce on Data Handling Best Practices",
+      "controls": [
+        "AT-2",
+        "AT-3",
+        "MP-1"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AT-2/AT-3 training includes data handling; MP-1 media protection policy.",
+      "gaps": "Minor: CIS is specific about data handling training. SP 800-53 includes through general training."
+    },
+    {
+      "id": "CIS 15",
+      "title": "Service Provider Management",
+      "controls": [
+        "SA-4",
+        "SA-9",
+        "SR-1",
+        "SR-2",
+        "SR-3",
+        "SR-5",
+        "SR-6"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-4 acquisition; SA-9 external services; SR family supply chain. Comprehensive service provider security management.",
+      "gaps": "Minor: CIS 15 includes specific guidance on classifying service providers and monitoring. SP 800-53 covers through acquisition and supply chain controls."
+    },
+    {
+      "id": "CIS 15.1",
+      "title": "Establish and Maintain an Inventory of Service Providers",
+      "controls": [
+        "SA-9",
+        "PM-5"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-9 external services require identification; PM-5 system inventory.",
+      "gaps": "CIS specifically requires service provider inventory. SP 800-53 implies but doesn't explicitly mandate a service provider register."
+    },
+    {
+      "id": "CIS 16",
+      "title": "Application Software Security",
+      "controls": [
+        "SA-3",
+        "SA-4",
+        "SA-8",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-17"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA family comprehensive for application security: SDLC (SA-3), requirements (SA-4), engineering (SA-8), config management (SA-10), testing (SA-11), standards (SA-15).",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 16.1",
+      "title": "Establish and Maintain a Secure Application Development Process",
+      "controls": [
+        "SA-3",
+        "SA-15"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-3 SDLC; SA-15 development process and standards.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 16.2",
+      "title": "Establish and Maintain a Process to Accept and Address Software Vulnerabilities",
+      "controls": [
+        "SI-2",
+        "RA-5",
+        "SA-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-2 flaw remediation; RA-5 vulnerability management; SA-11 developer testing.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 16.6",
+      "title": "Use Hardened Images",
+      "controls": [
+        "CM-2",
+        "CM-3",
+        "CM-6"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-2 baseline configuration; CM-6 configuration settings. Hardened image concept covered through baselines.",
+      "gaps": "Minor: CIS specifically addresses golden/hardened images. SP 800-53 uses baseline concept which is similar."
+    },
+    {
+      "id": "CIS 16.12",
+      "title": "Implement Code-Level Security Checks",
+      "controls": [
+        "SA-11(1)",
+        "SA-11(2)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-11(1) static code analysis; SA-11(2) dynamic code analysis.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 17",
+      "title": "Incident Response Management",
+      "controls": [
+        "IR-1",
+        "IR-2",
+        "IR-3",
+        "IR-4",
+        "IR-5",
+        "IR-6",
+        "IR-7",
+        "IR-8"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IR family comprehensively covers incident response management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 17.1",
+      "title": "Designate Personnel to Manage Incident Handling",
+      "controls": [
+        "IR-1",
+        "IR-2",
+        "PM-2"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IR-1/IR-2 roles and training; PM-2 security role assignment.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 17.4",
+      "title": "Establish and Maintain an Incident Response Process",
+      "controls": [
+        "IR-8",
+        "IR-1"
+      ],
+      "coverage_pct": 95,
+      "rationale": "IR-8 incident response plan; IR-1 incident response policy.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 17.6",
+      "title": "Define Mechanisms for Communicating During Incident Response",
+      "controls": [
+        "IR-4",
+        "IR-6",
+        "IR-7"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IR-4 incident handling; IR-6 reporting; IR-7 assistance.",
+      "gaps": "Minimal gap. Communication mechanisms covered through IR family."
+    },
+    {
+      "id": "CIS 17.8",
+      "title": "Conduct Post-Incident Reviews",
+      "controls": [
+        "IR-3",
+        "IR-4"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IR-3 incident response testing/lessons learned; IR-4 incident handling includes post-incident activities.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 18",
+      "title": "Penetration Testing",
+      "controls": [
+        "CA-8",
+        "CA-8(1)",
+        "RA-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CA-8 directly covers penetration testing. CA-8(1) independent penetration agent. RA-5 vulnerability assessment.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 18.1",
+      "title": "Establish and Maintain a Penetration Testing Program",
+      "controls": [
+        "CA-8"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CA-8 directly establishes penetration testing requirements.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 18.3",
+      "title": "Remediate Penetration Test Findings",
+      "controls": [
+        "CA-5",
+        "SI-2"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CA-5 POA&M for remediation tracking; SI-2 flaw remediation.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "CIS 18.5",
+      "title": "Perform Periodic External Penetration Tests",
+      "controls": [
+        "CA-8"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-8 covers penetration testing. External perspective specified through scope.",
+      "gaps": "Minor: CIS specifically addresses external penetration testing cadence. CA-8 covers testing generally."
+    }
+  ],
+  "summary": {
+    "total_clauses": 88,
+    "average_coverage": 89.3,
+    "full_count": 75,
+    "substantial_count": 13,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

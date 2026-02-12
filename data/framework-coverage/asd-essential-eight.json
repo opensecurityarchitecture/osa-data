@@ -1,0 +1,427 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "asd_e8",
+  "framework_name": "ASD Essential Eight",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "E8-1",
+      "title": "Application Control",
+      "controls": [
+        "CM-7(4)",
+        "CM-7(5)",
+        "CM-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-7(4) application allowlisting; CM-7(5) authorized software; CM-11 user-installed software restrictions.",
+      "gaps": "Minimal gap. SP 800-53 application allowlisting controls align well with ASD Essential Eight application control."
+    },
+    {
+      "id": "E8-1 ML1",
+      "title": "Application control - Maturity Level 1: Prevent execution of unapproved executables on workstations",
+      "controls": [
+        "CM-7(4)",
+        "CM-7(5)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-7(4)/(5) application allowlisting directly covers ML1 requirements.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "E8-1 ML2",
+      "title": "Application control - Maturity Level 2: Extend to all user-facing systems; logging of blocked attempts",
+      "controls": [
+        "CM-7(4)",
+        "CM-7(5)",
+        "AU-2",
+        "AU-3"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-7(4)/(5) application allowlisting; AU-2/AU-3 logging of security events.",
+      "gaps": "Minor: ASD E8 ML2 requires specific logging of blocked execution attempts and coverage of internet-facing servers."
+    },
+    {
+      "id": "E8-1 ML3",
+      "title": "Application control - Maturity Level 3: Microsoft's recommended block rules, WDAC, driver control",
+      "controls": [
+        "CM-7(4)",
+        "CM-7(5)"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CM-7(4)/(5) application allowlisting covers the concept.",
+      "gaps": "ASD E8 ML3 specifies Microsoft-specific implementation (WDAC, recommended block lists, driver control). SP 800-53 is technology-neutral and doesn't specify Microsoft implementations."
+    },
+    {
+      "id": "E8-2",
+      "title": "Patch Applications",
+      "controls": [
+        "SI-2",
+        "SI-2(1)",
+        "RA-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-2 flaw remediation with automated mechanisms; RA-5 vulnerability scanning.",
+      "gaps": "Minimal gap. SP 800-53 patching controls align well with ASD Essential Eight application patching."
+    },
+    {
+      "id": "E8-2 ML1",
+      "title": "Patch Applications - ML1: Patch internet-facing services within 2 weeks; scanners within 48 hours",
+      "controls": [
+        "SI-2",
+        "RA-5"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-2 flaw remediation; RA-5 vulnerability scanning.",
+      "gaps": "ASD E8 ML1 specifies patch timeframes (48 hours for critical vulnerabilities, 2 weeks for internet-facing). SP 800-53 requires timely patching but doesn't specify these timeframes."
+    },
+    {
+      "id": "E8-2 ML2",
+      "title": "Patch Applications - ML2: Patch within 48 hours for exploited vulnerabilities",
+      "controls": [
+        "SI-2",
+        "SI-2(1)",
+        "RA-5"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-2 with automated patching; RA-5 vulnerability scanning.",
+      "gaps": "ASD E8 ML2 specifies 48-hour patching for exploited vulnerabilities. SP 800-53 supports timely patching but specific timelines are organization-defined."
+    },
+    {
+      "id": "E8-2 ML3",
+      "title": "Patch Applications - ML3: Automated asset discovery and patch coverage",
+      "controls": [
+        "SI-2(1)",
+        "CM-8(1)",
+        "RA-5(2)"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-2(1) automated patching; CM-8(1) automated discovery; RA-5(2) update vulnerability database.",
+      "gaps": "Minor: ASD E8 ML3 requires automated patch compliance reporting. SP 800-53 covers automated mechanisms."
+    },
+    {
+      "id": "E8-3",
+      "title": "Configure Microsoft Office Macro Settings",
+      "controls": [
+        "CM-7",
+        "CM-6",
+        "SI-3"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-7 least functionality; CM-6 configuration settings; SI-3 malware protection.",
+      "gaps": "ASD E8 specifically addresses Microsoft Office macros. SP 800-53 covers application configuration generally but macro-specific controls are technology-specific. SC-18 (mobile code) is partially relevant."
+    },
+    {
+      "id": "E8-3 ML1",
+      "title": "Macros - ML1: Disable macros for users who don't require them",
+      "controls": [
+        "CM-7",
+        "CM-6"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CM-7 least functionality supports disabling unnecessary features; CM-6 configuration settings.",
+      "gaps": "ASD E8 ML1 specifies macro disablement. SP 800-53 supports through general configuration controls but Office macro-specific guidance not provided."
+    },
+    {
+      "id": "E8-3 ML2",
+      "title": "Macros - ML2: Block macros from the internet, antivirus scanning of macros",
+      "controls": [
+        "CM-7",
+        "SI-3",
+        "SC-18"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-7 configuration; SI-3 malware scanning; SC-18 mobile code.",
+      "gaps": "ASD E8 ML2 specifies blocking internet-originated macros and AV scanning. SP 800-53 covers malware protection generally."
+    },
+    {
+      "id": "E8-3 ML3",
+      "title": "Macros - ML3: Only signed macros from trusted publishers",
+      "controls": [
+        "CM-7",
+        "CM-6",
+        "SI-7"
+      ],
+      "coverage_pct": 60,
+      "rationale": "CM-7 least functionality; CM-6 configuration; SI-7 integrity verification.",
+      "gaps": "ASD E8 ML3 specifies trusted publisher macro signing. SP 800-53 covers integrity verification generally but macro signing policy is technology-specific."
+    },
+    {
+      "id": "E8-4",
+      "title": "User Application Hardening",
+      "controls": [
+        "CM-6",
+        "CM-7",
+        "SC-18"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-6 configuration settings; CM-7 least functionality; SC-18 mobile code restrictions.",
+      "gaps": "Minor: ASD E8 specifically addresses web browser hardening, blocking ads/Java/Flash. SP 800-53 covers application configuration generally."
+    },
+    {
+      "id": "E8-4 ML1",
+      "title": "App Hardening - ML1: Block Flash, ads, Java in browsers; disable unneeded features",
+      "controls": [
+        "CM-7",
+        "CM-6",
+        "SC-18"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-7 least functionality; CM-6 settings; SC-18 mobile code.",
+      "gaps": "ASD E8 ML1 specifies browser hardening. SP 800-53 covers through general configuration controls."
+    },
+    {
+      "id": "E8-4 ML2",
+      "title": "App Hardening - ML2: Disable PowerShell 2.0, constrained language mode",
+      "controls": [
+        "CM-7",
+        "CM-6"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-7 least functionality; CM-6 configuration settings.",
+      "gaps": "ASD E8 ML2 specifies PowerShell constraints. SP 800-53 covers least functionality generally but scripting engine restrictions are technology-specific."
+    },
+    {
+      "id": "E8-4 ML3",
+      "title": "App Hardening - ML3: .NET Framework 3.5 removal, PowerShell constrained mode, WDAC enforcement",
+      "controls": [
+        "CM-7",
+        "CM-6"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CM-7 least functionality; CM-6 configuration.",
+      "gaps": "ASD E8 ML3 specifies Windows-specific hardening. SP 800-53 is technology-neutral; Microsoft-specific hardening guidance not provided."
+    },
+    {
+      "id": "E8-5",
+      "title": "Restrict Administrative Privileges",
+      "controls": [
+        "AC-6",
+        "AC-6(1)",
+        "AC-6(2)",
+        "AC-6(5)",
+        "AC-6(10)",
+        "AC-2"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-6 least privilege with comprehensive enhancements; AC-2 account management.",
+      "gaps": "Minimal gap. SP 800-53 least privilege controls align well with ASD Essential Eight admin privilege restriction."
+    },
+    {
+      "id": "E8-5 ML1",
+      "title": "Admin Privileges - ML1: Restrict privileged access to admin tasks",
+      "controls": [
+        "AC-6",
+        "AC-6(5)",
+        "AC-2"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-6 least privilege; AC-6(5) privileged accounts; AC-2 account management.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "E8-5 ML2",
+      "title": "Admin Privileges - ML2: Separate admin workstations, no internet/email from privileged accounts",
+      "controls": [
+        "AC-6",
+        "AC-6(2)",
+        "SC-7",
+        "AC-2"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-6(2) non-privileged access for non-security functions; SC-7 boundary protection; AC-2 account management.",
+      "gaps": "ASD E8 ML2 requires privileged access workstations (PAWs) and internet restrictions. SP 800-53 supports through privilege and boundary controls but PAW concept is implementation-specific."
+    },
+    {
+      "id": "E8-5 ML3",
+      "title": "Admin Privileges - ML3: JIT admin, credential guard, block privileged account internet access",
+      "controls": [
+        "AC-6",
+        "AC-2(6)",
+        "IA-5"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AC-6 least privilege; AC-2(6) dynamic privilege management; IA-5 credential management.",
+      "gaps": "ASD E8 ML3 specifies just-in-time administration and credential guard. SP 800-53 covers dynamic access and credential management but JIT and Credential Guard are implementation-specific."
+    },
+    {
+      "id": "E8-6",
+      "title": "Patch Operating Systems",
+      "controls": [
+        "SI-2",
+        "SI-2(1)",
+        "RA-5",
+        "SA-22"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-2 flaw remediation; SI-2(1) automated mechanisms; RA-5 vulnerability scanning; SA-22 unsupported components.",
+      "gaps": "Minor: ASD E8 specifies OS patching timeframes (48 hours for critical). SP 800-53 requires timely patching but timeframes are organization-defined."
+    },
+    {
+      "id": "E8-6 ML1",
+      "title": "Patch OS - ML1: Patch internet-facing OS within 2 weeks",
+      "controls": [
+        "SI-2",
+        "RA-5"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-2 flaw remediation; RA-5 vulnerability scanning.",
+      "gaps": "ASD specifies 2-week timeframe. SP 800-53 requires timely remediation without specific timeframe."
+    },
+    {
+      "id": "E8-6 ML2",
+      "title": "Patch OS - ML2: Patch within 48 hours for exploited vulnerabilities",
+      "controls": [
+        "SI-2",
+        "SI-2(1)"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-2 with automated remediation mechanisms.",
+      "gaps": "ASD specifies 48-hour timeframe for exploited vulnerabilities. SP 800-53 timeframes are organization-defined."
+    },
+    {
+      "id": "E8-6 ML3",
+      "title": "Patch OS - ML3: Latest OS versions, automated patch compliance",
+      "controls": [
+        "SI-2(1)",
+        "SA-22",
+        "CM-8(1)"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-2(1) automated patching; SA-22 unsupported components; CM-8(1) automated inventory.",
+      "gaps": "ASD ML3 requires latest/previous OS versions only. SA-22 covers unsupported components similarly."
+    },
+    {
+      "id": "E8-7",
+      "title": "Multi-factor Authentication",
+      "controls": [
+        "IA-2(1)",
+        "IA-2(2)",
+        "IA-2(6)",
+        "IA-5"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IA-2(1)/(2) MFA for privileged/non-privileged; IA-2(6) network access; IA-5 authenticator management.",
+      "gaps": "Minimal gap. SP 800-53 MFA controls align well with ASD Essential Eight MFA requirements."
+    },
+    {
+      "id": "E8-7 ML1",
+      "title": "MFA - ML1: MFA for internet-facing services",
+      "controls": [
+        "IA-2(1)",
+        "IA-2(2)"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-2(1)/(2) MFA for accounts accessing systems.",
+      "gaps": "Minor: ASD E8 ML1 specifically targets internet-facing services. SP 800-53 covers MFA generally."
+    },
+    {
+      "id": "E8-7 ML2",
+      "title": "MFA - ML2: MFA for all privileged access and important data repositories",
+      "controls": [
+        "IA-2(1)",
+        "AC-17"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-2(1) MFA for privileged; AC-17 remote access.",
+      "gaps": "Minor: ASD E8 ML2 requires MFA for important data repositories. SP 800-53 covers through general MFA and access controls."
+    },
+    {
+      "id": "E8-7 ML3",
+      "title": "MFA - ML3: Phishing-resistant MFA (FIDO2, smart cards)",
+      "controls": [
+        "IA-2(1)",
+        "IA-2(12)"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IA-2(1) MFA; IA-2(12) acceptance of PIV credentials.",
+      "gaps": "ASD E8 ML3 specifies phishing-resistant authenticators. SP 800-53 supports through MFA and PIV controls but phishing resistance as a specific requirement is implementation-dependent."
+    },
+    {
+      "id": "E8-8",
+      "title": "Regular Backups",
+      "controls": [
+        "CP-9",
+        "CP-6",
+        "CP-10",
+        "CP-9(1)"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP-9 system backup; CP-6 alternate storage; CP-10 recovery; CP-9(1) testing for reliability.",
+      "gaps": "Minimal gap. SP 800-53 backup controls align well with ASD Essential Eight backup requirements."
+    },
+    {
+      "id": "E8-8 ML1",
+      "title": "Backups - ML1: Backups of important data, software, configuration settings",
+      "controls": [
+        "CP-9"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP-9 directly covers backup of data, software, and configurations.",
+      "gaps": "Minimal gap."
+    },
+    {
+      "id": "E8-8 ML2",
+      "title": "Backups - ML2: Backups stored disconnected, backup restoration tested",
+      "controls": [
+        "CP-9",
+        "CP-6",
+        "CP-9(1)"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-9 backup; CP-6 alternate storage; CP-9(1) testing restoration.",
+      "gaps": "Minor: ASD E8 ML2 requires offline/disconnected backup copies. CP-6 alternate storage covers but offline specifically is less explicit."
+    },
+    {
+      "id": "E8-8 ML3",
+      "title": "Backups - ML3: Unprivileged accounts cannot modify/delete backups",
+      "controls": [
+        "CP-9",
+        "AC-6",
+        "AC-3"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-9 backup with protection; AC-6 least privilege; AC-3 access enforcement.",
+      "gaps": "Minor: ASD E8 ML3 specifically addresses backup privilege separation. SP 800-53 covers through access control."
+    }
+  ],
+  "summary": {
+    "total_clauses": 32,
+    "average_coverage": 79.7,
+    "full_count": 15,
+    "substantial_count": 15,
+    "partial_count": 2,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

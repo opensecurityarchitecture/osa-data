@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensecurityarchitecture.org/schema/framework-coverage.schema.json",
+  "title": "OSA Framework Coverage Analysis",
+  "description": "Schema for reverse-direction compliance mappings showing how well SP 800-53 covers each framework requirement",
+  "type": "object",
+
+  "required": ["framework_id", "framework_name", "metadata", "weight_scale", "clauses", "summary"],
+
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+
+    "framework_id": {
+      "type": "string",
+      "description": "Framework identifier matching frameworks.json id field",
+      "examples": ["iso_27001_2022", "nist_csf_2", "pci_dss_v4"]
+    },
+
+    "framework_name": {
+      "type": "string",
+      "description": "Human-readable framework name",
+      "examples": ["ISO 27001:2022", "NIST CSF 2.0", "PCI DSS v4.0.1"]
+    },
+
+    "metadata": {
+      "type": "object",
+      "required": ["source", "version", "disclaimer"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Data source identifier"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of this coverage analysis"
+        },
+        "disclaimer": {
+          "type": "string",
+          "description": "Usage disclaimer for compliance/audit purposes"
+        }
+      }
+    },
+
+    "weight_scale": {
+      "type": "object",
+      "required": ["full", "substantial", "partial", "weak", "none"],
+      "properties": {
+        "full": {
+          "$ref": "#/$defs/weightBand"
+        },
+        "substantial": {
+          "$ref": "#/$defs/weightBand"
+        },
+        "partial": {
+          "$ref": "#/$defs/weightBand"
+        },
+        "weak": {
+          "$ref": "#/$defs/weightBand"
+        },
+        "none": {
+          "$ref": "#/$defs/weightBand"
+        }
+      }
+    },
+
+    "clauses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/clause"
+      },
+      "description": "Framework clauses/requirements with coverage analysis"
+    },
+
+    "summary": {
+      "type": "object",
+      "required": ["total_clauses", "average_coverage", "full_count", "substantial_count", "partial_count", "weak_count", "none_count"],
+      "properties": {
+        "total_clauses": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of framework clauses analysed"
+        },
+        "average_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Average coverage percentage across all clauses"
+        },
+        "full_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of clauses with 85-100% coverage"
+        },
+        "substantial_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of clauses with 65-84% coverage"
+        },
+        "partial_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of clauses with 40-64% coverage"
+        },
+        "weak_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of clauses with 1-39% coverage"
+        },
+        "none_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of clauses with 0% coverage"
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "weightBand": {
+      "type": "object",
+      "required": ["min", "max", "label"],
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "clause": {
+      "type": "object",
+      "required": ["id", "title", "controls", "coverage_pct", "rationale", "gaps"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Clause/requirement identifier within the framework"
+        },
+        "title": {
+          "type": "string",
+          "description": "Clause/requirement title or description"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "SP 800-53 control IDs that address this clause"
+        },
+        "coverage_pct": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of this clause addressed by SP 800-53 controls"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Expert rationale explaining the coverage assessment"
+        },
+        "gaps": {
+          "type": "string",
+          "description": "Description of gaps or areas not covered by SP 800-53"
+        }
+      }
+    }
+  }
+}

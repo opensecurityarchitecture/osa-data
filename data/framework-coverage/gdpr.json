@@ -1,0 +1,1279 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "gdpr",
+  "framework_name": "EU GDPR",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. GDPR is a data protection regulation — many requirements are legal/privacy obligations outside the scope of technical security controls. Validate with qualified data protection professionals for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "Art.5(1)(a)",
+      "title": "Lawfulness, fairness and transparency",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-05"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-02 (Authority to Process) partially addresses lawfulness. PT-05 (Privacy Notice) addresses transparency.",
+      "gaps": "SP 800-53 does not address lawfulness of processing (legal bases), fairness in data processing, or the comprehensive transparency obligations under GDPR. These are fundamental privacy law concepts outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.5(1)(b)",
+      "title": "Purpose limitation",
+      "controls": [
+        "PT-01",
+        "PT-03",
+        "PT-05",
+        "PT-07"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PT-03 (Processing Purposes) requires purpose specification. DM-01 (Minimization of PII) supports purpose limitation.",
+      "gaps": "SP 800-53 addresses purpose specification but lacks enforcement mechanisms for preventing further processing incompatible with original purposes. GDPR requires explicit compatibility assessment for secondary use."
+    },
+    {
+      "id": "Art.5(1)(c)",
+      "title": "Data minimisation",
+      "controls": [
+        "AC-06",
+        "PT-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "DM-01 (Minimization of PII), DM-02 (Data Retention and Disposal), PT-03 (Processing Purposes) address minimisation concepts.",
+      "gaps": "SP 800-53 covers data minimisation at a high level. GDPR requires data to be adequate, relevant, and limited to what is necessary — a stricter standard than SP 800-53's approach."
+    },
+    {
+      "id": "Art.5(1)(d)",
+      "title": "Accuracy",
+      "controls": [
+        "SI-01",
+        "SI-06",
+        "SI-07",
+        "SI-10"
+      ],
+      "coverage_pct": 30,
+      "rationale": "DM-03 (Minimization of PII Use in Testing) and SI-10 (Information Input Validation) partially address accuracy.",
+      "gaps": "SP 800-53 has no direct control requiring personal data accuracy. GDPR mandates that personal data be accurate, kept up to date, and that inaccurate data be erased or rectified without delay."
+    },
+    {
+      "id": "Art.5(1)(e)",
+      "title": "Storage limitation",
+      "controls": [
+        "AC-16",
+        "AU-04",
+        "AU-11",
+        "PT-07",
+        "SI-12"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-12 (Information Handling and Retention) and DM-02 (Data Retention and Disposal) address retention limits.",
+      "gaps": "SP 800-53 addresses retention schedules but does not explicitly require that personal data be kept in identifiable form only for as long as necessary for the processing purpose."
+    },
+    {
+      "id": "Art.5(1)(f)",
+      "title": "Integrity and confidentiality",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-09",
+        "AC-13",
+        "AC-15",
+        "AU-09",
+        "IA-01",
+        "IA-04",
+        "MP-01",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "SC-01",
+        "SC-02",
+        "SC-04",
+        "SC-07",
+        "SC-08",
+        "SI-01",
+        "SI-07",
+        "SI-09",
+        "SI-12"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-08 (Transmission Confidentiality/Integrity), SC-13 (Cryptographic Protection), SC-28 (Protection at Rest), AC family (Access Control). SP 800-53 excels at technical security controls.",
+      "gaps": "Minimal gap. SP 800-53 provides comprehensive integrity and confidentiality controls that align well with GDPR Art. 5(1)(f)."
+    },
+    {
+      "id": "Art.5(2)",
+      "title": "Accountability",
+      "controls": [
+        "AC-13",
+        "AT-04",
+        "AU-01",
+        "AU-02",
+        "AU-07",
+        "AU-10",
+        "PT-01"
+      ],
+      "coverage_pct": 40,
+      "rationale": "AU family (Audit and Accountability), CA-02 (Security Assessments), PM-01 (Program Plan) partially address accountability.",
+      "gaps": "GDPR accountability requires the controller to demonstrate compliance with all processing principles. SP 800-53 provides audit and assessment controls but not the GDPR-specific accountability framework (records, DPIAs, codes of conduct, certifications)."
+    },
+    {
+      "id": "Art.6(1)",
+      "title": "Lawfulness of processing — general",
+      "controls": [
+        "PT-01"
+      ],
+      "coverage_pct": 20,
+      "rationale": "PT-01 (Policy and Procedures) provides a general privacy framework.",
+      "gaps": "SP 800-53 PT-01 establishes privacy policies but does not address GDPR's six legal bases for processing (consent, contract, legal obligation, vital interests, public task, legitimate interests)."
+    },
+    {
+      "id": "Art.6(1)(a)",
+      "title": "Lawfulness — consent as legal basis",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PT-04 (Consent) addresses consent. PT-02 (Authority to Process) covers legal basis.",
+      "gaps": "SP 800-53 PT-04 covers consent mechanically but GDPR Art. 6(1)(a) requires freely given, specific, informed, unambiguous consent with ability to withdraw. Consent management lifecycle not addressed."
+    },
+    {
+      "id": "Art.6(1)(b)",
+      "title": "Lawfulness — contractual necessity",
+      "controls": [],
+      "coverage_pct": 15,
+      "rationale": "PT-02 (Authority to Process) partially relevant.",
+      "gaps": "SP 800-53 has no concept of contractual necessity as a legal basis for processing. This is a legal framework concept outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.6(1)(c)",
+      "title": "Lawfulness — legal obligation",
+      "controls": [],
+      "coverage_pct": 20,
+      "rationale": "PT-02 (Authority to Process) covers authority but in a US federal context.",
+      "gaps": "SP 800-53 covers authority to process in US federal context. GDPR legal obligation basis requires compliance with EU/member state law, which is outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.6(1)(f)",
+      "title": "Lawfulness — legitimate interests",
+      "controls": [],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent. PT-02 partially relevant for authority concepts.",
+      "gaps": "GDPR legitimate interest requires a balancing test between controller interests and data subject rights. SP 800-53 has no equivalent concept. This is entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.6(4)",
+      "title": "Lawfulness — compatibility of further processing",
+      "controls": [
+        "PT-03",
+        "PT-07"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PT-03 (Processing Purposes) and PT-07 (Specific Categories) partially address purpose compatibility.",
+      "gaps": "SP 800-53 covers purpose specification but GDPR Art. 6(4) requires a specific compatibility test for further processing including: link between purposes, context, data nature, consequences, and safeguards."
+    },
+    {
+      "id": "Art.7(1)",
+      "title": "Conditions for consent — demonstrability",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PT-04 (Consent) covers consent. AU-02/AU-03 (Audit Events/Content) provide audit trails.",
+      "gaps": "SP 800-53 covers consent and audit trails but does not specifically require the controller to demonstrate that consent was given. Consent records management not addressed."
+    },
+    {
+      "id": "Art.7(2)",
+      "title": "Conditions for consent — distinguishable request",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-04 (Consent) and PT-05 (Privacy Notice) partially relevant.",
+      "gaps": "SP 800-53 does not require consent requests to be distinguishable, in clear/plain language, or presented separately from other matters."
+    },
+    {
+      "id": "Art.7(3)",
+      "title": "Conditions for consent — right to withdraw",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 20,
+      "rationale": "PT-04 (Consent) partially covers consent lifecycle.",
+      "gaps": "SP 800-53 PT-04 does not explicitly address consent withdrawal mechanisms, ease of withdrawal, or processing cessation upon withdrawal."
+    },
+    {
+      "id": "Art.8(1)",
+      "title": "Child's consent in relation to information society services",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-04 (Consent) partially relevant.",
+      "gaps": "SP 800-53 has no age-specific consent requirements. GDPR Art. 8 requires parental consent for children under 16 (or lower per member state) for information society services. Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.9(1)",
+      "title": "Processing of special categories of personal data — prohibition",
+      "controls": [
+        "AC-16",
+        "MP-03",
+        "PT-01",
+        "PT-03"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-07 (Specific Categories of PII) addresses special categories in US federal context.",
+      "gaps": "SP 800-53 PT-07 covers some sensitive PII categories but GDPR Art. 9 prohibits processing of racial/ethnic origin, political opinions, religious beliefs, trade union membership, genetic/biometric data, health data, sex life/orientation unless specific derogations apply. Much broader than SP 800-53."
+    },
+    {
+      "id": "Art.9(2)",
+      "title": "Processing of special categories — exceptions",
+      "controls": [
+        "PT-03"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-07 (Specific Categories of PII) partially relevant.",
+      "gaps": "GDPR Art. 9(2) provides specific derogations (explicit consent, employment law, vital interests, public health, etc.). SP 800-53 has no equivalent exception framework for sensitive data processing."
+    },
+    {
+      "id": "Art.12(1)",
+      "title": "Transparent information, communication and modalities — transparency",
+      "controls": [
+        "AC-08",
+        "PT-01",
+        "PT-02",
+        "PT-05"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PT-05 (Privacy Notice) addresses transparency requirements.",
+      "gaps": "SP 800-53 PT-05 covers privacy notices but GDPR Art. 12 requires information in concise, transparent, intelligible, easily accessible form, using clear and plain language, especially for children."
+    },
+    {
+      "id": "Art.12(2)",
+      "title": "Transparent information — facilitating exercise of data subject rights",
+      "controls": [],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent for facilitating data subject rights exercise.",
+      "gaps": "GDPR requires controllers to facilitate the exercise of data subject rights, including providing information on actions taken within one month. SP 800-53 has no equivalent workflow for data subject rights management."
+    },
+    {
+      "id": "Art.12(7)",
+      "title": "Transparent information — standardised icons",
+      "controls": [
+        "PT-02"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-02 (Authority to Process) partially covers information provision.",
+      "gaps": "GDPR Art. 12(7) allows use of standardised icons for transparency. SP 800-53 does not address presentation format of privacy information."
+    },
+    {
+      "id": "Art.13(1)",
+      "title": "Information to be provided where data collected from data subject",
+      "controls": [
+        "AC-08",
+        "PT-01",
+        "PT-02",
+        "PT-05"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PT-05 (Privacy Notice) covers notice at collection.",
+      "gaps": "GDPR Art. 13 requires specific information at collection including: controller identity, DPO contact, processing purposes, legal basis, legitimate interests, recipients, third-country transfers, retention period, data subject rights, consent withdrawal, supervisory authority complaint. SP 800-53 PT-05 covers some but not all."
+    },
+    {
+      "id": "Art.13(2)",
+      "title": "Information to be provided — additional information for fair processing",
+      "controls": [
+        "PT-02"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-05 (Privacy Notice) partially covers additional information requirements.",
+      "gaps": "GDPR Art. 13(2) requires additional information on retention, rights, consent withdrawal, supervisory complaint, contractual obligation status, and automated decision-making. Most of these are outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.14(1)",
+      "title": "Information where data not obtained from data subject",
+      "controls": [
+        "PT-01",
+        "PT-02"
+      ],
+      "coverage_pct": 20,
+      "rationale": "PT-05 (Privacy Notice) partially relevant.",
+      "gaps": "SP 800-53 does not address notice requirements when personal data is not obtained directly from the data subject, including the requirement to inform about the source of data and categories of data."
+    },
+    {
+      "id": "Art.14(2)",
+      "title": "Information where data not obtained — additional details",
+      "controls": [
+        "PT-02"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-05 partially relevant.",
+      "gaps": "Similar gap to Art. 13(2) — SP 800-53 does not cover the full set of additional information requirements for indirect data collection."
+    },
+    {
+      "id": "Art.15(1)",
+      "title": "Right of access by the data subject",
+      "controls": [],
+      "coverage_pct": 20,
+      "rationale": "PT-06 (System of Records Notice) covers individual access in US Privacy Act context.",
+      "gaps": "SP 800-53 PT-06 is specific to US Privacy Act. GDPR right of access is broader: confirmation of processing, access to data, information about processing purposes, categories, recipients, retention, rights, source, and automated decision-making."
+    },
+    {
+      "id": "Art.15(3)",
+      "title": "Right of access — copy of data",
+      "controls": [],
+      "coverage_pct": 15,
+      "rationale": "PT-06 partially relevant.",
+      "gaps": "SP 800-53 does not explicitly require providing a copy of personal data in a commonly used electronic format. GDPR requires the first copy free of charge."
+    },
+    {
+      "id": "Art.16",
+      "title": "Right to rectification",
+      "controls": [],
+      "coverage_pct": 15,
+      "rationale": "PT-06 partially relevant in US federal context.",
+      "gaps": "SP 800-53 has no general right to rectification control. GDPR requires controllers to rectify inaccurate personal data without undue delay and complete incomplete data."
+    },
+    {
+      "id": "Art.17(1)",
+      "title": "Right to erasure ('right to be forgotten')",
+      "controls": [
+        "AU-11",
+        "MP-06",
+        "SI-12",
+        "SR-12"
+      ],
+      "coverage_pct": 20,
+      "rationale": "DM-02 (Data Retention and Disposal) and MP-06 (Media Sanitization) cover data deletion mechanics.",
+      "gaps": "SP 800-53 covers data disposal mechanics but not the right to erasure triggered by data subject request. GDPR grounds for erasure (purpose fulfilled, consent withdrawn, objection, unlawful processing, legal obligation, child's data) not addressed."
+    },
+    {
+      "id": "Art.17(2)",
+      "title": "Right to erasure — notification to recipients",
+      "controls": [],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR requires controllers who have made personal data public to take reasonable steps to inform other controllers processing the data that the data subject has requested erasure. Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.18(1)",
+      "title": "Right to restriction of processing",
+      "controls": [],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR right to restriction allows data subjects to limit processing in specific circumstances (accuracy contested, unlawful processing, purpose fulfilled but data needed for legal claims, pending objection verification). Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.19",
+      "title": "Notification obligation regarding rectification or erasure or restriction",
+      "controls": [],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR requires controllers to communicate rectification, erasure, or restriction to each recipient to whom data was disclosed. Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.20(1)",
+      "title": "Right to data portability",
+      "controls": [],
+      "coverage_pct": 5,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR right to data portability requires providing personal data in a structured, commonly used, machine-readable format and transmitting to another controller. No SP 800-53 control addresses data portability."
+    },
+    {
+      "id": "Art.20(2)",
+      "title": "Right to data portability — direct transmission",
+      "controls": [],
+      "coverage_pct": 5,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR requires the right to have personal data transmitted directly from one controller to another where technically feasible. Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.21(1)",
+      "title": "Right to object",
+      "controls": [],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR right to object allows data subjects to object to processing based on legitimate interests or public interest, requiring controller to cease processing unless compelling grounds. Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.22(1)",
+      "title": "Automated individual decision-making, including profiling",
+      "controls": [
+        "PT-08"
+      ],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent. PT-08 (Computer Matching) covers matching in US federal context only.",
+      "gaps": "GDPR Art. 22 restricts solely automated decision-making producing legal or significant effects. Requires human intervention right, right to express views, right to contest. SP 800-53 PT-08 is limited to US federal computer matching agreements."
+    },
+    {
+      "id": "Art.22(2)",
+      "title": "Automated decision-making — exceptions allowing automated processing",
+      "controls": [
+        "PT-08"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-08 (Computer Matching) covers matching in US federal context only.",
+      "gaps": "GDPR Art. 22(2) exceptions (contractual necessity, legal authorisation, explicit consent) for automated decision-making have no SP 800-53 equivalent."
+    },
+    {
+      "id": "Art.22(3)",
+      "title": "Automated decision-making — safeguards",
+      "controls": [
+        "PT-08"
+      ],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR requires safeguards for automated decision-making including right to human intervention, express views, and contest the decision. Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.22(4)",
+      "title": "Automated decision-making — special categories",
+      "controls": [
+        "PT-08"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-08 (Computer Matching) partially relevant.",
+      "gaps": "GDPR restricts automated decisions based on special category data unless explicit consent or substantial public interest with suitable safeguards. Outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.24(1)",
+      "title": "Responsibility of the controller — appropriate measures",
+      "controls": [
+        "AC-01",
+        "AC-05",
+        "AT-04",
+        "AU-01",
+        "CA-01",
+        "CA-05",
+        "CA-06",
+        "PL-01",
+        "RA-01"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-01 (Program Plan), PM-02 (Senior Officer), PM-03 (Resources), PM-09 (Risk Strategy) address organizational security responsibilities.",
+      "gaps": "SP 800-53 covers program-level responsibilities but GDPR Art. 24 requires the controller to implement appropriate technical and organisational measures to ensure and demonstrate GDPR compliance, including data protection policies."
+    },
+    {
+      "id": "Art.24(2)",
+      "title": "Responsibility of the controller — data protection policies",
+      "controls": [
+        "AC-01"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-01 (Program Plan), PL-01 (Security Planning Policy) cover policy requirements.",
+      "gaps": "SP 800-53 covers security policies broadly. GDPR requires specific data protection policies proportionate to processing activities. The policy scope differs (security vs. data protection)."
+    },
+    {
+      "id": "Art.25(1)",
+      "title": "Data protection by design",
+      "controls": [
+        "AC-01",
+        "CM-01",
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "PL-01",
+        "PL-02",
+        "PL-03",
+        "PL-06",
+        "PT-06",
+        "SA-01",
+        "SA-02",
+        "SA-03",
+        "SA-06",
+        "SA-07",
+        "SA-08",
+        "SA-10",
+        "SA-11"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-08 (Security Engineering Principles), SA-17 (Developer Security Architecture), PT-03 (Processing Purposes) partially address by-design concepts.",
+      "gaps": "SP 800-53 covers security-by-design but GDPR data protection by design requires implementing data protection principles (minimisation, pseudonymisation) at the point of determining the means and processing. Privacy-specific engineering principles less developed."
+    },
+    {
+      "id": "Art.25(2)",
+      "title": "Data protection by default",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "AC-14",
+        "CM-06",
+        "CM-07",
+        "PT-06",
+        "SA-08",
+        "SI-09"
+      ],
+      "coverage_pct": 40,
+      "rationale": "CM-06 (Configuration Settings), DM-01 (Minimization of PII) partially address default settings.",
+      "gaps": "SP 800-53 covers secure defaults for systems. GDPR by-default requires that only personal data necessary for each specific purpose is processed by default, covering amount, extent, storage, and accessibility."
+    },
+    {
+      "id": "Art.28(1)",
+      "title": "Processor obligations — sufficient guarantees",
+      "controls": [
+        "AC-20",
+        "PS-07",
+        "SA-03",
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-09",
+        "SR-12"
+      ],
+      "coverage_pct": 50,
+      "rationale": "SA-04 (Acquisitions), SA-09 (External System Services), SR-01 (Supply Chain Policy) address third-party requirements.",
+      "gaps": "SP 800-53 covers supply chain and external services. GDPR Art. 28 requires specific contractual obligations including processing only on documented instructions, confidentiality, security measures, sub-processor management, assistance with data subject rights, deletion/return, and audit rights."
+    },
+    {
+      "id": "Art.28(2)",
+      "title": "Processor obligations — sub-processor authorisation",
+      "controls": [
+        "SR-03"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SR-03 (Supply Chain Controls) addresses sub-contractor management.",
+      "gaps": "SP 800-53 SR-03 covers supply chain controls but GDPR requires specific prior written authorisation for sub-processors and imposes the same data protection obligations via contract."
+    },
+    {
+      "id": "Art.28(3)",
+      "title": "Processor obligations — binding contract terms",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-04 (Acquisitions), SA-09 (External System Services) cover contractual requirements.",
+      "gaps": "GDPR requires specific contractual clauses including: processing on instructions only, confidentiality obligations, Art. 32 security measures, sub-processor conditions, data subject rights assistance, deletion/return after services end, audit cooperation."
+    },
+    {
+      "id": "Art.28(3)(a)",
+      "title": "Processor contract — processing on documented instructions",
+      "controls": [
+        "AC-20",
+        "CA-03",
+        "SA-04",
+        "SR-04",
+        "SR-05",
+        "SR-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-20 (External Systems), CA-03 (System Interconnections), SA-04 (Acquisitions), SR-04/SR-05/SR-07 (Supply Chain) address contractual requirements.",
+      "gaps": "SP 800-53 covers external system agreements. GDPR specifically requires processors to process only on documented controller instructions and inform the controller if an instruction infringes GDPR."
+    },
+    {
+      "id": "Art.28(3)(b)",
+      "title": "Processor contract — confidentiality obligations",
+      "controls": [
+        "MA-05",
+        "PS-03",
+        "PS-07"
+      ],
+      "coverage_pct": 60,
+      "rationale": "MA-05 (Maintenance Personnel), PS-03 (Personnel Screening), PS-07 (Third-Party Personnel) address personnel confidentiality.",
+      "gaps": "SP 800-53 covers personnel security for third parties. GDPR requires contractual commitment that authorised persons have committed to confidentiality or are under statutory confidentiality obligation."
+    },
+    {
+      "id": "Art.28(3)(c)",
+      "title": "Processor contract — security measures per Art. 32",
+      "controls": [
+        "SR-02"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SR-02 (Supply Chain Risk Management Plan) addresses security requirements for third parties.",
+      "gaps": "SP 800-53 SR-02 covers supply chain security. GDPR requires the processor to implement all measures required under Art. 32 (security of processing)."
+    },
+    {
+      "id": "Art.28(3)(f)",
+      "title": "Processor contract — audit and inspection rights",
+      "controls": [
+        "SR-08"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SR-08 (Notification Agreements) addresses supplier communication.",
+      "gaps": "SP 800-53 SR-08 covers notification. GDPR requires processors to make available all information necessary for demonstrating compliance and allow audits/inspections by the controller."
+    },
+    {
+      "id": "Art.28(3)(g)",
+      "title": "Processor contract — data deletion/return after services end",
+      "controls": [
+        "SR-12"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SR-12 (Component Disposal) addresses data disposal.",
+      "gaps": "SP 800-53 SR-12 covers disposal. GDPR requires deletion or return of all personal data after the end of service provision, and deletion of existing copies unless storage is required by law."
+    },
+    {
+      "id": "Art.28(3)(h)",
+      "title": "Processor contract — compliance demonstration and audit cooperation",
+      "controls": [
+        "SR-02",
+        "SR-04",
+        "SR-05",
+        "SR-06",
+        "SR-07",
+        "SR-10",
+        "SR-11"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SR-02/SR-04/SR-05/SR-06/SR-07/SR-10/SR-11 (Supply Chain family) provide supplier assessment capabilities.",
+      "gaps": "SP 800-53 SR family covers supplier assessment. GDPR requires processors to make available all information for compliance demonstration and cooperate with audits."
+    },
+    {
+      "id": "Art.28(4)",
+      "title": "Processor obligations — sub-processor contract obligations",
+      "controls": [
+        "SR-01",
+        "SR-03",
+        "SR-09"
+      ],
+      "coverage_pct": 50,
+      "rationale": "SR-01 (Supply Chain Policy), SR-03 (Controls), SR-09 (Acquisition Strategies) address sub-contractor management.",
+      "gaps": "SP 800-53 covers supply chain cascading. GDPR requires same data protection obligations on sub-processors via contract, with initial processor remaining liable."
+    },
+    {
+      "id": "Art.29",
+      "title": "Processing under the authority of the controller or processor",
+      "controls": [
+        "AT-03",
+        "PL-04",
+        "PS-04",
+        "PS-05",
+        "PS-06"
+      ],
+      "coverage_pct": 60,
+      "rationale": "AT-03 (Role-Based Training), PL-04 (Rules of Behaviour), PS-04/PS-05/PS-06 (Personnel) address personnel processing authority.",
+      "gaps": "SP 800-53 covers personnel authorisation and training. GDPR requires that persons acting under controller/processor authority process data only on instructions (unless required by EU/member state law)."
+    },
+    {
+      "id": "Art.30(1)",
+      "title": "Records of processing activities — controller",
+      "controls": [
+        "AU-01",
+        "AU-04",
+        "AU-07",
+        "CM-08",
+        "RA-02",
+        "SA-05"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PM-05 (System Inventory) and PT-03 (Processing Purposes) partially address processing records.",
+      "gaps": "SP 800-53 covers system inventories but GDPR Art. 30 requires specific records of processing activities including: purposes, data categories, recipient categories, third-country transfers, retention periods, and security measures description."
+    },
+    {
+      "id": "Art.30(1)(g)",
+      "title": "Records of processing — security measures description",
+      "controls": [
+        "AU-02",
+        "AU-03"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AU-02 (Audit Events), AU-03 (Content of Audit Records) document security measures.",
+      "gaps": "SP 800-53 documents security measures through audit policies. GDPR requires a general description of technical and organisational security measures in processing records."
+    },
+    {
+      "id": "Art.30(2)",
+      "title": "Records of processing activities — processor",
+      "controls": [
+        "AU-01"
+      ],
+      "coverage_pct": 20,
+      "rationale": "PM-05 (System Inventory) partially relevant.",
+      "gaps": "GDPR requires processors to maintain records including: categories of processing, controller details, third-country transfers, and security measures. SP 800-53 does not distinguish controller/processor record requirements."
+    },
+    {
+      "id": "Art.30(2)(d)",
+      "title": "Records of processing — processor security measures description",
+      "controls": [
+        "SR-11"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SR-11 (Component Authenticity) partially relevant.",
+      "gaps": "GDPR requires processor records to include a general description of Art. 32 security measures. SP 800-53 does not require processors to maintain such records."
+    },
+    {
+      "id": "Art.32(1)",
+      "title": "Security of processing — appropriate technical and organisational measures",
+      "controls": [
+        "RA-01",
+        "RA-03",
+        "SA-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SP 800-53 control families comprehensively address technical and organisational security measures including AC, AU, CM, CP, IA, IR, PE, SC, SI families.",
+      "gaps": "Minor gap. SP 800-53 provides excellent coverage of security measures. GDPR Art. 32 specifically mentions pseudonymisation, encryption, confidentiality/integrity/availability/resilience, restoration ability, and regular testing — all covered by SP 800-53."
+    },
+    {
+      "id": "Art.32(1)(a)",
+      "title": "Security measures — pseudonymisation and encryption",
+      "controls": [
+        "AC-04",
+        "AC-17",
+        "AC-18",
+        "AC-19",
+        "CA-03",
+        "IA-05",
+        "IA-07",
+        "MA-04",
+        "MP-01",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "SC-01",
+        "SC-03",
+        "SC-04",
+        "SC-07",
+        "SC-08",
+        "SC-09",
+        "SC-11",
+        "SC-12",
+        "SC-13",
+        "SC-14",
+        "SC-16",
+        "SC-17",
+        "SC-19",
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "SC-23",
+        "SI-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-13 (Cryptographic Protection), SC-28 (Protection at Rest), SC-08 (Transmission Confidentiality). DM-01 covers data minimisation techniques.",
+      "gaps": "SP 800-53 covers encryption well. Pseudonymisation as a specific GDPR concept is not directly addressed — it's broader than de-identification and requires the ability to re-identify with additional information kept separately."
+    },
+    {
+      "id": "Art.32(1)(b)",
+      "title": "Security measures — confidentiality, integrity, availability, resilience",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-17",
+        "AC-18",
+        "AC-19",
+        "AC-20",
+        "AU-05",
+        "AU-09",
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CP-01",
+        "CP-02",
+        "CP-08",
+        "IA-01",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "MA-01",
+        "MA-02",
+        "MA-03",
+        "MA-04",
+        "MP-02",
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-08",
+        "PE-16",
+        "PE-17",
+        "PS-04",
+        "PS-05",
+        "SC-01",
+        "SC-02",
+        "SC-03",
+        "SC-05",
+        "SC-06",
+        "SC-07",
+        "SC-10",
+        "SC-15",
+        "SC-18",
+        "SC-23",
+        "SI-01",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07",
+        "SI-08",
+        "SI-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC family (confidentiality), SI family (integrity), CP family (availability), SC family (resilience). SP 800-53 core strength.",
+      "gaps": "Minimal gap. SP 800-53 provides comprehensive CIA coverage. GDPR explicitly adds 'resilience of processing systems' which CP and SC families address."
+    },
+    {
+      "id": "Art.32(1)(c)",
+      "title": "Security measures — restore availability and access after incident",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-05",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP-09 (Backup), CP-10 (Recovery), CP-02 (Contingency Plan), IR-04 (Incident Handling) directly address recovery capabilities.",
+      "gaps": "Minimal gap. SP 800-53 CP and IR families provide strong recovery and restoration controls."
+    },
+    {
+      "id": "Art.32(1)(d)",
+      "title": "Security measures — regular testing and evaluation",
+      "controls": [
+        "AC-07",
+        "AC-09",
+        "AC-13",
+        "AU-05",
+        "AU-06",
+        "CA-01",
+        "CA-02",
+        "CA-04",
+        "CA-05",
+        "CA-07",
+        "CM-03",
+        "CM-04",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-05",
+        "CP-10",
+        "IA-01",
+        "IA-02",
+        "IR-03",
+        "MA-02",
+        "MA-06",
+        "PE-06",
+        "RA-04",
+        "RA-05",
+        "SA-10",
+        "SA-11",
+        "SI-02",
+        "SI-04",
+        "SI-05",
+        "SI-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-02 (Security Assessments), CA-07 (Continuous Monitoring), CP-04 (Contingency Testing), IR-03 (Incident Response Testing) address regular testing.",
+      "gaps": "Minor gap. SP 800-53 provides comprehensive testing and assessment controls that align with GDPR Art. 32(1)(d) regular testing requirements."
+    },
+    {
+      "id": "Art.32(2)",
+      "title": "Security measures — risk assessment for appropriate level",
+      "controls": [
+        "AC-01",
+        "CA-01"
+      ],
+      "coverage_pct": 80,
+      "rationale": "RA-03 (Risk Assessment), RA-05 (Vulnerability Scanning), PM-09 (Risk Management Strategy) address risk-based security measures.",
+      "gaps": "SP 800-53 covers risk assessment comprehensively. Minor gap: GDPR specifically requires considering risks of accidental or unlawful destruction, loss, alteration, unauthorised disclosure or access."
+    },
+    {
+      "id": "Art.32(4)",
+      "title": "Security measures — personnel authorisation and confidentiality",
+      "controls": [
+        "AC-02",
+        "AT-03",
+        "MA-05",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-06",
+        "PS-07",
+        "PS-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PS family (Personnel Security), AC-02 (Account Management), AT-02 (Awareness Training) address personnel controls.",
+      "gaps": "Minor gap. SP 800-53 PS and AT families cover personnel security and authorisation requirements well."
+    },
+    {
+      "id": "Art.33(1)",
+      "title": "Notification of breach to supervisory authority — 72 hours",
+      "controls": [
+        "AU-08",
+        "IR-01",
+        "IR-04",
+        "IR-06",
+        "IR-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "IR-06 (Incident Reporting) addresses incident reporting. IR-01 (Incident Response Policy) establishes reporting procedures.",
+      "gaps": "SP 800-53 IR-06 covers incident reporting but does not specify 72-hour notification to a supervisory authority. GDPR requires notification unless unlikely to result in risk to data subjects. Regulatory reporting specifics (authority contact, format, content) not addressed."
+    },
+    {
+      "id": "Art.33(2)",
+      "title": "Notification of breach — processor to controller notification",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-06",
+        "SR-08"
+      ],
+      "coverage_pct": 45,
+      "rationale": "IR-06 (Incident Reporting), SA-09 (External System Services) partially address processor notification.",
+      "gaps": "SP 800-53 covers incident reporting but does not specifically require processors to notify controllers 'without undue delay' upon becoming aware of a breach. GDPR processor-to-controller breach notification chain not explicitly addressed."
+    },
+    {
+      "id": "Art.33(3)",
+      "title": "Notification of breach — content requirements",
+      "controls": [
+        "AU-02",
+        "IR-04"
+      ],
+      "coverage_pct": 40,
+      "rationale": "IR-06 (Incident Reporting), AU-03 (Content of Audit Records) partially address reporting content.",
+      "gaps": "GDPR requires specific breach notification content: nature of breach, DPO contact, likely consequences, measures taken/proposed. SP 800-53 IR-06 covers general reporting but not GDPR-specific content requirements."
+    },
+    {
+      "id": "Art.33(3)(a)",
+      "title": "Breach notification content — nature of breach",
+      "controls": [
+        "AU-03"
+      ],
+      "coverage_pct": 45,
+      "rationale": "AU-03 (Content of Audit Records) addresses incident documentation content.",
+      "gaps": "SP 800-53 covers audit record content. GDPR requires breach notifications to describe the nature of the breach including categories and approximate numbers of data subjects and records."
+    },
+    {
+      "id": "Art.33(3)(b)",
+      "title": "Breach notification content — DPO contact details",
+      "controls": [
+        "AU-03"
+      ],
+      "coverage_pct": 25,
+      "rationale": "AU-03 partially relevant.",
+      "gaps": "SP 800-53 does not require DPO contact details in breach notifications. GDPR mandates the name and contact details of the DPO or other contact point."
+    },
+    {
+      "id": "Art.33(3)(d)",
+      "title": "Breach notification content — measures taken",
+      "controls": [
+        "AU-06",
+        "IR-05"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AU-06 (Audit Review and Reporting), IR-05 (Incident Monitoring) address incident response reporting.",
+      "gaps": "SP 800-53 covers incident response reporting. GDPR requires specific description of measures taken or proposed to address the breach and mitigate adverse effects."
+    },
+    {
+      "id": "Art.33(4)",
+      "title": "Breach notification — phased provision of information",
+      "controls": [
+        "IR-04"
+      ],
+      "coverage_pct": 45,
+      "rationale": "IR-04 (Incident Handling) supports phased incident response.",
+      "gaps": "SP 800-53 IR-04 covers incident handling processes. GDPR allows phased notification without undue further delay where information cannot be provided at the same time."
+    },
+    {
+      "id": "Art.33(5)",
+      "title": "Breach notification — documentation requirement",
+      "controls": [
+        "IR-03",
+        "IR-05"
+      ],
+      "coverage_pct": 55,
+      "rationale": "IR-03 (Incident Response Testing), IR-05 (Incident Monitoring) support breach documentation.",
+      "gaps": "SP 800-53 covers incident documentation. GDPR requires documentation of all breaches including facts, effects, and remedial actions to enable supervisory authority verification."
+    },
+    {
+      "id": "Art.34(1)",
+      "title": "Communication of breach to data subject — high risk",
+      "controls": [
+        "IR-01",
+        "IR-04",
+        "IR-06",
+        "IR-07"
+      ],
+      "coverage_pct": 30,
+      "rationale": "IR-06 (Incident Reporting), IR-07 (Incident Response Assistance) partially relevant.",
+      "gaps": "SP 800-53 does not require breach notification to affected individuals (data subjects) when the breach is likely to result in high risk. GDPR requires 'without undue delay' communication in clear and plain language."
+    },
+    {
+      "id": "Art.34(2)",
+      "title": "Breach communication to data subject — content",
+      "controls": [
+        "IR-01",
+        "IR-07"
+      ],
+      "coverage_pct": 35,
+      "rationale": "IR-01 (Incident Response Policy), IR-07 (Incident Response Assistance) partially relevant.",
+      "gaps": "SP 800-53 covers incident response procedures. GDPR requires communication to data subjects in clear and plain language describing the nature of the breach and providing DPO contact, likely consequences, and measures taken."
+    },
+    {
+      "id": "Art.34(3)",
+      "title": "Communication of breach to data subject — exceptions",
+      "controls": [
+        "IR-06"
+      ],
+      "coverage_pct": 20,
+      "rationale": "IR-06 partially relevant.",
+      "gaps": "GDPR provides exceptions from data subject notification (encryption, measures eliminating risk, disproportionate effort with public communication). SP 800-53 has no equivalent exception framework for breach notification."
+    },
+    {
+      "id": "Art.35(1)",
+      "title": "Data protection impact assessment — requirement",
+      "controls": [
+        "CA-02",
+        "CM-04",
+        "PL-02",
+        "PL-05",
+        "PL-06",
+        "PT-06",
+        "RA-01",
+        "RA-03"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-03 (Risk Assessment), RA-08 (Privacy Impact Assessment — US federal) partially address impact assessment.",
+      "gaps": "SP 800-53 RA-08 covers US Privacy Impact Assessment (PIA). GDPR DPIA is different: triggered by high-risk processing, requires systematic description, necessity/proportionality assessment, risk assessment to data subjects, and planned mitigation measures."
+    },
+    {
+      "id": "Art.35(3)",
+      "title": "DPIA — mandatory cases",
+      "controls": [],
+      "coverage_pct": 25,
+      "rationale": "RA-03 (Risk Assessment) partially relevant.",
+      "gaps": "GDPR mandates DPIA for: systematic/extensive automated processing including profiling, large-scale special categories, and large-scale systematic public monitoring. SP 800-53 has no equivalent mandatory DPIA triggers."
+    },
+    {
+      "id": "Art.35(7)",
+      "title": "DPIA — minimum content",
+      "controls": [
+        "CA-02",
+        "PL-02",
+        "PL-05",
+        "PT-06"
+      ],
+      "coverage_pct": 30,
+      "rationale": "RA-03 (Risk Assessment), RA-08 (Privacy Impact Assessment) partially address assessment content.",
+      "gaps": "GDPR DPIA must contain: systematic description of processing, necessity/proportionality assessment, risk assessment, and planned measures including safeguards and compliance demonstration mechanisms. SP 800-53 RA-08 PIA has different content requirements."
+    },
+    {
+      "id": "Art.35(7)(a)",
+      "title": "DPIA content — systematic description of processing",
+      "controls": [
+        "CM-08",
+        "RA-02"
+      ],
+      "coverage_pct": 35,
+      "rationale": "CM-08 (Component Inventory), RA-02 (Security Categorization) address system documentation.",
+      "gaps": "SP 800-53 covers system documentation. GDPR DPIA requires systematic description of processing operations, purposes, and legitimate interest if applicable."
+    },
+    {
+      "id": "Art.35(7)(c)",
+      "title": "DPIA content — risk assessment to data subjects",
+      "controls": [
+        "RA-03"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-03 (Risk Assessment) addresses risk assessment methodology.",
+      "gaps": "SP 800-53 RA-03 covers system risk assessment. GDPR DPIA requires assessment of risks to the rights and freedoms of data subjects specifically, not just system/organisational risk."
+    },
+    {
+      "id": "Art.35(11)",
+      "title": "DPIA — review when processing changes",
+      "controls": [
+        "CA-07",
+        "RA-04"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CA-07 (Continuous Monitoring), RA-04 (Risk Assessment Update) address ongoing assessment.",
+      "gaps": "SP 800-53 covers continuous monitoring and risk updates. GDPR requires DPIA review when there is a change in the risk represented by processing operations."
+    },
+    {
+      "id": "Art.36(1)",
+      "title": "Prior consultation with supervisory authority",
+      "controls": [
+        "CA-06",
+        "PL-05"
+      ],
+      "coverage_pct": 5,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR requires prior consultation with the supervisory authority when a DPIA indicates high residual risk. SP 800-53 has no equivalent regulatory consultation requirement."
+    },
+    {
+      "id": "Art.37(1)",
+      "title": "Designation of the data protection officer",
+      "controls": [],
+      "coverage_pct": 15,
+      "rationale": "PM-02 (Senior Information Security Officer) assigns a security role.",
+      "gaps": "SP 800-53 PM-02 assigns a senior security role but the DPO under GDPR is a distinct role with specific designation criteria (public authority, large-scale monitoring, large-scale special categories), required expertise, and independence requirements."
+    },
+    {
+      "id": "Art.38(3)",
+      "title": "Position of the DPO — independence and non-dismissal",
+      "controls": [],
+      "coverage_pct": 5,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR requires DPO independence: no instructions regarding task exercise, no dismissal/penalty for performing duties, reports to highest management level. SP 800-53 has no concept of protected independence for privacy roles."
+    },
+    {
+      "id": "Art.39(1)",
+      "title": "Tasks of the DPO",
+      "controls": [],
+      "coverage_pct": 10,
+      "rationale": "PM-02 (Senior Officer) partially relevant for role definition.",
+      "gaps": "GDPR defines specific DPO tasks: inform/advise on GDPR obligations, monitor compliance, advise on DPIAs, cooperate with supervisory authority, act as contact point. These specific tasks have no SP 800-53 equivalent."
+    },
+    {
+      "id": "Art.39(1)(b)",
+      "title": "DPO tasks — monitoring compliance including training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-05",
+        "IR-02",
+        "PL-04",
+        "PS-01"
+      ],
+      "coverage_pct": 30,
+      "rationale": "AT-01/AT-02/AT-05 (Awareness Training), IR-02 (Incident Response Training), PL-04 (Rules of Behaviour), PS-01 (Personnel Policy) support compliance monitoring.",
+      "gaps": "SP 800-53 covers security training and awareness. GDPR DPO tasks include monitoring GDPR compliance, assigning responsibilities, raising awareness, and training staff involved in processing operations."
+    },
+    {
+      "id": "Art.44",
+      "title": "General principle for transfers to third countries",
+      "controls": [
+        "AC-04",
+        "AC-17",
+        "MP-05",
+        "SA-09"
+      ],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR restricts international transfers of personal data to countries without adequate protection. SP 800-53 has no data localisation or cross-border transfer restrictions."
+    },
+    {
+      "id": "Art.46(1)",
+      "title": "Transfers subject to appropriate safeguards",
+      "controls": [
+        "AC-04",
+        "SA-09"
+      ],
+      "coverage_pct": 10,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR requires appropriate safeguards for transfers including standard contractual clauses (SCCs), binding corporate rules, or approved codes of conduct/certifications. Entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Art.46(2)",
+      "title": "Appropriate safeguards — specific instruments for transfers",
+      "controls": [
+        "SA-09"
+      ],
+      "coverage_pct": 15,
+      "rationale": "SA-09 (External System Services) partially addresses external service agreements.",
+      "gaps": "GDPR Art. 46(2) lists specific transfer safeguards (SCCs, BCRs, codes of conduct, certifications). SP 800-53 covers external service agreements but not international transfer-specific instruments."
+    },
+    {
+      "id": "Art.47(2)(n)",
+      "title": "Binding corporate rules — training content",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03"
+      ],
+      "coverage_pct": 40,
+      "rationale": "AT-01/AT-02/AT-03 (Awareness and Training) address training requirements.",
+      "gaps": "SP 800-53 covers security training. GDPR requires BCRs to include appropriate data protection training for personnel with permanent or regular access to personal data."
+    },
+    {
+      "id": "Art.49(1)",
+      "title": "Derogations for specific situations",
+      "controls": [],
+      "coverage_pct": 5,
+      "rationale": "No SP 800-53 equivalent.",
+      "gaps": "GDPR derogations for transfers (explicit consent, contractual necessity, public interest, legal claims, vital interests) are legal framework provisions entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "Rec.78",
+      "title": "Recital 78 — appropriate technical and organisational measures",
+      "controls": [
+        "AT-01",
+        "CM-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PS-01",
+        "SA-01",
+        "SA-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AT-01/CM-01/MA-01/MP-01/PE-01/PS-01/SA-01 (Policy controls), SA-08 (Security Engineering) address organisational and technical measures.",
+      "gaps": "SP 800-53 provides comprehensive policy and engineering controls. Rec.78 specifically calls for data protection by design and by default, data minimisation, and pseudonymisation."
+    },
+    {
+      "id": "Rec.83",
+      "title": "Recital 83 — security measures including encryption",
+      "controls": [
+        "IA-07",
+        "SC-08",
+        "SC-09",
+        "SC-12",
+        "SC-13",
+        "SC-17"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-07 (Cryptographic Module Authentication), SC-08/SC-09 (Transmission Integrity/Confidentiality), SC-12/SC-13/SC-17 (Cryptography) provide comprehensive encryption and security controls.",
+      "gaps": "Minimal gap. SP 800-53 cryptographic controls align well with Rec.83 security measures including encryption and pseudonymisation."
+    }
+  ],
+  "summary": {
+    "total_clauses": 95,
+    "average_coverage": 35.5,
+    "full_count": 7,
+    "substantial_count": 3,
+    "partial_count": 32,
+    "weak_count": 53,
+    "none_count": 0
+  }
+}

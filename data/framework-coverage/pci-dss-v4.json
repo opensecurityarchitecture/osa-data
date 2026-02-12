@@ -4,8 +4,8 @@
   "framework_name": "PCI DSS v4.0.1",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates all 303 active SP 800-53 Rev 5 controls including new Rev 5 additions (CA-09, CM-12, CM-13, CM-14, IR-09, PL-09, PL-10, PL-11, RA-07, SC-24, SC-26, SC-34, SC-35, SC-37, SC-44, SC-45, SI-16). Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -39,155 +39,161 @@
       "id": "1.1",
       "title": "Processes and mechanisms for installing and maintaining network security controls are defined and understood",
       "controls": [
-        "SC-7",
-        "PL-1",
-        "CM-1"
+        "SC-07",
+        "PL-01",
+        "CM-01"
       ],
       "coverage_pct": 85,
-      "rationale": "SC-7 boundary protection; PL-1 security planning policy; CM-1 configuration management policy.",
+      "rationale": "SC-07 boundary protection; PL-01 security planning policy; CM-01 configuration management policy.",
       "gaps": "Minor: PCI requires specific network security control documentation. SP 800-53 covers through policy and boundary controls."
     },
     {
       "id": "1.2",
       "title": "Network security controls (NSCs) are configured and maintained",
       "controls": [
-        "SC-7",
-        "CM-6",
-        "CM-2",
-        "AC-4"
+        "SC-07",
+        "CM-06",
+        "CM-02",
+        "AC-04",
+        "CA-09"
       ],
       "coverage_pct": 90,
-      "rationale": "SC-7 boundary protection with configuration; CM-6 configuration settings; CM-2 baselines; AC-4 information flow.",
+      "rationale": "SC-07 boundary protection with configuration; CM-06 configuration settings; CM-02 baselines; AC-04 information flow; CA-09 (new in Rev 5) internal system connections for internal NSC management.",
       "gaps": "Minimal gap."
     },
     {
       "id": "1.2.1",
       "title": "Configuration standards for NSC rulesets are defined, implemented, maintained",
       "controls": [
-        "SC-7",
-        "CM-2",
-        "CM-6"
+        "SC-07",
+        "CM-02",
+        "CM-06"
       ],
       "coverage_pct": 90,
-      "rationale": "SC-7 configuration; CM-2 baseline configuration; CM-6 configuration settings.",
+      "rationale": "SC-07 configuration; CM-02 baseline configuration; CM-06 configuration settings.",
       "gaps": "Minimal gap."
     },
     {
       "id": "1.2.5",
       "title": "All services, protocols, and ports allowed are identified, approved, and have a defined business need",
       "controls": [
-        "CM-7",
-        "SC-7(5)"
+        "CM-07",
+        "SC-07(5)"
       ],
       "coverage_pct": 95,
-      "rationale": "CM-7 least functionality (deny by default); SC-7(5) deny by default/allow by exception.",
+      "rationale": "CM-07 least functionality (deny by default); SC-07(5) deny by default/allow by exception.",
       "gaps": "Minimal gap."
     },
     {
       "id": "1.2.8",
       "title": "Configuration files for NSCs are secured from unauthorized access and kept consistent with active network configurations",
       "controls": [
-        "CM-6",
-        "AC-3",
-        "CM-3"
+        "CM-06",
+        "AC-03",
+        "CM-03"
       ],
       "coverage_pct": 90,
-      "rationale": "CM-6 configuration file management; AC-3 access enforcement; CM-3 change control.",
+      "rationale": "CM-06 configuration file management; AC-03 access enforcement; CM-03 change control.",
       "gaps": "Minimal gap."
     },
     {
       "id": "1.3",
       "title": "Network access to and from the cardholder data environment is restricted",
       "controls": [
-        "SC-7",
-        "AC-4",
-        "SC-7(5)"
+        "SC-07",
+        "AC-04",
+        "SC-07(5)",
+        "CA-09"
       ],
       "coverage_pct": 95,
-      "rationale": "SC-7 boundary protection; AC-4 information flow enforcement; SC-7(5) deny by default.",
+      "rationale": "SC-07 boundary protection; AC-04 information flow enforcement; SC-07(5) deny by default; CA-09 (new in Rev 5) internal system connections strengthens internal CDE boundary controls.",
       "gaps": "Minimal gap."
     },
     {
       "id": "1.4",
       "title": "Network connections between trusted and untrusted networks are controlled",
       "controls": [
-        "SC-7",
-        "SC-7(4)",
-        "SC-7(5)",
-        "SC-7(11)"
+        "SC-07",
+        "SC-07(4)",
+        "SC-07(5)",
+        "SC-07(11)"
       ],
       "coverage_pct": 95,
-      "rationale": "SC-7 with boundary control enhancements for DMZ, filtering, and restricted connections.",
+      "rationale": "SC-07 with boundary control enhancements for DMZ, filtering, and restricted connections.",
       "gaps": "Minimal gap."
     },
     {
       "id": "1.5",
       "title": "Risks to the CDE from computing devices that are able to connect to both untrusted networks and the CDE are mitigated",
       "controls": [
-        "SC-7",
+        "SC-07",
         "AC-19",
         "AC-20"
       ],
       "coverage_pct": 85,
-      "rationale": "SC-7 boundary; AC-19 mobile device access; AC-20 external system use.",
+      "rationale": "SC-07 boundary; AC-19 mobile device access; AC-20 external system use.",
       "gaps": "Minor: PCI specifically addresses dual-homed devices. SP 800-53 covers through general boundary and device controls."
     },
     {
       "id": "2.1",
       "title": "Processes and mechanisms for applying secure configurations to all system components are defined and understood",
       "controls": [
-        "CM-1",
-        "CM-2",
-        "CM-6"
+        "CM-01",
+        "CM-02",
+        "CM-06",
+        "PL-10",
+        "PL-11"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-1 configuration management policy; CM-2 baseline; CM-6 settings.",
+      "coverage_pct": 92,
+      "rationale": "CM-01 configuration management policy; CM-02 baseline; CM-06 settings; PL-10 (new in Rev 5) baseline selection establishes configuration baseline criteria; PL-11 (new in Rev 5) baseline tailoring refines baselines per environment.",
       "gaps": "Minimal gap."
     },
     {
       "id": "2.2",
       "title": "System components are configured and managed securely",
       "controls": [
-        "CM-2",
-        "CM-6",
-        "CM-7"
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "PL-10",
+        "PL-11"
       ],
       "coverage_pct": 95,
-      "rationale": "CM-2 baseline configuration; CM-6 configuration settings; CM-7 least functionality.",
+      "rationale": "CM-02 baseline configuration; CM-06 configuration settings; CM-07 least functionality; PL-10/PL-11 (new in Rev 5) baseline selection and tailoring strengthen secure configuration processes.",
       "gaps": "Minimal gap."
     },
     {
       "id": "2.2.1",
       "title": "Vendor default accounts are managed: changed, removed, or disabled",
       "controls": [
-        "CM-6",
-        "AC-2",
-        "IA-5"
+        "CM-06",
+        "AC-02",
+        "IA-05"
       ],
       "coverage_pct": 90,
-      "rationale": "CM-6 configuration settings (change defaults); AC-2 account management; IA-5 authenticator management.",
+      "rationale": "CM-06 configuration settings (change defaults); AC-02 account management; IA-05 authenticator management.",
       "gaps": "Minimal gap."
     },
     {
       "id": "2.2.2",
       "title": "Vendor default accounts are managed if used",
       "controls": [
-        "AC-2",
-        "IA-5",
-        "CM-6"
+        "AC-02",
+        "IA-05",
+        "CM-06"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-2 account management; IA-5 authenticator management; CM-6 settings.",
+      "rationale": "AC-02 account management; IA-05 authenticator management; CM-06 settings.",
       "gaps": "Minimal gap."
     },
     {
       "id": "2.2.5",
       "title": "All unnecessary functionality is removed or disabled",
       "controls": [
-        "CM-7"
+        "CM-07"
       ],
       "coverage_pct": 95,
-      "rationale": "CM-7 directly covers least functionality (remove unnecessary services, ports, protocols).",
+      "rationale": "CM-07 directly covers least functionality (remove unnecessary services, ports, protocols).",
       "gaps": "Minimal gap."
     },
     {
@@ -195,11 +201,11 @@
       "title": "All non-console administrative access is encrypted using strong cryptography",
       "controls": [
         "AC-17",
-        "SC-8",
+        "SC-08",
         "SC-13"
       ],
       "coverage_pct": 95,
-      "rationale": "AC-17 remote access with encryption; SC-8 transmission protection; SC-13 cryptographic protection.",
+      "rationale": "AC-17 remote access with encryption; SC-08 transmission protection; SC-13 cryptographic protection.",
       "gaps": "Minimal gap."
     },
     {
@@ -207,22 +213,24 @@
       "title": "Processes and mechanisms for protecting stored account data are defined and understood",
       "controls": [
         "SC-28",
-        "MP-1",
-        "PL-1"
+        "MP-01",
+        "PL-01",
+        "CM-12"
       ],
-      "coverage_pct": 85,
-      "rationale": "SC-28 protection at rest; MP-1 media policy; PL-1 security planning.",
-      "gaps": "Minor: PCI requires specific account data protection documentation. SP 800-53 covers through general data protection controls."
+      "coverage_pct": 87,
+      "rationale": "SC-28 protection at rest; MP-01 media policy; PL-01 security planning; CM-12 (new in Rev 5) information location identifies where stored account data resides.",
+      "gaps": "Minor: PCI requires specific account data protection documentation. CM-12 strengthens data location awareness."
     },
     {
       "id": "3.2",
       "title": "Storage of account data is kept to a minimum",
       "controls": [
         "SI-12",
-        "PM-25"
+        "PM-25",
+        "CM-12"
       ],
-      "coverage_pct": 75,
-      "rationale": "SI-12 information lifecycle; PM-25 minimization of PII.",
+      "coverage_pct": 78,
+      "rationale": "SI-12 information lifecycle; PM-25 minimization of PII; CM-12 (new in Rev 5) information location helps identify stored data for minimization.",
       "gaps": "PCI requires specific data retention policies and purging for account data. SP 800-53 covers data minimization but PCI-specific account data requirements need supplementation."
     },
     {
@@ -230,22 +238,23 @@
       "title": "Sensitive authentication data (SAD) is not stored after authorization",
       "controls": [
         "SI-12",
-        "SC-28"
+        "SC-28",
+        "CM-13"
       ],
-      "coverage_pct": 65,
-      "rationale": "SI-12 information lifecycle; SC-28 protection of information at rest.",
+      "coverage_pct": 68,
+      "rationale": "SI-12 information lifecycle; SC-28 protection of information at rest; CM-13 (new in Rev 5) data action mapping helps trace SAD through processing to verify non-storage.",
       "gaps": "PCI has very specific requirements about SAD non-storage (CVV, PIN, track data). SP 800-53 doesn't address payment-specific data types."
     },
     {
       "id": "3.4",
       "title": "Access to displays of full PAN and ability to copy cardholder data are restricted",
       "controls": [
-        "AC-3",
-        "AC-6",
+        "AC-03",
+        "AC-06",
         "SI-19"
       ],
       "coverage_pct": 70,
-      "rationale": "AC-3 access enforcement; AC-6 least privilege; SI-19 de-identification.",
+      "rationale": "AC-03 access enforcement; AC-06 least privilege; SI-19 de-identification.",
       "gaps": "PCI specifically requires PAN masking/truncation displays. SP 800-53 covers access restriction but PAN-specific display controls are payment-industry specific."
     },
     {
@@ -255,10 +264,11 @@
         "SC-28",
         "SC-28(1)",
         "SC-12",
-        "SC-13"
+        "SC-13",
+        "CM-12"
       ],
-      "coverage_pct": 80,
-      "rationale": "SC-28 protection at rest with encryption; SC-12 key management; SC-13 cryptographic protection.",
+      "coverage_pct": 82,
+      "rationale": "SC-28 protection at rest with encryption; SC-12 key management; SC-13 cryptographic protection; CM-12 (new in Rev 5) information location ensures all PAN storage locations are identified.",
       "gaps": "PCI has specific PAN encryption requirements (disk vs. field-level). SP 800-53 covers encryption at rest generally but PAN-specific requirements need supplementation."
     },
     {
@@ -286,110 +296,118 @@
       "id": "4.1",
       "title": "Processes and mechanisms for protecting cardholder data with strong cryptography during transmission over open, public networks are defined and understood",
       "controls": [
-        "SC-8",
+        "SC-08",
         "SC-13",
-        "PL-1"
+        "PL-01",
+        "CM-13"
       ],
-      "coverage_pct": 85,
-      "rationale": "SC-8 transmission protection; SC-13 cryptographic protection; PL-1 security planning.",
-      "gaps": "Minor: PCI-specific transmission scope."
+      "coverage_pct": 87,
+      "rationale": "SC-08 transmission protection; SC-13 cryptographic protection; PL-01 security planning; CM-13 (new in Rev 5) data action mapping documents cardholder data flows to identify transmission paths.",
+      "gaps": "Minor: CM-13 strengthens transmission scope identification. PCI-specific transmission scope requirements remain."
     },
     {
       "id": "4.2",
       "title": "PAN is protected with strong cryptography during transmission",
       "controls": [
-        "SC-8",
-        "SC-8(1)",
-        "SC-13"
+        "SC-08",
+        "SC-08(1)",
+        "SC-13",
+        "CM-13"
       ],
       "coverage_pct": 90,
-      "rationale": "SC-8 transmission confidentiality/integrity; SC-8(1) cryptographic protection; SC-13 cryptographic protection.",
-      "gaps": "Minimal gap. SP 800-53 transmission encryption controls are comprehensive."
+      "rationale": "SC-08 transmission confidentiality/integrity; SC-08(1) cryptographic protection; SC-13 cryptographic protection; CM-13 (new in Rev 5) data action mapping ensures all PAN transmission paths are mapped.",
+      "gaps": "Minimal gap. SP 800-53 transmission encryption controls are comprehensive; CM-13 adds data flow visibility."
     },
     {
       "id": "5.1",
       "title": "Processes and mechanisms for protecting all systems and networks from malicious software are defined and understood",
       "controls": [
-        "SI-3",
-        "SI-1",
-        "PL-1"
+        "SI-03",
+        "SI-01",
+        "PL-01"
       ],
       "coverage_pct": 90,
-      "rationale": "SI-3 malicious code protection; SI-1 system and information integrity policy.",
+      "rationale": "SI-03 malicious code protection; SI-01 system and information integrity policy.",
       "gaps": "Minimal gap."
     },
     {
       "id": "5.2",
       "title": "Malicious software (malware) is prevented, or detected and addressed",
       "controls": [
-        "SI-3",
-        "SI-3(1)",
-        "SI-3(2)"
+        "SI-03",
+        "SI-03(1)",
+        "SI-03(2)",
+        "SC-34",
+        "SC-44",
+        "SI-16"
       ],
       "coverage_pct": 95,
-      "rationale": "SI-3 with comprehensive enhancements for centralized management, automatic updates.",
-      "gaps": "Minimal gap."
+      "rationale": "SI-03 with comprehensive enhancements for centralized management, automatic updates; SC-34 (new in Rev 5) non-modifiable executables prevent malware persistence; SC-44 detonation chambers for dynamic analysis; SI-16 memory protection (DEP/ASLR).",
+      "gaps": "Minimal gap. Rev 5 controls significantly strengthen malware prevention depth."
     },
     {
       "id": "5.3",
       "title": "Anti-malware mechanisms and processes are active, maintained, and monitored",
       "controls": [
-        "SI-3",
-        "SI-3(1)",
-        "SI-3(2)"
+        "SI-03",
+        "SI-03(1)",
+        "SI-03(2)",
+        "SC-35"
       ],
       "coverage_pct": 95,
-      "rationale": "SI-3 with ongoing maintenance and monitoring enhancements.",
+      "rationale": "SI-03 with ongoing maintenance and monitoring enhancements; SC-35 (new in Rev 5) external malicious code identification adds proactive malware detection capability.",
       "gaps": "Minimal gap."
     },
     {
       "id": "5.4",
       "title": "Anti-phishing mechanisms protect users against phishing attacks",
       "controls": [
-        "SI-8",
-        "AT-2(2)",
-        "SC-7"
+        "SI-08",
+        "AT-02(2)",
+        "SC-07"
       ],
       "coverage_pct": 80,
-      "rationale": "SI-8 spam protection; AT-2(2) social engineering awareness; SC-7 boundary protection.",
+      "rationale": "SI-08 spam protection; AT-02(2) social engineering awareness; SC-07 boundary protection.",
       "gaps": "PCI v4.0.1 added anti-phishing. SP 800-53 covers through spam, training, and boundary controls but dedicated anti-phishing control is less explicit."
     },
     {
       "id": "6.1",
       "title": "Processes and mechanisms for developing and maintaining secure systems and software are defined and understood",
       "controls": [
-        "SA-3",
-        "SA-1",
+        "SA-03",
+        "SA-01",
         "SA-15"
       ],
       "coverage_pct": 90,
-      "rationale": "SA-3 system development lifecycle; SA-1 system and services acquisition policy; SA-15 development standards.",
+      "rationale": "SA-03 system development lifecycle; SA-01 system and services acquisition policy; SA-15 development standards.",
       "gaps": "Minimal gap."
     },
     {
       "id": "6.2",
       "title": "Bespoke and custom software are developed securely",
       "controls": [
-        "SA-3",
-        "SA-8",
+        "SA-03",
+        "SA-08",
         "SA-10",
         "SA-11",
         "SA-15",
-        "SA-17"
+        "SA-17",
+        "CM-14",
+        "SI-16"
       ],
-      "coverage_pct": 90,
-      "rationale": "SA family comprehensive for secure development.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "SA family comprehensive for secure development; CM-14 (new in Rev 5) signed components ensures code integrity through signing; SI-16 memory protection adds exploit mitigation in developed software.",
+      "gaps": "Minimal gap. Rev 5 controls add code signing and memory protection to secure development."
     },
     {
       "id": "6.2.1",
       "title": "Bespoke and custom software are developed securely: training",
       "controls": [
-        "AT-3",
+        "AT-03",
         "SA-16"
       ],
       "coverage_pct": 85,
-      "rationale": "AT-3 role-based training; SA-16 developer-provided training.",
+      "rationale": "AT-03 role-based training; SA-16 developer-provided training.",
       "gaps": "Minor: PCI requires annual secure coding training."
     },
     {
@@ -408,227 +426,229 @@
       "id": "6.3",
       "title": "Security vulnerabilities are identified and addressed",
       "controls": [
-        "RA-5",
-        "SI-2",
-        "SI-5"
+        "RA-05",
+        "SI-02",
+        "SI-05"
       ],
       "coverage_pct": 95,
-      "rationale": "RA-5 vulnerability scanning; SI-2 flaw remediation; SI-5 security alerts.",
+      "rationale": "RA-05 vulnerability scanning; SI-02 flaw remediation; SI-05 security alerts.",
       "gaps": "Minimal gap."
     },
     {
       "id": "6.3.3",
       "title": "All system components are protected from known vulnerabilities by installing applicable security patches/updates",
       "controls": [
-        "SI-2",
-        "SI-2(1)"
+        "SI-02",
+        "SI-02(1)"
       ],
       "coverage_pct": 95,
-      "rationale": "SI-2 flaw remediation with automated patching.",
+      "rationale": "SI-02 flaw remediation with automated patching.",
       "gaps": "Minimal gap."
     },
     {
       "id": "6.4",
       "title": "Public-facing web applications are protected against attacks",
       "controls": [
-        "SC-7",
-        "SI-3",
+        "SC-07",
+        "SI-03",
         "SA-11",
-        "SC-7(17)"
+        "SC-07(17)"
       ],
       "coverage_pct": 80,
-      "rationale": "SC-7 boundary protection; SI-3 malware; SA-11 testing; SC-7(17) automated enforcement.",
+      "rationale": "SC-07 boundary protection; SI-03 malware; SA-11 testing; SC-07(17) automated enforcement.",
       "gaps": "PCI requires WAF or equivalent for public web apps. SP 800-53 doesn't specifically mandate WAF but addresses through general application and boundary controls."
     },
     {
       "id": "6.5",
       "title": "Changes to all system components are managed securely",
       "controls": [
-        "CM-3",
-        "CM-4",
-        "CM-5",
+        "CM-03",
+        "CM-04",
+        "CM-05",
         "SA-10"
       ],
       "coverage_pct": 95,
-      "rationale": "CM-3 change control; CM-4 impact analysis; CM-5 access restrictions; SA-10 developer configuration management.",
+      "rationale": "CM-03 change control; CM-04 impact analysis; CM-05 access restrictions; SA-10 developer configuration management.",
       "gaps": "Minimal gap."
     },
     {
       "id": "7.1",
       "title": "Processes and mechanisms for restricting access to system components and cardholder data by business need to know are defined and understood",
       "controls": [
-        "AC-1",
-        "AC-6",
-        "PL-1"
+        "AC-01",
+        "AC-06",
+        "PL-01"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-1 access control policy; AC-6 least privilege; PL-1 security planning.",
+      "rationale": "AC-01 access control policy; AC-06 least privilege; PL-01 security planning.",
       "gaps": "Minimal gap."
     },
     {
       "id": "7.2",
       "title": "Access to system components and data is appropriately defined and assigned",
       "controls": [
-        "AC-2",
-        "AC-3",
-        "AC-6",
-        "AC-5"
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "AC-05"
       ],
       "coverage_pct": 95,
-      "rationale": "AC-2 account management; AC-3 access enforcement; AC-6 least privilege; AC-5 separation of duties.",
+      "rationale": "AC-02 account management; AC-03 access enforcement; AC-06 least privilege; AC-05 separation of duties.",
       "gaps": "Minimal gap."
     },
     {
       "id": "7.3",
       "title": "Access to system components and data is managed via an access control system(s)",
       "controls": [
-        "AC-3",
+        "AC-03",
         "AC-25"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-3 access enforcement; AC-25 reference monitor.",
+      "rationale": "AC-03 access enforcement; AC-25 reference monitor.",
       "gaps": "Minimal gap."
     },
     {
       "id": "8.1",
       "title": "Processes and mechanisms for identifying users and authenticating access to system components are defined and understood",
       "controls": [
-        "IA-1",
-        "IA-2",
-        "PL-1"
+        "IA-01",
+        "IA-02",
+        "PL-01"
       ],
       "coverage_pct": 90,
-      "rationale": "IA-1 identification/authentication policy; IA-2 user identification; PL-1 planning.",
+      "rationale": "IA-01 identification/authentication policy; IA-02 user identification; PL-01 planning.",
       "gaps": "Minimal gap."
     },
     {
       "id": "8.2",
       "title": "User identification and related accounts for users and administrators are strictly managed throughout an account's lifecycle",
       "controls": [
-        "AC-2",
-        "IA-4",
-        "IA-5"
+        "AC-02",
+        "IA-04",
+        "IA-05"
       ],
       "coverage_pct": 95,
-      "rationale": "AC-2 account lifecycle management; IA-4 identifier management; IA-5 authenticator management.",
+      "rationale": "AC-02 account lifecycle management; IA-04 identifier management; IA-05 authenticator management.",
       "gaps": "Minimal gap."
     },
     {
       "id": "8.3",
       "title": "Strong authentication for users and administrators is established and managed",
       "controls": [
-        "IA-2",
-        "IA-5",
-        "IA-5(1)",
-        "IA-2(1)"
+        "IA-02",
+        "IA-05",
+        "IA-05(1)",
+        "IA-02(1)",
+        "SC-37"
       ],
       "coverage_pct": 95,
-      "rationale": "IA-2 authentication; IA-5 authenticator management with password enhancements; IA-2(1) MFA.",
+      "rationale": "IA-02 authentication; IA-05 authenticator management with password enhancements; IA-02(1) MFA; SC-37 (new in Rev 5) out-of-band channels strengthens MFA with independent authentication channels.",
       "gaps": "Minimal gap."
     },
     {
       "id": "8.3.6",
       "title": "If passwords/passphrases are used as authentication factors, minimum level of complexity requirements",
       "controls": [
-        "IA-5(1)"
+        "IA-05(1)"
       ],
       "coverage_pct": 95,
-      "rationale": "IA-5(1) directly covers password complexity requirements.",
+      "rationale": "IA-05(1) directly covers password complexity requirements.",
       "gaps": "Minimal gap."
     },
     {
       "id": "8.3.9",
       "title": "If passwords/passphrases are used as the only authentication factor for user access, passwords/passphrases are changed at least every 90 days",
       "controls": [
-        "IA-5(1)"
+        "IA-05(1)"
       ],
       "coverage_pct": 85,
-      "rationale": "IA-5(1) covers password lifecycle. Note: NIST 800-63B now recommends against periodic password rotation, creating a philosophical difference.",
+      "rationale": "IA-05(1) covers password lifecycle. Note: NIST 800-63B now recommends against periodic password rotation, creating a philosophical difference.",
       "gaps": "Gap in alignment: PCI still requires periodic rotation while NIST guidance has moved toward event-based password changes. This represents a deliberate policy divergence."
     },
     {
       "id": "8.4",
       "title": "Multi-factor authentication (MFA) is implemented to secure access into the CDE",
       "controls": [
-        "IA-2(1)",
-        "IA-2(2)"
+        "IA-02(1)",
+        "IA-02(2)",
+        "SC-37"
       ],
       "coverage_pct": 95,
-      "rationale": "IA-2(1)/(2) multi-factor authentication for privileged and non-privileged accounts.",
+      "rationale": "IA-02(1)/(2) multi-factor authentication for privileged and non-privileged accounts; SC-37 (new in Rev 5) out-of-band channels provides independent MFA verification path.",
       "gaps": "Minimal gap."
     },
     {
       "id": "8.5",
       "title": "Multi-factor authentication (MFA) systems are configured to prevent misuse",
       "controls": [
-        "IA-2(1)",
-        "IA-2(6)",
-        "IA-2(8)"
+        "IA-02(1)",
+        "IA-02(6)",
+        "IA-02(8)"
       ],
       "coverage_pct": 85,
-      "rationale": "IA-2 MFA enhancements cover MFA configuration. IA-2(6) network access; IA-2(8) replay resistance.",
+      "rationale": "IA-02 MFA enhancements cover MFA configuration. IA-02(6) network access; IA-02(8) replay resistance.",
       "gaps": "Minor: PCI has specific MFA anti-replay and independence requirements. SP 800-53 covers through MFA enhancements."
     },
     {
       "id": "8.6",
       "title": "Use of application and system accounts and associated authentication factors is strictly managed",
       "controls": [
-        "AC-2",
-        "IA-5",
-        "AC-6(5)"
+        "AC-02",
+        "IA-05",
+        "AC-06(5)"
       ],
       "coverage_pct": 85,
-      "rationale": "AC-2 account management; IA-5 authenticator management; AC-6(5) privileged accounts.",
+      "rationale": "AC-02 account management; IA-05 authenticator management; AC-06(5) privileged accounts.",
       "gaps": "Minor: PCI specifically addresses service/application account management. SP 800-53 covers through general account management."
     },
     {
       "id": "9.1",
       "title": "Processes and mechanisms for restricting physical access to cardholder data are defined and understood",
       "controls": [
-        "PE-1",
-        "PL-1"
+        "PE-01",
+        "PL-01"
       ],
       "coverage_pct": 85,
-      "rationale": "PE-1 physical and environmental protection policy; PL-1 security planning.",
+      "rationale": "PE-01 physical and environmental protection policy; PL-01 security planning.",
       "gaps": "Minor: PCI-specific scope for cardholder data."
     },
     {
       "id": "9.2",
       "title": "Physical access controls manage entry into facilities and systems containing cardholder data",
       "controls": [
-        "PE-2",
-        "PE-3",
-        "PE-6",
-        "PE-7",
-        "PE-8"
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "PE-07",
+        "PE-08"
       ],
       "coverage_pct": 95,
-      "rationale": "PE-2 access authorizations; PE-3 access control; PE-6 monitoring; PE-7 visitor control; PE-8 access records.",
+      "rationale": "PE-02 access authorizations; PE-03 access control; PE-06 monitoring; PE-07 visitor control; PE-08 access records.",
       "gaps": "Minimal gap."
     },
     {
       "id": "9.3",
       "title": "Physical access for personnel and visitors is authorized and managed",
       "controls": [
-        "PE-2",
-        "PE-3",
-        "PE-7",
-        "PE-8"
+        "PE-02",
+        "PE-03",
+        "PE-07",
+        "PE-08"
       ],
       "coverage_pct": 95,
-      "rationale": "PE-2/PE-3 personnel access; PE-7/PE-8 visitor management.",
+      "rationale": "PE-02/PE-03 personnel access; PE-07/PE-08 visitor management.",
       "gaps": "Minimal gap."
     },
     {
       "id": "9.4",
       "title": "Media with cardholder data is securely stored, accessed, distributed, and destroyed",
       "controls": [
-        "MP-2",
-        "MP-3",
-        "MP-4",
-        "MP-5",
-        "MP-6",
-        "MP-7"
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "MP-07"
       ],
       "coverage_pct": 95,
       "rationale": "MP family comprehensively covers media lifecycle.",
@@ -638,59 +658,59 @@
       "id": "9.5",
       "title": "Point of interaction (POI) devices are protected from tampering and unauthorized substitution",
       "controls": [
-        "PE-3",
-        "SR-9",
+        "PE-03",
+        "SR-09",
         "SR-10",
         "SR-11"
       ],
       "coverage_pct": 70,
-      "rationale": "PE-3 physical access; SR-9 tamper resistance; SR-10 inspection; SR-11 component authenticity.",
+      "rationale": "PE-03 physical access; SR-09 tamper resistance; SR-10 inspection; SR-11 component authenticity.",
       "gaps": "PCI has very specific POI device inspection and tamper-evidence requirements. SP 800-53 covers physical security and supply chain integrity but POI-specific requirements need supplementation."
     },
     {
       "id": "10.1",
       "title": "Processes and mechanisms for logging and monitoring all access to system components and cardholder data are defined and understood",
       "controls": [
-        "AU-1",
-        "PL-1"
+        "AU-01",
+        "PL-01"
       ],
       "coverage_pct": 90,
-      "rationale": "AU-1 audit and accountability policy; PL-1 security planning.",
+      "rationale": "AU-01 audit and accountability policy; PL-01 security planning.",
       "gaps": "Minimal gap."
     },
     {
       "id": "10.2",
       "title": "Audit logs are implemented to support the detection of anomalies and suspicious activity, and the forensic analysis of events",
       "controls": [
-        "AU-2",
-        "AU-3",
+        "AU-02",
+        "AU-03",
         "AU-12"
       ],
       "coverage_pct": 95,
-      "rationale": "AU-2 auditable events; AU-3 content; AU-12 audit generation.",
+      "rationale": "AU-02 auditable events; AU-03 content; AU-12 audit generation.",
       "gaps": "Minimal gap."
     },
     {
       "id": "10.3",
       "title": "Audit logs are protected from destruction and unauthorized modifications",
       "controls": [
-        "AU-9",
-        "AU-9(4)"
+        "AU-09",
+        "AU-09(4)"
       ],
       "coverage_pct": 95,
-      "rationale": "AU-9 protection of audit information with access enforcement.",
+      "rationale": "AU-09 protection of audit information with access enforcement.",
       "gaps": "Minimal gap."
     },
     {
       "id": "10.4",
       "title": "Audit logs are reviewed to identify anomalies or suspicious activity",
       "controls": [
-        "AU-6",
-        "AU-6(1)",
-        "SI-4"
+        "AU-06",
+        "AU-06(1)",
+        "SI-04"
       ],
       "coverage_pct": 95,
-      "rationale": "AU-6 audit review/analysis; AU-6(1) automated process integration; SI-4 monitoring.",
+      "rationale": "AU-06 audit review/analysis; AU-06(1) automated process integration; SI-04 monitoring.",
       "gaps": "Minimal gap."
     },
     {
@@ -707,178 +727,189 @@
       "id": "10.6",
       "title": "Time-synchronization mechanisms support consistent time settings across all systems",
       "controls": [
-        "AU-8",
-        "AU-8(1)"
+        "AU-08",
+        "AU-08(1)",
+        "SC-45"
       ],
       "coverage_pct": 95,
-      "rationale": "AU-8 timestamps; AU-8(1) synchronization with authoritative time source.",
-      "gaps": "Minimal gap."
+      "rationale": "AU-08 timestamps; AU-08(1) synchronization with authoritative time source; SC-45 (new in Rev 5) system time synchronization provides dedicated time sync control beyond audit timestamps.",
+      "gaps": "Minimal gap. SC-45 directly addresses NTP/time sync as a standalone control."
     },
     {
       "id": "10.7",
       "title": "Failures of critical security control systems are detected, reported, and responded to promptly",
       "controls": [
-        "AU-5",
-        "SI-4(5)",
-        "IR-4",
-        "IR-6"
+        "AU-05",
+        "SI-04(5)",
+        "IR-04",
+        "IR-06",
+        "SC-24"
       ],
-      "coverage_pct": 85,
-      "rationale": "AU-5 response to processing failures; SI-4(5) system alerts; IR-4 incident handling; IR-6 reporting.",
-      "gaps": "Minor: PCI specifically addresses security control failure detection (IDS, FIM, log, access control). SP 800-53 covers through general monitoring."
+      "coverage_pct": 87,
+      "rationale": "AU-05 response to processing failures; SI-04(5) system alerts; IR-04 incident handling; IR-06 reporting; SC-24 (new in Rev 5) fail in known state ensures security controls fail securely rather than silently.",
+      "gaps": "Minor: PCI specifically addresses security control failure detection (IDS, FIM, log, access control). SC-24 adds fail-safe behavior."
     },
     {
       "id": "11.1",
       "title": "Processes and mechanisms for regularly testing security of systems and networks are defined and understood",
       "controls": [
-        "CA-1",
-        "PL-1"
+        "CA-01",
+        "PL-01",
+        "SC-26"
       ],
-      "coverage_pct": 85,
-      "rationale": "CA-1 assessment policy; PL-1 security planning.",
-      "gaps": "Minor: PCI-specific testing scope."
+      "coverage_pct": 87,
+      "rationale": "CA-01 assessment policy; PL-01 security planning; SC-26 (new in Rev 5) decoys (honeypots/honeynets) adds proactive security testing and threat detection capability.",
+      "gaps": "Minor: SC-26 adds deception-based detection to security testing. PCI-specific testing scope requirements remain."
     },
     {
       "id": "11.2",
       "title": "Wireless access points are identified and monitored, and unauthorized wireless access points are addressed",
       "controls": [
-        "SI-4",
-        "CM-8",
+        "SI-04",
+        "CM-08",
         "AC-18"
       ],
       "coverage_pct": 80,
-      "rationale": "SI-4 monitoring; CM-8 inventory; AC-18 wireless access.",
+      "rationale": "SI-04 monitoring; CM-08 inventory; AC-18 wireless access.",
       "gaps": "PCI specifically requires wireless scanning. SP 800-53 AC-18 covers wireless but specific rogue AP scanning less explicit."
     },
     {
       "id": "11.3",
       "title": "External and internal vulnerabilities are regularly identified, prioritized, and addressed",
       "controls": [
-        "RA-5",
-        "SI-2"
+        "RA-05",
+        "SI-02",
+        "CA-09"
       ],
       "coverage_pct": 95,
-      "rationale": "RA-5 vulnerability scanning; SI-2 flaw remediation.",
+      "rationale": "RA-05 vulnerability scanning; SI-02 flaw remediation; CA-09 (new in Rev 5) internal system connections aids identification of internal vulnerability scope.",
       "gaps": "Minimal gap."
     },
     {
       "id": "11.4",
       "title": "External and internal penetration testing is regularly performed, and exploitable vulnerabilities and security weaknesses are corrected",
       "controls": [
-        "CA-8",
-        "CA-8(1)"
+        "CA-08",
+        "CA-08(1)",
+        "SC-26"
       ],
       "coverage_pct": 90,
-      "rationale": "CA-8 penetration testing; CA-8(1) independent penetration agent.",
-      "gaps": "Minor: PCI specifies annual external and internal penetration testing with specific scope (CDE). CA-8 covers testing generally."
+      "rationale": "CA-08 penetration testing; CA-08(1) independent penetration agent; SC-26 (new in Rev 5) decoys can complement penetration testing with deception-based validation.",
+      "gaps": "Minor: PCI specifies annual external and internal penetration testing with specific scope (CDE). CA-08 covers testing generally."
     },
     {
       "id": "11.5",
       "title": "Network intrusions and unexpected file changes are detected and responded to",
       "controls": [
-        "SI-7",
-        "SI-4",
-        "IR-4",
-        "AU-6"
+        "SI-07",
+        "SI-04",
+        "IR-04",
+        "AU-06",
+        "CM-14",
+        "SC-35"
       ],
-      "coverage_pct": 90,
-      "rationale": "SI-7 software/firmware integrity; SI-4 intrusion detection; IR-4 incident response; AU-6 audit review.",
-      "gaps": "Minimal gap. PCI FIM and IDS/IPS requirements well covered."
+      "coverage_pct": 92,
+      "rationale": "SI-07 software/firmware integrity; SI-04 intrusion detection; IR-04 incident response; AU-06 audit review; CM-14 (new in Rev 5) signed components verifies file integrity through signatures; SC-35 external malicious code identification detects malicious changes.",
+      "gaps": "Minimal gap. Rev 5 controls add signed component verification and external malware identification to FIM/IDS coverage."
     },
     {
       "id": "11.6",
       "title": "Unauthorized changes on payment pages are detected and responded to",
       "controls": [
-        "SI-7",
-        "SI-4",
-        "CM-3"
+        "SI-07",
+        "SI-04",
+        "CM-03",
+        "CM-14"
       ],
-      "coverage_pct": 70,
-      "rationale": "SI-7 integrity monitoring; SI-4 monitoring; CM-3 change control.",
-      "gaps": "PCI v4.0.1 added payment page script monitoring. SP 800-53 covers general integrity monitoring but web page/script change detection is more specific."
+      "coverage_pct": 72,
+      "rationale": "SI-07 integrity monitoring; SI-04 monitoring; CM-03 change control; CM-14 (new in Rev 5) signed components can verify payment page script integrity.",
+      "gaps": "PCI v4.0.1 added payment page script monitoring. SP 800-53 covers general integrity monitoring but web page/script change detection is more specific. CM-14 partially closes this gap."
     },
     {
       "id": "12.1",
       "title": "A comprehensive information security policy that governs and provides direction for protection of the entity's information assets is known and current",
       "controls": [
-        "PL-1",
-        "PM-1",
-        "AC-1",
-        "AT-1",
-        "AU-1",
-        "CA-1",
-        "CM-1",
-        "CP-1",
-        "IA-1",
-        "IR-1",
-        "MA-1",
-        "MP-1",
-        "PE-1",
-        "PS-1",
-        "RA-1",
-        "SA-1",
-        "SC-1",
-        "SI-1"
+        "PL-01",
+        "PM-01",
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PS-01",
+        "RA-01",
+        "SA-01",
+        "SC-01",
+        "SI-01",
+        "PL-09"
       ],
       "coverage_pct": 95,
-      "rationale": "SP 800-53 has comprehensive policy controls across all families.",
+      "rationale": "SP 800-53 has comprehensive policy controls across all families; PL-09 (new in Rev 5) central management enables enterprise-wide policy coordination and enforcement.",
       "gaps": "Minimal gap."
     },
     {
       "id": "12.2",
       "title": "Acceptable use policies for end-user technologies are defined and implemented",
       "controls": [
-        "PL-4",
+        "PL-04",
         "AC-20"
       ],
       "coverage_pct": 95,
-      "rationale": "PL-4 rules of behavior; AC-20 use of external systems.",
+      "rationale": "PL-04 rules of behavior; AC-20 use of external systems.",
       "gaps": "Minimal gap."
     },
     {
       "id": "12.3",
       "title": "Risks to the cardholder data environment are formally identified, evaluated, and managed",
       "controls": [
-        "RA-3",
-        "PM-9",
-        "RA-2"
+        "RA-03",
+        "PM-09",
+        "RA-02",
+        "RA-07"
       ],
-      "coverage_pct": 90,
-      "rationale": "RA-3 risk assessment; PM-9 risk strategy; RA-2 security categorization.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "RA-03 risk assessment; PM-09 risk strategy; RA-02 security categorization; RA-07 (new in Rev 5) risk response provides structured risk treatment options (accept, avoid, mitigate, share, transfer).",
+      "gaps": "Minimal gap. RA-07 adds formal risk response framework."
     },
     {
       "id": "12.4",
       "title": "PCI DSS compliance is managed (for service providers)",
       "controls": [
-        "CA-2",
-        "CA-7",
-        "PM-6"
+        "CA-02",
+        "CA-07",
+        "PM-06"
       ],
       "coverage_pct": 70,
-      "rationale": "CA-2 assessments; CA-7 continuous monitoring; PM-6 performance measurement.",
+      "rationale": "CA-02 assessments; CA-07 continuous monitoring; PM-06 performance measurement.",
       "gaps": "PCI-specific compliance management requirements (quarterly confirmation, annual scope review). SP 800-53 covers assessment but PCI compliance management is more specific."
     },
     {
       "id": "12.5",
       "title": "PCI DSS scope is documented and validated",
       "controls": [
-        "PL-2",
-        "CM-8",
-        "CA-2"
+        "PL-02",
+        "CM-08",
+        "CA-02",
+        "CM-12"
       ],
-      "coverage_pct": 70,
-      "rationale": "PL-2 security plan; CM-8 inventory; CA-2 assessment.",
-      "gaps": "PCI requires specific CDE scope documentation and validation. SP 800-53 system boundary concepts are similar but PCI scope validation methodology differs."
+      "coverage_pct": 73,
+      "rationale": "PL-02 security plan; CM-08 inventory; CA-02 assessment; CM-12 (new in Rev 5) information location helps identify where cardholder data resides for accurate scoping.",
+      "gaps": "PCI requires specific CDE scope documentation and validation. CM-12 improves data location awareness but PCI scope validation methodology still differs from SP 800-53 system boundary concepts."
     },
     {
       "id": "12.6",
       "title": "Security awareness education is an ongoing activity",
       "controls": [
-        "AT-1",
-        "AT-2",
-        "AT-3",
-        "AT-4"
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04"
       ],
       "coverage_pct": 95,
       "rationale": "AT family comprehensive for security awareness and training.",
@@ -888,59 +919,60 @@
       "id": "12.7",
       "title": "Personnel are screened to reduce risks from insider threats",
       "controls": [
-        "PS-3",
-        "PS-7"
+        "PS-03",
+        "PS-07"
       ],
       "coverage_pct": 90,
-      "rationale": "PS-3 personnel screening; PS-7 third-party personnel.",
+      "rationale": "PS-03 personnel screening; PS-07 third-party personnel.",
       "gaps": "Minimal gap."
     },
     {
       "id": "12.8",
       "title": "Risk to information assets associated with third party service provider (TPSP) relationships is managed",
       "controls": [
-        "SA-4",
-        "SA-9",
-        "SR-1",
-        "SR-3",
-        "SR-6"
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-03",
+        "SR-06"
       ],
       "coverage_pct": 85,
-      "rationale": "SA-4 acquisition; SA-9 external services; SR family supply chain.",
+      "rationale": "SA-04 acquisition; SA-09 external services; SR family supply chain.",
       "gaps": "Minor: PCI has specific TPSP management requirements. SP 800-53 covers through general vendor/supply chain controls."
     },
     {
       "id": "12.9",
       "title": "Third-party service providers (TPSPs) support their customers' PCI DSS compliance (for TPSPs)",
       "controls": [
-        "SA-9",
-        "SR-1"
+        "SA-09",
+        "SR-01"
       ],
       "coverage_pct": 60,
-      "rationale": "SA-9 external service responsibilities.",
+      "rationale": "SA-09 external service responsibilities.",
       "gaps": "PCI-specific TPSP compliance support requirements. SP 800-53 covers service provider responsibilities but PCI compliance support is industry-specific."
     },
     {
       "id": "12.10",
       "title": "Suspected and confirmed security incidents that could impact the CDE are responded to immediately",
       "controls": [
-        "IR-1",
-        "IR-2",
-        "IR-3",
-        "IR-4",
-        "IR-5",
-        "IR-6",
-        "IR-7",
-        "IR-8"
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "IR family comprehensive for incident response.",
-      "gaps": "Minor: PCI specifies CDE-specific incident response."
+      "coverage_pct": 92,
+      "rationale": "IR family comprehensive for incident response; IR-09 (new in Rev 5) information spillage response adds specific handling for data breach/spill scenarios relevant to cardholder data exposure.",
+      "gaps": "Minor: PCI specifies CDE-specific incident response. IR-09 strengthens data breach handling."
     }
   ],
   "summary": {
     "total_clauses": 74,
-    "average_coverage": 88.1,
+    "average_coverage": 88.5,
     "full_count": 62,
     "substantial_count": 11,
     "partial_count": 1,

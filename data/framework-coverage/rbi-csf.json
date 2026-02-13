@@ -1,0 +1,886 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "rbi_csf",
+  "framework_name": "RBI CSF",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "Annex1.1",
+      "title": "Inventory Management of Business IT Assets",
+      "controls": [
+        "CM-08",
+        "CM-09",
+        "CM-12",
+        "PM-05",
+        "RA-09"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CM-08 system component inventory directly addresses IT asset inventory requirements. CM-09 configuration management plan ensures inventory governance. CM-12 (Rev 5) information location tracking identifies where critical data resides across assets. PM-05 system inventory provides organisational-level asset tracking. RA-09 (Rev 5) criticality analysis enables risk-based prioritisation of business IT assets, aligning with RBI's risk-tiered approach.",
+      "gaps": "Minor: RBI CSF requires asset classification specifically aligned to Indian banking business criticality tiers. IDRBT asset classification taxonomy and RBI's graded approach for UCBs not captured in NIST controls."
+    },
+    {
+      "id": "Annex1.2",
+      "title": "Preventing Execution of Unauthorised Software",
+      "controls": [
+        "CM-07",
+        "CM-10",
+        "CM-11",
+        "CM-14",
+        "SI-07",
+        "SI-16"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-07 least functionality restricts software execution. CM-10 software usage restrictions and CM-11 user-installed software directly address unauthorised software prevention. CM-14 (Rev 5) signed components ensures cryptographic verification of software integrity. SI-07 software integrity verification detects tampering. SI-16 (Rev 5) memory protection prevents exploitation through DEP/ASLR-type controls.",
+      "gaps": "Minimal: RBI CSF application whitelisting requirements are well addressed by CM-07/CM-11. RBI-specific guidance on approved software lists for banking environments needs supplementation."
+    },
+    {
+      "id": "Annex1.3",
+      "title": "Environmental Controls",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-17",
+        "PE-18"
+      ],
+      "coverage_pct": 87,
+      "rationale": "PE family comprehensively addresses environmental controls. PE-01 policy; PE-02/PE-03 physical access; PE-09/PE-10 power and emergency shutoff; PE-11 emergency power; PE-12 emergency lighting; PE-13 fire protection; PE-14 temperature/humidity; PE-15 water damage; PE-17 alternate work site; PE-18 location of system components.",
+      "gaps": "Minor: RBI CSF specifies data centre tier classification requirements (Tier III/IV per TIA-942) and India-specific seismic zone considerations for DR site selection that go beyond general PE controls."
+    },
+    {
+      "id": "Annex1.4",
+      "title": "Network Management and Security",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "AC-04",
+        "SI-04",
+        "SC-05",
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "SC-32",
+        "SC-47",
+        "CM-06"
+      ],
+      "coverage_pct": 86,
+      "rationale": "SC-07 boundary protection and AC-04 information flow enforcement are core network security controls. SC-08 transmission confidentiality/integrity; SI-04 system monitoring; SC-05 denial of service protection; SC-20/SC-21/SC-22 DNS security. SC-32 (Rev 5) system partitioning isolates network segments. SC-47 (Rev 5) alternate communication paths provides network resilience. CM-06 configuration settings ensures hardened network device configurations.",
+      "gaps": "Minor: RBI CSF prescribes specific network segmentation for SWIFT infrastructure and INFINET/SFMS connectivity. Indian payment network (RTGS/NEFT/UPI) specific network architecture requirements need supplementation."
+    },
+    {
+      "id": "Annex1.5",
+      "title": "Secure Configuration",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-06",
+        "CM-07",
+        "CM-05",
+        "SC-41"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-02 baseline configuration; CM-03 configuration change control; CM-06 configuration settings; CM-07 least functionality; CM-05 access restrictions for change. SC-41 (Rev 5) port and I/O device access restriction strengthens endpoint hardening. Together these comprehensively address secure configuration management.",
+      "gaps": "Minimal: CIS benchmark-level hardening standards referenced by RBI are well addressed through CM-02/CM-06. RBI-specific CBS (Core Banking Solution) hardening guidance needs supplementation."
+    },
+    {
+      "id": "Annex1.6",
+      "title": "Application Security Life Cycle",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-17",
+        "SA-20",
+        "SA-21",
+        "CM-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SA-03 system development life cycle; SA-04 acquisition process; SA-08 security engineering; SA-10 developer configuration management; SA-11 developer testing; SA-15 development process/standards. SA-20 (Rev 5) customized development for critical components addresses bespoke banking application development. SA-21 (Rev 5) developer screening. CM-04 impact analysis ensures changes are assessed before deployment.",
+      "gaps": "Minor: SA-20/SA-21 strengthen application security assurance. RBI CSF requires specific secure coding standards for internet banking and mobile banking applications. OWASP compliance verification specific to Indian banking apps needs supplementation."
+    },
+    {
+      "id": "Annex1.7",
+      "title": "Patch/Vulnerability and Change Management",
+      "controls": [
+        "SI-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "RA-05",
+        "RA-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SI-02 flaw remediation directly addresses patching. CM-03 configuration change control; CM-04 impact analysis; CM-05 access restrictions for change collectively address change management. RA-05 vulnerability monitoring/scanning; RA-07 (Rev 5) risk response adds explicit risk treatment actions for identified vulnerabilities, strengthening prioritisation.",
+      "gaps": "Minor: RA-07 improves vulnerability response alignment. RBI CSF mandates specific patch deployment timelines (critical patches within defined windows) and requires CAB (Change Advisory Board) processes aligned to Indian banking operational windows."
+    },
+    {
+      "id": "Annex1.8",
+      "title": "User Access Control and Management",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-11",
+        "AC-12",
+        "IA-01",
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "IA-12",
+        "PS-04",
+        "PS-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-01/AC-02/AC-03 policy, account management, and access enforcement. AC-05 separation of duties and AC-06 least privilege are core principles. AC-07 unsuccessful login attempts; AC-11/AC-12 session controls. IA-01/IA-02/IA-04/IA-05 authentication framework. IA-12 (Rev 5) identity proofing strengthens user onboarding verification. PS-04/PS-05 personnel termination/transfer address access lifecycle.",
+      "gaps": "Minimal: RBI CSF user access control requirements are well addressed. Maker-checker controls specific to Indian banking operations (dual authorisation for high-value transactions) need supplementation at the process level."
+    },
+    {
+      "id": "Annex1.9",
+      "title": "Authentication Framework for Customers",
+      "controls": [
+        "IA-02",
+        "IA-05",
+        "IA-08",
+        "IA-12",
+        "SC-23",
+        "AC-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "IA-02 identification and authentication; IA-05 authenticator management; IA-08 identification and authentication for non-organisational users; IA-12 (Rev 5) identity proofing adds strong customer verification. SC-23 session authenticity protects customer sessions. AC-07 unsuccessful login attempts limits brute force attacks.",
+      "gaps": "RBI CSF mandates specific multi-factor authentication for internet banking (Aadhaar-based eKYC, OTP via SMS/email, device binding). India-specific payment authentication (UPI PIN, MPIN, Aadhaar biometric) and RBI's two-factor authentication mandate for all electronic payment transactions are not addressed by NIST controls. Digital India identity integration requirements (Aadhaar, DigiLocker) represent significant gaps."
+    },
+    {
+      "id": "Annex1.10",
+      "title": "Secure Mail and Messaging Systems",
+      "controls": [
+        "SC-08",
+        "SI-08",
+        "SC-07",
+        "SC-13"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-08 transmission confidentiality and integrity protects email in transit. SI-08 spam protection addresses unsolicited mail filtering. SC-07 boundary protection provides email gateway security. SC-13 cryptographic protection enables email encryption (S/MIME, PGP).",
+      "gaps": "RBI CSF requires email DLP integration specific to banking data classifications (account numbers, KYC data). SWIFT messaging security requirements (SWIFT CSP compliance) and INFINET secure messaging controls need supplementation beyond general email security."
+    },
+    {
+      "id": "Annex1.11",
+      "title": "Vendor Risk Management",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SA-21",
+        "PS-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SA-04 acquisition process; SA-09 external system services; SR-01/SR-02/SR-03 supply chain risk management policy, controls, and provenance. SR-05 acquisition strategies; SR-06 supplier assessments. SA-21 (Rev 5) developer screening adds vendor personnel vetting. PS-07 external personnel security covers third-party staff.",
+      "gaps": "RBI CSF requires specific vendor risk assessment aligned to RBI outsourcing guidelines (November 2006 circular and subsequent updates). RBI mandates prior notification to regulator for critical outsourcing, right-to-audit clauses, data localisation requirements (RBI data localisation directive 2018), and prohibition on outsourcing core management functions. These India-specific regulatory outsourcing requirements are not addressed."
+    },
+    {
+      "id": "Annex1.12",
+      "title": "Removable Media",
+      "controls": [
+        "MP-01",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "MP-07",
+        "MP-08",
+        "SC-41"
+      ],
+      "coverage_pct": 92,
+      "rationale": "MP family comprehensively addresses removable media: MP-01 policy; MP-02 media access; MP-03 marking; MP-04 storage; MP-05 transport; MP-06 sanitisation; MP-07 media use restrictions; MP-08 media downgrading. SC-41 (Rev 5) port and I/O device access restriction strengthens USB port control and peripheral device management.",
+      "gaps": "Minimal: SC-41 closes the endpoint port control gap. RBI CSF removable media requirements are well addressed by the MP family."
+    },
+    {
+      "id": "Annex1.13",
+      "title": "Advanced Real-time Threat Defence and Management",
+      "controls": [
+        "SI-03",
+        "SI-04",
+        "SI-05",
+        "SC-44",
+        "SC-26",
+        "RA-10",
+        "PM-16",
+        "SC-35"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-03 malware protection; SI-04 system monitoring; SI-05 security alerts/advisories. SC-44 (Rev 5) detonation chambers (sandboxing) enables advanced malware analysis. SC-26 (Rev 5) honeypots provides deception technology for advanced threat detection. RA-10 (Rev 5) threat hunting enables proactive threat identification. PM-16 threat awareness program. SC-35 (Rev 5) external malicious code identification.",
+      "gaps": "RBI CSF mandates real-time threat intelligence sharing with CERT-In and sectoral CERT (IB-CART/CSITE). Integration with IDRBT's Cyber Security Operations Centre and RBI's Cyber Security Information Sharing Portal (C-SHIP) are India-specific requirements not covered by NIST controls."
+    },
+    {
+      "id": "Annex1.14",
+      "title": "Anti-Phishing",
+      "controls": [
+        "SI-08",
+        "AT-02",
+        "AT-06",
+        "SC-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SI-08 spam protection covers email-based phishing filtering. AT-02 literacy training and awareness includes security awareness for phishing recognition. AT-06 (Rev 5) training feedback provides mechanisms for users to report suspected phishing. SC-07 boundary protection enables URL filtering and web proxy controls.",
+      "gaps": "RBI CSF requires specific anti-phishing measures for banking customers including customer-facing awareness (vernacular language support), brand monitoring, takedown services for fake banking sites, and coordination with CERT-In for phishing domain blocking. Customer education obligations are broader than internal workforce awareness."
+    },
+    {
+      "id": "Annex1.15",
+      "title": "Data Leak Prevention Strategy",
+      "controls": [
+        "SC-07",
+        "SC-28",
+        "AC-04",
+        "MP-04",
+        "AC-23",
+        "SI-19",
+        "SI-20",
+        "PT-02",
+        "PT-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-07 boundary protection with DLP-enabled inspection. SC-28 protection of information at rest. AC-04 information flow enforcement. MP-04 media storage. AC-23 (Rev 5) data mining protection restricts unauthorised data extraction. SI-19 (Rev 5) de-identification enables PII protection. SI-20 (Rev 5) tainting detects data provenance. PT-02/PT-03 privacy controls for data minimisation and use limitation.",
+      "gaps": "RBI CSF requires DLP specifically for banking data categories (account data, KYC records, card data) and alignment with RBI data localisation requirements. Indian data protection regulations (DPDP Act 2023) integration and cross-border data transfer restrictions for banking data are not addressed."
+    },
+    {
+      "id": "Annex1.16",
+      "title": "Maintenance, Monitoring and Analysis of Audit Logs",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-11",
+        "AU-12",
+        "AU-13",
+        "SI-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AU family comprehensively addresses audit log management. AU-01 policy; AU-02 event logging; AU-03 content of audit records; AU-04 audit log storage capacity; AU-05 response to audit log failures; AU-06 audit review, analysis, and reporting; AU-07 audit record reduction/report generation; AU-08 time stamps; AU-09 protection of audit information; AU-11 retention; AU-12 audit record generation; AU-13 monitoring for information disclosure. SI-04 system monitoring provides real-time analysis.",
+      "gaps": "Minimal: RBI CSF audit log requirements are well addressed. RBI mandates specific log retention periods (minimum 5 years for banking transactions) and tamper-evident log storage for forensic admissibility under Indian IT Act 2000."
+    },
+    {
+      "id": "Annex1.17",
+      "title": "Audit Log Settings",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-08",
+        "AU-09",
+        "AU-12",
+        "AU-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AU-02 auditable events defines what to log. AU-03 content of audit records specifies log fields. AU-08 time stamps ensures synchronised timestamps. AU-09 protection of audit information prevents log tampering. AU-12 audit record generation configures log generation parameters. AU-14 session audit enables detailed session-level logging for privileged activities.",
+      "gaps": "Minor: RBI CSF specifies audit log settings for banking-specific events (transaction logs, CBS access logs, ATM/POS transaction traces). NTP synchronisation with IDRBT/NPL time servers is an India-specific requirement."
+    },
+    {
+      "id": "Annex1.18",
+      "title": "Vulnerability Assessment, Penetration Test and Red Team Exercises",
+      "controls": [
+        "CA-02",
+        "CA-08",
+        "RA-05",
+        "PM-14",
+        "RA-09",
+        "RA-10"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CA-02 security assessments; CA-08 penetration testing; RA-05 vulnerability monitoring and scanning. PM-14 testing, training, and monitoring ensures regular assessment cycles. RA-09 (Rev 5) criticality analysis enables risk-based prioritisation of test targets. RA-10 (Rev 5) threat hunting complements penetration testing with proactive threat identification.",
+      "gaps": "RBI CSF mandates CERT-In empanelled auditors for VAPT, specific testing frequency (annual VAPT minimum, quarterly VA), and red team exercises aligned to IDRBT guidelines. RBI also requires reporting VAPT results to the Board and sharing critical findings with RBI's Department of Banking Supervision."
+    },
+    {
+      "id": "Annex1.19",
+      "title": "Incident Response and Management",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09"
+      ],
+      "coverage_pct": 78,
+      "rationale": "IR family comprehensively addresses incident response: IR-01 policy; IR-02 incident response training; IR-03 incident response testing; IR-04 incident handling; IR-05 incident monitoring; IR-06 incident reporting; IR-07 incident response assistance; IR-08 incident response plan; IR-09 information spillage response.",
+      "gaps": "RBI CSF mandates reporting cyber incidents to RBI within 2-6 hours (per RBI circular 2016/2017). Mandatory notification to CERT-In (within 6 hours per CERT-In April 2022 directions), IB-CART sector-specific reporting, and incident reporting to DPSS (Department of Payment and Settlement Systems) for payment-related incidents are India-specific requirements. RBI's prescribed incident classification taxonomy differs from NIST categories."
+    },
+    {
+      "id": "Annex1.20",
+      "title": "Risk-Based Transaction Monitoring",
+      "controls": [
+        "SI-04",
+        "AU-06",
+        "AU-13",
+        "AC-04",
+        "PM-16"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SI-04 system monitoring provides real-time transaction monitoring capability. AU-06 audit review and analysis enables transaction pattern analysis. AU-13 monitoring for information disclosure detects anomalous data access. AC-04 information flow enforcement can enforce transaction rules. PM-16 threat awareness provides intelligence context for transaction risk assessment.",
+      "gaps": "RBI CSF requires banking-specific transaction monitoring including fraud detection algorithms for RTGS/NEFT/UPI/IMPS, velocity checks, geo-location anomaly detection, and beneficiary behaviour profiling. AML/CFT (Anti-Money Laundering/Combating Financing of Terrorism) transaction monitoring per RBI KYC Master Direction 2016 and PMLA 2002 are sector-specific requirements outside NIST scope."
+    },
+    {
+      "id": "Annex1.21",
+      "title": "Metrics",
+      "controls": [
+        "PM-06",
+        "CA-07",
+        "PM-14",
+        "PM-31"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PM-06 measures of performance provides cybersecurity metrics framework. CA-07 continuous monitoring enables ongoing measurement. PM-14 testing and monitoring supports metrics collection. PM-31 (Rev 5) continuous monitoring strategy defines metrics methodology and reporting cadence.",
+      "gaps": "RBI CSF requires specific cybersecurity metrics for Board reporting including mean time to detect/respond, false positive rates, control effectiveness scores, and compliance status against RBI circulars. CISO dashboard requirements and periodic reporting to RBI's Department of Banking Supervision are India-specific obligations."
+    },
+    {
+      "id": "Annex1.22",
+      "title": "Forensics",
+      "controls": [
+        "AU-06",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "IR-04",
+        "IR-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "AU-06 audit review and analysis supports forensic investigation. AU-09 protection of audit information ensures evidence integrity. AU-10 non-repudiation establishes forensic evidence chain. AU-11 audit record retention preserves evidence. IR-04 incident handling includes forensic analysis during incident response. IR-09 information spillage response addresses data breach forensics.",
+      "gaps": "RBI CSF requires digital forensics capabilities aligned to Indian Evidence Act (Section 65B for electronic evidence admissibility) and IT Act 2000 provisions. Engagement of CERT-In empanelled forensic auditors, evidence preservation per Indian legal standards, and forensic report submission to law enforcement (Cyber Crime cells) and RBI represent India-specific legal and procedural requirements."
+    },
+    {
+      "id": "Annex1.23",
+      "title": "User/Employee/Management Awareness",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-05",
+        "AT-06",
+        "PM-13",
+        "PM-15"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AT-01 policy; AT-02 literacy training and awareness; AT-03 role-based training; AT-04 training records. AT-05 (Rev 5) contacts and groups facilitates security community building. AT-06 (Rev 5) training feedback enables phishing simulation reporting. PM-13 security workforce ensures skilled personnel. PM-15 security groups enables knowledge sharing.",
+      "gaps": "Minor: AT-05/AT-06 strengthen awareness capabilities. RBI CSF requires Board-level cybersecurity awareness programs and CISO reporting to Board. Vernacular language (Hindi and regional languages) training materials for bank staff across India's diverse workforce represent a localisation gap."
+    },
+    {
+      "id": "Annex1.24",
+      "title": "Customer Education and Awareness",
+      "controls": [
+        "AT-02",
+        "PM-27",
+        "PT-06"
+      ],
+      "coverage_pct": 45,
+      "rationale": "AT-02 literacy training and awareness is primarily workforce-focused but provides a framework. PM-27 (Rev 5) privacy reporting keeps stakeholders informed. PT-06 system of records notice addresses transparency obligations relevant to customer awareness.",
+      "gaps": "Significant: NIST SP 800-53 is primarily organisation/workforce-focused. RBI CSF mandates extensive customer education programs including SMS/email fraud alerts, safe banking practices communication in vernacular languages, customer grievance redressal for cyber fraud (per RBI circular on limiting customer liability 2017), and coordination with Banking Codes and Standards Board of India (BCSBI). Customer-facing awareness is largely outside NIST scope."
+    },
+    {
+      "id": "ITGRCA.4",
+      "title": "IT Governance Framework",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-09",
+        "PL-01",
+        "PL-08",
+        "PL-09"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PM-01 information security program plan; PM-02 senior information security officer; PM-03 resources; PM-09 risk strategy. PL-01 planning policy; PL-08 security and privacy architectures. PL-09 (Rev 5) central management enables unified governance across the organisation.",
+      "gaps": "RBI ITGRCA requires specific IT governance framework with Board-approved IT strategy, IT Steering Committee, and defined roles for Head of IT Function. Board-level IT committee composition requirements and RBI-specific governance reporting obligations are not addressed. Graded approach for UCBs (Urban Co-operative Banks) based on asset size is a unique RBI construct."
+    },
+    {
+      "id": "ITGRCA.5",
+      "title": "Role of Board of Directors",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PS-09"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-01 program plan requires senior leadership approval. PM-02 senior officer designation. PM-09 risk strategy involves executive leadership. PS-09 (Rev 5) position descriptions formalises security responsibilities in organisational roles.",
+      "gaps": "Significant: RBI ITGRCA mandates specific Board responsibilities including IT strategy approval, IT budget oversight, periodic IT risk review, and cybersecurity posture assessment by the Board. Board-level IT Sub-Committee with defined composition (independent directors, IT-experienced members) is an RBI-specific governance requirement. PS-09 improves role definition but does not address Indian banking board governance norms."
+    },
+    {
+      "id": "ITGRCA.6",
+      "title": "IT Strategy Committee of the Board",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-07"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-01 program plan provides strategic planning framework. PM-02 senior officer role involves strategic oversight. PM-07 enterprise architecture connects IT strategy to security architecture.",
+      "gaps": "Significant: RBI ITGRCA mandates a Board-level IT Strategy Committee with specific composition requirements (independent director as chairperson, CIO/CTO as member). Committee must review IT strategy, IT investments, IT architecture, and technology adoption. This prescriptive governance structure has no NIST equivalent — SP 800-53 focuses on security program governance, not IT strategy committee formation."
+    },
+    {
+      "id": "ITGRCA.7",
+      "title": "Senior Management and IT Steering Committee",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-09",
+        "PM-29"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-01/PM-02/PM-03 programme management. PM-09 risk strategy involves senior management. PM-29 (Rev 5) risk management program leadership adds explicit senior management risk oversight.",
+      "gaps": "Significant: RBI ITGRCA mandates an IT Steering Committee at senior management level with defined responsibilities (IT project prioritisation, resource allocation, performance monitoring). Specific committee composition, meeting frequency, and escalation to Board IT Strategy Committee are prescriptive governance requirements not addressed by NIST control framework."
+    },
+    {
+      "id": "ITGRCA.8",
+      "title": "Head of IT Function",
+      "controls": [
+        "PM-02",
+        "PS-09"
+      ],
+      "coverage_pct": 48,
+      "rationale": "PM-02 senior information security officer addresses the CISO role. PS-09 (Rev 5) position descriptions defines security responsibilities for organisational positions.",
+      "gaps": "Significant: RBI ITGRCA mandates a Head of IT Function at senior management level with specific qualifications, reporting lines (to MD/CEO or through IT Strategy Committee), and responsibilities distinct from the CISO role. Required qualifications include technology expertise in banking domain. This prescriptive role definition goes well beyond PM-02's general senior officer requirement."
+    },
+    {
+      "id": "ITGRCA.9",
+      "title": "IT Services Management",
+      "controls": [
+        "CM-03",
+        "SI-02",
+        "IR-04",
+        "CA-07",
+        "SI-13",
+        "SA-09"
+      ],
+      "coverage_pct": 62,
+      "rationale": "CM-03 configuration change control; SI-02 flaw remediation; IR-04 incident handling; CA-07 continuous monitoring. SI-13 (Rev 5) predictive maintenance enables proactive service reliability. SA-09 external information system services addresses outsourced IT service management.",
+      "gaps": "RBI ITGRCA requires ITIL-aligned IT service management including service level agreements, problem management, release management, capacity planning, and service desk operations. SP 800-53 addresses security aspects of IT services but not the full ITSM lifecycle. SLA management for banking operations (Core Banking uptime, ATM availability) needs supplementation."
+    },
+    {
+      "id": "ITGRCA.10",
+      "title": "Third-Party Arrangements",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SA-21",
+        "PS-07",
+        "PM-30"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-04 acquisition; SA-09 external services; SR family supply chain risk management. SA-21 (Rev 5) developer screening for vendor personnel. PS-07 external personnel security. PM-30 (Rev 5) supply chain risk management strategy provides strategic vendor oversight.",
+      "gaps": "RBI ITGRCA requires compliance with RBI outsourcing guidelines (2006 circular). Mandatory clauses include right-to-audit, regulatory access to third-party premises, data localisation within India (per RBI 2018 directive), business continuity obligations, and prior RBI notification for material outsourcing. Concentration risk assessment and vendor exit management are India-specific regulatory requirements."
+    },
+    {
+      "id": "ITGRCA.11",
+      "title": "Capacity Management",
+      "controls": [
+        "AU-04",
+        "CP-02",
+        "SC-05",
+        "SI-13",
+        "PE-11"
+      ],
+      "coverage_pct": 58,
+      "rationale": "AU-04 audit log storage capacity addresses a specific capacity requirement. CP-02 contingency planning includes capacity considerations. SC-05 denial of service protection requires capacity resilience. SI-13 (Rev 5) predictive maintenance addresses proactive capacity monitoring. PE-11 emergency power covers power capacity.",
+      "gaps": "Significant: RBI ITGRCA requires comprehensive IT capacity management covering compute, storage, network, and human resource capacity planning. Peak transaction volume planning (festival/salary days), ATM network capacity, and digital banking channel scalability requirements are banking-specific. SP 800-53 only tangentially addresses capacity through individual control requirements."
+    },
+    {
+      "id": "ITGRCA.12",
+      "title": "Project Management",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-15",
+        "PM-07",
+        "SA-20"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-03 system development life cycle; SA-04 acquisition process; SA-15 development process standards. PM-07 enterprise architecture provides strategic project context. SA-20 (Rev 5) customized development of critical components addresses security in project delivery for critical banking systems.",
+      "gaps": "Significant: RBI ITGRCA requires formal IT project management methodology including project governance structure, risk management, quality assurance, post-implementation review, and project escalation processes. SP 800-53 addresses security within projects but not the broader IT project management discipline. Banking-specific project controls (go-live certification, parallel run requirements) need supplementation."
+    },
+    {
+      "id": "ITGRCA.13",
+      "title": "Change and Patch Management",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "SI-02",
+        "RA-05",
+        "RA-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-03 configuration change control; CM-04 impact analysis; CM-05 access restrictions for change; SI-02 flaw remediation. RA-05 vulnerability monitoring. RA-07 (Rev 5) risk response strengthens the vulnerability-to-patch pipeline with explicit risk treatment.",
+      "gaps": "Minor: RA-07 improves alignment. RBI ITGRCA specifies emergency change procedures for banking environments, CAB processes, and rollback requirements aligned to banking operational windows. CBS (Core Banking Solution) change management has specific testing requirements."
+    },
+    {
+      "id": "ITGRCA.14",
+      "title": "Data Migration Controls",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "SI-07",
+        "SA-10",
+        "MP-04",
+        "MP-05"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-03/CM-04 change control and impact analysis apply to migration activities. SI-07 software, firmware, and information integrity provides data integrity verification. SA-10 developer configuration management addresses migration within development. MP-04/MP-05 media storage and transport cover physical data migration.",
+      "gaps": "RBI ITGRCA requires specific data migration controls including pre-migration testing, parallel run periods, data reconciliation, and post-migration validation. CBS migration from legacy systems requires RBI notification and approval. Data integrity verification specific to financial records (account balances, transaction history) needs banking-domain supplementation."
+    },
+    {
+      "id": "ITGRCA.15",
+      "title": "Audit Trails",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-08",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "AU-12",
+        "AU-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AU family comprehensively addresses audit trail requirements. AU-01 policy; AU-02/AU-03 event logging and content; AU-06 audit review and analysis; AU-08 timestamps; AU-09 protection of audit information; AU-10 non-repudiation; AU-11 retention; AU-12 audit record generation; AU-14 session audit for detailed activity tracking.",
+      "gaps": "Minor: RBI ITGRCA audit trail requirements are well addressed. RBI mandates specific retention periods aligned to Indian banking regulations and Evidence Act requirements. Audit trail for financial transactions must satisfy Indian statutory audit requirements."
+    },
+    {
+      "id": "ITGRCA.16",
+      "title": "Cryptographic Controls",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-08",
+        "SC-28",
+        "SC-17",
+        "IA-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-12 cryptographic key management; SC-13 cryptographic protection; SC-08 transmission confidentiality; SC-28 protection of information at rest. SC-17 public key infrastructure certificates addresses PKI governance. IA-07 cryptographic module authentication ensures FIPS-validated modules.",
+      "gaps": "Minor: RBI ITGRCA requires cryptographic controls aligned to IDRBT recommendations. India-specific requirements include PKI using CCA (Controller of Certifying Authorities) certified certificates, use of AES-256 for financial data, and HSM requirements for key management in banking operations."
+    },
+    {
+      "id": "ITGRCA.17",
+      "title": "Straight Through Processing",
+      "controls": [
+        "SI-07",
+        "SI-10",
+        "AC-04",
+        "AU-02"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-07 information integrity ensures data is not altered during processing. SI-10 information input validation prevents erroneous data entry. AC-04 information flow enforcement controls data flows between systems. AU-02 auditable events enables transaction tracking through the processing chain.",
+      "gaps": "Significant: RBI ITGRCA STP requirements address end-to-end automated transaction processing without manual intervention. Banking-specific STP controls include reconciliation, exception handling, duplicate detection, and cut-off time management for RTGS/NEFT settlement. SP 800-53 addresses data integrity but not the banking transaction processing discipline."
+    },
+    {
+      "id": "ITGRCA.18",
+      "title": "Physical and Environmental Controls",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-08",
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-17",
+        "PE-18",
+        "PE-20"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE family comprehensively addresses physical and environmental controls. PE-01 policy; PE-02/PE-03/PE-04/PE-05/PE-06 physical access controls; PE-08 visitor access records; PE-09/PE-10/PE-11 power; PE-12/PE-13 emergency systems; PE-14/PE-15 environmental controls; PE-17 alternate work site; PE-18 facility location; PE-20 asset monitoring and tracking.",
+      "gaps": "Minor: RBI ITGRCA physical security requirements are well addressed. India-specific considerations include data centre certification to TIA-942/Uptime Institute standards as required by RBI, and physical security for currency chest and vault areas within banking premises."
+    },
+    {
+      "id": "ITGRCA.19",
+      "title": "Access Controls",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-11",
+        "AC-12",
+        "AC-16",
+        "AC-24",
+        "IA-01",
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-12"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC and IA families comprehensively address access controls. AC-01/AC-02/AC-03 policy, account management, enforcement. AC-04/AC-05/AC-06 information flow, separation of duties, least privilege. AC-07 unsuccessful logins; AC-11/AC-12 session controls. AC-16 security attributes; AC-24 access control decisions. IA family provides authentication framework including IA-12 (Rev 5) identity proofing.",
+      "gaps": "Minimal: RBI ITGRCA access control requirements are well addressed. Maker-checker controls for banking transactions and CBS-specific access control matrices need banking-domain supplementation."
+    },
+    {
+      "id": "ITGRCA.20",
+      "title": "Controls on Teleworking",
+      "controls": [
+        "AC-17",
+        "AC-19",
+        "AC-20",
+        "SC-08",
+        "SC-10",
+        "SC-23",
+        "PE-17"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-17 remote access provides core teleworking access controls. AC-19 access control for mobile devices; AC-20 use of external systems. SC-08 transmission confidentiality for remote connections. SC-10 network disconnect; SC-23 session authenticity. PE-17 alternate work site addresses teleworking physical security.",
+      "gaps": "RBI ITGRCA teleworking controls were updated post-COVID. India-specific requirements include restrictions on accessing Core Banking from personal devices, VPN requirements for banking staff, and data localisation enforcement for remote access sessions. RBI's specific guidance on work-from-home for banking operations staff needs supplementation."
+    },
+    {
+      "id": "ITGRCA.21",
+      "title": "Metrics",
+      "controls": [
+        "PM-06",
+        "CA-07",
+        "PM-14",
+        "PM-31"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-06 measures of performance; CA-07 continuous monitoring; PM-14 testing, training, and monitoring. PM-31 (Rev 5) continuous monitoring strategy defines metrics framework and reporting cadence.",
+      "gaps": "RBI ITGRCA requires specific IT metrics including system availability, incident metrics, project delivery metrics, and IT spend ratios. Metrics must be reported to the Board IT Strategy Committee and IT Steering Committee. RBI-specific reporting formats and IT profile submission requirements are not covered."
+    },
+    {
+      "id": "ITGRCA.22",
+      "title": "Periodic Review of IT-Related Risks",
+      "controls": [
+        "RA-01",
+        "RA-03",
+        "RA-07",
+        "RA-09",
+        "PM-09",
+        "PM-28",
+        "CA-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "RA-01 risk assessment policy; RA-03 risk assessment; RA-07 (Rev 5) risk response; RA-09 (Rev 5) criticality analysis. PM-09 risk strategy; PM-28 (Rev 5) risk framing. CA-05 plan of action and milestones tracks risk remediation.",
+      "gaps": "RBI ITGRCA mandates periodic IT risk reviews at defined frequencies (at least annually, quarterly for critical systems). Risk review results must be presented to Board and IT Steering Committee. RBI's IT profile submission format and risk classification specific to Indian banking operations need supplementation."
+    },
+    {
+      "id": "ITGRCA.23",
+      "title": "IT and Information Security Risk Management Framework",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "RA-01",
+        "RA-03",
+        "PM-28",
+        "RA-07",
+        "RA-09",
+        "PL-09",
+        "PM-29",
+        "PM-30",
+        "PM-32"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PM-01 program plan; PM-09 risk strategy; RA-01/RA-03 risk assessment. PM-28 (Rev 5) risk framing; RA-07 (Rev 5) risk response; RA-09 (Rev 5) criticality analysis. PL-09 (Rev 5) central management. PM-29 (Rev 5) risk management program leadership. PM-30 (Rev 5) supply chain risk management strategy. PM-32 (Rev 5) purposing provides system classification.",
+      "gaps": "RBI ITGRCA requires a unified IT and information security risk management framework approved by the Board. Integration of IT risk into enterprise risk management and alignment with RBI's risk-based supervision framework are India-specific requirements. CISO appointment and reporting structure mandated by RBI circular 2016 needs supplementation."
+    },
+    {
+      "id": "ITGRCA.24",
+      "title": "Information Security Policy and Cyber Security Policy",
+      "controls": [
+        "PM-01",
+        "PL-01",
+        "PM-09",
+        "PM-10",
+        "PM-11",
+        "PM-24"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PM-01 information security program plan; PL-01 planning policy; PM-09 risk strategy; PM-10 security authorisation process; PM-11 mission and business process definition. PM-24 (Rev 5) data integrity board addresses organisational data governance.",
+      "gaps": "RBI ITGRCA mandates both an Information Security Policy and a separate Cyber Security Policy, both Board-approved and reviewed annually. Specific policy elements prescribed by RBI include CISO appointment, cyber crisis management plan, and alignment with RBI's Cyber Security Framework 2016 Annex requirements. Separate cyber security policy requirement is unique to RBI."
+    },
+    {
+      "id": "ITGRCA.25",
+      "title": "Risk Assessment",
+      "controls": [
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "RA-08",
+        "RA-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "RA-01 risk assessment policy; RA-02 security categorisation; RA-03 risk assessment; RA-05 vulnerability monitoring. RA-07 (Rev 5) risk response; RA-08 (Rev 5) privacy impact assessments. RA-09 (Rev 5) criticality analysis enables risk-based prioritisation of banking systems.",
+      "gaps": "Minor: RBI ITGRCA risk assessment requirements are well addressed by the RA family. India-specific requirements include risk assessment methodology aligned to RBI's supervisory expectations and inclusion of risks from digital banking channels (UPI, mobile banking, internet banking) in the assessment scope."
+    },
+    {
+      "id": "ITGRCA.26",
+      "title": "Vulnerability Assessment / Penetration Testing",
+      "controls": [
+        "CA-02",
+        "CA-08",
+        "RA-05",
+        "PM-14",
+        "RA-09",
+        "RA-10"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-02 security assessments; CA-08 penetration testing; RA-05 vulnerability monitoring and scanning; PM-14 testing, training, and monitoring. RA-09 (Rev 5) criticality analysis for risk-based test prioritisation. RA-10 (Rev 5) threat hunting for proactive vulnerability identification.",
+      "gaps": "RBI ITGRCA mandates VAPT by CERT-In empanelled auditors, specific testing frequency (at least annual), and scope including all internet-facing applications, mobile banking, and CBS. Results must be reported to Board IT Strategy Committee with remediation timelines. CERT-In empanelment requirement is India-specific."
+    },
+    {
+      "id": "ITGRCA.27",
+      "title": "Cyber Incident Response and Recovery Management",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "CP-02",
+        "CP-10"
+      ],
+      "coverage_pct": 75,
+      "rationale": "IR family addresses incident response comprehensively. CP-02 contingency planning and CP-10 system recovery address the recovery management component. IR-08 incident response plan integrates with business continuity.",
+      "gaps": "RBI ITGRCA mandates cyber incident reporting to RBI within 2-6 hours and to CERT-In within 6 hours (2022 direction). Cyber Crisis Management Plan aligned to NCIIPC guidelines, participation in IB-CART cyber drills, and CISO's role as incident commander are India-specific requirements. Recovery management must align with RBI's prescribed RPO/RTO for banking services."
+    },
+    {
+      "id": "ITGRCA.28",
+      "title": "BCP and DR Policy",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "PM-08",
+        "PM-09",
+        "PM-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CP-01 contingency planning policy; CP-02 contingency plan; CP-03 contingency training; CP-04 contingency plan testing. PM-08 critical infrastructure plan; PM-09 risk strategy; PM-11 mission/business process definition provides BIA context.",
+      "gaps": "RBI ITGRCA requires Board-approved BCP and DR policy with specific elements including BIA methodology, RPO/RTO for critical banking services (near-zero RPO for CBS), and annual DR drill requirements. RBI mandates DR site at geographically separate location with specific distance requirements. RTGS/NEFT availability obligations during disaster are India-specific."
+    },
+    {
+      "id": "ITGRCA.29",
+      "title": "Disaster Recovery Management",
+      "controls": [
+        "CP-02",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "CP-11",
+        "CP-12",
+        "CP-13",
+        "SC-24",
+        "SI-17"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP family comprehensive for DR: CP-02 contingency plan; CP-04 testing; CP-06 alternate storage; CP-07 alternate processing; CP-08 telecommunications; CP-09 backup; CP-10 recovery/reconstitution; CP-11 alternate communications; CP-12 safe mode; CP-13 alternative security mechanisms. SC-24 (Rev 5) fail in known state; SI-17 (Rev 5) fail-safe procedures strengthen failure handling.",
+      "gaps": "RBI ITGRCA mandates specific DR management requirements including minimum annual DR drills, switchover/switchback testing, and near-zero RPO for Core Banking. DR site must be in a different seismic zone. Data replication between primary and DR sites must use synchronous replication for critical systems. RBI-prescribed DR readiness assessment format needs supplementation."
+    },
+    {
+      "id": "ITGRCA.30",
+      "title": "IS Audit",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "AU-06",
+        "CA-05",
+        "PM-14",
+        "CA-06"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CA-02 security assessments; CA-07 continuous monitoring; AU-06 audit review, analysis, and reporting; CA-05 plan of action and milestones for audit finding remediation. PM-14 testing and monitoring. CA-06 (Rev 5) authorisation addresses formal audit approval processes.",
+      "gaps": "RBI ITGRCA mandates IS Audit by CERT-In empanelled auditors or CISA/DISA certified auditors. Specific audit scope must cover all IT systems including CBS, ATM switch, internet banking, and mobile banking. Audit findings must be reported to Board Audit Committee and tracked to closure. RBI's IS Audit framework and reporting format requirements are India-specific."
+    }
+  ],
+  "summary": {
+    "total_clauses": 51,
+    "average_coverage": 76.7,
+    "full_count": 19,
+    "substantial_count": 23,
+    "partial_count": 9,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

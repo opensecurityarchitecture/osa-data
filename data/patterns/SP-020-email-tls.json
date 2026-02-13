@@ -54,6 +54,12 @@
       "Google Postmaster Tools showing TLS encryption rates for email sent to Gmail",
       "Hardenize platform for monitoring MTA TLS configuration and certificate status",
       "CheckTLS.com for testing and verifying TLS support on partner mail gateways"
+    ],
+    "Developing Areas": [
+      "MTA-STS adoption remains stubbornly low despite being standardised since 2018 (RFC 8461). As of 2025, fewer than 5% of domains publish MTA-STS policies, meaning the vast majority of email remains vulnerable to STARTTLS downgrade attacks by active network adversaries. The chicken-and-egg problem persists: senders have little incentive to check for MTA-STS policies when so few receivers publish them, and receivers see limited value in publishing when few senders enforce. Google and Microsoft's adoption has helped, but the long tail of smaller mail operators remains exposed.",
+      "DANE/TLSA deployment is technically superior to MTA-STS for preventing man-in-the-middle attacks on SMTP connections, but it requires DNSSEC, which itself has limited deployment. Fewer than 10% of domains are DNSSEC-signed, and many DNS hosting providers and registrars still do not support it natively. The operational complexity of managing DNSSEC key rollovers alongside TLSA certificate records creates a maintenance burden that deters adoption, leaving DANE as a theoretically excellent but practically niche solution.",
+      "DMARC enforcement at p=reject is progressing but unevenly. While major email providers now require DMARC for bulk senders, many organisations still run DMARC in monitor-only mode (p=none) for years due to fear of blocking legitimate email from misconfigured third-party senders. The gap between DMARC deployment (growing rapidly) and DMARC enforcement (growing slowly) means that email spoofing protection is weaker in practice than aggregate statistics suggest.",
+      "Email authentication for AI-generated content is an emerging concern with no established standards. As AI systems increasingly send email on behalf of organisations -- automated responses, AI-drafted communications, agent-to-agent messaging -- the question of how to authenticate and attribute machine-generated email within existing SPF/DKIM/DMARC frameworks is unresolved. The potential for AI to generate highly convincing phishing emails at scale makes sender authentication more critical than ever, yet the protocols were designed for human-originated messaging patterns."
     ]
   },
   "references": [

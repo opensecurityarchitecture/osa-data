@@ -3,7 +3,7 @@
   "id": "SP-037",
   "slug": "privileged-user-management",
   "title": "Privileged User Management",
-  "description": "Comprehensive privileged access management pattern covering credential vaulting, just-in-time access, session recording, standing privilege elimination, and break-glass procedures. Addresses the full lifecycle of privileged accounts from provisioning through monitoring to decommissioning, with emphasis on reducing the attack surface created by administrative access. Maps 38 NIST 800-53 controls across identity governance, credential management, access control, and monitoring domains.",
+  "description": "Comprehensive privileged access management pattern covering credential vaulting, just-in-time access, session recording, standing privilege elimination, and break-glass procedures. Addresses the full lifecycle of privileged accounts from provisioning through monitoring to decommissioning, with emphasis on reducing the attack surface created by administrative access. Maps 33 NIST 800-53 controls across identity governance, credential management, access control, and monitoring domains.",
   "url": "https://www.opensecurityarchitecture.org/patterns/sp-037",
   "metadata": {
     "release": "26.02",
@@ -11,7 +11,7 @@
     "status": "draft",
     "type": "pattern",
     "datePublished": "2026-02-07",
-    "dateModified": "2026-02-07",
+    "dateModified": "2026-02-13",
     "authors": [
       "Aurelius",
       "Vitruvius"
@@ -139,6 +139,7 @@
       "mitigatedBy": [
         "AC-02",
         "AC-06",
+        "AC-12",
         "AC-17",
         "SI-04"
       ]
@@ -167,6 +168,8 @@
       "id": "T-PUM-005",
       "name": "Insider threat from privileged administrators abusing legitimate access",
       "mitigatedBy": [
+        "AC-12",
+        "AU-03",
         "AU-12",
         "AU-06",
         "PM-12",
@@ -190,6 +193,7 @@
         "IA-02",
         "IA-05",
         "AU-02",
+        "AU-03",
         "AC-02"
       ]
     },
@@ -270,6 +274,12 @@
       "emphasis": "critical"
     },
     {
+      "id": "AC-12",
+      "name": "Session Termination",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
       "id": "AC-17",
       "name": "Remote Access",
       "family": "AC",
@@ -280,6 +290,12 @@
       "name": "Event Logging",
       "family": "AU",
       "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "important"
     },
     {
       "id": "AU-06",
@@ -433,8 +449,8 @@
     }
   ],
   "controlFamilySummary": {
-    "AC": 5,
-    "AU": 3,
+    "AC": 6,
+    "AU": 4,
     "CA": 2,
     "CM": 4,
     "IA": 3,

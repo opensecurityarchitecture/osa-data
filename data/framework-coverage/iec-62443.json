@@ -4,8 +4,8 @@
   "framework_name": "IEC 62443",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -42,11 +42,12 @@
         "PM-01",
         "PM-02",
         "PM-03",
-        "PM-09"
+        "PM-09",
+        "PL-09"
       ],
-      "coverage_pct": 65,
-      "rationale": "PM-01 security program; PM-02 roles; PM-03 resources; PM-09 risk strategy.",
-      "gaps": "IEC 62443 requires IACS-specific security management system integrated with safety management. SP 800-53 covers information security management but OT/ICS-specific integration with safety management is not addressed."
+      "coverage_pct": 68,
+      "rationale": "PM-01 security program; PM-02 roles; PM-03 resources; PM-09 risk strategy. PL-09 (new in Rev 5) central management of security controls supports unified administration applicable to IACS security management.",
+      "gaps": "IEC 62443 requires IACS-specific security management system integrated with safety management. SP 800-53 covers information security management; PL-09 improves central control but OT/ICS-specific integration with safety management is not addressed."
     },
     {
       "id": "2-1 4.3",
@@ -55,11 +56,13 @@
         "RA-01",
         "RA-02",
         "RA-03",
-        "RA-05"
+        "RA-05",
+        "RA-07",
+        "RA-09"
       ],
-      "coverage_pct": 70,
-      "rationale": "RA family covers risk assessment comprehensively.",
-      "gaps": "IEC 62443 requires OT-specific risk assessment considering safety impacts, zone/conduit models, and SIL/SL targets. SP 800-53 risk assessment is comprehensive but lacks ICS/OT-specific risk methodology."
+      "coverage_pct": 75,
+      "rationale": "RA family covers risk assessment comprehensively. RA-07 (new in Rev 5) risk response adds explicit treatment actions; RA-09 (new in Rev 5) criticality analysis supports identification of critical IACS components for risk prioritisation.",
+      "gaps": "IEC 62443 requires OT-specific risk assessment considering safety impacts, zone/conduit models, and SIL/SL targets. RA-07/RA-09 improve risk response and criticality but ICS/OT-specific risk methodology gaps remain."
     },
     {
       "id": "2-1 4.4",
@@ -67,11 +70,12 @@
       "controls": [
         "PM-09",
         "CA-05",
-        "RA-03"
+        "RA-03",
+        "RA-07"
       ],
-      "coverage_pct": 65,
-      "rationale": "PM-09 risk management strategy; CA-05 POA&M; RA-03 risk response.",
-      "gaps": "IEC 62443 risk treatment includes safety impact analysis and OT-specific countermeasures. SP 800-53 covers risk treatment but OT safety integration is absent."
+      "coverage_pct": 68,
+      "rationale": "PM-09 risk management strategy; CA-05 POA&M; RA-03 risk assessment. RA-07 (new in Rev 5) risk response provides structured risk treatment actions applicable to IACS risk management.",
+      "gaps": "IEC 62443 risk treatment includes safety impact analysis and OT-specific countermeasures. RA-07 improves risk response but OT safety integration is absent."
     },
     {
       "id": "3-3 SR 1.1",
@@ -160,7 +164,7 @@
         "AU-12"
       ],
       "coverage_pct": 85,
-      "rationale": "AU-02 auditable events; AU-03 content; AU-12 audit generation.",
+      "rationale": "AU-02 auditable events; AU-03 content of audit records; AU-12 audit generation.",
       "gaps": "Minor: IEC 62443 specifies ICS-relevant audit events (setpoint changes, mode changes, safety system activation). SP 800-53 covers audit generally."
     },
     {
@@ -178,33 +182,37 @@
       "id": "3-3 SR 2.11",
       "title": "Timestamps",
       "controls": [
-        "AU-08"
+        "AU-08",
+        "SC-45"
       ],
-      "coverage_pct": 90,
-      "rationale": "AU-08 timestamps and synchronization.",
-      "gaps": "Minor: IEC 62443 considers ICS time synchronization (IEC 61850, PTP)."
+      "coverage_pct": 92,
+      "rationale": "AU-08 time stamps and synchronization. SC-45 (new in Rev 5) system time synchronization provides explicit controls for time source accuracy and integrity, important for ICS event correlation and sequence-of-events recording.",
+      "gaps": "Minor: IEC 62443 considers ICS time synchronization (IEC 61850, PTP). SC-45 improves general time synchronization but ICS-specific protocols not addressed."
     },
     {
       "id": "3-3 SR 3.1",
       "title": "Communication integrity",
       "controls": [
         "SC-08",
-        "SI-07"
+        "SI-07",
+        "CM-14"
       ],
-      "coverage_pct": 85,
-      "rationale": "SC-08 transmission integrity; SI-07 software/firmware integrity.",
-      "gaps": "Minor: IEC 62443 addresses ICS communication integrity (process variable integrity). SP 800-53 covers generally."
+      "coverage_pct": 88,
+      "rationale": "SC-08 transmission integrity; SI-07 software/firmware integrity. CM-14 (new in Rev 5) signed components ensures cryptographic integrity verification of deployed components, relevant to firmware and configuration integrity in ICS.",
+      "gaps": "Minor: IEC 62443 addresses ICS communication integrity (process variable integrity). CM-14 strengthens component integrity verification."
     },
     {
       "id": "3-3 SR 3.4",
       "title": "Software and information integrity",
       "controls": [
         "SI-07",
-        "SI-07(1)"
+        "SI-07(1)",
+        "CM-14",
+        "SI-16"
       ],
-      "coverage_pct": 85,
-      "rationale": "SI-07 software and firmware integrity verification.",
-      "gaps": "Minor: IEC 62443 addresses ICS firmware/software integrity (PLC programs, configuration files)."
+      "coverage_pct": 88,
+      "rationale": "SI-07 software and firmware integrity verification; SI-07(1) integrity checks. CM-14 (new in Rev 5) signed components adds cryptographic component verification; SI-16 (new in Rev 5) memory protection prevents unauthorized code execution, relevant to PLC/RTU firmware integrity.",
+      "gaps": "Minor: IEC 62443 addresses ICS firmware/software integrity (PLC programs, configuration files). CM-14/SI-16 improve integrity verification and memory protection."
     },
     {
       "id": "3-3 SR 3.5",
@@ -225,7 +233,7 @@
         "AC-03"
       ],
       "coverage_pct": 85,
-      "rationale": "SC-28 data at rest; SC-08 data in transit; AC-03 access enforcement.",
+      "rationale": "SC-28 protection of information at rest; SC-08 transmission confidentiality; AC-03 access enforcement.",
       "gaps": "Minor: IEC 62443 considers ICS-specific confidentiality (process recipes, control algorithms)."
     },
     {
@@ -234,11 +242,12 @@
       "controls": [
         "SC-07",
         "SC-32",
-        "AC-04"
+        "AC-04",
+        "SC-46"
       ],
-      "coverage_pct": 75,
-      "rationale": "SC-07 boundary protection; SC-32 system partitioning; AC-04 information flow.",
-      "gaps": "IEC 62443 uses zones and conduits model for ICS network segmentation. SP 800-53 covers network segmentation but ICS-specific zone/conduit architecture not addressed."
+      "coverage_pct": 78,
+      "rationale": "SC-07 boundary protection; SC-32 system partitioning; AC-04 information flow. SC-46 (new in Rev 5) cross-domain policy enforcement strengthens segmentation governance across IT/OT boundary zones.",
+      "gaps": "IEC 62443 uses zones and conduits model for ICS network segmentation. SC-46 improves cross-domain policy enforcement but ICS-specific zone/conduit architecture not addressed."
     },
     {
       "id": "3-3 SR 5.2",
@@ -246,11 +255,12 @@
       "controls": [
         "SC-07",
         "SC-07(5)",
-        "SC-07(11)"
+        "SC-07(11)",
+        "SC-46"
       ],
-      "coverage_pct": 80,
-      "rationale": "SC-07 boundary protection with enhancements.",
-      "gaps": "IEC 62443 zone boundaries include ICS-specific considerations (data historians, DMZ between IT/OT). SP 800-53 boundary controls apply but ICS DMZ architecture not specific."
+      "coverage_pct": 82,
+      "rationale": "SC-07 boundary protection with enhancements. SC-46 (new in Rev 5) cross-domain policy enforcement supports zone boundary governance between IT and OT domains.",
+      "gaps": "IEC 62443 zone boundaries include ICS-specific considerations (data historians, DMZ between IT/OT). SC-46 improves cross-domain enforcement but ICS DMZ architecture not specifically addressed."
     },
     {
       "id": "3-3 SR 6.1",
@@ -260,7 +270,7 @@
         "AU-06"
       ],
       "coverage_pct": 85,
-      "rationale": "AU-09 protection of audit information; AU-06 audit review.",
+      "rationale": "AU-09 protection of audit information; AU-06 audit review, analysis and reporting.",
       "gaps": "Minor: IEC 62443 considers ICS audit log access from safety perspective."
     },
     {
@@ -268,21 +278,23 @@
       "title": "Continuous monitoring",
       "controls": [
         "CA-07",
-        "SI-04"
+        "SI-04",
+        "SC-48"
       ],
-      "coverage_pct": 75,
-      "rationale": "CA-07 continuous monitoring; SI-04 system monitoring.",
-      "gaps": "IEC 62443 addresses ICS-specific monitoring (process variable anomalies, protocol anomalies). SP 800-53 covers monitoring generally but ICS protocol monitoring not addressed."
+      "coverage_pct": 78,
+      "rationale": "CA-07 continuous monitoring; SI-04 system monitoring. SC-48 (new in Rev 5) sensor relocation supports adaptable monitoring positioning relevant to ICS network monitoring deployment.",
+      "gaps": "IEC 62443 addresses ICS-specific monitoring (process variable anomalies, protocol anomalies). SC-48 improves monitoring adaptability but ICS protocol monitoring (Modbus/DNP3 deep packet inspection) not addressed."
     },
     {
       "id": "3-3 SR 7.1",
       "title": "Denial of service protection",
       "controls": [
-        "SC-05"
+        "SC-05",
+        "SC-24"
       ],
-      "coverage_pct": 70,
-      "rationale": "SC-05 denial of service protection.",
-      "gaps": "IEC 62443 addresses availability of safety functions. SP 800-53 covers DoS but safety function availability priority not addressed."
+      "coverage_pct": 72,
+      "rationale": "SC-05 denial-of-service protection. SC-24 (new in Rev 5) fail in known state ensures systems default to a known-secure state upon failure, partially addressing ICS availability requirements.",
+      "gaps": "IEC 62443 addresses availability of safety functions and deterministic operation. SC-24 provides fail-safe state concepts but safety function availability priority and real-time determinism not addressed."
     },
     {
       "id": "3-3 SR 7.2",
@@ -290,11 +302,12 @@
       "controls": [
         "AU-04",
         "SC-05",
-        "CP-02"
+        "CP-02",
+        "SC-06"
       ],
-      "coverage_pct": 75,
-      "rationale": "AU-04 storage capacity; SC-05 availability; CP-02 contingency planning.",
-      "gaps": "IEC 62443 addresses ICS resource management for deterministic real-time operation. SP 800-53 doesn't address real-time operational constraints."
+      "coverage_pct": 78,
+      "rationale": "AU-04 storage capacity; SC-05 availability; CP-02 contingency planning. SC-06 resource availability already in Rev 5 provides resource priority allocation relevant to ICS real-time resource management.",
+      "gaps": "IEC 62443 addresses ICS resource management for deterministic real-time operation. SP 800-53 doesn't address real-time operational constraints or process-priority scheduling."
     },
     {
       "id": "3-3 SR 7.3",
@@ -305,7 +318,7 @@
         "CP-10"
       ],
       "coverage_pct": 80,
-      "rationale": "CP-09 backup; CP-06 alternate storage; CP-10 recovery.",
+      "rationale": "CP-09 system backup; CP-06 alternate storage; CP-10 recovery and reconstitution.",
       "gaps": "IEC 62443 addresses ICS-specific backup (PLC programs, HMI configurations, historian data). SP 800-53 covers backup generally but ICS-specific backup requirements not detailed."
     },
     {
@@ -313,11 +326,12 @@
       "title": "Control system recovery and reconstitution",
       "controls": [
         "CP-10",
-        "IR-04"
+        "IR-04",
+        "SC-24"
       ],
-      "coverage_pct": 75,
-      "rationale": "CP-10 system recovery; IR-04 incident handling.",
-      "gaps": "IEC 62443 addresses safe-state recovery and graceful degradation for control systems. SP 800-53 covers recovery but ICS safe-state concepts not addressed."
+      "coverage_pct": 78,
+      "rationale": "CP-10 system recovery; IR-04 incident handling. SC-24 (new in Rev 5) fail in known state supports safe-state recovery concepts for control systems.",
+      "gaps": "IEC 62443 addresses safe-state recovery and graceful degradation for control systems. SC-24 provides fail-safe state concepts but ICS graceful degradation and process safety recovery not fully addressed."
     },
     {
       "id": "3-3 SR 7.6",
@@ -325,11 +339,13 @@
       "controls": [
         "CM-02",
         "CM-06",
-        "CM-07"
+        "CM-07",
+        "PL-10",
+        "PL-11"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM-02 baselines; CM-06 settings; CM-07 least functionality.",
-      "gaps": "Minor: IEC 62443 addresses ICS-specific configuration (PLC hardening, SCADA server configuration)."
+      "coverage_pct": 88,
+      "rationale": "CM-02 baselines; CM-06 settings; CM-07 least functionality. PL-10 (new in Rev 5) baseline selection and PL-11 (new in Rev 5) baseline tailoring support structured approach to ICS configuration baseline management.",
+      "gaps": "Minor: IEC 62443 addresses ICS-specific configuration (PLC hardening, SCADA server configuration). PL-10/PL-11 improve baseline governance."
     },
     {
       "id": "3-3 SR 7.7",
@@ -339,12 +355,12 @@
       ],
       "coverage_pct": 80,
       "rationale": "CM-07 least functionality.",
-      "gaps": "IEC 62443 applies least functionality to ICS components (disable unused protocols on PLCs). SP 800-53 covers generally but ICS-specific protocol considerations not detailed."
+      "gaps": "IEC 62443 applies least functionality to ICS components (disable unused protocols on PLCs, remove unnecessary services on SCADA servers). SP 800-53 covers generally but ICS-specific protocol considerations not detailed."
     }
   ],
   "summary": {
     "total_clauses": 27,
-    "average_coverage": 80.9,
+    "average_coverage": 82.3,
     "full_count": 15,
     "substantial_count": 12,
     "partial_count": 0,

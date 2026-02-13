@@ -4,8 +4,8 @@
   "framework_name": "BSI IT-Grundschutz",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -43,24 +43,28 @@
         "PM-02",
         "PM-03",
         "PM-09",
-        "PM-06"
+        "PM-06",
+        "PL-09",
+        "PL-10",
+        "PL-11"
       ],
-      "coverage_pct": 75,
-      "rationale": "PM-01 security program; PM-02 roles; PM-03 resources; PM-09 risk strategy; PM-06 measures.",
-      "gaps": "Minor: BSI Grundschutz requires an information security management system following BSI standards. SP 800-53 provides security program controls but BSI-specific ISMS methodology not addressed."
+      "coverage_pct": 80,
+      "rationale": "PM-01 security program; PM-02 roles; PM-03 resources; PM-09 risk strategy; PM-06 measures of performance; PL-09 (new in Rev 5) central management enables unified governance of controls across the organisation; PL-10 (new in Rev 5) baseline selection provides structured control selection methodology; PL-11 (new in Rev 5) baseline tailoring adapts controls to organisational context. Together PL-09/10/11 provide a governance-select-tailor cycle that partially mirrors BSI ISMS methodology.",
+      "gaps": "BSI Grundschutz requires a formal ISMS following BSI standards (BSI-Standard 200-1/200-2). PL-09/10/11 improve governance alignment but SP 800-53 is a control catalogue, not an ISMS standard. The BSI modular approach (Bausteine) and BSI-specific protection requirements analysis methodology are not addressed."
     },
     {
       "id": "ORP.1",
-      "title": "Organization",
+      "title": "Organisation",
       "controls": [
         "PM-01",
         "PM-02",
         "PL-01",
-        "AC-05"
+        "AC-05",
+        "PL-09"
       ],
-      "coverage_pct": 75,
-      "rationale": "PM-01/PM-02 program and roles; PL-01 security planning; AC-05 separation of duties.",
-      "gaps": "BSI Grundschutz covers organizational aspects including security organization, responsibilities, and processes. SP 800-53 addresses these but BSI-specific organizational requirements need supplementation."
+      "coverage_pct": 78,
+      "rationale": "PM-01/PM-02 programme and roles; PL-01 security planning; AC-05 separation of duties; PL-09 (new in Rev 5) central management supports organisational governance of security functions.",
+      "gaps": "BSI Grundschutz covers organisational aspects including security organisation, responsibilities, and processes. PL-09 improves central governance but BSI-specific organisational requirements (e.g., IT security officer mandate, reporting lines to management board) need supplementation."
     },
     {
       "id": "ORP.2",
@@ -74,15 +78,16 @@
         "PS-06",
         "PS-07",
         "PS-08",
+        "PS-09",
         "AT-01",
         "AT-02",
         "AT-03",
         "AT-04",
         "PM-13"
       ],
-      "coverage_pct": 85,
-      "rationale": "PS family personnel security; AT family training; PM-13 workforce.",
-      "gaps": "Minor: BSI Grundschutz personnel module aligns well with SP 800-53 PS and AT families."
+      "coverage_pct": 88,
+      "rationale": "PS family personnel security; PS-09 (new in Rev 5) position descriptions defines security responsibilities within role descriptions, directly supporting BSI requirements for defined security roles and responsibilities; AT family training; PM-13 workforce.",
+      "gaps": "Minor: PS-09 strengthens role definition alignment. BSI Grundschutz personnel module aligns well with SP 800-53 PS and AT families."
     },
     {
       "id": "ORP.3",
@@ -92,12 +97,13 @@
         "AT-02",
         "AT-03",
         "AT-04",
+        "AT-06",
         "PM-13",
         "PM-14"
       ],
-      "coverage_pct": 90,
-      "rationale": "AT family comprehensive for awareness and training. PM-13 workforce; PM-14 testing.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AT family comprehensive for awareness and training; AT-06 (new in Rev 5) training feedback measures training effectiveness and captures lessons learned, directly supporting BSI requirements for awareness programme evaluation; PM-13 workforce; PM-14 testing.",
+      "gaps": "Minimal gap. AT-06 improves training effectiveness measurement."
     },
     {
       "id": "ORP.4",
@@ -142,7 +148,7 @@
         "IA-12"
       ],
       "coverage_pct": 90,
-      "rationale": "AC and IA families comprehensive for identity and access management.",
+      "rationale": "AC and IA families comprehensive for identity and access management. No new Rev 5 controls add materially here — the AC and IA families were already very strong for IAM.",
       "gaps": "Minimal gap."
     },
     {
@@ -150,13 +156,14 @@
       "title": "Compliance Management",
       "controls": [
         "CA-02",
+        "CA-09",
         "PM-01",
         "PL-04",
         "SA-04"
       ],
-      "coverage_pct": 60,
-      "rationale": "CA-02 assessments; PM-01 program; PL-04 rules of behavior; SA-04 contractual.",
-      "gaps": "BSI Grundschutz compliance module covers legal, regulatory, and contractual compliance management. SP 800-53 lacks a dedicated compliance management control."
+      "coverage_pct": 62,
+      "rationale": "CA-02 assessments; PM-01 programme; PL-04 rules of behaviour; SA-04 contractual; CA-09 (new in Rev 5) internal system connections provides governance of internal interconnections that supports compliance tracking across system boundaries.",
+      "gaps": "BSI Grundschutz compliance module covers legal, regulatory, and contractual compliance management. CA-09 improves interconnection compliance visibility but SP 800-53 still lacks a dedicated compliance management control covering legal/regulatory monitoring, compliance gap tracking, and regulatory change management."
     },
     {
       "id": "CON.1",
@@ -165,11 +172,12 @@
         "SC-12",
         "SC-13",
         "SC-28",
-        "SC-08"
+        "SC-08",
+        "SC-38"
       ],
-      "coverage_pct": 85,
-      "rationale": "SC-12 key management; SC-13 cryptographic protection; SC-28 encryption at rest; SC-08 encryption in transit.",
-      "gaps": "Minor: BSI Grundschutz requires a formal cryptographic concept document. SP 800-53 covers cryptography controls but the formal concept document is BSI-specific."
+      "coverage_pct": 88,
+      "rationale": "SC-12 key management; SC-13 cryptographic protection; SC-28 encryption at rest; SC-08 encryption in transit; SC-38 (new in Rev 5) operations security adds protection of cryptographic operations from side-channel and implementation attacks.",
+      "gaps": "Minor: SC-38 strengthens cryptographic operations security. BSI Grundschutz requires a formal cryptographic concept document (BSI TR-02102); this document-level requirement remains BSI-specific."
     },
     {
       "id": "CON.2",
@@ -185,22 +193,23 @@
         "PT-08",
         "PM-25",
         "PM-26",
-        "PM-27"
+        "PM-27",
+        "SI-18",
+        "SI-19"
       ],
-      "coverage_pct": 80,
-      "rationale": "PT family privacy; PM-25 minimization; PM-26 complaints; PM-27 reporting.",
-      "gaps": "Minor: BSI Grundschutz privacy module aligned with GDPR. SP 800-53 PT family covers privacy but EU/German-specific GDPR implementation less explicit."
+      "coverage_pct": 82,
+      "rationale": "PT family privacy; PM-25 minimisation; PM-26 complaints; PM-27 reporting; SI-18 (new in Rev 5) PII quality and accuracy operations supports GDPR data accuracy requirements; SI-19 (new in Rev 5) de-identification supports GDPR pseudonymisation requirements.",
+      "gaps": "Minor: SI-18/SI-19 improve privacy alignment with GDPR accuracy and pseudonymisation. BSI Grundschutz privacy module is aligned with GDPR; SP 800-53 PT family covers privacy but EU/German-specific GDPR implementation (data subject rights, DPA notification, DPIA per Art. 35) remains less explicit."
     },
     {
       "id": "CON.3",
       "title": "Data Backup",
       "controls": [
         "CP-09",
-        "CP-06",
-        "CP-09(1)"
+        "CP-06"
       ],
       "coverage_pct": 90,
-      "rationale": "CP-09 system backup; CP-06 alternate storage; CP-09(1) testing restoration.",
+      "rationale": "CP-09 system backup; CP-06 alternate storage. No new Rev 5 controls materially improve backup coverage.",
       "gaps": "Minimal gap."
     },
     {
@@ -208,11 +217,13 @@
       "title": "Deletion and Destruction",
       "controls": [
         "MP-06",
-        "SI-12"
+        "MP-08",
+        "SI-12",
+        "SI-18"
       ],
-      "coverage_pct": 85,
-      "rationale": "MP-06 media sanitization; SI-12 information management.",
-      "gaps": "Minor: BSI Grundschutz covers comprehensive deletion and destruction. MP-06 covers media sanitization comprehensively."
+      "coverage_pct": 88,
+      "rationale": "MP-06 media sanitisation; MP-08 (new in Rev 5) media downgrading provides procedures for downgrading media classification after sanitisation, directly supporting BSI requirements for verified destruction and media reclassification; SI-12 information management; SI-18 (new in Rev 5) PII quality includes data minimisation and retention controls.",
+      "gaps": "Minor: MP-08 adds media downgrading procedures. BSI Grundschutz covers comprehensive deletion and destruction with specific German DIN standards for media destruction."
     },
     {
       "id": "CON.7",
@@ -221,11 +232,12 @@
         "AC-17",
         "AC-19",
         "PE-17",
-        "SC-28"
+        "SC-28",
+        "SC-42"
       ],
-      "coverage_pct": 75,
-      "rationale": "AC-17 remote access; AC-19 mobile devices; PE-17 alternate work site; SC-28 protection at rest.",
-      "gaps": "BSI Grundschutz has a specific module for travel security. SP 800-53 covers through remote access and mobile device controls but travel-specific security (hotel, transit) less explicit."
+      "coverage_pct": 78,
+      "rationale": "AC-17 remote access; AC-19 mobile devices; PE-17 alternate work site; SC-28 protection at rest; SC-42 (new in Rev 5) sensor capability and data addresses device sensor management (camera, microphone, GPS) which is relevant to travel security and eavesdropping protection.",
+      "gaps": "BSI Grundschutz has a specific module for travel security. SC-42 improves coverage of device sensor risks during travel. SP 800-53 covers remote access and mobile device controls but travel-specific security (hotel room procedures, border crossing device handling, transit eavesdropping) remains less explicit."
     },
     {
       "id": "OPS.1.1.2",
@@ -235,11 +247,12 @@
         "AC-05",
         "AC-06",
         "CM-03",
-        "CM-05"
+        "CM-05",
+        "PS-09"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-02 account management; AC-05 separation of duties; AC-06 least privilege; CM-03 change control; CM-05 access restrictions for change.",
-      "gaps": "Minor: BSI Grundschutz IT administration module aligns well with SP 800-53 access and configuration controls."
+      "coverage_pct": 88,
+      "rationale": "AC-02 account management; AC-05 separation of duties; AC-06 least privilege; CM-03 change control; CM-05 access restrictions for change; PS-09 (new in Rev 5) position descriptions defines security responsibilities within administrator role descriptions.",
+      "gaps": "Minor: PS-09 strengthens admin role definition. BSI Grundschutz IT administration module aligns well with SP 800-53 access and configuration controls."
     },
     {
       "id": "OPS.1.1.3",
@@ -247,25 +260,25 @@
       "controls": [
         "CM-03",
         "CM-04",
-        "SI-02",
-        "SI-02(1)"
+        "CM-14",
+        "SI-02"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-03 change control; CM-04 impact analysis; SI-02 flaw remediation with automated patching.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CM-03 change control; CM-04 impact analysis; SI-02 flaw remediation; CM-14 (new in Rev 5) signed components verifies integrity of software/firmware updates through cryptographic signatures, directly supporting BSI requirements for verified patch authenticity.",
+      "gaps": "Minimal gap. CM-14 adds integrity verification for patches."
     },
     {
       "id": "OPS.1.1.4",
       "title": "Protection Against Malware",
       "controls": [
         "SI-03",
-        "SI-03(1)",
-        "SI-03(2)",
-        "SI-08"
+        "SI-08",
+        "SI-16",
+        "SC-44"
       ],
-      "coverage_pct": 90,
-      "rationale": "SI-03 malware protection with enhancements; SI-08 spam protection.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "SI-03 malware protection; SI-08 spam protection; SI-16 (new in Rev 5) memory protection (DEP/ASLR) hardens against exploit techniques; SC-44 (new in Rev 5) detonation chambers provides sandboxing for suspicious file analysis.",
+      "gaps": "Minimal gap. SI-16 and SC-44 add defence-in-depth against advanced malware."
     },
     {
       "id": "OPS.1.1.5",
@@ -282,24 +295,24 @@
         "AU-09",
         "AU-10",
         "AU-11",
-        "AU-12"
+        "AU-12",
+        "SI-20"
       ],
       "coverage_pct": 95,
-      "rationale": "AU family comprehensive for logging.",
-      "gaps": "Minimal gap."
+      "rationale": "AU family comprehensive for logging; SI-20 (new in Rev 5) tainting tracks data provenance through system processing, supporting advanced audit trail analysis.",
+      "gaps": "Minimal gap. SI-20 adds data provenance tracking."
     },
     {
       "id": "OPS.1.1.6",
       "title": "Software Testing",
       "controls": [
         "SA-11",
-        "SA-11(1)",
-        "SA-11(2)",
-        "CM-04"
+        "CM-04",
+        "SA-20"
       ],
-      "coverage_pct": 85,
-      "rationale": "SA-11 developer testing with static/dynamic analysis; CM-04 impact analysis.",
-      "gaps": "Minor: BSI Grundschutz software testing module aligns well with SA-11."
+      "coverage_pct": 88,
+      "rationale": "SA-11 developer testing with static/dynamic analysis; CM-04 impact analysis; SA-20 (new in Rev 5) customized development of critical components addresses bespoke development and testing for high-assurance requirements.",
+      "gaps": "Minor: SA-20 adds testing rigour for critical components. BSI Grundschutz software testing module aligns well with SA-11."
     },
     {
       "id": "OPS.1.2.4",
@@ -307,23 +320,23 @@
       "controls": [
         "AC-17",
         "PE-17",
-        "SC-28"
+        "SC-28",
+        "SC-42"
       ],
-      "coverage_pct": 80,
-      "rationale": "AC-17 remote access; PE-17 alternate work site; SC-28 protection at rest.",
-      "gaps": "Minor: BSI Grundschutz telecommuting module includes home office security requirements."
+      "coverage_pct": 82,
+      "rationale": "AC-17 remote access; PE-17 alternate work site; SC-28 protection at rest; SC-42 (new in Rev 5) sensor capability and data addresses device sensor management relevant to home office security (microphone/camera controls during video calls, location services).",
+      "gaps": "Minor: SC-42 adds sensor security for telecommuting. BSI Grundschutz telecommuting module includes specific home office security requirements (room lockability, screen privacy, network isolation)."
     },
     {
       "id": "OPS.1.2.5",
       "title": "Remote Maintenance",
       "controls": [
         "MA-04",
-        "MA-04(1)",
-        "MA-04(2)"
+        "MA-07"
       ],
-      "coverage_pct": 90,
-      "rationale": "MA-04 nonlocal maintenance with auditing and strong authentication enhancements.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "MA-04 nonlocal maintenance with auditing and strong authentication; MA-07 (new in Rev 5) field maintenance addresses maintenance of equipment at off-site locations with appropriate security controls for field service scenarios.",
+      "gaps": "Minimal gap. MA-07 extends maintenance coverage to field operations."
     },
     {
       "id": "DER.1",
@@ -332,11 +345,13 @@
         "SI-04",
         "AU-06",
         "CA-07",
-        "IR-05"
+        "IR-05",
+        "SC-48",
+        "SI-20"
       ],
-      "coverage_pct": 90,
-      "rationale": "SI-04 system monitoring; AU-06 audit review; CA-07 continuous monitoring; IR-05 incident monitoring.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "SI-04 system monitoring; AU-06 audit review; CA-07 continuous monitoring; IR-05 incident monitoring; SC-48 (new in Rev 5) sensor relocation provides dynamic sensor repositioning to improve detection coverage; SI-20 (new in Rev 5) tainting tracks data provenance to support detection of data exfiltration or tampering.",
+      "gaps": "Minimal gap. SC-48 and SI-20 add advanced detection capabilities."
     },
     {
       "id": "DER.2.1",
@@ -346,11 +361,12 @@
         "IR-04",
         "IR-05",
         "IR-06",
-        "IR-08"
+        "IR-08",
+        "IR-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "IR family comprehensive for incident management.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "IR family comprehensive for incident management; IR-09 (new in Rev 5) information spillage response adds specific handling procedures for data breach/spillage incidents including containment and notification steps.",
+      "gaps": "Minimal gap. IR-09 adds spillage-specific incident procedures."
     },
     {
       "id": "DER.4",
@@ -368,11 +384,12 @@
         "CP-10",
         "CP-11",
         "CP-12",
-        "CP-13"
+        "CP-13",
+        "SI-13"
       ],
-      "coverage_pct": 80,
-      "rationale": "CP family comprehensive for contingency/continuity.",
-      "gaps": "Minor: BSI Grundschutz BCM module extends beyond IT. SP 800-53 focuses on IT contingency."
+      "coverage_pct": 82,
+      "rationale": "CP family comprehensive for contingency/continuity; SI-13 (new in Rev 5) predictive maintenance enables proactive failure prevention through monitoring component reliability, supporting BCM by reducing unplanned outages.",
+      "gaps": "Minor: SI-13 adds proactive failure prevention. BSI Grundschutz BCM module extends beyond IT to business continuity (crisis management, emergency procedures, business impact analysis at organisational level). SP 800-53 CP family focuses on IT contingency."
     },
     {
       "id": "INF.1",
@@ -395,11 +412,14 @@
         "PE-15",
         "PE-16",
         "PE-17",
-        "PE-18"
+        "PE-18",
+        "PE-21",
+        "PE-22",
+        "PE-23"
       ],
-      "coverage_pct": 85,
-      "rationale": "PE family comprehensive for physical and environmental protection.",
-      "gaps": "Minor: BSI Grundschutz has detailed building-level physical security. PE family covers most aspects."
+      "coverage_pct": 88,
+      "rationale": "PE family comprehensive for physical and environmental protection; PE-21 (new in Rev 5) electromagnetic pulse protection addresses EMP threats to building infrastructure; PE-22 (new in Rev 5) component marking supports physical asset identification within buildings; PE-23 (new in Rev 5) facility location provides guidance on secure facility siting decisions.",
+      "gaps": "Minor: PE-21/22/23 add EMP protection, asset marking, and facility siting. BSI Grundschutz has detailed building-level physical security including zone models (security areas, restricted areas, high-security areas) which are more prescriptive than SP 800-53 PE controls."
     },
     {
       "id": "INF.2",
@@ -422,11 +442,14 @@
         "PE-15",
         "PE-16",
         "PE-17",
-        "PE-18"
+        "PE-18",
+        "PE-21",
+        "PE-22",
+        "PE-23"
       ],
-      "coverage_pct": 85,
-      "rationale": "PE family covers data centre physical/environmental protection.",
-      "gaps": "Minor: BSI Grundschutz has specific data centre requirements (cooling, power, fire suppression)."
+      "coverage_pct": 88,
+      "rationale": "PE family covers data centre physical/environmental protection; PE-21 (new in Rev 5) electromagnetic pulse protection is particularly relevant for data centre resilience; PE-22 (new in Rev 5) component marking aids physical equipment inventory in large data centres; PE-23 (new in Rev 5) facility location supports data centre siting decisions (flood zones, seismic risk, proximity to hazards).",
+      "gaps": "Minor: PE-21/22/23 add data centre resilience and management. BSI Grundschutz has specific data centre requirements (cooling redundancy, power feed diversity, EN 50600 alignment) that are more prescriptive."
     },
     {
       "id": "NET.1.1",
@@ -435,11 +458,13 @@
         "SC-07",
         "PL-08",
         "SC-32",
-        "AC-04"
+        "AC-04",
+        "SC-46",
+        "SC-47"
       ],
-      "coverage_pct": 85,
-      "rationale": "SC-07 boundary protection; PL-08 security architecture; SC-32 partitioning; AC-04 information flow.",
-      "gaps": "Minor: BSI Grundschutz network architecture module aligns well with SP 800-53 network controls."
+      "coverage_pct": 88,
+      "rationale": "SC-07 boundary protection; PL-08 security architecture; SC-32 partitioning; AC-04 information flow; SC-46 (new in Rev 5) cross-domain policy enforcement strengthens network segmentation between security domains; SC-47 (new in Rev 5) alternate communications paths provides resilient network architecture design.",
+      "gaps": "Minor: SC-46/SC-47 strengthen network segmentation and resilience. BSI Grundschutz network architecture module aligns well with SP 800-53 network controls."
     },
     {
       "id": "NET.1.2",
@@ -448,11 +473,12 @@
         "CM-06",
         "CM-07",
         "CM-02",
-        "SC-07"
+        "SC-07",
+        "CM-12"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM-06 configuration; CM-07 least functionality; CM-02 baselines; SC-07 boundary.",
-      "gaps": "Minor: BSI Grundschutz network management includes SNMP hardening and network device management specifics."
+      "coverage_pct": 88,
+      "rationale": "CM-06 configuration; CM-07 least functionality; CM-02 baselines; SC-07 boundary; CM-12 (new in Rev 5) information location identifies where sensitive data resides across network segments, supporting network management decisions about data flow and segmentation.",
+      "gaps": "Minor: CM-12 adds data location awareness for network management. BSI Grundschutz network management includes SNMP hardening and network device management specifics."
     },
     {
       "id": "NET.3.1",
@@ -461,11 +487,13 @@
         "CM-06",
         "CM-07",
         "SC-07",
-        "CM-02"
+        "CM-02",
+        "CM-14",
+        "SC-41"
       ],
-      "coverage_pct": 80,
-      "rationale": "CM-06 configuration settings; CM-07 least functionality; SC-07 boundary protection; CM-02 baselines.",
-      "gaps": "BSI Grundschutz has device-specific modules. SP 800-53 covers through general configuration and network controls."
+      "coverage_pct": 85,
+      "rationale": "CM-06 configuration settings; CM-07 least functionality; SC-07 boundary protection; CM-02 baselines; CM-14 (new in Rev 5) signed components verifies firmware integrity on network devices; SC-41 (new in Rev 5) port and I/O device access restricts physical and logical port access on network equipment.",
+      "gaps": "Minor: CM-14 adds firmware integrity verification; SC-41 adds port access control. BSI Grundschutz has device-specific modules with detailed hardening checklists. SP 800-53 covers through general configuration and network controls."
     },
     {
       "id": "SYS.1.1",
@@ -475,11 +503,13 @@
         "CM-06",
         "CM-07",
         "SI-02",
-        "AC-03"
+        "AC-03",
+        "CM-14",
+        "SI-16"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM-02 baselines; CM-06 settings; CM-07 least functionality; SI-02 patching; AC-03 access.",
-      "gaps": "Minor: BSI Grundschutz has server-specific hardening requirements."
+      "coverage_pct": 88,
+      "rationale": "CM-02 baselines; CM-06 settings; CM-07 least functionality; SI-02 patching; AC-03 access; CM-14 (new in Rev 5) signed components verifies software integrity on servers; SI-16 (new in Rev 5) memory protection (DEP/ASLR) hardens server runtime environments.",
+      "gaps": "Minor: CM-14 and SI-16 strengthen server hardening. BSI Grundschutz has server-specific hardening requirements per operating system."
     },
     {
       "id": "SYS.2.1",
@@ -490,11 +520,13 @@
         "CM-07",
         "SI-02",
         "AC-03",
-        "SC-28"
+        "SC-28",
+        "SC-42",
+        "SI-16"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM family configuration; SI-02 patching; AC-03 access; SC-28 encryption at rest.",
-      "gaps": "Minor: BSI Grundschutz has client-specific hardening requirements."
+      "coverage_pct": 88,
+      "rationale": "CM family configuration; SI-02 patching; AC-03 access; SC-28 encryption at rest; SC-42 (new in Rev 5) sensor capability and data manages client device sensors (camera, microphone, GPS) which is relevant to endpoint security; SI-16 (new in Rev 5) memory protection hardens client runtime environments against exploitation.",
+      "gaps": "Minor: SC-42 and SI-16 strengthen endpoint security. BSI Grundschutz has client-specific hardening requirements per operating system."
     },
     {
       "id": "APP.1.1",
@@ -503,11 +535,12 @@
         "CM-06",
         "CM-07",
         "SI-03",
-        "SC-18"
+        "SC-18",
+        "SC-44"
       ],
-      "coverage_pct": 70,
-      "rationale": "CM-06 configuration; CM-07 least functionality; SI-03 malware; SC-18 mobile code.",
-      "gaps": "BSI Grundschutz has specific office product security modules. SP 800-53 covers through general application controls."
+      "coverage_pct": 72,
+      "rationale": "CM-06 configuration; CM-07 least functionality; SI-03 malware; SC-18 mobile code; SC-44 (new in Rev 5) detonation chambers provides sandboxing for suspicious document analysis, relevant to office product macro and embedded content threats.",
+      "gaps": "SC-44 adds document sandboxing. BSI Grundschutz has specific office product security modules (macro policies, OLE restrictions, PDF security). SP 800-53 covers through general application controls."
     },
     {
       "id": "APP.3.1",
@@ -516,18 +549,20 @@
         "SA-11",
         "SC-07",
         "SI-10",
-        "SC-08"
+        "SC-08",
+        "SA-23",
+        "SI-21"
       ],
-      "coverage_pct": 80,
-      "rationale": "SA-11 developer testing; SC-07 boundary; SI-10 input validation; SC-08 transmission protection.",
-      "gaps": "Minor: BSI Grundschutz has specific web application security requirements. SP 800-53 covers through development and infrastructure controls."
+      "coverage_pct": 85,
+      "rationale": "SA-11 developer testing; SC-07 boundary; SI-10 input validation; SC-08 transmission protection; SA-23 (new in Rev 5) specialization addresses domain-specific security engineering including web application security patterns; SI-21 (new in Rev 5) information refresh provides mechanisms to verify data freshness and prevent stale data attacks in web services.",
+      "gaps": "Minor: SA-23 and SI-21 strengthen web application security. BSI Grundschutz has specific web application security requirements (OWASP alignment, CSP headers, API security). SP 800-53 covers through development and infrastructure controls."
     }
   ],
   "summary": {
     "total_clauses": 30,
-    "average_coverage": 83.5,
-    "full_count": 20,
-    "substantial_count": 9,
+    "average_coverage": 86.0,
+    "full_count": 22,
+    "substantial_count": 7,
     "partial_count": 1,
     "weak_count": 0,
     "none_count": 0

@@ -4,8 +4,8 @@
   "framework_name": "FINOS CCC",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -45,7 +45,7 @@
         "SC-23"
       ],
       "coverage_pct": 90,
-      "rationale": "SC-08 transmission confidentiality/integrity; SC-08(1) cryptographic protection; SC-13 cryptographic protection.",
+      "rationale": "SC-08 transmission confidentiality/integrity; SC-08(1) cryptographic protection; SC-13 cryptographic protection; SC-23 session authenticity.",
       "gaps": "Minimal gap. SP 800-53 encryption-in-transit controls align well."
     },
     {
@@ -58,7 +58,7 @@
         "SC-12(1)"
       ],
       "coverage_pct": 80,
-      "rationale": "SC-28 protection at rest; SC-12 key management.",
+      "rationale": "SC-28 protection at rest; SC-28(1) cryptographic protection; SC-12 key establishment and management; SC-12(1) availability.",
       "gaps": "FINOS CCC specifically requires customer-managed keys (CMEK/BYOK). SP 800-53 covers encryption and key management but customer key control in cloud is not explicitly addressed."
     },
     {
@@ -80,11 +80,12 @@
         "AU-02",
         "AU-03",
         "AU-06",
-        "AU-12"
+        "AU-12",
+        "CM-13"
       ],
-      "coverage_pct": 90,
-      "rationale": "AU-02 auditable events; AU-03 content; AU-06 review; AU-12 generation. Comprehensive logging.",
-      "gaps": "Minor: FINOS CCC is cloud-specific (API calls, console access). SP 800-53 AU family covers generally."
+      "coverage_pct": 92,
+      "rationale": "AU-02 auditable events; AU-03 content of audit records; AU-06 audit review; AU-12 audit generation. CM-13 (new in Rev 5) data action mapping provides visibility into data processing actions, strengthening cloud access and change tracking.",
+      "gaps": "Minor: FINOS CCC is cloud-specific (API calls, console access). CM-13 improves data action visibility but cloud-native audit integration (e.g., CloudTrail) remains implementation-specific."
     },
     {
       "id": "CCC-C05",
@@ -93,11 +94,13 @@
         "AC-03",
         "AC-04",
         "SC-07",
-        "AC-17"
+        "AC-17",
+        "AC-20",
+        "CA-09"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-03 access enforcement; AC-04 information flow; SC-07 boundary protection; AC-17 remote access.",
-      "gaps": "Minor: FINOS CCC specifically addresses cloud tenant isolation and untrusted entity prevention in multi-cloud context."
+      "coverage_pct": 88,
+      "rationale": "AC-03 access enforcement; AC-04 information flow; SC-07 boundary protection; AC-17 remote access; AC-20 use of external systems. CA-09 (new in Rev 5) internal system connections adds governance over internal cross-service connections relevant to cloud tenant boundaries.",
+      "gaps": "Minor: FINOS CCC specifically addresses cloud tenant isolation and untrusted entity prevention in multi-cloud context. CA-09 improves internal connection governance."
     },
     {
       "id": "CCC-C06",
@@ -105,11 +108,12 @@
       "controls": [
         "CM-08",
         "CM-08(1)",
-        "PM-05"
+        "PM-05",
+        "CM-12"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM-08 component inventory with automated discovery; PM-05 system inventory.",
-      "gaps": "Minor: FINOS CCC specifically addresses cloud resource inventory across cloud service providers. SP 800-53 covers inventory generally."
+      "coverage_pct": 88,
+      "rationale": "CM-08 component inventory with automated discovery; PM-05 system inventory. CM-12 (new in Rev 5) information location tracks where data resides, improving cloud resource discovery across regions and providers.",
+      "gaps": "Minor: FINOS CCC specifically addresses cloud resource inventory across providers. CM-12 information location strengthens multi-region visibility."
     },
     {
       "id": "CCC-C07",
@@ -118,11 +122,12 @@
         "CM-03",
         "CM-04",
         "CM-05",
-        "CM-09"
+        "CM-09",
+        "CM-14"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-03 change control; CM-04 impact analysis; CM-05 access restrictions; CM-09 configuration management plan.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CM-03 change control; CM-04 impact analysis; CM-05 access restrictions; CM-09 configuration management plan. CM-14 (new in Rev 5) signed components ensures integrity of deployed cloud infrastructure components through cryptographic verification.",
+      "gaps": "Minimal gap. CM-14 strengthens change integrity verification for cloud deployments."
     },
     {
       "id": "CCC-C08",
@@ -131,11 +136,12 @@
         "SI-04",
         "AU-06",
         "CA-07",
-        "SI-04(5)"
+        "SI-04(5)",
+        "SC-48"
       ],
-      "coverage_pct": 90,
-      "rationale": "SI-04 system monitoring; AU-06 audit review; CA-07 continuous monitoring; SI-04(5) system alerts.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "SI-04 system monitoring; AU-06 audit review; CA-07 continuous monitoring; SI-04(5) system-generated alerts. SC-48 (new in Rev 5) sensor relocation supports dynamic monitoring in cloud environments where workloads migrate across infrastructure.",
+      "gaps": "Minimal gap. SC-48 improves monitoring adaptability for dynamic cloud environments."
     },
     {
       "id": "CCC-C09",
@@ -143,11 +149,12 @@
       "controls": [
         "SC-07",
         "SC-32",
-        "AC-04"
+        "AC-04",
+        "SC-46"
       ],
-      "coverage_pct": 90,
-      "rationale": "SC-07 boundary protection; SC-32 system partitioning; AC-04 information flow.",
-      "gaps": "Minimal gap. SP 800-53 network segmentation controls are comprehensive."
+      "coverage_pct": 92,
+      "rationale": "SC-07 boundary protection; SC-32 system partitioning; AC-04 information flow enforcement. SC-46 (new in Rev 5) cross-domain policy enforcement strengthens network segmentation governance across cloud VPCs and security groups.",
+      "gaps": "Minimal gap. SC-46 improves cross-domain segmentation policy enforcement relevant to cloud network architectures."
     },
     {
       "id": "CCC-C10",
@@ -155,11 +162,12 @@
       "controls": [
         "RA-05",
         "SI-02",
-        "SI-05"
+        "SI-05",
+        "RA-07"
       ],
       "coverage_pct": 95,
-      "rationale": "RA-05 vulnerability management; SI-02 flaw remediation; SI-05 security alerts.",
-      "gaps": "Minimal gap."
+      "rationale": "RA-05 vulnerability monitoring and scanning; SI-02 flaw remediation; SI-05 security alerts and advisories. RA-07 (new in Rev 5) risk response provides explicit risk treatment actions following vulnerability discovery.",
+      "gaps": "Minimal gap. RA-07 strengthens the response side of vulnerability management."
     },
     {
       "id": "CCC-C11",
@@ -173,8 +181,8 @@
         "IA-05"
       ],
       "coverage_pct": 90,
-      "rationale": "AC/IA families comprehensive for IAM. AC-02 account management; AC-03 enforcement; AC-06 least privilege; IA-02 authentication.",
-      "gaps": "Minor: FINOS CCC is cloud-IAM specific (roles, policies, service accounts). SP 800-53 covers IAM generally."
+      "rationale": "AC/IA families comprehensive for IAM. AC-02 account management; AC-03 enforcement; AC-06 least privilege; IA-02 authentication; IA-04 identifier management; IA-05 authenticator management.",
+      "gaps": "Minor: FINOS CCC is cloud-IAM specific (roles, policies, service accounts). SP 800-53 covers IAM generally but cloud-specific IAM constructs (e.g., assumed roles, service principals) are implementation-dependent."
     },
     {
       "id": "CCC-C12",
@@ -199,7 +207,7 @@
         "CP-10"
       ],
       "coverage_pct": 90,
-      "rationale": "CP-09 system backup; CP-06 alternate storage; CP-10 recovery.",
+      "rationale": "CP-09 system backup; CP-06 alternate storage site; CP-10 system recovery and reconstitution.",
       "gaps": "Minimal gap."
     },
     {
@@ -208,11 +216,13 @@
       "controls": [
         "CM-02",
         "CM-06",
-        "CM-07"
+        "CM-07",
+        "PL-10",
+        "PL-11"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-02 baseline configuration; CM-06 configuration settings; CM-07 least functionality.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CM-02 baseline configuration; CM-06 configuration settings; CM-07 least functionality. PL-10 (new in Rev 5) baseline selection provides structured approach to choosing control baselines; PL-11 (new in Rev 5) baseline tailoring formalises the process of adjusting baselines for specific cloud environments.",
+      "gaps": "Minimal gap. PL-10/PL-11 strengthen the governance of configuration baseline selection and tailoring for cloud services."
     },
     {
       "id": "CCC-C15",
@@ -222,11 +232,12 @@
         "IR-04",
         "IR-05",
         "IR-06",
-        "IR-08"
+        "IR-08",
+        "IR-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "IR family comprehensive for incident response.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "IR family comprehensive for incident response. IR-09 (new in Rev 5) information spillage response adds handling for data exposure incidents common in cloud environments (misconfigured buckets, leaked credentials).",
+      "gaps": "Minimal gap. IR-09 addresses cloud-relevant data spillage scenarios."
     },
     {
       "id": "CCC-C16",
@@ -240,11 +251,13 @@
         "MP-05",
         "MP-06",
         "MP-07",
-        "AC-16"
+        "AC-16",
+        "CM-12",
+        "CM-13"
       ],
-      "coverage_pct": 85,
-      "rationale": "RA-02 categorization; MP family media handling; AC-16 security attributes.",
-      "gaps": "Minor: FINOS CCC addresses cloud data classification. SP 800-53 covers through categorization and media handling."
+      "coverage_pct": 88,
+      "rationale": "RA-02 categorization; MP family media handling; AC-16 security attributes. CM-12 (new in Rev 5) information location identifies where classified data resides; CM-13 (new in Rev 5) data action mapping tracks how classified data is processed and moved.",
+      "gaps": "Minor: FINOS CCC addresses cloud data classification. CM-12/CM-13 improve data location and action tracking. Cloud-specific classification tagging mechanisms remain implementation-dependent."
     },
     {
       "id": "CCC-C17",
@@ -257,13 +270,13 @@
         "AU-16"
       ],
       "coverage_pct": 90,
-      "rationale": "AU family comprehensive; AU-16 covers cross-organizational audit logging.",
-      "gaps": "Minor: FINOS CCC specifically addresses cloud service audit logs (CloudTrail, Activity Log equivalents)."
+      "rationale": "AU family comprehensive; AU-16 cross-organizational audit logging.",
+      "gaps": "Minor: FINOS CCC specifically addresses cloud service audit logs (CloudTrail, Activity Log equivalents). SP 800-53 AU family covers the logging requirements generally."
     }
   ],
   "summary": {
     "total_clauses": 17,
-    "average_coverage": 89.4,
+    "average_coverage": 90.6,
     "full_count": 16,
     "substantial_count": 1,
     "partial_count": 0,

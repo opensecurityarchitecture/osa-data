@@ -4,8 +4,8 @@
   "framework_name": "ANSSI Hygiene Guide & SecNumCloud",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. ANSSI Hygiene Guide (Guide d'hygiene informatique, 42 measures), SecNumCloud (cloud security qualification), and RGS (Referentiel General de Securite). Validate with qualified assessors and ANSSI-accredited PASSI providers for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. ANSSI Hygiene Guide (Guide d'hygiene informatique, 42 measures), SecNumCloud (cloud security qualification), and RGS (Referentiel General de Securite). Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors and ANSSI-accredited PASSI providers for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -42,11 +42,12 @@
         "AT-01",
         "AT-02",
         "AT-05",
+        "AT-06",
         "PL-04"
       ],
-      "coverage_pct": 90,
-      "rationale": "AT-01 awareness policy; AT-02 security awareness; AT-05 contacts with security groups. SP 800-53 AT family comprehensively covers awareness and training.",
-      "gaps": "Minimal gap. ANSSI Hygiene Guide measure is practical and well-matched by SP 800-53 awareness controls."
+      "coverage_pct": 92,
+      "rationale": "AT-01 awareness policy; AT-02 security awareness; AT-05 contacts with security groups; AT-06 (new in Rev 5) training feedback measures training effectiveness and captures lessons learned, directly supporting ANSSI requirements for awareness programme evaluation; PL-04 rules of behaviour.",
+      "gaps": "Minimal gap. AT-06 improves training effectiveness measurement."
     },
     {
       "id": "Hygiene.2",
@@ -74,21 +75,23 @@
         "SR-01"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-01 access control policy; AU-01 audit policy; CA-01 assessment policy; CM-01 configuration management policy; CP-01 contingency planning policy; IA-01 identification and authentication policy; IR-01 incident response policy; MA-01 maintenance policy; MP-01 media protection policy; PE-01 physical protection policy; PL-01 security planning policy; PS-01 personnel security policy; PT-01 PII processing policy; RA-01 risk assessment policy; SA-01 acquisition policy; SC-01 system and communications protection policy; SI-01 system integrity policy; SR-01 supply chain policy. Broad policy family coverage.",
+      "rationale": "Comprehensive policy controls across all families. No new Rev 5 controls materially change policy definition coverage — the -01 family policy controls were already comprehensive.",
       "gaps": "Minimal gap. SP 800-53 requires comprehensive security policies across all control families."
     },
     {
       "id": "Hygiene.3",
       "title": "Carry out regular audits",
       "controls": [
-        "AC-08",
+        "CA-02",
+        "CA-07",
+        "CA-09",
         "AT-02",
         "AT-04",
         "PL-04"
       ],
-      "coverage_pct": 85,
-      "rationale": "AT-02 security awareness; AT-04 training records; AC-08 system use notification; PL-04 rules of behavior. These controls support accountability and user responsibility.",
-      "gaps": "Minor: ANSSI emphasizes regular independent audits as a hygiene measure. SP 800-53 CA-02 and CA-07 cover assessment and continuous monitoring but the practical audit cadence focus is less explicit."
+      "coverage_pct": 88,
+      "rationale": "CA-02 security assessments; CA-07 continuous monitoring; CA-09 (new in Rev 5) internal system connections supports audit scope by providing visibility into internal interconnections that require assessment; AT-02 security awareness; AT-04 training records; PL-04 rules of behaviour.",
+      "gaps": "Minor: CA-09 improves audit scope coverage. ANSSI emphasizes regular independent audits; SP 800-53 CA-02 covers assessment but the practical audit cadence focus is less explicit."
     },
     {
       "id": "Hygiene.4",
@@ -98,11 +101,13 @@
         "AT-04",
         "AT-05",
         "CP-03",
-        "IR-02"
+        "IR-02",
+        "PM-02",
+        "PS-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "AT-03 security training; AT-04 training records; AT-05 contacts; CP-03 contingency training; IR-02 incident response training. SP 800-53 training and role assignment controls comprehensively address responsibility designation.",
-      "gaps": "Minimal gap. SP 800-53 PM-02 designates senior information security officer role."
+      "coverage_pct": 92,
+      "rationale": "AT-03 security training; AT-04 training records; AT-05 contacts; CP-03 contingency training; IR-02 incident response training; PM-02 senior information security officer; PS-09 (new in Rev 5) position descriptions defines security responsibilities in role descriptions, directly supporting the requirement to formally designate RSSI/CISO.",
+      "gaps": "Minimal gap. PS-09 strengthens security role designation."
     },
     {
       "id": "Hygiene.5",
@@ -111,13 +116,14 @@
         "CM-01",
         "CM-02",
         "CM-08",
+        "CM-12",
         "IA-03",
         "PL-02",
         "SA-05"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-01 configuration management policy; CM-02 baseline configuration; CM-08 system component inventory; IA-03 device identification; PL-02 system security plan; SA-05 system documentation. CM-08 directly addresses asset inventory.",
-      "gaps": "Minimal gap. CM-08 maps directly to asset inventory requirements."
+      "coverage_pct": 92,
+      "rationale": "CM-01 configuration management policy; CM-02 baseline configuration; CM-08 system component inventory; CM-12 (new in Rev 5) information location identifies where sensitive data resides across infrastructure, directly supporting ANSSI asset inventory requirements by linking data to infrastructure components; IA-03 device identification; PL-02 system security plan; SA-05 documentation.",
+      "gaps": "Minimal gap. CM-12 strengthens data-to-asset mapping."
     },
     {
       "id": "Hygiene.6",
@@ -128,7 +134,7 @@
         "IA-04"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-02 account management; AC-13 supervision and review; IA-04 identifier management. SP 800-53 AC and IA families comprehensively address access control procedures.",
+      "rationale": "AC-02 account management; AC-13 supervision and review; IA-04 identifier management. No new Rev 5 controls materially improve access control procedure coverage.",
       "gaps": "Minimal gap."
     },
     {
@@ -145,11 +151,12 @@
         "PS-05",
         "PS-06",
         "PS-07",
-        "PS-08"
+        "PS-08",
+        "PS-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-02 account management; IA-04 identifier management; MA-05 maintenance personnel; PS-01 personnel security policy; PS-02 position categorization; PS-03 personnel screening; PS-04 personnel termination; PS-05 personnel transfer; PS-06 access agreements; PS-07 third-party personnel; PS-08 personnel sanctions. PS family comprehensively covers personnel lifecycle.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AC-02 account management; IA-04 identifier management; MA-05 maintenance personnel; PS family personnel security; PS-09 (new in Rev 5) position descriptions ensures security responsibilities are defined in role descriptions, supporting onboarding and role transition processes.",
+      "gaps": "Minimal gap. PS-09 strengthens personnel lifecycle management."
     },
     {
       "id": "Hygiene.8",
@@ -162,11 +169,12 @@
         "PT-03",
         "PT-07",
         "RA-02",
-        "SI-12"
+        "SI-12",
+        "CM-13"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-15 automated marking; AC-16 automated labeling; CM-08 component inventory; MP-03 media labeling; PT-07 specific categories of PII; RA-02 security categorization; SI-12 information management. RA-02 and MP-03 address classification.",
-      "gaps": "Minor: ANSSI emphasizes a practical classification scheme for all information. SP 800-53 RA-02 uses FIPS 199 categorization which is US-specific; French classification levels (e.g., Diffusion Restreinte) not addressed."
+      "coverage_pct": 88,
+      "rationale": "AC-15 automated marking; AC-16 automated labelling; CM-08 component inventory; MP-03 media labelling; PT-07 specific categories of PII; RA-02 security categorization; SI-12 information management; CM-13 (new in Rev 5) data action mapping documents data processing flows across systems, supporting classification by identifying where classified data is processed and stored.",
+      "gaps": "Minor: CM-13 improves classification mapping. ANSSI emphasizes a practical classification scheme; SP 800-53 RA-02 uses FIPS 199 categorization which is US-specific. French classification levels (e.g., Diffusion Restreinte) not addressed."
     },
     {
       "id": "Hygiene.9",
@@ -174,12 +182,13 @@
       "controls": [
         "AC-20",
         "CA-03",
+        "CA-09",
         "SA-09",
         "SR-03"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-20 use of external systems; CA-03 system connections; SA-09 external information system services; SR-03 supply chain controls. SP 800-53 addresses external service controls.",
-      "gaps": "Minor: ANSSI specifically targets cloud and SaaS service access governance. SP 800-53 covers external systems but less prescriptive on modern cloud service access patterns."
+      "coverage_pct": 88,
+      "rationale": "AC-20 use of external systems; CA-03 system connections; SA-09 external information system services; SR-03 supply chain controls; CA-09 (new in Rev 5) internal system connections extends governance to internal interconnections with external-facing services, providing better visibility into the full access chain.",
+      "gaps": "Minor: CA-09 improves interconnection governance. ANSSI specifically targets cloud and SaaS service access governance. SP 800-53 covers external systems but is less prescriptive on modern cloud service access patterns."
     },
     {
       "id": "Hygiene.10",
@@ -204,11 +213,12 @@
         "AC-14",
         "IA-01",
         "IA-02",
-        "IA-04"
+        "IA-04",
+        "PS-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-02 account management; AC-14 permitted actions without identification; IA-01 identification and authentication policy; IA-02 user identification; IA-04 identifier management. Account type differentiation well covered.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AC-02 account management; AC-14 permitted actions without identification; IA-01 identification and authentication policy; IA-02 user identification; IA-04 identifier management; PS-09 (new in Rev 5) position descriptions formally links account types to role definitions, supporting account type differentiation.",
+      "gaps": "Minimal gap. PS-09 strengthens account-to-role alignment."
     },
     {
       "id": "Hygiene.12",
@@ -224,11 +234,12 @@
         "SC-12",
         "SC-13",
         "SC-17",
-        "SC-23"
+        "SC-23",
+        "SC-38"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-07 unsuccessful login attempts; AC-10 concurrent session control; AC-12 session termination; IA-02 user identification; IA-05 authenticator management; IA-07 cryptographic module authentication; SC-10 network disconnect; SC-12 cryptographic key management; SC-13 use of cryptography; SC-17 PKI certificates; SC-23 session authenticity. Comprehensive coverage.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AC-07 unsuccessful login attempts; AC-10 concurrent session control; AC-12 session termination; IA-02 user identification; IA-05 authenticator management; IA-07 cryptographic module authentication; SC-10 network disconnect; SC-12 cryptographic key management; SC-13 use of cryptography; SC-17 PKI certificates; SC-23 session authenticity; SC-38 (new in Rev 5) operations security protects cryptographic key operations from side-channel attacks.",
+      "gaps": "Minimal gap. SC-38 strengthens key protection during operations."
     },
     {
       "id": "Hygiene.13",
@@ -237,7 +248,7 @@
         "AC-02"
       ],
       "coverage_pct": 85,
-      "rationale": "AC-02 account management. SP 800-53 AC-02 includes periodic review of accounts but ANSSI emphasizes a broader authorisation review process.",
+      "rationale": "AC-02 account management includes periodic review of accounts. No new Rev 5 controls materially add to authorisation review.",
       "gaps": "Minor: ANSSI measure focuses on regular, systematic review of all authorisations. AC-02 covers account review but the broader entitlement review scope is less prescriptive."
     },
     {
@@ -252,7 +263,7 @@
         "SI-09"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-01 access control policy; AC-03 access enforcement; AC-06 least privilege; CM-05 access restrictions for change; MP-02 media access; PS-05 personnel transfer; SI-09 information input restrictions. AC-06 directly maps to least privilege.",
+      "rationale": "AC-01 access control policy; AC-03 access enforcement; AC-06 least privilege; MP-02 media access; PS-05 personnel transfer; SI-09 information input restrictions. AC-06 directly maps to least privilege. No new Rev 5 controls materially improve coverage.",
       "gaps": "Minimal gap."
     },
     {
@@ -279,7 +290,7 @@
         "MA-04"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-06 least privilege; CM-05 access restrictions for change; MA-04 remote maintenance. SP 800-53 addresses privileged access control.",
+      "rationale": "AC-06 least privilege; CM-05 access restrictions for change; MA-04 remote maintenance. No new Rev 5 controls materially add here.",
       "gaps": "Minimal gap."
     },
     {
@@ -289,26 +300,26 @@
         "AC-03",
         "AC-05",
         "AC-06",
-        "CM-05"
+        "CM-05",
+        "SC-46"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-03 access enforcement; AC-05 separation of duties; AC-06 least privilege; CM-05 access restrictions for change. Network segmentation for admin access addressed through multiple controls.",
-      "gaps": "Minor: ANSSI emphasizes dedicated administration networks. SP 800-53 covers through AC-06 and SC-07 but dedicated admin network requirement is less explicit."
+      "coverage_pct": 88,
+      "rationale": "AC-03 access enforcement; AC-05 separation of duties; AC-06 least privilege; CM-05 access restrictions for change; SC-46 (new in Rev 5) cross-domain policy enforcement provides policy enforcement between network security domains, directly supporting dedicated administration network segmentation.",
+      "gaps": "Minor: SC-46 strengthens network domain separation. ANSSI emphasizes dedicated administration networks; SC-46 improves this but the specific requirement for physically or logically separate admin networks is still less prescriptive."
     },
     {
       "id": "Hygiene.18",
       "title": "Keep software up to date",
       "controls": [
-        "AC-11",
-        "AC-19",
         "CM-02",
         "CM-06",
         "CM-07",
-        "PE-17"
+        "CM-14",
+        "SI-02"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-11 session lock; AC-19 mobile devices; CM-02 baseline configuration; CM-06 configuration settings; CM-07 least functionality; PE-17 alternate work site. Configuration management and patching well covered.",
-      "gaps": "Minimal gap. SI-02 flaw remediation directly addresses software updates."
+      "coverage_pct": 92,
+      "rationale": "CM-02 baseline configuration; CM-06 configuration settings; CM-07 least functionality; CM-14 (new in Rev 5) signed components verifies update/patch integrity through cryptographic signatures; SI-02 flaw remediation directly addresses software updates.",
+      "gaps": "Minimal gap. CM-14 adds patch integrity verification."
     },
     {
       "id": "Hygiene.19",
@@ -320,14 +331,16 @@
         "MP-04",
         "MP-05",
         "MP-06",
+        "MP-08",
         "SC-04",
         "SC-13",
+        "SC-28",
         "SI-12",
         "SR-12"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-19 mobile devices; MP-01 media protection policy; MP-02 media access; MP-04 media storage; MP-05 media transport; MP-06 media sanitization; SC-04 information remnance; SC-13 use of cryptography; SI-12 information management; SR-12 component disposal. Comprehensive data protection coverage.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AC-19 mobile devices; MP-01 media protection policy; MP-02 media access; MP-04 media storage; MP-05 media transport; MP-06 media sanitization; MP-08 (new in Rev 5) media downgrading provides procedures for downgrading workstation media classification after sanitisation; SC-04 information remnance; SC-13 use of cryptography; SC-28 data at rest; SI-12 information management; SR-12 component disposal.",
+      "gaps": "Minimal gap. MP-08 adds media downgrading for workstation data."
     },
     {
       "id": "Hygiene.20",
@@ -335,26 +348,29 @@
       "controls": [
         "CM-06",
         "CM-07",
+        "CM-14",
         "MA-03",
         "SA-06",
         "SA-07",
         "SC-18",
         "SI-07"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-06 configuration settings; CM-07 least functionality; MA-03 maintenance tools; SA-06 software usage restrictions; SA-07 user installed software; SC-18 mobile code; SI-07 software and information integrity. CM-07 and SA-07 directly address software restriction.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CM-06 configuration settings; CM-07 least functionality; CM-14 (new in Rev 5) signed components verifies software authenticity before installation through cryptographic signatures; MA-03 maintenance tools; SA-06 software usage restrictions; SA-07 user installed software; SC-18 mobile code; SI-07 software and information integrity.",
+      "gaps": "Minimal gap. CM-14 strengthens software installation integrity."
     },
     {
       "id": "Hygiene.21",
       "title": "Protect against malware",
       "controls": [
         "SI-03",
-        "SI-08"
+        "SI-08",
+        "SI-16",
+        "SC-44"
       ],
-      "coverage_pct": 90,
-      "rationale": "SI-03 malicious code protection; SI-08 spam protection. SI-03 directly addresses malware protection.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "SI-03 malicious code protection; SI-08 spam protection; SI-16 (new in Rev 5) memory protection (DEP/ASLR) hardens against exploit-based malware; SC-44 (new in Rev 5) detonation chambers provides sandboxing for suspicious file analysis.",
+      "gaps": "Minimal gap. SI-16 and SC-44 add defence-in-depth."
     },
     {
       "id": "Hygiene.22",
@@ -369,7 +385,7 @@
         "SI-08"
       ],
       "coverage_pct": 85,
-      "rationale": "AC-20 use of external systems; SC-05 denial of service protection; SC-07 boundary protection; SC-14 public access protections; SC-15 collaborative computing; SC-18 mobile code; SI-08 spam protection. Email security addressed through multiple controls.",
+      "rationale": "AC-20 use of external systems; SC-05 denial of service protection; SC-07 boundary protection; SC-14 public access protections; SC-15 collaborative computing; SC-18 mobile code; SI-08 spam protection. No new Rev 5 controls directly address email-specific security.",
       "gaps": "Minor: ANSSI provides specific email security guidance. SP 800-53 covers email through general controls but email-specific measures (e.g., SPF, DKIM, DMARC requirements) less explicit."
     },
     {
@@ -385,11 +401,12 @@
         "SC-07",
         "SC-20",
         "SC-21",
-        "SC-22"
+        "SC-22",
+        "SC-46"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-04 information flow enforcement; SC-01 system and communications protection policy; SC-02 application partitioning; SC-03 security function isolation; SC-06 resource priority; SC-07 boundary protection; SC-08 transmission integrity; SC-20 secure name resolution; SC-21 secure name resolution (recursive); SC-22 architecture for name resolution; SA-08 security engineering principles. SC-07 directly addresses network segmentation and filtering.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AC-04 information flow enforcement; SC-07 boundary protection; SC-02 application partitioning; SC-03 security function isolation; SC-06 resource priority; SC-20/SC-21/SC-22 secure name resolution; SA-08 security engineering principles; SC-46 (new in Rev 5) cross-domain policy enforcement strengthens segmentation between security domains with explicit policy enforcement at domain boundaries.",
+      "gaps": "Minimal gap. SC-46 adds cross-domain enforcement."
     },
     {
       "id": "Hygiene.24",
@@ -398,38 +415,40 @@
         "AC-17",
         "MA-04",
         "SC-08",
-        "SC-09",
         "SC-11",
         "SC-16",
-        "SC-19",
-        "SC-23"
+        "SC-23",
+        "SC-47"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-17 remote access; MA-04 remote maintenance; SC-08 transmission integrity; SC-09 transmission confidentiality; SC-11 trusted path; SC-16 transmission of security parameters; SC-19 VoIP; SC-23 session authenticity. AC-17 directly addresses remote access security.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AC-17 remote access; MA-04 remote maintenance; SC-08 transmission integrity; SC-11 trusted path; SC-16 transmission of security parameters; SC-23 session authenticity; SC-47 (new in Rev 5) alternate communications paths provides resilient remote access by defining backup communication channels.",
+      "gaps": "Minimal gap. SC-47 adds remote access resilience."
     },
     {
       "id": "Hygiene.25",
       "title": "Secure wireless networks",
       "controls": [
         "AC-18",
-        "SC-19"
+        "SC-40"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-18 wireless access restrictions; SC-19 VoIP. AC-18 addresses wireless security.",
-      "gaps": "Minor: ANSSI provides detailed wireless security guidance including specific protocol requirements. SP 800-53 AC-18 covers wireless access but French-specific wireless standards less detailed."
+      "coverage_pct": 88,
+      "rationale": "AC-18 wireless access restrictions; SC-40 (new in Rev 5) wireless link protection provides specific protections for wireless communication links against eavesdropping and manipulation.",
+      "gaps": "Minor: SC-40 adds wireless link protection. ANSSI provides detailed wireless security guidance including specific protocol requirements. SP 800-53 covers wireless access but French-specific wireless standards less detailed."
     },
     {
       "id": "Hygiene.26",
       "title": "Secure interconnections with partners",
       "controls": [
         "AC-18",
+        "CA-03",
+        "CA-09",
         "IA-03",
-        "PE-04"
+        "PE-04",
+        "SA-09"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-18 wireless access restrictions; IA-03 device identification; PE-04 access control for transmission medium. Partner interconnection security addressed.",
-      "gaps": "Minor: ANSSI emphasizes specific interconnection security requirements with partner organisations. SP 800-53 CA-03 and SA-09 cover interconnections but the partner-specific governance aspects less prescriptive."
+      "coverage_pct": 88,
+      "rationale": "AC-18 wireless access restrictions; CA-03 system connections; IA-03 device identification; PE-04 access control for transmission medium; SA-09 external services; CA-09 (new in Rev 5) internal system connections authorizes and monitors internal connections that support partner interconnection governance.",
+      "gaps": "Minor: CA-09 improves interconnection governance. ANSSI emphasizes specific interconnection security requirements with partner organisations."
     },
     {
       "id": "Hygiene.27",
@@ -440,7 +459,7 @@
         "SC-07"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-04 information flow enforcement; SC-05 denial of service protection; SC-07 boundary protection. SC-07 directly addresses firewall and boundary protection.",
+      "rationale": "AC-04 information flow enforcement; SC-05 denial of service protection; SC-07 boundary protection. SC-07 directly addresses firewall and boundary protection. No new Rev 5 controls materially add here.",
       "gaps": "Minimal gap."
     },
     {
@@ -449,11 +468,12 @@
       "controls": [
         "AC-17",
         "MA-04",
+        "MA-07",
         "SC-11"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-17 remote access; MA-04 remote maintenance; SC-11 trusted path. Administration network protection addressed.",
-      "gaps": "Minor: ANSSI emphasizes dedicated out-of-band management networks. SP 800-53 covers through AC-17 and MA-04 but dedicated management network requirements less explicit."
+      "coverage_pct": 88,
+      "rationale": "AC-17 remote access; MA-04 remote maintenance; SC-11 trusted path; MA-07 (new in Rev 5) field maintenance addresses maintenance of network equipment at remote/field locations with appropriate security controls.",
+      "gaps": "Minor: MA-07 extends to field maintenance of network equipment. ANSSI emphasizes dedicated out-of-band management networks; SP 800-53 covers through AC-17 and MA-04 but dedicated management network requirements are less explicit."
     },
     {
       "id": "Hygiene.29",
@@ -471,13 +491,14 @@
         "AU-09",
         "AU-10",
         "AU-11",
+        "AU-12",
         "CA-07",
         "IR-05",
         "SI-04",
         "SI-11"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-09 previous logon notification; AU-01 audit policy; AU-02 auditable events; AU-03 audit record content; AU-04 audit storage capacity; AU-05 response to audit failures; AU-06 audit review and reporting; AU-07 audit reduction; AU-08 timestamps; AU-09 protection of audit information; AU-10 non-repudiation; AU-11 audit record retention; CA-07 continuous monitoring; IR-05 incident monitoring; SI-04 system monitoring; SI-11 error handling. AU family comprehensively addresses logging.",
+      "coverage_pct": 92,
+      "rationale": "AC-09 previous logon notification; AU family comprehensive for logging; AU-12 (added) audit record generation; CA-07 continuous monitoring; IR-05 incident monitoring; SI-04 system monitoring; SI-11 error handling. No new Rev 5 controls materially improve centralised logging — the AU family was already comprehensive.",
       "gaps": "Minimal gap."
     },
     {
@@ -493,7 +514,7 @@
         "CP-10"
       ],
       "coverage_pct": 90,
-      "rationale": "CP-01 contingency planning policy; CP-02 contingency plan; CP-06 alternate storage site; CP-07 alternate processing site; CP-08 telecommunications services; CP-09 system backup; CP-10 system recovery. CP-09 directly addresses backup requirements.",
+      "rationale": "CP-01 contingency planning policy; CP-02 contingency plan; CP-06 alternate storage site; CP-07 alternate processing site; CP-08 telecommunications services; CP-09 system backup; CP-10 system recovery. No new Rev 5 controls materially add to backup coverage.",
       "gaps": "Minimal gap."
     },
     {
@@ -505,14 +526,15 @@
         "CA-04",
         "CA-07",
         "RA-05",
+        "RA-07",
         "SA-11",
         "SI-06",
         "SR-06",
         "SR-10"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-13 supervision and review; CA-02 security assessments; CA-04 security certification; CA-07 continuous monitoring; RA-05 vulnerability scanning; SA-11 developer security testing; SI-06 security functionality verification; SR-06 supplier assessments; SR-10 inspection of systems. RA-05 directly addresses vulnerability management.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AC-13 supervision and review; CA-02 security assessments; CA-04 security certification; CA-07 continuous monitoring; RA-05 vulnerability scanning; RA-07 (new in Rev 5) risk response adds explicit risk treatment actions for identified vulnerabilities; SA-11 developer security testing; SI-06 security functionality verification; SR-06 supplier assessments; SR-10 inspection.",
+      "gaps": "Minimal gap. RA-07 adds formal risk response for vulnerabilities."
     },
     {
       "id": "Hygiene.32",
@@ -524,7 +546,7 @@
         "PS-05"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-02 account management; IA-04 identifier management; PS-04 personnel termination; PS-05 personnel transfer. AC-02 directly addresses account lifecycle management.",
+      "rationale": "AC-02 account management; IA-04 identifier management; PS-04 personnel termination; PS-05 personnel transfer. No new Rev 5 controls materially add here.",
       "gaps": "Minimal gap."
     },
     {
@@ -536,11 +558,12 @@
         "SI-01",
         "SI-02",
         "SI-05",
-        "SI-10"
+        "SI-10",
+        "CM-14"
       ],
-      "coverage_pct": 90,
-      "rationale": "RA-05 vulnerability scanning; SA-11 developer testing; SI-01 system integrity policy; SI-02 flaw remediation; SI-05 security alerts; SI-10 information accuracy. SI-02 directly addresses patch management.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "RA-05 vulnerability scanning; SA-11 developer testing; SI-01 system integrity policy; SI-02 flaw remediation; SI-05 security alerts; SI-10 information accuracy; CM-14 (new in Rev 5) signed components verifies patch integrity through cryptographic signatures.",
+      "gaps": "Minimal gap. CM-14 adds patch integrity verification."
     },
     {
       "id": "Hygiene.34",
@@ -549,6 +572,7 @@
         "CM-03",
         "CM-04",
         "CM-05",
+        "CM-14",
         "MA-01",
         "MA-02",
         "MA-03",
@@ -560,9 +584,9 @@
         "SI-02",
         "SI-07"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-03 configuration change control; CM-04 monitoring configuration changes; CM-05 access restrictions for change; MA-01 maintenance policy; MA-02 controlled maintenance; MA-03 maintenance tools; MA-04 remote maintenance; MA-06 timely maintenance; SA-03 lifecycle support; SA-10 developer configuration management; SI-01 system integrity policy; SI-02 flaw remediation; SI-07 software integrity. CM-03 directly addresses change management.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CM-03 configuration change control; CM-04 monitoring configuration changes; CM-05 access restrictions for change; CM-14 (new in Rev 5) signed components verifies integrity of software changes through cryptographic signatures; MA family maintenance; SA-03 lifecycle support; SA-10 developer configuration management; SI-01 system integrity policy; SI-02 flaw remediation; SI-07 software integrity.",
+      "gaps": "Minimal gap. CM-14 adds change integrity verification."
     },
     {
       "id": "Hygiene.35",
@@ -576,11 +600,12 @@
         "IR-01",
         "IR-02",
         "IR-03",
-        "IR-04"
+        "IR-04",
+        "IR-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "CP-02 contingency plan; CP-03 contingency training; CP-04 contingency plan testing; CP-05 contingency plan update; CP-10 system recovery; IR-01 incident response policy; IR-02 incident response training; IR-03 incident response testing; IR-04 incident handling. IR family comprehensively addresses incident response.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CP-02 contingency plan; CP-03 contingency training; CP-04 contingency plan testing; CP-05 contingency plan update; CP-10 system recovery; IR-01 incident response policy; IR-02 incident response training; IR-03 incident response testing; IR-04 incident handling; IR-09 (new in Rev 5) information spillage response adds specific handling for data breach/spillage incidents.",
+      "gaps": "Minimal gap. IR-09 adds spillage-specific response procedures."
     },
     {
       "id": "Hygiene.36",
@@ -595,7 +620,12 @@
         "PL-02",
         "PL-03",
         "PL-06",
+        "PL-09",
+        "PL-10",
+        "PL-11",
         "RA-04",
+        "RA-07",
+        "RA-09",
         "SA-01",
         "SA-02",
         "SA-03",
@@ -604,9 +634,9 @@
         "SR-01",
         "SR-02"
       ],
-      "coverage_pct": 85,
-      "rationale": "CA-01 assessment policy; CA-05 plan of action; CA-06 security accreditation; CM-03 configuration change control; CP-05 contingency plan update; PL-01 security planning policy; PL-02 system security plan; PL-03 security plan update; PL-06 security-related activity planning; RA-04 risk assessment update; SA-01 acquisition policy; SA-02 allocation of resources; SA-03 lifecycle support; SA-08 security engineering principles; SA-10 developer configuration management; SR-01 supply chain policy; SR-02 supply chain risk management plan. Broad governance coverage.",
-      "gaps": "Minor: ANSSI governance framework expectations include French regulatory integration. SP 800-53 provides comprehensive governance but French-specific regulatory requirements (CNIL, ANSSI regulations) not addressed."
+      "coverage_pct": 88,
+      "rationale": "CA-01 assessment policy; CA-05 plan of action; CA-06 security accreditation; PL-01/PL-02/PL-03 security planning; PL-06 security-related activity planning; PL-09 (new in Rev 5) central management enables unified governance; PL-10 (new in Rev 5) baseline selection provides structured control selection; PL-11 (new in Rev 5) baseline tailoring adapts to context; RA-04 risk assessment update; RA-07 (new in Rev 5) risk response provides explicit treatment; RA-09 (new in Rev 5) criticality analysis identifies critical components; SA/SR families.",
+      "gaps": "Minor: PL-09/10/11 and RA-07/RA-09 significantly strengthen governance and risk management coverage. ANSSI governance framework expectations include French regulatory integration (CNIL, ANSSI regulations) which SP 800-53 does not address."
     },
     {
       "id": "Hygiene.37",
@@ -625,11 +655,14 @@
         "PE-17",
         "PE-18",
         "PE-19",
+        "PE-21",
+        "PE-22",
+        "PE-23",
         "SR-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "MP-04 media storage; PE-01 physical protection policy; PE-02 physical access authorizations; PE-03 physical access control; PE-04 access control for transmission medium; PE-05 access control for display medium; PE-06 monitoring physical access; PE-07 visitor control; PE-08 access records; PE-16 delivery and removal; PE-17 alternate work site; PE-18 location of components; PE-19 information leakage; SR-09 tamper resistance. PE family comprehensively addresses physical security.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "MP-04 media storage; PE family physical protection; PE-21 (new in Rev 5) electromagnetic pulse protection; PE-22 (new in Rev 5) component marking aids physical asset identification; PE-23 (new in Rev 5) facility location provides guidance on secure facility siting; SR-09 tamper resistance.",
+      "gaps": "Minimal gap. PE-21/22/23 add EMP protection, asset marking, and facility siting."
     },
     {
       "id": "Hygiene.38",
@@ -642,11 +675,12 @@
         "PE-13",
         "PE-14",
         "PE-15",
-        "PE-18"
+        "PE-18",
+        "PE-21"
       ],
-      "coverage_pct": 90,
-      "rationale": "PE-09 power equipment; PE-10 emergency shutoff; PE-11 emergency power; PE-12 emergency lighting; PE-13 fire protection; PE-14 temperature and humidity controls; PE-15 water damage protection; PE-18 location of components. PE family environmental controls comprehensive.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "PE-09 power equipment; PE-10 emergency shutoff; PE-11 emergency power; PE-12 emergency lighting; PE-13 fire protection; PE-14 temperature and humidity controls; PE-15 water damage protection; PE-18 location of components; PE-21 (new in Rev 5) electromagnetic pulse protection addresses infrastructure resilience against EMP events.",
+      "gaps": "Minimal gap. PE-21 adds EMP protection."
     },
     {
       "id": "Hygiene.39",
@@ -658,11 +692,12 @@
         "IR-05",
         "PE-06",
         "SI-04",
-        "SI-05"
+        "SI-05",
+        "SC-48"
       ],
-      "coverage_pct": 90,
-      "rationale": "AU-06 audit review and reporting; CA-07 continuous monitoring; IR-04 incident handling; IR-05 incident monitoring; PE-06 monitoring physical access; SI-04 system monitoring; SI-05 security alerts. SI-04 directly addresses monitoring and detection.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AU-06 audit review and reporting; CA-07 continuous monitoring; IR-04 incident handling; IR-05 incident monitoring; PE-06 monitoring physical access; SI-04 system monitoring; SI-05 security alerts; SC-48 (new in Rev 5) sensor relocation provides dynamic sensor repositioning to improve detection coverage against adaptive threats.",
+      "gaps": "Minimal gap. SC-48 adds dynamic detection positioning."
     },
     {
       "id": "Hygiene.40",
@@ -672,11 +707,12 @@
         "IR-04",
         "IR-06",
         "IR-07",
+        "IR-09",
         "SR-08"
       ],
-      "coverage_pct": 90,
-      "rationale": "IR-01 incident response policy; IR-04 incident handling; IR-06 incident reporting; IR-07 incident response assistance; SR-08 notification agreements. IR family comprehensively addresses incident handling.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "IR-01 incident response policy; IR-04 incident handling; IR-06 incident reporting; IR-07 incident response assistance; IR-09 (new in Rev 5) information spillage response adds specific handling for data breach/spillage incidents including notification procedures; SR-08 notification agreements.",
+      "gaps": "Minimal gap. IR-09 adds spillage-specific incident handling."
     },
     {
       "id": "Hygiene.41",
@@ -688,11 +724,13 @@
         "RA-01",
         "RA-02",
         "RA-03",
-        "RA-04"
+        "RA-04",
+        "RA-07",
+        "RA-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "CA-02 security assessments; CA-06 security accreditation; PL-05 privacy impact assessment; RA-01 risk assessment policy; RA-02 security categorization; RA-03 risk assessment; RA-04 risk assessment update. RA family directly addresses risk assessment.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CA-02 security assessments; CA-06 security accreditation; PL-05 privacy impact assessment; RA-01 risk assessment policy; RA-02 security categorization; RA-03 risk assessment; RA-04 risk assessment update; RA-07 (new in Rev 5) risk response provides explicit treatment actions; RA-09 (new in Rev 5) criticality analysis identifies critical components for risk prioritization.",
+      "gaps": "Minimal gap. RA-07 and RA-09 strengthen risk assessment coverage."
     },
     {
       "id": "Hygiene.42",
@@ -701,6 +739,7 @@
         "IR-07",
         "SA-04",
         "SA-09",
+        "SA-21",
         "SR-01",
         "SR-02",
         "SR-03",
@@ -713,9 +752,9 @@
         "SR-10",
         "SR-11"
       ],
-      "coverage_pct": 85,
-      "rationale": "SA-04 acquisitions; SA-09 external services; SR-01 supply chain policy; SR-02 supply chain risk management plan; SR-03 supply chain controls; SR-04 provenance; SR-05 acquisition strategies; SR-06 supplier assessments; SR-07 supply chain operations security; SR-08 notification agreements; SR-09 tamper resistance; SR-10 inspection; SR-11 component authenticity; IR-07 incident response assistance. SR family comprehensive.",
-      "gaps": "Minor: ANSSI emphasizes French/EU supply chain sovereignty requirements. SP 800-53 SR family provides strong supply chain risk management but sovereignty and data localisation requirements not covered."
+      "coverage_pct": 88,
+      "rationale": "SA-04 acquisitions; SA-09 external services; SA-21 (new in Rev 5) developer screening adds personnel vetting for third-party development teams; IR-07 incident response assistance; SR family comprehensive supply chain risk management.",
+      "gaps": "Minor: SA-21 adds developer screening. ANSSI emphasizes French/EU supply chain sovereignty requirements. SP 800-53 SR family provides strong supply chain risk management but sovereignty and data localisation requirements not covered."
     },
     {
       "id": "SecNumCloud.6.1",
@@ -742,7 +781,7 @@
         "SR-01"
       ],
       "coverage_pct": 80,
-      "rationale": "AC-01 access control policy; AT-01 awareness training policy; AU-01 audit policy; CA-01 assessment policy; CM-01 configuration management policy; CP-01 contingency planning policy; IA-01 identification and authentication policy; IR-01 incident response policy; MA-01 maintenance policy; MP-01 media protection policy; PE-01 physical protection policy; PL-01 security planning policy; PS-01 personnel security policy; PT-01 PII processing policy; RA-01 risk assessment policy; SA-01 acquisition policy; SC-01 system and communications protection policy; SI-01 system integrity policy; SR-01 supply chain policy. Broad policy coverage.",
+      "rationale": "Comprehensive policy controls across all families. No new Rev 5 controls materially change cloud security policy coverage.",
       "gaps": "SecNumCloud requires cloud-specific security policies aligned with ANSSI certification requirements and French regulatory framework. SP 800-53 policies are comprehensive but not aligned to ANSSI qualification process."
     },
     {
@@ -754,7 +793,7 @@
         "PL-06"
       ],
       "coverage_pct": 85,
-      "rationale": "PL-02 system security plan; PL-03 security plan update; PL-06 security-related activity planning. SP 800-53 addresses policy review and update.",
+      "rationale": "PL-02 system security plan; PL-03 security plan update; PL-06 security-related activity planning. No new Rev 5 controls materially add here.",
       "gaps": "Minor: SecNumCloud requires policy review aligned with ANSSI certification renewal cycles."
     },
     {
@@ -762,11 +801,13 @@
       "title": "Risk assessment specific to cloud services",
       "controls": [
         "RA-03",
-        "RA-04"
+        "RA-04",
+        "RA-07",
+        "RA-09"
       ],
-      "coverage_pct": 80,
-      "rationale": "RA-03 risk assessment; RA-04 risk assessment update. SP 800-53 RA family addresses risk assessment.",
-      "gaps": "SecNumCloud requires cloud-specific risk assessment methodology that addresses multi-tenancy, data sovereignty, and jurisdictional risks. SP 800-53 risk assessment is general-purpose."
+      "coverage_pct": 82,
+      "rationale": "RA-03 risk assessment; RA-04 risk assessment update; RA-07 (new in Rev 5) risk response adds explicit risk treatment actions for cloud-specific risks; RA-09 (new in Rev 5) criticality analysis identifies critical cloud components for risk prioritization.",
+      "gaps": "RA-07 and RA-09 improve risk management coverage. SecNumCloud requires cloud-specific risk assessment methodology addressing multi-tenancy, data sovereignty, and jurisdictional risks. SP 800-53 risk assessment is general-purpose."
     },
     {
       "id": "SecNumCloud.8.1",
@@ -776,11 +817,12 @@
         "PS-01",
         "PS-02",
         "PS-03",
-        "PS-07"
+        "PS-07",
+        "PS-09"
       ],
-      "coverage_pct": 85,
-      "rationale": "MA-05 maintenance personnel; PS-01 personnel security policy; PS-02 position categorization; PS-03 personnel screening; PS-07 third-party personnel. PS family provides comprehensive personnel security.",
-      "gaps": "Minor: SecNumCloud requires nationality-based screening for certain roles handling sensitive data. SP 800-53 PS-03 covers screening but French/EU nationality requirements not addressed."
+      "coverage_pct": 88,
+      "rationale": "MA-05 maintenance personnel; PS-01 personnel security policy; PS-02 position categorization; PS-03 personnel screening; PS-07 third-party personnel; PS-09 (new in Rev 5) position descriptions defines security responsibilities in cloud operations role descriptions.",
+      "gaps": "Minor: PS-09 strengthens role definition. SecNumCloud requires nationality-based screening for certain roles handling sensitive data. SP 800-53 PS-03 covers screening but French/EU nationality requirements not addressed."
     },
     {
       "id": "SecNumCloud.8.2",
@@ -790,7 +832,7 @@
         "PS-06"
       ],
       "coverage_pct": 85,
-      "rationale": "PL-04 rules of behavior; PS-06 access agreements. SP 800-53 covers employment terms and access agreements.",
+      "rationale": "PL-04 rules of behaviour; PS-06 access agreements. No new Rev 5 controls materially add here.",
       "gaps": "Minor: SecNumCloud requires specific contractual clauses for cloud service personnel aligned with French labour law."
     },
     {
@@ -799,11 +841,12 @@
       "controls": [
         "AT-02",
         "AT-03",
-        "AT-04"
+        "AT-04",
+        "AT-06"
       ],
-      "coverage_pct": 90,
-      "rationale": "AT-02 security awareness; AT-03 security training; AT-04 training records. AT family comprehensively covers training.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "AT-02 security awareness; AT-03 security training; AT-04 training records; AT-06 (new in Rev 5) training feedback measures training effectiveness for cloud operations staff.",
+      "gaps": "Minimal gap. AT-06 improves training effectiveness measurement."
     },
     {
       "id": "SecNumCloud.8.4",
@@ -814,7 +857,7 @@
         "PS-08"
       ],
       "coverage_pct": 85,
-      "rationale": "PS-04 personnel termination; PS-05 personnel transfer; PS-08 personnel sanctions. PS family covers disciplinary and termination processes.",
+      "rationale": "PS-04 personnel termination; PS-05 personnel transfer; PS-08 personnel sanctions. No new Rev 5 controls materially add here.",
       "gaps": "Minor: SecNumCloud requires specific French labour law compliance for disciplinary actions."
     },
     {
@@ -822,11 +865,12 @@
       "title": "Asset inventory for cloud infrastructure",
       "controls": [
         "CM-08",
+        "CM-12",
         "RA-02"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM-08 system component inventory; RA-02 security categorization. CM-08 directly addresses asset inventory.",
-      "gaps": "Minor: SecNumCloud requires cloud-specific asset inventory including virtual resources, tenant isolation boundaries, and data localisation tracking."
+      "coverage_pct": 88,
+      "rationale": "CM-08 system component inventory; CM-12 (new in Rev 5) information location identifies where data resides across cloud infrastructure components, directly supporting cloud asset-to-data mapping; RA-02 security categorization.",
+      "gaps": "Minor: CM-12 adds data location mapping. SecNumCloud requires cloud-specific asset inventory including virtual resources, tenant isolation boundaries, and data localisation tracking."
     },
     {
       "id": "SecNumCloud.9.2",
@@ -837,23 +881,25 @@
         "MP-03",
         "MP-04",
         "MP-05",
+        "MP-08",
         "SI-12"
       ],
-      "coverage_pct": 85,
-      "rationale": "MP-01 media protection policy; MP-02 media access; MP-03 media labeling; MP-04 media storage; MP-05 media transport; SI-12 information management. MP family comprehensively addresses media handling.",
-      "gaps": "Minor: SecNumCloud requires specific media handling procedures for multi-tenant environments and certified destruction processes."
+      "coverage_pct": 88,
+      "rationale": "MP-01 media protection policy; MP-02 media access; MP-03 media labelling; MP-04 media storage; MP-05 media transport; MP-08 (new in Rev 5) media downgrading provides procedures for downgrading cloud media classification after sanitisation; SI-12 information management.",
+      "gaps": "Minor: MP-08 adds media downgrading. SecNumCloud requires specific media handling procedures for multi-tenant environments and certified destruction processes."
     },
     {
       "id": "SecNumCloud.9.3",
       "title": "Information disposal and data remanence",
       "controls": [
         "MP-06",
+        "MP-08",
         "SC-04",
         "SR-12"
       ],
-      "coverage_pct": 85,
-      "rationale": "MP-06 media sanitization; SC-04 information remnance; SR-12 component disposal. MP-06 and SC-04 directly address data remanence.",
-      "gaps": "Minor: SecNumCloud has strict requirements on data erasure in multi-tenant cloud environments, including proof of deletion. SP 800-53 covers sanitization but multi-tenant cloud specifics less detailed."
+      "coverage_pct": 88,
+      "rationale": "MP-06 media sanitization; MP-08 (new in Rev 5) media downgrading provides formal downgrading procedures after data erasure, supporting cloud-specific proof-of-deletion requirements; SC-04 information remnance; SR-12 component disposal.",
+      "gaps": "Minor: MP-08 improves data disposal governance. SecNumCloud has strict requirements on data erasure in multi-tenant cloud environments, including proof of deletion."
     },
     {
       "id": "SecNumCloud.10.1",
@@ -865,7 +911,7 @@
         "IA-01"
       ],
       "coverage_pct": 85,
-      "rationale": "AC-01 access control policy; AC-08 system use notification; AC-14 permitted actions without identification; IA-01 identification and authentication policy. Policy controls address access governance.",
+      "rationale": "AC-01 access control policy; AC-08 system use notification; AC-14 permitted actions without identification; IA-01 identification and authentication policy. No new Rev 5 controls materially add here.",
       "gaps": "Minor: SecNumCloud requires specific access control policies for cloud provider administrative access and tenant isolation."
     },
     {
@@ -877,7 +923,7 @@
         "IA-04"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-02 account management; AC-13 supervision and review; IA-04 identifier management. SP 800-53 comprehensively addresses user registration.",
+      "rationale": "AC-02 account management; AC-13 supervision and review; IA-04 identifier management. No new Rev 5 controls materially add here.",
       "gaps": "Minimal gap."
     },
     {
@@ -889,7 +935,7 @@
         "SI-09"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-03 access enforcement; AC-06 least privilege; SI-09 information input restrictions. SP 800-53 comprehensively addresses access rights.",
+      "rationale": "AC-03 access enforcement; AC-06 least privilege; SI-09 information input restrictions. No new Rev 5 controls materially add here.",
       "gaps": "Minimal gap."
     },
     {
@@ -900,7 +946,7 @@
         "AC-06"
       ],
       "coverage_pct": 85,
-      "rationale": "AC-05 separation of duties; AC-06 least privilege. SP 800-53 covers privileged access.",
+      "rationale": "AC-05 separation of duties; AC-06 least privilege. No new Rev 5 controls materially add here.",
       "gaps": "Minor: SecNumCloud requires specific privileged access management for cloud infrastructure administrators with French nationality requirements for certain operations."
     },
     {
@@ -916,7 +962,7 @@
         "SC-23"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-07 unsuccessful login attempts; AC-10 concurrent session control; IA-02 user identification; IA-03 device identification; IA-05 authenticator management; SC-23 session authenticity. IA family comprehensively addresses authentication.",
+      "rationale": "AC-07 unsuccessful login attempts; AC-10 concurrent session control; IA-02 user identification; IA-03 device identification; IA-05 authenticator management; IA-06 authenticator feedback; SC-23 session authenticity.",
       "gaps": "Minimal gap."
     },
     {
@@ -929,18 +975,19 @@
         "SC-10"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-11 session lock; AC-12 session termination; AC-19 mobile devices; SC-10 network disconnect. SP 800-53 comprehensively addresses session management.",
+      "rationale": "AC-11 session lock; AC-12 session termination; AC-19 mobile devices; SC-10 network disconnect. No new Rev 5 controls materially add here.",
       "gaps": "Minimal gap."
     },
     {
       "id": "SecNumCloud.10.7",
       "title": "Remote access to cloud administration",
       "controls": [
-        "AC-17"
+        "AC-17",
+        "SC-47"
       ],
-      "coverage_pct": 80,
-      "rationale": "AC-17 remote access. SP 800-53 covers remote access.",
-      "gaps": "SecNumCloud requires administration access from within EU/France only. SP 800-53 AC-17 covers remote access security but geographic restrictions on administrative access not addressed."
+      "coverage_pct": 82,
+      "rationale": "AC-17 remote access; SC-47 (new in Rev 5) alternate communications paths provides backup administration channels, supporting resilient remote administration for cloud infrastructure.",
+      "gaps": "SC-47 adds administrative access resilience. SecNumCloud requires administration access from within EU/France only. SP 800-53 covers remote access security but geographic restrictions on administrative access not addressed."
     },
     {
       "id": "SecNumCloud.11.1",
@@ -948,14 +995,14 @@
       "controls": [
         "IA-07",
         "SC-08",
-        "SC-09",
         "SC-12",
         "SC-13",
-        "SC-17"
+        "SC-17",
+        "SC-38"
       ],
-      "coverage_pct": 80,
-      "rationale": "IA-07 cryptographic module authentication; SC-08 transmission integrity; SC-09 transmission confidentiality; SC-12 cryptographic key management; SC-13 use of cryptography; SC-17 PKI certificates. SC family provides comprehensive cryptographic controls.",
-      "gaps": "SecNumCloud mandates use of ANSSI-approved cryptographic algorithms and French/EU-qualified key management. SP 800-53 references FIPS standards (US) rather than ANSSI/EU cryptographic qualifications."
+      "coverage_pct": 82,
+      "rationale": "IA-07 cryptographic module authentication; SC-08 transmission integrity; SC-12 cryptographic key management; SC-13 use of cryptography; SC-17 PKI certificates; SC-38 (new in Rev 5) operations security protects cryptographic key operations from side-channel attacks.",
+      "gaps": "SC-38 strengthens key operation security. SecNumCloud mandates ANSSI-approved cryptographic algorithms and French/EU-qualified key management. SP 800-53 references FIPS standards (US) rather than ANSSI/EU cryptographic qualifications."
     },
     {
       "id": "SecNumCloud.12.1",
@@ -964,11 +1011,12 @@
         "MP-04",
         "PE-01",
         "PE-17",
-        "PE-18"
+        "PE-18",
+        "PE-23"
       ],
-      "coverage_pct": 85,
-      "rationale": "MP-04 media storage; PE-01 physical protection policy; PE-17 alternate work site; PE-18 location of components. PE family covers physical security.",
-      "gaps": "Minor: SecNumCloud requires data centres to be located within EU territory with specific physical security certifications. SP 800-53 PE family covers physical security but data localisation requirements not addressed."
+      "coverage_pct": 88,
+      "rationale": "MP-04 media storage; PE-01 physical protection policy; PE-17 alternate work site; PE-18 location of components; PE-23 (new in Rev 5) facility location provides guidance on data centre siting decisions including environmental and security factors.",
+      "gaps": "Minor: PE-23 adds facility siting guidance. SecNumCloud requires data centres to be located within EU territory with specific physical security certifications. Data localisation requirements not addressed."
     },
     {
       "id": "SecNumCloud.12.2",
@@ -983,11 +1031,12 @@
         "PE-08",
         "PE-16",
         "PE-19",
+        "PE-22",
         "SR-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "PE-02 physical access authorizations; PE-03 physical access control; PE-04 access control for transmission medium; PE-05 access control for display medium; PE-06 monitoring physical access; PE-07 visitor control; PE-08 access records; PE-16 delivery and removal; PE-19 information leakage; SR-09 tamper resistance. PE family comprehensive.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "PE-02 physical access authorizations; PE-03 physical access control; PE-04 access control for transmission medium; PE-05 access control for display medium; PE-06 monitoring physical access; PE-07 visitor control; PE-08 access records; PE-16 delivery and removal; PE-19 information leakage; PE-22 (new in Rev 5) component marking aids physical equipment identification in cloud facilities; SR-09 tamper resistance.",
+      "gaps": "Minimal gap. PE-22 adds physical component identification."
     },
     {
       "id": "SecNumCloud.12.3",
@@ -999,11 +1048,12 @@
         "PE-12",
         "PE-13",
         "PE-14",
-        "PE-15"
+        "PE-15",
+        "PE-21"
       ],
-      "coverage_pct": 90,
-      "rationale": "PE-09 power equipment; PE-10 emergency shutoff; PE-11 emergency power; PE-12 emergency lighting; PE-13 fire protection; PE-14 temperature and humidity controls; PE-15 water damage protection. PE family environmental controls comprehensive.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "PE-09 power equipment; PE-10 emergency shutoff; PE-11 emergency power; PE-12 emergency lighting; PE-13 fire protection; PE-14 temperature and humidity controls; PE-15 water damage protection; PE-21 (new in Rev 5) electromagnetic pulse protection addresses cloud infrastructure resilience against EMP events.",
+      "gaps": "Minimal gap. PE-21 adds EMP protection."
     },
     {
       "id": "SecNumCloud.13.1",
@@ -1013,15 +1063,16 @@
         "CM-02",
         "CM-06",
         "CM-07",
+        "CM-14",
         "SA-06",
         "SA-07",
         "SC-18",
         "SI-03",
         "SI-08"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM-01 configuration management policy; CM-02 baseline configuration; CM-06 configuration settings; CM-07 least functionality; SA-06 software usage restrictions; SA-07 user installed software; SC-18 mobile code; SI-03 malicious code protection; SI-08 spam protection. CM and SI families cover operational security.",
-      "gaps": "Minor: SecNumCloud requires specific cloud infrastructure hardening procedures and documented operational runbooks aligned with ANSSI guidelines."
+      "coverage_pct": 88,
+      "rationale": "CM-01 configuration management policy; CM-02 baseline configuration; CM-06 configuration settings; CM-07 least functionality; CM-14 (new in Rev 5) signed components verifies software/firmware integrity for cloud infrastructure hardening; SA-06 software usage restrictions; SA-07 user installed software; SC-18 mobile code; SI-03 malicious code protection; SI-08 spam protection.",
+      "gaps": "Minor: CM-14 adds hardening integrity verification. SecNumCloud requires specific cloud infrastructure hardening procedures and documented operational runbooks aligned with ANSSI guidelines."
     },
     {
       "id": "SecNumCloud.13.2",
@@ -1029,21 +1080,23 @@
       "controls": [
         "CM-03",
         "CM-04",
-        "CM-05"
+        "CM-05",
+        "CM-14"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-03 configuration change control; CM-04 monitoring configuration changes; CM-05 access restrictions for change. CM family comprehensively addresses change management.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CM-03 configuration change control; CM-04 monitoring configuration changes; CM-05 access restrictions for change; CM-14 (new in Rev 5) signed components verifies integrity of cloud service changes through cryptographic signatures.",
+      "gaps": "Minimal gap. CM-14 adds change integrity verification."
     },
     {
       "id": "SecNumCloud.13.3",
       "title": "Capacity management",
       "controls": [
-        "SC-06"
+        "SC-06",
+        "SI-13"
       ],
-      "coverage_pct": 75,
-      "rationale": "SC-06 resource priority. SP 800-53 addresses resource priority.",
-      "gaps": "SecNumCloud requires specific capacity management for multi-tenant cloud environments including tenant resource isolation and guaranteed SLAs. SP 800-53 SC-06 covers resource priority but cloud-specific capacity planning less detailed."
+      "coverage_pct": 78,
+      "rationale": "SC-06 resource priority; SI-13 (new in Rev 5) predictive maintenance enables proactive failure prevention through monitoring component reliability, directly supporting capacity planning by predicting resource exhaustion.",
+      "gaps": "SI-13 improves capacity prediction. SecNumCloud requires specific capacity management for multi-tenant cloud environments including tenant resource isolation and guaranteed SLAs. SP 800-53 covers resource priority but cloud-specific capacity planning less detailed."
     },
     {
       "id": "SecNumCloud.13.4",
@@ -1053,11 +1106,12 @@
         "MA-02",
         "MA-03",
         "MA-04",
-        "MA-06"
+        "MA-06",
+        "MA-07"
       ],
-      "coverage_pct": 90,
-      "rationale": "MA-01 maintenance policy; MA-02 controlled maintenance; MA-03 maintenance tools; MA-04 remote maintenance; MA-06 timely maintenance. MA family comprehensively addresses maintenance.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "MA-01 maintenance policy; MA-02 controlled maintenance; MA-03 maintenance tools; MA-04 remote maintenance; MA-06 timely maintenance; MA-07 (new in Rev 5) field maintenance addresses maintenance of cloud infrastructure equipment at remote locations.",
+      "gaps": "Minimal gap. MA-07 adds field maintenance for distributed cloud infrastructure."
     },
     {
       "id": "SecNumCloud.13.5",
@@ -1066,7 +1120,7 @@
         "CP-09"
       ],
       "coverage_pct": 85,
-      "rationale": "CP-09 system backup. CP-09 directly addresses backup.",
+      "rationale": "CP-09 system backup. No new Rev 5 controls materially improve backup coverage.",
       "gaps": "Minor: SecNumCloud requires specific backup procedures for multi-tenant environments including tenant data isolation in backups and guaranteed restoration within defined SLAs."
     },
     {
@@ -1074,15 +1128,16 @@
       "title": "Vulnerability and patch management",
       "controls": [
         "RA-05",
+        "RA-07",
         "SI-01",
         "SI-02",
         "SI-05",
         "SI-06",
         "SI-07"
       ],
-      "coverage_pct": 90,
-      "rationale": "RA-05 vulnerability scanning; SI-01 system integrity policy; SI-02 flaw remediation; SI-05 security alerts; SI-06 security functionality verification; SI-07 software integrity. SI-02 and RA-05 directly address vulnerability and patch management.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "RA-05 vulnerability scanning; RA-07 (new in Rev 5) risk response adds explicit treatment actions for identified vulnerabilities in cloud infrastructure; SI-01 system integrity policy; SI-02 flaw remediation; SI-05 security alerts; SI-06 security functionality verification; SI-07 software integrity.",
+      "gaps": "Minimal gap. RA-07 adds formal vulnerability response."
     },
     {
       "id": "SecNumCloud.13.7",
@@ -1100,11 +1155,12 @@
         "AU-09",
         "AU-10",
         "AU-11",
+        "AU-12",
         "CA-07",
         "SI-04"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-09 previous logon notification; AU-01 audit policy; AU-02 auditable events; AU-03 audit record content; AU-04 audit storage capacity; AU-05 response to audit failures; AU-06 audit review and reporting; AU-07 audit reduction; AU-08 timestamps; AU-09 protection of audit information; AU-10 non-repudiation; AU-11 audit record retention; CA-07 continuous monitoring; SI-04 system monitoring. AU family comprehensively addresses logging.",
+      "coverage_pct": 92,
+      "rationale": "AC-09 previous logon notification; AU family comprehensive for logging; AU-12 audit record generation; CA-07 continuous monitoring; SI-04 system monitoring. No new Rev 5 controls materially add to cloud logging.",
       "gaps": "Minimal gap."
     },
     {
@@ -1120,11 +1176,12 @@
         "SC-15",
         "SC-20",
         "SC-21",
-        "SC-22"
+        "SC-22",
+        "SC-46"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-04 information flow enforcement; CA-03 system connections; SC-01 system and communications protection policy; SC-02 application partitioning; SC-03 security function isolation; SC-07 boundary protection; SC-15 collaborative computing; SC-20 secure name resolution; SC-21 secure name resolution (recursive); SC-22 architecture for name resolution. SC family provides comprehensive network security.",
-      "gaps": "Minor: SecNumCloud requires cloud-specific network segmentation including tenant isolation at network level and network security monitoring for cloud-native architectures."
+      "coverage_pct": 88,
+      "rationale": "AC-04 information flow enforcement; CA-03 system connections; SC-01 system and communications protection policy; SC-02 application partitioning; SC-03 security function isolation; SC-07 boundary protection; SC-15 collaborative computing; SC-20/SC-21/SC-22 secure name resolution; SC-46 (new in Rev 5) cross-domain policy enforcement strengthens tenant network isolation through explicit policy enforcement at domain boundaries.",
+      "gaps": "Minor: SC-46 adds cross-domain enforcement. SecNumCloud requires cloud-specific network segmentation including tenant isolation at network level."
     },
     {
       "id": "SecNumCloud.14.2",
@@ -1132,24 +1189,24 @@
       "controls": [
         "AC-17",
         "SC-08",
-        "SC-09",
         "SC-11",
         "SC-16",
-        "SC-19"
+        "SC-38"
       ],
-      "coverage_pct": 85,
-      "rationale": "AC-17 remote access; SC-08 transmission integrity; SC-09 transmission confidentiality; SC-11 trusted path; SC-16 transmission of security parameters; SC-19 VoIP. SC family covers data in transit.",
-      "gaps": "Minor: SecNumCloud requires ANSSI-approved protocols and cipher suites for all data in transit within cloud infrastructure."
+      "coverage_pct": 88,
+      "rationale": "AC-17 remote access; SC-08 transmission integrity; SC-11 trusted path; SC-16 transmission of security parameters; SC-38 (new in Rev 5) operations security protects communication channel cryptographic operations from side-channel attacks.",
+      "gaps": "Minor: SC-38 strengthens data-in-transit cryptographic operations. SecNumCloud requires ANSSI-approved protocols and cipher suites for all data in transit within cloud infrastructure."
     },
     {
       "id": "SecNumCloud.14.3",
       "title": "Wireless network security",
       "controls": [
-        "AC-18"
+        "AC-18",
+        "SC-40"
       ],
-      "coverage_pct": 80,
-      "rationale": "AC-18 wireless access restrictions. AC-18 covers wireless security.",
-      "gaps": "SecNumCloud restricts or prohibits wireless networks in sensitive cloud infrastructure zones. SP 800-53 AC-18 covers wireless access but the stringent restrictions for cloud data centres less explicit."
+      "coverage_pct": 82,
+      "rationale": "AC-18 wireless access restrictions; SC-40 (new in Rev 5) wireless link protection provides specific protections for wireless communication links in cloud facilities.",
+      "gaps": "SC-40 adds wireless link protection. SecNumCloud restricts or prohibits wireless networks in sensitive cloud infrastructure zones. SP 800-53 covers wireless access but the stringent restrictions for cloud data centres less explicit."
     },
     {
       "id": "SecNumCloud.14.4",
@@ -1157,11 +1214,12 @@
       "controls": [
         "SC-05",
         "SC-07",
-        "SC-14"
+        "SC-14",
+        "SC-47"
       ],
-      "coverage_pct": 85,
-      "rationale": "SC-05 denial of service protection; SC-07 boundary protection; SC-14 public access protections. SC-05 directly addresses DoS protection.",
-      "gaps": "Minor: SecNumCloud requires specific DDoS mitigation capabilities with EU-based scrubbing centres."
+      "coverage_pct": 88,
+      "rationale": "SC-05 denial of service protection; SC-07 boundary protection; SC-14 public access protections; SC-47 (new in Rev 5) alternate communications paths provides resilient communications that can maintain service during DoS attacks.",
+      "gaps": "Minor: SC-47 adds DoS resilience through alternate paths. SecNumCloud requires specific DDoS mitigation capabilities with EU-based scrubbing centres."
     },
     {
       "id": "SecNumCloud.15.1",
@@ -1170,11 +1228,13 @@
         "SA-01",
         "SA-02",
         "SA-03",
-        "SA-04"
+        "SA-04",
+        "SA-20",
+        "SA-21"
       ],
-      "coverage_pct": 85,
-      "rationale": "SA-01 acquisition policy; SA-02 allocation of resources; SA-03 lifecycle support; SA-04 acquisitions. SA family covers development and acquisition.",
-      "gaps": "Minor: SecNumCloud requires secure development lifecycle aligned with ANSSI secure coding guidelines."
+      "coverage_pct": 88,
+      "rationale": "SA-01 acquisition policy; SA-02 allocation of resources; SA-03 lifecycle support; SA-04 acquisitions; SA-20 (new in Rev 5) customized development of critical components addresses bespoke development for cloud infrastructure; SA-21 (new in Rev 5) developer screening adds personnel vetting for cloud development teams.",
+      "gaps": "Minor: SA-20/SA-21 add critical component development and developer screening. SecNumCloud requires secure development lifecycle aligned with ANSSI secure coding guidelines."
     },
     {
       "id": "SecNumCloud.15.2",
@@ -1183,7 +1243,7 @@
         "SA-05"
       ],
       "coverage_pct": 85,
-      "rationale": "SA-05 system documentation. SP 800-53 covers documentation.",
+      "rationale": "SA-05 system documentation. No new Rev 5 controls materially add to documentation coverage.",
       "gaps": "Minor: SecNumCloud requires cloud-specific technical documentation for ANSSI qualification assessment."
     },
     {
@@ -1191,32 +1251,35 @@
       "title": "Technical security requirements",
       "controls": [
         "SA-08",
+        "SA-23",
         "SI-10",
         "SI-11"
       ],
-      "coverage_pct": 80,
-      "rationale": "SA-08 security engineering principles; SI-10 information accuracy; SI-11 error handling. SP 800-53 covers engineering principles.",
-      "gaps": "SecNumCloud defines specific technical security requirements for cloud platforms including hypervisor security, container isolation, and API security. SP 800-53 covers general engineering principles but cloud-native technical requirements less detailed."
+      "coverage_pct": 82,
+      "rationale": "SA-08 security engineering principles; SI-10 information accuracy; SI-11 error handling; SA-23 (new in Rev 5) specialization addresses domain-specific security engineering including cloud platform technical security patterns (hypervisor security, container isolation, API security).",
+      "gaps": "SA-23 adds domain-specific engineering. SecNumCloud defines specific technical security requirements for cloud platforms. SP 800-53 covers general engineering principles but cloud-native technical requirements less detailed."
     },
     {
       "id": "SecNumCloud.15.4",
       "title": "Configuration management for cloud platforms",
       "controls": [
-        "SA-10"
+        "SA-10",
+        "CM-14"
       ],
-      "coverage_pct": 85,
-      "rationale": "SA-10 developer configuration management. SP 800-53 covers developer configuration management.",
-      "gaps": "Minor: SecNumCloud requires specific configuration management for cloud infrastructure components (hypervisors, orchestrators, container platforms)."
+      "coverage_pct": 88,
+      "rationale": "SA-10 developer configuration management; CM-14 (new in Rev 5) signed components verifies integrity of configuration changes for cloud platform components (hypervisors, orchestrators, containers).",
+      "gaps": "Minor: CM-14 adds configuration integrity verification. SecNumCloud requires specific configuration management for cloud infrastructure components."
     },
     {
       "id": "SecNumCloud.15.5",
       "title": "Security testing for cloud services",
       "controls": [
-        "SA-11"
+        "SA-11",
+        "SA-20"
       ],
-      "coverage_pct": 85,
-      "rationale": "SA-11 developer security testing. SP 800-53 covers security testing.",
-      "gaps": "Minor: SecNumCloud requires penetration testing aligned with ANSSI PASSI (security audit service provider) methodology."
+      "coverage_pct": 88,
+      "rationale": "SA-11 developer security testing; SA-20 (new in Rev 5) customized development of critical components includes testing requirements for high-assurance cloud components.",
+      "gaps": "Minor: SA-20 adds testing for critical cloud components. SecNumCloud requires penetration testing aligned with ANSSI PASSI methodology."
     },
     {
       "id": "SecNumCloud.16.1",
@@ -1226,6 +1289,7 @@
         "PS-07",
         "SA-04",
         "SA-09",
+        "SA-21",
         "SR-01",
         "SR-02",
         "SR-03",
@@ -1236,9 +1300,9 @@
         "SR-09",
         "SR-11"
       ],
-      "coverage_pct": 75,
-      "rationale": "AC-20 use of external systems; PS-07 third-party personnel; SA-04 acquisitions; SA-09 external services; SR-01 supply chain policy; SR-02 supply chain risk management plan; SR-03 supply chain controls; SR-04 provenance; SR-05 acquisition strategies; SR-07 supply chain operations security; SR-08 notification agreements; SR-11 component authenticity. SR family provides supply chain coverage.",
-      "gaps": "SecNumCloud requires that all subcontractors and suppliers comply with EU data sovereignty requirements and that no non-EU entity has access to cloud data or administration. SP 800-53 SR family covers supply chain risk but EU sovereignty and extraterritorial law protection (e.g., against US CLOUD Act) not addressed."
+      "coverage_pct": 78,
+      "rationale": "AC-20 use of external systems; PS-07 third-party personnel; SA-04 acquisitions; SA-09 external services; SA-21 (new in Rev 5) developer screening adds vetting for subcontractor development personnel; SR family supply chain risk management.",
+      "gaps": "SA-21 adds subcontractor developer screening. SecNumCloud requires that all subcontractors and suppliers comply with EU data sovereignty requirements and that no non-EU entity has access to cloud data or administration. SP 800-53 SR family covers supply chain risk but EU sovereignty and extraterritorial law protection (e.g., against US CLOUD Act) not addressed."
     },
     {
       "id": "SecNumCloud.16.2",
@@ -1250,7 +1314,7 @@
         "SR-10"
       ],
       "coverage_pct": 80,
-      "rationale": "SA-09 external services; SR-03 supply chain controls; SR-06 supplier assessments; SR-10 inspection of systems. SP 800-53 covers supplier assessment.",
+      "rationale": "SA-09 external services; SR-03 supply chain controls; SR-06 supplier assessments; SR-10 inspection of systems. No new Rev 5 controls materially add to supplier assessment.",
       "gaps": "SecNumCloud requires supplier qualification aligned with ANSSI requirements including EU sovereignty verification. SP 800-53 covers supplier assessment but ANSSI-specific qualification process not addressed."
     },
     {
@@ -1263,11 +1327,12 @@
         "IR-04",
         "IR-05",
         "IR-06",
-        "IR-07"
+        "IR-07",
+        "IR-09"
       ],
-      "coverage_pct": 85,
-      "rationale": "AU-06 audit review and reporting; IR-01 incident response policy; IR-02 incident response training; IR-04 incident handling; IR-05 incident monitoring; IR-06 incident reporting; IR-07 incident response assistance. IR family comprehensively addresses incident management.",
-      "gaps": "Minor: SecNumCloud requires incident reporting to ANSSI (French CERT-FR) within specific timeframes and notification of tenants according to French regulatory requirements."
+      "coverage_pct": 88,
+      "rationale": "AU-06 audit review and reporting; IR-01 incident response policy; IR-02 incident response training; IR-04 incident handling; IR-05 incident monitoring; IR-06 incident reporting; IR-07 incident response assistance; IR-09 (new in Rev 5) information spillage response adds specific handling for data breach/spillage incidents.",
+      "gaps": "Minor: IR-09 adds spillage-specific response. SecNumCloud requires incident reporting to ANSSI (French CERT-FR) within specific timeframes and notification of tenants according to French regulatory requirements."
     },
     {
       "id": "SecNumCloud.17.2",
@@ -1277,7 +1342,7 @@
         "IR-04"
       ],
       "coverage_pct": 90,
-      "rationale": "IR-03 incident response testing; IR-04 incident handling. SP 800-53 covers incident response testing.",
+      "rationale": "IR-03 incident response testing; IR-04 incident handling. No new Rev 5 controls materially add here.",
       "gaps": "Minimal gap."
     },
     {
@@ -1286,11 +1351,12 @@
       "controls": [
         "CP-01",
         "CP-02",
-        "CP-05"
+        "CP-05",
+        "SI-13"
       ],
-      "coverage_pct": 80,
-      "rationale": "CP-01 contingency planning policy; CP-02 contingency plan; CP-05 contingency plan update. CP family addresses business continuity.",
-      "gaps": "SecNumCloud requires cloud-specific business continuity plans including multi-region EU failover and tenant data portability. SP 800-53 CP family covers continuity but cloud-specific and EU-localised failover requirements less detailed."
+      "coverage_pct": 82,
+      "rationale": "CP-01 contingency planning policy; CP-02 contingency plan; CP-05 contingency plan update; SI-13 (new in Rev 5) predictive maintenance enables proactive failure prevention for cloud infrastructure.",
+      "gaps": "SI-13 improves continuity through proactive failure prevention. SecNumCloud requires cloud-specific business continuity plans including multi-region EU failover and tenant data portability. SP 800-53 CP family covers continuity but cloud-specific and EU-localised failover requirements less detailed."
     },
     {
       "id": "SecNumCloud.18.2",
@@ -1300,7 +1366,7 @@
         "CP-04"
       ],
       "coverage_pct": 85,
-      "rationale": "CP-03 contingency training; CP-04 contingency plan testing. SP 800-53 covers continuity testing.",
+      "rationale": "CP-03 contingency training; CP-04 contingency plan testing. No new Rev 5 controls materially add here.",
       "gaps": "Minor: SecNumCloud requires testing of cloud-specific failover scenarios including tenant isolation during recovery."
     },
     {
@@ -1310,11 +1376,12 @@
         "CP-06",
         "CP-07",
         "CP-08",
-        "CP-10"
+        "CP-10",
+        "SC-47"
       ],
-      "coverage_pct": 80,
-      "rationale": "CP-06 alternate storage site; CP-07 alternate processing site; CP-08 telecommunications services; CP-10 system recovery. CP family covers disaster recovery.",
-      "gaps": "SecNumCloud requires all redundant infrastructure to be located within EU territory. SP 800-53 covers disaster recovery but geographic constraints on alternate sites not addressed."
+      "coverage_pct": 82,
+      "rationale": "CP-06 alternate storage site; CP-07 alternate processing site; CP-08 telecommunications services; CP-10 system recovery; SC-47 (new in Rev 5) alternate communications paths provides resilient communication channels for disaster recovery scenarios.",
+      "gaps": "SC-47 improves DR communications resilience. SecNumCloud requires all redundant infrastructure to be located within EU territory. SP 800-53 covers disaster recovery but geographic constraints on alternate sites not addressed."
     },
     {
       "id": "SecNumCloud.19.1",
@@ -1324,7 +1391,7 @@
         "CA-05"
       ],
       "coverage_pct": 65,
-      "rationale": "CA-01 assessment policy; CA-05 plan of action. SP 800-53 covers compliance planning.",
+      "rationale": "CA-01 assessment policy; CA-05 plan of action. No new Rev 5 controls materially add to compliance management.",
       "gaps": "Significant: SecNumCloud compliance requires adherence to French and EU law including GDPR, French data protection law (Loi Informatique et Libertes), and protection against extraterritorial non-EU laws. SP 800-53 focuses on US federal compliance framework."
     },
     {
@@ -1337,7 +1404,7 @@
         "CA-07"
       ],
       "coverage_pct": 70,
-      "rationale": "CA-02 security assessments; CA-04 security certification; CA-06 security accreditation; CA-07 continuous monitoring. CA family covers security assessment.",
+      "rationale": "CA-02 security assessments; CA-04 security certification; CA-06 security accreditation; CA-07 continuous monitoring. No new Rev 5 controls address ANSSI-specific qualification.",
       "gaps": "Significant: SecNumCloud requires qualification by ANSSI through accredited PASSI audit providers, following specific French certification methodology. SP 800-53 CA family covers assessment but ANSSI-specific qualification process (SecNumCloud label) has no equivalent."
     },
     {
@@ -1351,21 +1418,24 @@
         "PT-05",
         "PT-06",
         "PT-07",
-        "PT-08"
+        "PT-08",
+        "SI-18",
+        "SI-19"
       ],
-      "coverage_pct": 70,
-      "rationale": "PT-01 policy and procedures; PT-02 authority to process PII; PT-03 PII processing purposes; PT-04 consent; PT-05 privacy notice; PT-06 system of records notice; PT-07 specific categories of PII; PT-08 computer matching requirements. PT family covers privacy.",
-      "gaps": "Significant: SecNumCloud data protection requirements are aligned with GDPR and French CNIL requirements, including data residency within EU, Data Protection Impact Assessments (DPIA), and specific cloud data protection obligations. SP 800-53 PT family addresses US privacy requirements but EU/French data protection framework materially different."
+      "coverage_pct": 72,
+      "rationale": "PT-01 policy and procedures; PT-02 authority to process PII; PT-03 PII processing purposes; PT-04 consent; PT-05 privacy notice; PT-06 system of records notice; PT-07 specific categories of PII; PT-08 computer matching requirements; SI-18 (new in Rev 5) PII quality and accuracy supports GDPR accuracy requirements; SI-19 (new in Rev 5) de-identification supports GDPR pseudonymisation.",
+      "gaps": "SI-18/SI-19 improve GDPR alignment for data quality and pseudonymisation. SecNumCloud data protection requirements are aligned with GDPR and French CNIL requirements, including data residency within EU, Data Protection Impact Assessments (DPIA), and specific cloud data protection obligations. SP 800-53 PT family addresses US privacy requirements but EU/French data protection framework materially different."
     },
     {
       "id": "RGS.1.2",
       "title": "Security awareness and competence",
       "controls": [
-        "AT-01"
+        "AT-01",
+        "AT-06"
       ],
-      "coverage_pct": 85,
-      "rationale": "AT-01 awareness training policy. SP 800-53 covers awareness requirements.",
-      "gaps": "Minor: RGS requires awareness programmes aligned with French government security classification framework."
+      "coverage_pct": 88,
+      "rationale": "AT-01 awareness training policy; AT-06 (new in Rev 5) training feedback measures training effectiveness, supporting RGS requirements for awareness programme evaluation.",
+      "gaps": "Minor: AT-06 adds training effectiveness measurement. RGS requires awareness programmes aligned with French government security classification framework."
     },
     {
       "id": "RGS.1.3",
@@ -1375,12 +1445,13 @@
         "AU-01",
         "CA-01",
         "PL-01",
+        "PL-09",
         "RA-01",
         "SC-01"
       ],
-      "coverage_pct": 80,
-      "rationale": "AC-01 access control policy; AU-01 audit policy; CA-01 assessment policy; PL-01 security planning policy; RA-01 risk assessment policy; SC-01 system and communications protection policy. Broad policy coverage.",
-      "gaps": "RGS requires security policies aligned with French General Security Framework (RGS v2.0) and ANSSI requirements. SP 800-53 provides comprehensive policies but French-specific RGS alignment not addressed."
+      "coverage_pct": 82,
+      "rationale": "AC-01 access control policy; AU-01 audit policy; CA-01 assessment policy; PL-01 security planning policy; PL-09 (new in Rev 5) central management enables unified policy governance across the security programme; RA-01 risk assessment policy; SC-01 system and communications protection policy.",
+      "gaps": "PL-09 improves policy governance. RGS requires security policies aligned with French General Security Framework (RGS v2.0) and ANSSI requirements. SP 800-53 provides comprehensive policies but French-specific RGS alignment not addressed."
     },
     {
       "id": "RGS.2.1",
@@ -1389,7 +1460,7 @@
         "AU-10"
       ],
       "coverage_pct": 75,
-      "rationale": "AU-10 non-repudiation. SP 800-53 covers non-repudiation.",
+      "rationale": "AU-10 non-repudiation. No new Rev 5 controls address EU eIDAS electronic signature requirements.",
       "gaps": "RGS mandates compliance with eIDAS regulation and French electronic signature standards. SP 800-53 AU-10 covers non-repudiation but EU eIDAS-qualified electronic signatures and French trust services not addressed."
     },
     {
@@ -1402,7 +1473,7 @@
         "SC-16"
       ],
       "coverage_pct": 80,
-      "rationale": "IA-01 identification and authentication policy; IA-02 user identification; IA-05 authenticator management; SC-16 transmission of security parameters. IA family covers authentication.",
+      "rationale": "IA-01 identification and authentication policy; IA-02 user identification; IA-05 authenticator management; SC-16 transmission of security parameters. No new Rev 5 controls address French trust level requirements.",
       "gaps": "RGS mandates specific authentication levels (one-factor, two-factor, qualified) aligned with French government trust framework. SP 800-53 IA family covers authentication but RGS-specific trust levels and French qualification requirements not addressed."
     },
     {
@@ -1411,24 +1482,26 @@
       "controls": [
         "IA-07",
         "SC-08",
-        "SC-09",
         "SC-12",
         "SC-13",
-        "SC-17"
+        "SC-17",
+        "SC-38"
       ],
-      "coverage_pct": 75,
-      "rationale": "IA-07 cryptographic module authentication; SC-08 transmission integrity; SC-09 transmission confidentiality; SC-12 cryptographic key management; SC-13 use of cryptography; SC-17 PKI certificates. SC family covers cryptography.",
-      "gaps": "RGS mandates ANSSI-approved cryptographic algorithms and key sizes (Annexe B of RGS). SP 800-53 references FIPS 140-2/3 (US standards). French/ANSSI cryptographic requirements differ from US NIST standards."
+      "coverage_pct": 78,
+      "rationale": "IA-07 cryptographic module authentication; SC-08 transmission integrity; SC-12 cryptographic key management; SC-13 use of cryptography; SC-17 PKI certificates; SC-38 (new in Rev 5) operations security protects cryptographic operations from side-channel attacks.",
+      "gaps": "SC-38 strengthens cryptographic operation security. RGS mandates ANSSI-approved cryptographic algorithms and key sizes (Annexe B of RGS). SP 800-53 references FIPS 140-2/3 (US standards). French/ANSSI cryptographic requirements differ from US NIST standards."
     },
     {
       "id": "RGS.3.1",
       "title": "Risk assessment methodology",
       "controls": [
-        "RA-03"
+        "RA-03",
+        "RA-07",
+        "RA-09"
       ],
-      "coverage_pct": 80,
-      "rationale": "RA-03 risk assessment. SP 800-53 covers risk assessment.",
-      "gaps": "RGS recommends EBIOS RM methodology (French risk assessment framework developed by ANSSI). SP 800-53 RA-03 covers risk assessment but EBIOS RM methodology not addressed."
+      "coverage_pct": 82,
+      "rationale": "RA-03 risk assessment; RA-07 (new in Rev 5) risk response adds explicit risk treatment; RA-09 (new in Rev 5) criticality analysis identifies critical components for risk prioritization.",
+      "gaps": "RA-07 and RA-09 improve risk methodology coverage. RGS recommends EBIOS RM methodology (French risk assessment framework developed by ANSSI). SP 800-53 RA-03 covers risk assessment but EBIOS RM methodology not addressed."
     },
     {
       "id": "RGS.4.1",
@@ -1439,13 +1512,13 @@
         "CA-06"
       ],
       "coverage_pct": 65,
-      "rationale": "CA-02 security assessments; CA-04 security certification; CA-06 security accreditation. CA family covers security assessment.",
+      "rationale": "CA-02 security assessments; CA-04 security certification; CA-06 security accreditation. No new Rev 5 controls address ANSSI-specific qualification.",
       "gaps": "Significant: RGS qualification requires assessment by ANSSI-accredited bodies following French government audit methodology. SP 800-53 CA family covers assessment but RGS-specific qualification (visa de securite) has no equivalent."
     }
   ],
   "summary": {
     "total_clauses": 96,
-    "average_coverage": 85.5,
+    "average_coverage": 87.1,
     "full_count": 76,
     "substantial_count": 20,
     "partial_count": 0,

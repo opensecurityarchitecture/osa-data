@@ -1,0 +1,1296 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "bio2",
+  "framework_name": "BIO2",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. BIO2 is aligned with ISO/IEC 27002:2022 with Dutch government-specific measures. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "5.1",
+      "title": "Policies for information security (BIO2)",
+      "controls": [
+        "PL-01",
+        "PM-01",
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PS-01",
+        "RA-01",
+        "SA-01",
+        "SC-01",
+        "SI-01",
+        "PT-01",
+        "SR-01"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SP 800-53 has comprehensive policy controls (-01) for every family. PL-01 is the overarching planning policy. PM-01 establishes program plan. PT-01 and SR-01 add privacy and supply chain policy requirements, giving broad coverage of ISO 27002's requirement for a coherent policy framework with topic-specific policies. BIO2 government measures additionally require explicit alignment with the Cyberbeveiligingswet and ENSIA audit framework, mandating that security policies reference Dutch legislative obligations and are subject to ENSIA accountability reporting, which is not addressed by SP 800-53.",
+      "gaps": "SP 800-53 policy requirements are more granular (per-family) while ISO 27002 expects a coherent hierarchical policy set with explicit review triggers and communication channels. BIO2 mandates that information security policy explicitly references the Cyberbeveiligingswet implementation roadmap and ENSIA compliance obligations, which have no SP 800-53 equivalent."
+    },
+    {
+      "id": "5.2",
+      "title": "Information security roles and responsibilities (BIO2)",
+      "controls": [
+        "PM-02",
+        "PS-01",
+        "PS-02",
+        "PL-01",
+        "PS-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PM-02 assigns CISO/senior security role. PS-01/PS-02 cover position risk designation and personnel categorization. PS-09 (Position Descriptions) explicitly requires incorporating security and privacy roles and responsibilities into organizational position descriptions, directly addressing ISO 27002's requirement that all information security responsibilities are defined and allocated. BIO2 government measures additionally require the formal appointment of a CISO at board level and mandate reporting lines to the executive board, which SP 800-53 does not prescribe at this level of organizational specificity.",
+      "gaps": "ISO 27002 provides specific implementation guidance on asset owner responsibilities. SP 800-53 addresses through system owner concept in PL-02 but 'asset owner' role is less defined. BIO2 mandates CISO appointment with specific governance reporting lines and accountability to ENSIA supervisory bodies, which are Netherlands-specific organisational requirements."
+    },
+    {
+      "id": "5.3",
+      "title": "Segregation of duties (BIO2)",
+      "controls": [
+        "AC-05"
+      ],
+      "coverage_pct": 87,
+      "rationale": "AC-05 directly addresses separation of duties including identifying conflicting duties and implementing compensating controls. Comprehensive alignment with ISO 27002's requirement. BIO2 government measures additionally require segregation of duties to be formally documented for ENSIA audit evidence, which is an accountability requirement that SP 800-53 supports implicitly through documentation but does not mandate for external audit purposes.",
+      "gaps": "ISO 27002 provides detailed guidance on identifying conflicting duties across business processes. AC-05 is focused on system-level duty separation. BIO2 requires ENSIA audit compliance for accountability to supervisory bodies, adding documentation obligations beyond SP 800-53 requirements."
+    },
+    {
+      "id": "5.4",
+      "title": "Management responsibilities (BIO2)",
+      "controls": [
+        "PM-02",
+        "PM-13",
+        "PS-07",
+        "AT-01",
+        "PM-29"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PM-02 and PM-13 address management security roles and workforce management. PS-07 covers third-party personnel management. AT-01 establishes training policy. PM-29 (Risk Management Program Leadership) adds explicit senior leadership accountability for risk management, supporting ISO 27002's requirement that management requires personnel to apply security per policies. BIO2 government measures additionally require management accountability through ENSIA self-assessment and external audit, with explicit board-level sign-off on security posture reported to supervisory bodies, which is not addressed by SP 800-53.",
+      "gaps": "ISO 27002 emphasizes management actively requiring all employees and contractors to apply security per policies, leading by example, and providing resources. SP 800-53 is less explicit on management behavioral expectations and enforcement responsibility. BIO2 mandates ENSIA audit compliance for accountability to supervisory bodies and requires board-level sign-off on information security status."
+    },
+    {
+      "id": "5.5",
+      "title": "Contact with authorities (BIO2)",
+      "controls": [
+        "IR-06",
+        "PM-15"
+      ],
+      "coverage_pct": 75,
+      "rationale": "IR-06 covers incident reporting to authorities. PM-15 covers establishing and maintaining contacts with security groups and associations. Together they address ISO 27002's requirement for maintaining relationships with relevant authorities. BIO2 government measures additionally require proactive engagement with NCSC-NL and coordination with Dutch sector-specific CERTs, as well as alignment with Rijksoverheid security coordination structures, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 includes proactive relationship maintenance with authorities for prevention and intelligence, not just reactive incident reporting. Anticipatory contact with regulatory bodies is not explicitly required. BIO2 mandates proactive engagement with NCSC-NL and sector-specific CERTs under the Cyberbeveiligingswet framework."
+    },
+    {
+      "id": "5.6",
+      "title": "Contact with special interest groups (BIO2)",
+      "controls": [
+        "PM-15",
+        "PM-16"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PM-15 directly covers contacts with security groups and associations. PM-16 covers threat awareness program including sharing with security communities. Good alignment with ISO 27002's requirement. BIO2 government measures additionally require participation in Dutch government information-sharing communities such as NCSC-NL partnerships and sector-specific ISACs, which SP 800-53 supports in general terms but does not prescribe for specific national communities.",
+      "gaps": "ISO 27002 details benefits including improved knowledge, early warnings, and advisory access from professional forums. SP 800-53 is less specific about the breadth of groups to engage. BIO2 requires participation in Dutch government security communities and NCSC-NL threat intelligence sharing."
+    },
+    {
+      "id": "5.7",
+      "title": "Threat intelligence (BIO2)",
+      "controls": [
+        "PM-16",
+        "RA-03",
+        "RA-05",
+        "SI-05",
+        "RA-10",
+        "RA-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PM-16 addresses threat awareness program. SI-05 covers security alerts and advisories. RA-03/RA-05 include threat identification and vulnerability assessment. RA-10 (Threat Hunting) adds proactive cyber threat hunting capability. RA-07 (Risk Response) ensures threat intelligence findings are acted upon systematically. BIO2 government measures additionally require consumption of NCSC-NL threat advisories and integration with Dutch government threat intelligence feeds, which SP 800-53 supports through general mechanisms but does not prescribe for specific national sources.",
+      "gaps": "Minimal gap for core threat intelligence. BIO2 requires integration with NCSC-NL threat advisories and Dutch government-specific threat intelligence feeds."
+    },
+    {
+      "id": "5.8",
+      "title": "Information security in project management (BIO2)",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "PM-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SA-03 covers security in SDLC integration. SA-04 addresses acquisition security requirements. SA-08 covers security engineering principles applied to projects. PM-07 addresses enterprise architecture integration. BIO2 government measures additionally require that all government IT projects undergo a BIO2 baseline assessment as part of project initiation, which is a mandatory gate not prescribed by SP 800-53.",
+      "gaps": "ISO 27002 specifies security integration into ALL project types regardless of nature (IT and non-IT). SP 800-53 SA controls focus on IT system development and acquisition projects specifically. BIO2 mandates BIO2 baseline assessment as a formal project gate for government IT projects."
+    },
+    {
+      "id": "5.9",
+      "title": "Inventory of information and other associated assets (BIO2)",
+      "controls": [
+        "CM-08",
+        "PM-05",
+        "CM-12",
+        "CM-13"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-08 directly covers system component inventory. PM-05 covers system inventory. CM-12 (Information Location) identifies and documents the location of information types and the specific system components on which information is processed and stored. CM-13 (Data Action Mapping) maps data actions to system components and individuals, strengthening asset-to-data relationship tracking. BIO2 government measures additionally require asset inventories to be aligned with Rijksoverheid asset classification standards, which SP 800-53 supports through general inventory controls.",
+      "gaps": "ISO 27002 includes 'associated assets' beyond information and system components (e.g., people, premises, cloud services as assets). CM-12 and CM-13 significantly strengthen the information asset inventory mapping. BIO2 requires alignment with Dutch government asset classification standards."
+    },
+    {
+      "id": "5.10",
+      "title": "Acceptable use of information and other associated assets (BIO2)",
+      "controls": [
+        "PL-04",
+        "AC-20",
+        "MP-07"
+      ],
+      "coverage_pct": 83,
+      "rationale": "PL-04 directly covers rules of behavior and acceptable use policies. AC-20 covers use of external systems. MP-07 covers media use restrictions. BIO2 government measures additionally require acceptable use policies to reference Dutch government classification (Departementaal Vertrouwelijk, Staatsgeheim) and handling procedures, which SP 800-53 addresses through its own classification framework but not Dutch-specific markings.",
+      "gaps": "ISO 27002 specifies 'return of assets' as part of the acceptable use lifecycle and covers acceptable use of cloud services. SP 800-53 separates asset return into PS-04. BIO2 requires acceptable use policies to reference Dutch government security classification levels."
+    },
+    {
+      "id": "5.11",
+      "title": "Return of assets (BIO2)",
+      "controls": [
+        "PS-04",
+        "PS-05"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PS-04 covers personnel termination including return of organizational assets and information. PS-05 covers personnel transfer with similar asset handling requirements. BIO2 government measures additionally require that classified government assets are returned through verified chain-of-custody procedures aligned with Rijksoverheid protocols, which SP 800-53 supports through general termination procedures.",
+      "gaps": "Minimal gap. ISO 27002 includes return of both physical and electronic assets, which PS-04/PS-05 address. BIO2 adds chain-of-custody requirements for classified government assets aligned with Dutch government handling standards."
+    },
+    {
+      "id": "5.12",
+      "title": "Classification of information (BIO2)",
+      "controls": [
+        "RA-02",
+        "AC-16"
+      ],
+      "coverage_pct": 82,
+      "rationale": "RA-02 covers security categorization of information and systems using FIPS 199 methodology. AC-16 supports association of security and privacy attributes with information for classification purposes. BIO2 government measures additionally require alignment with the Dutch government classification scheme (Departementaal Vertrouwelijk, Staatsgeheim-Confidentieel/Geheim/Zeer Geheim) and the Besluit Voorschrift Informatiebeveiliging Rijksdienst (VIR), which SP 800-53 does not address.",
+      "gaps": "ISO 27002 uses multi-tier classification schemes; SP 800-53 uses FIPS 199 categorization (C/I/A impact levels). Conceptually similar but terminology and methodology differ. BIO2 mandates the Dutch government classification scheme (Departementaal Vertrouwelijk, Staatsgeheim levels) per VIR, which has no SP 800-53 equivalent."
+    },
+    {
+      "id": "5.13",
+      "title": "Labelling of information (BIO2)",
+      "controls": [
+        "MP-03",
+        "AC-16",
+        "RA-02"
+      ],
+      "coverage_pct": 77,
+      "rationale": "MP-03 covers media marking and labeling. AC-16 supports association of security attributes with information for digital labeling. RA-02 provides the categorization basis for labels. BIO2 government measures additionally require Dutch government classification markings (Departementaal Vertrouwelijk, Staatsgeheim) to be applied consistently across all information formats per VIR procedures, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 requires labeling procedures for all information formats including physical, electronic, and verbal. SP 800-53 focuses primarily on media marking; comprehensive cross-format labeling is less prescribed. BIO2 mandates Dutch government-specific classification markings per the VIR framework."
+    },
+    {
+      "id": "5.14",
+      "title": "Information transfer (BIO2)",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "AC-04",
+        "AC-17",
+        "AC-20",
+        "MP-05",
+        "SC-46"
+      ],
+      "coverage_pct": 83,
+      "rationale": "SC-07 boundary protection; SC-08 transmission confidentiality/integrity; AC-04 information flow enforcement; AC-17 remote access; MP-05 media transport. SC-46 (Cross Domain Policy Enforcement) adds policy enforcement for information transfer between security domains. BIO2 government measures additionally require that information transfers between government organisations use approved secure channels (e.g., Diginetwerk, Rijksportaal) and comply with Dutch government data exchange standards, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 includes transfer agreements and procedures for all forms (electronic, physical, verbal). SP 800-53 focuses on electronic and physical transfer; verbal transfer procedures are a gap. BIO2 mandates use of approved Dutch government secure transfer channels such as Diginetwerk for inter-governmental data exchange."
+    },
+    {
+      "id": "5.15",
+      "title": "Access control (BIO2)",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "AC-07",
+        "AC-08",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-14",
+        "AC-17",
+        "AC-21",
+        "AC-24"
+      ],
+      "coverage_pct": 93,
+      "rationale": "AC family is exceptionally comprehensive for access control. AC-01 policy; AC-02 account management; AC-03 access enforcement; AC-06 least privilege; AC-07 unsuccessful login attempts; AC-17 remote access; AC-24 access control decisions. SP 800-53 AC family exceeds ISO 27002's access control requirements. BIO2 government measures additionally require that access control policies reference Dutch government identity frameworks and eIDAS trust levels where applicable, which SP 800-53 supports in general terms.",
+      "gaps": "Minimal gap for core access control. BIO2 requires access control policies to align with Dutch government identity and trust level frameworks, including eIDAS integration for cross-border government services."
+    },
+    {
+      "id": "5.16",
+      "title": "Identity management (BIO2)",
+      "controls": [
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "IA-08",
+        "IA-12"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IA family comprehensively covers identity management. IA-02 identification and authentication; IA-04 identifier management; IA-05 authenticator management; IA-08 non-organizational users; IA-12 identity proofing covers identity verification before credential issuance. BIO2 government measures additionally require eIDAS-compliant identity proofing and may mandate integration with DigiD for citizen-facing government services, which SP 800-53 does not prescribe.",
+      "gaps": "Minimal gap for core identity management. BIO2 requires eIDAS-compliant identity proofing for government services and may mandate DigiD integration for citizen-facing applications. DigiD authentication requirements for citizen-facing services are Netherlands-specific."
+    },
+    {
+      "id": "5.17",
+      "title": "Authentication information (BIO2)",
+      "controls": [
+        "IA-05",
+        "IA-06",
+        "IA-07",
+        "IA-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IA-05 directly covers authenticator management (passwords, tokens, certificates). IA-06 covers authenticator feedback. IA-07 covers cryptographic module authentication. IA-11 covers re-authentication requirements. BIO2 government measures additionally require that authentication mechanisms meet eIDAS assurance levels (low/substantial/high) appropriate to the service risk level, and may mandate PKIoverheid certificates for government services, which SP 800-53 does not prescribe.",
+      "gaps": "Minimal gap for core authentication. BIO2 requires eIDAS assurance level alignment and may mandate PKIoverheid certificates for government-to-government authentication, which are Netherlands-specific requirements."
+    },
+    {
+      "id": "5.18",
+      "title": "Access rights (BIO2)",
+      "controls": [
+        "AC-02",
+        "AC-06",
+        "AC-25"
+      ],
+      "coverage_pct": 93,
+      "rationale": "AC-02 covers account management including provisioning, periodic review, and revocation. AC-06 covers least privilege. AC-25 covers reference monitor concept for access mediation. BIO2 government measures additionally require periodic access right reviews with documentation for ENSIA audit trail, which SP 800-53 supports through AC-02 review provisions.",
+      "gaps": "Minimal gap. Access right lifecycle (request, approve, review, revoke) is well covered. BIO2 requires access right reviews to be documented for ENSIA audit compliance."
+    },
+    {
+      "id": "5.19",
+      "title": "Information security in supplier relationships (BIO2)",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-04 acquisition security requirements; SA-09 external system services; SR family covers supply chain risk management. SR-01 establishes supply chain risk management policy; SR-02/SR-03 cover supply chain controls. BIO2 government measures additionally mandate compliance with the DigiInkoop procurement framework for government ICT acquisitions, requiring specific security clauses in procurement contracts, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 emphasizes ongoing supplier relationship management with periodic review and risk reassessment. SP 800-53 focuses more on acquisition-time requirements. BIO2 mandates DigiInkoop procurement framework compliance for government ICT acquisitions, which has no SP 800-53 equivalent."
+    },
+    {
+      "id": "5.20",
+      "title": "Addressing information security within supplier agreements (BIO2)",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-04 directly requires security requirements in acquisitions. SA-09 covers external service agreements. SR-03 covers supply chain controls and processes specified in agreements. BIO2 government measures additionally require supplier agreements to include DigiInkoop security annexes and Dutch government-specific data processing requirements under the Uitvoeringswet AVG, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 requires specific agreement terms for information access, processing, handling, and return. SA-04 is comprehensive but agreement format requirements differ. BIO2 mandates DigiInkoop security annexes in supplier agreements and Dutch GDPR (Uitvoeringswet AVG) data processing clauses."
+    },
+    {
+      "id": "5.21",
+      "title": "Managing information security in the ICT supply chain (BIO2)",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SR-09",
+        "SR-10",
+        "SR-11"
+      ],
+      "coverage_pct": 87,
+      "rationale": "SR family comprehensively addresses ICT supply chain risk management. SR-05 covers acquisition strategies; SR-06 supplier assessments; SR-09 tamper resistance; SR-10 inspection of systems; SR-11 component authenticity verification. BIO2 government measures additionally require DigiInkoop procurement compliance and alignment with Dutch government supply chain security guidelines issued by NCSC-NL, which SP 800-53 does not prescribe.",
+      "gaps": "Minimal gap for core supply chain management. BIO2 mandates DigiInkoop compliance and NCSC-NL supply chain security guidelines for government ICT procurement."
+    },
+    {
+      "id": "5.22",
+      "title": "Monitoring, review and change management of supplier services (BIO2)",
+      "controls": [
+        "SA-09",
+        "SR-06",
+        "CA-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-09 includes external service monitoring requirements. SR-06 covers supplier assessments and reviews. CA-07 continuous monitoring can extend to supplier service monitoring. BIO2 government measures additionally require supplier service reviews to be aligned with DigiInkoop evaluation criteria and reported through ENSIA accountability mechanisms, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 requires regular monitoring and review of supplier service delivery, performance measurement, and change management of supplier services. SP 800-53 is less prescriptive about ongoing supplier service monitoring cadence and performance tracking. BIO2 mandates DigiInkoop evaluation criteria and ENSIA reporting for supplier service monitoring."
+    },
+    {
+      "id": "5.23",
+      "title": "Information security for use of cloud services (BIO2)",
+      "controls": [
+        "SA-09",
+        "AC-20",
+        "SC-07",
+        "SA-04"
+      ],
+      "coverage_pct": 63,
+      "rationale": "SA-09 covers external information system services (includes cloud). AC-20 addresses use of external systems. SC-07 boundary protection. SA-04 acquisition requirements. BIO2 government measures additionally require government cloud services to be assessed per the Rijkscloud policy and NCSC-NL cloud security guidelines, and may require data sovereignty assessment to ensure government data remains within EU/EEA jurisdictions, which SP 800-53 does not address.",
+      "gaps": "ISO 27002:2022 added cloud-specific controls covering shared responsibility models, cloud exit strategy, multi-tenancy isolation, and cloud-specific risk assessment. SP 800-53 addresses cloud through general external service controls but lacks cloud-specific implementation requirements. BIO2 requires government cloud assessment per Rijkscloud policy and NCSC-NL cloud guidelines, including data sovereignty and EU/EEA data residency requirements."
+    },
+    {
+      "id": "5.24",
+      "title": "Information security incident management planning and preparation (BIO2)",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-07",
+        "IR-08"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IR-01 covers incident response policy and procedures. IR-02 incident response training. IR-03 incident response testing. IR-04 incident handling. IR-07 incident response assistance. IR-08 incident response plan. Comprehensive coverage of planning and preparation. BIO2 government measures additionally require incident management plans to include NCSC-NL notification procedures and coordination with sector-specific CERTs per the Cyberbeveiligingswet, which SP 800-53 does not prescribe.",
+      "gaps": "Minimal gap for core incident planning. BIO2 mandates NCSC-NL notification procedures and sector-specific CERT coordination in incident management plans per the Cyberbeveiligingswet."
+    },
+    {
+      "id": "5.25",
+      "title": "Assessment and decision on information security events (BIO2)",
+      "controls": [
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "SI-04"
+      ],
+      "coverage_pct": 87,
+      "rationale": "IR-04 incident handling includes event assessment and triage. IR-05 incident monitoring. IR-06 incident reporting. SI-04 system monitoring supports event identification and initial assessment. BIO2 government measures additionally require event classification to align with Dutch government incident severity levels and NCSC-NL reporting thresholds, which SP 800-53 does not prescribe.",
+      "gaps": "Minor: Event classification and decision-making processes are well addressed. BIO2 requires event classification aligned with Dutch government incident severity levels and NCSC-NL reporting thresholds per the Cyberbeveiligingswet."
+    },
+    {
+      "id": "5.26",
+      "title": "Response to information security incidents (BIO2)",
+      "controls": [
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-09"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IR-04 comprehensively covers incident response including containment, eradication, and recovery. IR-06 reporting; IR-07 assistance. IR-09 (Information Spillage Response) adds specific response procedures for information spillage incidents. BIO2 government measures additionally require notification to NCSC-NL and sector-specific CERTs within specific timeframes defined by the Cyberbeveiligingswet, which SP 800-53 does not prescribe.",
+      "gaps": "Minimal gap for core incident response. BIO2 government measures mandate NCSC-NL incident notification within specific timeframes per the Cyberbeveiligingswet, which has no SP 800-53 equivalent."
+    },
+    {
+      "id": "5.27",
+      "title": "Learning from information security incidents (BIO2)",
+      "controls": [
+        "IR-03",
+        "IR-04"
+      ],
+      "coverage_pct": 83,
+      "rationale": "IR-03 includes lessons learned as part of incident response testing and exercises. IR-04 includes incident analysis and post-incident activities. Together they support ISO 27002's requirement for using incident knowledge to improve security. BIO2 government measures additionally require that lessons learned are shared with NCSC-NL and relevant sector CERTs where appropriate, and documented for ENSIA audit trail, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 emphasizes structured knowledge management from incidents to reduce future likelihood and impact. SP 800-53 supports this through post-incident review but formal knowledge base management is less prescribed. BIO2 requires lessons learned to be shared with NCSC-NL and documented for ENSIA audit compliance."
+    },
+    {
+      "id": "5.28",
+      "title": "Collection of evidence (BIO2)",
+      "controls": [
+        "IR-04",
+        "AU-03",
+        "AU-06",
+        "AU-09",
+        "AU-11"
+      ],
+      "coverage_pct": 83,
+      "rationale": "IR-04 incident handling includes evidence collection. AU-03 content of audit records for evidential value. AU-06 audit review and analysis. AU-09 protection of audit information against tampering. AU-11 audit record retention for evidence preservation. BIO2 government measures additionally require evidence handling to comply with Dutch Wetboek van Strafvordering (Code of Criminal Procedure) for potential law enforcement referrals, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 provides specific evidence handling guidance including chain of custody, forensic admissibility, and evidence management procedures. SP 800-53 is less explicit on forensic evidence management procedures for legal proceedings. BIO2 requires evidence handling compliance with Dutch legal procedures for potential law enforcement referrals."
+    },
+    {
+      "id": "5.29",
+      "title": "Information security during disruption (BIO2)",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-05",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "CP-11",
+        "CP-12",
+        "CP-13"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CP family comprehensively covers continuity planning, testing, and recovery. CP-11 alternate communications protocols; CP-12 safe mode; CP-13 alternative security mechanisms. Strong alignment with maintaining security during disruption. BIO2 government measures additionally require continuity plans to ensure essential government services remain available during disruptions, aligned with the Wet beveiliging netwerk- en informatiesystemen (Wbni) essential services requirements, which SP 800-53 does not prescribe.",
+      "gaps": "Minimal gap for core continuity controls. BIO2 requires continuity plans to address essential government service availability per the Wbni (Dutch NIS implementation) and Cyberbeveiligingswet."
+    },
+    {
+      "id": "5.30",
+      "title": "ICT readiness for business continuity (BIO2)",
+      "controls": [
+        "CP-02",
+        "CP-04",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10"
+      ],
+      "coverage_pct": 83,
+      "rationale": "CP-02 contingency plan covers ICT readiness. CP-04 testing. CP-07 alternate processing site. CP-08 telecommunications services. CP-09 backup. CP-10 recovery and reconstitution. BIO2 government measures additionally require ICT readiness assessments to be aligned with Dutch government essential services continuity requirements under the Cyberbeveiligingswet, which SP 800-53 supports through general contingency planning but does not prescribe for specific national essential services.",
+      "gaps": "ISO 27002 specifically addresses Business Impact Analysis for ICT services and ICT readiness as a distinct concept. SP 800-53 CP-02 requires BIA but ICT readiness analysis is implicit rather than a standalone requirement. BIO2 requires ICT readiness aligned with Dutch essential services continuity requirements."
+    },
+    {
+      "id": "5.31",
+      "title": "Legal, statutory, regulatory and contractual requirements (BIO2)",
+      "controls": [
+        "PL-04",
+        "PM-01",
+        "SA-04",
+        "PM-08"
+      ],
+      "coverage_pct": 52,
+      "rationale": "PL-04 rules of behavior include legal compliance obligations. PM-01 program plan addresses regulatory compliance. SA-04 covers contractual requirements. PM-08 critical infrastructure plan. BIO2 government measures additionally require explicit identification of and compliance with Dutch legislation including the Cyberbeveiligingswet, Uitvoeringswet AVG (Dutch GDPR implementation), Wet open overheid (Woo), and sector-specific regulations, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 requires explicit identification, documentation, and maintenance of all applicable legal, regulatory, and contractual requirements. SP 800-53 lacks a dedicated legal compliance identification control; FISMA context assumes federal requirements rather than requiring systematic identification. BIO2 requires alignment with the Cyberbeveiligingswet implementation roadmap and explicit compliance tracking for Dutch legislation (Uitvoeringswet AVG, Woo, sector regulations)."
+    },
+    {
+      "id": "5.32",
+      "title": "Intellectual property rights (BIO2)",
+      "controls": [],
+      "coverage_pct": 13,
+      "rationale": "No direct SP 800-53 control addresses intellectual property management, software licensing compliance, or copyright protection. BIO2 government measures additionally require compliance with Dutch government software licensing standards and open-source policy (Comply or Explain for open standards), which SP 800-53 does not address.",
+      "gaps": "Significant gap. SP 800-53 does not address software licensing compliance, copyright management, proprietary data protection, or IP rights enforcement. Requires supplementary organizational controls outside SP 800-53. BIO2 adds Dutch government open-source and open standards compliance requirements."
+    },
+    {
+      "id": "5.33",
+      "title": "Protection of records (BIO2)",
+      "controls": [
+        "AU-11",
+        "SI-12",
+        "AU-09"
+      ],
+      "coverage_pct": 68,
+      "rationale": "AU-11 covers audit record retention. SI-12 covers information management and retention. AU-09 covers protection of audit information against unauthorized modification or deletion. BIO2 government measures additionally require records management to comply with the Archiefwet (Dutch Archives Act) and Selectielijsten (retention schedules) for government records, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 requires protection of all records from loss, destruction, falsification, unauthorized access, and unauthorized release per legal, regulatory, and business requirements. SP 800-53 covers audit records well but broader records management is less explicit. BIO2 requires compliance with the Archiefwet and Dutch government retention schedules for government records."
+    },
+    {
+      "id": "5.34",
+      "title": "Privacy and protection of PII (BIO2)",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05",
+        "PT-06",
+        "PT-07",
+        "PT-08",
+        "PM-25",
+        "PM-26",
+        "PM-27",
+        "PM-28",
+        "SI-18",
+        "RA-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PT family provides comprehensive PII protection. PM-25 minimisation; PM-26 complaint management; PM-27 privacy reporting; PM-28 risk framing. SI-18 (PII Quality Operations) adds controls for maintaining the quality of PII throughout the data lifecycle. RA-08 (Privacy Impact Assessments) ensures privacy impacts are assessed before processing PII. BIO2 government measures additionally require compliance with the Uitvoeringswet AVG (Dutch GDPR implementation), mandatory DPIA for high-risk processing, and appointment of a Functionaris Gegevensbescherming (FG/DPO), which SP 800-53 partially addresses but not in the Dutch legal context.",
+      "gaps": "ISO 27002 defers to ISO 27701 for full privacy management system. SP 800-53 privacy controls are comprehensive but focused on US federal regulatory context. BIO2 requires compliance with the Uitvoeringswet AVG with specific Dutch DPO (FG) requirements and DPIA obligations that reflect EU/Dutch privacy law, not US federal privacy frameworks."
+    },
+    {
+      "id": "5.35",
+      "title": "Independent review of information security (BIO2)",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-06"
+      ],
+      "coverage_pct": 73,
+      "rationale": "CA-02 covers security assessments which serve as independent reviews. CA-07 continuous monitoring. PM-06 performance measurement to evaluate effectiveness. BIO2 government measures additionally require ENSIA self-assessment and external audit as the mandated independent review mechanism for Dutch government organisations, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 requires independent review of the organisation's approach to managing information security, not just technical control assessment. Management system review independence is less explicitly addressed in SP 800-53. BIO2 mandates ENSIA audit compliance for accountability to supervisory bodies, which has no SP 800-53 equivalent."
+    },
+    {
+      "id": "5.36",
+      "title": "Compliance with policies, rules and standards (BIO2)",
+      "controls": [
+        "CA-02",
+        "AU-06",
+        "PM-06",
+        "CA-07"
+      ],
+      "coverage_pct": 74,
+      "rationale": "CA-02 assesses compliance with security requirements. AU-06 reviews audit records for compliance violations. PM-06 measures security performance. CA-07 continuous monitoring detects deviations. BIO2 government measures additionally require compliance verification through the ENSIA framework with annual self-assessments and periodic external audits reported to supervisory bodies, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 requires regular review that information processing and procedures comply with security policies and standards. SP 800-53 assessment approach differs from ISO's compliance checking methodology. BIO2 mandates ENSIA compliance verification with annual self-assessments reported to supervisory bodies."
+    },
+    {
+      "id": "5.37",
+      "title": "Documented operating procedures (BIO2)",
+      "controls": [
+        "PL-02",
+        "SA-05",
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-09",
+        "CM-10",
+        "CM-11"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PL-02 covers system security plans documenting procedures. SA-05 system documentation. CM family covers operational procedures for configuration management activities. BIO2 government measures additionally require operating procedures to be documented, reviewed, and maintained per ENSIA accountability requirements, and to be aligned with Rijksoverheid operational standards, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 requires documented operating procedures for information processing facilities made available to all personnel who need them. SP 800-53 distributes procedures across families rather than requiring unified operating procedures documentation. BIO2 requires operating procedures to be aligned with Rijksoverheid standards and documented for ENSIA audit compliance."
+    },
+    {
+      "id": "6.1",
+      "title": "Screening (BIO2)",
+      "controls": [
+        "PS-03"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PS-03 directly covers personnel screening including background verification checks before access is granted. Covers initial and ongoing screening requirements. BIO2 government measures additionally require screening to comply with Dutch government personnel vetting standards, including Verklaring Omtrent het Gedrag (VOG) certificates for all government employees and contractors, which SP 800-53 supports in principle through PS-03 but does not prescribe Dutch-specific vetting.",
+      "gaps": "ISO 27002 provides guidance on screening depth varying by role sensitivity, which aligns with PS-03's risk-based approach. BIO2 requires VOG certificates (certificates of conduct) as a mandatory screening requirement for Dutch government personnel."
+    },
+    {
+      "id": "6.2",
+      "title": "Terms and conditions of employment (BIO2)",
+      "controls": [
+        "PS-06",
+        "PL-04",
+        "PS-07",
+        "PS-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PS-06 covers access agreements including confidentiality requirements. PL-04 covers rules of behavior. PS-07 covers third-party personnel. PS-09 (Position Descriptions) requires security and privacy responsibilities in position descriptions. BIO2 government measures additionally require employment terms to reference Dutch government security obligations including the Ambtenarenwet and applicable CAO regulations, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 includes security responsibilities in employment contracts. SP 800-53 focuses on access agreements and position descriptions rather than employment contract terms specifically. BIO2 requires employment terms to reference Dutch Ambtenarenwet and applicable CAO security obligations."
+    },
+    {
+      "id": "6.3",
+      "title": "Information security awareness, education and training (BIO2)",
+      "controls": [
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "PM-13",
+        "PM-14",
+        "AT-06"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AT-02 awareness training; AT-03 role-based security training; AT-04 training records. PM-13 workforce program; PM-14 testing and exercises. AT-06 (Training Feedback) provides feedback on training results. BIO2 government measures additionally require awareness training to cover Dutch-specific topics including the Cyberbeveiligingswet, government classification handling, and NCSC-NL advisories, which SP 800-53 supports through general training mechanisms.",
+      "gaps": "Minimal gap for core training. BIO2 requires awareness training to include Dutch government-specific topics including Cyberbeveiligingswet obligations and government classification handling procedures."
+    },
+    {
+      "id": "6.4",
+      "title": "Disciplinary process (BIO2)",
+      "controls": [
+        "PS-08"
+      ],
+      "coverage_pct": 73,
+      "rationale": "PS-08 covers personnel sanctions for security violations including formal and informal sanctions. BIO2 government measures additionally require disciplinary processes to comply with Dutch employment law (Ambtenarenwet) and applicable CAO procedures, including specific protections for government employees, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 requires a formal, communicated disciplinary process with graduated responses. PS-08 addresses sanctions but is less prescriptive about process stages, communication to personnel, and consideration of mitigating circumstances. BIO2 requires disciplinary processes to comply with Dutch Ambtenarenwet employee protections."
+    },
+    {
+      "id": "6.5",
+      "title": "Responsibilities after termination or change of employment (BIO2)",
+      "controls": [
+        "PS-04",
+        "PS-05",
+        "PS-06"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PS-04 covers personnel termination including access revocation and ongoing obligations. PS-05 covers personnel transfer. PS-06 covers access agreements that persist post-employment. BIO2 government measures additionally require post-employment confidentiality obligations to extend to classified government information under Dutch law, which SP 800-53 supports through access agreements but does not prescribe for specific national classification schemes.",
+      "gaps": "Minimal gap for core termination controls. BIO2 requires post-employment confidentiality obligations for classified government information under Dutch legal frameworks."
+    },
+    {
+      "id": "6.6",
+      "title": "Confidentiality or non-disclosure agreements (BIO2)",
+      "controls": [
+        "PS-06",
+        "SA-09"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PS-06 covers access agreements which include confidentiality requirements for personnel. SA-09 covers external service agreements including confidentiality terms with third parties. BIO2 government measures additionally require NDAs to reference Dutch government classification levels and comply with Dutch contract law, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 specifically requires NDAs reflecting organisational needs with regular review and updates. PS-06 is broader (access agreements) and NDA-specific requirements (jurisdiction, post-contract duration) are less detailed. BIO2 requires NDAs to reference Dutch government classification levels and comply with Dutch contract law."
+    },
+    {
+      "id": "6.7",
+      "title": "Remote working (BIO2)",
+      "controls": [
+        "AC-17",
+        "PE-17",
+        "SC-28"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-17 directly covers remote access controls and monitoring. PE-17 covers alternate work site security. SC-28 covers protection of information at rest on remote devices. BIO2 government measures additionally require remote working to comply with Rijksoverheid remote working policy and NCSC-NL secure remote working guidelines, including approved device management, which SP 800-53 supports through general remote access controls.",
+      "gaps": "ISO 27002 includes physical security at remote locations, clean desk for remote workers, and remote working-specific risk considerations beyond technical access controls. BIO2 requires compliance with Rijksoverheid remote working policy and NCSC-NL guidelines for secure remote working."
+    },
+    {
+      "id": "6.8",
+      "title": "Information security event reporting (BIO2)",
+      "controls": [
+        "IR-06",
+        "IR-07",
+        "IR-01"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IR-06 directly covers incident reporting requirements. IR-07 covers incident response assistance and guidance for reporters. IR-01 establishes the policy framework for event reporting. BIO2 government measures additionally require security event reporting to include NCSC-NL notification within prescribed timeframes per the Cyberbeveiligingswet, and employees must be trained on Dutch government-specific reporting channels, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 emphasizes employee obligation to report events. SP 800-53 addresses through policy and reporting procedures. BIO2 government measures mandate NCSC-NL incident notification within prescribed timeframes per the Cyberbeveiligingswet, which has no SP 800-53 equivalent."
+    },
+    {
+      "id": "7.1",
+      "title": "Physical security perimeters (BIO2)",
+      "controls": [
+        "PE-03",
+        "PE-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-03 covers physical access control including perimeter barriers, entry points, and access mechanisms. PE-04 covers access control for transmission medium including physical protection of cabling routes that form perimeters. BIO2 government measures additionally reference Rijksoverheid physical security standards for government buildings, which SP 800-53 supports through general physical access controls.",
+      "gaps": "ISO 27002 includes guidance on perimeter strength proportional to assets; PE-03 addresses this through risk-based physical access controls. BIO2 references Rijksoverheid physical security standards for government facilities."
+    },
+    {
+      "id": "7.2",
+      "title": "Physical entry (BIO2)",
+      "controls": [
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "PE-08",
+        "PE-07"
+      ],
+      "coverage_pct": 93,
+      "rationale": "PE-02 physical access authorizations; PE-03 physical access control mechanisms; PE-06 monitoring physical access; PE-07 visitor control; PE-08 visitor access records. Comprehensive physical entry controls. BIO2 government measures additionally reference Rijksoverheid visitor management procedures for government buildings, which SP 800-53 supports through general visitor controls.",
+      "gaps": "Minimal gap for core physical entry. BIO2 references Rijksoverheid visitor management procedures for government buildings."
+    },
+    {
+      "id": "7.3",
+      "title": "Securing offices, rooms and facilities (BIO2)",
+      "controls": [
+        "PE-03",
+        "PE-05",
+        "PE-18"
+      ],
+      "coverage_pct": 83,
+      "rationale": "PE-03 physical access control for offices and rooms. PE-05 access control for output devices. PE-18 location of information system components within facilities. BIO2 government measures additionally reference Rijksoverheid physical security standards for securing government offices and classified processing areas, which SP 800-53 supports through general physical access controls.",
+      "gaps": "ISO 27002 addresses office-specific risks including sound insulation, door locks, window protection, and facility design. SP 800-53 is less specific about office-level security design. BIO2 references Rijksoverheid standards for securing classified processing areas in government facilities."
+    },
+    {
+      "id": "7.4",
+      "title": "Physical security monitoring (BIO2)",
+      "controls": [
+        "PE-06",
+        "PE-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-06 directly covers monitoring physical access including CCTV, intrusion alarms, and guard patrols. PE-08 covers access logs for monitoring and review. BIO2 government measures additionally reference Rijksoverheid surveillance and monitoring requirements for government facilities, which SP 800-53 supports through general monitoring provisions.",
+      "gaps": "Minimal gap for core monitoring. BIO2 references Rijksoverheid surveillance requirements for government facilities."
+    },
+    {
+      "id": "7.5",
+      "title": "Protecting against physical and environmental threats (BIO2)",
+      "controls": [
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-21",
+        "PE-23"
+      ],
+      "coverage_pct": 93,
+      "rationale": "PE family comprehensively covers environmental protections: power equipment (PE-09), emergency shutoff (PE-10), emergency power (PE-11), emergency lighting (PE-12), fire protection (PE-13), temperature/humidity (PE-14), water damage (PE-15). PE-21 (Electromagnetic Pulse Protection) adds protection against EMP threats. PE-23 (Facility Location) adds facility location planning. BIO2 government measures additionally reference Rijksoverheid environmental protection standards, which SP 800-53 comprehensively addresses.",
+      "gaps": "Minimal gap. PE-21 and PE-23 strengthen coverage. BIO2 references Rijksoverheid environmental protection standards for government facilities."
+    },
+    {
+      "id": "7.6",
+      "title": "Working in secure areas (BIO2)",
+      "controls": [
+        "PE-02",
+        "PE-03",
+        "PE-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PE-02/PE-03 control access to secure areas. PE-07 addresses visitor control and escort requirements in secure areas. BIO2 government measures additionally reference Rijksoverheid secure area working procedures for classified processing environments, including photography restrictions and device controls, which SP 800-53 is less specific about.",
+      "gaps": "ISO 27002 includes specific rules for working in secure areas such as photography restrictions, supervised access, empty area verification, and prohibition of recording equipment. SP 800-53 is less specific about behavioural controls within secure areas. BIO2 references Rijksoverheid secure area working procedures for classified environments."
+    },
+    {
+      "id": "7.7",
+      "title": "Clear desk and clear screen (BIO2)",
+      "controls": [
+        "AC-11",
+        "MP-04",
+        "PE-05"
+      ],
+      "coverage_pct": 83,
+      "rationale": "AC-11 covers session lock (clear screen). MP-04 covers media storage requirements. PE-05 covers access control for output devices to prevent unauthorized viewing. BIO2 government measures additionally require clear desk policies to address handling of classified government documents per VIR, which SP 800-53 supports through general media protection.",
+      "gaps": "ISO 27002 explicitly addresses clear desk policy as a formal requirement. AC-11 covers screen lock; desk policy is implied through MP controls but not explicitly stated. BIO2 requires clear desk policies to address Dutch government classified document handling per VIR."
+    },
+    {
+      "id": "7.8",
+      "title": "Equipment siting and protection (BIO2)",
+      "controls": [
+        "PE-14",
+        "PE-18",
+        "PE-01",
+        "PE-23"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PE-14 environmental controls for equipment. PE-18 location of information system components. PE-01 physical and environmental protection policy. PE-23 (Facility Location) addresses planning facility and equipment location. BIO2 government measures additionally reference Rijksoverheid equipment siting guidelines for government data centres and processing facilities, which SP 800-53 supports through general environmental controls.",
+      "gaps": "ISO 27002 includes equipment placement to minimize unauthorized access, environmental hazards, and electromagnetic interference. SP 800-53 is less specific about equipment siting methodology. BIO2 references Rijksoverheid equipment siting guidelines for government data centres."
+    },
+    {
+      "id": "7.9",
+      "title": "Security of assets off-premises (BIO2)",
+      "controls": [
+        "AC-17",
+        "MP-05",
+        "SC-28",
+        "AC-19"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-17 remote access; MP-05 media transport protection; SC-28 protection of information at rest; AC-19 access control for mobile devices. BIO2 government measures additionally require that classified government assets taken off-premises comply with VIR handling standards and NCSC-NL mobile device security guidelines, which SP 800-53 supports through general mobile and media controls.",
+      "gaps": "ISO 27002 covers all off-premises assets including laptops, paper documents, and portable equipment. SP 800-53 covers media and remote access well but holistic physical asset protection off-site is less comprehensive. BIO2 requires classified government assets off-premises to comply with VIR handling standards."
+    },
+    {
+      "id": "7.10",
+      "title": "Storage media (BIO2)",
+      "controls": [
+        "MP-01",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "MP-07",
+        "MP-08"
+      ],
+      "coverage_pct": 93,
+      "rationale": "MP family comprehensively covers media protection lifecycle: policy (MP-01), access (MP-02), marking (MP-03), storage (MP-04), transport (MP-05), sanitization (MP-06), use restrictions (MP-07). MP-08 (Media Downgrading) adds media downgrading procedures. BIO2 government measures additionally require media handling to comply with VIR classification-specific procedures, which SP 800-53 comprehensively addresses through the MP family.",
+      "gaps": "Minimal gap. MP-08 strengthens coverage for media reclassification and reuse scenarios. BIO2 requires media handling aligned with VIR classification procedures for government media."
+    },
+    {
+      "id": "7.11",
+      "title": "Supporting utilities (BIO2)",
+      "controls": [
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-09 power equipment and cabling protection. PE-10 emergency shutoff capabilities. PE-11 emergency power supply. PE-12 emergency lighting. Comprehensive supporting utility protection. BIO2 government measures additionally reference Rijksoverheid utility resilience standards for government facilities, which SP 800-53 addresses through general utility protection controls.",
+      "gaps": "ISO 27002 includes water supply and sewage considerations which are partially addressed through general facility controls. BIO2 references Rijksoverheid utility resilience standards for government facilities."
+    },
+    {
+      "id": "7.12",
+      "title": "Cabling security (BIO2)",
+      "controls": [
+        "PE-04",
+        "PE-09"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PE-04 covers access control for transmission medium including cable routing protection. PE-09 covers power equipment and cabling protection. BIO2 government measures additionally reference Rijksoverheid cabling standards for government facilities, particularly for classified processing areas requiring TEMPEST-grade protection, which SP 800-53 supports through PE-04 but is less specific about.",
+      "gaps": "ISO 27002 provides specific cabling security measures including protected routing, electromagnetic shielding, fibre optic preference for sensitive links, and separation of power/telecommunications. SP 800-53 PE-04 is more general. BIO2 references Rijksoverheid cabling standards including TEMPEST requirements for classified environments."
+    },
+    {
+      "id": "7.13",
+      "title": "Equipment maintenance (BIO2)",
+      "controls": [
+        "MA-01",
+        "MA-02",
+        "MA-03",
+        "MA-04",
+        "MA-05",
+        "MA-06",
+        "MA-07"
+      ],
+      "coverage_pct": 93,
+      "rationale": "MA family comprehensively covers maintenance: policy (MA-01), controlled maintenance (MA-02), maintenance tools (MA-03), nonlocal maintenance (MA-04), maintenance personnel (MA-05), timely maintenance (MA-06). MA-07 (Field Maintenance) adds controls for field maintenance on critical components. BIO2 government measures additionally require maintenance personnel to hold appropriate security clearances per Dutch government vetting standards, which SP 800-53 supports through MA-05.",
+      "gaps": "Minimal gap. MA-07 strengthens coverage for maintenance of critical equipment. BIO2 requires maintenance personnel to hold Dutch government security clearances where applicable."
+    },
+    {
+      "id": "7.14",
+      "title": "Secure disposal or re-use of equipment (BIO2)",
+      "controls": [
+        "MP-06",
+        "MP-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "MP-06 covers media sanitization with methods appropriate to classification (clear, purge, destroy). MP-08 (Media Downgrading) adds media downgrading procedures for reclassification before reuse. BIO2 government measures additionally require disposal of classified government equipment to follow VIR destruction procedures and NCSC-NL sanitization guidelines, which SP 800-53 supports through MP-06.",
+      "gaps": "ISO 27002 includes all equipment disposal beyond just media. Equipment-level sanitization is less explicitly addressed. BIO2 requires disposal of classified equipment to follow VIR destruction procedures and NCSC-NL sanitization guidelines."
+    },
+    {
+      "id": "8.1",
+      "title": "User endpoint devices (BIO2)",
+      "controls": [
+        "AC-19",
+        "CM-07",
+        "SC-28",
+        "CM-08",
+        "SC-41"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-19 mobile device management; CM-07 least functionality for endpoint hardening; SC-28 encryption at rest; CM-08 inventory of endpoints. SC-41 (Port and I/O Device Access Restriction) adds controls for restricting physical port and I/O device access on endpoints. BIO2 government measures additionally require endpoints to comply with NCSC-NL endpoint security guidelines and Rijksoverheid-approved device configurations, which SP 800-53 supports through general endpoint controls.",
+      "gaps": "ISO 27002 provides holistic endpoint management guidance including BYOD policies, MDM, containerisation, and endpoint-specific risk assessment. SP 800-53 distributes endpoint controls across multiple families. BIO2 requires endpoints to comply with NCSC-NL endpoint security guidelines and Rijksoverheid-approved configurations."
+    },
+    {
+      "id": "8.2",
+      "title": "Privileged access rights (BIO2)",
+      "controls": [
+        "AC-06",
+        "AC-02",
+        "AC-05"
+      ],
+      "coverage_pct": 93,
+      "rationale": "AC-06 least privilege with specific privileged access restrictions, authorization, and review. AC-02 account management including privileged account lifecycle. AC-05 separation of duties for privileged functions. BIO2 government measures additionally require privileged access to be logged and reviewed for ENSIA audit compliance, which SP 800-53 supports through AC-02 and AU controls.",
+      "gaps": "Minimal gap. SP 800-53 privileged access controls are comprehensive. BIO2 requires privileged access review logs for ENSIA audit compliance."
+    },
+    {
+      "id": "8.3",
+      "title": "Information access restriction (BIO2)",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-06",
+        "AC-24"
+      ],
+      "coverage_pct": 93,
+      "rationale": "AC-03 access enforcement; AC-04 information flow enforcement; AC-06 least privilege; AC-24 access control decisions based on security attributes. Comprehensive access restriction implementation. BIO2 government measures additionally require access restrictions to align with Dutch government classification handling rules per VIR, which SP 800-53 addresses through its own classification framework.",
+      "gaps": "Minimal gap. SP 800-53 access restriction controls exceed ISO 27002 requirements. BIO2 requires access restrictions aligned with VIR classification handling rules for classified government information."
+    },
+    {
+      "id": "8.4",
+      "title": "Access to source code (BIO2)",
+      "controls": [
+        "CM-05",
+        "AC-03",
+        "SA-10"
+      ],
+      "coverage_pct": 83,
+      "rationale": "CM-05 covers access restrictions for change including source code. AC-03 access enforcement. SA-10 developer configuration management covers source code repository controls. BIO2 government measures additionally require source code access controls to align with Dutch government open-source policy and code publication guidelines where applicable, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 specifically addresses source code repositories, read/write access separation, and source code library management. SP 800-53 addresses through general access and configuration management controls. BIO2 adds Dutch government open-source code publication requirements."
+    },
+    {
+      "id": "8.5",
+      "title": "Secure authentication (BIO2)",
+      "controls": [
+        "IA-02",
+        "IA-05",
+        "IA-08",
+        "IA-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IA-02 identification and authentication with MFA capabilities. IA-05 authenticator management. IA-08 identification of non-organisational users. IA-11 re-authentication requirements. BIO2 government measures additionally require authentication to meet eIDAS assurance levels and may mandate DigiD for citizen-facing services and PKIoverheid certificates for government authentication, which SP 800-53 does not prescribe.",
+      "gaps": "Minimal gap for core authentication. BIO2 requires eIDAS assurance level compliance and may mandate DigiD for citizen-facing services. DigiD authentication requirements for citizen-facing services are Netherlands-specific."
+    },
+    {
+      "id": "8.6",
+      "title": "Capacity management (BIO2)",
+      "controls": [
+        "AU-04",
+        "CP-02",
+        "SC-05",
+        "SA-04"
+      ],
+      "coverage_pct": 63,
+      "rationale": "AU-04 covers audit log storage capacity. SC-05 denial of service protection addresses capacity exhaustion attacks. CP-02 contingency planning considers capacity requirements. SA-04 addresses capacity in acquisition requirements. BIO2 government measures additionally require capacity management for essential government services to ensure availability per the Cyberbeveiligingswet, which SP 800-53 addresses through general capacity provisions.",
+      "gaps": "ISO 27002 requires proactive capacity management for all IT resources with monitoring, forecasting, and right-sizing. SP 800-53 covers capacity in specific contexts but lacks a general IT capacity planning and management control. BIO2 requires capacity management for essential government services per the Cyberbeveiligingswet."
+    },
+    {
+      "id": "8.7",
+      "title": "Protection against malware (BIO2)",
+      "controls": [
+        "SI-03",
+        "SI-08",
+        "SC-44"
+      ],
+      "coverage_pct": 93,
+      "rationale": "SI-03 directly covers malicious code protection with detection, eradication, and prevention. SI-08 covers spam protection. SC-44 (Detonation Chambers) adds malware detonation/sandboxing capabilities. BIO2 government measures additionally require malware protection aligned with NCSC-NL advisories and hardening guidelines, which SP 800-53 comprehensively addresses through general malware controls.",
+      "gaps": "Minimal gap. SC-44 adds advanced malware analysis capability. BIO2 requires malware protection aligned with NCSC-NL advisories and hardening guidelines."
+    },
+    {
+      "id": "8.8",
+      "title": "Management of technical vulnerabilities (BIO2)",
+      "controls": [
+        "RA-05",
+        "SI-02",
+        "SI-05"
+      ],
+      "coverage_pct": 93,
+      "rationale": "RA-05 vulnerability monitoring and scanning. SI-02 flaw remediation with patching. SI-05 security alerts, advisories, and directives for vulnerability notifications. BIO2 government measures additionally require vulnerability management to incorporate NCSC-NL vulnerability advisories and patching timelines, which SP 800-53 supports through general vulnerability management controls.",
+      "gaps": "Minimal gap. SP 800-53 vulnerability management controls are comprehensive. BIO2 requires incorporation of NCSC-NL vulnerability advisories and patching timelines."
+    },
+    {
+      "id": "8.9",
+      "title": "Configuration management (BIO2)",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-09",
+        "CM-14"
+      ],
+      "coverage_pct": 93,
+      "rationale": "CM family comprehensively covers configuration management: baselines (CM-02), change control (CM-03), impact analysis (CM-04), access restrictions (CM-05), settings (CM-06), least functionality (CM-07), inventory (CM-08), restrictions (CM-09). CM-14 (Signed Components) adds digital signature verification. BIO2 government measures additionally require configuration baselines to align with NCSC-NL hardening guidelines, which SP 800-53 supports through general configuration controls.",
+      "gaps": "Minimal gap. CM-14 strengthens configuration integrity verification. BIO2 requires configuration baselines aligned with NCSC-NL hardening guidelines."
+    },
+    {
+      "id": "8.10",
+      "title": "Information deletion (BIO2)",
+      "controls": [
+        "MP-06",
+        "SI-12"
+      ],
+      "coverage_pct": 72,
+      "rationale": "MP-06 media sanitization covers secure deletion methods. SI-12 information management and retention covers information lifecycle including deletion. BIO2 government measures additionally require information deletion to comply with the Archiefwet (Dutch Archives Act) retention and destruction schedules, and the Uitvoeringswet AVG right-to-erasure provisions, which SP 800-53 does not address.",
+      "gaps": "ISO 27002 specifically addresses deletion when information is no longer required, based on retention policies and legal requirements. SP 800-53 covers sanitization methods but proactive information deletion based on business need is less explicitly addressed. BIO2 requires information deletion compliance with the Archiefwet and Uitvoeringswet AVG right-to-erasure provisions."
+    },
+    {
+      "id": "8.11",
+      "title": "Data masking (BIO2)",
+      "controls": [
+        "SI-19",
+        "PT-06",
+        "PT-07",
+        "SC-28",
+        "SI-20"
+      ],
+      "coverage_pct": 76,
+      "rationale": "SI-19 covers de-identification techniques. PT-06/PT-07 cover privacy data processing minimisation. SC-28 protection of information at rest. SI-20 (Tainting) applies tainting to data to detect unauthorised data flows. BIO2 government measures additionally require data masking to comply with the Uitvoeringswet AVG pseudonymisation and anonymisation requirements, which SP 800-53 supports through general de-identification controls.",
+      "gaps": "ISO 27002 provides specific data masking technique guidance including pseudonymisation, anonymisation, and dynamic masking rules. SP 800-53 addresses de-identification and privacy but masking as a comprehensive technique set is less prescriptively covered. BIO2 requires data masking compliance with Uitvoeringswet AVG pseudonymisation requirements."
+    },
+    {
+      "id": "8.12",
+      "title": "Data leakage prevention (BIO2)",
+      "controls": [
+        "AC-04",
+        "PE-19",
+        "SC-07",
+        "SI-04",
+        "SC-31"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-04 information flow enforcement directly supports DLP. PE-19 information leakage addresses physical emanations. SC-07 boundary protection controls data egress. SI-04 system monitoring detects unauthorized data transfer. SC-31 (Covert Channel Analysis) adds analysis of covert exfiltration channels. BIO2 government measures additionally require DLP to address Dutch government classification markings and prevent leakage of classified government information, which SP 800-53 supports through general DLP controls.",
+      "gaps": "ISO 27002 specifically addresses DLP tool implementation. SP 800-53 distributes DLP concepts across multiple controls. BIO2 requires DLP to address Dutch government classification markings and prevent leakage of classified information."
+    },
+    {
+      "id": "8.13",
+      "title": "Information backup (BIO2)",
+      "controls": [
+        "CP-09",
+        "CP-06"
+      ],
+      "coverage_pct": 93,
+      "rationale": "CP-09 directly covers information system backup including backup frequency, testing, and integrity verification. CP-06 alternate storage site for off-site backup. BIO2 government measures additionally require backup storage to comply with Dutch data sovereignty requirements, ensuring government data backups remain within EU/EEA jurisdictions, which SP 800-53 supports through general backup controls.",
+      "gaps": "Minimal gap. SP 800-53 backup controls are comprehensive. BIO2 requires backup storage to comply with Dutch data sovereignty and EU/EEA data residency requirements."
+    },
+    {
+      "id": "8.14",
+      "title": "Redundancy of information processing facilities (BIO2)",
+      "controls": [
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "SC-36"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CP-06 alternate storage site; CP-07 alternate processing site; CP-08 telecommunications services. SC-36 distributed processing and storage provides additional redundancy. BIO2 government measures additionally require redundant processing facilities for essential government services to comply with the Cyberbeveiligingswet availability requirements, which SP 800-53 supports through general contingency controls.",
+      "gaps": "ISO 27002 focuses on redundancy for availability requirements. CP controls focus on contingency which includes redundancy. BIO2 requires redundant processing for essential government services per the Cyberbeveiligingswet availability requirements."
+    },
+    {
+      "id": "8.15",
+      "title": "Logging (BIO2)",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-11",
+        "AU-12"
+      ],
+      "coverage_pct": 93,
+      "rationale": "AU family comprehensively covers logging: auditable events (AU-02), content (AU-03), storage capacity (AU-04), response to failures (AU-05), review and analysis (AU-06), reduction/reporting (AU-07), timestamps (AU-08), protection (AU-09), retention (AU-11), generation (AU-12). BIO2 government measures additionally require logging to support ENSIA audit trail requirements and NCSC-NL forensic readiness guidelines, which SP 800-53 comprehensively addresses through the AU family.",
+      "gaps": "Minimal gap. SP 800-53 AU family is comprehensive for logging requirements. BIO2 requires logging to support ENSIA audit trail and NCSC-NL forensic readiness guidelines."
+    },
+    {
+      "id": "8.16",
+      "title": "Monitoring activities (BIO2)",
+      "controls": [
+        "SI-04",
+        "AU-06",
+        "CA-07",
+        "IR-04"
+      ],
+      "coverage_pct": 93,
+      "rationale": "SI-04 directly covers system monitoring including real-time analysis, anomaly detection, and alerting. AU-06 audit review and analysis. CA-07 continuous monitoring strategy. IR-04 incident handling integrates monitoring outputs. BIO2 government measures additionally require monitoring to be aligned with NCSC-NL monitoring guidelines and to feed into Dutch government threat intelligence sharing, which SP 800-53 comprehensively addresses through general monitoring controls.",
+      "gaps": "Minimal gap. SP 800-53 monitoring controls are comprehensive. BIO2 requires monitoring aligned with NCSC-NL guidelines and Dutch government threat intelligence sharing."
+    },
+    {
+      "id": "8.17",
+      "title": "Clock synchronization (BIO2)",
+      "controls": [
+        "AU-08",
+        "SC-45"
+      ],
+      "coverage_pct": 93,
+      "rationale": "AU-08 directly covers time stamps and clock synchronisation for audit records. SC-45 (System Time Synchronization) adds authoritative time source synchronisation requirements. BIO2 government measures additionally require clock synchronisation to use approved time sources for government systems, which SP 800-53 addresses through SC-45.",
+      "gaps": "Minimal gap. SC-45 strengthens coverage with authoritative time source requirements. BIO2 requires use of approved time sources for government systems."
+    },
+    {
+      "id": "8.18",
+      "title": "Use of privileged utility programs (BIO2)",
+      "controls": [
+        "CM-07",
+        "CM-11",
+        "AC-06"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-07 least functionality restricts available utilities. CM-11 controls user-installed software including utilities. AC-06 least privilege restricts access to privileged utilities. BIO2 government measures additionally require privileged utility program usage to be logged and reviewed per NCSC-NL hardening guidelines, which SP 800-53 supports through general least functionality and privilege controls.",
+      "gaps": "ISO 27002 specifically addresses privileged utility programs that can override system and application controls. SP 800-53 addresses through general least functionality and privilege controls rather than utility-specific controls. BIO2 requires privileged utility usage logging aligned with NCSC-NL hardening guidelines."
+    },
+    {
+      "id": "8.19",
+      "title": "Installation of software on operational systems (BIO2)",
+      "controls": [
+        "CM-05",
+        "CM-07",
+        "CM-11",
+        "SA-22",
+        "CM-14"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-05 access restrictions for change controls who can install. CM-07 least functionality limits what can be installed. CM-11 controls user-installed software. SA-22 addresses unsupported components. CM-14 (Signed Components) prevents installation of unsigned software/firmware. BIO2 government measures additionally require software installation to comply with NCSC-NL approved software lists and hardening guidelines, which SP 800-53 supports through general software installation controls.",
+      "gaps": "Minimal gap. CM-14 adds digital signature verification for software installation. BIO2 requires software installation compliance with NCSC-NL approved software lists."
+    },
+    {
+      "id": "8.20",
+      "title": "Networks security (BIO2)",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "AC-04",
+        "CA-09"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-07 boundary protection; SC-08 transmission confidentiality and integrity; AC-04 information flow enforcement. CA-09 (Internal System Connections) addresses authorisation and review of internal system connections. BIO2 government measures additionally require network security to comply with NCSC-NL network security guidelines and may require connection to Diginetwerk for inter-governmental communication, which SP 800-53 supports through general network controls.",
+      "gaps": "Minimal gap. CA-09 adds internal connection authorisation. BIO2 requires network security aligned with NCSC-NL guidelines and may require Diginetwerk connectivity for inter-governmental networks."
+    },
+    {
+      "id": "8.21",
+      "title": "Security of network services (BIO2)",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "SA-09"
+      ],
+      "coverage_pct": 83,
+      "rationale": "SC-07/SC-08 cover network security mechanisms. SA-09 covers external system services including network services with security requirements and monitoring. BIO2 government measures additionally require network services to comply with NCSC-NL service security guidelines and Dutch government network standards, which SP 800-53 supports through general network service controls.",
+      "gaps": "ISO 27002 requires security features, service levels, and management requirements for network services including SLAs. Network service-specific level agreements are less detailed in SP 800-53. BIO2 requires network services aligned with NCSC-NL and Dutch government network standards."
+    },
+    {
+      "id": "8.22",
+      "title": "Segregation of networks (BIO2)",
+      "controls": [
+        "SC-07",
+        "SC-32"
+      ],
+      "coverage_pct": 93,
+      "rationale": "SC-07 boundary protection includes network segmentation capabilities. SC-32 system partitioning provides logical and physical separation. Together they comprehensively address network segregation. BIO2 government measures additionally require network segregation to align with Dutch government network zone standards, particularly for classified processing environments, which SP 800-53 comprehensively addresses through SC-07 and SC-32.",
+      "gaps": "Minimal gap. SP 800-53 network segmentation controls are comprehensive. BIO2 requires network segregation aligned with Dutch government zone standards for classified environments."
+    },
+    {
+      "id": "8.23",
+      "title": "Web filtering (BIO2)",
+      "controls": [
+        "SC-07",
+        "SI-03",
+        "AC-04"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SC-07 boundary protection includes content filtering. SI-03 malware protection catches web-borne threats. AC-04 information flow enforcement. BIO2 government measures additionally require web filtering to align with NCSC-NL web security guidelines and may require DNS filtering through government-approved services, which SP 800-53 does not specifically address.",
+      "gaps": "ISO 27002 specifically addresses URL filtering, web content filtering, and restricting access to unsafe websites. No dedicated SP 800-53 web filtering control exists. BIO2 requires web filtering aligned with NCSC-NL guidelines and may require government-approved DNS filtering services."
+    },
+    {
+      "id": "8.24",
+      "title": "Use of cryptography (BIO2)",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-28"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-12 cryptographic key establishment and management. SC-13 cryptographic protection with algorithm requirements. SC-28 protection of information at rest using encryption. BIO2 government measures additionally require cryptographic implementations to comply with NCSC-NL cryptographic guidelines and may require PKIoverheid certificates for government services, which SP 800-53 supports through general cryptographic controls but does not prescribe Dutch-specific certificate authorities.",
+      "gaps": "Minimal gap for core cryptography. BIO2 requires cryptographic implementations to comply with NCSC-NL cryptographic guidelines and may mandate PKIoverheid certificates for government services."
+    },
+    {
+      "id": "8.25",
+      "title": "Secure development life cycle (BIO2)",
+      "controls": [
+        "SA-03",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-17"
+      ],
+      "coverage_pct": 93,
+      "rationale": "SA-03 system development life cycle with security integration. SA-08 security and privacy engineering principles. SA-10 developer configuration management. SA-11 developer testing and evaluation. SA-15 development process, standards, and tools. SA-17 developer security and privacy architecture and design. BIO2 government measures additionally require secure development to align with NCSC-NL secure development guidelines and Dutch government open-source policy, which SP 800-53 comprehensively addresses through general SDLC controls.",
+      "gaps": "Minimal gap. SP 800-53 SA family is comprehensive for secure development lifecycle. BIO2 requires alignment with NCSC-NL secure development guidelines."
+    },
+    {
+      "id": "8.26",
+      "title": "Application security requirements (BIO2)",
+      "controls": [
+        "SA-04",
+        "SA-08",
+        "SA-11"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SA-04 acquisition process includes security functional requirements. SA-08 security engineering principles applied to application design. SA-11 developer testing validates security requirements are met. BIO2 government measures additionally require application security requirements to address DigiD integration, accessibility (WCAG), and Dutch government application standards where applicable, which SP 800-53 supports through general application security controls.",
+      "gaps": "Minimal gap for core application security. BIO2 requires application security to address DigiD integration, accessibility, and Dutch government application standards where applicable."
+    },
+    {
+      "id": "8.27",
+      "title": "Secure system architecture and engineering principles (BIO2)",
+      "controls": [
+        "SA-08",
+        "SA-17",
+        "SC-07",
+        "SC-32",
+        "PL-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SA-08 security and privacy engineering principles. SA-17 developer security architecture and design. SC-07/SC-32 provide architecture-level security controls. PL-08 security and privacy architectures. BIO2 government measures additionally require system architecture to comply with the Nederlandse Overheid Referentie Architectuur (NORA) and NCSC-NL architecture guidelines, which SP 800-53 supports through general architecture controls.",
+      "gaps": "Minimal gap for core architecture. BIO2 requires system architecture alignment with NORA (Nederlandse Overheid Referentie Architectuur) and NCSC-NL architecture guidelines."
+    },
+    {
+      "id": "8.28",
+      "title": "Secure coding (BIO2)",
+      "controls": [
+        "SA-11",
+        "SA-15",
+        "SA-16"
+      ],
+      "coverage_pct": 83,
+      "rationale": "SA-11 developer security testing validates code security. SA-15 development process standards and tools includes coding standards. SA-16 developer-provided training includes secure coding practices. BIO2 government measures additionally require secure coding to align with NCSC-NL secure coding guidelines and Dutch government open-source code publication standards, which SP 800-53 supports through general development controls.",
+      "gaps": "ISO 27002 provides specific secure coding practice guidance including input validation, error handling, and code review. SP 800-53 addresses through development process and testing controls rather than explicit coding standard requirements. BIO2 requires secure coding aligned with NCSC-NL guidelines."
+    },
+    {
+      "id": "8.29",
+      "title": "Security testing in development and acceptance (BIO2)",
+      "controls": [
+        "SA-11",
+        "CA-02",
+        "SA-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SA-11 directly covers developer security testing and evaluation. CA-02 security assessments for acceptance testing. SA-04 includes testing requirements in acquisition. BIO2 government measures additionally require security testing to include BIO2 baseline compliance verification as part of acceptance criteria, which SP 800-53 supports through general testing and assessment controls.",
+      "gaps": "Minimal gap for core security testing. BIO2 requires BIO2 baseline compliance verification as part of acceptance testing criteria."
+    },
+    {
+      "id": "8.30",
+      "title": "Outsourced development (BIO2)",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SA-10",
+        "SA-11",
+        "SA-21"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-04 acquisition requirements for outsourced development. SA-09 external system services. SA-10/SA-11 developer requirements apply to outsourced developers. SA-21 (Developer Screening) adds screening requirements for developers of critical system components. BIO2 government measures additionally require outsourced development to comply with DigiInkoop procurement requirements and Dutch government supplier security standards, which SP 800-53 supports through general acquisition and developer controls.",
+      "gaps": "ISO 27002 details outsourced development supervision, intellectual property rights, and acceptance testing. SP 800-53 covers through general acquisition and developer controls. BIO2 requires outsourced development compliance with DigiInkoop procurement requirements."
+    },
+    {
+      "id": "8.31",
+      "title": "Separation of development, test and production environments (BIO2)",
+      "controls": [
+        "CM-04",
+        "SA-11",
+        "SC-32",
+        "CM-02"
+      ],
+      "coverage_pct": 83,
+      "rationale": "CM-04 impact analysis requires separate test environments. SA-11 developer testing implies testing environments. SC-32 system partitioning supports environment separation. CM-02 baseline configuration with variants for different environments. BIO2 government measures additionally require environment separation to comply with NCSC-NL guidelines, particularly ensuring production data is not used in test environments without anonymisation per Uitvoeringswet AVG, which SP 800-53 implies but does not mandate.",
+      "gaps": "ISO 27002 explicitly requires development, testing, and production environment separation. SP 800-53 implies but does not mandate specific three-way environment separation. BIO2 requires environment separation aligned with NCSC-NL guidelines and Uitvoeringswet AVG data protection for test environments."
+    },
+    {
+      "id": "8.32",
+      "title": "Change management (BIO2)",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "SA-10"
+      ],
+      "coverage_pct": 93,
+      "rationale": "CM-03 configuration change control with documented approval processes. CM-04 impact analysis before changes. CM-05 access restrictions for change. SA-10 developer configuration management for development changes. BIO2 government measures additionally require change management to be documented for ENSIA audit trail, which SP 800-53 supports through CM-03 documentation requirements.",
+      "gaps": "Minimal gap. SP 800-53 change management controls are comprehensive. BIO2 requires change management documentation for ENSIA audit compliance."
+    },
+    {
+      "id": "8.33",
+      "title": "Test information (BIO2)",
+      "controls": [
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 62,
+      "rationale": "SA-11 covers testing requirements. SA-15 development process standards includes test data management practices. BIO2 government measures additionally require test data to comply with the Uitvoeringswet AVG, ensuring production PII is not used in test environments without proper anonymisation or pseudonymisation, which SP 800-53 does not explicitly address.",
+      "gaps": "ISO 27002 specifically addresses protection of test data including anonymisation, controlled use of production data for testing, and proper disposal of test data. SP 800-53 lacks an explicit test data management control. BIO2 requires test data compliance with Uitvoeringswet AVG anonymisation requirements."
+    },
+    {
+      "id": "8.34",
+      "title": "Protection of information systems during audit testing (BIO2)",
+      "controls": [
+        "CA-02",
+        "AU-06",
+        "CA-08"
+      ],
+      "coverage_pct": 73,
+      "rationale": "CA-02 covers security assessments including audit considerations and planning. AU-06 audit review analysis. CA-08 penetration testing addresses planned security testing with controls to protect systems during testing activities. BIO2 government measures additionally require audit testing to be coordinated with ENSIA audit schedules and conducted by approved auditors, which SP 800-53 does not prescribe.",
+      "gaps": "ISO 27002 requires that audit testing be planned and agreed to minimize business disruption, that access to tools is controlled, and that requirements are agreed with management. SP 800-53 assessment controls do not explicitly address protection of systems during audit activities. BIO2 requires audit testing coordination with ENSIA schedules and use of approved auditors."
+    }
+  ],
+  "summary": {
+    "total_clauses": 93,
+    "average_coverage": 83.0,
+    "full_count": 50,
+    "substantial_count": 38,
+    "partial_count": 4,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

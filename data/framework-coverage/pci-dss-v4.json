@@ -78,7 +78,7 @@
       "title": "All services, protocols, and ports allowed are identified, approved, and have a defined business need",
       "controls": [
         "CM-07",
-        "SC-07(5)"
+        "SC-07"
       ],
       "coverage_pct": 95,
       "rationale": "CM-07 least functionality (deny by default); SC-07(5) deny by default/allow by exception.",
@@ -100,10 +100,9 @@
       "id": "1.3",
       "title": "Network access to and from the cardholder data environment is restricted",
       "controls": [
-        "SC-07",
         "AC-04",
-        "SC-07(5)",
-        "CA-09"
+        "CA-09",
+        "SC-07"
       ],
       "coverage_pct": 95,
       "rationale": "SC-07 boundary protection; AC-04 information flow enforcement; SC-07(5) deny by default; CA-09 (new in Rev 5) internal system connections strengthens internal CDE boundary controls.",
@@ -113,10 +112,7 @@
       "id": "1.4",
       "title": "Network connections between trusted and untrusted networks are controlled",
       "controls": [
-        "SC-07",
-        "SC-07(4)",
-        "SC-07(5)",
-        "SC-07(11)"
+        "SC-07"
       ],
       "coverage_pct": 95,
       "rationale": "SC-07 with boundary control enhancements for DMZ, filtering, and restricted connections.",
@@ -261,11 +257,10 @@
       "id": "3.5",
       "title": "Primary account number (PAN) is secured wherever it is stored",
       "controls": [
-        "SC-28",
-        "SC-28(1)",
+        "CM-12",
         "SC-12",
         "SC-13",
-        "CM-12"
+        "SC-28"
       ],
       "coverage_pct": 82,
       "rationale": "SC-28 protection at rest with encryption; SC-12 key management; SC-13 cryptographic protection; CM-12 (new in Rev 5) information location ensures all PAN storage locations are identified.",
@@ -275,8 +270,7 @@
       "id": "3.6",
       "title": "Cryptographic keys used to protect stored account data are secured",
       "controls": [
-        "SC-12",
-        "SC-12(1)"
+        "SC-12"
       ],
       "coverage_pct": 85,
       "rationale": "SC-12 cryptographic key establishment and management with key management processes.",
@@ -309,10 +303,9 @@
       "id": "4.2",
       "title": "PAN is protected with strong cryptography during transmission",
       "controls": [
+        "CM-13",
         "SC-08",
-        "SC-08(1)",
-        "SC-13",
-        "CM-13"
+        "SC-13"
       ],
       "coverage_pct": 90,
       "rationale": "SC-08 transmission confidentiality/integrity; SC-08(1) cryptographic protection; SC-13 cryptographic protection; CM-13 (new in Rev 5) data action mapping ensures all PAN transmission paths are mapped.",
@@ -334,11 +327,9 @@
       "id": "5.2",
       "title": "Malicious software (malware) is prevented, or detected and addressed",
       "controls": [
-        "SI-03",
-        "SI-03(1)",
-        "SI-03(2)",
         "SC-34",
         "SC-44",
+        "SI-03",
         "SI-16"
       ],
       "coverage_pct": 95,
@@ -349,10 +340,8 @@
       "id": "5.3",
       "title": "Anti-malware mechanisms and processes are active, maintained, and monitored",
       "controls": [
-        "SI-03",
-        "SI-03(1)",
-        "SI-03(2)",
-        "SC-35"
+        "SC-35",
+        "SI-03"
       ],
       "coverage_pct": 95,
       "rationale": "SI-03 with ongoing maintenance and monitoring enhancements; SC-35 (new in Rev 5) external malicious code identification adds proactive malware detection capability.",
@@ -362,9 +351,9 @@
       "id": "5.4",
       "title": "Anti-phishing mechanisms protect users against phishing attacks",
       "controls": [
-        "SI-08",
-        "AT-02(2)",
-        "SC-07"
+        "AT-02",
+        "SC-07",
+        "SI-08"
       ],
       "coverage_pct": 80,
       "rationale": "SI-08 spam protection; AT-02(2) social engineering awareness; SC-07 boundary protection.",
@@ -414,9 +403,7 @@
       "id": "6.2.3",
       "title": "Bespoke and custom software is reviewed prior to being released into production to identify and correct potential coding vulnerabilities",
       "controls": [
-        "SA-11",
-        "SA-11(1)",
-        "SA-11(2)"
+        "SA-11"
       ],
       "coverage_pct": 90,
       "rationale": "SA-11 developer security testing with static and dynamic analysis enhancements.",
@@ -438,8 +425,7 @@
       "id": "6.3.3",
       "title": "All system components are protected from known vulnerabilities by installing applicable security patches/updates",
       "controls": [
-        "SI-02",
-        "SI-02(1)"
+        "SI-02"
       ],
       "coverage_pct": 95,
       "rationale": "SI-02 flaw remediation with automated patching.",
@@ -449,10 +435,9 @@
       "id": "6.4",
       "title": "Public-facing web applications are protected against attacks",
       "controls": [
-        "SC-07",
-        "SI-03",
         "SA-11",
-        "SC-07(17)"
+        "SC-07",
+        "SI-03"
       ],
       "coverage_pct": 80,
       "rationale": "SC-07 boundary protection; SI-03 malware; SA-11 testing; SC-07(17) automated enforcement.",
@@ -537,8 +522,6 @@
       "controls": [
         "IA-02",
         "IA-05",
-        "IA-05(1)",
-        "IA-02(1)",
         "SC-37"
       ],
       "coverage_pct": 95,
@@ -549,7 +532,7 @@
       "id": "8.3.6",
       "title": "If passwords/passphrases are used as authentication factors, minimum level of complexity requirements",
       "controls": [
-        "IA-05(1)"
+        "IA-05"
       ],
       "coverage_pct": 95,
       "rationale": "IA-05(1) directly covers password complexity requirements.",
@@ -559,7 +542,7 @@
       "id": "8.3.9",
       "title": "If passwords/passphrases are used as the only authentication factor for user access, passwords/passphrases are changed at least every 90 days",
       "controls": [
-        "IA-05(1)"
+        "IA-05"
       ],
       "coverage_pct": 85,
       "rationale": "IA-05(1) covers password lifecycle. Note: NIST 800-63B now recommends against periodic password rotation, creating a philosophical difference.",
@@ -569,8 +552,7 @@
       "id": "8.4",
       "title": "Multi-factor authentication (MFA) is implemented to secure access into the CDE",
       "controls": [
-        "IA-02(1)",
-        "IA-02(2)",
+        "IA-02",
         "SC-37"
       ],
       "coverage_pct": 95,
@@ -581,9 +563,7 @@
       "id": "8.5",
       "title": "Multi-factor authentication (MFA) systems are configured to prevent misuse",
       "controls": [
-        "IA-02(1)",
-        "IA-02(6)",
-        "IA-02(8)"
+        "IA-02"
       ],
       "coverage_pct": 85,
       "rationale": "IA-02 MFA enhancements cover MFA configuration. IA-02(6) network access; IA-02(8) replay resistance.",
@@ -594,8 +574,8 @@
       "title": "Use of application and system accounts and associated authentication factors is strictly managed",
       "controls": [
         "AC-02",
-        "IA-05",
-        "AC-06(5)"
+        "AC-06",
+        "IA-05"
       ],
       "coverage_pct": 85,
       "rationale": "AC-02 account management; IA-05 authenticator management; AC-06(5) privileged accounts.",
@@ -694,8 +674,7 @@
       "id": "10.3",
       "title": "Audit logs are protected from destruction and unauthorized modifications",
       "controls": [
-        "AU-09",
-        "AU-09(4)"
+        "AU-09"
       ],
       "coverage_pct": 95,
       "rationale": "AU-09 protection of audit information with access enforcement.",
@@ -706,7 +685,6 @@
       "title": "Audit logs are reviewed to identify anomalies or suspicious activity",
       "controls": [
         "AU-06",
-        "AU-06(1)",
         "SI-04"
       ],
       "coverage_pct": 95,
@@ -728,7 +706,6 @@
       "title": "Time-synchronization mechanisms support consistent time settings across all systems",
       "controls": [
         "AU-08",
-        "AU-08(1)",
         "SC-45"
       ],
       "coverage_pct": 95,
@@ -740,10 +717,10 @@
       "title": "Failures of critical security control systems are detected, reported, and responded to promptly",
       "controls": [
         "AU-05",
-        "SI-04(5)",
         "IR-04",
         "IR-06",
-        "SC-24"
+        "SC-24",
+        "SI-04"
       ],
       "coverage_pct": 87,
       "rationale": "AU-05 response to processing failures; SI-04(5) system alerts; IR-04 incident handling; IR-06 reporting; SC-24 (new in Rev 5) fail in known state ensures security controls fail securely rather than silently.",
@@ -790,7 +767,6 @@
       "title": "External and internal penetration testing is regularly performed, and exploitable vulnerabilities and security weaknesses are corrected",
       "controls": [
         "CA-08",
-        "CA-08(1)",
         "SC-26"
       ],
       "coverage_pct": 90,

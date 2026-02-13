@@ -1,0 +1,353 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-046",
+  "slug": "external-attack-surface-management",
+  "title": "External Attack Surface Management",
+  "description": "Comprehensive pattern for discovering, monitoring, and managing an organisation's internet-facing digital assets. Covers automated asset discovery, DNS and domain hygiene, continuous exposure assessment, cloud and API surface management, certificate lifecycle, third-party surface monitoring, risk-based remediation, and programme governance. Aligns with NCSC Active Cyber Defence 2.0 and addresses the fundamental premise that you cannot protect what you cannot see. Maps 28 NIST 800-53 controls across asset management, risk assessment, boundary protection, and continuous monitoring domains.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-046",
+  "metadata": {
+    "release": "2.0",
+    "status": "draft",
+    "type": "pattern",
+    "classification": "Risk Management & Monitoring",
+    "datePublished": "2026-02-13",
+    "dateModified": "2026-02-13",
+    "authors": ["Spinoza", "Vitruvius"],
+    "provenance": "Developed following the UK NCSC's Active Cyber Defence 2.0 programme, which trialled ten commercial EASM products against UK public sector infrastructure and published a buyer's guide for organisational adoption. Informed by the reality that modern attack surfaces extend far beyond the network perimeter: cloud resources, shadow IT, acquired company infrastructure, third-party integrations, and forgotten test environments create exposure that traditional vulnerability scanning cannot discover. The NCSC's retirement of Web Check and Mail Check services by March 2026 signals the maturation of commercial EASM and the expectation that organisations will adopt these capabilities independently."
+  },
+  "diagram": {
+    "svg": "/images/sp-046-external-attack-surface-management.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Every organisation has an external attack surface: the totality of internet-facing assets, services, and information that an adversary can discover and potentially exploit. This surface is far larger than most organisations believe. It includes not just the web servers and email gateways that the security team manages, but the test environment that a developer spun up eighteen months ago and forgot about, the subdomain that still points to a deprovisioned cloud service, the API endpoint that was never documented, the TLS certificate that expired last Tuesday, and the S3 bucket that a contractor configured as public during a proof of concept.\n\nExternal Attack Surface Management (EASM) is the discipline of continuously discovering, inventorying, analysing, and remediating this exposure from the outside in -- adopting the attacker's perspective rather than relying on internal asset registers that are invariably incomplete. The premise is simple: you cannot protect what you cannot see. Internal asset inventories capture what was intentionally deployed; EASM discovers what actually exists.\n\nThe discipline operates on a continuous cycle. Discovery uses DNS enumeration, certificate transparency logs, port scanning, web crawling, cloud resource enumeration, and OSINT techniques to identify every internet-facing asset associated with the organisation. Classification determines what each asset is, who owns it, and whether it should be exposed. Analysis assesses the security posture of each asset: software versions, TLS configuration, open ports, default credentials, information leakage, and known vulnerabilities. Prioritisation ranks exposures by risk: a publicly accessible database server with default credentials on a production domain is a different risk to an expired certificate on an internal documentation site. Remediation closes the gaps through patching, reconfiguration, decommissioning, or access restriction.\n\nThe UK National Cyber Security Centre's Active Cyber Defence 2.0 programme has validated this approach at national scale, trialling ten commercial EASM products against UK public sector infrastructure and publishing a buyer's guide for organisational adoption. The NCSC's decision to retire its own Web Check and Mail Check services reflects the market's maturation: EASM is no longer a niche capability but a baseline expectation for any organisation serious about managing its risk.\n\nThis pattern addresses EASM as a security programme, not a tool procurement exercise. Tools are necessary but insufficient -- the value lies in the governance, processes, and integration that turn continuous discovery into continuous improvement.",
+    "keyControlAreas": [
+      "Asset Discovery and Continuous Inventory (CM-08, CM-13, PM-05, RA-09): The foundation of EASM is knowing what you have. CM-08 (System Component Inventory) requires a complete, accurate, and continuously updated inventory of all internet-facing assets -- but the critical insight is that the inventory must be built from the outside in, not the inside out. Traditional asset registers reflect intended deployments; EASM discovery reveals actual exposure. The inventory must cover: domains and subdomains (including wildcard DNS), IP address ranges (owned and cloud-allocated), cloud resources across all providers (compute, storage, databases, serverless functions), APIs and webhooks, email infrastructure, VPN endpoints, remote access gateways, and any other internet-reachable service. CM-13 (Data Action Mapping) maps data flows across the external surface: which assets process, store, or transmit sensitive data, and which are internet-facing purely for availability. PM-05 (System Inventory) maintains the authoritative register at programme level -- reconciling EASM discovery results against the approved inventory to identify unauthorised assets (shadow IT), orphaned assets (no known owner), and drift (assets that have changed from their approved configuration). RA-09 (Criticality Analysis) classifies each discovered asset by business criticality: crown jewel systems that would cause significant harm if compromised versus low-value assets where the risk of exposure is tolerable. Discovery must run continuously, not quarterly -- the attack surface changes every time someone deploys a cloud resource, registers a subdomain, or exposes a new API.",
+      "DNS and Domain Hygiene (SC-20, CM-02, CM-03): DNS is the front door of the attack surface and the most common source of EASM findings. SC-20 (Secure Name/Address Resolution Service) governs DNS security: DNSSEC deployment to prevent DNS spoofing, monitoring of certificate transparency logs for rogue certificate issuance against your domains, and continuous enumeration of subdomains to detect new entries that may indicate shadow IT or compromise. The most critical DNS risk is subdomain takeover: when a DNS record points to a cloud service (Azure, AWS, GitHub Pages, Heroku) that has been deprovisioned, an attacker can claim that service and serve content under your domain. This is trivially exploitable and gives the attacker a trusted position for phishing, cookie theft, and credential harvesting. CM-02 (Baseline Configuration) establishes the approved DNS configuration: which domains are registered, which subdomains should exist, which DNS providers are authorised, and what records are expected. Any deviation from baseline triggers investigation. CM-03 (Configuration Change Control) ensures DNS changes go through a controlled process: subdomain creation, DNS record modification, and domain registration changes must be logged and approved. Monitor domain registration expiry dates -- lapsed domains can be re-registered by attackers. Monitor for typosquatting and lookalike domains that could be used for phishing campaigns. DMARC, SPF, and DKIM records must be monitored continuously -- misconfiguration enables email spoofing and degrades trust in the organisation's communications.",
+      "Continuous Vulnerability and Exposure Assessment (RA-05, CA-07, SI-04, RA-03): EASM goes beyond traditional vulnerability scanning by assessing the full spectrum of external exposure. RA-05 (Vulnerability Monitoring and Scanning) provides the baseline: regular scanning of all internet-facing assets for known vulnerabilities, misconfigurations, and deprecated software. But EASM assessment is broader: it includes detecting exposed administrative interfaces (login pages, management consoles, phpMyAdmin, Kubernetes dashboards), default credentials on internet-facing services, information leakage through HTTP headers (server version strings, framework identifiers), verbose error pages that reveal internal paths and stack traces, directory listings that expose file structures, and metadata in public documents (author names, internal paths, software versions). CA-07 (Continuous Monitoring) ensures assessment is not a point-in-time exercise but a continuous process: the external surface must be re-assessed at least daily for critical assets and weekly for the full estate. SI-04 (System Monitoring) extends to monitoring for changes in the external surface: new open ports, new services, changed TLS configurations, and newly published content that was not there yesterday. RA-03 (Risk Assessment) frames each finding in business context: a critical vulnerability on an internet-facing production database is a different risk to the same vulnerability on an internal documentation server that happens to be reachable from the internet. Not all findings are equal; not all require immediate remediation.",
+      "Cloud and API Surface Management (AC-20, SA-09, SC-07, AC-17): Cloud environments are where attack surface sprawl is worst. AC-20 (Use of External Systems) governs connections to cloud platforms -- every cloud account, subscription, and project must be enumerated and monitored for internet-facing resources. The most common cloud EASM findings are: publicly accessible storage (S3 buckets, Azure Blobs, GCP Cloud Storage) containing sensitive data, exposed cloud databases (RDS, CosmosDB) with default or weak authentication, Kubernetes dashboards and Docker registries accessible without authentication, serverless function URLs exposed to the internet, and cloud management APIs accessible from outside the corporate network. SA-09 (External System Services) extends to SaaS applications: every SaaS tool adopted by the organisation creates external surface through SSO integrations, API connections, and data sharing. SC-07 (Boundary Protection) is challenged by cloud architectures where the traditional network perimeter dissolves -- the boundary is now identity and policy, not firewalls. EASM must monitor the effective boundary: what is actually reachable from the internet regardless of where it is hosted. AC-17 (Remote Access) covers the VPN endpoints, jump servers, and remote desktop gateways that are necessarily internet-facing and therefore part of the attack surface. API sprawl is a growing concern: organisations expose REST APIs, GraphQL endpoints, and webhooks that may not appear in any asset register but are discoverable through enumeration. Every API endpoint is an attack surface entry point.",
+      "Certificate and TLS Lifecycle Management (SC-23, SC-20, IA-09): TLS certificates are both a security control and an attack surface. SC-23 (Session Authenticity) requires valid, correctly configured TLS on all internet-facing services -- but EASM reveals the gap between intention and reality: expired certificates causing browser warnings that train users to click through security prompts, certificates issued for internal hostnames that reveal infrastructure details, wildcard certificates that may be shared across trust boundaries, and weak cipher configurations that enable downgrade attacks. SC-20 (Secure Name/Address Resolution) includes monitoring certificate transparency logs: every certificate issued for your domains appears in public CT logs, and monitoring these logs detects rogue or unexpected certificate issuance that may indicate domain compromise or unauthorised services. IA-09 (Service Identification and Authentication) ensures that services authenticating to each other across the internet use strong, current certificates with proper chain validation. Maintain a complete certificate inventory: every certificate associated with every domain, including certificates on cloud services, CDNs, load balancers, and third-party platforms hosting content under your domains. Set alerting thresholds: certificates expiring within 30 days trigger renewal, certificates with weak keys or deprecated signature algorithms trigger replacement. Automated certificate management (ACME/Let's Encrypt) reduces expiry risk but must be monitored to ensure renewal processes are functioning.",
+      "Third-Party and Supply Chain Surface (SA-09, SA-04, PM-16): Your attack surface does not end at your boundary. SA-09 (External System Services) extends EASM to third-party services: hosting providers, CDN vendors, SaaS platforms, and managed service providers all contribute to your effective attack surface. When a third party hosts content or services under your domain, their security posture is your security posture. SA-04 (Acquisition Process) requires EASM considerations in vendor selection: does the vendor practice good security hygiene on the infrastructure that will serve your customers? Can you monitor the security posture of services hosted on your behalf? Include EASM-derived security requirements in vendor contracts. PM-16 (Threat Awareness Program) integrates external threat intelligence with EASM: monitoring dark web marketplaces for leaked credentials associated with your domains, tracking threat actor interest in your industry and infrastructure, and correlating EASM findings with known exploitation campaigns. Supply chain EASM also covers open-source dependencies in internet-facing applications: SBOMs (Software Bills of Materials) for web applications, API services, and public-facing platforms enable rapid assessment when a new library vulnerability is disclosed. The SolarWinds, Log4j, and MOVEit incidents demonstrated that supply chain compromise often manifests as external surface exposure.",
+      "Remediation Prioritisation and Response (RA-07, SI-02, IR-04, SI-05): EASM generates findings at scale; the challenge is prioritising remediation effectively. RA-07 (Risk Response) defines the remediation framework: critical findings on crown jewel assets within 24 hours, high findings within 7 days, medium within 30 days, low within 90 days -- but these SLAs must be calibrated to actual exploitability, not just CVSS scores. A medium-severity vulnerability on an internet-facing asset with no authentication may be more urgent than a critical vulnerability on an internal system behind a VPN. SI-02 (Flaw Remediation) covers the actual fix: patching, reconfiguration, access restriction, or decommissioning. The most effective EASM remediation is often the simplest: remove the asset from the internet. If it does not need to be internet-facing, make it internal. SI-05 (Security Alerts, Advisories, and Directives) integrates EASM with vulnerability intelligence: when a new zero-day is published, immediately cross-reference against the EASM inventory to identify exposed instances. IR-04 (Incident Handling) is triggered when EASM discovers evidence of active compromise: defaced pages, cryptominer scripts, command-and-control beacons, or data exfiltration indicators on internet-facing assets. EASM-discovered findings should feed directly into the vulnerability management programme (SP-038) and security monitoring (SP-031) rather than operating as a separate remediation stream.",
+      "EASM Programme Governance and Metrics (CA-02, PM-14, AU-02, AU-12, CM-11): EASM is a programme, not a tool. CA-02 (Control Assessments) evaluates EASM effectiveness: is discovery complete (what percentage of known assets does the tool find?), are findings accurate (what is the false positive rate?), and is remediation timely (what percentage of findings are resolved within SLA?). PM-14 (Testing, Training, and Monitoring) validates the programme through red team exercises: commission external penetration testers to discover assets and compare their findings against the EASM platform's inventory -- the gap reveals blind spots. AU-02 (Event Logging) and AU-12 (Audit Record Generation) require that all EASM discovery, analysis, and remediation actions are logged: what was found, when, what action was taken, by whom, and whether it was resolved. CM-11 (User-Installed Software) addresses shadow IT: software and services deployed by users or departments outside IT governance that create external exposure. EASM governance metrics should include: total discovered assets versus approved inventory (delta indicates shadow IT), mean time to discover new assets, mean time to remediate findings by severity, coverage percentage (what proportion of the external surface is monitored), and trend analysis (is the unmanaged surface growing or shrinking). Report metrics to the CISO monthly and to the board quarterly. EASM is not a project with an end date -- it is a continuous capability that must be funded, staffed, and measured like any other security function."
+    ],
+    "assumptions": "The organisation has internet-facing assets including web applications, email services, APIs, and cloud resources. A vulnerability management programme exists or is being established (see SP-038). DNS administration is performed by the organisation or a managed provider. The organisation has cloud deployments across one or more providers. Budget exists for commercial EASM tooling -- the NCSC buyer's guide provides selection criteria. A security operations capability exists to consume and act on EASM findings (see SP-031). The organisation understands its domain portfolio and registered IP ranges as a starting point for discovery seed configuration.",
+    "typicalChallenges": "The most common challenge is the volume of findings: initial EASM discovery typically reveals far more internet-facing assets than the organisation knew about, and the backlog of findings can overwhelm remediation capacity. False positives consume analyst time -- EASM tools that report every open port without context generate noise. Asset ownership is often unclear: discovered assets may belong to departments, acquired companies, or long-departed employees, and nobody wants to take responsibility for remediating them. Cloud environments are particularly challenging: developers can create internet-facing resources in minutes, faster than EASM can discover them. Multi-cloud and hybrid environments multiply the discovery challenge. Third-party hosted services under your domains are visible to EASM but may not be within your remediation control. Legacy infrastructure that cannot be patched or reconfigured but must remain internet-facing requires compensating controls. EASM tool sprawl: organisations may end up with overlapping tools from different vendors covering different parts of the surface. Integration with existing security tools (SIEM, SOAR, vulnerability scanners, CMDB) requires effort to avoid duplicate findings and conflicting priorities.",
+    "indications": "Every organisation with internet-facing assets should practice some form of EASM. It is particularly critical for: organisations that have grown through acquisition (inherited infrastructure is a major source of unknown exposure), organisations with significant cloud deployments across multiple providers, regulated industries where external exposure creates compliance risk (financial services, healthcare, government), organisations that have experienced breaches originating from unknown or forgotten internet-facing assets, enterprises with decentralised IT where business units deploy their own cloud resources, organisations with large domain portfolios (hundreds of domains and subdomains), and any organisation subject to the UK NCSC's Active Cyber Defence programme or equivalent national cyber security frameworks.",
+    "contraIndications": "Very small organisations with a handful of well-understood internet-facing services (a single website, an email service) may not justify commercial EASM tooling -- manual monitoring with free tools (Shodan, crt.sh, SecurityTrails) may suffice. Organisations with no internet-facing assets (air-gapped environments) have no external attack surface to manage. However, even organisations that believe they have no internet presence should verify that assumption through at least one baseline discovery scan.",
+    "threatResistance": "External Attack Surface Management directly counters the reconnaissance phase of the attack lifecycle -- the phase where adversaries discover your exposed assets, often using the same techniques as EASM tools. Subdomain takeover is prevented through continuous DNS monitoring that detects dangling records before an attacker can claim them (SC-20, CM-02). Shadow IT exposure is discovered and remediated before adversaries find it, closing the gap between what the organisation thinks is exposed and what actually is (CM-08, CM-11). Cloud resource misconfiguration -- the source of some of the most damaging data breaches of the past decade -- is detected through continuous cloud surface enumeration that catches public storage, exposed databases, and open management interfaces (AC-20, SC-07). Expired certificates and weak TLS configurations that enable interception are detected and remediated before they can be exploited (SC-23). Supply chain surface exposure is monitored to detect when third-party security failures create risk for your organisation (SA-09, PM-16). The fundamental principle: if you discover your exposure before the attacker does, you can fix it before it is exploited."
+  },
+  "examples": {
+    "Asset Discovery and Inventory": [
+      "Configure EASM tool with seed domains, IP ranges, and cloud account identifiers; initial discovery reveals 2,400 internet-facing assets against an approved inventory of 800 -- the delta of 1,600 unknown assets triggers a 90-day remediation programme",
+      "Establish weekly reconciliation between EASM discovery results and the CMDB; new assets discovered by EASM but not in the CMDB are flagged as shadow IT and assigned to the relevant business unit for review within 5 business days",
+      "Post-acquisition infrastructure audit: EASM scan of acquired company's domain portfolio discovers 47 active subdomains, 12 with critical vulnerabilities, 3 pointing to deprovisioned services vulnerable to takeover"
+    ],
+    "DNS and Domain Hygiene": [
+      "Deploy certificate transparency log monitoring for all registered domains; receive alerts within 1 hour of any certificate issuance, enabling immediate investigation of unexpected certificates",
+      "Weekly subdomain enumeration identifies 3 CNAME records pointing to decommissioned Azure App Service instances; DNS records removed within 4 hours to prevent subdomain takeover",
+      "Implement DMARC at p=reject for all primary domains after 6-month monitoring period; monitor DMARC aggregate reports to detect spoofing attempts"
+    ],
+    "Continuous Assessment and Remediation": [
+      "EASM platform detects publicly accessible Kibana dashboard on a development subdomain with no authentication; asset quarantined behind VPN within 2 hours of discovery, developer team notified",
+      "Cross-reference EASM asset inventory against new Log4Shell-class vulnerability disclosure; identify 14 internet-facing services running affected version within 30 minutes, prioritise patching by business criticality",
+      "Monthly EASM metrics report to CISO: 94% of critical findings remediated within 24-hour SLA, mean time to discover new assets reduced from 72 hours to 4 hours, shadow IT count reduced 60% year-over-year"
+    ],
+    "Cloud and Third-Party Surface": [
+      "Enumerate all cloud storage resources across AWS, Azure, and GCP accounts; discover 7 publicly accessible S3 buckets containing customer data, access restricted within 1 hour",
+      "Third-party hosting review: EASM scan of vendor-hosted marketing microsite discovers outdated WordPress with 3 critical CVEs served under primary domain; vendor given 48-hour remediation SLA",
+      "API discovery identifies 23 undocumented REST endpoints on production domains; 8 require authentication that was never implemented, remediated by adding API gateway authentication layer"
+    ]
+  },
+  "references": [
+    {
+      "title": "NCSC: External Attack Surface Management Buyer's Guide",
+      "url": "https://www.ncsc.gov.uk/guidance/external-attack-surface-management-buyers-guide",
+      "note": "Comprehensive guidance from the UK NCSC on selecting and implementing commercial EASM products. Covers required capabilities, evaluation criteria, and integration considerations."
+    },
+    {
+      "title": "NCSC: Active Cyber Defence 2.0 — EASM Trials",
+      "url": "https://www.ncsc.gov.uk/blog-post/active-cyber-defence-2-insights-easm-trials",
+      "note": "Insights from the NCSC's trial of ten commercial EASM products against UK public sector infrastructure. Key findings on discovery effectiveness, false positive rates, and operational considerations."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. Configuration Management (CM), Risk Assessment (RA), and System and Communications Protection (SC) families are primary."
+    },
+    {
+      "title": "CISA: Binding Operational Directive 23-01 — Asset Visibility and Vulnerability Detection",
+      "url": "https://www.cisa.gov/news-events/directives/binding-operational-directive-23-01",
+      "note": "US CISA directive requiring federal agencies to maintain comprehensive asset inventories and perform vulnerability enumeration on internet-facing assets. Reflects the regulatory expectation for EASM capabilities."
+    },
+    {
+      "title": "OWASP: Attack Surface Analysis Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html",
+      "note": "OWASP guidance on understanding and reducing the attack surface. Provides a framework for categorising attack surface components including network, software, and human elements."
+    },
+    {
+      "title": "MITRE ATT&CK: Reconnaissance Tactics (TA0043)",
+      "url": "https://attack.mitre.org/tactics/TA0043/",
+      "note": "Catalogue of reconnaissance techniques used by adversaries to discover targets. EASM tools use many of the same techniques defensively — understanding the attacker's methodology informs what to monitor."
+    },
+    {
+      "title": "Certificate Transparency: Monitoring and Auditing",
+      "url": "https://certificate.transparency.dev/",
+      "note": "Public logs of TLS certificate issuance. Monitoring CT logs is a core EASM capability for detecting rogue certificates, unauthorised services, and shadow IT."
+    },
+    {
+      "title": "Gartner: External Attack Surface Management Market Guide",
+      "url": "https://www.gartner.com/reviews/market/external-attack-surface-management",
+      "note": "Market landscape for EASM solutions including Censys, CyCognito, Mandiant (Google), Palo Alto (Cortex Xpanse), Microsoft Defender EASM, and Randori (IBM). Useful for vendor evaluation."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-029",
+    "SP-031",
+    "SP-038",
+    "SP-030",
+    "SP-036"
+  ],
+  "relatedPatternNames": [
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Vulnerability Management and Patching",
+    "API Security",
+    "Incident Response"
+  ],
+  "threats": [
+    {
+      "id": "T-EASM-001",
+      "name": "Subdomain takeover via dangling DNS records pointing to deprovisioned cloud services",
+      "mitigatedBy": ["SC-20", "CM-02", "CM-03", "CA-07"]
+    },
+    {
+      "id": "T-EASM-002",
+      "name": "Shadow IT exposure — unknown internet-facing assets deployed outside change management",
+      "mitigatedBy": ["CM-08", "CM-11", "PM-05", "CA-07"]
+    },
+    {
+      "id": "T-EASM-003",
+      "name": "Cloud resource misconfiguration exposing sensitive data publicly (open storage, databases, APIs)",
+      "mitigatedBy": ["AC-20", "SC-07", "CM-02", "RA-05"]
+    },
+    {
+      "id": "T-EASM-004",
+      "name": "Expired or misconfigured TLS certificates enabling interception or service disruption",
+      "mitigatedBy": ["SC-23", "SC-20", "IA-09", "CA-07"]
+    },
+    {
+      "id": "T-EASM-005",
+      "name": "Orphaned services running unpatched software with known exploitable vulnerabilities",
+      "mitigatedBy": ["RA-05", "SI-02", "CM-08", "RA-09"]
+    },
+    {
+      "id": "T-EASM-006",
+      "name": "API sprawl exposing undocumented or unsecured endpoints to the internet",
+      "mitigatedBy": ["CM-08", "AC-17", "SC-07", "RA-05"]
+    },
+    {
+      "id": "T-EASM-007",
+      "name": "Credential leakage discovered on public repositories, paste sites, or dark web markets",
+      "mitigatedBy": ["PM-16", "SI-05", "IR-04", "AU-02"]
+    },
+    {
+      "id": "T-EASM-008",
+      "name": "Supply chain surface exposure through compromised or misconfigured third-party services",
+      "mitigatedBy": ["SA-09", "SA-04", "PM-16", "SC-07"]
+    },
+    {
+      "id": "T-EASM-009",
+      "name": "Phishing infrastructure using lookalike domains or hijacked subdomains of the organisation",
+      "mitigatedBy": ["SC-20", "PM-16", "IR-04", "CM-02"]
+    },
+    {
+      "id": "T-EASM-010",
+      "name": "Information leakage through HTTP headers, error pages, DNS records, and document metadata",
+      "mitigatedBy": ["SI-04", "RA-05", "CM-02", "AU-12"]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-20",
+      "name": "Use of External Systems",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-11",
+      "name": "User-installed Software",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-13",
+      "name": "Data Action Mapping",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-09",
+      "name": "Service Identification and Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-05",
+      "name": "System Inventory",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-16",
+      "name": "Threat Awareness Program",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-07",
+      "name": "Risk Response",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-09",
+      "name": "Criticality Analysis",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-20",
+      "name": "Secure Name/Address Resolution Service",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts, Advisories, and Directives",
+      "family": "SI",
+      "emphasis": "important"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 2,
+    "AU": 2,
+    "CA": 2,
+    "CM": 5,
+    "IA": 1,
+    "IR": 1,
+    "PM": 3,
+    "RA": 4,
+    "SA": 2,
+    "SC": 3,
+    "SI": 3
+  }
+}

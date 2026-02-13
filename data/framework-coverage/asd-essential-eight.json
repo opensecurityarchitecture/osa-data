@@ -4,8 +4,8 @@
   "framework_name": "ASD Essential Eight",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -41,11 +41,12 @@
       "controls": [
         "CM-07(4)",
         "CM-07(5)",
-        "CM-11"
+        "CM-11",
+        "CM-14"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-07(4) application allowlisting; CM-07(5) authorized software; CM-11 user-installed software restrictions.",
-      "gaps": "Minimal gap. SP 800-53 application allowlisting controls align well with ASD Essential Eight application control."
+      "coverage_pct": 92,
+      "rationale": "CM-07(4) application allowlisting; CM-07(5) authorized software; CM-11 user-installed software restrictions. CM-14 (new in Rev 5) signed components adds cryptographic verification of application integrity, strengthening application control enforcement.",
+      "gaps": "Minimal gap. CM-14 improves integrity verification for allowed applications."
     },
     {
       "id": "E8-1 ML1",
@@ -76,11 +77,12 @@
       "title": "Application control - Maturity Level 3: Microsoft's recommended block rules, WDAC, driver control",
       "controls": [
         "CM-07(4)",
-        "CM-07(5)"
+        "CM-07(5)",
+        "CM-14"
       ],
-      "coverage_pct": 70,
-      "rationale": "CM-07(4)/(5) application allowlisting covers the concept.",
-      "gaps": "ASD E8 ML3 specifies Microsoft-specific implementation (WDAC, recommended block lists, driver control). SP 800-53 is technology-neutral and doesn't specify Microsoft implementations."
+      "coverage_pct": 72,
+      "rationale": "CM-07(4)/(5) application allowlisting covers the concept. CM-14 (new in Rev 5) signed components supports driver integrity verification relevant to ML3 driver control requirements.",
+      "gaps": "ASD E8 ML3 specifies Microsoft-specific implementation (WDAC, recommended block lists, driver control). SP 800-53 is technology-neutral. CM-14 strengthens signed component verification but doesn't address Microsoft-specific implementations."
     },
     {
       "id": "E8-2",
@@ -123,11 +125,12 @@
       "controls": [
         "SI-02(1)",
         "CM-08(1)",
-        "RA-05(2)"
+        "RA-05(2)",
+        "CM-12"
       ],
-      "coverage_pct": 85,
-      "rationale": "SI-02(1) automated patching; CM-08(1) automated discovery; RA-05(2) update vulnerability database.",
-      "gaps": "Minor: ASD E8 ML3 requires automated patch compliance reporting. SP 800-53 covers automated mechanisms."
+      "coverage_pct": 88,
+      "rationale": "SI-02(1) automated patching; CM-08(1) automated discovery; RA-05(2) update vulnerability database. CM-12 (new in Rev 5) information location improves asset-to-patch coverage tracking by identifying where software components reside.",
+      "gaps": "Minor: ASD E8 ML3 requires automated patch compliance reporting. CM-12 improves information location for patch coverage assessment."
     },
     {
       "id": "E8-3",
@@ -135,11 +138,12 @@
       "controls": [
         "CM-07",
         "CM-06",
-        "SI-03"
+        "SI-03",
+        "SC-18"
       ],
-      "coverage_pct": 65,
-      "rationale": "CM-07 least functionality; CM-06 configuration settings; SI-03 malware protection.",
-      "gaps": "ASD E8 specifically addresses Microsoft Office macros. SP 800-53 covers application configuration generally but macro-specific controls are technology-specific. SC-18 (mobile code) is partially relevant."
+      "coverage_pct": 68,
+      "rationale": "CM-07 least functionality; CM-06 configuration settings; SI-03 malware protection; SC-18 mobile code restrictions.",
+      "gaps": "ASD E8 specifically addresses Microsoft Office macros. SP 800-53 covers application configuration generally but macro-specific controls are technology-specific."
     },
     {
       "id": "E8-3 ML1",
@@ -170,11 +174,12 @@
       "controls": [
         "CM-07",
         "CM-06",
-        "SI-07"
+        "SI-07",
+        "CM-14"
       ],
-      "coverage_pct": 60,
-      "rationale": "CM-07 least functionality; CM-06 configuration; SI-07 integrity verification.",
-      "gaps": "ASD E8 ML3 specifies trusted publisher macro signing. SP 800-53 covers integrity verification generally but macro signing policy is technology-specific."
+      "coverage_pct": 65,
+      "rationale": "CM-07 least functionality; CM-06 configuration; SI-07 integrity verification. CM-14 (new in Rev 5) signed components provides cryptographic verification relevant to macro signing enforcement.",
+      "gaps": "ASD E8 ML3 specifies trusted publisher macro signing. CM-14 strengthens signed component verification but macro signing policy remains technology-specific."
     },
     {
       "id": "E8-4",
@@ -220,7 +225,7 @@
       ],
       "coverage_pct": 55,
       "rationale": "CM-07 least functionality; CM-06 configuration.",
-      "gaps": "ASD E8 ML3 specifies Windows-specific hardening. SP 800-53 is technology-neutral; Microsoft-specific hardening guidance not provided."
+      "gaps": "ASD E8 ML3 specifies Windows-specific hardening (.NET removal, PowerShell constraints, WDAC). SP 800-53 is technology-neutral; Microsoft-specific hardening guidance not provided."
     },
     {
       "id": "E8-5",
@@ -284,7 +289,7 @@
         "SA-22"
       ],
       "coverage_pct": 85,
-      "rationale": "SI-02 flaw remediation; SI-02(1) automated mechanisms; RA-05 vulnerability scanning; SA-22 unsupported components.",
+      "rationale": "SI-02 flaw remediation; SI-02(1) automated mechanisms; RA-05 vulnerability scanning; SA-22 unsupported system components.",
       "gaps": "Minor: ASD E8 specifies OS patching timeframes (48 hours for critical). SP 800-53 requires timely patching but timeframes are organization-defined."
     },
     {
@@ -417,10 +422,10 @@
   ],
   "summary": {
     "total_clauses": 32,
-    "average_coverage": 79.7,
+    "average_coverage": 80.2,
     "full_count": 15,
-    "substantial_count": 15,
-    "partial_count": 2,
+    "substantial_count": 16,
+    "partial_count": 1,
     "weak_count": 0,
     "none_count": 0
   }

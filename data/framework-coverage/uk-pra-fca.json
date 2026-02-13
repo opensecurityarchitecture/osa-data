@@ -4,8 +4,8 @@
   "framework_name": "UK PRA/FCA",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -41,11 +41,14 @@
       "controls": [
         "PM-11",
         "PM-08",
-        "CP-02"
+        "CP-02",
+        "CM-12",
+        "CM-13",
+        "RA-09"
       ],
-      "coverage_pct": 55,
-      "rationale": "PM-11 mission/business process; PM-08 critical infrastructure; CP-02 contingency planning identifies critical functions.",
-      "gaps": "PRA requires identification of 'important business services' with specific impact tolerances. SP 800-53 covers mission process definition but UK-specific IBS methodology and impact tolerance setting not addressed."
+      "coverage_pct": 60,
+      "rationale": "PM-11 mission/business process; PM-08 critical infrastructure; CP-02 contingency planning identifies critical functions. CM-12 (new in Rev 5) information location identifies where information assets reside, supporting IBS mapping. CM-13 (new in Rev 5) data action mapping documents data flows underpinning business services. RA-09 (new in Rev 5) criticality analysis identifies critical components supporting important business services.",
+      "gaps": "CM-12/CM-13/RA-09 improve identification and mapping of critical services. However, PRA 'important business service' methodology and impact tolerance setting remain UK-specific regulatory concepts not directly addressed by SP 800-53."
     },
     {
       "id": "SS1/21 4",
@@ -56,7 +59,7 @@
       ],
       "coverage_pct": 40,
       "rationale": "CP-02 includes RTO/RPO which are related concepts; PM-11 mission process definition.",
-      "gaps": "Significant gap. PRA impact tolerances are a specific UK regulatory concept measuring maximum tolerable disruption. SP 800-53 uses RTO/RPO which are related but distinct from impact tolerances."
+      "gaps": "Significant gap. PRA impact tolerances are a specific UK regulatory concept measuring maximum tolerable disruption. SP 800-53 uses RTO/RPO which are related but distinct. No new Rev 5 controls address this regulatory-specific concept."
     },
     {
       "id": "SS1/21 5",
@@ -65,11 +68,13 @@
         "PM-11",
         "PL-08",
         "CM-08",
-        "SA-09"
+        "SA-09",
+        "CM-12",
+        "CM-13"
       ],
-      "coverage_pct": 50,
-      "rationale": "PM-11 mission processes; PL-08 security architecture; CM-08 inventory; SA-09 external dependencies.",
-      "gaps": "PRA requires mapping of resources (people, technology, facilities, information, third parties) supporting each IBS. SP 800-53 covers system inventory and dependencies but IBS-level resource mapping methodology not addressed."
+      "coverage_pct": 58,
+      "rationale": "PM-11 mission processes; PL-08 security architecture; CM-08 inventory; SA-09 external dependencies. CM-12 (new in Rev 5) information location and CM-13 (new in Rev 5) data action mapping significantly improve resource mapping capabilities by documenting where information resides and how data flows through systems.",
+      "gaps": "CM-12/CM-13 close a material gap by enabling data-centric resource mapping. PRA requires mapping of all resources (people, technology, facilities, information, third parties) supporting each IBS. People and facilities mapping remain gaps."
     },
     {
       "id": "SS1/21 6",
@@ -82,7 +87,7 @@
       ],
       "coverage_pct": 60,
       "rationale": "CP-04 contingency testing; IR-03 incident response testing; PM-14 testing/exercises; CA-08 penetration testing.",
-      "gaps": "PRA requires severe but plausible scenario testing against impact tolerances. SP 800-53 covers testing but the specific PRA scenario testing methodology and impact tolerance validation not addressed."
+      "gaps": "PRA requires severe but plausible scenario testing against impact tolerances. SP 800-53 covers security testing but the specific PRA scenario testing methodology and impact tolerance validation are not addressed. No new Rev 5 controls materially improve this."
     },
     {
       "id": "SS1/21 7",
@@ -90,11 +95,12 @@
       "controls": [
         "IR-03",
         "CA-05",
-        "PM-06"
+        "PM-06",
+        "AT-06"
       ],
-      "coverage_pct": 65,
-      "rationale": "IR-03 post-incident review; CA-05 POA&M for remediation; PM-06 performance measurement.",
-      "gaps": "PRA requires continuous improvement from testing to remain within impact tolerances. SP 800-53 covers lessons learned but PRA-specific improvement cycle not addressed."
+      "coverage_pct": 68,
+      "rationale": "IR-03 post-incident review; CA-05 POA&M for remediation; PM-06 performance measurement. AT-06 (new in Rev 5) training feedback enables measurement of improvement actions from lessons learned, supporting continuous improvement cycles.",
+      "gaps": "AT-06 strengthens the improvement cycle by measuring effectiveness of corrective actions. PRA-specific improvement cycle tied to impact tolerance achievement still needs supplementation."
     },
     {
       "id": "SS2/21",
@@ -105,11 +111,12 @@
         "SR-01",
         "SR-02",
         "SR-03",
-        "SR-06"
+        "SR-06",
+        "SA-21"
       ],
-      "coverage_pct": 65,
-      "rationale": "SA-04 acquisition; SA-09 external services; SR family supply chain.",
-      "gaps": "PRA/FCA outsourcing requirements include materiality assessment, intra-group arrangements, and sub-outsourcing chains. SP 800-53 covers vendor management but UK-specific outsourcing regulatory requirements not fully addressed."
+      "coverage_pct": 67,
+      "rationale": "SA-04 acquisition; SA-09 external services; SR family supply chain. SA-21 (new in Rev 5) developer screening adds personnel vetting for outsourced service providers.",
+      "gaps": "SA-21 improves third-party personnel assurance. PRA/FCA outsourcing requirements include materiality assessment, intra-group arrangements, and sub-outsourcing chains which are UK-specific regulatory requirements not addressed by SP 800-53."
     },
     {
       "id": "FCA PS21/3",
@@ -135,11 +142,13 @@
         "IR-05",
         "IR-06",
         "IR-07",
-        "IR-08"
+        "IR-08",
+        "SC-24",
+        "SI-17"
       ],
-      "coverage_pct": 60,
-      "rationale": "CP and IR families cover contingency and incident response.",
-      "gaps": "FCA operational resilience extends beyond IT to people, premises, and processes. SP 800-53 focuses on IT/information security. Broader operational resilience framework gaps exist."
+      "coverage_pct": 63,
+      "rationale": "CP and IR families cover contingency and incident response. SC-24 (new in Rev 5) fail in known state ensures systems preserve security during failures. SI-17 (new in Rev 5) fail-safe procedures provide additional failure handling for operational resilience.",
+      "gaps": "SC-24/SI-17 add resilience depth through failure mode management. FCA operational resilience extends beyond IT to people, premises, and processes. SP 800-53 focuses on IT/information security; broader operational resilience framework gaps persist."
     },
     {
       "id": "PRA Cyber",
@@ -147,11 +156,12 @@
       "controls": [
         "PM-09",
         "RA-03",
-        "CP-02"
+        "CP-02",
+        "RA-07"
       ],
-      "coverage_pct": 35,
-      "rationale": "PM-09 risk management strategy; RA-03 risk assessment; CP-02 contingency planning.",
-      "gaps": "PRA cyber underwriting and stress testing requirements are UK financial regulatory specific. SP 800-53 covers risk management but financial regulatory stress testing not addressed."
+      "coverage_pct": 38,
+      "rationale": "PM-09 risk management strategy; RA-03 risk assessment; CP-02 contingency planning. RA-07 (new in Rev 5) risk response provides risk treatment options including transfer (insurance) and acceptance.",
+      "gaps": "RA-07 partially addresses cyber insurance through risk transfer concept. However, PRA cyber underwriting and stress testing requirements are UK financial regulatory specific. Financial regulatory stress testing is fundamentally outside SP 800-53 scope."
     },
     {
       "id": "CBEST",
@@ -160,27 +170,30 @@
         "CA-08",
         "CA-08(1)",
         "RA-10",
-        "PM-16"
+        "PM-16",
+        "SC-26",
+        "SC-35"
       ],
-      "coverage_pct": 65,
-      "rationale": "CA-08 penetration testing; CA-08(1) independent agent; RA-10 threat hunting; PM-16 threat awareness.",
-      "gaps": "CBEST requires threat intelligence-led red team testing of critical financial infrastructure. CA-08 covers penetration testing but the specific CBEST methodology and financial sector focus not addressed."
+      "coverage_pct": 68,
+      "rationale": "CA-08 penetration testing; CA-08(1) independent agent; RA-10 threat hunting; PM-16 threat awareness. SC-26 (new in Rev 5) honeypots provide deception technology relevant to CBEST threat simulation. SC-35 (new in Rev 5) honeyclients enable detection of client-side attack vectors used in CBEST scenarios.",
+      "gaps": "SC-26/SC-35 add deception technology capabilities aligned with CBEST threat simulation. However, CBEST requires threat intelligence-led red team testing of critical financial infrastructure with specific methodology and financial sector focus not addressed by SP 800-53."
     },
     {
       "id": "FCA SYSC 25",
       "title": "Senior management responsibilities for cyber",
       "controls": [
         "PM-01",
-        "PM-02"
+        "PM-02",
+        "PS-09"
       ],
-      "coverage_pct": 50,
-      "rationale": "PM-01 security program; PM-02 senior security role.",
-      "gaps": "FCA senior management arrangements require specific accountability under SM&CR. SP 800-53 assigns roles but UK-specific senior manager accountability framework not addressed."
+      "coverage_pct": 52,
+      "rationale": "PM-01 security program; PM-02 senior security role. PS-09 (new in Rev 5) position descriptions formalizes security responsibilities in organizational roles.",
+      "gaps": "PS-09 improves role definition. FCA senior management arrangements require specific accountability under SM&CR (Senior Managers and Certification Regime). UK-specific senior manager accountability framework is regulatory and not addressed by SP 800-53."
     }
   ],
   "summary": {
     "total_clauses": 10,
-    "average_coverage": 54.5,
+    "average_coverage": 57.4,
     "full_count": 0,
     "substantial_count": 3,
     "partial_count": 6,

@@ -4,8 +4,8 @@
   "framework_name": "ISO/IEC 42001:2023",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
     "full": {
@@ -41,22 +41,24 @@
       "controls": [
         "AC-01",
         "PL-01",
-        "PL-02"
+        "PL-02",
+        "PL-09"
       ],
-      "coverage_pct": 70,
-      "rationale": "AC-01 and PL-01/PL-02 cover security policy and planning. General policy frameworks apply, but AI-specific policy elements are not addressed.",
-      "gaps": "ISO 42001 A.2.2 requires an AI-specific policy covering responsible AI principles, ethical use, and AI governance. SP 800-53 policies are security/privacy-focused and do not address AI ethics, fairness, or responsible AI commitments."
+      "coverage_pct": 72,
+      "rationale": "AC-01 and PL-01/PL-02 cover security policy and planning. PL-09 (new in Rev 5) central management provides a unified policy administration mechanism that could extend to AI governance policy coordination.",
+      "gaps": "ISO 42001 A.2.2 requires an AI-specific policy covering responsible AI principles, ethical use, and AI governance. SP 800-53 policies are security/privacy-focused. PL-09 improves central policy coordination but does not address AI ethics, fairness, or responsible AI commitments."
     },
     {
       "id": "A.2.3",
       "title": "AI roles and responsibilities",
       "controls": [
         "AC-01",
-        "PL-01"
+        "PL-01",
+        "PS-09"
       ],
-      "coverage_pct": 65,
-      "rationale": "AC-01 and PL-01 assign security roles and responsibilities. Applicable to AI roles in a general sense.",
-      "gaps": "ISO 42001 requires AI-specific roles such as AI system owner, AI ethics officer, and AI risk manager. SP 800-53 defines security roles but not AI governance, AI ethics, or AI-specific accountability structures."
+      "coverage_pct": 68,
+      "rationale": "AC-01 and PL-01 assign security roles and responsibilities. PS-09 (new in Rev 5) position descriptions formalises the documentation of security-related duties within job descriptions, applicable to defining AI-related role responsibilities.",
+      "gaps": "ISO 42001 requires AI-specific roles such as AI system owner, AI ethics officer, and AI risk manager. PS-09 improves role definition but SP 800-53 does not address AI governance, AI ethics, or AI-specific accountability structures."
     },
     {
       "id": "A.2.4",
@@ -80,11 +82,12 @@
         "PS-01",
         "PS-02",
         "PS-04",
-        "PS-05"
+        "PS-05",
+        "PS-09"
       ],
-      "coverage_pct": 65,
-      "rationale": "AC-02 account management; AC-05 separation of duties; AC-06 least privilege; PS family personnel security. Covers role assignment and access governance.",
-      "gaps": "ISO 42001 requires AI-specific role definitions including those responsible for AI ethics, bias review, and AI lifecycle management. SP 800-53 covers information security roles comprehensively but not AI-specific authority structures."
+      "coverage_pct": 68,
+      "rationale": "AC-02 account management; AC-05 separation of duties; AC-06 least privilege; PS family personnel security. PS-09 (new in Rev 5) position descriptions strengthens role documentation for AI-related positions.",
+      "gaps": "ISO 42001 requires AI-specific role definitions including those responsible for AI ethics, bias review, and AI lifecycle management. PS-09 improves position documentation but AI-specific authority structures remain unaddressed."
     },
     {
       "id": "A.3.3",
@@ -94,11 +97,12 @@
         "IR-04",
         "IR-06",
         "PS-08",
-        "SI-05"
+        "SI-05",
+        "IR-09"
       ],
-      "coverage_pct": 55,
-      "rationale": "IR-04 incident handling; IR-06 incident reporting; SI-05 security alerts; PS-08 personnel sanctions; AT-05 contacts with security groups.",
-      "gaps": "ISO 42001 requires reporting of AI-specific incidents including bias events, unintended AI behaviours, ethical concerns, and AI safety events. SP 800-53 incident reporting covers security incidents but not AI-specific incident taxonomy, ethical concern escalation, or AI safety reporting channels."
+      "coverage_pct": 58,
+      "rationale": "IR-04 incident handling; IR-06 incident reporting; SI-05 security alerts; PS-08 personnel sanctions; AT-05 contacts with security groups. IR-09 (new in Rev 5) information spillage response adds handling for data exposure incidents, partially relevant to AI training data incidents.",
+      "gaps": "ISO 42001 requires reporting of AI-specific incidents including bias events, unintended AI behaviours, ethical concerns, and AI safety events. IR-09 addresses data spillage but AI-specific incident taxonomy, ethical concern escalation, and AI safety reporting channels are not covered."
     },
     {
       "id": "A.4.2",
@@ -107,11 +111,12 @@
         "CM-01",
         "CM-02",
         "CM-06",
-        "CM-08"
+        "CM-08",
+        "CM-12"
       ],
-      "coverage_pct": 60,
-      "rationale": "CM-01/CM-02 configuration management; CM-06 configuration settings; CM-08 component inventory. System inventory capabilities apply to AI systems.",
-      "gaps": "ISO 42001 requires an AI-specific system inventory documenting AI purpose, data used, model type, deployment context, and impact level. SP 800-53 CM-08 covers IT component inventory but not AI-specific attributes such as model type, training data provenance, or intended use documentation."
+      "coverage_pct": 65,
+      "rationale": "CM-01/CM-02 configuration management; CM-06 configuration settings; CM-08 component inventory. CM-12 (new in Rev 5) information location tracks where data and systems reside, applicable to AI system inventory across environments.",
+      "gaps": "ISO 42001 requires an AI-specific system inventory documenting AI purpose, data used, model type, deployment context, and impact level. CM-12 improves system location tracking but AI-specific attributes such as model type, training data provenance, or intended use documentation are not addressed."
     },
     {
       "id": "A.4.3",
@@ -122,11 +127,12 @@
         "MP-02",
         "MP-04",
         "MP-05",
-        "MP-06"
+        "MP-06",
+        "CM-13"
       ],
-      "coverage_pct": 50,
-      "rationale": "CP-09 backup; MP family media protection and handling. Data storage and protection controls apply.",
-      "gaps": "Significant gap. ISO 42001 requires AI-specific data management including training data quality assessment, data bias analysis, data lineage, data labelling governance, and representativeness validation. SP 800-53 covers data protection and media handling but not AI training data quality, bias in data, or data fitness-for-purpose assessment."
+      "coverage_pct": 55,
+      "rationale": "CP-09 backup; MP family media protection and handling. CM-13 (new in Rev 5) data action mapping provides visibility into data processing actions, partially relevant to AI data management and data lifecycle tracking.",
+      "gaps": "Significant gap. ISO 42001 requires AI-specific data management including training data quality assessment, data bias analysis, data lineage, and representativeness validation. CM-13 improves data action visibility but AI training data quality, bias in data, or data fitness-for-purpose assessment are not addressed."
     },
     {
       "id": "A.4.4",
@@ -151,11 +157,12 @@
         "CP-10",
         "PE-18",
         "SA-02",
-        "SC-06"
+        "SC-06",
+        "SC-24"
       ],
-      "coverage_pct": 70,
-      "rationale": "CP-01/CP-02 contingency planning; CP-07 alternate processing; CP-10 recovery; PE-18 component location; SA-02 resource allocation; SC-06 resource priority.",
-      "gaps": "ISO 42001 requires AI-specific continuity including model fallback strategies, graceful degradation for AI decisions, and AI system recovery priorities. SP 800-53 CP family provides strong continuity foundations but does not address AI-specific failover (e.g., reverting to non-AI decision paths)."
+      "coverage_pct": 72,
+      "rationale": "CP-01/CP-02 contingency planning; CP-07 alternate processing; CP-10 recovery; PE-18 component location; SA-02 resource allocation; SC-06 resource priority. SC-24 (new in Rev 5) fail in known state supports graceful degradation, partially relevant to AI system fallback strategies.",
+      "gaps": "ISO 42001 requires AI-specific continuity including model fallback strategies, graceful degradation for AI decisions, and AI system recovery priorities. SC-24 provides fail-safe concepts but does not address AI-specific failover (e.g., reverting to non-AI decision paths)."
     },
     {
       "id": "A.4.6",
@@ -166,11 +173,12 @@
         "AT-03",
         "AT-04",
         "PS-01",
-        "PS-03"
+        "PS-03",
+        "AT-06"
       ],
-      "coverage_pct": 55,
-      "rationale": "AT-01 through AT-04 training policy, awareness, training, and records; PS-01 personnel security; PS-03 screening.",
-      "gaps": "ISO 42001 requires AI-specific competency including ML/AI technical skills, AI ethics training, responsible AI awareness, and AI risk assessment capabilities. SP 800-53 training covers security awareness but not AI-specific competencies, AI ethics, or responsible AI development skills."
+      "coverage_pct": 58,
+      "rationale": "AT-01 through AT-04 training policy, awareness, training, and records; PS-01 personnel security; PS-03 screening. AT-06 (new in Rev 5) training feedback provides mechanisms for evaluating training effectiveness, applicable to assessing AI competency programme outcomes.",
+      "gaps": "ISO 42001 requires AI-specific competency including ML/AI technical skills, AI ethics training, responsible AI awareness, and AI risk assessment capabilities. AT-06 improves training evaluation but AI-specific competencies and responsible AI skills are not addressed."
     },
     {
       "id": "A.5.2",
@@ -183,11 +191,14 @@
         "RA-01",
         "RA-02",
         "RA-03",
-        "RA-04"
+        "RA-04",
+        "RA-07",
+        "RA-08",
+        "RA-09"
       ],
-      "coverage_pct": 50,
-      "rationale": "CA-01/CA-02 assessment policy and assessments; CA-06 authorization; PL-05 privacy impact; RA-01 through RA-04 risk assessment family.",
-      "gaps": "Significant gap. ISO 42001 requires AI-specific risk assessment covering bias risk, fairness risk, transparency risk, AI safety risk, and societal impact. SP 800-53 RA family covers information security risk but not AI-specific risks such as algorithmic bias, model explainability gaps, or unintended societal consequences."
+      "coverage_pct": 55,
+      "rationale": "CA-01/CA-02 assessment policy and assessments; CA-06 authorization; PL-05 privacy impact; RA-01 through RA-04 risk assessment family. RA-07 (new in Rev 5) risk response adds structured treatment actions; RA-08 (new in Rev 5) privacy impact assessments strengthens privacy risk analysis; RA-09 (new in Rev 5) criticality analysis identifies critical components for risk prioritisation.",
+      "gaps": "Significant gap. ISO 42001 requires AI-specific risk assessment covering bias risk, fairness risk, transparency risk, AI safety risk, and societal impact. RA-07/RA-08/RA-09 improve risk response, privacy assessment, and criticality analysis but AI-specific risks such as algorithmic bias, model explainability gaps, or unintended societal consequences are not addressed."
     },
     {
       "id": "A.5.3",
@@ -196,11 +207,12 @@
         "CA-02",
         "CA-05",
         "PL-05",
-        "RA-03"
+        "RA-03",
+        "RA-07"
       ],
-      "coverage_pct": 50,
-      "rationale": "CA-02 assessments; CA-05 POA&M; PL-05 privacy impact; RA-03 risk assessment. Risk treatment and remediation apply.",
-      "gaps": "ISO 42001 requires AI-specific risk treatment including bias mitigation techniques, fairness interventions, explainability enhancements, and human oversight mechanisms. SP 800-53 covers security risk treatment but not AI-specific mitigations such as debiasing algorithms, fairness constraints, or model interpretability improvements."
+      "coverage_pct": 52,
+      "rationale": "CA-02 assessments; CA-05 POA&M; PL-05 privacy impact; RA-03 risk assessment. RA-07 (new in Rev 5) risk response adds structured risk treatment actions.",
+      "gaps": "ISO 42001 requires AI-specific risk treatment including bias mitigation techniques, fairness interventions, explainability enhancements, and human oversight mechanisms. RA-07 improves risk treatment actions but AI-specific mitigations such as debiasing algorithms or fairness constraints are not addressed."
     },
     {
       "id": "A.5.4",
@@ -212,11 +224,12 @@
         "PT-03",
         "PT-07",
         "PT-08",
-        "RA-03"
+        "RA-03",
+        "RA-08"
       ],
-      "coverage_pct": 40,
-      "rationale": "PL-05 privacy impact assessment; PT family PII processing; RA-03 risk assessment. Privacy impact assessment is partially relevant.",
-      "gaps": "Significant gap. ISO 42001 requires comprehensive AI impact assessment covering human rights, societal impact, environmental impact, and affected stakeholder analysis. SP 800-53 PL-05 covers privacy impact but not broader AI impact assessment for human rights, discrimination, environmental cost of AI, or societal implications."
+      "coverage_pct": 45,
+      "rationale": "PL-05 privacy impact assessment; PT family PII processing; RA-03 risk assessment. RA-08 (new in Rev 5) privacy impact assessments strengthens privacy risk analysis relevant to AI data processing impacts.",
+      "gaps": "Significant gap. ISO 42001 requires comprehensive AI impact assessment covering human rights, societal impact, environmental impact, and affected stakeholder analysis. RA-08 improves privacy impact assessment but broader AI impact for human rights, discrimination, environmental cost, or societal implications is not addressed."
     },
     {
       "id": "A.5.5",
@@ -289,7 +302,7 @@
         "SR-10"
       ],
       "coverage_pct": 55,
-      "rationale": "CA-02 assessments; RA-05 vulnerability scanning; SA-11 developer security testing; SI-06 security verification; SI-07 software integrity; SR-10 inspection.",
+      "rationale": "CA-02 assessments; RA-05 vulnerability scanning; SA-11 developer security testing; SI-06 security function verification; SI-07 software integrity; SR-10 inspection.",
       "gaps": "ISO 42001 requires AI-specific testing including bias testing, fairness validation, robustness testing, and adversarial testing of AI models. SP 800-53 covers security testing and vulnerability assessment but not AI-specific testing such as model accuracy validation, bias benchmarking, or adversarial robustness evaluation."
     },
     {
@@ -319,7 +332,7 @@
         "SI-07"
       ],
       "coverage_pct": 60,
-      "rationale": "AC-13 supervision and review; AU-06 audit review; CA-07 continuous monitoring; CM-04 monitoring config changes; MA-02/MA-06 maintenance; SI-01/SI-02 system integrity and flaw remediation; SI-04 monitoring; SI-07 software integrity.",
+      "rationale": "AC-13 supervision and review; AU-06 audit review; CA-07 continuous monitoring; CM-04 monitoring configuration changes; MA-02/MA-06 maintenance; SI-01/SI-02 system integrity and flaw remediation; SI-04 monitoring; SI-07 software integrity.",
       "gaps": "ISO 42001 requires AI-specific maintenance including model performance monitoring, bias drift detection, data quality monitoring, and model retraining triggers. SP 800-53 covers security monitoring and system maintenance but not AI-specific monitoring such as model accuracy degradation, concept drift, or feature distribution shifts."
     },
     {
@@ -343,11 +356,12 @@
         "AU-06",
         "AU-07",
         "AU-09",
-        "AU-11"
+        "AU-11",
+        "CM-13"
       ],
-      "coverage_pct": 80,
-      "rationale": "AU-01 through AU-11 audit family provides comprehensive logging, audit trail, and record retention. Strong coverage.",
-      "gaps": "Minor gap. ISO 42001 requires AI-specific logging including AI decision logs, model input/output logging, and audit trails for AI decision rationale. SP 800-53 AU family covers logging comprehensively; minor gap around AI-specific decision logging and explainability audit trails."
+      "coverage_pct": 82,
+      "rationale": "AU-01 through AU-11 audit family provides comprehensive logging, audit trail, and record retention. CM-13 (new in Rev 5) data action mapping adds visibility into data processing actions, strengthening audit trails for AI data pipeline operations.",
+      "gaps": "Minor gap. ISO 42001 requires AI-specific logging including AI decision logs, model input/output logging, and audit trails for AI decision rationale. CM-13 improves data action audit trails but AI-specific decision logging and explainability audit trails remain a gap."
     },
     {
       "id": "A.7.2",
@@ -365,11 +379,13 @@
       "controls": [
         "PT-02",
         "PT-04",
-        "PT-07"
+        "PT-07",
+        "CM-12",
+        "CM-13"
       ],
-      "coverage_pct": 25,
-      "rationale": "PT-02 authority to process PII; PT-04 consent; PT-07 specific categories of PII. Privacy controls partially relevant.",
-      "gaps": "Major gap. ISO 42001 requires comprehensive data provenance including training data sourcing, data transformations, data lineage tracking, and data rights management. SP 800-53 PT family addresses PII processing authority but not general AI data provenance, training data lineage, or data sourcing documentation."
+      "coverage_pct": 30,
+      "rationale": "PT-02 authority to process PII; PT-04 consent; PT-07 specific categories of PII. CM-12 (new in Rev 5) information location and CM-13 (new in Rev 5) data action mapping provide some data tracking capabilities relevant to provenance.",
+      "gaps": "Major gap. ISO 42001 requires comprehensive data provenance including training data sourcing, data transformations, data lineage tracking, and data rights management. CM-12/CM-13 improve data location and action tracking but general AI data provenance, training data lineage, or data sourcing documentation are not addressed."
     },
     {
       "id": "A.7.4",
@@ -392,11 +408,12 @@
         "AC-16",
         "AU-10",
         "SR-04",
-        "SR-11"
+        "SR-11",
+        "CM-14"
       ],
-      "coverage_pct": 35,
-      "rationale": "AC-16 automated labelling; AU-10 non-repudiation; SR-04 provenance; SR-11 component authenticity. Supply chain integrity partially applicable.",
-      "gaps": "ISO 42001 requires AI-specific data integrity including training data tampering detection, data poisoning prevention, and AI dataset authenticity verification. SP 800-53 covers general data integrity and supply chain authenticity but not AI-specific threats such as training data poisoning or adversarial data manipulation."
+      "coverage_pct": 38,
+      "rationale": "AC-16 automated labelling; AU-10 non-repudiation; SR-04 provenance; SR-11 component authenticity. CM-14 (new in Rev 5) signed components provides cryptographic integrity verification applicable to AI model and data artefact integrity.",
+      "gaps": "ISO 42001 requires AI-specific data integrity including training data tampering detection, data poisoning prevention, and AI dataset authenticity verification. CM-14 strengthens component integrity but AI-specific threats such as training data poisoning or adversarial data manipulation are not addressed."
     },
     {
       "id": "A.8.2",
@@ -430,11 +447,12 @@
         "IR-05",
         "IR-06",
         "IR-07",
-        "SR-08"
+        "SR-08",
+        "IR-09"
       ],
-      "coverage_pct": 65,
-      "rationale": "IR-01 through IR-07 incident response family; SR-08 notification agreements. Comprehensive incident management framework.",
-      "gaps": "ISO 42001 requires AI-specific incident classification including bias incidents, AI safety events, and unintended AI behaviour. SP 800-53 IR family provides strong incident management but needs supplementation for AI-specific incident taxonomy and AI safety incident response procedures."
+      "coverage_pct": 68,
+      "rationale": "IR-01 through IR-07 incident response family; SR-08 notification agreements. IR-09 (new in Rev 5) information spillage response adds handling for data exposure incidents, relevant to AI training data breaches and model extraction incidents.",
+      "gaps": "ISO 42001 requires AI-specific incident classification including bias incidents, AI safety events, and unintended AI behaviour. IR-09 improves data spillage response but AI-specific incident taxonomy and AI safety incident response procedures need supplementation."
     },
     {
       "id": "A.8.5",
@@ -533,10 +551,10 @@
   ],
   "summary": {
     "total_clauses": 37,
-    "average_coverage": 51.6,
+    "average_coverage": 53.0,
     "full_count": 0,
-    "substantial_count": 10,
-    "partial_count": 19,
+    "substantial_count": 11,
+    "partial_count": 18,
     "weak_count": 8,
     "none_count": 0
   }

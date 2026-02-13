@@ -1,0 +1,219 @@
+{
+  "id": "SP-044",
+  "title": "SaaS Identity Lifecycle Management",
+  "slug": "saas-identity-lifecycle",
+  "description": "A security architecture pattern for managing the full identity lifecycle across SaaS applications -- from provisioning and role assignment through access reviews and deprovisioning. Addresses privilege creep, contractor access governance, orphaned accounts, and cross-application identity synchronisation in organisations with significant SaaS estates.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/saas-identity-lifecycle",
+  "metadata": {
+    "release": "2.0",
+    "status": "active",
+    "type": "pattern",
+    "classification": "Identity and Access Management",
+    "datePublished": "2026-02-13",
+    "dateModified": "2026-02-13",
+    "authors": ["Spinoza", "Vitruvius"],
+    "provenance": "Developed in response to community feedback (Reddit r/cybersecurity, SecureSlateHQ) identifying identity lifecycle gaps in SaaS environments as a persistent architectural blind spot. Informed by real-world experience managing identity sprawl across 50+ SaaS applications in financial services and technology organisations."
+  },
+  "diagram": {
+    "svg": "sp-044-saas-identity-lifecycle.svg",
+    "png": "sp-044-saas-identity-lifecycle.png"
+  },
+  "content": {
+    "description": "Most organisations today operate dozens or hundreds of SaaS applications, each with its own identity store, role model, and access management interface. The identity lifecycle -- joining, moving between roles, and leaving -- creates a sprawl of accounts, entitlements, and credentials that no single administrator can track manually.\n\nThe consequences are predictable: orphaned accounts persist for months after employees leave, contractors retain access long after engagements end, role changes accumulate entitlements without removing old ones (privilege creep), and shadow SaaS applications are adopted outside central governance. Each of these conditions represents an exploitable attack surface.\n\nThis pattern addresses the full identity lifecycle in SaaS-heavy environments. It covers automated provisioning from authoritative HR sources, role-based entitlement mapping, periodic access reviews with manager attestation, contractor and temporary access governance, and systematic deprovisioning. It complements SP-032 (Modern Authentication) which handles how users prove their identity, and SP-037 (Privileged User Management) which handles elevated credentials. SP-044 handles the question that comes before both: who should have access to what, when, and for how long.\n\nThe pattern assumes a centralised identity provider (IdP) federated to SaaS applications via SAML or OIDC, with SCIM or equivalent provisioning connectors. Organisations without centralised IdP should implement SP-032 first.",
+    "keyControlAreas": [
+      "## Automated Provisioning and Onboarding\n\nThe foundation of identity lifecycle management is automated provisioning from an authoritative source -- typically the HR information system (HRIS) or equivalent. When a new employee, contractor, or partner is created in the HR system, the identity governance platform should automatically create accounts in the identity provider and downstream SaaS applications based on role templates. AC-02 (Account Management) is critical here, requiring defined account types, assignment of account managers, and establishment of conditions for group and role membership. IA-04 (Identifier Management) ensures unique identifiers are assigned and managed across the lifecycle. IA-12 (Identity Proofing) establishes that identity verification occurs before access is granted, particularly important for remote onboarding where in-person verification is impractical. PS-07 (External Personnel Security) requires that security requirements for contractors and external personnel are established before access is provisioned, including background screening and contractual obligations.",
+      "## Role-Based Entitlement Mapping\n\nTranslating business roles (job titles, departments, cost centres) into application-level permissions is where most identity programmes struggle. The pattern requires a role catalogue that maps each business role to a set of SaaS application entitlements. AC-03 (Access Enforcement) ensures that access decisions are based on defined policy, not ad-hoc requests. AC-05 (Separation of Duties) prevents toxic role combinations -- an accounts payable clerk should not also have supplier master data access. AC-06 (Least Privilege) constrains each role to the minimum entitlements required. AC-16 (Security and Privacy Attributes) enables attribute-based access control (ABAC) where entitlements depend on dynamic attributes like department, location, project assignment, or clearance level rather than static role membership alone. AC-24 (Access Control Decisions) supports policy decision points that evaluate multiple attributes in real time.",
+      "## Contractor and Temporary Access Governance\n\nContractors, consultants, and temporary workers represent the highest-risk identity population because their access is time-bounded but often not time-limited in practice. IA-08 (Identification and Authentication for Non-Organisational Users) establishes authentication requirements for external users that match or exceed those for employees. PS-07 (External Personnel Security) requires contractual agreements covering security responsibilities, access limitations, and termination obligations. AC-02 mandates that temporary and emergency accounts have automatic expiry dates -- contractor accounts should be created with a defined end date that requires active renewal rather than persisting until someone remembers to remove them. AT-02 (Literacy Training and Awareness) should include contractor-specific security awareness covering the organisation's acceptable use policies and data handling requirements.",
+      "## Access Reviews and Recertification\n\nPeriodic access reviews are the primary control against privilege creep. CA-02 (Control Assessments) requires regular evaluation of whether access grants remain appropriate. AC-02 requires review of accounts for compliance with account management requirements at a defined frequency. CA-07 (Continuous Monitoring) enables ongoing access monitoring rather than point-in-time reviews alone. The pattern recommends quarterly manager attestation for standard users and monthly review for privileged or sensitive-data access. Reviews should surface changes since the last review period -- new entitlements added, role changes, and cross-application access aggregation that may not be visible in any single application's access report. AU-06 (Audit Record Review, Analysis, and Reporting) supports investigation of access anomalies flagged during reviews.",
+      "## Deprovisioning and Offboarding\n\nDeprovisioning is the most time-critical phase of the identity lifecycle. PS-04 (Personnel Termination) requires that access is revoked promptly upon termination, including retrieval of credentials and disabling all system access. PS-05 (Personnel Transfer) requires review and modification of access when personnel change roles, ensuring old entitlements are removed, not just new ones added. The pattern mandates automated deprovisioning triggered by HR system status changes, with a target of all SaaS access revoked within 1 hour of termination for involuntary departures and 24 hours for voluntary departures. SCIM deprovisioning should disable accounts (not delete them, to preserve audit trails) across all connected SaaS applications simultaneously. Manual deprovisioning checklists are required for SaaS applications without SCIM connectors.",
+      "## SaaS Application Inventory and Governance\n\nYou cannot govern identity lifecycle for applications you do not know about. CM-08 (System Component Inventory) requires maintaining a current inventory of all SaaS applications with their identity integration status (SCIM-connected, SAML-federated, standalone). SA-09 (External System Services) requires that security requirements are established for each SaaS provider, including identity integration capabilities, data residency, and incident notification obligations. Shadow SaaS discovery -- identifying applications adopted outside central procurement -- should be part of continuous monitoring. PL-04 (Rules of Behaviour) establishes acceptable use policies that require all SaaS adoption to go through the identity governance process.",
+      "## Audit Trail and Compliance\n\nEvery identity lifecycle event must be logged for compliance and forensic purposes. AU-02 (Event Logging) requires logging of account creation, modification, enabling, disabling, and removal events across all SaaS applications. AU-03 (Content of Audit Records) specifies that logs include who made the change, what changed, when, and why (approval reference). AU-12 (Audit Record Generation) ensures consistent log generation across the SaaS estate. PM-14 (Testing, Training, and Monitoring) requires periodic testing of identity lifecycle controls. These audit trails serve multiple compliance requirements simultaneously -- SOX access reviews, GDPR right-to-erasure verification, and SOC 2 CC6.1/CC6.2 access provisioning evidence."
+    ],
+    "assumptions": "The organisation uses a centralised identity provider (IdP) for SSO across its SaaS estate. An HR information system (HRIS) or equivalent serves as the authoritative source for employee and contractor identity data. SaaS applications support SAML/OIDC for authentication and ideally SCIM for provisioning. The organisation has a defined role model or is willing to create one. Management is willing to participate in periodic access reviews.",
+    "typicalChallenges": "SaaS applications with no SCIM support require manual provisioning workarounds. Role explosion as the number of unique permission combinations grows with SaaS count. Contractor onboarding often bypasses HR systems, requiring separate authoritative sources. Access reviews suffer from 'rubber stamping' where managers approve all access without genuine review. Shadow SaaS adoption undermines centralised governance. Mergers and acquisitions introduce conflicting identity models that take months to reconcile.",
+    "indications": "Organisation has more than 20 SaaS applications. Audit findings related to orphaned or excessive access. Contractor population exceeds 10% of total workforce. Previous security incidents involving former employee access. Regulatory requirements for access certification (SOX, PCI DSS, DORA). Help desk ticket volume for access provisioning and deprovisioning is high.",
+    "contraIndications": "Small organisations with fewer than 10 SaaS applications may find manual lifecycle management sufficient. Organisations with purely on-premises infrastructure should consider SP-010 (Identity Management) instead. If the organisation has not yet implemented centralised authentication (SP-032), that should come first.",
+    "threatResistance": "SaaS Identity Lifecycle Management addresses the full spectrum of access accumulation and orphaned identity threats. Orphaned accounts after employee departure are eliminated through automated deprovisioning triggered by HR system events, closing the window of opportunity that attackers exploit for persistent access. Privilege creep from role changes is systematically detected through periodic access reviews that surface accumulated entitlements, preventing the gradual accumulation of unnecessary access that insiders or compromised accounts can leverage. Contractor access that persists beyond engagement end dates is controlled through mandatory expiry dates and sponsor attestation, addressing one of the most common audit findings in regulated industries. Shadow SaaS provisioning is contained through application inventory and acceptable use policies, reducing the attack surface of ungoverned identity stores. The pattern's emphasis on audit trails and compliance evidence provides the forensic foundation needed for incident response and regulatory reporting."
+  },
+  "examples": {
+    "Automated Joiner Flow": [
+      "New employee created in Workday -> Azure AD account provisioned within 15 minutes -> role-based group membership assigned -> SCIM pushes accounts to Salesforce, ServiceNow, Slack, Jira within 1 hour of start date",
+      "Contractor record created in vendor management system with defined engagement end date -> sponsor-approved access template applied -> accounts created with automatic expiry matching contract end date",
+      "Graduate intake: 30 new joiners provisioned simultaneously using cohort-based role template, with department-specific entitlements activated on first day via scheduled provisioning"
+    ],
+    "Access Review Cycle": [
+      "Quarterly manager attestation via SailPoint or Saviynt: manager reviews all direct reports' SaaS entitlements, must actively confirm or revoke each entitlement within 14-day review window",
+      "Continuous access monitoring flags anomalies: user in Finance department has Jira admin role from previous Engineering rotation — surfaced in next review cycle for manager decision",
+      "Annual privileged access recertification: all users with admin-level access in any SaaS application reviewed by CISO office, not just line manager"
+    ],
+    "Deprovisioning": [
+      "Involuntary termination: HR status change triggers immediate disable across IdP and all SCIM-connected SaaS applications (target: <1 hour). Manual checklist for non-SCIM applications completed by end of business day",
+      "Voluntary departure: 2-week notice triggers access review — sensitive data access removed immediately, standard access maintained until last day, all accounts disabled on termination date",
+      "Role change (mover): employee transfers from Engineering to Product — old Engineering entitlements (GitHub org membership, AWS console, CI/CD pipeline access) removed within 48 hours, new Product entitlements provisioned same day"
+    ],
+    "Shadow SaaS Discovery": [
+      "CASB integration identifies 15 unapproved SaaS applications with corporate email sign-ups — each assessed for risk, high-risk apps blocked, medium-risk apps onboarded to identity governance, low-risk apps documented",
+      "OAuth consent audit: review all third-party applications with OAuth grants to corporate identity — revoke unused or excessive grants, enforce admin consent policy for new grants",
+      "Expense report analysis: SaaS subscription charges on corporate cards cross-referenced with approved application inventory to identify ungoverned subscriptions"
+    ]
+  },
+  "references": [
+    {
+      "title": "NIST SP 800-63-4 Digital Identity Guidelines",
+      "url": "https://pages.nist.gov/800-63-4/",
+      "note": "The authoritative framework for digital identity including identity proofing, authentication, and lifecycle management. Revision 4 (2024) adds significant guidance on identity lifecycle events and federation assurance levels."
+    },
+    {
+      "title": "SCIM (System for Cross-domain Identity Management) Protocol",
+      "url": "https://www.simplecloud.info/",
+      "note": "The standard protocol for automating user provisioning and deprovisioning across SaaS applications. SCIM 2.0 (RFC 7643/7644) defines schemas for Users and Groups with create, read, update, and delete operations."
+    },
+    {
+      "title": "ISO/IEC 24760 — IT Security — A Framework for Identity Management",
+      "url": "https://www.iso.org/standard/77582.html",
+      "note": "International standard establishing the framework for identity management including lifecycle states, identity information, and governance requirements."
+    },
+    {
+      "title": "CIS Control 5: Account Management",
+      "url": "https://www.cisecurity.org/controls/account-management",
+      "note": "CIS Controls v8 Sub-control 5 covers the full account lifecycle including inventory, disable dormant accounts, restrict admin privileges, and establish access revocation processes."
+    },
+    {
+      "title": "DORA Article 9 — ICT Security Policies",
+      "url": "https://www.digital-operational-resilience-act.com/Article_9.html",
+      "note": "DORA requires financial entities to implement policies governing the lifecycle of ICT user accounts, including provisioning, modification, and timely deactivation."
+    },
+    {
+      "title": "SailPoint Identity Security Platform",
+      "url": "https://www.sailpoint.com/",
+      "note": "Market-leading identity governance platform providing automated provisioning, access reviews, role mining, and lifecycle management across SaaS and on-premises applications."
+    },
+    {
+      "title": "Gartner: Identity Governance and Administration (IGA)",
+      "url": "https://www.gartner.com/reviews/market/identity-governance-administration",
+      "note": "Gartner's IGA market category covers the tools and processes for managing digital identities and access across the enterprise, including SaaS identity lifecycle."
+    },
+    {
+      "title": "SOC 2 CC6.1/CC6.2 — Logical and Physical Access Controls",
+      "url": "https://www.aicpa.org/resources/landing/system-and-organization-controls-soc-suite-of-services",
+      "note": "SOC 2 Trust Services Criteria CC6.1 and CC6.2 require organisations to implement logical access controls including provisioning, modification, and removal of access."
+    }
+  ],
+  "controls": [
+    { "id": "AC-01", "name": "Policy and Procedures", "family": "AC", "emphasis": "standard" },
+    { "id": "AC-02", "name": "Account Management", "family": "AC", "emphasis": "critical" },
+    { "id": "AC-03", "name": "Access Enforcement", "family": "AC", "emphasis": "critical" },
+    { "id": "AC-05", "name": "Separation of Duties", "family": "AC", "emphasis": "important" },
+    { "id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "critical" },
+    { "id": "AC-16", "name": "Security and Privacy Attributes", "family": "AC", "emphasis": "important" },
+    { "id": "AC-17", "name": "Remote Access", "family": "AC", "emphasis": "standard" },
+    { "id": "AC-21", "name": "Information Sharing", "family": "AC", "emphasis": "standard" },
+    { "id": "AC-24", "name": "Access Control Decisions", "family": "AC", "emphasis": "important" },
+    { "id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "standard" },
+    { "id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "standard" },
+    { "id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical" },
+    { "id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "important" },
+    { "id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important" },
+    { "id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "important" },
+    { "id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "critical" },
+    { "id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "important" },
+    { "id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "standard" },
+    { "id": "CM-08", "name": "System Component Inventory", "family": "CM", "emphasis": "important" },
+    { "id": "IA-02", "name": "Identification and Authentication (Organizational Users)", "family": "IA", "emphasis": "critical" },
+    { "id": "IA-04", "name": "Identifier Management", "family": "IA", "emphasis": "critical" },
+    { "id": "IA-05", "name": "Authenticator Management", "family": "IA", "emphasis": "important" },
+    { "id": "IA-08", "name": "Identification and Authentication (Non-Organizational Users)", "family": "IA", "emphasis": "critical" },
+    { "id": "IA-09", "name": "Service Identification and Authentication", "family": "IA", "emphasis": "standard" },
+    { "id": "IA-12", "name": "Identity Proofing", "family": "IA", "emphasis": "important" },
+    { "id": "PL-04", "name": "Rules of Behavior", "family": "PL", "emphasis": "standard" },
+    { "id": "PM-10", "name": "Authorization Process", "family": "PM", "emphasis": "standard" },
+    { "id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "standard" },
+    { "id": "PS-04", "name": "Personnel Termination", "family": "PS", "emphasis": "critical" },
+    { "id": "PS-05", "name": "Personnel Transfer", "family": "PS", "emphasis": "critical" },
+    { "id": "PS-07", "name": "External Personnel Security", "family": "PS", "emphasis": "critical" },
+    { "id": "SA-09", "name": "External System Services", "family": "SA", "emphasis": "important" }
+  ],
+  "threats": [
+    {
+      "id": "T-SIL-001",
+      "name": "Orphaned accounts persisting after employee departure enabling unauthorised access",
+      "mitigatedBy": ["PS-04", "AC-02", "IA-04"]
+    },
+    {
+      "id": "T-SIL-002",
+      "name": "Privilege creep from role changes accumulating unnecessary entitlements over time",
+      "mitigatedBy": ["PS-05", "CA-02", "AC-06"]
+    },
+    {
+      "id": "T-SIL-003",
+      "name": "Contractor access persisting beyond engagement end date",
+      "mitigatedBy": ["PS-07", "AC-02", "IA-08"]
+    },
+    {
+      "id": "T-SIL-004",
+      "name": "Shadow SaaS adoption creating ungoverned identity stores outside central control",
+      "mitigatedBy": ["CM-08", "SA-09", "PL-04"]
+    },
+    {
+      "id": "T-SIL-005",
+      "name": "Over-provisioned accounts from template-based onboarding granting excessive access",
+      "mitigatedBy": ["AC-06", "AC-03", "AC-05"]
+    },
+    {
+      "id": "T-SIL-006",
+      "name": "Delayed deprovisioning creating exploitable window between termination and access revocation",
+      "mitigatedBy": ["PS-04", "AC-02", "CA-07"]
+    },
+    {
+      "id": "T-SIL-007",
+      "name": "Identity attribute desynchronisation across SaaS applications causing access policy drift",
+      "mitigatedBy": ["IA-04", "AC-16", "CM-03"]
+    },
+    {
+      "id": "T-SIL-008",
+      "name": "Insider threat exploiting accumulated unnecessary access from multiple role changes",
+      "mitigatedBy": ["CA-02", "AU-06", "AC-06"]
+    },
+    {
+      "id": "T-SIL-009",
+      "name": "Account takeover of dormant but active SaaS accounts with weak or unchanged credentials",
+      "mitigatedBy": ["IA-05", "CA-07", "AC-02"]
+    },
+    {
+      "id": "T-SIL-010",
+      "name": "Compliance violation from unrecertified access in regulated environments",
+      "mitigatedBy": ["CA-02", "AU-02", "PM-14"]
+    },
+    {
+      "id": "T-SIL-011",
+      "name": "Cross-tenant data exposure from misconfigured identity federation in multi-tenant SaaS",
+      "mitigatedBy": ["SA-09", "AC-03", "IA-02"]
+    },
+    {
+      "id": "T-SIL-012",
+      "name": "Approval workflow bypass via emergency provisioning without subsequent review",
+      "mitigatedBy": ["PM-10", "AU-02", "AC-02"]
+    }
+  ],
+  "relatedPatterns": ["SP-010", "SP-029", "SP-032", "SP-033", "SP-037", "SP-042"],
+  "relatedPatternNames": [
+    "Identity Management and Authentication",
+    "Zero Trust Architecture",
+    "Modern Authentication",
+    "Passkey Authentication",
+    "Privileged User Management",
+    "Third Party Risk Management"
+  ],
+  "controlFamilySummary": {
+    "AC": 9,
+    "AT": 2,
+    "AU": 4,
+    "CA": 2,
+    "CM": 2,
+    "IA": 6,
+    "PL": 1,
+    "PM": 2,
+    "PS": 3,
+    "SA": 1
+  }
+}

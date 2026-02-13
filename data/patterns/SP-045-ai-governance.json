@@ -1,0 +1,219 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-045",
+  "slug": "ai-governance",
+  "title": "AI Governance and Responsible AI",
+  "description": "A governance pattern for establishing and operating an AI management system (AIMS) across the enterprise. Covers training data governance, model lifecycle management, transparency and explainability, AI-specific risk and impact assessment, human oversight, and responsible AI monitoring. Complements SP-027 (Secure AI Integration) which addresses the operational security of AI agents -- this pattern addresses the management system around them.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/ai-governance",
+  "metadata": {
+    "release": "2.0",
+    "status": "draft",
+    "type": "pattern",
+    "classification": "Governance & Risk Management",
+    "datePublished": "2026-02-13",
+    "dateModified": "2026-02-13",
+    "authors": ["Spinoza", "Vitruvius"],
+    "provenance": "Developed in response to community feedback (Reddit r/cybersecurity) requesting deeper AI governance coverage beyond SP-027's operational security focus. Informed by ISO/IEC 42001:2023 gap analysis revealing 53% average coverage against 37 AI management clauses -- with critical gaps in training data quality, transparency, human oversight, and impact assessment that NIST 800-53 alone cannot close."
+  },
+  "diagram": {
+    "svg": "/images/sp-045-ai-governance.svg",
+    "png": "/images/sp-045-ai-governance.png"
+  },
+  "content": {
+    "description": "Organisations deploying AI systems face governance requirements that go far beyond securing the technology itself. Regulators, auditors, and affected individuals increasingly demand answers to questions that traditional security controls were never designed to address: Is the training data representative and free from harmful bias? Can the AI system explain its decisions to affected individuals? Has the organisation assessed the societal impact of deploying this system? Who is accountable when the AI makes a consequential error?\n\nNIST 800-53 Rev 5 provides a strong security and privacy foundation, but its 303 active controls achieve only 53% coverage against ISO 42001's AI management clauses. The deepest gaps are in training data quality (30%), transparency and explainability (20%), data labelling and annotation (20%), and human oversight mechanisms (40%). These are not security gaps -- they are governance gaps that require purpose-built controls layered on top of the security baseline.\n\nThis pattern establishes the AI management system (AIMS) that organisations need to govern AI responsibly. It covers the full AI lifecycle from data acquisition through model retirement, with particular focus on the areas where security controls are necessary but insufficient: training data governance, bias detection, transparency obligations, impact assessment, and meaningful human oversight. It maps directly to ISO/IEC 42001:2023 and addresses EU AI Act, NIST AI RMF, and OECD AI Principles requirements.\n\nSP-027 (Secure AI Integration) handles how to deploy AI agents safely -- prompt security, tool authorisation, credential management. This pattern handles the governance question that comes before and around that deployment: should we deploy this AI system, under what constraints, with what oversight, and how do we demonstrate it is operating responsibly?",
+    "keyControlAreas": [
+      "AI Management System Establishment (PM-09, PM-28, PM-14, PL-02): An AI management system requires explicit governance structures: an AI policy approved at board or executive level, defined roles and accountabilities (AI ethics lead, model risk owner, data governance lead), and a risk appetite statement specific to AI. PM-09 (Risk Management Strategy) anchors the AIMS to the enterprise risk framework -- AI risk is not a separate category but a dimension of operational, reputational, legal, and ethical risk. PM-28 (Risk Framing) ensures the organisation defines what constitutes acceptable and unacceptable AI risk, including bias thresholds, fairness criteria, and autonomy boundaries. The AIMS should define a tiered classification for AI systems (following EU AI Act risk categories: unacceptable, high, limited, minimal) that determines the depth of assessment, testing, and oversight required. ISO 42001 Clause 5 requires leadership commitment and Clause 4 requires understanding the organisational context for AI -- neither maps to a single NIST control but the combination of PM-09 and PM-28 provides the closest foundation.",
+      "Training Data Governance (SI-10, PM-25, PT-02, PT-04, SA-03): Training data is the single largest determinant of AI system behaviour, yet it receives less governance attention than model architecture in most organisations. SI-10 (Information Input Validation) provides the baseline -- but for AI, validation means representativeness analysis, bias assessment, and quality metrics, not just format checking. Organisations must establish data quality standards for training datasets: completeness, accuracy, timeliness, representativeness across protected characteristics, and absence of proxy variables for discrimination. PM-25 (Minimization of PII) constrains what personal data enters training pipelines -- collect only what is necessary and justified. PT-02 (Authority to Process PII) and PT-04 (Consent) ensure lawful basis exists for every piece of personal data used in training, particularly under GDPR Article 6 and EU AI Act transparency requirements. Data provenance must be documented: where did each dataset come from, who labelled it, what annotation guidelines were used, and what quality checks were performed. SA-03 (System Development Life Cycle) ensures data governance is embedded in the model development process, not bolted on afterward. The 20% ISO 42001 coverage on data labelling (A.7.4) reflects the reality that no NIST control addresses inter-annotator agreement, labelling bias, or annotation quality -- these require supplementary organisational controls.",
+      "Model Lifecycle Management (SA-11, SA-08, SA-10, CM-02, CM-03, CM-04): Every AI model should follow a governed lifecycle: development, validation, approval, deployment, monitoring, and retirement. SA-11 (Developer Security Testing) extends to AI-specific testing: bias testing across protected characteristics, fairness validation using accepted metrics (demographic parity, equalised odds, calibration), adversarial robustness testing, and boundary case analysis. SA-08 (Security Engineering Principles) includes responsible AI by design -- privacy by design, fairness by design, and transparency by design embedded from the start, not retrofitted. CM-02 (Baseline Configuration) requires model baselines: pinned versions, documented hyperparameters, training data snapshots, and performance benchmarks that enable rollback. CM-03 (Configuration Change Control) governs model updates -- no model should reach production without passing through a defined approval gate that includes bias regression testing. CM-04 (Impact Analysis) requires that every model change be assessed for downstream impact: does retraining change outputs for specific populations? Does a fine-tuning run introduce new failure modes? Model retirement is equally important: when a model is superseded, decommission it completely rather than allowing shadow usage of deprecated versions.",
+      "Transparency and Explainability (PT-05, PT-03, AU-02, AU-03): Transparency is the most significant gap between NIST 800-53 and ISO 42001 (20% coverage on A.8.2). Organisations must establish what level of explanation is required for each AI system based on its risk tier and regulatory context. PT-05 (Privacy Notice) extends to AI transparency: affected individuals should be informed when AI is involved in decisions that affect them, what data is used, and how to contest outcomes. PT-03 (PII Processing Purposes) requires that the purpose of AI processing is clearly defined and communicated -- function creep from the stated purpose is a governance violation. AU-02 (Event Logging) and AU-03 (Content of Audit Records) require decision-level audit trails: not just that a decision was made, but what inputs drove it, what model version produced it, what confidence score it had, and whether a human reviewed it. For high-risk AI systems under the EU AI Act, technical documentation must include system capabilities and limitations, intended purpose, accuracy metrics, and known biases. The right to explanation under GDPR Article 22 requires that automated decisions significantly affecting individuals can be meaningfully explained -- this demands explainability techniques (SHAP, LIME, attention visualisation) integrated into the model deployment pipeline, not added as an afterthought.",
+      "AI Risk and Impact Assessment (RA-03, RA-07, RA-08, RA-09): AI risk assessment must go beyond traditional information security risk to include bias risk, fairness risk, societal impact, and ethical considerations. RA-03 (Risk Assessment) provides the framework, but AI-specific risk categories must be defined: discriminatory outcomes, privacy violations through inference, environmental impact of training compute, labour market displacement, and manipulation potential. RA-08 (Privacy Impact Assessments) extends to AI impact assessments (AIAs) covering fundamental rights, societal effects, and environmental costs -- the EU AI Act requires conformity assessments for high-risk systems. RA-07 (Risk Response) must include AI-specific responses: bias detected above threshold triggers retraining, fairness metrics failing triggers deployment pause, impact assessment finding triggers design review. RA-09 (Criticality Analysis) determines which AI systems require the most rigorous governance: systems making consequential decisions about individuals (credit, employment, healthcare, law enforcement) demand the highest tier of assessment, testing, and oversight. The 45% ISO 42001 coverage on impact assessment (A.5.4) reflects NIST's security focus -- human rights impact, environmental impact, and societal impact require supplementary assessment frameworks.",
+      "Human Oversight and Override (AC-05, PS-06, AT-02, AT-03, AC-06): Meaningful human oversight is not a checkbox -- it requires that the human reviewer has the competence, authority, time, and information to make an informed decision. AC-05 (Separation of Duties) ensures the person who builds the model is not the sole approver of its deployment. PS-06 (Access Agreements) should explicitly address AI-assisted decision-making: who is accountable when human and AI collaborate on a decision? AT-02 and AT-03 (Security Awareness and Role-Based Training) must include AI literacy: understanding model limitations, recognising hallucination, interpreting confidence scores, and knowing when to override AI recommendations. AC-06 (Least Privilege) constrains which AI systems can make autonomous decisions versus which require human approval. The organisation must define an autonomy spectrum per AI system: fully automated (no human review), human-on-the-loop (human monitors), human-in-the-loop (human approves), and human-in-command (human decides, AI assists). High-risk systems should default to human-in-the-loop or human-in-command. ISO 42001 A.9.2 (Human Oversight) has only 40% NIST coverage because no 800-53 control specifically addresses human override mechanisms for AI decisions.",
+      "Responsible AI Monitoring (CA-07, SI-04, AU-06, CA-02): Post-deployment monitoring is where most AI governance programmes fail. CA-07 (Continuous Monitoring) must include AI-specific metrics: model accuracy over time (concept drift), fairness metrics across protected groups (statistical parity difference, equalised odds ratio), output distribution analysis (detecting mode collapse or anomalous patterns), and input data drift (training-serving skew). SI-04 (System Monitoring) extends to monitoring for adversarial inputs, data poisoning attempts, and model extraction attacks. AU-06 (Audit Record Review) ensures AI decision logs are actually reviewed -- not just collected -- with escalation triggers for anomalous patterns. CA-02 (Control Assessments) requires periodic review of the entire AIMS: are the governance controls working, are risk assessments current, are impact assessments still valid, and have new regulatory requirements emerged? Define specific monitoring thresholds: if fairness metrics deviate by more than X% from baseline, trigger investigation. If accuracy drops below Y%, trigger retraining review. If complaint volume exceeds Z per month, trigger impact reassessment. ISO 42001 A.2.4 (AI System Monitoring) at 55% NIST coverage reflects that concept drift monitoring and fairness metrics are not addressed by traditional security monitoring controls."
+    ],
+    "assumptions": "The organisation deploys or intends to deploy AI systems that process personal data, make or support consequential decisions, or operate with a degree of autonomy. A centralised AI governance function exists or will be established (this may sit within risk, compliance, privacy, or a dedicated AI ethics team). The organisation has access to AI/ML engineering competence to implement bias testing, fairness metrics, and explainability techniques. NIST 800-53 Rev 5 controls are the security and privacy baseline; this pattern adds governance controls on top of that foundation. The regulatory landscape for AI is evolving rapidly -- this pattern should be reviewed quarterly.",
+    "typicalChallenges": "Defining 'fairness' is context-dependent and contested -- demographic parity may conflict with equalised odds, and different stakeholders may prefer different definitions. Training data provenance is difficult to establish for large-scale datasets, particularly foundation models trained on internet-scale data. Explainability techniques trade off fidelity with simplicity -- the most accurate explanation may not be the most understandable. AI impact assessments lack the methodological maturity of privacy impact assessments and often produce subjective conclusions. Responsible AI monitoring requires ML engineering capability that many governance teams lack. The pace of AI capability advancement outstrips governance framework development. Dual-use concerns: the same model may be low-risk in one context and high-risk in another. Board-level AI literacy is often insufficient for meaningful oversight of AI risk appetite decisions.",
+    "indications": "Organisation deploys AI systems that make or support decisions affecting individuals (credit, employment, insurance, healthcare, law enforcement). EU AI Act applies to the organisation's AI systems. ISO 42001 certification is planned or required by customers. AI systems process personal data subject to GDPR or equivalent privacy regulation. Audit findings related to AI transparency, bias, or accountability. Board or executive requesting assurance that AI is governed responsibly. Customers or regulators asking how AI decisions are made and can be contested.",
+    "contraIndications": "Organisation uses AI only for internal, non-consequential tasks (e.g., code completion, document formatting) with no impact on individuals. All AI usage is covered by SP-027's operational security controls and no regulatory AI governance requirements apply. Organisation has no current or planned AI deployments.",
+    "threatResistance": "AI Governance addresses the governance failures that security controls alone cannot prevent. Training data bias leading to discriminatory outputs is mitigated through mandatory representativeness analysis, bias testing, and fairness metrics thresholds with automated deployment gates. Opaque AI decisions in regulated contexts are addressed through transparency obligations, explainability requirements scaled to risk tier, and decision-level audit trails that enable meaningful review and contestation. Uncontrolled model deployment is prevented by the model lifecycle with mandatory impact assessment, bias regression testing, and approval gates. Concept drift degrading fairness over time is detected through continuous monitoring with defined thresholds and automated escalation. Shadow AI models outside governance are contained through AI inventory requirements, acceptable use policies, and discovery mechanisms. The pattern's emphasis on human oversight with competence requirements ensures that human-in-the-loop controls are meaningful rather than rubber-stamp exercises."
+  },
+  "examples": {
+    "Training Data Governance": [
+      "Financial services lender performs representativeness analysis on credit scoring training data: discovers underrepresentation of certain postcodes correlated with ethnicity, rebalances dataset before retraining",
+      "Healthcare AI provider establishes annotation guidelines requiring two independent annotators per medical image with inter-annotator agreement threshold of 0.85 Cohen's kappa",
+      "HR tech company documents complete data provenance chain for CV screening model: source datasets, collection dates, consent basis, labelling methodology, quality metrics"
+    ],
+    "Model Lifecycle": [
+      "Insurance company model approval gate requires: bias testing across 9 protected characteristics, fairness metrics within defined thresholds, explainability report, and sign-off from model risk owner and AI ethics lead",
+      "Model registry tracks all deployed models with version, training data snapshot, performance baseline, deployment date, and scheduled review date — models without current review are flagged for retirement",
+      "Retraining pipeline includes automated bias regression tests: if demographic parity difference exceeds 0.1, deployment is blocked and model risk owner is notified"
+    ],
+    "Transparency and Impact Assessment": [
+      "Public sector AI system for benefits eligibility provides plain-language explanation of each decision factor, links to appeal process, and identifies that AI assisted the decision with human review",
+      "EU AI Act conformity assessment for high-risk recruitment AI: technical documentation covering training data, accuracy metrics, bias testing results, intended purpose, and known limitations submitted to notified body",
+      "AI impact assessment for customer service chatbot: identifies risk of automated decisions affecting vulnerable customers, mandates human escalation path and quarterly fairness review"
+    ],
+    "Responsible AI Monitoring": [
+      "Monthly fairness dashboard tracks equalised odds ratio across 6 protected characteristics for credit decisioning model — amber alert at 5% deviation, red alert at 10%, automatic deployment pause at 15%",
+      "Concept drift detection via population stability index (PSI): training data distribution compared to last 30 days of production inputs, PSI > 0.2 triggers retraining review",
+      "Quarterly AIMS review: governance team assesses whether AI policies remain current, risk assessments reflect actual deployment, and monitoring thresholds are calibrated to emerging regulatory expectations"
+    ]
+  },
+  "references": [
+    {
+      "title": "ISO/IEC 42001:2023 — AI Management System",
+      "url": "https://www.iso.org/standard/81230.html",
+      "note": "The certifiable international standard for establishing, implementing, maintaining, and improving an AI management system. This pattern maps directly to its 37 clauses and addresses the gaps where NIST 800-53 provides insufficient coverage."
+    },
+    {
+      "title": "EU AI Act (Regulation 2024/1689)",
+      "url": "https://artificialintelligenceact.eu/",
+      "note": "European regulatory framework with risk-based classification of AI systems. High-risk AI systems face mandatory conformity assessments, transparency obligations, human oversight requirements, and technical documentation standards."
+    },
+    {
+      "title": "NIST AI Risk Management Framework (AI 100-1)",
+      "url": "https://www.nist.gov/artificial-intelligence/ai-risk-management-framework",
+      "note": "Voluntary framework for managing AI risks across the lifecycle. Organises around four functions: Govern, Map, Measure, Manage. Complements 800-53 controls with AI-specific risk guidance."
+    },
+    {
+      "title": "OECD AI Principles",
+      "url": "https://oecd.ai/en/ai-principles",
+      "note": "International principles for responsible AI adopted by 46 countries. Covers transparency, accountability, robustness, human-centred values, and fairness — foundational requirements that regulatory frameworks build upon."
+    },
+    {
+      "title": "NIST SP 800-218A — Secure Software Development for Generative AI",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/a/final",
+      "note": "Extension of the SSDF addressing generative AI: training data integrity, model validation, and AI-specific development practices."
+    },
+    {
+      "title": "UK AI Safety Institute — AI Safety Framework",
+      "url": "https://www.aisi.gov.uk/",
+      "note": "UK government framework for evaluating and ensuring AI safety, with particular focus on frontier model assessment and societal impact."
+    },
+    {
+      "title": "IEEE 7010-2020 — Recommended Practice for Assessing the Impact of Autonomous and Intelligent Systems on Human Well-Being",
+      "url": "https://standards.ieee.org/ieee/7010/6573/",
+      "note": "Standard providing a methodology for AI impact assessment covering human well-being indicators across 12 domains."
+    }
+  ],
+  "controls": [
+    { "id": "AC-05", "name": "Separation of Duties", "family": "AC", "emphasis": "important" },
+    { "id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important" },
+    { "id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important" },
+    { "id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "important" },
+    { "id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical" },
+    { "id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "critical" },
+    { "id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important" },
+    { "id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "important" },
+    { "id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important" },
+    { "id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical" },
+    { "id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical" },
+    { "id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important" },
+    { "id": "CM-04", "name": "Impact Analysis", "family": "CM", "emphasis": "important" },
+    { "id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "standard" },
+    { "id": "PM-09", "name": "Risk Management Strategy", "family": "PM", "emphasis": "critical" },
+    { "id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "important" },
+    { "id": "PM-25", "name": "Minimization of Personally Identifiable Information", "family": "PM", "emphasis": "important" },
+    { "id": "PM-28", "name": "Risk Framing", "family": "PM", "emphasis": "important" },
+    { "id": "PM-32", "name": "Purposing", "family": "PM", "emphasis": "important" },
+    { "id": "PS-06", "name": "Access Agreements", "family": "PS", "emphasis": "standard" },
+    { "id": "PT-02", "name": "Authority to Process Personally Identifiable Information", "family": "PT", "emphasis": "important" },
+    { "id": "PT-03", "name": "Personally Identifiable Information Processing Purposes", "family": "PT", "emphasis": "important" },
+    { "id": "PT-04", "name": "Consent", "family": "PT", "emphasis": "critical" },
+    { "id": "PT-05", "name": "Privacy Notice", "family": "PT", "emphasis": "important" },
+    { "id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "critical" },
+    { "id": "RA-07", "name": "Risk Response", "family": "RA", "emphasis": "important" },
+    { "id": "RA-08", "name": "Privacy Impact Assessments", "family": "RA", "emphasis": "critical" },
+    { "id": "RA-09", "name": "Criticality Analysis", "family": "RA", "emphasis": "important" },
+    { "id": "SA-03", "name": "System Development Life Cycle", "family": "SA", "emphasis": "important" },
+    { "id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "important" },
+    { "id": "SA-10", "name": "Developer Configuration Management", "family": "SA", "emphasis": "standard" },
+    { "id": "SA-11", "name": "Developer Testing and Evaluation", "family": "SA", "emphasis": "critical" },
+    { "id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "important" },
+    { "id": "SI-10", "name": "Information Input Validation", "family": "SI", "emphasis": "critical" }
+  ],
+  "threats": [
+    {
+      "id": "T-AIG-001",
+      "name": "Training data bias producing discriminatory AI outputs across protected characteristics",
+      "mitigatedBy": ["SI-10", "SA-11", "CA-07"]
+    },
+    {
+      "id": "T-AIG-002",
+      "name": "Opaque AI decisions in regulated contexts without explainability or contestability",
+      "mitigatedBy": ["PT-05", "AU-02", "AU-03"]
+    },
+    {
+      "id": "T-AIG-003",
+      "name": "Training data poisoning corrupting model behaviour at scale",
+      "mitigatedBy": ["SI-10", "SA-03", "CM-02"]
+    },
+    {
+      "id": "T-AIG-004",
+      "name": "Uncontrolled model deployment without impact assessment or approval gate",
+      "mitigatedBy": ["RA-08", "CM-03", "AC-05"]
+    },
+    {
+      "id": "T-AIG-005",
+      "name": "Concept drift degrading model accuracy and fairness over time",
+      "mitigatedBy": ["CA-07", "SI-04", "CM-04"]
+    },
+    {
+      "id": "T-AIG-006",
+      "name": "Training data containing PII processed without lawful basis or consent",
+      "mitigatedBy": ["PT-02", "PT-04", "PM-25"]
+    },
+    {
+      "id": "T-AIG-007",
+      "name": "Shadow AI models deployed outside governance framework",
+      "mitigatedBy": ["PM-09", "CA-02", "PM-14"]
+    },
+    {
+      "id": "T-AIG-008",
+      "name": "Model versioning failure enabling rollback to unsafe or biased version",
+      "mitigatedBy": ["CM-02", "SA-10", "CM-03"]
+    },
+    {
+      "id": "T-AIG-009",
+      "name": "Insufficient human oversight of high-risk autonomous AI decisions",
+      "mitigatedBy": ["AC-05", "AT-02", "PS-06"]
+    },
+    {
+      "id": "T-AIG-010",
+      "name": "Failure to disclose AI involvement to affected individuals",
+      "mitigatedBy": ["PT-05", "PT-03", "AU-02"]
+    },
+    {
+      "id": "T-AIG-011",
+      "name": "Regulatory non-compliance with EU AI Act or equivalent AI legislation",
+      "mitigatedBy": ["RA-08", "RA-03", "PM-09"]
+    },
+    {
+      "id": "T-AIG-012",
+      "name": "AI system causing unassessed societal or environmental harm",
+      "mitigatedBy": ["RA-08", "RA-09", "CA-02"]
+    }
+  ],
+  "relatedPatterns": ["SP-027", "SP-013", "SP-012", "SP-042", "SP-043", "SP-028"],
+  "relatedPatternNames": [
+    "Secure AI Integration",
+    "Data Security",
+    "Secure Software Development Lifecycle",
+    "Third Party Risk Management",
+    "Security Metrics and Measurement",
+    "Secure DevOps Pipeline"
+  ],
+  "controlFamilySummary": {
+    "AC": 2,
+    "AT": 2,
+    "AU": 4,
+    "CA": 2,
+    "CM": 3,
+    "PL": 1,
+    "PM": 5,
+    "PS": 1,
+    "PT": 4,
+    "RA": 4,
+    "SA": 4,
+    "SI": 2
+  }
+}

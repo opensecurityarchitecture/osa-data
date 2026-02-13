@@ -6,7 +6,7 @@
   "url": "https://www.opensecurityarchitecture.org/patterns/saas-identity-lifecycle",
   "metadata": {
     "release": "2.0",
-    "status": "active",
+    "status": "draft",
     "type": "pattern",
     "classification": "Identity and Access Management",
     "datePublished": "2026-02-13",
@@ -15,8 +15,8 @@
     "provenance": "Developed in response to community feedback (Reddit r/cybersecurity, SecureSlateHQ) identifying identity lifecycle gaps in SaaS environments as a persistent architectural blind spot. Informed by real-world experience managing identity sprawl across 50+ SaaS applications in financial services and technology organisations."
   },
   "diagram": {
-    "svg": "sp-044-saas-identity-lifecycle.svg",
-    "png": "sp-044-saas-identity-lifecycle.png"
+    "svg": "/images/sp-044-saas-identity-lifecycle.svg",
+    "png": "/images/sp-044-saas-identity-lifecycle.png"
   },
   "content": {
     "description": "Most organisations today operate dozens or hundreds of SaaS applications, each with its own identity store, role model, and access management interface. The identity lifecycle -- joining, moving between roles, and leaving -- creates a sprawl of accounts, entitlements, and credentials that no single administrator can track manually.\n\nThe consequences are predictable: orphaned accounts persist for months after employees leave, contractors retain access long after engagements end, role changes accumulate entitlements without removing old ones (privilege creep), and shadow SaaS applications are adopted outside central governance. Each of these conditions represents an exploitable attack surface.\n\nThis pattern addresses the full identity lifecycle in SaaS-heavy environments. It covers automated provisioning from authoritative HR sources, role-based entitlement mapping, periodic access reviews with manager attestation, contractor and temporary access governance, and systematic deprovisioning. It complements SP-032 (Modern Authentication) which handles how users prove their identity, and SP-037 (Privileged User Management) which handles elevated credentials. SP-044 handles the question that comes before both: who should have access to what, when, and for how long.\n\nThe pattern assumes a centralised identity provider (IdP) federated to SaaS applications via SAML or OIDC, with SCIM or equivalent provisioning connectors. Organisations without centralised IdP should implement SP-032 first.",

@@ -4,7 +4,7 @@
   "framework_name": "ISO 27002:2022",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "1.0",
+    "version": "2.0",
     "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use."
   },
   "weight_scale": {
@@ -37,7 +37,7 @@
   "clauses": [
     {
       "id": "5.1",
-      "title": "Policies for information security - Implementation",
+      "title": "Policies for information security",
       "controls": [
         "PL-01",
         "PM-01",
@@ -56,87 +56,92 @@
         "RA-01",
         "SA-01",
         "SC-01",
-        "SI-01"
+        "SI-01",
+        "PT-01",
+        "SR-01"
       ],
-      "coverage_pct": 90,
-      "rationale": "SP 800-53 has comprehensive policy controls for all families. ISO 27002 guidance on topic-specific policies, management approval, and regular review all addressed via -1 family controls.",
-      "gaps": "Minor: ISO 27002 provides specific guidance on policy structure, review triggers, and communication channels. SP 800-53 policy controls are less prescriptive about policy document structure."
+      "coverage_pct": 95,
+      "rationale": "SP 800-53 has comprehensive policy controls (-01) for every family. PL-01 is the overarching planning policy. PM-01 establishes program plan. PT-01 and SR-01 add privacy and supply chain policy requirements, giving complete coverage of ISO 27002's requirement for a coherent policy framework with topic-specific policies.",
+      "gaps": "Minimal gap. SP 800-53 policy requirements are more granular (per-family) while ISO 27002 expects a coherent hierarchical policy set with explicit review triggers and communication channels."
     },
     {
       "id": "5.2",
-      "title": "Information security roles and responsibilities - Implementation",
+      "title": "Information security roles and responsibilities",
       "controls": [
         "PM-02",
         "PS-01",
         "PS-02",
-        "PL-01"
+        "PL-01",
+        "PS-09"
       ],
-      "coverage_pct": 85,
-      "rationale": "PM-02 assigns CISO/senior role. PS-01/PS-02 cover position risk designation and description. ISO 27002 guidance on role definition well addressed.",
-      "gaps": "ISO 27002 provides specific implementation guidance on asset owner responsibilities. SP 800-53 addresses through system owner concept in PL-02 but 'asset owner' role less defined."
+      "coverage_pct": 90,
+      "rationale": "PM-02 assigns CISO/senior security role. PS-01/PS-02 cover position risk designation and personnel categorization. PS-09 (Position Descriptions) explicitly requires incorporating security and privacy roles and responsibilities into organizational position descriptions, directly addressing ISO 27002's requirement that all information security responsibilities are defined and allocated.",
+      "gaps": "Minor: ISO 27002 provides specific implementation guidance on asset owner responsibilities. SP 800-53 addresses through system owner concept in PL-02 but 'asset owner' role is less defined."
     },
     {
       "id": "5.3",
-      "title": "Segregation of duties - Implementation",
+      "title": "Segregation of duties",
       "controls": [
         "AC-05"
       ],
       "coverage_pct": 90,
-      "rationale": "AC-05 directly addresses separation of duties with specific implementation requirements.",
-      "gaps": "Minor: ISO 27002 provides detailed guidance on identifying conflicting duties and compensating controls. AC-05 is comprehensive but less implementation-specific."
+      "rationale": "AC-05 directly addresses separation of duties including identifying conflicting duties and implementing compensating controls. Comprehensive alignment with ISO 27002's requirement.",
+      "gaps": "Minor: ISO 27002 provides detailed guidance on identifying conflicting duties across business processes. AC-05 is focused on system-level duty separation."
     },
     {
       "id": "5.4",
-      "title": "Management responsibilities - Implementation",
+      "title": "Management responsibilities",
       "controls": [
         "PM-02",
         "PM-13",
         "PS-07",
-        "AT-01"
+        "AT-01",
+        "PM-29"
       ],
-      "coverage_pct": 75,
-      "rationale": "PM-02 and PM-13 address management roles. PS-07 third-party personnel. AT-01 training policy.",
-      "gaps": "ISO 27002 provides detailed guidance on management requiring compliance, providing resources, and leading by example. SP 800-53 less explicit on management behavioral expectations."
+      "coverage_pct": 78,
+      "rationale": "PM-02 and PM-13 address management security roles and workforce management. PS-07 covers third-party personnel management. AT-01 establishes training policy. PM-29 (Risk Management Program Leadership) adds explicit senior leadership accountability for risk management, supporting ISO 27002's requirement that management requires personnel to apply security per policies.",
+      "gaps": "ISO 27002 emphasizes management actively requiring all employees and contractors to apply security per policies, leading by example, and providing resources. SP 800-53 is less explicit on management behavioral expectations and enforcement responsibility."
     },
     {
       "id": "5.5",
-      "title": "Contact with authorities - Implementation",
+      "title": "Contact with authorities",
       "controls": [
         "IR-06",
         "PM-15"
       ],
       "coverage_pct": 80,
-      "rationale": "IR-06 incident reporting to authorities; PM-15 security contacts. Implementation of authority relationships covered.",
-      "gaps": "ISO 27002 provides guidance on maintaining authority contacts proactively for prevention, not just incident reporting."
+      "rationale": "IR-06 covers incident reporting to authorities. PM-15 covers establishing and maintaining contacts with security groups and associations. Together they address ISO 27002's requirement for maintaining relationships with relevant authorities.",
+      "gaps": "ISO 27002 includes proactive relationship maintenance with authorities for prevention and intelligence, not just reactive incident reporting. Anticipatory contact with regulatory bodies is not explicitly required."
     },
     {
       "id": "5.6",
-      "title": "Contact with special interest groups - Implementation",
+      "title": "Contact with special interest groups",
       "controls": [
         "PM-15",
         "PM-16"
       ],
       "coverage_pct": 85,
-      "rationale": "PM-15 directly covers contacts with security groups. PM-16 threat awareness. Implementation guidance aligned.",
-      "gaps": "Minor: ISO 27002 details benefits including improved knowledge, early warnings, and advisory access."
+      "rationale": "PM-15 directly covers contacts with security groups and associations. PM-16 covers threat awareness program including sharing with security communities. Good alignment with ISO 27002's requirement.",
+      "gaps": "Minor: ISO 27002 details benefits including improved knowledge, early warnings, and advisory access from professional forums. SP 800-53 is less specific about the breadth of groups to engage."
     },
     {
       "id": "5.7",
-      "title": "Threat intelligence - Implementation",
+      "title": "Threat intelligence",
       "controls": [
         "PM-16",
         "RA-03",
         "RA-05",
         "SI-05",
-        "RA-10"
+        "RA-10",
+        "RA-07"
       ],
-      "coverage_pct": 90,
-      "rationale": "PM-16 threat awareness; RA-03 risk assessment; RA-05 vulnerability scanning; SI-05 security alerts; RA-10 threat hunting. Comprehensive threat intelligence implementation.",
-      "gaps": "Minimal gap. SP 800-53 Rev 5 added strong threat intelligence capabilities."
+      "coverage_pct": 92,
+      "rationale": "PM-16 addresses threat awareness program. SI-05 covers security alerts and advisories. RA-03/RA-05 include threat identification and vulnerability assessment. RA-10 (Threat Hunting) adds proactive cyber threat hunting capability. RA-07 (Risk Response) ensures threat intelligence findings are acted upon systematically. Comprehensive threat intelligence implementation.",
+      "gaps": "Minimal gap. SP 800-53 Rev 5 with RA-10 and RA-07 provides strong threat intelligence capabilities including collection, analysis, and response."
     },
     {
       "id": "5.8",
-      "title": "Information security in project management - Implementation",
+      "title": "Information security in project management",
       "controls": [
         "SA-03",
         "SA-04",
@@ -144,70 +149,71 @@
         "PM-07"
       ],
       "coverage_pct": 80,
-      "rationale": "SA-03 SDLC integration; SA-04 acquisition requirements; SA-08 security engineering; PM-07 enterprise architecture.",
-      "gaps": "ISO 27002 specifies security integration into all project types (IT and non-IT). SP 800-53 SA controls focus on IT system development specifically."
+      "rationale": "SA-03 covers security in SDLC integration. SA-04 addresses acquisition security requirements. SA-08 covers security engineering principles applied to projects. PM-07 addresses enterprise architecture integration.",
+      "gaps": "ISO 27002 specifies security integration into ALL project types regardless of nature (IT and non-IT). SP 800-53 SA controls focus on IT system development and acquisition projects specifically."
     },
     {
       "id": "5.9",
-      "title": "Inventory of information and other associated assets - Implementation",
+      "title": "Inventory of information and other associated assets",
       "controls": [
         "CM-08",
-        "CM-08(1)",
-        "PM-05"
+        "PM-05",
+        "CM-12",
+        "CM-13"
       ],
-      "coverage_pct": 85,
-      "rationale": "CM-08 component inventory with automated mechanisms; PM-05 system inventory. Implementation guidance for inventory management well covered.",
-      "gaps": "ISO 27002 distinguishes between information assets and supporting assets (hardware, software, cloud services, people, sites). SP 800-53 focuses on system components."
+      "coverage_pct": 92,
+      "rationale": "CM-08 directly covers system component inventory. PM-05 covers system inventory. CM-12 (Information Location) identifies and documents the location of information types and the specific system components on which information is processed and stored. CM-13 (Data Action Mapping) maps data actions to system components and individuals, strengthening asset-to-data relationship tracking. Together these comprehensively address ISO 27002's inventory requirement.",
+      "gaps": "Minor: ISO 27002 includes 'associated assets' beyond information and system components (e.g., people, premises, cloud services as assets). CM-12 and CM-13 significantly strengthen the information asset inventory mapping."
     },
     {
       "id": "5.10",
-      "title": "Acceptable use of information and other associated assets - Implementation",
+      "title": "Acceptable use of information and other associated assets",
       "controls": [
         "PL-04",
         "AC-20",
         "MP-07"
       ],
       "coverage_pct": 85,
-      "rationale": "PL-04 rules of behavior; AC-20 external system use; MP-07 media use. Acceptable use implementation covered.",
-      "gaps": "Minor: ISO 27002 specifies 'return of assets' as part of acceptable use lifecycle. SP 800-53 separates this into PS-04."
+      "rationale": "PL-04 directly covers rules of behavior and acceptable use policies. AC-20 covers use of external systems. MP-07 covers media use restrictions.",
+      "gaps": "Minor: ISO 27002 specifies 'return of assets' as part of the acceptable use lifecycle and covers acceptable use of cloud services. SP 800-53 separates asset return into PS-04."
     },
     {
       "id": "5.11",
-      "title": "Return of assets - Implementation",
+      "title": "Return of assets",
       "controls": [
         "PS-04",
         "PS-05"
       ],
       "coverage_pct": 90,
-      "rationale": "PS-04 personnel termination (return of assets); PS-05 personnel transfer. Implementation guidance aligned.",
-      "gaps": "Minimal gap."
+      "rationale": "PS-04 covers personnel termination including return of organizational assets and information. PS-05 covers personnel transfer with similar asset handling requirements.",
+      "gaps": "Minimal gap. ISO 27002 includes return of both physical and electronic assets, which PS-04/PS-05 address."
     },
     {
       "id": "5.12",
-      "title": "Classification of information - Implementation",
+      "title": "Classification of information",
       "controls": [
         "RA-02",
         "AC-16"
       ],
       "coverage_pct": 85,
-      "rationale": "RA-02 security categorization; AC-16 security/privacy attributes. Classification implementation covered through FIPS 199 framework.",
-      "gaps": "ISO 27002 provides guidance on classification schemes, labeling, and handling procedures per classification. SP 800-53 uses categorization (C/I/A impact levels) which differs from typical ISO classification tiers."
+      "rationale": "RA-02 covers security categorization of information and systems using FIPS 199 methodology. AC-16 supports association of security and privacy attributes with information for classification purposes.",
+      "gaps": "ISO 27002 uses multi-tier classification schemes; SP 800-53 uses FIPS 199 categorization (C/I/A impact levels). Conceptually similar but terminology and methodology differ. ISO 27002 classification applies to all information forms."
     },
     {
       "id": "5.13",
-      "title": "Labelling of information - Implementation",
+      "title": "Labelling of information",
       "controls": [
         "MP-03",
         "AC-16",
         "RA-02"
       ],
       "coverage_pct": 80,
-      "rationale": "MP-03 media marking; AC-16 security attributes. Labeling implementation partially covered.",
-      "gaps": "ISO 27002 requires labeling procedures for all information formats (physical, electronic, verbal). SP 800-53 focuses on media marking."
+      "rationale": "MP-03 covers media marking and labeling. AC-16 supports association of security attributes with information for digital labeling. RA-02 provides the categorization basis for labels.",
+      "gaps": "ISO 27002 requires labeling procedures for all information formats including physical, electronic, and verbal. SP 800-53 focuses primarily on media marking; comprehensive cross-format labeling is less prescribed."
     },
     {
       "id": "5.14",
-      "title": "Information transfer - Implementation",
+      "title": "Information transfer",
       "controls": [
         "SC-07",
         "SC-08",
@@ -215,15 +221,16 @@
         "AC-04",
         "AC-17",
         "AC-20",
-        "MP-05"
+        "MP-05",
+        "SC-46"
       ],
-      "coverage_pct": 80,
-      "rationale": "SC-07/SC-08 boundary and transmission protection; AC-04 information flow; AC-17 remote access; MP-05 media transport. Comprehensive transfer controls.",
-      "gaps": "Minor: ISO 27002 includes transfer agreements and procedures for all forms (electronic, physical, verbal). SP 800-53 focuses on electronic/physical transfer; verbal transfer procedures are a gap."
+      "coverage_pct": 85,
+      "rationale": "SC-07 boundary protection; SC-08 transmission confidentiality/integrity; AC-04 information flow enforcement; AC-17 remote access; MP-05 media transport. SC-46 (Cross Domain Policy Enforcement) adds policy enforcement for information transfer between security domains, directly supporting controlled information transfer across different classification levels or organizational boundaries.",
+      "gaps": "ISO 27002 includes transfer agreements and procedures for all forms (electronic, physical, verbal). SP 800-53 focuses on electronic and physical transfer; verbal transfer procedures are a gap."
     },
     {
       "id": "5.15",
-      "title": "Access control - Implementation",
+      "title": "Access control",
       "controls": [
         "AC-01",
         "AC-02",
@@ -240,12 +247,12 @@
         "AC-24"
       ],
       "coverage_pct": 95,
-      "rationale": "AC family is exceptionally comprehensive for access control implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "AC family is exceptionally comprehensive for access control. AC-01 policy; AC-02 account management; AC-03 access enforcement; AC-06 least privilege; AC-07 unsuccessful login attempts; AC-17 remote access; AC-24 access control decisions. SP 800-53 AC family exceeds ISO 27002's access control requirements.",
+      "gaps": "Minimal gap. SP 800-53 AC family is more detailed than ISO 27002's requirement."
     },
     {
       "id": "5.16",
-      "title": "Identity management - Implementation",
+      "title": "Identity management",
       "controls": [
         "IA-02",
         "IA-04",
@@ -254,39 +261,37 @@
         "IA-12"
       ],
       "coverage_pct": 95,
-      "rationale": "IA family comprehensively covers identity management implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "IA family comprehensively covers identity management. IA-02 identification and authentication; IA-04 identifier management; IA-05 authenticator management; IA-08 non-organizational users; IA-12 identity proofing covers identity verification before credential issuance.",
+      "gaps": "Minimal gap. SP 800-53 IA family provides comprehensive identity lifecycle management."
     },
     {
       "id": "5.17",
-      "title": "Authentication information - Implementation",
+      "title": "Authentication information",
       "controls": [
         "IA-05",
-        "IA-05(1)",
         "IA-06",
         "IA-07",
         "IA-11"
       ],
       "coverage_pct": 95,
-      "rationale": "IA-05 authenticator management with detailed implementation; IA-06 feedback; IA-07 cryptographic module authentication.",
-      "gaps": "Minimal gap."
+      "rationale": "IA-05 directly covers authenticator management (passwords, tokens, certificates). IA-06 covers authenticator feedback. IA-07 covers cryptographic module authentication. IA-11 covers re-authentication requirements.",
+      "gaps": "Minimal gap. ISO 27002's authentication information management requirements are comprehensively addressed."
     },
     {
       "id": "5.18",
-      "title": "Access rights - Implementation",
+      "title": "Access rights",
       "controls": [
         "AC-02",
         "AC-06",
-        "AC-02(3)",
-        "AC-02(4)"
+        "AC-25"
       ],
       "coverage_pct": 95,
-      "rationale": "AC-02 account management with lifecycle controls; AC-06 least privilege; AC-02(3) disable inactive; AC-02(4) automated auditing.",
-      "gaps": "Minimal gap."
+      "rationale": "AC-02 covers account management including provisioning, periodic review, and revocation. AC-06 covers least privilege. AC-25 covers reference monitor concept for access mediation.",
+      "gaps": "Minimal gap. Access right lifecycle (request, approve, review, revoke) is well covered."
     },
     {
       "id": "5.19",
-      "title": "Information security in supplier relationships - Implementation",
+      "title": "Information security in supplier relationships",
       "controls": [
         "SA-04",
         "SA-09",
@@ -296,24 +301,24 @@
         "SR-05"
       ],
       "coverage_pct": 85,
-      "rationale": "SA-04 acquisition; SA-09 external services; SR family supply chain. Implementation guidance comprehensive.",
-      "gaps": "Minor: ISO 27002 includes specific guidance on supplier information security policy and register. SP 800-53 distributes these across multiple controls."
+      "rationale": "SA-04 acquisition security requirements; SA-09 external system services; SR family covers supply chain risk management. SR-01 establishes supply chain risk management policy; SR-02/SR-03 cover supply chain controls.",
+      "gaps": "Minor: ISO 27002 emphasizes ongoing supplier relationship management with periodic review and risk reassessment. SP 800-53 focuses more on acquisition-time requirements."
     },
     {
       "id": "5.20",
-      "title": "Addressing information security within supplier agreements - Implementation",
+      "title": "Addressing information security within supplier agreements",
       "controls": [
         "SA-04",
         "SA-09",
         "SR-03"
       ],
       "coverage_pct": 85,
-      "rationale": "SA-04 covers specific security requirements in agreements. SA-09 addresses external service agreements.",
-      "gaps": "Minor: ISO 27002 provides detailed agreement clause guidance. SA-04 enhancements partially cover this."
+      "rationale": "SA-04 directly requires security requirements in acquisitions. SA-09 covers external service agreements. SR-03 covers supply chain controls and processes specified in agreements.",
+      "gaps": "Minor: ISO 27002 requires specific agreement terms for information access, processing, handling, and return. SA-04 is comprehensive but agreement format requirements differ."
     },
     {
       "id": "5.21",
-      "title": "Managing information security in the ICT supply chain - Implementation",
+      "title": "Managing information security in the ICT supply chain",
       "controls": [
         "SR-01",
         "SR-02",
@@ -325,24 +330,24 @@
         "SR-11"
       ],
       "coverage_pct": 90,
-      "rationale": "SR family comprehensively addresses ICT supply chain implementation including provenance, inspection, and testing.",
-      "gaps": "Minimal gap."
+      "rationale": "SR family comprehensively addresses ICT supply chain risk management. SR-05 covers acquisition strategies; SR-06 supplier assessments; SR-09 tamper resistance; SR-10 inspection of systems; SR-11 component authenticity verification.",
+      "gaps": "Minimal gap. SP 800-53 SR family is well aligned with ISO 27002's ICT supply chain management requirements."
     },
     {
       "id": "5.22",
-      "title": "Monitoring and review of supplier services - Implementation",
+      "title": "Monitoring, review and change management of supplier services",
       "controls": [
         "SA-09",
         "SR-06",
         "CA-07"
       ],
       "coverage_pct": 75,
-      "rationale": "SA-09(2) function/port identification; SR-06 supplier assessments; CA-07 continuous monitoring.",
-      "gaps": "ISO 27002 provides specific guidance on supplier service monitoring, change management, and incident handling. Regular service review processes less explicit in SP 800-53."
+      "rationale": "SA-09 includes external service monitoring requirements. SR-06 covers supplier assessments and reviews. CA-07 continuous monitoring can extend to supplier service monitoring.",
+      "gaps": "ISO 27002 requires regular monitoring and review of supplier service delivery, performance measurement, and change management of supplier services. SP 800-53 is less prescriptive about ongoing supplier service monitoring cadence and performance tracking."
     },
     {
       "id": "5.23",
-      "title": "Information security for use of cloud services - Implementation",
+      "title": "Information security for use of cloud services",
       "controls": [
         "SA-09",
         "AC-20",
@@ -350,12 +355,12 @@
         "SA-04"
       ],
       "coverage_pct": 70,
-      "rationale": "SA-09 external services covers cloud conceptually. SA-04 acquisition. SC-07 boundary.",
-      "gaps": "ISO 27002 provides specific cloud security implementation guidance (shared responsibility, exit, multi-tenancy). SP 800-53 doesn't have cloud-specific implementation controls; FedRAMP supplements this."
+      "rationale": "SA-09 covers external information system services (includes cloud). AC-20 addresses use of external systems. SC-07 boundary protection. SA-04 acquisition requirements.",
+      "gaps": "ISO 27002:2022 added cloud-specific controls covering shared responsibility models, cloud exit strategy, multi-tenancy isolation, and cloud-specific risk assessment. SP 800-53 addresses cloud through general external service controls but lacks cloud-specific implementation requirements. FedRAMP supplements this for federal use."
     },
     {
       "id": "5.24",
-      "title": "Incident management planning - Implementation",
+      "title": "Information security incident management planning and preparation",
       "controls": [
         "IR-01",
         "IR-02",
@@ -365,12 +370,12 @@
         "IR-08"
       ],
       "coverage_pct": 95,
-      "rationale": "IR family comprehensively covers incident management implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "IR-01 covers incident response policy and procedures. IR-02 incident response training. IR-03 incident response testing. IR-04 incident handling. IR-07 incident response assistance. IR-08 incident response plan. Comprehensive coverage of planning and preparation.",
+      "gaps": "Minimal gap. IR family provides comprehensive incident management planning."
     },
     {
       "id": "5.25",
-      "title": "Assessment and decision on information security events - Implementation",
+      "title": "Assessment and decision on information security events",
       "controls": [
         "IR-04",
         "IR-05",
@@ -378,36 +383,37 @@
         "SI-04"
       ],
       "coverage_pct": 90,
-      "rationale": "IR-04/IR-05 event assessment and monitoring. SI-04 system monitoring supports event identification.",
-      "gaps": "Minimal gap."
+      "rationale": "IR-04 incident handling includes event assessment and triage. IR-05 incident monitoring. IR-06 incident reporting. SI-04 system monitoring supports event identification and initial assessment.",
+      "gaps": "Minimal gap. Event classification and decision-making processes are well addressed."
     },
     {
       "id": "5.26",
-      "title": "Response to information security incidents - Implementation",
+      "title": "Response to information security incidents",
       "controls": [
         "IR-04",
         "IR-05",
         "IR-06",
-        "IR-07"
+        "IR-07",
+        "IR-09"
       ],
       "coverage_pct": 95,
-      "rationale": "IR-04 comprehensive incident handling including containment, eradication, and recovery.",
-      "gaps": "Minimal gap."
+      "rationale": "IR-04 comprehensively covers incident response including containment, eradication, and recovery. IR-06 reporting; IR-07 assistance. IR-09 (Information Spillage Response) adds specific response procedures for information spillage incidents, strengthening response coverage for data exposure scenarios.",
+      "gaps": "Minimal gap. IR-09 adds coverage for information spillage, a specific incident type ISO 27002 expects to be handled."
     },
     {
       "id": "5.27",
-      "title": "Learning from information security incidents - Implementation",
+      "title": "Learning from information security incidents",
       "controls": [
         "IR-03",
-        "IR-04(8)"
+        "IR-04"
       ],
       "coverage_pct": 85,
-      "rationale": "IR-03 incident response testing includes lessons learned. IR-04(8) correlation with threat intelligence.",
-      "gaps": "Minor: ISO 27002 emphasizes structured knowledge management from incidents. SP 800-53 supports this but knowledge base concept less formalized."
+      "rationale": "IR-03 includes lessons learned as part of incident response testing and exercises. IR-04 includes incident analysis and post-incident activities. Together they support ISO 27002's requirement for using incident knowledge to improve security.",
+      "gaps": "Minor: ISO 27002 emphasizes structured knowledge management from incidents to reduce future likelihood and impact. SP 800-53 supports this through post-incident review but formal knowledge base management is less prescribed."
     },
     {
       "id": "5.28",
-      "title": "Collection of evidence - Implementation",
+      "title": "Collection of evidence",
       "controls": [
         "IR-04",
         "AU-03",
@@ -416,12 +422,12 @@
         "AU-11"
       ],
       "coverage_pct": 85,
-      "rationale": "IR-04 incident handling includes evidence; AU family covers audit trail integrity. AU-09 protection of audit information.",
-      "gaps": "Minor: ISO 27002 provides specific evidence handling guidance (chain of custody, admissibility). SP 800-53 less explicit on forensic evidence management procedures."
+      "rationale": "IR-04 incident handling includes evidence collection. AU-03 content of audit records for evidential value. AU-06 audit review and analysis. AU-09 protection of audit information against tampering. AU-11 audit record retention for evidence preservation.",
+      "gaps": "Minor: ISO 27002 provides specific evidence handling guidance including chain of custody, forensic admissibility, and evidence management procedures. SP 800-53 is less explicit on forensic evidence management procedures for legal proceedings."
     },
     {
       "id": "5.29",
-      "title": "Information security during disruption - Implementation",
+      "title": "Information security during disruption",
       "controls": [
         "CP-01",
         "CP-02",
@@ -438,12 +444,12 @@
         "CP-13"
       ],
       "coverage_pct": 90,
-      "rationale": "CP family comprehensive for continuity implementation including planning, testing, recovery.",
-      "gaps": "Minimal gap."
+      "rationale": "CP family comprehensively covers continuity planning, testing, and recovery. CP-11 alternate communications protocols; CP-12 safe mode; CP-13 alternative security mechanisms. Strong alignment with maintaining security during disruption.",
+      "gaps": "Minimal gap. SP 800-53 CP family is comprehensive for maintaining security during disruption scenarios."
     },
     {
       "id": "5.30",
-      "title": "ICT readiness for business continuity - Implementation",
+      "title": "ICT readiness for business continuity",
       "controls": [
         "CP-02",
         "CP-04",
@@ -453,12 +459,12 @@
         "CP-10"
       ],
       "coverage_pct": 85,
-      "rationale": "CP-02 contingency plan; CP-04 testing; CP-07 alternate site; CP-09 backup; CP-10 recovery.",
-      "gaps": "Minor: ISO 27002 specifically addresses BIA for ICT services. SP 800-53 CP-02 requires BIA but ICT readiness analysis as a distinct concept is less explicit."
+      "rationale": "CP-02 contingency plan covers ICT readiness. CP-04 testing. CP-07 alternate processing site. CP-08 telecommunications services. CP-09 backup. CP-10 recovery and reconstitution.",
+      "gaps": "Minor: ISO 27002 specifically addresses Business Impact Analysis for ICT services and ICT readiness as a distinct concept. SP 800-53 CP-02 requires BIA but ICT readiness analysis is implicit rather than a standalone requirement."
     },
     {
       "id": "5.31",
-      "title": "Legal requirements - Implementation",
+      "title": "Legal, statutory, regulatory and contractual requirements",
       "controls": [
         "PL-04",
         "PM-01",
@@ -466,32 +472,32 @@
         "PM-08"
       ],
       "coverage_pct": 60,
-      "rationale": "PL-04 rules include legal compliance; PM-01 program plan addresses legal; SA-04 contractual requirements.",
-      "gaps": "ISO 27002 provides detailed guidance on identifying and documenting legal/regulatory/contractual requirements. SP 800-53 lacks a dedicated legal compliance identification implementation guide."
+      "rationale": "PL-04 rules of behavior include legal compliance obligations. PM-01 program plan addresses regulatory compliance. SA-04 covers contractual requirements. PM-08 critical infrastructure plan.",
+      "gaps": "ISO 27002 requires explicit identification, documentation, and maintenance of all applicable legal, regulatory, and contractual requirements. SP 800-53 lacks a dedicated legal compliance identification control; FISMA context assumes federal requirements rather than requiring systematic identification."
     },
     {
       "id": "5.32",
-      "title": "Intellectual property rights - Implementation",
+      "title": "Intellectual property rights",
       "controls": [],
       "coverage_pct": 15,
-      "rationale": "No direct SP 800-53 control.",
-      "gaps": "Significant gap. SP 800-53 doesn't address software licensing, copyright, or IP protection implementation."
+      "rationale": "No direct SP 800-53 control addresses intellectual property management, software licensing compliance, or copyright protection.",
+      "gaps": "Significant gap. SP 800-53 does not address software licensing compliance, copyright management, proprietary data protection, or IP rights enforcement. Requires supplementary organizational controls outside SP 800-53."
     },
     {
       "id": "5.33",
-      "title": "Protection of records - Implementation",
+      "title": "Protection of records",
       "controls": [
         "AU-11",
         "SI-12",
         "AU-09"
       ],
       "coverage_pct": 70,
-      "rationale": "AU-11 audit retention; SI-12 information management; AU-09 protection of audit information.",
-      "gaps": "ISO 27002 provides records management implementation guidance (classification, retention schedules, destruction). SP 800-53 focuses on audit records rather than general records management."
+      "rationale": "AU-11 covers audit record retention. SI-12 covers information management and retention. AU-09 covers protection of audit information against unauthorized modification or deletion.",
+      "gaps": "ISO 27002 requires protection of all records from loss, destruction, falsification, unauthorized access, and unauthorized release per legal, regulatory, and business requirements. SP 800-53 covers audit records well but broader records management (classification, retention schedules, disposal) is less explicit."
     },
     {
       "id": "5.34",
-      "title": "Privacy and protection of PII - Implementation",
+      "title": "Privacy and protection of PII",
       "controls": [
         "PT-01",
         "PT-02",
@@ -504,28 +510,29 @@
         "PM-25",
         "PM-26",
         "PM-27",
-        "PM-28"
+        "PM-28",
+        "SI-18",
+        "RA-08"
       ],
-      "coverage_pct": 85,
-      "rationale": "PT family and PM privacy controls provide comprehensive PII protection implementation.",
-      "gaps": "Minor: ISO 27002 defers to ISO 27701. SP 800-53 privacy controls are comprehensive but focused on US federal context."
+      "coverage_pct": 90,
+      "rationale": "PT family provides comprehensive PII protection. PM-25 minimization; PM-26 complaint management; PM-27 privacy reporting; PM-28 risk framing. SI-18 (PII Quality Operations) adds controls for maintaining the quality of PII throughout the data lifecycle, directly supporting ISO 27002's PII protection requirements. RA-08 (Privacy Impact Assessments) ensures privacy impacts are assessed before processing PII.",
+      "gaps": "Minor: ISO 27002 defers to ISO 27701 for full privacy management system. SP 800-53 privacy controls are comprehensive but focused on US federal regulatory context."
     },
     {
       "id": "5.35",
-      "title": "Independent review - Implementation",
+      "title": "Independent review of information security",
       "controls": [
         "CA-02",
         "CA-07",
-        "PM-06",
-        "CA-02(1)"
+        "PM-06"
       ],
       "coverage_pct": 80,
-      "rationale": "CA-02 security assessments with independent assessor option. CA-02(1) independent assessors.",
-      "gaps": "ISO 27002 specifies independent review scope (approach, implementation, effectiveness). SP 800-53 assessments are comprehensive but review of ISMS approach specifically less explicit."
+      "rationale": "CA-02 covers security assessments which serve as independent reviews. CA-07 continuous monitoring. PM-06 performance measurement to evaluate effectiveness.",
+      "gaps": "ISO 27002 requires independent review of the organization's approach to managing information security, not just technical control assessment. Management system review independence is less explicitly addressed in SP 800-53."
     },
     {
       "id": "5.36",
-      "title": "Compliance with policies - Implementation",
+      "title": "Compliance with policies, rules and standards",
       "controls": [
         "CA-02",
         "AU-06",
@@ -533,12 +540,12 @@
         "CA-07"
       ],
       "coverage_pct": 80,
-      "rationale": "CA-02 compliance assessment; AU-06 audit review; PM-06 performance; CA-07 continuous monitoring.",
-      "gaps": "Minor: ISO 27002 includes specific compliance checking methodology. SP 800-53 assessment approach differs."
+      "rationale": "CA-02 assesses compliance with security requirements. AU-06 reviews audit records for compliance violations. PM-06 measures security performance. CA-07 continuous monitoring detects deviations.",
+      "gaps": "Minor: ISO 27002 requires regular review that information processing and procedures comply with security policies and standards. SP 800-53 assessment approach differs from ISO's compliance checking methodology."
     },
     {
       "id": "5.37",
-      "title": "Documented operating procedures - Implementation",
+      "title": "Documented operating procedures",
       "controls": [
         "PL-02",
         "SA-05",
@@ -555,119 +562,118 @@
         "CM-11"
       ],
       "coverage_pct": 75,
-      "rationale": "PL-02 system security plan; SA-05 documentation; CM family operational procedures.",
-      "gaps": "ISO 27002 requires documented procedures for operational activities affecting security. SP 800-53 distributes this across families."
+      "rationale": "PL-02 covers system security plans documenting procedures. SA-05 system documentation. CM family covers operational procedures for configuration management activities.",
+      "gaps": "ISO 27002 requires documented operating procedures for information processing facilities made available to all personnel who need them. SP 800-53 distributes procedures across families rather than requiring unified operating procedures documentation."
     },
     {
       "id": "6.1",
-      "title": "Screening - Implementation",
+      "title": "Screening",
       "controls": [
-        "PS-03",
-        "PS-03(3)",
-        "PS-03(4)"
+        "PS-03"
       ],
       "coverage_pct": 90,
-      "rationale": "PS-03 covers personnel screening with enhancements for citizenship and formal agreements.",
-      "gaps": "Minimal gap."
+      "rationale": "PS-03 directly covers personnel screening including background verification checks before access is granted. Covers initial and ongoing screening requirements.",
+      "gaps": "Minimal gap. ISO 27002 provides guidance on screening depth varying by role sensitivity, which aligns with PS-03's risk-based approach."
     },
     {
       "id": "6.2",
-      "title": "Terms and conditions of employment - Implementation",
+      "title": "Terms and conditions of employment",
       "controls": [
         "PS-06",
         "PL-04",
-        "PS-07"
+        "PS-07",
+        "PS-09"
       ],
-      "coverage_pct": 85,
-      "rationale": "PS-06 access agreements; PL-04 rules of behavior; PS-07 third-party personnel.",
-      "gaps": "Minor: ISO 27002 details specific employment contract security clauses. SP 800-53 focuses on access agreements."
+      "coverage_pct": 88,
+      "rationale": "PS-06 covers access agreements including confidentiality requirements. PL-04 covers rules of behavior. PS-07 covers third-party personnel. PS-09 (Position Descriptions) requires security and privacy responsibilities in position descriptions, directly supporting ISO 27002's requirement that employment terms include security responsibilities.",
+      "gaps": "Minor: ISO 27002 includes security responsibilities in employment contracts. SP 800-53 focuses on access agreements and position descriptions rather than employment contract terms specifically, but PS-09 strengthens coverage."
     },
     {
       "id": "6.3",
-      "title": "Awareness training - Implementation",
+      "title": "Information security awareness, education and training",
       "controls": [
         "AT-02",
         "AT-03",
         "AT-04",
         "PM-13",
-        "PM-14"
+        "PM-14",
+        "AT-06"
       ],
       "coverage_pct": 95,
-      "rationale": "AT family comprehensive for training implementation. PM-13 workforce; PM-14 testing/exercises.",
-      "gaps": "Minimal gap."
+      "rationale": "AT-02 awareness training; AT-03 role-based security training; AT-04 training records. PM-13 workforce program; PM-14 testing and exercises. AT-06 (Training Feedback) provides feedback on training results to senior personnel, enabling continuous improvement of training programs and measurement of training effectiveness.",
+      "gaps": "Minimal gap. AT-06 strengthens the training evaluation and improvement cycle that ISO 27002 emphasizes."
     },
     {
       "id": "6.4",
-      "title": "Disciplinary process - Implementation",
+      "title": "Disciplinary process",
       "controls": [
         "PS-08"
       ],
       "coverage_pct": 75,
-      "rationale": "PS-08 covers personnel sanctions.",
-      "gaps": "ISO 27002 provides detailed guidance on graduated disciplinary process. PS-08 is less prescriptive about process stages."
+      "rationale": "PS-08 covers personnel sanctions for security violations including formal and informal sanctions.",
+      "gaps": "ISO 27002 requires a formal, communicated disciplinary process with graduated responses. PS-08 addresses sanctions but is less prescriptive about process stages, communication to personnel, and consideration of mitigating circumstances."
     },
     {
       "id": "6.5",
-      "title": "Post-employment responsibilities - Implementation",
+      "title": "Responsibilities after termination or change of employment",
       "controls": [
         "PS-04",
         "PS-05",
         "PS-06"
       ],
       "coverage_pct": 90,
-      "rationale": "PS-04/PS-05 termination and transfer. PS-06 ongoing access agreements.",
-      "gaps": "Minimal gap."
+      "rationale": "PS-04 covers personnel termination including access revocation and ongoing obligations. PS-05 covers personnel transfer. PS-06 covers access agreements that persist post-employment.",
+      "gaps": "Minimal gap. PS-04/PS-05 address access revocation, asset return, and ongoing confidentiality obligations."
     },
     {
       "id": "6.6",
-      "title": "Confidentiality agreements - Implementation",
+      "title": "Confidentiality or non-disclosure agreements",
       "controls": [
         "PS-06",
         "SA-09"
       ],
       "coverage_pct": 80,
-      "rationale": "PS-06 access agreements include confidentiality. SA-09 external service agreements.",
-      "gaps": "ISO 27002 details NDA content requirements. SP 800-53 less specific about NDA clause requirements."
+      "rationale": "PS-06 covers access agreements which include confidentiality requirements for personnel. SA-09 covers external service agreements including confidentiality terms with third parties.",
+      "gaps": "ISO 27002 specifically requires NDAs reflecting organizational needs with regular review and updates. PS-06 is broader (access agreements) and NDA-specific requirements (jurisdiction, post-contract duration) are less detailed."
     },
     {
       "id": "6.7",
-      "title": "Remote working - Implementation",
+      "title": "Remote working",
       "controls": [
         "AC-17",
         "PE-17",
         "SC-28"
       ],
       "coverage_pct": 85,
-      "rationale": "AC-17 remote access with multiple enhancements; PE-17 alternate work site; SC-28 protection at rest.",
-      "gaps": "Minor: ISO 27002 includes physical security at remote location and clean desk for remote workers."
+      "rationale": "AC-17 directly covers remote access controls and monitoring. PE-17 covers alternate work site security. SC-28 covers protection of information at rest on remote devices.",
+      "gaps": "Minor: ISO 27002 includes physical security at remote locations, clean desk for remote workers, and remote working-specific risk considerations beyond technical access controls."
     },
     {
       "id": "6.8",
-      "title": "Event reporting - Implementation",
+      "title": "Information security event reporting",
       "controls": [
         "IR-06",
         "IR-07",
         "IR-01"
       ],
       "coverage_pct": 90,
-      "rationale": "IR-06 incident reporting; IR-07 assistance; IR-01 policy. Comprehensive event reporting implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "IR-06 directly covers incident reporting requirements. IR-07 covers incident response assistance and guidance for reporters. IR-01 establishes the policy framework for event reporting.",
+      "gaps": "Minimal gap. ISO 27002 emphasizes employee obligation to report events; SP 800-53 addresses through policy and reporting procedures."
     },
     {
       "id": "7.1",
-      "title": "Physical security perimeters - Implementation",
+      "title": "Physical security perimeters",
       "controls": [
         "PE-03",
-        "PE-03(1)",
         "PE-04"
       ],
       "coverage_pct": 90,
-      "rationale": "PE-03 physical access control with enhancements. PE-04 transmission medium protection.",
-      "gaps": "Minimal gap."
+      "rationale": "PE-03 covers physical access control including perimeter barriers, entry points, and access mechanisms. PE-04 covers access control for transmission medium including physical protection of cabling routes that form perimeters.",
+      "gaps": "Minimal gap. ISO 27002 includes guidance on perimeter strength proportional to assets; PE-03 addresses this through risk-based physical access controls."
     },
     {
       "id": "7.2",
-      "title": "Physical entry - Implementation",
+      "title": "Physical entry",
       "controls": [
         "PE-02",
         "PE-03",
@@ -676,36 +682,35 @@
         "PE-07"
       ],
       "coverage_pct": 95,
-      "rationale": "Comprehensive physical entry controls with visitor management, monitoring, and logging.",
-      "gaps": "Minimal gap."
+      "rationale": "PE-02 physical access authorizations; PE-03 physical access control mechanisms; PE-06 monitoring physical access; PE-07 visitor control; PE-08 visitor access records. Comprehensive physical entry controls.",
+      "gaps": "Minimal gap. Physical entry controls are comprehensive."
     },
     {
       "id": "7.3",
-      "title": "Securing offices and rooms - Implementation",
+      "title": "Securing offices, rooms and facilities",
       "controls": [
         "PE-03",
         "PE-05",
         "PE-18"
       ],
       "coverage_pct": 85,
-      "rationale": "PE-03 access control; PE-05 output device access; PE-18 component location.",
-      "gaps": "Minor: ISO 27002 addresses office-specific risks (sound insulation, door locks, window protection)."
+      "rationale": "PE-03 physical access control for offices and rooms. PE-05 access control for output devices. PE-18 location of information system components within facilities.",
+      "gaps": "Minor: ISO 27002 addresses office-specific risks including sound insulation, door locks, window protection, and facility design. SP 800-53 is less specific about office-level security design."
     },
     {
       "id": "7.4",
-      "title": "Physical security monitoring - Implementation",
+      "title": "Physical security monitoring",
       "controls": [
         "PE-06",
-        "PE-06(1)",
         "PE-08"
       ],
       "coverage_pct": 90,
-      "rationale": "PE-06 monitoring physical access with alarm enhancements.",
-      "gaps": "Minimal gap."
+      "rationale": "PE-06 directly covers monitoring physical access including CCTV, intrusion alarms, and guard patrols. PE-08 covers access logs for monitoring and review.",
+      "gaps": "Minimal gap. ISO 27002 monitoring requirements are well addressed by PE-06's comprehensive monitoring provisions."
     },
     {
       "id": "7.5",
-      "title": "Environmental protection - Implementation",
+      "title": "Protecting against physical and environmental threats",
       "controls": [
         "PE-09",
         "PE-10",
@@ -713,51 +718,54 @@
         "PE-12",
         "PE-13",
         "PE-14",
-        "PE-15"
+        "PE-15",
+        "PE-21",
+        "PE-23"
       ],
       "coverage_pct": 95,
-      "rationale": "PE family comprehensive for environmental controls implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "PE family comprehensively covers environmental protections: power equipment (PE-09), emergency shutoff (PE-10), emergency power (PE-11), emergency lighting (PE-12), fire protection (PE-13), temperature/humidity (PE-14), water damage (PE-15). PE-21 (Electromagnetic Pulse Protection) adds protection against EMP threats. PE-23 (Facility Location) adds planning facility location considering physical and environmental hazards, natural disasters, and man-made threats.",
+      "gaps": "Minimal gap. PE-21 and PE-23 strengthen coverage by addressing electromagnetic threats and hazard-informed facility location planning."
     },
     {
       "id": "7.6",
-      "title": "Working in secure areas - Implementation",
+      "title": "Working in secure areas",
       "controls": [
         "PE-02",
         "PE-03",
         "PE-07"
       ],
       "coverage_pct": 80,
-      "rationale": "PE controls cover access. PE-07 visitor escort.",
-      "gaps": "ISO 27002 implementation guidance includes photography restrictions, supervised access, and empty area procedures."
+      "rationale": "PE-02/PE-03 control access to secure areas. PE-07 addresses visitor control and escort requirements in secure areas.",
+      "gaps": "ISO 27002 includes specific rules for working in secure areas such as photography restrictions, supervised access, empty area verification, and prohibition of recording equipment. SP 800-53 is less specific about behavioral controls within secure areas."
     },
     {
       "id": "7.7",
-      "title": "Clear desk and clear screen - Implementation",
+      "title": "Clear desk and clear screen",
       "controls": [
         "AC-11",
         "MP-04",
         "PE-05"
       ],
       "coverage_pct": 85,
-      "rationale": "AC-11 session lock; MP-04 media storage; PE-05 output devices.",
-      "gaps": "Minor: ISO 27002 provides detailed clean desk implementation. SP 800-53 addresses screen lock but desk procedures less specific."
+      "rationale": "AC-11 covers session lock (clear screen). MP-04 covers media storage requirements. PE-05 covers access control for output devices to prevent unauthorized viewing.",
+      "gaps": "Minor: ISO 27002 explicitly addresses clear desk policy as a formal requirement. AC-11 covers screen lock; desk policy is implied through MP controls but not explicitly stated as a standalone requirement."
     },
     {
       "id": "7.8",
-      "title": "Equipment siting - Implementation",
+      "title": "Equipment siting and protection",
       "controls": [
         "PE-14",
         "PE-18",
-        "PE-01"
+        "PE-01",
+        "PE-23"
       ],
-      "coverage_pct": 75,
-      "rationale": "PE-14 environmental controls; PE-18 location of components.",
-      "gaps": "ISO 27002 details equipment placement (viewing angles, access, environmental). SP 800-53 less specific."
+      "coverage_pct": 80,
+      "rationale": "PE-14 environmental controls for equipment. PE-18 location of information system components. PE-01 physical and environmental protection policy. PE-23 (Facility Location) addresses planning facility and equipment location considering physical and environmental hazards, supporting equipment siting decisions at the site level.",
+      "gaps": "ISO 27002 includes equipment placement to minimize unauthorized access, environmental hazards, and electromagnetic interference. SP 800-53 is less specific about equipment siting methodology but PE-23 adds site-level considerations."
     },
     {
       "id": "7.9",
-      "title": "Off-premises security - Implementation",
+      "title": "Security of assets off-premises",
       "controls": [
         "AC-17",
         "MP-05",
@@ -765,12 +773,12 @@
         "AC-19"
       ],
       "coverage_pct": 80,
-      "rationale": "AC-17 remote access; MP-05 media transport; SC-28 protection at rest; AC-19 mobile devices.",
-      "gaps": "ISO 27002 covers all off-premises assets including physical protection guidance."
+      "rationale": "AC-17 remote access; MP-05 media transport protection; SC-28 protection of information at rest; AC-19 access control for mobile devices.",
+      "gaps": "ISO 27002 covers all off-premises assets including laptops, paper documents, and portable equipment with physical and logical protection. SP 800-53 covers media and remote access well but holistic physical asset protection off-site is less comprehensive."
     },
     {
       "id": "7.10",
-      "title": "Storage media - Implementation",
+      "title": "Storage media",
       "controls": [
         "MP-01",
         "MP-02",
@@ -778,15 +786,16 @@
         "MP-04",
         "MP-05",
         "MP-06",
-        "MP-07"
+        "MP-07",
+        "MP-08"
       ],
       "coverage_pct": 95,
-      "rationale": "MP family comprehensive for media lifecycle implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "MP family comprehensively covers media protection lifecycle: policy (MP-01), access (MP-02), marking (MP-03), storage (MP-04), transport (MP-05), sanitization (MP-06), use restrictions (MP-07). MP-08 (Media Downgrading) adds media downgrading procedures for reclassification before reuse, supporting ISO 27002's requirement for secure media handling throughout its lifecycle.",
+      "gaps": "Minimal gap. MP-08 strengthens coverage for media reclassification and reuse scenarios."
     },
     {
       "id": "7.11",
-      "title": "Supporting utilities - Implementation",
+      "title": "Supporting utilities",
       "controls": [
         "PE-09",
         "PE-10",
@@ -794,76 +803,76 @@
         "PE-12"
       ],
       "coverage_pct": 90,
-      "rationale": "Comprehensive supporting utility implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "PE-09 power equipment and cabling protection. PE-10 emergency shutoff capabilities. PE-11 emergency power supply. PE-12 emergency lighting. Comprehensive supporting utility protection.",
+      "gaps": "Minimal gap. ISO 27002 includes water supply and sewage considerations which are partially addressed through general facility controls."
     },
     {
       "id": "7.12",
-      "title": "Cabling security - Implementation",
+      "title": "Cabling security",
       "controls": [
         "PE-04",
         "PE-09"
       ],
       "coverage_pct": 80,
-      "rationale": "PE-04 transmission medium access control; PE-09 power cabling protection.",
-      "gaps": "ISO 27002 provides specific cabling implementation (shielding, separate power/telecom, inspection). SP 800-53 less detailed."
+      "rationale": "PE-04 covers access control for transmission medium including cable routing protection. PE-09 covers power equipment and cabling protection.",
+      "gaps": "ISO 27002 provides specific cabling security measures including protected routing, electromagnetic shielding, fiber optic preference for sensitive links, and separation of power/telecommunications. SP 800-53 PE-04 is more general about transmission medium protection."
     },
     {
       "id": "7.13",
-      "title": "Equipment maintenance - Implementation",
+      "title": "Equipment maintenance",
       "controls": [
         "MA-01",
         "MA-02",
         "MA-03",
         "MA-04",
         "MA-05",
-        "MA-06"
+        "MA-06",
+        "MA-07"
       ],
       "coverage_pct": 95,
-      "rationale": "MA family comprehensive for maintenance implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "MA family comprehensively covers maintenance: policy (MA-01), controlled maintenance (MA-02), maintenance tools (MA-03), nonlocal maintenance (MA-04), maintenance personnel (MA-05), timely maintenance (MA-06). MA-07 (Field Maintenance) adds controls for restricting or managing field maintenance on critical system components, ensuring maintenance in operational environments is properly controlled.",
+      "gaps": "Minimal gap. MA-07 strengthens coverage for maintenance of critical equipment in field/operational environments."
     },
     {
       "id": "7.14",
-      "title": "Secure disposal - Implementation",
+      "title": "Secure disposal or re-use of equipment",
       "controls": [
         "MP-06",
-        "MP-06(1)",
-        "MP-06(2)"
+        "MP-08"
       ],
       "coverage_pct": 90,
-      "rationale": "MP-06 media sanitization with enhanced methods (purge, destroy).",
-      "gaps": "Minor: ISO 27002 includes equipment disposal. MP-06 focuses on media."
+      "rationale": "MP-06 covers media sanitization with methods appropriate to classification (clear, purge, destroy). MP-08 (Media Downgrading) adds media downgrading procedures for reclassification before reuse, supporting secure re-use assessment.",
+      "gaps": "Minor: ISO 27002 includes all equipment disposal beyond just media. Equipment-level sanitization (checking for embedded storage) is less explicitly addressed; SP 800-53 focuses on media sanitization."
     },
     {
       "id": "8.1",
-      "title": "User endpoint devices - Implementation",
+      "title": "User endpoint devices",
       "controls": [
         "AC-19",
         "CM-07",
         "SC-28",
-        "CM-08"
+        "CM-08",
+        "SC-41"
       ],
-      "coverage_pct": 80,
-      "rationale": "AC-19 mobile device management; CM-07 least functionality; SC-28 encryption at rest; CM-08 inventory.",
-      "gaps": "ISO 27002 provides holistic endpoint management guidance (BYOD, MDM, containerization). SP 800-53 distributes across controls."
+      "coverage_pct": 82,
+      "rationale": "AC-19 mobile device management; CM-07 least functionality for endpoint hardening; SC-28 encryption at rest; CM-08 inventory of endpoints. SC-41 (Port and I/O Device Access Restriction) adds controls for restricting physical port and I/O device access on endpoints, addressing USB and peripheral control that ISO 27002 expects for endpoint protection.",
+      "gaps": "ISO 27002 provides holistic endpoint management guidance including BYOD policies, MDM, containerization, and endpoint-specific risk assessment. SP 800-53 distributes endpoint controls across multiple families."
     },
     {
       "id": "8.2",
-      "title": "Privileged access - Implementation",
+      "title": "Privileged access rights",
       "controls": [
         "AC-06",
         "AC-02",
-        "AC-05",
-        "IA-02(1)"
+        "AC-05"
       ],
       "coverage_pct": 95,
-      "rationale": "AC-06 least privilege with enhancements; AC-02 account management; AC-05 separation of duties; IA-02(1) MFA for privileged.",
-      "gaps": "Minimal gap."
+      "rationale": "AC-06 least privilege with specific privileged access restrictions, authorization, and review. AC-02 account management including privileged account lifecycle. AC-05 separation of duties for privileged functions.",
+      "gaps": "Minimal gap. SP 800-53 privileged access controls are comprehensive."
     },
     {
       "id": "8.3",
-      "title": "Information access restriction - Implementation",
+      "title": "Information access restriction",
       "controls": [
         "AC-03",
         "AC-04",
@@ -871,39 +880,37 @@
         "AC-24"
       ],
       "coverage_pct": 95,
-      "rationale": "Comprehensive access restriction implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "AC-03 access enforcement; AC-04 information flow enforcement; AC-06 least privilege; AC-24 access control decisions based on security attributes. Comprehensive access restriction implementation.",
+      "gaps": "Minimal gap. SP 800-53 access restriction controls exceed ISO 27002 requirements."
     },
     {
       "id": "8.4",
-      "title": "Source code access - Implementation",
+      "title": "Access to source code",
       "controls": [
         "CM-05",
         "AC-03",
         "SA-10"
       ],
       "coverage_pct": 85,
-      "rationale": "CM-05 access restrictions for change; SA-10 developer configuration management.",
-      "gaps": "Minor: ISO 27002 specifically addresses source code repositories and libraries. SP 800-53 addresses generally."
+      "rationale": "CM-05 covers access restrictions for change including source code. AC-03 access enforcement. SA-10 developer configuration management covers source code repository controls.",
+      "gaps": "Minor: ISO 27002 specifically addresses source code repositories, read/write access separation, and source code library management. SP 800-53 addresses through general access and configuration management controls."
     },
     {
       "id": "8.5",
-      "title": "Secure authentication - Implementation",
+      "title": "Secure authentication",
       "controls": [
         "IA-02",
         "IA-05",
         "IA-08",
-        "IA-11",
-        "IA-02(1)",
-        "IA-02(2)"
+        "IA-11"
       ],
       "coverage_pct": 95,
-      "rationale": "IA family comprehensive for authentication implementation including MFA.",
-      "gaps": "Minimal gap."
+      "rationale": "IA-02 identification and authentication with MFA capabilities. IA-05 authenticator management. IA-08 identification of non-organizational users. IA-11 re-authentication requirements.",
+      "gaps": "Minimal gap. SP 800-53 authentication controls are comprehensive."
     },
     {
       "id": "8.6",
-      "title": "Capacity management - Implementation",
+      "title": "Capacity management",
       "controls": [
         "AU-04",
         "CP-02",
@@ -911,39 +918,36 @@
         "SA-04"
       ],
       "coverage_pct": 65,
-      "rationale": "AU-04 audit storage capacity; SC-05 DoS protection; CP-02 capacity planning.",
-      "gaps": "ISO 27002 addresses proactive capacity management for all resources. SP 800-53 covers specific capacity contexts but lacks general IT capacity management control."
+      "rationale": "AU-04 covers audit log storage capacity. SC-05 denial of service protection addresses capacity exhaustion attacks. CP-02 contingency planning considers capacity requirements. SA-04 addresses capacity in acquisition requirements.",
+      "gaps": "ISO 27002 requires proactive capacity management for all IT resources with monitoring, forecasting, and right-sizing. SP 800-53 covers capacity in specific contexts (audit storage, DoS protection) but lacks a general IT capacity planning and management control."
     },
     {
       "id": "8.7",
-      "title": "Malware protection - Implementation",
+      "title": "Protection against malware",
       "controls": [
         "SI-03",
-        "SI-03(1)",
-        "SI-03(2)",
-        "SI-08"
+        "SI-08",
+        "SC-44"
       ],
       "coverage_pct": 95,
-      "rationale": "SI-03 malicious code protection with comprehensive enhancements. SI-08 spam protection.",
-      "gaps": "Minimal gap."
+      "rationale": "SI-03 directly covers malicious code protection with detection, eradication, and prevention. SI-08 covers spam protection. SC-44 (Detonation Chambers) adds malware detonation/sandboxing capabilities for analyzing suspicious code in isolated environments before execution, strengthening malware protection with advanced analysis.",
+      "gaps": "Minimal gap. SC-44 adds advanced malware analysis capability that supports ISO 27002's malware protection requirements."
     },
     {
       "id": "8.8",
-      "title": "Technical vulnerability management - Implementation",
+      "title": "Management of technical vulnerabilities",
       "controls": [
         "RA-05",
         "SI-02",
-        "SI-05",
-        "RA-05(2)",
-        "RA-05(5)"
+        "SI-05"
       ],
       "coverage_pct": 95,
-      "rationale": "RA-05 vulnerability scanning with enhancements; SI-02 flaw remediation; SI-05 security alerts.",
-      "gaps": "Minimal gap."
+      "rationale": "RA-05 vulnerability monitoring and scanning. SI-02 flaw remediation with patching. SI-05 security alerts, advisories, and directives for vulnerability notifications.",
+      "gaps": "Minimal gap. SP 800-53 vulnerability management controls are comprehensive."
     },
     {
       "id": "8.9",
-      "title": "Configuration management - Implementation",
+      "title": "Configuration management",
       "controls": [
         "CM-02",
         "CM-03",
@@ -952,65 +956,66 @@
         "CM-06",
         "CM-07",
         "CM-08",
-        "CM-09"
+        "CM-09",
+        "CM-14"
       ],
       "coverage_pct": 95,
-      "rationale": "CM family comprehensive for configuration management implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "CM family comprehensively covers configuration management: baselines (CM-02), change control (CM-03), impact analysis (CM-04), access restrictions (CM-05), settings (CM-06), least functionality (CM-07), inventory (CM-08), restrictions (CM-09). CM-14 (Signed Components) adds verification of digitally signed software/firmware components before installation, ensuring configuration integrity.",
+      "gaps": "Minimal gap. CM-14 strengthens configuration integrity verification."
     },
     {
       "id": "8.10",
-      "title": "Information deletion - Implementation",
+      "title": "Information deletion",
       "controls": [
         "MP-06",
         "SI-12"
       ],
       "coverage_pct": 75,
-      "rationale": "MP-06 media sanitization; SI-12 information management.",
-      "gaps": "ISO 27002 addresses deletion based on retention requirements. SP 800-53 focuses on sanitization methods."
+      "rationale": "MP-06 media sanitization covers secure deletion methods. SI-12 information management and retention covers information lifecycle including deletion.",
+      "gaps": "ISO 27002 specifically addresses deletion when information is no longer required, based on retention policies and legal requirements. SP 800-53 covers sanitization methods but proactive information deletion based on business need is less explicitly addressed."
     },
     {
       "id": "8.11",
-      "title": "Data masking - Implementation",
+      "title": "Data masking",
       "controls": [
         "SI-19",
         "PT-06",
         "PT-07",
-        "SC-28"
+        "SC-28",
+        "SI-20"
       ],
-      "coverage_pct": 75,
-      "rationale": "SI-19 de-identification; PT-06/PT-07 privacy processing.",
-      "gaps": "ISO 27002 provides specific masking technique guidance (pseudonymization, anonymization, masking rules). SP 800-53 less prescriptive on masking implementation."
+      "coverage_pct": 78,
+      "rationale": "SI-19 covers de-identification techniques. PT-06/PT-07 cover privacy data processing minimization. SC-28 protection of information at rest. SI-20 (Tainting) applies tainting to data to detect unauthorized data flows and enable tracing of data through systems, which supports data masking verification and data lineage tracking.",
+      "gaps": "ISO 27002 provides specific data masking technique guidance including pseudonymization, anonymization, and dynamic masking rules. SP 800-53 addresses de-identification and privacy but masking as a comprehensive technique set is less prescriptively covered."
     },
     {
       "id": "8.12",
-      "title": "Data leakage prevention - Implementation",
+      "title": "Data leakage prevention",
       "controls": [
         "AC-04",
         "PE-19",
         "SC-07",
         "SI-04",
-        "SC-07(8)"
+        "SC-31"
       ],
-      "coverage_pct": 80,
-      "rationale": "AC-04 information flow; PE-19 information leakage; SC-07 boundary protection; SI-04 monitoring.",
-      "gaps": "ISO 27002 specifically addresses DLP tool implementation. SP 800-53 distributes DLP concepts across controls."
+      "coverage_pct": 82,
+      "rationale": "AC-04 information flow enforcement directly supports DLP. PE-19 information leakage addresses physical emanations. SC-07 boundary protection controls data egress. SI-04 system monitoring detects unauthorized data transfer. SC-31 (Covert Channel Analysis) adds analysis of covert channels that could be used for data exfiltration, strengthening DLP coverage against sophisticated leakage vectors.",
+      "gaps": "ISO 27002 specifically addresses DLP tool implementation. SP 800-53 distributes DLP concepts across multiple controls. SC-31 adds covert channel analysis but integrated DLP tooling requirements are not consolidated."
     },
     {
       "id": "8.13",
-      "title": "Information backup - Implementation",
+      "title": "Information backup",
       "controls": [
         "CP-09",
-        "CP-06",
-        "CP-09(1)"
+        "CP-06"
       ],
       "coverage_pct": 95,
-      "rationale": "CP-09 system backup with integrity testing enhancement. CP-06 alternate storage.",
-      "gaps": "Minimal gap."
+      "rationale": "CP-09 directly covers information system backup including backup frequency, testing, and integrity verification. CP-06 alternate storage site for off-site backup.",
+      "gaps": "Minimal gap. SP 800-53 backup controls are comprehensive."
     },
     {
       "id": "8.14",
-      "title": "Redundancy - Implementation",
+      "title": "Redundancy of information processing facilities",
       "controls": [
         "CP-06",
         "CP-07",
@@ -1018,12 +1023,12 @@
         "SC-36"
       ],
       "coverage_pct": 90,
-      "rationale": "CP family alternate site/processing/telecom. SC-36 distributed processing.",
-      "gaps": "Minimal gap."
+      "rationale": "CP-06 alternate storage site; CP-07 alternate processing site; CP-08 telecommunications services. SC-36 distributed processing and storage provides additional redundancy through geographic and logical distribution.",
+      "gaps": "Minor: ISO 27002 focuses on redundancy for availability requirements. CP controls focus on contingency which includes redundancy, and SC-36 adds distributed processing."
     },
     {
       "id": "8.15",
-      "title": "Logging - Implementation",
+      "title": "Logging",
       "controls": [
         "AU-02",
         "AU-03",
@@ -1037,128 +1042,122 @@
         "AU-12"
       ],
       "coverage_pct": 95,
-      "rationale": "AU family comprehensive for logging implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "AU family comprehensively covers logging: auditable events (AU-02), content (AU-03), storage capacity (AU-04), response to failures (AU-05), review and analysis (AU-06), reduction/reporting (AU-07), timestamps (AU-08), protection (AU-09), retention (AU-11), generation (AU-12).",
+      "gaps": "Minimal gap. SP 800-53 AU family is comprehensive for logging requirements."
     },
     {
       "id": "8.16",
-      "title": "Monitoring activities - Implementation",
+      "title": "Monitoring activities",
       "controls": [
         "SI-04",
         "AU-06",
         "CA-07",
-        "IR-04",
-        "SI-04(2)",
-        "SI-04(4)",
-        "SI-04(5)"
+        "IR-04"
       ],
       "coverage_pct": 95,
-      "rationale": "SI-04 with enhancements provides comprehensive monitoring implementation. CA-07 continuous monitoring.",
-      "gaps": "Minimal gap."
+      "rationale": "SI-04 directly covers system monitoring including real-time analysis, anomaly detection, and alerting. AU-06 audit review and analysis. CA-07 continuous monitoring strategy. IR-04 incident handling integrates monitoring outputs.",
+      "gaps": "Minimal gap. SP 800-53 monitoring controls are comprehensive."
     },
     {
       "id": "8.17",
-      "title": "Clock synchronization - Implementation",
+      "title": "Clock synchronization",
       "controls": [
         "AU-08",
-        "AU-08(1)"
+        "SC-45"
       ],
       "coverage_pct": 95,
-      "rationale": "AU-08 with synchronization with authoritative source enhancement.",
-      "gaps": "Minimal gap."
+      "rationale": "AU-08 directly covers time stamps and clock synchronization for audit records. SC-45 (System Time Synchronization) adds authoritative time source synchronization requirements, ensuring all systems use a consistent, trusted time reference for correlation of events across distributed systems.",
+      "gaps": "Minimal gap. SC-45 strengthens coverage with authoritative time source requirements."
     },
     {
       "id": "8.18",
-      "title": "Privileged utility programs - Implementation",
+      "title": "Use of privileged utility programs",
       "controls": [
         "CM-07",
         "CM-11",
         "AC-06"
       ],
       "coverage_pct": 80,
-      "rationale": "CM-07 least functionality; CM-11 software installation; AC-06 least privilege.",
-      "gaps": "ISO 27002 specifically addresses privileged utilities. SP 800-53 addresses through general controls."
+      "rationale": "CM-07 least functionality restricts available utilities. CM-11 controls user-installed software including utilities. AC-06 least privilege restricts access to privileged utilities.",
+      "gaps": "ISO 27002 specifically addresses privileged utility programs that can override system and application controls. SP 800-53 addresses through general least functionality and privilege controls rather than utility-specific controls."
     },
     {
       "id": "8.19",
-      "title": "Software installation - Implementation",
+      "title": "Installation of software on operational systems",
       "controls": [
         "CM-05",
         "CM-07",
         "CM-11",
-        "SA-22"
+        "SA-22",
+        "CM-14"
       ],
-      "coverage_pct": 90,
-      "rationale": "CM-05 access restrictions for change; CM-11 user-installed software; SA-22 unsupported components.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "CM-05 access restrictions for change controls who can install. CM-07 least functionality limits what can be installed. CM-11 controls user-installed software. SA-22 addresses unsupported components. CM-14 (Signed Components) prevents installation of unsigned software/firmware, ensuring only verified software is installed on operational systems.",
+      "gaps": "Minimal gap. CM-14 adds digital signature verification for software installation, strengthening operational system integrity."
     },
     {
       "id": "8.20",
-      "title": "Networks security - Implementation",
+      "title": "Networks security",
       "controls": [
         "SC-07",
         "SC-08",
         "AC-04",
-        "SC-07(5)",
-        "SC-07(8)"
+        "CA-09"
       ],
-      "coverage_pct": 90,
-      "rationale": "SC-07 boundary protection with enhancements. Comprehensive network security implementation.",
-      "gaps": "Minimal gap."
+      "coverage_pct": 92,
+      "rationale": "SC-07 boundary protection; SC-08 transmission confidentiality and integrity; AC-04 information flow enforcement. CA-09 (Internal System Connections) addresses authorization, documentation, and review of internal system connections, strengthening network security controls for internal network management.",
+      "gaps": "Minimal gap. CA-09 adds internal connection authorization and documentation, complementing perimeter-focused SC-07."
     },
     {
       "id": "8.21",
-      "title": "Network services security - Implementation",
+      "title": "Security of network services",
       "controls": [
         "SC-07",
         "SC-08",
-        "SA-09",
-        "SC-07(8)"
+        "SA-09"
       ],
       "coverage_pct": 85,
-      "rationale": "SC-07/SC-08 network protection; SA-09 external service agreements.",
-      "gaps": "Minor: ISO 27002 requires specific SLA terms for network services."
+      "rationale": "SC-07/SC-08 cover network security mechanisms. SA-09 covers external system services including network services with security requirements and monitoring.",
+      "gaps": "Minor: ISO 27002 requires security features, service levels, and management requirements for network services including SLAs. Network service-specific level agreements are less detailed in SP 800-53."
     },
     {
       "id": "8.22",
-      "title": "Network segregation - Implementation",
+      "title": "Segregation of networks",
       "controls": [
         "SC-07",
-        "SC-32",
-        "SC-07(5)"
+        "SC-32"
       ],
       "coverage_pct": 95,
-      "rationale": "SC-07 with segmentation; SC-32 system partitioning. Comprehensive network segregation.",
-      "gaps": "Minimal gap."
+      "rationale": "SC-07 boundary protection includes network segmentation capabilities. SC-32 system partitioning provides logical and physical separation. Together they comprehensively address network segregation.",
+      "gaps": "Minimal gap. SP 800-53 network segmentation controls are comprehensive."
     },
     {
       "id": "8.23",
-      "title": "Web filtering - Implementation",
+      "title": "Web filtering",
       "controls": [
         "SC-07",
         "SI-03",
         "AC-04"
       ],
       "coverage_pct": 70,
-      "rationale": "SC-07 boundary protection; SI-03 malware protection; AC-04 information flow.",
-      "gaps": "ISO 27002 specifically addresses URL filtering/web content filtering. No dedicated SP 800-53 web filtering control."
+      "rationale": "SC-07 boundary protection includes content filtering. SI-03 malware protection catches web-borne threats. AC-04 information flow enforcement.",
+      "gaps": "ISO 27002 specifically addresses URL filtering, web content filtering, and restricting access to unsafe websites. No dedicated SP 800-53 web filtering control exists; addressed through general boundary and content controls."
     },
     {
       "id": "8.24",
-      "title": "Cryptography - Implementation",
+      "title": "Use of cryptography",
       "controls": [
         "SC-12",
         "SC-13",
-        "SC-28",
-        "SC-08(1)"
+        "SC-28"
       ],
       "coverage_pct": 90,
-      "rationale": "SC-12 key management; SC-13 cryptographic protection; SC-28 data at rest; SC-08(1) transmission encryption.",
-      "gaps": "Minimal gap."
+      "rationale": "SC-12 cryptographic key establishment and management. SC-13 cryptographic protection with algorithm requirements. SC-28 protection of information at rest using encryption.",
+      "gaps": "Minimal gap. SP 800-53 cryptography controls are comprehensive including key management lifecycle."
     },
     {
       "id": "8.25",
-      "title": "Secure development life cycle - Implementation",
+      "title": "Secure development life cycle",
       "controls": [
         "SA-03",
         "SA-08",
@@ -1168,24 +1167,24 @@
         "SA-17"
       ],
       "coverage_pct": 95,
-      "rationale": "SA family comprehensive for SDLC implementation.",
-      "gaps": "Minimal gap."
+      "rationale": "SA-03 system development life cycle with security integration. SA-08 security and privacy engineering principles. SA-10 developer configuration management. SA-11 developer testing and evaluation. SA-15 development process, standards, and tools. SA-17 developer security and privacy architecture and design.",
+      "gaps": "Minimal gap. SP 800-53 SA family is comprehensive for secure development lifecycle."
     },
     {
       "id": "8.26",
-      "title": "Application security requirements - Implementation",
+      "title": "Application security requirements",
       "controls": [
         "SA-04",
         "SA-08",
         "SA-11"
       ],
       "coverage_pct": 90,
-      "rationale": "SA-04 requirements; SA-08 security engineering; SA-11 testing.",
-      "gaps": "Minimal gap."
+      "rationale": "SA-04 acquisition process includes security functional requirements. SA-08 security engineering principles applied to application design. SA-11 developer testing validates security requirements are met.",
+      "gaps": "Minimal gap. SP 800-53 application security requirements are well covered through acquisition and engineering controls."
     },
     {
       "id": "8.27",
-      "title": "Secure architecture - Implementation",
+      "title": "Secure system architecture and engineering principles",
       "controls": [
         "SA-08",
         "SA-17",
@@ -1194,51 +1193,50 @@
         "PL-08"
       ],
       "coverage_pct": 90,
-      "rationale": "SA-08/SA-17 security architecture; PL-08 security architecture; SC-07/SC-32 architecture controls.",
-      "gaps": "Minimal gap."
+      "rationale": "SA-08 security and privacy engineering principles. SA-17 developer security architecture and design. SC-07/SC-32 provide architecture-level security controls. PL-08 security and privacy architectures.",
+      "gaps": "Minimal gap. SP 800-53 architecture and engineering controls are comprehensive."
     },
     {
       "id": "8.28",
-      "title": "Secure coding - Implementation",
+      "title": "Secure coding",
       "controls": [
         "SA-11",
         "SA-15",
         "SA-16"
       ],
       "coverage_pct": 85,
-      "rationale": "SA-11 developer testing; SA-15 development standards; SA-16 training.",
-      "gaps": "Minor: ISO 27002 provides specific secure coding practice guidance."
+      "rationale": "SA-11 developer security testing validates code security. SA-15 development process standards and tools includes coding standards. SA-16 developer-provided training includes secure coding practices.",
+      "gaps": "Minor: ISO 27002 provides specific secure coding practice guidance including input validation, error handling, and code review. SP 800-53 addresses through development process and testing controls rather than explicit coding standard requirements."
     },
     {
       "id": "8.29",
-      "title": "Security testing - Implementation",
+      "title": "Security testing in development and acceptance",
       "controls": [
         "SA-11",
         "CA-02",
-        "SA-11(1)",
-        "SA-11(2)"
+        "SA-04"
       ],
       "coverage_pct": 90,
-      "rationale": "SA-11 with enhancements for static/dynamic analysis. CA-02 security assessments.",
-      "gaps": "Minimal gap."
+      "rationale": "SA-11 directly covers developer security testing and evaluation. CA-02 security assessments for acceptance testing. SA-04 includes testing requirements in acquisition.",
+      "gaps": "Minimal gap. SP 800-53 security testing controls are comprehensive."
     },
     {
       "id": "8.30",
-      "title": "Outsourced development - Implementation",
+      "title": "Outsourced development",
       "controls": [
         "SA-04",
         "SA-09",
         "SA-10",
         "SA-11",
-        "SA-04(1)"
+        "SA-21"
       ],
-      "coverage_pct": 85,
-      "rationale": "SA-04 with property rights enhancement; SA-09 external services; SA-10/SA-11 developer requirements.",
-      "gaps": "Minor: ISO 27002 details outsourced development oversight. SP 800-53 covers through general acquisition."
+      "coverage_pct": 88,
+      "rationale": "SA-04 acquisition requirements for outsourced development. SA-09 external system services. SA-10/SA-11 developer requirements apply to outsourced developers. SA-21 (Developer Screening) adds screening requirements for developers of critical system components, ensuring outsourced developers meet security trustworthiness standards.",
+      "gaps": "Minor: ISO 27002 details outsourced development supervision, intellectual property rights, and acceptance testing. SP 800-53 covers through general acquisition and developer controls; SA-21 strengthens developer trust assurance."
     },
     {
       "id": "8.31",
-      "title": "Environment separation - Implementation",
+      "title": "Separation of development, test and production environments",
       "controls": [
         "CM-04",
         "SA-11",
@@ -1246,51 +1244,51 @@
         "CM-02"
       ],
       "coverage_pct": 85,
-      "rationale": "CM-04 impact analysis (test environments); SC-32 system partitioning; CM-02 baseline with variants.",
-      "gaps": "Minor: ISO 27002 explicitly requires dev/test/prod separation. SP 800-53 implies but doesn't mandate."
+      "rationale": "CM-04 impact analysis requires separate test environments. SA-11 developer testing implies testing environments. SC-32 system partitioning supports environment separation. CM-02 baseline configuration with variants for different environments.",
+      "gaps": "Minor: ISO 27002 explicitly requires development, testing, and production environment separation. SP 800-53 implies but does not mandate specific three-way environment separation."
     },
     {
       "id": "8.32",
-      "title": "Change management - Implementation",
+      "title": "Change management",
       "controls": [
         "CM-03",
         "CM-04",
         "CM-05",
-        "SA-10",
-        "CM-03(2)"
+        "SA-10"
       ],
       "coverage_pct": 95,
-      "rationale": "CM family comprehensive for change management implementation with enhancements.",
-      "gaps": "Minimal gap."
+      "rationale": "CM-03 configuration change control with documented approval processes. CM-04 impact analysis before changes. CM-05 access restrictions for change. SA-10 developer configuration management for development changes.",
+      "gaps": "Minimal gap. SP 800-53 change management controls are comprehensive."
     },
     {
       "id": "8.33",
-      "title": "Test information - Implementation",
+      "title": "Test information",
       "controls": [
         "SA-11",
         "SA-15"
       ],
       "coverage_pct": 65,
-      "rationale": "SA-11 testing; SA-15 development standards.",
-      "gaps": "ISO 27002 details test data protection (anonymization, controlled production data use). SP 800-53 lacks explicit test data management."
+      "rationale": "SA-11 covers testing requirements. SA-15 development process standards includes test data management practices.",
+      "gaps": "ISO 27002 specifically addresses protection of test data including anonymization, controlled use of production data for testing, and proper disposal of test data. SP 800-53 lacks an explicit test data management control."
     },
     {
       "id": "8.34",
-      "title": "Audit testing protection - Implementation",
+      "title": "Protection of information systems during audit testing",
       "controls": [
         "CA-02",
-        "AU-06"
+        "AU-06",
+        "CA-08"
       ],
-      "coverage_pct": 70,
-      "rationale": "CA-02 security assessments; AU-06 audit review.",
-      "gaps": "ISO 27002 requires minimizing audit disruption and protecting audit tools. Less explicit in SP 800-53."
+      "coverage_pct": 75,
+      "rationale": "CA-02 covers security assessments including audit considerations and planning. AU-06 audit review analysis. CA-08 penetration testing addresses planned security testing with controls to protect systems during testing activities.",
+      "gaps": "ISO 27002 requires that audit testing be planned and agreed to minimize business disruption, that access to tools is controlled, and that requirements are agreed with management. SP 800-53 assessment controls do not explicitly address protection of systems during audit activities."
     }
   ],
   "summary": {
     "total_clauses": 93,
-    "average_coverage": 85.2,
-    "full_count": 65,
-    "substantial_count": 26,
+    "average_coverage": 85.8,
+    "full_count": 66,
+    "substantial_count": 25,
     "partial_count": 1,
     "weak_count": 1,
     "none_count": 0

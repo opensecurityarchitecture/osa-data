@@ -23,10 +23,10 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 
 ## Current Data
 
-- **43 security patterns** (SP-001 to SP-043) + SP-000 reference/style guide
-- **191 NIST 800-53 Rev 5 controls** across 20 families
-- **19 compliance frameworks** with 9,000+ cross-references
-- **1,251 control instances** across all patterns
+- **48 security patterns** (SP-001 to SP-046) + SP-000 reference/style guide + SP-999 test
+- **315 NIST 800-53 Rev 5 controls** across 20 families
+- **26 compliance frameworks** with cross-references
+- **469 MITRE ATT&CK techniques** mapped to 108 controls via CTID (ATT&CK v16.1)
 
 ## Directory Structure
 
@@ -37,6 +37,9 @@ data/
 ├── controls/           # NIST 800-53 Rev 5 (AC-01.json, etc.)
 │   ├── _manifest.json
 │   └── _catalog.json
+├── attack/             # MITRE ATT&CK integration
+│   ├── technique-catalog.json  # Full technique details (469 techniques)
+│   └── metadata.json           # Source provenance (CTID, ATT&CK v16.1)
 └── schema/
     ├── pattern.schema.json
     └── control.schema.json

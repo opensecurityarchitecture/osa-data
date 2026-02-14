@@ -1,0 +1,829 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "lgpd_bcb",
+  "framework_name": "LGPD + BCB Resolution 4893",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis of Lei Geral de Protecao de Dados (Law 13,709/2018) and BCB Resolution 4893/2021. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. LGPD is a data protection law with significant legal/privacy obligations outside SP 800-53 scope. BCB Resolution 4893 contains financial-sector-specific cybersecurity requirements for institutions regulated by the Banco Central do Brasil. Expect low coverage for LGPD legal-basis articles and BCB regulatory-reporting clauses. Validate with qualified Brazilian data protection and financial regulation professionals for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "LGPD.Art.6",
+      "title": "Processing Principles (purpose limitation, adequacy, necessity, free access, data quality, transparency, security, prevention, non-discrimination, accountability)",
+      "controls": [
+        "AC-06",
+        "AU-01",
+        "AU-02",
+        "CM-12",
+        "CM-13",
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05",
+        "PT-07",
+        "SI-18"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PT-03 (Processing Purposes) partially addresses purpose limitation. PT-05 (Privacy Notice) supports transparency. PT-07 (Specific Categories) supports adequacy and necessity principles. CM-12 (Rev 5) information location and CM-13 (Rev 5) data action mapping document processing flows, supporting accountability through processing traceability. SI-18 (Rev 5) PII Quality Operations addresses data quality. AC-06 (Least Privilege) applies the necessity principle at the access level. AU-01/AU-02 provide audit accountability.",
+      "gaps": "LGPD Art. 6 establishes ten processing principles that are fundamentally legal constructs. SP 800-53 cannot address: purpose limitation enforcement under Brazilian law, the 'adequacy' principle (processing must match stated purposes), 'free access' (data subjects must be able to query processing without charge), non-discrimination in automated processing, or the Brazilian-specific accountability framework requiring demonstrable compliance to the ANPD. The ten LGPD principles are broader than GDPR's six, adding free access, prevention, and non-discrimination as distinct principles."
+    },
+    {
+      "id": "LGPD.Art.7",
+      "title": "Legal Bases for Processing Personal Data (ten legal bases)",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-04"
+      ],
+      "coverage_pct": 18,
+      "rationale": "PT-02 (Authority to Process) covers authority concepts in a US federal context. PT-04 (Consent) addresses one of the ten legal bases. PT-01 (Policy and Procedures) provides general privacy policy framework. However, none of these controls address the specific Brazilian legal bases for processing.",
+      "gaps": "LGPD provides ten legal bases for processing \u2014 four more than GDPR's six \u2014 including: consent, legal/regulatory obligation, public administration, research (with anonymisation), contract execution, exercise of rights in judicial/arbitration/administrative proceedings, protection of life/physical safety, health protection, legitimate interest, and credit protection. SP 800-53 has no concept of Brazilian legal bases. The credit protection basis (Art. 7(X)) is unique to Brazil and reflects the importance of credit scoring (Cadastro Positivo) in Brazilian commerce. No NIST control addresses the LGPD legal basis framework."
+    },
+    {
+      "id": "LGPD.Art.8",
+      "title": "Consent Requirements (free, informed, unambiguous, specific purpose)",
+      "controls": [
+        "PT-04",
+        "PT-05",
+        "AU-02",
+        "AU-03"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PT-04 (Consent) addresses consent mechanisms. PT-05 (Privacy Notice) supports informed consent through transparency. AU-02/AU-03 (Audit Events/Content) provide audit trails that can support consent demonstrability as required by Art. 8(2).",
+      "gaps": "LGPD consent must be free, informed, and unambiguous, provided in writing or other means demonstrating the data subject's will. Art. 8(1) requires specific, prominent consent clauses distinguishable from other contractual provisions. Art. 8(4) mandates that consent be granular \u2014 authorising general processing is void. Art. 8(5) requires consent withdrawal to be as easy as granting it. SP 800-53 PT-04 covers consent mechanically but not the LGPD-specific granularity, distinguishability, and withdrawal ease requirements. Portuguese-language consent presentation requirements are outside NIST scope."
+    },
+    {
+      "id": "LGPD.Art.9",
+      "title": "Data Subject Right to Information About Processing",
+      "controls": [
+        "AC-08",
+        "PT-05"
+      ],
+      "coverage_pct": 20,
+      "rationale": "PT-05 (Privacy Notice) addresses transparency requirements. AC-08 (System Use Notification) provides notice mechanisms at the point of system interaction.",
+      "gaps": "LGPD Art. 9 requires the data subject to have access to facilitated information about processing including: (I) specific purpose, (II) form and duration including when based on legitimate interest, (III) controller identification and contact, (IV) information on shared use and purpose, (V) controller responsibilities, and (VI) data subject rights. Art. 9(3) further requires that when processing is based on consent, the data subject must be informed of the consequences of refusing. This level of transparency detail exceeds what SP 800-53 PT-05 requires. Portuguese-language information provision and ANPD-prescribed formats are not addressed."
+    },
+    {
+      "id": "LGPD.Art.10",
+      "title": "Legitimate Interest as Legal Basis",
+      "controls": [
+        "PT-02",
+        "PT-03",
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-02 (Authority to Process) covers processing authority concepts. PT-03 (Processing Purposes) addresses purpose documentation. RA-03 (Risk Assessment) and RA-08 (Rev 5) privacy impact assessment partially support the balancing test required for legitimate interest.",
+      "gaps": "LGPD Art. 10 permits processing based on legitimate interest only for legitimate purposes based on specific situations including: (I) support and promotion of the controller's activities, and (II) protection of the data subject or third party against fraud. Art. 10(1) limits processing to strictly necessary data. Art. 10(2) requires the controller to adopt safeguards for data subject rights. Art. 10(3) empowers ANPD to request a RIPD for legitimate interest processing. The LGPD legitimate interest test is narrower than GDPR's \u2014 it provides only two explicit scenarios rather than GDPR's open-ended approach. SP 800-53 has no concept of legitimate interest balancing, and RA-08 US PIA differs from the LGPD legitimate interest analysis."
+    },
+    {
+      "id": "LGPD.Art.11",
+      "title": "Processing of Sensitive Personal Data",
+      "controls": [
+        "AC-03",
+        "AC-16",
+        "MP-03",
+        "PT-01",
+        "PT-03",
+        "PT-07",
+        "SC-28"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-07 (Specific Categories of PII) addresses special data categories in a US federal context. AC-16 (Security/Privacy Attributes) enables data classification including sensitive categories. AC-03 (Access Enforcement) restricts access to sensitive data. MP-03 (Media Marking) supports physical labelling of sensitive data. SC-28 (Protection at Rest) provides encryption for stored sensitive data.",
+      "gaps": "LGPD defines sensitive data as: racial/ethnic origin, religious conviction, political opinion, trade union membership, religious/philosophical/political affiliation, health data, sex life, genetic data, and biometric data. Processing requires either specific and highlighted consent or one of the Art. 11(II) exceptions (legal obligation, public administration, research with anonymisation, exercise of rights, life/physical safety protection, health protection, fraud prevention). Sensitive data processing by credit scoring entities is explicitly prohibited. SP 800-53 has no concept of Brazil's sensitive data categories or the exception framework. CPF (Cadastro de Pessoas Fisicas) and biometric data handling under Brazilian law require specific protections not addressed by NIST."
+    },
+    {
+      "id": "LGPD.Art.14",
+      "title": "Processing of Children's and Adolescents' Data",
+      "controls": [
+        "PT-04",
+        "PT-07"
+      ],
+      "coverage_pct": 12,
+      "rationale": "PT-04 (Consent) partially relevant for parental consent mechanisms. PT-07 (Specific Categories of PII) covers some sensitive data categorisation. However, neither addresses age-specific processing requirements.",
+      "gaps": "LGPD Art. 14 requires processing children's data in their best interest with specific and prominent parental/guardian consent. Controllers must make reasonable efforts to verify parental consent using available technology. Art. 14(3) prohibits requiring children to provide personal data beyond what is strictly necessary for the activity. Art. 14(4) prohibits conditioning children's participation in games, apps, or similar activities on data provision beyond what is strictly necessary. These child-specific protections, including age verification aligned with the Brazilian Estatuto da Crianca e do Adolescente (ECA), are entirely outside SP 800-53 scope. Brazil sets the threshold at under 12 for children (distinct from adolescents 12-18)."
+    },
+    {
+      "id": "LGPD.Art.15-16",
+      "title": "Termination of Processing and Data Deletion",
+      "controls": [
+        "AU-11",
+        "MP-06",
+        "SI-12",
+        "SR-12"
+      ],
+      "coverage_pct": 35,
+      "rationale": "SI-12 (Information Handling and Retention) addresses retention policies and disposal. MP-06 (Media Sanitization) covers secure data destruction. AU-11 (Audit Record Retention) models retention enforcement. SR-12 (Component Disposal) addresses disposal of system components containing data.",
+      "gaps": "LGPD Art. 15 specifies termination of processing upon: purpose fulfilment, end of processing period, data subject request (including revocation), or ANPD determination of legal violation. Art. 16 mandates data deletion upon processing termination except for: legal/regulatory retention, research (anonymised), transfer to third parties (with consent or legal basis), or exclusive use by the controller (anonymised and without third-party access). SP 800-53 covers deletion mechanics but not the LGPD-specific termination triggers or the Brazilian exception framework for data retention after processing ends. ANPD enforcement orders triggering deletion have no NIST equivalent."
+    },
+    {
+      "id": "LGPD.Art.17-18",
+      "title": "Data Subject Rights (confirmation, access, correction, anonymisation, portability, deletion, information about sharing)",
+      "controls": [
+        "PT-05",
+        "PT-06",
+        "SI-18"
+      ],
+      "coverage_pct": 18,
+      "rationale": "PT-06 (System of Records Notice) covers individual access in US Privacy Act context but differs fundamentally from LGPD subject access. PT-05 (Privacy Notice) provides transparency supporting the right to information. SI-18 (Rev 5) PII Quality Operations addresses data accuracy and correction, partially supporting the right to rectification.",
+      "gaps": "LGPD Art. 18 grants data subjects extensive rights: (I) confirmation of processing, (II) access to data, (III) correction of incomplete/inaccurate/outdated data, (IV) anonymisation/blocking/deletion of unnecessary/excessive/non-compliant data, (V) data portability, (VI) deletion of data processed with consent, (VII) information about public and private entities with which data was shared, (VIII) information about the possibility and consequences of not providing consent, (IX) revocation of consent. These rights must be exercisable via request to the controller. SP 800-53 does not address individual rights workflows, portability in structured machine-readable formats, or the right to information about third-party sharing. The ANPD petition mechanism (Art. 18(1)) for unresolved requests has no NIST equivalent."
+    },
+    {
+      "id": "LGPD.Art.19-20",
+      "title": "Data Subject Request Fulfilment and Review of Automated Decisions",
+      "controls": [
+        "PT-06",
+        "PT-08"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-06 (System of Records Notice) addresses record access in a US context. PT-08 (Computer Matching) covers automated matching in US federal context, partially relevant to automated decision review.",
+      "gaps": "LGPD Art. 19 requires confirmation and data access to be provided in simplified format immediately or via detailed declaration within 15 days. Art. 20 grants the right to request review of decisions made solely by automated means that affect the data subject's interests, including profiling, credit scoring, and personality assessments. Unlike GDPR Art. 22, the LGPD does not require that automated decision-making produce 'legal or similarly significant effects' \u2014 any decision affecting interests triggers the right. The controller must provide clear and adequate information about the decision criteria and, upon ANPD request, must provide an audit of the automated decision system. SP 800-53 has no equivalent for the LGPD automated decision review framework or the 15-day response timeline."
+    },
+    {
+      "id": "LGPD.Art.23-26",
+      "title": "Public Sector Processing Rules",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-05",
+        "AC-04",
+        "SA-09"
+      ],
+      "coverage_pct": 22,
+      "rationale": "PT-02 (Authority to Process) covers processing authority in a government context, partially aligning with LGPD public sector provisions. PT-03 (Processing Purposes) supports purpose specification. PT-05 (Privacy Notice) provides transparency. AC-04 (Information Flow Enforcement) partially addresses inter-agency data sharing controls. SA-09 (External System Services) covers shared services governance.",
+      "gaps": "LGPD Arts. 23-26 establish specific rules for public sector data processing by the Federal Government, States, Federal District, and Municipalities. Art. 23 requires public entities to process data for public purpose with transparency. Art. 25 restricts public-private data sharing except under specific conditions. Art. 26 prohibits sharing of personal data held by public entities with private entities except in specific circumstances (consent, shared use per Art. 23, or where the data is publicly accessible). The Brazilian federated government structure (Federal, State, Municipal) and the role of the Tribunal de Contas da Uniao (TCU) in oversight are not addressed by NIST. Public procurement under Brazilian Lei de Licitacoes adds procurement-specific data protection requirements absent from SP 800-53."
+    },
+    {
+      "id": "LGPD.Art.33-36",
+      "title": "International Data Transfers",
+      "controls": [
+        "AC-04",
+        "AC-17",
+        "MP-05",
+        "SA-09",
+        "SC-08"
+      ],
+      "coverage_pct": 12,
+      "rationale": "AC-04 (Information Flow Enforcement) provides cross-boundary flow controls. AC-17 (Remote Access) addresses secure remote connections. SC-08 (Transmission Confidentiality) protects data in transit. SA-09 (External System Services) covers third-party service agreements. MP-05 (Media Transport) addresses physical transfer security.",
+      "gaps": "LGPD Art. 33 permits international transfers only under specific conditions: (I) adequacy determination by ANPD, (II) controller demonstrating LGPD-equivalent safeguards (standard contractual clauses, binding corporate rules, certifications, codes of conduct), (III) specific and prominent consent, (IV) legal cooperation/agreements, (V) protection of life/physical safety, (VI) ANPD authorisation, (VII) transfer commitments in international cooperation, (VIII) controller policy execution, or (IX) compliance with regulatory/legal obligations. Art. 34 defines adequacy criteria the ANPD evaluates. Art. 35 empowers ANPD to request data transfer impact assessments. Art. 36 covers changes to ANPD adequacy decisions. Brazil has not yet published its adequacy determination list, creating uncertainty for transfers. The ANPD Resolution CD/ANPD No. 19/2024 on international transfers introduces additional requirements including Transfer Impact Assessments (TIA). Mercosul data transfer considerations and Brazilian tax authority (Receita Federal) data exchange requirements are outside NIST scope."
+    },
+    {
+      "id": "LGPD.Art.37-38",
+      "title": "Data Protection Impact Assessment (RIPD - Relatorio de Impacto a Protecao de Dados)",
+      "controls": [
+        "CA-02",
+        "PL-02",
+        "PL-05",
+        "RA-01",
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-03 (Risk Assessment) provides risk assessment methodology. RA-08 (Rev 5) privacy impact assessment is directly relevant \u2014 it requires privacy impact assessments for PII-processing systems. CA-02 (Security Assessments) supports assessment processes. PL-02 (System Security Plan) and PL-05 (Privacy Impact Assessment) address assessment planning and documentation.",
+      "gaps": "LGPD Art. 38 allows ANPD to order the controller to produce a RIPD, which must contain at minimum: a description of the types of data collected, the methodology used for collection, the technical and administrative safeguards for data protection, and a risk analysis. Unlike GDPR's DPIA, the RIPD is not self-triggered by high-risk processing \u2014 it is ordered by the ANPD. RA-08 covers US PIAs but not the ANPD-ordered RIPD process. The ANPD Resolution CD/ANPD No. 4/2023 provides further RIPD guidance specific to Brazil. The RIPD must be in Portuguese and follow ANPD-prescribed format, which NIST does not address."
+    },
+    {
+      "id": "LGPD.Art.41",
+      "title": "Data Protection Officer (Encarregado pelo Tratamento de Dados Pessoais)",
+      "controls": [
+        "PM-02",
+        "PS-09"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PM-02 (Senior Information Security Officer) assigns a senior privacy/security role. PS-09 (Rev 5) position descriptions enables formal role definition with privacy responsibilities, partially supporting Encarregado designation.",
+      "gaps": "LGPD Art. 41 requires controllers to appoint an Encarregado whose identity and contact information must be publicly disclosed (typically on the controller's website). The Encarregado's duties include: (I) accepting complaints and communications from data subjects and ANPD, (II) advising employees on data protection practices, (III) performing duties determined by the controller or regulatory norms, and (IV) executing other ANPD-assigned tasks. The ANPD Resolution CD/ANPD No. 18/2024 reduced the mandatory appointment threshold, exempting micro-enterprises and startups under certain conditions. PM-02 covers a senior officer role but not the LGPD-specific Encarregado duties, public disclosure requirement, or ANPD interaction responsibilities. Portuguese-language competency requirements for the Encarregado are not addressed by NIST."
+    },
+    {
+      "id": "LGPD.Art.42-45",
+      "title": "Liability and Indemnification (controller/operator liability, burden of proof)",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-10"
+      ],
+      "coverage_pct": 12,
+      "rationale": "AU family (Audit and Accountability) provides evidence collection that may support legal proceedings. AU-10 (Non-repudiation) ensures actions are attributable, which is relevant to establishing liability. AU-02/AU-03 document security events that could serve as evidence.",
+      "gaps": "LGPD Arts. 42-45 establish a comprehensive liability regime. Art. 42 creates joint and several liability between controllers and operators for damages caused by processing violations. Art. 42(2) inverts the burden of proof \u2014 the controller/operator must prove they did not process data, that there was no violation, or that the damage was caused by the data subject or third party. Art. 43 provides exemptions. Art. 44 defines irregular processing. Art. 45 establishes that data protection claims in consumer relations follow the Codigo de Defesa do Consumidor (strict liability). This Brazilian civil liability framework, including class actions (Acao Civil Publica) by the Ministerio Publico and consumer protection organisations (PROCON), is entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "LGPD.Art.46",
+      "title": "Security Measures (administrative and technical measures to protect personal data)",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AU-01",
+        "AU-09",
+        "CA-01",
+        "CM-01",
+        "CM-06",
+        "IA-01",
+        "IA-02",
+        "IA-05",
+        "MP-01",
+        "MP-02",
+        "MP-04",
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "SI-01",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SP 800-53 excels at technical and administrative security measures. AC family (access control), IA family (authentication), SC family (encryption, boundary protection, transmission security), SI family (integrity, monitoring, patching), PE family (physical security), AU-09 (audit protection), MP family (media protection). SC-13 (Cryptographic Protection), SC-28 (Protection at Rest), and SC-08 (Transmission Confidentiality) directly address data protection. CM-06 (Configuration Settings) ensures hardened configurations. This is the strongest mapping area between NIST and LGPD.",
+      "gaps": "Minor technical gap. LGPD Art. 46 requires security measures from the design phase of products and services through to their end of life. Art. 46(2) empowers ANPD to define minimum technical standards for security, which may diverge from NIST standards. ANPD's forthcoming security regulation (Regulamento de Seguranca) may impose Brazil-specific requirements such as mandatory ICP-Brasil digital certificates, specific encryption standards approved by ITI (Instituto Nacional de Tecnologia da Informacao), or data localisation mandates. These potential ANPD-specific requirements cannot be anticipated by SP 800-53."
+    },
+    {
+      "id": "LGPD.Art.47",
+      "title": "Processing Agents' Obligations (controller and operator security duties)",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "PL-04",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-05",
+        "PS-06",
+        "PS-07",
+        "PS-08",
+        "PS-09"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PS family (Personnel Security) comprehensively addresses personnel obligations including screening (PS-03), agreements (PS-06), third-party personnel (PS-07), and sanctions (PS-08). AT family (Awareness and Training) ensures staff understand security obligations. PL-04 (Rules of Behaviour) formalises acceptable use. PS-09 (Rev 5) position descriptions incorporates security/privacy responsibilities into role definitions, strengthening the link between processing agent responsibilities and individual accountability.",
+      "gaps": "LGPD Art. 47 requires processing agents to adopt security measures sufficient to protect personal data from unauthorised access, accidental or unlawful destruction, loss, alteration, communication, or any other improper or unlawful processing. The obligation extends to all persons involved in any phase of processing. SP 800-53 covers personnel security but LGPD imposes joint liability between controllers and operators (Art. 42) that creates a distinct legal obligation framework. The Brazilian CLT (Consolidacao das Leis do Trabalho) imposes employment-specific data handling obligations that supplement LGPD requirements and are outside NIST scope."
+    },
+    {
+      "id": "LGPD.Art.48",
+      "title": "Incident Notification to ANPD and Data Subjects",
+      "controls": [
+        "AU-06",
+        "IR-01",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09"
+      ],
+      "coverage_pct": 48,
+      "rationale": "IR-06 (Incident Reporting) addresses incident reporting. IR-01 (Incident Response Policy) establishes reporting procedures. IR-04 (Incident Handling) covers containment and recovery. IR-05 (Incident Monitoring) tracks incidents. IR-08 (Incident Response Plan) provides structured response. IR-09 (Rev 5) information spillage response adds data breach-specific handling. AU-06 (Audit Review and Reporting) supports incident analysis.",
+      "gaps": "LGPD Art. 48 requires the controller to notify the ANPD and the data subject within a 'reasonable time' (the ANPD has proposed 3 business days per Resolution CD/ANPD No. 15/2024) of a security incident that may result in relevant risk or damage to data subjects. Notification must include: nature of affected data, information on affected data subjects, technical and security measures used, risks related to the incident, reasons for any delay, and measures adopted to reverse or mitigate the effects. SP 800-53 IR-06 covers incident reporting generically but not the ANPD-specific notification timeline, format, or content requirements. The ANPD's incident notification form (Formulario de Comunicacao de Incidente de Seguranca) and the requirement for Portuguese-language notification are outside NIST scope."
+    },
+    {
+      "id": "LGPD.Art.49",
+      "title": "ANPD Post-Incident Measures and Remediation Orders",
+      "controls": [
+        "IR-04",
+        "IR-06",
+        "PM-04"
+      ],
+      "coverage_pct": 20,
+      "rationale": "IR-04 (Incident Handling) covers incident remediation. IR-06 (Incident Reporting) addresses reporting to authorities. PM-04 (Plan of Action and Milestones) supports remediation tracking.",
+      "gaps": "LGPD Art. 49 empowers ANPD to determine that the controller take measures including broad dissemination of the incident in media outlets. ANPD can order specific remediation actions including measures to reverse or mitigate effects. The ANPD's enforcement powers (administrative sanctions under Art. 52) and the ability to order public disclosure of incidents through major Brazilian media outlets (including TV Globo, Folha de Sao Paulo, etc.) create regulatory consequences that have no NIST equivalent. ANPD coordination with SENACON (National Consumer Secretariat) on consumer data incidents adds a layer not addressed by SP 800-53."
+    },
+    {
+      "id": "LGPD.Art.50",
+      "title": "Good Practices and Governance (privacy programme, codes of conduct)",
+      "controls": [
+        "AC-01",
+        "AT-01",
+        "AT-02",
+        "AT-06",
+        "CA-01",
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "PL-01",
+        "PL-02",
+        "PL-04",
+        "PL-09",
+        "PM-01",
+        "PM-09",
+        "PM-14",
+        "RA-01"
+      ],
+      "coverage_pct": 52,
+      "rationale": "PM-01 (Program Plan) establishes programme governance. PM-09 (Risk Management Strategy) provides strategic risk framework. PM-14 (Testing/Training/Monitoring) supports ongoing compliance. CA-02 (Security Assessments) and CA-07 (Continuous Monitoring) address assessment. PL-09 (Rev 5) central management enables unified governance. AT-06 (Rev 5) training feedback measures programme effectiveness. PL-04 (Rules of Behaviour), AT-01/AT-02 (Awareness and Training) support the training and awareness elements of a governance programme.",
+      "gaps": "LGPD Art. 50 encourages controllers and operators to formulate good practices and governance rules including: demonstrating controller commitment, applicability to the full set of personal data, risk-adapted mechanisms, transparency policies, integration with governance structure, incident response plans, and continuous improvement. Art. 50(2) allows the creation of codes of conduct and ANPD-certified good practices. SP 800-53 provides programme management controls but LGPD governance must specifically demonstrate compliance with the LGPD's principles. ANPD certification of good practices (Art. 50(2)(I)(d)) and the role of certification bodies accredited by ANPD are regulatory constructs outside NIST scope. The Brazilian ABNT NBR ISO/IEC 27701 adoption adds local certification pathway requirements."
+    },
+    {
+      "id": "LGPD.Art.52",
+      "title": "Administrative Sanctions (warnings, fines, daily fines, data blocking/deletion)",
+      "controls": [],
+      "coverage_pct": 5,
+      "rationale": "No SP 800-53 equivalent for regulatory sanctions. PM-01 (Program Plan) and CA-05 (Plan of Action and Milestones) tangentially support compliance efforts that may reduce sanction risk, but do not address the sanctions themselves.",
+      "gaps": "LGPD Art. 52 establishes administrative sanctions including: (I) warning with deadline for corrective measures, (II) simple fine up to 2% of Brazilian revenue (capped at BRL 50 million per infraction), (III) daily fine, (IV) publication of the infraction, (V) blocking of personal data, (VI) deletion of personal data, (VII-XII) suspension and prohibition of processing activities. The ANPD Dosimetria (sanctioning methodology per Resolution CD/ANPD No. 4/2023) calculates fines based on severity, good faith, advantage obtained, economic condition, recidivism, and cooperation. SP 800-53 has no regulatory penalty framework. Brazilian Codigo de Defesa do Consumidor (CDC) allows parallel consumer protection sanctions for data violations affecting consumers."
+    },
+    {
+      "id": "LGPD.Art.55-A-K",
+      "title": "ANPD Structure, Competencies, and Regulatory Powers",
+      "controls": [],
+      "coverage_pct": 5,
+      "rationale": "No SP 800-53 equivalent for data protection authority structure and powers. PM-01 (Program Plan) tangentially supports regulatory engagement.",
+      "gaps": "LGPD Arts. 55-A through 55-K establish the ANPD as the federal authority responsible for overseeing, implementing, and enforcing LGPD. ANPD powers include: rulemaking, standard-setting, investigation, auditing, sanctioning, international cooperation, and guidance publication. The ANPD's conversion from a federal government body to an independent authority (autarquia especial per Law 14,460/2022) strengthened its independence. ANPD's Regulamento de Dosimetria e Aplicacao de Sancoes Administrativas and other regulatory instruments create compliance obligations entirely outside NIST scope. Interaction requirements with other Brazilian regulators (CADE for antitrust, SENACON for consumer protection, BACEN for financial sector) add multi-regulator complexity."
+    },
+    {
+      "id": "BCB.Art.2",
+      "title": "Cybersecurity Policy Requirements",
+      "controls": [
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PL-01",
+        "PL-09",
+        "PM-01",
+        "PM-09",
+        "PS-01",
+        "RA-01",
+        "SA-01",
+        "SC-01",
+        "SI-01",
+        "SR-01"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SP 800-53 policy controls (-01 suffix across all families) comprehensively address cybersecurity policy requirements. PM-01 (Program Plan) establishes the overarching security programme. PM-09 (Risk Management Strategy) provides strategic risk framework. PL-09 (Rev 5) central management enables unified policy governance across the institution. The full set of policy controls covers access control, audit, configuration, contingency, identification, incident response, maintenance, media, physical, planning, personnel, risk assessment, acquisition, communications, and integrity \u2014 aligning well with BCB's requirement for a comprehensive cybersecurity policy.",
+      "gaps": "BCB Art. 2 requires the cybersecurity policy to be compatible with the institution's size, risk profile, business model, nature of operations, complexity of products/services, and sensitivity of processed data. The policy must specifically address: objectives, incident prevention/detection/risk-reduction procedures, and controls against harmful software. SP 800-53 provides the control substance but BCB requires the policy to be formally approved by the board of directors or, if applicable, the institution's executive committee. BCB also requires policy alignment with the institution's risk appetite as defined under Resolution 4557/2017 (risk management). Portuguese-language documentation requirements and BCB-prescribed policy format are not addressed."
+    },
+    {
+      "id": "BCB.Art.3",
+      "title": "Cybersecurity Policy Principles (confidentiality, integrity, availability of data and information systems)",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AU-09",
+        "CP-01",
+        "CP-02",
+        "CP-06",
+        "CP-07",
+        "CP-09",
+        "CP-10",
+        "IA-01",
+        "IA-02",
+        "IA-05",
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "SI-01",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SP 800-53 directly addresses all three CIA principles. AC family (confidentiality through access control), SI family (integrity through monitoring, validation, patching), CP family (availability through contingency planning, backup, recovery). SC-08 (Transmission Confidentiality), SC-13 (Cryptographic Protection), SC-28 (Protection at Rest) provide data-level confidentiality. CP-02/CP-06/CP-07/CP-09/CP-10 provide comprehensive availability. IA-02/IA-05 provide authentication integrity. This is the strongest alignment area between NIST and BCB.",
+      "gaps": "Minimal technical gap. BCB Art. 3 requires the policy to contemplate CIA for data processed by the financial institution and by third-party service providers. SP 800-53 comprehensively addresses CIA principles. Minor gap: BCB requires these principles to extend to all information systems used for financial operations, including systems connected to the Sistema de Pagamentos Brasileiro (SPB), which may include PIX infrastructure, CIP (Camara Interbancaria de Pagamentos) connectivity, and B3 (stock exchange) interfaces. These sector-specific system scoping requirements are not addressed by NIST."
+    },
+    {
+      "id": "BCB.Art.4",
+      "title": "Cybersecurity Policy Dissemination and Culture",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-05",
+        "AT-06",
+        "PL-04",
+        "PM-13",
+        "PM-14"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AT-01 (Security Awareness Policy) establishes training requirements. AT-02 (Security Awareness Training) provides awareness programmes. AT-03 (Role-Based Training) targets specific roles. AT-05 (Contacts with Security Groups) supports external knowledge sharing. AT-06 (Rev 5) training feedback measures training effectiveness. PL-04 (Rules of Behaviour) formalises acceptable use. PM-13 (Security and Privacy Workforce) ensures adequate staffing. PM-14 (Testing, Training, Monitoring) ensures continuous programme operation.",
+      "gaps": "BCB Art. 4 requires dissemination of the cybersecurity policy to employees and outsourced service providers at all levels, promoting an institutional cybersecurity culture. SP 800-53 covers training and awareness comprehensively. Minor gap: BCB requires this culture to be adapted to the institution's communication channels and include specific awareness about Brazilian financial sector threats (e.g., PIX fraud schemes, boleto fraud, SIM swap attacks targeting Brazilian mobile operators). Portuguese-language training materials and alignment with FEBRABAN (Brazilian Federation of Banks) security awareness standards are not addressed."
+    },
+    {
+      "id": "BCB.Art.5",
+      "title": "Incident Response Plan Requirements",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "PM-04"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IR-01 (Incident Response Policy) establishes procedures. IR-02 (Incident Response Training) ensures staff preparedness. IR-03 (Incident Response Testing) validates plan effectiveness. IR-04 (Incident Handling) covers detection through recovery. IR-05 (Incident Monitoring) provides ongoing tracking. IR-06 (Incident Reporting) addresses reporting requirements. IR-08 (Incident Response Plan) provides the structured plan. PM-04 (Plan of Action and Milestones) supports remediation tracking.",
+      "gaps": "BCB Art. 5 requires the incident response plan to include: routines, procedures, and controls to identify and reduce vulnerability, define and implement procedures and controls for timely response, establish recovery mechanisms, and implement classification processes. SP 800-53 IR family provides strong incident response coverage. Gap: BCB requires the plan to specifically address incidents involving financial systems (SPB, PIX, CIP, SWIFT), including coordination with the BCB's incident response framework and CERT.br (Brazil's national CERT). BCB-specific incident classification categories and escalation timelines are not addressed."
+    },
+    {
+      "id": "BCB.Art.6",
+      "title": "Incident Detection and Assessment Procedures",
+      "controls": [
+        "AU-02",
+        "AU-06",
+        "CA-07",
+        "IR-04",
+        "RA-05",
+        "RA-10",
+        "SI-02",
+        "SI-04",
+        "SI-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-04 (System Monitoring) provides continuous monitoring capabilities. AU-02 (Audit Events) defines auditable events for detection. AU-06 (Audit Review, Analysis, Reporting) enables log analysis. CA-07 (Continuous Monitoring) provides ongoing assessment. RA-05 (Vulnerability Monitoring and Scanning) identifies vulnerabilities. RA-10 (Rev 5) threat hunting proactively searches for threats. SI-02 (Flaw Remediation) addresses discovered vulnerabilities. SI-05 (Security Alerts) provides threat intelligence feeds.",
+      "gaps": "Minor gap. BCB Art. 6 requires procedures for promptly detecting and assessing relevant cybersecurity incidents. SP 800-53 provides comprehensive detection controls. RA-10 (Rev 5 threat hunting) strengthens proactive detection. Gap: BCB requires detection capabilities specifically calibrated for Brazilian financial sector threats including PIX fraud patterns, boleto manipulation, and attacks targeting the Brazilian instant payment infrastructure. Integration with FEBRABAN's threat intelligence sharing programme and BCB's supervisory monitoring systems are not addressed."
+    },
+    {
+      "id": "BCB.Art.7",
+      "title": "Incident Response Actions and Containment",
+      "controls": [
+        "IR-04",
+        "IR-05",
+        "IR-07",
+        "IR-09",
+        "SC-24",
+        "SI-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-04 (Incident Handling) covers containment, eradication, and recovery. IR-05 (Incident Monitoring) tracks ongoing incidents. IR-07 (Incident Response Assistance) provides support resources. IR-09 (Rev 5) information spillage response addresses data breach containment specifically. SC-24 (Rev 5) fail in known state ensures systems fail securely during incidents. SI-04 (System Monitoring) provides situational awareness during response.",
+      "gaps": "BCB Art. 7 requires defined actions to be taken during and after relevant cybersecurity incidents. SP 800-53 provides strong response controls. Gap: BCB requires incident response actions to include measures to maintain the continuity of financial services and customer transaction processing. Response actions must consider the interconnected nature of Brazil's financial system (SPB) and the potential for systemic impact. Coordination with other financial institutions via FEBRABAN's incident response framework and escalation to BCB supervision are not addressed."
+    },
+    {
+      "id": "BCB.Art.8",
+      "title": "Incident Reporting to BCB (Banco Central do Brasil)",
+      "controls": [
+        "IR-06",
+        "IR-08",
+        "AU-06"
+      ],
+      "coverage_pct": 35,
+      "rationale": "IR-06 (Incident Reporting) provides general incident reporting capability. IR-08 (Incident Response Plan) supports structured reporting. AU-06 (Audit Review, Analysis, Reporting) enables report generation.",
+      "gaps": "BCB Art. 8 requires notification to the Banco Central do Brasil of relevant cybersecurity incidents that have occurred and the respective response measures taken. Notification must occur through BCB-prescribed channels and within BCB-specified timelines. BCB Circular 3909/2018 and subsequent guidance specify: mandatory reporting through the BCB's electronic communication system (Unicad/RDR), specific incident categories requiring notification, reporting timelines, and required report content. The BCB's supervisory inspection regime may require additional ad-hoc reporting. SP 800-53 IR-06 covers generic incident reporting but not BCB-specific notification channels, formats, timelines, or the regulatory consequences of delayed/inadequate reporting. Integration with the BCB's STAR system (Sistema de Transferencia de Arquivos) for secure regulatory communication is outside NIST scope."
+    },
+    {
+      "id": "BCB.Art.9",
+      "title": "Incident Record Retention (10-year minimum)",
+      "controls": [
+        "AU-04",
+        "AU-09",
+        "AU-11",
+        "SI-12"
+      ],
+      "coverage_pct": 65,
+      "rationale": "AU-11 (Audit Record Retention) directly addresses record retention requirements. AU-04 (Audit Log Storage Capacity) ensures sufficient storage for long-term retention. AU-09 (Protection of Audit Information) protects retained records from tampering. SI-12 (Information Handling and Retention) provides general retention policy governance.",
+      "gaps": "BCB Art. 9 mandates a minimum 10-year retention period for incident records, covering: incident description, timeline, affected systems/data, response measures taken, impact assessment, and post-incident analysis. SP 800-53 AU-11 addresses retention but does not specify the 10-year minimum. The extended retention period is significant for BCB regulatory examinations and must align with Brazilian document retention requirements under Codigo Civil Art. 205 (10-year general prescription period). Records must be accessible for BCB supervisory inspections and must comply with Brazilian document authenticity requirements (ICP-Brasil digital signatures for electronic records)."
+    },
+    {
+      "id": "BCB.Art.10",
+      "title": "Cybersecurity Assessment and Testing Programme",
+      "controls": [
+        "CA-02",
+        "CA-04",
+        "CA-07",
+        "CA-08",
+        "PM-14",
+        "RA-05",
+        "RA-06",
+        "SA-11"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CA-02 (Security Assessments) provides comprehensive assessment methodology. CA-04 (Security Certification) addresses security evaluation. CA-07 (Continuous Monitoring) enables ongoing assessment. CA-08 (Penetration Testing) directly addresses testing requirements. PM-14 (Testing, Training, Monitoring) ensures programme-level testing governance. RA-05 (Vulnerability Monitoring) provides scanning capabilities. RA-06 (Technical Surveillance Countermeasures) covers advanced assessment. SA-11 (Developer Testing) addresses application-level security testing.",
+      "gaps": "BCB Art. 10 requires assessment of the cybersecurity policy's adequacy and effectiveness. SP 800-53 provides strong assessment controls. Gap: BCB requires assessments to consider BCB regulatory expectations and may require engagement with BCB-approved auditors. For systemically important institutions, BCB may mandate specific testing methodologies analogous to CBEST/TIBER frameworks. Assessment results may need to be shared with BCB supervisors. The BCB's inspection manual (Manual de Supervisao) defines assessment expectations that go beyond NIST assessment requirements."
+    },
+    {
+      "id": "BCB.Art.11",
+      "title": "Cloud Computing Services Governance",
+      "controls": [
+        "AC-20",
+        "CA-03",
+        "CA-09",
+        "PM-08",
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SA-09 (External System Services) addresses external service governance. SA-04 (Acquisitions) covers procurement requirements. AC-20 (External Information Systems) provides access controls for external systems. CA-03 (System Interconnections) governs connections to cloud systems. SR-01/SR-02/SR-03 (Supply Chain) provide supply chain governance. PM-08 (Critical Infrastructure Plan) addresses critical infrastructure considerations. CA-09 (Rev 5) internal system connections extends monitoring to cloud-connected systems.",
+      "gaps": "BCB Art. 11 establishes specific governance requirements for cloud computing contracting by financial institutions. Requirements include: prior due diligence, contractual provisions, BCB notification, and ongoing monitoring. SP 800-53 covers cloud governance but BCB adds: mandatory risk assessment prior to cloud adoption, requirement for the institution to maintain the ability to audit the cloud provider, data and information access capabilities in emergencies, and assurance of regulatory compliance. BCB's cloud-specific requirements under Circular 3909 include mandatory cloud provider assessment criteria specific to Brazilian financial sector needs."
+    },
+    {
+      "id": "BCB.Art.12",
+      "title": "Cloud Provider Due Diligence and Risk Assessment",
+      "controls": [
+        "RA-03",
+        "RA-09",
+        "SA-04",
+        "SA-09",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06"
+      ],
+      "coverage_pct": 72,
+      "rationale": "RA-03 (Risk Assessment) provides risk assessment methodology. RA-09 (Rev 5) criticality analysis identifies critical dependencies. SA-04 (Acquisitions) covers procurement due diligence. SA-09 (External System Services) addresses service-level agreements. SR-02 (Supply Chain Risk Management Plan) provides vendor risk governance. SR-03 (Supply Chain Controls) covers supplier requirements. SR-05 (Acquisition Strategies) supports procurement decisions. SR-06 (Supplier Assessments and Reviews) enables vendor assessment.",
+      "gaps": "BCB Art. 12 requires due diligence on cloud service providers including assessment of: provider's ability to comply with Brazilian legislation, adherence to BCB regulations, provider's capacity to provide audit access, data location capabilities, and business continuity assurances. SR-06 supports vendor assessment but BCB requires specific evaluation of the provider's ability to guarantee BCB's regulatory access to data and systems. Assessment must consider provider's local presence in Brazil and ability to respond to Brazilian judicial orders. FEBRABAN cloud computing guidelines add additional assessment criteria."
+    },
+    {
+      "id": "BCB.Art.13",
+      "title": "Cloud Data Location and Residency Requirements",
+      "controls": [
+        "AC-04",
+        "CM-12",
+        "SA-09",
+        "SC-07"
+      ],
+      "coverage_pct": 35,
+      "rationale": "CM-12 (Rev 5) information location identifies where data resides across systems and geographies. AC-04 (Information Flow Enforcement) controls data movement. SA-09 (External System Services) covers service agreements including data location terms. SC-07 (Boundary Protection) controls cross-boundary flows.",
+      "gaps": "BCB Art. 13 requires financial institutions using cloud services to ensure that data and processing relevant to financial operations can be accessed by BCB at any time, including when data is stored abroad. The institution must ensure the cloud provider can comply with BCB requests for data access and audit. While BCB does not mandate data localisation, it requires the institution to guarantee BCB's access rights regardless of data location. CM-12 identifies data locations but cannot enforce Brazilian regulatory access to cloud data stored in foreign jurisdictions. Conflicts between foreign data sovereignty laws and BCB access requirements are outside NIST scope. The Marco Civil da Internet (Law 12,965/2014) adds additional data location considerations for internet services operating in Brazil."
+    },
+    {
+      "id": "BCB.Art.14",
+      "title": "Data Processing and Storage Abroad",
+      "controls": [
+        "AC-04",
+        "CM-12",
+        "MP-05",
+        "SA-09",
+        "SC-08"
+      ],
+      "coverage_pct": 30,
+      "rationale": "CM-12 (Rev 5) information location tracks data across jurisdictions. AC-04 (Information Flow Enforcement) controls cross-border data flows. MP-05 (Media Transport) secures physical data transfers. SC-08 (Transmission Confidentiality) protects data in transit across borders. SA-09 (External System Services) covers international service agreements.",
+      "gaps": "BCB Art. 14 governs data processing and storage abroad by financial institutions. Requirements include: the institution must ensure that Brazilian law and BCB regulations are complied with in the foreign jurisdiction, the institution must have the capability to access and provide data to BCB from the foreign location, and the institution must obtain prior BCB authorisation where required. SP 800-53 covers data transfer security but not the jurisdictional compliance requirements. Cross-border data flow restrictions between Brazil and other Mercosul nations, bilateral agreements, and potential conflicts with foreign banking secrecy laws (e.g., Swiss banking secrecy) are not addressed. The LGPD's own international transfer provisions (Art. 33-36) must also be satisfied concurrently, creating dual compliance requirements."
+    },
+    {
+      "id": "BCB.Art.15",
+      "title": "BCB Regulatory Access to Cloud Data and Systems",
+      "controls": [
+        "AU-09",
+        "AU-16",
+        "SA-09",
+        "SR-08"
+      ],
+      "coverage_pct": 25,
+      "rationale": "AU-09 (Protection of Audit Information) ensures records are accessible for regulatory review. AU-16 (Rev 5) cross-organizational audit logging supports audit trails across provider boundaries. SA-09 (External System Services) covers contractual access provisions. SR-08 (Notification Agreements) supports regulatory communication with suppliers.",
+      "gaps": "BCB Art. 15 requires that financial institutions' cloud contracts ensure BCB can access data, information, and systems at any time. This includes: direct access rights for BCB inspectors, the ability for BCB to conduct on-site inspections of cloud providers (including foreign providers), and the requirement that the cloud provider cannot invoke confidentiality or contractual clauses to deny BCB access. SP 800-53 supports audit access but BCB's sovereign regulatory access rights \u2014 potentially requiring cloud providers operating abroad to submit to Brazilian regulatory inspection \u2014 create significant jurisdictional challenges outside NIST scope. The BCB's power to require contract termination if access is denied has no NIST equivalent."
+    },
+    {
+      "id": "BCB.Art.16",
+      "title": "Cloud Outsourcing Notification to BCB",
+      "controls": [
+        "PM-08",
+        "SA-04",
+        "SA-09"
+      ],
+      "coverage_pct": 28,
+      "rationale": "SA-09 (External System Services) covers external service agreements. SA-04 (Acquisitions) addresses procurement governance. PM-08 (Critical Infrastructure Plan) provides planning for critical system outsourcing.",
+      "gaps": "BCB Art. 16 requires financial institutions to communicate to BCB about the contracting of relevant cloud computing services, including: the services contracted, denomination of the cloud provider, countries and regions where data will be stored/processed, and the commencement date. This pre-notification requirement must follow BCB-prescribed communication channels and timelines. SP 800-53 covers procurement governance but BCB's mandatory pre-notification via Unicad, the specific information requirements, and the BCB's right to object to the outsourcing arrangement before commencement are regulatory requirements outside NIST scope."
+    },
+    {
+      "id": "BCB.Art.17",
+      "title": "Board and Director Responsibilities for Cybersecurity",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PL-09",
+        "PS-09"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-01 (Program Plan) establishes the security programme. PM-02 (Senior Information Security Officer) assigns senior leadership responsibility. PM-09 (Risk Management Strategy) provides strategic oversight. PL-09 (Rev 5) central management enables centralised governance that could support board oversight. PS-09 (Rev 5) position descriptions enables formal role definitions for cybersecurity responsibilities at senior levels.",
+      "gaps": "BCB Art. 17 requires the institution's board of directors (or equivalent administrative body) to approve the cybersecurity policy, the incident response plan, and cloud computing usage. A director must be designated as responsible for cybersecurity policy implementation and cloud computing governance. SP 800-53 provides programme management but BCB requires personal accountability at the director level, with potential regulatory sanctions against individual directors who fail their cybersecurity duties under BCB Resolution 4968/2021 (administrative proceedings). The designacao formal (formal designation) of a responsible director must be communicated to BCB. BCB can impose penalties on individual directors, including prohibition from holding positions in the financial sector."
+    },
+    {
+      "id": "BCB.Art.18",
+      "title": "Annual Cybersecurity Report to BCB",
+      "controls": [
+        "AU-01",
+        "CA-02",
+        "CA-05",
+        "PM-06",
+        "RA-03",
+        "RA-04"
+      ],
+      "coverage_pct": 42,
+      "rationale": "CA-02 (Security Assessments) provides assessment results for reporting. CA-05 (Plan of Action and Milestones) documents remediation progress. PM-06 (Measures of Performance) supports metrics reporting. RA-03/RA-04 (Risk Assessment/Update) produce risk analysis outputs suitable for annual reporting.",
+      "gaps": "BCB Art. 18 requires the institution to submit an annual report to BCB covering: the implementation of the cybersecurity policy, a summary of results of the cybersecurity assessment programme, incidents that occurred and response measures adopted, and results of tests and exercises conducted. This report must be presented to the board of directors and made available to BCB. SP 800-53 generates assessment outputs but not the BCB-specific annual report format, content requirements, or submission timelines. The report must align with BCB's supervisory expectations documented in the Manual de Supervisao and must be submitted through BCB-prescribed channels (Unicad/RDR). Portuguese-language reporting is mandatory."
+    },
+    {
+      "id": "BCB.Art.19",
+      "title": "Cybersecurity Assessment Programme and Continuous Improvement",
+      "controls": [
+        "CA-02",
+        "CA-04",
+        "CA-05",
+        "CA-07",
+        "PM-04",
+        "PM-06",
+        "PM-14",
+        "RA-04",
+        "RA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-02 (Security Assessments) provides structured assessments. CA-04 (Security Certification) addresses formal evaluation. CA-05 (Plan of Action and Milestones) tracks remediation. CA-07 (Continuous Monitoring) enables ongoing assessment. PM-04 (Plan of Action and Milestones) supports programme-level tracking. PM-06 (Measures of Performance) provides metrics. PM-14 (Testing, Training, Monitoring) ensures programme operation. RA-04 (Risk Assessment Update) supports iterative improvement. RA-05 (Vulnerability Monitoring) provides vulnerability data for the programme.",
+      "gaps": "BCB Art. 19 requires a continuous cybersecurity assessment programme that evaluates the adequacy and effectiveness of the cybersecurity policy and incident response plan. SP 800-53 provides strong assessment controls. Gap: BCB may require assessments to follow specific methodologies prescribed by the BCB or aligned with FEBRABAN recommendations. Assessment results must feed into the annual report (Art. 18) and must be available for BCB supervisory review. The BCB's thematic inspection programme may impose additional assessment requirements on specific institutions based on their risk profile."
+    },
+    {
+      "id": "BCB.Art.20",
+      "title": "Record-Keeping and Documentation Requirements",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-07",
+        "AU-09",
+        "AU-11",
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "PM-05",
+        "SI-12"
+      ],
+      "coverage_pct": 72,
+      "rationale": "AU family (Audit and Accountability) provides comprehensive record-keeping. AU-01 (Policy), AU-02/AU-03 (Event/Content), AU-04 (Storage), AU-07 (Reduction/Reporting), AU-09 (Protection), AU-11 (Retention). CM-08 (Component Inventory) and CM-12 (Rev 5 Information Location) document systems. CM-13 (Rev 5 Data Action Mapping) documents processing activities. PM-05 (System Inventory) provides organisational-level documentation. SI-12 (Information Handling and Retention) governs records management.",
+      "gaps": "BCB Art. 20 requires the institution to maintain documentation and records related to: the cybersecurity policy, incident response plan, cloud computing contracts, assessment programme results, risk assessments, and all changes to these documents. Records must be maintained for the periods established by BCB (generally 5-10 years depending on document type). SP 800-53 provides record-keeping controls but BCB requires specific document categories, retention periods aligned with Brazilian regulatory requirements, and records in Portuguese accessible for BCB inspection. Documents must comply with Brazilian digital document standards (ICP-Brasil for electronic signatures, MP 2,200-2/2001 for digital certification) to have legal validity."
+    },
+    {
+      "id": "BCB.Art.3-Supp",
+      "title": "Risk-Based Security Controls Proportionate to Institution Size and Complexity",
+      "controls": [
+        "PL-10",
+        "PL-11",
+        "PM-07",
+        "PM-09",
+        "PM-11",
+        "RA-01",
+        "RA-03",
+        "RA-07",
+        "RA-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PL-10 (Rev 5) baseline selection and PL-11 (Rev 5) baseline tailoring provide systematic risk-based control selection. PM-07 (Enterprise Architecture) supports proportionate security design. PM-09 (Risk Management Strategy) provides strategic risk framework. PM-11 (Mission and Business Process) aligns security to business needs. RA-03/RA-07/RA-09 (Risk Assessment/Response/Criticality) enable risk-proportionate control implementation.",
+      "gaps": "BCB Resolution 4893 applies proportionately based on institution type: Segmento 1 (S1) through Segmento 5 (S5) prudential segments per Resolution 4553/2017. Larger institutions (S1/S2: major banks like Banco do Brasil, Itau, Bradesco, Santander Brasil, Caixa) face more stringent requirements than smaller cooperatives (S5). SP 800-53 PL-10/PL-11 support tailoring but not BCB's specific segmentation. BCB's simplified framework for S4/S5 institutions (cooperatives, fintech startups) reduces requirements below NIST baselines. The graded approach also applies to specific requirements like cloud notification thresholds and assessment programme scope."
+    },
+    {
+      "id": "BCB.Art.5-Supp",
+      "title": "Incident Classification and Severity Framework",
+      "controls": [
+        "IR-04",
+        "IR-05",
+        "IR-08",
+        "RA-02",
+        "RA-09"
+      ],
+      "coverage_pct": 65,
+      "rationale": "IR-04 (Incident Handling) includes classification during response. IR-05 (Incident Monitoring) supports severity tracking. IR-08 (Incident Response Plan) provides classification framework. RA-02 (Security Categorization) provides impact categorisation methodology. RA-09 (Rev 5) criticality analysis supports risk-based incident prioritisation.",
+      "gaps": "BCB requires incidents to be classified according to their relevance, considering: the criticality of affected services (including PIX, TED, DOC, boleto services), the number of affected customers, and the potential for systemic impact on the Brazilian financial system (SPB). Incidents affecting PIX infrastructure must be reported within specific timelines under BCB Resolution 147/2021. The BCB incident classification must consider the institution's segment (S1-S5) and the potential impact on financial system stability. NIST incident classification does not address financial sector systemic risk or PIX-specific incident categories."
+    },
+    {
+      "id": "BCB.Art.11-Supp",
+      "title": "Cloud Service SLA and Contract Requirements for Financial Institutions",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-08"
+      ],
+      "coverage_pct": 58,
+      "rationale": "SA-04 (Acquisitions) covers procurement requirements. SA-09 (External System Services) addresses SLA governance. SR-01/SR-02/SR-03 (Supply Chain Policy/Plan/Controls) provide supply chain governance. SR-05 (Acquisition Strategies) supports procurement decisions. SR-08 (Notification Agreements) covers supplier communication requirements.",
+      "gaps": "BCB cloud contracts must include: specific SLA metrics for financial services availability, BCB audit access rights, data residency commitments, incident notification obligations, data portability and reversibility provisions, and exit strategy clauses. Contract terms must comply with BCB Circular 3909/2018 requirements, including the ability for the institution to switch providers within defined timelines and without service disruption. SP 800-53 covers supplier management but not BCB-specific contractual requirements. Contracts must be in Portuguese (or have certified Portuguese translations) and comply with Brazilian contract law (Codigo Civil). Open Finance Brasil API requirements for cloud-hosted services add additional contractual obligations."
+    },
+    {
+      "id": "BCB.Art.17-Supp",
+      "title": "Designated Cybersecurity Director Registration with BCB",
+      "controls": [
+        "PM-02",
+        "PS-09"
+      ],
+      "coverage_pct": 22,
+      "rationale": "PM-02 (Senior Information Security Officer) assigns senior security responsibility. PS-09 (Rev 5) position descriptions enables formal role definition. These partially support the concept of a designated cybersecurity director.",
+      "gaps": "BCB Art. 17 requires formal designation of a director responsible for cybersecurity, who must be registered with BCB through the Unicad system. This director must: be approved by BCB (fit and proper assessment per Resolution 4122/2012), accumulate the cybersecurity function only with compatible roles, have demonstrable competence in cybersecurity, and be personally accountable for cybersecurity policy implementation. BCB can refuse or revoke the director's registration. SP 800-53 PM-02 assigns a senior officer but does not address regulatory registration, fit-and-proper assessments, or personal regulatory liability. The director's criminal liability under Brazilian law (Lei 7492/1986 \u2014 crimes against the national financial system) for cybersecurity failures adds a dimension entirely absent from NIST."
+    },
+    {
+      "id": "BCB.PIX",
+      "title": "PIX Security Requirements (BCB Resolution 147/2021 and related provisions)",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-17",
+        "IA-02",
+        "IA-05",
+        "IA-08",
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23",
+        "SI-04",
+        "SI-10"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC family provides access control for PIX systems. IA-02/IA-05/IA-08 (Authentication) support strong authentication for PIX transactions. SC-07 (Boundary Protection), SC-08 (Transmission Security), SC-12/SC-13 (Cryptographic Protection) secure PIX communications. SC-23 (Session Authenticity) supports transaction integrity. SI-04 (System Monitoring) enables PIX fraud monitoring. SI-10 (Information Input Validation) supports transaction validation.",
+      "gaps": "PIX (Brazil's instant payment system launched November 2020) has specific security requirements under BCB regulations including: mandatory use of digital certificates (ICP-Brasil) for PIX API communication, specific authentication requirements for PIX Dict (directory) access, transaction fraud monitoring with BCB-prescribed detection rules, Mecanismo Especial de Devolucao (MED \u2014 Special Return Mechanism) for fraud recovery, mandatory SPI (Sistema de Pagamentos Instantaneos) connectivity standards, and real-time fraud reporting to BCB's DICT. PIX security requirements also include: QR code security standards, anti-fraud rules for PIX key registration (CPF, CNPJ, email, phone), and maximum transaction limits per BCB regulations. These are entirely Brazil-specific payment infrastructure requirements outside NIST scope."
+    },
+    {
+      "id": "BCB.OpenFinance",
+      "title": "Open Finance Brasil Security Requirements",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "IA-02",
+        "IA-05",
+        "IA-08",
+        "SC-07",
+        "SC-08",
+        "SC-13",
+        "SC-23",
+        "SA-09"
+      ],
+      "coverage_pct": 48,
+      "rationale": "AC-03/AC-04 (Access/Flow Enforcement) control data sharing. IA-02/IA-05/IA-08 (Authentication) support OAuth 2.0/FAPI requirements. SC-07 (Boundary Protection) secures API endpoints. SC-08 (Transmission Security) protects API communications. SC-13 (Cryptographic Protection) supports mTLS requirements. SC-23 (Session Authenticity) supports token-based authentication. SA-09 (External System Services) covers third-party API governance.",
+      "gaps": "Open Finance Brasil (BCB's implementation of open banking, regulated since 2021) requires specific security measures including: mandatory Financial-grade API (FAPI) profile compliance, mutual TLS (mTLS) with ICP-Brasil certificates, OAuth 2.0 with PKCE, consent management APIs following BCB-prescribed standards, participant directory integration, and DCR (Dynamic Client Registration) following BCB's technical specifications. Security requirements include API rate limiting per BCB specifications, mandatory security event logging for regulatory audit, and participant certification through the Open Finance Brasil governance structure. These are sector-specific API security requirements tied to Brazilian financial regulation that go well beyond NIST's generic controls."
+    },
+    {
+      "id": "LGPD.BCB.Integration",
+      "title": "LGPD-BCB Compliance Integration (dual regulatory alignment)",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "PL-01",
+        "PL-02",
+        "PL-09",
+        "PT-01",
+        "PT-02",
+        "RA-01",
+        "RA-03"
+      ],
+      "coverage_pct": 32,
+      "rationale": "PM-01 (Program Plan), PM-09 (Risk Management Strategy), PL-01/PL-02 (Security Planning) provide governance that could support integrated compliance. PT-01/PT-02 (Privacy Policy/Authority) address privacy governance. PL-09 (Rev 5) central management enables unified policy governance. RA-01/RA-03 (Risk Assessment) provide assessment frameworks adaptable to multiple regulatory requirements.",
+      "gaps": "Financial institutions in Brazil must comply simultaneously with LGPD (data protection, ANPD-supervised) and BCB Resolution 4893 (cybersecurity, BCB-supervised), creating dual compliance obligations with different regulators. Key integration challenges include: overlapping but distinct incident notification requirements (ANPD for data breaches, BCB for cybersecurity incidents), different legal bases for LGPD processing (credit protection under Art. 7(X)) versus BCB's operational requirements, reconciling LGPD data minimisation with BCB's record retention requirements, coordinating RIPD (LGPD) with BCB cybersecurity assessments, and managing Encarregado (LGPD) alongside the designated BCB cybersecurity director. The CMN (Conselho Monetario Nacional) Resolution 4893 compliance must also integrate with CVM (Comissao de Valores Mobiliarios) requirements for securities firms. This multi-regulator coordination challenge has no NIST equivalent."
+    }
+  ],
+  "summary": {
+    "total_clauses": 48,
+    "average_coverage": 44.4,
+    "full_count": 3,
+    "substantial_count": 12,
+    "partial_count": 9,
+    "weak_count": 24,
+    "none_count": 0
+  }
+}

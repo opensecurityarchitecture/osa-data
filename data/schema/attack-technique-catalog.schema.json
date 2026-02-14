@@ -59,6 +59,68 @@
         "is_subtechnique": {
           "type": "boolean",
           "description": "True if this is a sub-technique (e.g., T1078.001)"
+        },
+        "mitigations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^M[0-9]{4}$",
+                "description": "ATT&CK mitigation ID (e.g., M1032)"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Mitigation name"
+              }
+            }
+          },
+          "description": "ATT&CK mitigations that counter this technique (COUNTERS edge)"
+        },
+        "detection_strategies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^DET[0-9]{4}$",
+                "description": "ATT&CK v18 detection strategy ID (e.g., DET0001)"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Detection strategy name"
+              }
+            }
+          },
+          "description": "ATT&CK v18 detection strategies that detect this technique (DETECTS edge)"
+        },
+        "weaknesses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^CWE-[0-9]+$",
+                "description": "CWE weakness ID (e.g., CWE-522)"
+              },
+              "source": {
+                "type": "string",
+                "description": "Weakness source (e.g., CWE)"
+              }
+            }
+          },
+          "description": "CWE weakness classes this technique exploits (EXPLOITS edge, via CAPEC bridge)"
         }
       }
     }

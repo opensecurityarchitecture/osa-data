@@ -160,7 +160,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting credential stores at rest, including SAM databases, NTDS.dit files, and cached credential storage, renders dumped credential data unreadable without the corresponding decryption keys."
     },
     {
       "id": "T1005",
@@ -168,7 +169,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting sensitive data at rest on local file systems ensures that even if adversaries gain file-level access, the collected data remains cryptographically protected and unusable."
     },
     {
       "id": "T1025",
@@ -176,7 +178,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encryption of data stored on removable media ensures that physically exfiltrated storage devices contain only ciphertext, preventing adversary access to plaintext data without decryption keys."
     },
     {
       "id": "T1041",
@@ -184,7 +187,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting information at rest ensures that data staged for exfiltration over C2 channels is in ciphertext form, requiring decryption keys that adversaries are unlikely to possess."
     },
     {
       "id": "T1048",
@@ -192,7 +196,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protection of information at rest through encryption ensures that data copied for exfiltration via alternative protocols remains encrypted, limiting the value of successfully exfiltrated ciphertext."
     },
     {
       "id": "T1052",
@@ -200,7 +205,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting data at rest on systems with physical media access ensures that data copied to removable devices for physical exfiltration remains cryptographically protected."
     },
     {
       "id": "T1078",
@@ -211,7 +217,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting stored credentials and authentication databases at rest limits the utility of valid account credentials obtained through file system access, as the credential material is ciphertext."
     },
     {
       "id": "T1213",
@@ -219,7 +226,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting information repository data at rest ensures that adversaries accessing wikis, document stores, or databases cannot read content without possessing the appropriate decryption keys."
     },
     {
       "id": "T1530",
@@ -227,7 +235,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encryption of cloud storage objects at rest with customer-managed keys ensures that even if bucket policies are misconfigured, adversary-accessed data remains encrypted and unusable."
     },
     {
       "id": "T1552",
@@ -235,7 +244,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting stored credentials at rest, including password files, private keys, and credential databases, prevents adversaries from reading unsecured credential material through file system access."
     },
     {
       "id": "T1565",
@@ -243,7 +253,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Integrity protection mechanisms for information at rest detect unauthorized data modifications through cryptographic checksums and authenticated encryption, preventing undetected data manipulation."
     },
     {
       "id": "T1567",
@@ -251,7 +262,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting data at rest ensures that information staged for exfiltration over web services is cryptographically protected, limiting the intelligence value of successfully exfiltrated content."
     },
     {
       "id": "T1599",
@@ -259,7 +271,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting network device configurations at rest prevents adversaries who bridge network boundaries from reading sensitive configuration data stored on compromised network infrastructure."
     },
     {
       "id": "T1602",
@@ -267,7 +280,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting configuration repository data at rest ensures that SNMP MIB values and device configuration files remain protected even if adversaries gain access to configuration storage."
     },
     {
       "id": "T1003.001",
@@ -275,7 +289,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Credential Guard and memory encryption mechanisms protect LSASS credential material at rest in memory, preventing credential dumping tools from reading plaintext passwords and hashes."
     },
     {
       "id": "T1003.002",
@@ -283,7 +298,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting the SAM database with SYSKEY and additional cryptographic protections ensures that extracted SAM hive files contain encrypted credential data that resists offline extraction."
     },
     {
       "id": "T1003.003",
@@ -291,7 +307,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting the NTDS.dit database at rest through BitLocker or database-level encryption ensures that copies of the Active Directory database contain encrypted credential hashes."
     },
     {
       "id": "T1003.004",
@@ -299,7 +316,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encryption of LSA Secrets at rest in the registry protects cached service account credentials and machine secrets from extraction by adversaries with registry access."
     },
     {
       "id": "T1003.005",
@@ -307,7 +325,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting cached domain credentials at rest with strong cryptographic algorithms limits adversary ability to extract and crack DCC2 hashes from offline system access."
     },
     {
       "id": "T1003.006",
@@ -315,7 +334,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting domain controller data at rest ensures that even if replication data is intercepted through DCSync, the credential material remains cryptographically protected."
     },
     {
       "id": "T1003.007",
@@ -323,7 +343,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory encryption technologies and confidential computing protections safeguard credential data stored in process memory from extraction through /proc filesystem reads by adversaries on Linux systems."
     },
     {
       "id": "T1003.008",
@@ -331,7 +352,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Strong encryption of the /etc/shadow file with modern hashing algorithms (SHA-512, bcrypt) ensures that extracted password hashes resist offline brute-force cracking attempts."
     },
     {
       "id": "T1048.002",
@@ -339,7 +361,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting data at rest ensures that information collected for exfiltration over asymmetric-encrypted non-C2 protocols is already in ciphertext form, providing defense-in-depth against data theft."
     },
     {
       "id": "T1048.003",
@@ -347,7 +370,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information encryption at rest ensures that data exfiltrated over unencrypted protocols still requires decryption keys that adversaries lack, limiting the value of intercepted plaintext transmissions."
     },
     {
       "id": "T1052.001",
@@ -355,7 +379,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting data on systems with USB access ensures that information copied to USB devices for physical exfiltration remains cryptographically protected and unreadable without proper keys."
     },
     {
       "id": "T1078.001",
@@ -366,7 +391,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting stored default account credentials at rest prevents adversaries from harvesting factory-set passwords from configuration files and databases on newly provisioned systems."
     },
     {
       "id": "T1078.003",
@@ -377,7 +403,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting local credential stores and password databases at rest limits adversary extraction of local account credentials through file system access to encrypted systems."
     },
     {
       "id": "T1078.004",
@@ -388,7 +415,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting cloud credential stores and token caches at rest prevents adversaries from reading cloud account credentials stored on compromised endpoints or cloud infrastructure."
     },
     {
       "id": "T1213.001",
@@ -396,7 +424,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting Confluence data at rest ensures that adversaries accessing the underlying database or file storage cannot read organizational knowledge base content without decryption keys."
     },
     {
       "id": "T1213.002",
@@ -404,7 +433,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting SharePoint document libraries and site collections at rest protects organizational documents from being read even if adversaries gain access to storage infrastructure."
     },
     {
       "id": "T1213.004",
@@ -412,7 +442,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting CRM database storage at rest ensures that adversary access to underlying data stores does not expose customer relationship data without appropriate decryption keys."
     },
     {
       "id": "T1213.005",
@@ -420,7 +451,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting messaging application data at rest protects chat histories, file attachments, and channel content from unauthorized access through storage-level compromise."
     },
     {
       "id": "T1550.001",
@@ -429,7 +461,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting application access token stores at rest prevents adversaries from extracting usable OAuth tokens from local caches and credential storage files."
     },
     {
       "id": "T1552.001",
@@ -437,7 +470,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting files that may contain credentials ensures that passwords, API keys, and secrets stored in configuration files remain protected even if file-level access is compromised."
     },
     {
       "id": "T1552.002",
@@ -445,7 +479,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting registry-stored credentials at rest through DPAPI or similar mechanisms ensures that credential values in registry keys are ciphertext requiring additional keys to decrypt."
     },
     {
       "id": "T1552.003",
@@ -453,7 +488,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting bash history files or configuring them to exclude sensitive commands prevents adversary extraction of credentials inadvertently typed into command-line history."
     },
     {
       "id": "T1552.004",
@@ -461,7 +497,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting private key files at rest with passphrase protection ensures that stolen key files require additional authentication before they can be used for access."
     },
     {
       "id": "T1565.001",
@@ -469,7 +506,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Integrity protection through authenticated encryption of stored data detects unauthorized modifications, as adversary changes to encrypted data will fail integrity verification checks."
     },
     {
       "id": "T1565.003",
@@ -477,7 +515,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory integrity protection mechanisms detect unauthorized runtime data modifications through hardware-backed integrity verification, preventing undetected manipulation of live application data."
     },
     {
       "id": "T1599.001",
@@ -485,7 +524,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting network device configuration data at rest ensures that NAT rules and routing configurations exposed through boundary bridging remain cryptographically protected."
     },
     {
       "id": "T1602.001",
@@ -493,7 +533,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting SNMP MIB data and device configuration stores at rest prevents adversaries from reading usable configuration information from SNMP dumps of protected devices."
     },
     {
       "id": "T1602.002",
@@ -501,7 +542,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting network device configurations at rest ensures that full device configuration dumps obtained through unauthorized access contain encrypted data requiring additional keys to decrypt."
     }
   ],
   "metadata": {

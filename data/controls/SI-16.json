@@ -105,7 +105,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection controls including DEP and ASLR prevent WMI-based exploitation techniques that rely on predictable memory layouts or execution of injected shellcode in non-executable memory regions."
     },
     {
       "id": "T1059",
@@ -113,7 +114,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection through DEP prevents execution of adversary-injected code in data regions used by scripting interpreters, while ASLR makes exploitation of interpreter vulnerabilities unreliable."
     },
     {
       "id": "T1218",
@@ -121,7 +123,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP and ASLR protections on system binary processes prevent adversaries from exploiting memory corruption vulnerabilities in signed system utilities to achieve arbitrary code execution."
     },
     {
       "id": "T1543",
@@ -130,7 +133,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on service host processes prevents exploitation of buffer overflows in system services that adversaries target for persistent, privileged code execution through process creation."
     },
     {
       "id": "T1548",
@@ -139,7 +143,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP and ASLR on privilege elevation mechanisms prevent memory corruption exploits targeting UAC, sudo, or setuid binaries that adversaries use to bypass elevation controls."
     },
     {
       "id": "T1565",
@@ -147,7 +152,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory integrity protections including DEP and guard pages detect and prevent unauthorized modification of runtime data structures through buffer overflows or out-of-bounds writes."
     },
     {
       "id": "T1611",
@@ -155,7 +161,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection boundaries between container processes and host kernel, including seccomp and DEP enforcement, prevent exploitation of memory corruption vulnerabilities for container escape."
     },
     {
       "id": "T1003.001",
@@ -163,7 +170,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protected Process Light and Credential Guard memory protection prevent unauthorized processes from reading LSASS memory regions where cached credentials and Kerberos tickets are stored."
     },
     {
       "id": "T1055.009",
@@ -172,7 +180,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP enforcement prevents injected code from executing in process memory regions marked as non-executable, while ASLR randomizes memory layouts to make /proc/pid/mem injection unreliable."
     },
     {
       "id": "T1059.001",
@@ -180,7 +189,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "AMSI integration with memory protection prevents PowerShell from executing malicious scripts that have been dynamically loaded into memory, including fileless attack payloads."
     },
     {
       "id": "T1059.002",
@@ -188,7 +198,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on the AppleScript runtime prevents exploitation of interpreter vulnerabilities and blocks execution of injected code in non-executable memory regions."
     },
     {
       "id": "T1059.003",
@@ -196,7 +207,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP enforcement prevents adversary shellcode from executing within cmd.exe process memory by blocking code execution in non-executable data regions, countering memory-based attacks that bypass disk-based detection."
     },
     {
       "id": "T1059.004",
@@ -204,7 +216,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on Unix shell processes through W^X enforcement prevents execution of adversary-injected code in writable memory regions used by shell interpreters."
     },
     {
       "id": "T1059.005",
@@ -212,7 +225,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP and ASLR on Visual Basic runtime environments prevent exploitation of VB interpreter vulnerabilities and block execution of injected code in non-executable memory."
     },
     {
       "id": "T1059.006",
@@ -220,7 +234,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on Python interpreter processes prevents adversaries from exploiting buffer overflows or executing shellcode injected into Python's memory space."
     },
     {
       "id": "T1059.007",
@@ -228,7 +243,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP and ASLR on JavaScript engines prevent memory corruption exploits targeting V8, SpiderMonkey, or other JS runtime environments for arbitrary code execution."
     },
     {
       "id": "T1059.008",
@@ -236,7 +252,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on network device operating systems prevents exploitation of CLI interface buffer overflows that adversaries target for command execution on network infrastructure."
     },
     {
       "id": "T1059.011",
@@ -244,7 +261,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on Lua interpreter processes prevents exploitation of interpreter vulnerabilities and blocks adversary execution of shellcode in Lua runtime memory regions."
     },
     {
       "id": "T1218.001",
@@ -252,7 +270,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP enforcement prevents execution of malicious shellcode embedded in compiled HTML files that attempt to exploit the HTML Help viewer's memory space."
     },
     {
       "id": "T1218.002",
@@ -260,7 +279,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on the Control Panel host process prevents exploitation of memory corruption vulnerabilities in .cpl file loading that adversaries target for code execution."
     },
     {
       "id": "T1218.003",
@@ -268,7 +288,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP and ASLR on the CMSTP.exe process prevent memory corruption exploits targeting the Connection Manager installation utility for arbitrary code execution."
     },
     {
       "id": "T1218.004",
@@ -276,7 +297,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on the InstallUtil.exe process prevents exploitation of .NET assembly loading mechanisms through buffer overflows or memory corruption in the installer utility."
     },
     {
       "id": "T1218.005",
@@ -284,7 +306,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP enforcement on Mshta.exe prevents adversary shellcode from executing within the HTML Application host's memory space when processing malicious HTA content."
     },
     {
       "id": "T1218.008",
@@ -292,7 +315,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on Odbcconf.exe prevents memory corruption exploits targeting the ODBC configuration utility that adversaries abuse for DLL loading and execution."
     },
     {
       "id": "T1218.009",
@@ -300,7 +324,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP and ASLR on Regsvcs/Regasm processes prevent exploitation of .NET COM registration utilities through memory corruption attacks targeting managed assembly loading."
     },
     {
       "id": "T1218.012",
@@ -308,7 +333,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on Verclsid.exe prevents adversary exploitation of COM verification processes through buffer overflows or memory injection in the class ID verification utility."
     },
     {
       "id": "T1218.013",
@@ -316,7 +342,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP enforcement prevents adversary shellcode from executing within Mavinject.exe memory space during DLL injection operations, blocking memory corruption exploits that target the process injection utility."
     },
     {
       "id": "T1218.014",
@@ -324,7 +351,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on the MMC process prevents exploitation of snap-in loading mechanisms through memory corruption attacks targeting the Microsoft Management Console."
     },
     {
       "id": "T1218.015",
@@ -332,7 +360,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP and ASLR on Electron application processes prevent exploitation of Chromium-based rendering engine memory corruption vulnerabilities for arbitrary code execution."
     },
     {
       "id": "T1505.004",
@@ -340,7 +369,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on IIS worker processes prevents exploitation of buffer overflows in IIS components that adversaries target for installing persistent server-side backdoors."
     },
     {
       "id": "T1543.002",
@@ -349,7 +379,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on systemd and service processes prevents exploitation of buffer overflows that adversaries target for creating persistent privileged services on Linux systems."
     },
     {
       "id": "T1547.004",
@@ -358,7 +389,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP enforcement on the Winlogon process prevents adversary shellcode execution through Winlogon Helper DLL loading, as injected code in non-executable regions is blocked."
     },
     {
       "id": "T1547.006",
@@ -367,7 +399,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Kernel memory protection including SMEP and SMAP prevents exploitation of kernel module loading mechanisms through memory corruption, blocking unauthorized kernel-level persistence."
     },
     {
       "id": "T1548.004",
@@ -376,7 +409,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory protection on macOS authorization prompts prevents exploitation of elevation dialog memory corruption that adversaries could use to bypass prompted privilege escalation."
     },
     {
       "id": "T1565.001",
@@ -384,7 +418,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Memory integrity protections including guard pages and canaries detect buffer overflows targeting stored data structures, preventing undetected manipulation of persistent application data."
     },
     {
       "id": "T1565.003",
@@ -392,7 +427,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DEP, ASLR, and Control Flow Integrity mechanisms prevent adversary exploitation of memory corruption to manipulate runtime data in application processes for operational impact."
     }
   ],
   "metadata": {

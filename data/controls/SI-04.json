@@ -190,7 +190,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Continuous network monitoring with traffic analysis and anomaly detection enables identification of obfuscated command-and-control communications by flagging unusual encoding patterns, entropy anomalies, or protocol deviations that differ from established network baselines."
     },
     {
       "id": "T1003",
@@ -198,7 +199,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint monitoring tools can detect credential dumping activities by alerting on suspicious process access to LSASS, SAM registry hives, or NTDS.dit files, as well as anomalous use of credential-extraction utilities such as Mimikatz or secretsdump."
     },
     {
       "id": "T1005",
@@ -206,7 +208,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Host-based monitoring with file integrity checking and data loss prevention sensors can detect anomalous bulk file access, staging of sensitive data in temporary directories, or unusual read operations against databases and document stores indicative of local data collection."
     },
     {
       "id": "T1008",
@@ -214,7 +217,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring that baselines normal communication patterns can detect when compromised hosts switch to fallback C2 channels by identifying unexpected outbound connections to previously unseen infrastructure or sudden protocol changes."
     },
     {
       "id": "T1011",
@@ -222,7 +226,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network interfaces and wireless activity can detect unauthorized exfiltration over non-standard network media such as cellular, Bluetooth, or RF channels by alerting on unexpected network adapter activity or traffic on unmonitored interfaces."
     },
     {
       "id": "T1021",
@@ -230,7 +235,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring authentication events and remote service connections\u2014including RDP, SSH, SMB, and WinRM sessions\u2014enables detection of lateral movement by flagging unusual source-destination pairs, off-hours access, or connections from previously unseen hosts."
     },
     {
       "id": "T1025",
@@ -238,7 +244,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint monitoring that tracks removable media mount events and file copy operations to external devices can detect adversary collection of sensitive data from USB drives, optical media, or other removable storage."
     },
     {
       "id": "T1027",
@@ -246,7 +253,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malware detection tools with static and dynamic analysis capabilities can identify obfuscated files through entropy analysis, behavioral sandboxing, and signature-based detection of known packing or encoding techniques used to evade traditional antivirus."
     },
     {
       "id": "T1029",
@@ -254,7 +262,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring that profiles normal data transfer patterns can detect scheduled exfiltration by identifying periodic outbound data flows at unusual times, consistent transfer sizes, or automated transmission patterns inconsistent with legitimate user behavior."
     },
     {
       "id": "T1030",
@@ -262,7 +271,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring outbound data flows for size thresholds and transfer frequency enables detection of adversaries chunking exfiltrated data into small packets to evade volumetric alerts, particularly when cumulative transfers exceed normal baselines."
     },
     {
       "id": "T1036",
@@ -270,7 +280,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process and file monitoring can detect masquerading by comparing process names and file paths against known legitimate binaries, flagging executables running from unusual locations or with names closely resembling but not matching system utilities."
     },
     {
       "id": "T1037",
@@ -279,7 +290,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring changes to boot and logon initialization scripts\u2014including startup folders, login hooks, and logon scripts\u2014enables detection of persistence mechanisms that execute adversary code during system startup or user authentication."
     },
     {
       "id": "T1040",
@@ -288,7 +300,8 @@
         "credential-access",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring and host-based sensors can detect unauthorized packet capture activity by identifying promiscuous mode interfaces, unexpected sniffing tools, or anomalous network adapter configurations on endpoints."
     },
     {
       "id": "T1041",
@@ -296,7 +309,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring C2 channel traffic for unusual data volumes, asymmetric upload-to-download ratios, or beaconing patterns with large payloads enables detection of adversaries exfiltrating stolen data over their existing command-and-control infrastructure."
     },
     {
       "id": "T1046",
@@ -304,7 +318,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network intrusion detection systems can identify port scanning and service discovery activity by detecting sequential connection attempts across multiple ports or hosts, SYN sweeps, and other network reconnaissance signatures."
     },
     {
       "id": "T1047",
@@ -312,7 +327,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring WMI process creation events, WMI consumer registrations, and WMIC command-line invocations enables detection of adversaries leveraging Windows Management Instrumentation for remote code execution across the enterprise."
     },
     {
       "id": "T1048",
@@ -320,7 +336,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring tools can detect exfiltration over alternative protocols by identifying unexpected outbound connections using protocols such as DNS, ICMP, or FTP that deviate from established traffic baselines or carry anomalous payload sizes."
     },
     {
       "id": "T1052",
@@ -328,7 +345,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring USB device connections, file transfer events to removable media, and physical port activity can detect adversary attempts to exfiltrate data by physically carrying it out of the environment on portable storage devices."
     },
     {
       "id": "T1053",
@@ -338,7 +356,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring scheduled task creation, modification, and execution\u2014including Windows Task Scheduler events, cron job changes, and systemd timer registrations\u2014enables detection of adversaries establishing persistence or executing payloads through job schedulers."
     },
     {
       "id": "T1055",
@@ -347,7 +366,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint detection tools monitoring for suspicious memory allocation patterns, cross-process write operations, and anomalous thread creation can identify process injection techniques used to execute code within the address space of legitimate processes."
     },
     {
       "id": "T1059",
@@ -355,7 +375,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring command-line and script interpreter invocations\u2014including PowerShell, cmd.exe, bash, and scripting engines\u2014with logging of arguments and parent-child process relationships enables detection of adversary execution through scripting environments."
     },
     {
       "id": "T1068",
@@ -363,7 +384,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "System monitoring with exploit detection signatures, crash analysis, and abnormal privilege transitions can identify exploitation attempts targeting kernel or application vulnerabilities to escalate privileges beyond the user's authorized level."
     },
     {
       "id": "T1070",
@@ -371,7 +393,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for log deletion events, timestamp modifications, and attempts to clear audit trails enables detection of adversary indicator removal, particularly when centralized log collection preserves records that attackers cannot access to delete."
     },
     {
       "id": "T1071",
@@ -379,7 +402,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Continuous monitoring of network traffic with deep-packet inspection and anomaly detection enables identification of command-and-control channels disguised within standard application-layer protocols such as HTTP, DNS, or SMTP."
     },
     {
       "id": "T1072",
@@ -388,7 +412,8 @@
         "execution",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring software deployment tool usage\u2014including SCCM, Ansible, and similar platforms\u2014for unauthorized package deployments, unexpected configuration pushes, or execution from non-standard accounts can detect lateral movement via trusted management infrastructure."
     },
     {
       "id": "T1078",
@@ -399,7 +424,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring authentication logs for impossible travel, unusual login times, concurrent sessions from disparate locations, or access to atypical resources enables detection of adversaries operating with valid but compromised credentials."
     },
     {
       "id": "T1080",
@@ -407,7 +433,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring file integrity on shared network resources can detect adversaries tainting shared content with malicious payloads, particularly when files in commonly accessed directories are modified outside normal business workflows."
     },
     {
       "id": "T1087",
@@ -415,7 +442,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for enumeration commands such as net user, net group, or LDAP queries against Active Directory can detect adversary account discovery activity used to map available accounts for subsequent lateral movement or privilege escalation."
     },
     {
       "id": "T1090",
@@ -423,7 +451,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring can identify proxy-based C2 channels by detecting unusual traffic relay patterns, connections to known proxy services, or internal hosts forwarding traffic in ways inconsistent with their designated network roles."
     },
     {
       "id": "T1091",
@@ -432,7 +461,8 @@
         "initial-access",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring removable media insertion events and tracking autorun execution or file access patterns from external devices enables detection of malware propagation via USB drives or other portable media."
     },
     {
       "id": "T1092",
@@ -440,7 +470,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for removable media mount events correlated with unusual data writes or reads on air-gapped or restricted systems can detect adversaries using physical media as a covert C2 channel to bridge network isolation."
     },
     {
       "id": "T1095",
@@ -448,7 +479,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring with protocol analysis can detect non-application layer C2 channels by identifying anomalous ICMP, raw TCP, or UDP traffic patterns that do not conform to expected protocol behavior or carry encoded payloads."
     },
     {
       "id": "T1098",
@@ -457,7 +489,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring account modification events\u2014including privilege grants, group membership changes, and credential resets\u2014enables detection of adversary persistence through unauthorized manipulation of existing accounts."
     },
     {
       "id": "T1102",
@@ -465,7 +498,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring can detect C2 channels leveraging legitimate web services by identifying unusual access patterns to cloud storage, social media APIs, or paste sites that correlate with beaconing behavior or data staging."
     },
     {
       "id": "T1104",
@@ -473,7 +507,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for sequential outbound connections to distinct infrastructure or changing C2 endpoints enables detection of multi-stage channel setups where adversaries progressively establish deeper access through staged communication relays."
     },
     {
       "id": "T1105",
@@ -481,7 +516,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network and endpoint monitoring can detect ingress tool transfer by identifying downloads of executables, scripts, or archives from external sources, particularly when initiated by processes not typically associated with software retrieval."
     },
     {
       "id": "T1106",
@@ -489,7 +525,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring API call sequences and system call patterns on endpoints can detect adversaries invoking native OS APIs directly to execute malicious code, bypass higher-level security controls, or interact with system resources in unauthorized ways."
     },
     {
       "id": "T1110",
@@ -497,7 +534,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring authentication logs for rapid sequential login failures, distributed attempts across multiple accounts, or geographically impossible authentication patterns enables detection of brute force credential attacks in progress."
     },
     {
       "id": "T1111",
@@ -505,7 +543,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for anomalous MFA token usage, duplicate authentication factor presentations, or suspicious API calls to authentication services can detect adversary interception or replay of multi-factor authentication credentials."
     },
     {
       "id": "T1114",
@@ -513,7 +552,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring email access logs for unusual mailbox access patterns, bulk message downloads, or access from unexpected IP addresses enables detection of adversary email collection from compromised accounts or mail servers."
     },
     {
       "id": "T1119",
@@ -521,7 +561,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint and network monitoring can detect automated collection scripts by identifying systematic file enumeration, bulk data staging, or scripted access patterns that traverse directories and gather data at machine speed."
     },
     {
       "id": "T1127",
@@ -529,7 +570,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring execution of developer utilities such as MSBuild, dnStar, and other trusted tools for unexpected invocations\u2014particularly outside development environments\u2014can detect adversaries proxying malicious code execution through signed Microsoft binaries."
     },
     {
       "id": "T1129",
@@ -537,7 +579,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring DLL load events and shared module registrations can detect adversaries executing malicious code through shared libraries by identifying unexpected module loads into legitimate processes or loads from unusual file paths."
     },
     {
       "id": "T1132",
@@ -545,7 +588,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring with payload inspection can detect data encoding in C2 traffic by identifying Base64, XOR, or custom encoding patterns in protocol headers or payloads that deviate from standard application behavior."
     },
     {
       "id": "T1133",
@@ -554,7 +598,8 @@
         "initial-access",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring external remote service connections\u2014including VPN, Citrix, and RDP gateways\u2014for unusual source IPs, off-hours access, or anomalous authentication patterns enables detection of adversary initial access and persistence via remote services."
     },
     {
       "id": "T1135",
@@ -562,7 +607,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for network share enumeration commands such as net view, net share, or SMB browsing activity can detect adversary reconnaissance of available file shares used to identify targets for lateral movement or data collection."
     },
     {
       "id": "T1136",
@@ -570,7 +616,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring account creation events across local, domain, and cloud environments\u2014including unexpected new accounts, accounts with elevated privileges, or accounts created outside normal provisioning workflows\u2014enables detection of adversary persistence."
     },
     {
       "id": "T1137",
@@ -578,7 +625,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Office application startup locations\u2014including templates, add-ins, and COM objects\u2014for unauthorized modifications enables detection of persistence mechanisms that execute adversary code whenever Office applications are launched."
     },
     {
       "id": "T1176",
@@ -586,7 +634,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Browser monitoring that tracks extension installations, updates, and permissions can detect unauthorized or malicious browser extensions used by adversaries to maintain persistence, steal credentials, or intercept browsing activity."
     },
     {
       "id": "T1185",
@@ -594,7 +643,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring browser process behavior for unexpected inter-process communication, memory injection, or proxy manipulation can detect browser session hijacking where adversaries inherit authenticated web sessions to access protected resources."
     },
     {
       "id": "T1187",
@@ -602,7 +652,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring can detect forced authentication attempts by identifying outbound SMB, WebDAV, or NTLMv2 traffic triggered by malicious links, documents, or file references designed to capture user credential hashes."
     },
     {
       "id": "T1189",
@@ -610,7 +661,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Web traffic monitoring and URL reputation analysis can detect drive-by compromise attempts by identifying connections to known exploit kit infrastructure, suspicious redirects, or anomalous browser behavior following visits to compromised websites."
     },
     {
       "id": "T1190",
@@ -618,7 +670,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring public-facing application logs and web application firewalls for exploit signatures, anomalous input patterns, or unexpected server behavior enables detection of adversaries exploiting vulnerabilities in internet-exposed services."
     },
     {
       "id": "T1195",
@@ -626,7 +679,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring software integrity through hash verification, code signing validation, and behavioral analysis of newly installed components can detect supply chain compromises where legitimate software has been trojaned or tampered with during distribution."
     },
     {
       "id": "T1197",
@@ -635,7 +689,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring BITS job creation and transfer activity can detect adversary abuse of the Background Intelligent Transfer Service for persistent file downloads or uploads that blend with legitimate Windows update traffic."
     },
     {
       "id": "T1201",
@@ -643,7 +698,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for password policy enumeration commands such as net accounts or Get-ADDefaultDomainPasswordPolicy can detect adversary reconnaissance aimed at understanding password complexity requirements to optimize brute force attacks."
     },
     {
       "id": "T1203",
@@ -651,7 +707,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint monitoring with exploit detection capabilities\u2014including behavioral analysis of application crashes, heap sprays, and ROP chain indicators\u2014can detect client-side exploitation targeting vulnerabilities in browsers, Office applications, or PDF readers."
     },
     {
       "id": "T1204",
@@ -659,7 +716,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring user execution events\u2014including file opens, script launches, and link clicks\u2014correlated with threat intelligence on malicious indicators enables detection of social engineering attacks that rely on user interaction to execute payloads."
     },
     {
       "id": "T1205",
@@ -669,7 +727,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring that tracks unusual packet sequences, malformed headers, or specific bit patterns in network traffic can detect traffic signaling techniques such as port knocking or wake-on-LAN used to activate dormant backdoors."
     },
     {
       "id": "T1210",
@@ -677,7 +736,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring for exploit signatures targeting remote services\u2014including SMB, RDP, and SSH vulnerabilities\u2014combined with anomalous lateral connection patterns enables detection of adversaries exploiting unpatched services to move between systems."
     },
     {
       "id": "T1211",
@@ -685,7 +745,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unexpected privilege changes, process crashes followed by elevated execution, or anomalous system behavior can detect exploitation of software vulnerabilities used to evade security controls and maintain undetected access."
     },
     {
       "id": "T1212",
@@ -693,7 +754,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring authentication subsystems for anomalous behavior\u2014including unexpected credential issuance, token generation without corresponding user action, or exploitation indicators in authentication services\u2014enables detection of credential access exploits."
     },
     {
       "id": "T1213",
@@ -701,7 +763,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring access to information repositories such as SharePoint, Confluence, and wikis for unusual query volumes, bulk downloads, or access from unauthorized accounts enables detection of adversary data collection from organizational knowledge bases."
     },
     {
       "id": "T1216",
@@ -709,7 +772,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring execution of system scripts like PubPrn.vbs and other signed script proxies for unexpected invocations or unusual parent processes can detect adversaries using trusted scripts to bypass application whitelisting controls."
     },
     {
       "id": "T1218",
@@ -717,7 +781,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring execution of signed system binaries such as rundll32, regsvr32, mshta, and certutil for unusual command-line arguments or unexpected parent processes can detect proxy execution of malicious code through trusted Windows utilities."
     },
     {
       "id": "T1219",
@@ -725,7 +790,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for installation and usage of remote access tools\u2014including TeamViewer, AnyDesk, and similar software\u2014that are not part of approved toolsets enables detection of adversary C2 channels established through legitimate remote support applications."
     },
     {
       "id": "T1220",
@@ -733,7 +799,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for XSLT processing by msxsl.exe or embedded XSL within XML documents can detect adversaries leveraging XSL script processing to execute arbitrary code while bypassing application control mechanisms."
     },
     {
       "id": "T1221",
@@ -741,7 +808,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Office documents fetching remote templates via HTTP or SMB at open time can detect template injection attacks where adversaries embed malicious macro-enabled templates referenced by seemingly benign documents."
     },
     {
       "id": "T1222",
@@ -749,7 +817,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for file and directory permission changes\u2014including icacls, chmod, and ACL modifications\u2014can detect adversaries weakening access controls to enable broader access to sensitive files or to prepare for subsequent attack stages."
     },
     {
       "id": "T1484",
@@ -758,7 +827,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring domain and tenant policy changes\u2014including Group Policy modifications and Azure AD policy updates\u2014enables detection of adversaries manipulating trust relationships or security policies to weaken defenses and escalate privileges."
     },
     {
       "id": "T1485",
@@ -766,7 +836,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for mass file deletion events, unusual volume shadow copy removal, or bulk data destruction patterns enables detection of adversary data destruction attacks intended to cause operational disruption and data loss."
     },
     {
       "id": "T1486",
@@ -774,7 +845,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for rapid file encryption activity, ransom note creation, and cryptographic API calls at anomalous rates enables early detection of ransomware execution before complete encryption of organizational data stores."
     },
     {
       "id": "T1489",
@@ -782,7 +854,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unexpected service stop commands, mass service termination, or disabling of critical system services enables detection of adversary disruption activities that precede ransomware deployment or destructive attacks."
     },
     {
       "id": "T1490",
@@ -790,7 +863,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for deletion of volume shadow copies, modification of recovery partitions, or disabling of Windows Recovery Environment enables detection of adversary actions to prevent system restoration after destructive attacks."
     },
     {
       "id": "T1491",
@@ -798,7 +872,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring web server file integrity and internal application content for unauthorized modifications enables detection of defacement attacks that alter visible content to damage organizational reputation or signal compromise."
     },
     {
       "id": "T1499",
@@ -806,7 +881,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring system resource utilization, connection rates, and service availability metrics enables detection of endpoint denial-of-service attacks that exhaust CPU, memory, or network resources to disrupt service delivery."
     },
     {
       "id": "T1505",
@@ -814,7 +890,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring server software components\u2014including web shells, IIS modules, and SQL stored procedures\u2014for unauthorized additions or modifications enables detection of persistent backdoors installed in server infrastructure."
     },
     {
       "id": "T1525",
@@ -822,7 +899,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring container image registries for unauthorized image pushes, unexpected image modifications, or images with known malicious layers can detect adversary implantation of backdoored container images used for persistence."
     },
     {
       "id": "T1528",
@@ -830,7 +908,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring OAuth token grants, API key usage, and application access patterns for anomalous requests or token theft indicators enables detection of adversaries stealing application access tokens to bypass normal authentication."
     },
     {
       "id": "T1530",
@@ -838,7 +917,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud storage access logs for unusual download volumes, access from unexpected IP ranges, or queries to sensitive storage buckets enables detection of adversary data collection from misconfigured or compromised cloud storage."
     },
     {
       "id": "T1537",
@@ -846,7 +926,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud account activity for large data transfers to external accounts, cross-region replications, or unauthorized storage bucket sharing enables detection of exfiltration via cloud-to-cloud data transfer mechanisms."
     },
     {
       "id": "T1539",
@@ -854,7 +935,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for anomalous cookie access, browser credential store reads, or unexpected session token usage can detect adversary theft of web session cookies used to hijack authenticated sessions without credentials."
     },
     {
       "id": "T1543",
@@ -863,7 +945,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for creation or modification of system processes\u2014including Windows services, systemd units, and launch daemons\u2014enables detection of adversary persistence and privilege escalation through system-level process manipulation."
     },
     {
       "id": "T1548",
@@ -872,7 +955,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for UAC bypass indicators, setuid/setgid changes, or sudo abuse patterns enables detection of adversaries exploiting elevation control mechanisms to gain higher privileges without proper authorization."
     },
     {
       "id": "T1552",
@@ -880,7 +964,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring file access to known credential storage locations\u2014including configuration files, registry keys, and cloud metadata endpoints\u2014enables detection of adversary searches for unsecured credentials left in accessible locations."
     },
     {
       "id": "T1553",
@@ -888,7 +973,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for changes to code signing policies, certificate store modifications, or trust provider tampering enables detection of adversary attempts to subvert trust controls that validate software authenticity and integrity."
     },
     {
       "id": "T1555",
@@ -896,7 +982,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring access to password stores\u2014including browser credential databases, keychains, and credential manager vaults\u2014enables detection of adversary tools harvesting saved passwords for credential reuse across systems."
     },
     {
       "id": "T1556",
@@ -906,7 +993,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring authentication process integrity\u2014including DLL loads in authentication services, PAM module changes, and authentication filter modifications\u2014enables detection of adversary tampering that creates backdoor access or captures credentials."
     },
     {
       "id": "T1557",
@@ -915,7 +1003,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring for ARP anomalies, LLMNR/NBT-NS poisoning, DHCP spoofing, and unexpected traffic redirection enables detection of adversary-in-the-middle attacks that intercept and manipulate network communications."
     },
     {
       "id": "T1558",
@@ -923,7 +1012,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Kerberos authentication traffic for anomalous ticket requests, encryption downgrade attempts, or ticket-granting ticket manipulation enables detection of adversaries forging or stealing Kerberos tickets for unauthorized access."
     },
     {
       "id": "T1559",
@@ -931,7 +1021,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring inter-process communication mechanisms\u2014including COM, DDE, and XPC\u2014for unexpected invocations or data exchanges between processes enables detection of adversary execution through legitimate IPC channels."
     },
     {
       "id": "T1560",
@@ -939,7 +1030,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for compression and archiving tool execution\u2014such as 7-Zip, WinRAR, or tar\u2014particularly when targeting sensitive directories, enables detection of adversary data staging prior to exfiltration."
     },
     {
       "id": "T1561",
@@ -947,7 +1039,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for disk-level write operations targeting boot sectors, partition tables, or bulk sector overwrites enables detection of disk wipe attacks designed to render systems unrecoverable and cause maximum operational disruption."
     },
     {
       "id": "T1562",
@@ -955,7 +1048,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring the health and status of security tools, audit configurations, and firewall rules enables detection of adversary attempts to impair defenses by disabling antivirus, stopping logging services, or modifying security configurations."
     },
     {
       "id": "T1563",
@@ -963,7 +1057,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for remote service session anomalies\u2014including RDP session takeover indicators, SSH session multiplexing, or unexpected session transfers\u2014enables detection of adversaries hijacking legitimate remote sessions for lateral movement."
     },
     {
       "id": "T1565",
@@ -971,7 +1066,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring data integrity through checksums, database transaction logs, and runtime validation enables detection of adversary data manipulation that alters stored, transmitted, or runtime data to undermine business operations."
     },
     {
       "id": "T1566",
@@ -979,7 +1075,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Email and web traffic monitoring with attachment sandboxing, URL analysis, and sender reputation scoring enables detection of phishing attacks delivering malicious payloads or credential-harvesting links to organizational users."
     },
     {
       "id": "T1567",
@@ -987,7 +1084,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring outbound connections to cloud storage services, code repositories, and paste sites for unusual upload volumes or unauthorized access enables detection of exfiltration over legitimate web services."
     },
     {
       "id": "T1568",
@@ -995,7 +1093,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring DNS queries for high-entropy domain names, rapid domain resolution changes, or queries to known dynamic DNS providers enables detection of C2 infrastructure using dynamic resolution techniques like domain generation algorithms."
     },
     {
       "id": "T1569",
@@ -1003,7 +1102,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring system service execution events\u2014including service control manager logs and systemctl invocations\u2014for unexpected service startups or execution of unknown binaries as services enables detection of adversary execution via system services."
     },
     {
       "id": "T1570",
@@ -1011,7 +1111,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring internal file transfer activity\u2014including SMB copies, PowerShell remoting transfers, and SCP operations between internal hosts\u2014enables detection of adversaries moving tools and malware laterally across the network."
     },
     {
       "id": "T1571",
@@ -1019,7 +1120,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring that validates expected port-to-service mappings can detect C2 channels operating on non-standard ports by flagging protocol mismatches where, for example, HTTP traffic flows over unusual high-numbered ports."
     },
     {
       "id": "T1572",
@@ -1027,7 +1129,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring with deep packet inspection can detect protocol tunneling by identifying encapsulated traffic within permitted protocols, such as SSH tunnels within HTTP or DNS tunneling for covert data transfer."
     },
     {
       "id": "T1573",
@@ -1035,7 +1138,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring for encrypted C2 channels focuses on detecting anomalous TLS certificate characteristics, unexpected encrypted sessions to non-standard endpoints, or encrypted traffic patterns inconsistent with legitimate application behavior."
     },
     {
       "id": "T1574",
@@ -1045,7 +1149,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring DLL load events, file path modifications, and service binary changes enables detection of execution flow hijacking where adversaries place malicious libraries or executables in locations that intercept legitimate application loading."
     },
     {
       "id": "T1578",
@@ -1053,7 +1158,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud compute infrastructure for unauthorized instance creation, snapshot operations, or configuration changes enables detection of adversaries modifying cloud resources to evade detection or establish persistent access."
     },
     {
       "id": "T1598",
@@ -1061,7 +1167,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring inbound communications for social engineering indicators\u2014including suspicious email patterns, credential harvesting page references, and impersonation attempts\u2014enables detection of phishing-for-information reconnaissance campaigns."
     },
     {
       "id": "T1599",
@@ -1069,7 +1176,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network device configurations and routing tables for unauthorized changes that bridge segmented networks enables detection of adversary attempts to bypass network boundaries and access isolated environments."
     },
     {
       "id": "T1601",
@@ -1077,7 +1185,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network device firmware integrity through hash verification and boot process validation enables detection of adversary modifications to system images that persist backdoors or disable security features on network infrastructure."
     },
     {
       "id": "T1602",
@@ -1085,7 +1194,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring SNMP access, configuration management traffic, and network device CLI sessions for unauthorized queries or bulk configuration downloads enables detection of adversary collection of device configurations containing sensitive network architecture details."
     },
     {
       "id": "T1610",
@@ -1094,7 +1204,8 @@
         "defense-evasion",
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring container runtime environments for unauthorized container deployments, unexpected image pulls, or containers launched with elevated privileges enables detection of adversaries deploying malicious containers for execution or evasion."
     },
     {
       "id": "T1611",
@@ -1102,7 +1213,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring container escape indicators\u2014including unexpected host namespace access, privileged system calls from containers, or container breakout exploit signatures\u2014enables detection of adversaries escaping container isolation to compromise the host."
     },
     {
       "id": "T1612",
@@ -1110,7 +1222,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring container build operations on hosts\u2014including unexpected Docker build commands or Dockerfile creation outside CI/CD pipelines\u2014enables detection of adversaries building malicious images locally to evade registry-based scanning."
     },
     {
       "id": "T1613",
@@ -1118,7 +1231,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for container and Kubernetes API enumeration commands\u2014including kubectl get, docker ps, and API server queries\u2014enables detection of adversary discovery activities mapping the container orchestration environment."
     },
     {
       "id": "T1622",
@@ -1127,7 +1241,8 @@
         "defense-evasion",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for debugger detection techniques\u2014including IsDebuggerPresent checks, timing-based evasion, or anti-analysis behaviors\u2014enables identification of malware actively evading sandbox and debugging environments."
     },
     {
       "id": "T1647",
@@ -1135,7 +1250,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring plist file modifications on macOS\u2014particularly in LaunchAgent, LaunchDaemon, and application preference directories\u2014enables detection of adversary persistence or defense evasion through property list manipulation."
     },
     {
       "id": "T1648",
@@ -1143,7 +1259,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring serverless function invocations, Lambda deployments, and cloud function logs for unauthorized execution or unexpected function creation enables detection of adversaries leveraging serverless compute for malicious execution."
     },
     {
       "id": "T1651",
@@ -1151,7 +1268,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud management APIs and administration commands\u2014including AWS SSM, Azure Run Command, and GCP OS Config\u2014for unauthorized execution enables detection of adversaries leveraging cloud administration tools for remote code execution."
     },
     {
       "id": "T1653",
@@ -1159,7 +1277,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring changes to power management settings\u2014including sleep timers, hibernate configurations, and wake schedules\u2014enables detection of adversaries modifying power settings to maintain system availability for persistent access."
     },
     {
       "id": "T1001.001",
@@ -1167,7 +1286,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring with payload analysis can detect junk data injection in C2 traffic by identifying packets with anomalous padding, random byte sequences, or payload sizes inconsistent with the purported application protocol."
     },
     {
       "id": "T1001.002",
@@ -1175,7 +1295,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Deep content inspection and anomaly detection can identify steganographic C2 channels by flagging image, audio, or video files with statistical anomalies in least-significant bits or embedded data inconsistent with normal media files."
     },
     {
       "id": "T1001.003",
@@ -1183,7 +1304,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protocol-aware network monitoring can detect service impersonation by comparing actual traffic behavior against expected protocol specifications, identifying C2 channels that mimic but imperfectly replicate legitimate services like HTTPS or DNS."
     },
     {
       "id": "T1003.001",
@@ -1191,7 +1313,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint monitoring that tracks process access to lsass.exe\u2014including suspicious OpenProcess calls, memory dumps, and credential extraction tool signatures\u2014enables specific detection of LSASS memory credential dumping attempts."
     },
     {
       "id": "T1003.002",
@@ -1199,7 +1322,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for registry access to SAM hive locations, volume shadow copy access for SAM extraction, and tools targeting the Security Account Manager database enables detection of local password hash harvesting on Windows systems."
     },
     {
       "id": "T1003.003",
@@ -1207,7 +1331,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for ntdsutil execution, volume shadow copy creation targeting NTDS.dit, or suspicious access to Active Directory database files enables detection of adversaries extracting the complete domain credential store from domain controllers."
     },
     {
       "id": "T1003.004",
@@ -1215,7 +1340,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for registry access to HKLM\\SECURITY\\Policy\\Secrets and tools targeting LSA secret storage enables detection of adversary extraction of service account credentials, auto-logon passwords, and other secrets stored in LSA."
     },
     {
       "id": "T1003.005",
@@ -1223,7 +1349,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for access to cached credential storage locations and registry keys containing domain credential caches enables detection of adversaries harvesting cached logon credentials for offline cracking or pass-the-hash attacks."
     },
     {
       "id": "T1003.006",
@@ -1231,7 +1358,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring domain controller replication traffic for unauthorized DCSync requests\u2014particularly GetNCChanges calls from non-domain controller sources\u2014enables detection of adversaries remotely extracting password data via directory replication."
     },
     {
       "id": "T1003.007",
@@ -1239,7 +1367,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for access to /proc/*/maps, /proc/*/mem, and process memory reads on Linux systems enables detection of adversaries extracting credentials from running process memory through the proc filesystem interface."
     },
     {
       "id": "T1003.008",
@@ -1247,7 +1376,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unauthorized access to /etc/shadow, /etc/passwd, and attempts to use unshadow or john-the-ripper against these files enables detection of adversaries harvesting Linux user credentials for offline password cracking."
     },
     {
       "id": "T1011.001",
@@ -1255,7 +1385,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Bluetooth adapter activation, pairing events, and file transfer operations can detect unauthorized data exfiltration over Bluetooth connections, particularly on systems where Bluetooth should be disabled by policy."
     },
     {
       "id": "T1020.001",
@@ -1263,7 +1394,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network device configurations for unauthorized port mirroring, SPAN sessions, or traffic duplication rules enables detection of adversaries configuring network infrastructure to copy traffic for data collection or exfiltration."
     },
     {
       "id": "T1021.001",
@@ -1271,7 +1403,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring RDP connection logs for unusual source IPs, concurrent sessions, or connections outside business hours enables detection of adversaries using Remote Desktop Protocol for lateral movement within the network."
     },
     {
       "id": "T1021.002",
@@ -1279,7 +1412,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring SMB authentication events and administrative share access (C$, ADMIN$, IPC$) for unusual access patterns enables detection of adversaries using Windows administrative shares for lateral movement and remote file operations."
     },
     {
       "id": "T1021.003",
@@ -1287,7 +1421,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring DCOM activation events, remote object instantiation, and network connections on DCOM ports enables detection of adversaries leveraging Distributed COM for remote code execution across Windows systems."
     },
     {
       "id": "T1021.004",
@@ -1295,7 +1430,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring SSH connection logs for key-based authentication anomalies, unusual source addresses, or connections to unexpected hosts enables detection of adversary lateral movement through compromised SSH credentials or keys."
     },
     {
       "id": "T1021.005",
@@ -1303,7 +1439,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring VNC connection attempts, server process spawning, and authentication events enables detection of adversaries using Virtual Network Computing for remote graphical access and lateral movement."
     },
     {
       "id": "T1021.006",
@@ -1311,7 +1448,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Windows Remote Management (WinRM) session creation, PowerShell remoting events, and WSMan traffic enables detection of adversaries using WinRM for remote command execution during lateral movement."
     },
     {
       "id": "T1021.008",
@@ -1319,7 +1457,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring direct cloud VM connections\u2014including serial console access and cloud-native SSH/RDP\u2014for unauthorized sessions enables detection of adversaries bypassing network security controls to access cloud instances directly."
     },
     {
       "id": "T1027.002",
@@ -1327,7 +1466,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint monitoring with unpacking analysis and behavioral detection can identify software-packed executables by flagging binaries with high entropy sections, known packer signatures, or runtime unpacking behavior indicative of evasion."
     },
     {
       "id": "T1027.007",
@@ -1335,7 +1475,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for dynamic API resolution patterns\u2014including GetProcAddress calls to suspicious APIs or runtime resolution of sensitive functions\u2014enables detection of malware hiding its true capabilities from static analysis."
     },
     {
       "id": "T1027.008",
@@ -1343,7 +1484,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Behavioral monitoring can detect stripped payloads that have been stripped of debugging symbols and identifying information, by flagging executables lacking standard metadata that deviate from normal software distribution patterns."
     },
     {
       "id": "T1027.009",
@@ -1351,7 +1493,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for embedded payload extraction\u2014including executables that drop or decode secondary payloads at runtime\u2014enables detection of adversaries hiding malicious code within seemingly benign carrier files."
     },
     {
       "id": "T1027.010",
@@ -1359,7 +1502,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring command-line activity for heavily obfuscated commands\u2014including character escaping, variable substitution, and encoding tricks in PowerShell, cmd, or bash\u2014enables detection of adversary attempts to evade command logging and analysis."
     },
     {
       "id": "T1027.011",
@@ -1367,7 +1511,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for data stored in registry keys, WMI repositories, or alternate data streams that serves as fileless malware storage enables detection of adversaries avoiding traditional file-based detection by persisting payloads in non-file locations."
     },
     {
       "id": "T1027.012",
@@ -1375,7 +1520,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for LNK files with manipulated icon references pointing to external resources can detect icon smuggling techniques where adversaries use shortcut files to trigger outbound connections for payload delivery or credential capture."
     },
     {
       "id": "T1036.001",
@@ -1383,7 +1529,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring code signature validation results and flagging executables with invalid, revoked, or mismatched digital signatures enables detection of adversaries using forged or copied signatures to masquerade as legitimate software."
     },
     {
       "id": "T1036.003",
@@ -1391,7 +1538,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for system utility execution from unexpected file paths or with unexpected file hashes enables detection of adversaries who rename malicious binaries to match legitimate system utilities to avoid suspicion."
     },
     {
       "id": "T1036.005",
@@ -1399,7 +1547,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for executables whose names match legitimate software but run from non-standard directories enables detection of adversaries placing malicious files in locations designed to exploit analyst assumptions about trusted file paths."
     },
     {
       "id": "T1036.007",
@@ -1407,7 +1556,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for files with double extensions (e.g., document.pdf.exe) or mismatched MIME types enables detection of adversaries using extension manipulation to trick users and file-type-based security controls into treating malicious files as benign."
     },
     {
       "id": "T1036.008",
@@ -1415,7 +1565,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for files where the actual file type differs from the displayed extension\u2014such as executables disguised as documents\u2014enables detection of adversaries manipulating file type indicators to bypass security controls."
     },
     {
       "id": "T1036.010",
@@ -1423,7 +1574,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring account creation and naming patterns for accounts that mimic legitimate service accounts or administrative users enables detection of adversaries creating deceptively named accounts to blend in with normal account inventories."
     },
     {
       "id": "T1037.002",
@@ -1432,7 +1584,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring macOS login hook configurations in /var/root/Library/Preferences/com.apple.loginwindow.plist for unauthorized modifications enables detection of adversaries establishing persistence through login-triggered script execution."
     },
     {
       "id": "T1037.003",
@@ -1441,7 +1594,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Group Policy logon script assignments and network logon script file modifications enables detection of adversaries inserting malicious commands into scripts that execute automatically during domain user authentication."
     },
     {
       "id": "T1037.004",
@@ -1450,7 +1604,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring RC script directories (/etc/rc.d/, /etc/init.d/) for unauthorized script additions or modifications enables detection of adversaries establishing persistence through system initialization scripts on Unix/Linux systems."
     },
     {
       "id": "T1037.005",
@@ -1459,7 +1614,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring macOS StartupItems directories and legacy startup script locations for unauthorized additions enables detection of adversaries using deprecated but still functional startup mechanisms for persistence."
     },
     {
       "id": "T1048.001",
@@ -1467,7 +1623,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring can detect exfiltration over encrypted non-C2 channels by identifying unexpected outbound connections using symmetric encryption protocols to unusual destinations that deviate from established baseline traffic patterns."
     },
     {
       "id": "T1048.002",
@@ -1475,7 +1632,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring for unexpected TLS/SSH connections to external hosts\u2014particularly from servers or workstations without business justification\u2014enables detection of exfiltration using asymmetric encrypted channels separate from C2 infrastructure."
     },
     {
       "id": "T1048.003",
@@ -1483,7 +1641,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network monitoring for cleartext protocol usage carrying large or encoded payloads\u2014such as FTP, HTTP, or DNS with anomalous query volumes\u2014enables detection of exfiltration over unencrypted non-C2 channels."
     },
     {
       "id": "T1052.001",
@@ -1491,7 +1650,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring USB device connections, mass storage driver loads, and file copy events to removable drives enables specific detection of data exfiltration via USB storage devices being physically carried out of the environment."
     },
     {
       "id": "T1053.002",
@@ -1501,7 +1661,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring at command execution and ATQ file creation enables detection of adversaries using the legacy AT scheduler for task execution and persistence, particularly on older Windows systems where this utility remains available."
     },
     {
       "id": "T1053.003",
@@ -1511,7 +1672,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring crontab modifications, /etc/cron.d/ directory changes, and cron job execution logs enables detection of adversaries scheduling malicious commands through the Unix/Linux cron daemon for persistence and execution."
     },
     {
       "id": "T1053.005",
@@ -1521,7 +1683,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Windows Task Scheduler for new task registrations, particularly those with SYSTEM-level execution, encoded commands, or connections to external resources, enables detection of adversary persistence through scheduled tasks."
     },
     {
       "id": "T1053.006",
@@ -1531,7 +1694,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring systemd timer creation and modification events\u2014including new .timer unit files and systemctl timer operations\u2014enables detection of adversaries using systemd timers as a persistence and execution mechanism on Linux systems."
     },
     {
       "id": "T1055.001",
@@ -1540,7 +1704,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for LoadLibrary calls with unusual DLL paths, CreateRemoteThread targeting other processes, or unexpected DLL loads in processes enables detection of dynamic-link library injection used to execute code in legitimate process contexts."
     },
     {
       "id": "T1055.002",
@@ -1549,7 +1714,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for WriteProcessMemory followed by CreateRemoteThread in target processes enables detection of portable executable injection where adversaries inject entire PE images into the memory space of running processes."
     },
     {
       "id": "T1055.003",
@@ -1558,7 +1724,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for SuspendThread, WriteProcessMemory, and SetThreadContext API sequences targeting remote processes enables detection of thread execution hijacking used to redirect legitimate thread execution to adversary code."
     },
     {
       "id": "T1055.004",
@@ -1567,7 +1734,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for QueueUserAPC calls targeting threads in remote processes\u2014particularly in alertable wait states\u2014enables detection of asynchronous procedure call injection used for stealthy code execution within legitimate processes."
     },
     {
       "id": "T1055.005",
@@ -1576,7 +1744,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for manipulation of thread local storage callback arrays in PE headers enables detection of TLS callback injection, where adversaries insert malicious code that executes during DLL load before the main entry point."
     },
     {
       "id": "T1055.008",
@@ -1585,7 +1754,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for ptrace system calls targeting other processes on Linux\u2014particularly PTRACE_ATTACH and PTRACE_POKETEXT operations\u2014enables detection of adversaries injecting code into running processes via the debugging interface."
     },
     {
       "id": "T1055.009",
@@ -1594,7 +1764,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for reads and writes to /proc/[pid]/mem on Linux systems enables detection of adversaries performing process memory injection through the proc filesystem to execute code within other processes without using ptrace."
     },
     {
       "id": "T1055.011",
@@ -1603,7 +1774,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for SetWindowLong/SetWindowLongPtr calls that modify extra window memory in combination with NtMapViewOfSection enables detection of extra window memory injection used to execute shellcode in GUI processes."
     },
     {
       "id": "T1055.012",
@@ -1612,7 +1784,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for process creation in suspended state followed by NtUnmapViewOfSection and WriteProcessMemory enables detection of process hollowing, where adversaries replace a legitimate process's memory with malicious code."
     },
     {
       "id": "T1055.013",
@@ -1621,7 +1794,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for NTFS transaction operations combined with process creation\u2014particularly NtCreateTransaction followed by NtCreateSection\u2014enables detection of process doppelganging used to execute malicious code through transacted file operations."
     },
     {
       "id": "T1055.014",
@@ -1630,7 +1804,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for VDSO manipulation attempts on Linux\u2014including writes to vDSO pages or syscall interception through virtual dynamic shared object modification\u2014enables detection of this advanced process injection technique."
     },
     {
       "id": "T1056.002",
@@ -1639,7 +1814,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for fake dialog boxes, unexpected credential prompts, or GUI overlay activity that intercepts user input enables detection of adversaries using graphical input capture to steal credentials or sensitive information."
     },
     {
       "id": "T1059.001",
@@ -1647,7 +1823,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring PowerShell execution with ScriptBlock logging, module logging, and transcription captures enables detection of adversary scripts by revealing decoded commands, downloaded payloads, and post-exploitation activities."
     },
     {
       "id": "T1059.002",
@@ -1655,7 +1832,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring osascript invocations and AppleScript execution events for unexpected automation commands\u2014particularly those accessing system resources or user data\u2014enables detection of adversary execution through Apple's scripting framework."
     },
     {
       "id": "T1059.003",
@@ -1663,7 +1841,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cmd.exe process creation, command-line arguments, and parent-child relationships enables detection of adversaries using the Windows command shell for execution, particularly when spawned from unusual parent processes like Office applications."
     },
     {
       "id": "T1059.004",
@@ -1671,7 +1850,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring bash, sh, and zsh execution with command-line argument logging enables detection of adversary Unix shell activity, particularly reverse shells, encoded commands, or commands spawned from web server processes."
     },
     {
       "id": "T1059.005",
@@ -1679,7 +1859,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for cscript.exe and wscript.exe invocations, VBScript file creation, and macro-enabled document execution enables detection of adversary use of Visual Basic scripting for payload delivery and execution."
     },
     {
       "id": "T1059.006",
@@ -1687,7 +1868,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Python interpreter invocations\u2014including python.exe, python3, and embedded Python runtimes\u2014for unexpected execution contexts enables detection of adversaries leveraging Python for post-exploitation scripting and tool execution."
     },
     {
       "id": "T1059.007",
@@ -1695,7 +1877,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for JavaScript execution through wscript, cscript, Node.js, or browser-based contexts outside normal development workflows enables detection of adversary use of JavaScript for payload execution and post-exploitation."
     },
     {
       "id": "T1059.008",
@@ -1703,7 +1886,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network device CLI sessions\u2014including SSH, Telnet, and console connections to routers and switches\u2014for unusual commands or unauthorized access enables detection of adversary execution on network infrastructure."
     },
     {
       "id": "T1059.009",
@@ -1711,7 +1895,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud API invocations through CLI tools (aws, az, gcloud) and SDK calls for unusual commands, unauthorized resource access, or execution from unexpected source IPs enables detection of adversary cloud API abuse."
     },
     {
       "id": "T1059.010",
@@ -1719,7 +1904,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for AutoHotKey and AutoIT process creation, script compilation, and automated input patterns enables detection of adversary use of automation scripting tools for keylogging, GUI automation, or payload execution."
     },
     {
       "id": "T1059.011",
@@ -1727,7 +1913,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Lua interpreter invocations and embedded Lua script execution\u2014particularly within applications that embed Lua engines\u2014enables detection of adversary abuse of the Lua scripting environment for code execution."
     },
     {
       "id": "T1070.001",
@@ -1735,7 +1922,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Windows event log clearing\u2014including Event ID 1102 (audit log cleared) and wevtutil cl commands\u2014enables detection of adversaries erasing security logs to cover their tracks after compromise."
     },
     {
       "id": "T1070.002",
@@ -1743,7 +1931,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for syslog deletion, /var/log file truncation, or journalctl vacuum commands on Linux and macOS enables detection of adversaries clearing system logs to remove evidence of their activities."
     },
     {
       "id": "T1070.003",
@@ -1751,7 +1940,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for .bash_history deletion, history command manipulation, or HISTSIZE=0 settings enables detection of adversaries clearing command history to prevent forensic analysis of executed commands."
     },
     {
       "id": "T1070.007",
@@ -1759,7 +1949,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for deletion of known_hosts files, Wi-Fi connection profiles, or network configuration history enables detection of adversaries removing network connection artifacts to conceal lateral movement and C2 communication patterns."
     },
     {
       "id": "T1070.008",
@@ -1767,7 +1958,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for bulk mailbox data deletion, inbox rule modifications that auto-delete messages, or Exchange purge operations enables detection of adversaries clearing email evidence of phishing campaigns or data exfiltration."
     },
     {
       "id": "T1070.009",
@@ -1775,7 +1967,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for removal of registry run keys, scheduled task deletions, or service uninstallations that eliminate prior persistence mechanisms enables detection of adversaries cleaning up after achieving their objectives."
     },
     {
       "id": "T1070.010",
@@ -1783,7 +1976,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for malware files being moved between directories, renamed, or relocated to evade path-based detection signatures enables detection of adversaries repositioning malicious payloads to avoid security tool scanning."
     },
     {
       "id": "T1071.001",
@@ -1791,7 +1985,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring HTTP/HTTPS traffic for anomalous request patterns, unusual user-agent strings, beaconing intervals, or connections to uncategorized domains enables specific detection of web protocol-based C2 channels."
     },
     {
       "id": "T1071.002",
@@ -1799,7 +1994,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring FTP and SFTP traffic for unexpected file transfers, connections to unusual external servers, or transfers initiated by non-standard processes enables detection of C2 channels using file transfer protocols."
     },
     {
       "id": "T1071.003",
@@ -1807,7 +2003,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring SMTP and IMAP traffic for unusual email patterns, automated message generation, or email-based data exfiltration enables detection of adversaries using mail protocols as covert C2 communication channels."
     },
     {
       "id": "T1071.004",
@@ -1815,7 +2012,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring DNS queries for high-volume requests, TXT record queries with encoded payloads, unusual subdomain lengths, or queries to non-standard resolvers enables detection of DNS-based C2 tunneling and data exfiltration."
     },
     {
       "id": "T1071.005",
@@ -1823,7 +2021,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring publish/subscribe protocol traffic\u2014including MQTT and AMQP\u2014for unexpected broker connections, anomalous message patterns, or unauthorized topic subscriptions enables detection of C2 channels leveraging messaging middleware."
     },
     {
       "id": "T1078.001",
@@ -1834,7 +2033,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring authentication logs for use of default credentials\u2014including manufacturer passwords and well-known test accounts\u2014enables detection of adversaries exploiting unchanged default accounts for initial access or persistence."
     },
     {
       "id": "T1078.002",
@@ -1845,7 +2045,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Active Directory authentication for anomalous domain account usage\u2014including impossible travel, service account interactive logins, or access from untrusted endpoints\u2014enables detection of compromised domain credentials."
     },
     {
       "id": "T1078.003",
@@ -1856,7 +2057,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring local account authentication events for unusual login patterns, concurrent local sessions, or local admin usage from unexpected sources enables detection of adversaries operating with compromised local credentials."
     },
     {
       "id": "T1078.004",
@@ -1867,7 +2069,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud identity provider logs for anomalous cloud account activity\u2014including API calls from unusual locations, impossible travel, or access to atypical cloud resources\u2014enables detection of compromised cloud credentials."
     },
     {
       "id": "T1087.001",
@@ -1875,7 +2078,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for local account enumeration commands such as net user, wmic useraccount, or /etc/passwd reads enables detection of adversary discovery activities mapping local user accounts for subsequent exploitation."
     },
     {
       "id": "T1087.002",
@@ -1883,7 +2087,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for domain account enumeration through LDAP queries, net group /domain commands, or PowerShell AD module usage enables detection of adversaries mapping Active Directory user accounts and group memberships."
     },
     {
       "id": "T1090.001",
@@ -1891,7 +2096,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for internal hosts relaying traffic to other internal systems or acting as intermediary connection points enables detection of adversary-deployed internal proxies used to route C2 traffic through compromised infrastructure."
     },
     {
       "id": "T1090.002",
@@ -1899,7 +2105,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for outbound connections to external proxy services, VPN endpoints, or anonymization networks enables detection of adversaries routing C2 traffic through external proxy infrastructure to obscure their true origin."
     },
     {
       "id": "T1098.001",
@@ -1908,7 +2115,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud IAM audit logs for additional credential creation\u2014including new API keys, OAuth tokens, or certificate-based credentials\u2014enables detection of adversaries establishing persistent access through additional cloud credentials."
     },
     {
       "id": "T1098.002",
@@ -1917,7 +2125,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Exchange and Microsoft 365 audit logs for mailbox delegation changes, forwarding rule additions, or send-as permission grants enables detection of adversaries adding email delegate permissions for persistent email access."
     },
     {
       "id": "T1098.003",
@@ -1926,7 +2135,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud identity audit trails for role assignment changes, privilege escalations, or addition of administrative cloud roles enables detection of adversaries manipulating cloud IAM to gain elevated access."
     },
     {
       "id": "T1098.004",
@@ -1935,7 +2145,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring authorized_keys file modifications and SSH key management operations for unauthorized key additions enables detection of adversaries planting SSH keys for persistent passwordless access to Linux and Unix systems."
     },
     {
       "id": "T1098.007",
@@ -1944,7 +2155,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unexpected local or domain group membership changes\u2014including additions to Administrators, Domain Admins, or other privileged groups\u2014enables detection of adversaries escalating privileges through group manipulation."
     },
     {
       "id": "T1102.001",
@@ -1952,7 +2164,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for DNS lookups and HTTP requests to known paste sites, social media platforms, or cloud services used as dead drop resolvers enables detection of adversaries retrieving C2 infrastructure addresses from public web services."
     },
     {
       "id": "T1102.002",
@@ -1960,7 +2173,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for bidirectional data exchange with cloud services\u2014where both upload and download patterns appear in traffic to platforms like GitHub, Dropbox, or Google Drive\u2014enables detection of full-duplex C2 over web services."
     },
     {
       "id": "T1102.003",
@@ -1968,7 +2182,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for periodic one-way data retrieval from web services\u2014such as polling RSS feeds, cloud storage files, or social media posts for encoded instructions\u2014enables detection of adversary command delivery through public platforms."
     },
     {
       "id": "T1110.001",
@@ -1976,7 +2191,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for sequential authentication failures against individual accounts from single or distributed sources enables detection of password guessing attacks attempting to discover valid credentials through systematic trial."
     },
     {
       "id": "T1110.002",
@@ -1984,7 +2200,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for extraction of password hashes followed by system resource utilization spikes or offline cracking tool execution enables detection of adversaries performing password cracking against captured hash databases."
     },
     {
       "id": "T1110.003",
@@ -1992,7 +2209,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for authentication failures distributed across many accounts from limited source IPs enables detection of password spraying attacks that test common passwords against multiple accounts to avoid lockout thresholds."
     },
     {
       "id": "T1110.004",
@@ -2000,7 +2218,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for authentication attempts using known breached credential pairs\u2014detected through correlation with threat intelligence feeds\u2014enables identification of credential stuffing attacks leveraging stolen credential databases."
     },
     {
       "id": "T1114.001",
@@ -2008,7 +2227,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unusual local email file access\u2014including PST, OST, or EML file reads by non-email processes\u2014enables detection of adversaries collecting email data from local mail stores on compromised endpoints."
     },
     {
       "id": "T1114.002",
@@ -2016,7 +2236,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for remote email access via EWS, IMAP, or Graph API from unexpected IP addresses or user agents enables detection of adversaries remotely harvesting email content from compromised mailboxes."
     },
     {
       "id": "T1114.003",
@@ -2024,7 +2245,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for new email forwarding rule creation\u2014including inbox rules that auto-forward to external addresses\u2014enables detection of adversaries establishing persistent email collection through automated forwarding."
     },
     {
       "id": "T1127.001",
@@ -2032,7 +2254,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for MSBuild.exe execution outside normal development contexts\u2014particularly invocations loading custom project files or inline tasks\u2014enables detection of adversaries using MSBuild to compile and execute malicious code."
     },
     {
       "id": "T1127.002",
@@ -2040,7 +2263,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for ClickOnce application deployment from unexpected sources or unsigned publishers enables detection of adversaries using .NET ClickOnce deployment mechanism to deliver and execute malicious applications on endpoints."
     },
     {
       "id": "T1132.001",
@@ -2048,7 +2272,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Base64 or other standard encoding patterns in C2 traffic\u2014particularly in URL parameters, HTTP headers, or DNS queries\u2014enables detection of adversaries using common encoding to obfuscate command-and-control data."
     },
     {
       "id": "T1132.002",
@@ -2056,7 +2281,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for custom or non-standard encoding patterns in network traffic\u2014including character substitution ciphers, custom XOR schemes, or proprietary encoding\u2014enables detection of bespoke C2 data obfuscation techniques."
     },
     {
       "id": "T1136.001",
@@ -2064,7 +2290,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for local account creation events\u2014including net user /add commands and user creation API calls\u2014enables detection of adversaries establishing local account persistence on compromised systems."
     },
     {
       "id": "T1136.002",
@@ -2072,7 +2299,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Active Directory for new account creation events, particularly outside normal provisioning processes or from unexpected source systems, enables detection of adversary domain account creation for persistence."
     },
     {
       "id": "T1136.003",
@@ -2080,7 +2308,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud IAM logs for new user or service account creation outside established provisioning workflows enables detection of adversaries creating cloud accounts for persistent access to cloud environments."
     },
     {
       "id": "T1137.001",
@@ -2088,7 +2317,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Office template directories for unexpected .dotm or .xlsm file additions or modifications enables detection of adversaries planting macro-enabled templates that execute malicious code when Office applications start."
     },
     {
       "id": "T1195.001",
@@ -2096,7 +2326,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring software dependency resolution and package manager activity for unexpected package sources, version anomalies, or dependency confusion indicators enables detection of compromised development tools and software dependencies."
     },
     {
       "id": "T1204.001",
@@ -2104,7 +2335,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for process creation following URL access\u2014particularly browser child processes executing downloaded scripts or binaries\u2014enables detection of user execution triggered by malicious links in phishing messages."
     },
     {
       "id": "T1204.002",
@@ -2112,7 +2344,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for suspicious child process creation from document applications\u2014such as Office spawning PowerShell, cmd.exe, or wscript\u2014enables detection of malicious file execution triggered by user interaction with weaponized documents."
     },
     {
       "id": "T1204.003",
@@ -2120,7 +2353,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring container runtime for execution of malicious container images\u2014including unexpected image pulls, containers with embedded malware, or images from untrusted registries\u2014enables detection of adversary-crafted container execution."
     },
     {
       "id": "T1205.001",
@@ -2130,7 +2364,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network traffic for specific packet sequences targeting closed ports\u2014particularly SYN packets to sequential ports or crafted ICMP messages\u2014enables detection of port knocking techniques used to activate hidden services."
     },
     {
       "id": "T1205.002",
@@ -2140,7 +2375,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for BPF/eBPF program loading, raw socket creation, or unexpected network filter installations enables detection of socket filter-based traffic signaling used to activate backdoors based on specially crafted packets."
     },
     {
       "id": "T1213.001",
@@ -2148,7 +2384,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Confluence access logs for bulk page exports, automated API scraping, or access to sensitive spaces from unusual accounts enables detection of adversary data collection from organizational wikis."
     },
     {
       "id": "T1213.002",
@@ -2156,7 +2393,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring SharePoint access logs for mass document downloads, unusual search queries, or site collection access from unexpected accounts enables detection of adversary data harvesting from organizational document repositories."
     },
     {
       "id": "T1213.004",
@@ -2164,7 +2402,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring CRM system access logs for bulk data exports, unusual query patterns, or API access from unexpected sources enables detection of adversaries extracting customer relationship data for espionage or financial gain."
     },
     {
       "id": "T1213.005",
@@ -2172,7 +2411,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring messaging application logs\u2014including Slack, Teams, and similar platforms\u2014for bulk message exports, unusual API access, or channel enumeration enables detection of adversaries collecting sensitive communications."
     },
     {
       "id": "T1216.001",
@@ -2180,7 +2420,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for PubPrn.vbs execution or similar signed script invocations with unusual parameters\u2014particularly those referencing remote script locations\u2014enables detection of adversary script proxy execution through trusted Microsoft utilities."
     },
     {
       "id": "T1218.001",
@@ -2188,7 +2429,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for hh.exe execution loading CHM files from unusual locations or with embedded scripts enables detection of adversaries using compiled HTML help files to execute arbitrary code through a trusted system binary."
     },
     {
       "id": "T1218.002",
@@ -2196,7 +2438,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for control.exe invocations loading CPL files from non-system directories enables detection of adversaries using Control Panel item format to execute malicious DLLs through the trusted Windows control panel interface."
     },
     {
       "id": "T1218.003",
@@ -2204,7 +2447,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for CMSTP.exe execution with INF files\u2014particularly those containing ScriptBlock or RunPreSetupCommands entries\u2014enables detection of adversary UAC bypass and code execution through the Connection Manager service."
     },
     {
       "id": "T1218.004",
@@ -2212,7 +2456,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for InstallUtil.exe invocations\u2014especially those loading assemblies from temp directories or user-writable paths\u2014enables detection of adversaries using the .NET installation utility to execute unmanaged code."
     },
     {
       "id": "T1218.005",
@@ -2220,7 +2465,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for mshta.exe execution with HTA files or inline script arguments enables detection of adversaries using the Microsoft HTML Application host to execute VBScript, JScript, or PowerShell through a trusted binary."
     },
     {
       "id": "T1218.008",
@@ -2228,7 +2474,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for odbcconf.exe execution with /A actions loading DLLs\u2014particularly from non-standard paths\u2014enables detection of adversary code execution proxied through the ODBC configuration utility."
     },
     {
       "id": "T1218.009",
@@ -2236,7 +2483,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for regsvcs.exe and regasm.exe invocations loading assemblies with ComRegisterFunction attributes enables detection of adversaries using .NET COM registration utilities for code execution bypass."
     },
     {
       "id": "T1218.010",
@@ -2244,7 +2492,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for regsvr32.exe invocations\u2014especially those using /s /n /i flags or loading remote scriptlets\u2014enables detection of adversary DLL registration proxy execution, including the well-known squiblydoo bypass technique."
     },
     {
       "id": "T1218.011",
@@ -2252,7 +2501,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for rundll32.exe execution with unusual DLL paths, exported function names, or command-line arguments enables detection of adversaries using the Windows DLL host to proxy execution of malicious dynamic libraries."
     },
     {
       "id": "T1218.012",
@@ -2260,7 +2510,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for verclsid.exe invocations verifying unusual CLSIDs\u2014particularly those loading DLLs from non-standard locations\u2014enables detection of adversary code execution through the COM object verification utility."
     },
     {
       "id": "T1218.013",
@@ -2268,7 +2519,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for mavinject.exe execution targeting process IDs with DLL injection payloads enables detection of adversaries using this Microsoft signed binary to inject malicious DLLs into running processes."
     },
     {
       "id": "T1218.014",
@@ -2276,7 +2528,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for mmc.exe execution loading snap-in files from unusual locations or with embedded scripts enables detection of adversaries using Microsoft Management Console for proxy execution of malicious code."
     },
     {
       "id": "T1218.015",
@@ -2284,7 +2537,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Electron application execution with tampered asar archives or debugging flags\u2014particularly with --inspect or modified main.js\u2014enables detection of adversaries abusing Electron-based applications for code execution."
     },
     {
       "id": "T1222.001",
@@ -2292,7 +2546,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for icacls, cacls, and takeown command execution or programmatic DACL modifications on Windows enables detection of adversaries weakening file and directory permissions to facilitate further attack operations."
     },
     {
       "id": "T1222.002",
@@ -2300,7 +2555,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for chmod, chown, and setfacl commands on Linux and macOS\u2014particularly those granting world-readable permissions to sensitive files\u2014enables detection of adversary permission modification for defense evasion."
     },
     {
       "id": "T1491.001",
@@ -2308,7 +2564,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring internal web application content, intranet pages, and shared resources for unauthorized modifications enables detection of internal defacement targeting organizational morale or operational communications."
     },
     {
       "id": "T1491.002",
@@ -2316,7 +2573,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring public-facing website file integrity, DNS records, and web server content for unauthorized changes enables detection of external defacement attacks that damage organizational reputation."
     },
     {
       "id": "T1499.001",
@@ -2324,7 +2582,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring operating system resource metrics\u2014including TCP connection tables, socket exhaustion, and kernel resource counters\u2014enables detection of OS-level exhaustion floods that overwhelm system networking stacks."
     },
     {
       "id": "T1499.002",
@@ -2332,7 +2591,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring service-level performance metrics, request queues, and connection pools enables detection of service exhaustion floods that consume web server, database, or application service resources to cause denial of service."
     },
     {
       "id": "T1499.003",
@@ -2340,7 +2600,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring application-layer request rates, error codes, and resource consumption per session enables detection of application exhaustion floods that exploit resource-intensive features to overwhelm application processing capacity."
     },
     {
       "id": "T1499.004",
@@ -2348,7 +2609,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for exploit-induced application crashes, memory corruption indicators, or anomalous process behavior can detect denial of service achieved through vulnerability exploitation that causes service failures."
     },
     {
       "id": "T1505.002",
@@ -2356,7 +2618,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Exchange transport agent installations and mail flow configurations for unauthorized additions enables detection of adversaries deploying malicious transport agents for persistent email interception on mail servers."
     },
     {
       "id": "T1505.003",
@@ -2364,7 +2627,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring web server directories for new script files (ASPX, PHP, JSP) and detecting web shell signatures\u2014including command execution patterns and reverse shell connections\u2014enables identification of deployed web shells."
     },
     {
       "id": "T1505.004",
@@ -2372,7 +2636,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring IIS module registrations, ISAPI filter additions, and managed handler installations for unauthorized components enables detection of adversaries persisting through malicious IIS server components."
     },
     {
       "id": "T1505.005",
@@ -2380,7 +2645,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Terminal Services DLL registrations and RDP session host configurations for unexpected DLL loads enables detection of adversaries installing malicious Terminal Services components for persistent remote access."
     },
     {
       "id": "T1542.004",
@@ -2389,7 +2655,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring ROMMON integrity on Cisco network devices through hash verification and boot process validation enables detection of adversaries installing persistent rootkits in the ROM monitor firmware."
     },
     {
       "id": "T1542.005",
@@ -2398,7 +2665,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring TFTP boot configurations and network boot image integrity enables detection of adversaries manipulating network boot processes to load compromised operating system images on network devices."
     },
     {
       "id": "T1543.002",
@@ -2407,7 +2675,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for systemd unit file creation or modification in /etc/systemd/ and user-level systemd directories\u2014particularly units with unusual ExecStart paths\u2014enables detection of adversary persistence through systemd services."
     },
     {
       "id": "T1546.002",
@@ -2416,7 +2685,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for screensaver registry modifications\u2014including SCRNSAVE.EXE path changes\u2014enables detection of adversaries configuring malicious screensaver executables that activate after idle periods for persistence."
     },
     {
       "id": "T1546.003",
@@ -2425,7 +2695,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for WMI event subscription creation\u2014including EventFilter, EventConsumer, and FilterToConsumerBinding objects\u2014enables detection of adversary persistence through WMI event-triggered execution."
     },
     {
       "id": "T1546.004",
@@ -2434,7 +2705,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for modifications to .bashrc, .bash_profile, .zshrc, and similar shell configuration files enables detection of adversaries inserting malicious commands that execute whenever a user opens a new shell session."
     },
     {
       "id": "T1546.006",
@@ -2443,7 +2715,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for LC_LOAD_DYLIB header additions to Mach-O binaries enables detection of adversaries injecting persistent code loading directives that force applications to load malicious dynamic libraries on macOS."
     },
     {
       "id": "T1546.008",
@@ -2452,7 +2725,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for replacement or modification of accessibility feature binaries\u2014including sethc.exe, utilman.exe, and osk.exe\u2014enables detection of adversaries installing backdoors accessible from the Windows login screen."
     },
     {
       "id": "T1546.013",
@@ -2461,7 +2735,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for PowerShell profile file modifications across all profile paths enables detection of adversaries inserting malicious commands into profiles that execute automatically whenever PowerShell sessions are started."
     },
     {
       "id": "T1546.014",
@@ -2470,7 +2745,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for emond rule file creation in /etc/emond.d/rules/ and emond daemon activity on macOS enables detection of adversaries leveraging the Event Monitor daemon for persistent event-triggered execution."
     },
     {
       "id": "T1546.016",
@@ -2479,7 +2755,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for installer package execution with embedded pre- or post-install scripts\u2014particularly from untrusted sources\u2014enables detection of adversaries using installer packages to execute code during software installation."
     },
     {
       "id": "T1547.002",
@@ -2488,7 +2765,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Authentication Package registry modifications under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa enables detection of adversaries loading malicious authentication packages for persistence and credential interception."
     },
     {
       "id": "T1547.003",
@@ -2497,7 +2775,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Time Provider DLL registrations under HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\TimeProviders enables detection of adversaries using the Windows Time service as a persistence mechanism."
     },
     {
       "id": "T1547.004",
@@ -2506,7 +2785,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Winlogon Helper DLL registry modifications\u2014including Notify, Userinit, and Shell value changes\u2014enables detection of adversary persistence through code that executes during the Windows logon process."
     },
     {
       "id": "T1547.005",
@@ -2515,7 +2795,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for SSP DLL additions to the Security Packages registry value or in-memory SSP loading via AddSecurityPackage enables detection of adversaries installing security support providers to capture plaintext credentials."
     },
     {
       "id": "T1547.006",
@@ -2524,7 +2805,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for kernel module loading events\u2014including insmod, modprobe, and kextload on Linux/macOS\u2014and flagging unsigned or unexpected modules enables detection of adversary persistence through kernel-level implants."
     },
     {
       "id": "T1547.007",
@@ -2533,7 +2815,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for modifications to LoginItems plist files, saved application state directories, or Re-opened Applications configurations on macOS enables detection of adversaries persisting through app restoration mechanisms."
     },
     {
       "id": "T1547.008",
@@ -2542,7 +2825,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for LSASS driver registration changes and DLL loads into the LSASS process space enables detection of adversaries installing persistent credential-intercepting drivers in the local security authority subsystem."
     },
     {
       "id": "T1547.009",
@@ -2551,7 +2835,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for shortcut (.lnk) file modifications\u2014particularly changes to target paths in startup folders or desktop shortcuts\u2014enables detection of adversaries altering shortcuts to execute malicious payloads on user interaction."
     },
     {
       "id": "T1547.012",
@@ -2560,7 +2845,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for print processor DLL registrations under the Print Spooler service enables detection of adversaries installing malicious print processors that execute code when the spooler service starts."
     },
     {
       "id": "T1547.013",
@@ -2569,7 +2855,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for new or modified .desktop files in XDG autostart directories (/etc/xdg/autostart/, ~/.config/autostart/) enables detection of adversary persistence through Linux desktop environment autostart entries."
     },
     {
       "id": "T1548.001",
@@ -2578,7 +2865,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for setuid/setgid bit changes on Linux and macOS executables\u2014particularly on scripts or binaries in user-writable directories\u2014enables detection of adversaries elevating privileges through SUID/SGID abuse."
     },
     {
       "id": "T1548.002",
@@ -2587,7 +2875,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for UAC bypass indicators\u2014including known bypass registry modifications, auto-elevate executable abuse, and DLL side-loading in elevated contexts\u2014enables detection of adversaries circumventing User Account Control."
     },
     {
       "id": "T1548.003",
@@ -2596,7 +2885,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring sudo command usage, sudoers file modifications, and sudo timestamp file access enables detection of adversaries exploiting sudo misconfigurations or cached credentials to escalate privileges on Unix systems."
     },
     {
       "id": "T1548.004",
@@ -2605,7 +2895,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for AppleScript-triggered privilege elevation prompts, AuthorizationExecuteWithPrivileges API calls, and unexpected system preference pane invocations enables detection of macOS privilege escalation through fake elevation dialogs."
     },
     {
       "id": "T1548.006",
@@ -2614,7 +2905,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for TCC database modifications, tccutil commands, or MDM profile manipulation on macOS enables detection of adversaries manipulating Transparency, Consent, and Control protections to gain unauthorized access."
     },
     {
       "id": "T1550.001",
@@ -2623,7 +2915,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for OAuth token usage from unexpected IP addresses, client applications, or with unusual scope patterns enables detection of adversaries using stolen application access tokens to authenticate without credentials."
     },
     {
       "id": "T1550.003",
@@ -2632,7 +2925,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring Kerberos ticket usage for anomalies\u2014including tickets with unusual lifetimes, forged PAC data, or service ticket requests from unexpected sources\u2014enables detection of pass-the-ticket lateral movement."
     },
     {
       "id": "T1552.001",
@@ -2640,7 +2934,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for file access to known credential storage locations\u2014including web.config, wp-config.php, .env files, and shell history\u2014enables detection of adversaries searching the filesystem for plaintext credentials."
     },
     {
       "id": "T1552.002",
@@ -2648,7 +2943,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring registry access to known credential storage locations\u2014including RunAs stored credentials and application-specific password entries\u2014enables detection of adversaries harvesting credentials from the Windows registry."
     },
     {
       "id": "T1552.003",
@@ -2656,7 +2952,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for reads of .bash_history, .zsh_history, and similar shell history files by non-interactive processes enables detection of adversaries mining command history for previously typed credentials or sensitive information."
     },
     {
       "id": "T1552.004",
@@ -2664,7 +2961,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for access to private key files\u2014including SSH keys, PEM files, and PFX certificates in user profile directories\u2014enables detection of adversaries stealing private keys for unauthorized authentication or decryption."
     },
     {
       "id": "T1552.005",
@@ -2672,7 +2970,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for queries to cloud instance metadata APIs (169.254.169.254) from application processes enables detection of adversaries harvesting temporary credentials, API tokens, and configuration data from cloud metadata services."
     },
     {
       "id": "T1552.006",
@@ -2680,7 +2979,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for access to SYSVOL Group Policy Preferences XML files containing cpassword attributes enables detection of adversaries extracting encrypted credentials from legacy GPP configurations that use reversible encryption."
     },
     {
       "id": "T1552.008",
@@ -2688,7 +2988,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for automated access to messaging platform APIs, bulk message retrieval, or search queries targeting credential-related keywords in chat applications enables detection of adversaries mining chat messages for credentials."
     },
     {
       "id": "T1553.001",
@@ -2696,7 +2997,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Gatekeeper bypass indicators on macOS\u2014including xattr removal of quarantine attributes, special file attributes, or unsigned application execution\u2014enables detection of adversary attempts to circumvent macOS trust controls."
     },
     {
       "id": "T1553.003",
@@ -2704,7 +3006,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for modifications to Windows SIP and trust provider registry entries\u2014including changes to CryptSIPDllGetSignedDataMsg\u2014enables detection of adversaries hijacking code signing verification to validate malicious binaries."
     },
     {
       "id": "T1553.004",
@@ -2712,7 +3015,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring certificate store modifications for unauthorized root certificate installations\u2014including certutil imports and programmatic certificate store writes\u2014enables detection of adversaries installing rogue CA certificates."
     },
     {
       "id": "T1553.005",
@@ -2720,7 +3024,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for attempts to remove or manipulate Mark-of-the-Web attributes on downloaded files\u2014including Zone.Identifier alternate data stream deletion\u2014enables detection of adversaries bypassing web download security warnings."
     },
     {
       "id": "T1555.001",
@@ -2728,7 +3033,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unauthorized access to macOS Keychain files and security CLI commands targeting keychain items enables detection of adversaries extracting stored credentials from Apple's credential management system."
     },
     {
       "id": "T1555.002",
@@ -2736,7 +3042,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for process memory access targeting the securityd daemon on macOS\u2014including debugging attachments and memory reads\u2014enables detection of adversaries extracting decrypted Keychain credentials from securityd process memory."
     },
     {
       "id": "T1555.004",
@@ -2744,7 +3051,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for VaultCmd.exe usage, Credential Manager file access, and programmatic queries to the Windows Credential Manager vault enables detection of adversaries harvesting stored credentials from the Windows credential store."
     },
     {
       "id": "T1555.005",
@@ -2752,7 +3060,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for access to password manager databases, browser credential stores, and master key files enables detection of adversaries targeting password management applications to extract large collections of stored credentials."
     },
     {
       "id": "T1556.001",
@@ -2762,7 +3071,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for modifications to NTLM authentication DLLs, skeleton key indicators, or domain controller authentication process anomalies enables detection of adversaries backdooring Active Directory authentication mechanisms."
     },
     {
       "id": "T1556.002",
@@ -2772,7 +3082,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for password filter DLL registrations under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Notification Packages enables detection of adversaries installing malicious filters that capture plaintext passwords during changes."
     },
     {
       "id": "T1556.003",
@@ -2782,7 +3093,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for PAM configuration file modifications and unusual shared library additions to PAM module directories enables detection of adversaries inserting malicious pluggable authentication modules for credential capture."
     },
     {
       "id": "T1556.004",
@@ -2792,7 +3104,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for changes to network device authentication configurations\u2014including TACACS+, RADIUS, and local authentication settings\u2014enables detection of adversaries modifying network device authentication for persistent access."
     },
     {
       "id": "T1556.008",
@@ -2802,7 +3115,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Network Provider DLL registrations under HKLM\\SYSTEM\\CurrentControlSet\\Services and mpnotify.exe behavior enables detection of adversaries installing credential-harvesting network provider DLLs."
     },
     {
       "id": "T1556.009",
@@ -2812,7 +3126,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Azure AD conditional access policy changes\u2014including policy deletions, exemptions, or trust modifications\u2014enables detection of adversaries weakening authentication requirements to facilitate unauthorized access."
     },
     {
       "id": "T1557.001",
@@ -2821,7 +3136,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for LLMNR and NBT-NS response traffic from unexpected hosts, SMB relay indicators, and NTLMv2 hash capture attempts enables detection of adversaries performing name resolution poisoning for credential interception."
     },
     {
       "id": "T1557.002",
@@ -2830,7 +3146,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for gratuitous ARP packets, ARP table anomalies, and IP-MAC binding changes enables detection of ARP cache poisoning attacks used to redirect network traffic through adversary-controlled systems."
     },
     {
       "id": "T1557.003",
@@ -2839,7 +3156,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for rogue DHCP server responses, unusual DHCP offer traffic, and DNS settings changes via DHCP enables detection of adversaries using DHCP spoofing to redirect client traffic through malicious infrastructure."
     },
     {
       "id": "T1557.004",
@@ -2848,7 +3166,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for rogue wireless access points, unexpected SSID broadcasts matching organizational networks, and deauthentication frame floods enables detection of evil twin attacks targeting wireless network users."
     },
     {
       "id": "T1558.002",
@@ -2856,7 +3175,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for anomalous Kerberos service ticket usage\u2014including tickets with forged PAC data or service tickets for accounts that did not request TGTs\u2014enables detection of silver ticket forgery attacks."
     },
     {
       "id": "T1558.003",
@@ -2864,7 +3184,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unusual TGS-REQ patterns targeting service accounts, particularly mass service ticket requests followed by offline activity, enables detection of Kerberoasting attacks extracting service account password hashes."
     },
     {
       "id": "T1558.004",
@@ -2872,7 +3193,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for AS-REQ messages for accounts without pre-authentication requirements and subsequent offline cracking indicators enables detection of AS-REP roasting attacks targeting misconfigured Kerberos accounts."
     },
     {
       "id": "T1558.005",
@@ -2880,7 +3202,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for access to Kerberos credential cache files (/tmp/krb5cc_*) and ccache file manipulation by non-standard processes enables detection of adversaries stealing cached Kerberos tickets for authentication reuse."
     },
     {
       "id": "T1559.002",
@@ -2888,7 +3211,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for DDE link activation in Office documents\u2014including DDEAuto field codes and DDEEXEC registry keys\u2014enables detection of adversaries exploiting Dynamic Data Exchange for remote code execution without macros."
     },
     {
       "id": "T1559.003",
@@ -2896,7 +3220,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for suspicious XPC service connections on macOS\u2014including unauthorized clients connecting to privileged XPC services\u2014enables detection of adversaries abusing inter-process communication for privilege escalation."
     },
     {
       "id": "T1560.001",
@@ -2904,7 +3229,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for archiving utility execution\u2014including 7z.exe, WinRAR, and tar\u2014targeting sensitive directories or creating encrypted archives enables detection of adversaries packaging collected data for efficient exfiltration."
     },
     {
       "id": "T1561.001",
@@ -2912,7 +3238,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for low-level disk write operations, dd commands targeting block devices, or mass file overwrite patterns enables detection of adversaries performing disk content wipes to destroy data and hinder recovery."
     },
     {
       "id": "T1561.002",
@@ -2920,7 +3247,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for modifications to MBR, GPT partition tables, or boot sector writes enables detection of adversaries performing disk structure wipes that render storage devices unrecoverable at the structural level."
     },
     {
       "id": "T1562.001",
@@ -2928,7 +3256,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for security tool process termination, antivirus service stops, or EDR agent tampering enables detection of adversaries disabling or modifying endpoint protection tools to operate undetected."
     },
     {
       "id": "T1562.002",
@@ -2936,7 +3265,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for Windows event logging configuration changes\u2014including auditpol modifications, EventLog service stops, or ETW provider disabling\u2014enables detection of adversaries silencing security event collection."
     },
     {
       "id": "T1562.003",
@@ -2944,7 +3274,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for HISTCONTROL, HISTFILE, and Set-PSReadLineOption modifications that impair command history recording enables detection of adversaries disabling shell history to prevent forensic analysis of their commands."
     },
     {
       "id": "T1562.004",
@@ -2952,7 +3283,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for firewall rule modifications\u2014including netsh advfirewall, iptables, or pfctl changes\u2014that create unauthorized network access paths enables detection of adversary manipulation of host-based firewalls."
     },
     {
       "id": "T1562.006",
@@ -2960,7 +3292,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for ETW provider modifications, Sysmon configuration tampering, or event source deregistration enables detection of adversaries blocking security indicators from reaching monitoring and analysis tools."
     },
     {
       "id": "T1562.010",
@@ -2968,7 +3301,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for protocol downgrade indicators\u2014including forced use of weaker authentication protocols, TLS version downgrades, or encryption cipher suite manipulation\u2014enables detection of adversary attempts to weaken security controls."
     },
     {
       "id": "T1562.011",
@@ -2976,7 +3310,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for security alert spoofing\u2014including fake antivirus notifications, forged SIEM alerts, or manipulated dashboard data\u2014enables detection of adversaries creating deceptive security information to mislead defenders."
     },
     {
       "id": "T1562.012",
@@ -2984,7 +3319,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for auditd configuration changes, auditctl rule modifications, or audit daemon stop events enables detection of adversaries disabling the Linux audit system to eliminate forensic evidence collection."
     },
     {
       "id": "T1563.001",
@@ -2992,7 +3328,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for SSH session multiplexing, ControlMaster socket creation, or unauthorized SSH agent forwarding enables detection of adversaries hijacking existing SSH sessions to move laterally without re-authenticating."
     },
     {
       "id": "T1563.002",
@@ -3000,7 +3337,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for RDP session takeover indicators\u2014including tscon.exe usage without disconnects, session shadow requests, or RDP hijacking through service manipulation\u2014enables detection of adversaries stealing active RDP sessions."
     },
     {
       "id": "T1564.002",
@@ -3008,7 +3346,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for user account modifications that hide accounts from login screens\u2014including UserID manipulation below 500 on macOS or Hide_From_User_List registry changes\u2014enables detection of adversary-created hidden user accounts."
     },
     {
       "id": "T1564.004",
@@ -3016,7 +3355,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for NTFS alternate data stream creation, extended attribute writes, and file attribute manipulation enables detection of adversaries hiding payloads in NTFS file attributes invisible to standard directory listings."
     },
     {
       "id": "T1564.006",
@@ -3024,7 +3364,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unexpected virtual machine creation or hypervisor execution\u2014including VirtualBox, VMware, or QEMU processes started by unusual users\u2014enables detection of adversaries running malware within hidden virtual instances."
     },
     {
       "id": "T1564.007",
@@ -3032,7 +3373,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for VBA project binary modifications (VBA stomping) that remove source code while preserving compiled p-code enables detection of adversaries making macro analysis more difficult for security researchers."
     },
     {
       "id": "T1564.008",
@@ -3040,7 +3382,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for email inbox rule creation that deletes, moves, or hides specific messages\u2014particularly rules targeting security notification keywords\u2014enables detection of adversaries concealing their activities within compromised mailboxes."
     },
     {
       "id": "T1564.009",
@@ -3048,7 +3391,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for macOS resource fork creation and extended attribute manipulation\u2014particularly resource forks containing executable code\u2014enables detection of adversaries hiding payloads in Apple filesystem metadata structures."
     },
     {
       "id": "T1564.010",
@@ -3056,7 +3400,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for process argument spoofing\u2014where initial process creation arguments differ from runtime arguments due to PEB manipulation\u2014enables detection of adversaries hiding their true command-line parameters from logging."
     },
     {
       "id": "T1565.001",
@@ -3064,7 +3409,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring database integrity, file checksums, and data change audit trails for unauthorized modifications enables detection of adversaries manipulating stored data to undermine business processes or destroy evidence."
     },
     {
       "id": "T1565.002",
@@ -3072,7 +3418,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network traffic integrity through cryptographic verification and traffic analysis enables detection of adversaries manipulating data in transit to alter communications between systems."
     },
     {
       "id": "T1565.003",
@@ -3080,7 +3427,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring application runtime behavior for unexpected data transformations, memory modifications, or output alterations enables detection of adversaries manipulating data during processing to affect business logic outcomes."
     },
     {
       "id": "T1566.001",
@@ -3088,7 +3436,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for emails with weaponized attachments\u2014including malicious macros, embedded exploits, or polyglot files\u2014through sandbox analysis and content inspection enables detection of spearphishing attachment delivery."
     },
     {
       "id": "T1566.002",
@@ -3096,7 +3445,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for emails containing suspicious URLs, newly registered domains, or known credential-harvesting pages enables detection of spearphishing link campaigns targeting organizational users for credential theft or malware delivery."
     },
     {
       "id": "T1566.003",
@@ -3104,7 +3454,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for suspicious messages delivered through social media, messaging platforms, or other non-email services enables detection of spearphishing via alternative communication channels that bypass email security controls."
     },
     {
       "id": "T1568.002",
@@ -3112,7 +3463,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring DNS query logs for algorithmically generated domain patterns\u2014identified by high entropy, consistent length patterns, or bulk NXDOMAIN responses\u2014enables detection of malware using domain generation algorithms for C2."
     },
     {
       "id": "T1569.002",
@@ -3120,7 +3472,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for PsExec-style service creation, sc.exe execution commands, and Service Control Manager events for unexpected service installations enables detection of adversaries executing code through Windows service creation."
     },
     {
       "id": "T1573.001",
@@ -3128,7 +3481,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for encrypted C2 channels using symmetric cryptography\u2014identified by traffic pattern analysis, key exchange indicators, or known malware encryption signatures\u2014enables detection of symmetrically encrypted command channels."
     },
     {
       "id": "T1573.002",
@@ -3136,7 +3490,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for anomalous TLS/SSL sessions using self-signed certificates, unusual cipher suites, or certificate pinning bypass indicators enables detection of asymmetrically encrypted C2 channels that evade standard decryption."
     },
     {
       "id": "T1574.001",
@@ -3146,7 +3501,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for DLL loads from unexpected directories\u2014particularly when applications load libraries from current working directories instead of system paths\u2014enables detection of DLL search order hijacking attacks."
     },
     {
       "id": "T1574.004",
@@ -3156,7 +3512,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for dylib loading from non-standard paths on macOS\u2014particularly when applications load dynamic libraries from writable locations\u2014enables detection of adversaries exploiting dylib search order for persistence."
     },
     {
       "id": "T1574.005",
@@ -3166,7 +3523,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for DLL loads and executable writes in installer temporary directories with overly permissive file permissions enables detection of adversaries exploiting weak installer file permissions for privilege escalation."
     },
     {
       "id": "T1574.007",
@@ -3176,7 +3534,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for creation of executables in PATH directories that shadow legitimate system utilities enables detection of adversaries placing malicious binaries in PATH locations to intercept command execution."
     },
     {
       "id": "T1574.008",
@@ -3186,7 +3545,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for executable creation in directories that precede legitimate binary locations in search order enables detection of adversaries exploiting application search order to execute malicious binaries before intended targets."
     },
     {
       "id": "T1574.009",
@@ -3196,7 +3556,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for executables placed in path segments of unquoted Windows service paths enables detection of adversaries exploiting unquoted path parsing to intercept service binary resolution for privilege escalation."
     },
     {
       "id": "T1574.010",
@@ -3206,7 +3567,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for modifications to service binary paths and service DLL registrations\u2014including changes to ImagePath values\u2014enables detection of adversaries exploiting weak service file permissions to replace legitimate service components."
     },
     {
       "id": "T1574.013",
@@ -3216,7 +3578,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for KernelCallbackTable modifications in process memory enables detection of adversaries hijacking kernel callback function pointers to redirect execution flow from legitimate processes to malicious code."
     },
     {
       "id": "T1574.014",
@@ -3226,7 +3589,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for AppDomainManager entries in application .config files and unexpected .NET assembly loads enables detection of adversaries using the .NET AppDomainManager to inject code into managed applications."
     },
     {
       "id": "T1578.001",
@@ -3234,7 +3598,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud audit logs for unauthorized snapshot creation\u2014particularly of running instances or volumes containing sensitive data\u2014enables detection of adversaries creating snapshots to exfiltrate data or analyze system configurations."
     },
     {
       "id": "T1578.002",
@@ -3242,7 +3607,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring cloud provider logs for unauthorized instance creation\u2014including instances launched from public AMIs, suspicious regions, or with unusual configurations\u2014enables detection of adversary cloud resource manipulation."
     },
     {
       "id": "T1578.003",
@@ -3250,7 +3616,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for unexpected cloud instance deletions\u2014particularly of logging, monitoring, or security instances\u2014enables detection of adversaries destroying cloud resources to cover tracks or impair defensive capabilities."
     },
     {
       "id": "T1598.001",
@@ -3258,7 +3625,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring inbound messages from social media, professional networks, and web services for social engineering patterns\u2014including impersonation and information solicitation\u2014enables detection of spearphishing for information via services."
     },
     {
       "id": "T1598.002",
@@ -3266,7 +3634,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for reconnaissance-stage emails with benign attachments designed to elicit responses containing organizational information enables detection of phishing-for-information campaigns using attachment-based pretexts."
     },
     {
       "id": "T1598.003",
@@ -3274,7 +3643,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for emails containing links to fake surveys, credential verification pages, or information harvesting sites enables detection of spearphishing link campaigns aimed at gathering organizational intelligence."
     },
     {
       "id": "T1599.001",
@@ -3282,7 +3652,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network device routing configurations for unauthorized NAT rules, static routes, or policy-based routing changes that traverse network boundaries enables detection of adversaries bridging segmented networks through NAT traversal."
     },
     {
       "id": "T1601.001",
@@ -3290,7 +3661,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network device firmware hashes against known-good baselines and alerting on discrepancies enables detection of adversaries who have patched system images with modified firmware containing backdoors or weakened security."
     },
     {
       "id": "T1601.002",
@@ -3298,7 +3670,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring for firmware version downgrades on network devices\u2014including unexpected IOS or firmware version changes to older releases\u2014enables detection of adversaries reverting to vulnerable system images to exploit known weaknesses."
     },
     {
       "id": "T1602.001",
@@ -3306,7 +3679,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring SNMP traffic for unauthorized MIB walks, bulk GET requests, or SNMP access from unexpected source IPs enables detection of adversaries using SNMP to extract device configuration and network topology information."
     },
     {
       "id": "T1602.002",
@@ -3314,7 +3688,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Monitoring network management interfaces for unauthorized configuration export commands\u2014including show running-config, tftp transfers, or API-based configuration retrieval\u2014enables detection of adversary network device configuration dumping."
     }
   ],
   "metadata": {

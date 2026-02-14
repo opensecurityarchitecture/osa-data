@@ -87,7 +87,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation through separate address spaces prevents credential-dumping tools from freely accessing the memory of authentication processes, requiring adversaries to circumvent isolation boundaries to extract credentials."
     },
     {
       "id": "T1068",
@@ -95,7 +96,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation limits privilege-escalation exploitation by maintaining separate execution domains, ensuring that exploits in unprivileged processes cannot directly access kernel or privileged process memory."
     },
     {
       "id": "T1189",
@@ -103,7 +105,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation in browsers and client applications contains drive-by compromise exploits within sandboxed processes, preventing exploitation of rendering-engine vulnerabilities from accessing the broader system."
     },
     {
       "id": "T1190",
@@ -111,7 +114,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation for public-facing application workers contains exploitation damage by ensuring that compromised application processes cannot directly access other processes' memory or the underlying operating system."
     },
     {
       "id": "T1203",
@@ -119,7 +123,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation sandboxes client application processes, limiting the impact of exploitation for code execution by preventing exploited document renderers or browsers from accessing other process address spaces."
     },
     {
       "id": "T1210",
@@ -127,7 +132,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation limits exploitation of remote services by ensuring that compromised service processes cannot escape their execution domain to access other processes' memory or resources."
     },
     {
       "id": "T1211",
@@ -135,7 +141,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation maintains separate security and non-security function domains, ensuring that exploitation in application processes cannot directly modify security-enforcement code in isolated security processes."
     },
     {
       "id": "T1212",
@@ -143,7 +150,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation protects credential-storage processes by maintaining separate address spaces that prevent exploitation in application processes from directly accessing authentication-service memory."
     },
     {
       "id": "T1556",
@@ -153,7 +161,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation protects authentication processes by maintaining separate execution domains for security functions, making it harder for adversaries to modify authentication libraries or password filters in protected process contexts."
     },
     {
       "id": "T1611",
@@ -161,7 +170,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation is the primary defense against container escape, maintaining separate execution domains between container processes and the host kernel to prevent breakout through process-boundary exploitation."
     },
     {
       "id": "T1003.001",
@@ -169,7 +179,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation with LSASS protection (RunAsPPL/Credential Guard) maintains the LSASS process in a separate, protected execution domain that prevents standard user-mode tools from reading its address space for credential extraction."
     },
     {
       "id": "T1003.002",
@@ -177,7 +188,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation restricts SAM database access by isolating the registry service and SAM access within protected process boundaries that prevent cross-process memory reads by credential-dumping tools."
     },
     {
       "id": "T1003.003",
@@ -185,7 +197,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation on domain controllers protects the NTDS.dit database service by maintaining Active Directory processes in isolated execution domains that resist unauthorized memory access."
     },
     {
       "id": "T1003.004",
@@ -193,7 +206,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation protects LSA secret storage by maintaining the Local Security Authority in a separate, protected execution domain that prevents unauthorized cross-process access to encrypted credential stores."
     },
     {
       "id": "T1003.005",
@@ -201,7 +215,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation restricts access to cached domain credentials by maintaining credential-cache processes in protected execution domains that prevent unauthorized memory reads by dumping tools."
     },
     {
       "id": "T1003.006",
@@ -209,7 +224,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation on domain controllers protects directory replication services by maintaining replication processes in isolated domains, making it harder for adversaries to inject DCSync requests through process manipulation."
     },
     {
       "id": "T1003.007",
@@ -217,7 +233,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation on Linux systems restricts /proc filesystem access between processes, requiring explicit privilege to read other processes' memory maps and preventing casual credential extraction from process address spaces."
     },
     {
       "id": "T1003.008",
@@ -225,7 +242,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation with proper file-access controls restricts access to /etc/shadow by ensuring that password-file reads require processes running with appropriate privilege levels, not just any user-space process."
     },
     {
       "id": "T1547.002",
@@ -234,7 +252,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation protects the LSA authentication pipeline by maintaining authentication packages in isolated execution contexts, preventing unauthorized code from injecting into the authentication process chain."
     },
     {
       "id": "T1547.005",
@@ -243,7 +262,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation protects the Security Support Provider interface by running SSP/AP modules within the protected LSASS process domain, requiring adversaries to bypass isolation to inject credential-intercepting code."
     },
     {
       "id": "T1547.008",
@@ -252,7 +272,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation with LSASS protection prevents malicious driver loading into the LSASS process by maintaining the process in a protected execution domain that rejects unsigned or unauthorized driver DLLs."
     },
     {
       "id": "T1556.001",
@@ -262,7 +283,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process isolation on domain controllers protects the authentication pipeline by isolating authentication-processing components, making it harder for adversaries to inject modified authentication code into domain controller processes."
     }
   ],
   "metadata": {

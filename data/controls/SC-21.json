@@ -96,7 +96,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Secure recursive DNS resolution with origin authentication and integrity verification prevents adversaries from redirecting application layer protocol communications through poisoned DNS responses that resolve C2 domains to attacker-controlled infrastructure."
     },
     {
       "id": "T1568",
@@ -104,7 +105,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DNSSEC validation on recursive resolvers detects and rejects forged DNS responses, undermining dynamic resolution techniques where adversaries use fast-flux or algorithmically generated domains that rely on DNS manipulation to direct traffic to C2 servers."
     },
     {
       "id": "T1071.001",
@@ -112,7 +114,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Authenticated DNS resolution ensures that web protocol C2 traffic reaches only legitimate destinations, preventing DNS cache poisoning attacks that could silently redirect HTTP/HTTPS communications to adversary-controlled servers."
     },
     {
       "id": "T1071.002",
@@ -120,7 +123,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Data origin authentication on DNS responses prevents adversaries from redirecting file transfer protocol C2 channels through poisoned name resolution, ensuring FTP/SFTP connections resolve to legitimate servers rather than attacker infrastructure."
     },
     {
       "id": "T1071.003",
@@ -128,7 +132,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Secure name resolution with integrity verification prevents adversaries from hijacking mail protocol C2 channels by poisoning DNS MX records, ensuring SMTP-based command-and-control traffic cannot be redirected through forged resolution responses."
     },
     {
       "id": "T1071.004",
@@ -136,7 +141,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DNSSEC validation directly counters DNS-based C2 by authenticating resolution responses, detecting adversary attempts to inject forged DNS records that tunnel commands or exfiltrate data through manipulated DNS query-response pairs."
     },
     {
       "id": "T1568.002",
@@ -144,7 +150,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Secure recursive resolvers with DNSSEC validation can detect anomalous resolution patterns characteristic of domain generation algorithms, and authenticated responses prevent adversaries from poisoning the resolver cache to redirect DGA-resolved domains to their infrastructure."
     }
   ],
   "metadata": {

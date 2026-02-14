@@ -170,7 +170,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement mechanisms restrict which accounts and processes can read sensitive credential stores such as SAM databases, LSASS memory, and NTDS.dit files, limiting the ability of adversaries to extract hashed or plaintext credentials from the operating system."
     },
     {
       "id": "T1005",
@@ -178,7 +179,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Mandatory access controls and role-based permissions on files and directories prevent unauthorized processes and users from reading sensitive data stored on local systems, reducing the scope of collection available to adversaries."
     },
     {
       "id": "T1021",
@@ -186,7 +188,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing authorization policies on remote service endpoints ensures that only authenticated, authorized users can establish remote sessions via RDP, SSH, SMB, or other protocols, blocking lateral movement by adversaries lacking proper entitlements."
     },
     {
       "id": "T1025",
@@ -194,7 +197,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on removable media mount points and device interfaces restricts which users and processes can read data from USB drives and other removable storage, limiting adversary collection from physical media."
     },
     {
       "id": "T1027",
@@ -202,7 +206,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on file systems and execution environments restricts adversaries from writing or reading obfuscated payloads in protected directories, limiting their ability to stage and retrieve encoded malicious content."
     },
     {
       "id": "T1036",
@@ -210,7 +215,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing strict access controls on system directories and binary locations prevents adversaries from placing masquerading files alongside or in place of legitimate executables, as write access to trusted paths is denied."
     },
     {
       "id": "T1037",
@@ -219,7 +225,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on boot and logon script directories prevents unauthorized modification of startup scripts, blocking adversaries from inserting malicious initialization commands that execute during system or user logon."
     },
     {
       "id": "T1041",
@@ -227,7 +234,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Data-level access controls and egress authorization policies restrict which processes and users can transmit data over command-and-control channels, limiting unauthorized exfiltration by preventing access to sensitive data objects in the first place."
     },
     {
       "id": "T1047",
@@ -235,7 +243,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting WMI namespace permissions and limiting remote DCOM access through access enforcement mechanisms prevents unauthorized users from executing arbitrary commands or queries via Windows Management Instrumentation."
     },
     {
       "id": "T1048",
@@ -243,7 +252,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network interfaces and data repositories prevents unauthorized processes from reading sensitive data and transmitting it over alternative protocols such as DNS, FTP, or SMTP for exfiltration."
     },
     {
       "id": "T1052",
@@ -251,7 +261,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on physical device interfaces and restricting which users can mount or write to removable media prevents adversaries from copying sensitive data to physical media for offline exfiltration."
     },
     {
       "id": "T1053",
@@ -261,7 +272,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting permissions on task scheduling services (cron, Task Scheduler, at) through access enforcement ensures only authorized administrators can create or modify scheduled tasks, preventing adversary persistence and execution."
     },
     {
       "id": "T1055",
@@ -270,7 +282,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Process-level access controls, including memory protection boundaries and inter-process permission enforcement, restrict which processes can read or write to the memory of other processes, impeding injection techniques."
     },
     {
       "id": "T1059",
@@ -278,7 +291,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on scripting engines and command interpreters through execution policies, shell restrictions, and application allowlists prevents unauthorized users from invoking PowerShell, cmd, bash, or other interpreters."
     },
     {
       "id": "T1070",
@@ -286,7 +300,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on log files, event logs, and audit records prevents unauthorized users and processes from deleting or modifying forensic evidence, preserving indicators of compromise."
     },
     {
       "id": "T1072",
@@ -295,7 +310,8 @@
         "execution",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on software deployment tools restricts which accounts can push packages and execute remote installations, preventing adversaries from hijacking deployment infrastructure for lateral movement."
     },
     {
       "id": "T1078",
@@ -306,7 +322,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Fine-grained access enforcement ensures that even when adversaries obtain valid credentials, the compromised accounts are constrained by least-privilege authorization policies that limit accessible resources and actions."
     },
     {
       "id": "T1080",
@@ -314,7 +331,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on shared network drives and collaboration platforms restrict which users can write or modify shared content, preventing adversaries from tainting files used by other users for lateral movement."
     },
     {
       "id": "T1090",
@@ -322,7 +340,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network-layer access enforcement through proxy authorization controls and firewall rules restricts which systems and users can establish outbound connections, hindering adversary use of proxy infrastructure for C2."
     },
     {
       "id": "T1091",
@@ -331,7 +350,8 @@
         "initial-access",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on removable media autorun capabilities and USB device mounting restricts execution of binaries from removable media, preventing malware replication and initial access via infected devices."
     },
     {
       "id": "T1095",
@@ -339,7 +359,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement at the network layer through protocol-specific authorization and firewall policies restricts unauthorized non-application-layer communications, disrupting adversary C2 channels using raw TCP/UDP or ICMP."
     },
     {
       "id": "T1098",
@@ -348,7 +369,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing strict authorization on directory services and identity management interfaces prevents unauthorized users from modifying account attributes, group memberships, or permissions for privilege escalation and persistence."
     },
     {
       "id": "T1110",
@@ -356,7 +378,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement mechanisms that lock accounts or restrict authentication endpoints after policy violations complement brute force prevention by ensuring that even successfully guessed credentials face additional authorization barriers."
     },
     {
       "id": "T1114",
@@ -364,7 +387,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on mailbox permissions, mail server APIs, and email delegation settings restricts which users and applications can read email content, limiting adversary collection of organizational communications."
     },
     {
       "id": "T1133",
@@ -373,7 +397,8 @@
         "initial-access",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Authorization controls on VPN gateways, remote desktop services, and other external access points ensure only explicitly permitted accounts can establish remote sessions, limiting adversary initial access and persistence."
     },
     {
       "id": "T1134",
@@ -382,7 +407,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement validates process tokens against authorization policies at each resource request, making it harder for adversaries to gain elevated privileges simply by manipulating tokens without corresponding entitlements."
     },
     {
       "id": "T1136",
@@ -390,7 +416,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting account creation privileges through authorization policies ensures only designated administrators can provision new local, domain, or cloud accounts, preventing adversaries from creating persistent backdoor identities."
     },
     {
       "id": "T1185",
@@ -398,7 +425,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on browser session data and web application authorization tokens limits what resources a hijacked browser session can access, constraining the impact of session takeover attacks."
     },
     {
       "id": "T1187",
@@ -406,7 +434,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on network authentication protocols and file share permissions prevent adversaries from exploiting forced authentication scenarios by restricting what credentials are automatically sent to remote resources."
     },
     {
       "id": "T1190",
@@ -414,7 +443,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Authorization controls on public-facing application interfaces, including API gateways and web application firewalls, enforce input validation and privilege checks that limit the impact of exploitation attempts."
     },
     {
       "id": "T1195",
@@ -422,7 +452,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on software repositories, build pipelines, and deployment channels restricts who can introduce code or binaries, reducing the risk of supply chain compromise through unauthorized modifications."
     },
     {
       "id": "T1197",
@@ -431,7 +462,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting BITS job creation and management permissions through access enforcement prevents non-administrative users from scheduling background transfers that could be used for persistence or data staging."
     },
     {
       "id": "T1199",
@@ -439,7 +471,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement ensures that trusted third-party connections are limited to specific, authorized services and data, preventing adversaries from pivoting through partner network trust relationships."
     },
     {
       "id": "T1200",
@@ -447,7 +480,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Physical and logical access enforcement on device interfaces prevents unauthorized hardware additions such as rogue network adapters, keyloggers, or implant devices from gaining system access."
     },
     {
       "id": "T1205",
@@ -457,7 +491,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network interfaces and firewall configurations prevents unauthorized modification of traffic signaling mechanisms like port knocking, ensuring only approved services respond to connection requests."
     },
     {
       "id": "T1210",
@@ -465,7 +500,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation and service-level access controls restrict which systems can connect to internal services, limiting adversary ability to exploit remote service vulnerabilities for lateral movement."
     },
     {
       "id": "T1213",
@@ -473,7 +509,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on information repositories such as wikis, SharePoint, and databases restricts data retrieval to authorized users, preventing adversary collection of sensitive organizational knowledge."
     },
     {
       "id": "T1218",
@@ -481,7 +518,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting execution permissions on system binaries and signed executables through application control policies prevents adversaries from using trusted binaries as proxies to bypass security controls."
     },
     {
       "id": "T1219",
@@ -489,7 +527,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on outbound network connections and application allowlists restricts installation and use of remote access tools, preventing adversaries from establishing unauthorized remote management channels."
     },
     {
       "id": "T1222",
@@ -497,7 +536,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing immutable file and directory permissions through mandatory access controls prevents adversaries from using chmod, icacls, or similar utilities to weaken protection on critical system and data files."
     },
     {
       "id": "T1484",
@@ -506,7 +546,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on domain and tenant policy objects restricts which administrators can modify Group Policy or Azure AD policies, preventing adversaries from weakening security configurations across the environment."
     },
     {
       "id": "T1485",
@@ -514,7 +555,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on critical data stores and backup repositories prevent unauthorized deletion operations, ensuring adversaries cannot destroy data without first obtaining explicitly granted administrative privileges."
     },
     {
       "id": "T1486",
@@ -522,7 +564,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write and execute permissions on critical file systems through access enforcement limits the ability of ransomware to encrypt data, particularly when combined with role separation between data owners and administrators."
     },
     {
       "id": "T1489",
@@ -530,7 +573,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on service management interfaces restricts which accounts can stop, disable, or reconfigure critical services, preventing adversaries from disrupting operations without elevated privileges."
     },
     {
       "id": "T1490",
@@ -538,7 +582,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to backup management tools, volume shadow copies, and recovery consoles through authorization policies prevents adversaries from deleting recovery resources needed for system restoration."
     },
     {
       "id": "T1491",
@@ -546,7 +591,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on web server content directories and internal portal resources restricts unauthorized modification, preventing adversaries from replacing pages with defacement content."
     },
     {
       "id": "T1495",
@@ -554,7 +600,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on firmware update mechanisms and BIOS/UEFI management interfaces restrict which accounts and processes can modify firmware, preventing unauthorized corruption of low-level system software."
     },
     {
       "id": "T1498",
@@ -562,7 +609,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network access enforcement through rate limiting, traffic filtering, and authorization policies on network infrastructure helps mitigate denial-of-service attacks by restricting unauthorized traffic volumes."
     },
     {
       "id": "T1499",
@@ -570,7 +618,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on application endpoints through authentication requirements and rate-limiting policies prevents unauthorized users from overwhelming services with resource-exhausting requests."
     },
     {
       "id": "T1505",
@@ -578,7 +627,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on server software installation directories, module registration, and extension loading mechanisms prevent unauthorized deployment of malicious server components for persistent backdoor access."
     },
     {
       "id": "T1525",
@@ -586,7 +636,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on container registries and image repositories restricts which accounts can push or modify container images, preventing adversaries from implanting trojaned images for later deployment."
     },
     {
       "id": "T1528",
@@ -594,7 +645,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing OAuth consent policies and application permission scopes through access controls limits which applications can request access tokens, reducing the risk of token theft through unauthorized app registrations."
     },
     {
       "id": "T1530",
@@ -602,7 +654,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud storage buckets, blobs, and containers through IAM policies and bucket policies restricts data retrieval to authorized principals, preventing unauthorized cloud data collection."
     },
     {
       "id": "T1537",
@@ -610,7 +663,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud account resource policies restricts which identities can create or modify cross-account data transfer configurations, preventing unauthorized exfiltration to adversary-controlled cloud accounts."
     },
     {
       "id": "T1538",
@@ -618,7 +672,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to cloud management consoles and service dashboards through IAM policies and conditional access rules prevents unauthorized enumeration of cloud infrastructure and service configurations."
     },
     {
       "id": "T1539",
@@ -626,7 +681,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on browser cookie stores and session management mechanisms restricts which processes can read session tokens, limiting adversary ability to steal web session cookies for account takeover."
     },
     {
       "id": "T1542",
@@ -635,7 +691,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on firmware update interfaces, BIOS settings, and boot configuration through physical and logical controls prevents unauthorized pre-OS boot modifications that evade operating system security."
     },
     {
       "id": "T1543",
@@ -644,7 +701,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting permissions to create or modify system processes, services, and daemons ensures only authorized administrators can register new services, preventing adversary persistence through system process manipulation."
     },
     {
       "id": "T1546",
@@ -653,7 +711,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on event-triggered execution mechanisms such as WMI subscriptions, shell configuration files, and registry autorun entries prevents adversaries from establishing persistent execution hooks."
     },
     {
       "id": "T1548",
@@ -662,7 +721,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Mandatory access controls and proper privilege separation ensure that elevation control mechanisms like UAC, sudo, and setuid binaries cannot be bypassed by unauthorized users to gain elevated privileges."
     },
     {
       "id": "T1550",
@@ -671,7 +731,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement validates authentication material beyond simple token or hash presentation, requiring contextual authorization checks that detect and block use of stolen or forged alternate credentials."
     },
     {
       "id": "T1552",
@@ -679,7 +740,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting file system and registry access to locations where credentials may be stored prevents unauthorized users from discovering plaintext passwords, private keys, or other unsecured credential material."
     },
     {
       "id": "T1553",
@@ -687,7 +749,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on trust stores, certificate authorities, and code signing infrastructure prevents adversaries from installing unauthorized root certificates or modifying trust validation mechanisms."
     },
     {
       "id": "T1555",
@@ -695,7 +758,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on password manager databases, keychain files, and credential vaults restrict which processes and users can query stored credentials, preventing bulk extraction of saved passwords."
     },
     {
       "id": "T1556",
@@ -705,7 +769,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on authentication system components such as domain controllers, PAM modules, and authentication libraries prevents unauthorized modification of the authentication process for credential harvesting or bypass."
     },
     {
       "id": "T1557",
@@ -714,7 +779,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network-level access enforcement through authenticated and encrypted communication channels prevents adversary-in-the-middle attacks by ensuring that only authorized endpoints can participate in network conversations."
     },
     {
       "id": "T1558",
@@ -722,7 +788,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Kerberos infrastructure, including KDC services and ticket-granting mechanisms, restricts which accounts can request service tickets, limiting Kerberoasting and ticket forgery attacks."
     },
     {
       "id": "T1559",
@@ -730,7 +797,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on COM objects and inter-process communication channels restrict which processes can invoke IPC mechanisms, preventing adversaries from leveraging trusted process communication for execution."
     },
     {
       "id": "T1561",
@@ -738,7 +806,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on raw disk access and volume management APIs prevents unauthorized users and processes from directly wiping disk content or modifying disk structures for destructive impact."
     },
     {
       "id": "T1562",
@@ -746,7 +815,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on security tool configurations, logging services, and firewall settings prevents adversaries from disabling or modifying defensive capabilities without proper administrative authorization."
     },
     {
       "id": "T1563",
@@ -754,7 +824,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on remote session management, including idle session handling and terminal server reconnection policies, prevents adversaries from hijacking active SSH or RDP sessions for lateral movement."
     },
     {
       "id": "T1565",
@@ -762,7 +833,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on databases, file systems, and application data stores prevent unauthorized modification of stored or runtime data, ensuring data integrity against manipulation attacks."
     },
     {
       "id": "T1567",
@@ -770,7 +842,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on outbound web service connections and cloud storage APIs restricts which processes can upload data to external services, preventing exfiltration via legitimate web platforms."
     },
     {
       "id": "T1569",
@@ -778,7 +851,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting permissions on service control managers and launchctl interfaces through access enforcement prevents unauthorized users from creating or executing system services for malicious purposes."
     },
     {
       "id": "T1570",
@@ -786,7 +860,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on network shares and internal transfer mechanisms restrict which users can copy tools and files between systems, impeding adversary lateral tool transfer within the network."
     },
     {
       "id": "T1572",
@@ -794,7 +869,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network interfaces and tunnel creation capabilities restricts which users and processes can establish protocol tunnels, disrupting adversary attempts to encapsulate C2 traffic."
     },
     {
       "id": "T1574",
@@ -804,7 +880,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on DLL directories, service binary paths, and execution flow paths prevents adversaries from placing malicious libraries or executables where they will be loaded by trusted applications."
     },
     {
       "id": "T1578",
@@ -812,7 +889,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policies and access controls on cloud compute APIs restrict which accounts can create, modify, or delete virtual machines and snapshots, preventing unauthorized infrastructure manipulation for defense evasion."
     },
     {
       "id": "T1580",
@@ -820,7 +898,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud infrastructure APIs and management consoles restricts discovery operations to authorized administrators, preventing adversaries from enumerating cloud resources for targeting."
     },
     {
       "id": "T1599",
@@ -828,7 +907,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on network device configurations and routing tables prevent unauthorized modification of network boundaries, blocking adversary attempts to bridge isolated network segments."
     },
     {
       "id": "T1601",
@@ -836,7 +916,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network device management interfaces and firmware update mechanisms prevents unauthorized modification of system images used by routers, switches, and other network infrastructure."
     },
     {
       "id": "T1602",
@@ -844,7 +925,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on SNMP communities, network device CLI access, and configuration management interfaces restrict unauthorized retrieval of device configurations containing sensitive network architecture details."
     },
     {
       "id": "T1606",
@@ -852,7 +934,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on web credential infrastructure, including SAML assertion signing keys and cookie generation mechanisms, prevents adversaries from forging authentication credentials without proper authorization."
     },
     {
       "id": "T1609",
@@ -860,7 +943,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to container runtime APIs and orchestration management interfaces through RBAC policies prevents unauthorized execution of administrative commands within container environments."
     },
     {
       "id": "T1610",
@@ -869,7 +953,8 @@
         "defense-evasion",
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on container orchestration platforms restricts which accounts can deploy new containers, preventing adversaries from running malicious workloads that evade host-based security controls."
     },
     {
       "id": "T1611",
@@ -877,7 +962,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on container runtime configurations, including seccomp profiles and namespace boundaries, restrict the ability of containerized processes to escape to the host operating system."
     },
     {
       "id": "T1612",
@@ -885,7 +971,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on container build APIs and image registries restricts which users can build images directly on host systems, preventing adversaries from creating malicious containers that bypass image scanning."
     },
     {
       "id": "T1613",
@@ -893,7 +980,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to container orchestration APIs and service discovery endpoints through RBAC prevents unauthorized enumeration of running containers, pods, and associated resources."
     },
     {
       "id": "T1619",
@@ -901,7 +989,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud storage listing APIs restricts which identities can enumerate storage objects, preventing adversaries from discovering and targeting sensitive data in cloud storage services."
     },
     {
       "id": "T1622",
@@ -910,7 +999,8 @@
         "defense-evasion",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on debugging interfaces and process inspection APIs restrict which accounts can attach debuggers or inspect process memory, limiting adversary ability to detect and evade analysis environments."
     },
     {
       "id": "T1647",
@@ -918,7 +1008,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on property list files and application configuration directories on macOS prevents unauthorized modification of plist files used to configure system behavior and application settings."
     },
     {
       "id": "T1648",
@@ -926,7 +1017,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on serverless function deployment and invocation through IAM policies restricts which identities can create or trigger Lambda functions, Azure Functions, or Cloud Functions for malicious execution."
     },
     {
       "id": "T1651",
@@ -934,7 +1026,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud administration command execution through IAM policies and conditional access ensures only authorized operators can run management commands against cloud infrastructure resources."
     },
     {
       "id": "T1654",
@@ -942,7 +1035,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on log storage locations and query interfaces restrict which accounts can enumerate log data, preventing adversaries from using log access to map security monitoring capabilities."
     },
     {
       "id": "T1003.001",
@@ -950,7 +1044,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to the LSASS process through Protected Process Light and memory access controls prevents unauthorized processes from reading LSASS memory to extract cached credentials and Kerberos tickets."
     },
     {
       "id": "T1003.002",
@@ -958,7 +1053,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on the SAM registry hive and associated system files prevents unauthorized extraction of local password hashes stored in the Security Account Manager database."
     },
     {
       "id": "T1003.003",
@@ -966,7 +1062,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to the NTDS.dit Active Directory database file and the Volume Shadow Copy service prevents unauthorized dumping of domain-wide credential hashes."
     },
     {
       "id": "T1003.004",
@@ -974,7 +1071,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on LSA Secrets registry keys and the Security registry hive prevent unauthorized processes from extracting service account passwords, machine account credentials, and cached secrets."
     },
     {
       "id": "T1003.005",
@@ -982,7 +1080,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on the cached domain credentials stored in the SECURITY registry hive limits adversary ability to extract DCC2 hashes for offline cracking."
     },
     {
       "id": "T1003.006",
@@ -990,7 +1089,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Active Directory replication permissions to authorized domain controllers prevents non-DC accounts from performing DCSync attacks to extract domain-wide password hashes via the MS-DRSR protocol."
     },
     {
       "id": "T1003.007",
@@ -998,7 +1098,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on the /proc filesystem, particularly /proc/[pid]/mem and /proc/[pid]/maps, prevent unauthorized processes from reading memory of other processes to extract credential material on Linux systems."
     },
     {
       "id": "T1003.008",
@@ -1006,7 +1107,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing strict file permissions on /etc/passwd and /etc/shadow files ensures only root and authorized shadow group members can read password hashes, preventing unauthorized credential harvesting."
     },
     {
       "id": "T1020.001",
@@ -1014,7 +1116,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network device configurations restricts which administrators can configure port mirroring or traffic duplication, preventing adversaries from duplicating traffic for covert data exfiltration."
     },
     {
       "id": "T1021.001",
@@ -1022,7 +1125,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on RDP endpoints through Network Level Authentication requirements and user rights assignments restricts which accounts can establish Remote Desktop sessions for lateral movement."
     },
     {
       "id": "T1021.002",
@@ -1030,7 +1134,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to administrative shares (C$, ADMIN$, IPC$) through share permissions and user rights policies prevents unauthorized SMB-based lateral movement between Windows systems."
     },
     {
       "id": "T1021.003",
@@ -1038,7 +1143,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on DCOM launch and access permissions restricts which accounts can remotely instantiate COM objects, preventing adversaries from using DCOM for lateral movement across Windows networks."
     },
     {
       "id": "T1021.004",
@@ -1046,7 +1152,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting SSH access through authorized_keys management, AllowUsers directives, and key-based authentication enforcement limits which accounts can establish SSH sessions for lateral movement."
     },
     {
       "id": "T1021.005",
@@ -1054,7 +1161,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on VNC server configurations and authentication requirements restrict which users can establish remote graphical sessions, preventing unauthorized lateral movement via VNC."
     },
     {
       "id": "T1021.006",
@@ -1062,7 +1170,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting WinRM access through TrustedHosts configurations and listener permissions prevents unauthorized accounts from executing remote commands via Windows Remote Management."
     },
     {
       "id": "T1021.007",
@@ -1070,7 +1179,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policies and conditional access rules on cloud service management APIs restrict which identities can access cloud services, preventing adversary lateral movement through cloud platform interfaces."
     },
     {
       "id": "T1021.008",
@@ -1078,7 +1188,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud VM connection methods, including serial console access and instance-level SSH, restricts direct access to virtual machines, preventing bypass of network-level security controls."
     },
     {
       "id": "T1036.003",
@@ -1086,7 +1197,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on system utility directories prevent adversaries from replacing or renaming system utilities with malicious variants, as write permissions to protected paths are restricted."
     },
     {
       "id": "T1036.005",
@@ -1094,7 +1206,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on trusted application directories and system paths prevents adversaries from placing malicious files with legitimate names in protected locations to deceive users and security tools."
     },
     {
       "id": "T1036.010",
@@ -1102,7 +1215,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on account creation and naming conventions through directory service policies prevents adversaries from creating accounts with names designed to mimic legitimate service or administrative accounts."
     },
     {
       "id": "T1037.002",
@@ -1111,7 +1225,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on macOS login hook configuration files restrict which users can modify the com.apple.loginwindow.plist, preventing unauthorized insertion of login hooks for persistence."
     },
     {
       "id": "T1037.003",
@@ -1120,7 +1235,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write access to network logon script directories and Group Policy script configurations prevents adversaries from modifying domain logon scripts executed during user authentication."
     },
     {
       "id": "T1037.004",
@@ -1129,7 +1245,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on /etc/rc.d and init script directories restricts which users can create or modify RC scripts, preventing adversary persistence through system initialization script manipulation."
     },
     {
       "id": "T1037.005",
@@ -1138,7 +1255,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to macOS StartupItems directories and launch configuration files prevents unauthorized installation of startup items that execute with elevated privileges during system boot."
     },
     {
       "id": "T1048.001",
@@ -1146,7 +1264,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement restricts which processes can establish outbound encrypted connections over non-standard protocols, limiting adversary ability to exfiltrate data via symmetric-encrypted alternative channels."
     },
     {
       "id": "T1048.002",
@@ -1154,7 +1273,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on network egress paths and application-level authorization restrict unauthorized processes from transmitting data over asymmetric-encrypted non-C2 protocols for exfiltration."
     },
     {
       "id": "T1048.003",
@@ -1162,7 +1282,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on network interfaces and data objects prevents unauthorized processes from sending sensitive data over unencrypted alternative protocols such as raw HTTP, FTP, or DNS."
     },
     {
       "id": "T1052.001",
@@ -1170,7 +1291,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on USB device interfaces, including device access policies and removable storage write restrictions, prevents unauthorized data transfer to USB drives for physical exfiltration."
     },
     {
       "id": "T1053.002",
@@ -1180,7 +1302,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting permissions on the at command and its associated spool directories prevents non-privileged users from scheduling malicious jobs for deferred execution and persistence."
     },
     {
       "id": "T1053.003",
@@ -1190,7 +1313,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on crontab files and cron directories restricts which users can create or modify cron jobs, preventing adversary persistence through unauthorized scheduled task creation on Unix systems."
     },
     {
       "id": "T1053.005",
@@ -1200,7 +1324,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to the Windows Task Scheduler service and task folder through ACLs prevents unauthorized users from creating or modifying scheduled tasks for execution and persistence."
     },
     {
       "id": "T1053.006",
@@ -1210,7 +1335,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on systemd timer unit files and the systemctl interface restricts which users can create or modify timer-based services for persistent scheduled execution on Linux systems."
     },
     {
       "id": "T1053.007",
@@ -1220,7 +1346,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "RBAC policies on container orchestration platforms restrict which accounts can create CronJobs or Jobs, preventing adversaries from scheduling malicious workloads in Kubernetes or similar environments."
     },
     {
       "id": "T1055.008",
@@ -1229,7 +1356,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on the ptrace system call through security modules like Yama restrict which processes can attach to and inject code into other processes via ptrace-based debugging interfaces."
     },
     {
       "id": "T1055.009",
@@ -1238,7 +1366,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on /proc/[pid]/mem files through process isolation and mandatory access controls prevents unauthorized processes from writing to another process's memory space for code injection."
     },
     {
       "id": "T1056.003",
@@ -1247,7 +1376,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on web portal authentication pages and form handling mechanisms prevents adversaries from injecting credential-harvesting overlays into legitimate web authentication interfaces."
     },
     {
       "id": "T1059.001",
@@ -1255,7 +1385,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement through PowerShell execution policies, Constrained Language Mode, and AMSI integration restricts unauthorized users from executing arbitrary PowerShell scripts and commands."
     },
     {
       "id": "T1059.002",
@@ -1263,7 +1394,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting AppleScript execution permissions and osascript access through macOS security policies prevents unauthorized users from executing automation scripts for malicious purposes."
     },
     {
       "id": "T1059.003",
@@ -1271,7 +1403,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on cmd.exe execution through application control policies and user rights restrictions prevent unauthorized invocation of the Windows Command Shell for adversary command execution."
     },
     {
       "id": "T1059.004",
@@ -1279,7 +1412,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on shell binaries and restricting interactive shell access through PAM configurations and rbash limits adversary ability to execute commands via Unix shells."
     },
     {
       "id": "T1059.005",
@@ -1287,7 +1421,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Visual Basic scripting hosts (wscript, cscript) through application control policies prevents unauthorized execution of VBScript files for malicious purposes."
     },
     {
       "id": "T1059.006",
@@ -1295,7 +1430,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Python interpreter access and execution permissions through application control and user rights policies prevents adversary use of Python for executing malicious scripts."
     },
     {
       "id": "T1059.007",
@@ -1303,7 +1439,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on JavaScript runtime engines and browser scripting capabilities restrict adversary execution of malicious JavaScript through host-based script interpreters like Node.js or Windows Script Host."
     },
     {
       "id": "T1059.008",
@@ -1311,7 +1448,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network device CLI interfaces through privilege levels, role-based access, and authentication controls restricts which administrators can execute configuration commands on network infrastructure."
     },
     {
       "id": "T1059.009",
@@ -1319,7 +1457,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policies and API access controls restrict which identities can invoke cloud APIs, preventing adversaries from executing arbitrary cloud management commands through compromised or unauthorized accounts."
     },
     {
       "id": "T1059.010",
@@ -1327,7 +1466,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement through application allowlisting prevents unauthorized execution of AutoHotKey and AutoIT scripts that adversaries use for automating malicious actions on Windows systems."
     },
     {
       "id": "T1059.011",
@@ -1335,7 +1475,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to Lua interpreters embedded in applications and network devices through access controls prevents adversaries from executing malicious Lua scripts for code execution."
     },
     {
       "id": "T1070.001",
@@ -1343,7 +1484,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Windows Event Log files and the Event Log service prevents unauthorized users from clearing security, system, and application event logs to remove forensic evidence."
     },
     {
       "id": "T1070.002",
@@ -1351,7 +1493,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to system log files in /var/log and syslog facilities through file permissions prevents adversaries from clearing Linux or macOS system logs to cover their tracks."
     },
     {
       "id": "T1070.003",
@@ -1359,7 +1502,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on shell history files (.bash_history, .zsh_history) and history configuration prevent adversaries from clearing or disabling command history to remove evidence of executed commands."
     },
     {
       "id": "T1070.007",
@@ -1367,7 +1511,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network configuration tools and connection history storage prevents adversaries from clearing wireless network profiles, VPN logs, and other network connection artifacts."
     },
     {
       "id": "T1070.008",
@@ -1375,7 +1520,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to mailbox data stores and email deletion APIs through authorization policies prevents adversaries from clearing mailbox contents to remove evidence of data access or email-based C2."
     },
     {
       "id": "T1070.009",
@@ -1383,7 +1529,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on persistence mechanism locations, including registry autorun keys, scheduled tasks, and startup directories, prevent adversaries from removing their own persistence artifacts to evade detection."
     },
     {
       "id": "T1071.004",
@@ -1391,7 +1538,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on DNS resolver configurations and query channels restricts unauthorized DNS traffic, limiting adversary ability to use DNS as a covert command-and-control protocol."
     },
     {
       "id": "T1078.002",
@@ -1402,7 +1550,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Fine-grained access enforcement on domain resources ensures that compromised domain accounts are constrained by group policies, OU-level restrictions, and resource-specific ACLs that limit lateral movement."
     },
     {
       "id": "T1078.003",
@@ -1413,7 +1562,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on local system resources through UAC, local security policies, and file system permissions constrains compromised local accounts to their authorized privilege level, limiting damage."
     },
     {
       "id": "T1078.004",
@@ -1424,7 +1574,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policies, service control policies, and resource-based policies in cloud environments enforce least-privilege access for cloud accounts, constraining adversary actions even with valid cloud credentials."
     },
     {
       "id": "T1087.004",
@@ -1432,7 +1583,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud IAM enumeration APIs and directory services restricts which accounts can list cloud user accounts, preventing adversary reconnaissance of cloud identity infrastructure."
     },
     {
       "id": "T1090.003",
@@ -1440,7 +1592,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement through egress filtering and proxy authentication requirements disrupts multi-hop proxy chains by requiring authorization at each network boundary traversal point."
     },
     {
       "id": "T1098.001",
@@ -1449,7 +1602,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting permissions to add credentials, access keys, or service principals to cloud accounts prevents adversaries from establishing persistent access through additional cloud credential provisioning."
     },
     {
       "id": "T1098.002",
@@ -1458,7 +1612,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Exchange and M365 delegation settings restricts which accounts can grant email delegate permissions, preventing adversaries from adding mailbox access for persistent email collection."
     },
     {
       "id": "T1098.003",
@@ -1467,7 +1622,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policy enforcement restricts which identities can assign cloud roles, preventing adversaries from granting themselves elevated permissions such as Owner, Contributor, or Admin roles."
     },
     {
       "id": "T1098.004",
@@ -1476,7 +1632,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on ~/.ssh/authorized_keys files and SSH configuration directories restrict who can add SSH public keys, preventing adversaries from establishing persistent key-based access."
     },
     {
       "id": "T1098.005",
@@ -1485,7 +1642,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on device registration services and enrollment policies restricts which accounts can register new devices to the directory, preventing adversary persistence through rogue device enrollment."
     },
     {
       "id": "T1098.006",
@@ -1494,7 +1652,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "RBAC policies on container orchestration platforms restrict which accounts can create or modify ClusterRoles and RoleBindings, preventing adversaries from granting themselves elevated container cluster permissions."
     },
     {
       "id": "T1098.007",
@@ -1503,7 +1662,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on group management APIs and directory services restricts which accounts can add members to local or domain security groups, preventing adversary privilege escalation through group manipulation."
     },
     {
       "id": "T1110.001",
@@ -1511,7 +1671,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement mechanisms that implement progressive delays and thresholds on authentication endpoints slow down password guessing attempts, making real-time brute force attacks impractical."
     },
     {
       "id": "T1110.002",
@@ -1519,7 +1680,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Strong access enforcement on credential stores and password hash databases limits adversary access to the hashed material needed for offline password cracking, reducing the attack surface."
     },
     {
       "id": "T1110.003",
@@ -1527,7 +1689,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement through per-account lockout policies and intelligent rate limiting across authentication endpoints detects and blocks password spraying campaigns that target many accounts with few passwords."
     },
     {
       "id": "T1110.004",
@@ -1535,7 +1698,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on authentication endpoints that detect and throttle credential stuffing attempts, combined with per-IP and per-account rate limits, prevent adversaries from testing stolen credential databases."
     },
     {
       "id": "T1114.002",
@@ -1543,7 +1707,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Exchange Web Services, IMAP, and Graph API endpoints restricts which accounts and applications can access mailboxes remotely, preventing unauthorized email collection."
     },
     {
       "id": "T1134.001",
@@ -1552,7 +1717,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement validates token integrity at each resource access attempt, preventing adversaries from using impersonated or stolen tokens to access resources beyond the original token's authorization scope."
     },
     {
       "id": "T1134.002",
@@ -1561,7 +1727,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Mandatory access controls verify the legitimacy of process tokens at creation time, preventing adversaries from spawning processes with manipulated tokens that bypass intended privilege boundaries."
     },
     {
       "id": "T1134.003",
@@ -1570,7 +1737,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement mechanisms validate the authenticity of impersonation tokens against authorization policies, preventing adversaries from fabricating tokens that grant unauthorized access to protected resources."
     },
     {
       "id": "T1134.005",
@@ -1579,7 +1747,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on SID-History attribute modification in Active Directory prevent unauthorized injection of privileged SIDs that would grant escalated access across domain trust boundaries."
     },
     {
       "id": "T1136.001",
@@ -1587,7 +1756,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement restricts local account creation to authorized administrators through user rights assignments, preventing adversaries from creating backdoor local accounts on compromised systems."
     },
     {
       "id": "T1136.002",
@@ -1595,7 +1765,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing permissions on Active Directory organizational units and user containers restricts domain account creation to authorized directory administrators, preventing unauthorized domain-level persistence."
     },
     {
       "id": "T1136.003",
@@ -1603,7 +1774,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policy enforcement on cloud identity services restricts account creation to authorized administrators, preventing adversaries from provisioning cloud accounts for persistent unauthorized access."
     },
     {
       "id": "T1205.001",
@@ -1613,7 +1785,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on firewall and network device configurations prevents unauthorized modification of port filtering rules, blocking adversaries from implementing port knocking sequences for covert access."
     },
     {
       "id": "T1213.001",
@@ -1621,7 +1794,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on Confluence spaces, pages, and API endpoints restrict which users can read organizational knowledge base content, preventing adversary collection of sensitive documentation."
     },
     {
       "id": "T1213.002",
@@ -1629,7 +1803,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing SharePoint site permissions, document library access controls, and sharing policies restricts unauthorized users from accessing stored documents and organizational intelligence."
     },
     {
       "id": "T1213.003",
@@ -1637,7 +1812,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on code repository permissions, including branch protection and read access restrictions, prevents adversaries from cloning or browsing source code repositories for sensitive information."
     },
     {
       "id": "T1213.004",
@@ -1645,7 +1821,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting CRM platform access through role-based permissions and API authentication prevents adversaries from extracting customer data, sales intelligence, and other sensitive business information."
     },
     {
       "id": "T1213.005",
@@ -1653,7 +1830,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on messaging platforms such as Slack, Teams, and enterprise chat enforce channel membership and message visibility policies, preventing unauthorized collection of internal communications."
     },
     {
       "id": "T1218.002",
@@ -1661,7 +1839,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting execution permissions for Control Panel items (.cpl files) through application control policies prevents adversaries from using the Control Panel as a proxy for executing malicious DLLs."
     },
     {
       "id": "T1218.007",
@@ -1669,7 +1848,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on MSI package installation and msiexec execution through application control policies prevents adversaries from using the Windows Installer for proxy execution of malicious payloads."
     },
     {
       "id": "T1218.012",
@@ -1677,7 +1857,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting execution of verclsid.exe through application control and user rights policies prevents adversaries from using this COM object verification utility as a proxy for DLL execution."
     },
     {
       "id": "T1222.001",
@@ -1685,7 +1866,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Mandatory access controls on Windows that override discretionary permissions prevent adversaries from using icacls, cacls, or PowerShell to weaken file and directory ACLs on protected resources."
     },
     {
       "id": "T1222.002",
@@ -1693,7 +1875,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Mandatory access controls on Linux and macOS enforce permission boundaries that cannot be overridden by chmod, chown, or setfacl commands, preventing adversary weakening of file protections."
     },
     {
       "id": "T1485.001",
@@ -1701,7 +1884,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud storage lifecycle policies restricts which identities can create or modify retention rules, preventing adversaries from configuring automatic deletion of critical data."
     },
     {
       "id": "T1491.001",
@@ -1709,7 +1893,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on internal-facing web content and intranet portals restrict modification permissions, preventing adversaries from replacing internal pages with defacement content for organizational disruption."
     },
     {
       "id": "T1491.002",
@@ -1717,7 +1902,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on externally-facing web server content directories and CMS platforms prevents unauthorized modification of public websites for reputational damage through defacement."
     },
     {
       "id": "T1498.001",
@@ -1725,7 +1911,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network access enforcement through ingress filtering, rate limiting, and traffic authorization policies reduces the volume of direct network flood traffic that reaches protected infrastructure."
     },
     {
       "id": "T1498.002",
@@ -1733,7 +1920,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network services susceptible to reflection and amplification, combined with ingress filtering and BCP38 compliance, limits the effectiveness of amplification-based DDoS attacks."
     },
     {
       "id": "T1499.001",
@@ -1741,7 +1929,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement through connection-level controls and resource allocation policies prevents unauthorized users from exhausting operating system resources such as TCP connections and socket handles."
     },
     {
       "id": "T1499.002",
@@ -1749,7 +1938,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to service endpoints through authentication requirements and rate-limiting enforcement prevents adversaries from flooding specific services with resource-exhausting requests."
     },
     {
       "id": "T1499.003",
@@ -1757,7 +1947,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on application interfaces through request validation and resource quotas prevents adversaries from sending specially crafted requests designed to exhaust application-layer resources."
     },
     {
       "id": "T1499.004",
@@ -1765,7 +1956,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on application endpoints combined with input validation and authentication requirements limit adversary ability to exploit application vulnerabilities for denial-of-service conditions."
     },
     {
       "id": "T1505.002",
@@ -1773,7 +1965,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Exchange transport agent registration and mail server configuration prevents unauthorized installation of malicious transport agents that intercept or modify email traffic for persistence."
     },
     {
       "id": "T1505.003",
@@ -1781,7 +1974,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write access to web server directories and CGI-bin locations through access controls prevents adversaries from deploying web shells for persistent remote command execution on compromised servers."
     },
     {
       "id": "T1505.004",
@@ -1789,7 +1983,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on IIS module registration and configuration files prevents unauthorized installation of malicious ISAPI extensions or managed modules that provide persistent server-side backdoor access."
     },
     {
       "id": "T1505.005",
@@ -1797,7 +1992,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to Terminal Services DLL registration paths and RDP configuration prevents adversaries from loading malicious DLLs that execute within the context of remote desktop sessions."
     },
     {
       "id": "T1542.001",
@@ -1806,7 +2002,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on BIOS/UEFI management interfaces through physical security and firmware passwords prevents unauthorized modification of system firmware for persistent pre-OS boot access."
     },
     {
       "id": "T1542.003",
@@ -1815,7 +2012,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on boot sector modification, including Secure Boot enforcement and disk write protections, prevent adversaries from installing bootkits that persist below the operating system."
     },
     {
       "id": "T1542.004",
@@ -1824,7 +2022,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to network device ROMMON interfaces through physical security and console port authentication prevents adversaries from modifying ROM Monitor firmware on Cisco devices."
     },
     {
       "id": "T1542.005",
@@ -1833,7 +2032,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on TFTP server configurations and network device boot settings prevents adversaries from redirecting devices to boot from malicious TFTP-served images for persistent compromise."
     },
     {
       "id": "T1543.001",
@@ -1842,7 +2042,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on macOS LaunchAgent directories (~/Library/LaunchAgents and /Library/LaunchAgents) restrict which users can install launch agent plists for persistence through user-level process creation."
     },
     {
       "id": "T1543.002",
@@ -1851,7 +2052,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to systemd unit file directories and the systemctl interface prevents unauthorized creation or modification of systemd services for persistent privileged execution on Linux systems."
     },
     {
       "id": "T1543.003",
@@ -1860,7 +2062,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on the Windows Service Control Manager and service binary paths prevents unauthorized creation or modification of Windows services used for persistence and privilege escalation."
     },
     {
       "id": "T1543.004",
@@ -1869,7 +2072,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to /Library/LaunchDaemons and the launchctl interface through access controls prevents adversaries from installing launch daemons that execute with root privileges on macOS."
     },
     {
       "id": "T1543.005",
@@ -1878,7 +2082,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "RBAC policies on container orchestration platforms restrict which accounts can create or modify container services, preventing adversaries from deploying persistent malicious containers."
     },
     {
       "id": "T1546.003",
@@ -1887,7 +2092,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on WMI event subscriptions and the WMI repository restricts which accounts can create permanent event consumers, preventing adversary persistence through WMI event-triggered execution."
     },
     {
       "id": "T1546.004",
@@ -1896,7 +2102,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write access to shell configuration files (.bashrc, .zshrc, .profile) through access controls prevents adversaries from inserting malicious commands that execute on each shell session."
     },
     {
       "id": "T1546.013",
@@ -1905,7 +2112,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on PowerShell profile locations prevent unauthorized modification of profile scripts that execute automatically when PowerShell sessions start, blocking profile-based persistence."
     },
     {
       "id": "T1547.003",
@@ -1914,7 +2122,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting registry access to the W32Time service configuration and Time Provider DLL registration keys prevents adversaries from registering malicious time provider DLLs for persistent execution."
     },
     {
       "id": "T1547.004",
@@ -1923,7 +2132,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Winlogon registry keys prevents unauthorized modification of Winlogon Helper DLL references, blocking adversaries from loading malicious DLLs during the Windows logon process."
     },
     {
       "id": "T1547.006",
@@ -1932,7 +2142,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to kernel module loading interfaces (insmod, modprobe) and kernel extension directories through access controls prevents unauthorized installation of kernel-level persistence mechanisms."
     },
     {
       "id": "T1547.007",
@@ -1941,7 +2152,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on the macOS re-opened applications plist and session restoration data prevent adversaries from registering malicious applications for automatic re-launch after system restart."
     },
     {
       "id": "T1547.009",
@@ -1950,7 +2162,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write access to shortcut (.lnk) files in startup directories and common locations prevents adversaries from modifying shortcuts to redirect execution to malicious payloads."
     },
     {
       "id": "T1547.012",
@@ -1959,7 +2172,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on the Print Spooler service configuration and print processor registry keys prevents adversaries from registering malicious print processor DLLs for persistent code execution."
     },
     {
       "id": "T1547.013",
@@ -1968,7 +2182,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to XDG autostart directories (~/.config/autostart, /etc/xdg/autostart) prevents adversaries from creating desktop entry files for automatic execution on Linux desktop environments."
     },
     {
       "id": "T1548.002",
@@ -1977,7 +2192,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement through properly configured UAC policies, including requiring elevation prompts for all administrative operations, prevents adversaries from silently bypassing User Account Control."
     },
     {
       "id": "T1548.003",
@@ -1986,7 +2202,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting sudoers file modification and enforcing timestamp_timeout=0 in sudo configuration limits adversary ability to exploit sudo caching for persistent elevated access without re-authentication."
     },
     {
       "id": "T1548.005",
@@ -1995,7 +2212,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud IAM policies governing temporary role assumption and just-in-time access prevents adversaries from abusing temporary elevated cloud access beyond authorized scope and duration."
     },
     {
       "id": "T1548.006",
@@ -2004,7 +2222,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on the macOS TCC database and privacy preference policy control prevent unauthorized manipulation of application permissions that grant access to protected resources like camera, microphone, and files."
     },
     {
       "id": "T1550.002",
@@ -2013,7 +2232,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement that requires full Kerberos authentication rather than accepting NTLM hashes alone prevents adversaries from using pass-the-hash techniques to authenticate as other users."
     },
     {
       "id": "T1550.003",
@@ -2022,7 +2242,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on Kerberos ticket validation, including PAC verification and ticket lifetime enforcement, prevent adversaries from using stolen or forged Kerberos tickets for lateral movement."
     },
     {
       "id": "T1552.002",
@@ -2030,7 +2251,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on Windows Registry keys where credentials may be stored, including HKLM\\SOFTWARE and HKCU entries, prevents unauthorized processes from extracting stored credential material."
     },
     {
       "id": "T1552.005",
@@ -2038,7 +2260,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to cloud instance metadata APIs through IMDSv2 enforcement and network access controls prevents unauthorized processes from retrieving temporary credentials from metadata services."
     },
     {
       "id": "T1552.007",
@@ -2046,7 +2269,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on container runtime APIs, including Docker socket and kubelet endpoints, prevents unauthorized processes from querying container metadata to extract secrets and credentials."
     },
     {
       "id": "T1553.003",
@@ -2054,7 +2278,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on Subject Interface Package (SIP) and trust provider DLL registration in the registry prevent adversaries from hijacking Windows code signing verification to validate malicious binaries."
     },
     {
       "id": "T1555.002",
@@ -2062,7 +2287,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on the macOS securityd process and keychain database files restricts which processes can read decrypted credentials from the system keychain memory."
     },
     {
       "id": "T1555.005",
@@ -2070,7 +2296,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to password manager application data, browser credential databases, and vault configuration files prevents adversary extraction of stored credentials from password management tools."
     },
     {
       "id": "T1555.006",
@@ -2078,7 +2305,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policies and access controls on cloud secrets management services (AWS Secrets Manager, Azure Key Vault, GCP Secret Manager) restrict which identities can retrieve stored secrets."
     },
     {
       "id": "T1556.001",
@@ -2088,7 +2316,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on domain controller authentication components, including password filter DLLs and authentication packages, prevents unauthorized modification of the DC authentication pipeline."
     },
     {
       "id": "T1556.003",
@@ -2098,7 +2327,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write access to PAM module directories (/etc/pam.d/, /lib/security/) and PAM configuration files prevents adversaries from installing malicious authentication modules for credential capture."
     },
     {
       "id": "T1556.004",
@@ -2108,7 +2338,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on network device authentication configurations, including TACACS+ and RADIUS settings, prevent unauthorized modification of authentication mechanisms on routers and switches."
     },
     {
       "id": "T1556.006",
@@ -2118,7 +2349,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to MFA provider configurations and registration interfaces prevents adversaries from modifying multi-factor authentication settings to bypass or intercept second-factor verification."
     },
     {
       "id": "T1556.007",
@@ -2128,7 +2360,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on hybrid identity synchronization services such as Azure AD Connect prevents adversary modification of authentication flows between on-premises and cloud identity providers."
     },
     {
       "id": "T1556.008",
@@ -2138,7 +2371,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting registry access to network provider DLL registration keys prevents adversaries from installing malicious credential-intercepting DLLs in the Windows network authentication chain."
     },
     {
       "id": "T1556.009",
@@ -2148,7 +2382,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on conditional access policy management interfaces prevents adversaries from modifying or disabling conditional access rules that enforce MFA, device compliance, and location-based controls."
     },
     {
       "id": "T1557.001",
@@ -2157,7 +2392,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement through SMB signing requirements and NTLM relay protections prevents adversaries from intercepting LLMNR/NBT-NS authentication traffic and relaying captured hashes."
     },
     {
       "id": "T1557.002",
@@ -2166,7 +2402,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network-level access controls including static ARP entries and port security configurations prevent adversaries from poisoning ARP caches to redirect traffic through attacker-controlled systems."
     },
     {
       "id": "T1557.003",
@@ -2175,7 +2412,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on DHCP server deployment and rogue DHCP detection prevents adversaries from spoofing DHCP responses to redirect network traffic through malicious gateways."
     },
     {
       "id": "T1557.004",
@@ -2184,7 +2422,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on wireless network infrastructure, including rogue AP detection and 802.1X enforcement, prevent adversaries from deploying evil twin access points for credential interception."
     },
     {
       "id": "T1558.001",
@@ -2192,7 +2431,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on the krbtgt account and KDC service restricts the ability to forge Kerberos TGTs, as only the KDC should possess the krbtgt key needed for golden ticket creation."
     },
     {
       "id": "T1558.002",
@@ -2200,7 +2440,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to service account password hashes and enforcing strong service account credentials through access controls limits adversary ability to forge service tickets for lateral movement."
     },
     {
       "id": "T1558.003",
@@ -2208,7 +2449,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement that restricts which accounts can request service tickets, combined with strong service account passwords, reduces the exploitability of Kerberoasting attacks targeting weak SPN credentials."
     },
     {
       "id": "T1558.004",
@@ -2216,7 +2458,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement requiring Kerberos pre-authentication for all accounts prevents adversaries from requesting AS-REP responses for accounts without pre-auth, blocking AS-REP Roasting attacks."
     },
     {
       "id": "T1558.005",
@@ -2224,7 +2467,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on Kerberos credential cache files (ccache) in /tmp and user directories prevent unauthorized processes from reading stored ticket-granting tickets for credential theft."
     },
     {
       "id": "T1559.001",
@@ -2232,7 +2476,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on COM object instantiation through DCOM launch permissions and activation security settings restricts which processes can invoke COM objects for inter-process communication."
     },
     {
       "id": "T1561.001",
@@ -2240,7 +2485,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on raw disk access APIs and disk management utilities prevent unauthorized processes from directly overwriting disk content sectors, protecting against wiper malware."
     },
     {
       "id": "T1561.002",
@@ -2248,7 +2494,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to disk partitioning tools and MBR/GPT modification interfaces prevents adversaries from destroying disk partition tables and boot structures for destructive impact."
     },
     {
       "id": "T1562.001",
@@ -2256,7 +2503,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on security tool configurations and service management prevents adversaries from disabling antivirus, EDR, or other protective tools without administrative authorization."
     },
     {
       "id": "T1562.002",
@@ -2264,7 +2512,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting permissions on the Windows Event Log service and audit policy configuration prevents adversaries from disabling event logging to blind security monitoring capabilities."
     },
     {
       "id": "T1562.004",
@@ -2272,7 +2521,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on firewall management interfaces and iptables/netsh configurations prevent unauthorized modification or disabling of host-based firewalls that enforce network segmentation."
     },
     {
       "id": "T1562.006",
@@ -2280,7 +2530,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on ETW providers, sensor configurations, and telemetry pipelines prevents adversaries from blocking security indicators from reaching monitoring and detection systems."
     },
     {
       "id": "T1562.007",
@@ -2288,7 +2539,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policies restricting access to cloud security group and firewall rule management prevent adversaries from disabling or modifying cloud-based network access controls."
     },
     {
       "id": "T1562.008",
@@ -2296,7 +2548,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud logging service configurations, including CloudTrail, Cloud Audit Logs, and Azure Monitor, prevents adversaries from disabling or modifying cloud audit trails."
     },
     {
       "id": "T1562.009",
@@ -2304,7 +2557,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to boot configuration tools and Safe Mode settings prevents adversaries from rebooting systems into Safe Mode where security tools and drivers are not loaded."
     },
     {
       "id": "T1562.012",
@@ -2312,7 +2566,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on auditd configuration files and the Linux audit framework prevent adversaries from disabling or modifying audit rules that capture security-relevant system activity."
     },
     {
       "id": "T1563.001",
@@ -2320,7 +2575,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on SSH session multiplexing, agent forwarding, and ControlMaster configurations prevents adversaries from hijacking active SSH sessions for unauthorized lateral movement."
     },
     {
       "id": "T1563.002",
@@ -2328,7 +2584,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting RDP session reconnection permissions and enforcing session-specific authentication prevents adversaries from hijacking disconnected Remote Desktop sessions belonging to other users."
     },
     {
       "id": "T1564.004",
@@ -2336,7 +2593,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on NTFS alternate data streams restrict which processes can read or write hidden content in ADS, limiting adversary use of this file system feature for data concealment."
     },
     {
       "id": "T1565.001",
@@ -2344,7 +2602,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on databases, file systems, and application data stores prevents unauthorized modification of stored records, protecting data integrity against manipulation by adversaries."
     },
     {
       "id": "T1565.003",
@@ -2352,7 +2611,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on process memory and runtime data structures prevent adversaries from manipulating live application data in memory to alter processing outcomes or corrupt real-time information."
     },
     {
       "id": "T1569.001",
@@ -2360,7 +2620,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on the launchctl interface and associated plist configuration files restrict which users can load, unload, or manage macOS services for execution purposes."
     },
     {
       "id": "T1569.002",
@@ -2368,7 +2629,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to the Windows Service Control Manager and service creation APIs prevents unauthorized users from installing or executing services for malicious code execution."
     },
     {
       "id": "T1574.004",
@@ -2378,7 +2640,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on macOS dylib search paths and framework directories prevents adversaries from placing malicious dynamic libraries where applications will load them through dylib hijacking."
     },
     {
       "id": "T1574.005",
@@ -2388,7 +2651,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write permissions on installer directories and executable paths prevents adversaries from exploiting weak file permissions to replace legitimate installer binaries with malicious versions."
     },
     {
       "id": "T1574.007",
@@ -2398,7 +2662,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on PATH environment variable modification and system binary directories prevent adversaries from placing malicious executables earlier in the search path to intercept execution."
     },
     {
       "id": "T1574.008",
@@ -2408,7 +2673,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing access controls on application directories and DLL search paths prevents adversaries from placing malicious binaries in locations that take precedence in the search order resolution."
     },
     {
       "id": "T1574.009",
@@ -2418,7 +2684,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on service binary paths and proper quoting of service executable paths prevent adversaries from exploiting unquoted path vulnerabilities to intercept service execution."
     },
     {
       "id": "T1574.010",
@@ -2428,7 +2695,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write permissions on Windows service binary paths and configuration files prevents adversaries from replacing service executables through services file permissions weakness."
     },
     {
       "id": "T1574.012",
@@ -2438,7 +2706,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on the COR_PROFILER environment variable and .NET profiler DLL directories prevent adversaries from registering malicious profiler DLLs that load into .NET processes."
     },
     {
       "id": "T1574.014",
@@ -2448,7 +2717,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to AppDomainManager configuration files and .NET application directories prevents adversaries from specifying malicious AppDomainManager types that execute within .NET application domains."
     },
     {
       "id": "T1578.001",
@@ -2456,7 +2726,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "IAM policy enforcement restricts which accounts can create cloud compute snapshots, preventing adversaries from snapshotting volumes to extract data or create instances that bypass security controls."
     },
     {
       "id": "T1578.002",
@@ -2464,7 +2735,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on cloud compute instance creation APIs restrict which identities can launch new virtual machines, preventing adversaries from deploying instances outside security monitoring coverage."
     },
     {
       "id": "T1578.003",
@@ -2472,7 +2744,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud instance termination permissions through IAM policies prevents adversaries from deleting virtual machines to destroy evidence or disrupt services."
     },
     {
       "id": "T1578.005",
@@ -2480,7 +2753,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on cloud compute configuration modification APIs prevents adversaries from changing VM settings, security groups, or metadata to weaken security posture or enable further access."
     },
     {
       "id": "T1599.001",
@@ -2488,7 +2762,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on NAT configuration and network device management interfaces prevent adversaries from modifying NAT rules to traverse network boundaries and access isolated network segments."
     },
     {
       "id": "T1601.001",
@@ -2496,7 +2771,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to network device software update mechanisms and configuration interfaces prevents adversaries from patching system images to inject malicious functionality into network infrastructure."
     },
     {
       "id": "T1601.002",
@@ -2504,7 +2780,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on network device firmware management prevents adversaries from downgrading system images to older versions with known vulnerabilities that can be exploited for persistent access."
     },
     {
       "id": "T1602.001",
@@ -2512,7 +2789,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting SNMP community string access and enforcing SNMPv3 authentication prevents unauthorized MIB queries that expose network device configurations, credentials, and architecture details."
     },
     {
       "id": "T1602.002",
@@ -2520,7 +2798,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access controls on network device configuration export functions and management protocols restrict unauthorized retrieval of running and startup configurations containing sensitive infrastructure data."
     },
     {
       "id": "T1606.001",
@@ -2528,7 +2807,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Access enforcement on web cookie generation mechanisms and session management infrastructure prevents adversaries from forging valid session cookies that bypass authentication controls."
     },
     {
       "id": "T1606.002",
@@ -2536,7 +2816,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to SAML signing certificates and token-signing keys through hardware security modules and access controls prevents adversaries from forging SAML assertions for unauthorized authentication."
     }
   ],
   "metadata": {

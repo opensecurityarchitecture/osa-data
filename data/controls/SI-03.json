@@ -148,7 +148,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection mechanisms deployed at network entry and exit points can inspect traffic for obfuscated command-and-control data by employing heuristic and behavioral analysis beyond signature-based detection, identifying anomalous data patterns indicative of covert channels."
     },
     {
       "id": "T1003",
@@ -156,7 +157,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions with memory-scanning capabilities can detect credential-dumping tools such as Mimikatz and gsecdump resident in memory, blocking the extraction of password hashes and plaintext credentials from operating system processes."
     },
     {
       "id": "T1005",
@@ -164,7 +166,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint malicious code protection can detect and quarantine data-harvesting malware\u2014including keyloggers, spyware, and information stealers\u2014before they can collect and stage sensitive files from local storage for exfiltration."
     },
     {
       "id": "T1008",
@@ -172,7 +175,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at network boundaries can identify malware beaconing patterns that attempt to establish fallback C2 channels, detecting the characteristic retry and protocol-switching behaviors even when primary channels are disrupted."
     },
     {
       "id": "T1025",
@@ -180,7 +184,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning of removable media upon insertion\u2014as specified in SI-03's requirement for protection at entry points\u2014can detect malicious collection tools designed to harvest data from USB drives, external hard disks, and other removable storage."
     },
     {
       "id": "T1027",
@@ -188,7 +193,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Multi-engine malicious code protection employing behavioral analysis, sandboxing, and heuristic detection can identify obfuscated malware that evades signature-based methods through encoding, encryption, or packing of files and payloads."
     },
     {
       "id": "T1029",
@@ -196,7 +202,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection mechanisms monitoring outbound traffic patterns can detect malware that stages data exfiltration on scheduled intervals, identifying the characteristic periodic transfer behavior as anomalous automated activity."
     },
     {
       "id": "T1030",
@@ -204,7 +211,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions with data-loss-prevention capabilities can detect malware that breaks exfiltrated data into size-limited chunks to evade threshold-based detection, correlating multiple small transfers as a unified exfiltration campaign."
     },
     {
       "id": "T1036",
@@ -212,7 +220,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with file integrity and metadata analysis can detect executables masquerading as legitimate system files by comparing file hashes, digital signatures, and behavioral profiles against known-good baselines."
     },
     {
       "id": "T1037",
@@ -221,7 +230,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning of boot and logon initialization scripts can detect malicious code injected into startup sequences, preventing persistent backdoors from executing during system boot or user logon events."
     },
     {
       "id": "T1041",
@@ -229,7 +239,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at network boundaries can inspect C2 channel traffic for embedded exfiltration payloads, detecting malware that piggybacks data theft onto existing command-and-control communications."
     },
     {
       "id": "T1046",
@@ -237,7 +248,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect and block network scanning tools and scripts commonly used for service discovery, preventing adversaries from mapping network topology and identifying exploitable services."
     },
     {
       "id": "T1047",
@@ -245,7 +257,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint malicious code protection can detect malicious use of WMI by identifying known attack tools and suspicious WMI-based execution patterns, blocking adversaries from leveraging Windows Management Instrumentation for remote code execution."
     },
     {
       "id": "T1048",
@@ -253,7 +266,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection deployed at network exit points can detect exfiltration malware that transmits stolen data over alternative protocols such as DNS, ICMP, or custom protocols not normally used for data transfer."
     },
     {
       "id": "T1052",
@@ -261,7 +275,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning at endpoint level can detect exfiltration tools that stage and copy data to physical media, and scanning removable media upon connection prevents transfer of data-harvesting malware to air-gapped systems."
     },
     {
       "id": "T1055",
@@ -270,7 +285,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint malicious code protection with runtime behavior monitoring can detect process injection techniques by identifying suspicious cross-process memory operations, API call sequences, and code execution within non-standard process contexts."
     },
     {
       "id": "T1059",
@@ -278,7 +294,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect and block malicious scripts and commands executed through interpreters by employing content inspection, script emulation, and behavioral analysis of command-line activity."
     },
     {
       "id": "T1068",
@@ -286,7 +303,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions with exploit-prevention capabilities\u2014including memory protection and behavioral detection\u2014can identify and block exploit code targeting software vulnerabilities before privilege escalation succeeds."
     },
     {
       "id": "T1070",
@@ -294,7 +312,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect tools designed to tamper with forensic evidence, identifying known indicator-removal utilities and suspicious file-deletion or log-manipulation behaviors as malicious activity."
     },
     {
       "id": "T1071",
@@ -302,7 +321,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at network boundaries with deep-packet inspection can identify C2 traffic disguised within legitimate application-layer protocols such as HTTP, HTTPS, DNS, and SMTP by detecting malicious payloads and anomalous protocol usage."
     },
     {
       "id": "T1072",
@@ -311,7 +331,8 @@
         "execution",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning can detect malicious payloads distributed through compromised software deployment tools, preventing adversaries from leveraging trusted distribution infrastructure for lateral movement and code execution."
     },
     {
       "id": "T1080",
@@ -319,7 +340,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection scanning shared network drives and collaboration platforms can detect and quarantine tainted files before other users access them, preventing lateral movement through poisoned shared content."
     },
     {
       "id": "T1090",
@@ -327,7 +349,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at network boundaries can detect proxy-based C2 infrastructure by identifying malware that establishes proxy connections, relay chains, or SOCKS tunnels to obscure the true origin of command-and-control traffic."
     },
     {
       "id": "T1091",
@@ -336,7 +359,8 @@
         "initial-access",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning of removable media at insertion\u2014a core SI-03 requirement\u2014directly prevents replication of malicious code through USB drives and other removable storage by detecting and quarantining self-propagating malware."
     },
     {
       "id": "T1092",
@@ -344,7 +368,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection on endpoints can detect malware designed to communicate via removable media in air-gapped environments, scanning files written to and read from USB devices for known C2 protocols and suspicious data patterns."
     },
     {
       "id": "T1095",
@@ -352,7 +377,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network-based malicious code protection can inspect non-application-layer protocol traffic (ICMP, raw sockets, custom protocols) for embedded C2 payloads, detecting covert channels that bypass application-layer security controls."
     },
     {
       "id": "T1102",
@@ -360,7 +386,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect malware that uses legitimate web services (cloud storage, social media, paste sites) as C2 infrastructure by identifying suspicious API calls and data exchange patterns with these services."
     },
     {
       "id": "T1104",
@@ -368,7 +395,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect multi-stage malware delivery by scanning downloaded payloads at each stage, blocking initial droppers, secondary loaders, and final-stage implants before they establish persistent C2 channels."
     },
     {
       "id": "T1105",
@@ -376,7 +404,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning at network entry points and endpoints can detect and block adversary tools transferred into the environment, quarantining malicious binaries, scripts, and exploitation frameworks during download."
     },
     {
       "id": "T1106",
@@ -384,7 +413,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint malicious code protection with behavioral monitoring can detect malicious use of native operating system APIs by identifying suspicious API call patterns characteristic of malware execution, including unusual process creation and memory manipulation sequences."
     },
     {
       "id": "T1111",
@@ -392,7 +422,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect MFA-interception malware such as credential-harvesting trojans and token-theft tools that hook into authentication processes, preventing adversaries from capturing multi-factor authentication tokens and one-time codes."
     },
     {
       "id": "T1129",
@@ -400,7 +431,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect adversary use of shared modules by scanning loaded DLLs and shared libraries for malicious code, identifying unauthorized or modified modules loaded into legitimate processes."
     },
     {
       "id": "T1132",
@@ -408,7 +440,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with traffic analysis capabilities can detect encoded C2 communications by identifying non-standard encoding schemes (Base64, XOR, custom encoding) in network traffic that deviate from legitimate protocol patterns."
     },
     {
       "id": "T1137",
@@ -416,7 +449,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning of Office application startup locations\u2014including templates, add-ins, and COM objects\u2014can detect malicious code planted to execute when Office applications launch, preventing persistence through trusted productivity software."
     },
     {
       "id": "T1176",
@@ -424,7 +458,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious browser extensions that harvest credentials, inject content, or establish persistence by scanning extension packages for known malware signatures and suspicious behavioral patterns."
     },
     {
       "id": "T1185",
@@ -432,7 +467,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint anti-malware with browser protection capabilities can detect man-in-the-browser attacks and session hijacking tools that inject into browser processes, preventing adversaries from intercepting web sessions and authentication tokens."
     },
     {
       "id": "T1189",
@@ -440,7 +476,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at web gateways and endpoints can detect and block drive-by compromise payloads\u2014including exploit kits, malicious JavaScript, and weaponized content\u2014before browser vulnerabilities are exploited for initial access."
     },
     {
       "id": "T1190",
@@ -448,7 +485,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions on public-facing servers can detect web shells, backdoors, and exploitation payloads uploaded through application vulnerabilities, preventing adversaries from establishing persistent access through exploited internet-facing services."
     },
     {
       "id": "T1195",
@@ -456,7 +494,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect compromised software distributed through supply chain attacks by scanning all incoming software packages, updates, and dependencies for embedded malware, trojans, and unauthorized code modifications."
     },
     {
       "id": "T1201",
@@ -464,7 +503,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect reconnaissance tools and scripts used to enumerate password policies, blocking utilities commonly employed by adversaries to gather information that informs subsequent brute-force or credential-stuffing attacks."
     },
     {
       "id": "T1203",
@@ -472,7 +512,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint malicious code protection with exploit prevention can detect and block exploitation of client application vulnerabilities\u2014in browsers, document readers, and office suites\u2014by identifying malicious payloads targeting memory corruption and code execution flaws."
     },
     {
       "id": "T1204",
@@ -480,7 +521,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning can intercept and block malicious files and links before user execution, providing a critical safety net when social engineering bypasses user awareness training and users attempt to open weaponized content."
     },
     {
       "id": "T1210",
@@ -488,7 +530,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection on networked systems can detect exploitation tools and payloads targeting remote service vulnerabilities, blocking lateral movement attempts that leverage unpatched services for remote code execution."
     },
     {
       "id": "T1211",
@@ -496,7 +539,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions with exploit detection capabilities can identify code that exploits software vulnerabilities to evade security controls, detecting exploitation attempts aimed at disabling defenses or bypassing security enforcement."
     },
     {
       "id": "T1212",
@@ -504,7 +548,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect exploitation tools targeting authentication and credential-storage vulnerabilities, blocking adversary attempts to leverage software flaws for unauthorized credential access."
     },
     {
       "id": "T1218",
@@ -512,7 +557,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with behavioral analysis can detect malicious payloads executed through signed system binaries (LOLBins), identifying when trusted utilities like mshta, regsvr32, or rundll32 are used to proxy-execute malicious code."
     },
     {
       "id": "T1219",
@@ -520,7 +566,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect unauthorized remote access tools\u2014such as TeamViewer, AnyDesk, or custom RATs\u2014installed by adversaries, distinguishing them from legitimate remote administration software through behavioral and signature analysis."
     },
     {
       "id": "T1221",
@@ -528,7 +575,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning of document files can detect template injection attacks where malicious remote templates are loaded into Office documents, blocking the retrieval and execution of weaponized template payloads."
     },
     {
       "id": "T1485",
@@ -536,7 +584,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect and block destructive malware\u2014including wipers and ransomware\u2014before they execute data destruction routines, quarantining payloads designed to permanently delete or corrupt organizational data."
     },
     {
       "id": "T1486",
@@ -544,7 +593,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions are a primary defense against ransomware, detecting encryption routines, known ransomware families, and suspicious mass-file-encryption behaviors to block data encryption for impact before files become inaccessible."
     },
     {
       "id": "T1490",
@@ -552,7 +602,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malware that deletes shadow copies, disables recovery services, or modifies boot configuration to inhibit system recovery, blocking these destructive actions that prevent restoration after an attack."
     },
     {
       "id": "T1491",
@@ -560,7 +611,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning on web servers and internal systems can detect defacement tools and web shells that modify content for visual impact, preventing adversaries from altering websites or internal portals for propaganda or disruption."
     },
     {
       "id": "T1525",
@@ -568,7 +620,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can scan container images and virtual machine templates for implanted backdoors and malicious code, detecting adversary modifications to internal images before they are deployed across the infrastructure."
     },
     {
       "id": "T1539",
@@ -576,7 +629,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Endpoint anti-malware can detect cookie-stealing malware and browser-session-theft tools that extract session tokens from browser storage, preventing adversaries from hijacking authenticated web sessions."
     },
     {
       "id": "T1543",
@@ -585,7 +639,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malware that creates or modifies system services and daemons for persistence, identifying suspicious service installations and unauthorized modifications to system process configurations."
     },
     {
       "id": "T1548",
@@ -594,7 +649,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect tools that abuse elevation control mechanisms\u2014such as UAC bypass utilities\u2014blocking malicious code designed to escalate privileges through exploitation of trust boundaries."
     },
     {
       "id": "T1554",
@@ -602,7 +658,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with file-integrity capabilities can detect modifications to legitimate host software binaries, identifying trojaned executables where adversaries have replaced or patched system binaries to maintain persistence."
     },
     {
       "id": "T1557",
@@ -611,7 +668,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect man-in-the-middle attack tools\u2014such as Responder, Ettercap, and mitmproxy\u2014blocking adversary interception of network communications used to harvest credentials and manipulate data in transit."
     },
     {
       "id": "T1558",
@@ -619,7 +677,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect Kerberos attack tools such as Rubeus and Impacket that forge or steal tickets, blocking the execution of utilities used for golden ticket, silver ticket, and kerberoasting attacks."
     },
     {
       "id": "T1559",
@@ -627,7 +686,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with behavioral monitoring can detect malicious inter-process communication exploitation, identifying when COM objects or DDE channels are abused to execute arbitrary code across application boundaries."
     },
     {
       "id": "T1560",
@@ -635,7 +695,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect data-staging tools that archive and compress collected data for exfiltration, identifying suspicious use of archiving utilities and custom compression routines indicative of pre-exfiltration staging."
     },
     {
       "id": "T1561",
@@ -643,7 +704,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect and block disk-wiping malware\u2014such as Shamoon, NotPetya, and similar destructive tools\u2014before they execute disk content or structure wipe operations that render systems inoperable."
     },
     {
       "id": "T1562",
@@ -651,7 +713,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with self-defense capabilities can detect and resist attempts to disable or modify security tools, maintaining defensive coverage even when adversaries specifically target anti-malware mechanisms."
     },
     {
       "id": "T1566",
@@ -659,7 +722,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at email gateways and endpoints is a primary defense against phishing, scanning attachments and linked content for malware, exploit code, and weaponized documents before they reach end users."
     },
     {
       "id": "T1567",
@@ -667,7 +731,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect exfiltration malware that transmits stolen data to cloud storage services, code repositories, or other web services, identifying suspicious automated uploads to external platforms."
     },
     {
       "id": "T1568",
@@ -675,7 +740,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malware employing dynamic resolution techniques\u2014including domain generation algorithms and fast-flux DNS\u2014by identifying characteristic resolution patterns and blocking connections to algorithmically generated domains."
     },
     {
       "id": "T1569",
@@ -683,7 +749,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious payloads executed through system services, identifying when service control mechanisms are leveraged to launch unauthorized code with elevated privileges."
     },
     {
       "id": "T1570",
@@ -691,7 +758,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection scanning network file transfers can detect adversary tools being moved laterally between systems, quarantining malicious binaries, scripts, and exploitation frameworks during internal transfer."
     },
     {
       "id": "T1571",
@@ -699,7 +767,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network-based malicious code protection can detect C2 traffic on non-standard ports by correlating protocol analysis with port usage, identifying communications where the observed protocol does not match the expected service for that port."
     },
     {
       "id": "T1572",
@@ -707,7 +776,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions with network inspection capabilities can detect protocol tunneling\u2014such as DNS tunneling or HTTP encapsulation\u2014by identifying anomalous protocol behavior and data patterns indicative of covert channel encapsulation."
     },
     {
       "id": "T1573",
@@ -715,7 +785,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with TLS inspection capabilities can detect malicious encrypted C2 channels by analyzing certificate anomalies, connection patterns, and decrypted payload content for known malware indicators."
     },
     {
       "id": "T1574",
@@ -725,7 +796,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect execution-flow hijacking techniques by monitoring for suspicious DLL loads, path interception, and library injection, identifying when legitimate applications are redirected to execute malicious code."
     },
     {
       "id": "T1598",
@@ -733,7 +805,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at email gateways can scan reconnaissance-focused phishing messages for malicious attachments and links, blocking attempts to harvest sensitive organizational information through social engineering."
     },
     {
       "id": "T1602",
@@ -741,7 +814,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions on network management systems can detect tools used to extract configuration data from network devices, blocking unauthorized SNMP queries and configuration dump utilities."
     },
     {
       "id": "T1611",
@@ -749,7 +823,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection within containerized environments can detect container escape exploits and tools, preventing malicious code from breaking out of container isolation to compromise the underlying host system."
     },
     {
       "id": "T1622",
@@ -758,7 +833,8 @@
         "defense-evasion",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with advanced evasion detection can identify malware that employs debugger evasion techniques\u2014such as timing checks, debug-flag queries, and environment fingerprinting\u2014treating these anti-analysis behaviors as indicators of malicious intent."
     },
     {
       "id": "T1001.001",
@@ -766,7 +842,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with traffic analysis can detect C2 communications padded with junk data by identifying statistical anomalies in packet size distributions and payload entropy that deviate from legitimate protocol patterns."
     },
     {
       "id": "T1001.002",
@@ -774,7 +851,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions with content inspection capabilities can detect steganographic payloads hidden within image, audio, or video files by analyzing files for embedded data that does not match the expected media format structure."
     },
     {
       "id": "T1001.003",
@@ -782,7 +860,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at network boundaries can detect C2 traffic impersonating legitimate protocols by performing deep protocol validation, identifying communications that superficially resemble standard services but contain malicious command structures."
     },
     {
       "id": "T1003.001",
@@ -790,7 +869,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect credential-dumping tools that target LSASS process memory\u2014such as Mimikatz and ProcDump\u2014blocking attempts to extract plaintext passwords, NTLM hashes, and Kerberos tickets from the LSASS address space."
     },
     {
       "id": "T1003.002",
@@ -798,7 +878,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect tools that extract password hashes from the SAM database by identifying known SAM-dumping utilities and suspicious registry access patterns targeting the SAM hive."
     },
     {
       "id": "T1003.003",
@@ -806,7 +887,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect tools targeting the NTDS.dit Active Directory database\u2014such as ntdsutil abuse and volume shadow copy extraction\u2014blocking attempts to harvest domain-wide credential material from domain controllers."
     },
     {
       "id": "T1003.004",
@@ -814,7 +896,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect utilities that dump LSA secrets from the Windows registry, including service account passwords, cached credentials, and other sensitive authentication material stored in the LSA secret store."
     },
     {
       "id": "T1003.005",
@@ -822,7 +905,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect tools that extract cached domain credentials (DCC2 hashes) from the Windows registry, blocking offline credential-cracking attacks against cached logon material."
     },
     {
       "id": "T1003.006",
@@ -830,7 +914,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect DCSync attack tools that impersonate domain controllers to request credential replication via the MS-DRSR protocol, blocking unauthorized directory replication attempts."
     },
     {
       "id": "T1003.007",
@@ -838,7 +923,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on Linux systems can detect tools that read credential material from the /proc filesystem, identifying suspicious access to process memory spaces where authentication tokens and passwords may be stored."
     },
     {
       "id": "T1003.008",
@@ -846,7 +932,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect tools targeting /etc/passwd and /etc/shadow files for credential harvesting, blocking unauthorized read access and known password-file extraction utilities on Unix and Linux systems."
     },
     {
       "id": "T1011.001",
@@ -854,7 +941,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning can detect exfiltration tools that leverage Bluetooth connections to transmit stolen data to nearby adversary-controlled devices, identifying suspicious Bluetooth data-transfer utilities and malware."
     },
     {
       "id": "T1021.003",
@@ -862,7 +950,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious use of DCOM for lateral movement by identifying known attack tools and suspicious remote DCOM instantiation patterns that deviate from normal administrative activity."
     },
     {
       "id": "T1021.005",
@@ -870,7 +959,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect unauthorized VNC tools and malicious remote-access agents installed to provide adversaries with graphical remote control, distinguishing them from legitimate VNC deployments."
     },
     {
       "id": "T1027.002",
@@ -878,7 +968,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with unpacking and emulation capabilities can analyze packed executables to reveal hidden malicious code, defeating software packing used to evade static signature-based detection."
     },
     {
       "id": "T1027.007",
@@ -886,7 +977,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with behavioral analysis can detect malware using dynamic API resolution\u2014resolving Windows API functions at runtime via hash lookups\u2014by monitoring suspicious GetProcAddress patterns and API call obfuscation techniques."
     },
     {
       "id": "T1027.008",
@@ -894,7 +986,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with heuristic analysis can detect stripped payloads where debug symbols and metadata have been removed, employing behavioral and entropy-based analysis to identify malicious binaries despite the absence of identifying strings."
     },
     {
       "id": "T1027.009",
@@ -902,7 +995,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning can detect executables containing embedded payloads\u2014such as encrypted shellcode or secondary malware hidden within carrier files\u2014by analyzing binary structure for concealed executable content."
     },
     {
       "id": "T1027.010",
@@ -910,7 +1004,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with command-line analysis can detect obfuscated commands using techniques like string concatenation, environment variable substitution, and encoding to evade static detection of malicious script content."
     },
     {
       "id": "T1027.012",
@@ -918,7 +1013,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning can detect LNK files with smuggled icons that point to remote resources, identifying shortcut files designed to retrieve malicious payloads when their icons are rendered by Windows Explorer."
     },
     {
       "id": "T1027.013",
@@ -927,7 +1023,7 @@
         "defense-evasion"
       ],
       "mapping_type": "mitigates",
-      "mapping_rationale": "Encrypted/encoded malware is designed to hide its true purpose from an observer, meaning that signature-based methods of detection may fail. Incorporating alternative detection methods as noted in control SI-03 can provide additional avenues to detect these obfuscated malware and protect against the damage they can cause."
+      "mapping_rationale": "Encrypted or encoded malware payloads are designed to evade signature-based detection; anti-malware solutions employing behavioral analysis, sandboxing, and heuristic evaluation provide alternative detection methods that can identify these obfuscated threats."
     },
     {
       "id": "T1027.014",
@@ -936,7 +1032,7 @@
         "defense-evasion"
       ],
       "mapping_type": "mitigates",
-      "mapping_rationale": "As polymorphic code is difficult to detect via signature-based means, non-signature-based means, pointed out in this control, should be implemented for detection. Additionally, endpoint-level fortifications should be taken to prevent the malware from inflicting damage on systems."
+      "mapping_rationale": "Polymorphic malware mutates its code with each propagation to evade signature detection; anti-malware employing behavioral analysis, emulation, and machine-learning classifiers can identify the underlying malicious behavior despite constant code transformation."
     },
     {
       "id": "T1036.003",
@@ -944,7 +1040,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect renamed system utilities by comparing file hashes and metadata against known-good system binaries, identifying executables that have been renamed to avoid allowlisting or blend with legitimate tools."
     },
     {
       "id": "T1036.005",
@@ -952,7 +1049,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect malware placed in legitimate directories or named to match trusted executables by performing file-hash verification and behavioral analysis that identifies mismatches between expected and actual file behavior."
     },
     {
       "id": "T1036.008",
@@ -960,7 +1058,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect files with misleading extensions\u2014such as executables disguised as documents\u2014by analyzing actual file content and magic bytes rather than relying solely on file extension classification."
     },
     {
       "id": "T1037.002",
@@ -969,7 +1068,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning can detect malicious macOS login hooks by monitoring the LoginHook configuration and scanning referenced scripts for malicious code that executes at user login."
     },
     {
       "id": "T1037.003",
@@ -978,7 +1078,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious network logon scripts planted in SYSVOL or NETLOGON shares, scanning script content for malicious payloads that execute across multiple systems during domain authentication."
     },
     {
       "id": "T1037.004",
@@ -987,7 +1088,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning of system initialization scripts can detect malicious code injected into RC scripts on Unix and Linux systems, preventing persistent backdoors from executing during system boot."
     },
     {
       "id": "T1037.005",
@@ -996,7 +1098,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious macOS startup items by scanning LaunchDaemons and LaunchAgents plists and their referenced executables for embedded malware or unauthorized persistent payloads."
     },
     {
       "id": "T1048.001",
@@ -1004,7 +1107,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at network boundaries can detect exfiltration over symmetric-encrypted non-C2 protocols by identifying suspicious encrypted connections on unusual ports or to unexpected destinations not associated with normal business operations."
     },
     {
       "id": "T1048.002",
@@ -1012,7 +1116,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect exfiltration over asymmetric-encrypted non-C2 channels by analyzing outbound connection patterns for anomalous TLS/SSH sessions transferring data to unrecognized external endpoints."
     },
     {
       "id": "T1048.003",
@@ -1020,7 +1125,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at network exit points can detect plaintext exfiltration over non-C2 protocols\u2014such as FTP, DNS, or raw sockets\u2014by inspecting outbound traffic for data patterns indicative of unauthorized bulk data transfer."
     },
     {
       "id": "T1052.001",
@@ -1028,7 +1134,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection scanning USB devices upon connection can detect exfiltration tools and staged data being copied to USB drives, preventing data theft through removable media at the endpoint level."
     },
     {
       "id": "T1055.001",
@@ -1037,7 +1144,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with runtime behavior monitoring can detect DLL injection attacks by identifying suspicious calls to CreateRemoteThread, LoadLibrary injection into foreign processes, and unauthorized DLL loading patterns."
     },
     {
       "id": "T1055.002",
@@ -1046,7 +1154,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect portable executable injection by monitoring for suspicious VirtualAllocEx and WriteProcessMemory calls that write executable code into remote process memory spaces."
     },
     {
       "id": "T1055.003",
@@ -1055,7 +1164,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with behavioral detection can identify thread execution hijacking by monitoring for SuspendThread/SetThreadContext/ResumeThread call sequences that redirect legitimate thread execution to malicious code."
     },
     {
       "id": "T1055.004",
@@ -1064,7 +1174,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect asynchronous procedure call injection by identifying QueueUserAPC calls targeting threads in remote processes, a technique used to execute malicious code within a target process context."
     },
     {
       "id": "T1055.005",
@@ -1073,7 +1184,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect thread local storage injection by monitoring for manipulation of TLS callback mechanisms to execute malicious code during DLL loading sequences."
     },
     {
       "id": "T1055.008",
@@ -1082,7 +1194,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection on Linux systems can detect ptrace-based process injection by monitoring for suspicious ptrace system calls that attach to running processes to inject and execute arbitrary code."
     },
     {
       "id": "T1055.009",
@@ -1091,7 +1204,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect injection via /proc/[pid]/mem by monitoring for suspicious writes to process memory through the proc filesystem, a technique used on Linux to inject code without ptrace."
     },
     {
       "id": "T1055.011",
@@ -1100,7 +1214,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect extra window memory injection by identifying suspicious manipulation of window memory structures (SetWindowLong/SetWindowLongPtr) to store and execute shellcode."
     },
     {
       "id": "T1055.012",
@@ -1109,7 +1224,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with behavioral analysis can detect process hollowing by identifying the characteristic pattern of creating a suspended process, unmapping its memory, writing malicious code to the hollowed space, and resuming execution."
     },
     {
       "id": "T1055.013",
@@ -1118,7 +1234,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect process doppelganging by monitoring for suspicious NTFS transaction API usage (CreateFileTransacted) combined with process creation, a technique that abuses transactional NTFS to evade detection."
     },
     {
       "id": "T1055.014",
@@ -1127,7 +1244,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on Linux can detect VDSO hijacking by monitoring for suspicious manipulation of the virtual dynamic shared object memory region, which adversaries may abuse to redirect system call execution."
     },
     {
       "id": "T1055.015",
@@ -1136,7 +1254,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect ListPlanting attacks by monitoring for suspicious manipulation of SysListView32 controls, where adversaries inject shellcode via list-view message handlers in target processes."
     },
     {
       "id": "T1056.002",
@@ -1145,7 +1264,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect fake GUI input-capture overlays\u2014such as phishing dialog boxes mimicking system authentication prompts\u2014by identifying unauthorized window creation and credential-harvesting behaviors."
     },
     {
       "id": "T1059.001",
@@ -1153,7 +1273,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with script-analysis capabilities can detect malicious PowerShell scripts through content inspection, AMSI integration, and behavioral monitoring of encoded commands, download cradles, and obfuscated execution patterns."
     },
     {
       "id": "T1059.002",
@@ -1161,7 +1282,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on macOS can detect malicious AppleScript execution by scanning script content for suspicious commands including system event manipulation, application scripting abuse, and osascript-based payload delivery."
     },
     {
       "id": "T1059.003",
@@ -1169,7 +1291,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious Windows command shell usage by analyzing cmd.exe command-line arguments for encoded payloads, suspicious batch file content, and command patterns associated with known attack frameworks."
     },
     {
       "id": "T1059.004",
@@ -1177,7 +1300,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on Unix and Linux systems can detect malicious shell scripts by scanning bash, sh, and zsh script content for reverse shells, download-and-execute patterns, and known exploitation payloads."
     },
     {
       "id": "T1059.005",
@@ -1185,7 +1309,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious Visual Basic scripts and macros by scanning VBS/VBA content for suspicious API calls, obfuscation patterns, and payload-delivery techniques commonly used in initial-access campaigns."
     },
     {
       "id": "T1059.006",
@@ -1193,7 +1318,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect malicious Python script execution by identifying suspicious Python-based attack tools, encoded payloads, and known exploitation frameworks written in Python running on endpoints."
     },
     {
       "id": "T1059.007",
@@ -1201,7 +1327,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious JavaScript execution by scanning for obfuscated JS payloads, suspicious eval() chains, and known attack patterns in both browser and server-side JavaScript contexts."
     },
     {
       "id": "T1059.008",
@@ -1209,7 +1336,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions on network infrastructure can detect malicious commands executed through network device CLIs by identifying suspicious configuration changes and known exploitation command sequences."
     },
     {
       "id": "T1059.010",
@@ -1217,7 +1345,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious AutoHotKey and AutoIT scripts by scanning compiled executables and script content for automation-based attack patterns, keylogging routines, and GUI manipulation used in credential theft."
     },
     {
       "id": "T1059.011",
@@ -1225,7 +1354,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious Lua scripts by scanning for suspicious Lua-based payloads that may be embedded within legitimate applications or used as standalone attack scripts for code execution."
     },
     {
       "id": "T1070.001",
@@ -1233,7 +1363,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect tools designed to clear Windows Event Logs by identifying known log-wiping utilities and suspicious calls to wevtutil or the Event Log API that attempt to destroy forensic evidence."
     },
     {
       "id": "T1070.002",
@@ -1241,7 +1372,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on Unix and macOS systems can detect tools and scripts that clear system logs (/var/log, syslog, auth.log), blocking attempts to eliminate forensic evidence of adversary activity."
     },
     {
       "id": "T1070.003",
@@ -1249,7 +1381,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect utilities that clear command history files (.bash_history, .zsh_history, PSReadLine) to cover adversary tracks, identifying suspicious file-truncation and history-manipulation behaviors."
     },
     {
       "id": "T1070.007",
@@ -1257,7 +1390,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect tools that clear network connection history and saved configurations\u2014including WiFi profiles, ARP caches, and DNS resolver caches\u2014used by adversaries to remove evidence of lateral movement."
     },
     {
       "id": "T1070.008",
@@ -1265,7 +1399,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect tools that delete or manipulate mailbox data to cover tracks, identifying suspicious Exchange or mail-client operations that bulk-delete emails containing evidence of compromise."
     },
     {
       "id": "T1070.009",
@@ -1273,7 +1408,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect adversary tools that remove their own persistence mechanisms post-operation, identifying the characteristic pattern of persistence artifact cleanup as an indicator of a completed attack lifecycle."
     },
     {
       "id": "T1070.010",
@@ -1281,7 +1417,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with behavioral tracking can detect malware that relocates itself to different directories or renames its files to evade detection, identifying suspicious file-movement patterns and self-modification behaviors."
     },
     {
       "id": "T1071.001",
@@ -1289,7 +1426,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at network boundaries can detect C2 traffic over HTTP/HTTPS by analyzing web request patterns, identifying beaconing behavior, suspicious User-Agent strings, and anomalous data volumes in web protocol traffic."
     },
     {
       "id": "T1071.002",
@@ -1297,7 +1435,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect C2 communications over file transfer protocols (FTP, FTPS, TFTP) by scanning transferred content for embedded commands and identifying anomalous file-transfer sessions to unknown destinations."
     },
     {
       "id": "T1071.003",
@@ -1305,7 +1444,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at email gateways can detect C2 communications disguised as mail traffic by analyzing SMTP/IMAP/POP3 sessions for embedded command structures and unusual mail-exchange patterns with adversary infrastructure."
     },
     {
       "id": "T1071.004",
@@ -1313,7 +1453,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with DNS inspection capabilities can detect DNS-based C2 channels by analyzing query patterns for high-entropy subdomain names, anomalous query volumes, and TXT record abuse characteristic of DNS tunneling."
     },
     {
       "id": "T1090.001",
@@ -1321,7 +1462,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect internal proxy tools\u2014such as SOCKS proxies and port forwarders\u2014deployed by adversaries within the network to relay C2 traffic, identifying unauthorized proxy software and suspicious connection-relaying behavior."
     },
     {
       "id": "T1090.002",
@@ -1329,7 +1471,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at network boundaries can detect connections to external proxy infrastructure used to anonymize C2 traffic, identifying adversary-controlled proxy servers and suspicious connection-chaining patterns."
     },
     {
       "id": "T1098.004",
@@ -1338,7 +1481,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect tools that plant unauthorized SSH authorized keys for persistent remote access, identifying modifications to authorized_keys files as potential backdoor installation."
     },
     {
       "id": "T1102.001",
@@ -1346,7 +1490,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malware using dead drop resolvers on legitimate web services to retrieve C2 addresses, identifying suspicious API calls to social media, paste sites, and cloud platforms used for address resolution."
     },
     {
       "id": "T1102.002",
@@ -1354,7 +1499,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect malware maintaining bidirectional C2 through web services by identifying suspicious persistent connections and data-exchange patterns with cloud storage, collaboration platforms, or social media APIs."
     },
     {
       "id": "T1102.003",
@@ -1362,7 +1508,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malware using one-way web service communications for command retrieval by identifying periodic polling of paste sites, cloud storage, or social media for encoded instructions."
     },
     {
       "id": "T1132.001",
@@ -1370,7 +1517,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with traffic inspection can detect C2 data encoded with standard schemes (Base64, Base32, URL encoding) by identifying encoded payloads within protocol fields that should contain plaintext data."
     },
     {
       "id": "T1132.002",
@@ -1378,7 +1526,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect C2 communications using non-standard or custom encoding by performing entropy analysis and pattern matching on network traffic to identify data that deviates from expected protocol formats."
     },
     {
       "id": "T1137.001",
@@ -1386,7 +1535,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning of Office template directories can detect malicious macros planted in global templates (Normal.dotm, Personal.xlsb), preventing persistence through code that executes every time Office applications open documents."
     },
     {
       "id": "T1204.001",
@@ -1394,7 +1544,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at email gateways and web proxies can scan and block malicious URLs before users click them, providing automated protection against social engineering that lures users to weaponized websites."
     },
     {
       "id": "T1204.002",
@@ -1402,7 +1553,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning intercepts malicious files before user execution, detecting weaponized documents, trojanized installers, and malicious executables distributed through email attachments, downloads, or file shares."
     },
     {
       "id": "T1204.003",
@@ -1410,7 +1562,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can scan container images and virtual machine images for embedded malware before deployment, detecting backdoors and malicious code in images distributed through compromised or untrusted registries."
     },
     {
       "id": "T1218.001",
@@ -1418,7 +1571,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious payloads executed through compiled HTML help files (CHM) by scanning .chm content for embedded scripts, ActiveX controls, and exploitation techniques that abuse the HTML Help engine."
     },
     {
       "id": "T1218.002",
@@ -1426,7 +1580,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious .cpl files loaded through the Control Panel by scanning control panel items for embedded exploitation code and suspicious DLL payloads."
     },
     {
       "id": "T1218.003",
@@ -1434,7 +1589,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious code executed through CMSTP.exe by scanning INF files for embedded payloads and monitoring for suspicious CMSTP invocations that bypass application whitelisting."
     },
     {
       "id": "T1218.004",
@@ -1442,7 +1598,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious .NET assemblies executed through InstallUtil.exe by scanning managed binaries for embedded exploitation code in installer class methods."
     },
     {
       "id": "T1218.005",
@@ -1450,7 +1607,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious HTA files and scripts executed through mshta.exe by scanning HTML Application content for embedded VBScript, JScript, and PowerShell payloads."
     },
     {
       "id": "T1218.008",
@@ -1458,7 +1616,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious payloads loaded through odbcconf.exe by scanning response files and DLL arguments for exploitation code abusing the ODBC driver configuration utility."
     },
     {
       "id": "T1218.009",
@@ -1466,7 +1625,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious .NET assemblies executed through Regsvcs/Regasm by scanning COM-registered binaries for embedded exploitation code in ComRegisterFunction methods."
     },
     {
       "id": "T1218.012",
@@ -1474,7 +1634,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious COM objects validated through verclsid.exe by scanning referenced DLLs and CLSIDs for known malicious payloads executed during COM class verification."
     },
     {
       "id": "T1218.013",
@@ -1482,7 +1643,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect DLL injection via mavinject.exe by monitoring for suspicious invocations of the Windows component used to inject DLLs into running processes under the guise of legitimate Microsoft functionality."
     },
     {
       "id": "T1218.014",
@@ -1490,7 +1652,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious MMC snap-in files (.msc) that abuse the Microsoft Management Console to execute embedded scripts and payloads through trusted system management interfaces."
     },
     {
       "id": "T1218.015",
@@ -1498,7 +1661,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious code execution through Electron applications by scanning application packages for modified JavaScript, embedded payloads, and suspicious Node.js code within Electron-based software."
     },
     {
       "id": "T1491.001",
@@ -1506,7 +1670,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection on internal systems can detect defacement tools and malware that modify internal web applications, portals, or shared resources for visual impact or intimidation."
     },
     {
       "id": "T1491.002",
@@ -1514,7 +1679,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning on public-facing web servers can detect web shells and defacement scripts that modify external website content, preventing adversaries from altering public-facing pages for propaganda or disruption."
     },
     {
       "id": "T1505.004",
@@ -1522,7 +1688,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious IIS modules and handlers installed for web server persistence by scanning IIS components for unauthorized native and managed code modules added to the request pipeline."
     },
     {
       "id": "T1543.002",
@@ -1531,7 +1698,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious systemd service unit files by scanning service definitions for suspicious ExecStart commands, unauthorized binary paths, and persistence mechanisms disguised as legitimate system services."
     },
     {
       "id": "T1546.002",
@@ -1540,7 +1708,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious screensaver files (.scr) installed for persistence by scanning screensaver executables for embedded malware that executes when the system enters screensaver mode."
     },
     {
       "id": "T1546.003",
@@ -1549,7 +1718,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious WMI event subscriptions by scanning WMI permanent event consumers for suspicious scripts and commands that execute automatically in response to system events."
     },
     {
       "id": "T1546.004",
@@ -1558,7 +1728,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious modifications to Unix shell configuration files (.bashrc, .profile, .zshrc) that establish persistence by executing adversary code at every shell session initialization."
     },
     {
       "id": "T1546.006",
@@ -1567,7 +1738,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on macOS can detect malicious LC_LOAD_DYLIB additions to Mach-O binaries, identifying unauthorized dynamic library loading directives inserted to achieve code execution when legitimate applications launch."
     },
     {
       "id": "T1546.013",
@@ -1576,7 +1748,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious PowerShell profile modifications that execute adversary code at every PowerShell session startup, scanning profile scripts for embedded backdoors and download cradles."
     },
     {
       "id": "T1546.014",
@@ -1585,7 +1758,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on macOS can detect malicious emond rules and scripts by scanning the Event Monitor daemon configuration for unauthorized rules that trigger malicious code execution in response to system events."
     },
     {
       "id": "T1546.016",
@@ -1594,7 +1768,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious installer packages (.pkg, .msi) containing embedded backdoors and post-install scripts by scanning package contents for malicious payloads that execute during software installation."
     },
     {
       "id": "T1547.002",
@@ -1603,7 +1778,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious authentication packages by scanning DLLs registered in the LSA authentication package registry key, identifying unauthorized code that loads into the LSASS process at system startup."
     },
     {
       "id": "T1547.005",
@@ -1612,7 +1788,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious Security Support Providers by scanning SSP/AP DLLs registered with LSA, blocking unauthorized code that intercepts authentication credentials during logon."
     },
     {
       "id": "T1547.006",
@@ -1621,7 +1798,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious kernel modules and extensions by scanning loadable kernel modules (LKMs) and kexts for rootkit code, unauthorized system-call hooking, and kernel-level persistence mechanisms."
     },
     {
       "id": "T1547.007",
@@ -1630,7 +1808,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection on macOS can detect malicious applications configured to re-open at login, scanning applications in the re-opened items list for malware that persists through the login persistence mechanism."
     },
     {
       "id": "T1547.008",
@@ -1639,7 +1818,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious LSASS driver DLLs loaded through the LSA driver registry key, identifying unauthorized code that achieves persistence and credential access by loading into the LSASS process."
     },
     {
       "id": "T1547.009",
@@ -1648,7 +1828,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect modified shortcut files (.lnk) that have been altered to point to malicious payloads, identifying shortcut modifications that redirect execution to adversary-controlled code at user login."
     },
     {
       "id": "T1547.013",
@@ -1657,7 +1838,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious XDG autostart entries on Linux desktop environments by scanning .desktop files in autostart directories for unauthorized executables configured to run at user login."
     },
     {
       "id": "T1548.004",
@@ -1666,7 +1848,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection on macOS can detect malware that triggers elevated execution prompts to trick users into granting administrator privileges, identifying unauthorized applications requesting elevation through AuthorizationExecuteWithPrivileges."
     },
     {
       "id": "T1548.006",
@@ -1675,7 +1858,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect tools that manipulate macOS Transparency, Consent, and Control (TCC) databases to grant unauthorized permissions, blocking attempts to bypass privacy protections through TCC.db modification."
     },
     {
       "id": "T1553.003",
@@ -1683,7 +1867,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect SIP and trust provider hijacking by monitoring for modifications to Subject Interface Package DLLs and trust provider registry entries, blocking attempts to subvert code-signing verification."
     },
     {
       "id": "T1557.001",
@@ -1692,7 +1877,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect LLMNR/NBT-NS poisoning tools such as Responder by identifying their characteristic broadcast poisoning behavior and SMB relay attack components on the local network."
     },
     {
       "id": "T1557.002",
@@ -1701,7 +1887,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect ARP cache poisoning tools by identifying known ARP spoofing utilities and suspicious gratuitous ARP packet generation indicative of man-in-the-middle positioning."
     },
     {
       "id": "T1557.003",
@@ -1710,7 +1897,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect DHCP spoofing tools by identifying rogue DHCP server software and suspicious lease-offer behavior designed to redirect network traffic through adversary-controlled systems."
     },
     {
       "id": "T1558.002",
@@ -1718,7 +1906,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect silver ticket forgery tools by identifying Kerberos ticket manipulation utilities that create forged service tickets, blocking the use of crafted tickets for unauthorized service access."
     },
     {
       "id": "T1558.003",
@@ -1726,7 +1915,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect kerberoasting tools\u2014such as Invoke-Kerberoast and Rubeus kerberoast\u2014that request service tickets for offline password cracking, identifying the characteristic TGS request patterns and extraction utilities."
     },
     {
       "id": "T1558.004",
@@ -1734,7 +1924,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect AS-REP roasting tools that target accounts without Kerberos pre-authentication, identifying utilities that request and extract AS-REP messages for offline credential cracking."
     },
     {
       "id": "T1559.001",
@@ -1742,7 +1933,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious COM object abuse by scanning for suspicious COM instantiation patterns, identifying when adversaries leverage Component Object Model interfaces to execute arbitrary code across application boundaries."
     },
     {
       "id": "T1559.002",
@@ -1750,7 +1942,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malicious DDE exploitation in Office documents by scanning for embedded DDE field codes that execute external commands, blocking document-based code execution through Dynamic Data Exchange."
     },
     {
       "id": "T1560.001",
@@ -1758,7 +1951,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect adversary use of archiving utilities (7-Zip, WinRAR, tar) for data staging by identifying suspicious invocations that archive sensitive directories or create encrypted archives for exfiltration."
     },
     {
       "id": "T1561.001",
@@ -1766,7 +1960,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect disk content wipe malware that overwrites file system data, blocking destructive payloads\u2014such as those using raw disk writes\u2014before they render stored data irrecoverable."
     },
     {
       "id": "T1561.002",
@@ -1774,7 +1969,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect disk structure wipe attacks that target master boot records, partition tables, and GUID partition tables, blocking malware that destroys disk structures to render systems completely unbootable."
     },
     {
       "id": "T1562.001",
@@ -1782,7 +1978,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with tamper-resistant self-defense mechanisms can detect and resist adversary attempts to disable, uninstall, or modify security tools, maintaining endpoint protection even under active attack."
     },
     {
       "id": "T1562.002",
@@ -1790,7 +1987,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect tools and techniques used to disable Windows Event Logging\u2014including auditpol manipulation, service stopping, and registry modification\u2014preventing adversaries from blinding monitoring capabilities."
     },
     {
       "id": "T1562.004",
@@ -1798,7 +1996,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect tools that disable or modify host firewalls by identifying suspicious netsh, iptables, or firewall-management commands that weaken network-level defenses."
     },
     {
       "id": "T1562.006",
@@ -1806,7 +2005,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware with tamper protection can detect and prevent indicator-blocking techniques\u2014such as ETW patching, AMSI bypasses, and Event Tracing manipulation\u2014that adversaries use to prevent security telemetry collection."
     },
     {
       "id": "T1562.011",
@@ -1814,7 +2014,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect malware that spoofs security alerts or generates false notifications to create confusion, identifying unauthorized processes that mimic security tool interfaces or suppress legitimate warnings."
     },
     {
       "id": "T1564.004",
@@ -1822,7 +2023,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malware hidden in NTFS alternate data streams by scanning ADS content for executable code, identifying a Windows-specific hiding technique that conceals malicious payloads within legitimate file metadata."
     },
     {
       "id": "T1564.008",
@@ -1830,7 +2032,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect tools that create email hiding rules in Exchange or Outlook to conceal adversary communications, identifying suspicious mail-rule creation that auto-deletes or moves security notifications."
     },
     {
       "id": "T1564.009",
@@ -1838,7 +2041,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on macOS can detect malicious code hidden in resource forks\u2014the legacy dual-fork file structure\u2014identifying payloads concealed in the resource fork that evade file-scanning tools examining only the data fork."
     },
     {
       "id": "T1564.012",
@@ -1846,7 +2050,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect adversary abuse of file-path exclusions in security tools, identifying malware deliberately placed in excluded directories or attempts to modify exclusion lists to create safe havens."
     },
     {
       "id": "T1566.001",
@@ -1854,7 +2059,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at email gateways and endpoints scans spearphishing attachments\u2014including weaponized documents, executables, and archives\u2014for malicious content, detonating suspicious files in sandboxes to detect zero-day exploits."
     },
     {
       "id": "T1566.002",
@@ -1862,7 +2068,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection at email gateways can analyze URLs in spearphishing links, blocking access to known malicious domains, phishing pages, and exploit kit landing pages embedded in targeted email messages."
     },
     {
       "id": "T1566.003",
@@ -1870,7 +2077,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware scanning extends to messages received through collaboration services (Slack, Teams, social media), detecting malicious files and links delivered through non-email communication channels."
     },
     {
       "id": "T1568.002",
@@ -1878,7 +2086,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can identify malware using domain generation algorithms by detecting characteristic DGA resolver code patterns and blocking connections to algorithmically generated domains that lack legitimate DNS registrations."
     },
     {
       "id": "T1569.002",
@@ -1886,7 +2095,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect malicious binaries executed through the Windows Service Control Manager by scanning service executables for malware signatures and identifying suspicious service creation events."
     },
     {
       "id": "T1573.001",
@@ -1894,7 +2104,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection with TLS termination capabilities can inspect C2 traffic encrypted with symmetric cryptography, identifying malicious payloads within decrypted sessions that use AES, ChaCha20, or other symmetric algorithms."
     },
     {
       "id": "T1573.002",
@@ -1902,7 +2113,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at network boundaries with TLS inspection can analyze C2 channels using asymmetric cryptography (RSA, ECDHE key exchange), detecting malicious traffic through certificate analysis and decrypted content inspection."
     },
     {
       "id": "T1574.001",
@@ -1912,7 +2124,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect DLL search-order hijacking by identifying malicious DLLs placed in application directories that override legitimate system libraries, blocking unauthorized code loaded through predictable search paths."
     },
     {
       "id": "T1574.004",
@@ -1922,7 +2135,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware on macOS can detect dylib hijacking by identifying malicious dynamic libraries placed to intercept application dylib loading, blocking unauthorized code execution through macOS library search-path abuse."
     },
     {
       "id": "T1574.007",
@@ -1932,7 +2146,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect path interception via PATH environment variable manipulation by identifying malicious executables placed in directories that appear earlier in the PATH than their legitimate counterparts."
     },
     {
       "id": "T1574.008",
@@ -1942,7 +2157,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect search-order hijacking by identifying malicious executables or libraries placed in locations where they are loaded before their legitimate counterparts due to predictable search-order behavior."
     },
     {
       "id": "T1574.009",
@@ -1952,7 +2168,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect path interception through unquoted service paths by identifying malicious executables placed at path segments that Windows evaluates before reaching the intended service binary."
     },
     {
       "id": "T1574.013",
@@ -1962,7 +2179,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware can detect KernelCallbackTable hijacking by monitoring for suspicious modifications to the PEB's KernelCallbackTable pointer, identifying adversary attempts to redirect kernel callbacks to malicious code."
     },
     {
       "id": "T1574.014",
@@ -1972,7 +2190,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can detect AppDomainManager hijacking by identifying unauthorized .NET configuration files or assemblies that redirect the CLR to load adversary-controlled code into managed application domains."
     },
     {
       "id": "T1598.001",
@@ -1980,7 +2199,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at email and messaging gateways can scan phishing-for-information messages delivered through third-party services, blocking malicious attachments and links used for reconnaissance-stage social engineering."
     },
     {
       "id": "T1598.002",
@@ -1988,7 +2208,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection can scan attachments in reconnaissance-focused spearphishing emails for malicious content, blocking weaponized documents designed to harvest sensitive information or establish tracking callbacks."
     },
     {
       "id": "T1598.003",
@@ -1996,7 +2217,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware at email gateways can analyze URLs in reconnaissance spearphishing links, blocking access to credential-harvesting pages and tracking pixels used to gather information about targeted individuals."
     },
     {
       "id": "T1602.001",
@@ -2004,7 +2226,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Malicious code protection on network management platforms can detect SNMP exploitation tools and unauthorized MIB-dumping utilities, blocking attempts to extract device configurations through SNMP query abuse."
     },
     {
       "id": "T1602.002",
@@ -2012,7 +2235,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Anti-malware solutions can detect tools that dump network device configurations through management protocols, blocking unauthorized extraction of running and startup configurations containing sensitive infrastructure data."
     }
   ],
   "metadata": {

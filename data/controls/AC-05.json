@@ -140,7 +140,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties ensures that no single role has both the access to credential stores and the ability to suppress audit trails, making credential dumping operations more detectable because the adversary must compromise multiple accounts with distinct privileges."
     },
     {
       "id": "T1021",
@@ -148,7 +149,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Dividing remote service administration across distinct roles ensures that credentials granting remote access are limited in scope, reducing the lateral movement value of any single compromised account by restricting which services each role can access."
     },
     {
       "id": "T1047",
@@ -156,7 +158,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts WMI execution privileges to designated administrative roles, preventing standard users from leveraging Windows Management Instrumentation for remote command execution and limiting the blast radius of account compromise."
     },
     {
       "id": "T1053",
@@ -166,7 +169,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting scheduled task creation and modification to dedicated administrative roles prevents regular users from establishing persistent scheduled jobs, requiring adversaries to compromise specifically privileged accounts to achieve persistence through task scheduling."
     },
     {
       "id": "T1055",
@@ -175,7 +179,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits process injection capabilities by restricting debug and memory manipulation privileges to specific roles, preventing adversaries with standard user access from injecting code into higher-privileged processes."
     },
     {
       "id": "T1059",
@@ -183,7 +188,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts scripting interpreter access to roles that require it for legitimate operations, preventing general users from executing scripts and limiting the adversary's ability to use compromised standard accounts for script-based attacks."
     },
     {
       "id": "T1070",
@@ -191,7 +197,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating audit management from operational roles ensures that users cannot delete or modify their own audit trails, requiring adversaries to compromise both an operational account and a separate audit administration account to remove indicators."
     },
     {
       "id": "T1072",
@@ -200,7 +207,8 @@
         "execution",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts software deployment tool access to dedicated deployment roles, preventing adversaries who compromise standard administrative accounts from leveraging enterprise deployment infrastructure for lateral movement."
     },
     {
       "id": "T1078",
@@ -211,7 +219,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation ensures that valid accounts are scoped to specific functions, so even if adversaries obtain legitimate credentials, the compromised account provides limited access rather than broad cross-functional privileges enabling widespread lateral movement."
     },
     {
       "id": "T1098",
@@ -220,7 +229,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting account manipulation capabilities to dedicated identity management roles prevents adversaries with general administrative access from adding credentials, modifying permissions, or creating persistence through account modifications."
     },
     {
       "id": "T1110",
@@ -228,7 +238,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits the value of brute-forced credentials by ensuring that compromised accounts provide access only to their designated function, preventing a single credential compromise from yielding broad organisational access."
     },
     {
       "id": "T1134",
@@ -237,7 +248,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits access token manipulation by restricting token creation and impersonation privileges to specific service accounts, preventing adversaries from creating or stealing tokens that grant cross-functional access."
     },
     {
       "id": "T1136",
@@ -245,7 +257,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting account creation to dedicated identity management roles prevents adversaries with general administrative access from establishing persistent backdoor accounts, as account provisioning requires a separately authorised role."
     },
     {
       "id": "T1185",
@@ -253,7 +266,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits the data accessible through hijacked browser sessions by ensuring that each user role has access only to its designated applications and data, reducing the collection value of any single session compromise."
     },
     {
       "id": "T1190",
@@ -261,7 +275,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation between application development, deployment, and administration reduces the impact of public-facing application exploitation, as compromised application service accounts lack the cross-functional privileges needed for deeper penetration."
     },
     {
       "id": "T1197",
@@ -270,7 +285,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting BITS administration to dedicated roles prevents adversaries who compromise standard accounts from creating BITS transfer jobs for persistence or data exfiltration, as the necessary privileges are separated from general user access."
     },
     {
       "id": "T1210",
@@ -278,7 +294,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits the lateral movement value of exploited remote services by ensuring that service accounts have narrowly scoped privileges, preventing a single service exploitation from providing broad network access."
     },
     {
       "id": "T1213",
@@ -286,7 +303,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation enforces need-to-know access controls on information repositories, ensuring that compromised accounts can only access data relevant to their specific role rather than providing unrestricted collection across all repositories."
     },
     {
       "id": "T1218",
@@ -294,7 +312,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to system binary proxy execution tools to designated administrative roles prevents standard users from leveraging signed binaries for defense evasion, limiting adversary options when operating with non-privileged accounts."
     },
     {
       "id": "T1222",
@@ -302,7 +321,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts permission modification capabilities to designated security administrators, preventing adversaries with standard or application-level access from weakening file and directory protections to facilitate data access."
     },
     {
       "id": "T1484",
@@ -311,7 +331,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting domain and tenant policy modification to dedicated identity governance roles prevents adversaries with general administrative access from altering domain trust relationships or conditional access policies for privilege escalation."
     },
     {
       "id": "T1489",
@@ -319,7 +340,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation ensures that service management privileges are restricted to designated operations roles, preventing adversaries who compromise standard accounts from stopping critical services to cause operational disruption."
     },
     {
       "id": "T1495",
@@ -327,7 +349,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating firmware management from general system administration restricts firmware update privileges to dedicated roles, preventing adversaries with standard admin access from corrupting firmware on critical infrastructure."
     },
     {
       "id": "T1505",
@@ -335,7 +358,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts server component installation to designated deployment roles, preventing adversaries with general server access from installing persistent web shells, transport agents, or other malicious server components."
     },
     {
       "id": "T1525",
@@ -343,7 +367,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting container image management to dedicated DevOps roles prevents adversaries with general infrastructure access from implanting backdoored images into container registries used for production deployments."
     },
     {
       "id": "T1528",
@@ -351,7 +376,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits the scope of application access tokens to specific service functions, reducing the value of stolen tokens and preventing a single token compromise from granting cross-functional API access."
     },
     {
       "id": "T1530",
@@ -359,7 +385,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts cloud storage access by role, ensuring that compromised accounts can only access data repositories relevant to their designated function rather than providing broad cloud data collection capabilities."
     },
     {
       "id": "T1537",
@@ -367,7 +394,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts cloud data transfer permissions to designated data management roles, preventing adversaries with standard cloud accounts from transferring data to external cloud accounts for exfiltration."
     },
     {
       "id": "T1538",
@@ -375,7 +403,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud service dashboard access to designated cloud administrators limits the discovery value of compromised accounts, preventing adversaries from enumerating organisational cloud infrastructure through management console access."
     },
     {
       "id": "T1542",
@@ -384,7 +413,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties ensures that boot-level configuration changes require dedicated firmware management roles, preventing adversaries with general administrative access from modifying pre-OS boot components for persistent defense evasion."
     },
     {
       "id": "T1543",
@@ -393,7 +423,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting system process creation and modification to designated service management roles prevents adversaries with standard accounts from establishing persistence through new or modified services, daemons, or launch agents."
     },
     {
       "id": "T1548",
@@ -402,7 +433,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits access to elevation control configuration, ensuring that adversaries must compromise specifically privileged accounts to modify sudo policies, UAC settings, or other privilege escalation mechanisms."
     },
     {
       "id": "T1550",
@@ -411,7 +443,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts the scope of alternate authentication materials such as tokens and hashes, ensuring that even if adversaries obtain these credentials, they provide limited cross-functional access."
     },
     {
       "id": "T1552",
@@ -419,7 +452,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation reduces the incidence of unsecured credentials by restricting credential management to dedicated roles, ensuring that sensitive authentication materials are not scattered across accounts with broader access patterns."
     },
     {
       "id": "T1556",
@@ -429,7 +463,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting authentication infrastructure management to dedicated identity security roles prevents adversaries with general administrative access from modifying authentication processes to install credential-harvesting backdoors."
     },
     {
       "id": "T1558",
@@ -437,7 +472,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits access to Kerberos infrastructure management, ensuring that service account password management and KDC administration are restricted to roles where these operations are auditable and controlled."
     },
     {
       "id": "T1559",
@@ -445,7 +481,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits inter-process communication privileges by restricting COM and DDE access to roles that require it, preventing adversaries from using compromised standard accounts for cross-process execution."
     },
     {
       "id": "T1562",
@@ -453,7 +490,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating security tool administration from operational roles ensures that adversaries who compromise standard accounts cannot disable or modify defensive tools, requiring a separate security administration account to impair defenses."
     },
     {
       "id": "T1563",
@@ -461,7 +499,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts remote session management to designated administrative roles, preventing adversaries from hijacking existing sessions when the compromised account lacks session management privileges."
     },
     {
       "id": "T1569",
@@ -469,7 +508,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting service execution privileges to designated roles prevents adversaries with standard accounts from launching processes via service control mechanisms, limiting their execution options for privilege escalation."
     },
     {
       "id": "T1574",
@@ -479,7 +519,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits write access to executable directories and service configurations, preventing adversaries from hijacking execution flow without first compromising a role with specific file system modification privileges."
     },
     {
       "id": "T1578",
@@ -487,7 +528,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud infrastructure modification to designated cloud engineering roles prevents adversaries with standard cloud accounts from creating, modifying, or deleting compute instances to evade forensic investigation."
     },
     {
       "id": "T1580",
@@ -495,7 +537,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits cloud infrastructure discovery by restricting resource enumeration permissions to designated cloud administration roles, preventing compromised standard accounts from mapping the cloud environment."
     },
     {
       "id": "T1599",
@@ -503,7 +546,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts network device configuration to dedicated network engineering roles, preventing adversaries with general access from bridging network boundaries by modifying routing or NAT configurations."
     },
     {
       "id": "T1601",
@@ -511,7 +555,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating network device firmware management from general administration prevents adversaries with standard network access from modifying system images, requiring dedicated engineering credentials for firmware operations."
     },
     {
       "id": "T1606",
@@ -519,7 +564,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts access to web credential signing infrastructure\u2014including SAML certificates and JWT signing keys\u2014preventing adversaries from forging web credentials without compromising the dedicated identity management role."
     },
     {
       "id": "T1609",
@@ -527,7 +573,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting container administration commands to designated container platform roles prevents adversaries with general infrastructure access from executing arbitrary commands within containers for privilege escalation."
     },
     {
       "id": "T1611",
@@ -535,7 +582,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation between container workloads and host management limits the impact of container escape, as even if adversaries break out of the container, the host privileges available are restricted by role separation."
     },
     {
       "id": "T1619",
@@ -543,7 +591,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits cloud storage enumeration to designated data management roles, preventing adversaries with standard accounts from discovering and cataloguing cloud storage objects across the organisation."
     },
     {
       "id": "T1657",
@@ -551,7 +600,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation between financial system access, transaction approval, and audit functions prevents a single compromised account from executing financial theft, as adversaries must compromise multiple independently controlled roles."
     },
     {
       "id": "T1003.001",
@@ -559,7 +609,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting debug and memory access privileges to dedicated security roles prevents adversaries from dumping LSASS memory with standard administrative credentials, as the required SeDebugPrivilege is separated from general administration."
     },
     {
       "id": "T1003.002",
@@ -567,7 +618,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits access to the Security Account Manager database by restricting local admin and backup operator roles, preventing adversaries with standard accounts from extracting local credential hashes."
     },
     {
       "id": "T1003.003",
@@ -575,7 +627,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts NTDS.dit access to dedicated domain controller administrators, preventing adversaries with general Active Directory privileges from directly accessing the domain credential database."
     },
     {
       "id": "T1003.004",
@@ -583,7 +636,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting access to LSA secrets through role separation ensures that only dedicated security administrators can interact with the Local Security Authority, limiting adversary credential extraction from compromised service accounts."
     },
     {
       "id": "T1003.005",
@@ -591,7 +645,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits local administrator access needed to extract cached domain credentials, requiring adversaries to compromise specifically privileged accounts rather than using broadly distributed administrative access."
     },
     {
       "id": "T1003.006",
@@ -599,7 +654,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting directory replication privileges to dedicated domain controller roles prevents adversaries from performing DCSync attacks with general domain admin accounts, as the replication ACL requires a separately controlled permission."
     },
     {
       "id": "T1003.007",
@@ -607,7 +663,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits access to /proc filesystem entries containing credentials by restricting privileged process access to designated system administration roles, preventing standard accounts from reading sensitive process memory."
     },
     {
       "id": "T1003.008",
@@ -615,7 +672,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts read access to /etc/shadow through role-based access controls, preventing adversaries with standard user or application accounts from accessing hashed password files on Linux systems."
     },
     {
       "id": "T1021.001",
@@ -623,7 +681,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting RDP access to designated remote administration roles prevents adversaries from using compromised standard credentials for lateral movement via Remote Desktop Protocol connections to other systems."
     },
     {
       "id": "T1021.002",
@@ -631,7 +690,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits SMB and administrative share access to designated administration roles, preventing adversaries with standard domain accounts from accessing admin shares (C$, ADMIN$) for lateral movement."
     },
     {
       "id": "T1021.003",
@@ -639,7 +699,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting DCOM activation permissions to designated roles prevents adversaries from leveraging compromised standard accounts for lateral movement via Distributed Component Object Model remote instantiation."
     },
     {
       "id": "T1021.004",
@@ -647,7 +708,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits SSH access to designated administration roles and specific hosts, preventing adversaries from using compromised credentials for broad SSH-based lateral movement across the environment."
     },
     {
       "id": "T1021.006",
@@ -655,7 +717,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting WinRM access to designated management roles prevents adversaries from leveraging compromised standard credentials for remote command execution via Windows Remote Management."
     },
     {
       "id": "T1021.007",
@@ -663,7 +726,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation in cloud environments restricts service access by role, preventing adversaries with compromised cloud credentials from moving laterally across cloud services beyond the account's designated function."
     },
     {
       "id": "T1053.002",
@@ -673,7 +737,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting 'at' command usage to dedicated scheduling roles prevents adversaries with standard access from creating automated tasks for persistence or privilege escalation through the legacy scheduling mechanism."
     },
     {
       "id": "T1053.003",
@@ -683,7 +748,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits cron job creation to designated automation roles, preventing adversaries from establishing cron-based persistence with standard user accounts on Linux systems."
     },
     {
       "id": "T1053.005",
@@ -693,7 +759,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting scheduled task creation to designated administrative roles prevents adversaries from using compromised standard accounts to establish persistence through Windows Task Scheduler."
     },
     {
       "id": "T1053.006",
@@ -703,7 +770,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits systemd timer creation to designated service management roles, preventing adversaries from establishing timer-based persistence on Linux systems with standard user access."
     },
     {
       "id": "T1053.007",
@@ -713,7 +781,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting container orchestration job creation to dedicated platform roles prevents adversaries from scheduling malicious workloads through Kubernetes cron jobs or similar orchestration mechanisms."
     },
     {
       "id": "T1055.008",
@@ -722,7 +791,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts ptrace capabilities to designated debugging roles, preventing adversaries with standard accounts from using ptrace system calls for process injection and privilege escalation."
     },
     {
       "id": "T1056.003",
@@ -731,7 +801,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits administrative access to web portals, ensuring that adversaries cannot modify login pages to capture credentials without compromising a role specifically authorised for portal administration."
     },
     {
       "id": "T1059.001",
@@ -739,7 +810,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting PowerShell execution to designated administrative roles through constrained language mode and execution policy enforcement prevents adversaries with standard accounts from leveraging PowerShell for attacks."
     },
     {
       "id": "T1059.008",
@@ -747,7 +819,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts network device CLI access to dedicated network engineering roles, preventing adversaries with general infrastructure credentials from executing commands on routers and switches."
     },
     {
       "id": "T1070.001",
@@ -755,7 +828,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation between operational and audit roles prevents users from clearing their own Windows event logs, requiring adversaries to compromise a separate audit administration account to eliminate evidence."
     },
     {
       "id": "T1070.002",
@@ -763,7 +837,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating log management from operational roles on Linux and macOS prevents adversaries from clearing system logs with the same credentials used for the initial compromise, preserving forensic evidence."
     },
     {
       "id": "T1070.003",
@@ -771,7 +846,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation ensures that command history protections are managed by designated security roles, preventing adversaries from clearing bash or PowerShell history when the compromised account lacks the necessary privileges."
     },
     {
       "id": "T1070.007",
@@ -779,7 +855,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting network configuration management to designated roles prevents adversaries from clearing network connection history and configurations to hide lateral movement evidence without compromising a network admin account."
     },
     {
       "id": "T1070.008",
@@ -787,7 +864,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts mailbox administration from standard user roles, preventing adversaries from clearing mailbox data to destroy email-based evidence without compromising a dedicated Exchange administrator account."
     },
     {
       "id": "T1070.009",
@@ -795,7 +873,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation between persistence mechanism management and standard operations prevents adversaries from clearing persistence artifacts using the same account that established them, preserving forensic evidence."
     },
     {
       "id": "T1078.001",
@@ -806,7 +885,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties mandates that default accounts are either disabled or restricted to narrow functions, limiting the damage from default credential exploitation by ensuring these accounts lack cross-functional privileges."
     },
     {
       "id": "T1078.002",
@@ -817,7 +897,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation ensures that domain accounts are scoped to specific functions, so compromised domain credentials provide limited access rather than the broad privileges needed for widespread lateral movement."
     },
     {
       "id": "T1078.003",
@@ -828,7 +909,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting local account privileges through separation of duties ensures that local accounts provide only the minimum access needed for their specific function, limiting the impact of local credential compromise."
     },
     {
       "id": "T1078.004",
@@ -839,7 +921,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties in cloud environments restricts cloud account permissions to designated functions, preventing a single compromised cloud account from providing broad access across cloud services and resources."
     },
     {
       "id": "T1087.004",
@@ -847,7 +930,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts cloud account enumeration to designated identity management roles, preventing adversaries from discovering and cataloguing cloud accounts using compromised standard cloud credentials."
     },
     {
       "id": "T1098.001",
@@ -856,7 +940,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud credential management to dedicated identity roles prevents adversaries from adding alternative authentication credentials to cloud accounts using compromised standard administrative access."
     },
     {
       "id": "T1098.002",
@@ -865,7 +950,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts email delegation management to designated mail administrators, preventing adversaries from granting additional mailbox access permissions using compromised standard accounts."
     },
     {
       "id": "T1098.003",
@@ -874,7 +960,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud role assignment to dedicated identity governance roles prevents adversaries from escalating privileges by granting themselves additional cloud roles through compromised standard admin accounts."
     },
     {
       "id": "T1098.004",
@@ -883,7 +970,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts SSH key management to designated administration roles, preventing adversaries from adding authorized SSH keys for persistence using compromised accounts that lack key management privileges."
     },
     {
       "id": "T1098.005",
@@ -892,7 +980,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating device registration from standard user capabilities prevents adversaries from registering rogue devices for persistent access using compromised end-user credentials."
     },
     {
       "id": "T1098.007",
@@ -901,7 +990,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting group membership management to designated identity administration roles prevents adversaries from adding compromised accounts to privileged groups for escalation without compromising the identity management function."
     },
     {
       "id": "T1110.001",
@@ -909,7 +999,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits the value of password guessing success by ensuring that each account provides access only to its designated function, containing the impact of individual credential compromise."
     },
     {
       "id": "T1110.002",
@@ -917,7 +1008,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation ensures that even if adversaries successfully crack passwords offline, the compromised credentials provide only narrowly scoped access aligned with the account's specific organisational role."
     },
     {
       "id": "T1110.003",
@@ -925,7 +1017,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties mitigates password spraying by ensuring that accounts across different roles have distinct access scopes, preventing a single sprayed credential from yielding broad cross-functional access."
     },
     {
       "id": "T1110.004",
@@ -933,7 +1026,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits the impact of credential stuffing attacks by ensuring that reused credentials\u2014even if valid\u2014provide access only to the specific function assigned to each compromised account."
     },
     {
       "id": "T1134.001",
@@ -942,7 +1036,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts token impersonation capabilities to designated service accounts, preventing adversaries from stealing and impersonating tokens when operating under standard user roles."
     },
     {
       "id": "T1134.002",
@@ -951,7 +1046,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting the ability to create processes with alternate tokens to designated service roles prevents adversaries from spawning processes under different security contexts using compromised standard accounts."
     },
     {
       "id": "T1134.003",
@@ -960,7 +1056,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits token creation and impersonation to specific service accounts, preventing adversaries from forging and using impersonation tokens when the compromised account lacks these privileges."
     },
     {
       "id": "T1134.005",
@@ -969,7 +1066,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting SID-History modification to dedicated domain administration roles prevents adversaries from injecting SID-History entries for privilege escalation using compromised standard Active Directory accounts."
     },
     {
       "id": "T1136.001",
@@ -977,7 +1075,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts local account creation to designated identity management processes, preventing adversaries from establishing persistent local backdoor accounts using compromised administrative credentials."
     },
     {
       "id": "T1136.002",
@@ -985,7 +1084,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting domain account creation to dedicated identity provisioning roles prevents adversaries from creating persistent domain accounts when they compromise general Active Directory administrative access."
     },
     {
       "id": "T1136.003",
@@ -993,7 +1093,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation in cloud environments restricts account provisioning to designated identity management roles, preventing adversaries from creating cloud backdoor accounts using compromised standard admin credentials."
     },
     {
       "id": "T1213.001",
@@ -1001,7 +1102,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts Confluence access by role, ensuring that compromised accounts can only access wiki spaces relevant to their designated function rather than providing broad knowledge base collection."
     },
     {
       "id": "T1213.002",
@@ -1009,7 +1111,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation enforces role-based access on SharePoint sites, limiting the document libraries accessible through any single compromised account to those aligned with the account's specific organisational role."
     },
     {
       "id": "T1213.003",
@@ -1017,7 +1120,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting code repository access by role through separation of duties prevents compromised developer accounts from accessing repositories outside their project scope, limiting source code collection opportunities."
     },
     {
       "id": "T1213.004",
@@ -1025,7 +1129,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts CRM data access by role, ensuring that compromised accounts can only access customer records relevant to their designated function rather than the full customer database."
     },
     {
       "id": "T1218.007",
@@ -1033,7 +1138,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Msiexec execution privileges to designated deployment roles prevents adversaries from using compromised standard accounts to install malicious MSI packages for defense evasion."
     },
     {
       "id": "T1222.001",
@@ -1041,7 +1147,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts Windows ACL modification to designated security administrator roles, preventing adversaries from altering file and directory permissions with standard administrative accounts."
     },
     {
       "id": "T1222.002",
@@ -1049,7 +1156,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts chmod/chown operations on critical files to designated system administration roles, preventing adversaries from weakening Linux/macOS file permissions with standard accounts."
     },
     {
       "id": "T1505.002",
@@ -1057,7 +1165,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting mail transport agent configuration to dedicated mail administration roles prevents adversaries from installing persistent transport agents using compromised accounts with general server access."
     },
     {
       "id": "T1505.003",
@@ -1065,7 +1174,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation between web server management and content deployment prevents adversaries from installing web shells when the compromised account lacks both file write access and web server configuration privileges."
     },
     {
       "id": "T1505.005",
@@ -1073,7 +1183,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Terminal Services DLL registration to designated RDS administration roles prevents adversaries from installing persistent DLL-based backdoors using compromised standard server administration accounts."
     },
     {
       "id": "T1542.001",
@@ -1082,7 +1193,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts firmware update privileges to dedicated hardware management roles, preventing adversaries with standard administrative access from modifying system firmware for persistent defense evasion."
     },
     {
       "id": "T1542.003",
@@ -1091,7 +1203,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting boot configuration modification to dedicated roles prevents adversaries from installing bootkits, as the necessary firmware management privileges are separated from general system administration."
     },
     {
       "id": "T1542.005",
@@ -1100,7 +1213,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts TFTP boot configuration to dedicated network engineering roles, preventing adversaries from redirecting network device boot processes to malicious images using standard administrative access."
     },
     {
       "id": "T1543.001",
@@ -1109,7 +1223,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Launch Agent creation to designated management roles on macOS prevents adversaries from establishing persistent launch agents using compromised standard user accounts."
     },
     {
       "id": "T1543.002",
@@ -1118,7 +1233,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits systemd service creation to designated service management roles, preventing adversaries from creating persistent systemd services with standard Linux user accounts."
     },
     {
       "id": "T1543.003",
@@ -1127,7 +1243,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Windows service creation and modification to designated roles prevents adversaries from establishing persistent services using compromised standard administrative credentials."
     },
     {
       "id": "T1543.004",
@@ -1136,7 +1253,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts Launch Daemon installation to designated macOS administration roles, preventing adversaries from establishing root-level persistent daemons with standard administrative access."
     },
     {
       "id": "T1543.005",
@@ -1145,7 +1263,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting container service management to designated platform roles prevents adversaries from creating persistent container services using compromised standard infrastructure credentials."
     },
     {
       "id": "T1546.003",
@@ -1154,7 +1273,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits WMI event subscription creation to designated administrative roles, preventing adversaries from establishing WMI-based persistence when the compromised account lacks WMI management privileges."
     },
     {
       "id": "T1547.004",
@@ -1163,7 +1283,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting registry modification of Winlogon Helper DLL entries to designated roles prevents adversaries from establishing persistence through login-triggered DLL loading using standard administrative accounts."
     },
     {
       "id": "T1547.006",
@@ -1172,7 +1293,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts kernel module loading to designated system engineering roles, preventing adversaries from loading malicious kernel modules or extensions without specifically privileged access."
     },
     {
       "id": "T1547.009",
@@ -1181,7 +1303,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits shortcut file modification in startup locations to designated management roles, preventing adversaries from establishing persistence through modified shortcuts using standard user access."
     },
     {
       "id": "T1547.012",
@@ -1190,7 +1313,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting print processor registration to designated print management roles prevents adversaries from installing persistent DLLs through the print subsystem using compromised standard administrative accounts."
     },
     {
       "id": "T1547.013",
@@ -1199,7 +1323,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts XDG autostart entry creation to designated administration roles, preventing adversaries from establishing desktop login persistence on Linux systems with standard user access."
     },
     {
       "id": "T1548.002",
@@ -1208,7 +1333,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits UAC configuration and bypass capabilities, ensuring that adversaries must compromise roles with specific UAC management privileges rather than relying on standard administrative access."
     },
     {
       "id": "T1548.003",
@@ -1217,7 +1343,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting sudoers file modification to designated security roles prevents adversaries from adding sudo caching exceptions or escalating privileges through sudo configuration changes with standard admin accounts."
     },
     {
       "id": "T1548.006",
@@ -1226,7 +1353,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts TCC database modification to designated security roles, preventing adversaries from granting themselves macOS privacy permissions using compromised standard administrative access."
     },
     {
       "id": "T1550.002",
@@ -1235,7 +1363,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits the lateral movement value of pass-the-hash attacks by ensuring that compromised NTLM hashes provide access only to the specific role's designated systems and resources."
     },
     {
       "id": "T1550.003",
@@ -1244,7 +1373,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Kerberos service access by role ensures that pass-the-ticket attacks provide limited value, as forged or stolen tickets grant access only to the services assigned to the original account's role."
     },
     {
       "id": "T1552.001",
@@ -1252,7 +1382,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation reduces the incidence of credentials in files by ensuring that each role accesses only its designated systems, limiting the propagation of stored credentials across the file system."
     },
     {
       "id": "T1552.002",
@@ -1260,7 +1391,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits registry access by role, reducing the number of accounts that can access registry locations containing credentials and ensuring that credential storage is restricted to authorised service accounts."
     },
     {
       "id": "T1552.006",
@@ -1268,7 +1400,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting Group Policy Preferences management to dedicated domain administration roles limits the exposure of credentials stored in GPP by ensuring that only authorised administrators can create or access these policy objects."
     },
     {
       "id": "T1552.007",
@@ -1276,7 +1409,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts container API access to designated orchestration roles, preventing adversaries with standard container access from querying API endpoints that expose service account credentials."
     },
     {
       "id": "T1556.001",
@@ -1286,7 +1420,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating domain controller authentication management from general domain administration prevents adversaries from modifying the DC authentication process to install credential-harvesting hooks without compromising dedicated security infrastructure roles."
     },
     {
       "id": "T1556.003",
@@ -1296,7 +1431,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts PAM configuration to dedicated security roles, preventing adversaries from inserting malicious pluggable authentication modules using compromised standard root or administrative accounts."
     },
     {
       "id": "T1556.004",
@@ -1306,7 +1442,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting network device authentication configuration to dedicated roles prevents adversaries from modifying AAA mechanisms on routers and switches using compromised general network management credentials."
     },
     {
       "id": "T1556.005",
@@ -1316,7 +1453,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts encryption policy management, preventing adversaries from enabling reversible encryption storage of passwords without compromising the dedicated security policy administration role."
     },
     {
       "id": "T1556.009",
@@ -1326,7 +1464,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting conditional access policy management to dedicated identity governance roles prevents adversaries from weakening authentication requirements through policy modification using compromised standard admin accounts."
     },
     {
       "id": "T1558.001",
@@ -1334,7 +1473,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits access to the KRBTGT account and KDC infrastructure, ensuring that golden ticket creation requires compromising the dedicated domain controller management role rather than general domain admin access."
     },
     {
       "id": "T1558.002",
@@ -1342,7 +1482,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts service account credential management to dedicated roles, limiting adversary access to the keying material needed for silver ticket forgery."
     },
     {
       "id": "T1558.003",
@@ -1350,7 +1491,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting service account management to dedicated identity roles enables strong password policies and monitoring that reduce the effectiveness of Kerberoasting against accounts managed through the separated duty process."
     },
     {
       "id": "T1559.001",
@@ -1358,7 +1500,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits COM object registration and modification to designated roles, preventing adversaries from leveraging COM-based execution techniques when the compromised account lacks COM configuration privileges."
     },
     {
       "id": "T1562.001",
@@ -1366,7 +1509,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separating security tool management from operational roles ensures that adversaries cannot disable or modify endpoint protection tools without compromising a dedicated security administration account."
     },
     {
       "id": "T1562.002",
@@ -1374,7 +1518,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts event logging configuration to designated security roles, preventing adversaries from disabling Windows event logging using compromised standard administrative accounts."
     },
     {
       "id": "T1562.004",
@@ -1382,7 +1527,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting firewall management to dedicated network security roles prevents adversaries from modifying or disabling system firewalls to facilitate lateral movement using compromised standard accounts."
     },
     {
       "id": "T1562.006",
@@ -1390,7 +1536,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties ensures that indicator blocking requires compromising security tool administration accounts, preventing adversaries from suppressing security alerts using standard operational credentials."
     },
     {
       "id": "T1562.007",
@@ -1398,7 +1545,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud firewall management to dedicated cloud security roles prevents adversaries from modifying cloud network security groups and firewall rules using compromised standard cloud accounts."
     },
     {
       "id": "T1562.008",
@@ -1406,7 +1554,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts cloud logging configuration to dedicated security roles, preventing adversaries from disabling or redirecting cloud audit logs using compromised standard cloud administrative accounts."
     },
     {
       "id": "T1562.009",
@@ -1414,7 +1563,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits boot configuration modification to designated roles, preventing adversaries from forcing safe mode boot to disable security tools using compromised standard administrative access."
     },
     {
       "id": "T1563.001",
@@ -1422,7 +1572,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting SSH session management to designated roles prevents adversaries from hijacking existing SSH sessions when the compromised account lacks the process control privileges needed for session attachment."
     },
     {
       "id": "T1563.002",
@@ -1430,7 +1581,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation restricts remote desktop session management, preventing adversaries from hijacking disconnected RDP sessions without compromising an account with specific session administration privileges."
     },
     {
       "id": "T1569.001",
@@ -1438,7 +1590,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting launchctl usage to designated macOS administration roles prevents adversaries from loading or unloading services using compromised standard user credentials."
     },
     {
       "id": "T1569.002",
@@ -1446,7 +1599,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties limits service execution privileges to designated roles, preventing adversaries from launching processes via the Service Control Manager using compromised standard administrative accounts."
     },
     {
       "id": "T1574.004",
@@ -1456,7 +1610,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting dylib installation and modification to designated roles prevents adversaries from hijacking macOS dynamic library loading when the compromised account lacks write access to library search paths."
     },
     {
       "id": "T1574.005",
@@ -1466,7 +1621,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits file permission management, preventing adversaries from exploiting weak installer permissions to plant malicious executables without compromising a role with specific file system privileges."
     },
     {
       "id": "T1574.007",
@@ -1476,7 +1632,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts PATH environment variable modification to designated roles, preventing adversaries from intercepting execution through PATH manipulation using compromised standard accounts."
     },
     {
       "id": "T1574.008",
@@ -1486,7 +1643,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting write access to DLL search order paths to designated roles prevents adversaries from planting malicious libraries for search order hijacking without specifically privileged file system access."
     },
     {
       "id": "T1574.009",
@@ -1496,7 +1654,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits service configuration management, preventing adversaries from exploiting unquoted service paths for privilege escalation without compromising a role with service configuration privileges."
     },
     {
       "id": "T1574.010",
@@ -1506,7 +1665,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting service file permissions management to designated roles prevents adversaries from exploiting weak service executable permissions to replace binaries for execution flow hijacking."
     },
     {
       "id": "T1574.012",
@@ -1516,7 +1676,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts COR_PROFILER environment variable modification to designated .NET management roles, preventing adversaries from loading profiler DLLs for persistence using standard accounts."
     },
     {
       "id": "T1578.001",
@@ -1524,7 +1685,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud snapshot creation to designated roles prevents adversaries from creating snapshots of production volumes for offline data extraction or forensic evasion using compromised standard cloud accounts."
     },
     {
       "id": "T1578.002",
@@ -1532,7 +1694,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation limits cloud instance creation to designated infrastructure roles, preventing adversaries from spinning up new compute instances in the environment using compromised standard cloud credentials."
     },
     {
       "id": "T1578.003",
@@ -1540,7 +1703,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting cloud instance deletion to designated roles prevents adversaries from destroying evidence by deleting compromised cloud instances using standard cloud accounts that lack infrastructure management privileges."
     },
     {
       "id": "T1599.001",
@@ -1548,7 +1712,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Separation of duties restricts NAT and routing configuration to dedicated network engineering roles, preventing adversaries from traversing network boundaries through NAT manipulation using general network credentials."
     },
     {
       "id": "T1601.001",
@@ -1556,7 +1721,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting network device firmware operations to dedicated engineering roles prevents adversaries from patching system images using compromised general management credentials, requiring separately controlled access."
     },
     {
       "id": "T1601.002",
@@ -1564,7 +1730,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Duty separation ensures that firmware downgrade operations require dedicated engineering credentials, preventing adversaries from reverting network devices to vulnerable firmware versions using standard administrative access."
     }
   ],
   "metadata": {

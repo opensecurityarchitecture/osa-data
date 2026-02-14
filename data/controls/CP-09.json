@@ -153,7 +153,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Regular system-level backups that include Active Directory and credential store snapshots enable restoration of known-good authentication databases after credential dumping incidents, limiting the window during which harvested credentials remain valid."
     },
     {
       "id": "T1005",
@@ -161,7 +162,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Comprehensive backup procedures ensure that data collected or exfiltrated from local systems can be restored from known-good copies, reducing the long-term impact of data theft and enabling forensic comparison against baseline states."
     },
     {
       "id": "T1025",
@@ -169,7 +171,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Backing up data from removable media repositories to protected storage ensures that information stolen from portable devices can be recovered, and backup integrity checks can reveal unauthorized modifications to media contents."
     },
     {
       "id": "T1070",
@@ -177,7 +180,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protected backups of system logs and audit trails preserve forensic evidence even when adversaries attempt indicator removal, enabling investigators to reconstruct attack timelines from backup copies of deleted or tampered log data."
     },
     {
       "id": "T1119",
@@ -185,7 +189,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Regular backups provide baseline data states that enable detection of automated collection activities by comparing current data volumes and access patterns against known-good backup snapshots, revealing bulk data staging anomalies."
     },
     {
       "id": "T1485",
@@ -193,7 +198,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Immutable, regularly tested backups directly counter data destruction attacks by providing recoverable copies of all critical information, enabling rapid restoration of destroyed data and minimising operational disruption from destructive malware."
     },
     {
       "id": "T1486",
@@ -201,7 +207,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protected offline or immutable backups are the primary countermeasure against ransomware encryption, enabling organisations to restore encrypted data without paying ransoms, provided backups are isolated from the production environment and tested regularly."
     },
     {
       "id": "T1490",
@@ -209,7 +216,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Backup procedures that store copies in isolated, protected locations directly counter attempts to inhibit system recovery by ensuring that even if adversaries delete shadow copies, disable recovery partitions, or corrupt system restore points, restorable copies remain available."
     },
     {
       "id": "T1491",
@@ -217,7 +225,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "System and application backups enable rapid restoration of defaced websites and internal systems to their legitimate state, minimising the reputational and operational impact of both internal and external defacement attacks."
     },
     {
       "id": "T1561",
@@ -225,7 +234,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Regular backups stored on isolated media or immutable cloud storage provide the recovery capability needed to restore systems after disk wipe attacks, enabling full reconstruction of wiped endpoints from known-good images."
     },
     {
       "id": "T1565",
@@ -233,7 +243,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Backup integrity verification enables detection of data manipulation by comparing current data states against historical backup copies, and regular backups ensure that manipulated data can be restored to its authentic pre-tampering state."
     },
     {
       "id": "T1003.003",
@@ -241,7 +252,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Backing up the NTDS.dit database to secure, access-controlled storage enables restoration of the Active Directory credential store to a known-good state after a compromise, while also providing forensic comparison to identify injected or modified accounts."
     },
     {
       "id": "T1070.001",
@@ -249,7 +261,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protected backups of Windows event logs preserve forensic evidence even when adversaries clear event logs to cover their tracks, enabling security teams to reconstruct attack activities from backup copies of the deleted audit records."
     },
     {
       "id": "T1070.002",
@@ -257,7 +270,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Backing up Linux and macOS system logs to isolated, protected storage ensures that adversary attempts to clear local log files do not eliminate all forensic evidence, preserving audit trails for incident investigation."
     },
     {
       "id": "T1070.008",
@@ -265,7 +279,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Regular mailbox backups preserve email data that adversaries attempt to delete to cover their tracks, enabling recovery of purged messages and forensic analysis of email-based attack vectors even after mailbox data clearing."
     },
     {
       "id": "T1485.001",
@@ -273,7 +288,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protected backups counter lifecycle-triggered deletion by preserving data copies independent of the application lifecycle policies that adversaries manipulate, ensuring that data scheduled for malicious deletion can be recovered from backup repositories."
     },
     {
       "id": "T1491.001",
@@ -281,7 +297,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Backups of internal-facing web applications and portals enable rapid restoration after internal defacement, returning compromised dashboards and intranet sites to their legitimate state and preserving evidence of the original modification."
     },
     {
       "id": "T1491.002",
@@ -289,7 +306,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Regular backups of external-facing website content and configurations enable swift recovery from external defacement attacks, minimising public-facing reputational damage by restoring legitimate content from verified backup copies."
     },
     {
       "id": "T1561.001",
@@ -297,7 +315,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Isolated backups provide the recovery capability to restore full disk contents after adversaries perform content-level disk wipes, enabling reconstruction of user data, applications, and configurations from protected backup repositories."
     },
     {
       "id": "T1561.002",
@@ -305,7 +324,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Backups of system images and disk structure metadata enable recovery from disk structure wipe attacks that destroy partition tables and file system headers, allowing full system reconstruction even after low-level destructive operations."
     },
     {
       "id": "T1565.001",
@@ -313,7 +333,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Regular backups of critical data stores create authoritative reference points that enable detection and reversal of stored data manipulation, as comparison between current data and backup copies reveals unauthorized modifications."
     },
     {
       "id": "T1565.003",
@@ -321,7 +342,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "System state backups that capture application configurations and runtime parameters enable restoration to known-good states after runtime data manipulation, and provide forensic baselines for detecting in-memory or in-process data alterations."
     }
   ],
   "metadata": {

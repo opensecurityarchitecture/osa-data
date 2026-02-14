@@ -212,7 +212,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection devices with deep-packet inspection can detect obfuscated C2 data traversing network perimeters by analyzing traffic content for anomalous encoding patterns and protocol deviations that indicate covert command channels."
     },
     {
       "id": "T1008",
@@ -220,7 +221,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can disrupt fallback C2 channels by enforcing strict egress filtering that blocks unauthorized outbound connections, preventing adversaries from establishing alternative communication paths when primary channels fail."
     },
     {
       "id": "T1029",
@@ -228,7 +230,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with traffic-pattern analysis can detect scheduled exfiltration by identifying periodic outbound data transfers that match automated staging-and-transfer patterns inconsistent with normal business communications."
     },
     {
       "id": "T1030",
@@ -236,7 +239,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary monitoring can detect size-limited exfiltration by correlating multiple small outbound transfers to the same destination, identifying adversary techniques designed to stay below data-loss-prevention thresholds."
     },
     {
       "id": "T1041",
@@ -244,7 +248,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection devices can detect and block exfiltration over C2 channels by inspecting outbound traffic for data payloads embedded within established command-and-control connections traversing the network perimeter."
     },
     {
       "id": "T1046",
@@ -252,7 +257,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary segmentation limits the scope of service discovery by restricting cross-zone visibility, preventing adversaries from scanning services in protected network segments from less-trusted zones."
     },
     {
       "id": "T1048",
@@ -260,7 +266,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with strict egress filtering can block exfiltration over alternative protocols by restricting outbound traffic to authorized protocols and ports, preventing data theft over DNS, ICMP, or other unexpected channels."
     },
     {
       "id": "T1055",
@@ -269,7 +276,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary segmentation limits the impact of process injection by containing compromised processes within their network zone, preventing injected code from accessing resources in higher-trust segments."
     },
     {
       "id": "T1068",
@@ -277,7 +285,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls limit the exploitability of privilege-escalation vulnerabilities by restricting network access to vulnerable services, reducing the attack surface available for exploitation from less-trusted zones."
     },
     {
       "id": "T1071",
@@ -285,7 +294,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection devices with application-layer inspection can detect C2 traffic disguised within HTTP, DNS, SMTP, and other protocols by analyzing content for anomalous payloads that deviate from legitimate protocol usage."
     },
     {
       "id": "T1072",
@@ -294,7 +304,8 @@
         "execution",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts software deployment tool access to authorized zones, preventing adversaries from leveraging compromised deployment infrastructure to execute code or move laterally across network boundaries."
     },
     {
       "id": "T1078",
@@ -305,7 +316,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits the utility of compromised valid accounts by enforcing network-level access controls that restrict which systems can be reached from specific zones, regardless of authentication credentials."
     },
     {
       "id": "T1080",
@@ -313,7 +325,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits the propagation of tainted shared content by restricting cross-zone file-share access, preventing poisoned files from reaching systems in separate network segments."
     },
     {
       "id": "T1090",
@@ -321,7 +334,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection devices can detect and block proxy-based C2 infrastructure by identifying unauthorized proxy connections at network perimeters and enforcing policies against unapproved relay traffic."
     },
     {
       "id": "T1095",
@@ -329,7 +343,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can block non-application-layer C2 protocols by filtering ICMP, raw sockets, and custom protocols at perimeter firewalls, preventing covert channels that bypass application-layer inspection."
     },
     {
       "id": "T1098",
@@ -338,7 +353,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts the reach of account manipulation by limiting access to identity management systems, preventing adversaries in low-trust zones from modifying accounts in protected directory services."
     },
     {
       "id": "T1102",
@@ -346,7 +362,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with URL filtering and web proxies can restrict connections to web services used for C2 by blocking access to unauthorized cloud storage, social media APIs, and paste sites from protected networks."
     },
     {
       "id": "T1104",
@@ -354,7 +371,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can disrupt multi-stage C2 by blocking callback connections to secondary staging infrastructure, preventing adversaries from establishing layered command channels across the perimeter."
     },
     {
       "id": "T1105",
@@ -362,7 +380,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with egress and ingress filtering can block tool transfer by restricting file downloads from unauthorized sources and preventing the introduction of adversary tools through network boundaries."
     },
     {
       "id": "T1114",
@@ -370,7 +389,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation protects email infrastructure by restricting access to mail servers and limiting email collection to authorized email clients and management systems within approved network zones."
     },
     {
       "id": "T1132",
@@ -378,7 +398,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with traffic inspection can detect encoded C2 data at network perimeters by identifying Base64, XOR, or custom encoding in protocol fields traversing the boundary."
     },
     {
       "id": "T1133",
@@ -387,7 +408,8 @@
         "initial-access",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection is a primary control against abuse of external remote services by restricting VPN, RDP, and SSH access through managed interfaces with authentication, monitoring, and access-control enforcement."
     },
     {
       "id": "T1136",
@@ -395,7 +417,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits the impact of unauthorized account creation by restricting access to directory services and identity providers, preventing adversaries from creating accounts across network boundaries."
     },
     {
       "id": "T1176",
@@ -403,7 +426,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with web filtering can limit malicious browser extension activity by blocking connections to C2 infrastructure and data-exfiltration endpoints that extensions attempt to reach across the network perimeter."
     },
     {
       "id": "T1187",
@@ -411,7 +435,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can prevent forced-authentication credential theft by blocking outbound SMB, WebDAV, and similar authentication traffic to untrusted destinations, preventing NTLM hash interception."
     },
     {
       "id": "T1189",
@@ -419,7 +444,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with web proxies and URL filtering can mitigate drive-by compromises by blocking access to known malicious websites, exploit kit landing pages, and watering-hole domains."
     },
     {
       "id": "T1190",
@@ -427,7 +453,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection is a frontline defense against exploitation of public-facing applications by filtering malicious inbound traffic, enforcing web application firewall rules, and limiting exposed attack surface."
     },
     {
       "id": "T1197",
@@ -436,7 +463,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can limit BITS job abuse by restricting outbound BITS transfer destinations through proxy enforcement, preventing adversaries from using BITS for data exfiltration or tool download."
     },
     {
       "id": "T1199",
@@ -444,7 +472,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection controls access from trusted third-party connections by enforcing dedicated managed interfaces, segmentation, and monitoring for traffic from business partners and service providers."
     },
     {
       "id": "T1203",
@@ -452,7 +481,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary protection at web proxies can reduce exploitation for client execution by blocking access to websites hosting exploit kits and filtering malicious content before it reaches client applications."
     },
     {
       "id": "T1204",
@@ -460,7 +490,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with content filtering can reduce user execution of malicious content by blocking downloads of dangerous file types and restricting access to known malicious distribution points."
     },
     {
       "id": "T1205",
@@ -470,7 +501,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary devices can detect and block traffic signaling techniques\u2014including port knocking\u2014by enforcing strict stateful inspection that rejects connection attempts not matching authorized traffic patterns."
     },
     {
       "id": "T1210",
@@ -478,7 +510,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation is a primary defense against exploitation of remote services for lateral movement by isolating systems into zones and restricting cross-zone access to only authorized service connections."
     },
     {
       "id": "T1211",
@@ -486,7 +519,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits exploitation for defense evasion by restricting the attack surface accessible from less-trusted zones, reducing opportunities for adversaries to exploit vulnerabilities that disable security controls."
     },
     {
       "id": "T1212",
@@ -494,7 +528,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts exploitation for credential access by isolating authentication infrastructure in protected zones, limiting adversary access to credential-storage services from compromised segments."
     },
     {
       "id": "T1218",
@@ -502,7 +537,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can limit the impact of system binary proxy execution by blocking outbound connections from LOLBin processes to unauthorized external resources through strict egress filtering."
     },
     {
       "id": "T1219",
@@ -510,7 +546,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can detect and block unauthorized remote access software by identifying RAS connection patterns at perimeter firewalls and restricting outbound connections to unapproved remote-access services."
     },
     {
       "id": "T1221",
@@ -518,7 +555,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with web filtering can block template injection by preventing Office documents from retrieving remote templates from unauthorized external servers during document opening."
     },
     {
       "id": "T1482",
@@ -526,7 +564,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits domain trust discovery by restricting LDAP and domain-controller access across zone boundaries, preventing adversaries from enumerating trust relationships from compromised segments."
     },
     {
       "id": "T1489",
@@ -534,7 +573,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls protect critical services by restricting access to service-management interfaces, preventing adversaries in less-trusted zones from stopping services across network boundaries."
     },
     {
       "id": "T1498",
@@ -542,7 +582,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection devices\u2014including rate-limiting firewalls, scrubbing services, and traffic-filtering appliances\u2014are primary defenses against network DoS attacks by absorbing and filtering volumetric attack traffic."
     },
     {
       "id": "T1499",
@@ -550,7 +591,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary protection with rate limiting and traffic shaping can mitigate endpoint DoS attacks by throttling excessive request rates before they overwhelm target services behind the perimeter."
     },
     {
       "id": "T1530",
@@ -558,7 +600,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can restrict unauthorized access to cloud storage by enforcing CASB policies and limiting which network zones can reach cloud-storage APIs, preventing data collection from unsanctioned access paths."
     },
     {
       "id": "T1537",
@@ -566,7 +609,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with egress controls can detect data transfer to external cloud accounts by monitoring for unusual outbound connections to cloud storage APIs and blocking unauthorized cross-account data movements."
     },
     {
       "id": "T1542",
@@ -575,7 +619,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation isolates pre-OS boot management interfaces, restricting access to firmware-update and boot-configuration mechanisms that adversaries could abuse for pre-OS persistence."
     },
     {
       "id": "T1552",
@@ -583,7 +628,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits credential exposure by segmenting credential-storage systems within protected zones, reducing the attack surface available for adversaries to access unsecured credential repositories."
     },
     {
       "id": "T1557",
@@ -592,7 +638,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation with managed interfaces limits adversary-in-the-middle opportunities by isolating network segments, reducing the scope within which ARP poisoning, DHCP spoofing, and similar interception techniques can operate."
     },
     {
       "id": "T1559",
@@ -600,7 +647,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can limit inter-process communication abuse by restricting DCOM and other IPC protocols at zone boundaries, preventing cross-zone exploitation of COM/DDE interfaces."
     },
     {
       "id": "T1560",
@@ -608,7 +656,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with DLP capabilities can detect archived data being staged for exfiltration by inspecting outbound transfers for compressed and encrypted archives containing sensitive content."
     },
     {
       "id": "T1563",
@@ -616,7 +665,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts remote service session hijacking by limiting cross-zone access to remote-management protocols, preventing adversaries from hijacking sessions across network boundaries."
     },
     {
       "id": "T1565",
@@ -624,7 +674,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls protect data integrity by restricting access to critical data stores, preventing unauthorized modifications from compromised systems in less-trusted network segments."
     },
     {
       "id": "T1566",
@@ -632,7 +683,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection at email gateways and web proxies provides defense against phishing by scanning inbound emails, blocking malicious attachments and URLs, and filtering access to phishing infrastructure."
     },
     {
       "id": "T1567",
@@ -640,7 +692,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls with egress filtering can detect and block exfiltration to web services by restricting outbound connections to unauthorized cloud storage, paste sites, and code repositories."
     },
     {
       "id": "T1568",
@@ -648,7 +701,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with DNS filtering can disrupt dynamic resolution techniques by blocking DNS queries to known DGA domains and restricting DNS resolution to authorized resolvers."
     },
     {
       "id": "T1570",
@@ -656,7 +710,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation directly limits lateral tool transfer by restricting file-sharing protocols between zones, preventing adversaries from copying tools across network boundaries."
     },
     {
       "id": "T1571",
@@ -664,7 +719,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with port-based access controls blocks C2 on non-standard ports by enforcing policies that only permit expected protocols on their standard ports, rejecting connections on unauthorized port numbers."
     },
     {
       "id": "T1572",
@@ -672,7 +728,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary inspection can detect protocol tunneling by analyzing traffic for encapsulation patterns\u2014such as DNS-over-HTTPS or HTTP tunneling\u2014that indicate covert channels embedded within permitted protocols."
     },
     {
       "id": "T1573",
@@ -680,7 +737,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with TLS inspection capabilities can analyze encrypted C2 channels by decrypting traffic at the perimeter, identifying malicious payloads within sessions that would otherwise be opaque to inspection."
     },
     {
       "id": "T1598",
@@ -688,7 +746,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection at email gateways provides defense against phishing-for-information by filtering inbound reconnaissance emails, blocking malicious attachments, and flagging suspicious social-engineering messages."
     },
     {
       "id": "T1599",
@@ -696,7 +755,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection directly addresses network boundary bridging by enforcing strict segmentation policies, monitoring for unauthorized route changes, and preventing traffic from bypassing designated network perimeters."
     },
     {
       "id": "T1602",
@@ -704,7 +764,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation protects configuration repositories by restricting access to network device management interfaces from authorized management zones only, preventing configuration extraction from less-trusted segments."
     },
     {
       "id": "T1609",
@@ -712,7 +773,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection around container orchestration environments restricts container administration command access by enforcing network-level controls that limit which systems can issue commands to container management APIs."
     },
     {
       "id": "T1610",
@@ -721,7 +783,8 @@
         "defense-evasion",
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation can limit unauthorized container deployment by restricting access to container registries and orchestration APIs, preventing adversaries from deploying malicious containers from compromised zones."
     },
     {
       "id": "T1611",
@@ -729,7 +792,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls around container infrastructure limit the impact of container escape by ensuring that even if adversaries break out to the host, they cannot easily reach systems in other network segments."
     },
     {
       "id": "T1612",
@@ -737,7 +801,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can restrict access to container build environments by segmenting build infrastructure and limiting which zones can push images to trusted registries."
     },
     {
       "id": "T1613",
@@ -745,7 +810,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits container discovery by restricting access to container orchestration APIs, preventing adversaries in compromised zones from enumerating container infrastructure across network boundaries."
     },
     {
       "id": "T1622",
@@ -754,7 +820,8 @@
         "defense-evasion",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with behavioral analysis at the perimeter can detect malware employing debugger-evasion techniques by identifying traffic patterns characteristic of analysis-aware malware communicating with C2."
     },
     {
       "id": "T1648",
@@ -762,7 +829,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can restrict serverless function execution by enforcing access policies on cloud function APIs and limiting which network zones can trigger serverless workloads."
     },
     {
       "id": "T1659",
@@ -771,7 +839,8 @@
         "command-and-control",
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with content-inspection capabilities can detect content injection attacks by analyzing inbound traffic for manipulated web content, man-on-the-side injection patterns, and tampered responses."
     },
     {
       "id": "T1001.001",
@@ -779,7 +848,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with traffic analysis can detect junk-data padding in C2 by identifying statistically anomalous packet sizes at the network perimeter that deviate from expected protocol characteristics."
     },
     {
       "id": "T1001.002",
@@ -787,7 +857,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary inspection can detect steganographic C2 by analyzing media-file transfers for embedded data payloads that deviate from expected image, audio, or video content formats."
     },
     {
       "id": "T1001.003",
@@ -795,7 +866,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with deep protocol validation can detect protocol impersonation at the perimeter by identifying traffic that superficially resembles legitimate protocols but fails strict compliance checks."
     },
     {
       "id": "T1020.001",
@@ -803,7 +875,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary monitoring can detect traffic duplication by identifying unauthorized port-mirroring, SPAN configurations, or tap-based exfiltration that copies network traffic to adversary-controlled destinations."
     },
     {
       "id": "T1021.001",
@@ -811,7 +884,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection restricts RDP access by enforcing firewall rules that limit Remote Desktop Protocol connections to authorized source networks and require traversal through secure jump hosts."
     },
     {
       "id": "T1021.002",
@@ -819,7 +893,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts SMB and admin-share access by blocking port 445 at zone boundaries, preventing lateral movement via Windows administrative shares between network segments."
     },
     {
       "id": "T1021.003",
@@ -827,7 +902,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can block DCOM-based lateral movement by restricting the dynamic RPC ports used for remote DCOM instantiation at zone boundaries."
     },
     {
       "id": "T1021.005",
@@ -835,7 +911,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls restrict VNC access by filtering VNC protocol traffic at perimeter firewalls, preventing unauthorized graphical remote-control connections across network boundaries."
     },
     {
       "id": "T1021.006",
@@ -843,7 +920,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection restricts Windows Remote Management by filtering WinRM traffic (ports 5985/5986) at zone boundaries, preventing PowerShell remoting and WMI-over-WinRM lateral movement."
     },
     {
       "id": "T1036.008",
@@ -851,7 +929,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary content filtering can detect files with masqueraded types by analyzing file content during transfer rather than relying on extensions, identifying executables disguised as documents."
     },
     {
       "id": "T1048.001",
@@ -859,7 +938,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with egress filtering can block exfiltration over symmetric-encrypted non-C2 channels by restricting encrypted outbound connections to only authorized destinations and protocols."
     },
     {
       "id": "T1048.002",
@@ -867,7 +947,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can block exfiltration over asymmetric-encrypted channels by restricting TLS/SSH connections to approved external endpoints and detecting unauthorized certificate usage."
     },
     {
       "id": "T1048.003",
@@ -875,7 +956,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can block unencrypted exfiltration by inspecting plaintext outbound traffic at the perimeter and blocking suspicious data transfers over FTP, HTTP, or other unencrypted protocols."
     },
     {
       "id": "T1055.001",
@@ -884,7 +966,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits the impact of DLL injection by containing compromised processes within their zone, preventing injected code from communicating with C2 infrastructure across network boundaries."
     },
     {
       "id": "T1055.002",
@@ -893,7 +976,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits PE injection impact by restricting outbound communications from compromised processes, containing the network reach of injected portable executable code."
     },
     {
       "id": "T1055.003",
@@ -902,7 +986,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits thread-hijacking impact by ensuring that even if thread execution is redirected to malicious code, network-level controls constrain its communication and lateral-movement capabilities."
     },
     {
       "id": "T1055.004",
@@ -911,7 +996,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits the network impact of APC injection by restricting the compromised process's ability to establish outbound connections to C2 infrastructure across zone boundaries."
     },
     {
       "id": "T1055.005",
@@ -920,7 +1006,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation constrains TLS-injection impact by limiting network access from the hosting process's zone, reducing the ability of injected code to reach attacker infrastructure."
     },
     {
       "id": "T1055.008",
@@ -929,7 +1016,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits the network reach of ptrace-injected code on Linux by enforcing zone-level access controls that restrict outbound connections from compromised processes."
     },
     {
       "id": "T1055.009",
@@ -938,7 +1026,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation contains proc-memory injection impact by restricting network communications from the compromised process's zone, limiting lateral movement and C2 access."
     },
     {
       "id": "T1055.011",
@@ -947,7 +1036,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits extra-window-memory injection impact by restricting the network capabilities of the host process's zone, preventing injected code from establishing external communications."
     },
     {
       "id": "T1055.012",
@@ -956,7 +1046,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits process-hollowing impact by containing the hollowed process within its network zone, preventing the injected code from communicating with C2 across boundaries."
     },
     {
       "id": "T1055.013",
@@ -965,7 +1056,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits process-doppelganging impact by restricting the transacted process's network access through zone-level controls, containing adversary communications."
     },
     {
       "id": "T1055.014",
@@ -974,7 +1066,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits VDSO-hijacking impact by constraining the compromised process's network access to its assigned zone, preventing cross-boundary C2 communications."
     },
     {
       "id": "T1071.001",
@@ -982,7 +1075,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with web proxy enforcement can detect and filter HTTP/HTTPS-based C2 by requiring all web traffic through inspected proxy channels, identifying anomalous web-protocol patterns at the perimeter."
     },
     {
       "id": "T1071.002",
@@ -990,7 +1084,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can detect FTP/FTPS-based C2 by restricting file-transfer protocol usage to authorized connections and inspecting FTP sessions for command-and-control indicators."
     },
     {
       "id": "T1071.003",
@@ -998,7 +1093,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection at email gateways can detect mail-protocol C2 by analyzing SMTP/IMAP/POP3 traffic for embedded commands and restricting mail-server connections to authorized infrastructure."
     },
     {
       "id": "T1071.004",
@@ -1006,7 +1102,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary DNS controls can detect DNS-based C2 by enforcing DNS resolution through organizational resolvers, inspecting queries for tunneling indicators, and blocking direct external DNS access."
     },
     {
       "id": "T1071.005",
@@ -1014,7 +1111,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can detect C2 over publish/subscribe protocols (MQTT, AMQP) by restricting these protocols at perimeter firewalls and monitoring for unauthorized IoT-messaging traffic."
     },
     {
       "id": "T1090.001",
@@ -1022,7 +1120,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation and internal boundary controls can detect internal proxy deployment by identifying unauthorized systems relaying traffic between zones, disrupting adversary-established relay infrastructure."
     },
     {
       "id": "T1090.002",
@@ -1030,7 +1129,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with egress controls can block connections to external proxy infrastructure by maintaining blocklists of known proxy services and detecting unauthorized encrypted-tunnel establishment."
     },
     {
       "id": "T1090.003",
@@ -1038,7 +1138,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary monitoring can detect multi-hop proxy chains by identifying traffic patterns where connections traverse multiple intermediary nodes, characteristic of adversary obfuscation techniques."
     },
     {
       "id": "T1098.001",
@@ -1047,7 +1148,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts access to cloud identity management APIs, preventing adversaries in compromised zones from adding unauthorized cloud credentials to accounts in protected cloud environments."
     },
     {
       "id": "T1102.001",
@@ -1055,7 +1157,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with web filtering can block dead-drop resolver connections by restricting access to social media, paste sites, and other platforms used to host encoded C2 address information."
     },
     {
       "id": "T1102.002",
@@ -1063,7 +1166,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can block bidirectional web-service C2 by restricting API-level access to cloud platforms and monitoring for persistent, unusual data exchanges with web services."
     },
     {
       "id": "T1102.003",
@@ -1071,7 +1175,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can block one-way web-service C2 by restricting outbound connections to web platforms used for command retrieval, disrupting the adversary's ability to push instructions through legitimate services."
     },
     {
       "id": "T1114.003",
@@ -1079,7 +1184,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation protects email infrastructure from unauthorized forwarding-rule creation by restricting access to Exchange/O365 management interfaces from authorized administrative zones only."
     },
     {
       "id": "T1132.001",
@@ -1087,7 +1193,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with traffic inspection can detect standard-encoding in C2 traversing the perimeter by identifying Base64 or URL-encoded data in protocol fields where plaintext is expected."
     },
     {
       "id": "T1132.002",
@@ -1095,7 +1202,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary inspection can detect non-standard encoding in C2 by performing entropy analysis on traffic crossing the perimeter, identifying custom encoding that deviates from normal protocol data."
     },
     {
       "id": "T1136.002",
@@ -1103,7 +1211,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts domain account creation by limiting access to Active Directory domain controllers from authorized administrative zones, preventing adversary account creation across boundaries."
     },
     {
       "id": "T1136.003",
@@ -1111,7 +1220,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection restricts cloud account creation by enforcing network-level controls on access to cloud IAM APIs, preventing unauthorized account provisioning from compromised network zones."
     },
     {
       "id": "T1204.001",
@@ -1119,7 +1229,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with URL filtering blocks access to malicious link destinations by maintaining categorized URL databases and preventing users from navigating to known phishing and exploitation sites."
     },
     {
       "id": "T1204.002",
@@ -1127,7 +1238,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls with content filtering can block malicious file downloads by inspecting transferred files at the perimeter and preventing delivery of weaponized documents and executables."
     },
     {
       "id": "T1204.003",
@@ -1135,7 +1247,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can restrict access to container registries, preventing deployment of malicious images by blocking connections to unauthorized registries from production network zones."
     },
     {
       "id": "T1205.001",
@@ -1145,7 +1258,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary stateful inspection can defeat port-knocking sequences by requiring established sessions and rejecting the irregular connection patterns characteristic of port-knocking activation attempts."
     },
     {
       "id": "T1218.012",
@@ -1153,7 +1267,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can limit verclsid proxy-execution impact by blocking outbound connections from verclsid.exe-launched payloads that attempt to reach C2 infrastructure across the network perimeter."
     },
     {
       "id": "T1218.015",
@@ -1161,7 +1276,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can restrict Electron application network access by filtering outbound connections from Electron-based processes to prevent communication with adversary infrastructure."
     },
     {
       "id": "T1498.001",
@@ -1169,7 +1285,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection devices\u2014including rate-limiting firewalls and DDoS-scrubbing services\u2014directly mitigate direct network floods by filtering volumetric attack traffic before it saturates internal infrastructure."
     },
     {
       "id": "T1498.002",
@@ -1177,7 +1294,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary protection with anti-amplification controls mitigates reflection attacks by blocking spoofed source-address traffic and rate-limiting responses from reflectable services."
     },
     {
       "id": "T1499.001",
@@ -1185,7 +1303,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with connection-rate limiting mitigates OS exhaustion floods by throttling excessive inbound connection attempts before they deplete operating-system-level resources on target systems."
     },
     {
       "id": "T1499.002",
@@ -1193,7 +1312,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary rate limiting mitigates service exhaustion floods by restricting request rates to protected services, preventing service-level resource depletion from high-volume attacks."
     },
     {
       "id": "T1499.003",
@@ -1201,7 +1321,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with application-aware filtering mitigates application exhaustion floods by identifying and throttling request patterns designed to consume excessive application resources."
     },
     {
       "id": "T1499.004",
@@ -1209,7 +1330,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls with intrusion-prevention capabilities can detect and block exploitation-based DoS by identifying exploit payloads targeting application vulnerabilities to cause service disruption."
     },
     {
       "id": "T1505.004",
@@ -1217,7 +1339,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can restrict IIS component access by enforcing web application firewall rules that detect malicious module installation attempts and limiting management-interface access to authorized zones."
     },
     {
       "id": "T1542.004",
@@ -1226,7 +1349,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation isolates network device management interfaces, restricting access to ROM monitor environments and preventing ROMMONkit installation from compromised zones."
     },
     {
       "id": "T1542.005",
@@ -1235,7 +1359,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection restricts TFTP boot manipulation by controlling access to TFTP servers and boot-image repositories, preventing adversaries from substituting malicious boot images."
     },
     {
       "id": "T1552.001",
@@ -1243,7 +1368,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits access to file systems containing credentials by restricting cross-zone file access, reducing the attack surface for extracting credentials stored in plaintext files."
     },
     {
       "id": "T1552.004",
@@ -1251,7 +1377,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits access to systems storing private keys by enforcing network-level controls that restrict which zones can reach key-storage locations and SSH/TLS certificate repositories."
     },
     {
       "id": "T1552.005",
@@ -1259,7 +1386,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation can restrict access to cloud instance metadata APIs by limiting which network paths can reach the metadata endpoint, preventing credential harvesting from compromised containers or workloads."
     },
     {
       "id": "T1552.007",
@@ -1267,7 +1395,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection around container environments restricts access to container APIs that expose credentials, limiting which network zones can query container runtime metadata and secrets."
     },
     {
       "id": "T1557.001",
@@ -1276,7 +1405,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits LLMNR/NBT-NS poisoning scope by isolating broadcast domains, restricting the network segments within which adversaries can intercept name-resolution queries and relay SMB authentication."
     },
     {
       "id": "T1557.002",
@@ -1285,7 +1415,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with segmented VLANs limits ARP poisoning scope by restricting the broadcast domain within which adversaries can inject gratuitous ARP responses and intercept traffic."
     },
     {
       "id": "T1557.003",
@@ -1294,7 +1425,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits DHCP spoofing impact by isolating DHCP broadcast domains and enforcing DHCP snooping at boundary switches to prevent rogue server responses from reaching protected subnets."
     },
     {
       "id": "T1557.004",
@@ -1303,7 +1435,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with wireless-network controls limits evil twin attacks by enforcing wireless intrusion detection, rogue-AP suppression, and network-access controls that validate legitimate access points."
     },
     {
       "id": "T1559.001",
@@ -1311,7 +1444,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts remote COM instantiation by blocking DCOM traffic at zone boundaries, preventing adversaries from executing code through COM interfaces across network segments."
     },
     {
       "id": "T1559.002",
@@ -1319,7 +1453,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can limit DDE exploitation impact by restricting outbound connections from Office processes that may establish C2 channels following DDE-based code execution."
     },
     {
       "id": "T1560.001",
@@ -1327,7 +1462,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary DLP controls can detect archived data being staged for exfiltration by inspecting outbound transfers for compressed and encrypted files created by archiving utilities."
     },
     {
       "id": "T1563.002",
@@ -1335,7 +1471,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts RDP hijacking by limiting RDP access across zone boundaries, preventing adversaries from connecting to active or disconnected RDP sessions across network segments."
     },
     {
       "id": "T1565.001",
@@ -1343,7 +1480,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection restricts access to critical data stores, preventing stored-data manipulation by ensuring that only authorized systems and users in approved zones can modify sensitive data repositories."
     },
     {
       "id": "T1565.003",
@@ -1351,7 +1489,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation limits runtime data manipulation by restricting access to application-processing environments from less-trusted zones, reducing opportunities for adversaries to tamper with data in transit."
     },
     {
       "id": "T1566.001",
@@ -1359,7 +1498,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection at email gateways scans spearphishing attachments, detonates suspicious files in sandboxes, and blocks weaponized content before targeted phishing emails reach internal mailboxes."
     },
     {
       "id": "T1566.002",
@@ -1367,7 +1507,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary URL filtering blocks spearphishing link destinations by preventing users from navigating to credential-harvesting pages, exploit-kit landing pages, and other malicious URLs."
     },
     {
       "id": "T1566.003",
@@ -1375,7 +1516,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection extends to collaboration-service gateways, filtering malicious content delivered through third-party messaging platforms that may bypass traditional email security controls."
     },
     {
       "id": "T1567.001",
@@ -1383,7 +1525,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can block exfiltration to code repositories by restricting access to Git hosting platforms and monitoring for unusual push operations containing sensitive data."
     },
     {
       "id": "T1567.002",
@@ -1391,7 +1534,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with egress filtering can block exfiltration to cloud storage by restricting outbound connections to unauthorized cloud-storage providers and detecting anomalous upload patterns."
     },
     {
       "id": "T1567.003",
@@ -1399,7 +1543,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls can block exfiltration to text-storage sites (Pastebin, Ghostbin) by restricting access to paste services and monitoring for data uploads to these platforms."
     },
     {
       "id": "T1567.004",
@@ -1407,7 +1552,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection can block exfiltration over webhooks by restricting outbound webhook connections to only authorized integration endpoints and monitoring for unusual webhook data volumes."
     },
     {
       "id": "T1568.002",
@@ -1415,7 +1561,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary DNS controls can disrupt domain generation algorithms by sinkholing algorithmically generated domains, blocking resolution of DGA-produced names, and alerting on characteristic query patterns."
     },
     {
       "id": "T1573.001",
@@ -1423,7 +1570,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection with TLS inspection can detect symmetric-cryptography C2 by decrypting traffic at the perimeter and analyzing session content for malicious payloads and command structures."
     },
     {
       "id": "T1573.002",
@@ -1431,7 +1579,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary TLS inspection can detect asymmetric-cryptography C2 by analyzing certificate attributes, identifying self-signed or adversary-controlled certificates, and inspecting decrypted traffic for malicious content."
     },
     {
       "id": "T1590.002",
@@ -1439,7 +1588,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection limits DNS reconnaissance by restricting zone-transfer capabilities, implementing split DNS architectures, and minimizing the information exposed through external DNS records."
     },
     {
       "id": "T1598.001",
@@ -1447,7 +1597,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary controls at messaging gateways filter reconnaissance spearphishing through third-party services by scanning inbound messages for social-engineering indicators and malicious content."
     },
     {
       "id": "T1598.002",
@@ -1455,7 +1606,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection at email gateways scans reconnaissance spearphishing attachments for tracking mechanisms, information-gathering payloads, and malicious content designed to harvest organizational intelligence."
     },
     {
       "id": "T1598.003",
@@ -1463,7 +1615,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network boundary URL filtering blocks reconnaissance spearphishing links by preventing access to credential-harvesting pages, tracking pixels, and information-gathering infrastructure embedded in phishing messages."
     },
     {
       "id": "T1599.001",
@@ -1471,7 +1624,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection directly addresses NAT traversal by enforcing strict NAT configurations on boundary devices, monitoring for unauthorized translation rules, and preventing traffic bypass through NAT manipulation."
     },
     {
       "id": "T1602.001",
@@ -1479,7 +1633,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation restricts SNMP access by placing management interfaces in dedicated zones and filtering SNMP traffic at boundaries, preventing unauthorized MIB queries from compromised segments."
     },
     {
       "id": "T1602.002",
@@ -1487,7 +1642,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Boundary protection restricts network device management access by enforcing out-of-band management networks and filtering management-protocol traffic at zone boundaries to prevent unauthorized configuration extraction."
     }
   ],
   "metadata": {

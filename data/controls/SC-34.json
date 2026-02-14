@@ -81,7 +81,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Loading the operating environment from hardware-enforced read-only media prevents adversaries from modifying pre-OS boot components, as the boot chain is physically immutable and cannot be altered to establish persistence below the operating system."
     },
     {
       "id": "T1548",
@@ -90,7 +91,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Non-modifiable executable programs loaded from read-only media prevent adversaries from altering elevation control mechanisms, as the binaries responsible for privilege management cannot be tampered with to bypass authorization checks."
     },
     {
       "id": "T1553",
@@ -98,7 +100,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardware-enforced read-only execution environments prevent adversaries from subverting trust controls by modifying signed binaries or trust validation logic, as the code integrity verification chain itself resides on immutable media."
     },
     {
       "id": "T1601",
@@ -106,7 +109,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Executing system images from non-modifiable, hardware-enforced read-only media directly prevents adversaries from patching or replacing the running system image, as physical write protection makes persistent modification impossible."
     },
     {
       "id": "T1611",
@@ -114,7 +118,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Non-modifiable executable environments loaded from read-only media limit container escape techniques by ensuring that host operating system binaries and kernel components cannot be modified even if an adversary gains write access within a container."
     },
     {
       "id": "T1195.003",
@@ -122,7 +127,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardware-enforced read-only boot media provides a trusted execution baseline that detects or resists compromised hardware supply chain components, as the expected system image is immutable and any discrepancy with hardware behavior becomes evident."
     },
     {
       "id": "T1218.015",
@@ -130,7 +136,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Loading applications from hardware-enforced read-only media prevents adversaries from modifying Electron application binaries to proxy malicious execution, as the application code and its embedded runtime are physically protected from tampering."
     },
     {
       "id": "T1542.001",
@@ -139,7 +146,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Non-modifiable boot media prevents adversaries from installing persistent system firmware modifications, as the UEFI/BIOS image is loaded from hardware-enforced read-only storage that cannot be reflashed through software-based attacks."
     },
     {
       "id": "T1542.003",
@@ -148,7 +156,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardware-enforced read-only boot media directly prevents bootkit installation by making the master boot record and boot partition physically immutable, blocking adversary attempts to establish pre-OS persistence through boot sector modification."
     },
     {
       "id": "T1542.004",
@@ -157,7 +166,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Executing network device firmware from non-modifiable media prevents ROMMONkit installation by ensuring the bootstrap monitor program resides on hardware-enforced read-only storage that cannot be altered by adversary-injected code."
     },
     {
       "id": "T1542.005",
@@ -166,7 +176,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Non-modifiable boot media eliminates TFTP boot manipulation by ensuring devices boot exclusively from local read-only storage rather than network-provided images, preventing adversaries from substituting malicious boot images via compromised TFTP servers."
     },
     {
       "id": "T1548.004",
@@ -175,7 +186,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Loading system binaries from read-only media ensures that authorization prompt mechanisms cannot be tampered with to auto-approve elevation requests, as the executables governing privilege escalation prompts are physically write-protected."
     },
     {
       "id": "T1553.006",
@@ -183,7 +195,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardware-enforced read-only execution prevents adversaries from modifying code signing policies stored on the boot media, as the signing enforcement configuration is immutable and cannot be weakened through software-based policy changes."
     },
     {
       "id": "T1601.001",
@@ -191,7 +204,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Non-modifiable executable media directly prevents adversaries from patching network device system images, as the firmware resides on hardware-enforced read-only storage where in-place modifications are physically impossible."
     },
     {
       "id": "T1601.002",
@@ -199,7 +213,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardware-enforced read-only media prevents adversaries from downgrading system images to vulnerable versions, as the current firmware is physically protected from replacement and the boot process loads only from the immutable source."
     }
   ],
   "metadata": {

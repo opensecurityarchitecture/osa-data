@@ -177,7 +177,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement policies that inspect and filter network traffic based on content characteristics can block obfuscated C2 data by rejecting traffic that fails protocol conformance checks or contains anomalous payload encodings."
     },
     {
       "id": "T1003",
@@ -185,7 +186,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restricting information flows between security domains\u2014particularly isolating credential stores and domain controllers behind strict network segmentation\u2014limits adversary ability to access credential dumping targets from compromised endpoints."
     },
     {
       "id": "T1008",
@@ -193,7 +195,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies that restrict outbound connections to authorized destinations and protocols can block fallback C2 channels by preventing compromised hosts from establishing connections to alternate adversary infrastructure."
     },
     {
       "id": "T1029",
@@ -201,7 +204,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement that monitors and restricts data transfers based on schedules, volumes, and destination characteristics can detect and block automated scheduled exfiltration by enforcing approved transfer windows and size limits."
     },
     {
       "id": "T1030",
@@ -209,7 +213,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that track cumulative data transfer volumes can detect exfiltration using small transfer sizes by aggregating individual transfers and alerting when total outbound data exceeds thresholds even at low per-transfer rates."
     },
     {
       "id": "T1041",
@@ -217,7 +222,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement between internal networks and external infrastructure can restrict exfiltration over C2 channels by applying content inspection and data loss prevention at network boundaries to detect sensitive data in outbound traffic."
     },
     {
       "id": "T1046",
@@ -225,7 +231,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network flow enforcement that restricts inter-zone communication to explicitly authorized service paths limits network service discovery by preventing adversary scanning across network segments they should not be able to reach."
     },
     {
       "id": "T1048",
@@ -233,7 +240,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies that whitelist authorized outbound protocols and destinations can block exfiltration over alternative protocols by rejecting DNS tunneling, ICMP-based transfers, or unauthorized protocol usage at enforcement boundaries."
     },
     {
       "id": "T1068",
@@ -241,7 +249,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing information flow boundaries between privilege levels and security domains constrains the impact of privilege escalation exploits by limiting what an attacker can access even after gaining elevated permissions within a single zone."
     },
     {
       "id": "T1071",
@@ -249,7 +258,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement through application-layer gateways and proxy architectures can detect and block C2 channels by validating that application protocol usage conforms to expected patterns and authorized communication paths."
     },
     {
       "id": "T1072",
@@ -258,7 +268,8 @@
         "execution",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement policies restricting software deployment tool communication to authorized management networks prevent adversaries from abusing these tools for lateral execution by blocking deployment commands from unauthorized network segments."
     },
     {
       "id": "T1090",
@@ -266,7 +277,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network flow enforcement that restricts proxy usage to authorized proxy infrastructure and blocks direct outbound connections prevents adversaries from establishing unauthorized proxy chains for C2 traffic relay."
     },
     {
       "id": "T1095",
@@ -274,7 +286,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control at network boundaries that enforces application-layer protocol requirements can block non-application layer C2 protocols by rejecting raw TCP, ICMP tunneling, or custom protocol traffic that bypasses proxy infrastructure."
     },
     {
       "id": "T1098",
@@ -283,7 +296,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies that restrict administrative operations to authorized management channels prevent adversaries from performing account manipulation from compromised user workstations by enforcing administrative action boundaries."
     },
     {
       "id": "T1102",
@@ -291,7 +305,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement that controls access to cloud services and external web platforms can restrict C2 channels leveraging legitimate web services by blocking or inspecting traffic to categories of sites commonly abused for command-and-control."
     },
     {
       "id": "T1104",
@@ -299,7 +314,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies restricting outbound connection chains and blocking multi-hop routing through unauthorized relays can disrupt multi-stage C2 channel establishment that progressively tunnels through multiple intermediaries."
     },
     {
       "id": "T1105",
@@ -307,7 +323,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement blocking executable downloads, script retrieval, and tool staging from unauthorized external sources prevents adversaries from transferring additional attack tools into the environment through ingress channels."
     },
     {
       "id": "T1114",
@@ -315,7 +332,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement policies restricting email data access to authorized clients and protocols\u2014and preventing bulk email export across security boundaries\u2014limit adversary ability to collect and exfiltrate email content from compromised environments."
     },
     {
       "id": "T1132",
@@ -323,7 +341,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control with content inspection can detect encoded C2 data by analyzing traffic payloads for Base64, XOR, or custom encoding signatures that differ from expected application-layer data formats within permitted protocols."
     },
     {
       "id": "T1133",
@@ -332,7 +351,8 @@
         "initial-access",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement through VPN concentrators and remote access gateways\u2014with strict source validation and protocol restrictions\u2014limits adversary exploitation of external remote services for initial access and persistence."
     },
     {
       "id": "T1136",
@@ -340,7 +360,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting account provisioning operations to authorized identity management systems and approved network pathways prevents adversaries from creating persistent accounts through unauthorized administrative channels."
     },
     {
       "id": "T1187",
@@ -348,7 +369,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control that restricts outbound SMB and NTLM traffic from crossing network boundaries prevents forced authentication attacks from coercing credential hash transmission to adversary-controlled external servers."
     },
     {
       "id": "T1189",
@@ -356,7 +378,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement through web proxy architectures with content filtering, URL categorization, and sandboxing of web content can block drive-by compromise payloads before they reach user endpoints."
     },
     {
       "id": "T1190",
@@ -364,7 +387,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through web application firewalls and reverse proxies with input validation rules limits exploitation of public-facing applications by blocking malformed requests, injection attempts, and known exploit payloads."
     },
     {
       "id": "T1197",
@@ -373,7 +397,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies that restrict BITS transfer destinations to authorized update servers prevent adversary abuse of the Background Intelligent Transfer Service for downloading tools or exfiltrating data through BITS jobs."
     },
     {
       "id": "T1199",
@@ -381,7 +406,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement between trusted partner networks and internal systems\u2014through strictly defined interface boundaries and data validation\u2014limits the blast radius of supply chain compromise through trusted relationships."
     },
     {
       "id": "T1203",
@@ -389,7 +415,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement that sandboxes or restricts content from external sources\u2014including email attachments, web downloads, and shared files\u2014can limit client-side exploitation by preventing malicious content from reaching vulnerable applications."
     },
     {
       "id": "T1204",
@@ -397,7 +424,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies that restrict executable content from external sources\u2014blocking file types, enforcing download restrictions, and validating content\u2014reduce the impact of user execution by preventing malicious payloads from entering the environment."
     },
     {
       "id": "T1205",
@@ -407,7 +435,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through stateful firewalls and strict protocol compliance checking can prevent traffic signaling techniques by rejecting malformed packets, unexpected flag combinations, or out-of-sequence traffic used to activate backdoors."
     },
     {
       "id": "T1210",
@@ -415,7 +444,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network segmentation enforced through information flow controls limits exploitation of remote services by restricting which systems can communicate with vulnerable services, containing lateral movement to authorized network paths."
     },
     {
       "id": "T1211",
@@ -423,7 +453,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement between security zones limits the utility of defense evasion exploits by ensuring that even if an adversary exploits a vulnerability to bypass local controls, they remain constrained by network-level flow boundaries."
     },
     {
       "id": "T1212",
@@ -431,7 +462,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies isolating authentication infrastructure behind strict network access controls limit adversary ability to exploit credential access vulnerabilities by restricting which systems can reach authentication services."
     },
     {
       "id": "T1213",
@@ -439,7 +471,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting access to information repositories\u2014including SharePoint, Confluence, and databases\u2014to authorized user segments and preventing bulk data transfers across boundaries limits adversary data collection."
     },
     {
       "id": "T1218",
@@ -447,7 +480,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control that restricts outbound connectivity from signed system binaries\u2014preventing rundll32, regsvr32, and similar utilities from reaching external resources\u2014limits proxy execution techniques that fetch remote payloads."
     },
     {
       "id": "T1219",
@@ -455,7 +489,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies blocking unauthorized remote access tool traffic\u2014by restricting TeamViewer, AnyDesk, and similar application protocols at network boundaries\u2014prevent adversary C2 through commercial remote support software."
     },
     {
       "id": "T1482",
@@ -463,7 +498,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting directory replication traffic and LDAP queries across trust boundaries limits domain trust discovery by preventing adversaries from enumerating trust relationships across network segments."
     },
     {
       "id": "T1484",
@@ -472,7 +508,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that restrict Group Policy and tenant configuration changes to authorized administrative channels prevent adversaries from modifying domain or tenant policies from compromised user workstations."
     },
     {
       "id": "T1489",
@@ -480,7 +517,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting service management commands to authorized management networks and admin workstations prevents adversaries from remotely stopping critical services from compromised user endpoints."
     },
     {
       "id": "T1498",
@@ -488,7 +526,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network flow enforcement with rate limiting, traffic shaping, and upstream scrubbing center integration mitigates network denial-of-service attacks by filtering volumetric attack traffic before it overwhelms target infrastructure."
     },
     {
       "id": "T1499",
@@ -496,7 +535,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control with connection rate limiting and request throttling at application boundaries mitigates endpoint denial-of-service by restricting the volume of traffic that can reach target services from any single source."
     },
     {
       "id": "T1528",
@@ -504,7 +544,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting OAuth and API token traffic to authorized client applications and endpoints limits adversary ability to use stolen application access tokens from unauthorized network locations."
     },
     {
       "id": "T1530",
@@ -512,7 +553,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies controlling access to cloud storage\u2014including network-based access restrictions and cloud service broker enforcement\u2014limit adversary ability to access misconfigured or over-permissioned cloud storage from unauthorized networks."
     },
     {
       "id": "T1537",
@@ -520,7 +562,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement blocking unauthorized cross-account data transfers and restricting cloud storage replication to approved destinations prevents adversary exfiltration of data to external cloud accounts."
     },
     {
       "id": "T1552",
@@ -528,7 +571,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that restrict access to credential storage locations\u2014isolating configuration management databases and secrets managers behind network boundaries\u2014limit adversary discovery of unsecured credentials."
     },
     {
       "id": "T1557",
@@ -537,7 +581,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through network segmentation, encrypted channels, and strict routing policies limits adversary-in-the-middle opportunities by reducing the network paths available for traffic interception and manipulation."
     },
     {
       "id": "T1559",
@@ -545,7 +590,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies restricting inter-process communication across security boundaries\u2014including DCOM, COM, and DDE cross-process calls\u2014limit adversary execution through IPC mechanisms that span security contexts."
     },
     {
       "id": "T1563",
@@ -553,7 +599,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting remote session protocols to authorized management networks and requiring re-authentication for session transfers limits adversary ability to hijack remote service sessions for lateral movement."
     },
     {
       "id": "T1565",
@@ -561,7 +608,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow integrity controls\u2014including cryptographic validation and data provenance checking at system boundaries\u2014enable detection of adversary data manipulation by verifying data integrity during transit between systems."
     },
     {
       "id": "T1566",
@@ -569,7 +617,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through email security gateways with attachment sandboxing, URL rewriting, and content filtering blocks phishing delivery by intercepting malicious payloads before they reach user inboxes."
     },
     {
       "id": "T1567",
@@ -577,7 +626,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies restricting outbound uploads to cloud storage, code repositories, and web services\u2014through proxy enforcement and DLP inspection\u2014prevent adversary exfiltration over legitimate web service channels."
     },
     {
       "id": "T1568",
@@ -585,7 +635,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DNS flow enforcement through organizational resolvers with threat intelligence filtering and sinkholing can block dynamic C2 resolution by preventing clients from resolving domains generated by DGA algorithms or fast-flux infrastructure."
     },
     {
       "id": "T1570",
@@ -593,7 +644,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting internal file transfer protocols between network zones limits lateral tool transfer by blocking SMB, SCP, and PowerShell remoting file copies across segment boundaries."
     },
     {
       "id": "T1571",
@@ -601,7 +653,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies that enforce standard port-to-service mappings and block traffic on non-standard ports prevent C2 channels from operating on unexpected ports to evade port-based security controls."
     },
     {
       "id": "T1572",
@@ -609,7 +662,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement with deep packet inspection can detect and block protocol tunneling by identifying encapsulated traffic that does not match the expected characteristics of the outer protocol."
     },
     {
       "id": "T1573",
@@ -617,7 +671,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through TLS inspection proxies and encrypted traffic analysis can identify encrypted C2 channels by examining certificate characteristics, JA3 fingerprints, and traffic patterns of encrypted sessions."
     },
     {
       "id": "T1574",
@@ -627,7 +682,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting write access to system binary directories and library paths across network boundaries prevents remote adversaries from placing hijacking payloads in locations that intercept legitimate execution flows."
     },
     {
       "id": "T1598",
@@ -635,7 +691,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement filtering inbound communications through email gateways and web proxies with reputation services blocks phishing-for-information attempts by intercepting social engineering messages before they reach targets."
     },
     {
       "id": "T1599",
@@ -643,7 +700,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement on network devices\u2014including strict routing policies and network boundary controls\u2014prevents adversaries from bridging isolated network segments by manipulating device configurations to bypass segmentation."
     },
     {
       "id": "T1601",
@@ -651,7 +709,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting management plane access to network devices prevents unauthorized firmware modifications by ensuring only authenticated administrators on approved management networks can alter system images."
     },
     {
       "id": "T1602",
@@ -659,7 +718,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting SNMP, CLI, and API access to network devices from authorized management stations prevents adversaries from remotely extracting device configurations containing sensitive network architecture details."
     },
     {
       "id": "T1609",
@@ -667,7 +727,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting access to container orchestration APIs and container runtime interfaces to authorized management systems prevents adversaries from executing unauthorized container administration commands."
     },
     {
       "id": "T1611",
@@ -675,7 +736,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that enforce container isolation boundaries\u2014including restricted kernel namespaces and seccomp profiles\u2014limit container escape techniques by preventing containers from accessing host resources."
     },
     {
       "id": "T1622",
@@ -684,7 +746,8 @@
         "defense-evasion",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement that restricts debugger and analysis tool access across security boundaries limits adversary ability to probe security tools and develop evasion techniques against monitoring infrastructure."
     },
     {
       "id": "T1654",
@@ -692,7 +755,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting access to log repositories and SIEM infrastructure to authorized administrative channels prevents adversaries from enumerating security logs to understand detection capabilities."
     },
     {
       "id": "T1659",
@@ -701,7 +765,8 @@
         "command-and-control",
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement through content validation and integrity checking at network boundaries blocks content injection attacks by verifying that data crossing security boundaries has not been tampered with."
     },
     {
       "id": "T1001.001",
@@ -709,7 +774,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement with payload analysis can block junk data padding in C2 traffic by rejecting packets with anomalous padding patterns or payload sizes that deviate from expected protocol specifications."
     },
     {
       "id": "T1001.002",
@@ -717,7 +783,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls with content inspection capabilities can detect steganographic channels by analyzing file transfers for statistical anomalies in media files that indicate hidden data payloads."
     },
     {
       "id": "T1001.003",
@@ -725,7 +792,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protocol-conformant flow enforcement that validates traffic against expected protocol behavior can block service impersonation by rejecting traffic that mimics but does not fully comply with legitimate protocol specifications."
     },
     {
       "id": "T1003.001",
@@ -733,7 +801,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow controls isolating domain controllers and credential stores behind strict network segmentation restrict adversary access to LSASS memory by preventing remote credential extraction tools from reaching targets."
     },
     {
       "id": "T1003.005",
@@ -741,7 +810,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies that restrict replication traffic and domain controller access to authorized systems limit adversary ability to remotely access cached domain credentials by blocking unauthorized authentication traffic."
     },
     {
       "id": "T1003.006",
@@ -749,7 +819,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting directory replication protocol (MS-DRSR) traffic to authorized domain controllers blocks DCSync attacks by preventing non-DC systems from requesting credential data through replication channels."
     },
     {
       "id": "T1020.001",
@@ -757,7 +828,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control policies that restrict port mirroring and SPAN configuration to authorized management interfaces prevent adversaries from establishing unauthorized traffic duplication that copies sensitive data for exfiltration."
     },
     {
       "id": "T1021.001",
@@ -765,7 +837,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement restricting RDP traffic to authorized jump servers and management networks limits lateral movement by preventing direct Remote Desktop connections between workstations or from unauthorized network segments."
     },
     {
       "id": "T1021.002",
@@ -773,7 +846,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting SMB traffic between network zones\u2014particularly blocking administrative share access across security boundaries\u2014limits lateral movement through Windows administrative shares."
     },
     {
       "id": "T1021.003",
@@ -781,7 +855,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement blocking DCOM traffic at network boundaries and restricting RPC port ranges prevents adversaries from leveraging Distributed COM for remote code execution across network segments."
     },
     {
       "id": "T1021.005",
@@ -789,7 +864,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies restricting VNC traffic to authorized management networks and blocking VNC ports at segment boundaries prevent adversaries from using VNC for lateral graphical access."
     },
     {
       "id": "T1021.006",
@@ -797,7 +873,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting WinRM traffic (ports 5985/5986) to authorized administrative networks limits adversary lateral movement through Windows Remote Management and PowerShell remoting."
     },
     {
       "id": "T1048.001",
@@ -805,7 +882,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control that inspects or blocks encrypted outbound connections on non-standard ports or to unauthorized destinations prevents exfiltration using symmetric encrypted channels outside normal C2 infrastructure."
     },
     {
       "id": "T1048.002",
@@ -813,7 +891,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement blocking unauthorized TLS/SSH connections to external hosts\u2014particularly from servers\u2014prevents adversary exfiltration using asymmetric encrypted non-C2 protocol channels."
     },
     {
       "id": "T1048.003",
@@ -821,7 +900,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement monitoring and restricting cleartext protocol traffic\u2014including FTP, HTTP, and TFTP\u2014at network boundaries prevents exfiltration over unencrypted alternative protocols by blocking unauthorized transfers."
     },
     {
       "id": "T1070.008",
@@ -829,7 +909,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting mailbox management operations to authorized administrative systems and preventing bulk message deletion from compromised user sessions limits adversary ability to clear email evidence."
     },
     {
       "id": "T1071.001",
@@ -837,7 +918,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement through web proxy architectures with URL filtering, SSL inspection, and content analysis enables detection and blocking of HTTP/HTTPS-based C2 channels at network boundaries."
     },
     {
       "id": "T1071.002",
@@ -845,7 +927,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting FTP and SFTP traffic to authorized transfer servers and blocking ad hoc file transfer connections at network boundaries prevents adversary C2 through file transfer protocols."
     },
     {
       "id": "T1071.003",
@@ -853,7 +936,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting mail protocol traffic (SMTP, IMAP, POP3) to authorized mail servers prevents adversaries from establishing C2 channels through direct mail protocol connections from compromised hosts."
     },
     {
       "id": "T1071.004",
@@ -861,7 +945,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DNS flow enforcement that restricts queries to organizational resolvers, blocks direct external DNS, and inspects query patterns prevents DNS-based C2 tunneling and data exfiltration through covert DNS channels."
     },
     {
       "id": "T1071.005",
@@ -869,7 +954,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting publish/subscribe protocol traffic\u2014including MQTT and AMQP\u2014to authorized broker infrastructure prevents adversary C2 channels through messaging middleware protocols."
     },
     {
       "id": "T1090.001",
@@ -877,7 +963,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement that restricts internal traffic routing and prevents unauthorized systems from acting as network relays blocks adversary deployment of internal proxy infrastructure for C2 traffic forwarding."
     },
     {
       "id": "T1090.002",
@@ -885,7 +972,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies requiring all external traffic to route through authorized proxy infrastructure and blocking direct outbound connections prevent adversary use of external proxy services for C2."
     },
     {
       "id": "T1090.003",
@@ -893,7 +981,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through network egress controls that detect and block multi-hop proxy chains\u2014including Tor, VPN cascades, and anonymization services\u2014prevents adversaries from obscuring C2 origins through layered proxies."
     },
     {
       "id": "T1098.001",
@@ -902,7 +991,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting cloud IAM management operations to authorized administrative channels and requiring elevated authentication prevents adversary creation of additional cloud credentials from compromised user sessions."
     },
     {
       "id": "T1098.007",
@@ -911,7 +1001,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies that restrict group management operations to authorized identity governance systems prevent adversaries from adding accounts to privileged groups through unauthorized administrative channels."
     },
     {
       "id": "T1102.001",
@@ -919,7 +1010,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement blocking or inspecting access to known dead drop resolver platforms\u2014including paste sites and social media profiles used for C2 address retrieval\u2014prevents adversary infrastructure discovery through public services."
     },
     {
       "id": "T1102.002",
@@ -927,7 +1019,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls restricting bidirectional data exchange with unauthorized cloud services and social media platforms block full-duplex C2 channels operating through legitimate web services."
     },
     {
       "id": "T1102.003",
@@ -935,7 +1028,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting polling access to external web services, RSS feeds, and cloud storage prevents adversaries from receiving one-way command delivery through publicly accessible content platforms."
     },
     {
       "id": "T1114.001",
@@ -943,7 +1037,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting local email file access across security boundaries and preventing email data extraction to removable media limits adversary collection of email from local mail stores."
     },
     {
       "id": "T1114.002",
@@ -951,7 +1046,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement restricting remote email protocol access to authorized clients and enforcing conditional access policies limits adversary remote email collection from Exchange or cloud mail services."
     },
     {
       "id": "T1114.003",
@@ -959,7 +1055,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control monitoring and restricting email forwarding rule creation\u2014particularly rules forwarding to external domains\u2014prevents adversary persistent email collection through automated forwarding mechanisms."
     },
     {
       "id": "T1132.001",
@@ -967,7 +1064,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement with payload inspection that decodes and analyzes Base64 and standard encoding in network traffic can detect and block C2 commands hidden within commonly encoded data formats."
     },
     {
       "id": "T1132.002",
@@ -975,7 +1073,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls with anomaly detection can identify non-standard encoding in C2 traffic by flagging byte patterns that do not match any expected application data encoding for the observed protocol."
     },
     {
       "id": "T1134.005",
@@ -984,7 +1083,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement preventing unauthorized SID-History modifications during cross-domain migration and restricting access to domain migration tools limits adversary ability to inject SID-History for privilege escalation."
     },
     {
       "id": "T1136.002",
@@ -992,7 +1092,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting Active Directory account creation to authorized provisioning systems and approved administrative channels prevents adversary creation of domain accounts from compromised workstations."
     },
     {
       "id": "T1136.003",
@@ -1000,7 +1101,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement restricting cloud identity management to authorized administrative interfaces prevents adversary creation of persistent cloud accounts through unauthorized API access."
     },
     {
       "id": "T1204.001",
@@ -1008,7 +1110,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through web proxy content filtering and URL categorization blocks malicious link execution by preventing user browsers from reaching adversary-controlled download sites or credential harvesting pages."
     },
     {
       "id": "T1204.002",
@@ -1016,7 +1119,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that sandbox or block executable file types at email gateways and web proxies prevent malicious file execution by intercepting weaponized documents before they reach user endpoints."
     },
     {
       "id": "T1204.003",
@@ -1024,7 +1128,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting container image pulls to authorized registries and validating image provenance prevents execution of malicious container images pulled from adversary-controlled or untrusted sources."
     },
     {
       "id": "T1205.001",
@@ -1034,7 +1139,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through stateful firewalls that track connection state and reject unexpected connection sequences prevents port knocking techniques that rely on specific packet sequences to activate hidden services."
     },
     {
       "id": "T1205.002",
@@ -1044,7 +1150,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that restrict raw socket access and BPF filter installation prevent adversaries from deploying socket filters that intercept and respond to specially crafted traffic signaling packets."
     },
     {
       "id": "T1213.001",
@@ -1052,7 +1159,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting Confluence access to authorized user networks and enforcing data classification controls limits adversary data collection from organizational wiki repositories."
     },
     {
       "id": "T1213.002",
@@ -1060,7 +1168,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies restricting SharePoint access based on user context, location, and device posture limit adversary ability to harvest documents from organizational collaboration platforms."
     },
     {
       "id": "T1213.004",
@@ -1068,7 +1177,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting CRM system API access and data export to authorized business applications prevents adversary extraction of customer data through unauthorized CRM access channels."
     },
     {
       "id": "T1213.005",
@@ -1076,7 +1186,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement restricting messaging application data export and API access to authorized integrations limits adversary collection of sensitive communications from Slack, Teams, and similar platforms."
     },
     {
       "id": "T1218.012",
@@ -1084,7 +1195,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control monitoring and restricting network connections initiated by verclsid.exe and similar system binary proxies prevents adversaries from using trusted binaries to fetch remote payloads."
     },
     {
       "id": "T1498.001",
@@ -1092,7 +1204,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement with ingress rate limiting and traffic shaping at network boundaries mitigates direct network flood attacks by throttling volumetric traffic before it saturates target network links."
     },
     {
       "id": "T1498.002",
@@ -1100,7 +1213,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that filter amplified response traffic from reflection sources\u2014including DNS, NTP, and memcached\u2014mitigate reflection amplification DDoS by blocking spoofed-source response traffic."
     },
     {
       "id": "T1499.001",
@@ -1108,7 +1222,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement with per-source connection rate limiting at network boundaries mitigates OS exhaustion floods by restricting the number of simultaneous connections any source can establish with target systems."
     },
     {
       "id": "T1499.002",
@@ -1116,7 +1231,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls with request rate limiting and queue management prevent service exhaustion floods by throttling excessive requests before they overwhelm application service resources."
     },
     {
       "id": "T1499.003",
@@ -1124,7 +1240,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement with application-layer rate limiting and request validation prevents application exhaustion by blocking excessive or malformed requests that target resource-intensive application features."
     },
     {
       "id": "T1499.004",
@@ -1132,7 +1249,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls with input validation and protocol conformance checking at application boundaries can block exploit-based denial of service by rejecting malformed requests that trigger application crashes."
     },
     {
       "id": "T1505.004",
@@ -1140,7 +1258,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting IIS module installation to authorized management processes and monitoring server software component changes prevents adversary persistence through unauthorized IIS component registration."
     },
     {
       "id": "T1547.003",
@@ -1149,7 +1268,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement restricting access to Windows Time service configuration prevents adversaries from registering malicious Time Provider DLLs from unauthorized network locations for persistence."
     },
     {
       "id": "T1552.001",
@@ -1157,7 +1277,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting access to configuration files and credential storage locations across security boundaries limits adversary ability to discover plaintext credentials in files accessible from compromised systems."
     },
     {
       "id": "T1552.005",
@@ -1165,7 +1286,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement blocking instance metadata API access from application containers or restricting metadata service token scope limits adversary credential harvesting from cloud metadata endpoints."
     },
     {
       "id": "T1552.007",
@@ -1173,7 +1295,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting container API access to authorized orchestration systems and enforcing network policies between pods prevents adversary credential extraction through unauthorized container API queries."
     },
     {
       "id": "T1552.008",
@@ -1181,7 +1304,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies restricting messaging platform API access and data export from chat applications to authorized integrations limit adversary mining of credentials from messaging systems."
     },
     {
       "id": "T1557.001",
@@ -1190,7 +1314,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement disabling LLMNR and NBT-NS at network boundaries, combined with SMB signing requirements, prevents LLMNR/NBT-NS poisoning and SMB relay attacks by eliminating the vulnerable name resolution pathways."
     },
     {
       "id": "T1557.002",
@@ -1199,7 +1324,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network flow controls implementing dynamic ARP inspection, DHCP snooping, and port security prevent ARP cache poisoning by validating ARP responses against known IP-MAC bindings on managed network switches."
     },
     {
       "id": "T1557.003",
@@ -1208,7 +1334,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through DHCP snooping and authorized DHCP server validation prevents DHCP spoofing by blocking rogue DHCP responses from unauthorized ports and ensuring clients receive legitimate network configurations."
     },
     {
       "id": "T1557.004",
@@ -1217,7 +1344,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls enforcing wireless authentication standards\u2014including 802.1X and WPA3\u2014and monitoring for rogue access points prevent evil twin attacks by validating access point identity before client association."
     },
     {
       "id": "T1559.001",
@@ -1225,7 +1353,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting COM object instantiation across security boundaries and limiting DCOM access between network zones prevents adversary execution through unauthorized Component Object Model communications."
     },
     {
       "id": "T1559.002",
@@ -1233,7 +1362,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that block DDE auto-update links in Office documents and restrict cross-application data exchange prevent adversary execution through Dynamic Data Exchange without requiring macros."
     },
     {
       "id": "T1563.002",
@@ -1241,7 +1371,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting RDP session access and requiring re-authentication for session transfers prevents adversaries from hijacking disconnected RDP sessions for lateral movement."
     },
     {
       "id": "T1564.008",
@@ -1249,7 +1380,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies that monitor and restrict email rule creation\u2014particularly rules targeting specific senders or containing auto-delete actions\u2014prevent adversaries from hiding their email activity."
     },
     {
       "id": "T1565.003",
@@ -1257,7 +1389,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement with runtime data integrity validation\u2014including transaction signing and output verification\u2014can detect adversary manipulation of data during processing that alters business logic outcomes."
     },
     {
       "id": "T1566.001",
@@ -1265,7 +1398,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement through email gateways with attachment analysis, sandboxing, and content disarmament blocks spearphishing attachments by neutralizing or quarantining weaponized email payloads."
     },
     {
       "id": "T1566.002",
@@ -1273,7 +1407,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control through URL rewriting, click-time analysis, and web proxy enforcement blocks spearphishing links by evaluating destination safety when users click links in email messages."
     },
     {
       "id": "T1566.003",
@@ -1281,7 +1416,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies filtering messages across social media, messaging platforms, and collaboration tools block spearphishing via alternative services by applying content analysis to non-email communication channels."
     },
     {
       "id": "T1567.001",
@@ -1289,7 +1425,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement blocking or restricting uploads to code repositories\u2014including GitHub, GitLab, and Bitbucket\u2014from unauthorized systems prevents adversary exfiltration of data to public code hosting platforms."
     },
     {
       "id": "T1567.002",
@@ -1297,7 +1434,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls restricting uploads to cloud storage services\u2014including Dropbox, Google Drive, and OneDrive\u2014through proxy enforcement and DLP prevent exfiltration to cloud storage destinations."
     },
     {
       "id": "T1567.003",
@@ -1305,7 +1443,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement blocking access to text storage sites\u2014including Pastebin, Ghostbin, and similar platforms\u2014prevents adversary exfiltration of data to publicly accessible paste services."
     },
     {
       "id": "T1567.004",
@@ -1313,7 +1452,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls restricting outbound webhook creation and monitoring webhook traffic patterns prevent adversary exfiltration through automated webhook-based data delivery to external endpoints."
     },
     {
       "id": "T1568.002",
@@ -1321,7 +1461,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "DNS flow enforcement through organizational resolvers with DGA detection algorithms and domain reputation filtering blocks domain generation algorithm C2 by sinkholing algorithmically generated domains."
     },
     {
       "id": "T1573.001",
@@ -1329,7 +1470,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through TLS inspection that decrypts and examines symmetrically encrypted C2 traffic at proxy boundaries enables detection and blocking of encrypted command channels."
     },
     {
       "id": "T1573.002",
@@ -1337,7 +1479,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls with certificate validation and JA3 fingerprinting can identify and block C2 channels using asymmetric encryption with self-signed or anomalous certificates at network boundaries."
     },
     {
       "id": "T1574.004",
@@ -1347,7 +1490,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting library load paths and preventing cross-boundary file writes to application directories limits adversary ability to plant malicious dylibs for dynamic library hijacking on macOS."
     },
     {
       "id": "T1574.005",
@@ -1357,7 +1501,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement that restricts write access to installer directories from network sources prevents adversary exploitation of weak installer file permissions from remote compromise positions."
     },
     {
       "id": "T1574.007",
@@ -1367,7 +1512,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting creation of executables in PATH directories from network-connected processes prevents adversaries from remotely placing malicious binaries that intercept legitimate command execution."
     },
     {
       "id": "T1574.008",
@@ -1377,7 +1523,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies that restrict write access to application search paths from unauthorized network locations prevent remote adversaries from exploiting search order hijacking vulnerabilities."
     },
     {
       "id": "T1574.009",
@@ -1387,7 +1534,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement restricting write access to unquoted service path directories from network sources prevents remote adversaries from exploiting path parsing vulnerabilities in Windows service configurations."
     },
     {
       "id": "T1574.010",
@@ -1397,7 +1545,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls that restrict modification of service executable files and service DLL registrations to authorized management processes prevent remote exploitation of weak service file permissions."
     },
     {
       "id": "T1590.002",
@@ -1405,7 +1554,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through DNS security controls\u2014including DNS response policy zones and DNS-over-HTTPS restrictions\u2014limits adversary DNS reconnaissance by controlling what DNS information is exposed externally."
     },
     {
       "id": "T1598.001",
@@ -1413,7 +1563,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls filtering inbound social engineering messages across communication platforms block spearphishing-for-information campaigns targeting organizational personnel through professional networking services."
     },
     {
       "id": "T1598.002",
@@ -1421,7 +1572,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through email gateway content analysis that identifies and quarantines reconnaissance-stage attachments blocks phishing-for-information attempts using benign-appearing document pretexts."
     },
     {
       "id": "T1598.003",
@@ -1429,7 +1581,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow policies with URL filtering and reputation analysis that block access to credential harvesting and information collection pages prevent spearphishing link-based reconnaissance campaigns."
     },
     {
       "id": "T1599.001",
@@ -1437,7 +1590,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement through strict network device configuration controls and routing policy validation prevents adversaries from creating unauthorized NAT traversal rules that bridge isolated network segments."
     },
     {
       "id": "T1601.001",
@@ -1445,7 +1599,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow controls restricting firmware update channels to authenticated, integrity-verified management interfaces prevent adversaries from deploying patched system images that contain backdoors."
     },
     {
       "id": "T1601.002",
@@ -1453,7 +1608,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow enforcement requiring firmware version validation and preventing downgrades through management plane access controls blocks adversary attempts to revert network devices to vulnerable system images."
     },
     {
       "id": "T1602.001",
@@ -1461,7 +1617,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Information flow enforcement restricting SNMP access to authorized management stations with SNMPv3 authentication prevents adversary SNMP MIB dumps that extract device configurations and network topology data."
     },
     {
       "id": "T1602.002",
@@ -1469,7 +1626,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Flow control restricting network device CLI and API access to authorized management networks prevents adversary extraction of running configurations containing sensitive infrastructure details."
     }
   ],
   "metadata": {

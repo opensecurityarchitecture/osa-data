@@ -121,6 +121,27 @@
             }
           },
           "description": "CWE weakness classes this technique exploits (EXPLOITS edge, via CAPEC bridge)"
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^G[0-9]{4}$",
+                "description": "ATT&CK threat group ID (e.g., G0016)"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Threat group name"
+              }
+            }
+          },
+          "description": "ATT&CK threat groups known to use this technique (USES edge)"
         }
       }
     }

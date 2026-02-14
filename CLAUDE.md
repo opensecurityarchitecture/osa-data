@@ -27,11 +27,12 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 - **315 NIST 800-53 Rev 5 controls** across 20 families
 - **26 compliance frameworks** with cross-references
 - **469 MITRE ATT&CK techniques** mapped to 108 controls via CTID (ATT&CK v16.1)
+- **163 ATT&CK threat groups** with 2,921 technique USES edges
 - **44 ATT&CK mitigations** (M-series, v18.1) with 1,445 technique COUNTERS edges
 - **691 ATT&CK detection strategies** (DET-series, v18.1) with technique DETECTS edges
 - **171 CIS v8 safeguards** reverse-indexed to controls (IMPLEMENTED_BY edges)
 - **135 CWE weakness classes** mapped to 132 techniques via CAPEC bridge (EXPLOITS edges)
-- **15,190 TRIDENT graph edges** across 7 relationship types
+- **18,111 TRIDENT graph edges** across 8 relationship types
 
 ## Directory Structure
 
@@ -48,7 +49,8 @@ data/
 │   ├── detection-catalog.json    # 691 ATT&CK v18 detection strategies
 │   ├── cis-safeguard-index.json  # 171 CIS v8 safeguards -> controls reverse index
 │   ├── weakness-catalog.json     # 135 CWE weakness classes -> techniques via CAPEC
-│   ├── graph-edges.json          # 15,190 explicit TRIDENT graph edges
+│   ├── actor-catalog.json        # 163 ATT&CK threat groups -> techniques (USES)
+│   ├── graph-edges.json          # 18,111 explicit TRIDENT graph edges
 │   └── metadata.json             # Provenance, version info, graph summary
 └── schema/
     ├── pattern.schema.json
@@ -65,6 +67,7 @@ Each layer in the TRIDENT graph has different source authority and validation ch
 | Mitigation→Technique | ATT&CK STIX v18.1 | MITRE first-party | No (canonical MITRE relationship) | 44 mitigations, 1,445 COUNTERS edges |
 | Detection→Technique | ATT&CK STIX v18.1 | MITRE first-party | No (canonical MITRE relationship) | 691 detections (1:1 with techniques) |
 | Technique→Weakness | CWE via CAPEC bridge | MITRE first-party chain | No (upstream MITRE data) | 28% technique coverage is expected — CAPEC only covers software-level patterns |
+| Actor→Technique | ATT&CK STIX v18.1 | MITRE first-party | No (canonical MITRE relationship) | 163 groups, 2,921 USES edges, 313 techniques with actors |
 | CIS Safeguard→Control | OSA compliance_mappings | OSA first-party | Inherited from framework mapping | 171 safeguards, 468 IMPLEMENTED_BY edges |
 
 ## Naming Conventions

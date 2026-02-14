@@ -1,88 +1,97 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://opensecurityarchitecture.org/schema/attack-metadata.schema.json",
-  "title": "OSA ATT&CK Metadata",
-  "description": "Provenance and version metadata for the ATT&CK enrichment dataset",
+  "title": "OSA TRIDENT Graph Metadata",
+  "description": "Provenance, version info, and graph summary for the TRIDENT threat model data",
   "type": "object",
   "required": [
-    "source",
-    "source_url",
-    "attack_version",
+    "description",
+    "data_layers",
+    "graph_summary",
+    "files",
     "attack_domain",
-    "nist_version",
-    "mapping_framework_version",
-    "total_mappings",
-    "controls_mapped",
-    "techniques_mapped",
-    "families_covered",
-    "enrichment_date"
+    "last_updated"
   ],
   "additionalProperties": false,
 
   "properties": {
-    "source": {
+    "description": {
       "type": "string",
       "minLength": 1,
-      "description": "Name of the mapping source organisation"
+      "description": "Human-readable description of this dataset"
     },
-    "source_url": {
-      "type": "string",
-      "format": "uri",
-      "description": "URL to the mapping source repository or project"
+    "data_layers": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "source": { "type": "string" },
+          "source_url": { "type": "string", "format": "uri" },
+          "attack_version": { "type": "string" },
+          "nist_version": { "type": "string" },
+          "cis_version": { "type": "string" },
+          "capec_version": { "type": "string" },
+          "total_mappings": { "type": "integer", "minimum": 0 },
+          "controls_mapped": { "type": "integer", "minimum": 0 },
+          "techniques_mapped": { "type": "integer", "minimum": 0 },
+          "total_mitigations": { "type": "integer", "minimum": 0 },
+          "mitigation_technique_edges": { "type": "integer", "minimum": 0 },
+          "mitigations_with_control_links": { "type": "integer", "minimum": 0 },
+          "total_detection_strategies": { "type": "integer", "minimum": 0 },
+          "detection_technique_edges": { "type": "integer", "minimum": 0 },
+          "total_safeguards": { "type": "integer", "minimum": 0 },
+          "implemented_by_edges": { "type": "integer", "minimum": 0 },
+          "total_cwe_entries": { "type": "integer", "minimum": 0 },
+          "cwe_technique_edges": { "type": "integer", "minimum": 0 },
+          "techniques_with_cwe": { "type": "integer", "minimum": 0 },
+          "families_covered": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[A-Z]{2}$" }
+          },
+          "enrichment_date": { "type": "string", "format": "date" },
+          "notes": { "type": "string" }
+        },
+        "description": "Provenance for one data layer in the TRIDENT model"
+      },
+      "description": "Data layer provenance (technique_control_mappings, mitigations, detection_strategies, etc.)"
     },
-    "attack_version": {
-      "type": "string",
-      "pattern": "^[0-9]+\\.[0-9]+$",
-      "description": "ATT&CK version (e.g., 16.1)"
+    "graph_summary": {
+      "type": "object",
+      "required": ["total_edges", "edge_types", "node_types"],
+      "additionalProperties": true,
+      "properties": {
+        "total_edges": { "type": "integer", "minimum": 0 },
+        "edge_types": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "node_types": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "trident_paths": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "description": "Aggregate graph statistics"
+    },
+    "files": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string" },
+      "description": "Descriptions of each data file in the attack/ directory"
     },
     "attack_domain": {
       "type": "string",
       "enum": ["enterprise", "mobile", "ics"],
       "description": "ATT&CK domain"
     },
-    "nist_version": {
-      "type": "string",
-      "minLength": 1,
-      "description": "NIST 800-53 revision used (e.g., NIST 800-53 Rev 5)"
-    },
-    "mapping_framework_version": {
-      "type": "string",
-      "description": "CTID mapping framework version identifier"
-    },
-    "total_mappings": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Total number of technique-control mapping relationships"
-    },
-    "controls_mapped": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Number of unique NIST controls with ATT&CK mappings"
-    },
-    "techniques_mapped": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Number of unique ATT&CK techniques in the dataset"
-    },
-    "families_covered": {
-      "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "items": {
-        "type": "string",
-        "pattern": "^[A-Z]{2}$",
-        "description": "NIST 800-53 control family code"
-      },
-      "description": "NIST control families covered by the mapping"
-    },
-    "enrichment_date": {
+    "last_updated": {
       "type": "string",
       "format": "date",
-      "description": "Date the enrichment was performed (ISO 8601)"
-    },
-    "notes": {
-      "type": "string",
-      "description": "Additional context or caveats about the mapping"
+      "description": "Date of last update to this metadata"
     }
   }
 }

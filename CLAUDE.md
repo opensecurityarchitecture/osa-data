@@ -55,6 +55,18 @@ data/
     └── control.schema.json
 ```
 
+## TRIDENT Data Layer Provenance
+
+Each layer in the TRIDENT graph has different source authority and validation characteristics:
+
+| Layer | Source | Authority | Has Rationale? | Notes |
+|-------|--------|-----------|----------------|-------|
+| Technique→Control (CTID) | CTID Mappings Explorer | Third-party interpretive | Yes — `mapping_type` + `rationale` on each of 5,246 relationships | Only layer with custom rationale (interpretive mapping needs audit trail) |
+| Mitigation→Technique | ATT&CK STIX v18.1 | MITRE first-party | No (canonical MITRE relationship) | 44 mitigations, 1,445 COUNTERS edges |
+| Detection→Technique | ATT&CK STIX v18.1 | MITRE first-party | No (canonical MITRE relationship) | 691 detections (1:1 with techniques) |
+| Technique→Weakness | CWE via CAPEC bridge | MITRE first-party chain | No (upstream MITRE data) | 28% technique coverage is expected — CAPEC only covers software-level patterns |
+| CIS Safeguard→Control | OSA compliance_mappings | OSA first-party | Inherited from framework mapping | 171 safeguards, 468 IMPLEMENTED_BY edges |
+
 ## Naming Conventions
 
 - **Pattern JSON**: `SP-NNN-descriptive-title.json` (e.g., `SP-029-zero-trust-architecture.json`)

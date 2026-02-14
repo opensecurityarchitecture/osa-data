@@ -258,6 +258,49 @@
       }
     },
 
+    "attack_techniques": {
+      "type": "array",
+      "description": "MITRE ATT&CK techniques mitigated by this control (source: CTID mappings, ATT&CK v16.1 Enterprise)",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "tactics"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$",
+            "description": "ATT&CK technique ID (e.g., T1078, T1078.001)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Technique name"
+          },
+          "tactics": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "reconnaissance",
+                "resource-development",
+                "initial-access",
+                "execution",
+                "persistence",
+                "privilege-escalation",
+                "defense-evasion",
+                "credential-access",
+                "discovery",
+                "lateral-movement",
+                "collection",
+                "command-and-control",
+                "exfiltration",
+                "impact"
+              ]
+            },
+            "description": "ATT&CK tactics (kill chain phases) for this technique"
+          }
+        }
+      }
+    },
+
     "patterns": {
       "type": "array",
       "items": {"type": "string"},

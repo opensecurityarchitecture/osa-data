@@ -1,0 +1,649 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "fisc",
+  "framework_name": "FISC Security Guidelines on Computer Systems for Financial Institutions",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis of the FISC Security Guidelines (11th Edition Revised, 2024). Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. FISC has Japan-specific requirements for financial institutions that extend beyond SP 800-53 scope, particularly in FSA/BOJ reporting, Zengin system integration, Japanese banking system specifics, and facility standards for seismic resilience. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "FISC.T1",
+      "title": "System Planning and Design Requirements",
+      "controls": [
+        "PL-01",
+        "PL-02",
+        "PL-06",
+        "PL-09",
+        "PL-10",
+        "PL-11",
+        "SA-02",
+        "SA-03",
+        "SA-08",
+        "SA-17"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PL-01/PL-02 security planning policy and system security plan provide structured planning processes. PL-06 security-related activity planning addresses coordinated system design. SA-02 resource allocation and SA-03 system development lifecycle cover acquisition and design phases. SA-08 security and privacy engineering principles directly addresses secure-by-design requirements. SA-17 developer security architecture and design covers formal design methodologies. PL-09 (new in Rev 5) central management enables unified oversight of system planning across the institution. PL-10/PL-11 baseline selection and tailoring support risk-based system design decisions.",
+      "gaps": "FISC requires system planning aligned with Japanese financial infrastructure including BOJ-NET and Zengin system integration requirements. FISC specifies design considerations for the Japanese banking ecosystem (e.g., furikomi transfer systems, account numbering conventions) and FSA-mandated system risk management frameworks that are outside SP 800-53 scope."
+    },
+    {
+      "id": "FISC.T2",
+      "title": "Access Control and Authentication",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-08",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-13",
+        "AC-24",
+        "IA-01",
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-08",
+        "IA-12"
+      ],
+      "coverage_pct": 92,
+      "rationale": "The AC and IA families provide comprehensive access control and authentication coverage. AC-01 through AC-07 cover policies, account management, access enforcement, information flow, separation of duties, least privilege, and failed login handling. AC-10/AC-11/AC-12 address concurrent sessions, session lock, and session termination. AC-13 provides supervision and review of access control. AC-24 (new in Rev 5) access control decisions adds dynamic, attribute-based authorization. IA-01 through IA-06 cover identification and authentication policies, multi-factor authentication, identifier management, authenticator management, and authenticator feedback. IA-08 handles identification for non-organizational users. IA-12 (new in Rev 5) identity proofing strengthens user verification before credential issuance.",
+      "gaps": "Minimal gap for technical access control. FISC specifies Japanese financial institution-specific access requirements including hanko (seal) and dual-authorization workflows for high-value transactions that reflect traditional Japanese banking practices not addressed by NIST."
+    },
+    {
+      "id": "FISC.T3",
+      "title": "Network Security Architecture",
+      "controls": [
+        "AC-04",
+        "AC-17",
+        "AC-18",
+        "CA-03",
+        "CA-09",
+        "SC-02",
+        "SC-03",
+        "SC-05",
+        "SC-07",
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "SC-46",
+        "SC-47"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-07 boundary protection is central to FISC network segmentation requirements. AC-04 information flow enforcement and SC-02/SC-03 application/security function isolation address network zone design. CA-03 system interconnections and CA-09 (new in Rev 5) internal system connections manage both external and internal network authorization. SC-05 denial-of-service protection, SC-20/SC-21/SC-22 secure name resolution, and AC-17/AC-18 remote and wireless access cover network perimeter controls. SC-46 (new in Rev 5) cross-domain policy enforcement supports multi-zone architectures, and SC-47 alternate communications channels provides network resilience.",
+      "gaps": "FISC specifies network architecture requirements specific to Japanese financial infrastructure including connectivity to Zengin Data Telecommunication System, BOJ-NET, and SWIFT integration points. FISC also mandates specific DMZ architectures for internet banking (IB) systems serving Japanese retail customers."
+    },
+    {
+      "id": "FISC.T4",
+      "title": "Cryptographic Controls",
+      "controls": [
+        "IA-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "SC-28",
+        "SC-40"
+      ],
+      "coverage_pct": 87,
+      "rationale": "SC-12 cryptographic key management and SC-13 cryptographic protection form the foundation of cryptographic controls. SC-08 provides transmission confidentiality and integrity, while SC-28 covers protection of information at rest. IA-07 cryptographic module authentication ensures validated modules. SC-17 public key infrastructure certificates addresses PKI requirements. SC-40 (new in Rev 5) wireless link protection extends cryptographic protection to wireless communications in branch and data center environments.",
+      "gaps": "FISC references specific cryptographic standards endorsed by CRYPTREC (Cryptography Research and Evaluation Committees), Japan's national cryptographic evaluation body. CRYPTREC-approved algorithms and key lengths may differ from NIST-recommended suites. FISC also addresses cryptographic requirements for the Japanese My Number (individual number) system used in financial KYC."
+    },
+    {
+      "id": "FISC.T5",
+      "title": "Database and Data Security",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-16",
+        "CM-12",
+        "CM-13",
+        "MP-01",
+        "MP-02",
+        "SC-04",
+        "SC-28",
+        "SI-10",
+        "SI-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-03 access enforcement and AC-04 information flow enforcement govern database access. AC-16 automated labelling supports data classification within databases. CM-12 (new in Rev 5) information location identifies where sensitive financial data resides, and CM-13 data action mapping documents data processing flows across database systems. MP-01/MP-02 media protection policies cover database storage media. SC-04 information in shared resources prevents data leakage, SC-28 protects data at rest, and SI-10 information input validation guards against injection attacks. SI-12 information management and retention addresses data lifecycle.",
+      "gaps": "FISC specifies database security requirements for Japanese financial data types including koseki (family register) linkage data, My Number personal identification, and furikomi transaction records. Specific data residency requirements mandate that certain financial data must remain within Japanese territorial boundaries."
+    },
+    {
+      "id": "FISC.T6",
+      "title": "Application Security",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-16",
+        "SA-17",
+        "SA-20",
+        "CM-14",
+        "SI-10"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SA-03 system development lifecycle and SA-08 security engineering principles establish secure development practices. SA-10 developer configuration management and SA-11 developer security testing ensure code quality. SA-15 development process standards and SA-16 developer-provided training support development governance. SA-17 developer security architecture addresses application design. SA-04 acquisition process covers third-party application requirements. SA-20 (new in Rev 5) customized development of critical components addresses bespoke development for high-assurance financial applications. CM-14 (new in Rev 5) signed components verifies application integrity through cryptographic signatures. SI-10 input validation protects against application-layer attacks.",
+      "gaps": "FISC includes application security requirements for Japanese-specific financial applications including ATM systems supporting Japanese-language interfaces, internet banking platforms compliant with Japanese Consumer Contract Act, and integration with Japan Post Bank (Yucho) systems. These industry-specific application requirements are outside NIST scope."
+    },
+    {
+      "id": "FISC.T7",
+      "title": "Operating System and Platform Security",
+      "controls": [
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "SC-34",
+        "SI-02",
+        "SI-03",
+        "SI-07",
+        "SI-16"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-02 baseline configuration and CM-06 configuration settings establish hardened platform baselines. CM-07 least functionality reduces attack surface. CM-08 component inventory tracks platform components. SI-02 flaw remediation addresses patching, SI-03 malicious code protection covers anti-malware, and SI-07 software/firmware/information integrity verifies platform integrity. SC-34 (new in Rev 5) non-modifiable executable programs protects critical platform binaries from modification. SI-16 (new in Rev 5) memory protection adds DEP/ASLR-type hardening to protect against memory exploitation attacks.",
+      "gaps": "Minor gap. FISC specifies platform hardening for mainframe systems (IBM z/Series, Fujitsu GS Series) still widely used in Japanese megabanks (MUFG, SMBC, Mizuho). Japanese financial institutions often run bespoke operating environments not fully addressed by NIST's general platform controls."
+    },
+    {
+      "id": "FISC.T8",
+      "title": "Web and API Security",
+      "controls": [
+        "AC-04",
+        "AC-17",
+        "SC-07",
+        "SC-08",
+        "SC-13",
+        "SC-18",
+        "SC-23",
+        "SI-10",
+        "SI-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-07 boundary protection and AC-04 information flow enforcement protect web application boundaries. SC-08 transmission confidentiality and integrity covers TLS/HTTPS requirements. SC-13 cryptographic protection addresses API authentication tokens and signatures. SC-18 mobile code controls manage client-side scripting risks. SC-23 session authenticity protects web sessions against hijacking. AC-17 remote access and SI-10 information input validation address web application attack vectors. SI-11 error handling prevents information leakage through error messages.",
+      "gaps": "FISC includes specific web security requirements for Japanese internet banking (IB) services including one-time password (OTP) integration with hardware tokens distributed by Japanese banks, web content security for Japanese character encoding (Shift_JIS/UTF-8 handling), and API security for Open Banking interfaces mandated by Japan's revised Banking Act."
+    },
+    {
+      "id": "FISC.T9",
+      "title": "Cloud Computing Security",
+      "controls": [
+        "AC-20",
+        "CA-03",
+        "CA-09",
+        "SA-04",
+        "SA-09",
+        "SC-07",
+        "SR-01",
+        "SR-02",
+        "SR-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-09 external system services and AC-20 use of external systems directly address cloud service consumption. SA-04 acquisition process covers cloud service procurement requirements. CA-03 and CA-09 (new in Rev 5) manage cloud system interconnections. SC-07 boundary protection addresses cloud network boundaries. SR-01/SR-02/SR-03 supply chain risk management covers cloud provider supply chain requirements.",
+      "gaps": "FISC has extensive cloud-specific guidance added from Version 9 (2018) onwards, including requirements for cloud service evaluation specific to Japanese financial institutions, data location requirements within Japan or approved jurisdictions, and cloud-specific risk assessments aligned with FSA supervisory expectations. FISC also addresses multi-cloud and hybrid-cloud architectures for Japanese banking infrastructure, and mandates that cloud usage does not impair FSA/BOJ inspection rights."
+    },
+    {
+      "id": "FISC.T10",
+      "title": "Mobile and Remote Access Security",
+      "controls": [
+        "AC-17",
+        "AC-18",
+        "AC-19",
+        "IA-02",
+        "IA-05",
+        "SC-07",
+        "SC-08",
+        "SC-40"
+      ],
+      "coverage_pct": 83,
+      "rationale": "AC-17 remote access policy and AC-19 access control for portable and mobile devices provide comprehensive mobile/remote security foundations. AC-18 wireless access restrictions covers wireless security. IA-02 multi-factor authentication and IA-05 authenticator management address mobile authentication requirements. SC-07 boundary protection, SC-08 transmission protection, and SC-40 (new in Rev 5) wireless link protection secure mobile communications channels.",
+      "gaps": "FISC addresses mobile banking (mobile banking app) security requirements specific to the Japanese market, including integration with Japanese carrier-based authentication (carrier billing, SIM-based authentication), security requirements for mobile payment services using Osaifu-Keitai (mobile wallet) and Felica/NFC systems, and remote access provisions for branch staff in Japanese financial institutions."
+    },
+    {
+      "id": "FISC.T11",
+      "title": "Electronic Payment Systems Security",
+      "controls": [
+        "AC-03",
+        "AU-02",
+        "AU-10",
+        "IA-02",
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13"
+      ],
+      "coverage_pct": 68,
+      "rationale": "AC-03 access enforcement and IA-02 multi-factor authentication protect payment system access. AU-02 event logging and AU-10 non-repudiation support payment transaction auditability. SC-07 boundary protection isolates payment processing environments. SC-08/SC-12/SC-13 provide cryptographic protection for payment data in transit and at rest.",
+      "gaps": "FISC has extensive requirements for Japanese payment systems that are largely outside NIST scope: Zengin Data Telecommunication System integration requirements, BOJ-NET Funds Transfer System connectivity, debit card (J-Debit) system security, convenience store (konbini) payment integration, QR code payment (PayPay, LINE Pay) security standards, and specific requirements for yen settlement processing including same-day settlement (toujitsu furikomi) controls."
+    },
+    {
+      "id": "FISC.T12",
+      "title": "Transaction Integrity and Non-repudiation",
+      "controls": [
+        "AU-10",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-16",
+        "SC-23",
+        "SI-07",
+        "SI-10"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-10 non-repudiation provides direct coverage of transaction non-repudiation requirements. SC-08 transmission integrity and SC-13 cryptographic protection ensure transaction data integrity in transit. SC-12 key management supports digital signature infrastructure. SC-16 transmission of security and privacy attributes preserves transaction metadata integrity. SC-23 session authenticity protects transaction sessions. SI-07 software and information integrity verifies transaction processing integrity. SI-10 input validation ensures transaction data accuracy.",
+      "gaps": "FISC specifies transaction integrity requirements for Japanese financial transactions including electronic seals (denshishomei), qualified timestamps per the Japanese Electronic Signatures Act, and transaction integrity for domestic wire transfers (furikomi/furikae). Specific non-repudiation requirements for interbank settlement through the Japanese Bankers Association (Zenginkyo) clearing infrastructure are outside NIST scope."
+    },
+    {
+      "id": "FISC.T13",
+      "title": "System Interconnection Controls",
+      "controls": [
+        "AC-04",
+        "AC-20",
+        "CA-03",
+        "CA-09",
+        "SC-07",
+        "SC-46",
+        "SC-47"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-03 system interconnections and AC-20 use of external systems directly govern interconnection security. CA-09 (new in Rev 5) internal system connections extends authorization and monitoring to internal interconnections. AC-04 information flow enforcement controls data exchange between connected systems. SC-07 boundary protection establishes interconnection boundary controls. SC-46 (new in Rev 5) cross-domain policy enforcement supports policy-driven interconnection governance. SC-47 (new in Rev 5) alternate communications channels provides backup interconnection paths.",
+      "gaps": "FISC specifies interconnection requirements for Japanese financial infrastructure including connectivity to the Japanese Payment Clearing Network (Zenginkyo), SWIFT network integration points, BOJ-NET terminal security, and interconnection with Japan Securities Depository Center (JASDEC) for securities settlement. These specific financial market infrastructure interconnection requirements are not addressed by NIST."
+    },
+    {
+      "id": "FISC.T14",
+      "title": "Virtualisation and Container Security",
+      "controls": [
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "SC-02",
+        "SC-03",
+        "SC-39",
+        "SI-03",
+        "SI-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-02 application partitioning and SC-03 security function isolation address virtualisation isolation requirements. SC-39 process isolation covers container and hypervisor process separation. CM-02/CM-06/CM-07 configuration management provides hardening baselines for virtualised environments. SI-03 malicious code protection and SI-07 integrity verification cover runtime security for virtual workloads.",
+      "gaps": "FISC addresses virtualisation security for Japanese financial institutions including multi-tenancy isolation requirements when financial systems share infrastructure, hypervisor hardening specific to platforms used by Japanese banks (VMware, KVM on Fujitsu/NEC hardware), and container orchestration security for modernised banking applications. FISC also specifies virtualisation-specific audit requirements for FSA inspection readiness."
+    },
+    {
+      "id": "FISC.O1",
+      "title": "IT Governance and Risk Management",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-04",
+        "PM-05",
+        "PM-09",
+        "PM-28",
+        "PL-01",
+        "PL-09",
+        "RA-01",
+        "RA-03",
+        "RA-07",
+        "RA-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-01 information security program plan, PM-02 senior information security officer, and PM-03 resources establish governance foundations. PM-04 plan of action and milestones and PM-05 system inventory support governance oversight. PM-09 risk management strategy and PM-28 (new in Rev 5) risk framing provide risk governance structures. PL-01/PL-09 planning policies and central management address governance coordination. RA-01/RA-03 risk assessment policy and execution, RA-07 (new in Rev 5) risk response, and RA-09 criticality analysis complete the risk management framework.",
+      "gaps": "FISC requires IT governance aligned with FSA's Comprehensive Guidelines for Supervision of financial institutions. This includes board-level IT risk committee requirements, appointment of a CISO with FSA-recognized qualifications, annual IT risk assessment reports to the FSA, and system risk management governance structures defined in FSA supervisory expectations. Japanese corporate governance code requirements for IT oversight are also outside NIST scope."
+    },
+    {
+      "id": "FISC.O2",
+      "title": "System Operation and Monitoring",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-12",
+        "CA-07",
+        "SI-04",
+        "SI-05",
+        "SI-13",
+        "SC-48"
+      ],
+      "coverage_pct": 87,
+      "rationale": "AU-02/AU-03/AU-06/AU-12 audit and accountability family provides comprehensive logging and review. CA-07 continuous monitoring establishes ongoing operational oversight. SI-04 information system monitoring and SI-05 security alerts enable real-time operations monitoring. SI-13 (new in Rev 5) predictive maintenance supports proactive operational monitoring through failure prediction. SC-48 (new in Rev 5) sensor relocation enables dynamic repositioning of monitoring sensors for adaptive operations coverage.",
+      "gaps": "FISC specifies operational monitoring requirements for Japanese financial system operations including monitoring of batch processing schedules (yakkan batch), real-time monitoring of Zengin system transaction queues, and operations reporting to FSA during system incidents. FISC also requires specific operations monitoring for end-of-fiscal-year (March) processing peaks."
+    },
+    {
+      "id": "FISC.O3",
+      "title": "Change Management and Configuration Control",
+      "controls": [
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-09",
+        "CM-14",
+        "SA-10"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-01 configuration management policy establishes the change management framework. CM-02/CM-06 baseline configuration and configuration settings define controlled states. CM-03 configuration change control, CM-04 impact analysis, and CM-05 access restrictions for change govern the change lifecycle. CM-09 configuration management plan provides documented processes. SA-10 developer configuration management extends change control to development. CM-14 (new in Rev 5) signed components provides cryptographic verification that authorized changes are deployed.",
+      "gaps": "Minor gap. FISC specifies change management approval processes aligned with Japanese financial institution governance structures, including specific change freeze periods around Japanese national holidays (Golden Week, Obon, New Year) and end-of-fiscal-year processing windows. These scheduling-specific requirements are outside NIST scope."
+    },
+    {
+      "id": "FISC.O4",
+      "title": "Incident Detection and Response",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09",
+        "SI-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "IR-01 incident response policy, IR-02 training, IR-03 testing, and IR-04 incident handling cover the full incident lifecycle. IR-05 monitoring, IR-06 reporting, and IR-07 assistance support detection and escalation. IR-08 incident response plan provides documented procedures. IR-09 (new in Rev 5) information spillage response addresses data breach handling. SI-04 system monitoring enables incident detection.",
+      "gaps": "FISC requires incident reporting to the FSA and BOJ within prescribed timeframes (typically immediately for significant system failures affecting customers). FISC specifies coordination with the Financial ISAC Japan (Financials ISAC) for threat sharing and mandates incident reporting through the Japanese Bankers Association's system incident reporting framework. These Japan-specific regulatory reporting obligations are not addressed by NIST."
+    },
+    {
+      "id": "FISC.O5",
+      "title": "Business Continuity and Disaster Recovery",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-05",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "SC-24",
+        "SI-17"
+      ],
+      "coverage_pct": 82,
+      "rationale": "The CP family provides comprehensive business continuity and disaster recovery coverage. CP-01/CP-02/CP-05 address policy, planning, and plan updates. CP-03/CP-04 cover training and testing. CP-06/CP-07/CP-08 provide alternate storage, processing, and telecommunications. CP-09/CP-10 address backup and system recovery. SC-24 (new in Rev 5) fail in known state ensures systems fail securely during disasters. SI-17 (new in Rev 5) fail-safe procedures provide additional failure handling for critical financial systems.",
+      "gaps": "FISC has extensive disaster recovery requirements specific to Japan's seismic risk profile, including requirements for earthquake-resistant data centers (shindo 7 rated), tsunami evacuation procedures for coastal facilities, and mandatory disaster recovery testing scenarios based on Great East Japan Earthquake (2011) lessons learned. FISC specifies RTO/RPO targets for critical payment systems (Zengin: 2 hours RTO) and requires geographic separation of primary and DR sites considering Japanese fault lines."
+    },
+    {
+      "id": "FISC.O6",
+      "title": "Outsourcing and Third-Party Management",
+      "controls": [
+        "AC-20",
+        "CA-03",
+        "PS-07",
+        "SA-04",
+        "SA-09",
+        "SA-21",
+        "SA-23",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-09 external system services and AC-20 use of external systems directly address outsourcing governance. SA-04 acquisition and PS-07 third-party personnel security cover vendor engagement. SR-01/SR-02/SR-03/SR-05/SR-06 supply chain risk management provides supply chain governance. SA-21 (new in Rev 5) developer screening adds personnel vetting for outsourced development. SA-23 (new in Rev 5) specialization supports domain-specific expertise requirements.",
+      "gaps": "FISC requires outsourcing governance aligned with FSA's Guidelines on Outsourcing for financial institutions, including mandatory FSA notification for material outsourcing arrangements, restrictions on offshore outsourcing of customer data processing, specific requirements for outsourcing to domestic IT vendors (NTT Data, Fujitsu, NEC, Hitachi), and provisions for FSA/BOJ on-site inspection rights at outsourcing providers. Sub-outsourcing chain management and concentration risk for shared banking platforms (e.g., NTT Data's STELLA CUBE) are Japan-specific requirements not covered by NIST."
+    },
+    {
+      "id": "FISC.O7",
+      "title": "System Audit and Compliance",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-11",
+        "CA-01",
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "PM-06",
+        "PM-14"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-01 assessment policy and CA-02 security assessments establish audit foundations. CA-05 plan of action and milestones tracks remediation. CA-07 continuous monitoring and PM-14 testing/training/monitoring support ongoing compliance. AU-01/AU-02/AU-11 audit policy, events, and retention ensure audit trail integrity. PM-06 measures of performance supports compliance measurement.",
+      "gaps": "FISC audit requirements are closely aligned with FSA examination and BOJ on-site inspection frameworks. FISC specifies audit standards from the Japan Institute of Internal Auditing (IIA Japan) and the Information Systems Audit and Control Association (ISACA) Japan chapter. Specific requirements include annual IT system audits by qualified system auditors (Joho System Kansa-shi), FSA examination preparation procedures, and compliance reporting formats specified by the Japanese Bankers Association."
+    },
+    {
+      "id": "FISC.O8",
+      "title": "Human Resources Security and Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-06",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-05",
+        "PS-06",
+        "PS-07",
+        "PS-08",
+        "PS-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AT-01 through AT-04 provide comprehensive training policy, security awareness, role-based training, and training records. AT-06 (new in Rev 5) training feedback measures training effectiveness. PS-01 through PS-08 cover personnel security policies, position risk designation, screening, termination, transfer, access agreements, third-party security, and sanctions. PS-09 (new in Rev 5) position descriptions incorporates security responsibilities into job roles, directly supporting FISC's requirement for defined security responsibilities.",
+      "gaps": "FISC specifies human resources security practices aligned with Japanese employment law, including specific background screening permitted under Japan's Act on the Protection of Personal Information (APPI), training requirements in Japanese language for all financial institution staff, and security clearance considerations for staff handling My Number data. Japanese labor law restrictions on termination processes differ from Western models assumed by NIST."
+    },
+    {
+      "id": "FISC.O9",
+      "title": "Information Asset and Data Lifecycle Management",
+      "controls": [
+        "AC-16",
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "MP-01",
+        "MP-03",
+        "MP-06",
+        "MP-08",
+        "PT-01",
+        "PT-02",
+        "RA-02",
+        "SI-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-08 component inventory and CM-12 (new in Rev 5) information location identify and track information assets across the institution. CM-13 (new in Rev 5) data action mapping documents data processing flows. AC-16 automated labelling and RA-02 security categorisation support data classification. MP-01/MP-03/MP-06 media protection policies, marking, and sanitisation manage physical media. MP-08 (new in Rev 5) media downgrading supports data reclassification during lifecycle transitions. PT-01/PT-02 privacy policies and authority support data governance. SI-12 information management and retention addresses retention and disposal.",
+      "gaps": "FISC data lifecycle requirements include compliance with Japan's APPI (Act on the Protection of Personal Information) and specific retention periods mandated by the Financial Instruments and Exchange Act (typically 10 years for transaction records). FISC addresses data residency requirements mandating that certain financial customer data remain within Japan, and specific handling requirements for tokutei kojin joho (specified personal information) including My Number data."
+    },
+    {
+      "id": "FISC.O10",
+      "title": "Software Development Lifecycle",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-16",
+        "SA-17",
+        "SA-20",
+        "SA-21"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SA-03 system development lifecycle provides SDLC framework requirements. SA-04 acquisition process, SA-08 security engineering principles, and SA-17 developer security architecture address secure design. SA-10 developer configuration management and SA-11 developer security testing cover development quality controls. SA-15 development process and standards and SA-16 developer-provided training ensure development governance. SA-20 (new in Rev 5) customized development of critical components addresses bespoke development for high-assurance financial systems. SA-21 (new in Rev 5) developer screening adds personnel vetting for development staff.",
+      "gaps": "FISC specifies SDLC requirements for Japanese financial systems including testing standards aligned with Japanese software quality standards (JIS X 25010, based on ISO/IEC 25010), requirements for mission-critical system development review by the FSA, and specific system development governance for core banking system migrations common in Japanese megabank consolidations."
+    },
+    {
+      "id": "FISC.O11",
+      "title": "Log Management and Forensic Readiness",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-10",
+        "AU-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "The AU family provides comprehensive log management coverage. AU-01 audit policy and AU-02 auditable events establish logging requirements. AU-03 audit content and AU-08 timestamps ensure log completeness. AU-04 audit storage capacity and AU-05 response to audit processing failures address log infrastructure reliability. AU-06 audit review and analysis and AU-07 audit record generation support forensic analysis. AU-09 audit protection ensures log integrity. AU-10 non-repudiation supports forensic evidence requirements. AU-11 audit record retention addresses long-term forensic readiness.",
+      "gaps": "FISC specifies log retention periods aligned with Japanese financial regulations (minimum 7 years for transaction logs, 10 years under Financial Instruments and Exchange Act). FISC also addresses forensic readiness requirements for FSA examination support, including log formats compatible with Japanese regulatory analysis tools and timestamping requirements aligned with Japanese Standard Time (JST/UTC+9)."
+    },
+    {
+      "id": "FISC.O12",
+      "title": "Vulnerability and Patch Management",
+      "controls": [
+        "CM-03",
+        "RA-05",
+        "RA-07",
+        "SI-02",
+        "SI-05"
+      ],
+      "coverage_pct": 87,
+      "rationale": "RA-05 vulnerability monitoring and scanning provides comprehensive vulnerability detection. SI-02 flaw remediation addresses patching processes. CM-03 configuration change control governs patch deployment through change management. SI-05 security alerts and advisories ensures awareness of new vulnerabilities. RA-07 (new in Rev 5) risk response supports vulnerability-to-treatment workflow enabling risk-based patch prioritisation.",
+      "gaps": "FISC specifies vulnerability management coordination with JPCERT/CC (Japan Computer Emergency Response Team Coordination Center) and IPA (Information-technology Promotion Agency) vulnerability databases. FISC requires consideration of Japanese vendor patch cycles (NTT Data, Fujitsu, NEC systems) and coordination of patch windows with Japanese banking system maintenance schedules."
+    },
+    {
+      "id": "FISC.O13",
+      "title": "Capacity and Performance Management",
+      "controls": [
+        "AU-04",
+        "CM-02",
+        "CM-08",
+        "MA-02",
+        "SA-08",
+        "SC-06",
+        "SI-13"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AU-04 audit storage capacity addresses storage capacity planning. CM-02/CM-08 baseline configuration and component inventory track infrastructure capacity. MA-02 controlled maintenance supports performance through preventive maintenance. SA-08 security engineering principles includes performance considerations. SC-06 resource priority allocates resources to critical functions. SI-13 (new in Rev 5) predictive maintenance enables proactive capacity monitoring and failure prediction.",
+      "gaps": "FISC requires capacity planning for peak processing periods specific to Japanese financial systems, including end-of-month salary transfer peaks (kyuryo furikomi), Japanese fiscal year-end (March 31) processing surges, Obon/New Year holiday settlement backlogs, and Zengin system throughput requirements. Specific SLA requirements for Japanese financial system response times are outside NIST scope."
+    },
+    {
+      "id": "FISC.F1",
+      "title": "Data Center Physical Security",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-07",
+        "PE-08",
+        "PE-18",
+        "PE-19",
+        "PE-22"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PE-01 physical security policy, PE-02/PE-03 physical access authorisations and enforcement, PE-04 access control for transmission, and PE-05 access control for output devices establish physical access governance. PE-06 monitoring physical access and PE-07 visitor control support surveillance. PE-08 access records maintains access logs. PE-18 location of components addresses component placement. PE-19 information leakage protects against emanation. PE-22 (new in Rev 5) component marking supports physical asset identification.",
+      "gaps": "FISC has extensive data center physical security requirements specific to Japanese conditions including seismic design standards (Building Standards Act requirements, shindo 7 earthquake resistance), tsunami risk assessment for coastal facilities, proximity restrictions to nuclear power facilities (post-Fukushima considerations), and specific Japanese building code compliance for critical financial infrastructure. FISC also specifies data center location requirements considering Japanese geography and natural disaster risk profiles that extend well beyond NIST PE controls."
+    },
+    {
+      "id": "FISC.F2",
+      "title": "Environmental Controls (Power, HVAC, Fire Suppression)",
+      "controls": [
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-21"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PE-09 power equipment and cabling protects power infrastructure. PE-10 emergency shutoff and PE-11 emergency power provide power continuity. PE-12 emergency lighting, PE-13 fire protection, PE-14 environmental controls (temperature/humidity), and PE-15 water damage protection cover environmental protection. PE-21 (new in Rev 5) electromagnetic pulse protection adds resilience against electromagnetic threats.",
+      "gaps": "FISC environmental standards are significantly shaped by Japan's unique natural hazard profile. Requirements include: earthquake-resistant rack mounting and equipment isolation (menshin/seishin design), emergency power systems sized for extended outages (referencing Tokyo Electric Power Company outage scenarios), fire suppression using halon alternatives approved by Japan Fire and Disaster Management Agency, and cooling system redundancy for Japan's hot and humid summer conditions. FISC also addresses volcanic ash protection for facilities near active volcanoes (e.g., Mount Fuji contingency planning) and lightning protection standards per JIS (Japanese Industrial Standards)."
+    },
+    {
+      "id": "FISC.F3",
+      "title": "Equipment Protection and Maintenance",
+      "controls": [
+        "MA-01",
+        "MA-02",
+        "MA-03",
+        "MA-04",
+        "MA-05",
+        "MA-06",
+        "MA-07",
+        "PE-16"
+      ],
+      "coverage_pct": 85,
+      "rationale": "MA-01 system maintenance policy, MA-02 controlled maintenance, and MA-03 maintenance tools establish maintenance governance. MA-04 nonlocal maintenance and MA-05 maintenance personnel address remote and third-party maintenance security. MA-06 timely maintenance ensures availability. MA-07 (new in Rev 5) field maintenance adds off-site equipment servicing controls. PE-16 delivery and removal governs equipment logistics.",
+      "gaps": "FISC specifies equipment maintenance aligned with Japanese vendor maintenance contracts and practices. This includes maintenance coordination with Japanese IT vendors (Fujitsu, NEC, Hitachi) service level agreements, equipment lifecycle management aligned with Japanese depreciation schedules, and seismic inspection requirements after earthquakes exceeding specified shindo levels."
+    },
+    {
+      "id": "FISC.F4",
+      "title": "Media Handling and Disposal",
+      "controls": [
+        "MP-01",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "MP-07",
+        "MP-08",
+        "SR-12"
+      ],
+      "coverage_pct": 90,
+      "rationale": "MP-01 media protection policy, MP-02 media access, and MP-03 media marking establish media governance. MP-04 media storage and MP-05 media transport control media handling. MP-06 media sanitisation and SR-12 component disposal address secure disposal. MP-07 media use restricts media to authorized purposes. MP-08 (new in Rev 5) media downgrading supports media reclassification before disposal or transfer.",
+      "gaps": "Minor gap. FISC specifies media handling aligned with APPI requirements for personal information destruction and specific disposal certification requirements from approved Japanese data destruction vendors. Media transport requirements between financial institution sites must comply with Japanese road transport regulations for sensitive materials."
+    },
+    {
+      "id": "FISC.F5",
+      "title": "Alternative Site and Recovery Facilities",
+      "controls": [
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "PE-17",
+        "PE-23"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CP-06 alternate storage site, CP-07 alternate processing site, and CP-08 telecommunications services provide alternate facility foundations. PE-17 alternate work site covers staff relocation. PE-23 (new in Rev 5) facility location adds requirements for physical siting of recovery facilities.",
+      "gaps": "FISC has stringent alternative site requirements driven by Japan's seismic geography. Requirements include minimum geographic separation between primary and recovery sites (typically 200+ km, crossing major tectonic plate boundaries), recovery site placement in different seismic zones, consideration of Japanese transportation infrastructure availability post-disaster, and specific requirements for regional bank consortia shared DR facilities. FISC also addresses BOJ-NET and Zengin system reconnection procedures for DR sites and mandates that recovery sites maintain FSA/BOJ inspection accessibility."
+    }
+  ],
+  "summary": {
+    "total_clauses": 32,
+    "average_coverage": 82.2,
+    "full_count": 16,
+    "substantial_count": 16,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

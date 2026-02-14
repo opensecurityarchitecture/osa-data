@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensecurityarchitecture.org/schema/attack-technique-catalog.schema.json",
+  "title": "OSA ATT&CK Technique Catalog",
+  "description": "Catalog of MITRE ATT&CK Enterprise techniques with tactic, platform, and URL metadata. Keyed by technique ID.",
+  "type": "object",
+  "minProperties": 1,
+
+  "patternProperties": {
+    "^T[0-9]{4}(\\.[0-9]{3})?$": {
+      "type": "object",
+      "required": ["name", "tactics", "url", "platforms", "is_subtechnique"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "ATT&CK technique name"
+        },
+        "tactics": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "reconnaissance",
+              "resource-development",
+              "initial-access",
+              "execution",
+              "persistence",
+              "privilege-escalation",
+              "defense-evasion",
+              "credential-access",
+              "discovery",
+              "lateral-movement",
+              "collection",
+              "command-and-control",
+              "exfiltration",
+              "impact"
+            ]
+          },
+          "description": "ATT&CK tactics (kill chain phases)"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://attack\\.mitre\\.org/techniques/T[0-9]{4}(/[0-9]{3})?$",
+          "description": "Direct URL to the ATT&CK technique page"
+        },
+        "platforms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Target platforms (e.g., Windows, Linux, macOS, IaaS, SaaS)"
+        },
+        "is_subtechnique": {
+          "type": "boolean",
+          "description": "True if this is a sub-technique (e.g., T1078.001)"
+        }
+      }
+    }
+  },
+
+  "additionalProperties": false
+}

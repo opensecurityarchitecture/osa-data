@@ -264,6 +264,7 @@
       "items": {
         "type": "object",
         "required": ["id", "name", "tactics"],
+        "additionalProperties": false,
         "properties": {
           "id": {
             "type": "string",
@@ -272,10 +273,13 @@
           },
           "name": {
             "type": "string",
+            "minLength": 1,
             "description": "Technique name"
           },
           "tactics": {
             "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
             "items": {
               "type": "string",
               "enum": [
@@ -296,6 +300,15 @@
               ]
             },
             "description": "ATT&CK tactics (kill chain phases) for this technique"
+          },
+          "mapping_type": {
+            "type": "string",
+            "enum": ["mitigates", "detects"],
+            "description": "Relationship type between the control and technique"
+          },
+          "mapping_rationale": {
+            "type": "string",
+            "description": "Explanation of how this control mitigates or detects the technique"
           }
         }
       }

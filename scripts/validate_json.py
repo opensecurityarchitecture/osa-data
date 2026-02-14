@@ -110,6 +110,50 @@ def main():
         validated += 1
         print(f"  OK: {filepath.name}")
 
+    # Validate ATT&CK data
+    attack_dir = DATA_DIR / "attack"
+    if attack_dir.exists():
+        print("\nATT&CK:")
+        attack_catalog_schema_path = DATA_DIR / "schema" / "attack-technique-catalog.schema.json"
+        attack_metadata_schema_path = DATA_DIR / "schema" / "attack-metadata.schema.json"
+
+        attack_catalog_schema = load_schema(attack_catalog_schema_path) if attack_catalog_schema_path.exists() else None
+        attack_metadata_schema = load_schema(attack_metadata_schema_path) if attack_metadata_schema_path.exists() else None
+
+        catalog_path = attack_dir / "technique-catalog.json"
+        if catalog_path.exists():
+            if not validate_json_syntax(catalog_path):
+                errors += 1
+            else:
+                with open(catalog_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                if attack_catalog_schema and HAS_JSONSCHEMA:
+                    if not validate_against_schema(data, attack_catalog_schema, catalog_path):
+                        errors += 1
+                    else:
+                        validated += 1
+                        print(f"  OK: {catalog_path.name} ({len(data)} techniques)")
+                else:
+                    validated += 1
+                    print(f"  OK: {catalog_path.name}")
+
+        metadata_path = attack_dir / "metadata.json"
+        if metadata_path.exists():
+            if not validate_json_syntax(metadata_path):
+                errors += 1
+            else:
+                with open(metadata_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                if attack_metadata_schema and HAS_JSONSCHEMA:
+                    if not validate_against_schema(data, attack_metadata_schema, metadata_path):
+                        errors += 1
+                    else:
+                        validated += 1
+                        print(f"  OK: {metadata_path.name}")
+                else:
+                    validated += 1
+                    print(f"  OK: {metadata_path.name}")
+
     # Summary
     print(f"\nValidation complete: {validated} files OK, {errors} errors")
 

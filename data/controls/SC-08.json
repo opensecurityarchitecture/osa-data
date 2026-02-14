@@ -164,7 +164,8 @@
         "credential-access",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity protections such as TLS and IPsec encrypt network traffic in transit, preventing adversaries from capturing usable credentials or sensitive data through passive network sniffing on compromised network segments."
     },
     {
       "id": "T1090",
@@ -172,7 +173,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Integrity protections on transmitted data\u2014including TLS certificate validation and mutual authentication\u2014enable detection of proxy interception attempts where adversaries insert themselves into the communication path to relay or modify C2 traffic."
     },
     {
       "id": "T1557",
@@ -181,7 +183,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Cryptographic integrity verification of transmitted data directly counters adversary-in-the-middle attacks by ensuring that any interception, modification, or replay of network traffic is detected through failed integrity checks or certificate validation errors."
     },
     {
       "id": "T1562",
@@ -189,7 +192,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity controls protect the communication channels used by security tools to report telemetry, ensuring adversaries cannot tamper with or suppress security alerts and log data as they traverse the network."
     },
     {
       "id": "T1602",
@@ -197,7 +201,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protecting the integrity of management protocol transmissions prevents adversaries from intercepting or modifying configuration data in transit between network devices and management stations, ensuring collected configurations have not been tampered with."
     },
     {
       "id": "T1622",
@@ -206,7 +211,8 @@
         "defense-evasion",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity mechanisms protect the communication channels used by debugging and analysis tools, making it harder for adversaries to intercept and manipulate debug protocol traffic to evade analysis or inject misleading telemetry."
     },
     {
       "id": "T1020.001",
@@ -214,7 +220,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity controls detect unauthorized traffic duplication by validating data streams end-to-end, revealing discrepancies caused by network taps or port mirroring configurations that silently copy traffic to adversary-controlled destinations."
     },
     {
       "id": "T1090.004",
@@ -222,7 +229,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "TLS integrity verification with proper certificate validation detects domain fronting attempts where the SNI header and HTTP Host header diverge, as transmission integrity mechanisms can enforce consistency between transport and application layer routing."
     },
     {
       "id": "T1550.001",
@@ -231,7 +239,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity protections such as TLS prevent adversaries from intercepting application access tokens in transit, ensuring that stolen tokens cannot be captured through network-level eavesdropping during API authentication exchanges."
     },
     {
       "id": "T1550.004",
@@ -240,7 +249,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Encrypting transmissions and enforcing integrity verification prevents adversaries from capturing web session cookies in transit, blocking a primary vector for session hijacking that enables lateral movement without re-authentication."
     },
     {
       "id": "T1552.007",
@@ -248,7 +258,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity controls on container API communications prevent adversaries from intercepting credentials exchanged between container orchestration components, ensuring that API tokens and service account credentials are not exposed during transit."
     },
     {
       "id": "T1557.001",
@@ -257,7 +268,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity mechanisms that enforce authenticated and encrypted connections prevent LLMNR/NBT-NS poisoning attacks by ensuring name resolution responses are validated and SMB relay attempts fail against cryptographically protected sessions."
     },
     {
       "id": "T1557.002",
@@ -266,7 +278,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Integrity protections on network transmissions\u2014including encrypted sessions and mutual authentication\u2014render ARP cache poisoning ineffective for credential interception, as captured traffic remains encrypted and integrity-verified end-to-end."
     },
     {
       "id": "T1557.003",
@@ -275,7 +288,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity controls ensure that DHCP spoofing attacks cannot successfully redirect traffic through adversary-controlled gateways for interception, as encrypted and integrity-verified sessions resist man-in-the-middle manipulation regardless of routing changes."
     },
     {
       "id": "T1557.004",
@@ -284,7 +298,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "End-to-end transmission integrity protections such as TLS with certificate pinning prevent evil twin wireless access points from successfully intercepting credentials or sensitive data, as integrity verification fails when traffic passes through the rogue AP."
     },
     {
       "id": "T1562.006",
@@ -292,7 +307,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protecting the integrity of security telemetry transmissions prevents adversaries from blocking or modifying indicators in transit between sensors and SIEM platforms, ensuring that detection events reach security operations without suppression or alteration."
     },
     {
       "id": "T1562.009",
@@ -300,7 +316,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity controls ensure that security tool communications remain protected even during safe mode boot scenarios, preventing adversaries from exploiting reduced security postures to intercept or modify management traffic."
     },
     {
       "id": "T1562.010",
@@ -308,7 +325,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Integrity verification of transmitted data detects and prevents protocol downgrade attacks by enforcing minimum cryptographic standards, ensuring adversaries cannot force connections to weaker protocols that facilitate interception or manipulation."
     },
     {
       "id": "T1602.001",
@@ -316,7 +334,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Protecting SNMP transmission integrity through SNMPv3 authentication and encryption prevents adversaries from intercepting MIB data in transit and blocks injection of forged SNMP responses that could mislead network management systems."
     },
     {
       "id": "T1602.002",
@@ -324,7 +343,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Transmission integrity controls on management protocols ensure that network device configuration dumps cannot be intercepted or modified in transit, preventing adversaries from capturing sensitive configuration data including credentials and ACLs during legitimate management operations."
     }
   ],
   "metadata": {

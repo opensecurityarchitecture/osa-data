@@ -98,7 +98,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation ensures that WMI execution occurs within controlled domains, preventing adversaries from leveraging WMI to cross security boundaries and tamper with security-enforcement mechanisms."
     },
     {
       "id": "T1068",
@@ -106,7 +107,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation separates security-critical processes from application processes, limiting the impact of privilege-escalation exploits by ensuring they cannot directly compromise security-enforcement functions."
     },
     {
       "id": "T1189",
@@ -114,7 +116,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation ensures that drive-by compromise of application processes cannot directly impact security functions, as browser sandboxes and security services operate in separate, protected execution domains."
     },
     {
       "id": "T1190",
@@ -122,7 +125,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation protects security-enforcement mechanisms from exploitation of public-facing applications by maintaining security functions in domains inaccessible from compromised web-application processes."
     },
     {
       "id": "T1203",
@@ -130,7 +134,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation contains client-execution exploits by ensuring that compromised application processes operate in domains separated from security controls, preventing exploitation from disabling defensive mechanisms."
     },
     {
       "id": "T1210",
@@ -138,7 +143,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation limits the impact of remote-service exploitation by ensuring that security functions run in protected domains inaccessible from compromised application services."
     },
     {
       "id": "T1211",
@@ -146,7 +152,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation directly addresses exploitation for defense evasion by maintaining security functions in isolated execution domains that cannot be disabled or modified through application-level vulnerabilities."
     },
     {
       "id": "T1212",
@@ -154,7 +161,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation protects credential-management services by separating authentication and authorization functions into protected domains inaccessible from exploited application processes."
     },
     {
       "id": "T1559",
@@ -162,7 +170,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation prevents inter-process communication abuse from reaching security functions by maintaining security processes in protected domains that restrict incoming IPC from untrusted sources."
     },
     {
       "id": "T1602",
@@ -170,7 +179,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation protects network device security configurations by separating management-plane functions from data-plane processes, preventing configuration extraction through compromised forwarding processes."
     },
     {
       "id": "T1611",
@@ -178,7 +188,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation directly addresses container escape by maintaining host security functions in protected domains separate from container execution environments, limiting escape impact."
     },
     {
       "id": "T1003.001",
@@ -186,7 +197,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation with Credential Guard moves LSASS credential operations to a virtualization-based security enclave, protecting NTLM hashes and Kerberos tickets from extraction even by kernel-level attackers."
     },
     {
       "id": "T1021.003",
@@ -194,7 +206,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation restricts DCOM-based lateral movement by maintaining security boundaries between COM execution domains, preventing unauthorized remote COM instantiation from accessing protected resources."
     },
     {
       "id": "T1134.005",
@@ -203,7 +216,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation protects SID-history processing by isolating authentication-token creation within protected security functions, preventing adversaries from injecting unauthorized SIDs into access tokens."
     },
     {
       "id": "T1559.001",
@@ -211,7 +225,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation restricts COM abuse by maintaining security boundaries around COM server processes, preventing malicious COM clients from executing code in protected security-function domains."
     },
     {
       "id": "T1559.002",
@@ -219,7 +234,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation limits DDE exploitation impact by ensuring that code execution through Dynamic Data Exchange cannot reach or modify security functions operating in isolated execution domains."
     },
     {
       "id": "T1602.001",
@@ -227,7 +243,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation separates SNMP management functions from forwarding-plane operations, preventing compromised data-plane processes from accessing device configuration through management-interface exploitation."
     },
     {
       "id": "T1602.002",
@@ -235,7 +252,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Security function isolation protects network device configuration by isolating management-plane functions, ensuring that configuration data cannot be extracted through compromised application or forwarding processes."
     }
   ],
   "metadata": {

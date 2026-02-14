@@ -168,7 +168,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing restrictive configuration baselines on network devices and endpoints can limit the protocols and encoding methods available for outbound communications, constraining adversaries' ability to obfuscate command-and-control traffic using non-standard data transformations."
     },
     {
       "id": "T1003",
@@ -176,7 +177,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration settings\u2014such as enabling Credential Guard, restricting debug privileges, and enforcing LSA protection\u2014directly limit the tools and OS interfaces adversaries exploit to dump credentials from memory, the SAM database, or domain controllers."
     },
     {
       "id": "T1008",
@@ -184,7 +186,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive configuration of egress firewall rules and proxy settings on endpoints limits the alternative network paths available to adversaries, preventing fallback C2 channels from successfully establishing connectivity when primary channels are blocked."
     },
     {
       "id": "T1011",
@@ -192,7 +195,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that disable or restrict Bluetooth, Wi-Fi, and other non-primary network interfaces on managed endpoints prevent adversaries from exfiltrating data through alternative network media outside standard monitoring channels."
     },
     {
       "id": "T1021",
@@ -200,7 +204,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing restrictive configuration settings for remote services\u2014disabling unnecessary protocols like RDP, SMB, or WinRM by default\u2014reduces the attack surface available for lateral movement through legitimate remote administration tools."
     },
     {
       "id": "T1027",
@@ -208,7 +213,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Mandatory configuration baselines that enforce code signing requirements, restrict execution of unknown binaries, and enable content inspection help detect and block obfuscated files or information used to evade static analysis and signature-based detection."
     },
     {
       "id": "T1029",
@@ -216,7 +222,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce data transfer quotas, time-based network access restrictions, and proxy-based content inspection can detect and prevent scheduled data exfiltration by limiting when and how data flows leave the network."
     },
     {
       "id": "T1030",
@@ -224,7 +231,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing configuration-based data loss prevention policies with transfer size thresholds and content inspection at network boundaries detects and blocks adversary attempts to chunk exfiltrated data into sizes designed to evade volumetric detection."
     },
     {
       "id": "T1036",
@@ -232,7 +240,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Strict configuration settings enforcing code signing validation, application whitelisting, and file integrity checks prevent adversaries from masquerading malicious executables as legitimate system binaries or trusted applications."
     },
     {
       "id": "T1037",
@@ -241,7 +250,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Locking down boot and logon initialization script locations through restrictive configuration policies\u2014such as GPO-enforced script paths and write-protected startup directories\u2014prevents adversaries from planting persistent malicious scripts that execute during system startup or user logon."
     },
     {
       "id": "T1046",
@@ -249,7 +259,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that disables unnecessary network services, closes unused ports, and restricts ICMP responses reduces the information available through network service discovery scans, limiting adversary reconnaissance within the environment."
     },
     {
       "id": "T1047",
@@ -257,7 +268,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive WMI configuration settings\u2014including disabling remote WMI access for non-administrative users and enforcing WMI namespace security\u2014prevent adversaries from leveraging Windows Management Instrumentation for remote code execution and system enumeration."
     },
     {
       "id": "T1048",
@@ -265,7 +277,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing strict egress filtering configurations that whitelist approved protocols and destination addresses at network boundaries prevents adversaries from exfiltrating data through alternative protocols such as DNS, ICMP, or unapproved encrypted channels."
     },
     {
       "id": "T1052",
@@ -273,7 +286,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that disable USB mass storage devices, enforce device control rules, and restrict removable media mounting directly prevent exfiltration of sensitive data over physical media such as USB drives."
     },
     {
       "id": "T1053",
@@ -283,7 +297,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration settings that restrict task scheduler permissions, limit cron access to authorized users, and enforce approval workflows for scheduled jobs prevent adversaries from creating persistent scheduled tasks for execution or privilege escalation."
     },
     {
       "id": "T1055",
@@ -292,7 +307,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration baselines enforcing process protection mechanisms\u2014such as ASLR, DEP, code integrity policies, and restricted debug privileges\u2014raise the barrier for adversaries attempting process injection techniques to execute code within legitimate process address spaces."
     },
     {
       "id": "T1059",
@@ -300,7 +316,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing restrictive configuration baselines can disable or constrain scripting engines (PowerShell, WScript, bash) and command interpreters through execution policies, AppLocker rules, or shell restrictions, directly preventing adversaries from executing malicious scripts on managed endpoints."
     },
     {
       "id": "T1068",
@@ -308,7 +325,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Maintaining restrictive configuration settings that enforce DEP, ASLR, Control Flow Guard, and kernel patch protection reduces the exploitable attack surface, making privilege escalation through software vulnerability exploitation significantly more difficult."
     },
     {
       "id": "T1070",
@@ -316,7 +334,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce immutable logging, centralized log forwarding, and restricted permissions on log directories prevent adversaries from clearing or tampering with audit trails to conceal their activities."
     },
     {
       "id": "T1071",
@@ -324,7 +343,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive proxy and firewall configuration settings that enforce protocol inspection, block unauthorized application-layer protocols, and require authenticated outbound connections limit adversaries' ability to disguise C2 communications within standard protocols like HTTP or DNS."
     },
     {
       "id": "T1072",
@@ -333,7 +353,8 @@
         "execution",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration of software deployment tools\u2014restricting administrative access, enforcing mutual authentication, and limiting deployment scope\u2014prevents adversaries from abusing enterprise software distribution systems for lateral code execution."
     },
     {
       "id": "T1078",
@@ -344,7 +365,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing strict authentication configuration settings\u2014password complexity requirements, account lockout thresholds, session timeout policies, and MFA enforcement\u2014reduces the viability of compromised valid accounts for initial access, persistence, and privilege escalation."
     },
     {
       "id": "T1087",
@@ -352,7 +374,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict access to user enumeration interfaces\u2014such as disabling anonymous SAM enumeration, hiding user lists from login screens, and limiting LDAP query permissions\u2014reduce the information adversaries can gather about account structures during discovery."
     },
     {
       "id": "T1090",
@@ -360,7 +383,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Strict proxy configuration settings that enforce authenticated outbound connections, block unauthorized SOCKS or HTTP proxy tools, and restrict direct internet access prevent adversaries from establishing proxy-based C2 relay infrastructure."
     },
     {
       "id": "T1091",
@@ -369,7 +393,8 @@
         "initial-access",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that disable autorun/autoplay functionality and enforce device control restrictions on removable media prevent malware propagation through infected USB drives and other removable storage devices."
     },
     {
       "id": "T1092",
@@ -377,7 +402,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Disabling or restricting removable media access through configuration policies prevents adversaries from using physical media as covert communication channels to transfer commands and data to air-gapped or isolated systems."
     },
     {
       "id": "T1095",
@@ -385,7 +411,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Network configuration settings that enforce protocol whitelisting at the firewall level and block raw socket access from non-privileged applications prevent adversaries from establishing C2 channels over non-application-layer protocols like ICMP or raw TCP."
     },
     {
       "id": "T1098",
@@ -394,7 +421,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce approval workflows for privilege changes, restrict self-service account modification, and lock down group membership management prevent adversaries from silently manipulating accounts to maintain persistent elevated access."
     },
     {
       "id": "T1102",
@@ -402,7 +430,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive web access configuration settings\u2014URL category filtering, domain whitelisting, and SSL/TLS inspection\u2014limit adversaries' ability to use legitimate web services as C2 dead drops or relay points."
     },
     {
       "id": "T1104",
@@ -410,7 +439,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Egress filtering and protocol inspection configurations that restrict outbound connectivity to approved destinations and inspect encrypted traffic prevent adversaries from establishing multi-stage C2 channels that evolve through different infrastructure."
     },
     {
       "id": "T1105",
@@ -418,7 +448,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration baselines enforcing application whitelisting, download restrictions, and proxy-based content inspection prevent adversaries from transferring additional tools and payloads into the compromised environment via the network."
     },
     {
       "id": "T1106",
@@ -426,7 +457,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive configuration settings such as API call filtering, code integrity policies, and restricted access to sensitive Windows APIs limit adversaries' ability to invoke native OS APIs directly for execution, process manipulation, or credential harvesting."
     },
     {
       "id": "T1110",
@@ -434,7 +466,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration-enforced account lockout policies, password complexity requirements, and rate limiting on authentication endpoints directly mitigate brute force attacks by increasing the cost and detectability of credential guessing attempts."
     },
     {
       "id": "T1111",
@@ -442,7 +475,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that enforces phishing-resistant MFA methods (FIDO2/WebAuthn), disables legacy authentication protocols, and restricts token caching prevents adversaries from intercepting or replaying multi-factor authentication credentials."
     },
     {
       "id": "T1114",
@@ -450,7 +484,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive email client and server configuration settings\u2014disabling auto-forwarding rules, enforcing access controls on mailbox delegation, and limiting programmatic mailbox access\u2014prevent adversaries from collecting sensitive email content at scale."
     },
     {
       "id": "T1119",
@@ -458,7 +493,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce strict file system permissions, disable unnecessary scripting capabilities, and restrict API access limit the tools and interfaces adversaries can leverage for automated data collection across compromised systems."
     },
     {
       "id": "T1127",
@@ -466,7 +502,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration baselines that restrict or disable execution of trusted developer utilities (MSBuild, dotnet) through application control policies prevent adversaries from abusing these signed binaries to proxy execution of malicious code."
     },
     {
       "id": "T1132",
@@ -474,7 +511,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing strict proxy configuration with deep content inspection enables detection of non-standard data encoding patterns in outbound traffic, identifying C2 communications that use Base64 or custom encoding to evade signature-based detection."
     },
     {
       "id": "T1133",
@@ -483,7 +521,8 @@
         "initial-access",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive configuration of external remote services\u2014enforcing VPN-only access, requiring MFA, disabling unnecessary remote access protocols, and limiting exposed service endpoints\u2014reduces the attack surface for initial access and persistent backdoor connections."
     },
     {
       "id": "T1134",
@@ -492,7 +531,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict token creation privileges, enforce User Account Control, and limit the SeImpersonatePrivilege assignment to essential service accounts prevent adversaries from manipulating access tokens to escalate privileges or impersonate users."
     },
     {
       "id": "T1135",
@@ -500,7 +540,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that restricts network share visibility, enforces share-level permissions, and disables unnecessary administrative shares (C$, ADMIN$) limits adversary ability to discover and enumerate network file shares during lateral movement."
     },
     {
       "id": "T1136",
@@ -508,7 +549,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that restrict local and domain account creation to authorized administrative processes and enforce approval workflows prevent adversaries from creating rogue accounts for persistent access."
     },
     {
       "id": "T1137",
@@ -516,7 +558,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened Office application configurations\u2014disabling macros by default, blocking external add-ins, and enforcing trusted publisher requirements\u2014prevent adversaries from installing persistent backdoors through Office startup mechanisms."
     },
     {
       "id": "T1176",
@@ -524,7 +567,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Browser configuration policies that restrict extension installation to an approved whitelist, enforce enterprise management of browser settings, and disable sideloading prevent adversaries from installing malicious browser extensions for persistent access and credential theft."
     },
     {
       "id": "T1187",
@@ -532,7 +576,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable NTLM authentication, enforce SMB signing, and restrict outbound authentication to trusted domains prevent adversaries from coercing forced authentication to capture credential hashes via techniques like malicious SCF files or document links."
     },
     {
       "id": "T1189",
@@ -540,7 +585,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive browser and endpoint configuration settings\u2014enabling site isolation, disabling unnecessary plugins, enforcing content security policies, and keeping browser sandboxing active\u2014reduce the attack surface exploitable through drive-by compromise of vulnerable web content."
     },
     {
       "id": "T1190",
@@ -548,7 +594,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration settings for public-facing applications\u2014disabling debug modes, enforcing input validation, restricting unnecessary features, and applying secure defaults\u2014reduce the exploitable vulnerabilities available for initial access through internet-exposed services."
     },
     {
       "id": "T1195",
@@ -556,7 +603,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce software supply chain integrity checks\u2014code signing validation, package hash verification, and trusted repository restrictions\u2014detect tampered or compromised components before they enter the production environment."
     },
     {
       "id": "T1197",
@@ -565,7 +613,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict BITS job creation to authorized processes and administrative accounts, and enforce monitoring of BITS activity, prevent adversaries from abusing Background Intelligent Transfer Service for stealthy file transfer and persistence."
     },
     {
       "id": "T1199",
@@ -573,7 +622,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Strict configuration of trust relationships\u2014limiting shared credentials, enforcing network segmentation between partner connections, and requiring MFA for third-party access\u2014reduces the risk of adversaries leveraging trusted relationships for initial access."
     },
     {
       "id": "T1201",
@@ -581,7 +631,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that restricts access to password policy information\u2014limiting GPO read access, disabling anonymous LDAP queries, and securing policy retrieval interfaces\u2014prevents adversaries from discovering password requirements to optimize credential attacks."
     },
     {
       "id": "T1204",
@@ -589,7 +640,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce file type restrictions, disable macro execution by default, and enable SmartScreen or equivalent warning mechanisms reduce the likelihood of successful user execution of malicious files or links."
     },
     {
       "id": "T1205",
@@ -599,7 +651,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening of network devices that disables port knocking capabilities, enforces strict ACL rules, and locks down management interfaces prevents adversaries from using traffic signaling to trigger hidden backdoor services on compromised infrastructure."
     },
     {
       "id": "T1210",
@@ -607,7 +660,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing restrictive configuration baselines that disable unnecessary services, apply security patches promptly, and harden network-facing applications directly reduces the vulnerabilities available for adversaries to exploit during lateral movement."
     },
     {
       "id": "T1211",
@@ -615,7 +669,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration settings that enable exploit protection mechanisms (DEP, ASLR, CFG) and restrict access to vulnerable system components reduce the attack surface for exploitation aimed at evading security controls."
     },
     {
       "id": "T1212",
@@ -623,7 +678,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive configuration settings enforcing credential storage hardening, memory protection, and restricted access to authentication-related services mitigate exploitation attempts targeting software vulnerabilities to extract credentials."
     },
     {
       "id": "T1213",
@@ -631,7 +687,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce strict access controls on information repositories\u2014wikis, SharePoint sites, databases, and document management systems\u2014limit adversaries' ability to harvest sensitive data from centralized knowledge stores."
     },
     {
       "id": "T1216",
@@ -639,7 +696,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that restrict execution of system scripts (PubPrn, SyncAppvPublishingServer) through application control rules prevent adversaries from abusing signed system scripts as proxy execution mechanisms to bypass security controls."
     },
     {
       "id": "T1218",
@@ -647,7 +705,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Application control configurations that restrict which signed system binaries can execute\u2014blocking or monitoring utilities like mshta, regsvr32, rundll32, and msiexec\u2014prevent adversaries from using trusted binaries to proxy execution of malicious payloads."
     },
     {
       "id": "T1219",
@@ -655,7 +714,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that block unauthorized remote access tools, enforce application whitelisting for remote administration, and restrict outbound connections to unapproved remote desktop services prevent adversary use of legitimate remote access software for C2."
     },
     {
       "id": "T1220",
@@ -663,7 +723,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable XSLT processing or restrict it to trusted stylesheets prevent adversaries from using XSL script processing to execute arbitrary code through the msxsl.exe utility or embedded XML transforms."
     },
     {
       "id": "T1221",
@@ -671,7 +732,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened Office configurations that block external template loading, disable automatic content retrieval from remote sources, and enforce trusted location policies prevent adversaries from exploiting template injection to deliver malicious payloads via document files."
     },
     {
       "id": "T1222",
@@ -679,7 +741,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce mandatory access controls, restrict modification of file permissions to privileged accounts, and maintain ACL integrity prevent adversaries from weakening file and directory permissions to access or tamper with protected resources."
     },
     {
       "id": "T1482",
@@ -687,7 +750,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that restricts domain trust enumeration\u2014limiting access to AD trust objects, disabling anonymous LDAP queries, and restricting nltest usage\u2014prevents adversaries from mapping trust relationships for cross-domain lateral movement."
     },
     {
       "id": "T1484",
@@ -696,7 +760,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive configuration of domain and tenant policies\u2014enforcing change approval workflows, limiting GPO modification rights, and monitoring policy changes\u2014prevents adversaries from modifying domain or cloud tenant policies to weaken security controls or escalate privileges."
     },
     {
       "id": "T1489",
@@ -704,7 +769,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce service protection mechanisms, restrict service control permissions to authorized administrators, and implement change management for critical services prevent adversaries from stopping security-critical services to enable further attacks."
     },
     {
       "id": "T1490",
@@ -712,7 +778,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration baselines that protect system recovery mechanisms\u2014restricting access to volume shadow copies, protecting backup configurations, and enforcing boot configuration integrity\u2014prevent adversaries from inhibiting system recovery during destructive attacks."
     },
     {
       "id": "T1495",
@@ -720,7 +787,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce firmware write protections, require signed firmware updates, and enable Secure Boot prevent adversaries from corrupting device firmware to cause persistent denial of service or establish undetectable persistence."
     },
     {
       "id": "T1498",
@@ -728,7 +796,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened network configuration settings\u2014rate limiting, SYN flood protection, ingress filtering, and redundant connectivity\u2014reduce the impact of network denial of service attacks by limiting the effectiveness of volumetric and protocol-based flooding."
     },
     {
       "id": "T1499",
@@ -736,7 +805,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce connection limits, request rate thresholds, and resource allocation controls on endpoints and services prevent adversaries from exhausting system resources through application or service-level denial of service attacks."
     },
     {
       "id": "T1505",
@@ -744,7 +814,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive server configuration settings\u2014disabling unnecessary modules, enforcing file integrity monitoring on web roots, and restricting server extension installation\u2014prevent adversaries from deploying persistent server software components like web shells or malicious IIS modules."
     },
     {
       "id": "T1525",
@@ -752,7 +823,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing container image signing, trusted registry restrictions, and image scanning policies prevent adversaries from implanting malicious code within internal container images used for deployment."
     },
     {
       "id": "T1528",
@@ -760,7 +832,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce OAuth scope restrictions, limit token lifetimes, and require consent prompts for application permissions reduce the risk of adversaries stealing application access tokens for unauthorized API access."
     },
     {
       "id": "T1530",
@@ -768,7 +841,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive cloud storage configuration settings\u2014enforcing bucket policies, disabling public access, requiring encryption, and implementing access logging\u2014prevent adversaries from accessing sensitive data stored in cloud storage services."
     },
     {
       "id": "T1537",
@@ -776,7 +850,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce cloud egress controls, restrict cross-account data transfer, and require approval for storage replication policies prevent adversaries from exfiltrating data by transferring it to attacker-controlled cloud accounts."
     },
     {
       "id": "T1539",
@@ -784,7 +859,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Browser configuration settings that enforce secure cookie attributes (HttpOnly, Secure, SameSite), restrict cookie access from scripts, and implement short session lifetimes reduce the risk of adversaries stealing web session cookies for session hijacking."
     },
     {
       "id": "T1542",
@@ -793,7 +869,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing Secure Boot, firmware write protections, and UEFI validation prevent adversaries from establishing pre-OS boot persistence mechanisms that execute before the operating system and its security controls load."
     },
     {
       "id": "T1543",
@@ -802,7 +879,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration baselines that restrict service creation privileges, enforce service binary signing requirements, and limit systemd unit file modifications prevent adversaries from creating or modifying system processes for persistence and privilege escalation."
     },
     {
       "id": "T1546",
@@ -811,7 +889,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration settings that restrict WMI subscription creation, lock down shell configuration files, and enforce integrity checking on event trigger mechanisms prevent adversaries from establishing persistence through event-triggered execution paths."
     },
     {
       "id": "T1548",
@@ -820,7 +899,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce UAC at the highest level, restrict sudo access, configure proper setuid/setgid permissions, and limit elevation prompt behavior prevent adversaries from abusing built-in elevation control mechanisms for privilege escalation."
     },
     {
       "id": "T1550",
@@ -829,7 +909,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce Kerberos delegation restrictions, disable NTLM where possible, and implement token binding reduce adversaries' ability to use stolen hashes, tickets, or tokens as alternate authentication material for lateral movement."
     },
     {
       "id": "T1552",
@@ -837,7 +918,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that removes embedded credentials from scripts and configuration files, restricts access to credential stores, and enforces secrets management policies eliminates the unsecured credential repositories adversaries search during post-compromise operations."
     },
     {
       "id": "T1553",
@@ -845,7 +927,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce strict code signing policies, maintain trusted certificate stores, and validate trust chains prevent adversaries from subverting trust controls by installing rogue certificates or bypassing signature verification."
     },
     {
       "id": "T1554",
@@ -853,7 +936,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing file integrity monitoring, binary signing requirements, and write protection on application directories detect and prevent adversaries from replacing legitimate software binaries with trojanized versions for persistent access."
     },
     {
       "id": "T1556",
@@ -863,7 +947,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened authentication configuration settings\u2014protecting authentication module directories, enforcing integrity checking on authentication libraries, and restricting modification of PAM configurations\u2014prevent adversaries from modifying the authentication process to capture credentials or bypass controls."
     },
     {
       "id": "T1557",
@@ -872,7 +957,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce mutual TLS, disable legacy protocols (LLMNR, NBT-NS), enable SMB signing, and require encrypted communications prevent adversaries from positioning themselves as intermediaries to intercept or relay authentication traffic."
     },
     {
       "id": "T1558",
@@ -880,7 +966,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening of Kerberos settings\u2014enforcing AES encryption, reducing ticket lifetimes, and restricting delegation\u2014limits the effectiveness of Kerberoasting, golden ticket, and silver ticket attacks by reducing the window and material available for ticket theft or forgery."
     },
     {
       "id": "T1559",
@@ -888,7 +975,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict COM object registration, disable DDE in Office applications, and limit IPC mechanism access prevent adversaries from abusing inter-process communication channels for code execution."
     },
     {
       "id": "T1562",
@@ -896,7 +984,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce tamper protection on security tools, restrict modification of audit policies, and lock firewall configurations prevent adversaries from impairing defensive capabilities by disabling or modifying security controls."
     },
     {
       "id": "T1563",
@@ -904,7 +993,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce session timeout policies, disable session reconnection for unauthorized users, and require re-authentication for existing sessions prevent adversaries from hijacking active remote service sessions for lateral movement."
     },
     {
       "id": "T1565",
@@ -912,7 +1002,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce data integrity controls\u2014checksums, write-once policies, and mandatory access controls on critical data stores\u2014detect and prevent adversary manipulation of stored, transmitted, or runtime data."
     },
     {
       "id": "T1566",
@@ -920,7 +1011,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive email gateway configuration settings\u2014attachment filtering, URL rewriting, DMARC/DKIM/SPF enforcement, and sandboxed content analysis\u2014reduce the success rate of phishing attacks delivering malicious payloads or credential harvesting links."
     },
     {
       "id": "T1569",
@@ -928,7 +1020,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict service execution privileges, enforce binary signing for service binaries, and limit service control manager access prevent adversaries from executing arbitrary code through system service mechanisms."
     },
     {
       "id": "T1570",
@@ -936,7 +1029,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that restricts administrative share access, enforces network segmentation, and limits SMB/WinRM connectivity between workstations prevents adversaries from transferring tools and malware laterally between compromised systems."
     },
     {
       "id": "T1571",
@@ -944,7 +1038,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Firewall and proxy configuration settings that enforce destination port whitelisting and block outbound connections on non-standard ports prevent adversaries from establishing C2 channels on unexpected ports to evade basic network monitoring."
     },
     {
       "id": "T1572",
@@ -952,7 +1047,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing deep packet inspection, TLS interception at proxy boundaries, and blocking unauthorized tunneling protocols prevent adversaries from encapsulating C2 traffic within legitimate protocol tunnels."
     },
     {
       "id": "T1573",
@@ -960,7 +1056,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enabling TLS inspection at network boundaries, enforcing certificate pinning, and restricting unapproved encryption libraries enable detection of adversary-controlled encrypted C2 channels that would otherwise evade content inspection."
     },
     {
       "id": "T1574",
@@ -970,7 +1067,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce strict DLL search order, set proper directory permissions, and implement binary path quoting prevent adversaries from hijacking execution flow through DLL side-loading, path interception, or library injection."
     },
     {
       "id": "T1598",
@@ -978,7 +1076,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive email and web configuration settings\u2014URL filtering, attachment scanning, and sender verification policies\u2014reduce the effectiveness of phishing-for-information campaigns that target employees to gather intelligence for subsequent attacks."
     },
     {
       "id": "T1599",
@@ -986,7 +1085,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened network device configurations that enforce routing policy integrity, restrict management access, and prevent unauthorized NAT modifications prevent adversaries from bridging network boundaries to bypass segmentation controls."
     },
     {
       "id": "T1601",
@@ -994,7 +1094,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing firmware integrity validation, restricting image modification capabilities, and enabling secure boot on network devices prevent adversaries from modifying system images to maintain persistent, undetectable access on network infrastructure."
     },
     {
       "id": "T1602",
@@ -1002,7 +1103,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict SNMP access (enforcing SNMPv3 with authentication), limit management protocol exposure, and enforce encrypted configuration backups prevent adversaries from extracting device configurations containing sensitive network architecture and credential information."
     },
     {
       "id": "T1609",
@@ -1010,7 +1112,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive container runtime configuration settings\u2014disabling privileged containers, enforcing read-only root filesystems, and restricting container admin command access\u2014prevent adversaries from executing arbitrary commands within container environments."
     },
     {
       "id": "T1610",
@@ -1019,7 +1122,8 @@
         "defense-evasion",
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that restrict container deployment to approved images from trusted registries, enforce image signing, and require security scanning before deployment prevent adversaries from deploying malicious containers for code execution or defense evasion."
     },
     {
       "id": "T1611",
@@ -1027,7 +1131,8 @@
       "tactics": [
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened container configuration settings\u2014enforcing seccomp profiles, disabling privileged mode, restricting kernel capabilities, and implementing namespace isolation\u2014prevent adversaries from escaping container boundaries to compromise the underlying host system."
     },
     {
       "id": "T1612",
@@ -1035,7 +1140,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict local image build capabilities, enforce build pipeline controls, and require signed base images prevent adversaries from building malicious container images directly on compromised hosts to evade detection."
     },
     {
       "id": "T1613",
@@ -1043,7 +1149,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive RBAC configuration on container orchestration platforms that limits discovery API access and restricts namespace visibility prevents adversaries from enumerating container infrastructure, services, and resources during reconnaissance."
     },
     {
       "id": "T1622",
@@ -1052,7 +1159,8 @@
         "defense-evasion",
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict debug tool availability, disable debugging interfaces on production systems, and enforce anti-debugging protections prevent adversaries from detecting or evading debugger-based analysis and security monitoring tools."
     },
     {
       "id": "T1647",
@@ -1060,7 +1168,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce plist file integrity through System Integrity Protection, restrict plist modification permissions, and monitor property list changes prevent adversaries from modifying macOS plist files to alter system behavior or disable security features."
     },
     {
       "id": "T1648",
@@ -1068,7 +1177,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive cloud configuration settings that enforce IAM role restrictions on serverless function creation, require code review for function deployments, and limit function permissions prevent adversaries from leveraging serverless execution for stealthy code execution."
     },
     {
       "id": "T1001.001",
@@ -1076,7 +1186,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict protocol compliance and content inspection at network boundaries detect and block junk data padding appended to legitimate protocol traffic, disrupting adversary attempts to obfuscate C2 communications with noise."
     },
     {
       "id": "T1001.002",
@@ -1084,7 +1195,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Enforcing deep content inspection configurations and restricting file transfer to approved types at network boundaries enables detection of steganographic payloads hidden within image, audio, or video files used for covert C2 data exchange."
     },
     {
       "id": "T1001.003",
@@ -1092,7 +1204,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce strict protocol validation and service identification at network boundaries detect traffic impersonating legitimate services, preventing adversaries from disguising C2 channels as authorized protocol communications."
     },
     {
       "id": "T1003.001",
@@ -1100,7 +1213,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enabling LSA Protection (RunAsPPL), Credential Guard, and restricting SeDebugPrivilege prevent adversaries from accessing the LSASS process memory space to extract plaintext passwords, NTLM hashes, and Kerberos tickets."
     },
     {
       "id": "T1003.002",
@@ -1108,7 +1222,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configurations that restrict SAM database access permissions, enable encryption of the SAM hive, and limit local administrator access prevent adversaries from extracting cached password hashes from the Security Account Manager."
     },
     {
       "id": "T1003.003",
@@ -1116,7 +1231,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce strict access controls on the NTDS.dit file, restrict ntdsutil usage, and limit Volume Shadow Copy access on domain controllers prevent adversaries from extracting the Active Directory credential database."
     },
     {
       "id": "T1003.004",
@@ -1124,7 +1240,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that restricts access to LSA Secrets registry keys, enforces additional protection on service account credentials, and limits debug privileges prevents adversaries from extracting cached service account passwords and domain trust keys from LSA storage."
     },
     {
       "id": "T1003.005",
@@ -1132,7 +1249,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that reduce the number of cached domain logon credentials (CachedLogonsCount), enforce credential encryption, and restrict local admin access prevent adversaries from extracting cached domain credentials for offline cracking."
     },
     {
       "id": "T1003.006",
@@ -1140,7 +1258,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that restricts directory replication permissions, enforces AdminSDHolder protections, and monitors replication requests prevents adversaries from using DCSync to simulate domain controller replication and extract all domain password hashes."
     },
     {
       "id": "T1003.007",
@@ -1148,7 +1267,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict /proc filesystem access through mount options, enforce mandatory access controls (SELinux/AppArmor), and limit ptrace capabilities prevent adversaries from reading process memory to extract credentials on Linux systems."
     },
     {
       "id": "T1003.008",
@@ -1156,7 +1276,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing restrictive file permissions on /etc/passwd and /etc/shadow, enabling strong password hashing algorithms, and restricting root access prevent adversaries from reading password hash files on Linux systems."
     },
     {
       "id": "T1011.001",
@@ -1164,7 +1285,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that disable Bluetooth interfaces on endpoints, restrict Bluetooth device pairing, and enforce device control rules prevent adversaries from exfiltrating data through Bluetooth connections to nearby receiving devices."
     },
     {
       "id": "T1020.001",
@@ -1172,7 +1294,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict port mirroring capabilities, limit SPAN session creation to authorized administrators, and enforce monitoring of network tap configurations prevent adversaries from duplicating network traffic for covert exfiltration."
     },
     {
       "id": "T1021.001",
@@ -1180,7 +1303,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened RDP configuration settings\u2014enforcing Network Level Authentication, restricting RDP access to specific groups, limiting concurrent sessions, and disabling clipboard redirection\u2014prevent adversaries from abusing Remote Desktop Protocol for lateral movement."
     },
     {
       "id": "T1021.002",
@@ -1188,7 +1312,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable default administrative shares, enforce SMB signing, and restrict SMB access through host-based firewall rules prevent adversaries from leveraging SMB and Windows admin shares for lateral movement."
     },
     {
       "id": "T1021.003",
@@ -1196,7 +1321,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict DCOM launch and access permissions, limit remote COM object activation, and enforce firewall rules for DCOM ports prevent adversaries from using Distributed Component Object Model for lateral code execution."
     },
     {
       "id": "T1021.004",
@@ -1204,7 +1330,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened SSH configuration settings\u2014disabling password authentication, enforcing key-based access with restricted key permissions, limiting SSH access by user and source IP, and disabling agent forwarding\u2014prevent adversaries from leveraging SSH for lateral movement."
     },
     {
       "id": "T1021.005",
@@ -1212,7 +1339,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable VNC services by default, enforce strong authentication for VNC connections, and restrict VNC access through firewall rules prevent adversaries from using Virtual Network Computing for graphical remote access during lateral movement."
     },
     {
       "id": "T1021.006",
@@ -1220,7 +1348,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive WinRM configuration settings\u2014disabling the service on non-managed endpoints, enforcing HTTPS transport, restricting allowed remote management IP ranges, and requiring Kerberos authentication\u2014prevent adversaries from using Windows Remote Management for lateral movement."
     },
     {
       "id": "T1021.008",
@@ -1228,7 +1357,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Cloud configuration settings that restrict direct VM serial console access, enforce bastion host architectures, and require IAM role-based access prevent adversaries from establishing direct connections to cloud virtual machines bypassing standard network controls."
     },
     {
       "id": "T1027.010",
@@ -1236,7 +1366,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce PowerShell constrained language mode, enable script block logging, and restrict obfuscated command execution help detect and prevent adversaries from using encoding and string manipulation to obfuscate malicious commands."
     },
     {
       "id": "T1036.001",
@@ -1244,7 +1375,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict code signing validation, maintaining trusted publisher lists, and blocking execution of binaries with invalid or revoked signatures prevent adversaries from masquerading malware with forged or invalid code signatures."
     },
     {
       "id": "T1036.003",
@@ -1252,7 +1384,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies using application whitelisting that validate executables by hash and path\u2014not just filename\u2014prevent adversaries from renaming system utilities to evade detection rules that rely on process name-based monitoring."
     },
     {
       "id": "T1036.005",
@@ -1260,7 +1393,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Application control configurations that validate binaries by cryptographic hash and expected location detect adversaries placing malicious executables in legitimate system directories or naming them to match trusted software."
     },
     {
       "id": "T1036.007",
@@ -1268,7 +1402,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce visible file extensions, restrict double-extension execution, and block known masquerading patterns prevent adversaries from deceiving users with files named to hide their true executable extension."
     },
     {
       "id": "T1036.010",
@@ -1276,7 +1411,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict account naming conventions and monitoring for accounts mimicking service or system accounts detect adversaries creating accounts with names designed to blend in with legitimate accounts."
     },
     {
       "id": "T1037.002",
@@ -1285,7 +1421,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict login hook creation on macOS, enforce SIP protection on hook directories, and monitor LoginHook plist modifications prevent adversaries from establishing persistence through macOS login hook mechanisms."
     },
     {
       "id": "T1037.003",
@@ -1294,7 +1431,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration settings that restrict network logon script locations to secured, read-only shares, enforce script signing, and limit Group Policy script modification rights prevent adversaries from planting malicious network logon scripts."
     },
     {
       "id": "T1037.004",
@@ -1303,7 +1441,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that restricts write access to RC script directories (/etc/rc.d, /etc/init.d), enforces integrity monitoring on init scripts, and limits root-level script modifications prevents adversaries from embedding persistence in Unix RC scripts."
     },
     {
       "id": "T1037.005",
@@ -1312,7 +1451,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict access to macOS startup item directories, enforce System Integrity Protection, and monitor StartupItems plist modifications prevent adversaries from installing persistent startup items on macOS systems."
     },
     {
       "id": "T1048.001",
@@ -1320,7 +1460,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict egress filtering that blocks unapproved encrypted protocols and restricts outbound connections to authorized destinations prevent adversaries from exfiltrating data through symmetric encrypted non-C2 protocol channels."
     },
     {
       "id": "T1048.002",
@@ -1328,7 +1469,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict outbound connectivity to approved ports and protocols, enforce TLS inspection at proxy boundaries, and block unauthorized certificate usage prevent data exfiltration over asymmetric encrypted non-C2 protocol channels."
     },
     {
       "id": "T1048.003",
@@ -1336,7 +1478,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Egress filtering configurations that whitelist approved unencrypted protocols and block unexpected protocol usage\u2014such as FTP, TFTP, or raw HTTP to external destinations\u2014prevent adversaries from exfiltrating data over cleartext non-C2 channels."
     },
     {
       "id": "T1052.001",
@@ -1344,7 +1487,8 @@
       "tactics": [
         "exfiltration"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration policies that disable USB mass storage class drivers, enforce device control through endpoint management, and restrict removable media write access prevent adversaries from copying sensitive data to USB devices for physical exfiltration."
     },
     {
       "id": "T1053.002",
@@ -1354,7 +1498,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict at command usage to authorized users, disable the atd service where unnecessary, and enforce monitoring of at job creation prevent adversaries from scheduling persistent tasks through the at scheduling utility."
     },
     {
       "id": "T1053.005",
@@ -1364,7 +1509,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened configuration settings that restrict Task Scheduler permissions, require administrative approval for scheduled task creation, and enforce monitoring of schtasks.exe usage prevent adversaries from creating Windows scheduled tasks for persistence and execution."
     },
     {
       "id": "T1053.006",
@@ -1374,7 +1520,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict systemd timer creation to authorized administrators, enforce file integrity monitoring on timer unit files, and limit systemd-run capabilities prevent adversaries from abusing systemd timers for persistent scheduled execution."
     },
     {
       "id": "T1055.008",
@@ -1383,7 +1530,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict ptrace capabilities through kernel parameters (kernel.yama.ptrace_scope), enforce mandatory access controls, and limit debugging privileges prevent adversaries from using ptrace system calls to inject code into running processes on Linux."
     },
     {
       "id": "T1056.003",
@@ -1392,7 +1540,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening of web portal authentication pages\u2014enforcing Content Security Policy headers, restricting form action targets, and implementing subresource integrity checks\u2014prevents adversaries from injecting credential capture scripts into web authentication interfaces."
     },
     {
       "id": "T1059.001",
@@ -1400,7 +1549,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing PowerShell constrained language mode, requiring script signing, enabling enhanced script block logging, and restricting PowerShell execution policies prevent adversaries from leveraging PowerShell for malicious command execution."
     },
     {
       "id": "T1059.002",
@@ -1408,7 +1558,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict AppleScript execution through application sandboxing, enforce Gatekeeper policies, and limit osascript usage to authorized processes prevent adversaries from using AppleScript as a command execution vector on macOS."
     },
     {
       "id": "T1059.003",
@@ -1416,7 +1567,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict cmd.exe execution through application control policies, disable command shell access for standard users, and enforce process creation monitoring limit adversaries' ability to use the Windows command shell for execution."
     },
     {
       "id": "T1059.004",
@@ -1424,7 +1576,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing restricted shell environments, limiting PATH variables, and applying mandatory access controls (SELinux/AppArmor) on shell interpreters constrain adversary ability to execute malicious commands through Unix shells."
     },
     {
       "id": "T1059.005",
@@ -1432,7 +1585,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable VBScript execution through Windows Script Host configuration, enforce macro blocking in Office applications, and restrict wscript.exe/cscript.exe through application control prevent Visual Basic-based script execution."
     },
     {
       "id": "T1059.006",
@@ -1440,7 +1594,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Python interpreter access, remove Python from standard user environments, and enforce application whitelisting that blocks unauthorized interpreter execution prevent adversaries from leveraging Python for malicious code execution."
     },
     {
       "id": "T1059.007",
@@ -1448,7 +1603,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict JavaScript execution contexts, disable Windows Script Host, enforce browser content security policies, and limit Node.js availability prevent adversaries from using JavaScript engines for malicious code execution."
     },
     {
       "id": "T1059.008",
@@ -1456,7 +1612,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened network device configurations that enforce role-based CLI access, require strong authentication, restrict management interface exposure, and enable command authorization prevent adversaries from executing unauthorized commands on network infrastructure devices."
     },
     {
       "id": "T1059.010",
@@ -1464,7 +1621,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict execution of AutoHotKey and AutoIT interpreters through application whitelisting, block unsigned automation scripts, and monitor for suspicious automation tool usage prevent adversaries from leveraging these scripting frameworks."
     },
     {
       "id": "T1059.011",
@@ -1472,7 +1630,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Lua interpreter availability, enforce application whitelisting to block unauthorized Lua execution, and monitor embedded Lua engines prevent adversaries from using Lua scripting for malicious code execution."
     },
     {
       "id": "T1070.001",
@@ -1480,7 +1639,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing immutable Windows event log forwarding, restricting wevtutil permissions, and implementing tamper-protected central logging prevent adversaries from clearing Windows event logs to erase evidence of their activities."
     },
     {
       "id": "T1070.002",
@@ -1488,7 +1648,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce centralized syslog forwarding, restrict write access to log directories, and implement append-only log storage prevent adversaries from clearing Linux or Mac system logs to remove forensic evidence."
     },
     {
       "id": "T1070.003",
@@ -1496,7 +1657,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce persistent command history logging, restrict modification of history files, and forward command logs to a central SIEM prevent adversaries from clearing command history to hide executed commands."
     },
     {
       "id": "T1070.007",
@@ -1504,7 +1666,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce centralized logging of network connection events, restrict access to network configuration tools, and implement immutable network audit trails prevent adversaries from clearing network connection history and configurations."
     },
     {
       "id": "T1070.008",
@@ -1512,7 +1675,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce mailbox audit logging, restrict mailbox cleanup permissions, and implement immutable email audit trails prevent adversaries from clearing mailbox data to remove evidence of email-based collection or communication."
     },
     {
       "id": "T1070.009",
@@ -1520,7 +1684,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing integrity monitoring on persistence mechanism locations\u2014registry, scheduled tasks, services\u2014with immutable audit logging of changes, detect adversary attempts to clean up persistence artifacts after achieving their objectives."
     },
     {
       "id": "T1071.001",
@@ -1528,7 +1693,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing web proxy inspection, blocking direct HTTP/HTTPS connections bypassing the proxy, and implementing URL categorization detect and disrupt C2 communications disguised as standard web protocol traffic."
     },
     {
       "id": "T1071.002",
@@ -1536,7 +1702,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict FTP/SFTP/SCP to approved destinations, block unauthorized file transfer protocol usage, and enforce proxy-based inspection of file transfers prevent adversaries from using file transfer protocols for C2 communications."
     },
     {
       "id": "T1071.003",
@@ -1544,7 +1711,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing mail relay restrictions, blocking direct SMTP/IMAP connections to external servers, and requiring authenticated mail gateway usage prevent adversaries from using mail protocols as covert C2 channels."
     },
     {
       "id": "T1071.004",
@@ -1552,7 +1720,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing DNS query restrictions through approved resolvers, blocking direct external DNS queries, and implementing DNS inspection detect adversary C2 channels that encode commands and data within DNS queries and responses."
     },
     {
       "id": "T1078.002",
@@ -1563,7 +1732,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strong password policies on domain accounts, implementing privileged access workstations, and requiring MFA for domain authentication reduce the pool of exploitable domain accounts available for adversary initial access and lateral movement."
     },
     {
       "id": "T1078.003",
@@ -1574,7 +1744,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce unique local administrator passwords (LAPS), disable default local accounts, and implement strong password requirements reduce adversary ability to leverage compromised local account credentials across multiple systems."
     },
     {
       "id": "T1078.004",
@@ -1585,7 +1756,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Cloud configuration settings enforcing conditional access policies, requiring MFA for all cloud account access, and implementing just-in-time access provisioning reduce the attack surface for adversaries attempting to use compromised cloud credentials."
     },
     {
       "id": "T1087.001",
@@ -1593,7 +1765,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that hide local user lists from login screens, restrict net user enumeration, and limit local account information disclosure prevent adversaries from discovering local account names for targeted credential attacks."
     },
     {
       "id": "T1087.002",
@@ -1601,7 +1774,8 @@
       "tactics": [
         "discovery"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict LDAP anonymous binding, limit Active Directory query permissions, and enforce audit logging on directory enumeration prevent adversaries from discovering domain account structures for targeted lateral movement."
     },
     {
       "id": "T1090.001",
@@ -1609,7 +1783,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing internal network segmentation, restricting port forwarding capabilities, and blocking unauthorized proxy services prevent adversaries from deploying internal proxy relays to route C2 traffic through compromised internal hosts."
     },
     {
       "id": "T1090.002",
@@ -1617,7 +1792,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Strict egress filtering configurations that whitelist approved external destinations, block outbound connections to uncategorized infrastructure, and enforce proxy authentication prevent adversaries from routing C2 through external proxy servers."
     },
     {
       "id": "T1090.003",
@@ -1625,7 +1801,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that block outbound connections to Tor exit nodes, restrict anonymous proxy services, and enforce deep traffic inspection prevent adversaries from using multi-hop proxy chains to obscure C2 infrastructure origin."
     },
     {
       "id": "T1098.001",
@@ -1634,7 +1811,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict IAM policies that restrict credential creation privileges, require MFA for API key generation, and implement approval workflows prevent adversaries from adding additional cloud credentials for persistent access."
     },
     {
       "id": "T1098.002",
@@ -1643,7 +1821,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict mailbox delegation changes, enforce approval workflows for email forwarding rules, and monitor Exchange permission modifications prevent adversaries from adding email delegate permissions for persistent mailbox access."
     },
     {
       "id": "T1098.003",
@@ -1652,7 +1831,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing separation of duties for cloud role assignments, requiring multi-party approval for privilege escalation, and implementing just-in-time role activation prevent adversaries from assigning additional cloud roles to maintain elevated access."
     },
     {
       "id": "T1098.004",
@@ -1661,7 +1841,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict write access to SSH authorized_keys files, enforce file integrity monitoring on .ssh directories, and limit SSH key management to authorized processes prevent adversaries from adding unauthorized SSH keys for persistent access."
     },
     {
       "id": "T1098.005",
@@ -1670,7 +1851,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing device registration policies that restrict enrollment to compliant, corporate-managed devices, require administrator approval, and implement conditional access prevent adversaries from registering rogue devices for persistent network access."
     },
     {
       "id": "T1098.007",
@@ -1679,7 +1861,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict group membership modification to authorized administrators, enforce approval workflows for security group changes, and monitor group additions prevent adversaries from adding accounts to privileged groups for persistent access."
     },
     {
       "id": "T1102.001",
@@ -1687,7 +1870,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict and inspect access to web services commonly used as dead drop resolvers, enforce SSL inspection, and block access to uncategorized URLs prevent adversaries from retrieving C2 instructions from legitimate web platforms."
     },
     {
       "id": "T1102.002",
@@ -1695,7 +1879,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing web content filtering, blocking access to known C2-hosting web services, and implementing SSL inspection detect and prevent adversaries from establishing bidirectional command-and-control through legitimate web service APIs."
     },
     {
       "id": "T1102.003",
@@ -1703,7 +1888,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict outbound API access to approved web services, enforce proxy authentication, and implement content inspection prevent adversaries from using legitimate web platforms for one-way C2 communication channels."
     },
     {
       "id": "T1110.001",
@@ -1711,7 +1897,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration-enforced account lockout policies with progressive delays, CAPTCHA requirements, and rate limiting on authentication endpoints directly limit the number of password guessing attempts an adversary can perform before triggering detection."
     },
     {
       "id": "T1110.002",
@@ -1719,7 +1906,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strong password hashing algorithms (bcrypt, Argon2), salt requirements, and stretched key derivation significantly increase the computational cost of offline password cracking against stolen credential databases."
     },
     {
       "id": "T1110.003",
@@ -1727,7 +1915,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing smart lockout policies that detect distributed authentication attempts across multiple accounts, combined with rate limiting and anomalous login alerting, mitigate password spraying attacks targeting many accounts with common passwords."
     },
     {
       "id": "T1110.004",
@@ -1735,7 +1924,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing breach detection responses, blocking known compromised credentials, and implementing adaptive authentication that challenges logins from unfamiliar patterns mitigate credential stuffing attacks using credentials leaked from other services."
     },
     {
       "id": "T1114.002",
@@ -1743,7 +1933,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict remote email access to approved protocols and clients, enforce MFA for webmail access, and limit Exchange Web Services permissions prevent adversaries from remotely collecting email content across the organization."
     },
     {
       "id": "T1114.003",
@@ -1751,7 +1942,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict email forwarding rule creation, disable auto-forwarding to external domains, and enforce administrator approval for mail flow rules prevent adversaries from establishing persistent email forwarding for ongoing data collection."
     },
     {
       "id": "T1127.001",
@@ -1759,7 +1951,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict MSBuild execution through application control policies, block MSBuild for non-developer endpoints, and monitor MSBuild invocations prevent adversaries from abusing this trusted developer utility to compile and execute malicious code inline."
     },
     {
       "id": "T1127.002",
@@ -1767,7 +1960,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict ClickOnce application deployment, enforce trust prompts for unsigned applications, and block execution from untrusted internet zones prevent adversaries from leveraging ClickOnce for proxy execution."
     },
     {
       "id": "T1132.001",
@@ -1775,7 +1969,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing proxy-based content inspection that detect Base64 and standard encoding patterns in C2 traffic, combined with protocol compliance validation, identify adversary use of standard encoding to obfuscate command-and-control data."
     },
     {
       "id": "T1132.002",
@@ -1783,7 +1978,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing deep content inspection and anomaly detection on outbound traffic identify non-standard or custom encoding schemes used by adversaries to encode C2 data in ways that evade standard signature-based detection."
     },
     {
       "id": "T1134.001",
@@ -1792,7 +1988,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict SeImpersonatePrivilege assignment, enforce UAC integrity levels, and limit access to token manipulation APIs prevent adversaries from stealing or impersonating security tokens of higher-privileged users or services."
     },
     {
       "id": "T1134.002",
@@ -1801,7 +1998,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings restricting CreateProcessWithToken API access, enforcing least-privilege service account configurations, and limiting token manipulation privileges prevent adversaries from spawning new processes under stolen token contexts."
     },
     {
       "id": "T1134.003",
@@ -1810,7 +2008,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict LogonUser API access, enforce strict service account policies, and limit the creation of impersonation tokens to authorized service processes prevent adversaries from forging tokens to operate under different security contexts."
     },
     {
       "id": "T1134.005",
@@ -1819,7 +2018,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict SID-History modification permissions, enable SID filtering on domain trusts, and monitor SID-History attribute changes prevent adversaries from injecting privileged SIDs to escalate access across trust boundaries."
     },
     {
       "id": "T1136.001",
@@ -1827,7 +2027,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict local account creation to authorized administrators, enforce approval workflows for new accounts, and implement real-time alerting on local account creation events prevent adversaries from creating persistent local backdoor accounts."
     },
     {
       "id": "T1136.002",
@@ -1835,7 +2036,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict domain account creation privileges, enforce OU-based delegation controls, and implement alerting on unauthorized account creation in Active Directory prevent adversaries from creating rogue domain accounts for persistence."
     },
     {
       "id": "T1136.003",
@@ -1843,7 +2045,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing IAM policies that restrict cloud account creation, require multi-party approval for new identities, and implement automated alerting on new cloud account provisioning prevent adversaries from creating persistent cloud accounts."
     },
     {
       "id": "T1137.001",
@@ -1851,7 +2054,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Office template locations to trusted paths, block macros from untrusted sources, and enforce template signing requirements prevent adversaries from planting malicious Office template macros for persistent code execution."
     },
     {
       "id": "T1137.002",
@@ -1859,7 +2063,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict the Office Test registry key path, enforce Group Policy protections on Office configuration, and monitor for test DLL loading prevent adversaries from using the Office Test persistence mechanism to execute arbitrary DLLs."
     },
     {
       "id": "T1137.003",
@@ -1867,7 +2072,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict custom Outlook form deployment, enforce form trust settings, and block execution of forms from untrusted sources prevent adversaries from installing malicious Outlook forms for persistent code execution within the email client."
     },
     {
       "id": "T1137.004",
@@ -1875,7 +2081,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable or restrict the Outlook Home Page feature, enforce Group Policy controls on Outlook web view settings, and monitor home page URL modifications prevent adversaries from embedding malicious HTML in Outlook folder home pages."
     },
     {
       "id": "T1137.005",
@@ -1883,7 +2090,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Outlook rule creation, disable rules that invoke applications, and enforce administrator review of mail flow rules prevent adversaries from establishing persistent Outlook rules that execute malicious commands upon email receipt."
     },
     {
       "id": "T1137.006",
@@ -1891,7 +2099,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Office add-in installation to trusted publishers, enforce Group Policy add-in management, and block unsigned add-in loading prevent adversaries from deploying malicious add-ins for persistent code execution within Office applications."
     },
     {
       "id": "T1195.001",
@@ -1899,7 +2108,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing package manager integrity verification, restricting dependency sources to trusted registries, and implementing software bill of materials validation detect and prevent compromised software dependencies from entering the build pipeline."
     },
     {
       "id": "T1204.001",
@@ -1907,7 +2117,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing URL filtering, link preview sanitization, and browser-based click protection warn users and block navigation to malicious links, reducing the success rate of adversary social engineering through link-based execution."
     },
     {
       "id": "T1204.002",
@@ -1915,7 +2126,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing attachment blocking by file type, mandatory sandboxed execution of downloaded files, and SmartScreen warnings reduce the likelihood of users successfully executing malicious files delivered by adversaries."
     },
     {
       "id": "T1204.003",
@@ -1923,7 +2135,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing container image signing, trusted registry restrictions, and automated vulnerability scanning prevent users from inadvertently deploying malicious container images that contain adversary payloads."
     },
     {
       "id": "T1205.001",
@@ -1933,7 +2146,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration hardening that disables port knocking services, enforces strict stateful firewall rules that ignore out-of-sequence packet patterns, and locks down management interfaces prevents adversaries from using port knocking sequences to activate hidden services."
     },
     {
       "id": "T1213.001",
@@ -1941,7 +2155,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce strict access controls on Confluence spaces, implement content-level permissions, and restrict API access limit adversary ability to harvest sensitive organizational knowledge from Confluence instances."
     },
     {
       "id": "T1213.002",
@@ -1949,7 +2164,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce granular SharePoint site permissions, restrict external sharing, and limit search crawl scope prevent adversaries from collecting sensitive documents and data from SharePoint repositories."
     },
     {
       "id": "T1213.004",
@@ -1957,7 +2173,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing role-based access controls on CRM platforms, restricting data export capabilities, and limiting API query permissions prevent adversaries from harvesting customer data and business intelligence from CRM systems."
     },
     {
       "id": "T1213.005",
@@ -1965,7 +2182,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict messaging application integrations, enforce data loss prevention policies on messaging platforms, and limit message export capabilities prevent adversaries from collecting sensitive conversations from messaging applications."
     },
     {
       "id": "T1216.001",
@@ -1973,7 +2191,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that block PubPrn.vbs execution through application control policies, restrict Windows Script Host for cscript-based system scripts, and monitor script proxy execution prevent adversaries from abusing PubPrn for remote script execution."
     },
     {
       "id": "T1216.002",
@@ -1981,7 +2200,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict SyncAppvPublishingServer execution, block unnecessary App-V components through application control, and monitor PowerShell invocation through App-V scripts prevent adversaries from using this utility to proxy malicious execution."
     },
     {
       "id": "T1218.001",
@@ -1989,7 +2209,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that block or restrict hh.exe execution, enforce application control on CHM file processing, and disable HTML Help for non-essential users prevent adversaries from using compiled HTML files to execute embedded scripts."
     },
     {
       "id": "T1218.002",
@@ -1997,7 +2218,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict access to control panel items, enforce application control on .cpl file execution, and monitor control.exe invocations prevent adversaries from executing malicious DLLs through the Windows Control Panel mechanism."
     },
     {
       "id": "T1218.003",
@@ -2005,7 +2227,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict CMSTP.exe execution through application control policies and monitor for profile installation commands prevent adversaries from abusing the Connection Manager Profile Installer to bypass application whitelisting."
     },
     {
       "id": "T1218.004",
@@ -2013,7 +2236,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict InstallUtil.exe execution to authorized deployment processes and enforce application control policies blocking .NET installer utility abuse prevent adversaries from executing code through the .NET installation framework."
     },
     {
       "id": "T1218.005",
@@ -2021,7 +2245,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict or block mshta.exe execution through application control, disable HTA file associations, and enforce script execution restrictions prevent adversaries from using Microsoft HTML Application Host to execute malicious scripts."
     },
     {
       "id": "T1218.007",
@@ -2029,7 +2254,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict msiexec execution to approved installation sources, enforce MSI signing requirements, and block remote MSI installation prevent adversaries from using the Windows Installer for proxy execution of malicious packages."
     },
     {
       "id": "T1218.008",
@@ -2037,7 +2263,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Odbcconf.exe execution through application control policies and monitor for DLL registration via ODBC commands prevent adversaries from abusing this utility to execute arbitrary DLLs through response file processing."
     },
     {
       "id": "T1218.009",
@@ -2045,7 +2272,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Regsvcs.exe and Regasm.exe execution, limit .NET COM registration to authorized processes, and monitor for suspicious assembly registration prevent adversaries from abusing these utilities for code execution."
     },
     {
       "id": "T1218.012",
@@ -2053,7 +2281,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Verclsid.exe execution, block COM object verification for untrusted CLSIDs, and implement application control covering this utility prevent adversaries from using it to proxy execution of malicious COM objects."
     },
     {
       "id": "T1218.013",
@@ -2061,7 +2290,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Mavinject.exe execution through application control policies and monitor for DLL injection via this utility prevent adversaries from using it to inject malicious DLLs into running processes."
     },
     {
       "id": "T1218.014",
@@ -2069,7 +2299,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict MMC snap-in loading to approved management console files, enforce application control on mmc.exe parameters, and block unsigned .msc files prevent adversaries from leveraging MMC for proxy execution."
     },
     {
       "id": "T1218.015",
@@ -2077,7 +2308,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Electron application installation to approved packages, enforce code signing for Electron apps, and monitor for suspicious Electron-based execution prevent adversaries from abusing Electron's Node.js integration for defense evasion."
     },
     {
       "id": "T1222.001",
@@ -2085,7 +2317,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing mandatory access controls, restricting icacls/cacls usage to administrators, and implementing file integrity monitoring prevent adversaries from modifying Windows file and directory permissions to access protected files."
     },
     {
       "id": "T1222.002",
@@ -2093,7 +2326,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing mandatory access controls (SELinux/AppArmor), restricting chmod/chown to authorized users, and monitoring permission changes prevent adversaries from modifying Linux/Mac file permissions to access restricted resources."
     },
     {
       "id": "T1498.001",
@@ -2101,7 +2335,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce connection rate limiting, SYN cookie protections, and traffic scrubbing at network boundaries mitigate direct network flood attacks by filtering high-volume malicious traffic before it saturates network capacity."
     },
     {
       "id": "T1498.002",
@@ -2109,7 +2344,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that implement BCP38 ingress filtering, restrict responses to amplification-susceptible services, and enforce rate limiting prevent adversaries from leveraging reflection amplification for volumetric denial of service."
     },
     {
       "id": "T1499.001",
@@ -2117,7 +2353,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing OS-level connection limits, TCP stack hardening with SYN cookies, and resource reservation for critical services prevent adversaries from exhausting operating system resources through network connection flooding."
     },
     {
       "id": "T1499.002",
@@ -2125,7 +2362,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings implementing service-level rate limiting, request throttling, and connection pooling constraints prevent adversaries from overwhelming specific services with excessive requests designed to exhaust service processing capacity."
     },
     {
       "id": "T1499.003",
@@ -2133,7 +2371,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing application-layer rate limiting, request size restrictions, and computational resource quotas prevent adversaries from consuming application resources through crafted requests that trigger expensive processing operations."
     },
     {
       "id": "T1499.004",
@@ -2141,7 +2380,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings maintaining up-to-date patches, enabling exploit protection mechanisms, and implementing input validation prevent adversaries from exploiting software vulnerabilities to crash applications or systems for denial of service."
     },
     {
       "id": "T1505.001",
@@ -2149,7 +2389,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict SQL stored procedure creation and modification privileges, enforce procedure signing, and implement monitoring of procedure changes prevent adversaries from implanting malicious SQL stored procedures for persistent server-side execution."
     },
     {
       "id": "T1505.002",
@@ -2157,7 +2398,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Exchange transport agent installation, enforce agent signing requirements, and monitor transport pipeline modifications prevent adversaries from deploying malicious transport agents for persistent email interception."
     },
     {
       "id": "T1505.003",
@@ -2165,7 +2407,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened web server configuration settings\u2014restricting write access to web directories, disabling script execution in upload folders, and enforcing file integrity monitoring\u2014prevent adversaries from deploying web shells for persistent remote access."
     },
     {
       "id": "T1505.004",
@@ -2173,7 +2416,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict IIS module installation, enforce module signing requirements, and monitor changes to the IIS handler pipeline prevent adversaries from deploying malicious IIS components for persistent traffic interception."
     },
     {
       "id": "T1505.005",
@@ -2181,7 +2425,8 @@
       "tactics": [
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Terminal Services DLL registration, enforce integrity checking on RDP-related libraries, and monitor Terminal Services configuration changes prevent adversaries from loading malicious DLLs through the Terminal Services subsystem."
     },
     {
       "id": "T1542.001",
@@ -2190,7 +2435,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce UEFI Secure Boot, require signed firmware updates, and enable firmware write protections prevent adversaries from modifying system firmware to establish persistence that survives OS reinstallation."
     },
     {
       "id": "T1542.003",
@@ -2199,7 +2445,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing Secure Boot with UEFI, enabling Measured Boot attestation, and restricting bootloader modifications prevent adversaries from installing bootkits that execute before the OS kernel loads, evading all OS-level security controls."
     },
     {
       "id": "T1542.004",
@@ -2208,7 +2455,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce ROM Monitor integrity validation, restrict ROMMON access, and implement secure boot chain verification on network devices prevent adversaries from installing ROMMONkits for persistent network infrastructure compromise."
     },
     {
       "id": "T1542.005",
@@ -2217,7 +2465,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict TFTP boot server sources, enforce authenticated boot image retrieval, and validate boot image integrity prevent adversaries from replacing network device boot images with malicious versions loaded via TFTP."
     },
     {
       "id": "T1543.002",
@@ -2226,7 +2475,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings restricting systemd service file creation, enforcing service file integrity monitoring, and requiring signed unit files prevent adversaries from creating or modifying systemd services for persistence and privilege escalation on Linux."
     },
     {
       "id": "T1546.002",
@@ -2235,7 +2485,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable or restrict screensaver executable modification, enforce Group Policy control over screensaver configuration, and monitor screensaver registry keys prevent adversaries from replacing the screensaver with a malicious payload for persistence."
     },
     {
       "id": "T1546.003",
@@ -2244,7 +2495,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict WMI event subscription creation to authorized administrators, enforce WMI namespace permissions, and monitor for persistent WMI event consumers prevent adversaries from establishing persistence through WMI event-triggered execution."
     },
     {
       "id": "T1546.004",
@@ -2253,7 +2505,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing integrity monitoring on shell configuration files (.bashrc, .zshrc, .profile) and restricting write access to user profile directories prevent adversaries from persisting through Unix shell configuration modification."
     },
     {
       "id": "T1546.006",
@@ -2262,7 +2515,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing code signing for dynamic libraries, restricting modification of Mach-O binary headers, and implementing SIP protections prevent adversaries from adding LC_LOAD_DYLIB entries for persistent dynamic library loading on macOS."
     },
     {
       "id": "T1546.008",
@@ -2271,7 +2525,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that protect accessibility feature binaries (sethc.exe, utilman.exe) through integrity monitoring, restrict replacement of accessibility executables, and enforce WRP protections prevent adversaries from hijacking accessibility features for backdoor access."
     },
     {
       "id": "T1546.013",
@@ -2280,7 +2535,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing integrity monitoring on PowerShell profile files and restricting write access to profile directories prevent adversaries from inserting malicious code into PowerShell profiles for persistent execution on every PowerShell session."
     },
     {
       "id": "T1546.014",
@@ -2289,7 +2545,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict access to the emond rules directory, enforce file integrity monitoring on event monitor configurations, and disable emond when unnecessary prevent adversaries from leveraging the Event Monitor Daemon for persistence on macOS."
     },
     {
       "id": "T1546.016",
@@ -2298,7 +2555,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict installer package execution to approved sources, enforce package signing requirements, and monitor custom installer actions prevent adversaries from embedding malicious code in installer packages executed during software installation."
     },
     {
       "id": "T1547.002",
@@ -2307,7 +2565,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict authentication package registration in the LSA registry key, enforce integrity monitoring on authentication DLLs, and block unsigned authentication packages prevent adversaries from installing malicious authentication packages for persistence."
     },
     {
       "id": "T1547.003",
@@ -2316,7 +2575,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict time provider DLL registration, enforce integrity checks on W32Time service configuration, and monitor time provider registry modifications prevent adversaries from loading malicious DLLs through the Windows Time service provider mechanism."
     },
     {
       "id": "T1547.005",
@@ -2325,7 +2585,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Security Support Provider DLL registration, enforce integrity monitoring on SSP/AP registry keys, and block unsigned security packages prevent adversaries from installing malicious SSPs to intercept credentials during authentication."
     },
     {
       "id": "T1547.006",
@@ -2334,7 +2595,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce kernel module signing requirements, restrict module loading to approved modules, and implement integrity verification on kernel extensions prevent adversaries from loading malicious kernel modules for rootkit-level persistence."
     },
     {
       "id": "T1547.007",
@@ -2343,7 +2605,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict modification of the LoginWindow plist and re-opened applications list, and limit plist write access prevent adversaries from configuring malicious applications to reopen at login on macOS."
     },
     {
       "id": "T1547.008",
@@ -2352,7 +2615,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce LSASS protection (RunAsPPL), restrict driver loading through code signing requirements, and implement integrity monitoring on LSASS driver configurations prevent adversaries from loading malicious drivers into the LSASS process."
     },
     {
       "id": "T1547.009",
@@ -2361,7 +2625,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce integrity monitoring on shortcut files, restrict modifications to startup folder contents, and implement application control on shortcut targets prevent adversaries from modifying shortcuts to execute malicious payloads upon user login."
     },
     {
       "id": "T1547.013",
@@ -2370,7 +2635,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict write access to XDG autostart directories, enforce integrity monitoring on .desktop files, and implement application control on autostart entries prevent adversaries from establishing persistence through Linux desktop autostart mechanisms."
     },
     {
       "id": "T1548.001",
@@ -2379,7 +2645,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that audit and restrict setuid/setgid bit assignments, enforce mount options (nosuid) on user-writable partitions, and monitor for new setuid binaries prevent adversaries from exploiting misconfigured setuid/setgid permissions for privilege escalation."
     },
     {
       "id": "T1548.002",
@@ -2388,7 +2655,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce UAC at the highest notification level, disable auto-elevation for administrative accounts, and restrict COM object elevation prevent adversaries from bypassing User Account Control through auto-elevation exploits."
     },
     {
       "id": "T1548.003",
@@ -2397,7 +2665,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict sudo access to specific commands via sudoers files, disable timestamp-based sudo caching, and enforce password requirements for each invocation prevent adversaries from abusing sudo or its credential cache for privilege elevation."
     },
     {
       "id": "T1548.004",
@@ -2406,7 +2675,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict authorization plugin usage on macOS, enforce Gatekeeper policies, and configure elevation prompts to require full credential re-entry prevent adversaries from abusing system-native elevation prompts for unauthorized privilege escalation."
     },
     {
       "id": "T1548.006",
@@ -2415,7 +2685,8 @@
         "defense-evasion",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing System Integrity Protection, restricting TCC database modification, and monitoring TCC authorization changes prevent adversaries from manipulating macOS Transparency, Consent, and Control frameworks to gain unauthorized resource access."
     },
     {
       "id": "T1550.001",
@@ -2424,7 +2695,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce short token lifetimes, implement token binding to client certificates, and restrict OAuth scope assignments reduce the utility of stolen application access tokens by limiting their validity window and authorization scope."
     },
     {
       "id": "T1550.002",
@@ -2433,7 +2705,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable NTLM authentication where possible, enforce Credential Guard to protect hash storage, and implement admin-tier segmentation prevent adversaries from using stolen NTLM password hashes for pass-the-hash lateral movement."
     },
     {
       "id": "T1550.003",
@@ -2442,7 +2715,8 @@
         "defense-evasion",
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing reduced Kerberos ticket lifetimes, restricting delegation permissions, and enabling PAC validation prevent adversaries from using stolen or forged Kerberos tickets for pass-the-ticket authentication to access remote services."
     },
     {
       "id": "T1552.001",
@@ -2450,7 +2724,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing file permission restrictions on configuration files, implementing secrets scanning in repositories, and mandating credential vault usage prevent adversaries from discovering credentials stored in plaintext files or scripts."
     },
     {
       "id": "T1552.002",
@@ -2458,7 +2733,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict registry access permissions on credential-storing keys, enforce registry auditing, and mandate migration of registry-stored credentials to secure vaults prevent adversaries from extracting credentials from Windows registry values."
     },
     {
       "id": "T1552.003",
@@ -2466,7 +2742,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable persistent bash history or redirect it to centralized, access-controlled logging, and restrict read access to history files prevent adversaries from harvesting credentials and sensitive commands from shell history files."
     },
     {
       "id": "T1552.004",
@@ -2474,7 +2751,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce restrictive file permissions on SSH private keys and certificates, implement hardware-backed key storage, and restrict key directory access prevent adversaries from stealing private keys used for authentication."
     },
     {
       "id": "T1552.005",
@@ -2482,7 +2760,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict cloud instance metadata API access through IMDSv2 enforcement requiring session tokens, implement metadata endpoint restrictions, and limit IAM role permissions prevent adversaries from harvesting credentials from cloud metadata services."
     },
     {
       "id": "T1552.006",
@@ -2490,7 +2769,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that remove or encrypt sensitive data in Group Policy Preferences XML files, enforce LAPS for local administrator passwords, and restrict SYSVOL access prevent adversaries from extracting cached credentials from Group Policy Preferences."
     },
     {
       "id": "T1552.007",
@@ -2498,7 +2778,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict container API access through RBAC, enforce mutual TLS for API server communications, and limit service account token mounting prevent adversaries from extracting credentials through exposed container orchestration APIs."
     },
     {
       "id": "T1553.001",
@@ -2506,7 +2787,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing Gatekeeper strictness on macOS, requiring notarized applications, and restricting quarantine attribute removal prevent adversaries from bypassing Gatekeeper code verification to execute untrusted applications."
     },
     {
       "id": "T1553.003",
@@ -2514,7 +2796,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that protect Subject Interface Package and trust provider DLL registry entries, enforce integrity monitoring on trust verification components, and restrict CryptSIPDll modifications prevent adversaries from hijacking Windows trust validation."
     },
     {
       "id": "T1553.004",
@@ -2522,7 +2805,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict certificate store modification to authorized administrators, enforce certificate pinning for critical connections, and monitor trusted root certificate additions prevent adversaries from installing rogue root certificates."
     },
     {
       "id": "T1553.005",
@@ -2530,7 +2814,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing Mark-of-the-Web enforcement, restricting NTFS alternate data stream manipulation, and configuring SmartScreen to block web-downloaded files without MOTW attributes prevent adversaries from bypassing web download protections."
     },
     {
       "id": "T1555.004",
@@ -2538,7 +2823,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict access to Windows Credential Manager APIs, enforce Credential Guard for credential isolation, and monitor credential vault access prevent adversaries from extracting stored credentials from Windows Credential Manager."
     },
     {
       "id": "T1555.005",
@@ -2546,7 +2832,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce access controls on password manager databases, require hardware key-based master authentication, and monitor bulk credential export operations limit adversary ability to extract credentials from password management applications."
     },
     {
       "id": "T1556.001",
@@ -2556,7 +2843,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that protect domain controller authentication DLLs through integrity monitoring, restrict password filter installations, and enforce code signing for authentication modules prevent adversaries from installing skeleton key mechanisms on domain controllers."
     },
     {
       "id": "T1556.002",
@@ -2566,7 +2854,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict password filter DLL registration in the LSA registry key, enforce integrity monitoring on notification packages, and require signed DLLs prevent adversaries from installing malicious password filters that capture plaintext credentials."
     },
     {
       "id": "T1556.003",
@@ -2576,7 +2865,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce integrity monitoring on PAM module directories, restrict PAM module installation to authorized administrators, and implement centralized PAM policy management prevent adversaries from modifying Pluggable Authentication Modules."
     },
     {
       "id": "T1556.004",
@@ -2586,7 +2876,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Hardened network device authentication configurations\u2014enforcing local authentication database integrity, restricting TACACS+/RADIUS modifications, and implementing multi-factor authentication\u2014prevent adversaries from modifying network device authentication to create backdoor access."
     },
     {
       "id": "T1556.008",
@@ -2596,7 +2887,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict Network Provider DLL registration, enforce integrity monitoring on network provider registry entries, and require code signing for provider DLLs prevent adversaries from installing malicious network provider DLLs that intercept credentials."
     },
     {
       "id": "T1556.009",
@@ -2606,7 +2898,8 @@
         "defense-evasion",
         "persistence"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce change management for conditional access policies, restrict policy modification to privileged administrators with MFA, and implement alerting on policy changes prevent adversaries from weakening conditional access policies."
     },
     {
       "id": "T1557.001",
@@ -2615,7 +2908,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable LLMNR and NBT-NS name resolution, enforce SMB signing, and require Kerberos authentication prevent adversaries from poisoning multicast name resolution responses to intercept and relay authentication credentials."
     },
     {
       "id": "T1557.002",
@@ -2624,7 +2918,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce Dynamic ARP Inspection, restrict static ARP modifications, and implement network segmentation with port security prevent adversaries from poisoning ARP caches to redirect network traffic for credential interception."
     },
     {
       "id": "T1557.003",
@@ -2633,7 +2928,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce DHCP snooping, restrict rogue DHCP server deployment through port security, and implement 802.1X network access control prevent adversaries from deploying spoofed DHCP servers to redirect victim traffic for interception."
     },
     {
       "id": "T1557.004",
@@ -2642,7 +2938,8 @@
         "collection",
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce 802.1X enterprise wireless authentication, restrict rogue access point deployment through wireless IDS, and implement certificate-based network verification prevent adversaries from creating evil twin access points to intercept wireless credentials."
     },
     {
       "id": "T1558.001",
@@ -2650,7 +2947,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing frequent KRBTGT password rotation, reducing maximum ticket lifetime, and implementing PAC validation prevent adversaries from forging golden tickets by limiting the validity window of Kerberos TGT compromises."
     },
     {
       "id": "T1558.002",
@@ -2658,7 +2956,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing service account password complexity, reducing service ticket lifetimes, and implementing service-specific encryption requirements prevent adversaries from forging silver tickets by limiting material available for service ticket forgery."
     },
     {
       "id": "T1558.003",
@@ -2666,7 +2965,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing AES-256 Kerberos encryption (disabling RC4), using Group Managed Service Accounts with automated rotation, and limiting SPN exposure reduce the volume and crackability of service tickets vulnerable to Kerberoasting."
     },
     {
       "id": "T1558.004",
@@ -2674,7 +2974,8 @@
       "tactics": [
         "credential-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings requiring Kerberos pre-authentication for all accounts, enforcing strong password policies, and implementing AES encryption prevent adversaries from requesting and offline-cracking AS-REP responses for accounts with pre-authentication disabled."
     },
     {
       "id": "T1559.001",
@@ -2682,7 +2983,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict COM object registration, enforce DCOM launch permissions, and limit cross-process COM activation prevent adversaries from abusing Component Object Model interfaces for inter-process code execution."
     },
     {
       "id": "T1559.002",
@@ -2690,7 +2992,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that disable DDE in Office applications through registry and Group Policy enforcement, block DDE auto-update links, and restrict OLE connections prevent adversaries from exploiting Dynamic Data Exchange for document-based code execution."
     },
     {
       "id": "T1559.003",
@@ -2698,7 +3001,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict XPC service entitlements, enforce code signing for XPC services, and limit inter-process communication scope prevent adversaries from abusing macOS XPC Services for unauthorized inter-process command execution."
     },
     {
       "id": "T1562.001",
@@ -2706,7 +3010,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing tamper protection on security tools, preventing local modification of endpoint protection agents, and restricting uninstallation privileges prevent adversaries from disabling or modifying security tools to operate undetected."
     },
     {
       "id": "T1562.002",
@@ -2714,7 +3019,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing protected event log configurations, restricting access to the EventLog service, and implementing audit policy lockdown prevent adversaries from disabling Windows event logging to operate without generating audit records."
     },
     {
       "id": "T1562.003",
@@ -2722,7 +3028,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing persistent command history logging, restricting modification of history configuration variables, and redirecting command history to protected storage prevent adversaries from disabling shell command history logging."
     },
     {
       "id": "T1562.004",
@@ -2730,7 +3037,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing firewall change management, restricting local firewall modification privileges, and implementing configuration integrity monitoring prevent adversaries from disabling or modifying firewalls to enable unauthorized traffic flows."
     },
     {
       "id": "T1562.006",
@@ -2738,7 +3046,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing ETW provider protection, restricting modification of event tracing configurations, and implementing tamper detection on logging pipelines prevent adversaries from blocking security event indicators to evade detection."
     },
     {
       "id": "T1562.009",
@@ -2746,7 +3055,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict boot configuration modifications, enforce BitLocker with boot integrity validation, and disable safe mode access for non-administrators prevent adversaries from booting in safe mode to disable security tools."
     },
     {
       "id": "T1562.010",
@@ -2754,7 +3064,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce minimum protocol versions, disable legacy authentication methods, and restrict negotiation fallback prevent adversaries from forcing protocol downgrades that weaken encryption and authentication security."
     },
     {
       "id": "T1562.011",
@@ -2762,7 +3073,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce integrity validation on security alerting mechanisms, implement out-of-band alert verification, and restrict modification of SIEM notification channels prevent adversaries from spoofing security alerts."
     },
     {
       "id": "T1562.012",
@@ -2770,7 +3082,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing Linux audit daemon protection, restricting modification of audit rules and configurations, and implementing immutable audit configurations prevent adversaries from disabling the Linux audit system to evade detection."
     },
     {
       "id": "T1563.001",
@@ -2778,7 +3091,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing SSH session timeout, disabling SSH agent forwarding, requiring per-session authentication, and restricting SSH multiplexing prevent adversaries from hijacking existing SSH sessions for lateral movement."
     },
     {
       "id": "T1563.002",
@@ -2786,7 +3100,8 @@
       "tactics": [
         "lateral-movement"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing RDP session timeout and disconnection policies, restricting session reconnection to authenticated users, and requiring NLA prevent adversaries from hijacking disconnected or active RDP sessions for lateral movement."
     },
     {
       "id": "T1564.002",
@@ -2794,7 +3109,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict hidden user account creation, enforce visibility of all accounts in system management tools, and monitor for UserID values below standard thresholds detect adversary creation of hidden user accounts."
     },
     {
       "id": "T1564.006",
@@ -2802,7 +3118,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict virtual machine installation capabilities, enforce hypervisor access controls, and monitor for unauthorized VM creation prevent adversaries from running malicious virtual instances to evade host-level endpoint security."
     },
     {
       "id": "T1564.007",
@@ -2810,7 +3127,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that enforce macro source code integrity checks, restrict VBA project access, and enable macro compilation validation detect adversaries using VBA stomping to replace macro source code while preserving malicious p-code."
     },
     {
       "id": "T1564.009",
@@ -2818,7 +3136,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing file integrity monitoring that includes resource fork analysis, restricting alternate data stream creation, and monitoring for suspicious resource fork manipulation detect adversaries hiding payloads in macOS resource forks."
     },
     {
       "id": "T1565.001",
@@ -2826,7 +3145,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing database integrity controls, implementing write-once storage for critical records, and restricting data modification privileges prevent adversaries from manipulating stored data to impact business operations or integrity."
     },
     {
       "id": "T1565.002",
@@ -2834,7 +3154,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing transport layer encryption, implementing message authentication codes, and enabling network integrity monitoring prevent adversaries from modifying data in transit to corrupt communications or inject false information."
     },
     {
       "id": "T1565.003",
@@ -2842,7 +3163,8 @@
       "tactics": [
         "impact"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing runtime application integrity verification, implementing memory protection mechanisms, and restricting process debugging capabilities prevent adversaries from manipulating data during processing to alter application behavior."
     },
     {
       "id": "T1566.001",
@@ -2850,7 +3172,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive email configuration settings\u2014blocking dangerous attachment types, enforcing attachment sandboxing, implementing DMARC/DKIM/SPF validation, and disabling macro execution\u2014prevent delivery of malicious spearphishing attachments to end users."
     },
     {
       "id": "T1566.002",
@@ -2858,7 +3181,8 @@
       "tactics": [
         "initial-access"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing URL rewriting, link scanning at time of click, and blocking access to uncategorized or newly registered domains reduce the effectiveness of spearphishing links designed to deliver malware or harvest credentials."
     },
     {
       "id": "T1569.002",
@@ -2866,7 +3190,8 @@
       "tactics": [
         "execution"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings that restrict service installation privileges, enforce service binary path validation and signing requirements, and limit service control manager access prevent adversaries from executing malicious code through the Windows service control mechanism."
     },
     {
       "id": "T1573.001",
@@ -2874,7 +3199,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enabling TLS/SSL inspection at proxy boundaries and restricting approved symmetric cipher suites enable detection of adversary C2 channels using symmetric encryption to hide communication content from network monitoring."
     },
     {
       "id": "T1573.002",
@@ -2882,7 +3208,8 @@
       "tactics": [
         "command-and-control"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing certificate transparency validation, implementing TLS inspection, and restricting approved asymmetric algorithms enable detection of adversary C2 channels using asymmetric encryption that would otherwise evade content inspection."
     },
     {
       "id": "T1574.001",
@@ -2892,7 +3219,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing SafeDllSearchMode, restricting DLL loading to known paths, and implementing KnownDLLs protections prevent adversaries from placing malicious DLLs in directories searched before legitimate library locations."
     },
     {
       "id": "T1574.004",
@@ -2902,7 +3230,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing dylib loading restrictions on macOS, implementing DYLD_INSERT_LIBRARIES controls, and requiring code signing for dynamic libraries prevent adversaries from hijacking dylib loading order for persistent code execution."
     },
     {
       "id": "T1574.005",
@@ -2912,7 +3241,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict file permissions on installer directories, restricting write access to installation paths, and implementing integrity monitoring on installer executables prevent adversaries from exploiting weak file permissions on installer binaries."
     },
     {
       "id": "T1574.006",
@@ -2922,7 +3252,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings restricting dynamic linker environment variables (LD_PRELOAD, DYLD_INSERT_LIBRARIES), enforcing secure library loading paths, and implementing mandatory access controls prevent adversaries from hijacking the dynamic linker to inject malicious shared libraries."
     },
     {
       "id": "T1574.007",
@@ -2932,7 +3263,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict PATH environment variable management, restricting PATH modification privileges, and implementing absolute path requirements for critical executables prevent adversaries from placing malicious executables in PATH directories."
     },
     {
       "id": "T1574.008",
@@ -2942,7 +3274,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing safe search order for executables, implementing application whitelisting by path and hash, and restricting write access to directories in the system search path prevent path interception through search order exploitation."
     },
     {
       "id": "T1574.009",
@@ -2952,7 +3285,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing proper quoting of all service binary paths, implementing automated detection of unquoted paths, and restricting directory creation in path segments prevent adversaries from exploiting unquoted service paths."
     },
     {
       "id": "T1574.010",
@@ -2962,7 +3296,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing restrictive ACLs on service executable files, implementing file integrity monitoring on service binaries, and restricting permission modification on service-related files prevent adversaries from replacing service executables."
     },
     {
       "id": "T1574.014",
@@ -2972,7 +3307,8 @@
         "persistence",
         "privilege-escalation"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings restricting AppDomainManager registration in .NET configuration files, enforcing integrity checks on .NET assembly loading, and monitoring for suspicious configurations prevent adversaries from hijacking .NET application domain managers."
     },
     {
       "id": "T1590.002",
@@ -2980,7 +3316,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings restricting DNS zone transfer permissions, implementing DNS response rate limiting, and enforcing DNSSEC prevent adversaries from gathering DNS intelligence about organizational network infrastructure during reconnaissance."
     },
     {
       "id": "T1598.002",
@@ -2988,7 +3325,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Restrictive email configuration settings\u2014attachment sandboxing, DMARC enforcement, and sender reputation filtering\u2014reduce the effectiveness of spearphishing attachments sent during reconnaissance to elicit information before a targeted attack."
     },
     {
       "id": "T1598.003",
@@ -2996,7 +3334,8 @@
       "tactics": [
         "reconnaissance"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing URL filtering, link reputation checking, and blocking clicks to newly registered domains reduce the effectiveness of spearphishing links sent during reconnaissance to harvest credentials or gather intelligence."
     },
     {
       "id": "T1599.001",
@@ -3004,7 +3343,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing strict NAT and routing policies, restricting network device management access, and implementing routing integrity validation prevent adversaries from modifying NAT configurations to traverse network boundaries."
     },
     {
       "id": "T1601.001",
@@ -3012,7 +3352,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing firmware image signature verification, restricting write access to device firmware, and maintaining hash-based integrity baselines prevent adversaries from patching network device system images to inject backdoors."
     },
     {
       "id": "T1601.002",
@@ -3020,7 +3361,8 @@
       "tactics": [
         "defense-evasion"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing minimum firmware version requirements, restricting firmware downgrade operations, and implementing version-aware boot validation prevent adversaries from downgrading system images to versions with known vulnerabilities."
     },
     {
       "id": "T1602.001",
@@ -3028,7 +3370,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings enforcing SNMPv3 with strong authentication and encryption, restricting SNMP community strings, and limiting MIB query access prevent adversaries from extracting sensitive device configuration data through SNMP MIB dumps."
     },
     {
       "id": "T1602.002",
@@ -3036,7 +3379,8 @@
       "tactics": [
         "collection"
       ],
-      "mapping_type": "mitigates"
+      "mapping_type": "mitigates",
+      "mapping_rationale": "Configuration settings restricting network management protocol access, enforcing encrypted configuration backup channels, and implementing access controls on device configuration repositories prevent adversaries from extracting network device configurations."
     }
   ],
   "metadata": {

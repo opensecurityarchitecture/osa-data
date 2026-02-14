@@ -27,6 +27,11 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 - **315 NIST 800-53 Rev 5 controls** across 20 families
 - **26 compliance frameworks** with cross-references
 - **469 MITRE ATT&CK techniques** mapped to 108 controls via CTID (ATT&CK v16.1)
+- **44 ATT&CK mitigations** (M-series, v18.1) with 1,445 technique COUNTERS edges
+- **691 ATT&CK detection strategies** (DET-series, v18.1) with technique DETECTS edges
+- **171 CIS v8 safeguards** reverse-indexed to controls (IMPLEMENTED_BY edges)
+- **135 CWE weakness classes** mapped to 132 techniques via CAPEC bridge (EXPLOITS edges)
+- **15,190 TRIDENT graph edges** across 7 relationship types
 
 ## Directory Structure
 
@@ -37,9 +42,14 @@ data/
 ├── controls/           # NIST 800-53 Rev 5 (AC-01.json, etc.)
 │   ├── _manifest.json
 │   └── _catalog.json
-├── attack/             # MITRE ATT&CK integration
-│   ├── technique-catalog.json  # Full technique details (469 techniques)
-│   └── metadata.json           # Source provenance (CTID, ATT&CK v16.1)
+├── attack/             # TRIDENT attack/weakness/control graph
+│   ├── technique-catalog.json    # 469 techniques with mitigations[], detection_strategies[], weaknesses[]
+│   ├── mitigation-catalog.json   # 44 ATT&CK mitigations with techniques[], controls[], cis_safeguards[]
+│   ├── detection-catalog.json    # 691 ATT&CK v18 detection strategies
+│   ├── cis-safeguard-index.json  # 171 CIS v8 safeguards -> controls reverse index
+│   ├── weakness-catalog.json     # 135 CWE weakness classes -> techniques via CAPEC
+│   ├── graph-edges.json          # 15,190 explicit TRIDENT graph edges
+│   └── metadata.json             # Provenance, version info, graph summary
 └── schema/
     ├── pattern.schema.json
     └── control.schema.json

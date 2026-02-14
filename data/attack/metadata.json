@@ -1,26 +1,92 @@
 {
-  "source": "CTID (Center for Threat-Informed Defense)",
-  "source_url": "https://github.com/center-for-threat-informed-defense/mappings-explorer",
-  "attack_version": "16.1",
+  "description": "TRIDENT attack/weakness/control graph data for Open Security Architecture",
+  "data_layers": {
+    "technique_control_mappings": {
+      "source": "CTID (Center for Threat-Informed Defense)",
+      "source_url": "https://github.com/center-for-threat-informed-defense/mappings-explorer",
+      "attack_version": "16.1",
+      "nist_version": "NIST 800-53 Rev 5",
+      "total_mappings": 5313,
+      "controls_mapped": 109,
+      "techniques_mapped": 469,
+      "families_covered": ["AC", "CA", "CM", "CP", "IA", "MP", "RA", "SA", "SC", "SI", "SR"],
+      "enrichment_date": "2026-02-14",
+      "notes": "CTID maps 11 NIST families. Controls in other families (AT, AU, IR, MA, PE, PL, PM, PS, PT) have no ATT&CK mappings in this dataset."
+    },
+    "mitigations": {
+      "source": "MITRE ATT&CK STIX Data",
+      "source_url": "https://github.com/mitre-attack/attack-stix-data",
+      "attack_version": "18.1",
+      "total_mitigations": 44,
+      "mitigation_technique_edges": 1445,
+      "mitigations_with_control_links": 43,
+      "enrichment_date": "2026-02-14",
+      "notes": "44 ATT&CK mitigations (M-series) with technique COUNTERS relationships. Cross-referenced to SP800-53 controls via shared technique coverage (PRESCRIBES edges). M1055 'Do Not Mitigate' correctly has no control links."
+    },
+    "detection_strategies": {
+      "source": "MITRE ATT&CK STIX Data (v18 detection overhaul)",
+      "source_url": "https://github.com/mitre-attack/attack-stix-data",
+      "attack_version": "18.1",
+      "total_detection_strategies": 691,
+      "detection_technique_edges": 691,
+      "enrichment_date": "2026-02-14",
+      "notes": "ATT&CK v18 replaced Data Sources with Detection Strategies (DET-series). Each strategy maps to one technique via DETECTS relationship."
+    },
+    "cis_safeguard_index": {
+      "source": "OSA control data (compliance_mappings.cis_controls_v8)",
+      "cis_version": "CIS Controls v8",
+      "total_safeguards": 171,
+      "implemented_by_edges": 468,
+      "enrichment_date": "2026-02-14",
+      "notes": "Reverse index of CIS v8 safeguard -> SP800-53 controls from existing OSA compliance mappings. Provides the IMPLEMENTED_BY edges in the TRIDENT model."
+    },
+    "weakness_catalog": {
+      "source": "MITRE CWE via CAPEC bridge",
+      "capec_version": "3.9",
+      "source_url": "https://capec.mitre.org/data/xml/capec_latest.xml",
+      "total_cwe_entries": 135,
+      "cwe_technique_edges": 485,
+      "techniques_with_cwe": 132,
+      "enrichment_date": "2026-02-14",
+      "notes": "CWE weakness classes mapped to ATT&CK techniques via CAPEC attack patterns. 135 CWEs map to 132 techniques in our catalog through 485 EXPLOITS edges. CAPEC IDs normalized from bare numbers to T-prefixed ATT&CK format."
+    }
+  },
+  "graph_summary": {
+    "total_edges": 15190,
+    "edge_types": {
+      "COUNTERS": 1445,
+      "PRESCRIBES": 2049,
+      "ALIGNS_TO": 4815,
+      "DETECTS": 691,
+      "DETECTED_BY": 5237,
+      "IMPLEMENTED_BY": 468,
+      "EXPLOITS": 485
+    },
+    "node_types": {
+      "technique": 469,
+      "mitigation": 44,
+      "detection_strategy": 691,
+      "control": 315,
+      "cis_safeguard": 171,
+      "weakness_class": 135
+    },
+    "trident_paths": {
+      "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
+      "detection_path": "Technique <-DETECTS- Detection Strategy -DETECTED_BY-> Control",
+      "weakness_path": "Technique -EXPLOITS-> WeaknessClass(CWE)",
+      "governance_path": "Framework -SATISFIED_BY-> Control (in control compliance_mappings)",
+      "direct_shortcut": "Technique <-mitigates- Control (CTID, in control attack_techniques[])"
+    }
+  },
+  "files": {
+    "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[] back-references",
+    "mitigation-catalog.json": "44 ATT&CK mitigations with techniques[], controls[], cis_safeguards[]",
+    "detection-catalog.json": "691 ATT&CK v18 detection strategies with techniques[]",
+    "cis-safeguard-index.json": "171 CIS v8 safeguards with controls[] reverse index",
+    "weakness-catalog.json": "135 CWE weakness classes with techniques[] via CAPEC bridge",
+    "graph-edges.json": "15,190 explicit TRIDENT graph edges across 7 relationship types",
+    "metadata.json": "This file — provenance, version info, graph summary"
+  },
   "attack_domain": "enterprise",
-  "nist_version": "NIST 800-53 Rev 5",
-  "mapping_framework_version": "rev5",
-  "total_mappings": 5313,
-  "controls_mapped": 109,
-  "techniques_mapped": 469,
-  "families_covered": [
-    "AC",
-    "CA",
-    "CM",
-    "CP",
-    "IA",
-    "MP",
-    "RA",
-    "SA",
-    "SC",
-    "SI",
-    "SR"
-  ],
-  "enrichment_date": "2026-02-14",
-  "notes": "CTID maps 11 NIST families (AC, CA, CM, CP, IA, MP, RA, SA, SC, SI, SR). Controls in other families (AT, AU, IR, MA, PE, PL, PM, PS, PT) have no ATT&CK mappings in this dataset."
+  "last_updated": "2026-02-14"
 }

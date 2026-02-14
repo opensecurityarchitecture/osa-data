@@ -49,10 +49,20 @@
       "techniques_with_cwe": 132,
       "enrichment_date": "2026-02-14",
       "notes": "CWE weakness classes mapped to ATT&CK techniques via CAPEC attack patterns. 135 CWEs map to 132 techniques in our catalog through 485 EXPLOITS edges. CAPEC IDs normalized from bare numbers to T-prefixed ATT&CK format."
+    },
+    "threat_actors": {
+      "source": "MITRE ATT&CK STIX Data",
+      "source_url": "https://github.com/mitre-attack/attack-stix-data",
+      "attack_version": "18.1",
+      "total_actors": 163,
+      "uses_technique_edges": 2921,
+      "techniques_with_actors": 313,
+      "enrichment_date": "2026-02-14",
+      "notes": "163 active ATT&CK threat groups (G-series intrusion-sets) with USES relationships to techniques. 9 actors excluded (revoked/deprecated or no technique overlap with our 469-technique catalog). Actors carry aliases but not country attribution (deferred)."
     }
   },
   "graph_summary": {
-    "total_edges": 15190,
+    "total_edges": 18111,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -60,7 +70,8 @@
       "DETECTS": 691,
       "DETECTED_BY": 5237,
       "IMPLEMENTED_BY": 468,
-      "EXPLOITS": 485
+      "EXPLOITS": 485,
+      "USES": 2921
     },
     "node_types": {
       "technique": 469,
@@ -68,23 +79,26 @@
       "detection_strategy": 691,
       "control": 315,
       "cis_safeguard": 171,
-      "weakness_class": 135
+      "weakness_class": 135,
+      "threat_actor": 163
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
       "detection_path": "Technique <-DETECTS- Detection Strategy -DETECTED_BY-> Control",
       "weakness_path": "Technique -EXPLOITS-> WeaknessClass(CWE)",
+      "threat_path": "ThreatActor -USES-> Technique (actor technique repertoire)",
       "governance_path": "Framework -SATISFIED_BY-> Control (in control compliance_mappings)",
       "direct_shortcut": "Technique <-mitigates- Control (CTID, in control attack_techniques[])"
     }
   },
   "files": {
-    "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[] back-references",
+    "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[], actors[] back-references",
     "mitigation-catalog.json": "44 ATT&CK mitigations with techniques[], controls[], cis_safeguards[]",
     "detection-catalog.json": "691 ATT&CK v18 detection strategies with techniques[]",
     "cis-safeguard-index.json": "171 CIS v8 safeguards with controls[] reverse index",
     "weakness-catalog.json": "135 CWE weakness classes with techniques[] via CAPEC bridge",
-    "graph-edges.json": "15,190 explicit TRIDENT graph edges across 7 relationship types",
+    "actor-catalog.json": "163 ATT&CK threat groups with techniques[], aliases",
+    "graph-edges.json": "18,111 explicit TRIDENT graph edges across 8 relationship types",
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",

@@ -154,6 +154,26 @@ def main():
                     validated += 1
                     print(f"  OK: {metadata_path.name}")
 
+        actor_catalog_schema_path = DATA_DIR / "schema" / "attack-actor-catalog.schema.json"
+        actor_catalog_schema = load_schema(actor_catalog_schema_path) if actor_catalog_schema_path.exists() else None
+
+        actor_path = attack_dir / "actor-catalog.json"
+        if actor_path.exists():
+            if not validate_json_syntax(actor_path):
+                errors += 1
+            else:
+                with open(actor_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                if actor_catalog_schema and HAS_JSONSCHEMA:
+                    if not validate_against_schema(data, actor_catalog_schema, actor_path):
+                        errors += 1
+                    else:
+                        validated += 1
+                        print(f"  OK: {actor_path.name} ({len(data)} actors)")
+                else:
+                    validated += 1
+                    print(f"  OK: {actor_path.name}")
+
     # Summary
     print(f"\nValidation complete: {validated} files OK, {errors} errors")
 

@@ -1,0 +1,452 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "swift_cscf",
+  "framework_name": "SWIFT Customer Security Controls Framework v2024",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of the SWIFT Customer Security Controls Framework (CSCF) v2024. SWIFT CSCF comprises 25 mandatory and 7 advisory controls for all SWIFT-connected institutions. Annual independent assessment attestation is required. Control applicability varies by architecture type (A1-A4, B). SWIFT CSCF aligns with ISO 27002:2022, NIST CSF v1.1, PCI DSS 4.0, and SOC 2 TSC. SWIFT-specific requirements around messaging interface security, transaction business controls, RMA management, and SWIFT-proprietary software integrity have limited SP 800-53 equivalence. Validate with qualified SWIFT CSP assessors for attestation use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "SWIFT.1.1",
+      "title": "SWIFT Environment Protection (Mandatory)",
+      "controls": [
+        "SC-07",
+        "SC-32",
+        "AC-04",
+        "CA-03",
+        "CM-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-07 boundary protection directly addresses network segmentation and secure zone isolation. SC-32 information system partitioning supports logical separation of SWIFT infrastructure. AC-04 information flow enforcement controls traffic between secure zone and general IT. CA-03 information exchange covers inter-system connection agreements. CM-07 least functionality reduces the attack surface within the secure zone.",
+      "gaps": "SWIFT requires a specifically defined 'secure zone' for all SWIFT connectivity components (messaging interface, SwiftNet Link, HSM, jump server, operator PC) with documented architecture diagrams conforming to SWIFT reference architectures A1-A4/B. This prescriptive architecture model goes beyond general SP 800-53 segmentation requirements."
+    },
+    {
+      "id": "SWIFT.1.2",
+      "title": "Operating System Privileged Account Control (Mandatory)",
+      "controls": [
+        "AC-02",
+        "AC-05",
+        "AC-06",
+        "AU-02",
+        "IA-02"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-06 least privilege directly addresses restricting OS-level administrative access. AC-02 account management covers provisioning and lifecycle of privileged accounts. AC-05 separation of duties prevents excess privilege concentration. AU-02 event logging records privileged account actions. IA-02 identification and authentication covers multi-factor requirements for privileged access.",
+      "gaps": "SWIFT specifically requires monitoring of all administrator-level OS actions on SWIFT-related hosts and restricting the number of users with OS-level privilege on messaging interfaces and communication interfaces."
+    },
+    {
+      "id": "SWIFT.1.3",
+      "title": "Virtualisation or Cloud Platform Protection (Mandatory)",
+      "controls": [
+        "SC-07",
+        "SC-28",
+        "SC-39",
+        "AC-04",
+        "CM-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-39 process isolation supports VM separation. SC-07 boundary protection covers virtual network segmentation between tenants. SC-28 protection of information at rest covers encrypted VM storage. AC-04 information flow enforcement controls cross-tenant traffic. CM-06 configuration settings covers hypervisor hardening.",
+      "gaps": "SWIFT requires that virtualisation platforms and VMs hosting SWIFT components are secured to the same level as physical systems, with specific guidance on hypervisor-layer security, VM isolation from non-SWIFT workloads, and cloud-hosted SWIFT deployment security that references SWIFT-specific architecture patterns."
+    },
+    {
+      "id": "SWIFT.1.4",
+      "title": "Restriction of Internet Access (Mandatory)",
+      "controls": [
+        "SC-07",
+        "AC-04",
+        "AC-20",
+        "CM-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-07 boundary protection covers firewall rules restricting internet connectivity. AC-04 information flow enforcement controls outbound traffic from the secure zone. AC-20 use of external systems manages connections to external networks. CM-07 least functionality removes unnecessary internet-facing services.",
+      "gaps": "SWIFT mandates either complete removal of internet connectivity from the secure zone or strictly controlled proxy/firewall filtering with DNS controls and monitoring. This is more prescriptive than general SP 800-53 boundary controls."
+    },
+    {
+      "id": "SWIFT.1.5",
+      "title": "Customer Environment Protection (Mandatory)",
+      "controls": [
+        "SC-07",
+        "AC-04",
+        "CA-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-07 boundary protection covers segmentation for customer connector infrastructure. AC-04 information flow enforcement controls data flows between customer equipment and SWIFT network. CA-03 information exchange covers connection agreements with service bureaux.",
+      "gaps": "SWIFT-specific requirement for protecting 'customer connectors' and equipment in service bureau architectures. Requires equivalent segmentation as the core SWIFT secure zone for customer-facing endpoints."
+    },
+    {
+      "id": "SWIFT.2.1",
+      "title": "Internal Data Flow Security (Mandatory)",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "IA-03"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-08 transmission confidentiality and integrity protects data flows between SWIFT components. SC-12 cryptographic key establishment and management covers key lifecycle for LAU and TLS. SC-13 cryptographic protection specifies algorithms (AES, ECDHE). IA-03 device identification and authentication covers mutual authentication between SWIFT components.",
+      "gaps": "SWIFT requires Local Authentication (LAU) or equivalent mechanisms specifically for SWIFT messaging interface data flows, using SWIFT-prescribed cryptographic algorithms and key lengths."
+    },
+    {
+      "id": "SWIFT.2.2",
+      "title": "Security Updates (Mandatory)",
+      "controls": [
+        "SI-02",
+        "CM-07",
+        "SA-22"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-02 flaw remediation directly addresses applying security patches and maintaining vendor support. CM-07 least functionality covers running only supported and patched software. SA-22 unsupported system components addresses end-of-life software removal.",
+      "gaps": "SWIFT mandates specific supported OS and software versions (e.g., Windows 10 no longer permitted under v2025). SWIFT mandatory software updates must be applied within defined timelines per SWIFT Knowledge Centre guidance."
+    },
+    {
+      "id": "SWIFT.2.3",
+      "title": "System Hardening (Mandatory)",
+      "controls": [
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "SC-07"
+      ],
+      "coverage_pct": 92,
+      "rationale": "CM-06 configuration settings covers hardening to industry standards (CIS Benchmarks). CM-07 least functionality removes unnecessary services, protocols, and ports. CM-02 baseline configuration establishes secure configuration baselines. SC-07 boundary protection covers firewall rule hardening.",
+      "gaps": "SWIFT references CIS Benchmarks and SWIFT-specific hardening guidance from the SWIFT Knowledge Centre for Alliance products. Hardening must cover all components within the secure zone."
+    },
+    {
+      "id": "SWIFT.2.4A",
+      "title": "Back Office Data Flow Security (Advisory)",
+      "controls": [
+        "SC-08",
+        "SC-13",
+        "AC-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-08 transmission confidentiality and integrity covers encryption of back-office to SWIFT zone data flows. SC-13 cryptographic protection specifies VPN/IPsec/MACsec mechanisms. AC-04 information flow enforcement controls boundary crossing data.",
+      "gaps": "SWIFT-specific requirement for encrypting and authenticating data flows at the boundary between back-office applications and the SWIFT secure zone. Becoming mandatory in v2026."
+    },
+    {
+      "id": "SWIFT.2.5A",
+      "title": "External Transmission Data Protection (Advisory)",
+      "controls": [
+        "SC-08",
+        "SC-28",
+        "MP-05",
+        "SC-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-28 protection of information at rest covers encrypted backups and data stores. SC-08 transmission confidentiality protects data leaving the secure zone. MP-05 media transport covers physical media protection. SC-12 cryptographic key management covers FIPS 140-2 validated HSM usage.",
+      "gaps": "SWIFT specifically addresses protection of SWIFT-related data during backup, extraction, and external transmission, including HSM-protected key management."
+    },
+    {
+      "id": "SWIFT.2.6",
+      "title": "Operator Session Confidentiality and Integrity (Mandatory)",
+      "controls": [
+        "AC-17",
+        "SC-08",
+        "AC-11",
+        "AC-12",
+        "AU-14"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-17 remote access covers encrypted and authenticated operator sessions. SC-08 transmission confidentiality and integrity protects session data. AC-11 device lock covers session timeout. AC-12 session termination handles inactivity lockout. AU-14 session audit covers session logging.",
+      "gaps": "SWIFT requires that all interactive operator sessions to the SWIFT secure zone are encrypted and authenticated, with session recording and audit capability for forensic analysis."
+    },
+    {
+      "id": "SWIFT.2.7",
+      "title": "Vulnerability Scanning (Mandatory)",
+      "controls": [
+        "RA-05",
+        "SI-02",
+        "CM-08"
+      ],
+      "coverage_pct": 90,
+      "rationale": "RA-05 vulnerability monitoring and scanning directly addresses automated vulnerability scanning at OS and application levels. SI-02 flaw remediation covers timely remediation of findings. CM-08 system component inventory supports asset identification for scanning scope.",
+      "gaps": "SWIFT requires vulnerability scanning specifically within the SWIFT secure zone environment, including both OS and SWIFT application-level scanning, with documented remediation of findings."
+    },
+    {
+      "id": "SWIFT.2.8",
+      "title": "Outsourced Critical Activity Protection (Mandatory)",
+      "controls": [
+        "SA-09",
+        "SR-01",
+        "SR-03",
+        "SR-06",
+        "CA-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SA-09 external system services establishes security requirements for outsourced activities. SR-01 supply chain risk management covers vendor risk. SR-03 supply chain controls addresses ongoing monitoring. SR-06 supplier assessments covers performance evaluation. CA-03 information exchange covers connection agreements.",
+      "gaps": "SWIFT mandates that outsourced SWIFT activities (cloud providers, managed services, service bureaux) maintain equivalent security controls, with the SWIFT user remaining fully responsible for attestation compliance regardless of outsourcing arrangements."
+    },
+    {
+      "id": "SWIFT.2.9",
+      "title": "Transaction Business Controls (Mandatory)",
+      "controls": [
+        "AC-03",
+        "AU-02",
+        "AU-06",
+        "SI-04"
+      ],
+      "coverage_pct": 62,
+      "rationale": "AC-03 access enforcement supports transaction authorization controls. AU-02 event logging records transaction activity. AU-06 audit record review enables transaction monitoring and reconciliation. SI-04 system monitoring detects anomalous transaction patterns.",
+      "gaps": "SWIFT requires highly specific transaction business controls: configurable limits by region/currency/type, business-hour restrictions, hold-and-validate processes for out-of-band transactions, and reconciliation between internal records and SWIFT network activity. These financial messaging-specific anti-fraud controls have no direct SP 800-53 equivalent."
+    },
+    {
+      "id": "SWIFT.2.10",
+      "title": "Application Hardening (Mandatory)",
+      "controls": [
+        "CM-06",
+        "CM-07",
+        "SA-11"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-06 configuration settings covers application security configuration. CM-07 least functionality restricts application features to required functions. SA-11 developer testing and evaluation supports application security validation.",
+      "gaps": "SWIFT requires hardening of SWIFT-specific applications (Alliance Messaging Hub, Alliance Access, Alliance Gateway, SwiftNet Link) following SWIFT Knowledge Centre guidance and OWASP principles. This is specific to proprietary SWIFT software."
+    },
+    {
+      "id": "SWIFT.2.11A",
+      "title": "RMA Business Controls (Advisory)",
+      "controls": [
+        "AC-02",
+        "AC-03"
+      ],
+      "coverage_pct": 40,
+      "rationale": "AC-02 account management conceptually maps to managing counterparty relationships. AC-03 access enforcement covers restricting transaction capability to authorized counterparties.",
+      "gaps": "SWIFT's Relationship Management Application (RMA) is a proprietary mechanism for managing authorized counterparty relationships on the SWIFT network. Requirements for regular due diligence on RMA relationships, removing obsolete counterparties, and using the SWIFT RMA portal are entirely SWIFT-specific with no SP 800-53 equivalent."
+    },
+    {
+      "id": "SWIFT.3.1",
+      "title": "Physical Security (Mandatory)",
+      "controls": [
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "PE-08",
+        "MP-02",
+        "MP-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PE-03 physical access control covers restricted access to data centres and server rooms. PE-02 physical access authorizations manages approval. PE-06 monitoring physical access covers surveillance cameras. PE-08 visitor access records covers visitor management. MP-02 media access and MP-04 media storage cover HSM physical management.",
+      "gaps": "SWIFT requires physical protection specifically for SWIFT HSM devices, storage locations of SWIFT messages, and physical locations where SWIFT transactions are processed or transmitted."
+    },
+    {
+      "id": "SWIFT.4.1",
+      "title": "Password Policy (Mandatory)",
+      "controls": [
+        "IA-05",
+        "AC-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "IA-05 authenticator management directly addresses password complexity, minimum length, expiration, history, and lockout policies for all account types. AC-07 unsuccessful logon attempts covers account lockout after failed attempts.",
+      "gaps": "SWIFT requires password policies covering both human and service accounts on all SWIFT-related systems, with specific strength requirements aligned to SWIFT guidance."
+    },
+    {
+      "id": "SWIFT.4.2",
+      "title": "Multi-Factor Authentication (Mandatory)",
+      "controls": [
+        "IA-02",
+        "IA-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "IA-02 identification and authentication covers multi-factor authentication requirements. IA-05 authenticator management addresses token and credential lifecycle. SP 800-53 IA-02 enhancements specifically cover MFA for network access and local access.",
+      "gaps": "SWIFT mandates MFA specifically for all interactive access to the SWIFT secure zone, including jump server access. At least two independent factors (know/have/are) are required."
+    },
+    {
+      "id": "SWIFT.5.1",
+      "title": "Logical Access Control (Mandatory)",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-03 access enforcement implements RBAC policies for SWIFT operator roles. AC-06 least privilege restricts access to minimum necessary. AC-05 separation of duties prevents role conflicts. AC-02 account management covers role assignment, regular access reviews, and recertification.",
+      "gaps": "SWIFT defines specific operator roles (SWIFT instance operator, SWIFT infrastructure role) with prescribed privilege levels. Access rights must be regularly reviewed and recertified per SWIFT-specific role definitions."
+    },
+    {
+      "id": "SWIFT.5.2",
+      "title": "Token Management (Mandatory)",
+      "controls": [
+        "IA-05",
+        "PE-03",
+        "PS-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "IA-05 authenticator management covers hardware token lifecycle including distribution, assignment, and revocation. PE-03 physical access control addresses secure storage of tokens when not in use. PS-04 personnel termination covers token revocation on departure.",
+      "gaps": "SWIFT requires specific management of PKI tokens and smartcards used for SWIFT authentication, including controlled distribution, secure storage, and audit trail of issuance/returns for SWIFT-specific hardware tokens."
+    },
+    {
+      "id": "SWIFT.5.3A",
+      "title": "Staff Screening Process (Advisory)",
+      "controls": [
+        "PS-03",
+        "PS-06"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PS-03 personnel screening covers background checks and vetting prior to granting access. PS-06 access agreements covers confidentiality and NDA obligations.",
+      "gaps": "SWIFT recommends ongoing screening (not just pre-employment) for personnel with access to critical SWIFT systems."
+    },
+    {
+      "id": "SWIFT.5.4",
+      "title": "Password Repository Protection (Mandatory)",
+      "controls": [
+        "IA-05",
+        "SC-28",
+        "AC-03",
+        "AU-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-05 authenticator management covers credential protection. SC-28 protection of information at rest addresses encrypted storage of password repositories. AC-03 access enforcement restricts access to credential stores. AU-02 event logging audits access to password repositories.",
+      "gaps": "SWIFT requires that any physical or logical storage of SWIFT-related passwords be specifically protected with encryption and access controls, with audit logging of all access."
+    },
+    {
+      "id": "SWIFT.6.1",
+      "title": "Malware Protection (Mandatory)",
+      "controls": [
+        "SI-03",
+        "SI-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SI-03 malicious code protection covers anti-malware deployment, signature updates, and scanning across all systems. SI-04 system monitoring covers network-level malware detection. Together they address both endpoint and network-level malware protection within the SWIFT secure zone.",
+      "gaps": "SWIFT requires anti-malware coverage specifically for all systems within the SWIFT secure zone, including messaging interfaces and communication interfaces."
+    },
+    {
+      "id": "SWIFT.6.2",
+      "title": "Software Integrity (Mandatory)",
+      "controls": [
+        "SI-07",
+        "CM-03",
+        "CM-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-07 software, firmware, and information integrity covers file integrity monitoring and detection of unauthorized modifications. CM-03 configuration change control manages authorized changes. CM-05 access restrictions for change limits who can modify software.",
+      "gaps": "SWIFT components (AMH, SAA, SAG, SNL) have embedded integrity checks provided by SWIFT. The control requires verifying these SWIFT-specific integrity mechanisms function correctly and that no unauthorized modifications have been applied to SWIFT proprietary software."
+    },
+    {
+      "id": "SWIFT.6.3",
+      "title": "Database Integrity (Mandatory)",
+      "controls": [
+        "SI-07",
+        "SC-28",
+        "AC-03",
+        "AC-06",
+        "CP-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SI-07 software/information integrity covers database integrity verification. SC-28 protection of information at rest covers encrypted database instances. AC-03/AC-06 cover least-privilege database access. CP-09 system backup covers automated database backups.",
+      "gaps": "SWIFT requires dedicated and encrypted database instances for SWIFT message and transaction records, with separation of duty via designated database roles, secure password rotation, and integrity checks specific to SWIFT transaction data."
+    },
+    {
+      "id": "SWIFT.6.4",
+      "title": "Logging and Monitoring (Mandatory)",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-09",
+        "AU-12",
+        "SI-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AU-02 event logging covers comprehensive logging on all SWIFT components. AU-03 content of audit records ensures sufficient detail. AU-06 audit review enables real-time alerting and analysis. AU-09 protection of audit information prevents log tampering. AU-12 audit generation ensures consistent capture. SI-04 system monitoring enables SIEM integration.",
+      "gaps": "SWIFT requires logging specifically on jump servers, firewalls, databases, messaging interfaces, OS-level activity, and CLI history within the SWIFT secure zone, with centralized collection, real-time alerting, and forensic analysis capability."
+    },
+    {
+      "id": "SWIFT.6.5A",
+      "title": "Intrusion Detection (Advisory)",
+      "controls": [
+        "SI-04",
+        "SC-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-04 system monitoring covers IDS/IPS deployment for network traffic analysis and anomaly detection. SC-07 boundary protection supports network monitoring at zone boundaries.",
+      "gaps": "SWIFT recommends IDS/IPS specifically for detecting lateral movement and indicators of compromise within the SWIFT secure zone and monitoring for account-level suspicious activity."
+    },
+    {
+      "id": "SWIFT.7.1",
+      "title": "Cyber Incident Response Planning (Mandatory)",
+      "controls": [
+        "IR-01",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "IR-08 incident response plan covers documented response procedures. IR-04 incident handling addresses detection, containment, eradication, and recovery. IR-01 incident response policy establishes the framework. IR-05 incident monitoring enables tracking. IR-06 incident reporting covers escalation paths.",
+      "gaps": "SWIFT requires incident response plans specifically for SWIFT-related cyber incidents, with defined communication procedures to SWIFT (SWIFT ISAC), v2025 guidance on extreme/catastrophic scenario planning, and post-incident analysis specific to financial messaging compromise."
+    },
+    {
+      "id": "SWIFT.7.2",
+      "title": "Security Training and Awareness (Mandatory)",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AT-02 literacy training and awareness covers general security awareness. AT-03 role-based training provides specialized training for SWIFT operators and administrators. AT-01 training policy establishes the training framework.",
+      "gaps": "SWIFT requires SWIFT-specific security training for operators and administrators, including awareness of threats to financial messaging infrastructure and SWIFT-specific security procedures."
+    },
+    {
+      "id": "SWIFT.7.3A",
+      "title": "Penetration Testing (Advisory)",
+      "controls": [
+        "CA-08",
+        "RA-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-08 penetration testing directly addresses authorized penetration testing of security controls. RA-05 vulnerability monitoring and scanning complements with vulnerability assessment of SWIFT infrastructure.",
+      "gaps": "SWIFT recommends penetration testing specifically against the SWIFT secure zone and its components, with evaluation of findings and remediation tracking specific to SWIFT infrastructure."
+    },
+    {
+      "id": "SWIFT.7.4A",
+      "title": "Scenario-Based Risk Assessment (Advisory)",
+      "controls": [
+        "RA-03",
+        "PM-16",
+        "CP-04"
+      ],
+      "coverage_pct": 75,
+      "rationale": "RA-03 risk assessment covers structured risk identification. PM-16 threat awareness program supports threat scenario development. CP-04 contingency plan testing enables scenario-based exercises.",
+      "gaps": "SWIFT recommends structured threat scenario exercises modelling realistic attack paths specifically against SWIFT infrastructure to identify control gaps and response capability weaknesses. This goes beyond general risk assessment to SWIFT-specific threat modelling."
+    }
+  ],
+  "summary": {
+    "total_clauses": 32,
+    "average_coverage": 84.4,
+    "full_count": 24,
+    "substantial_count": 6,
+    "partial_count": 2,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

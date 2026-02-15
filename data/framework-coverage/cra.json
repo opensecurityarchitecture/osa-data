@@ -1,0 +1,566 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "cra",
+  "framework_name": "EU Cyber Resilience Act (Regulation 2024/2847)",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of Regulation (EU) 2024/2847 (Cyber Resilience Act) against SP 800-53 Rev 5. The CRA is an EU product security regulation applying to manufacturers, importers, and distributors of products with digital elements. Annex I essential requirements are legally binding with penalties up to EUR 15 million or 2.5% of worldwide annual turnover. CRA complements NIS2 (which targets operators/essential entities) by addressing the product supply side. Full applicability from 11 December 2027, with vulnerability reporting obligations from 11 September 2026. Security-update obligation extends for the support period (minimum 5 years from placing on market). CRA is product-focused (manufacturer obligations) while NIST 800-53 is organisation/system-focused, meaning some CRA requirements around vulnerability disclosure, SBOM, incident reporting to ENISA, and CE marking conformity have only partial NIST coverage. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "CRA.I.1",
+      "title": "General obligation — products designed, developed, and produced ensuring appropriate cybersecurity",
+      "controls": [
+        "SA-01",
+        "SA-02",
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-17",
+        "PL-08",
+        "PM-07",
+        "PM-30",
+        "SR-01",
+        "SR-02",
+        "SR-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-03 system development lifecycle, SA-08 security engineering principles, SA-10 developer configuration management, and SA-11 developer testing provide a strong security-by-design development framework. SA-15 development process/standards and SA-17 developer security architecture ensure structured secure development. PL-08 security architecture and PM-07 enterprise architecture embed security into product design. SR-01/SR-02/SR-03 supply chain risk management addresses component-level security. PM-30 supply chain risk management strategy provides overarching governance.",
+      "gaps": "CRA Art. 10 imposes a general obligation for the entire product lifecycle from design through production and market availability, including CE marking and EU declaration of conformity. NIST 800-53 does not address product conformity assessment, CE marking procedures, or the manufacturer's ongoing obligation to monitor and ensure cybersecurity post-market. The EU market surveillance dimension is entirely absent."
+    },
+    {
+      "id": "CRA.I.2a",
+      "title": "No known exploitable vulnerabilities at market availability",
+      "controls": [
+        "RA-05",
+        "SA-11",
+        "SA-15",
+        "SI-02",
+        "CA-02",
+        "CA-08",
+        "SR-06"
+      ],
+      "coverage_pct": 65,
+      "rationale": "RA-05 vulnerability monitoring and scanning identifies known vulnerabilities. SA-11 developer testing and evaluation covers security testing prior to release. CA-02 control assessments and CA-08 penetration testing verify security posture. SI-02 flaw remediation ensures identified vulnerabilities are patched. SR-06 supplier assessments and reviews extend scrutiny to third-party components.",
+      "gaps": "CRA requires that no known exploitable vulnerability exists at the time of placing on the market — an absolute obligation, not a risk-managed process. NIST addresses vulnerability scanning and remediation as ongoing activities but does not mandate a zero-known-vulnerability state at any specific milestone. CRA also requires this standard for all incorporated third-party components (including open-source), which goes beyond NIST's supplier assessment framework."
+    },
+    {
+      "id": "CRA.I.2b",
+      "title": "Secure by default configuration with reset capability",
+      "controls": [
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "SA-04",
+        "SA-08",
+        "SC-28",
+        "SI-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-02 baseline configuration and CM-06 configuration settings establish secure defaults. CM-07 least functionality ensures minimal attack surface by default. SA-04 acquisition process can mandate secure defaults from suppliers. SA-08 security engineering principles support secure-by-default design. SC-28 protection of information at rest and SI-07 software/firmware/information integrity protect default configuration state.",
+      "gaps": "CRA explicitly requires a factory reset capability to return the product to its secure default state — NIST has no equivalent control for product reset mechanisms. CRA also mandates that default credentials must not be used and that initial configuration must be secure out-of-box without requiring user expertise, which is a product design obligation beyond NIST's organisational configuration management scope."
+    },
+    {
+      "id": "CRA.I.2c",
+      "title": "Vulnerability addressable through security updates — automatic update as default, opt-out available",
+      "controls": [
+        "SI-02",
+        "MA-01",
+        "MA-02",
+        "CM-03",
+        "SA-22",
+        "SI-07"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SI-02 flaw remediation is the primary control for patch management. MA-01/MA-02 maintenance policy and controlled maintenance address update procedures. CM-03 configuration change control governs how updates are applied. SA-22 unsupported system components addresses end-of-support scenarios. SI-07 ensures integrity of updates.",
+      "gaps": "CRA mandates that automatic security updates must be the default mechanism with a user opt-out option — a specific product design requirement absent from NIST. CRA requires updates to be separate from functionality updates, free of charge, and accompanied by advisory information. NIST treats patching as an organisational process, not a product capability. The CRA's requirement for the manufacturer to maintain update infrastructure for the entire support period (minimum 5 years) has no NIST equivalent."
+    },
+    {
+      "id": "CRA.I.2d",
+      "title": "Protection from unauthorised access — authentication, identity management, report unauthorised access",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "AC-07",
+        "AC-17",
+        "IA-01",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-08",
+        "IA-11",
+        "IA-12",
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "SI-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "NIST provides comprehensive access control and identity management. AC-02/AC-03/AC-06 enforce access policies and least privilege. IA-02/IA-05/IA-08 address authentication strength including multi-factor. IA-11 re-authentication and IA-12 identity proofing (Rev 5) strengthen identity assurance. AC-07 unsuccessful login attempts and AC-17 remote access controls add defence layers. AU-02/AU-03 audit events and AU-06 audit review enable detection and reporting of unauthorised access. SI-04 system monitoring detects and alerts on intrusions.",
+      "gaps": "CRA requires the product itself to report unauthorised access to the user — a product-level notification feature. NIST addresses monitoring and alerting at the organisational/system level but does not mandate product-embedded reporting mechanisms to end users. CRA's requirement applies to consumer and commercial products alike, whereas NIST assumes enterprise security operations."
+    },
+    {
+      "id": "CRA.I.2e",
+      "title": "Data confidentiality — encrypt relevant data at rest and in transit, state of the art",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "MP-04",
+        "MP-05",
+        "SA-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-08 transmission confidentiality and integrity directly addresses encryption in transit. SC-28 protection of information at rest covers encryption at rest. SC-12 cryptographic key management and SC-13 cryptographic protection provide the cryptographic framework. MP-04/MP-05 media storage and transport add data protection layers. SA-04 acquisition process can mandate encryption requirements from suppliers. NIST's cryptographic controls are comprehensive and well-aligned with CRA's state-of-the-art encryption requirement.",
+      "gaps": "Minor: CRA uses the phrase 'state of the art' which implies a dynamic obligation to use current best-practice cryptography — this is a self-updating standard unlike NIST's control baselines which are periodically revised. CRA applies to the product as shipped, whereas NIST assumes organisational deployment decisions for cryptographic implementation."
+    },
+    {
+      "id": "CRA.I.2f",
+      "title": "Data integrity — protect stored/transmitted data, commands, programs, configuration; report corruption",
+      "controls": [
+        "SC-08",
+        "SI-07",
+        "SI-10",
+        "SA-10",
+        "SC-16",
+        "AU-09",
+        "AU-10"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-07 software, firmware, and information integrity verification directly addresses integrity of programs and configuration. SC-08 covers transmission integrity. SI-10 information input validation protects against injection attacks corrupting data. SA-10 developer configuration management ensures source integrity. SC-16 transmission of security attributes protects command integrity. AU-09 protection of audit information and AU-10 non-repudiation provide integrity evidence.",
+      "gaps": "CRA requires the product to report data corruption to the user — a built-in notification mechanism. NIST addresses integrity verification and monitoring at the system level but does not mandate product-level user notification of corruption events. CRA's scope includes commands and configuration data integrity in a product context that differs from NIST's organisational system focus."
+    },
+    {
+      "id": "CRA.I.2g",
+      "title": "Data minimisation — only adequate, relevant, limited data processed",
+      "controls": [
+        "PT-02",
+        "PT-03",
+        "PT-06",
+        "PM-25",
+        "SA-08",
+        "SI-12",
+        "SI-19"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PT-02 authority to process personally identifiable information and PT-03 personally identifiable information processing purpose establish data minimisation principles. PT-06 (Rev 5) system of records notice and PM-25 (Rev 5) minimisation of personally identifiable information directly implement data minimisation. SA-08 security engineering principles can incorporate minimisation by design. SI-12 information management and retention and SI-19 de-identification support limiting data to what is necessary.",
+      "gaps": "CRA's data minimisation applies to all data the product processes (not just PII), whereas NIST PT-family controls focus primarily on personally identifiable information. CRA requires minimisation as a design property of the product, while NIST frames it as an organisational policy. The functional scope of CRA's data minimisation for product telemetry, operational data, and configuration data exceeds NIST's PII-centred controls."
+    },
+    {
+      "id": "CRA.I.2h",
+      "title": "Availability — protect essential and basic functions, denial-of-service resilience",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-07",
+        "CP-09",
+        "CP-10",
+        "SC-05",
+        "SC-06",
+        "SI-13",
+        "SI-17"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SC-05 denial-of-service protection directly addresses DoS resilience. CP-01/CP-02 contingency planning, CP-07 alternative processing, CP-09 system backup, and CP-10 system recovery ensure availability of essential functions. SC-06 resource availability and SI-13 predictable failure prevention address availability engineering. SI-17 (Rev 5) fail-safe procedures ensure graceful degradation.",
+      "gaps": "CRA requires the product itself to be resilient to denial-of-service attacks — a product engineering requirement. NIST addresses DoS protection and availability at the system/infrastructure level within an organisational context. CRA also requires that basic functions continue when other functions are disrupted, implying fault isolation within the product, which exceeds NIST's system-level contingency focus."
+    },
+    {
+      "id": "CRA.I.2i",
+      "title": "Minimise negative impact on availability/security of other devices and networks",
+      "controls": [
+        "SC-07",
+        "SC-44",
+        "SI-03",
+        "SI-04",
+        "CA-03",
+        "SA-09",
+        "SC-47"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SC-07 boundary protection limits a product's network impact. SC-44 (Rev 5) detonation chambers and SI-03 malware protection address preventing the product from becoming a vector. SI-04 system monitoring detects anomalous behaviour. CA-03 system interconnection controls manage cross-system impact. SA-09 external information system services governs third-party service impact. SC-47 (Rev 5) alternative communications security provides resilience channels.",
+      "gaps": "CRA imposes a product design obligation to minimise negative impact on other connected devices and networks — essentially requiring good neighbour behaviour by design. This is a novel product-level obligation without direct NIST equivalent. NIST addresses boundary protection and interconnection security from the defending organisation's perspective, not from the perspective of the product manufacturer ensuring their product does not harm others' systems."
+    },
+    {
+      "id": "CRA.I.2j",
+      "title": "Attack surface reduction — limit external interfaces to minimum necessary",
+      "controls": [
+        "CM-07",
+        "SC-07",
+        "SA-08",
+        "AC-04",
+        "SC-41",
+        "SA-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-07 least functionality is the primary attack surface reduction control, minimising exposed interfaces and services. SC-07 boundary protection limits network exposure. SA-08 security engineering principles support minimalist design. AC-04 information flow enforcement restricts unnecessary data flows. SC-41 (Rev 5) port and I/O device access restriction directly limits physical and logical interfaces. SA-04 acquisition process can mandate minimal interface requirements.",
+      "gaps": "CRA requires this as a product design obligation — the manufacturer must limit external interfaces (network, logical, physical) to the minimum necessary for the product's intended function. NIST addresses interface reduction from the deploying organisation's perspective through configuration management, not as a manufacturer's design requirement. CRA's obligation is absolute at design time, whereas NIST permits risk-based decisions at deployment time."
+    },
+    {
+      "id": "CRA.I.2k",
+      "title": "Incident impact reduction — exploitation mitigation mechanisms",
+      "controls": [
+        "SI-16",
+        "SC-03",
+        "SC-39",
+        "SC-24",
+        "SC-29",
+        "SC-30",
+        "SC-34",
+        "SC-35",
+        "SA-20",
+        "IR-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SI-16 memory protection mitigates exploitation techniques (ASLR, DEP, stack canaries). SC-03 security function isolation and SC-39 process isolation limit blast radius. SC-24 fail in known state ensures deterministic failure. SC-29/SC-30 (Rev 5) heterogeneity and concealment/misdirection reduce attacker predictability. SC-34 non-modifiable executables and SC-35 honeyclients add active defence. SA-20 customised development reduces common vulnerability classes. IR-04 incident handling addresses response after exploitation.",
+      "gaps": "CRA requires built-in exploitation mitigation as a product design property (e.g., memory protection, exploit mitigation, sandboxing). NIST provides many relevant controls but frames them as system configuration choices, not mandatory product features. CRA's obligation means the manufacturer must ship these mitigations enabled, whereas NIST allows organisational discretion in implementation."
+    },
+    {
+      "id": "CRA.I.2l",
+      "title": "Monitoring and logging — record and monitor internal activity, user opt-out",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-08",
+        "AU-09",
+        "AU-11",
+        "AU-12",
+        "AU-14",
+        "SI-04",
+        "SI-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "NIST's AU family is comprehensive for monitoring and logging. AU-02/AU-03/AU-12 establish what is logged, content, and generation. AU-04/AU-05 handle log storage capacity. AU-06 audit review and SI-04 system monitoring cover active monitoring. AU-08 timestamps, AU-09 protection of audit information, and AU-11 retention ensure reliable audit records. AU-14 (Rev 5) session audit provides detailed activity recording. SI-11 error handling controls information exposure in logs.",
+      "gaps": "CRA requires a user opt-out mechanism for monitoring and logging — allowing end users to disable product telemetry/activity recording. NIST has no equivalent concept of end-user opt-out from audit logging; in NIST's model, the organisation determines audit policy. This reflects CRA's consumer-facing orientation where user privacy and autonomy must be balanced against security monitoring. CRA also requires the logging to be proportionate and not exceed what is necessary."
+    },
+    {
+      "id": "CRA.I.2m",
+      "title": "Secure data removal — permanent deletion and secure transfer capability",
+      "controls": [
+        "MP-06",
+        "SI-12",
+        "SI-18",
+        "SI-19",
+        "MP-05"
+      ],
+      "coverage_pct": 72,
+      "rationale": "MP-06 media sanitisation is the primary control for secure data deletion, including purging and destruction methods. SI-12 information management and retention governs data lifecycle. SI-18 (Rev 5) personally identifiable information quality operations and SI-19 de-identification support data management. MP-05 media transport addresses secure transfer of data between products.",
+      "gaps": "CRA requires the product to provide a built-in capability for users to permanently, easily, and securely delete their data, and to securely transfer data to another product. This is a product feature requirement — the product must expose deletion and portability functions to end users. NIST addresses media sanitisation as an organisational process (typically performed by IT staff), not as a user-accessible product feature. The data portability requirement has no NIST equivalent."
+    },
+    {
+      "id": "CRA.II.1",
+      "title": "SBOM and vulnerability identification — document vulnerabilities and components, machine-readable SBOM",
+      "controls": [
+        "CM-08",
+        "SA-04",
+        "RA-05",
+        "SR-04",
+        "CM-12",
+        "PM-05"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CM-08 system component inventory provides a foundation for component documentation. SR-04 (Rev 5) provenance tracks component origin and history. CM-12 (Rev 5) information location addresses data mapping. SA-04 acquisition process can mandate component disclosure from suppliers. RA-05 vulnerability scanning identifies vulnerabilities in components. PM-05 system inventory provides organisational awareness.",
+      "gaps": "CRA mandates a machine-readable Software Bill of Materials (SBOM) — a specific artifact format requirement (likely SPDX or CycloneDX) with no NIST equivalent. NIST CM-08 covers system component inventory but does not mandate SBOM as a deliverable format or require machine-readable output. CRA requires the SBOM to cover at minimum the top-level dependencies, published in a commonly used machine-readable format. The formal SBOM artifact obligation is a product documentation requirement outside NIST's scope."
+    },
+    {
+      "id": "CRA.II.2",
+      "title": "Timely remediation — address and remediate vulnerabilities without delay, provide security updates",
+      "controls": [
+        "SI-02",
+        "RA-05",
+        "CM-03",
+        "CM-04",
+        "SA-11",
+        "SA-22"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SI-02 flaw remediation is the primary patch management control. RA-05 vulnerability scanning identifies flaws requiring remediation. CM-03/CM-04 change control and impact analysis govern update processes. SA-11 developer testing ensures patches do not introduce regressions. SA-22 unsupported components addresses end-of-support remediation challenges.",
+      "gaps": "CRA imposes a strict timeliness obligation — vulnerabilities must be addressed 'without delay' once identified, which is more demanding than NIST's risk-based remediation timelines. CRA also requires the manufacturer to continue providing security updates for the entire support period (minimum 5 years), whereas NIST treats patching as a deploying organisation's responsibility. The manufacturer's ongoing legal duty to remediate is a product liability concept absent from NIST."
+    },
+    {
+      "id": "CRA.II.3",
+      "title": "Security testing — effective and regular tests and reviews",
+      "controls": [
+        "SA-11",
+        "CA-02",
+        "CA-08",
+        "RA-05",
+        "RA-06",
+        "SI-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SA-11 developer testing and evaluation is comprehensive, covering unit testing, integration testing, penetration testing, and static analysis. CA-02 control assessments and CA-08 penetration testing provide independent verification. RA-05 vulnerability scanning and RA-06 (Rev 5) technical surveillance countermeasures survey add testing depth. SI-06 security function verification ensures security mechanisms operate correctly.",
+      "gaps": "CRA requires testing to be 'effective and regular' as an ongoing manufacturer obligation throughout the product lifecycle. NIST addresses testing at development time (SA-11) and periodic assessment (CA-02), but CRA's obligation extends to continuous testing of products already on the market, not just during development or at deployment. The manufacturer must test proactively, not just when deploying updates."
+    },
+    {
+      "id": "CRA.II.4",
+      "title": "Public disclosure — share information about fixed vulnerabilities after security update",
+      "controls": [
+        "SI-05",
+        "PM-15",
+        "IR-06"
+      ],
+      "coverage_pct": 35,
+      "rationale": "SI-05 security alerts, advisories, and directives addresses dissemination of vulnerability information. PM-15 security and privacy groups and associations supports information sharing. IR-06 incident reporting provides a reporting framework. However, these controls focus on receiving and processing vulnerability information, not on the manufacturer's obligation to publicly disclose fixed vulnerabilities.",
+      "gaps": "CRA requires manufacturers to publicly share information about fixed vulnerabilities after a security update is available, including a description of the vulnerability, affected products, severity, and remediation guidance. This is a public disclosure obligation with no direct NIST equivalent. NIST's SI-05 focuses on the receiving organisation processing external advisories, not on being the publisher. CRA creates a structured disclosure obligation similar to CVE/advisory publication, which is outside NIST 800-53's organisational control framework."
+    },
+    {
+      "id": "CRA.II.5",
+      "title": "Coordinated vulnerability disclosure policy",
+      "controls": [
+        "PM-15",
+        "PM-16",
+        "SI-05",
+        "IR-06"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PM-15 security groups and associations and PM-16 threat awareness programme support participation in vulnerability disclosure ecosystems. SI-05 security alerts and IR-06 incident reporting provide partial frameworks for handling disclosures. However, NIST controls address the receiving side of vulnerability disclosure, not establishing a manufacturer's CVD policy.",
+      "gaps": "CRA mandates manufacturers implement a coordinated vulnerability disclosure (CVD) policy in accordance with ISO/IEC 29147 or equivalent. This requires publishing a CVD policy, accepting reports from external researchers, confirming receipt, providing timelines, and coordinating with CSIRT/ENISA. NIST 800-53 does not address manufacturer-side CVD processes — it assumes the organisation is a consumer of vulnerability information, not a producer/coordinator. The specific ISO 29147 alignment requirement is entirely outside NIST scope."
+    },
+    {
+      "id": "CRA.II.6",
+      "title": "Vulnerability reporting channel — contact address for vulnerability reports",
+      "controls": [
+        "PM-15",
+        "IR-01",
+        "IR-07"
+      ],
+      "coverage_pct": 28,
+      "rationale": "IR-01 incident response policy and IR-07 incident response assistance provide organisational frameworks for receiving reports. PM-15 security groups and associations encourages external engagement. However, these controls address internal incident handling, not a publicly accessible vulnerability reporting channel for external researchers and users.",
+      "gaps": "CRA requires manufacturers to make publicly available a contact address for vulnerability reporting and to clearly communicate their preferred channel and expected response process. This is a product transparency obligation — the contact must be easily accessible to any user or researcher. NIST does not address the manufacturer's obligation to maintain a public-facing vulnerability intake channel. The requirement is closer to a product labelling/documentation obligation than an information security control."
+    },
+    {
+      "id": "CRA.II.7",
+      "title": "Secure update distribution — mechanisms for timely and automatic security updates",
+      "controls": [
+        "SI-02",
+        "SI-07",
+        "CM-03",
+        "MA-01",
+        "SC-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-02 flaw remediation covers patch application. SI-07 integrity verification ensures updates have not been tampered with. CM-03 configuration change control governs update deployment. SC-08 transmission confidentiality and integrity protects the update distribution channel. MA-01 maintenance policy governs maintenance activities including updates.",
+      "gaps": "CRA requires the manufacturer to build secure, automatic update distribution mechanisms into the product itself — including cryptographic verification of updates, automatic download, and secure installation. This is a product engineering requirement, not an organisational process control. NIST addresses patch management from the deploying organisation's perspective. CRA also requires that updates be distributable in a timely manner even under high demand (infrastructure scalability), which has no NIST control equivalent."
+    },
+    {
+      "id": "CRA.II.8",
+      "title": "Free security updates — disseminated without delay, free of charge, with advisory information",
+      "controls": [
+        "SI-02",
+        "SI-05"
+      ],
+      "coverage_pct": 25,
+      "rationale": "SI-02 flaw remediation addresses the patching process. SI-05 security alerts provides a framework for communicating advisory information with updates. However, NIST does not address the economics of update distribution or mandate that updates be free.",
+      "gaps": "CRA mandates that security updates be provided free of charge, disseminated without delay, and accompanied by advisory information including severity, affected products, and user actions required. The free-of-charge requirement is a commercial/legal obligation entirely outside NIST's scope. NIST does not govern pricing of security updates or mandate specific advisory content format. CRA also distinguishes security updates from functionality updates, requiring they be separable — a product design requirement absent from NIST."
+    },
+    {
+      "id": "CRA.Info.1",
+      "title": "Manufacturer identification details — name, registered trade name, trademark, postal and electronic addresses",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No NIST 800-53 controls address manufacturer identification labelling on products. This is a product documentation and market regulation requirement derived from EU product safety law (New Legislative Framework), not an information security control.",
+      "gaps": "Entirely outside NIST scope. CRA requires the manufacturer's name, registered trade name or trademark, postal address, and email address to be provided on the product or its packaging, or in the accompanying documentation. This derives from EU product compliance legislation and CE marking requirements, not information security frameworks."
+    },
+    {
+      "id": "CRA.Info.2",
+      "title": "Vulnerability reporting single point of contact",
+      "controls": [
+        "IR-01",
+        "PM-15"
+      ],
+      "coverage_pct": 20,
+      "rationale": "IR-01 incident response policy establishes organisational reporting structures. PM-15 security groups and associations supports external engagement. However, these address internal processes, not the publication of a single point of contact for external vulnerability reporting.",
+      "gaps": "CRA requires manufacturers to designate and make publicly available a single point of contact for vulnerability reporting. This must be easily accessible to users and security researchers and distinct from customer support. NIST has no control for establishing or publishing a product-level vulnerability intake contact. This is a product transparency and documentation requirement outside NIST's organisational control model."
+    },
+    {
+      "id": "CRA.Info.3",
+      "title": "Product identification — type, batch, serial number, version",
+      "controls": [
+        "CM-08",
+        "CM-02"
+      ],
+      "coverage_pct": 15,
+      "rationale": "CM-08 system component inventory tracks component identifiers within an organisation's systems. CM-02 baseline configuration includes version identification. However, these address organisational asset management, not the manufacturer's product labelling obligation.",
+      "gaps": "CRA requires manufacturers to mark products with type name, batch/serial number, and any other identifying element enabling unique identification. This is a product traceability and market surveillance requirement from EU product regulation, not an information security control. NIST addresses component identification from the deploying organisation's perspective, not the manufacturer's labelling obligation."
+    },
+    {
+      "id": "CRA.Info.4",
+      "title": "Intended purpose and security environment description",
+      "controls": [
+        "SA-05",
+        "PL-02",
+        "PL-07"
+      ],
+      "coverage_pct": 42,
+      "rationale": "SA-05 system documentation addresses product documentation including intended use. PL-02 system security plan describes the security environment and boundaries. PL-07 (Rev 5) concept of operations defines intended system use. These controls provide partial alignment with documenting intended purpose and security context.",
+      "gaps": "CRA requires manufacturers to describe the product's intended purpose, the security-relevant properties of its environment of use, and any pre-conditions for secure deployment. This is product documentation aimed at end users and market surveillance authorities, not system security planning documentation. The CRA obligation extends to consumer-friendly descriptions, whereas NIST documentation controls target security professionals."
+    },
+    {
+      "id": "CRA.Info.5",
+      "title": "Known or foreseeable cybersecurity risk circumstances",
+      "controls": [
+        "RA-03",
+        "RA-05",
+        "PM-09",
+        "SA-05"
+      ],
+      "coverage_pct": 45,
+      "rationale": "RA-03 risk assessment and RA-05 vulnerability scanning identify known risks. PM-09 risk management strategy provides overarching risk governance. SA-05 system documentation can include risk information. However, these are organisational risk processes, not product documentation obligations.",
+      "gaps": "CRA requires manufacturers to document and communicate to users the known or reasonably foreseeable circumstances that may lead to cybersecurity risks, including misuse scenarios and environmental threats. This is a product safety communication obligation — similar to risk warnings on physical products — not an organisational risk assessment. NIST's risk assessment framework produces internal risk documentation, not consumer-facing product risk communications."
+    },
+    {
+      "id": "CRA.Info.6",
+      "title": "EU declaration of conformity access — simplified or full, with internet address",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No NIST 800-53 controls address EU declarations of conformity, CE marking, or product compliance documentation. This is an EU New Legislative Framework requirement for market access.",
+      "gaps": "Entirely outside NIST scope. CRA requires manufacturers to include a simplified EU declaration of conformity or a reference (including internet address) to the full declaration. This is an EU regulatory compliance documentation requirement derived from Decision 768/2008/EC and not related to information security controls."
+    },
+    {
+      "id": "CRA.Info.7",
+      "title": "Support period and end-date information",
+      "controls": [
+        "SA-22",
+        "PM-05"
+      ],
+      "coverage_pct": 25,
+      "rationale": "SA-22 unsupported system components addresses end-of-life and end-of-support scenarios. PM-05 system inventory tracks system lifecycle status. However, these address the deploying organisation's management of end-of-support, not the manufacturer's obligation to declare and communicate support periods.",
+      "gaps": "CRA requires manufacturers to clearly state the expected product support period (minimum 5 years from placing on market) and the end date for security updates. This must be communicated at the point of sale and in product documentation. NIST addresses unsupported components from the consumer organisation's risk management perspective, not the manufacturer's obligation to declare and honour a support commitment. The minimum 5-year support period is a legal obligation absent from NIST."
+    },
+    {
+      "id": "CRA.Info.8a",
+      "title": "Instructions for secure commissioning and lifetime use",
+      "controls": [
+        "SA-05",
+        "CM-06",
+        "PL-02",
+        "AT-01"
+      ],
+      "coverage_pct": 48,
+      "rationale": "SA-05 system documentation covers installation and operational documentation. CM-06 configuration settings provides guidance for secure configuration. PL-02 system security plan describes the security environment. AT-01 awareness and training policy supports user education. These controls provide partial coverage for secure deployment guidance.",
+      "gaps": "CRA requires manufacturers to provide clear, intelligible user instructions for secure initial setup, secure ongoing use throughout the product's lifetime, and secure configuration. This must be accessible to non-technical users. NIST documentation controls target security professionals deploying enterprise systems, not end-user product setup guides. CRA's scope includes consumer-friendly commissioning instructions, which is a product usability requirement beyond NIST's scope."
+    },
+    {
+      "id": "CRA.Info.8b",
+      "title": "How changes to the product affect data security",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "SA-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "CM-03 configuration change control and CM-04 impact analysis address change management and its security implications. SA-05 system documentation can cover change impact documentation. However, these are organisational process controls, not product documentation obligations.",
+      "gaps": "CRA requires manufacturers to document and communicate how product changes (updates, configuration modifications) affect data security. This must be communicated to end users in understandable terms. NIST addresses change management as an internal organisational process; it does not require communicating change impact to product end users."
+    },
+    {
+      "id": "CRA.Info.8c",
+      "title": "How to install security updates",
+      "controls": [
+        "SI-02",
+        "SA-05"
+      ],
+      "coverage_pct": 38,
+      "rationale": "SI-02 flaw remediation addresses the update process. SA-05 system documentation includes maintenance/update documentation. However, these address organisational patch management, not user-facing update installation instructions.",
+      "gaps": "CRA requires manufacturers to provide clear instructions to users on how to install security updates, including for products where automatic updates can be disabled. This must be accessible to non-technical end users. NIST's SI-02 is an organisational patch management control, not a requirement for consumer-facing update installation guidance."
+    },
+    {
+      "id": "CRA.Info.8d",
+      "title": "Secure decommissioning instructions — including data deletion",
+      "controls": [
+        "MP-06",
+        "SA-05"
+      ],
+      "coverage_pct": 35,
+      "rationale": "MP-06 media sanitisation addresses secure data deletion. SA-05 system documentation can include decommissioning procedures. However, these are organisational processes, not manufacturer-provided consumer decommissioning guides.",
+      "gaps": "CRA requires manufacturers to provide instructions for secure decommissioning, including permanent data deletion and secure transfer of data when replacing the product. This must be accessible to end users. NIST addresses media sanitisation as a technical organisational process performed by IT staff, not as consumer-facing product decommissioning instructions."
+    },
+    {
+      "id": "CRA.Info.8e",
+      "title": "How to disable automatic security updates",
+      "controls": [
+        "CM-07",
+        "SA-05"
+      ],
+      "coverage_pct": 22,
+      "rationale": "CM-07 least functionality addresses disabling unnecessary functions. SA-05 system documentation provides operational guidance. However, neither addresses the specific requirement to document how users can disable automatic updates.",
+      "gaps": "CRA requires manufacturers to provide instructions on how to opt out of automatic security updates, while making clear the security implications of doing so. This is a product transparency and user autonomy requirement. NIST has no concept of user opt-out from security updates; in NIST's model, the organisation mandates patching policy. CRA balances security with user autonomy in a way that is foreign to NIST's organisational control model."
+    },
+    {
+      "id": "CRA.Info.8f",
+      "title": "Integration documentation — secure integration with other products and systems",
+      "controls": [
+        "SA-05",
+        "SA-09",
+        "CA-03",
+        "SA-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-05 system documentation covers integration documentation. SA-09 external system services and CA-03 system interconnections address secure integration controls. SA-04 acquisition process can mandate integration documentation from suppliers. These controls provide reasonable coverage for integration security documentation.",
+      "gaps": "CRA requires manufacturers to provide documentation enabling users to securely integrate the product with other products and systems, including specifying secure interfaces, APIs, protocols, and dependencies. This must be comprehensive enough for non-specialist integrators. NIST's controls address interconnection management from the deploying organisation's perspective, not the manufacturer's obligation to supply integration documentation."
+    },
+    {
+      "id": "CRA.Art14",
+      "title": "Incident reporting — 24-hour early warning to CSIRT/ENISA, 72-hour notification, 14-day final report",
+      "controls": [
+        "IR-01",
+        "IR-05",
+        "IR-06",
+        "IR-08",
+        "PM-15",
+        "SI-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "IR-06 incident reporting provides a general incident reporting framework. IR-01 policy, IR-05 incident monitoring, and IR-08 incident response plan establish response processes. PM-15 security groups and associations supports external coordination. SI-05 security alerts addresses information sharing. However, NIST addresses internal and US-federal reporting, not EU CSIRT/ENISA reporting.",
+      "gaps": "CRA mandates a three-stage reporting obligation to national CSIRTs and ENISA: (1) 24-hour early warning upon becoming aware of an actively exploited vulnerability or severe incident, (2) 72-hour incident notification with initial assessment and IoCs, (3) 14-day final report with root cause analysis, remediation status, and cross-border impact assessment. These are strict legal deadlines with penalties for non-compliance. NIST IR-06 requires incident reporting but does not prescribe specific timeframes or mandatory reporting to EU authorities. The ENISA single reporting platform and cross-border coordination requirements are entirely EU-specific regulatory obligations outside NIST's scope."
+    }
+  ],
+  "summary": {
+    "total_clauses": 36,
+    "average_coverage": 51.1,
+    "full_count": 2,
+    "substantial_count": 12,
+    "partial_count": 10,
+    "weak_count": 10,
+    "none_count": 2
+  }
+}

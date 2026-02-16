@@ -107,10 +107,30 @@
       "nist_830_alignment": true,
       "enrichment_date": "2026-02-16",
       "notes": "5 adversary capability tiers (T1-T5) classifying all 469 ATT&CK techniques by minimum adversary sophistication required. Tiers are cumulative — higher tiers include all lower tier tradecraft. Uses STIX 2.1 vocabularies for actor attributes and NIST SP 800-30 capability/intent/targeting model. Technique assignments based on tool availability, skill requirement, detection difficulty, operational complexity, and prerequisite access."
+    },
+    "human_factors_model": {
+      "source": "OSA THFM (Trident Human Factors Model)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "trident-human-factors-model.md",
+      "total_classes": 24,
+      "categories": 6,
+      "category_breakdown": {
+        "AU_authority_compliance": 3,
+        "UR_urgency_scarcity": 3,
+        "TR_trust_rapport": 4,
+        "CU_curiosity_reward": 3,
+        "HB_habitual_cognitive_load": 4,
+        "IN_insider_disposition": 7
+      },
+      "cialdini_mapped": 17,
+      "insider_classes": 7,
+      "exploits_human_edges": 31,
+      "enrichment_date": "2026-02-16",
+      "notes": "24 cognitive vulnerability classes across 6 categories. Social engineering classes (AU/UR/TR/CU/HB) map to ATT&CK techniques via EXPLOITS_HUMAN edges with rationale. Insider disposition classes (IN) have no technique edges — they are risk factors mitigated by SP800-53 controls. Cialdini principle mapping on 17 of 24 classes; remaining 7 map to cognitive biases outside Cialdini framework."
     }
   },
   "graph_summary": {
-    "total_edges": 18843,
+    "total_edges": 18874,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -122,7 +142,8 @@
       "USES": 2921,
       "CLASSIFIED_BY": 140,
       "PROVIDES_CAPABILITY": 123,
-      "TIER_CONTAINS": 469
+      "TIER_CONTAINS": 469,
+      "EXPLOITS_HUMAN": 31
     },
     "node_types": {
       "technique": 469,
@@ -134,7 +155,8 @@
       "threat_actor": 163,
       "process_capability": 30,
       "technology_class": 28,
-      "adversary_tier": 5
+      "adversary_tier": 5,
+      "human_factor": 24
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -145,7 +167,8 @@
       "direct_shortcut": "Technique <-mitigates- Control (CTID, in control attack_techniques[] — LEGACY, retained for validation only)",
       "process_capability_path": "Control <-CLASSIFIED_BY- ProcessCapability (TPCE process implementation classification)",
       "technology_capability_path": "Control <-PROVIDES_CAPABILITY- TechnologyClass (TTCE technology capability profiling)",
-      "adversary_capability_path": "AdversaryTier -TIER_CONTAINS-> Technique (TACM capability tier classification)"
+      "adversary_capability_path": "AdversaryTier -TIER_CONTAINS-> Technique (TACM capability tier classification)",
+      "human_factors_path": "HumanFactor -EXPLOITS_HUMAN-> Technique (THFM cognitive vulnerability exploitation)"
     }
   },
   "files": {
@@ -158,7 +181,8 @@
     "process-capability-catalog.json": "30 TPCE process capabilities with controlRefs[], cisSafeguards[], attackMitigations[]",
     "technology-capability-catalog.json": "28 TTCE technology classes with 86 capabilities, controlRefs[], cisSafeguards[], attackMitigations[], D3FEND alignment",
     "adversary-tier-catalog.json": "5 TACM adversary capability tiers with STIX/NIST attributes and technique tier distribution",
-    "graph-edges.json": "18,843 explicit TRIDENT graph edges across 11 relationship types",
+    "human-factors-catalog.json": "24 THFM cognitive vulnerability classes across 6 categories with Cialdini mappings and SP800-53 control refs",
+    "graph-edges.json": "18,874 explicit TRIDENT graph edges across 12 relationship types",
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",

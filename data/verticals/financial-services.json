@@ -1,0 +1,423 @@
+{
+  "id": "VP-FS",
+  "name": "Financial Services",
+  "description": "Vertical profile for regulated financial services organisations. Covers 4 sub-verticals from TACM §5.2 reference threat profiles: mid-market regulated FS, Tier 1 global banks, payment processors, and exchanges/CCPs. Scopes technique sets, regulatory requirements, and human factor priorities for the TRIDENT derivation engine.",
+  "version": "0.1.0",
+  "status": "draft",
+  "subVerticalProfiles": [
+    {
+      "id": "TP-FS-MID-MARKET",
+      "name": "Mid-Market Regulated",
+      "description": "Regional banks, building societies, mid-tier asset managers, insurance firms. Regulated under general FS frameworks but without systemic importance designation. Primary threat is organised cybercrime (ransomware, BEC); nation-state targeting is possible but not primary.",
+      "subVertical": "mid-market-regulated",
+      "maxTier": 2,
+      "tierLikelihoods": [
+        { "tier": "TACM-T1", "likelihood": "certain" },
+        { "tier": "TACM-T2", "likelihood": "likely" },
+        { "tier": "TACM-T3", "likelihood": "possible" }
+      ],
+      "relevantActorTypes": [
+        "criminal",
+        "crime-syndicate",
+        "hacker",
+        "insider-accidental",
+        "insider-disgruntled"
+      ],
+      "primaryMotivations": [
+        "personal-gain",
+        "organizational-gain",
+        "revenge"
+      ],
+      "regulatoryScope": [
+        "gdpr",
+        "pci_dss_v4",
+        "iso_27001_2022",
+        "nis2"
+      ],
+      "advisoryFrameworks": [
+        "nist_csf_2",
+        "cis_controls_v8",
+        "iso_27002_2022",
+        "soc2_tsc"
+      ]
+    },
+    {
+      "id": "TP-FS-TIER1-BANK",
+      "name": "Tier 1 Global Bank",
+      "description": "G-SIBs and D-SIBs — globally or domestically systemically important banks. Subject to the most stringent regulatory requirements. Face the full spectrum of threat actors from commodity criminals to state-directed espionage. SWIFT connectivity and high-value payment systems make them high-priority targets for FIN-series groups and nation-state actors (Lazarus Group/DPRK targeting SWIFT since 2016).",
+      "subVertical": "tier-1-bank",
+      "maxTier": 4,
+      "tierLikelihoods": [
+        { "tier": "TACM-T1", "likelihood": "certain" },
+        { "tier": "TACM-T2", "likelihood": "certain" },
+        { "tier": "TACM-T3", "likelihood": "likely" },
+        { "tier": "TACM-T4", "likelihood": "possible" },
+        { "tier": "TACM-T5", "likelihood": "unlikely" }
+      ],
+      "relevantActorTypes": [
+        "criminal",
+        "crime-syndicate",
+        "nation-state",
+        "spy",
+        "insider-accidental",
+        "insider-disgruntled",
+        "activist"
+      ],
+      "primaryMotivations": [
+        "personal-gain",
+        "organizational-gain",
+        "dominance",
+        "ideology",
+        "coercion"
+      ],
+      "regulatoryScope": [
+        "gdpr",
+        "dora",
+        "pci_dss_v4",
+        "swift_cscf",
+        "nis2",
+        "iso_27001_2022"
+      ],
+      "advisoryFrameworks": [
+        "nist_csf_2",
+        "cis_controls_v8",
+        "iso_27002_2022",
+        "soc2_tsc",
+        "cobit_2019",
+        "uk_pra_fca",
+        "finma_circular",
+        "mas_trm",
+        "apra_cps_234",
+        "osfi_b13",
+        "hkma_tme1",
+        "dnb_good_practice",
+        "fisc",
+        "rbi_csf",
+        "finos_ccc"
+      ]
+    },
+    {
+      "id": "TP-FS-PAYMENT-PROC",
+      "name": "Payment Processor",
+      "description": "Card acquirers, payment gateways, PSPs, and e-money institutions. PCI DSS is the defining regulatory requirement. High transaction volumes and direct access to payment rails make them primary targets for financially motivated organised crime. Supply chain position means compromise affects thousands of merchants downstream.",
+      "subVertical": "payment-processor",
+      "maxTier": 3,
+      "tierLikelihoods": [
+        { "tier": "TACM-T1", "likelihood": "certain" },
+        { "tier": "TACM-T2", "likelihood": "certain" },
+        { "tier": "TACM-T3", "likelihood": "likely" },
+        { "tier": "TACM-T4", "likelihood": "unlikely" }
+      ],
+      "relevantActorTypes": [
+        "criminal",
+        "crime-syndicate",
+        "nation-state",
+        "insider-accidental",
+        "insider-disgruntled"
+      ],
+      "primaryMotivations": [
+        "personal-gain",
+        "organizational-gain"
+      ],
+      "regulatoryScope": [
+        "gdpr",
+        "pci_dss_v4",
+        "nis2",
+        "iso_27001_2022"
+      ],
+      "advisoryFrameworks": [
+        "nist_csf_2",
+        "cis_controls_v8",
+        "dora",
+        "soc2_tsc",
+        "iso_27002_2022"
+      ]
+    },
+    {
+      "id": "TP-FS-EXCHANGE-CCP",
+      "name": "Exchange / CCP",
+      "description": "Stock exchanges, derivatives exchanges, central counterparties, central securities depositories. Designated as critical financial market infrastructure (FMI) under CPMI-IOSCO Principles. Disruption has systemic consequences — a 4-hour outage at a major CCP can cascade across global markets. Face state-directed threats due to geopolitical significance and potential for market manipulation.",
+      "subVertical": "exchange-ccp",
+      "maxTier": 4,
+      "tierLikelihoods": [
+        { "tier": "TACM-T1", "likelihood": "certain" },
+        { "tier": "TACM-T2", "likelihood": "certain" },
+        { "tier": "TACM-T3", "likelihood": "likely" },
+        { "tier": "TACM-T4", "likelihood": "possible" },
+        { "tier": "TACM-T5", "likelihood": "unlikely" }
+      ],
+      "relevantActorTypes": [
+        "criminal",
+        "crime-syndicate",
+        "nation-state",
+        "spy",
+        "insider-accidental",
+        "insider-disgruntled",
+        "activist"
+      ],
+      "primaryMotivations": [
+        "personal-gain",
+        "organizational-gain",
+        "dominance",
+        "ideology"
+      ],
+      "regulatoryScope": [
+        "gdpr",
+        "dora",
+        "nis2",
+        "iso_27001_2022"
+      ],
+      "advisoryFrameworks": [
+        "nist_csf_2",
+        "cis_controls_v8",
+        "iso_27002_2022",
+        "soc2_tsc",
+        "uk_pra_fca",
+        "finma_circular",
+        "dnb_good_practice",
+        "finos_ccc"
+      ]
+    }
+  ],
+  "regulatoryLandscape": {
+    "mandatoryFrameworks": [
+      "gdpr",
+      "iso_27001_2022",
+      "nis2"
+    ],
+    "subVerticalFrameworks": {
+      "mid-market-regulated": [
+        "pci_dss_v4"
+      ],
+      "tier-1-bank": [
+        "dora",
+        "pci_dss_v4",
+        "swift_cscf"
+      ],
+      "payment-processor": [
+        "pci_dss_v4"
+      ],
+      "exchange-ccp": [
+        "dora"
+      ]
+    },
+    "frameworkNotes": {
+      "gdpr": "Applies to all FS entities processing personal data of EU/EEA residents. Extra-territorial scope means non-EU FS firms serving EU clients are in scope.",
+      "dora": "Digital Operational Resilience Act (EU 2022/2554). Mandatory for credit institutions, payment institutions, investment firms, trading venues, CCPs, CSDs, and ICT third-party service providers designated as critical. Applies from 17 January 2025.",
+      "pci_dss_v4": "Mandatory for any entity that stores, processes, or transmits cardholder data. Scope varies — a Tier 1 bank may have PCI zones while non-card business units are exempt. Payment processors are fully in scope.",
+      "swift_cscf": "SWIFT Customer Security Controls Framework. Mandatory for all SWIFT-connected institutions. Self-attestation required annually. Not all FS entities connect to SWIFT — mid-market firms may use correspondent banking instead.",
+      "nis2": "Network and Information Systems Directive 2 (EU 2022/2555). Financial services entities are 'essential entities' under Annex I. Applies from 18 October 2024. Member state transposition varies.",
+      "iso_27001_2022": "Not legally mandated but effectively required — most FS regulators expect an ISMS aligned to ISO 27001 or equivalent. Many require certification.",
+      "uk_pra_fca": "UK Prudential Regulation Authority and Financial Conduct Authority. Operational resilience requirements (PS6/21, PS21/3). Applies to UK-authorised firms — banks, insurers, FCA solo-regulated firms. Important business services must be mapped and impact tolerances set.",
+      "finma_circular": "Swiss Financial Market Supervisory Authority Circular 2023/1 on operational risks and resilience. Applies to Swiss-authorised banks, securities dealers, and insurance companies.",
+      "mas_trm": "Monetary Authority of Singapore Technology Risk Management Guidelines. Applies to all financial institutions in Singapore.",
+      "apra_cps_234": "Australian Prudential Regulation Authority CPS 234 Information Security. Applies to all APRA-regulated entities in Australia.",
+      "osfi_b13": "Office of the Superintendent of Financial Institutions Guideline B-13 Technology and Cyber Risk Management. Applies to all federally regulated financial institutions in Canada.",
+      "hkma_tme1": "Hong Kong Monetary Authority Technology Risk Management Module TM-E-1. Applies to all authorized institutions in Hong Kong.",
+      "dnb_good_practice": "De Nederlandsche Bank Good Practice Information Security 2023. Applies to Dutch financial institutions supervised by DNB.",
+      "fisc": "Center for Financial Industry Information Systems Security Guidelines. Applies to Japanese financial institutions.",
+      "rbi_csf": "Reserve Bank of India Cyber Security Framework. Applies to all scheduled commercial banks and urban cooperative banks in India.",
+      "finos_ccc": "FINOS Common Cloud Controls. Industry consortium standard for financial services cloud adoption. Advisory but increasingly referenced by regulators.",
+      "soc2_tsc": "SOC 2 Type II attestation. Not legally mandated but commercially required — most FS vendor contracts require SOC 2 reports.",
+      "nist_csf_2": "NIST Cybersecurity Framework 2.0. Not mandatory for non-US FS firms but widely adopted as the de facto risk management framework. US banking regulators increasingly reference CSF alignment."
+    }
+  },
+  "humanFactorsProfile": {
+    "elevatedRiskFactors": [
+      {
+        "ref": "THFM-IN-01",
+        "elevation": "critical",
+        "rationale": "Trading floor staff, treasury operations, and payment processing roles have direct access to high-value transaction systems. Financial pressure combined with knowledge of payment flows and system controls creates elevated fraud opportunity. CERT research shows 37% of insider cases involve financial fraud — the dominant insider impact category."
+      },
+      {
+        "ref": "THFM-IN-02",
+        "elevation": "elevated",
+        "rationale": "Bonus culture, redundancy cycles, and regulatory-driven restructuring create periodic disgruntlement spikes. Passed-over traders or displaced IT staff with retained system access represent elevated risk. Annual bonus round (Q1) and cost-cutting cycles are high-risk periods."
+      },
+      {
+        "ref": "THFM-IN-04",
+        "elevation": "elevated",
+        "rationale": "FS staff with access to payment systems or market-sensitive information are targets for coercion by organised crime and nation-state actors. Blackmail and extortion risks are elevated for roles with SWIFT access, trading authority, or regulatory reporting responsibilities."
+      },
+      {
+        "ref": "THFM-IN-06",
+        "elevation": "high",
+        "rationale": "Long-tenured FS staff accumulate access across trading systems, payment platforms, and client data repositories. Role changes (front-to-back office, trading desk moves) without access review create privilege accumulation. Merger/acquisition activity compounds this — inherited system access from acquired entities."
+      },
+      {
+        "ref": "THFM-IN-07",
+        "elevation": "high",
+        "rationale": "Departing staff in FS frequently move to competitors. Client lists, trading strategies, proprietary models, and market intelligence are high-value IP theft targets. Notice periods (typically 3-6 months in FS) create extended departure windows. Garden leave reduces but does not eliminate risk if system access is not revoked immediately."
+      }
+    ],
+    "sectorSpecificNotes": {
+      "THFM-IN-01": "Trading floor staff, treasury operations, and payment processing roles have direct access to high-value transaction authority. Financial pressure is the primary insider fraud motivator in FS (CERT: 37% of insider cases). Monitoring should cover unusual trading patterns, out-of-hours payment approvals, and split transactions designed to avoid dual-control thresholds.",
+      "THFM-IN-02": "Bonus disputes, redundancy programmes, and regulatory-driven restructuring (e.g., ring-fencing, cost of compliance headcount) create cyclical disgruntlement. IT and operations staff displaced by outsourcing retain institutional knowledge of system weaknesses.",
+      "THFM-IN-03": "Ideological motivation is lower in FS than in defence/government but not absent. ESG-related activism, whistleblowing on perceived misconduct (LIBOR-type scenarios), and politically-motivated data leaks to journalists are the primary FS-specific manifestations.",
+      "THFM-IN-04": "FS staff are recruitment targets for intelligence services and organised crime. SWIFT operators, compliance officers, and IT administrators with privileged access are particularly exposed. Coercion vectors include financial leverage (gambling debts), compromising personal information, and threats to family.",
+      "THFM-IN-05": "Negligence in FS often involves workarounds to dual-control requirements, sharing of service accounts on trading platforms, and failure to encrypt sensitive data in transit. Regulatory fines for negligent data handling (GDPR, PCI DSS) create organisational liability even without malicious intent.",
+      "THFM-IN-06": "FS privilege accumulation is compounded by the complexity of entitlement landscapes — trading systems, payment platforms, market data terminals, client reporting systems, and regulatory reporting tools each have independent access control. Joiners-movers-leavers processes frequently fail to cover all systems.",
+      "THFM-IN-07": "FS departure risk is elevated by competitive intelligence value. Client lists, trading algorithms, market research, and deal pipeline data are high-value targets. Regulatory requirements (e.g., MiFID II recording obligations) provide some forensic trail but personal device usage creates blind spots."
+    },
+    "socialEngineeringProfile": [
+      {
+        "ref": "THFM-AU-01",
+        "rank": 1,
+        "prevalence": "critical",
+        "rationale": "Business Email Compromise (BEC) / CEO fraud is the #1 social engineering vector in financial services. Authority impersonation exploits hierarchical compliance culture in banks — requests appearing to come from CFO, CEO, or senior traders bypass verification. FBI IC3 reports $2.9B in BEC losses in 2023, with FS disproportionately targeted due to high-value transaction capability."
+      },
+      {
+        "ref": "THFM-AU-02",
+        "rank": 2,
+        "prevalence": "high",
+        "rationale": "FS hierarchical culture creates strong deference to seniority. Requests from perceived managing directors or C-suite bypass normal verification procedures. Particularly dangerous in trading environments where speed is valued over process."
+      },
+      {
+        "ref": "THFM-UR-01",
+        "rank": 3,
+        "prevalence": "high",
+        "rationale": "Time pressure is endemic in FS — market close deadlines, settlement windows, regulatory reporting deadlines. Adversaries time social engineering to coincide with known pressure points (end-of-day settlement, quarter-end reporting, regulatory filing deadlines)."
+      },
+      {
+        "ref": "THFM-TR-01",
+        "rank": 4,
+        "prevalence": "high",
+        "rationale": "Internal trust exploitation is elevated in FS due to high email volumes between trusted counterparts — traders, operations staff, compliance teams. Compromised internal accounts (via credential theft or BEC) are highly effective because FS staff routinely execute financial instructions received via internal channels."
+      },
+      {
+        "ref": "THFM-HB-04",
+        "rank": 5,
+        "prevalence": "elevated",
+        "rationale": "Routine deviation blindness is high in FS payment operations where staff process hundreds of similar transactions daily. A fraudulent payment instruction that matches the format and cadence of legitimate transactions may not trigger anomaly detection by human operators."
+      },
+      {
+        "ref": "THFM-UR-02",
+        "rank": 6,
+        "prevalence": "elevated",
+        "rationale": "Loss aversion is amplified in FS where financial loss is both personally and professionally consequential. Phishing using account suspension, credential expiry, or regulatory non-compliance threats is effective against staff attuned to financial risk."
+      },
+      {
+        "ref": "THFM-HB-01",
+        "rank": 7,
+        "prevalence": "elevated",
+        "rationale": "Security fatigue in FS is driven by multiple authentication systems, frequent password rotations, and layered security controls across trading, payment, and communication platforms. MFA fatigue attacks are effective against staff who authenticate dozens of times daily."
+      },
+      {
+        "ref": "THFM-HB-02",
+        "rank": 8,
+        "prevalence": "elevated",
+        "rationale": "Cognitive load exploitation targets FS staff during peak processing periods — market open/close, month-end, regulatory reporting windows. Phishing campaigns timed to high-volume periods exploit reduced capacity for security evaluation."
+      },
+      {
+        "ref": "THFM-TR-02",
+        "rank": 9,
+        "prevalence": "moderate",
+        "rationale": "Relationship-based compliance in FS manifests through trusted third-party channels — correspondent banks, clearing members, vendor integrations. Trusted Relationship (T1199) attacks via compromised third parties exploit established FS interconnections."
+      },
+      {
+        "ref": "THFM-AU-03",
+        "rank": 10,
+        "prevalence": "moderate",
+        "rationale": "Technical authority deference is moderate in FS — IT helpdesk impersonation is effective but FS staff are generally more sceptical of unsolicited IT requests than in other verticals due to security awareness investment."
+      },
+      {
+        "ref": "THFM-CU-01",
+        "rank": 11,
+        "prevalence": "moderate",
+        "rationale": "Curiosity-driven attacks in FS often use market-relevant lures — fake research reports, leaked deal information, regulatory announcements. Effective against front-office staff and analysts."
+      },
+      {
+        "ref": "THFM-UR-03",
+        "rank": 12,
+        "prevalence": "moderate",
+        "rationale": "Fear-based compliance using regulatory threat pretexts (FCA investigation, PCI audit finding, GDPR breach notification) is effective in FS where regulatory consequence is well understood and feared."
+      },
+      {
+        "ref": "THFM-TR-03",
+        "rank": 13,
+        "prevalence": "moderate",
+        "rationale": "Social proof compliance is moderate — FS staff may assume mass-distributed emails are legitimate if colleagues appear to have received the same message. Less effective than authority-based attacks in the FS hierarchy."
+      },
+      {
+        "ref": "THFM-HB-03",
+        "rank": 14,
+        "prevalence": "moderate",
+        "rationale": "Automation bias in FS relates to over-trust in screening systems — if an email passes the gateway, if a payment clears compliance checks, staff assume it is legitimate. Particularly relevant for AI-assisted decision support systems entering FS workflows."
+      },
+      {
+        "ref": "THFM-CU-02",
+        "rank": 15,
+        "prevalence": "baseline",
+        "rationale": "Incentive-driven attacks (gift cards, prizes) are less effective in FS where staff are generally well-compensated and trained to be suspicious of unsolicited rewards."
+      },
+      {
+        "ref": "THFM-TR-04",
+        "rank": 16,
+        "prevalence": "baseline",
+        "rationale": "Reciprocity obligation attacks have baseline prevalence in FS. The transactional culture of financial services means staff are less susceptible to reciprocity-based social engineering than in more relationship-driven verticals."
+      },
+      {
+        "ref": "THFM-CU-03",
+        "rank": 17,
+        "prevalence": "baseline",
+        "rationale": "Information-seeking behaviour beyond need-to-know is controlled in FS by Chinese wall requirements, information barrier policies, and market abuse regulations. Regulatory controls reduce but do not eliminate this vulnerability."
+      }
+    ]
+  },
+  "patternRelevance": {
+    "corePatterns": [
+      "SP-010",
+      "SP-013",
+      "SP-014",
+      "SP-017",
+      "SP-018",
+      "SP-020",
+      "SP-025",
+      "SP-026",
+      "SP-029",
+      "SP-030",
+      "SP-031",
+      "SP-032",
+      "SP-034",
+      "SP-036",
+      "SP-037",
+      "SP-038",
+      "SP-039",
+      "SP-042",
+      "SP-043",
+      "SP-044",
+      "SP-046"
+    ],
+    "patternNotes": {
+      "SP-010": "Identity management is foundational — FS regulatory requirements mandate strong authentication for all system access. DORA Art.9 and PCI DSS Req.8 are explicit.",
+      "SP-013": "Data security underpins all FS data protection obligations — GDPR, PCI DSS cardholder data, MiFID II transaction records, market-sensitive information classification.",
+      "SP-014": "Awareness and training is a regulatory requirement across all FS frameworks. DORA Art.13(6) mandates ICT security awareness programmes. Effectiveness against BEC (THFM-AU-01) makes this critical in FS.",
+      "SP-017": "Network segmentation is a core PCI DSS requirement (Req.1) and essential for isolating cardholder data environments, SWIFT zones, and trading systems from general corporate networks.",
+      "SP-018": "ISMS (ISO 27001) is effectively mandatory for all FS entities. Most regulators require an ISMS framework aligned to ISO 27001 or equivalent.",
+      "SP-020": "Email TLS protects the primary BEC attack vector. Despite being a legacy pattern, email security remains critical in FS where email-initiated payment fraud is the top social engineering threat.",
+      "SP-025": "Advanced monitoring and detection is required for T3+ threat profiles. DORA Art.10 mandates detection capabilities. SWIFT CSCF requires anomaly detection on SWIFT transactions.",
+      "SP-026": "PCI full environment is directly applicable to all FS entities handling cardholder data. The pattern maps the complete PCI DSS v4 control environment.",
+      "SP-029": "Zero Trust Architecture is the strategic direction for FS network security. DORA resilience requirements and the dissolution of traditional perimeters (cloud adoption, remote working) make ZTA essential.",
+      "SP-030": "API security is critical as FS adopts open banking (PSD2), real-time payments, and partner integrations. API attack surface is expanding rapidly in FS.",
+      "SP-031": "Security monitoring and response is required by all FS regulators. DORA Art.10-11, PCI DSS Req.10, SWIFT CSCF mandatory controls. SOC capability is non-negotiable for T2+ threat profiles.",
+      "SP-032": "Modern authentication (MFA, passwordless) addresses credential-based attacks that dominate T1-T2 tradecraft. PCI DSS v4 Req.8.4 mandates MFA for all access to cardholder data environments.",
+      "SP-034": "Cyber resilience is the central theme of DORA. Operational resilience requirements (UK PS6/21, EU DORA, APRA CPS 230) mandate business continuity and recovery capabilities specifically for cyber scenarios.",
+      "SP-036": "Incident response is mandated by DORA Art.17-19 (ICT-related incident management), NIS2 Art.23 (incident reporting), and all FS regulators. 72-hour reporting obligations under GDPR and DORA.",
+      "SP-037": "Privileged user management is critical in FS where privileged accounts can authorise high-value transactions, modify trading systems, or access market-sensitive data. PAM is a SWIFT CSCF mandatory control.",
+      "SP-038": "Vulnerability management addresses the commodity attack surface (T1 tradecraft). PCI DSS Req.6 and Req.11, DORA Art.8, and SWIFT CSCF all mandate vulnerability management programmes.",
+      "SP-039": "Client-side encryption protects sensitive data (cardholder data, PII) at the application layer. Relevant for payment applications, mobile banking, and client-facing platforms.",
+      "SP-042": "Third-party risk management is mandated by DORA Art.28-44 (ICT third-party risk), PCI DSS Req.12.8, and all FS regulators. Supply chain compromise (T3 tradecraft) makes TPRM essential for T3+ profiles.",
+      "SP-043": "Security metrics are required for board reporting and regulatory compliance. DORA Art.5 mandates ICT risk management framework with measurable risk appetite. Board-level cyber reporting is a regulatory expectation.",
+      "SP-044": "SaaS identity lifecycle management addresses the expanding cloud footprint in FS. Orphaned SaaS accounts and unmanaged OAuth grants create shadow IT risk in regulated environments.",
+      "SP-046": "External attack surface management is relevant for FS entities with complex internet-facing footprints — customer portals, API gateways, trading platforms, mobile apps."
+    }
+  },
+  "_meta": {
+    "createdAt": "2026-02-16",
+    "createdBy": "Vitruvius",
+    "reviewStatus": "draft — founder review required",
+    "reviewNotes": "Tier likelihoods from TACM §5.2 reference table. Regulatory scope assignments based on framework applicability analysis. THFM elevations and social engineering rankings are domain-expert judgement calls — Vinylwasp and Aurelius should calibrate from operational experience.",
+    "tacmSourceSection": "§5.2 Reference Threat Profiles",
+    "thfmSourceCatalog": "human-factors-catalog.json (24 classes), insider-stage-catalog.json (5 stages)"
+  }
+}

@@ -1069,6 +1069,203 @@
       },
       "required": ["id", "name", "category", "description"]
     },
+    "VerticalProfile": {
+      "$id": "https://example.org/trident/vertical-profile.schema.json",
+      "type": "object",
+      "description": "Vertical-specific configuration profile that the TRIDENT derivation engine consumes to scope technique sets, regulatory requirements, and human factor priorities per sub-vertical.",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "name": { "$ref": "#/$defs/NonEmptyString" },
+        "description": { "$ref": "#/$defs/Text" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "active", "retired"]
+        },
+        "subVerticalProfiles": {
+          "type": "array",
+          "description": "Threat profiles per sub-vertical, derived from TACM §5.2 reference profiles",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/$defs/Identifier" },
+              "name": { "$ref": "#/$defs/NonEmptyString" },
+              "description": { "$ref": "#/$defs/Text" },
+              "subVertical": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "maxTier": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "tierLikelihoods": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "tier": {
+                      "type": "string",
+                      "pattern": "^TACM-T[1-5]$"
+                    },
+                    "likelihood": {
+                      "type": "string",
+                      "enum": ["certain", "likely", "possible", "unlikely"]
+                    }
+                  },
+                  "required": ["tier", "likelihood"]
+                },
+                "minItems": 1,
+                "maxItems": 5
+              },
+              "relevantActorTypes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "nation-state", "crime-syndicate", "criminal", "hacker",
+                    "insider-accidental", "insider-disgruntled", "activist",
+                    "competitor", "spy", "terrorist"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "primaryMotivations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "personal-gain", "organizational-gain", "dominance",
+                    "ideology", "notoriety", "coercion", "revenge",
+                    "personal-satisfaction", "accidental", "unpredictable"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "regulatoryScope": {
+                "type": "array",
+                "items": { "type": "string" },
+                "uniqueItems": true,
+                "description": "Framework IDs mandatory for this sub-vertical"
+              },
+              "advisoryFrameworks": {
+                "type": "array",
+                "items": { "type": "string" },
+                "uniqueItems": true,
+                "description": "Framework IDs advisory/recommended for this sub-vertical"
+              }
+            },
+            "required": ["id", "name", "subVertical", "maxTier", "tierLikelihoods"]
+          },
+          "minItems": 1,
+          "maxItems": 32
+        },
+        "regulatoryLandscape": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mandatoryFrameworks": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true,
+              "description": "Frameworks applying to all entities in this vertical"
+            },
+            "subVerticalFrameworks": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": { "type": "string" },
+                "uniqueItems": true
+              },
+              "description": "Per sub-vertical mandatory frameworks keyed by sub-vertical ID"
+            },
+            "frameworkNotes": {
+              "type": "object",
+              "additionalProperties": { "type": "string" },
+              "description": "Per framework-ID applicability notes"
+            }
+          }
+        },
+        "humanFactorsProfile": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "elevatedRiskFactors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "ref": {
+                    "type": "string",
+                    "pattern": "^THFM-IN-[0-9]{2}$"
+                  },
+                  "elevation": {
+                    "type": "string",
+                    "enum": ["elevated", "high", "critical"]
+                  },
+                  "rationale": { "$ref": "#/$defs/Text" }
+                },
+                "required": ["ref", "elevation", "rationale"]
+              },
+              "maxItems": 16
+            },
+            "sectorSpecificNotes": {
+              "type": "object",
+              "additionalProperties": { "type": "string" },
+              "description": "Per THFM class ID, sector-specific context"
+            },
+            "socialEngineeringProfile": {
+              "type": "array",
+              "description": "THFM cognitive vulnerability classes ranked by sector prevalence",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "ref": {
+                    "type": "string",
+                    "pattern": "^THFM-[A-Z]+-[0-9]{2}$"
+                  },
+                  "rank": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "prevalence": {
+                    "type": "string",
+                    "enum": ["critical", "high", "elevated", "moderate", "baseline"]
+                  },
+                  "rationale": { "$ref": "#/$defs/Text" }
+                },
+                "required": ["ref", "rank", "prevalence"]
+              },
+              "maxItems": 32
+            }
+          }
+        },
+        "patternRelevance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "corePatterns": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true,
+              "description": "Pattern IDs most relevant to this vertical"
+            },
+            "patternNotes": {
+              "type": "object",
+              "additionalProperties": { "type": "string" },
+              "description": "Per pattern-ID, vertical-specific context"
+            }
+          }
+        }
+      },
+      "required": ["id", "name", "version", "status", "subVerticalProfiles"]
+    },
     "InsiderStage": {
       "$id": "https://example.org/trident/insider-stage.schema.json",
       "type": "object",

@@ -11,7 +11,16 @@
       "techniques_mapped": 469,
       "families_covered": ["AC", "CA", "CM", "CP", "IA", "MP", "RA", "SA", "SC", "SI", "SR"],
       "enrichment_date": "2026-02-14",
-      "notes": "CTID maps 11 NIST families. Controls in other families (AT, AU, IR, MA, PE, PL, PM, PS, PT) have no ATT&CK mappings in this dataset."
+      "status": "legacy",
+      "deprecation": {
+        "deprecated_date": "2026-02-16",
+        "reason": "Superseded by TRIDENT mitigation path (Control -> Mitigation -> Technique) which uses MITRE first-party data. CTID is a third-party interpretive mapping with 99.5% overlap with the mitigation path but lower authority.",
+        "superseded_by": "mitigations + graph-edges (COUNTERS, PRESCRIBES, ALIGNS_TO)",
+        "retained_for": "backtesting, quality assurance, coverage validation against TRIDENT mitigation path",
+        "removed_from": ["trident-explorer", "attack-matrix-detail-panel"],
+        "data_preserved": true
+      },
+      "notes": "CTID maps 11 NIST families. Controls in other families (AT, AU, IR, MA, PE, PL, PM, PS, PT) have no ATT&CK mappings in this dataset. LEGACY: retained for validation only — the TRIDENT mitigation path (Mitigation -COUNTERS-> Technique, CIS Safeguard -ALIGNS_TO-> Mitigation, Control -IMPLEMENTED_BY-> CIS Safeguard) provides equivalent coverage using MITRE first-party data."
     },
     "mitigations": {
       "source": "MITRE ATT&CK STIX Data",
@@ -88,7 +97,7 @@
       "weakness_path": "Technique -EXPLOITS-> WeaknessClass(CWE)",
       "threat_path": "ThreatActor -USES-> Technique (actor technique repertoire)",
       "governance_path": "Framework -SATISFIED_BY-> Control (in control compliance_mappings)",
-      "direct_shortcut": "Technique <-mitigates- Control (CTID, in control attack_techniques[])"
+      "direct_shortcut": "Technique <-mitigates- Control (CTID, in control attack_techniques[] — LEGACY, retained for validation only)"
     }
   },
   "files": {
@@ -102,5 +111,5 @@
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",
-  "last_updated": "2026-02-14"
+  "last_updated": "2026-02-16"
 }

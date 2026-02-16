@@ -174,6 +174,67 @@ def main():
                     validated += 1
                     print(f"  OK: {actor_path.name}")
 
+    # Validate TPCE process capability catalog
+    tpce_path = attack_dir / "process-capability-catalog.json"
+    if tpce_path.exists():
+        print("\nTPCE Process Capabilities:")
+        if not validate_json_syntax(tpce_path):
+            errors += 1
+        else:
+            with open(tpce_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            tpce_errors = 0
+            for cap_id, cap in data.items():
+                required = ['id', 'name', 'family', 'family_name', 'description', 'controlRefs', 'cisSafeguards', 'attackMitigations']
+                missing = [r for r in required if r not in cap]
+                if missing:
+                    print(f"  FAIL: {cap_id} missing fields: {missing}")
+                    tpce_errors += 1
+                if cap.get('id') != cap_id:
+                    print(f"  FAIL: {cap_id} id mismatch: {cap.get('id')}")
+                    tpce_errors += 1
+            if tpce_errors:
+                errors += tpce_errors
+            else:
+                validated += 1
+                print(f"  OK: {tpce_path.name} ({len(data)} process capabilities)")
+
+    # Validate TTCE technology capability catalog
+    ttce_path = attack_dir / "technology-capability-catalog.json"
+    if ttce_path.exists():
+        print("\nTTCE Technology Capabilities:")
+        if not validate_json_syntax(ttce_path):
+            errors += 1
+        else:
+            with open(ttce_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            ttce_errors = 0
+            total_caps = 0
+            for cls_id, cls in data.items():
+                required = ['id', 'name', 'category', 'category_name', 'description', 'controlRefs', 'cisSafeguards', 'attackMitigations', 'capabilities']
+                missing = [r for r in required if r not in cls]
+                if missing:
+                    print(f"  FAIL: {cls_id} missing fields: {missing}")
+                    ttce_errors += 1
+                if cls.get('id') != cls_id:
+                    print(f"  FAIL: {cls_id} id mismatch: {cls.get('id')}")
+                    ttce_errors += 1
+                for cap in cls.get('capabilities', []):
+                    cap_required = ['id', 'name', 'd3fendTechnique', 'tier']
+                    cap_missing = [r for r in cap_required if r not in cap]
+                    if cap_missing:
+                        print(f"  FAIL: {cap.get('id', '?')} missing fields: {cap_missing}")
+                        ttce_errors += 1
+                    if cap.get('tier') not in ('core', 'extended'):
+                        print(f"  FAIL: {cap.get('id', '?')} invalid tier: {cap.get('tier')}")
+                        ttce_errors += 1
+                    total_caps += 1
+            if ttce_errors:
+                errors += ttce_errors
+            else:
+                validated += 1
+                print(f"  OK: {ttce_path.name} ({len(data)} classes, {total_caps} capabilities)")
+
     # Summary
     print(f"\nValidation complete: {validated} files OK, {errors} errors")
 

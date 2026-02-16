@@ -192,10 +192,37 @@
       "customer_implements_edges": 270,
       "enrichment_date": "2026-02-16",
       "notes": "22 cloud service entries across 7 providers and 11 service model categories. Each service carries shared responsibility splits — provider controls (inherited, customer does not implement) and customer controls (must implement, patterns derive from these). Replaces CPE for cloud services where traditional versioning and CVE models do not apply. Provides PROVIDER_IMPLEMENTS and CUSTOMER_IMPLEMENTS edges for threat-led pattern derivation with shared responsibility awareness."
+    },
+    "protocol_catalog": {
+      "source": "OSA TPE (Trident Protocol Enumeration)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "trident-pattern-modernisation.md",
+      "total_protocols": 37,
+      "categories": 11,
+      "category_breakdown": {
+        "transport": 4,
+        "resolution": 3,
+        "authentication": 6,
+        "file_sharing": 3,
+        "web": 4,
+        "remote_access": 4,
+        "messaging": 2,
+        "database": 2,
+        "infrastructure": 3,
+        "cloud": 3,
+        "industrial": 3
+      },
+      "protocols_with_techniques": 23,
+      "protocols_without_techniques": 12,
+      "unique_techniques_referenced": 38,
+      "targets_protocol_edges": 54,
+      "upgrades_to_edges": 4,
+      "enrichment_date": "2026-02-16",
+      "notes": "37 protocol entries across 11 categories covering network transport, name resolution, authentication, file sharing, web/API, remote access, email/messaging, database, infrastructure, cloud/container, and industrial protocols. Each protocol carries ATT&CK technique references (TARGETS_PROTOCOL edges), secure alternative references (UPGRADES_TO edges), and SP800-53 control references. 3 ICS protocols (Modbus, OPC UA, BACnet) included with empty technique arrays — their techniques are ICS ATT&CK domain, not in the Enterprise catalog. SECURES_PROTOCOL edges (Control -> Protocol) deferred to separate design pass."
     }
   },
   "graph_summary": {
-    "total_edges": 19715,
+    "total_edges": 19773,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -212,7 +239,9 @@
       "REQUIRES_PROTECTION": 140,
       "PROTECTS_DATA": 140,
       "PROVIDER_IMPLEMENTS": 291,
-      "CUSTOMER_IMPLEMENTS": 270
+      "CUSTOMER_IMPLEMENTS": 270,
+      "TARGETS_PROTOCOL": 54,
+      "UPGRADES_TO": 4
     },
     "node_types": {
       "technique": 469,
@@ -227,7 +256,8 @@
       "adversary_tier": 5,
       "human_factor": 24,
       "data_type": 14,
-      "cloud_service": 22
+      "cloud_service": 22,
+      "protocol": 37
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -241,7 +271,9 @@
       "adversary_capability_path": "AdversaryTier -TIER_CONTAINS-> Technique (TACM capability tier classification)",
       "human_factors_path": "HumanFactor -EXPLOITS_HUMAN-> Technique (THFM cognitive vulnerability exploitation)",
       "data_classification_path": "DataType -REQUIRES_PROTECTION-> Control / Control -PROTECTS_DATA-> DataType (TDCE regulatory-driven control derivation)",
-      "cloud_service_path": "CloudService -PROVIDER_IMPLEMENTS-> Control / CloudService -CUSTOMER_IMPLEMENTS-> Control (TCSE shared responsibility derivation)"
+      "cloud_service_path": "CloudService -PROVIDER_IMPLEMENTS-> Control / CloudService -CUSTOMER_IMPLEMENTS-> Control (TCSE shared responsibility derivation)",
+      "protocol_path": "Technique -TARGETS_PROTOCOL-> Protocol (TPE protocol-specific attack surface derivation)",
+      "protocol_upgrade_path": "Protocol -UPGRADES_TO-> Protocol (TPE secure alternative recommendation)"
     }
   },
   "files": {
@@ -257,7 +289,8 @@
     "human-factors-catalog.json": "24 THFM cognitive vulnerability classes across 6 categories with Cialdini mappings and SP800-53 control refs",
     "data-classification-catalog.json": "14 TDCE data type classes across 8 categories with regulatory drivers, impact domains, and protection requirements",
     "cloud-service-catalog.json": "22 TCSE cloud service entries across 7 providers with shared responsibility splits and customer/provider control mappings",
-    "graph-edges.json": "19,715 explicit TRIDENT graph edges across 16 relationship types",
+    "protocol-catalog.json": "37 TPE protocol entries across 11 categories with technique references, secure alternatives, and SP800-53 control mappings",
+    "graph-edges.json": "19,773 explicit TRIDENT graph edges across 18 relationship types",
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",

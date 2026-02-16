@@ -68,10 +68,30 @@
       "techniques_with_actors": 313,
       "enrichment_date": "2026-02-14",
       "notes": "163 active ATT&CK threat groups (G-series intrusion-sets) with USES relationships to techniques. 9 actors excluded (revoked/deprecated or no technique overlap with our 469-technique catalog). Actors carry aliases but not country attribution (deferred)."
+    },
+    "process_capability_catalog": {
+      "source": "OSA TPCE (Trident Process Capability Enumeration)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "total_capabilities": 30,
+      "families_covered": ["AC", "AT", "AU", "CA", "CM", "CP", "IA", "IR", "MA", "MP", "PE", "PL", "PM", "PS", "RA", "SA", "SC", "SI", "SR"],
+      "classified_by_edges": 140,
+      "enrichment_date": "2026-02-16",
+      "notes": "30 process capability classes across 19 NIST 800-53 families. Each capability mapped to SP800-53 controls, CIS Safeguards, and ATT&CK Mitigations. Provides CLASSIFIED_BY edges connecting process implementations to canonical capability identifiers."
+    },
+    "technology_capability_catalog": {
+      "source": "OSA TTCE (Trident Technology Capability Enumeration)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "d3fend_alignment": true,
+      "total_classes": 28,
+      "total_capabilities": 86,
+      "categories": 9,
+      "provides_capability_edges": 123,
+      "enrichment_date": "2026-02-16",
+      "notes": "28 technology capability classes across 9 categories with 86 individual capabilities built on MITRE D3FEND. Each class mapped to SP800-53 controls, CIS Safeguards, and ATT&CK Mitigations. Provides PROVIDES_CAPABILITY edges connecting technology implementations to capability profiles."
     }
   },
   "graph_summary": {
-    "total_edges": 18111,
+    "total_edges": 18374,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -80,7 +100,9 @@
       "DETECTED_BY": 5237,
       "IMPLEMENTED_BY": 468,
       "EXPLOITS": 485,
-      "USES": 2921
+      "USES": 2921,
+      "CLASSIFIED_BY": 140,
+      "PROVIDES_CAPABILITY": 123
     },
     "node_types": {
       "technique": 469,
@@ -89,7 +111,9 @@
       "control": 315,
       "cis_safeguard": 171,
       "weakness_class": 135,
-      "threat_actor": 163
+      "threat_actor": 163,
+      "process_capability": 30,
+      "technology_class": 28
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -97,7 +121,9 @@
       "weakness_path": "Technique -EXPLOITS-> WeaknessClass(CWE)",
       "threat_path": "ThreatActor -USES-> Technique (actor technique repertoire)",
       "governance_path": "Framework -SATISFIED_BY-> Control (in control compliance_mappings)",
-      "direct_shortcut": "Technique <-mitigates- Control (CTID, in control attack_techniques[] — LEGACY, retained for validation only)"
+      "direct_shortcut": "Technique <-mitigates- Control (CTID, in control attack_techniques[] — LEGACY, retained for validation only)",
+      "process_capability_path": "Control <-CLASSIFIED_BY- ProcessCapability (TPCE process implementation classification)",
+      "technology_capability_path": "Control <-PROVIDES_CAPABILITY- TechnologyClass (TTCE technology capability profiling)"
     }
   },
   "files": {
@@ -107,7 +133,9 @@
     "cis-safeguard-index.json": "171 CIS v8 safeguards with controls[] reverse index",
     "weakness-catalog.json": "135 CWE weakness classes with techniques[] via CAPEC bridge",
     "actor-catalog.json": "163 ATT&CK threat groups with techniques[], aliases",
-    "graph-edges.json": "18,111 explicit TRIDENT graph edges across 8 relationship types",
+    "process-capability-catalog.json": "30 TPCE process capabilities with controlRefs[], cisSafeguards[], attackMitigations[]",
+    "technology-capability-catalog.json": "28 TTCE technology classes with 86 capabilities, controlRefs[], cisSafeguards[], attackMitigations[], D3FEND alignment",
+    "graph-edges.json": "18,374 explicit TRIDENT graph edges across 10 relationship types",
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",

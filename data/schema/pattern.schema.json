@@ -271,6 +271,150 @@
           }
         }
       }
+    },
+
+    "context": {
+      "type": "object",
+      "description": "Structured environmental context driving threat-led control selection (§3.1 pattern modernisation). References TDCE, TPE, TCSE, TACM, and THFM catalogues.",
+      "properties": {
+        "dataTypes": {
+          "type": "array",
+          "description": "Data types processed by this pattern (TDCE catalogue references)",
+          "items": {
+            "type": "object",
+            "required": ["ref"],
+            "additionalProperties": false,
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^TDCE-[A-Z]+-[0-9]{2}$",
+                "description": "TDCE data type identifier (e.g., TDCE-PCI-01)"
+              },
+              "state": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["at-rest", "in-transit", "in-use"]
+                },
+                "minItems": 1,
+                "uniqueItems": true,
+                "description": "Data states relevant to this pattern"
+              },
+              "volume": {
+                "type": "string",
+                "enum": ["low", "medium", "high"],
+                "description": "Relative data volume throughput"
+              }
+            }
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Protocols used on pattern boundaries (TPE catalogue references)",
+          "items": {
+            "type": "object",
+            "required": ["ref"],
+            "additionalProperties": false,
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^TPE-[A-Z]+-[0-9]{2}$",
+                "description": "TPE protocol identifier (e.g., TPE-WEB-01)"
+              },
+              "boundary": {
+                "type": "string",
+                "enum": ["external", "internal", "dmz"],
+                "description": "Network boundary where protocol is used"
+              },
+              "direction": {
+                "type": "string",
+                "enum": ["inbound", "outbound", "bidirectional"],
+                "description": "Traffic direction"
+              }
+            }
+          }
+        },
+        "cloudServices": {
+          "type": "array",
+          "description": "Cloud services hosting this pattern (TCSE catalogue references)",
+          "items": {
+            "type": "object",
+            "required": ["ref"],
+            "additionalProperties": false,
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^TCSE-[A-Z0-9]+(-[A-Z0-9]+)?$",
+                "description": "TCSE cloud service identifier (e.g., TCSE-AWS-LAM, TCSE-M365)"
+              },
+              "responsibility": {
+                "type": "string",
+                "enum": ["customer", "provider", "shared"],
+                "description": "Shared responsibility model position"
+              },
+              "notes": {
+                "type": "string",
+                "description": "How this service is used in the pattern"
+              }
+            }
+          }
+        },
+        "assetTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "uniqueItems": true,
+          "description": "Freeform asset type tags (e.g., web-application, database, load-balancer)"
+        },
+        "adversaryProfile": {
+          "type": "object",
+          "description": "Adversary capability scoping (TACM reference)",
+          "additionalProperties": false,
+          "properties": {
+            "minTier": {
+              "type": "string",
+              "pattern": "^TACM-T[1-5]$",
+              "description": "Minimum TACM adversary tier this pattern should resist"
+            },
+            "relevantActorTypes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "nation-state",
+                  "cybercriminal",
+                  "hacktivist",
+                  "insider-malicious",
+                  "insider-accidental",
+                  "competitor",
+                  "terrorist"
+                ]
+              },
+              "uniqueItems": true,
+              "description": "STIX 2.1 threat actor type vocabulary subset"
+            }
+          }
+        },
+        "regulatoryScope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Applicable regulatory frameworks (e.g., PCI-DSS, GDPR, NIS2, DORA)"
+        },
+        "humanFactors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^THFM-[A-Z]+-[0-9]{2}$"
+          },
+          "uniqueItems": true,
+          "description": "Relevant human factor classes (THFM catalogue references)"
+        }
+      }
     }
   }
 }

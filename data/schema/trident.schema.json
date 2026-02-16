@@ -861,6 +861,141 @@
         "issuedAt": { "$ref": "#/$defs/ISODateTime" }
       },
       "required": ["id", "meta", "issuedBy", "opinion", "issuedAt"]
+    },
+    "PatternContext": {
+      "$id": "https://example.org/trident/pattern-context.schema.json",
+      "type": "object",
+      "description": "Structured environmental context for threat-led control selection. References TDCE (data types), TPE (protocols), TCSE (cloud services), TACM (adversary tiers), and THFM (human factors) catalogues.",
+      "additionalProperties": false,
+      "properties": {
+        "dataTypes": {
+          "type": "array",
+          "description": "Data types processed by the pattern (TDCE catalogue)",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^TDCE-[A-Z]+-[0-9]{2}$",
+                "description": "TDCE data type identifier"
+              },
+              "state": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["at-rest", "in-transit", "in-use"]
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "volume": {
+                "type": "string",
+                "enum": ["low", "medium", "high"]
+              }
+            }
+          },
+          "maxItems": 32
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Protocols on pattern boundaries (TPE catalogue)",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^TPE-[A-Z]+-[0-9]{2}$",
+                "description": "TPE protocol identifier"
+              },
+              "boundary": {
+                "type": "string",
+                "enum": ["external", "internal", "dmz"]
+              },
+              "direction": {
+                "type": "string",
+                "enum": ["inbound", "outbound", "bidirectional"]
+              }
+            }
+          },
+          "maxItems": 32
+        },
+        "cloudServices": {
+          "type": "array",
+          "description": "Cloud services hosting the pattern (TCSE catalogue)",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref"],
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^TCSE-[A-Z0-9]+(-[A-Z0-9]+)?$",
+                "description": "TCSE cloud service identifier"
+              },
+              "responsibility": {
+                "type": "string",
+                "enum": ["customer", "provider", "shared"]
+              },
+              "notes": { "type": "string" }
+            }
+          },
+          "maxItems": 32
+        },
+        "assetTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "adversaryProfile": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "minTier": {
+              "type": "string",
+              "pattern": "^TACM-T[1-5]$"
+            },
+            "relevantActorTypes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "nation-state",
+                  "cybercriminal",
+                  "hacktivist",
+                  "insider-malicious",
+                  "insider-accidental",
+                  "competitor",
+                  "terrorist"
+                ]
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "regulatoryScope": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "humanFactors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^THFM-[A-Z]+-[0-9]{2}$"
+          },
+          "maxItems": 32,
+          "uniqueItems": true
+        }
+      }
     }
   }
 }

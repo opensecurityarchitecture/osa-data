@@ -127,10 +127,39 @@
       "exploits_human_edges": 31,
       "enrichment_date": "2026-02-16",
       "notes": "24 cognitive vulnerability classes across 6 categories. Social engineering classes (AU/UR/TR/CU/HB) map to ATT&CK techniques via EXPLOITS_HUMAN edges with rationale. Insider disposition classes (IN) have no technique edges — they are risk factors mitigated by SP800-53 controls. Cialdini principle mapping on 17 of 24 classes; remaining 7 map to cognitive biases outside Cialdini framework."
+    },
+    "data_classification_catalog": {
+      "source": "OSA TDCE (Trident Data Classification Enumeration)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "trident-pattern-modernisation.md",
+      "total_data_types": 14,
+      "classification_tiers": 4,
+      "categories": 8,
+      "category_breakdown": {
+        "PII_personal_data": 2,
+        "PCI_payment_card": 2,
+        "PHI_health_data": 1,
+        "FIN_financial": 1,
+        "IP_proprietary": 2,
+        "SEC_security": 3,
+        "GOV_government": 1,
+        "OPS_operational": 1,
+        "BUS_business": 1
+      },
+      "tier_distribution": {
+        "DC_1_internal": 1,
+        "DC_2_confidential": 3,
+        "DC_3_restricted": 10
+      },
+      "unique_controls_referenced": 29,
+      "requires_protection_edges": 140,
+      "protects_data_edges": 140,
+      "enrichment_date": "2026-02-16",
+      "notes": "14 data type classes across 8 categories with 4 classification tiers (DC-0 through DC-3). Each data type carries regulatory drivers, impact domains, and protection requirements grouped by data state (at-rest, in-transit, in-use, lifecycle, logging). Provides REQUIRES_PROTECTION edges (DataType -> Control) and PROTECTS_DATA edges (Control -> DataType) for threat-led pattern derivation."
     }
   },
   "graph_summary": {
-    "total_edges": 18874,
+    "total_edges": 19154,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -143,7 +172,9 @@
       "CLASSIFIED_BY": 140,
       "PROVIDES_CAPABILITY": 123,
       "TIER_CONTAINS": 469,
-      "EXPLOITS_HUMAN": 31
+      "EXPLOITS_HUMAN": 31,
+      "REQUIRES_PROTECTION": 140,
+      "PROTECTS_DATA": 140
     },
     "node_types": {
       "technique": 469,
@@ -156,7 +187,8 @@
       "process_capability": 30,
       "technology_class": 28,
       "adversary_tier": 5,
-      "human_factor": 24
+      "human_factor": 24,
+      "data_type": 14
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -168,7 +200,8 @@
       "process_capability_path": "Control <-CLASSIFIED_BY- ProcessCapability (TPCE process implementation classification)",
       "technology_capability_path": "Control <-PROVIDES_CAPABILITY- TechnologyClass (TTCE technology capability profiling)",
       "adversary_capability_path": "AdversaryTier -TIER_CONTAINS-> Technique (TACM capability tier classification)",
-      "human_factors_path": "HumanFactor -EXPLOITS_HUMAN-> Technique (THFM cognitive vulnerability exploitation)"
+      "human_factors_path": "HumanFactor -EXPLOITS_HUMAN-> Technique (THFM cognitive vulnerability exploitation)",
+      "data_classification_path": "DataType -REQUIRES_PROTECTION-> Control / Control -PROTECTS_DATA-> DataType (TDCE regulatory-driven control derivation)"
     }
   },
   "files": {
@@ -182,7 +215,8 @@
     "technology-capability-catalog.json": "28 TTCE technology classes with 86 capabilities, controlRefs[], cisSafeguards[], attackMitigations[], D3FEND alignment",
     "adversary-tier-catalog.json": "5 TACM adversary capability tiers with STIX/NIST attributes and technique tier distribution",
     "human-factors-catalog.json": "24 THFM cognitive vulnerability classes across 6 categories with Cialdini mappings and SP800-53 control refs",
-    "graph-edges.json": "18,874 explicit TRIDENT graph edges across 12 relationship types",
+    "data-classification-catalog.json": "14 TDCE data type classes across 8 categories with regulatory drivers, impact domains, and protection requirements",
+    "graph-edges.json": "19,154 explicit TRIDENT graph edges across 14 relationship types",
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",

@@ -1,0 +1,410 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-047",
+  "slug": "secure-agentic-ai-frameworks",
+  "title": "Secure Agentic AI Frameworks",
+  "description": "Enterprise security architecture for adopting agentic AI frameworks (LangChain, CrewAI, AutoGen, LangGraph, and similar orchestration platforms) safely at scale. Covers agent execution isolation, tool registry governance, guardrails architecture, RAG pipeline security, multi-agent communication trust, cost and resource governance, agent lifecycle management, and incident response for autonomous agent failures. Addresses OWASP Top 10 for Agentic Applications (2025). Complements SP-027 (operational agent security) and SP-045 (AI governance) by providing the infrastructure and programme-level controls for running agentic AI as a managed enterprise capability.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-047",
+  "metadata": {
+    "release": "2.0",
+    "status": "draft",
+    "type": "pattern",
+    "classification": "Application & Operations",
+    "datePublished": "2026-02-15",
+    "dateModified": "2026-02-15",
+    "authors": ["Aurelius", "Vitruvius"],
+    "provenance": "Developed in response to enterprise demand for structured guidance on adopting agentic AI frameworks safely. Informed by the OWASP Top 10 for Agentic Applications (2025), the MAESTRO framework for agentic AI threat modelling, NIST AI RMF Agentic AI Profile (2025), and direct operational experience deploying tool-using AI agents for security architecture and software engineering. The rapid proliferation of agentic AI frameworks in enterprise environments -- LangChain alone reports over 100,000 organisations using its platform -- has outpaced the development of security guidance, creating a gap between framework capabilities and enterprise security baselines."
+  },
+  "diagram": {
+    "svg": "/images/sp-047-secure-agentic-ai-frameworks.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "Agentic AI is the step change from AI that answers questions to AI that takes actions. An agentic AI system autonomously plans multi-step workflows, invokes tools (APIs, databases, file systems, code interpreters, web browsers), makes decisions about which actions to take, and chains outputs from one step as inputs to the next. Where a traditional chatbot responds to a prompt with text, an agentic system responds by executing a plan: reading files, querying databases, calling external APIs, writing code, running that code, evaluating the results, and iterating until the objective is met.\n\nThe frameworks enabling this -- LangChain, LangGraph, CrewAI, AutoGen, Semantic Kernel, Amazon Bedrock Agents, Google Vertex AI Agent Builder -- have moved from research prototypes to enterprise adoption in under two years. Organisations are deploying agentic AI for customer service automation, code generation and review, security operations, compliance monitoring, data analysis, and process automation. The business value is real: tasks that required hours of human work can be completed in minutes.\n\nThe security implications are equally real and fundamentally different from traditional application security. An agentic AI system is not a web application with defined inputs and outputs. It is an autonomous decision-maker with access to enterprise tools and data, operating on natural language instructions that cannot be formally verified, using reasoning processes that cannot be fully predicted, and taking actions that may be difficult or impossible to reverse. The attack surface is not the application -- it is the entire set of tools, data sources, and systems the agent can reach.\n\nSP-027 (Secure AI Integration) defines the security controls for individual AI agents: identity, prompt security, tool authorisation, audit. SP-045 (AI Governance) establishes the management system for responsible AI: bias, transparency, impact assessment. This pattern addresses the missing middle layer: the enterprise infrastructure and programme required to run agentic AI frameworks safely at scale. It answers the question a CISO asks when the CTO announces the company is adopting LangChain: what are the baseline security requirements?\n\nThe answer has seven dimensions: (1) where agents run and how they are isolated, (2) what tools agents can use and how those tools are governed, (3) what guardrails prevent agents from causing harm, (4) how data flows through agent pipelines and how it is protected, (5) how agents communicate with each other in multi-agent systems, (6) how agent costs and resources are controlled, and (7) how agent failures are detected, contained, and remediated. This pattern addresses each dimension with specific controls, threat mitigations, and implementation guidance.",
+    "keyControlAreas": [
+      "Agent Execution Isolation and Environment Hardening (SC-07, CM-07, SC-39, AC-06): The most fundamental security decision is where agents run and what they can reach. SC-07 (Boundary Protection) is the anchor: every agent execution environment must be a defined security zone with explicit ingress and egress rules. Agents should run in ephemeral containers with read-only root filesystems, no persistent storage beyond what is explicitly provisioned, and network policies that whitelist only the specific endpoints the agent needs. CM-07 (Least Functionality) requires stripping the agent runtime to the minimum required capabilities: no shell access unless the agent's function requires it, no outbound internet unless specific URLs are whitelisted, no access to the container orchestration API. SC-39 (Process Isolation) ensures each agent session runs in its own process space -- one compromised agent session must not be able to access the memory, filesystem, or network connections of another. AC-06 (Least Privilege) applies at every layer: the container runs as a non-root user, the service account has minimal IAM permissions, API tokens are scoped to specific operations and expire after the session. For high-risk agent deployments, consider gVisor or Firecracker-level isolation rather than standard container boundaries. The execution environment must be reproducible and auditable: infrastructure-as-code definitions, immutable images, and cryptographic verification of the runtime stack.",
+      "Tool Registry and Plugin Governance (CM-08, CM-03, SA-04, SA-11, AC-03): Agentic AI frameworks are built on tools -- functions that agents invoke to interact with the world. LangChain tools, CrewAI tools, AutoGen functions, and custom MCP (Model Context Protocol) servers are the enterprise's new API surface, and they require the same governance rigour as any other integration. CM-08 (System Component Inventory) requires a centralised tool registry: every tool available to any agent must be catalogued with its name, description, owner, risk rating, data classification, approved use cases, and the set of agents authorised to invoke it. CM-03 (Configuration Change Control) governs tool lifecycle: new tools go through a security review before being added to the registry; tool updates are tested in staging before promotion to production; deprecated tools are disabled on a defined timeline. SA-04 (Acquisition Process) applies to third-party tools and MCP servers: evaluate the security posture of tool providers, review source code for community tools, and assess what data the tool processes and where. SA-11 (Developer Security Testing) requires that every custom tool undergoes security testing: input validation, authorisation checks, error handling, and injection resistance. AC-03 (Access Enforcement) ensures tools enforce their own access controls and do not rely solely on the agent's claimed permissions. The OWASP ASI-02 (Tool Misuse) risk is addressed by combining tool-level access controls with agent-level authorisation -- the agent must be authorised to use the tool, and the tool must independently verify the request is valid.",
+      "Guardrails Architecture (SI-10, AC-04, CM-02, SC-07): Guardrails are the technical enforcement layer that prevents agents from causing harm, distinct from the policy layer (SP-045) that defines what harm means. SI-10 (Information Input Validation) applies to both agent inputs and outputs: every message entering an agent must be screened for prompt injection, jailbreak attempts, and adversarial payloads; every action an agent proposes must be validated against a policy before execution. AC-04 (Information Flow Enforcement) prevents data from flowing where it should not: PII must not be sent to external APIs, confidential documents must not be summarised in logs, credentials must not appear in agent responses. CM-02 (Baseline Configuration) defines the guardrail ruleset: what topics the agent may discuss, what actions it may take, what data classifications it may process, what output formats are permitted, and what escalation paths exist when the agent encounters a boundary. SC-07 (Boundary Protection) enforces the guardrails at the infrastructure level: network policies prevent the agent from reaching disallowed endpoints even if the guardrail software is bypassed. Implement guardrails at multiple layers -- input filtering, output filtering, action approval, and infrastructure enforcement -- because no single layer is sufficient. NVIDIA NeMo Guardrails, Guardrails AI, and custom policy engines can provide the application-layer enforcement, but these must be complemented by infrastructure controls that the agent cannot circumvent. The OWASP ASI-01 (Agent Goal Hijack) and ASI-11 (Guardrail Bypass) risks require that guardrails are tested adversarially: red team the guardrails to verify they resist sophisticated bypass attempts, not just obvious ones.",
+      "RAG Pipeline and Data Store Security (SC-28, AC-04, SI-10, CM-08): Retrieval-Augmented Generation (RAG) is the dominant architecture for grounding agents in enterprise data: documents are chunked, embedded into vectors, stored in a vector database, and retrieved at query time to provide context for the agent's responses. Every step in this pipeline is an attack surface. SC-28 (Protection of Information at Rest) requires encryption of vector stores, document stores, and embedding caches. The vector database is not just a cache -- it is a structured representation of enterprise knowledge and must be protected accordingly. AC-04 (Information Flow Enforcement) controls what data enters the RAG pipeline: documents must be classified before ingestion, and retrieval must be filtered by the querying agent's authorisation level -- an agent assisting a junior analyst must not retrieve board-level strategy documents even if they exist in the same vector store. SI-10 (Information Input Validation) addresses RAG poisoning: an attacker who can inject or modify documents in the source corpus can influence agent behaviour at scale. Validate document provenance, implement integrity checks on the ingestion pipeline, and monitor for unexpected changes to the document corpus. CM-08 (System Component Inventory) requires a data source registry: every document collection, database, API, and knowledge base feeding into RAG pipelines must be catalogued with its data classification, owner, and refresh cadence. Embedding models are themselves a supply chain dependency -- an embedding model that produces subtly biased vectors can influence retrieval without any visible change to the source documents.",
+      "Multi-Agent Communication and Trust (AC-04, AC-05, IA-04, AU-03): Multi-agent systems -- where a planner agent delegates tasks to specialist agents, or a team of agents collaborates on a complex workflow -- introduce trust boundaries that single-agent architectures do not have. AC-04 (Information Flow Enforcement) governs what data agents can share: a code-generation agent should not have access to the context of a financial-analysis agent operating in the same framework instance. AC-05 (Separation of Duties) ensures that the agent proposing an action is not the same agent approving it -- in CrewAI's terminology, the agent that writes code should not be the agent that approves the pull request. IA-04 (Identifier Management) requires that every agent in a multi-agent system has a distinct identity that persists across interactions and can be correlated in audit trails -- anonymous agents in a swarm cannot be held accountable. AU-03 (Content of Audit Records) must capture the full delegation chain: which agent initiated the workflow, which sub-agents were spawned, what context was passed between them, and what each agent's contribution was to the final output. The OWASP ASI-10 (Cross-Agent Trust Exploitation) risk is acute: if one agent in a multi-agent system is compromised through prompt injection in a tool output, it can potentially inject malicious instructions into the shared context that influence all other agents. Implement context isolation between agents -- each agent should receive only the inputs explicitly passed to it, not the full conversation history of the orchestrating agent. Treat inter-agent messages as crossing a trust boundary, with the same validation applied to them as to external inputs.",
+      "Cost, Resource, and Autonomy Governance (AC-06, AU-02, PM-09, CA-07): Agentic AI systems can consume resources in ways that traditional applications cannot. An agent caught in a reasoning loop can make thousands of API calls in minutes. A multi-agent system spawning sub-agents recursively can exhaust compute budgets. An agent with code execution capabilities can allocate cloud resources. AC-06 (Least Privilege) must include resource constraints: maximum API calls per session, maximum tokens per request, maximum execution time per task, maximum cost per workflow. AU-02 (Event Logging) must capture resource consumption: token usage, API call counts, execution duration, and estimated cost per agent session. PM-09 (Risk Management Strategy) must define the organisation's risk appetite for autonomous agent actions -- what is the maximum financial exposure from a single agent workflow before human approval is required? CA-07 (Continuous Monitoring) must include real-time alerting on resource consumption: an agent exceeding its expected token budget by 3x triggers investigation; an agent making API calls to an endpoint it has never previously called triggers review. The OWASP ASI-09 (Excessive Agent Autonomy) risk is addressed by defining explicit autonomy boundaries for each agent class: what decisions the agent can make independently, what requires notification, and what requires approval. Circuit breakers must be implemented at the infrastructure level: if an agent exceeds defined thresholds for cost, duration, API calls, or error rate, the runtime automatically pauses the workflow and alerts the operator.",
+      "Agent Lifecycle and Deployment Management (CM-03, CM-04, SA-11, RA-03, CM-02): Agentic AI workflows are software and must follow software lifecycle governance -- but with additional considerations for non-deterministic behaviour. CM-03 (Configuration Change Control) governs agent deployment: agent prompts, tool configurations, guardrail rules, and model selections are versioned and deployed through the same CI/CD pipeline as other enterprise software. CM-04 (Impact Analysis) requires that every agent change is assessed for downstream impact: a prompt change may alter the agent's tool selection behaviour in ways that are not obvious from reading the prompt. SA-11 (Developer Security Testing) must include agent-specific testing: adversarial prompt testing, tool interaction fuzzing, guardrail bypass testing, and multi-step workflow validation. Standard unit tests are necessary but insufficient -- agent behaviour is probabilistic, so testing must include statistical validation across multiple runs. RA-03 (Risk Assessment) must be performed before deploying any new agent workflow to production: what data can this agent access, what actions can it take, what is the worst-case outcome if the agent behaves unexpectedly, and what compensating controls are in place? CM-02 (Baseline Configuration) defines the approved agent configurations: pinned model versions, locked tool sets, validated prompts, and tested guardrail rules. Promote configurations through environments (development, staging, production) with approval gates at each transition. Agent retirement is equally important: when a workflow is decommissioned, revoke the agent's credentials, remove its tool access, and archive its audit trail.",
+      "Agent Incident Response and Failure Containment (IR-04, IR-06, IR-01, SI-04): When an agentic AI system fails -- producing incorrect outputs, taking unintended actions, leaking data, or being exploited through prompt injection -- the response must be swift and specific. IR-04 (Incident Handling) must include agent-specific runbooks: how to stop a running agent workflow immediately (kill switch), how to identify what actions the agent has already taken (audit trail review), how to assess the blast radius (what data was accessed, what tools were invoked, what external systems were contacted), and how to remediate (roll back changes, revoke credentials, notify affected parties). IR-06 (Incident Reporting) must include criteria for when an agent failure constitutes a reportable incident: an agent accessing data above its clearance, an agent contacting an external endpoint not on its allowlist, an agent producing outputs that violate the organisation's content policy, or an agent bypassing guardrails. IR-01 (Incident Response Policy and Procedures) must be updated to address agent-specific scenarios that traditional IR playbooks do not cover: what happens when an agent modifies production data incorrectly, when an agent sends an email or message on behalf of the organisation, or when a multi-agent system produces a cascading failure? SI-04 (System Monitoring) provides the detection layer: anomaly detection on agent behaviour patterns, real-time comparison of agent actions against expected workflows, and automated alerting when agents deviate from their baseline. Every agent deployment must have a documented kill switch: a mechanism to immediately halt the agent, revoke its access, and preserve its state for forensic analysis."
+    ],
+    "assumptions": "The organisation has decided to adopt one or more agentic AI frameworks (LangChain, CrewAI, AutoGen, LangGraph, Semantic Kernel, Amazon Bedrock Agents, or similar) for business-critical or business-supporting workflows. A cloud or on-premises container platform is available for agent execution (Kubernetes, ECS, or equivalent). SP-027 (Secure AI Integration) controls are implemented or being implemented for individual agent security. SP-045 (AI Governance) is established or planned for AI management governance. The organisation has software engineering and DevOps capability to implement infrastructure-as-code, CI/CD pipelines, and monitoring for agent workloads. Budget exists for vector databases, guardrail tooling, monitoring infrastructure, and agent-specific security tooling. The organisation's security team has or is developing competence in AI/ML security -- this is a specialist domain that cannot be fully addressed by traditional application security skills alone.",
+    "typicalChallenges": "The most common challenge is the pace of framework evolution: LangChain, CrewAI, and AutoGen release breaking changes frequently, and security controls built against one version may not function correctly after an upgrade. Framework supply chain risk is significant -- these frameworks have deep dependency trees with hundreds of transitive packages, and vulnerability scanning of agentic framework dependencies reveals a higher CVE density than mature enterprise middleware. Non-deterministic agent behaviour makes testing fundamentally harder than deterministic software: the same prompt and tools may produce different action sequences on different runs, requiring statistical testing approaches rather than binary pass/fail assertions. Multi-agent communication lacks standardised protocols -- each framework implements inter-agent messaging differently, making it difficult to apply uniform security controls across heterogeneous agent architectures. Vector database security is immature: most vector databases prioritise performance over access control, and fine-grained retrieval authorisation (ensuring an agent only retrieves documents it is authorised to see) must typically be implemented at the application layer. Developer enthusiasm for agentic AI often outpaces security review capacity, leading to shadow agent deployments that bypass the governed platform. Cost unpredictability is a practical concern: agent workflows that reason extensively before acting can consume 10-100x more tokens than expected, and without circuit breakers, a single misbehaving workflow can generate significant API costs.",
+    "indications": "The organisation is evaluating or deploying agentic AI frameworks (LangChain, LangGraph, CrewAI, AutoGen, Semantic Kernel, Bedrock Agents) for production use cases. AI agents will have access to enterprise tools, APIs, databases, or code execution environments. Multi-agent architectures are planned where agents collaborate, delegate, or compete on complex workflows. The organisation needs to demonstrate to regulators, auditors, or customers that agentic AI deployments are governed and controlled. Customer-facing AI agents will take actions on behalf of customers (placing orders, modifying accounts, processing transactions). Internal AI agents will have access to sensitive data (financial records, customer PII, intellectual property, source code). The organisation wants to enable rapid experimentation with agentic AI while maintaining enterprise security baselines.",
+    "contraIndications": "Organisation uses AI only for simple prompt-response interactions with no tool access, no autonomous actions, and no multi-step workflows -- SP-027 alone provides sufficient coverage. All AI usage is confined to managed SaaS products (ChatGPT Enterprise, Microsoft Copilot, GitHub Copilot) where the agent infrastructure is the provider's responsibility. The organisation has no plans to build custom agentic workflows or deploy open-source agent frameworks. Note: if the organisation uses any tool-augmented AI (even a single agent with file access or API access), a subset of this pattern's controls becomes relevant.",
+    "threatResistance": "This pattern directly addresses the OWASP Top 10 for Agentic Applications. Agent Goal Hijack (ASI-01) is mitigated through multi-layer guardrails with adversarial testing, ensuring that prompt injection in tool outputs or retrieved documents cannot redirect the agent's objective. Tool Misuse (ASI-02) is prevented through the centralised tool registry with per-tool access controls and input validation, ensuring agents can only invoke approved tools with valid parameters. Cross-Agent Trust Exploitation (ASI-10) is addressed through context isolation between agents, treating inter-agent messages as trust boundaries with the same validation applied to external inputs. RAG Poisoning is mitigated through document provenance validation, ingestion pipeline integrity checks, and retrieval-level authorisation filters on the vector store. Cascading Hallucination (ASI-04) is addressed through output validation at each step of multi-agent workflows, preventing one agent's incorrect output from propagating unchecked through the pipeline. Runaway resource consumption is controlled through cost circuit breakers, token budgets, and execution time limits enforced at the infrastructure level. Framework supply chain compromise is mitigated through dependency scanning, pinned framework versions, and reproducible agent runtime builds. Shadow agent deployment is detected through the agent inventory requirement and network monitoring for unauthorised agent-to-model-provider traffic."
+  },
+  "examples": {
+    "Agent Execution Isolation": [
+      "Deploy all production agent workloads in ephemeral Kubernetes pods with Istio service mesh: each agent session gets a fresh container with a read-only root filesystem, a dedicated network namespace with egress limited to the approved tool endpoints, and a 15-minute maximum lifetime after which the pod is terminated regardless of task completion",
+      "Implement gVisor sandboxing for agent code execution tools: when an agent runs generated code, it executes in a user-space kernel that intercepts all system calls, preventing file system access outside the designated workspace and blocking network calls not on the allowlist",
+      "Agent runtime images are built via CI/CD from locked Dockerfiles, signed with Cosign, and verified at deployment time. No agent container runs without a valid signature chain from the approved build pipeline"
+    ],
+    "Tool Registry and Governance": [
+      "Establish a centralised MCP server registry: every MCP server (file system, database, Slack, Jira, GitHub) is catalogued with its risk rating (low/medium/high/critical), data classification, owner, and the set of agent roles authorised to use it. New MCP servers require security review including source code audit and penetration testing before registration",
+      "Tool versioning and rollback: all tool definitions are stored in Git alongside agent prompts. Tool updates go through PR review, automated security testing in staging, and canary deployment to 5% of production traffic before full rollout. Any tool causing error rate spikes is automatically rolled back",
+      "Quarterly tool access review: the security team audits which agents use which tools, identifies tools with excessive permission grants, and removes tool access that is no longer required for the agent's current function"
+    ],
+    "Guardrails and Safety Boundaries": [
+      "Deploy NVIDIA NeMo Guardrails as an input/output filter for all production agents: input rails block prompt injection patterns, jailbreak attempts, and off-topic requests; output rails block PII leakage, credential exposure, and content that violates the organisation's acceptable use policy. Guardrail rules are version-controlled and tested adversarially monthly",
+      "Implement a three-tier action approval framework: Tier 1 actions (read-only queries, search, analysis) are auto-approved; Tier 2 actions (write operations, API calls, file modifications) require the agent to explain its intent and receive approval from a supervisor agent; Tier 3 actions (production deployments, financial transactions, external communications) require human approval via a review queue with a 30-minute SLA",
+      "Infrastructure-level guardrails complement application-level guardrails: network policies block all outbound traffic except to approved endpoints regardless of what the agent requests, preventing guardrail bypass through novel tool invocations or encoded instructions"
+    ],
+    "RAG Pipeline Security": [
+      "Implement document-level access control in the RAG pipeline: each document chunk in the vector store is tagged with its classification level and authorised roles. At retrieval time, the vector store query is filtered by the requesting agent's role, ensuring that a customer service agent cannot retrieve internal strategy documents even if the embedding similarity score is high",
+      "RAG ingestion pipeline includes provenance tracking: every document records its source, ingestion date, hash, and the pipeline version that processed it. Weekly integrity checks compare current embeddings against source document hashes to detect tampering",
+      "Implement retrieval anomaly detection: if an agent's retrieval pattern suddenly shifts -- querying document categories it has never accessed before, or retrieving an unusually high volume of documents -- alert the security team for investigation"
+    ],
+    "Multi-Agent Systems": [
+      "CrewAI deployment with context isolation: each agent in the crew receives only the specific outputs passed to it by the orchestrator, not the full conversation history. Inter-agent messages are logged with sender, receiver, content hash, and timestamp for complete audit trail reconstruction",
+      "Multi-agent code review pipeline: the code-writing agent, the code-review agent, and the deployment-approval agent run in separate containers with distinct credentials. The review agent cannot modify code, and the deployment agent cannot write code -- separation of duties enforced at the infrastructure level",
+      "Implement agent-to-agent authentication: agents in a multi-agent system authenticate to each other using short-lived tokens issued by a central authority, preventing a compromised agent from injecting tasks into the workflow by impersonating another agent"
+    ],
+    "Developing Areas": [
+      "Model Context Protocol (MCP) security: Anthropic's MCP is becoming a de facto standard for connecting AI agents to external tools and data sources. MCP servers provide structured tool interfaces, but the security model is still maturing. Current MCP implementations often run with broad permissions, lack fine-grained authorisation, and do not enforce input validation at the protocol level. Enterprises adopting MCP need to layer their own access controls, audit logging, and input validation on top of the protocol. The MCP specification does not yet include authentication standards for server-to-server communication, leaving each implementation to define its own trust model.",
+      "Agent-to-agent protocol standardisation: The AI industry lacks a standard protocol for secure multi-agent communication. LangGraph uses graph-based state passing, CrewAI uses role-based delegation, AutoGen uses conversation-based messaging, and Amazon Bedrock uses event-driven orchestration. This fragmentation means security controls must be framework-specific, increasing the cost and complexity of securing heterogeneous agent environments. Proposals for standardised agent communication protocols (Google's A2A, Anthropic's MCP extensions) are emerging but not yet mature enough for enterprise adoption.",
+      "Agentic AI in regulated industries: Financial services, healthcare, and government agencies face additional constraints when deploying agentic AI. DORA (EU Digital Operational Resilience Act) requires that ICT third-party risk management covers AI agent infrastructure. FINMA expects Swiss banks to apply operational risk controls to autonomous AI systems. The FDA is developing guidance for AI agents in clinical decision support. These regulatory requirements add a compliance dimension to the security architecture that generic framework guidance does not address. Organisations in regulated industries should expect to demonstrate that their agentic AI deployments satisfy industry-specific resilience, auditability, and transparency requirements.",
+      "Hardware-level agent isolation: Current agent isolation relies on container boundaries, which provide process-level separation but share the host kernel. For high-assurance environments, hardware-level isolation using confidential computing (AMD SEV, Intel TDX, ARM CCA) can provide cryptographic guarantees that agent workloads are isolated from each other and from the infrastructure operator. This is particularly relevant for multi-tenant agent platforms where agents from different customers or business units run on shared infrastructure. The performance overhead of confidential computing is decreasing but remains non-trivial for latency-sensitive agent workflows.",
+      "Agent observability and tracing standards: Distributed tracing for agentic AI (tracking a request through planning, tool invocation, sub-agent delegation, and response generation) is emerging but not standardised. OpenTelemetry is being extended for AI agent workflows, and frameworks like LangSmith (LangChain), AgentOps, and Arize provide agent-specific observability, but interoperability between these tools is limited. Enterprises operating multiple agent frameworks need a unified observability layer to correlate agent actions across frameworks, detect anomalies, and perform forensic analysis of agent incidents."
+    ]
+  },
+  "references": [
+    {
+      "title": "OWASP Top 10 for Agentic Applications (2025)",
+      "url": "https://owasp.org/www-project-top-10-for-agentic-applications/",
+      "note": "Comprehensive taxonomy of security risks specific to agentic AI systems. Covers agent goal hijack, tool misuse, identity abuse, cascading hallucination, memory corruption, and cross-agent trust exploitation. Essential baseline for agentic AI security assessment."
+    },
+    {
+      "title": "NIST AI 600-1: AI Risk Management Framework — Generative AI Profile",
+      "url": "https://airc.nist.gov/Docs/1",
+      "note": "NIST guidance on managing risks specific to generative AI systems including agentic applications. Extends the AI RMF with generative AI-specific risks and mitigations."
+    },
+    {
+      "title": "MAESTRO: Multi-Agent Environment for Security Threat, Risk, and Oversight",
+      "url": "https://cloudsecurityalliance.org/blog/2025/01/28/maestro-multi-agent-security-framework",
+      "note": "Cloud Security Alliance framework for threat modelling multi-agent AI systems. Provides structured methodology for identifying and mitigating risks in agent orchestration architectures."
+    },
+    {
+      "title": "Anthropic Model Context Protocol (MCP) Specification",
+      "url": "https://modelcontextprotocol.io/",
+      "note": "Open protocol for connecting AI agents to external tools and data sources. Becoming a de facto standard for agent-tool integration. Security considerations include server authentication, tool authorisation, and input validation."
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/",
+      "note": "Knowledge base of adversary tactics and techniques against AI systems, modelled on ATT&CK. Provides structured threat intelligence for AI-specific attacks including prompt injection, model evasion, and data poisoning."
+    },
+    {
+      "title": "NCSC Guidelines for Secure AI System Development",
+      "url": "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development",
+      "note": "UK National Cyber Security Centre guidance covering secure design, development, deployment, and maintenance of AI systems. Co-signed by agencies from 18 countries. Addresses supply chain, monitoring, and incident response for AI."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. Access Control (AC), Configuration Management (CM), System and Communications Protection (SC), and System and Information Integrity (SI) families are primary."
+    },
+    {
+      "title": "LangChain Security Best Practices",
+      "url": "https://python.langchain.com/docs/security/",
+      "note": "Framework-specific security guidance from the LangChain project. Covers tool sandboxing, input validation, and credential management. Useful as a baseline but insufficient as an enterprise security standard."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-027",
+    "SP-045",
+    "SP-030",
+    "SP-029",
+    "SP-012",
+    "SP-031",
+    "SP-037"
+  ],
+  "relatedPatternNames": [
+    "Secure AI Integration",
+    "AI Governance and Responsible AI",
+    "API Security",
+    "Zero Trust Architecture",
+    "Secure Software Development Lifecycle",
+    "Security Monitoring and Response",
+    "Privileged User Management"
+  ],
+  "threats": [
+    {
+      "id": "T-AAF-001",
+      "name": "Agent goal hijack through adversarial prompt injection in tool outputs or retrieved documents",
+      "mitigatedBy": ["SI-10", "SC-07", "AC-04", "CM-02"]
+    },
+    {
+      "id": "T-AAF-002",
+      "name": "Tool misuse — agent tricked into invoking wrong tool or passing malicious parameters via prompt manipulation",
+      "mitigatedBy": ["AC-03", "CM-08", "SI-10", "SA-11"]
+    },
+    {
+      "id": "T-AAF-003",
+      "name": "Cross-agent context poisoning in multi-agent systems — compromised agent contaminating shared state",
+      "mitigatedBy": ["AC-04", "AC-05", "IA-04", "AU-03"]
+    },
+    {
+      "id": "T-AAF-004",
+      "name": "RAG retrieval poisoning — malicious content injected into vector stores to manipulate agent responses",
+      "mitigatedBy": ["SI-10", "SC-28", "CM-08", "AC-04"]
+    },
+    {
+      "id": "T-AAF-005",
+      "name": "Agent credential theft through tool interactions or context window exposure",
+      "mitigatedBy": ["IA-05", "SC-28", "AC-06", "AU-02"]
+    },
+    {
+      "id": "T-AAF-006",
+      "name": "Cascading hallucination — incorrect output from one agent propagating unchecked through multi-agent pipeline",
+      "mitigatedBy": ["SI-10", "AC-05", "AU-03", "CA-07"]
+    },
+    {
+      "id": "T-AAF-007",
+      "name": "Runaway agent resource consumption — uncontrolled loops or recursive agent spawning exhausting compute and API budgets",
+      "mitigatedBy": ["AC-06", "CA-07", "AU-02", "PM-09"]
+    },
+    {
+      "id": "T-AAF-008",
+      "name": "Framework supply chain compromise — vulnerabilities in agentic framework dependencies or malicious packages",
+      "mitigatedBy": ["SR-02", "SR-03", "SA-04", "RA-05"]
+    },
+    {
+      "id": "T-AAF-009",
+      "name": "Unauthorised external access — agent making network calls, API requests, or data exfiltration outside approved endpoints",
+      "mitigatedBy": ["SC-07", "CM-07", "AC-04", "SI-04"]
+    },
+    {
+      "id": "T-AAF-010",
+      "name": "Agent state and memory manipulation — corrupting checkpoints, memory stores, or configuration to alter future behaviour",
+      "mitigatedBy": ["SC-28", "SC-04", "CM-02", "AU-02"]
+    },
+    {
+      "id": "T-AAF-011",
+      "name": "Guardrail bypass through indirect channels — circumventing safety controls via encoded instructions, multi-step reasoning, or tool-mediated payloads",
+      "mitigatedBy": ["SI-10", "SC-07", "SA-11", "CA-07"]
+    },
+    {
+      "id": "T-AAF-012",
+      "name": "Shadow agent deployment — unauthorised agentic workflows running outside the governed platform",
+      "mitigatedBy": ["CM-08", "CM-07", "SI-04", "AC-03"]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-04",
+      "name": "Impact Analysis",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-04",
+      "name": "Identifier Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-01",
+      "name": "Incident Response Policy and Procedures",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-04",
+      "name": "Information in Shared System Resources",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-39",
+      "name": "Process Isolation",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Input Validation",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-02",
+      "name": "Supply Chain Risk Management Plan",
+      "family": "SR",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR",
+      "emphasis": "important"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 4,
+    "AU": 3,
+    "CA": 1,
+    "CM": 5,
+    "IA": 2,
+    "IR": 3,
+    "PM": 1,
+    "RA": 2,
+    "SA": 4,
+    "SC": 4,
+    "SI": 2,
+    "SR": 2
+  }
+}

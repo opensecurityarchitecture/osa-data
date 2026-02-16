@@ -235,6 +235,45 @@ def main():
                 validated += 1
                 print(f"  OK: {ttce_path.name} ({len(data)} classes, {total_caps} capabilities)")
 
+    # Validate THFM human factors catalog
+    thfm_path = attack_dir / "human-factors-catalog.json"
+    if thfm_path.exists():
+        print("\nTHFM Human Factors:")
+        if not validate_json_syntax(thfm_path):
+            errors += 1
+        else:
+            with open(thfm_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            thfm_errors = 0
+            cialdini_count = 0
+            insider_count = 0
+            total_edges = 0
+            for hf_id, hf in data.items():
+                required = ['id', 'name', 'category', 'category_name', 'description', 'cialdiniPrinciple', 'exploitedBy', 'controlRefs', 'insiderStage']
+                missing = [r for r in required if r not in hf]
+                if missing:
+                    print(f"  FAIL: {hf_id} missing fields: {missing}")
+                    thfm_errors += 1
+                if hf.get('id') != hf_id:
+                    print(f"  FAIL: {hf_id} id mismatch: {hf.get('id')}")
+                    thfm_errors += 1
+                for eb in hf.get('exploitedBy', []):
+                    eb_required = ['technique', 'rationale']
+                    eb_missing = [r for r in eb_required if r not in eb]
+                    if eb_missing:
+                        print(f"  FAIL: {hf_id} exploitedBy entry missing fields: {eb_missing}")
+                        thfm_errors += 1
+                    total_edges += 1
+                if hf.get('cialdiniPrinciple'):
+                    cialdini_count += 1
+                if hf.get('category') == 'IN':
+                    insider_count += 1
+            if thfm_errors:
+                errors += thfm_errors
+            else:
+                validated += 1
+                print(f"  OK: {thfm_path.name} ({len(data)} classes, {cialdini_count} Cialdini-mapped, {insider_count} insider, {total_edges} technique edges)")
+
     # Summary
     print(f"\nValidation complete: {validated} files OK, {errors} errors")
 

@@ -156,10 +156,46 @@
       "protects_data_edges": 140,
       "enrichment_date": "2026-02-16",
       "notes": "14 data type classes across 8 categories with 4 classification tiers (DC-0 through DC-3). Each data type carries regulatory drivers, impact domains, and protection requirements grouped by data state (at-rest, in-transit, in-use, lifecycle, logging). Provides REQUIRES_PROTECTION edges (DataType -> Control) and PROTECTS_DATA edges (Control -> DataType) for threat-led pattern derivation."
+    },
+    "cloud_service_catalog": {
+      "source": "OSA TCSE (Trident Cloud Service Enumeration)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "trident-pattern-modernisation.md",
+      "total_services": 22,
+      "providers": 7,
+      "categories": 11,
+      "category_breakdown": {
+        "compute_iaas": 3,
+        "compute_faas": 2,
+        "compute_caas": 2,
+        "storage_object": 3,
+        "identity": 3,
+        "database_paas": 2,
+        "database_saas": 1,
+        "network": 2,
+        "cdn_waf": 1,
+        "saas_productivity": 2,
+        "saas_business": 1
+      },
+      "provider_breakdown": {
+        "AWS": 8,
+        "Azure": 5,
+        "GCP": 3,
+        "Microsoft": 1,
+        "Google": 1,
+        "Okta": 1,
+        "Cloudflare": 1,
+        "Salesforce": 1
+      },
+      "unique_controls_referenced": 38,
+      "provider_implements_edges": 291,
+      "customer_implements_edges": 270,
+      "enrichment_date": "2026-02-16",
+      "notes": "22 cloud service entries across 7 providers and 11 service model categories. Each service carries shared responsibility splits — provider controls (inherited, customer does not implement) and customer controls (must implement, patterns derive from these). Replaces CPE for cloud services where traditional versioning and CVE models do not apply. Provides PROVIDER_IMPLEMENTS and CUSTOMER_IMPLEMENTS edges for threat-led pattern derivation with shared responsibility awareness."
     }
   },
   "graph_summary": {
-    "total_edges": 19154,
+    "total_edges": 19715,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -174,7 +210,9 @@
       "TIER_CONTAINS": 469,
       "EXPLOITS_HUMAN": 31,
       "REQUIRES_PROTECTION": 140,
-      "PROTECTS_DATA": 140
+      "PROTECTS_DATA": 140,
+      "PROVIDER_IMPLEMENTS": 291,
+      "CUSTOMER_IMPLEMENTS": 270
     },
     "node_types": {
       "technique": 469,
@@ -188,7 +226,8 @@
       "technology_class": 28,
       "adversary_tier": 5,
       "human_factor": 24,
-      "data_type": 14
+      "data_type": 14,
+      "cloud_service": 22
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -201,7 +240,8 @@
       "technology_capability_path": "Control <-PROVIDES_CAPABILITY- TechnologyClass (TTCE technology capability profiling)",
       "adversary_capability_path": "AdversaryTier -TIER_CONTAINS-> Technique (TACM capability tier classification)",
       "human_factors_path": "HumanFactor -EXPLOITS_HUMAN-> Technique (THFM cognitive vulnerability exploitation)",
-      "data_classification_path": "DataType -REQUIRES_PROTECTION-> Control / Control -PROTECTS_DATA-> DataType (TDCE regulatory-driven control derivation)"
+      "data_classification_path": "DataType -REQUIRES_PROTECTION-> Control / Control -PROTECTS_DATA-> DataType (TDCE regulatory-driven control derivation)",
+      "cloud_service_path": "CloudService -PROVIDER_IMPLEMENTS-> Control / CloudService -CUSTOMER_IMPLEMENTS-> Control (TCSE shared responsibility derivation)"
     }
   },
   "files": {
@@ -216,7 +256,8 @@
     "adversary-tier-catalog.json": "5 TACM adversary capability tiers with STIX/NIST attributes and technique tier distribution",
     "human-factors-catalog.json": "24 THFM cognitive vulnerability classes across 6 categories with Cialdini mappings and SP800-53 control refs",
     "data-classification-catalog.json": "14 TDCE data type classes across 8 categories with regulatory drivers, impact domains, and protection requirements",
-    "graph-edges.json": "19,154 explicit TRIDENT graph edges across 14 relationship types",
+    "cloud-service-catalog.json": "22 TCSE cloud service entries across 7 providers with shared responsibility splits and customer/provider control mappings",
+    "graph-edges.json": "19,715 explicit TRIDENT graph edges across 16 relationship types",
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",

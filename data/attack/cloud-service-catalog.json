@@ -1,0 +1,398 @@
+{
+  "TCSE-AWS-EC2": {
+    "id": "TCSE-AWS-EC2",
+    "name": "Amazon EC2",
+    "provider": "AWS",
+    "service": "EC2",
+    "category": "compute-iaas",
+    "category_name": "Compute (IaaS)",
+    "description": "Elastic Compute Cloud provides resizable virtual machines in AWS. Customers control the operating system, middleware, runtime, application code, and network configuration. AWS manages the hypervisor, physical host, and datacenter infrastructure. Customers are responsible for patching, hardening, access control, and vulnerability management of their instances.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-39"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "AU-06", "CM-02", "CM-03", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SC-07", "SC-08", "SI-02", "SI-03", "SI-04"],
+      "boundary": "Customer owns OS, applications, data, and network config. Provider owns hypervisor, hardware, and physical facilities."
+    },
+    "cisBenchmark": "CIS Amazon EC2 Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "AU-06", "CM-02", "CM-03", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SC-07", "SC-08", "SI-02", "SI-03", "SI-04"]
+  },
+  "TCSE-AWS-LAM": {
+    "id": "TCSE-AWS-LAM",
+    "name": "AWS Lambda",
+    "provider": "AWS",
+    "service": "Lambda",
+    "category": "compute-faas",
+    "category_name": "Compute (FaaS)",
+    "description": "Serverless function-as-a-service platform that executes code in response to events without provisioning servers. AWS manages the runtime, OS, patching, scaling, and infrastructure. Customers are responsible for function code security, IAM permissions, input validation, dependency management, and secrets handling.",
+    "deploymentModel": "public",
+    "ephemeral": true,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08"],
+      "boundary": "Customer owns function code, IAM roles, environment variables, and event source config. Provider owns runtime, OS, compute, scaling, and infrastructure."
+    },
+    "cisBenchmark": "CIS AWS Lambda Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08"]
+  },
+  "TCSE-AWS-ECS": {
+    "id": "TCSE-AWS-ECS",
+    "name": "Amazon ECS/Fargate",
+    "provider": "AWS",
+    "service": "ECS",
+    "category": "compute-caas",
+    "category_name": "Compute (CaaS)",
+    "description": "Managed container orchestration service. With Fargate launch type, AWS manages the underlying compute. Customers manage container images, task definitions, networking, IAM roles, and application code. Patching container base images is the customer's responsibility.",
+    "deploymentModel": "public",
+    "ephemeral": true,
+    "sharedResponsibility": {
+      "provider": ["CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-39"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-02", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08", "SI-02", "SI-03"],
+      "boundary": "Customer owns container images, task definitions, networking, and IAM roles. Provider owns host OS, orchestration plane, and infrastructure."
+    },
+    "cisBenchmark": "CIS Amazon ECS Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-02", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08", "SI-02", "SI-03"]
+  },
+  "TCSE-AZ-VM": {
+    "id": "TCSE-AZ-VM",
+    "name": "Azure Virtual Machines",
+    "provider": "Azure",
+    "service": "Virtual Machines",
+    "category": "compute-iaas",
+    "category_name": "Compute (IaaS)",
+    "description": "Azure IaaS virtual machines providing full OS-level control. Customers manage the operating system, middleware, runtime, applications, and network security groups. Microsoft manages the hypervisor, physical host, and datacenter. Customers are responsible for patching, hardening, endpoint protection, and access management.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-39"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "AU-06", "CM-02", "CM-03", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SC-07", "SC-08", "SI-02", "SI-03", "SI-04"],
+      "boundary": "Customer owns OS, applications, data, and network config. Provider owns hypervisor, hardware, and physical facilities."
+    },
+    "cisBenchmark": "CIS Microsoft Azure Compute Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "AU-06", "CM-02", "CM-03", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SC-07", "SC-08", "SI-02", "SI-03", "SI-04"]
+  },
+  "TCSE-AZ-FUNC": {
+    "id": "TCSE-AZ-FUNC",
+    "name": "Azure Functions",
+    "provider": "Azure",
+    "service": "Functions",
+    "category": "compute-faas",
+    "category_name": "Compute (FaaS)",
+    "description": "Serverless compute service for event-driven code execution on Azure. Microsoft manages the runtime, OS, patching, scaling, and infrastructure. Customers manage function code, bindings, authentication configuration, and managed identity assignments.",
+    "deploymentModel": "public",
+    "ephemeral": true,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08"],
+      "boundary": "Customer owns function code, bindings, authentication config, and managed identities. Provider owns runtime, OS, compute, scaling, and infrastructure."
+    },
+    "cisBenchmark": "CIS Microsoft Azure Functions Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08"]
+  },
+  "TCSE-GCP-GCE": {
+    "id": "TCSE-GCP-GCE",
+    "name": "Google Compute Engine",
+    "provider": "GCP",
+    "service": "Compute Engine",
+    "category": "compute-iaas",
+    "category_name": "Compute (IaaS)",
+    "description": "Google Cloud IaaS virtual machines with full OS-level access. Customers manage operating system, applications, network firewall rules, and data. Google manages the hypervisor (KVM-based), hardware, Titan security chip, and physical facilities.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-39"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "AU-06", "CM-02", "CM-03", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SC-07", "SC-08", "SI-02", "SI-03", "SI-04"],
+      "boundary": "Customer owns OS, applications, data, and network config. Provider owns hypervisor, hardware, and physical facilities."
+    },
+    "cisBenchmark": "CIS Google Compute Engine Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "AU-06", "CM-02", "CM-03", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SC-07", "SC-08", "SI-02", "SI-03", "SI-04"]
+  },
+  "TCSE-GCP-RUN": {
+    "id": "TCSE-GCP-RUN",
+    "name": "Google Cloud Run",
+    "provider": "GCP",
+    "service": "Cloud Run",
+    "category": "compute-caas",
+    "category_name": "Compute (CaaS)",
+    "description": "Fully managed serverless container platform on Google Cloud. Automatically scales container instances to zero. Customers manage container images, service configuration, IAM bindings, and ingress settings. Google manages the Knative-based orchestration, host OS, and infrastructure.",
+    "deploymentModel": "public",
+    "ephemeral": true,
+    "sharedResponsibility": {
+      "provider": ["CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-39"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-02", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08", "SI-02", "SI-03"],
+      "boundary": "Customer owns container images, service config, IAM bindings, and ingress rules. Provider owns orchestration, host OS, and infrastructure."
+    },
+    "cisBenchmark": "CIS Google Cloud Run Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-02", "CM-06", "CM-07", "IA-02", "IA-05", "IR-04", "RA-05", "SA-11", "SC-08", "SI-02", "SI-03"]
+  },
+  "TCSE-AWS-S3": {
+    "id": "TCSE-AWS-S3",
+    "name": "Amazon S3",
+    "provider": "AWS",
+    "service": "S3",
+    "category": "storage-object",
+    "category_name": "Storage (Object)",
+    "description": "Simple Storage Service providing scalable object storage with 11 nines of durability. Customers manage bucket policies, access control lists, encryption configuration, versioning, lifecycle rules, and public access settings. AWS manages storage infrastructure, replication, and physical security.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "MP-06", "SC-08", "SC-28"],
+      "boundary": "Customer owns bucket policies, ACLs, encryption config, and data lifecycle. Provider owns storage infrastructure, replication, and physical security."
+    },
+    "cisBenchmark": "CIS Amazon S3 Benchmark",
+    "controlRefs": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "MP-06", "SC-08", "SC-28"]
+  },
+  "TCSE-AZ-BLOB": {
+    "id": "TCSE-AZ-BLOB",
+    "name": "Azure Blob Storage",
+    "provider": "Azure",
+    "service": "Blob Storage",
+    "category": "storage-object",
+    "category_name": "Storage (Object)",
+    "description": "Massively scalable object storage for unstructured data on Azure. Supports hot, cool, and archive access tiers. Customers manage container access levels, SAS tokens, encryption scope, immutability policies, and private endpoint configuration. Microsoft manages storage replication, infrastructure, and physical security.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "MP-06", "SC-08", "SC-28"],
+      "boundary": "Customer owns access policies, SAS tokens, encryption config, and data lifecycle. Provider owns storage infrastructure, replication, and physical security."
+    },
+    "cisBenchmark": "CIS Microsoft Azure Storage Benchmark",
+    "controlRefs": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "MP-06", "SC-08", "SC-28"]
+  },
+  "TCSE-GCP-GCS": {
+    "id": "TCSE-GCP-GCS",
+    "name": "Google Cloud Storage",
+    "provider": "GCP",
+    "service": "Cloud Storage",
+    "category": "storage-object",
+    "category_name": "Storage (Object)",
+    "description": "Unified object storage on Google Cloud with Standard, Nearline, Coldline, and Archive classes. Customers manage IAM bindings, ACLs, CMEK encryption, retention policies, and object versioning. Google manages storage infrastructure, erasure coding, and physical security.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "MP-06", "SC-08", "SC-28"],
+      "boundary": "Customer owns IAM bindings, ACLs, encryption config, and data lifecycle. Provider owns storage infrastructure, erasure coding, and physical security."
+    },
+    "cisBenchmark": "CIS Google Cloud Storage Benchmark",
+    "controlRefs": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "MP-06", "SC-08", "SC-28"]
+  },
+  "TCSE-AZ-ENTRA": {
+    "id": "TCSE-AZ-ENTRA",
+    "name": "Microsoft Entra ID",
+    "provider": "Azure",
+    "service": "Entra ID",
+    "category": "identity",
+    "category_name": "Identity",
+    "description": "Cloud identity and access management service (formerly Azure AD). Provides SSO, MFA, conditional access, identity governance, and B2B/B2C identity federation. Customers manage user lifecycle, group assignments, conditional access policies, app registrations, and role definitions. Microsoft manages the identity platform, directory infrastructure, and authentication protocols.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-05", "AC-06", "AU-02", "AU-03", "AU-06", "CM-06", "IA-02", "IA-05", "IR-04", "PS-04"],
+      "boundary": "Customer owns user lifecycle, group policies, conditional access, role assignments, and app registrations. Provider owns directory infrastructure, authentication protocols, and platform security."
+    },
+    "cisBenchmark": "CIS Microsoft Azure Identity Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-05", "AC-06", "AU-02", "AU-03", "AU-06", "CM-06", "IA-02", "IA-05", "IR-04", "PS-04"]
+  },
+  "TCSE-OKTA-SSO": {
+    "id": "TCSE-OKTA-SSO",
+    "name": "Okta Workforce Identity",
+    "provider": "Okta",
+    "service": "Workforce Identity Cloud",
+    "category": "identity",
+    "category_name": "Identity",
+    "description": "Third-party identity platform providing SSO, adaptive MFA, lifecycle management, and universal directory. Customers manage user provisioning, authentication policies, app integrations, API access tokens, and admin role assignments. Okta manages the identity platform, cell architecture, and infrastructure security.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-05", "AC-06", "AU-02", "AU-03", "AU-06", "CM-06", "IA-02", "IA-05", "IR-04", "PS-04"],
+      "boundary": "Customer owns user provisioning, authentication policies, app integrations, and API tokens. Provider owns identity platform, cell architecture, and infrastructure."
+    },
+    "cisBenchmark": "CIS Okta Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-05", "AC-06", "AU-02", "AU-03", "AU-06", "CM-06", "IA-02", "IA-05", "IR-04", "PS-04"]
+  },
+  "TCSE-AWS-IAM": {
+    "id": "TCSE-AWS-IAM",
+    "name": "AWS IAM",
+    "provider": "AWS",
+    "service": "IAM",
+    "category": "identity",
+    "category_name": "Identity",
+    "description": "AWS Identity and Access Management controls authentication and authorisation for all AWS services. Customers manage IAM users, roles, policies, permission boundaries, service control policies, and MFA configuration. AWS manages the IAM service infrastructure, API endpoints, and STS token issuance.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-05", "AC-06", "AU-02", "AU-03", "AU-06", "CM-06", "IA-02", "IA-05", "IR-04", "PS-04"],
+      "boundary": "Customer owns IAM users, roles, policies, permission boundaries, and MFA config. Provider owns IAM service infrastructure, API endpoints, and token issuance."
+    },
+    "cisBenchmark": "CIS AWS IAM Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-05", "AC-06", "AU-02", "AU-03", "AU-06", "CM-06", "IA-02", "IA-05", "IR-04", "PS-04"]
+  },
+  "TCSE-AWS-RDS": {
+    "id": "TCSE-AWS-RDS",
+    "name": "Amazon RDS",
+    "provider": "AWS",
+    "service": "RDS",
+    "category": "database-paas",
+    "category_name": "Database (PaaS)",
+    "description": "Managed relational database service supporting MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server. AWS manages OS patching, database engine patching, backups, replication, and failover. Customers manage database users, query access controls, parameter groups, encryption settings, and network access via security groups.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SC-08", "SC-28"],
+      "boundary": "Customer owns database users, access controls, parameter groups, encryption config, and security groups. Provider owns OS, engine patching, backups, replication, and infrastructure."
+    },
+    "cisBenchmark": "CIS Amazon RDS Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SC-08", "SC-28"]
+  },
+  "TCSE-AWS-DDB": {
+    "id": "TCSE-AWS-DDB",
+    "name": "Amazon DynamoDB",
+    "provider": "AWS",
+    "service": "DynamoDB",
+    "category": "database-saas",
+    "category_name": "Database (SaaS)",
+    "description": "Fully managed serverless NoSQL database with single-digit millisecond performance. AWS manages all infrastructure, patching, replication, scaling, and backups. Customers manage table design, IAM policies, encryption key selection, VPC endpoint access, and backup schedules.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CM-07", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "SC-08"],
+      "boundary": "Customer owns table design, IAM policies, encryption key selection, and VPC endpoint config. Provider owns all infrastructure, patching, replication, scaling, and backups."
+    },
+    "cisBenchmark": "CIS Amazon DynamoDB Benchmark",
+    "controlRefs": ["AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "SC-08"]
+  },
+  "TCSE-AZ-SQL": {
+    "id": "TCSE-AZ-SQL",
+    "name": "Azure SQL Database",
+    "provider": "Azure",
+    "service": "SQL Database",
+    "category": "database-paas",
+    "category_name": "Database (PaaS)",
+    "description": "Fully managed relational database engine based on SQL Server. Microsoft manages OS patching, database engine updates, high availability, backups, and infrastructure. Customers manage database users, firewall rules, TDE encryption, auditing configuration, and data classification labels.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SC-08", "SC-28"],
+      "boundary": "Customer owns database users, firewall rules, TDE config, auditing, and data classification. Provider owns engine updates, HA, backups, and infrastructure."
+    },
+    "cisBenchmark": "CIS Microsoft Azure SQL Database Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04", "RA-05", "SC-08", "SC-28"]
+  },
+  "TCSE-AWS-VPC": {
+    "id": "TCSE-AWS-VPC",
+    "name": "Amazon VPC",
+    "provider": "AWS",
+    "service": "VPC",
+    "category": "network",
+    "category_name": "Network",
+    "description": "Virtual Private Cloud provides logically isolated network sections within AWS. Customers manage subnets, route tables, security groups, NACLs, VPN/Direct Connect, internet gateway, and flow log configuration. AWS manages the underlying physical network, SDN fabric, and cross-AZ connectivity.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-39"],
+      "customer": ["AC-04", "AU-02", "AU-03", "CM-06", "CM-07", "IR-04", "SC-07"],
+      "boundary": "Customer owns subnets, route tables, security groups, NACLs, and flow logs. Provider owns physical network, SDN fabric, and cross-AZ connectivity."
+    },
+    "cisBenchmark": "CIS Amazon VPC Benchmark",
+    "controlRefs": ["AC-04", "AU-02", "AU-03", "CM-06", "CM-07", "IR-04", "SC-07"]
+  },
+  "TCSE-AZ-VNET": {
+    "id": "TCSE-AZ-VNET",
+    "name": "Azure Virtual Network",
+    "provider": "Azure",
+    "service": "Virtual Network",
+    "category": "network",
+    "category_name": "Network",
+    "description": "Azure networking service providing isolated virtual networks with subnets, NSGs, route tables, peering, and private endpoints. Customers manage network topology, security group rules, service endpoints, DNS configuration, and DDoS protection plan assignment. Microsoft manages the physical network backbone and SDN infrastructure.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-39"],
+      "customer": ["AC-04", "AU-02", "AU-03", "CM-06", "CM-07", "IR-04", "SC-07"],
+      "boundary": "Customer owns network topology, NSGs, route tables, peering, and private endpoints. Provider owns physical network backbone and SDN infrastructure."
+    },
+    "cisBenchmark": "CIS Microsoft Azure Networking Benchmark",
+    "controlRefs": ["AC-04", "AU-02", "AU-03", "CM-06", "CM-07", "IR-04", "SC-07"]
+  },
+  "TCSE-CF-CDN": {
+    "id": "TCSE-CF-CDN",
+    "name": "Cloudflare CDN/WAF",
+    "provider": "Cloudflare",
+    "service": "CDN/WAF",
+    "category": "cdn-waf",
+    "category_name": "CDN/WAF",
+    "description": "Global content delivery network with integrated web application firewall, DDoS protection, and bot management. Customers manage WAF rulesets, page rules, rate limiting, firewall rules, SSL/TLS settings, and origin server configuration. Cloudflare manages the edge network, Anycast infrastructure, and threat intelligence feeds.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-03", "AU-02", "AU-03", "CM-06", "IR-04", "SC-05", "SC-08", "SI-04"],
+      "boundary": "Customer owns WAF rulesets, page rules, rate limiting, SSL/TLS config, and origin protection. Provider owns edge network, Anycast infrastructure, and threat intelligence."
+    },
+    "cisBenchmark": "CIS Cloudflare Benchmark",
+    "controlRefs": ["AC-03", "AU-02", "AU-03", "CM-06", "IR-04", "SC-05", "SC-08", "SI-04"]
+  },
+  "TCSE-M365": {
+    "id": "TCSE-M365",
+    "name": "Microsoft 365",
+    "provider": "Microsoft",
+    "service": "Microsoft 365",
+    "category": "saas-productivity",
+    "category_name": "SaaS (Productivity)",
+    "description": "Cloud productivity suite including Exchange Online, SharePoint Online, OneDrive, Teams, and Office applications. Microsoft manages the entire application stack, infrastructure, patching, and availability. Customers manage user accounts, DLP policies, sharing settings, retention labels, sensitivity labels, and conditional access policies.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CM-07", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-05", "AC-06", "AT-02", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04"],
+      "boundary": "Customer owns user accounts, DLP policies, sharing/retention settings, sensitivity labels, and conditional access. Provider owns application stack, infrastructure, patching, and availability."
+    },
+    "cisBenchmark": "CIS Microsoft 365 Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-05", "AC-06", "AT-02", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04"]
+  },
+  "TCSE-SF-CRM": {
+    "id": "TCSE-SF-CRM",
+    "name": "Salesforce CRM",
+    "provider": "Salesforce",
+    "service": "Sales Cloud",
+    "category": "saas-business",
+    "category_name": "SaaS (Business)",
+    "description": "Cloud-based customer relationship management platform. Salesforce manages the entire multi-tenant application stack, Hyperforce infrastructure, and patching. Customers manage user profiles, permission sets, sharing rules, field-level security, login IP ranges, session policies, and custom Apex code security.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CM-07", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-05", "AC-06", "AT-02", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04"],
+      "boundary": "Customer owns user profiles, permission sets, sharing rules, field-level security, and session policies. Provider owns multi-tenant application stack, Hyperforce infrastructure, and patching."
+    },
+    "cisBenchmark": "CIS Salesforce Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-05", "AC-06", "AT-02", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04"]
+  },
+  "TCSE-GWS": {
+    "id": "TCSE-GWS",
+    "name": "Google Workspace",
+    "provider": "Google",
+    "service": "Workspace",
+    "category": "saas-productivity",
+    "category_name": "SaaS (Productivity)",
+    "description": "Cloud productivity and collaboration suite including Gmail, Drive, Docs, Meet, and Admin Console. Google manages the entire application stack, infrastructure, patching, and availability. Customers manage user accounts, organisational units, DLP rules, sharing policies, app access control, and OAuth consent settings.",
+    "deploymentModel": "public",
+    "ephemeral": false,
+    "sharedResponsibility": {
+      "provider": ["CM-02", "CM-07", "CP-06", "CP-07", "MA-02", "MA-05", "PE-03", "PE-06", "PE-09", "PE-11", "PE-12", "PE-13", "SC-07", "SC-39", "SI-02"],
+      "customer": ["AC-02", "AC-03", "AC-05", "AC-06", "AT-02", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04"],
+      "boundary": "Customer owns user accounts, OU structure, DLP rules, sharing policies, and OAuth consent settings. Provider owns application stack, infrastructure, patching, and availability."
+    },
+    "cisBenchmark": "CIS Google Workspace Benchmark",
+    "controlRefs": ["AC-02", "AC-03", "AC-05", "AC-06", "AT-02", "AU-02", "AU-03", "CM-06", "IA-02", "IA-05", "IR-04"]
+  }
+}

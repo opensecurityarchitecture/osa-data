@@ -1,0 +1,264 @@
+{
+  "THFM-STAGE-0": {
+    "id": "THFM-STAGE-0",
+    "stage": 0,
+    "name": "Trusted Employee",
+    "description": "Individual with legitimate access operating within normal behavioural parameters. No observable risk indicators. This is the baseline state for all authorised users.",
+    "certCpirMapping": null,
+    "cpniMapping": null,
+    "cisaTypes": ["accidental", "negligent", "compromised", "malicious", "collusive"],
+    "riskFactors": [],
+    "indicators": [],
+    "detectionControls": [
+      {
+        "controlRef": "PS-3",
+        "name": "Personnel Screening",
+        "purpose": "Pre-employment vetting establishes baseline trustworthiness"
+      },
+      {
+        "controlRef": "PS-6",
+        "name": "Access Agreements",
+        "purpose": "Signed agreements establish behavioural expectations and legal framework"
+      }
+    ],
+    "interventionWindow": "Preventive — screening and onboarding controls reduce probability of future progression",
+    "transitionTrigger": "Predisposition factors (THFM-IN-03, THFM-IN-05, THFM-IN-06) activated by life events or organisational changes"
+  },
+  "THFM-STAGE-1": {
+    "id": "THFM-STAGE-1",
+    "stage": 1,
+    "name": "At-Risk Individual",
+    "description": "Personal predispositions or early stressors create vulnerability to insider risk. Individual may not yet have any malicious intent — this stage includes negligent and pre-malicious states. CERT CPIR reports 76% of insiders did not join with malicious intent; they entered the pathway here.",
+    "certCpirMapping": "Stage 1 (Personal Predispositions) + early Stage 2 (Stressors)",
+    "cpniMapping": "Stage 1 (Exploration)",
+    "cisaTypes": ["negligent", "compromised", "malicious"],
+    "riskFactors": ["THFM-IN-01", "THFM-IN-02", "THFM-IN-03", "THFM-IN-04", "THFM-IN-05", "THFM-IN-07"],
+    "indicators": [
+      {
+        "category": "financial",
+        "observableSigns": "Unexpected lifestyle changes, wage garnishment, bankruptcy filings, gambling indicators",
+        "detectionMethod": "HR records, Employee Assistance Programme referrals, continuous vetting"
+      },
+      {
+        "category": "professional",
+        "observableSigns": "Passed over for promotion, negative performance review, conflict with management, formal grievance",
+        "detectionMethod": "HR records, manager reporting, exit interview patterns"
+      },
+      {
+        "category": "personal",
+        "observableSigns": "Divorce, family crisis, substance abuse, significant behavioural changes",
+        "detectionMethod": "EAP referrals, peer reporting, manager awareness"
+      },
+      {
+        "category": "ideological",
+        "observableSigns": "Expressed grievances about company direction, ethical objections, radicalisation indicators",
+        "detectionMethod": "Manager awareness, anonymous reporting channels"
+      },
+      {
+        "category": "external",
+        "observableSigns": "Unusual foreign contacts, unexplained travel, unreported outside employment",
+        "detectionMethod": "Vetting updates, continuous evaluation, travel monitoring"
+      }
+    ],
+    "detectionControls": [
+      {
+        "controlRef": "PM-12",
+        "name": "Insider Threat Programme",
+        "purpose": "Organisational framework for identifying and responding to insider risk indicators"
+      },
+      {
+        "controlRef": "PS-3",
+        "name": "Personnel Screening",
+        "purpose": "Continuous evaluation and periodic rescreening detect emerging risk factors"
+      },
+      {
+        "controlRef": "AT-2",
+        "name": "Awareness Training",
+        "purpose": "Manager and peer awareness training enables early identification of concerning changes"
+      }
+    ],
+    "interventionWindow": "Early intervention — 71% of insider threats detectable at this stage by mature programmes (CERT research). EAP support, management engagement, and workload review are non-punitive interventions.",
+    "transitionTrigger": "Stressor event + rationalisation (Fraud Triangle completion). Failed or absent organisational intervention. Opportunity discovery."
+  },
+  "THFM-STAGE-2": {
+    "id": "THFM-STAGE-2",
+    "stage": 2,
+    "name": "Concerning Behaviour",
+    "description": "Observable behavioural changes indicating escalating risk. The individual begins testing boundaries through minor policy violations, unusual access patterns, or data behaviours that deviate from their baseline. This is the critical intervention window — the Fraud Triangle is forming but not yet complete.",
+    "certCpirMapping": "Stage 3 (Concerning Behaviours)",
+    "cpniMapping": "Stage 2 (Experimentation)",
+    "cisaTypes": ["negligent", "compromised", "malicious", "collusive"],
+    "riskFactors": ["THFM-IN-01", "THFM-IN-02", "THFM-IN-04", "THFM-IN-06", "THFM-IN-07"],
+    "indicators": [
+      {
+        "category": "access_pattern",
+        "observableSigns": "Accessing systems or data outside normal role, unusual working hours, access to sensitive files without business need",
+        "detectionMethod": "SIEM correlation (TTCE-DT-01), UEBA behavioural analytics (TTCE-DT-04)"
+      },
+      {
+        "category": "data_behaviour",
+        "observableSigns": "Downloading unusual volumes, bulk file access, accessing sensitive directories, personal device data transfer",
+        "detectionMethod": "DLP monitoring (TTCE-DP-01), UEBA (TTCE-DT-04), CASB (TTCE-IA-03)"
+      },
+      {
+        "category": "policy_violation",
+        "observableSigns": "Minor security policy breaches, tailgating, credential sharing, bypassing security controls",
+        "detectionMethod": "Audit logs, physical access monitoring, security policy violation tracking"
+      },
+      {
+        "category": "social",
+        "observableSigns": "Increased isolation, expressions of injustice, hostile communications, disengagement from team",
+        "detectionMethod": "Manager reporting, HR engagement, peer reporting channels"
+      },
+      {
+        "category": "technical",
+        "observableSigns": "Researching data exfiltration methods, testing removable media policies, exploring network shares",
+        "detectionMethod": "Endpoint monitoring (TTCE-EP-01), web proxy logs (TTCE-NP-04), search query logging"
+      }
+    ],
+    "detectionControls": [
+      {
+        "controlRef": "AU-6",
+        "name": "Audit Review, Analysis, and Reporting",
+        "purpose": "Systematic review of audit logs identifies anomalous access patterns"
+      },
+      {
+        "controlRef": "SI-4",
+        "name": "System Monitoring",
+        "purpose": "Continuous monitoring detects behavioural anomalies and policy violations"
+      },
+      {
+        "controlRef": "AC-2",
+        "name": "Account Management",
+        "purpose": "Periodic access review identifies privilege accumulation and inappropriate access"
+      },
+      {
+        "controlRef": "PM-12",
+        "name": "Insider Threat Programme",
+        "purpose": "Structured response framework for concerning behaviour indicators"
+      }
+    ],
+    "interventionWindow": "Critical intervention window. Non-punitive engagement preferred — CERT research shows heavy-handed response at this stage escalates 40% of cases. EAP referral, access adjustment, management dialogue.",
+    "transitionTrigger": "Opportunity + escalation. Failed organisational intervention (CERT CPIR Stage 4: Problematic Organisational Response). Pressure intensification."
+  },
+  "THFM-STAGE-3": {
+    "id": "THFM-STAGE-3",
+    "stage": 3,
+    "name": "Active Insider Threat",
+    "description": "The Fraud Triangle is complete: pressure + opportunity + rationalisation. The individual begins deliberate misuse of legitimate access for unauthorised purposes. Actions include data exfiltration, privilege abuse, cover-up activities, and preparation for departure or escalation.",
+    "certCpirMapping": "Late Stage 3 (Concerning Behaviours escalating to action)",
+    "cpniMapping": "Stage 3 (Exploitation) + Stage 4 (Execution)",
+    "cisaTypes": ["compromised", "malicious", "collusive"],
+    "riskFactors": ["THFM-IN-01", "THFM-IN-02", "THFM-IN-04", "THFM-IN-06", "THFM-IN-07"],
+    "indicators": [
+      {
+        "category": "data_exfiltration",
+        "observableSigns": "Large file transfers to external destinations, USB usage spikes, personal email forwarding of corporate data, cloud upload to personal accounts",
+        "detectionMethod": "DLP (TTCE-DP-01), CASB (TTCE-IA-03), EDR (TTCE-EP-01), email gateway (TTCE-AS-03)"
+      },
+      {
+        "category": "access_abuse",
+        "observableSigns": "Privilege escalation attempts, accessing other users' accounts, credential harvesting, creating backdoor accounts",
+        "detectionMethod": "PAM (TTCE-IA-02), UEBA (TTCE-DT-04), SIEM (TTCE-DT-01), identity analytics"
+      },
+      {
+        "category": "cover_up",
+        "observableSigns": "Log clearing or modification, anti-forensics tool usage, unusual deletion patterns, audit trail gaps",
+        "detectionMethod": "SIEM integrity monitoring, file integrity monitoring (TTCE-EP-02), audit trail analysis"
+      },
+      {
+        "category": "departure_preparation",
+        "observableSigns": "Updating CV/LinkedIn during work hours, increased personal calls, resignation signals, knowledge hoarding",
+        "detectionMethod": "HR awareness, manager reporting, DLP correlation with HR status"
+      }
+    ],
+    "detectionControls": [
+      {
+        "controlRef": "AC-6",
+        "name": "Least Privilege",
+        "purpose": "Limits blast radius by constraining access to minimum required"
+      },
+      {
+        "controlRef": "AU-12",
+        "name": "Audit Record Generation",
+        "purpose": "Comprehensive logging enables forensic reconstruction of insider actions"
+      },
+      {
+        "controlRef": "IR-4",
+        "name": "Incident Handling",
+        "purpose": "Structured response to confirmed insider threat activity"
+      },
+      {
+        "controlRef": "SC-7",
+        "name": "Boundary Protection",
+        "purpose": "Network-level controls constrain data exfiltration paths"
+      }
+    ],
+    "interventionWindow": "Reactive — damage limitation and evidence preservation. Legal and HR coordination required. Access revocation must be balanced with evidence collection needs.",
+    "transitionTrigger": "Execution of data theft, sabotage, fraud, or espionage action with material impact"
+  },
+  "THFM-STAGE-4": {
+    "id": "THFM-STAGE-4",
+    "stage": 4,
+    "name": "Impact",
+    "description": "Active damage has occurred. The insider has executed their objective — data theft, IT sabotage, fraud, or espionage. Detection at this stage is reactive; the goal is minimising blast radius, preserving evidence, and preventing recurrence. CERT statistics: IT sabotage peaks within 30 days of termination, IP theft within 60 days before departure, median dwell time 8 months (IP theft) to 3 years (espionage).",
+    "certCpirMapping": "Beyond Stage 4 — impact realised",
+    "cpniMapping": "Stage 5 (Escape & Evasion)",
+    "cisaTypes": ["malicious", "collusive"],
+    "riskFactors": [],
+    "indicators": [
+      {
+        "category": "it_sabotage",
+        "observableSigns": "Data destruction, service disruption, system wipe, logic bomb detonation, ransomware deployment",
+        "detectionMethod": "EDR (TTCE-EP-01), SIEM (TTCE-DT-01), backup integrity checks, service monitoring",
+        "attackTechniques": ["T1485", "T1489", "T1561"],
+        "certPercentage": "21% of insider cases"
+      },
+      {
+        "category": "ip_theft",
+        "observableSigns": "Confirmed data exfiltration, trade secret compromise, source code theft, customer data extraction",
+        "detectionMethod": "DLP (TTCE-DP-01), forensic analysis, cloud audit logs, legal discovery",
+        "attackTechniques": ["T1005", "T1039", "T1041"],
+        "certPercentage": "15% of insider cases"
+      },
+      {
+        "category": "fraud",
+        "observableSigns": "Financial fraud, procurement fraud, expense fraud, payroll manipulation, unauthorised transactions",
+        "detectionMethod": "Financial audit, account management (AC-2), audit review (AU-6), anomaly detection",
+        "attackTechniques": ["T1078", "T1098"],
+        "certPercentage": "37% of insider cases"
+      },
+      {
+        "category": "espionage",
+        "observableSigns": "Long-term data collection, classified/restricted material extraction, intelligence transfer to external handler",
+        "detectionMethod": "Counter-intelligence, DLP (TTCE-DP-01), forensic analysis, communications monitoring",
+        "attackTechniques": ["T1005", "T1039", "T1560", "T1567"],
+        "certPercentage": "19% of insider cases"
+      }
+    ],
+    "detectionControls": [
+      {
+        "controlRef": "CP-9",
+        "name": "System Backup",
+        "purpose": "Enables recovery from sabotage and data destruction"
+      },
+      {
+        "controlRef": "IR-4",
+        "name": "Incident Handling",
+        "purpose": "Structured response including evidence preservation and legal coordination"
+      },
+      {
+        "controlRef": "IR-5",
+        "name": "Incident Monitoring",
+        "purpose": "Tracking impact scope and ongoing insider activity"
+      },
+      {
+        "controlRef": "AU-6",
+        "name": "Audit Review, Analysis, and Reporting",
+        "purpose": "Forensic reconstruction of insider actions for legal proceedings"
+      }
+    ],
+    "interventionWindow": "Post-incident — focus on containment, evidence preservation, legal proceedings, and lessons learned. Access immediately revoked.",
+    "transitionTrigger": null
+  }
+}

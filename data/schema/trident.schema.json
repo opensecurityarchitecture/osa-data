@@ -996,6 +996,173 @@
           "uniqueItems": true
         }
       }
+    },
+    "CognitiveVulnerability": {
+      "$id": "https://example.org/trident/cognitive-vulnerability.schema.json",
+      "type": "object",
+      "description": "THFM cognitive vulnerability class — a human behavioural weakness that adversaries exploit via social engineering or that manifests as insider threat risk. The human equivalent of CWE for software weaknesses.",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^THFM-[A-Z]+-[0-9]{2}$",
+          "description": "THFM identifier (e.g., THFM-AU-01)"
+        },
+        "name": { "$ref": "#/$defs/NonEmptyString" },
+        "category": {
+          "type": "string",
+          "enum": ["AU", "UR", "TR", "CU", "HB", "IN"],
+          "description": "Vulnerability category: AU=Authority & Compliance, UR=Urgency & Scarcity, TR=Trust & Rapport, CU=Curiosity & Reward, HB=Habitual & Cognitive Load, IN=Insider Disposition"
+        },
+        "category_name": { "$ref": "#/$defs/NonEmptyString" },
+        "description": { "$ref": "#/$defs/Text" },
+        "cialdiniPrinciple": {
+          "type": ["string", "null"],
+          "enum": ["Authority", "Scarcity", "Social Proof", "Reciprocity", "Liking", "Commitment", "Unity", null],
+          "description": "Cialdini principle of influence this vulnerability maps to (null for non-Cialdini cognitive biases)"
+        },
+        "exploitedBy": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "technique": {
+                "type": "string",
+                "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$",
+                "description": "ATT&CK technique ID"
+              },
+              "rationale": { "$ref": "#/$defs/Text" }
+            },
+            "required": ["technique", "rationale"]
+          },
+          "maxItems": 16,
+          "description": "ATT&CK techniques that exploit this cognitive vulnerability"
+        },
+        "controlRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "SP800-53 control identifier (e.g., AT-2(3))"
+          },
+          "maxItems": 16,
+          "description": "SP800-53 controls that mitigate this vulnerability"
+        },
+        "cisSafeguards": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 16,
+          "description": "CIS Safeguard identifiers that mitigate this vulnerability"
+        },
+        "insiderStage": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 4,
+          "description": "For IN-category: CERT CPIR stage (0-4) this disposition factor maps to. Null for non-insider categories."
+        },
+        "resilienceLevel": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 4,
+          "description": "Organisational resilience maturity: 0=Unaddressed, 1=Aware, 2=Targeted, 3=Measured, 4=Adaptive. Null if not assessed."
+        }
+      },
+      "required": ["id", "name", "category", "description"]
+    },
+    "InsiderStage": {
+      "$id": "https://example.org/trident/insider-stage.schema.json",
+      "type": "object",
+      "description": "Insider threat progression stage (0-4). Synthesises CERT CPIR, CPNI attack sequence, and Fraud Triangle into a Trident-native insider pathway model.",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^THFM-STAGE-[0-4]$",
+          "description": "Stage identifier (e.g., THFM-STAGE-2)"
+        },
+        "stage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4,
+          "description": "Numeric stage: 0=Trusted Employee, 1=At-Risk, 2=Concerning Behaviour, 3=Active Threat, 4=Impact"
+        },
+        "name": { "$ref": "#/$defs/NonEmptyString" },
+        "description": { "$ref": "#/$defs/Text" },
+        "certCpirMapping": {
+          "type": ["string", "null"],
+          "description": "Corresponding CERT CPIR stage description"
+        },
+        "cpniMapping": {
+          "type": ["string", "null"],
+          "description": "Corresponding CPNI/NPSA attack sequence stage"
+        },
+        "cisaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["accidental", "negligent", "compromised", "malicious", "collusive"]
+          },
+          "uniqueItems": true,
+          "description": "CISA insider types that can be at this stage"
+        },
+        "riskFactors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^THFM-IN-[0-9]{2}$"
+          },
+          "maxItems": 16,
+          "description": "THFM-IN disposition factors that indicate this stage"
+        },
+        "indicators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": { "$ref": "#/$defs/NonEmptyString" },
+              "observableSigns": { "$ref": "#/$defs/Text" },
+              "detectionMethod": { "$ref": "#/$defs/Text" },
+              "attackTechniques": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$"
+                },
+                "maxItems": 16
+              },
+              "certPercentage": { "type": "string" }
+            },
+            "required": ["category", "observableSigns", "detectionMethod"]
+          },
+          "maxItems": 16,
+          "description": "Observable indicators for this stage with detection methods"
+        },
+        "detectionControls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "controlRef": { "$ref": "#/$defs/NonEmptyString" },
+              "name": { "$ref": "#/$defs/NonEmptyString" },
+              "purpose": { "$ref": "#/$defs/Text" }
+            },
+            "required": ["controlRef", "name", "purpose"]
+          },
+          "maxItems": 16,
+          "description": "SP800-53 controls and TTCE capabilities that detect this stage"
+        },
+        "interventionWindow": {
+          "$ref": "#/$defs/Text",
+          "description": "Description of the intervention opportunity at this stage"
+        },
+        "transitionTrigger": {
+          "type": ["string", "null"],
+          "description": "What causes progression to the next stage (null for Stage 4 — terminal)"
+        }
+      },
+      "required": ["id", "stage", "name", "description"]
     }
   }
 }

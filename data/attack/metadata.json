@@ -9,7 +9,19 @@
       "total_mappings": 5313,
       "controls_mapped": 109,
       "techniques_mapped": 469,
-      "families_covered": ["AC", "CA", "CM", "CP", "IA", "MP", "RA", "SA", "SC", "SI", "SR"],
+      "families_covered": [
+        "AC",
+        "CA",
+        "CM",
+        "CP",
+        "IA",
+        "MP",
+        "RA",
+        "SA",
+        "SC",
+        "SI",
+        "SR"
+      ],
       "enrichment_date": "2026-02-14",
       "status": "legacy",
       "deprecation": {
@@ -17,7 +29,10 @@
         "reason": "Superseded by TRIDENT mitigation path (Control -> Mitigation -> Technique) which uses MITRE first-party data. CTID is a third-party interpretive mapping with 99.5% overlap with the mitigation path but lower authority.",
         "superseded_by": "mitigations + graph-edges (COUNTERS, PRESCRIBES, ALIGNS_TO)",
         "retained_for": "backtesting, quality assurance, coverage validation against TRIDENT mitigation path",
-        "removed_from": ["trident-explorer", "attack-matrix-detail-panel"],
+        "removed_from": [
+          "trident-explorer",
+          "attack-matrix-detail-panel"
+        ],
         "data_preserved": true
       },
       "notes": "CTID maps 11 NIST families. Controls in other families (AT, AU, IR, MA, PE, PL, PM, PS, PT) have no ATT&CK mappings in this dataset. LEGACY: retained for validation only — the TRIDENT mitigation path (Mitigation -COUNTERS-> Technique, CIS Safeguard -ALIGNS_TO-> Mitigation, Control -IMPLEMENTED_BY-> CIS Safeguard) provides equivalent coverage using MITRE first-party data."
@@ -73,7 +88,27 @@
       "source": "OSA TPCE (Trident Process Capability Enumeration)",
       "author": "Chris Lethaby (Vinylwasp)",
       "total_capabilities": 30,
-      "families_covered": ["AC", "AT", "AU", "CA", "CM", "CP", "IA", "IR", "MA", "MP", "PE", "PL", "PM", "PS", "RA", "SA", "SC", "SI", "SR"],
+      "families_covered": [
+        "AC",
+        "AT",
+        "AU",
+        "CA",
+        "CM",
+        "CP",
+        "IA",
+        "IR",
+        "MA",
+        "MP",
+        "PE",
+        "PL",
+        "PM",
+        "PS",
+        "RA",
+        "SA",
+        "SC",
+        "SI",
+        "SR"
+      ],
       "classified_by_edges": 140,
       "enrichment_date": "2026-02-16",
       "notes": "30 process capability classes across 19 NIST 800-53 families. Each capability mapped to SP800-53 controls, CIS Safeguards, and ATT&CK Mitigations. Provides CLASSIFIED_BY edges connecting process implementations to canonical capability identifiers."
@@ -222,7 +257,7 @@
     }
   },
   "graph_summary": {
-    "total_edges": 19819,
+    "total_edges": 20454,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -241,10 +276,16 @@
       "PROVIDER_IMPLEMENTS": 291,
       "CUSTOMER_IMPLEMENTS": 270,
       "TARGETS_PROTOCOL": 54,
-      "UPGRADES_TO": 4
+      "UPGRADES_TO": 4,
+      "TRANSITIONS_TO": 4,
+      "INDICATED_BY": 16,
+      "STAGE_DETECTED_BY": 26,
+      "PARENT_OF": 301,
+      "CAPABILITY_SUPPORTS_CIS": 246,
+      "CAPABILITY_SUPPORTS_MITIGATION": 88
     },
     "node_types": {
-      "technique": 469,
+      "technique": 472,
       "mitigation": 44,
       "detection_strategy": 691,
       "control": 315,
@@ -274,7 +315,8 @@
       "cloud_service_path": "CloudService -PROVIDER_IMPLEMENTS-> Control / CloudService -CUSTOMER_IMPLEMENTS-> Control (TCSE shared responsibility derivation)",
       "protocol_path": "Technique -TARGETS_PROTOCOL-> Protocol (TPE protocol-specific attack surface derivation)",
       "protocol_upgrade_path": "Protocol -UPGRADES_TO-> Protocol (TPE secure alternative recommendation)"
-    }
+    },
+    "total_edge_types": 24
   },
   "files": {
     "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[], actors[], minTier back-references",

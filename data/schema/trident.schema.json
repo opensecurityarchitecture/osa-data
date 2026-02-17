@@ -925,16 +925,36 @@
         },
         "cloudServices": {
           "type": "array",
-          "description": "Cloud services hosting the pattern (TCSE catalogue)",
+          "description": "Cloud services used by the pattern. Reference a specific TCSE entry (ref) or a provider-agnostic service model (serviceModel).",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["ref"],
+            "anyOf": [
+              {"required": ["ref"]},
+              {"required": ["serviceModel"]}
+            ],
             "properties": {
               "ref": {
                 "type": "string",
                 "pattern": "^TCSE-[A-Z0-9]+(-[A-Z0-9]+)?$",
-                "description": "TCSE cloud service identifier"
+                "description": "Specific TCSE cloud service identifier"
+              },
+              "serviceModel": {
+                "type": "string",
+                "enum": [
+                  "compute-iaas",
+                  "compute-faas",
+                  "compute-caas",
+                  "storage-object",
+                  "identity",
+                  "database-paas",
+                  "database-saas",
+                  "network",
+                  "cdn-waf",
+                  "saas-productivity",
+                  "saas-business"
+                ],
+                "description": "Provider-agnostic TCSE service model category"
               },
               "responsibility": {
                 "type": "string",

@@ -336,16 +336,36 @@
         },
         "cloudServices": {
           "type": "array",
-          "description": "Cloud services hosting this pattern (TCSE catalogue references)",
+          "description": "Cloud services used by this pattern. Reference either a specific TCSE entry (ref) or a provider-agnostic service model (serviceModel). The derivation engine resolves serviceModel to the organisation's chosen provider.",
           "items": {
             "type": "object",
-            "required": ["ref"],
             "additionalProperties": false,
+            "anyOf": [
+              {"required": ["ref"]},
+              {"required": ["serviceModel"]}
+            ],
             "properties": {
               "ref": {
                 "type": "string",
                 "pattern": "^TCSE-[A-Z0-9]+(-[A-Z0-9]+)?$",
-                "description": "TCSE cloud service identifier (e.g., TCSE-AWS-LAM, TCSE-M365)"
+                "description": "Specific TCSE cloud service identifier (e.g., TCSE-AWS-LAM). Use for outlier services with no multi-provider equivalent."
+              },
+              "serviceModel": {
+                "type": "string",
+                "enum": [
+                  "compute-iaas",
+                  "compute-faas",
+                  "compute-caas",
+                  "storage-object",
+                  "identity",
+                  "database-paas",
+                  "database-saas",
+                  "network",
+                  "cdn-waf",
+                  "saas-productivity",
+                  "saas-business"
+                ],
+                "description": "Provider-agnostic service model category from TCSE catalogue. Resolves to the specific TCSE entry for the organisation's cloud provider."
               },
               "responsibility": {
                 "type": "string",

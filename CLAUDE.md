@@ -25,14 +25,22 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 
 - **48 security patterns** (SP-001 to SP-046) + SP-000 reference/style guide + SP-999 test
 - **315 NIST 800-53 Rev 5 controls** across 20 families
-- **26 compliance frameworks** with cross-references
-- **469 MITRE ATT&CK techniques** mapped to 108 controls via CTID (ATT&CK v16.1)
+- **30 compliance frameworks** with cross-references
+- **472 MITRE ATT&CK techniques** mapped to 108 controls via CTID (ATT&CK v16.1)
 - **163 ATT&CK threat groups** with 2,921 technique USES edges
 - **44 ATT&CK mitigations** (M-series, v18.1) with 1,445 technique COUNTERS edges
 - **691 ATT&CK detection strategies** (DET-series, v18.1) with technique DETECTS edges
 - **171 CIS v8 safeguards** reverse-indexed to controls (IMPLEMENTED_BY edges)
 - **135 CWE weakness classes** mapped to 132 techniques via CAPEC bridge (EXPLOITS edges)
-- **18,111 TRIDENT graph edges** across 8 relationship types
+- **30 TPCE process capabilities** across 19 NIST families (CLASSIFIED_BY edges)
+- **28 TTCE technology classes** with 86 D3FEND-aligned capabilities (PROVIDES_CAPABILITY edges)
+- **5 TACM adversary tiers** classifying all 469 techniques by minimum sophistication (TIER_CONTAINS edges)
+- **24 THFM cognitive vulnerability classes** across 6 categories with 31 EXPLOITS_HUMAN edges
+- **22 cloud services** with shared responsibility splits (PROVIDER_IMPLEMENTS + CUSTOMER_IMPLEMENTS edges)
+- **37 protocols** across 11 categories (TARGETS_PROTOCOL + UPGRADES_TO edges)
+- **14 data types** with classification tiers (REQUIRES_PROTECTION + PROTECTS_DATA edges)
+- **5 insider stages** with progression model (TRANSITIONS_TO + INDICATED_BY + STAGE_DETECTED_BY edges)
+- **20,454 TRIDENT graph edges** across 24 relationship types, 15 entity types
 
 ## Directory Structure
 
@@ -44,17 +52,28 @@ data/
 │   ├── _manifest.json
 │   └── _catalog.json
 ├── attack/             # TRIDENT attack/weakness/control graph
-│   ├── technique-catalog.json    # 469 techniques with mitigations[], detection_strategies[], weaknesses[]
-│   ├── mitigation-catalog.json   # 44 ATT&CK mitigations with techniques[], controls[], cis_safeguards[]
-│   ├── detection-catalog.json    # 691 ATT&CK v18 detection strategies
-│   ├── cis-safeguard-index.json  # 171 CIS v8 safeguards -> controls reverse index
-│   ├── weakness-catalog.json     # 135 CWE weakness classes -> techniques via CAPEC
-│   ├── actor-catalog.json        # 163 ATT&CK threat groups -> techniques (USES)
-│   ├── graph-edges.json          # 18,111 explicit TRIDENT graph edges
-│   └── metadata.json             # Provenance, version info, graph summary
+│   ├── technique-catalog.json           # 472 techniques with mitigations[], detection_strategies[], weaknesses[], minTier
+│   ├── mitigation-catalog.json          # 44 ATT&CK mitigations with techniques[], controls[], cis_safeguards[]
+│   ├── detection-catalog.json           # 691 ATT&CK v18 detection strategies
+│   ├── cis-safeguard-index.json         # 171 CIS v8 safeguards -> controls reverse index
+│   ├── weakness-catalog.json            # 135 CWE weakness classes -> techniques via CAPEC
+│   ├── actor-catalog.json               # 163 ATT&CK threat groups -> techniques (USES)
+│   ├── process-capability-catalog.json  # 30 TPCE process capabilities -> controls (CLASSIFIED_BY)
+│   ├── technology-capability-catalog.json # 28 TTCE technology classes + 86 capabilities (PROVIDES_CAPABILITY)
+│   ├── adversary-tier-catalog.json      # 5 TACM tiers -> techniques (TIER_CONTAINS)
+│   ├── human-factors-catalog.json       # 24 THFM cognitive vulnerability classes (EXPLOITS_HUMAN)
+│   ├── cloud-service-catalog.json       # 22 cloud services with shared responsibility splits
+│   ├── data-classification-catalog.json # 14 TDCE data types with protection requirements
+│   ├── protocol-catalog.json            # 37 TPE protocols with technique attack surface
+│   ├── insider-stage-catalog.json       # 5 THFM insider threat progression stages
+│   ├── graph-edges.json                 # 20,454 explicit TRIDENT graph edges
+│   └── metadata.json                    # Provenance, version info, graph summary
+├── verticals/
+│   └── financial-services.json          # FS vertical profile with threat profiles
 └── schema/
     ├── pattern.schema.json
-    └── control.schema.json
+    ├── control.schema.json
+    └── trident.schema.json              # 40 $defs, 17+ entity types
 ```
 
 ## TRIDENT Data Layer Provenance
@@ -69,6 +88,16 @@ Each layer in the TRIDENT graph has different source authority and validation ch
 | Technique→Weakness | CWE via CAPEC bridge | MITRE first-party chain | No (upstream MITRE data) | 28% technique coverage is expected — CAPEC only covers software-level patterns |
 | Actor→Technique | ATT&CK STIX v18.1 | MITRE first-party | No (canonical MITRE relationship) | 163 groups, 2,921 USES edges, 313 techniques with actors |
 | CIS Safeguard→Control | OSA compliance_mappings | OSA first-party | Inherited from framework mapping | 171 safeguards, 468 IMPLEMENTED_BY edges |
+| ProcessCapability→Control | TPCE (Vinylwasp design) | OSA first-party | No (reference enumeration) | 30 capabilities, 140 CLASSIFIED_BY edges |
+| TechnologyClass→Control | TTCE (Vinylwasp design) | OSA first-party | No (reference enumeration) | 28 classes, 123 PROVIDES_CAPABILITY edges |
+| AdversaryTier→Technique | TACM (Vinylwasp design) | OSA first-party | No (capability classification) | 5 tiers, 469 TIER_CONTAINS edges |
+| Technique→HumanFactor | THFM (Vinylwasp design) | OSA first-party | Yes (rationale per exploitedBy) | 24 classes, 31 EXPLOITS_HUMAN edges |
+| Technique→Technique | ATT&CK hierarchy | MITRE first-party | No (canonical sub-technique hierarchy) | 301 PARENT_OF edges |
+| Capability→CIS/Mitigation | TPCE/TTCE cross-ref | OSA first-party | No (capability alignment) | 246 CAPABILITY_SUPPORTS_CIS + 88 CAPABILITY_SUPPORTS_MITIGATION edges |
+| CloudService→Control | TCSE (Vinylwasp design) | OSA first-party | No (shared responsibility) | 22 services, 291 PROVIDER_IMPLEMENTS + 270 CUSTOMER_IMPLEMENTS edges |
+| DataType→Control | TDCE (Vinylwasp design) | OSA first-party | No (data classification) | 14 types, 140 REQUIRES_PROTECTION + 140 PROTECTS_DATA edges |
+| Technique→Protocol | TPE (Vinylwasp design) | OSA first-party | No (protocol attack surface) | 37 protocols, 54 TARGETS_PROTOCOL + 4 UPGRADES_TO edges |
+| InsiderStage→HumanFactor | THFM (Vinylwasp design) | OSA first-party | No (CERT CPIR progression) | 5 stages, 4 TRANSITIONS_TO + 16 INDICATED_BY + 26 STAGE_DETECTED_BY edges |
 
 ## Naming Conventions
 

@@ -143,6 +143,15 @@
           },
           "description": "ATT&CK threat groups known to use this technique (USES edge)"
         },
+        "description": {
+          "type": "string",
+          "description": "ATT&CK technique description from STIX data"
+        },
+        "parent": {
+          "type": ["string", "null"],
+          "pattern": "^T[0-9]{4}$",
+          "description": "Parent technique ID for sub-techniques (e.g., T1001 for T1001.001). Null for top-level techniques."
+        },
         "minTier": {
           "type": "integer",
           "minimum": 1,
@@ -159,11 +168,11 @@
               "id": {
                 "type": "string",
                 "pattern": "^THFM-[A-Z]{2}-[0-9]{2}$",
-                "description": "Threat Human Factor Model ID (e.g., THFM-HB-03)"
+                "description": "THFM cognitive vulnerability class ID (e.g., THFM-AU-01)"
               }
             }
           },
-          "description": "THFM human factors that enable or amplify this technique"
+          "description": "THFM cognitive vulnerability classes exploited by this technique (EXPLOITS_HUMAN edge)"
         }
       }
     }

@@ -254,10 +254,31 @@
       "upgrades_to_edges": 4,
       "enrichment_date": "2026-02-16",
       "notes": "37 protocol entries across 11 categories covering network transport, name resolution, authentication, file sharing, web/API, remote access, email/messaging, database, infrastructure, cloud/container, and industrial protocols. Each protocol carries ATT&CK technique references (TARGETS_PROTOCOL edges), secure alternative references (UPGRADES_TO edges), and SP800-53 control references. 3 ICS protocols (Modbus, OPC UA, BACnet) included with empty technique arrays — their techniques are ICS ATT&CK domain, not in the Enterprise catalog. SECURES_PROTOCOL edges (Control -> Protocol) deferred to separate design pass."
+    },
+    "identity_domain_catalog": {
+      "source": "OSA TIDM (Trident Identity Domain Model)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "trident-identity-domain-model.md",
+      "total_entries": 35,
+      "entity_breakdown": {
+        "identity_provider": 10,
+        "access_policy": 12,
+        "identity_principal": 8,
+        "federation_pattern": 5
+      },
+      "nist_800_63_integration": true,
+      "satisfies_edges": 119,
+      "mitigates_edges": 23,
+      "implements_class_edges": 6,
+      "uses_protocol_edges": 13,
+      "federates_to_edges": 10,
+      "total_new_edges": 171,
+      "enrichment_date": "2026-02-18",
+      "notes": "35 identity domain reference entries across 4 entity types: 10 IdentityProvider classes (enterprise directory, cloud IdP, federation broker, MFA, PAM, CIAM, CA/PKI, device trust, workload identity, NAC), 12 AccessPolicy classes (conditional access, RBAC, ABAC, SCP, credential, JIT, session, federation trust, network, data, API, lifecycle), 8 IdentityPrincipal classes (human interactive, human privileged, service account, managed identity, workload, device, API key, external), and 5 FederationPattern classes (hub-and-spoke, mesh, cascading, B2B, workload-to-cloud). NIST 800-63 assurance profiles (IAL, AAL, FAL) on identity providers. Provides SATISFIES edges (IDP/POL/PRI -> Control), MITIGATES edges (POL -> Technique), IMPLEMENTS_CLASS edges (IDP -> TTCE), USES_PROTOCOL edges (IDP -> TPE), and FEDERATES_TO edges (IDP -> IDP) for identity-aware threat-led pattern derivation."
     }
   },
   "graph_summary": {
-    "total_edges": 20454,
+    "total_edges": 20625,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -282,7 +303,12 @@
       "STAGE_DETECTED_BY": 26,
       "PARENT_OF": 301,
       "CAPABILITY_SUPPORTS_CIS": 246,
-      "CAPABILITY_SUPPORTS_MITIGATION": 88
+      "CAPABILITY_SUPPORTS_MITIGATION": 88,
+      "SATISFIES": 119,
+      "MITIGATES": 23,
+      "IMPLEMENTS_CLASS": 6,
+      "USES_PROTOCOL": 13,
+      "FEDERATES_TO": 10
     },
     "node_types": {
       "technique": 472,
@@ -299,7 +325,11 @@
       "data_type": 14,
       "cloud_service": 22,
       "protocol": 37,
-      "insider_stage": 5
+      "insider_stage": 5,
+      "identity_provider": 10,
+      "access_policy": 12,
+      "identity_principal": 8,
+      "federation_pattern": 5
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -315,9 +345,13 @@
       "data_classification_path": "DataType -REQUIRES_PROTECTION-> Control / Control -PROTECTS_DATA-> DataType (TDCE regulatory-driven control derivation)",
       "cloud_service_path": "CloudService -PROVIDER_IMPLEMENTS-> Control / CloudService -CUSTOMER_IMPLEMENTS-> Control (TCSE shared responsibility derivation)",
       "protocol_path": "Technique -TARGETS_PROTOCOL-> Protocol (TPE protocol-specific attack surface derivation)",
-      "protocol_upgrade_path": "Protocol -UPGRADES_TO-> Protocol (TPE secure alternative recommendation)"
+      "protocol_upgrade_path": "Protocol -UPGRADES_TO-> Protocol (TPE secure alternative recommendation)",
+      "identity_satisfies_path": "IdentityProvider/AccessPolicy/IdentityPrincipal -SATISFIES-> Control (TIDM identity infrastructure control satisfaction)",
+      "identity_mitigates_path": "AccessPolicy -MITIGATES-> Technique (TIDM policy-based technique mitigation)",
+      "identity_federation_path": "IdentityProvider -FEDERATES_TO-> IdentityProvider (TIDM federation chain traversal)",
+      "identity_capability_path": "IdentityProvider -IMPLEMENTS_CLASS-> TechnologyClass / -USES_PROTOCOL-> Protocol (TIDM identity-to-capability cross-domain)"
     },
-    "total_edge_types": 24
+    "total_edge_types": 29
   },
   "files": {
     "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[], actors[], minTier back-references",
@@ -333,9 +367,10 @@
     "data-classification-catalog.json": "14 TDCE data type classes across 8 categories with regulatory drivers, impact domains, and protection requirements",
     "cloud-service-catalog.json": "22 TCSE cloud service entries across 7 providers with shared responsibility splits and customer/provider control mappings",
     "protocol-catalog.json": "37 TPE protocol entries across 11 categories with technique references, secure alternatives, and SP800-53 control mappings",
-    "graph-edges.json": "19,773 explicit TRIDENT graph edges across 18 relationship types",
+    "identity-domain-catalog.json": "35 TIDM identity domain entries: 10 identity providers, 12 access policies, 8 identity principals, 5 federation patterns with NIST 800-63 assurance profiles",
+    "graph-edges.json": "20,625 explicit TRIDENT graph edges across 29 relationship types",
     "metadata.json": "This file — provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",
-  "last_updated": "2026-02-16"
+  "last_updated": "2026-02-18"
 }

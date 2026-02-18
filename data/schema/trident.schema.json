@@ -1380,6 +1380,244 @@
         }
       },
       "required": ["id", "stage", "name", "description"]
+    },
+    "EnumIdpType": {
+      "type": "string",
+      "enum": [
+        "enterprise-directory",
+        "cloud-idp",
+        "federation-broker",
+        "mfa-provider",
+        "pam-vault",
+        "ciam",
+        "certificate-authority",
+        "device-trust",
+        "workload-identity",
+        "network-access-control"
+      ],
+      "description": "TIDM identity provider type classification"
+    },
+    "EnumPolicyType": {
+      "type": "string",
+      "enum": [
+        "conditional-access",
+        "rbac",
+        "abac",
+        "scp",
+        "credential-policy",
+        "jit-policy",
+        "session-policy",
+        "federation-trust-policy",
+        "network-access-policy",
+        "data-access-policy",
+        "api-access-policy",
+        "lifecycle-policy"
+      ],
+      "description": "TIDM access policy type classification"
+    },
+    "EnumPrincipalType": {
+      "type": "string",
+      "enum": [
+        "human-interactive",
+        "human-privileged",
+        "service-account",
+        "managed-identity",
+        "workload",
+        "device",
+        "api-key",
+        "external-identity"
+      ],
+      "description": "TIDM identity principal type classification"
+    },
+    "EnumFederationTopology": {
+      "type": "string",
+      "enum": [
+        "hub-and-spoke",
+        "mesh",
+        "cascading",
+        "b2b",
+        "workload-to-cloud"
+      ],
+      "description": "TIDM federation topology classification"
+    },
+    "EnumAAL": {
+      "type": "string",
+      "enum": ["AAL1", "AAL2", "AAL3"],
+      "description": "NIST SP 800-63 Authenticator Assurance Level"
+    },
+    "EnumFAL": {
+      "type": "string",
+      "enum": ["FAL1", "FAL2"],
+      "description": "NIST SP 800-63 Federation Assurance Level"
+    },
+    "AssuranceProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "NIST SP 800-63 assurance profile indicating maximum supported assurance levels",
+      "properties": {
+        "maxIAL": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Maximum Identity Assurance Level (IAL1-IAL3) this provider class can support"
+        },
+        "maxAAL": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Maximum Authenticator Assurance Level (AAL1-AAL3) this provider class can support"
+        },
+        "maxFAL": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 2,
+          "description": "Maximum Federation Assurance Level (FAL1-FAL2) this provider class can support"
+        }
+      }
+    },
+    "IdentityProvider": {
+      "$id": "https://example.org/trident/identity-provider.schema.json",
+      "type": "object",
+      "additionalProperties": false,
+      "description": "TIDM identity provider reference class — an architectural role in the enterprise identity graph. Not a product instance (that is CPE/Implementation) but a class of identity infrastructure.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TIDM-IDP-[0-9]{2}$",
+          "description": "TIDM identity provider identifier"
+        },
+        "type": { "$ref": "#/$defs/EnumIdpType" },
+        "name": { "$ref": "#/$defs/NonEmptyString" },
+        "description": { "$ref": "#/$defs/Text" },
+        "controlRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 32,
+          "description": "SP800-53 control identifiers this provider class satisfies"
+        },
+        "technologyClass": {
+          "type": ["string", "null"],
+          "description": "TTCE technology class identifier (e.g., TTCE-IA-01)"
+        },
+        "protocols": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 16,
+          "description": "TPE protocol identifiers used by this provider class"
+        },
+        "assuranceProfile": { "$ref": "#/$defs/AssuranceProfile" },
+        "federationRole": {
+          "type": ["string", "null"],
+          "enum": ["upstream", "downstream", "both", null],
+          "description": "Typical federation role of this provider class"
+        },
+        "mfaCapability": {
+          "type": "boolean",
+          "description": "Whether this provider class supports multi-factor authentication"
+        }
+      },
+      "required": ["id", "type", "name", "description", "controlRefs"]
+    },
+    "AccessPolicy": {
+      "$id": "https://example.org/trident/access-policy.schema.json",
+      "type": "object",
+      "additionalProperties": false,
+      "description": "TIDM access policy reference class — an architectural pattern of access control policy, not individual policy instances.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TIDM-POL-[0-9]{2}$",
+          "description": "TIDM access policy identifier"
+        },
+        "policyType": { "$ref": "#/$defs/EnumPolicyType" },
+        "name": { "$ref": "#/$defs/NonEmptyString" },
+        "description": { "$ref": "#/$defs/Text" },
+        "controlRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 32,
+          "description": "SP800-53 control identifiers this policy class enforces"
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$"
+          },
+          "maxItems": 32,
+          "description": "ATT&CK technique identifiers this policy class mitigates"
+        },
+        "cisSafeguards": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 32,
+          "description": "CIS Safeguard identifiers this policy class supports"
+        },
+        "enforcementPoint": {
+          "type": "string",
+          "enum": ["idp", "gateway", "application", "network", "data", "endpoint"],
+          "description": "Where the policy is evaluated and enforced"
+        },
+        "evaluationModel": {
+          "type": "string",
+          "enum": ["real-time", "periodic", "event-driven", "on-demand"],
+          "description": "When the policy is evaluated"
+        }
+      },
+      "required": ["id", "policyType", "name", "description", "controlRefs"]
+    },
+    "IdentityPrincipal": {
+      "$id": "https://example.org/trident/identity-principal.schema.json",
+      "type": "object",
+      "additionalProperties": false,
+      "description": "TIDM identity principal reference class — a category of identity principal that determines lifecycle, credential management, and risk profile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TIDM-PRI-[0-9]{2}$",
+          "description": "TIDM identity principal identifier"
+        },
+        "principalType": { "$ref": "#/$defs/EnumPrincipalType" },
+        "name": { "$ref": "#/$defs/NonEmptyString" },
+        "description": { "$ref": "#/$defs/Text" },
+        "controlRefs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 32,
+          "description": "SP800-53 control identifiers governing this principal class"
+        },
+        "riskFactors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 16,
+          "description": "Key risk factors associated with this principal class"
+        }
+      },
+      "required": ["id", "principalType", "name", "description", "controlRefs"]
+    },
+    "FederationPattern": {
+      "$id": "https://example.org/trident/federation-pattern.schema.json",
+      "type": "object",
+      "additionalProperties": false,
+      "description": "TIDM federation pattern reference class — a common federation topology describing how identity providers are connected.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TIDM-FED-[0-9]{2}$",
+          "description": "TIDM federation pattern identifier"
+        },
+        "topology": { "$ref": "#/$defs/EnumFederationTopology" },
+        "name": { "$ref": "#/$defs/NonEmptyString" },
+        "description": { "$ref": "#/$defs/Text" },
+        "riskProfile": {
+          "$ref": "#/$defs/Text",
+          "description": "Key risk characteristics of this federation topology"
+        }
+      },
+      "required": ["id", "topology", "name", "description", "riskProfile"]
     }
   }
 }

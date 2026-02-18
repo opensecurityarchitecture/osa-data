@@ -1,0 +1,353 @@
+{
+  "TIDM-IDP-01": {
+    "id": "TIDM-IDP-01",
+    "type": "enterprise-directory",
+    "name": "Enterprise Directory Service",
+    "description": "On-premises directory (Active Directory, OpenLDAP, FreeIPA) providing centralised authentication, authorisation, and account lifecycle for domain-joined assets. Kerberos/LDAP as primary protocols.",
+    "controlRefs": ["AC-02", "AC-03", "IA-02", "IA-04", "IA-05"],
+    "technologyClass": "TTCE-IA-01",
+    "protocols": ["TPE-AUTH-01", "TPE-AUTH-02", "TPE-AUTH-03"],
+    "assuranceProfile": { "maxIAL": 2, "maxAAL": 2, "maxFAL": 1 },
+    "federationRole": "upstream",
+    "mfaCapability": true
+  },
+  "TIDM-IDP-02": {
+    "id": "TIDM-IDP-02",
+    "type": "cloud-idp",
+    "name": "Cloud Identity Provider",
+    "description": "Cloud-native IdP (Entra ID, Google Workspace Identity, AWS IAM Identity Center) providing SSO, MFA, conditional access, and directory services as a managed service.",
+    "controlRefs": ["AC-02", "IA-02", "IA-04", "IA-05", "IA-08"],
+    "technologyClass": "TTCE-IA-01",
+    "protocols": ["TPE-AUTH-05", "TPE-AUTH-06"],
+    "assuranceProfile": { "maxIAL": 2, "maxAAL": 3, "maxFAL": 2 },
+    "federationRole": "both",
+    "mfaCapability": true
+  },
+  "TIDM-IDP-03": {
+    "id": "TIDM-IDP-03",
+    "type": "federation-broker",
+    "name": "Federation Broker / Identity Hub",
+    "description": "Third-party identity platform (Okta, Ping Identity, OneLogin) that federates between multiple upstream directories and downstream service providers. Acts as the trust anchor for SaaS and cloud access.",
+    "controlRefs": ["IA-02", "IA-04", "IA-08", "AC-02"],
+    "technologyClass": "TTCE-IA-01",
+    "protocols": ["TPE-AUTH-05", "TPE-AUTH-06"],
+    "assuranceProfile": { "maxIAL": 2, "maxAAL": 3, "maxFAL": 2 },
+    "federationRole": "both",
+    "mfaCapability": true
+  },
+  "TIDM-IDP-04": {
+    "id": "TIDM-IDP-04",
+    "type": "mfa-provider",
+    "name": "Multi-Factor Authentication Provider",
+    "description": "Dedicated MFA service (Duo Security, RSA SecurID, YubiKey infrastructure) providing step-up authentication. May be standalone or embedded within a cloud-idp or federation-broker.",
+    "controlRefs": ["IA-02", "IA-05"],
+    "technologyClass": "TTCE-IA-01",
+    "protocols": ["TPE-AUTH-06"],
+    "assuranceProfile": { "maxIAL": null, "maxAAL": 3, "maxFAL": null },
+    "federationRole": null,
+    "mfaCapability": true
+  },
+  "TIDM-IDP-05": {
+    "id": "TIDM-IDP-05",
+    "type": "pam-vault",
+    "name": "Privileged Access Management Vault",
+    "description": "Credential vault and session broker (CyberArk, BeyondTrust, Delinea) managing privileged account credentials, just-in-time access provisioning, and session recording.",
+    "controlRefs": ["AC-02", "AC-06", "IA-05", "AU-02", "AU-12"],
+    "technologyClass": "TTCE-IA-02",
+    "protocols": ["TPE-AUTH-01", "TPE-AUTH-03"],
+    "assuranceProfile": { "maxIAL": 2, "maxAAL": 3, "maxFAL": 1 },
+    "federationRole": "downstream",
+    "mfaCapability": true
+  },
+  "TIDM-IDP-06": {
+    "id": "TIDM-IDP-06",
+    "type": "ciam",
+    "name": "Customer Identity and Access Management",
+    "description": "External-facing identity platform (Auth0, AWS Cognito, Azure AD B2C) managing customer/partner identities with self-service registration, social login, and consent management.",
+    "controlRefs": ["IA-02", "IA-04", "IA-08", "AC-02"],
+    "technologyClass": "TTCE-IA-01",
+    "protocols": ["TPE-AUTH-06"],
+    "assuranceProfile": { "maxIAL": 1, "maxAAL": 2, "maxFAL": 2 },
+    "federationRole": "downstream",
+    "mfaCapability": true
+  },
+  "TIDM-IDP-07": {
+    "id": "TIDM-IDP-07",
+    "type": "certificate-authority",
+    "name": "Certificate Authority / PKI",
+    "description": "Internal or external CA (ADCS, EJBCA, Venafi, Let's Encrypt) issuing X.509 certificates for TLS, code signing, device identity, and user authentication.",
+    "controlRefs": ["IA-05", "SC-12", "SC-13", "IA-03"],
+    "technologyClass": null,
+    "protocols": [],
+    "assuranceProfile": { "maxIAL": 3, "maxAAL": 3, "maxFAL": 2 },
+    "federationRole": null,
+    "mfaCapability": false
+  },
+  "TIDM-IDP-08": {
+    "id": "TIDM-IDP-08",
+    "type": "device-trust",
+    "name": "Device Trust / Endpoint Identity",
+    "description": "Device identity and posture assessment platform (Intune, Jamf, CrowdStrike Falcon Zero Trust) providing device compliance signals as authentication context.",
+    "controlRefs": ["IA-03", "AC-17", "CM-08"],
+    "technologyClass": null,
+    "protocols": [],
+    "assuranceProfile": { "maxIAL": null, "maxAAL": null, "maxFAL": null },
+    "federationRole": null,
+    "mfaCapability": false
+  },
+  "TIDM-IDP-09": {
+    "id": "TIDM-IDP-09",
+    "type": "workload-identity",
+    "name": "Workload Identity Provider",
+    "description": "Machine-to-machine identity infrastructure (SPIFFE/SPIRE, Kubernetes service accounts, cloud IAM roles) issuing short-lived credentials for workloads without human interaction.",
+    "controlRefs": ["IA-03", "IA-09", "AC-02", "SC-12"],
+    "technologyClass": null,
+    "protocols": ["TPE-AUTH-06"],
+    "assuranceProfile": { "maxIAL": null, "maxAAL": 2, "maxFAL": 2 },
+    "federationRole": "upstream",
+    "mfaCapability": false
+  },
+  "TIDM-IDP-10": {
+    "id": "TIDM-IDP-10",
+    "type": "network-access-control",
+    "name": "Network Access Control",
+    "description": "NAC system (Cisco ISE, Aruba ClearPass, ForeScout) authenticating devices and enforcing network-level access policies based on identity, device posture, and location.",
+    "controlRefs": ["IA-03", "AC-17", "SC-07"],
+    "technologyClass": null,
+    "protocols": ["TPE-AUTH-04"],
+    "assuranceProfile": { "maxIAL": 1, "maxAAL": 2, "maxFAL": 1 },
+    "federationRole": null,
+    "mfaCapability": false
+  },
+  "TIDM-POL-01": {
+    "id": "TIDM-POL-01",
+    "policyType": "conditional-access",
+    "name": "Conditional Access Policy",
+    "description": "Context-aware access decision evaluating user identity, device compliance, location, application sensitivity, and risk score. Grants, denies, or requires step-up authentication.",
+    "controlRefs": ["AC-02", "AC-03", "AC-07", "AC-17", "IA-02", "IA-10"],
+    "techniques": ["T1078", "T1110", "T1621"],
+    "cisSafeguards": ["CIS 5.6", "CIS 6.3", "CIS 6.4", "CIS 6.5", "CIS 6.7"],
+    "enforcementPoint": "idp",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-02": {
+    "id": "TIDM-POL-02",
+    "policyType": "rbac",
+    "name": "Role-Based Access Control Policy",
+    "description": "Access governed by role assignments. Users inherit permissions from roles; roles map to job functions. Static role hierarchy.",
+    "controlRefs": ["AC-02", "AC-03", "AC-05", "AC-06", "AC-16"],
+    "techniques": ["T1078"],
+    "cisSafeguards": ["CIS 6.1", "CIS 6.8"],
+    "enforcementPoint": "application",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-03": {
+    "id": "TIDM-POL-03",
+    "policyType": "abac",
+    "name": "Attribute-Based Access Control Policy",
+    "description": "Access governed by attributes of subject, resource, action, and environment evaluated at decision time. Dynamic, fine-grained, context-sensitive.",
+    "controlRefs": ["AC-02", "AC-03", "AC-06", "AC-16", "AC-24"],
+    "techniques": ["T1078"],
+    "cisSafeguards": ["CIS 6.7"],
+    "enforcementPoint": "application",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-04": {
+    "id": "TIDM-POL-04",
+    "policyType": "scp",
+    "name": "Service Control Policy / Permission Boundary",
+    "description": "Cloud provider guardrails (AWS SCPs, Azure Management Group policies, GCP Organisation Policies) limiting maximum permissions regardless of IAM role grants. Defence in depth against privilege escalation.",
+    "controlRefs": ["AC-03", "AC-06", "CM-07"],
+    "techniques": ["T1078.004"],
+    "cisSafeguards": [],
+    "enforcementPoint": "gateway",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-05": {
+    "id": "TIDM-POL-05",
+    "policyType": "credential-policy",
+    "name": "Credential and Authenticator Policy",
+    "description": "Password complexity, rotation, MFA enrollment, authenticator type requirements, phishing-resistant credential mandates. Governs credential lifecycle from issuance to revocation.",
+    "controlRefs": ["IA-05", "IA-02", "AC-07"],
+    "techniques": ["T1110", "T1556"],
+    "cisSafeguards": ["CIS 5.2"],
+    "enforcementPoint": "idp",
+    "evaluationModel": "event-driven"
+  },
+  "TIDM-POL-06": {
+    "id": "TIDM-POL-06",
+    "policyType": "jit-policy",
+    "name": "Just-In-Time Access Policy",
+    "description": "Privileged access provisioned on-demand with time-bound elevation, approval workflow, and automatic revocation. Zero standing privileges as the baseline.",
+    "controlRefs": ["AC-02", "AC-06", "AC-17", "IA-05"],
+    "techniques": ["T1078", "T1098"],
+    "cisSafeguards": ["CIS 6.1"],
+    "enforcementPoint": "idp",
+    "evaluationModel": "on-demand"
+  },
+  "TIDM-POL-07": {
+    "id": "TIDM-POL-07",
+    "policyType": "session-policy",
+    "name": "Session Management Policy",
+    "description": "Session duration limits, idle timeout, re-authentication requirements, concurrent session restrictions, token lifetime governance.",
+    "controlRefs": ["AC-12", "AC-10", "SC-23", "IA-11"],
+    "techniques": ["T1539", "T1550", "T1528"],
+    "cisSafeguards": [],
+    "enforcementPoint": "application",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-08": {
+    "id": "TIDM-POL-08",
+    "policyType": "federation-trust-policy",
+    "name": "Federation Trust Policy",
+    "description": "Rules governing federation trust establishment, maintenance, and revocation. Signing key rotation, assertion validation, audience restriction, claim mapping rules.",
+    "controlRefs": ["IA-08", "SC-12", "SC-13"],
+    "techniques": ["T1606", "T1550", "T1556"],
+    "cisSafeguards": [],
+    "enforcementPoint": "idp",
+    "evaluationModel": "event-driven"
+  },
+  "TIDM-POL-09": {
+    "id": "TIDM-POL-09",
+    "policyType": "network-access-policy",
+    "name": "Network-Based Access Policy",
+    "description": "Access decisions incorporating network context: source IP/range, VPN status, geographic location, network segmentation compliance. Often combined with conditional access.",
+    "controlRefs": ["AC-17", "SC-07", "AC-04"],
+    "techniques": ["T1078", "T1021"],
+    "cisSafeguards": ["CIS 6.4"],
+    "enforcementPoint": "network",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-10": {
+    "id": "TIDM-POL-10",
+    "policyType": "data-access-policy",
+    "name": "Data-Centric Access Policy",
+    "description": "Access decisions based on data classification, sensitivity labels, DLP rules, and information rights management. Governs who can access what data regardless of application.",
+    "controlRefs": ["AC-03", "AC-04", "AC-21", "AC-23"],
+    "techniques": ["T1530"],
+    "cisSafeguards": [],
+    "enforcementPoint": "data",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-11": {
+    "id": "TIDM-POL-11",
+    "policyType": "api-access-policy",
+    "name": "API Access and Rate Limiting Policy",
+    "description": "OAuth scope enforcement, API key management, rate limiting, throttling, API gateway authorisation rules. Governs programmatic access to services.",
+    "controlRefs": ["AC-03", "AC-06", "IA-09", "SC-07"],
+    "techniques": ["T1528", "T1106"],
+    "cisSafeguards": [],
+    "enforcementPoint": "gateway",
+    "evaluationModel": "real-time"
+  },
+  "TIDM-POL-12": {
+    "id": "TIDM-POL-12",
+    "policyType": "lifecycle-policy",
+    "name": "Identity Lifecycle Governance Policy",
+    "description": "Joiner-mover-leaver automation rules, access certification schedules, dormant account remediation, orphaned account detection. Governs identity lifecycle from provisioning to deprovisioning.",
+    "controlRefs": ["AC-02", "IA-04", "PS-04", "PS-05"],
+    "techniques": ["T1078", "T1098"],
+    "cisSafeguards": ["CIS 6.2"],
+    "enforcementPoint": "idp",
+    "evaluationModel": "periodic"
+  },
+  "TIDM-PRI-01": {
+    "id": "TIDM-PRI-01",
+    "principalType": "human-interactive",
+    "name": "Human Interactive User",
+    "description": "Employee, contractor, or partner accessing systems via interactive login. Subject to HR lifecycle, access reviews, security awareness training.",
+    "controlRefs": ["AC-02", "IA-02", "IA-04", "IA-05", "AT-02"],
+    "riskFactors": ["Phishing", "Credential reuse", "MFA fatigue", "Social engineering"]
+  },
+  "TIDM-PRI-02": {
+    "id": "TIDM-PRI-02",
+    "principalType": "human-privileged",
+    "name": "Human Privileged User",
+    "description": "System administrator, DBA, security operator, or other user with elevated access. Subject to enhanced vetting, session recording, JIT access, and PAM controls.",
+    "controlRefs": ["AC-02", "AC-06", "IA-02", "IA-05", "AU-12"],
+    "riskFactors": ["Insider threat", "Credential theft", "Lateral movement", "Privilege escalation"]
+  },
+  "TIDM-PRI-03": {
+    "id": "TIDM-PRI-03",
+    "principalType": "service-account",
+    "name": "Service Account",
+    "description": "Persistent non-human account used by applications and services for inter-system communication. Often has standing credentials (passwords, API keys) requiring rotation.",
+    "controlRefs": ["AC-02", "IA-05", "IA-09", "AC-06"],
+    "riskFactors": ["Credential exposure", "No MFA", "Over-privileged", "Orphaned on decommission"]
+  },
+  "TIDM-PRI-04": {
+    "id": "TIDM-PRI-04",
+    "principalType": "managed-identity",
+    "name": "Managed / Federated Identity",
+    "description": "Cloud-provider-managed identity (Azure Managed Identity, GCP Service Account with Workload Identity Federation, AWS IAM Role) with automatic credential management. No human-managed secrets.",
+    "controlRefs": ["AC-02", "IA-03", "IA-09", "SC-12"],
+    "riskFactors": ["Privilege escalation via role assumption", "Cross-account trust abuse"]
+  },
+  "TIDM-PRI-05": {
+    "id": "TIDM-PRI-05",
+    "principalType": "workload",
+    "name": "Workload Identity",
+    "description": "Ephemeral identity issued to containerised or serverless workloads via SPIFFE/SPIRE or similar. Short-lived X.509 SVIDs or JWT tokens. Lifecycle tied to workload lifecycle.",
+    "controlRefs": ["IA-03", "IA-09", "SC-12", "SC-13"],
+    "riskFactors": ["Service mesh trust boundary", "Certificate sprawl", "Pod identity confusion"]
+  },
+  "TIDM-PRI-06": {
+    "id": "TIDM-PRI-06",
+    "principalType": "device",
+    "name": "Device Identity",
+    "description": "Endpoint, IoT device, or network equipment authenticated via certificate, TPM attestation, or NAC protocol. Device posture contributes to access decisions.",
+    "controlRefs": ["IA-03", "CM-08", "AC-17"],
+    "riskFactors": ["Compromised device as access vector", "Unmanaged device risk"]
+  },
+  "TIDM-PRI-07": {
+    "id": "TIDM-PRI-07",
+    "principalType": "api-key",
+    "name": "API Key / Token",
+    "description": "Static or long-lived credential used for programmatic API access. Often lacks identity context (no user attribution), rotation discipline, or revocation mechanism.",
+    "controlRefs": ["IA-05", "IA-09", "AC-03"],
+    "riskFactors": ["Embedded in code", "Leaked in repos", "No expiry", "Over-scoped"]
+  },
+  "TIDM-PRI-08": {
+    "id": "TIDM-PRI-08",
+    "principalType": "external-identity",
+    "name": "External / Federated Identity",
+    "description": "Partner, customer, or third-party identity authenticated via federation (SAML, OIDC) from an external IdP. Trust depends on the external IdP's security posture, which is outside organisational control.",
+    "controlRefs": ["IA-08", "AC-20", "SA-09", "PS-07"],
+    "riskFactors": ["Third-party IdP compromise", "Attribute assertion trust", "Consent management"]
+  },
+  "TIDM-FED-01": {
+    "id": "TIDM-FED-01",
+    "topology": "hub-and-spoke",
+    "name": "Hub-and-Spoke Federation",
+    "description": "Single authoritative IdP (hub) federates to multiple downstream service providers (spokes). Most common enterprise pattern. Compromise of the hub compromises all spokes.",
+    "riskProfile": "Single point of failure at hub; hub compromise = total identity compromise"
+  },
+  "TIDM-FED-02": {
+    "id": "TIDM-FED-02",
+    "topology": "mesh",
+    "name": "Mesh Federation",
+    "description": "Multiple IdPs establish bilateral trust with each other. No single hub. Common in M&A scenarios where each business unit retains its own directory. Complexity grows quadratically with IdP count.",
+    "riskProfile": "Trust complexity; any compromised IdP can assert identities to all mesh partners"
+  },
+  "TIDM-FED-03": {
+    "id": "TIDM-FED-03",
+    "topology": "cascading",
+    "name": "Cascading / Multi-Hop Federation",
+    "description": "Identity assertion traverses multiple IdPs in sequence. AD authenticates, Okta federates, AWS SSO assumes role, cross-account role chain. Each hop transforms or constrains the assertion.",
+    "riskProfile": "Each hop is a potential transformation point; signing key compromise at any hop breaks downstream trust; assertion replay risk increases with chain depth"
+  },
+  "TIDM-FED-04": {
+    "id": "TIDM-FED-04",
+    "topology": "b2b",
+    "name": "Business-to-Business Federation",
+    "description": "Cross-organisational federation for partner access. External IdP asserts identity; relying party maps external claims to internal authorisation. Trust is contractual and often asymmetric.",
+    "riskProfile": "Reliance on external IdP security posture; attribute assertion trust; contractual vs technical trust mismatch"
+  },
+  "TIDM-FED-05": {
+    "id": "TIDM-FED-05",
+    "topology": "workload-to-cloud",
+    "name": "Workload-to-Cloud Federation",
+    "description": "On-premises or hybrid workloads authenticate to cloud services via federated identity. OIDC federation from Kubernetes to AWS IAM roles; SPIFFE-to-cloud trust. No human credentials involved.",
+    "riskProfile": "Misscoped trust policies (overly broad sub or aud claims); OIDC provider impersonation; token replay across environments"
+  }
+}

@@ -1,0 +1,562 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "bom_ctrm",
+  "framework_name": "BoM CTRM",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "1.1",
+      "title": "Board and Senior Management Oversight",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-09",
+        "PM-13",
+        "PM-28",
+        "PM-29",
+        "PS-09",
+        "PL-09"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PM-01 information security program plan establishes the overarching organisational security programme required by the board. PM-02 senior information security officer assigns the senior leadership role for cyber risk, partially mapping to the CISO appointment requirement. PM-03 information security resources addresses resource allocation for the cyber programme as directed by senior management. PM-09 risk management strategy provides the strategic risk framework that the board must approve. PM-13 security and privacy workforce addresses staffing governance expectations. PM-28 risk framing establishes the organisational context for risk decisions and partially maps to the board-approved risk appetite. PM-29 (new in Rev 5) risk management program leadership roles formalises senior leadership accountability for risk management, strengthening the board-to-management delegation chain. PS-09 (new in Rev 5) position descriptions defines security responsibilities for roles including CISO-type positions. PL-09 (new in Rev 5) central management enables unified governance of controls across the organisation.",
+      "gaps": "BoM CTRM mandates a specific Cyber and Technology Risk Committee at board level with defined composition, charter, and meeting frequency. The guideline requires the board to approve the cyber and technology risk management strategy and framework, and to receive regular (at minimum quarterly) reports on the institution's cyber resilience posture. The CISO must be appointed with direct reporting to senior management and the board, with explicit independence from IT operations — PM-02 partially addresses this but does not mandate the reporting line structure. BoM-specific requirements for board competence in technology risk oversight and board-level approval of the technology strategy are not covered by SP 800-53. Annual certification to the Bank of Mauritius regarding compliance with the guideline is a regulatory-specific obligation."
+    },
+    {
+      "id": "1.2",
+      "title": "Roles and Responsibilities of the CISO",
+      "controls": [
+        "PM-02",
+        "PM-13",
+        "PS-01",
+        "PS-02",
+        "PS-06",
+        "PS-07",
+        "PS-09",
+        "PM-29"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-02 senior information security officer establishes the requirement for a designated security leadership role, directly mapping to the CISO function. PM-13 security and privacy workforce addresses the broader staffing and competency requirements for the cyber security function under the CISO. PS-01 personnel security policy and procedures establishes the policy framework for security personnel management. PS-02 position risk designation categorises roles by risk level, relevant to the CISO's oversight of sensitive positions. PS-06 access agreements formalises security obligations for personnel. PS-07 external personnel security extends oversight to contractors and third-party staff. PS-09 (new in Rev 5) position descriptions formalises security responsibilities in organisational roles, directly supporting CISO role definition. PM-29 (new in Rev 5) risk management program leadership roles explicitly assigns senior leadership accountability for risk management programmes.",
+      "gaps": "BoM CTRM prescribes detailed CISO responsibilities including development and maintenance of the cyber and technology risk management framework, oversight of security operations, incident response leadership, reporting to the board on cyber resilience metrics, and coordination with the three lines of defence model. The guideline requires the CISO to have sufficient seniority, authority, and independence from business and IT operations functions — requirements that go beyond PM-02's general senior officer designation. Specific CISO qualifications, experience requirements, and the mandate for the CISO to have direct access to the board are BoM-specific governance expectations not covered by SP 800-53."
+    },
+    {
+      "id": "1.3",
+      "title": "Technology Strategy",
+      "controls": [
+        "PM-01",
+        "PM-07",
+        "PM-11",
+        "PL-01",
+        "PL-02",
+        "PL-08",
+        "SA-02",
+        "SA-03"
+      ],
+      "coverage_pct": 62,
+      "rationale": "PM-01 information security program plan provides the foundation for aligning security with the overall technology strategy. PM-07 enterprise architecture defines the organisational architecture framework that the technology strategy must reference. PM-11 mission and business process definition links technology decisions to business objectives. PL-01 planning policy and procedures establishes the governance for security planning. PL-02 system security and privacy plans documents security requirements for systems covered by the technology strategy. PL-08 security and privacy architectures defines the target security architecture. SA-02 allocation of resources ensures adequate budgeting for the technology strategy. SA-03 system development life cycle integrates security into the development lifecycle underpinning the strategy.",
+      "gaps": "BoM CTRM requires a comprehensive technology strategy approved by the board that aligns with the institution's business strategy and covers IT infrastructure modernisation, technology refresh roadmaps, digital transformation initiatives, and emerging technology adoption. The guideline expects the strategy to address technology obsolescence management, capacity planning, and alignment with Mauritius-specific regulatory expectations for digital banking services. SP 800-53 addresses security architecture and planning but does not cover business-driven technology strategy formulation, IT investment governance, or technology roadmap requirements that are central to this section."
+    },
+    {
+      "id": "1.4",
+      "title": "Cyber and Technology Risk Management Strategy and Framework",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "PM-28",
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-04",
+        "RA-07",
+        "RA-09",
+        "PL-09",
+        "PL-10",
+        "PL-11",
+        "CA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PM-01 information security program plan establishes the overarching security programme framework. PM-09 risk management strategy provides the strategic approach to managing technology risk. PM-28 risk framing establishes the organisational context, risk appetite, and risk tolerance that frame the risk management approach. RA-01 risk assessment policy and procedures creates the policy foundation for risk assessments. RA-02 security categorisation classifies systems by impact level to prioritise risk treatment. RA-03 risk assessment and RA-04 risk assessment update create a comprehensive risk assessment lifecycle with periodic review. RA-07 (new in Rev 5) risk response adds explicit risk treatment options including acceptance, avoidance, mitigation, sharing, and transfer. RA-09 (new in Rev 5) criticality analysis identifies critical components for risk-based prioritisation. PL-09 (new in Rev 5) central management enables unified governance of controls. PL-10 (new in Rev 5) baseline selection and PL-11 (new in Rev 5) baseline tailoring enable systematic risk-based control selection. CA-05 plan of action and milestones tracks risk treatment progress.",
+      "gaps": "BoM CTRM requires the risk management framework to be commensurate with the size, nature, and complexity of the institution's activities, explicitly requiring a proportionality assessment. The framework must integrate with the institution's enterprise risk management framework and operational risk taxonomy. The guideline requires explicit linkage to Basel Committee BCBS 239 principles on risk data aggregation and reporting. Regular framework reviews and independent assessments of the framework's effectiveness, with results reported to the board and the Bank of Mauritius, are regulatory-specific obligations. The risk appetite statement for cyber and technology risk must be board-approved with quantitative thresholds."
+    },
+    {
+      "id": "1.5",
+      "title": "Control Functions (Three Lines of Defence)",
+      "controls": [
+        "PM-14",
+        "CA-01",
+        "CA-02",
+        "CA-06",
+        "CA-07",
+        "CA-09",
+        "PM-04",
+        "PM-06",
+        "AU-01",
+        "AU-06",
+        "PM-30"
+      ],
+      "coverage_pct": 66,
+      "rationale": "PM-14 testing, training, and monitoring establishes the foundation for continuous assurance activities across all three lines. CA-01 assessment, authorisation, and monitoring policy provides the policy framework for control functions. CA-02 control assessments defines the assessment approach for evaluating control effectiveness (second line function). CA-06 authorisation formalises the risk acceptance and authorisation process. CA-07 continuous monitoring provides the overarching monitoring programme spanning all lines. CA-09 internal system connections addresses inter-system control oversight. PM-04 plan of action and milestones process enables remediation tracking from assessments. PM-06 measures of performance defines metrics for evaluating security programme effectiveness. AU-01 audit and accountability policy establishes the audit framework (third line function). AU-06 audit record review, analysis, and reporting addresses audit review functions. PM-30 (new in Rev 5) supply chain risk management strategy extends control functions to third-party oversight.",
+      "gaps": "BoM CTRM requires an explicit three lines of defence model with clearly defined roles: first line (business/IT operations owning and managing risks), second line (risk management and compliance functions providing oversight and challenge), and third line (internal audit providing independent assurance). The guideline requires the second line to conduct independent risk assessments and challenge first-line risk decisions, and the third line to perform regular audits against the guideline requirements with findings reported to the board audit committee. SP 800-53 addresses assessment and monitoring but does not prescribe the three lines of defence organisational model. The requirement for external independent assessors to validate compliance with the guideline on a periodic basis is a BoM-specific regulatory obligation."
+    },
+    {
+      "id": "2.1",
+      "title": "Identification of Cyber and Technology Risks",
+      "controls": [
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-04",
+        "RA-05",
+        "RA-06",
+        "RA-07",
+        "RA-08",
+        "RA-09",
+        "PM-09",
+        "PM-11",
+        "PM-16",
+        "CM-08",
+        "CM-12",
+        "PM-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "RA-01 risk assessment policy establishes the framework for risk identification. RA-02 security categorisation classifies systems by impact. RA-03 risk assessment and RA-04 risk assessment update provide the core risk identification and assessment lifecycle. RA-05 vulnerability monitoring and scanning identifies technical vulnerabilities. RA-06 technical surveillance countermeasures survey addresses advanced reconnaissance threats relevant to financial institutions. RA-07 (new in Rev 5) risk response adds structured risk treatment following identification. RA-08 (new in Rev 5) privacy impact assessments addresses data protection risk identification. RA-09 (new in Rev 5) criticality analysis identifies critical assets and dependencies. PM-09 risk management strategy provides the strategic context for risk identification. PM-11 mission and business process definition links risk identification to business processes. PM-16 threat awareness programme establishes threat intelligence capabilities. CM-08 system component inventory and CM-12 (new in Rev 5) information location enable asset identification and data mapping. PM-05 system inventory maintains the portfolio of systems for risk identification.",
+      "gaps": "BoM CTRM requires identification of critical assets, processes, and third-party dependencies essential to operations, with specific emphasis on identifying interconnections and concentration risks. The guideline requires regular risk assessments to be conducted that specifically cover cyber threats relevant to the Mauritian financial sector, including risks from regional threat actors targeting East African financial hubs. The requirement to maintain a formal register of identified cyber and technology risks integrated with the enterprise risk register, and to report material risk findings to the Bank of Mauritius, are regulatory-specific requirements beyond SP 800-53 scope."
+    },
+    {
+      "id": "3.1",
+      "title": "Control Implementation and Design",
+      "controls": [
+        "PL-01",
+        "PL-02",
+        "PL-08",
+        "PL-10",
+        "PL-11",
+        "SA-04",
+        "SA-08",
+        "SA-17",
+        "CM-01",
+        "CM-02",
+        "CM-06",
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PL-01 planning policy and procedures establishes the governance for control design. PL-02 system security and privacy plans documents the security control requirements for each system. PL-08 security and privacy architectures provides the architectural framework for control placement. PL-10 (new in Rev 5) baseline selection and PL-11 (new in Rev 5) baseline tailoring enable systematic, risk-based control selection and customisation. SA-04 acquisition process defines security requirements for acquired systems. SA-08 security and privacy engineering principles establishes design principles for controls. SA-17 developer security and privacy architecture and design ensures controls are embedded in system design. CM-01 configuration management policy and CM-02 baseline configuration establish the foundational configuration controls. CM-06 configuration settings defines secure configuration standards. CA-02 control assessments validates control implementation effectiveness. CA-07 continuous monitoring provides ongoing assurance that controls operate as designed.",
+      "gaps": "Minor: BoM CTRM requires that controls be designed and implemented commensurate with the institution's risk profile and proportional to the criticality of the systems they protect. The guideline expects controls to address confidentiality, integrity, and availability in a balanced manner aligned with the institution's risk appetite. SP 800-53 control baselines and tailoring (PL-10/PL-11) address this well, but the specific requirement for proportionality assessments documented and approved by the risk function is a BoM-specific expectation."
+    },
+    {
+      "id": "3.2",
+      "title": "Network and Infrastructure Management",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "SC-32",
+        "SC-39",
+        "SC-46",
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "AC-04",
+        "AC-17",
+        "AC-18",
+        "AC-20",
+        "SI-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-07 boundary protection provides the core network segmentation and perimeter security controls fundamental to infrastructure management. SC-08 transmission confidentiality and integrity protects data in transit across the network. SC-20/SC-21/SC-22 address secure name/address resolution services ensuring DNS integrity. SC-32 system partitioning enables logical separation of network segments. SC-39 process isolation protects system processes. SC-46 (new in Rev 5) cross-domain policy enforcement manages security policies across network boundaries. CM-02 baseline configuration establishes standard configurations for network infrastructure. CM-06 configuration settings enforces secure configurations on network devices. CM-07 least functionality restricts unnecessary network services and protocols. CM-08 system component inventory tracks network infrastructure assets. AC-04 information flow enforcement controls data flows between network segments. AC-17 remote access secures remote connectivity. AC-18 wireless access controls wireless network security. AC-20 use of external systems manages connections to external networks. SI-04 system monitoring provides network monitoring and intrusion detection capabilities.",
+      "gaps": "Minor: BoM CTRM requires network architecture documentation including network diagrams maintained and reviewed regularly, network segmentation between critical banking systems and general office environments, and DMZ architecture for internet-facing services. The guideline also requires redundant network paths for critical systems and specific requirements for securing SWIFT and payment network connections relevant to Mauritius as a financial hub. These architecture-specific requirements are addressed by the controls but the specific documentation and review frequency expectations are BoM-specific."
+    },
+    {
+      "id": "3.3",
+      "title": "Logical Security Management",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-08",
+        "AC-09",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-24",
+        "IA-01",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-07",
+        "IA-08",
+        "IA-09",
+        "IA-10",
+        "IA-11",
+        "IA-12"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-01 access control policy and AC-02 account management establish the foundation for logical access governance. AC-03 access enforcement and AC-06 least privilege implement the principle of minimal necessary access. AC-05 separation of duties prevents conflicts of interest in critical banking operations. AC-07 unsuccessful logon attempts provides brute-force protection. AC-08 system use notification displays access banners. AC-09 previous logon notification alerts users to suspicious access. AC-10 concurrent session control and AC-11 device lock manage session security. AC-12 session termination enforces timeout policies. AC-24 (new in Rev 5) access control decisions provides attribute-based access control for fine-grained authorisation. IA-01 through IA-12 provide comprehensive identification and authentication controls including IA-02 multi-factor authentication for privileged and remote access, IA-05 authenticator management for password and credential lifecycle, IA-08 identification and authentication for non-organisational users covering external access, IA-10 adaptive authentication supporting risk-based authentication, and IA-12 (new in Rev 5) identity proofing for user verification.",
+      "gaps": "Minor: BoM CTRM requires privileged access management (PAM) with specific controls for administrative access to critical banking systems, including session recording, just-in-time access provisioning, and regular recertification of privileged accounts. The guideline requires multi-factor authentication for all remote access and for access to critical systems, which is well addressed by IA-02 but the specific requirement for hardware tokens or biometric factors for the most critical systems goes beyond the general MFA requirement. Regular user access reviews (at minimum semi-annually) with documented sign-off from business owners are a BoM-specific operational requirement."
+    },
+    {
+      "id": "3.4",
+      "title": "Encryption and Cryptographic Materials",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-08",
+        "SC-28",
+        "SC-17",
+        "SC-40"
+      ],
+      "coverage_pct": 87,
+      "rationale": "SC-12 cryptographic key establishment and management provides the comprehensive key management lifecycle including generation, distribution, storage, rotation, and destruction of cryptographic keys. SC-13 cryptographic protection establishes the use of approved cryptographic algorithms and mechanisms for protecting information confidentiality and integrity. SC-08 transmission confidentiality and integrity mandates encryption for data in transit, covering TLS/SSL for internet banking and secure communications. SC-28 protection of information at rest addresses encryption of stored data including databases, file systems, and backup media containing sensitive financial data. SC-17 public key infrastructure certificates manages PKI for digital certificates used in banking authentication and secure communications. SC-40 (new in Rev 5) wireless link protection adds cryptographic protection for wireless communications, relevant to branch office and ATM network connections.",
+      "gaps": "BoM CTRM requires specific attention to cryptographic standards acceptable for protecting banking data, including alignment with international standards for financial messaging (e.g., SWIFT). The guideline requires a formal cryptographic policy covering algorithm selection, key management procedures, and a crypto-agility plan for transitioning to new algorithms when existing ones are deprecated. Hardware security module (HSM) requirements for key storage in critical payment systems and the requirement for regular cryptographic assessments are BoM-specific operational expectations that go beyond the general cryptographic controls in SP 800-53."
+    },
+    {
+      "id": "3.5",
+      "title": "Physical Security Management",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-07",
+        "PE-08",
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-17",
+        "PE-18"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-01 physical and environmental protection policy establishes the governance framework for physical security. PE-02 physical access authorisations controls who may access facilities. PE-03 physical access control implements access mechanisms including card readers, biometrics, and mantraps. PE-04 access control for transmission addresses physical protection of network cabling and equipment. PE-05 access control for output devices protects printers and displays. PE-06 monitoring physical access provides CCTV and surveillance. PE-07 visitor control manages third-party physical access. PE-08 visitor access records maintains audit trails. PE-09 power equipment and cabling protects critical power infrastructure. PE-10 emergency shutoff provides power isolation capability. PE-11 emergency power ensures UPS and generator backup. PE-12 emergency lighting supports safe evacuation. PE-13 fire protection provides fire detection and suppression. PE-14 environmental controls manages temperature and humidity for data centres. PE-15 water damage protection prevents flooding damage. PE-17 alternate work site addresses physical security for remote work locations. PE-18 location of system components governs placement of critical IT assets.",
+      "gaps": "Minor: BoM CTRM requires physical security measures for data centres hosting critical banking systems including restricted access zones, multi-layered physical access controls, and 24/7 monitoring. The guideline expects specific physical protection for ATM infrastructure, branch network equipment, and cash-handling systems relevant to Mauritian banking operations. Environmental monitoring with automated alerting for data centre facilities and regular physical security audits are BoM-specific expectations. SP 800-53 PE family provides comprehensive physical security but does not address banking-specific physical security requirements for branches and ATMs."
+    },
+    {
+      "id": "3.6",
+      "title": "Change and Patch Management",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-09",
+        "CM-11",
+        "SI-02",
+        "SI-07",
+        "SA-10",
+        "CM-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CM-03 configuration change control establishes the formal change management process including change request, impact assessment, approval, implementation, and verification. CM-04 impact analyses requires security impact assessment before changes are implemented. CM-05 access restrictions for change ensures only authorised personnel can implement changes to production systems. CM-09 configuration management plan documents the overall change management approach. CM-11 user-installed software controls unauthorised software installation. SI-02 flaw remediation provides the patch management lifecycle including identification, assessment, testing, and deployment of patches. SI-07 software, firmware, and information integrity verifies that changes do not compromise system integrity. SA-10 developer configuration management extends change control to the development environment. CM-14 (new in Rev 5) signed components ensures software integrity through cryptographic verification of patches and updates before deployment.",
+      "gaps": "Minor: BoM CTRM requires specific change management processes for critical banking systems with enhanced approval requirements (including sign-off from the CISO for security-impacting changes), mandatory rollback procedures, and post-implementation reviews. The guideline requires emergency change procedures with retrospective approval and risk acceptance by senior management. Patch management timelines are prescribed — critical patches must be applied within defined timeframes (e.g., 72 hours for critical vulnerabilities) with risk acceptance documentation required for any delays. These prescriptive timelines and banking-specific approval chains are BoM-specific operational requirements."
+    },
+    {
+      "id": "3.7",
+      "title": "Technology Refresh Management",
+      "controls": [
+        "SA-22",
+        "CM-08",
+        "PM-07",
+        "RA-09",
+        "PL-08",
+        "SA-02",
+        "SA-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-22 unsupported system components directly addresses end-of-life and end-of-support technology management including identifying, replacing, or providing alternative protections for unsupported components. CM-08 system component inventory provides the asset register necessary to track technology lifecycle status across the institution. PM-07 enterprise architecture links technology refresh decisions to the overall architectural roadmap. RA-09 (new in Rev 5) criticality analysis prioritises refresh activities based on component criticality to banking operations. PL-08 security and privacy architectures provides the target architecture guiding refresh decisions. SA-02 allocation of resources ensures budgetary provision for technology refresh programmes. SA-03 system development life cycle integrates security into refresh and replacement initiatives.",
+      "gaps": "BoM CTRM requires a formal technology refresh programme with a documented technology lifecycle policy covering identification of end-of-life and end-of-support systems, migration planning, and board-approved timelines for replacing obsolete technology. The guideline expects institutions to maintain a technology obsolescence register with risk ratings and remediation plans. Where unsupported systems remain in use, enhanced compensating controls must be documented and approved by the risk function with regular reporting to the board. SP 800-53 SA-22 addresses unsupported components but does not mandate the comprehensive lifecycle management programme, technology roadmapping, or the board-level reporting requirements expected by the BoM."
+    },
+    {
+      "id": "3.8",
+      "title": "People Management",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-05",
+        "AT-06",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-05",
+        "PS-06",
+        "PS-07",
+        "PS-08",
+        "PM-13",
+        "PM-15"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AT-01 awareness and training policy establishes the framework for cyber security awareness. AT-02 literacy training and awareness provides general security awareness training for all staff. AT-03 role-based training delivers specialised training for staff in security-sensitive roles. AT-04 training records maintains documentation of training completion. AT-05 (new in Rev 5) contacts with security groups and associations enables knowledge sharing with industry peers. AT-06 (new in Rev 5) training feedback provides mechanisms to improve training effectiveness. PS-01 personnel security policy establishes the policy for personnel management. PS-02 position risk designation categorises roles by sensitivity. PS-03 personnel screening addresses background checks and vetting. PS-04 personnel termination and PS-05 personnel transfer manage the security aspects of staff lifecycle events. PS-06 access agreements and PS-07 external personnel security formalise security obligations. PS-08 personnel sanctions defines consequences for security violations. PM-13 security and privacy workforce addresses competency requirements for the security team. PM-15 security and privacy groups and associations facilitates external knowledge sharing.",
+      "gaps": "BoM CTRM requires tailored cyber security awareness programmes for board members and senior management in addition to general staff training. The guideline mandates regular phishing simulations and social engineering testing as part of the awareness programme. Specific requirements for annual background screening renewal for staff in critical positions, and cooling-off periods before rehiring former staff from third-party service providers handling critical functions, are BoM-specific personnel management expectations. The guideline also requires institutions to maintain adequate internal cyber security expertise rather than over-relying on outsourced resources."
+    },
+    {
+      "id": "3.9",
+      "title": "Third-Party Service Providers",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SR-08",
+        "SA-21",
+        "PM-30",
+        "PS-07",
+        "CA-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-04 acquisition process establishes security requirements in procurement. SA-09 external system services addresses due diligence and ongoing oversight of service providers. SR-01 supply chain risk management policy provides the overarching framework for third-party risk management. SR-02 supply chain risk assessment enables risk-based evaluation of service providers. SR-03 supply chain controls and processes implements specific supply chain security measures. SR-05 acquisition strategies for supply chain and SR-06 supplier assessments address procurement and ongoing assessment. SR-08 notification agreements ensures timely reporting of security incidents by providers. SA-21 (new in Rev 5) developer screening adds personnel vetting for third-party development staff. PM-30 (new in Rev 5) supply chain risk management strategy establishes the strategic approach to supply chain risk. PS-07 external personnel security extends personnel security controls to third-party staff. CA-03 information exchange addresses secure connectivity with third parties.",
+      "gaps": "BoM CTRM requires prior notification to the Bank of Mauritius before entering into material outsourcing arrangements for critical functions, including cloud services. The guideline mandates rotation and cooling-off periods for third-party service providers handling critical functions — a unique BoM requirement not addressed by SP 800-53. Hosting of customer information and systems outside Mauritius requires specific approval from the Bank of Mauritius with demonstrated adequacy of data protection in the host jurisdiction. The guideline requires comprehensive exit strategies and transition plans for all material outsourcing arrangements, with regular testing of exit procedures. Concentration risk assessment for critical third-party dependencies and sub-outsourcing oversight requirements are BoM-specific obligations."
+    },
+    {
+      "id": "3.10",
+      "title": "Hosting of Customer Information Outside Mauritius",
+      "controls": [
+        "SA-09",
+        "PM-09",
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-05",
+        "SC-08",
+        "SC-28",
+        "AC-04"
+      ],
+      "coverage_pct": 52,
+      "rationale": "SA-09 external system services addresses oversight of external service providers hosting data in other jurisdictions. PM-09 risk management strategy provides the risk framework for evaluating cross-border data hosting risks. PT-01 (new in Rev 5) policy and procedures for personally identifiable information processing establishes the PII handling framework. PT-02 (new in Rev 5) authority to process PII defines the legal basis for processing personal data. PT-03 (new in Rev 5) PII processing purposes limits processing to authorised purposes. PT-05 (new in Rev 5) privacy notice addresses transparency requirements for data subjects. SC-08 transmission confidentiality and integrity protects data during cross-border transfer. SC-28 protection of information at rest secures data stored in external jurisdictions. AC-04 information flow enforcement controls data flows to external locations.",
+      "gaps": "BoM CTRM requires explicit prior approval from the Bank of Mauritius before hosting customer information or critical systems outside Mauritius. The institution must demonstrate that the host jurisdiction provides adequate data protection, that the Bank of Mauritius retains the ability to access data for supervisory purposes, and that contingency arrangements exist for repatriating data if the arrangement is terminated. The Mauritius Data Protection Act 2017 requirements for cross-border data transfers must be satisfied. These are sovereignty and regulatory-specific requirements that SP 800-53 does not address. The guideline also requires that outsourcing arrangements do not impede the institution's ability to comply with Mauritian laws and regulations or inhibit the Bank's supervisory access."
+    },
+    {
+      "id": "3.11",
+      "title": "Secure Coding in Application Development",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-16",
+        "SA-17",
+        "SA-20",
+        "SA-21",
+        "CM-14"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-03 system development life cycle establishes the secure SDLC framework. SA-04 acquisition process embeds security requirements in development contracts. SA-08 security and privacy engineering principles mandates security-by-design in application development. SA-10 developer configuration management ensures source code integrity and version control. SA-11 developer testing and evaluation requires security testing including static analysis, dynamic analysis, and code reviews. SA-15 development process, standards, and tools specifies secure development standards and approved tools. SA-16 developer-provided training ensures developers are trained on secure coding practices. SA-17 developer security and privacy architecture and design requires security architecture documentation. SA-20 (new in Rev 5) customised development of critical components addresses bespoke development for high-assurance banking applications. SA-21 (new in Rev 5) developer screening adds personnel vetting for development staff handling sensitive code. CM-14 (new in Rev 5) signed components ensures integrity of code through cryptographic verification.",
+      "gaps": "Minor: BoM CTRM requires adherence to established secure coding standards (e.g., OWASP) for all application development, with mandatory code reviews before production deployment. The guideline requires specific attention to secure development of online banking and mobile banking applications. SA-11 and SA-15 address most secure coding requirements well. The requirement for maintaining a software bill of materials (SBOM) for critical applications and regular review of third-party libraries for known vulnerabilities are emerging BoM expectations that slightly exceed general SP 800-53 coverage."
+    },
+    {
+      "id": "3.12",
+      "title": "End-User Computing",
+      "controls": [
+        "CM-11",
+        "CM-07",
+        "AC-19",
+        "SC-42",
+        "SC-43",
+        "MP-07",
+        "SC-28"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CM-11 user-installed software controls the installation of unauthorised software on end-user devices. CM-07 least functionality restricts end-user devices to necessary functions and services. AC-19 access control for mobile devices manages security for portable computing devices. SC-42 sensor capability and data addresses privacy and security concerns with device sensors. SC-43 usage restrictions establishes acceptable use policies for organisational systems. MP-07 media use restricts the use of removable media on end-user devices. SC-28 protection of information at rest addresses encryption of data on end-user devices including laptops and mobile devices.",
+      "gaps": "BoM CTRM addresses end-user computing including the management of spreadsheet-based models, databases, and other end-user-developed applications that support critical business processes (shadow IT). The guideline requires institutions to maintain an inventory of significant end-user computing applications, implement change controls for critical spreadsheets and databases, and conduct regular reviews of end-user computing risks. These requirements for managing unstructured end-user computing tools used in banking operations (e.g., risk models built in spreadsheets) go significantly beyond general endpoint security controls in SP 800-53."
+    },
+    {
+      "id": "3.13",
+      "title": "Online Financial Services Security",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "SC-13",
+        "SC-23",
+        "SC-45",
+        "IA-02",
+        "IA-08",
+        "AC-17",
+        "AU-02",
+        "AU-03",
+        "SI-10"
+      ],
+      "coverage_pct": 73,
+      "rationale": "SC-07 boundary protection secures the perimeter for internet-facing banking services. SC-08 transmission confidentiality and integrity mandates TLS encryption for online transactions. SC-13 cryptographic protection ensures adequate cryptographic mechanisms for financial transactions. SC-23 session authenticity protects online banking session integrity against session hijacking. SC-45 (new in Rev 5) system time synchronisation ensures accurate transaction timestamps for financial services. IA-02 multi-factor authentication addresses strong customer authentication for online banking. IA-08 identification and authentication for non-organisational users manages external customer authentication. AC-17 remote access secures remote connectivity to banking platforms. AU-02 event logging and AU-03 content of audit records ensure comprehensive transaction audit trails. SI-10 information input validation prevents injection attacks against online banking applications.",
+      "gaps": "BoM CTRM requires specific security controls for online financial services including internet banking, mobile banking, and electronic payment services. The guideline mandates customer authentication standards aligned with international best practices, transaction signing for high-value transfers, real-time fraud monitoring and anomaly detection, and customer notification mechanisms for sensitive transactions. Mobile application security requirements including secure development, code obfuscation, certificate pinning, and jailbreak/root detection are BoM-specific. The guideline also requires customer cyber hygiene awareness programmes and mechanisms for customers to report suspicious activities — requirements that go beyond SP 800-53's system-centric scope."
+    },
+    {
+      "id": "4.1",
+      "title": "Cyber and Technology Threat Intelligence",
+      "controls": [
+        "PM-16",
+        "RA-03",
+        "RA-05",
+        "RA-10",
+        "SI-04",
+        "SI-05",
+        "PM-15",
+        "SR-08"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-16 threat awareness programme establishes the organisational capability for threat intelligence collection, analysis, and dissemination. RA-03 risk assessment incorporates threat intelligence into the risk assessment process. RA-05 vulnerability monitoring and scanning provides vulnerability intelligence to complement threat data. RA-10 (new in Rev 5) threat hunting enables proactive searching for threats based on intelligence indicators. SI-04 system monitoring provides the technical infrastructure for detecting threats informed by intelligence. SI-05 security alerts, advisories, and directives ensures the institution receives and acts upon external security advisories from sources including the Bank of Mauritius. PM-15 security and privacy groups and associations facilitates participation in industry threat intelligence sharing communities. SR-08 notification agreements ensures third-party providers share relevant threat information.",
+      "gaps": "BoM CTRM requires institutions to establish a formal cyber threat intelligence capability that monitors threats relevant to the Mauritian financial sector, including participation in financial sector information sharing and analysis centres (FSISACs) or equivalent regional forums. The guideline expects threat intelligence to be operationalised into defensive measures and used to inform risk assessments, security testing scenarios, and board reporting. Specific requirements for subscribing to BoM-issued alerts and advisories and for sharing threat information with the Bank of Mauritius upon request are regulatory-specific obligations."
+    },
+    {
+      "id": "4.2",
+      "title": "Detection of Cyber Events and Monitoring",
+      "controls": [
+        "SI-04",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-10",
+        "AU-12",
+        "AU-13",
+        "AU-14",
+        "CA-07",
+        "SC-26",
+        "SC-44",
+        "IR-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SI-04 system monitoring provides the core monitoring capability for detecting cyber events across the institution's technology estate. AU-02 event logging and AU-03 content of audit records establish comprehensive logging requirements. AU-04 audit log storage capacity ensures adequate log retention. AU-05 response to audit logging process failures provides resilience in the logging infrastructure. AU-06 audit record review, analysis, and reporting addresses security analytics and log analysis. AU-07 audit record reduction and report generation enables SIEM-style log aggregation and correlation. AU-08 time stamps ensures log integrity through accurate time synchronisation. AU-09 protection of audit information prevents log tampering. AU-10 non-repudiation ensures accountability for logged actions. AU-12 audit record generation completes the logging framework. AU-13 monitoring for information disclosure detects data leakage. AU-14 session audit provides detailed session recording capability. CA-07 continuous monitoring provides the overarching monitoring programme. SC-26 (new in Rev 5) honeypots provides deception technology for advanced threat detection. SC-44 (new in Rev 5) detonation chambers enables sandbox analysis of suspicious files and malware. IR-04 incident handling provides the operational linkage from detection to response.",
+      "gaps": "Minor: BoM CTRM requires implementation of advanced monitoring and detection capabilities including a Security Operations Centre (SOC) function — either internal or outsourced — with defined operating hours commensurate with the institution's risk profile. The guideline expects real-time alerting for critical security events, correlation of events across multiple sources, and regular tuning of detection rules. Specific log retention periods (typically a minimum of one year for security logs, seven years for transaction logs) prescribed by the BoM and the requirement to make logs available to the Bank of Mauritius for supervisory purposes are regulatory-specific."
+    },
+    {
+      "id": "4.3",
+      "title": "Vulnerability Assessment and Penetration Testing",
+      "controls": [
+        "CA-02",
+        "CA-08",
+        "RA-05",
+        "RA-06",
+        "RA-09",
+        "PM-14",
+        "CA-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-02 control assessments provides the framework for evaluating control effectiveness through assessments. CA-08 penetration testing mandates regular penetration testing of organisational systems, directly addressing the BoM requirement for periodic pen testing of critical systems. RA-05 vulnerability monitoring and scanning provides comprehensive vulnerability assessment capability including automated scanning and manual analysis. RA-06 technical surveillance countermeasures survey addresses advanced reconnaissance detection. RA-09 (new in Rev 5) criticality analysis enables risk-prioritised testing focused on the most critical banking systems. PM-14 testing, training, and monitoring establishes the overall testing programme including frequency and scope. CA-05 plan of action and milestones tracks remediation of identified vulnerabilities from assessments.",
+      "gaps": "BoM CTRM requires vulnerability assessments at least annually and penetration testing at least annually, with more frequent testing for critical systems and after significant changes. The guideline mandates that penetration testing be conducted by qualified independent assessors (external parties for critical systems). Red team testing and scenario-based cyber resilience testing aligned with the ECB TIBER framework methodology are expected for systemically important institutions. Findings must be reported to the board and the Bank of Mauritius with remediation plans and timelines. SP 800-53 CA-08 and RA-05 cover the testing well but the prescriptive frequency, independence requirements, and regulatory reporting obligations are BoM-specific."
+    },
+    {
+      "id": "5.1",
+      "title": "Cyber Incident Management",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09",
+        "AU-06",
+        "SI-04",
+        "SI-05",
+        "PM-31"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-01 incident response policy and procedures establishes the incident management framework. IR-02 incident response training ensures staff are prepared to respond to incidents. IR-03 incident response testing validates the effectiveness of incident response plans through exercises. IR-04 incident handling provides the core operational process for managing security incidents through detection, analysis, containment, eradication, and recovery. IR-05 incident monitoring tracks and documents incidents. IR-06 incident reporting establishes internal reporting mechanisms. IR-07 incident response assistance provides support resources during incidents. IR-08 incident response plan documents the comprehensive response plan. IR-09 information spillage response addresses data breach scenarios. AU-06 audit record review supports incident investigation through log analysis. SI-04 system monitoring provides detection feeds into incident management. SI-05 security alerts, advisories, and directives ensures external threat intelligence informs incident classification. PM-31 (new in Rev 5) continuous diagnostics and mitigation addresses ongoing monitoring supporting incident detection.",
+      "gaps": "BoM CTRM requires mandatory notification to the Bank of Mauritius of material cyber incidents within prescribed timeframes (typically within 24 hours of detection for significant incidents). The guideline mandates notification to affected customers where their data or accounts have been compromised. Incident classification schemes must align with BoM-defined severity categories. The requirement for post-incident root cause analysis with findings reported to the board and to the Bank of Mauritius, and for maintaining an incident register accessible to the regulator, are BoM-specific regulatory obligations. Crisis communication protocols covering media, customers, and regulatory authorities during major incidents are also expected."
+    },
+    {
+      "id": "5.2",
+      "title": "Business Continuity and Response and Recovery Planning",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "CP-11",
+        "CP-12",
+        "CP-13",
+        "SC-24",
+        "SI-17"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-01 contingency planning policy establishes the BCP/DRP governance framework. CP-02 contingency plan develops the comprehensive business continuity plan. CP-03 contingency training ensures staff are prepared for continuity scenarios. CP-04 contingency plan testing validates plans through regular exercises. CP-06 alternate storage site and CP-07 alternate processing site provide recovery infrastructure. CP-08 telecommunications services ensures communication continuity. CP-09 system backup establishes backup procedures for data and system recovery. CP-10 system recovery and reconstitution provides the recovery processes. CP-11 (new in Rev 5) alternate communications protocols defines backup communication channels. CP-12 (new in Rev 5) safe mode provides degraded operation capability during incidents. CP-13 (new in Rev 5) alternative security mechanisms ensures security controls remain effective during contingency operations. SC-24 (new in Rev 5) fail in known state ensures systems preserve a secure state during failures. SI-17 (new in Rev 5) fail-safe procedures provides additional failure handling for critical banking systems.",
+      "gaps": "BoM CTRM requires specific recovery time objectives (RTO) and recovery point objectives (RPO) for critical banking systems, with board-approved thresholds that must be tested and validated at least annually. The guideline mandates cyber-specific scenarios in business continuity testing, including ransomware, data destruction, and widespread system compromise. The requirement for a dedicated response and recovery plan for cyber incidents (separate from general BCP) with defined escalation procedures and crisis management team composition is a BoM expectation. Regular reporting of BCP/DRP testing results to the board and submission to the Bank of Mauritius, and the ability to demonstrate recovery capability to the regulator, are BoM-specific supervisory requirements."
+    },
+    {
+      "id": "5.3",
+      "title": "Situational Awareness, Learning and Evolving",
+      "controls": [
+        "PM-15",
+        "PM-16",
+        "IR-05",
+        "CA-07",
+        "PM-14",
+        "AT-02",
+        "AT-05",
+        "RA-07",
+        "SI-05"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-15 security and privacy groups and associations facilitates participation in information sharing forums and industry groups for situational awareness. PM-16 threat awareness programme provides the structured approach to maintaining awareness of evolving threats. IR-05 incident monitoring and post-incident lessons learned drives continuous improvement. CA-07 continuous monitoring provides ongoing visibility into the security posture. PM-14 testing, training, and monitoring ensures regular testing informs improvements to the security programme. AT-02 literacy training and awareness keeps staff informed of evolving threats. AT-05 (new in Rev 5) contacts with security groups and associations enables direct engagement with security communities. RA-07 (new in Rev 5) risk response ensures identified risks from situational awareness lead to concrete treatment actions. SI-05 security alerts, advisories, and directives integrates external advisories into the institution's awareness programme.",
+      "gaps": "BoM CTRM requires institutions to continuously monitor the evolving cyber landscape and adapt their cyber resilience strategies accordingly. The guideline expects formal lessons-learned processes following incidents and near-misses, with findings systematically integrated into security controls, risk assessments, and awareness programmes. Benchmarking against industry peers and international best practices, participation in regulator-sponsored cyber exercises, and regular reporting to the board on the evolving threat landscape and the institution's adaptive responses are BoM-specific expectations. The requirement to evolve the cyber resilience framework based on ECB CROE maturity model principles goes beyond the general continuous improvement provisions in SP 800-53."
+    },
+    {
+      "id": "5.4",
+      "title": "Technology Audit",
+      "controls": [
+        "AU-01",
+        "CA-01",
+        "CA-02",
+        "CA-06",
+        "CA-07",
+        "CA-09",
+        "PM-04",
+        "PM-06",
+        "PM-14"
+      ],
+      "coverage_pct": 68,
+      "rationale": "AU-01 audit and accountability policy establishes the audit framework. CA-01 assessment, authorisation, and monitoring policy provides the policy basis for independent assessments. CA-02 control assessments defines the approach for evaluating control effectiveness against the guideline requirements. CA-06 authorisation provides the formal risk acceptance process following audit findings. CA-07 continuous monitoring supports ongoing assurance between formal audits. CA-09 internal system connections addresses the scope of systems subject to audit. PM-04 plan of action and milestones process tracks remediation of audit findings. PM-06 measures of performance defines metrics for evaluating programme effectiveness as assessed by auditors. PM-14 testing, training, and monitoring establishes the testing and monitoring programme that complements audit activities.",
+      "gaps": "BoM CTRM requires technology audits to be conducted by the internal audit function (third line of defence) with sufficient expertise in cyber and technology risk. The guideline mandates that the cyber and technology risk management framework be audited by an external independent assessor at least every three years, with audit findings reported to the board audit committee and submitted to the Bank of Mauritius within 90 days. Specific audit scopes must cover all sections of the guideline. The requirement for the Bank of Mauritius to have the right to conduct supervisory inspections of the institution's technology infrastructure and operations, and the obligation to submit gap analysis reports together with board-approved remediation plans, are regulatory-specific obligations not covered by SP 800-53."
+    }
+  ],
+  "summary": {
+    "total_clauses": 26,
+    "average_coverage": 77.7,
+    "full_count": 9,
+    "substantial_count": 15,
+    "partial_count": 2,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

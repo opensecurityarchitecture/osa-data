@@ -1,0 +1,288 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "bog_cisd",
+  "framework_name": "BoG CISD",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "CISD-I",
+      "title": "Overview, Scope and Applicability",
+      "controls": [
+        "PM-01", "PM-02", "PM-03", "PM-09", "PM-10", "PM-11",
+        "PL-01", "PL-02", "PL-04", "PL-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-01 information security program plan establishes the organisational security programme that maps to the directive's mandate for a formal cyber and information security framework. PM-02 senior information security officer role partially addresses the requirement for designated security leadership. PM-03 information security resources supports resource allocation for the programme. PM-09 risk management strategy and PM-10 authorisation process provide the strategic governance context. PM-11 mission and business process definition helps scope the programme to the institution's critical functions. PL-01 planning policy, PL-02 system security and privacy plans, PL-04 rules of behaviour, and PL-07 external security and privacy plans cover foundational planning. However, this part primarily defines the regulatory authority, scope of applicability under Act 930 (Banks and Specialised Deposit-Taking Institutions Act 2016), definitions, and enforcement provisions which are inherently jurisdictional.",
+      "gaps": "The directive's scope clause establishes the legal basis under Act 930 and defines which entities are regulated (banks, SDIs, payment service providers, fintech companies). It mandates compliance timelines of 6 to 36 months for implementing Parts I through XVI. SP 800-53 cannot replicate the jurisdictional authority of the Bank of Ghana, the specific applicability to Ghanaian financial entities, or the enforcement mechanisms including sanctions for non-compliance. The requirement that the directive applies to both Ghanaian banks and their international affiliates, and to Ghanaian affiliates of international banks, has no SP 800-53 equivalent."
+    },
+    {
+      "id": "CISD-II",
+      "title": "Governance",
+      "controls": [
+        "PM-01", "PM-02", "PM-03", "PM-09", "PM-13", "PM-14",
+        "PM-28", "PM-29", "PS-09", "PL-09",
+        "CA-01", "CA-06", "CA-07"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PM-01 information security program plan maps to the requirement for a board-approved information security programme. PM-02 senior information security officer partially addresses the mandatory CISO appointment with board reporting lines. PM-03 information security resources covers resourcing of the security function. PM-09 risk management strategy provides the strategic risk governance framework required by the board. PM-13 security and privacy workforce addresses staffing requirements for the security team. PM-14 testing, training, and monitoring establishes ongoing assurance. PM-28 risk framing (new in Rev 5) addresses organisational risk appetite articulation required at board level. PM-29 risk management program leadership roles (new in Rev 5) formalises senior leadership accountability. PS-09 position descriptions (new in Rev 5) defines security responsibilities including the CISO role. PL-09 central management (new in Rev 5) enables unified governance across the institution. CA-01 assessment policy, CA-06 authorisation, and CA-07 continuous monitoring support governance assurance.",
+      "gaps": "BoG mandates a specific governance hierarchy: the board must have direct oversight of cyber risk with a dedicated committee or standing agenda item. The directive requires a CISO who reports to senior management and advises the board, with independence from IT operations. Internal audit must periodically assess the effectiveness of the information security programme. Senior management must approve the information security policy and ensure adequate resources. Quarterly board reporting on the cyber risk posture is a BoG-specific obligation. SP 800-53 provides programme governance controls but does not prescribe the Ghana-specific board committee structures, CISO reporting line requirements, or the BoG-mandated governance hierarchy for financial institutions."
+    },
+    {
+      "id": "CISD-III",
+      "title": "Risk Management",
+      "controls": [
+        "PM-09", "PM-28", "RA-01", "RA-02", "RA-03", "RA-04",
+        "RA-07", "RA-08", "RA-09", "PL-10", "PL-11",
+        "CA-05", "CA-07", "PM-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PM-09 risk management strategy and PM-28 risk framing (new in Rev 5) establish the enterprise risk context aligned with the directive's risk framework requirements. RA-01 risk assessment policy establishes the assessment methodology. RA-02 security categorisation provides asset-based risk classification. RA-03 risk assessment and RA-04 risk assessment update create a comprehensive risk assessment lifecycle covering the directive's requirements for risk surveys and risk assessments. RA-07 risk response (new in Rev 5) adds explicit risk treatment actions covering acceptance, avoidance, mitigation, sharing, and transfer, mapping to the risk mitigation section. RA-08 privacy impact assessment supports broader impact analysis. RA-09 criticality analysis (new in Rev 5) identifies critical systems for risk-based prioritisation. PL-10 baseline selection (new in Rev 5) and PL-11 baseline tailoring (new in Rev 5) enable systematic risk-based control selection. CA-05 plan of action and milestones and PM-04 plan of action and milestones process track risk treatment and remediation progress, mapping to risk monitoring and reporting.",
+      "gaps": "The BoG directive requires a formal cyber risk management framework with specific elements: risk surveys to identify the institution's threat landscape, periodic risk assessments aligned with ISO 27005 or equivalent methodologies, risk mitigation plans with defined timelines, and ongoing risk monitoring with reporting to the board and senior management. The requirement for risk registers maintained with Ghana-specific threat intelligence and sector-level threat information from FICSOC (Financial Industry Command Security Operations Centre) has no SP 800-53 equivalent. Integration with the institution's enterprise risk management framework and reporting through the risk management committee are BoG-specific structural requirements."
+    },
+    {
+      "id": "CISD-IV",
+      "title": "Internal Audit",
+      "controls": [
+        "CA-01", "CA-02", "CA-05", "CA-06", "CA-07",
+        "PM-04", "PM-06", "PM-14", "AU-01", "AU-06"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CA-01 assessment, authorisation, and monitoring policy establishes the audit and assessment framework. CA-02 control assessments provides the methodology for evaluating control effectiveness, mapping to the directive's requirement for periodic internal audit of information security controls. CA-05 plan of action and milestones tracks audit findings and remediation. CA-06 authorisation ensures systems are formally approved. CA-07 continuous monitoring provides ongoing assurance between audit cycles. PM-04 plan of action and milestones process and PM-06 measures of performance support audit programme governance and effectiveness measurement. PM-14 testing, training, and monitoring establishes the overarching assurance programme. AU-01 audit and accountability policy and AU-06 audit record review provide the audit logging foundation that internal audit teams rely upon for evidence gathering.",
+      "gaps": "The BoG directive requires internal audit to independently assess the effectiveness of the information security programme, with findings reported directly to the board audit committee. Internal audit must evaluate compliance with the CISD itself, not just with the institution's own policies. The directive mandates specific audit frequencies and scope requirements that are BoG-prescribed. SP 800-53 provides assessment and monitoring controls but does not address the three-lines-of-defence model that the directive implicitly requires, nor does it prescribe the BoG-specific audit reporting chain to the board audit committee. The requirement for external audit or third-party assessment of the ISMS as part of ISO 27001 certification goes beyond SP 800-53 scope."
+    },
+    {
+      "id": "CISD-V",
+      "title": "Asset Management",
+      "controls": [
+        "CM-08", "CM-09", "CM-12", "CM-13",
+        "MP-01", "MP-02", "MP-03", "MP-04", "MP-05", "MP-06", "MP-07",
+        "PM-05", "SC-28", "AC-16"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-08 system component inventory provides comprehensive IT asset inventory management, directly mapping to the directive's requirement for maintaining a register of all information assets. CM-09 configuration management plan supports asset baseline documentation. CM-12 information location (new in Rev 5) identifies where sensitive data resides across the institution's infrastructure, critical for data asset management. CM-13 data action mapping (new in Rev 5) tracks data flows, supporting data-centric asset management. MP-01 media protection policy through MP-07 media use establish the complete media lifecycle including classification, handling, storage, transport, sanitisation, and disposal of information assets. PM-05 system inventory provides the organisational system-level inventory. SC-28 protection of information at rest covers encryption of stored assets. AC-16 security and privacy attributes enables classification labelling of information assets, supporting the directive's asset classification requirements.",
+      "gaps": "The BoG directive requires asset classification schemes aligned with the sensitivity of financial and customer data specific to Ghanaian banking operations. Requirements for maintaining asset registers that include data ownership, custodianship, and the classification of assets according to their criticality to the institution's operations are prescribed with specific attributes. SP 800-53 provides strong asset inventory and media protection controls but does not address BoG-specific requirements for classifying assets according to the Ghanaian Data Protection Act 2012 (Act 843) or the specific handling requirements for financial data under Bank of Ghana regulations."
+    },
+    {
+      "id": "CISD-VI",
+      "title": "Cyber Defence",
+      "controls": [
+        "SC-01", "SC-02", "SC-03", "SC-04", "SC-05", "SC-07", "SC-08",
+        "SC-12", "SC-13", "SC-17", "SC-20", "SC-21", "SC-22", "SC-28",
+        "SC-39", "SC-40", "SC-41",
+        "CM-01", "CM-02", "CM-03", "CM-05", "CM-06", "CM-07",
+        "SI-02", "SI-03", "SI-04", "SI-07", "SI-16",
+        "RA-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-07 boundary protection provides network architecture and segmentation controls, directly mapping to the directive's security architecture and network elements requirements. SC-05 denial-of-service protection and SC-20/SC-21/SC-22 DNS security address infrastructure resilience. SC-08 transmission confidentiality and integrity covers encryption in transit. SC-12 cryptographic key establishment and management and SC-13 cryptographic protection map to the directive's encryption section, addressing key management lifecycle and cryptographic standards. SC-17 public key infrastructure certificates covers certificate management. SC-28 protection of information at rest addresses data encryption at rest. SC-39 process isolation, SC-40 wireless link protection, and SC-41 port and I/O device access restriction (new in Rev 5) strengthen endpoint and communication hardening. SC-01 system communications policy, SC-02 separation of system and user functionality, SC-03 security function isolation, and SC-04 information in shared system resources cover defence-in-depth architecture. CM-01 through CM-07 provide comprehensive configuration management covering baselines, change control, access restrictions, settings, and least functionality. SI-02 flaw remediation addresses patch management. SI-03 malicious code protection covers anti-malware. SI-04 system monitoring and SI-07 software integrity address detection capabilities. SI-16 memory protection (new in Rev 5) adds host-level hardening. RA-05 vulnerability monitoring and scanning provides vulnerability assessment.",
+      "gaps": "The BoG directive prescribes specific security infrastructure requirements including firewalls, intrusion detection/prevention systems, anti-malware, and web application firewalls as mandatory technology deployments. Network management requirements include specific architecture standards for financial institutions such as DMZ configurations and network segmentation between banking zones. The directive's encryption requirements mandate specific standards for protecting sensitive financial data. SP 800-53 provides comprehensive technical controls but does not prescribe the specific technology stack or network architecture patterns mandated by the BoG directive for Ghanaian financial institutions."
+    },
+    {
+      "id": "CISD-VII",
+      "title": "Cyber Response",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05", "IR-06",
+        "IR-07", "IR-08", "IR-09",
+        "SI-04", "AU-02", "AU-03", "AU-04", "AU-05", "AU-06",
+        "AU-07", "AU-08", "AU-09", "AU-12",
+        "CA-07", "PM-16"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-01 incident response policy through IR-09 information spillage response provide the complete incident management lifecycle. IR-04 incident handling covers detection, analysis, containment, eradication, and recovery mapping to the directive's cyber response methodology. The directive specifically mandates SIEM deployment: SI-04 system monitoring provides the core monitoring capability, while AU-02 event logging, AU-03 content of audit records, AU-04 audit log storage capacity, AU-05 response to audit logging process failures, AU-06 audit record review and analysis, AU-07 audit record reduction and report generation, AU-08 time stamps, AU-09 protection of audit information, and AU-12 audit record generation collectively address the SIEM technology requirements. The directive requires a Security Operations Centre (SOC): CA-07 continuous monitoring provides the overarching monitoring programme and PM-16 threat awareness program addresses threat intelligence sharing, relevant to FICSOC integration. IR-02 incident response training and IR-03 incident response testing address SOC team readiness and exercises.",
+      "gaps": "The BoG directive mandates each regulated institution establish a Security Operations Centre (SOC) or 'Situation Room / War Room' with defined structure, hierarchy, and staffing. SIEM technology must provide real-time analysis of security alerts from network, hardware, and applications. The directive prescribes a specific response methodology and coordination with the Bank of Ghana's FICSOC for sector-wide threat intelligence sharing and incident coordination. Mandatory incident reporting to the Bank of Ghana within prescribed timeframes is a regulatory obligation with no SP 800-53 equivalent. SP 800-53 covers the technical and procedural controls comprehensively but cannot replicate the BoG-specific SOC establishment mandate, FICSOC coordination requirements, or the regulatory incident notification obligations to the central bank."
+    },
+    {
+      "id": "CISD-VIII",
+      "title": "Employee Access to ICT Systems",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-04", "AC-05", "AC-06",
+        "AC-07", "AC-08", "AC-10", "AC-11", "AC-12", "AC-14",
+        "AC-17", "AC-19", "AC-20", "AC-21", "AC-22",
+        "IA-01", "IA-02", "IA-04", "IA-05", "IA-06", "IA-08", "IA-11",
+        "SC-08", "SC-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-01 access control policy and IA-01 identification and authentication policy establish the policy framework mapping to the directive's access control section. AC-02 account management covers user lifecycle management including provisioning, modification, and removal. AC-03 access enforcement and AC-04 information flow enforcement implement access control models. AC-05 separation of duties and AC-06 least privilege address privileged access management. AC-07 unsuccessful logon attempts, AC-08 system use notification, AC-10 concurrent session control, AC-11 device lock, and AC-12 session termination enforce session management. AC-14 permitted actions without identification, AC-17 remote access, AC-19 access control for mobile devices, and AC-20 use of external systems cover extended access scenarios. AC-21 information sharing and AC-22 publicly accessible content address the directive's data transfer and communication channel requirements. IA-02 identification and authentication covers authentication mechanisms. IA-04 identifier management, IA-05 authenticator management, IA-06 authentication feedback, IA-08 non-organisational user identification, and IA-11 re-authentication strengthen the identity lifecycle. SC-07 boundary protection and SC-08 transmission confidentiality address web access and email security controls. The directive's sections on web access and email are well-addressed by these controls.",
+      "gaps": "The BoG directive includes specific prescriptions for channels of communication with external entities, controlling data transfer between sites and organisations, web access policies, and email usage policies that go into operational detail beyond SP 800-53 control-level guidance. Internet usage monitoring and filtering requirements for financial institutions, restrictions on personal email use for business communications, and specific controls for data transfer to external parties (including USB device restrictions) are prescribed with operational specificity. SP 800-53 covers the control objectives comprehensively but the BoG directive adds Ghana-specific operational requirements for financial institutions."
+    },
+    {
+      "id": "CISD-IX",
+      "title": "Electronic Banking Services",
+      "controls": [
+        "AC-02", "AC-03", "AC-17",
+        "IA-01", "IA-02", "IA-03", "IA-05", "IA-08", "IA-12",
+        "SC-07", "SC-08", "SC-13", "SC-23",
+        "SA-03", "SA-04", "SA-08", "SA-11",
+        "SI-10", "SI-11"
+      ],
+      "coverage_pct": 75,
+      "rationale": "The directive's electronic banking section covers general provisions and identification/authentication for e-banking services. IA-01 identification and authentication policy, IA-02 identification and authentication (including multi-factor), IA-03 device identification and authentication, IA-05 authenticator management, IA-08 non-organisational user identification, and IA-12 identity proofing (new in Rev 5) provide the identity framework for customer-facing banking channels. AC-02 account management, AC-03 access enforcement, and AC-17 remote access cover access control for remote banking. SC-07 boundary protection, SC-08 transmission confidentiality, SC-13 cryptographic protection, and SC-23 session authenticity address secure channel establishment for e-banking. SA-03 system development life cycle, SA-04 acquisition process, SA-08 security engineering principles, and SA-11 developer testing cover secure development of e-banking platforms. SI-10 information input validation and SI-11 error handling address application security for banking transaction processing.",
+      "gaps": "The BoG directive prescribes specific requirements for electronic banking services including mobile banking, internet banking, and agent banking channels that are unique to the Ghanaian financial sector. Customer authentication requirements for transaction authorisation, transaction limits, and real-time fraud monitoring are prescribed at an operational level. Requirements for subscriber verification before enabling e-banking services and specific identification/authentication standards for different transaction types go beyond SP 800-53. Integration with Ghana's payment systems (GhIPSS, e-zwich) and compliance with the Payment Systems and Services Act 2019 (Act 987) are jurisdiction-specific obligations."
+    },
+    {
+      "id": "CISD-X",
+      "title": "Cyber Exercises",
+      "controls": [
+        "IR-03", "CP-04", "CA-08",
+        "PM-14", "AT-02", "AT-03",
+        "RA-05", "RA-06"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IR-03 incident response testing directly maps to the requirement for cyber exercises including tabletop exercises, functional exercises, and full-scale simulations. CP-04 contingency plan testing validates recovery and resilience capabilities through exercises. CA-08 penetration testing addresses technical testing exercises including adversary simulation. PM-14 testing, training, and monitoring establishes the overarching testing programme that governs exercise cadence and scope. AT-02 literacy training and awareness and AT-03 role-based training support exercise-related training and staff preparedness. RA-05 vulnerability monitoring and scanning covers vulnerability-focused exercises. RA-06 technical surveillance countermeasures survey addresses advanced threat detection exercises.",
+      "gaps": "The BoG directive requires regulated institutions to conduct cyber exercises that include coordination with business partners, service providers, and the Bank of Ghana's FICSOC. Sector-wide exercises coordinated by the Bank of Ghana to test the financial industry's collective response capability are a BoG-specific initiative. The requirement for exercises to test coordination with Ghana's national CERT (Ghana Computer Emergency Response Team under the Cyber Security Authority) and law enforcement agencies goes beyond SP 800-53. Post-exercise reporting to the Bank of Ghana with findings and remediation plans is a regulatory obligation."
+    },
+    {
+      "id": "CISD-XI",
+      "title": "External Connections",
+      "controls": [
+        "AC-17", "AC-20", "AC-04",
+        "CA-03", "CA-09",
+        "SC-07", "SC-08", "SC-13",
+        "SA-09", "SR-01", "SR-02", "SR-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-17 remote access controls external access to institutional systems, mapping to the directive's remote access section. AC-20 use of external systems covers connections with external parties. AC-04 information flow enforcement controls data flows between internal and external networks. CA-03 information exchange addresses direct connectivity and interconnection agreements with other financial institutions and non-financial entities. CA-09 internal system connections (new in Rev 5) extends to internal network pathways. SC-07 boundary protection provides the network segmentation and perimeter controls for managing external connections. SC-08 transmission confidentiality and SC-13 cryptographic protection secure external communication channels. SA-09 external system services manages ongoing third-party service relationships. SR-01 supply chain risk management policy, SR-02 supply chain risk assessment, and SR-03 supply chain controls and processes establish the framework for managing external connection risks with business partners and service providers.",
+      "gaps": "The BoG directive specifies requirements for direct connectivity with other financial institutions, business partners, and non-financial entities that are specific to the Ghanaian financial ecosystem. Requirements for secure connections with Ghana Interbank Settlement (GIS), Ghana Interbank Payment and Settlement Systems (GhIPSS), and the Bank of Ghana's own systems are jurisdiction-specific. The directive mandates specific controls for remote access by external parties including vendors, auditors, and regulators. SP 800-53 covers external connection management comprehensively but does not address the Ghana-specific interconnection requirements for the national payment infrastructure."
+    },
+    {
+      "id": "CISD-XII",
+      "title": "Cloud Services",
+      "controls": [
+        "SA-04", "SA-09",
+        "SR-01", "SR-02", "SR-03", "SR-05",
+        "AC-20",
+        "SC-07", "SC-08", "SC-28",
+        "CM-12", "CM-13",
+        "CP-06", "CP-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-04 acquisition process integrates security requirements into cloud service procurement. SA-09 external system services addresses ongoing cloud service management and oversight. SR-01 supply chain risk management policy, SR-02 supply chain risk assessment, SR-03 supply chain controls and processes, and SR-05 acquisition strategies cover cloud provider risk management. AC-20 use of external systems governs access to cloud environments. SC-07 boundary protection, SC-08 transmission confidentiality and integrity, and SC-28 protection of information at rest address cloud infrastructure security controls. CM-12 information location (new in Rev 5) identifies where data resides in cloud environments, critical for data residency compliance. CM-13 data action mapping (new in Rev 5) tracks data processing flows in cloud environments. CP-06 alternate storage site and CP-07 alternate processing site address cloud-based resilience and redundancy.",
+      "gaps": "The BoG directive imposes specific requirements for cloud services adoption by regulated financial institutions, likely including BoG notification or approval requirements before migrating critical banking workloads to cloud environments. Data residency requirements may mandate that certain categories of customer financial data remain within Ghana or approved jurisdictions. Cloud service contracts must include specific security clauses, right-to-audit provisions, incident notification obligations, and exit/transition management plans. SP 800-53 provides strong cloud security controls but does not address the Ghana-specific data localisation requirements, BoG pre-approval processes for cloud adoption, or the specific contractual requirements prescribed by the directive for cloud service providers serving the Ghanaian financial sector."
+    },
+    {
+      "id": "CISD-XIII",
+      "title": "Banks with International Affiliation",
+      "controls": [
+        "PM-09", "PM-11", "PM-12",
+        "AC-04", "AC-20",
+        "CA-03", "SA-09",
+        "SC-07", "SC-08",
+        "PL-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-09 risk management strategy provides the strategic framework applicable to internationally affiliated banks. PM-11 mission and business process definition helps scope security requirements across international operations. PM-12 insider threat program addresses personnel risks across international affiliations. AC-04 information flow enforcement and AC-20 use of external systems control data flows between the Ghanaian entity and international affiliates. CA-03 information exchange governs interconnection agreements between affiliated entities. SA-09 external system services manages the relationship with international parent/subsidiary systems. SC-07 boundary protection and SC-08 transmission confidentiality secure cross-border communications. PL-08 security and privacy architectures supports architectural alignment across international affiliates.",
+      "gaps": "This part addresses the unique challenge of Ghanaian affiliates of international banks and Ghanaian banks with international affiliates. The directive requires that the BoG CISD is applied regardless of the parent organisation's own cybersecurity standards — the Ghanaian entity must comply with BoG requirements independently. Cross-border data sharing between affiliates must comply with Ghana's Data Protection Act 2012 (Act 843). The requirement for group-wide information security policies to be supplemented with Ghana-specific addenda, and for the BoG to have supervisory access to relevant security information from international affiliates, are jurisdiction-specific provisions with no SP 800-53 equivalent. This part is inherently regulatory and territorial in nature."
+    },
+    {
+      "id": "CISD-XIV",
+      "title": "Physical Security",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-04", "PE-05", "PE-06",
+        "PE-07", "PE-08", "PE-09", "PE-10", "PE-11", "PE-12",
+        "PE-13", "PE-14", "PE-15", "PE-16", "PE-17", "PE-18"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-01 physical and environmental protection policy establishes the physical security framework. PE-02 physical access authorisations and PE-03 physical access control map to the directive's secured zones and access management requirements. PE-04 access control for transmission covers cabling security in data centres. PE-05 access control for output devices and PE-06 monitoring physical access provide surveillance and monitoring within secured zones. PE-07 visitor control and PE-08 visitor access records manage external access to IT data centres and control rooms. PE-09 power equipment and cabling, PE-10 emergency shutoff, PE-11 emergency power, PE-12 emergency lighting, PE-13 fire protection, PE-14 environmental controls (temperature/humidity), and PE-15 water damage protection address environmental protection requirements for data centres. PE-16 delivery and removal controls media and equipment movement. PE-17 alternate work site addresses remote/alternate location security. PE-18 location of system components supports the directive's segmentation requirements for physically separating critical infrastructure zones.",
+      "gaps": "The BoG directive prescribes specific physical security requirements for IT data centres and control rooms in Ghanaian financial institutions, including secured zones with defined security perimeters and segmentation between processing zones. Requirements for CCTV coverage, biometric access controls for server rooms, and specific environmental standards for data centres are prescribed with operational detail. The directive's physical security requirements are aligned with the Ghanaian context including protection against environmental risks specific to the region. SP 800-53 PE family provides comprehensive coverage but does not address BoG-specific prescriptions for secured zone classifications or the specific physical security standards mandated for the Ghanaian financial sector."
+    },
+    {
+      "id": "CISD-XV",
+      "title": "Human Resource Management",
+      "controls": [
+        "PS-01", "PS-02", "PS-03", "PS-04", "PS-05", "PS-06",
+        "PS-07", "PS-08", "PS-09",
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-06",
+        "PM-12", "PM-13"
+      ],
+      "coverage_pct": 83,
+      "rationale": "PS-01 personnel security policy establishes the HR security framework. PS-02 position risk designation maps to the directive's sensitive positions classification. PS-03 personnel screening addresses background checks and vetting during hiring, directly mapping to the directive's hiring requirements. PS-04 personnel termination and PS-05 personnel transfer cover access revocation and security procedures upon termination or role change. PS-06 access agreements and PS-07 external personnel security extend personnel controls to contractors and third parties. PS-08 personnel sanctions addresses enforcement actions for security policy violations. PS-09 position descriptions (new in Rev 5) defines security responsibilities for each role. AT-01 training policy and AT-02 awareness training cover ongoing security awareness. AT-03 role-based training provides specialised training for personnel in sensitive positions. AT-04 training records tracks compliance. AT-06 training feedback (new in Rev 5) measures training effectiveness. PM-12 insider threat program addresses insider risk management. PM-13 security and privacy workforce ensures competency standards.",
+      "gaps": "The BoG directive specifies HR security requirements including background checks aligned with Ghanaian employment law and banking regulations. Requirements for vetting of personnel in sensitive positions (system administrators, DBAs, security staff) go to operational detail including police clearance certificates and reference checks specific to Ghana. Termination procedures must include immediate revocation of all access rights with BoG-prescribed timelines. The Enhanced Competency Framework (Annex B / Part XIX) defines specific qualification and certification requirements for cybersecurity personnel in Ghanaian financial institutions. SP 800-53 PS family covers personnel security comprehensively but does not address the Ghana-specific employment law requirements, the BoG-mandated competency framework, or the specific vetting standards for the Ghanaian financial sector."
+    },
+    {
+      "id": "CISD-XVI",
+      "title": "Contractual Aspects",
+      "controls": [
+        "SA-04", "SA-09", "SA-22",
+        "SR-01", "SR-02", "SR-03", "SR-05", "SR-06",
+        "PM-30", "PM-31", "PM-32",
+        "PS-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-04 acquisition process integrates security requirements into vendor contracts. SA-09 external system services addresses ongoing management of outsourced services including SLA monitoring. SA-22 unsupported system components (new in Rev 5) addresses contractual requirements for vendor support and end-of-life management. SR-01 supply chain risk management policy, SR-02 supply chain risk assessment, SR-03 supply chain controls and processes, SR-05 acquisition strategies, and SR-06 supplier assessments provide comprehensive third-party risk management controls for the contractual lifecycle. PM-30 supply chain risk management strategy, PM-31 supply chain risk management plan, and PM-32 purposeful attack surface reduction (new in Rev 5) address strategic supplier governance. PS-07 external personnel security covers contractor and vendor personnel security requirements referenced in cyber security contracts.",
+      "gaps": "The BoG directive prescribes specific contractual requirements for cyber security contracts including mandatory security clauses, right-to-audit provisions, incident notification obligations from third parties, data protection requirements under Ghanaian law, and exit/transition management plans. Contracts must address liability for security breaches, indemnification, and compliance with the CISD itself. The requirement for BoG notification or approval of material outsourcing arrangements involving critical banking functions is a regulatory obligation. SP 800-53 provides strong supply chain risk management controls but does not address the Ghana-specific contractual requirements, the BoG approval process for material outsourcing, or the specific legal clauses required under Ghanaian banking regulations for cyber security contracts."
+    },
+    {
+      "id": "CISD-ISMS",
+      "title": "ISMS and ISO 27001 Certification",
+      "controls": [
+        "PM-01", "PM-02", "PM-03", "PM-09", "PM-10",
+        "PL-01", "PL-02", "PL-08",
+        "CA-01", "CA-02", "CA-05", "CA-06", "CA-07",
+        "RA-01", "RA-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-01 information security program plan, PM-02 senior information security officer, and PM-03 information security resources establish the organisational security programme that maps to ISMS requirements. PM-09 risk management strategy and PM-10 authorisation process provide the management framework. PL-01 planning policy, PL-02 system security and privacy plans, and PL-08 security and privacy architectures cover planning and documentation requirements aligned with ISMS. CA-01 assessment policy, CA-02 control assessments, CA-05 plan of action and milestones, CA-06 authorisation, and CA-07 continuous monitoring support the Plan-Do-Check-Act cycle of an ISMS. RA-01 risk assessment policy and RA-03 risk assessment address the risk-based approach central to ISO 27001.",
+      "gaps": "The BoG directive mandates that all regulated financial institutions establish an Information Security Management System (ISMS) and attain ISO 27001 certification. This is a formal certification requirement — institutions must undergo third-party audit by an accredited certification body and maintain active ISO 27001 certification. SP 800-53 is a control catalogue, not a management system standard, and achieving SP 800-53 compliance does not satisfy the ISO 27001 certification requirement. The PDCA (Plan-Do-Check-Act) continuous improvement model, management review requirements, documented information requirements, and the formal certification/surveillance audit cycle are ISO 27001-specific constructs that SP 800-53 does not replicate. This represents a significant structural gap."
+    },
+    {
+      "id": "CISD-BCM",
+      "title": "Business Continuity Management",
+      "controls": [
+        "CP-01", "CP-02", "CP-03", "CP-04", "CP-06", "CP-07",
+        "CP-08", "CP-09", "CP-10", "CP-11", "CP-12", "CP-13",
+        "SC-24", "SI-13", "SI-17",
+        "PM-08", "PM-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CP-01 contingency planning policy establishes the business continuity framework. CP-02 contingency plan and CP-03 contingency training provide planning and readiness. CP-04 contingency plan testing validates recovery capabilities through exercises. CP-06 alternate storage site, CP-07 alternate processing site, and CP-08 telecommunications services address infrastructure redundancy. CP-09 system backup and CP-10 system recovery cover backup and recovery operations. CP-11 alternate communications and CP-12 information system recovery and reconstitution (new in Rev 5) address advanced recovery scenarios. CP-13 alternative security mechanisms (new in Rev 5) provides fallback controls during disruption. SC-24 fail in known state (new in Rev 5) ensures systems preserve a secure state during failures, critical for financial transaction integrity. SI-13 predictive maintenance (new in Rev 5) enables proactive failure prevention. SI-17 fail-safe procedures (new in Rev 5) provides additional failure handling. PM-08 critical infrastructure plan and PM-11 mission and business process definition link resilience to business impact.",
+      "gaps": "The BoG directive requires comprehensive business continuity management including business impact analysis (BIA) with specific RTO/RPO targets for critical banking services (core banking, payments, treasury). Crisis management requirements include crisis communication plans and coordination with the Bank of Ghana during sector-wide disruptions. Resilience testing must include full disaster recovery exercises with documented results. The requirement for institutions to contribute to the financial sector's collective resilience through FICSOC coordination is BoG-specific. SP 800-53 CP family provides strong coverage but does not address the Ghana-specific requirements for coordination with the Bank of Ghana during financial sector disruptions or the specific BIA parameters mandated for critical banking services in the Ghanaian context."
+    },
+    {
+      "id": "CISD-COMP",
+      "title": "Compliance, Reporting and Regulatory Obligations",
+      "controls": [
+        "CA-01", "CA-02", "CA-03", "CA-05", "CA-06", "CA-07",
+        "PM-04", "PM-06", "PM-10",
+        "PL-01", "PL-02", "PL-04",
+        "AU-01", "AU-11", "AU-16",
+        "IR-06"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CA-01 assessment, authorisation, and monitoring policy, CA-02 control assessments, and CA-07 continuous monitoring establish the compliance assurance framework. CA-03 information exchange and CA-05 plan of action and milestones address compliance tracking and information sharing with regulators. CA-06 authorisation and PM-10 authorisation process provide formal approval mechanisms. PM-04 plan of action and milestones process and PM-06 measures of performance support compliance programme governance. PL-01 planning policy, PL-02 system security and privacy plans, and PL-04 rules of behaviour establish planning foundations. AU-01 audit and accountability policy, AU-11 audit record retention, and AU-16 cross-organisational audit logging support evidence preservation for regulatory examination. IR-06 incident reporting addresses reporting mechanisms.",
+      "gaps": "The BoG directive establishes comprehensive regulatory compliance obligations including mandatory incident reporting to the Bank of Ghana within prescribed timeframes using the Return on Cyber Security Incidents form (Annex C / Part XX). The implementation schedule (Annex B / Part XVIII) defines specific compliance timelines of 6 to 36 months for implementing Parts I through XVI, with the Bank of Ghana monitoring adherence. Regular compliance self-assessments and regulatory examinations by the Bank of Ghana's Banking Supervision Department are mandated. Compliance with ancillary Ghanaian legislation including the Data Protection Act 2012 (Act 843), Electronic Transactions Act 2008 (Act 772), Payment Systems and Services Act 2019 (Act 987), and the Cybersecurity Act 2020 (Act 1038) is required. SP 800-53 provides assessment and monitoring controls but cannot replicate the BoG's jurisdictional regulatory authority, enforcement mechanisms, prescribed reporting forms, compliance timelines, or integration with the broader Ghanaian legal framework."
+    },
+    {
+      "id": "CISD-SDLC",
+      "title": "System Acquisition, Development and Maintenance",
+      "controls": [
+        "SA-01", "SA-02", "SA-03", "SA-04", "SA-05", "SA-08",
+        "SA-09", "SA-10", "SA-11", "SA-15", "SA-16", "SA-17",
+        "SA-20", "SA-21", "CM-14",
+        "SI-10", "SI-11", "SI-15"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-01 system and services acquisition policy establishes the acquisition framework. SA-02 allocation of resources covers resource planning for secure development. SA-03 system development life cycle establishes the secure SDLC framework aligned with the directive's implicit ISO 27001 Annex A.14 requirements for system acquisition, development and maintenance. SA-04 acquisition process integrates security into procurement of banking systems. SA-05 system documentation ensures adequate documentation for financial systems. SA-08 security and privacy engineering principles provides security-by-design, critical for banking application development. SA-10 developer configuration management and SA-11 developer testing and evaluation address code security testing and secure coding practices. SA-15 development process and standards and SA-16 developer-provided training ensure development rigour for banking platforms. SA-17 developer security and privacy architecture and design covers threat modelling for financial systems. SA-20 customized development of critical components (new in Rev 5) addresses bespoke development for core banking systems. SA-21 developer screening (new in Rev 5) adds vetting for development personnel handling sensitive financial systems. CM-14 signed components (new in Rev 5) ensures software integrity through cryptographic verification of banking application components. SI-10 information input validation, SI-11 error handling, and SI-15 information output filtering address application security fundamentals for transaction processing systems.",
+      "gaps": "The BoG directive, being aligned with ISO 27001, requires secure system development practices for banking applications including secure coding standards, code review processes, and security testing before production deployment. Requirements for change management procedures specific to core banking systems, payment platforms, and customer-facing applications go to operational detail including BoG notification requirements for material system changes. Testing requirements include functional testing, penetration testing, and user acceptance testing in isolated environments before production rollout. SP 800-53 SA family provides comprehensive coverage of the acquisition and development lifecycle but does not address the BoG-specific requirements for testing and approval of systems that process financial transactions or the Ghana-specific requirements for integration with national payment infrastructure (GhIPSS, e-zwich)."
+    }
+  ],
+  "summary": {
+    "total_clauses": 20,
+    "average_coverage": 74.9,
+    "full_count": 5,
+    "substantial_count": 11,
+    "partial_count": 4,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

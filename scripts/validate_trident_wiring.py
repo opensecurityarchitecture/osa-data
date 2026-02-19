@@ -35,7 +35,7 @@ NODE_TYPE_MAP = {
     'weakness_class':     'weakness',
     'threat_actor':       'actor',
     'process_capability': 'process_capability',
-    'technology_class':   'technology_class',
+    'technology_capability': 'technology_capability',
     'adversary_tier':     'adversary_tier',
     'human_factor':       'human_factor',
     'data_type':          'data_type',
@@ -142,24 +142,58 @@ def main():
         warnings.append(f'EDGE_TYPE_MAP stale entries: {", ".join(sorted(stale_edges))}')
 
     # ═══════════════════════════════════════════════════════════
-    # ERD checks (trident-model.js uses metadata names directly)
+    # ERD checks — data-driven contract validation
     # ═══════════════════════════════════════════════════════════
+    # ERD is now fully data-driven: model.astro derives all config from data
+    # at build time and injects it as window.__tridentModel. The JS reads from
+    # modelData, not hardcoded constants. Build-time validation in model.astro
+    # catches any mismatches. Here we verify the contract is intact.
 
-    for nt in node_types:
-        checks += 1
-        if not check_key_in_js(model_js, nt):
-            errors.append(f'ERD NODE_COLOURS missing: {nt}')
+    # Check ERD JS reads from modelData (data-driven, no hardcoded entity types)
+    checks += 1
+    if 'modelData.nodeConfig' not in model_js and 'nc[' not in model_js:
+        errors.append('ERD JS does not read from modelData.nodeConfig (data-driven contract broken)')
 
+    checks += 1
+    if 'modelData.edgeConfig' not in model_js and 'ec[' not in model_js:
+        errors.append('ERD JS does not read from modelData.edgeConfig (data-driven contract broken)')
+
+    checks += 1
+    if 'modelData.pathConfig' not in model_js and 'paths[' not in model_js:
+        errors.append('ERD JS does not read from modelData.pathConfig (data-driven contract broken)')
+
+    # Check model.astro has build-time validation (throws on entity type mismatch)
+    checks += 1
+    if 'validationErrors' not in model_astro or 'build-time validation failed' not in model_astro:
+        errors.append('ERD model.astro missing build-time validation')
+
+    # Check model.astro loads graph-edges.json for edge derivation
+    checks += 1
+    if 'graph-edges.json' not in model_astro:
+        errors.append('ERD model.astro not loading graph-edges.json for edge derivation')
+
+    # Check model.astro generates legend swatches from data (entity-swatch class)
+    checks += 1
+    if 'entity-swatch' not in model_astro:
+        errors.append('ERD model.astro missing data-driven legend swatches')
+
+    # Check model.astro generates node colours from metadata node_types
+    checks += 1
+    if 'metadata.graph_summary.node_types' not in model_astro:
+        errors.append('ERD model.astro not reading metadata.graph_summary.node_types')
+
+    # Check edge config covers all metadata edge types (via graph-edges.json)
+    graph_edges = load_json(os.path.join(DATA, 'graph-edges.json'))
     for et in edge_types:
         checks += 1
-        if not check_key_in_js(model_js, et):
-            errors.append(f'ERD EDGE_MAP missing: {et}')
+        if et not in graph_edges:
+            errors.append(f'graph-edges.json missing edge type: {et}')
 
-    # ERD model.astro legend — entity swatches
+    # Check node colour map in model.astro covers all metadata node types
     for nt in node_types:
         checks += 1
-        if f'data-node="{nt}"' not in model_astro:
-            errors.append(f'ERD legend swatch missing: {nt}')
+        if nt not in model_astro:
+            errors.append(f'ERD model.astro does not reference node type: {nt} (missing from NODE_COLOUR_MAP?)')
 
     # ═══════════════════════════════════════════════════════════
     # Explorer checks — node types (uses mapped names)

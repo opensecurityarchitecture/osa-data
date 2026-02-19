@@ -1,0 +1,203 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "qatar_nia",
+  "framework_name": "Qatar NIA v2.0",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of the Qatar National Information Assurance (NIA) Policy v2.0, issued by Qatar's National Cyber Security Agency (NCSA). The NIA is mandatory for all Qatar government entities, semi-government organisations, and critical national infrastructure operators. The framework is modelled on ISO 27001/27002 and NIST 800-53 with a 3-tier classification system (Basic, Advanced, Critical). Qatar-specific requirements include NCSA compliance reporting obligations, Qatar national classification scheme alignment, data sovereignty and localisation mandates, and mandatory NCSA incident notification timelines. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with NCSA-approved assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "GV",
+      "title": "Information Security Governance",
+      "controls": [
+        "PL-01", "PL-02", "PL-04", "PL-09", "PL-10", "PL-11",
+        "PM-01", "PM-02", "PM-03", "PM-05", "PM-06", "PM-07", "PM-09", "PM-10", "PM-13", "PM-14", "PM-15", "PM-28", "PM-30", "PM-31", "PM-32",
+        "CA-01", "CA-02", "CA-05", "CA-06", "CA-07",
+        "PS-09",
+        "AT-01",
+        "RA-01",
+        "SA-01", "SA-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PL-01 security planning policy and PL-02 system security plan establish the policy framework and strategic planning. PM-01 information security program plan provides the overarching security programme structure. PM-02 senior information security officer addresses the CISO role requirement. PM-03 information security resources covers resource allocation for the security function. PM-05/PM-06 system inventory and measures of performance support governance oversight. PM-07 enterprise architecture integrates security into organisational architecture. PM-09 risk management strategy provides the strategic risk governance layer. PM-10 authorization process and PM-13 security workforce address organisational structure and staffing. PM-14 testing/training/monitoring programme and PM-15 security groups support compliance management and external coordination. PM-28 risk framing, PM-30 supply chain risk management strategy, PM-31 continuous monitoring strategy, and PM-32 purposing provide strategic governance controls. PL-09 (Rev 5) central management enables unified governance across the programme. PL-10 (Rev 5) baseline selection and PL-11 (Rev 5) baseline tailoring support the NIA tiered classification approach. CA-01/CA-02/CA-05/CA-06/CA-07 cover assessment, remediation tracking, authorisation, and continuous monitoring. PS-09 (Rev 5) position descriptions formalises security responsibilities in role definitions, supporting CISO and security committee requirements. AT-01, RA-01, and SA-01/SA-02 establish domain-specific governance policies and resource allocation.",
+      "gaps": "Qatar NIA mandates a specific NCSA compliance reporting structure with periodic reports to the National Cyber Security Agency. The policy requires alignment with Qatar's national information classification scheme (Unclassified, Restricted, Confidential, Secret, Top Secret) which differs from FIPS 199 Low/Moderate/High categorization. NIA governance requirements include mandatory NCSA-approved security committee composition, annual governance maturity assessments reported to NCSA, and alignment with Qatar National Vision 2030 cybersecurity objectives. SP 800-53 provides strong governance controls but the Qatar-specific regulatory reporting obligations and national classification alignment have no direct equivalent."
+    },
+    {
+      "id": "RM",
+      "title": "Risk Management",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-05", "RA-07", "RA-09", "RA-10",
+        "PM-04", "PM-09", "PM-28",
+        "CA-02", "CA-05", "CA-07",
+        "PL-02", "PL-10"
+      ],
+      "coverage_pct": 85,
+      "rationale": "RA-01 risk assessment policy establishes the risk management framework. RA-02 security categorization supports classification-based risk assessment. RA-03 risk assessment provides comprehensive threat, vulnerability, and impact analysis. RA-05 vulnerability monitoring and scanning identifies exploitable weaknesses. RA-07 (Rev 5) risk response adds explicit risk treatment actions for identified risks, directly supporting NIA risk treatment plan requirements. RA-09 (Rev 5) criticality analysis identifies critical assets for risk prioritisation, aligning with NIA asset-based risk methodology. RA-10 (Rev 5) threat hunting provides proactive threat identification capability. PM-04 plan of action and milestones tracks risk remediation. PM-09 risk management strategy and PM-28 risk framing provide the strategic risk governance layer. CA-02 security assessments, CA-05 remediation tracking, and CA-07 continuous monitoring enable ongoing risk review. PL-02 system security plan documents risk context and PL-10 (Rev 5) baseline selection supports risk-based control selection aligned with the NIA 3-tier model.",
+      "gaps": "Qatar NIA requires risk assessments to follow NCSA-endorsed methodologies and mandates that risk acceptance decisions above defined thresholds are escalated to NCSA for approval. The NIA risk monitoring requirements include quarterly risk posture reporting to organisational leadership and annual risk assessment submissions to NCSA. SP 800-53 RA family provides comprehensive risk management but Qatar-specific NCSA risk reporting obligations and national risk acceptance escalation requirements are not addressed."
+    },
+    {
+      "id": "AM",
+      "title": "Asset Management",
+      "controls": [
+        "CM-08", "CM-12", "CM-13",
+        "PM-05",
+        "RA-02",
+        "MP-01", "MP-02", "MP-03", "MP-04", "MP-05", "MP-06", "MP-07", "MP-08",
+        "PE-16",
+        "SR-12",
+        "AC-16",
+        "SC-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-08 system component inventory provides comprehensive hardware and software asset tracking with ownership assignment. CM-12 (Rev 5) information location identifies where sensitive data resides across infrastructure, directly supporting NIA requirements to map data assets to infrastructure. CM-13 (Rev 5) data action mapping documents data processing flows, supporting asset classification by tracking how data moves through systems. PM-05 system inventory maintains the organisational system register. RA-02 security categorization supports the NIA asset classification scheme by assigning impact levels. MP-01 through MP-08 comprehensively cover media management including access control, marking, storage, transport, sanitization, and disposal across the full media lifecycle. MP-07 media use restricts use of removable media. MP-08 (Rev 5) media downgrading provides formal procedures for reclassifying media. PE-16 delivery and removal controls asset movement. SR-12 component disposal addresses end-of-life asset management. AC-16 security and privacy attributes supports automated asset labelling. SC-04 information in shared system resources prevents data leakage during asset reallocation.",
+      "gaps": "Qatar NIA requires asset classification aligned with the Qatar national classification scheme and mandates that all assets processing government data are registered with NCSA. The NIA asset disposal requirements include NCSA-approved sanitization standards and formal certification of destruction for assets handling classified information. Data sovereignty requirements mandate that assets storing or processing Qatar government data remain within Qatar's jurisdiction unless explicitly authorised by NCSA. SP 800-53 covers asset management comprehensively but Qatar-specific national classification alignment, NCSA asset registration, and data sovereignty mandates are not addressed."
+    },
+    {
+      "id": "HR",
+      "title": "Human Resources Security",
+      "controls": [
+        "PS-01", "PS-02", "PS-03", "PS-04", "PS-05", "PS-06", "PS-07", "PS-08", "PS-09",
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-06",
+        "PL-04",
+        "PE-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PS-01 personnel security policy establishes the HR security framework. PS-02 position risk designation categorises roles by risk level. PS-03 personnel screening covers pre-employment background checks and vetting. PS-04 personnel termination addresses access revocation, equipment return, and exit procedures. PS-05 personnel transfer handles role changes and access adjustment. PS-06 access agreements covers confidentiality and non-disclosure obligations. PS-07 external personnel security establishes requirements for contractors and third-party personnel. PS-08 personnel sanctions provides the disciplinary process framework. PS-09 (Rev 5) position descriptions formally defines security responsibilities in role descriptions, directly supporting NIA requirements for documented security roles and responsibilities. AT-01 training policy, AT-02 security awareness, AT-03 role-based training, and AT-04 training records provide comprehensive security awareness and education. AT-06 (Rev 5) training feedback measures training effectiveness, supporting NIA requirements for awareness programme evaluation. PL-04 rules of behaviour defines acceptable use. PE-02 physical access authorizations manages personnel physical access approvals.",
+      "gaps": "Qatar NIA mandates security clearance requirements aligned with Qatar's national security vetting process for personnel handling classified government information. The NIA requires background checks to include verification against Qatar Ministry of Interior databases. Termination procedures must include NCSA notification for personnel in critical security roles. SP 800-53 PS family provides strong HR security controls but Qatar-specific national vetting processes and NCSA notification obligations are not addressed."
+    },
+    {
+      "id": "PS",
+      "title": "Physical Security",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-04", "PE-05", "PE-06", "PE-07", "PE-08",
+        "PE-09", "PE-10", "PE-11", "PE-12", "PE-13", "PE-14", "PE-15",
+        "PE-16", "PE-17", "PE-18", "PE-19", "PE-20", "PE-21", "PE-22", "PE-23"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PE-01 physical and environmental protection policy establishes the physical security framework. PE-02 physical access authorizations manages approval of personnel. PE-03 physical access control provides electronic access control systems, biometric readers, and multi-factor physical authentication. PE-04 access control for transmission medium protects cabling infrastructure. PE-05 access control for output devices secures printers and displays. PE-06 monitoring physical access covers CCTV, surveillance, and intrusion detection systems. PE-07 visitor control manages visitor registration and escorting. PE-08 visitor access records provides logging of all visitors. PE-09 power equipment and cabling covers redundant power infrastructure. PE-10 emergency shutoff provides emergency power disconnection. PE-11 emergency power addresses UPS and generator systems. PE-12 emergency lighting ensures illumination during power failures. PE-13 fire protection covers detection, suppression, and fire safety systems. PE-14 environmental controls (temperature and humidity) addresses climate control for equipment rooms. PE-15 water damage protection covers leak detection and prevention. PE-16 delivery and loading areas controls equipment movement. PE-17 alternate work site addresses remote working physical security. PE-18 location of components reduces physical risk through strategic placement. PE-19 information leakage addresses TEMPEST and emanation security. PE-20 asset monitoring and tracking provides automated location tracking for equipment. PE-21 (Rev 5) electromagnetic pulse protection hardens infrastructure against EMP events. PE-22 (Rev 5) component marking aids physical asset identification with tamper-evident labels. PE-23 (Rev 5) facility location provides guidance on secure facility siting considering environmental and security factors.",
+      "gaps": "Qatar NIA physical security requirements include specific provisions for extreme climate resilience (cooling systems rated for 50°C+ ambient temperatures, sandstorm protection for external equipment). The NIA mandates physical security standards aligned with Qatar Civil Defence requirements and coordination with Qatar's Ministry of Interior for facility security classifications. Delivery and loading area requirements include customs coordination protocols specific to Qatar's import regulations for IT equipment. SP 800-53 PE family provides excellent physical security coverage but Qatar-specific environmental resilience and national regulatory coordination requirements are not addressed."
+    },
+    {
+      "id": "CS",
+      "title": "Communications Security",
+      "controls": [
+        "SC-01", "SC-02", "SC-03", "SC-04", "SC-05", "SC-07", "SC-08",
+        "SC-10", "SC-11", "SC-12", "SC-13", "SC-15", "SC-16", "SC-17",
+        "SC-20", "SC-21", "SC-22", "SC-23", "SC-26", "SC-28",
+        "SC-32", "SC-36", "SC-37", "SC-38", "SC-39", "SC-40", "SC-44", "SC-46", "SC-47",
+        "AC-04", "AC-17", "AC-18", "AC-20",
+        "CA-03", "CA-09",
+        "SI-08"
+      ],
+      "coverage_pct": 93,
+      "rationale": "SC-07 boundary protection is the core control for network security management and network segregation, covering firewalls, DMZs, and traffic filtering. SC-32 information system partitioning supports security zone separation. AC-04 information flow enforcement controls data flows between security domains. SC-08 transmission confidentiality and integrity directly addresses encryption and integrity for information transfer. SC-12 cryptographic key management and SC-13 cryptographic protection cover the cryptographic infrastructure for secure communications. SC-46 (Rev 5) cross-domain policy enforcement strengthens network segregation with explicit policy enforcement at domain boundaries. AC-17 remote access and AC-18 wireless access manage external and wireless connectivity. AC-20 use of external systems governs connections from untrusted networks. CA-03 system interconnection agreements and CA-09 (Rev 5) internal system connections provide governance for all network interconnections. SI-08 spam protection addresses electronic messaging security. SC-40 (Rev 5) wireless link protection provides specific protections for wireless communication links. SC-44 (Rev 5) detonation chambers supports sandboxing for malicious content analysis in network traffic. SC-47 (Rev 5) alternate communications paths provides resilient communication channels. SC-26 (Rev 5) confidentiality of information at rest in transit enhances data protection. Additional SC controls (SC-01 through SC-39) provide comprehensive communications protection including session management, trusted paths, DNS security, resource isolation, and cryptographic operations security.",
+      "gaps": "Qatar NIA requires that all interconnection agreements with external parties are approved by NCSA and that international data transfers comply with Qatar data sovereignty requirements. Electronic messaging security requirements include NCSA-endorsed encryption standards for government email systems. Network segregation requirements mandate air-gapping for systems processing Top Secret classified information under Qatar's national classification scheme. SP 800-53 SC family provides excellent communications security coverage and is the strongest area of alignment."
+    },
+    {
+      "id": "OS",
+      "title": "Operations Security",
+      "controls": [
+        "CM-01", "CM-02", "CM-03", "CM-04", "CM-05", "CM-06", "CM-07", "CM-08", "CM-09", "CM-10", "CM-11", "CM-12", "CM-14",
+        "CP-09", "CP-10",
+        "AU-01", "AU-02", "AU-03", "AU-04", "AU-05", "AU-06", "AU-07", "AU-08", "AU-09", "AU-10", "AU-11", "AU-12", "AU-13", "AU-14", "AU-16",
+        "SI-02", "SI-03", "SI-04", "SI-05", "SI-07", "SI-16",
+        "RA-05", "RA-07",
+        "CA-02", "CA-07", "CA-08"
+      ],
+      "coverage_pct": 91,
+      "rationale": "CM-01 configuration management policy and CM-02 baseline configuration establish operational procedures and documented configurations. CM-03 configuration change control, CM-04 impact analyses, and CM-05 access restrictions for change provide comprehensive change management. CM-06 configuration settings and CM-07 least functionality address system hardening and attack surface reduction. CM-08 system component inventory supports capacity management by tracking all components. CM-09/CM-10/CM-11 cover configuration management plans, software usage restrictions, and user-installed software. CM-12 (Rev 5) information location and CM-14 (Rev 5) signed components support separation of environments and software integrity verification. CP-09 system backup and CP-10 system recovery cover backup and restoration requirements. AU-01 through AU-16 provide comprehensive logging and monitoring including event logging (AU-02), content of audit records (AU-03), audit storage capacity (AU-04), response to processing failures (AU-05), audit review and analysis (AU-06), report generation (AU-07), time stamps (AU-08), protection of audit information (AU-09), non-repudiation (AU-10), retention (AU-11), generation (AU-12), monitoring for information disclosure (AU-13), session audit (AU-14), and cross-organisational auditing (AU-16). SI-02 flaw remediation addresses patching and technical vulnerability management. SI-03 malicious code protection covers anti-malware requirements. SI-04 system monitoring provides intrusion detection and SOC operations. SI-05 security alerts addresses threat intelligence feeds. SI-07 software integrity verification detects unauthorised modifications. SI-16 (Rev 5) memory protection (DEP/ASLR) hardens against exploit-based attacks. RA-05 vulnerability scanning and RA-07 (Rev 5) risk response support technical vulnerability management with explicit treatment actions. CA-02 security assessments, CA-07 continuous monitoring, and CA-08 penetration testing support IS audit considerations.",
+      "gaps": "Qatar NIA operations security requirements include NCSA-mandated minimum logging retention periods (typically 12 months for Basic, 24 months for Advanced, 36 months for Critical tier systems). The NIA requires that vulnerability management timelines align with NCSA-published patch windows and that critical vulnerabilities on internet-facing systems are remediated within 48 hours of NCSA advisory publication. Software installation controls must enforce NCSA-approved application whitelisting for Critical tier systems. SP 800-53 provides excellent operations security coverage but Qatar-specific NCSA patch timelines, retention mandates, and tier-based requirements are not addressed."
+    },
+    {
+      "id": "AC",
+      "title": "Access Control",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-04", "AC-05", "AC-06", "AC-07",
+        "AC-08", "AC-09", "AC-10", "AC-11", "AC-12", "AC-13", "AC-14",
+        "AC-16", "AC-17", "AC-18", "AC-19", "AC-20", "AC-21", "AC-22", "AC-24", "AC-25",
+        "IA-01", "IA-02", "IA-03", "IA-04", "IA-05", "IA-06", "IA-07", "IA-08", "IA-09", "IA-10", "IA-11", "IA-12"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-01 access control policy establishes the access control framework. AC-02 account management covers the full user access lifecycle including registration, provisioning, review, and deregistration. AC-03 access enforcement implements RBAC/ABAC policies. AC-04 information flow enforcement controls data flows. AC-05 separation of duties addresses role segregation. AC-06 least privilege restricts access to minimum necessary. AC-07 unsuccessful logon attempts provides account lockout mechanisms. AC-08 system use notification displays access warnings. AC-09 previous logon notification informs users of last access. AC-10 concurrent session control limits simultaneous sessions. AC-11 session lock and AC-12 session termination manage inactive sessions. AC-13 supervision and review of access provides periodic access reviews. AC-14 permitted actions without identification governs unauthenticated access. AC-16 security attributes supports attribute-based access decisions. AC-17 remote access, AC-18 wireless access, and AC-19 mobile device access control external connectivity. AC-20 use of external systems governs third-party system access. AC-21 information sharing, AC-22 publicly accessible content, AC-24 access control decisions, and AC-25 reference monitor support fine-grained access governance. IA-01 through IA-12 provide comprehensive identification and authentication including multi-factor authentication (IA-02), device identification (IA-03), identifier management (IA-04), authenticator management (IA-05), authentication feedback (IA-06), cryptographic module authentication (IA-07), external user identification (IA-08), service identification (IA-09), adaptive identification (IA-10), re-authentication (IA-11), and identity proofing (IA-12). IA-12 (Rev 5) identity proofing specifically supports NIA requirements for rigorous user registration and verification processes.",
+      "gaps": "Qatar NIA requires access control policies to enforce Qatar national classification scheme access restrictions, where access to Confidential and above requires NCSA-approved security clearance verification. The NIA mandates integration with Qatar's national identity systems (QID/smart card) for government system authentication where applicable. Access to networks and network services must comply with NCSA-published network access standards. Privileged access management for Critical tier systems requires real-time session recording approved by NCSA. SP 800-53 AC and IA families provide excellent access control coverage but Qatar-specific national identity integration and NCSA clearance verification requirements are not addressed."
+    },
+    {
+      "id": "SD",
+      "title": "Systems Development and Maintenance",
+      "controls": [
+        "SA-01", "SA-02", "SA-03", "SA-04", "SA-05", "SA-08", "SA-09", "SA-10", "SA-11",
+        "SA-15", "SA-16", "SA-17", "SA-20", "SA-21", "SA-22",
+        "CM-02", "CM-03", "CM-04", "CM-05", "CM-14",
+        "SR-01", "SR-02", "SR-03", "SR-04", "SR-05", "SR-06",
+        "CA-02"
+      ],
+      "coverage_pct": 87,
+      "rationale": "SA-01 system and services acquisition policy establishes the development governance framework. SA-02 allocation of resources covers security investment in development. SA-03 system development lifecycle provides the SDLC framework including security integration at each phase. SA-04 acquisition process addresses security requirements in procurement and outsourced development contracts. SA-05 system documentation covers operational and maintenance documentation. SA-08 security engineering principles addresses secure-by-design methodology. SA-09 external system services governs outsourced development security requirements. SA-10 developer configuration management ensures build integrity and version control. SA-11 developer security testing and evaluation covers code review, static analysis, dynamic testing, and penetration testing. SA-15 development process and standards ensures secure coding practices. SA-16 developer-provided training addresses developer security competency. SA-17 developer security and privacy architecture covers secure design verification. SA-20 (Rev 5) customized development of critical components addresses bespoke development for high-assurance components. SA-21 (Rev 5) developer screening adds personnel vetting for development teams, supporting NIA requirements for trusted development personnel. SA-22 (Rev 5) unsupported system components addresses risks from end-of-life software, supporting NIA requirements for ongoing system maintenance. CM-02/CM-03/CM-04/CM-05 cover configuration baselines and change control for development environments. CM-14 (Rev 5) signed components verifies integrity of developed and deployed components. SR-01 through SR-06 cover supply chain risk management for outsourced development including vendor assessment and monitoring. CA-02 security assessments supports system acceptance testing.",
+      "gaps": "Qatar NIA requires that system development for government entities follows NCSA-published secure development guidelines and that systems processing classified information undergo NCSA-approved security evaluation before deployment. Outsourced development agreements must include data sovereignty clauses ensuring development activities for Qatar government systems do not expose source code or test data to foreign jurisdictions without NCSA approval. The NIA mandates that secure development environments for Critical tier systems are physically or logically isolated and subject to NCSA audit. SP 800-53 SA and SR families provide strong development security coverage but Qatar-specific NCSA evaluation requirements and data sovereignty clauses for development are not addressed."
+    },
+    {
+      "id": "IM",
+      "title": "Incident Management",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05", "IR-06", "IR-07", "IR-08", "IR-09",
+        "AU-06", "AU-07",
+        "SI-04", "SI-05",
+        "PM-14"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IR-01 incident response policy and IR-08 incident response plan establish the incident management framework. IR-02 incident response training covers staff preparedness and awareness of reporting procedures. IR-03 incident response testing validates procedures through tabletop exercises, functional tests, and simulations. IR-04 incident handling covers detection, analysis, containment, eradication, and recovery — the full incident lifecycle. IR-05 incident monitoring tracks security events and maintains incident metrics. IR-06 incident reporting addresses escalation and notification procedures. IR-07 incident response assistance provides support mechanisms. IR-09 (Rev 5) information spillage response adds specific handling for data breach and spillage incidents, directly supporting NIA requirements for classified information breach procedures. AU-06 audit review and AU-07 audit reduction support incident analysis through log correlation and forensic review. SI-04 system monitoring enables real-time incident detection. SI-05 security alerts provides threat intelligence for incident assessment. PM-14 testing, training, and monitoring programme ensures ongoing incident response readiness.",
+      "gaps": "Qatar NIA mandates specific NCSA incident notification timelines: Critical incidents must be reported to Q-CERT (Qatar Computer Emergency Response Team) within 2 hours of detection, High-severity incidents within 6 hours, and Medium-severity incidents within 24 hours. The NIA requires that incident classification follows the NCSA-published incident severity taxonomy. Evidence collection must comply with Qatar legal requirements for digital evidence admissibility. Post-incident reports for Critical and High-severity incidents must be submitted to NCSA within 30 days. Learning from incidents must be shared with Q-CERT threat intelligence sharing programme. SP 800-53 IR family provides strong incident management coverage but Qatar-specific NCSA notification timelines, Q-CERT reporting obligations, and Qatar digital evidence standards are not addressed."
+    },
+    {
+      "id": "BC",
+      "title": "Business Continuity",
+      "controls": [
+        "CP-01", "CP-02", "CP-03", "CP-04", "CP-05", "CP-06", "CP-07", "CP-08",
+        "CP-09", "CP-10", "CP-11", "CP-12", "CP-13",
+        "PM-08", "PM-11",
+        "SI-13"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-01 contingency planning policy establishes the BCM framework. CP-02 contingency plan provides comprehensive continuity plans addressing all critical business functions. CP-03 contingency training ensures staff readiness for continuity scenarios. CP-04 contingency plan testing covers testing and exercising through tabletop exercises, functional tests, and full-scale exercises. CP-05 contingency plan update supports review and maintenance of plans based on test results and organisational changes. CP-06 alternate storage site and CP-07 alternate processing site address offsite recovery facilities. CP-08 telecommunications services covers resilient communications infrastructure. CP-09 system backup and CP-10 system recovery provide backup and restoration capabilities. CP-11 alternate communications protocols supports failover for communication channels. CP-12 (Rev 5) safe mode provides graceful degradation capability for critical systems, supporting NIA requirements for essential service continuity. CP-13 (Rev 5) alternative security mechanisms enables continued operations when primary security controls fail. PM-08 critical infrastructure plan integrates BCM with national critical infrastructure protection. PM-11 mission and business process definition identifies critical processes for business impact analysis. SI-13 (Rev 5) predictive maintenance enables proactive failure prevention, supporting NIA requirements for proactive continuity management.",
+      "gaps": "Qatar NIA requires that business continuity plans for critical national infrastructure entities are aligned with Qatar's National Crisis Management Framework and coordinated with the Supreme Committee for Crisis Management. Business impact analysis must identify dependencies on Qatar national infrastructure (power, telecommunications, water). Continuity plans must ensure that Recovery Time Objectives for Critical tier systems do not exceed NCSA-mandated maximum outage windows. Continuity testing must include scenario exercises coordinated with Q-CERT for cyber-incident-triggered business disruption. Alternate processing sites for government systems must be located within Qatar unless explicitly approved by NCSA. SP 800-53 CP family provides strong business continuity coverage but Qatar-specific national crisis management integration, NCSA-mandated recovery objectives, and data sovereignty constraints on alternate sites are not addressed."
+    }
+  ],
+  "summary": {
+    "total_clauses": 11,
+    "average_coverage": 86.5,
+    "full_count": 8,
+    "substantial_count": 3,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

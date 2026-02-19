@@ -26,8 +26,8 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 
 - **48 security patterns** (SP-001 to SP-047) + SP-000 reference/style guide + SP-999 test
 - **315 NIST 800-53 Rev 5 controls** across 20 families
-- **36 compliance frameworks** (1,840 clauses) with cross-references
-- `data/attack/metadata.json` — TRIDENT provenance and graph summary
+- **53 compliance frameworks** with cross-references
+- `data/attack/metadata.json` — TRIDENT provenance and graph summary (17,332 edges, 29 edge types, 19 entity types)
 
 > **Note:** TRIDENT data catalogs, schemas, and enrichment scripts have moved to [osa-trident](https://github.com/opensecurityarchitecture/osa-trident). Only `metadata.json` and `attack-metadata.schema.json` remain here.
 

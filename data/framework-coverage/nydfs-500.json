@@ -1,0 +1,262 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "nydfs_500",
+  "framework_name": "NYDFS 500",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "500.2",
+      "title": "Cybersecurity Program",
+      "controls": [
+        "PM-01", "PM-02", "PM-03", "PM-04", "PM-06", "PM-09", "PM-11", "PM-14",
+        "PL-01", "PL-02", "PL-07", "PL-08",
+        "CA-02", "CA-05", "CA-07",
+        "RA-01", "RA-03",
+        "SI-04", "SC-07",
+        "IR-04", "CP-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PM-01 information security program; PM-02 senior security officer; PM-03 security/privacy resources; PM-04 plan of action and milestones; PM-06 security measures of performance; PM-09 risk management strategy; PM-11 mission/business process definition; PM-14 testing, training, and monitoring. PL-01/PL-02 establish planning policy and system security plans. CA-02 control assessments and CA-07 continuous monitoring align with NYDFS requirements for ongoing program evaluation. PL-07 security concept of operations and PL-08 security architecture support program design. RA-01/RA-03 provide risk assessment policy and risk mitigation. SI-04 system monitoring, SC-07 boundary protection, IR-04 incident handling, and CP-02 contingency planning address the core cybersecurity functions (identify, protect, detect, respond, recover).",
+      "gaps": "NYDFS 500.2 requires the cybersecurity program to be based on the entity's specific risk assessment and tailored to its business operations. SP 800-53 provides comprehensive program management controls but does not prescribe the NYDFS-specific program structure or annual certification requirement. Class A companies must conduct independent audits of their cybersecurity program (500.2(c)), which goes beyond CA-02 control assessments."
+    },
+    {
+      "id": "500.3",
+      "title": "Cybersecurity Policy",
+      "controls": [
+        "PL-01", "PL-02", "PL-03",
+        "AC-01", "AT-01", "AU-01", "CA-01", "CM-01", "CP-01", "IA-01", "IR-01",
+        "MA-01", "MP-01", "PE-01", "PM-01", "PS-01", "RA-01", "SA-01", "SC-01", "SI-01", "SR-01",
+        "PM-05", "PM-09"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PL-01 planning policy provides overarching security policy framework; PL-02 system security and privacy plans; PL-03 rules of behavior. The 20 family-level policy controls (AC-01 through SR-01) directly map to the NYDFS requirement for written policies addressing information security, data governance, asset inventory management, access controls, business continuity, systems and network security, customer data privacy, vendor management, risk assessment, and incident response. PM-05 system inventory and PM-09 risk management strategy support policy-driven governance.",
+      "gaps": "NYDFS 500.3 requires policies to be approved annually by a senior officer or the senior governing body. SP 800-53 requires periodic review but does not mandate annual board-level approval. The NYDFS lists specific policy topic areas that must be addressed; while SP 800-53 family policies collectively cover these areas, the regulatory requirement for a unified or explicitly enumerated set of cybersecurity policies is NYDFS-specific."
+    },
+    {
+      "id": "500.4",
+      "title": "Cybersecurity Governance",
+      "controls": [
+        "PM-02", "PM-01", "PM-03", "PM-13",
+        "PL-01", "PL-04",
+        "RA-01",
+        "PM-29"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PM-02 senior information security officer directly aligns with the CISO requirement; PM-01 information security program establishes governance. PM-03 information security resources addresses adequate staffing. PM-13 security and privacy workforce addresses competency of security personnel. PM-29 risk management program leadership provides executive oversight. PL-01 planning policy and PL-04 rules of behavior support governance structures. RA-01 risk assessment policy supports risk-based governance.",
+      "gaps": "Significant NYDFS-specific gaps: (1) the CISO must report in writing at least annually to the board of directors on the cybersecurity program and material cybersecurity risks — PM-02 establishes the role but does not mandate board-level written annual reports; (2) the board or senior governing body must exercise oversight of cybersecurity risk management and have sufficient understanding of cybersecurity matters; (3) the CISO must timely report material cybersecurity issues to the board; (4) Class A companies must have an independent audit of their cybersecurity program. These board-level governance mandates are regulatory-specific."
+    },
+    {
+      "id": "500.5",
+      "title": "Vulnerability Management",
+      "controls": [
+        "RA-05", "RA-07",
+        "CA-08",
+        "SI-02", "SI-05",
+        "CM-04", "CM-06",
+        "SA-11", "SA-15"
+      ],
+      "coverage_pct": 90,
+      "rationale": "RA-05 vulnerability monitoring and scanning directly addresses vulnerability assessments and automated scanning requirements. RA-07 (new in Rev 5) risk response provides a framework for prioritizing vulnerability remediation. CA-08 penetration testing maps directly to the annual penetration testing requirement. SI-02 flaw remediation addresses timely patching. SI-05 security alerts and advisories supports threat intelligence. CM-04 impact analyses and CM-06 configuration settings support vulnerability management processes. SA-11 developer testing and evaluation and SA-15 development process standards address secure development lifecycle vulnerability management.",
+      "gaps": "Minor gaps: NYDFS 500.5(a)(1) requires annual penetration testing from both inside and outside the information systems' boundaries — CA-08 covers penetration testing broadly but the specific internal/external requirement is NYDFS-prescribed. NYDFS 500.5(a)(2) requires automated vulnerability scans and manual reviews of systems not covered by scans, which is more prescriptive than RA-05 general monitoring."
+    },
+    {
+      "id": "500.6",
+      "title": "Audit Trail",
+      "controls": [
+        "AU-02", "AU-03", "AU-04", "AU-05", "AU-06", "AU-07", "AU-08", "AU-09", "AU-11", "AU-12",
+        "SI-04",
+        "AC-06", "AC-17"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AU-02 event logging defines auditable events; AU-03 content of audit records specifies required information; AU-04 audit log storage capacity; AU-05 response to audit logging process failures; AU-06 audit review, analysis, and reporting; AU-07 audit record reduction and report generation; AU-08 time stamps; AU-09 protection of audit information; AU-11 audit record retention (maps to the five-year retention requirement); AU-12 audit record generation. SI-04 system monitoring supports detection of cybersecurity events. AC-06 least privilege and AC-17 remote access logging support the audit trail for access activities. The AU family provides excellent coverage of NYDFS audit trail requirements.",
+      "gaps": "Minimal gap. NYDFS 500.6 requires audit trails designed to detect and respond to cybersecurity events with records maintained for a minimum of five years (three years for certain records). AU-11 addresses retention but specific NYDFS retention periods (five and three years) are regulatory-prescribed. NYDFS also requires tracking financial transactions sufficient to support normal operations and obligations — this financial-specific audit scope is not directly addressed by SP 800-53."
+    },
+    {
+      "id": "500.7",
+      "title": "Access Privileges and Management",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-05", "AC-06", "AC-17", "AC-19", "AC-20",
+        "IA-01", "IA-02", "IA-04", "IA-05",
+        "PS-04", "PS-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-01 access control policy; AC-02 account management addresses provisioning, review, and deprovisioning; AC-03 access enforcement; AC-05 separation of duties; AC-06 least privilege maps directly to the NYDFS principle of limiting access privileges. AC-17 remote access and AC-19 access control for mobile devices address remote access scenarios. AC-20 use of external systems covers third-party access. IA-01/IA-02/IA-04/IA-05 cover identification, authentication, identifier management, and authenticator management. PS-04 personnel termination and PS-05 personnel transfer ensure timely access revocation upon role changes.",
+      "gaps": "Minor gaps: NYDFS 500.7 requires periodic review of access privileges and prompt termination of access following departure — well covered by AC-02 and PS-04/PS-05. Class A companies must implement a privileged access management (PAM) solution and an automated method of blocking commonly used passwords. While AC-06 addresses least privilege and IA-05 addresses authenticator management, the specific requirement for a PAM solution and automated password blocking tool is more prescriptive than SP 800-53."
+    },
+    {
+      "id": "500.8",
+      "title": "Application Security",
+      "controls": [
+        "SA-03", "SA-04", "SA-08", "SA-11", "SA-15", "SA-17",
+        "CM-02", "CM-03", "CM-04",
+        "SI-02", "SI-07",
+        "SC-03"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SA-03 system development lifecycle; SA-04 acquisition process controls; SA-08 security and privacy engineering principles; SA-11 developer testing and evaluation (including code review and penetration testing); SA-15 development process, standards, and tools; SA-17 developer security and privacy architecture and design. CM-02 baseline configuration and CM-03/CM-04 configuration change control and impact analysis. SI-02 flaw remediation and SI-07 software, firmware, and information integrity support application security maintenance. SC-03 security function isolation provides defense-in-depth.",
+      "gaps": "NYDFS 500.8 requires written procedures, guidelines, and standards for the security of in-house developed applications and procedures for evaluating and testing externally developed applications used by the entity. SA-11 covers developer testing broadly, but the NYDFS requirement for written standards specific to the entity's technology environment and evaluation of all third-party applications is more operationally prescriptive. The 2023 amendment expanded this to require assessment of the security of externally developed applications and their development practices."
+    },
+    {
+      "id": "500.9",
+      "title": "Risk Assessment",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-05", "RA-06", "RA-07", "RA-09",
+        "PM-08", "PM-09", "PM-11", "PM-16",
+        "CA-02", "CA-05"
+      ],
+      "coverage_pct": 88,
+      "rationale": "RA-01 risk assessment policy and procedures; RA-02 security categorization; RA-03 risk assessment — the core mapping to 500.9's requirement for periodic risk assessment. RA-05 vulnerability monitoring and scanning feeds risk assessment. RA-06 technical surveillance countermeasures. RA-07 (new in Rev 5) risk response strengthens remediation. RA-09 (new in Rev 5) criticality analysis identifies critical system components. PM-08 critical infrastructure plan; PM-09 risk management strategy; PM-11 mission/business process definition; PM-16 threat awareness program. CA-02 control assessments and CA-05 plan of action and milestones address assessment remediation.",
+      "gaps": "NYDFS 500.9 requires risk assessment to be updated at least annually and whenever a change in business or technology causes a material change to the entity's cyber risk. SP 800-53 RA-03 requires periodic assessment but does not mandate the annual minimum or material-change trigger. The NYDFS risk assessment must specifically inform the design of the cybersecurity program, cybersecurity policy, and all other requirements of Part 500 — this circular dependency between risk assessment and program design is NYDFS-specific."
+    },
+    {
+      "id": "500.10",
+      "title": "Cybersecurity Personnel and Intelligence",
+      "controls": [
+        "PM-02", "PM-13",
+        "PS-01", "PS-02", "PS-03", "PS-06", "PS-07",
+        "AT-01", "AT-02", "AT-03",
+        "PM-15", "PM-16",
+        "SI-05",
+        "SA-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PM-02 senior information security officer establishes CISO-equivalent role; PM-13 security and privacy workforce ensures qualified personnel. PS-01 through PS-07 provide personnel security policy, position risk designation, screening, access agreements, and external personnel security. AT-01/AT-02/AT-03 cover security awareness training policy, literacy training, and role-based training — supporting the requirement for trained cybersecurity personnel. PM-15 security and privacy groups and associations supports threat intelligence sharing; PM-16 threat awareness program addresses staying current on evolving threats. SI-05 security alerts and advisories. SA-09 external system services addresses outsourced cybersecurity functions.",
+      "gaps": "NYDFS 500.10 requires sufficient cybersecurity personnel to manage the entity's cybersecurity risks, with personnel required to stay current on changing cybersecurity threats and countermeasures. While PM-13 addresses workforce competency, the NYDFS requirement for entity-specific staffing adequacy assessment is more prescriptive. The requirement for cybersecurity personnel to use current threat intelligence to maintain the cybersecurity program goes beyond general PM-15/PM-16 threat awareness."
+    },
+    {
+      "id": "500.11",
+      "title": "Third-Party Service Provider Security Policy",
+      "controls": [
+        "SA-04", "SA-09",
+        "SR-01", "SR-02", "SR-03", "SR-05", "SR-06",
+        "PS-07",
+        "CA-03",
+        "PM-30", "PM-31",
+        "AC-20"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-04 acquisition process and SA-09 external system services address third-party security requirements in contracts. SR-01 supply chain risk management policy; SR-02 supply chain risk assessment; SR-03 supply chain controls and processes; SR-05 acquisition strategies and supply chain protection; SR-06 supplier assessments and reviews. PS-07 external personnel security. CA-03 information exchange (formerly system interconnections) addresses secure connections. PM-30 supply chain risk management strategy and PM-31 supply chain risk management plan (new in Rev 5) significantly strengthen third-party risk governance. AC-20 use of external systems restricts connections to third-party systems.",
+      "gaps": "NYDFS 500.11 has specific requirements that go beyond SP 800-53: (1) written policies and procedures for third-party service providers based on the entity's risk assessment; (2) minimum cybersecurity practices required of third parties including encryption, MFA, and notification of cybersecurity events; (3) due diligence processes for evaluating third-party cybersecurity practices; (4) periodic assessment and ongoing monitoring of third parties based on risk. The 2023 amendment removed the limited exemption for third-party requirements, expanding the scope. While SR family controls and PM-30/PM-31 provide strong supply chain governance, the NYDFS-specific third-party minimum standards (encryption, MFA, event notification) are regulatory-prescribed."
+    },
+    {
+      "id": "500.12",
+      "title": "Multi-Factor Authentication",
+      "controls": [
+        "IA-02", "IA-05", "IA-08",
+        "AC-17",
+        "SC-23"
+      ],
+      "coverage_pct": 88,
+      "rationale": "IA-02 identification and authentication (organizational users) with MFA enhancements directly addresses the MFA requirement. IA-05 authenticator management governs MFA token/factor lifecycle. IA-08 identification and authentication (non-organizational users) extends MFA to external parties. AC-17 remote access addresses MFA for remote access scenarios, which was the original NYDFS focus. SC-23 session authenticity supports the integrity of authenticated sessions.",
+      "gaps": "NYDFS 500.12 (as amended in 2023) requires MFA for any individual accessing any information system of the covered entity — this is significantly broader than typical SP 800-53 IA-02 implementations which allow risk-based application of MFA. NYDFS requires at least two of three factors (knowledge, possession, inherence) and the CISO may approve reasonably equivalent compensating controls reviewed annually. The universal MFA mandate for all systems regardless of risk level is more prescriptive than SP 800-53's risk-based approach."
+    },
+    {
+      "id": "500.13",
+      "title": "Asset Management and Data Retention Limitations",
+      "controls": [
+        "CM-08", "CM-12", "CM-13",
+        "PM-05",
+        "MP-06",
+        "SI-12",
+        "SA-22",
+        "PT-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CM-08 system component inventory maps directly to the asset inventory requirement, tracking hardware, software, and system components. CM-12 (new in Rev 5) information location identifies where data resides. CM-13 (new in Rev 5) data action mapping documents data flows. PM-05 system inventory provides enterprise-level asset tracking. MP-06 media sanitization and SI-12 information management and retention address data retention and secure disposal. SA-22 unsupported system components addresses the requirement to track support expiration dates. PT-03 personally identifiable information processing covers data classification requirements.",
+      "gaps": "NYDFS 500.13(a) requires a complete, accurate, documented asset inventory including specific attributes: owner, location, classification/sensitivity, support expiration date, and recovery time objectives. While CM-08 and CM-12/CM-13 address inventory and location, the specific required attribute set is NYDFS-prescribed. NYDFS 500.13(b) requires policies for secure disposal of nonpublic information that is no longer necessary for business operations or other legitimate purposes — SI-12 and MP-06 address disposal but the business-purpose trigger for disposal is regulatory-specific."
+    },
+    {
+      "id": "500.14",
+      "title": "Monitoring and Training",
+      "controls": [
+        "SI-04", "SI-03",
+        "AT-01", "AT-02", "AT-03", "AT-04",
+        "AU-06", "AU-13",
+        "IR-04",
+        "PM-14",
+        "SC-07", "SC-44"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-04 system monitoring provides continuous monitoring of information systems. SI-03 malicious code protection addresses anti-malware requirements. AT-01 training policy; AT-02 literacy training and awareness includes phishing/social engineering training required by NYDFS; AT-03 role-based training for cybersecurity personnel; AT-04 training records. AU-06 audit review, analysis, and reporting; AU-13 monitoring for information disclosure. IR-04 incident handling supports detection and response. PM-14 testing, training, and monitoring provides the overarching framework. SC-07 boundary protection and SC-44 (new in Rev 5) detonation chambers support malicious content filtering.",
+      "gaps": "NYDFS 500.14 requires cybersecurity awareness training that includes social engineering (phishing) — AT-02 covers awareness training broadly but the specific phishing training mandate is NYDFS-prescribed. Class A companies (500.14(b)) must implement endpoint detection and response (EDR) solutions and centralized logging/security event alerting — these are specific technology mandates that go beyond SP 800-53's technology-neutral approach. The requirement to monitor and filter emails and web traffic for malicious content is more operationally specific than SI-03/SC-07."
+    },
+    {
+      "id": "500.15",
+      "title": "Encryption of Nonpublic Information",
+      "controls": [
+        "SC-08", "SC-12", "SC-13", "SC-28",
+        "MP-04", "MP-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "SC-08 transmission confidentiality and integrity directly addresses encryption in transit. SC-12 cryptographic key establishment and management; SC-13 cryptographic protection provides the core encryption framework. SC-28 protection of information at rest directly addresses encryption at rest. MP-04 media storage addresses physical media encryption. MP-05 media transport addresses encryption of data in transit on removable media.",
+      "gaps": "Minimal gap for technical controls. NYDFS 500.15 requires a written encryption policy meeting industry standards for encryption of nonpublic information both in transit over external networks and at rest. The 2023 amendment removed the CISO's ability to approve compensating controls for encryption in transit (compensating controls remain available only for encryption at rest). SP 800-53 SC-08/SC-28 fully cover the technical requirements but the regulatory mandate for a specific written encryption policy with limited exception provisions is NYDFS-specific."
+    },
+    {
+      "id": "500.16",
+      "title": "Incident Response and Business Continuity Management",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05", "IR-06", "IR-07", "IR-08",
+        "CP-01", "CP-02", "CP-03", "CP-04", "CP-06", "CP-07", "CP-09", "CP-10",
+        "PM-14"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IR-01 incident response policy and procedures; IR-02 incident response training; IR-03 incident response testing; IR-04 incident handling (detection, analysis, containment, eradication, recovery); IR-05 incident monitoring; IR-06 incident reporting; IR-07 incident response assistance; IR-08 incident response plan. CP-01 contingency planning policy; CP-02 contingency plan; CP-03 contingency training; CP-04 contingency plan testing; CP-06 alternate storage/processing site; CP-07 alternate processing site; CP-09 system backup; CP-10 system recovery and reconstitution. PM-14 testing, training, and monitoring supports the annual testing requirement.",
+      "gaps": "NYDFS 500.16 (as amended 2023) combines incident response with business continuity and disaster recovery (BCDR) planning. Specific gaps include: (1) the requirement for root cause analysis following cybersecurity events — IR-05 monitors incidents but root cause analysis mandates are NYDFS-specific; (2) BCDR plans must identify essential documents, data, facilities, infrastructure, and personnel — CP-02 addresses contingency planning but NYDFS specifies the exact scope; (3) plans for communication with customers, regulators, and the public during a disruption are more prescriptive than IR-06/CP-02. Class A companies must test BCDR plans annually with review by senior management."
+    },
+    {
+      "id": "500.17",
+      "title": "Notices to Superintendent",
+      "controls": [
+        "IR-06",
+        "PM-26",
+        "AU-06"
+      ],
+      "coverage_pct": 55,
+      "rationale": "IR-06 incident reporting addresses the general requirement to report security incidents to appropriate authorities. PM-26 (new in Rev 5) complaint management provides a framework for managing regulatory communications. AU-06 audit review, analysis, and reporting supports the identification of reportable events.",
+      "gaps": "Significant NYDFS-specific gaps: (1) 72-hour notification to the superintendent after determining a cybersecurity event has occurred — specific timeframe and recipient are regulatory-prescribed; (2) notification of ransomware deployment within a material part of information systems; (3) notification of cybersecurity events reported to any other government body; (4) notification of extortion payments within 24 hours and written description of reasons within 30 days; (5) annual certification of compliance (500.17(b)) or acknowledgment of noncompliance filed by April 15; (6) continuing obligation to update the superintendent with material changes or new information. These detailed notification requirements to a specific state regulator have no equivalent in SP 800-53."
+    },
+    {
+      "id": "500.18",
+      "title": "Confidentiality",
+      "controls": [
+        "PT-01", "PT-03", "PT-04",
+        "AC-04", "AC-21",
+        "SI-12"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PT-01 policy and procedures for personally identifiable information; PT-03 personally identifiable information processing; PT-04 consent addresses information sharing constraints. AC-04 information flow enforcement and AC-21 information sharing control restrict unauthorized disclosure. SI-12 information management and retention addresses data handling requirements.",
+      "gaps": "NYDFS 500.18 establishes that information provided to the superintendent pursuant to Part 500 is confidential and exempt from disclosure. This is a regulatory privilege provision protecting information shared with NYDFS during examinations and reporting. SP 800-53 addresses information protection broadly but the specific legal privilege for regulator-shared information is a state law provision with no SP 800-53 equivalent."
+    },
+    {
+      "id": "500.19",
+      "title": "Exemptions",
+      "controls": [
+        "PM-01", "PM-11",
+        "PL-02"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-01 information security program addresses the concept of tailoring security requirements to organizational needs. PM-11 mission/business process definition helps determine applicability. PL-02 system security and privacy plans support scoping and tailoring.",
+      "gaps": "Significant gap. NYDFS 500.19 provides specific exemptions for: (a) entities with fewer than 20 employees/contractors, under $7.5M gross annual revenue, or under $15M total year-end assets (limited exemption from certain sections); (b) entities that do not operate, maintain, or control information systems and have no nonpublic information (full exemption); (c) entities under Insurance Law captive insurance provisions; (d) entities that do not control nonpublic information other than employee information. These size-based and scope-based exemption thresholds are entirely NYDFS regulatory constructs with no SP 800-53 equivalent. SP 800-53 uses impact-level tailoring rather than entity-size exemptions."
+    }
+  ],
+  "summary": {
+    "total_clauses": 18,
+    "average_coverage": 80.0,
+    "full_count": 11,
+    "substantial_count": 4,
+    "partial_count": 2,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

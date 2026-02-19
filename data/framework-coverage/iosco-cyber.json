@@ -1,0 +1,465 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "iosco_cyber",
+  "framework_name": "CPMI-IOSCO Cyber Resilience Guidance for FMIs",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis of CPMI-IOSCO Guidance on Cyber Resilience for Financial Market Infrastructures (June 2016, BIS d146). Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. The guidance has FMI-specific requirements for systemic risk, 2-hour recovery time objectives, sector-wide coordination, and regulatory oversight that extend beyond SP 800-53 scope. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "GOV-1",
+      "title": "Governance — Cyber resilience framework establishment",
+      "controls": [
+        "AC-01", "AT-01", "AU-01", "CA-01", "CM-01", "CP-01", "IA-01",
+        "IR-01", "MA-01", "MP-01", "PE-01", "PL-01", "PL-02", "PL-09",
+        "PM-01", "PS-01", "RA-01", "SA-01", "SC-01", "SI-01", "SR-01"
+      ],
+      "coverage_pct": 72,
+      "rationale": "AC-01, AU-01, CA-01, CM-01, CP-01, IA-01, IR-01, MA-01, MP-01, PE-01, PL-01, PS-01, RA-01, SA-01, SC-01, SI-01, SR-01 collectively establish a comprehensive policy framework spanning all 20 NIST families. PM-01 information security program plan defines the overall security programme. PL-02 system security plans and PL-09 (new in Rev 5) central management provide unified governance of security controls across the organisation. The guidance requires an FMI to establish a clear and comprehensive cyber resilience framework that prioritises security and efficiency of operations and supports financial stability objectives.",
+      "gaps": "The guidance requires the framework to be guided by an FMI-specific cyber resilience strategy that accounts for systemic risk to the broader financial system. SP 800-53 establishes organisational security programmes but does not address systemic financial stability objectives, FMI-specific resilience strategies, or the obligation to coordinate the framework with relevant authorities (central banks, securities regulators). The guidance also expects the framework to outline people, processes, and technology requirements holistically for FMI operations, which SP 800-53 addresses in separate families rather than as an integrated FMI resilience strategy."
+    },
+    {
+      "id": "GOV-2",
+      "title": "Governance — Board and senior management oversight",
+      "controls": [
+        "PM-01", "PM-02", "PM-09", "PM-13", "PM-14", "PL-01", "PL-09",
+        "CA-06"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-01 information security program plan establishes the overall programme. PM-02 senior information security officer designates a responsible executive. PM-09 risk management strategy and PM-13 security workforce provide management-level governance. PM-14 (new in Rev 5) testing, training, and monitoring addresses ongoing board-level assurance activities. PL-09 (new in Rev 5) central management supports unified oversight. CA-06 authorisation provides management sign-off on system risk acceptance. The guidance requires board and senior management attention as critical to a successful cyber resilience strategy.",
+      "gaps": "The guidance mandates that the board should define cyber risk appetite, approve the cyber resilience strategy, and ensure sufficient resources are allocated. SP 800-53 PM-02 creates a senior security role but does not mandate board-level accountability, fiduciary duty for cyber risk, or personal liability for cyber resilience outcomes. The guidance also expects the board to receive regular reports on the FMI's cyber risk posture and to instil a culture of cyber risk awareness at every level — requirements that go beyond SP 800-53's organisational focus."
+    },
+    {
+      "id": "GOV-3",
+      "title": "Governance — Cyber risk appetite and tolerance",
+      "controls": [
+        "PM-09", "RA-01", "RA-03", "RA-07", "PL-10", "PL-11"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PM-09 risk management strategy establishes organisational risk tolerance. RA-01, RA-03 risk assessment policy and process evaluate risk levels. RA-07 (new in Rev 5) risk response documents explicit risk treatment decisions. PL-10 (new in Rev 5) baseline selection and PL-11 (new in Rev 5) baseline tailoring enable risk-based control selection aligned with tolerance levels. The guidance requires an FMI to clearly define its cyber risk appetite.",
+      "gaps": "The guidance requires the cyber risk appetite to be defined in the context of the FMI's role in the financial system and the potential for systemic impact. SP 800-53 defines risk tolerance at the organisational/system level via FIPS 199 categorisation but does not address FMI-specific systemic risk appetite, the need to coordinate risk tolerance with overseers and regulators, or the expectation that zero tolerance should apply to certain scenarios (e.g., corruption of settlement data). RA-07 improves risk response documentation but does not create FMI-specific risk appetite frameworks."
+    },
+    {
+      "id": "GOV-4",
+      "title": "Governance — Roles, responsibilities, and cyber workforce",
+      "controls": [
+        "PM-02", "PM-13", "PS-01", "PS-02", "PS-03", "PS-04", "PS-05",
+        "PS-06", "PS-07", "PS-08", "PS-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-02 senior information security officer establishes executive responsibility. PM-13 security workforce addresses staffing and competence. PS-01 through PS-08 provide comprehensive personnel security covering screening, termination, transfer, access agreements, and third-party personnel. PS-09 (new in Rev 5) position descriptions incorporates security responsibilities into role definitions, directly supporting the guidance's requirement for clear roles. The guidance expects FMIs to define clear roles and responsibilities for cyber resilience.",
+      "gaps": "The guidance requires FMIs to ensure sufficient skilled cyber security staff, including dedicated CISO-equivalent roles with direct board access. It also expects regular skills assessments, succession planning for critical cyber roles, and engagement of external expertise where internal resources are insufficient. SP 800-53 PS family covers personnel security broadly and PM-13 addresses workforce planning, but does not mandate CISO board access, FMI-specific succession planning for cyber roles, or the specific staffing ratios expected for systemically important infrastructure."
+    },
+    {
+      "id": "GOV-5",
+      "title": "Governance — Engagement with participants, linked FMIs, and service providers",
+      "controls": [
+        "CA-03", "PM-15", "PS-07", "SA-09", "SR-01", "SR-02", "SR-03",
+        "SR-06"
+      ],
+      "coverage_pct": 60,
+      "rationale": "CA-03 system connections addresses interconnection agreements. PM-15 contacts with security groups supports stakeholder engagement. PS-07 third-party personnel security, SA-09 external services, and SR-01 through SR-06 supply chain controls address third-party relationships. The guidance emphasises that from a cyber perspective, small participants or non-critical vendors can pose risks equal to major participants or critical service providers.",
+      "gaps": "The guidance requires FMIs to engage directly with participants, linked FMIs, and critical service providers on cyber resilience expectations, joint testing, and coordinated response. SP 800-53 covers supply chain risk and external connections but does not address the FMI ecosystem requirement for coordinated cyber resilience across the entire market infrastructure chain. The guidance notes that FMIs can themselves become a channel to propagate cyber attacks, requiring ecosystem-wide coordination that SP 800-53 does not mandate. Sector-specific coordination with central banks and securities regulators is also outside SP 800-53 scope."
+    },
+    {
+      "id": "ID-1",
+      "title": "Identification — Critical business functions, processes, and information assets",
+      "controls": [
+        "CM-08", "CM-12", "CM-13", "PM-11", "RA-02", "RA-09", "SA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-08 component inventory provides asset management. CM-12 (new in Rev 5) information location identifies where sensitive data resides. CM-13 (new in Rev 5) data action mapping documents data processing flows. PM-11 mission/business process definition. RA-02 security categorisation classifies assets by criticality. RA-09 (new in Rev 5) criticality analysis identifies critical system components and functions, directly supporting the guidance's requirement to identify critical business functions. SA-05 documentation. The guidance requires FMIs to know their information assets and understand processes, procedures, systems, and dependencies.",
+      "gaps": "The guidance requires FMIs to identify and classify all critical business functions in the context of settlement finality, payment processing, and market operations — functions specific to financial market infrastructure. SP 800-53 provides strong asset and criticality identification via CM-08, CM-12, CM-13, and RA-09, but does not address FMI-specific business function taxonomy (e.g., matching, clearing, settlement, position management). The requirement to map dependencies to linked FMIs and participants is also beyond SP 800-53 scope."
+    },
+    {
+      "id": "ID-2",
+      "title": "Identification — Interconnections and dependencies mapping",
+      "controls": [
+        "CA-03", "CA-09", "CM-08", "CM-12", "PM-11", "RA-09", "SA-09"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CA-03 system connections and CA-09 (new in Rev 5) internal system connections address both external and internal interconnection mapping. CM-08 component inventory and CM-12 (new in Rev 5) information location track assets and data flows. PM-11 mission/business process definition, RA-09 (new in Rev 5) criticality analysis, and SA-09 external services identify critical dependencies. The guidance requires FMIs to map all interconnections including links to other FMIs, participants, and service providers.",
+      "gaps": "The guidance specifically requires mapping of systemic interconnections across the financial market infrastructure ecosystem, including how a cyber compromise at one FMI could propagate to linked FMIs, participants, and the broader financial system. SP 800-53 CA-03 and CA-09 cover technical interconnections but do not address systemic cascading risk analysis across financial market participants. The guidance's concept of 'single points of failure' in the financial system interconnection web goes beyond SP 800-53's organisational boundary focus."
+    },
+    {
+      "id": "ID-3",
+      "title": "Identification — Cyber threat landscape and risk assessment",
+      "controls": [
+        "PM-16", "RA-01", "RA-02", "RA-03", "RA-05", "RA-07", "RA-10",
+        "SI-05"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-16 threat awareness program establishes threat intelligence. RA-01 through RA-03 provide risk assessment policy, categorisation, and assessment. RA-05 vulnerability scanning. RA-07 (new in Rev 5) risk response documents risk treatment decisions. RA-10 (new in Rev 5) threat hunting enables proactive threat identification. SI-05 security alerts and advisories. The guidance requires FMIs to understand the cyber threat landscape and assess risks accordingly.",
+      "gaps": "The guidance expects FMIs to assess the threat landscape specific to financial market infrastructure, including state-directed threats targeting settlement integrity, market manipulation via cyber means, and threats from geopolitically motivated actors. SP 800-53 provides general risk assessment and threat awareness controls. RA-10 adds threat hunting capability. However, SP 800-53 does not require FMI-specific threat modelling that considers systemic financial impact, nor does it mandate threat intelligence sharing with financial sector ISACs or coordination with central banks on emerging threats."
+    },
+    {
+      "id": "ID-4",
+      "title": "Identification — Asset inventory and classification using automated tools",
+      "controls": [
+        "AC-16", "CM-02", "CM-08", "CM-12", "CM-13", "RA-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-16 security and privacy attributes enables automated labelling. CM-02 baseline configuration. CM-08 component inventory provides automated asset tracking. CM-12 (new in Rev 5) information location and CM-13 (new in Rev 5) data action mapping enable automated discovery and classification of data. RA-02 security categorisation provides classification framework. The guidance recommends FMIs use automated tools such as centralised asset inventory management (AIM) systems for identification and classification.",
+      "gaps": "The guidance specifically recommends automated AIM tools that enable real-time identification and classification of critical functions, processes, and information assets. SP 800-53 CM-08 requires automated inventory but does not prescribe FMI-specific classification taxonomies or real-time asset change notification to relevant staff. Minor gap: the guidance expects inventory changes to be shared with relevant FMI staff in a timely manner, which is an operational process beyond SP 800-53 technical controls."
+    },
+    {
+      "id": "PROT-1",
+      "title": "Protection — Access control and privileged user management",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-05", "AC-06", "AC-07", "AC-08",
+        "AC-09", "AC-10", "AC-11", "AC-12", "AC-17", "AC-24", "AC-25",
+        "IA-01", "IA-02", "IA-03", "IA-04", "IA-05", "IA-06", "IA-08",
+        "IA-12"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-01 through AC-12 provide comprehensive access control. AC-17 remote access. AC-24 (new in Rev 5) access control decisions enables dynamic authorisation. AC-25 (new in Rev 5) reference monitor enforces access control policy. IA-01 through IA-06 and IA-08 cover identification and authentication. IA-12 identity proofing. The guidance requires role-based access, strong authentication, logging and reviewing of privileged users' activities, and monitoring for anomalies in access patterns.",
+      "gaps": "The guidance specifically requires logging and reviewing the activities of privileged users with access to critical FMI systems (e.g., settlement engines, trade repositories). SP 800-53 AC and IA families provide thorough access control and authentication. Minor gap: the guidance expects FMI-specific privileged access reviews linked to settlement cycles and market operations, and coordinated privileged access management across linked FMIs."
+    },
+    {
+      "id": "PROT-2",
+      "title": "Protection — Network segmentation and boundary protection",
+      "controls": [
+        "AC-04", "CA-03", "SC-02", "SC-03", "SC-07", "SC-32", "SC-39",
+        "SC-46"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-04 information flow enforcement. CA-03 system connections. SC-02 separation of system and user functionality. SC-03 security function isolation. SC-07 boundary protection. SC-32 system partitioning. SC-39 process isolation. SC-46 (new in Rev 5) cross-domain policy enforcement strengthens segmentation controls. The guidance emphasises that segmenting networks to segregate systems and data of varying criticality both insulates systems from compromise in other segments and facilitates more efficient recovery.",
+      "gaps": "The guidance notes that network segmentation should be designed to facilitate recovery by enabling segment-by-segment restoration. SP 800-53 provides strong segmentation controls. Minor gap: the guidance's specific expectation that segmentation design considers recovery efficiency (not just prevention) and enables intermediate checkpoints and reconciliations for faster detection is an FMI-specific operational concern not addressed by SP 800-53."
+    },
+    {
+      "id": "PROT-3",
+      "title": "Protection — Data integrity and confidentiality controls",
+      "controls": [
+        "PT-02", "PT-03", "SC-04", "SC-08", "SC-12", "SC-13", "SC-16",
+        "SC-28", "SI-07", "SI-10", "SI-12", "SI-19"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PT-02 authority to process PII and PT-03 PII processing purposes ensure data handling policies are established for transaction data containing personally identifiable information. SC-04 information in shared resources. SC-08 transmission confidentiality and integrity. SC-12 cryptographic key establishment and management. SC-13 cryptographic protection. SC-16 transmission of security and privacy attributes. SC-28 protection of information at rest. SI-07 software, firmware, and information integrity. SI-10 information input validation. SI-12 information management and retention. SI-19 (new in Rev 5) de-identification. The guidance requires FMIs to protect data integrity, confidentiality, and availability of critical data including transaction records.",
+      "gaps": "The guidance specifically requires protection of settlement data integrity and transaction immutability — the ability to ensure that completed transactions cannot be reversed or corrupted. SP 800-53 provides comprehensive data protection controls. Gap: SP 800-53 does not address FMI-specific data integrity requirements such as settlement finality assurance, transaction record immutability, or the specific cryptographic requirements for protecting clearing and settlement data flows between FMIs."
+    },
+    {
+      "id": "PROT-4",
+      "title": "Protection — Security awareness and staff training",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-05", "AT-06",
+        "PL-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AT-01 security awareness and training policy. AT-02 literacy training and awareness. AT-03 role-based training. AT-04 training records. AT-05 contacts with security groups. AT-06 (new in Rev 5) training feedback measures training effectiveness and captures lessons learned. PL-04 rules of behaviour. The guidance requires all relevant staff, permanent or temporary, to receive training to develop and maintain appropriate awareness of and competencies for detecting and addressing cyber-related risks.",
+      "gaps": "The guidance expects training to cover FMI-specific scenarios including threats to settlement integrity, market manipulation via cyber means, and social engineering targeting FMI operations staff. SP 800-53 training controls are comprehensive and AT-06 improves effectiveness measurement. Gap: the guidance requires FMI-specific training content that addresses the unique operational context of market infrastructure, including escalation to central banks and coordination with sector-wide response mechanisms."
+    },
+    {
+      "id": "PROT-5",
+      "title": "Protection — Physical security and environmental controls",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-04", "PE-05", "PE-06", "PE-08",
+        "PE-09", "PE-10", "PE-11", "PE-12", "PE-13", "PE-14", "PE-15",
+        "PE-17", "PE-18"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-01 physical and environmental protection policy. PE-02 through PE-06 physical access authorisation, control, monitoring, and visitor access. PE-08 access records. PE-09 through PE-15 power equipment, emergency shutoff, lighting, fire protection, temperature, and water damage. PE-17 alternate work site. PE-18 location of system components. The guidance requires FMIs to protect critical infrastructure from physical threats that could enable or accompany cyber attacks.",
+      "gaps": "The guidance notes that physical security should be coordinated with cyber security as part of a converged security approach. SP 800-53 PE family provides comprehensive physical controls. Minor gap: the guidance expects physical security of FMI data centres to account for geopolitical risks and to be coordinated with national critical infrastructure protection programmes, which are outside SP 800-53 scope."
+    },
+    {
+      "id": "PROT-6",
+      "title": "Protection — Change management and secure development",
+      "controls": [
+        "CM-03", "CM-04", "CM-05", "CM-06", "CM-09", "CM-14",
+        "SA-03", "SA-04", "SA-08", "SA-10", "SA-11", "SA-15", "SA-17",
+        "SI-02", "SI-07"
+      ],
+      "coverage_pct": 87,
+      "rationale": "CM-03 through CM-06 change control, security analysis, access restrictions, and configuration settings. CM-09 configuration management plan. CM-14 (new in Rev 5) signed components verifies integrity of software changes via cryptographic signatures. SA-03 system development lifecycle. SA-04 acquisition process. SA-08 security and privacy engineering principles. SA-10 developer configuration management. SA-11 developer testing and evaluation. SA-15 development process standards. SA-17 developer security architecture. SI-02 flaw remediation. SI-07 software integrity. The guidance requires robust change management for all FMI systems.",
+      "gaps": "The guidance requires change management processes to consider the impact of changes on settlement finality and market operations timing. SP 800-53 provides comprehensive change management and secure development controls. CM-14 strengthens change integrity verification. Gap: the guidance expects change windows to be coordinated with market schedules and linked FMIs, and requires rollback procedures that can restore operations within the 2-hour recovery time objective, which are FMI-operational concerns beyond SP 800-53."
+    },
+    {
+      "id": "PROT-7",
+      "title": "Protection — Supply chain and third-party risk management",
+      "controls": [
+        "SA-04", "SA-09", "SA-21", "SA-22", "SR-01", "SR-02", "SR-03",
+        "SR-04", "SR-05", "SR-06", "SR-07", "SR-08", "SR-09", "SR-10",
+        "SR-11", "SR-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SA-04 acquisition process. SA-09 external system services. SA-21 (new in Rev 5) developer screening vets third-party development personnel. SA-22 unsupported system components. SR-01 through SR-12 provide the full supply chain risk management family including policy, plans, controls, provenance, acquisition strategies, assessments, operations security, notification agreements, inspection, authenticity, and disposal. The guidance requires FMIs to manage risks from critical service providers, vendors, and vendor products.",
+      "gaps": "The guidance specifically requires FMIs to assess whether third-party dependencies could become channels for propagating cyber attacks to participants and linked FMIs. SP 800-53 SR family provides comprehensive supply chain controls. Gap: the guidance expects FMIs to coordinate with regulators on critical service provider oversight, maintain contractual rights for regulatory inspection of key providers, and ensure that concentration risk from shared service providers across multiple FMIs is assessed — requirements specific to the FMI regulatory ecosystem."
+    },
+    {
+      "id": "DET-1",
+      "title": "Detection — Comprehensive monitoring and logging",
+      "controls": [
+        "AU-02", "AU-03", "AU-04", "AU-05", "AU-06", "AU-07", "AU-08",
+        "AU-09", "AU-10", "AU-11", "AU-12", "AU-13", "AU-14",
+        "CA-07", "SI-04"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AU-02 through AU-14 provide comprehensive audit and accountability including event identification, content, storage, response to failures, review/analysis, report generation, time stamps, protection, non-repudiation, retention, generation, monitoring of open-source information, and session audit. CA-07 continuous monitoring. SI-04 system monitoring. The guidance requires FMIs to maintain effective capabilities to extensively monitor for anomalous activities across multiple layers of the infrastructure.",
+      "gaps": "The guidance expects monitoring to cover all layers of FMI infrastructure including matching engines, clearing systems, and settlement platforms with FMI-specific alert rules. SP 800-53 AU and SI families provide thorough monitoring and logging. Minor gap: the guidance requires FMI-specific monitoring of transaction integrity and settlement reconciliation anomalies, which are domain-specific detection capabilities beyond generic system monitoring."
+    },
+    {
+      "id": "DET-2",
+      "title": "Detection — Anomaly detection and baseline profiling",
+      "controls": [
+        "AU-06", "CA-07", "SC-05", "SI-04", "SI-06", "SI-16", "SI-20"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-06 audit review, analysis, and reporting. CA-07 continuous monitoring. SC-05 denial-of-service protection. SI-04 system monitoring. SI-06 security functionality verification. SI-16 (new in Rev 5) memory protection prevents exploitation that could mask anomalous activity. SI-20 (new in Rev 5) tainting tracks data provenance through system execution, supporting detection of anomalous data flows. The guidance requires baseline profiles of system activity to enable detection of anomalous patterns.",
+      "gaps": "The guidance emphasises that given the stealthy and sophisticated nature of cyber attacks and the multiple entry points through which a compromise could take place, FMIs should maintain anomaly detection across all layers. SP 800-53 provides strong monitoring and anomaly detection. Gap: the guidance expects FMI-specific baseline profiling of normal transaction volumes, settlement patterns, and participant behaviour, including detection of subtle integrity attacks that alter transaction data rather than disrupt availability."
+    },
+    {
+      "id": "DET-3",
+      "title": "Detection — Indicators of compromise and threat intelligence integration",
+      "controls": [
+        "PM-16", "RA-05", "RA-10", "SI-03", "SI-04", "SI-05", "SI-08"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PM-16 threat awareness program. RA-05 vulnerability scanning. RA-10 (new in Rev 5) threat hunting enables proactive searching for indicators of compromise. SI-03 malicious code protection. SI-04 system monitoring. SI-05 security alerts and advisories. SI-08 spam protection. The guidance requires integration of threat intelligence into detection processes to identify indicators of compromise and validate detection capabilities.",
+      "gaps": "The guidance expects FMIs to integrate financial-sector-specific threat intelligence, including indicators specific to attacks on market infrastructure (e.g., SWIFT-targeting malware, settlement manipulation tools). SP 800-53 covers threat awareness and hunting well. RA-10 adds proactive threat hunting. Gap: the guidance expects integration with financial sector ISACs and central bank threat sharing mechanisms, and real-time IOC feeds specific to the financial market infrastructure threat landscape."
+    },
+    {
+      "id": "DET-4",
+      "title": "Detection — Monitoring controls implemented to assist containment and analysis",
+      "controls": [
+        "AU-06", "AU-12", "IR-04", "SC-07", "SI-04", "SI-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-06 audit review and analysis. AU-12 audit record generation. IR-04 incident handling. SC-07 boundary protection with monitoring. SI-04 system monitoring. SI-06 security functionality verification. The guidance requires controls to be implemented in a way that assists in monitoring for, detecting, containing, and analysing anomalous activities should protective measures fail.",
+      "gaps": "The guidance expects detection controls to be designed for dual-purpose: both prevention and forensic analysis capability. SP 800-53 provides strong monitoring and containment controls. Minor gap: the guidance expects FMI detection systems to support rapid forensic analysis during incidents to determine whether settlement data integrity has been compromised, which requires domain-specific forensic capabilities."
+    },
+    {
+      "id": "RR-1",
+      "title": "Response and Recovery — Incident response plan and procedures",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05", "IR-06", "IR-07",
+        "IR-08", "IR-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-01 incident response policy and procedures. IR-02 incident response training. IR-03 incident response testing. IR-04 incident handling. IR-05 incident monitoring. IR-06 incident reporting. IR-07 incident response assistance. IR-08 incident response plan. IR-09 (new in Rev 5) information spillage response adds specific handling for data breach incidents. The guidance requires FMIs to develop response, resumption, and recovery plans that protect and re-establish integrity and availability of operations.",
+      "gaps": "The guidance requires incident response plans to be specifically designed for cyber attacks on financial market infrastructure, including scenarios involving corruption of settlement data, market-wide outages, and coordinated attacks on multiple FMIs. SP 800-53 IR family is comprehensive. IR-09 adds spillage response. Gap: the guidance expects response plans to include coordination with central banks, securities regulators, and other FMIs in the settlement chain, and to address the specific obligation under PFMI Principle 17 to resume critical operations within 2 hours of disruption."
+    },
+    {
+      "id": "RR-2",
+      "title": "Response and Recovery — 2-hour recovery time objective (2hRTO)",
+      "controls": [
+        "CP-02", "CP-06", "CP-07", "CP-08", "CP-09", "CP-10", "CP-12",
+        "CP-13", "RA-09", "SC-24"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CP-02 contingency plan. CP-06 alternate storage site. CP-07 alternate processing site. CP-08 telecommunications services. CP-09 system backup. CP-10 system recovery and reconstitution. CP-12 safe mode enables degraded operation. CP-13 alternative security mechanisms provides fallback controls. RA-09 (new in Rev 5) criticality analysis identifies critical components for prioritised recovery. SC-24 (new in Rev 5) fail in known state ensures predictable recovery states. The guidance requires FMIs to resume critical operations within two hours following disruptive events, including extreme but plausible cyber attack scenarios.",
+      "gaps": "The guidance's 2-hour recovery time objective (2hRTO) under PFMI Principle 17 Key Consideration 6 is one of the most demanding recovery requirements in any regulatory framework. SP 800-53 CP family provides recovery and continuity controls but does not mandate specific recovery time targets. CP-12 and CP-13 improve resilient operations. Major gap: SP 800-53 does not prescribe the 2hRTO, does not require recovery planning for 'extreme but plausible' cyber scenarios specifically, and does not mandate that critical IT systems must complete settlement by end of day even after a major cyber attack. The 2022 Level 3 assessment identified failure to meet the 2hRTO as a 'serious issue of concern'."
+    },
+    {
+      "id": "RR-3",
+      "title": "Response and Recovery — Settlement finality and transaction integrity preservation",
+      "controls": [
+        "CP-09", "CP-10", "SC-08", "SC-24", "SI-07", "SI-10"
+      ],
+      "coverage_pct": 62,
+      "rationale": "CP-09 system backup and CP-10 system recovery address data preservation. SC-08 transmission integrity and SC-24 (new in Rev 5) fail in known state support data integrity during recovery. SI-07 software and information integrity and SI-10 information input validation protect data correctness. The guidance requires FMIs to preserve transaction integrity during and after cyber incidents, ensuring settlement finality is maintained.",
+      "gaps": "The guidance requires FMIs to design systems and processes to limit the impact of any cyber incident, resume critical operations within 2 hours, complete settlement by day-end, and preserve transaction integrity. SP 800-53 provides data integrity and recovery controls. Major gap: SP 800-53 does not address settlement finality assurance, the ability to determine the exact point of data corruption in a transaction ledger, or the requirement to ensure that all transactions up to the point of compromise can be verified and settled. These are fundamental FMI-specific requirements under PFMI Principle 8."
+    },
+    {
+      "id": "RR-4",
+      "title": "Response and Recovery — Communication and coordination during incidents",
+      "controls": [
+        "IR-06", "IR-07", "PM-15", "SC-47"
+      ],
+      "coverage_pct": 52,
+      "rationale": "IR-06 incident reporting. IR-07 incident response assistance. PM-15 contacts with security groups. SC-47 (new in Rev 5) alternate communications safeguards provides resilient communication paths during incidents. The guidance requires FMIs to communicate with relevant internal and external stakeholders during and after cyber incidents.",
+      "gaps": "The guidance requires coordinated communication with participants, linked FMIs, central banks, securities regulators, and potentially the public during cyber incidents. SP 800-53 provides general incident reporting and SC-47 adds alternate communications. Major gap: the guidance expects FMI-specific communication protocols including real-time notification to participants about settlement delays, coordination with central banks on liquidity provision during outages, market-wide announcements, and regulatory notification within prescribed timescales. SP 800-53 does not address financial market communication obligations or systemic incident coordination."
+    },
+    {
+      "id": "RR-5",
+      "title": "Response and Recovery — Recovery plans based on current threat intelligence and plausible scenarios",
+      "controls": [
+        "CP-02", "CP-04", "IR-03", "IR-08", "PM-16", "RA-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CP-02 contingency plan and CP-04 contingency plan testing. IR-03 incident response testing and IR-08 incident response plan. PM-16 threat awareness program provides threat intelligence. RA-03 risk assessment. The guidance requires response, resumption, and recovery plans to be actively updated based on current cyber threat intelligence, information sharing, and lessons learned.",
+      "gaps": "The guidance specifically requires recovery plans to be based on operationally and technically plausible scenarios that have not yet occurred, including scenarios where the primary data centre is completely compromised and the integrity of backup data is uncertain. SP 800-53 provides testing and planning controls. Gap: the guidance expects scenario development to include FMI-specific extreme scenarios such as simultaneous compromise of production and backup systems, corruption of settlement databases, and coordinated attacks timed to coincide with peak settlement periods."
+    },
+    {
+      "id": "TEST-1",
+      "title": "Testing — Comprehensive cyber resilience testing programme",
+      "controls": [
+        "CA-02", "CA-04", "CA-07", "CA-08", "CP-04", "IR-03", "RA-05",
+        "SA-11"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-02 control assessments. CA-04 security certification. CA-07 continuous monitoring. CA-08 penetration testing. CP-04 contingency plan testing. IR-03 incident response testing. RA-05 vulnerability scanning. SA-11 developer testing. The guidance requires FMIs to establish a comprehensive and evolving cyber resilience testing programme.",
+      "gaps": "The guidance requires the testing programme to be integrated across all risk management categories and to include vulnerability assessments, scenario-based testing, penetration testing, and red team exercises. SP 800-53 provides multiple testing controls. Gap: the guidance expects FMI-specific testing that validates the 2hRTO under cyber attack scenarios, tests settlement integrity preservation, and includes participants and linked FMIs in testing exercises. The 2022 Level 3 assessment identified lack of comprehensive scenario-based testing as an issue of concern."
+    },
+    {
+      "id": "TEST-2",
+      "title": "Testing — Threat-led penetration testing and red team exercises",
+      "controls": [
+        "CA-08", "RA-06"
+      ],
+      "coverage_pct": 40,
+      "rationale": "CA-08 penetration testing provides general penetration testing capability. RA-06 (new in Rev 5) technical surveillance countermeasures provides one specialised assessment methodology. The guidance requires threat intelligence-led testing including red team exercises simulating realistic cyber attack scenarios against the FMI.",
+      "gaps": "The guidance requires threat-led penetration testing using current threat intelligence to simulate realistic attacks on FMI operations. SP 800-53 CA-08 provides basic penetration testing. Major gap: SP 800-53 does not require threat intelligence-led testing (similar to TIBER-EU/CBEST), red team exercises that simulate advanced persistent threats, or purple team exercises. The guidance expects testing to be conducted by qualified independent testers with knowledge of financial market infrastructure operations, which is not addressed by SP 800-53."
+    },
+    {
+      "id": "TEST-3",
+      "title": "Testing — Testing after significant system changes",
+      "controls": [
+        "CA-02", "CM-04", "SA-11", "SI-06"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-02 control assessments. CM-04 monitoring of configuration changes including security impact analysis. SA-11 developer testing and evaluation. SI-06 security functionality verification. The guidance requires cyber resilience testing after significant system changes.",
+      "gaps": "The guidance requires comprehensive cyber resilience testing (not just functional testing) after any significant system change, including changes to interconnections with participants and linked FMIs. SP 800-53 CM-04 and SA-11 cover change testing. Gap: the 2022 Level 3 assessment specifically identified lack of cyber resilience testing after significant system changes as an issue of concern, suggesting that some FMIs treated system testing and cyber resilience testing as separate activities. SP 800-53 does not mandate integrated cyber resilience regression testing."
+    },
+    {
+      "id": "TEST-4",
+      "title": "Testing — Involvement of participants, linked FMIs, and critical service providers",
+      "controls": [
+        "CA-02", "CA-08", "CP-04", "IR-03", "SR-06"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-02 control assessments. CA-08 penetration testing. CP-04 contingency plan testing. IR-03 incident response testing. SR-06 supplier assessments and reviews. The guidance requires testing to involve FMI participants, critical service providers, and linked FMIs.",
+      "gaps": "The guidance requires FMIs to involve their ecosystem stakeholders in cyber resilience testing, including joint incident response exercises with participants and linked FMIs. SP 800-53 covers internal testing and supplier assessment. Major gap: SP 800-53 does not mandate joint testing with external counterparties such as clearing members, settlement banks, or linked FMIs. The 2022 Level 3 assessment identified inadequate involvement of relevant stakeholders in testing as an issue of concern. Sector-wide coordination testing is outside SP 800-53 scope."
+    },
+    {
+      "id": "TEST-5",
+      "title": "Testing — Backup data integrity verification",
+      "controls": [
+        "CP-04", "CP-09", "SI-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CP-04 contingency plan testing supports backup testing. CP-09 system backup addresses backup procedures. SI-07 software, firmware, and information integrity protects backup integrity. The guidance requires FMIs to regularly verify the integrity of backup data, including under cyber attack scenarios where backup integrity may be compromised.",
+      "gaps": "The guidance requires specific testing of backup data integrity including scenarios where an attacker may have compromised backup systems. SP 800-53 CP-09 covers backup and SI-07 addresses integrity. Gap: the 2022 Level 3 assessment identified lack of backup data integrity testing as an issue of concern. The guidance expects FMIs to verify that backup data is free from compromise before initiating recovery, including for scenarios where an attacker has been present in the environment for an extended period and may have corrupted backups."
+    },
+    {
+      "id": "SA-1",
+      "title": "Situational Awareness — Proactive threat monitoring and intelligence",
+      "controls": [
+        "AT-05", "PM-15", "PM-16", "RA-03", "RA-05", "RA-10",
+        "SI-05", "SI-21"
+      ],
+      "coverage_pct": 72,
+      "rationale": "AT-05 contacts with security groups. PM-15 contacts with security groups and associations. PM-16 threat awareness program. RA-03 risk assessment. RA-05 vulnerability scanning. RA-10 (new in Rev 5) threat hunting. SI-05 security alerts and advisories. SI-21 (new in Rev 5) information refresh ensures threat information is current. The guidance requires FMIs to proactively monitor the cyber threat landscape and acquire actionable threat intelligence.",
+      "gaps": "The guidance expects FMIs to validate risk assessments, strategic direction, resource allocation, processes, procedures, and controls based on acquired threat intelligence. SP 800-53 provides threat awareness and hunting capabilities. SI-21 improves information currency. Gap: the guidance expects FMI-specific situational awareness including monitoring of threats to the broader financial system ecosystem, coordination with national CERTs and financial sector ISACs, and intelligence sharing across jurisdictions relevant to the FMI's operations."
+    },
+    {
+      "id": "SA-2",
+      "title": "Situational Awareness — Threat intelligence sharing with the financial sector",
+      "controls": [
+        "AT-05", "PM-15", "PM-16", "IR-06"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AT-05 contacts with security groups. PM-15 contacts with security groups and associations. PM-16 threat awareness program. IR-06 incident reporting. The guidance requires FMIs to share and receive threat intelligence with sector peers and regulators.",
+      "gaps": "The guidance requires structured information sharing within the financial market infrastructure ecosystem, including with central banks, securities regulators, other FMIs, and financial sector ISACs. SP 800-53 supports contacts with security groups and threat awareness. Major gap: SP 800-53 does not mandate sector-specific threat intelligence sharing arrangements, does not address the legal protections needed for sharing sensitive threat data between FMIs across jurisdictions, and does not require the bi-directional intelligence sharing with regulators that the guidance expects."
+    },
+    {
+      "id": "SA-3",
+      "title": "Situational Awareness — Vulnerability management and assessment",
+      "controls": [
+        "CA-02", "CA-07", "CA-08", "RA-05", "SA-11", "SI-02", "SI-05"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CA-02 control assessments. CA-07 continuous monitoring. CA-08 penetration testing. RA-05 vulnerability scanning. SA-11 developer testing. SI-02 flaw remediation. SI-05 security alerts. The guidance requires FMIs to conduct vulnerability assessments as part of their cyber resilience posture. All assessed FMIs stated that vulnerability assessments are part of their testing programmes.",
+      "gaps": "The guidance requires vulnerability assessments to be conducted at least annually, with many FMIs conducting them more frequently. SP 800-53 RA-05 and supporting controls provide strong vulnerability management. Minor gap: the guidance expects vulnerability assessment scope to include the entire FMI ecosystem including participant-facing interfaces, linked FMI connections, and critical service provider integration points."
+    },
+    {
+      "id": "LE-1",
+      "title": "Learning and Evolving — Post-incident review and lessons learned",
+      "controls": [
+        "CA-05", "CA-07", "CP-04", "IR-04", "IR-05", "IR-06"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-05 plan of action and milestones tracks remediation. CA-07 continuous monitoring. CP-04 contingency plan testing includes post-exercise review. IR-04 incident handling includes post-incident activity. IR-05 incident monitoring. IR-06 incident reporting. The guidance requires FMIs to undertake thorough post-incident reviews and apply lessons learned to improve cyber resilience.",
+      "gaps": "The guidance requires FMIs to learn from incidents both within their own organisation and across the financial sector. SP 800-53 IR-04 includes post-incident analysis. Gap: the guidance expects FMIs to share post-incident lessons with regulators, other FMIs, and sector bodies to improve collective resilience. It also requires analysis of incidents at other organisations to extract applicable lessons — a sector-wide learning mandate that goes beyond SP 800-53's organisational focus."
+    },
+    {
+      "id": "LE-2",
+      "title": "Learning and Evolving — Continuous improvement of the cyber resilience framework",
+      "controls": [
+        "CA-02", "CA-05", "CA-07", "PL-03", "PM-04", "RA-04"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CA-02 control assessments. CA-05 plan of action and milestones. CA-07 continuous monitoring. PL-03 system security plan update. PM-04 plan of action and milestones process. RA-04 risk assessment update. The guidance requires FMIs to continuously evolve their cyber resilience framework based on changes in the threat landscape, technological developments, and lessons learned.",
+      "gaps": "The guidance expects the framework to evolve in response to changes in the financial market ecosystem, new interconnections, regulatory expectations, and sector-wide threat developments. SP 800-53 provides continuous monitoring and improvement mechanisms. Gap: the guidance requires framework evolution to be coordinated with regulators and overseers, and expects FMIs to adopt emerging best practices from the international FMI community. SP 800-53 does not address regulatory coordination in framework improvement."
+    },
+    {
+      "id": "LE-3",
+      "title": "Learning and Evolving — Adoption of emerging standards and international best practices",
+      "controls": [
+        "PM-15", "PM-16", "SA-08", "SI-21"
+      ],
+      "coverage_pct": 58,
+      "rationale": "PM-15 contacts with security groups supports awareness of emerging standards. PM-16 threat awareness program. SA-08 security and privacy engineering principles. SI-21 (new in Rev 5) information refresh ensures that standards and practices used are current. The guidance requires FMIs to actively monitor and adopt international emerging standards and best practices for cyber resilience.",
+      "gaps": "The guidance expects FMIs to track evolving international standards (ISO, NIST CSF, SWIFT CSP, TIBER-EU, etc.) and adopt improvements proactively. SP 800-53 supports standards awareness. Gap: the guidance mandates active engagement with international standard-setting bodies and CPMI-IOSCO working groups, adoption of cross-border best practices, and coordination with regulators on implementation of new guidance — organisational and regulatory engagement requirements outside SP 800-53 scope."
+    },
+    {
+      "id": "PFMI-2",
+      "title": "PFMI Principle 2 — Governance arrangements for cyber resilience",
+      "controls": [
+        "PM-01", "PM-02", "PM-09", "PL-01", "PL-09"
+      ],
+      "coverage_pct": 62,
+      "rationale": "PM-01 information security program plan. PM-02 senior information security officer. PM-09 risk management strategy. PL-01 security planning policy. PL-09 (new in Rev 5) central management. The guidance supplements PFMI Principle 2 with specific cyber governance expectations including board-level oversight of cyber risk, clear cyber resilience strategy, and integration with the FMI's overall governance framework.",
+      "gaps": "PFMI Principle 2 requires FMIs to have governance arrangements that are clear and transparent, promoting the safety and efficiency of the FMI and supporting the stability of the broader financial system. SP 800-53 provides security programme governance. Major gap: SP 800-53 does not address FMI-specific governance for financial stability, board accountability for systemic risk, coordination with central bank overseers, or the specific governance structures required for designated financial market infrastructure."
+    },
+    {
+      "id": "PFMI-3",
+      "title": "PFMI Principle 3 — Comprehensive risk management framework for cyber risk",
+      "controls": [
+        "PM-01", "PM-09", "PL-02", "PL-09", "PL-10", "PL-11",
+        "RA-01", "RA-03", "RA-07"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-01 programme plan and PM-09 risk management strategy. PL-02 security plans. PL-09 (new in Rev 5) central management. PL-10 (new in Rev 5) baseline selection and PL-11 (new in Rev 5) baseline tailoring. RA-01, RA-03, RA-07 (new in Rev 5) risk assessment and response. The guidance supplements PFMI Principle 3 requiring cyber risk to be integrated into the FMI's comprehensive risk management framework.",
+      "gaps": "PFMI Principle 3 requires a comprehensive framework for managing legal, credit, liquidity, operational, and other risks, including policies and procedures to identify, measure, monitor, and manage these risks. SP 800-53 provides strong risk management. Gap: the guidance expects cyber risk to be managed alongside financial risks (credit, liquidity, market) in an integrated framework, which is fundamentally different from SP 800-53's information-security-specific scope. Systemic risk modelling and the interaction between cyber events and financial risk are outside SP 800-53."
+    },
+    {
+      "id": "PFMI-17",
+      "title": "PFMI Principle 17 — Operational risk management and 2hRTO for cyber scenarios",
+      "controls": [
+        "CP-01", "CP-02", "CP-04", "CP-06", "CP-07", "CP-08", "CP-09",
+        "CP-10", "CP-12", "CP-13", "IR-01", "IR-04", "IR-08",
+        "MA-01", "MA-02", "SC-24"
+      ],
+      "coverage_pct": 68,
+      "rationale": "CP-01 through CP-13 provide contingency planning across policy, plans, training, testing, update, alternate sites, telecom, backup, recovery, safe mode, and alternative mechanisms. IR-01, IR-04, IR-08 incident response. MA-01, MA-02 maintenance. SC-24 (new in Rev 5) fail in known state. PFMI Principle 17 Key Consideration 6 requires FMIs to resume critical operations within 2 hours and complete settlement by end of day.",
+      "gaps": "PFMI Principle 17 is the primary operational risk principle requiring the 2-hour recovery time objective even under extreme but plausible scenarios. SP 800-53 CP family provides strong contingency planning. Major gap: SP 800-53 does not mandate specific recovery timeframes, does not require end-of-day settlement completion after cyber incidents, and does not address the specific operational risk scenarios faced by FMIs including simultaneous compromise of multiple systems, data integrity attacks targeting settlement finality, and coordinated attacks on linked infrastructure."
+    },
+    {
+      "id": "PFMI-20",
+      "title": "PFMI Principle 20 — FMI links and interconnection cyber risk",
+      "controls": [
+        "AC-04", "AC-20", "CA-03", "CA-09", "SA-09", "SC-07"
+      ],
+      "coverage_pct": 60,
+      "rationale": "AC-04 information flow enforcement. AC-20 use of external systems. CA-03 system connections. CA-09 (new in Rev 5) internal system connections. SA-09 external system services. SC-07 boundary protection. PFMI Principle 20 addresses the cyber risks arising from links between FMIs, including the potential for cyber attacks to propagate across linked infrastructure.",
+      "gaps": "PFMI Principle 20 requires FMIs to identify, monitor, and manage risks related to FMI links. SP 800-53 covers system connections and boundary protection. Major gap: SP 800-53 does not address the specific risks of FMI-to-FMI links including cascading settlement failures, cross-border regulatory coordination for linked infrastructure, or the requirement for linked FMIs to maintain compatible cyber resilience standards. The guidance notes that cyber attacks could propagate through FMI links, requiring coordinated resilience across the linked infrastructure chain."
+    },
+    {
+      "id": "REG-1",
+      "title": "Regulatory coordination — Engagement with overseers and regulators",
+      "controls": [
+        "PM-15", "PM-25", "PM-26"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-15 contacts with security groups provides a general engagement mechanism. PM-25 (new in Rev 5) minimisation of personally identifiable information and PM-26 (new in Rev 5) complaint management are tangentially related to regulatory compliance. The guidance requires FMIs to liaise closely with their respective authorities on cyber governance, testing, and incident response.",
+      "gaps": "The guidance requires deep and ongoing engagement with central banks, securities regulators, and other relevant authorities on all aspects of cyber resilience. SP 800-53 does not address the regulatory relationship between FMIs and their overseers, mandatory regulatory reporting of cyber incidents to securities regulators, supervisory review of cyber resilience programmes, or the role of authorities in validating FMI testing programmes. This regulatory coordination is fundamental to the guidance and entirely outside SP 800-53 scope."
+    }
+  ],
+  "summary": {
+    "total_clauses": 41,
+    "average_coverage": 72.7,
+    "full_count": 10,
+    "substantial_count": 21,
+    "partial_count": 9,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

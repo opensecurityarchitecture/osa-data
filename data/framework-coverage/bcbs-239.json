@@ -1,0 +1,344 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "bcbs_239",
+  "framework_name": "BCBS 239",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. BCBS 239 is a risk data aggregation and reporting standard — many requirements address data governance methodologies, risk aggregation processes, report formatting, and supervisory review that fall outside SP 800-53 scope. Expect moderate-to-low coverage for reporting and supervisory principles. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "Principle 1",
+      "title": "Governance",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-09",
+        "PM-10",
+        "PM-13",
+        "PM-14",
+        "PM-28",
+        "PM-29",
+        "PM-30",
+        "PM-31",
+        "PL-01",
+        "PL-02",
+        "PL-04",
+        "PL-09",
+        "RA-01",
+        "RA-03",
+        "AT-01",
+        "AT-02",
+        "PS-01",
+        "PS-02",
+        "PS-07",
+        "AC-05",
+        "CA-01",
+        "CA-06"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PM-01 information security program plan provides overarching governance structure. PM-02 senior information security officer establishes clear accountability. PM-03 information security resources addresses resource allocation. PM-09 risk management strategy and PM-10 security authorization process support risk governance. PM-13 information security workforce and PM-14 testing/training/monitoring coordinate governance activities. PM-28 (Rev 5) risk framing and PM-29 (Rev 5) risk management program strengthen risk governance. PM-30 (Rev 5) supply chain risk management strategy and PM-31 (Rev 5) continuous monitoring strategy add governance breadth. PL-01/PL-02 security planning; PL-04 rules of behaviour; PL-09 (Rev 5) central management enables unified governance. RA-01/RA-03 risk assessment policy and methodology. AT-01/AT-02 awareness and training. PS-01/PS-02/PS-07 personnel security and third-party governance. AC-05 separation of duties. CA-01 assessment policy and CA-06 authorization.",
+      "gaps": "BCBS 239 requires board-level oversight of risk data aggregation and reporting, risk appetite integration into data governance, and clear accountability for data quality at the board and senior management level. SP 800-53 governance controls address information security governance broadly but do not cover banking-specific board accountability structures, risk data quality ownership hierarchies, or the integration of data governance with Basel capital adequacy frameworks."
+    },
+    {
+      "id": "Principle 2",
+      "title": "Data architecture and IT infrastructure",
+      "controls": [
+        "CM-01",
+        "CM-02",
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "SA-03",
+        "SA-05",
+        "SA-08",
+        "SA-17",
+        "SC-02",
+        "SC-03",
+        "SC-04",
+        "SC-07",
+        "SC-22",
+        "SC-28",
+        "SI-12",
+        "PL-08",
+        "PM-07",
+        "CP-02",
+        "CP-07",
+        "CP-08"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-01/CM-02 configuration management establishes baseline infrastructure standards. CM-08 component inventory identifies IT assets supporting data aggregation. CM-12 (Rev 5) information location tracks where risk data resides across systems. CM-13 (Rev 5) data action mapping documents data flows critical for understanding aggregation pathways. SA-03 system development lifecycle; SA-05 system documentation; SA-08 security and privacy engineering principles; SA-17 developer security and privacy architecture support infrastructure design. SC-02/SC-03/SC-04 application/processing/information partitioning protect data integrity in multi-system environments. SC-07 boundary protection; SC-22 architecture and provisioning for naming. SC-28 protection of information at rest. SI-12 information management and retention. PL-08 security and privacy architectures links security architecture to enterprise architecture. PM-07 enterprise architecture integration. CP-02/CP-07/CP-08 contingency planning ensures infrastructure resilience during stress periods.",
+      "gaps": "BCBS 239 requires data architecture that supports end-to-end risk data aggregation across all business lines, legal entities, and risk types — including single authoritative data sources (golden sources), enterprise data taxonomies, data lineage tracking, and metadata management. SP 800-53 addresses IT infrastructure security and some data classification but does not cover enterprise data architecture design patterns, data warehousing strategies for risk aggregation, or the specific requirement that infrastructure must function equally well during stress/crisis periods for risk reporting purposes."
+    },
+    {
+      "id": "Principle 3",
+      "title": "Accuracy and Integrity",
+      "controls": [
+        "SI-01",
+        "SI-06",
+        "SI-07",
+        "SI-10",
+        "SI-11",
+        "SI-15",
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-10",
+        "SC-08",
+        "SC-13",
+        "SC-16",
+        "SC-28",
+        "PM-11",
+        "SA-10",
+        "SA-11"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-01 system and information integrity policy establishes integrity governance. SI-06 security and privacy function verification validates processing correctness. SI-07 software/firmware/information integrity detection prevents unauthorized data modifications. SI-10 information input validation and SI-11 error handling address data accuracy at system boundaries. SI-15 information output filtering prevents erroneous data propagation. AU-01/AU-02/AU-03 audit policy, events, and content provide audit trails for data changes. AU-10 non-repudiation ensures accountability for data modifications. SC-08 transmission confidentiality and integrity protects data in transit. SC-13 cryptographic protection and SC-16 transmission of security and privacy attributes. SC-28 protection of information at rest. PM-11 mission/business process definition connects data quality to business objectives. SA-10 developer configuration management and SA-11 developer testing ensure system accuracy.",
+      "gaps": "BCBS 239 accuracy and integrity requirements go far beyond system integrity — they require data reconciliation processes across systems, automated aggregation to minimise manual error, accuracy metrics and thresholds, proxy data documentation and approval processes, and the ability to demonstrate that aggregated risk data is accurate enough for risk management decisions. SP 800-53 addresses technical data integrity well but does not cover risk data reconciliation methodologies, aggregation accuracy validation, proxy data governance, or statistical accuracy requirements for risk reporting."
+    },
+    {
+      "id": "Principle 4",
+      "title": "Completeness",
+      "controls": [
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "SI-12",
+        "PM-05",
+        "PM-11",
+        "RA-02",
+        "RA-09",
+        "AU-02",
+        "AU-11",
+        "AU-12",
+        "PT-03",
+        "SA-04"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CM-08 component inventory supports identifying all data sources. CM-12 (Rev 5) information location identifies where risk data resides across the enterprise. CM-13 (Rev 5) data action mapping documents data processing across systems. SI-12 information management and retention ensures data is retained for aggregation. PM-05 information system inventory and PM-11 mission/business process definition identify systems holding risk data. RA-02 security categorization classifies data by criticality. RA-09 (Rev 5) criticality analysis identifies critical data elements. AU-02/AU-11/AU-12 audit events, retention, and generation ensure complete audit coverage. PT-03 personally identifiable information processing and retention addresses data completeness for privacy. SA-04 acquisition process ensures new systems capture required data.",
+      "gaps": "BCBS 239 completeness requires capturing ALL material risk data across the entire banking group — every business line, legal entity, asset type, industry, and region. This includes on- and off-balance-sheet positions, all risk types (credit, market, operational, liquidity), and group-wide consolidation. SP 800-53 addresses data inventory and classification but does not cover risk data completeness validation across banking group structures, materiality thresholds for risk data gaps, or the specific requirement to aggregate across all dimensions of risk exposure."
+    },
+    {
+      "id": "Principle 5",
+      "title": "Timeliness",
+      "controls": [
+        "CP-02",
+        "CP-07",
+        "CP-08",
+        "CP-10",
+        "SC-05",
+        "SC-06",
+        "SC-10",
+        "SC-24",
+        "SI-13",
+        "SI-17",
+        "AU-04",
+        "AU-05",
+        "AU-08",
+        "PM-09"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CP-02/CP-07/CP-08 contingency planning ensures system availability during stress periods when timely risk data is most critical. CP-10 system recovery supports rapid restoration of data aggregation capability. SC-05 denial of service protection and SC-06 resource availability ensure systems remain available. SC-10 network disconnect provides failover capability. SC-24 (Rev 5) fail in known state ensures data processing integrity under failure. SI-13 predictable failure prevention and SI-17 (Rev 5) fail-safe procedures maintain system availability. AU-04 audit log storage capacity ensures logging does not impede system performance. AU-05 response to audit logging process failures handles degradation gracefully. AU-08 time stamps supports time-critical data reconciliation. PM-09 risk management strategy addresses risk tolerance for availability.",
+      "gaps": "BCBS 239 timeliness is about the speed of risk data aggregation and delivery to decision-makers — banks must produce aggregate risk data rapidly enough for risk management decisions, including during stress/crisis periods. This requires specific SLAs for data freshness, near-real-time aggregation for market risk, and the ability to produce ad hoc reports quickly. SP 800-53 addresses system availability and resilience but does not cover data aggregation SLAs, risk report production timelines, or the specific requirement to deliver risk data within defined time windows for board and senior management consumption."
+    },
+    {
+      "id": "Principle 6",
+      "title": "Adaptability",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "CM-09",
+        "SA-03",
+        "SA-08",
+        "SA-15",
+        "SA-17",
+        "PL-08",
+        "PM-07",
+        "PM-18",
+        "CP-02",
+        "IR-04",
+        "RA-03",
+        "RA-07"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CM-03/CM-04 configuration change control and impact analysis support system adaptability. CM-09 configuration management plan provides change governance. SA-03 system development lifecycle; SA-08 security engineering principles; SA-15 development process/standards; SA-17 developer architecture support building adaptable systems. PL-08 security and privacy architectures enables architectural flexibility. PM-07 enterprise architecture integration supports adaptable infrastructure. PM-18 (Rev 5) privacy program plan extends governance adaptability. CP-02 contingency planning addresses stress scenario adaptability. IR-04 incident handling supports crisis-mode reporting adaptation. RA-03 risk assessment and RA-07 (Rev 5) risk response provide methodologies for adapting to emerging risks.",
+      "gaps": "BCBS 239 adaptability requires banks to produce ad hoc risk reports on demand, adapt aggregation to new risk types or business structures, respond to supervisory queries with bespoke data cuts, and modify reporting during stress/crisis scenarios. SP 800-53 supports system change management and architectural flexibility but does not address the specific ability to produce customised risk aggregations on demand, adapt data models to new risk categories, or the regulatory expectation for flexible risk reporting that can respond to evolving supervisory requirements."
+    },
+    {
+      "id": "Principle 7",
+      "title": "Accuracy (Risk Reporting)",
+      "controls": [
+        "SI-06",
+        "SI-07",
+        "SI-10",
+        "SI-11",
+        "SI-15",
+        "AU-06",
+        "AU-07",
+        "AU-10",
+        "CA-02",
+        "CA-07",
+        "SA-11",
+        "SC-16"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SI-06 security function verification and SI-07 software/firmware/information integrity validate data processing accuracy. SI-10 information input validation and SI-11 error handling ensure data quality at boundaries. SI-15 information output filtering prevents inaccurate data in reports. AU-06 audit record review/analysis supports report reconciliation activities. AU-07 audit record reduction and report generation provides report generation capability. AU-10 non-repudiation ensures accountability for reported data. CA-02 control assessments and CA-07 continuous monitoring provide ongoing validation. SA-11 developer testing ensures system accuracy. SC-16 transmission of security and privacy attributes maintains data attribution.",
+      "gaps": "BCBS 239 report accuracy requires reconciliation of aggregated data against source systems, validation of report outputs against known positions, error quantification and correction processes, and assurance that reports reflect risk positions exactly. SP 800-53 provides technical data integrity and verification controls but does not cover risk report reconciliation processes, report validation against financial positions, tolerance thresholds for report accuracy, or the specific requirement that reports precisely convey aggregated risk data."
+    },
+    {
+      "id": "Principle 8",
+      "title": "Comprehensiveness (Risk Reporting)",
+      "controls": [
+        "PM-05",
+        "PM-09",
+        "PM-11",
+        "RA-02",
+        "RA-03",
+        "RA-09",
+        "PL-02",
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 40,
+      "rationale": "PM-05 information system inventory and PM-11 mission/business process definition identify systems and processes that should be covered by risk reporting. PM-09 risk management strategy establishes risk scope. RA-02 security categorization and RA-03 risk assessment identify risk areas. RA-09 (Rev 5) criticality analysis supports identifying material risk areas requiring reporting coverage. PL-02 system security plan documents system boundaries and risk scope. CA-02 control assessments and CA-07 continuous monitoring provide visibility into risk posture across the enterprise.",
+      "gaps": "BCBS 239 comprehensiveness requires risk reports to cover ALL material risk areas — credit, market, operational, liquidity, legal, and reputational risk — with depth and scope proportional to the bank's complexity. Reports must cover exposures across business lines, legal entities, and portfolios. SP 800-53 addresses information security risk comprehensively but does not cover financial risk categories (credit, market, liquidity risk), capital adequacy reporting, or the requirement that reporting depth should scale with institutional complexity and risk profile."
+    },
+    {
+      "id": "Principle 9",
+      "title": "Clarity and Usefulness (Risk Reporting)",
+      "controls": [
+        "PL-02",
+        "PM-09",
+        "SI-11",
+        "SI-15",
+        "AU-07"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PL-02 system security plan provides a model for clear documentation. PM-09 risk management strategy addresses risk communication. SI-11 error handling and SI-15 information output filtering support report quality by ensuring clean data outputs. AU-07 audit record reduction and report generation provides some report generation and formatting capability.",
+      "gaps": "BCBS 239 clarity and usefulness is fundamentally about report design and communication — reports must be concise yet comprehensive, include appropriate balance of data and interpretation, provide context and qualitative explanations, include forward-looking risk assessments, and facilitate informed board decision-making. SP 800-53 does not address risk report formatting, readability, qualitative analysis requirements, forward-looking risk assessment presentation, or the usability of risk information for non-technical board recipients."
+    },
+    {
+      "id": "Principle 10",
+      "title": "Frequency (Risk Reporting)",
+      "controls": [
+        "CA-07",
+        "AU-06",
+        "PM-14",
+        "PM-31",
+        "SI-04"
+      ],
+      "coverage_pct": 35,
+      "rationale": "CA-07 continuous monitoring establishes ongoing assessment cadence. AU-06 audit review, analysis, and reporting provides regular review cycles. PM-14 testing, training, and monitoring program establishes periodic activities. PM-31 (Rev 5) continuous monitoring strategy formalises monitoring frequency decisions. SI-04 system monitoring supports ongoing data collection.",
+      "gaps": "BCBS 239 frequency requires the board and senior management to set the frequency of risk report production and distribution based on the nature and volatility of risks, with the ability to increase frequency during stress/crisis periods. Reports should be produced at least monthly for most risk areas, with more frequent reporting for market risk. SP 800-53 addresses monitoring cadence for security controls but does not prescribe risk report production schedules, escalation triggers for increased reporting frequency, or board-level frequency determination authority."
+    },
+    {
+      "id": "Principle 11",
+      "title": "Distribution (Risk Reporting)",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-06",
+        "AC-16",
+        "AC-21",
+        "AC-22",
+        "SC-08",
+        "SC-13",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "PT-05",
+        "PM-12"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-01/AC-02/AC-03 access control policy, account management, and enforcement control who receives reports. AC-04 information flow enforcement governs how risk reports are distributed across boundaries. AC-06 least privilege limits report access to authorised recipients. AC-16 security and privacy attributes supports labelling reports by classification. AC-21 information sharing enables controlled sharing with authorised parties. AC-22 publicly accessible content prevents inadvertent public disclosure. SC-08 transmission confidentiality and integrity and SC-13 cryptographic protection secure report distribution channels. MP-02/MP-03/MP-04/MP-05 media protection controls secure report media. PT-05 privacy notice supports transparency in data sharing. PM-12 insider threat program addresses risks of report leakage.",
+      "gaps": "BCBS 239 distribution requires reports to reach the right recipients (board, senior management, risk committees) in a timely manner while maintaining confidentiality. This includes ensuring reports are distributed to all relevant parties across the banking group, including subsidiaries in different jurisdictions. SP 800-53 provides strong access control and confidentiality but does not address risk report distribution lists, timeliness of report delivery to board members, cross-jurisdictional distribution requirements, or the governance of who should receive which risk reports."
+    },
+    {
+      "id": "Principle 12",
+      "title": "Supervisory Review",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-06",
+        "CA-07",
+        "PM-06",
+        "PM-09",
+        "PM-10",
+        "AU-06"
+      ],
+      "coverage_pct": 30,
+      "rationale": "CA-02 control assessments and CA-06 authorisation support review processes. CA-05 plan of action and milestones enables tracking remediation of findings. CA-07 continuous monitoring provides ongoing supervisory visibility. PM-06 measures of performance enables quantitative review. PM-09 risk management strategy and PM-10 security authorisation process provide review frameworks. AU-06 audit review and analysis supports examination activities.",
+      "gaps": "BCBS 239 Principle 12 is primarily about external supervisory review — regulators periodically evaluating a bank's compliance with all 11 bank-facing principles. This includes supervisory assessment methodologies, on-site examinations, off-site reviews of self-assessments, and the ability for supervisors to require independent third-party reviews. SP 800-53 addresses internal assessment and continuous monitoring but does not cover external supervisory review processes, Basel supervisory assessment methodologies, or the specific mechanisms by which banking regulators evaluate data governance compliance."
+    },
+    {
+      "id": "Principle 13",
+      "title": "Remedial Actions and Supervisory Measures",
+      "controls": [
+        "CA-05",
+        "RA-07",
+        "PM-04",
+        "PM-09",
+        "PM-10",
+        "IR-08"
+      ],
+      "coverage_pct": 25,
+      "rationale": "CA-05 plan of action and milestones provides a remediation tracking mechanism. RA-07 (Rev 5) risk response establishes a structured approach to addressing identified deficiencies. PM-04 plan of action and milestones process enables remediation planning. PM-09 risk management strategy provides risk tolerance context for remediation prioritisation. PM-10 security authorisation process includes ongoing remediation requirements. IR-08 incident response plan addresses response to identified deficiencies.",
+      "gaps": "BCBS 239 Principle 13 is fundamentally about supervisory enforcement — regulators must have tools and resources to require banks to fix deficiencies in risk data aggregation and reporting, including the ability to impose Pillar 2 capital add-ons, restrict business activities, or take other supervisory measures. SP 800-53 provides internal remediation mechanisms (POA&M) but does not address external supervisory enforcement powers, capital adequacy implications of data governance failures, regulatory escalation processes, or the specific supervisory tools available under Basel frameworks."
+    },
+    {
+      "id": "Principle 14",
+      "title": "Home/Host Cooperation",
+      "controls": [
+        "PM-15",
+        "PM-16",
+        "AC-20",
+        "CA-03",
+        "SA-09"
+      ],
+      "coverage_pct": 20,
+      "rationale": "PM-15 security and privacy groups and associations supports information sharing between jurisdictions. PM-16 threat awareness program provides cross-organisational threat intelligence sharing. AC-20 use of external systems and CA-03 information exchange address cross-boundary interactions. SA-09 external system services governs relationships with external parties.",
+      "gaps": "BCBS 239 Principle 14 addresses supervisory cooperation between home and host regulators across jurisdictions — sharing of supervisory findings, coordinating remedial actions, resolving cross-border data governance issues, and ensuring consistent implementation across a banking group's global operations. SP 800-53 addresses some inter-organisational information sharing but does not cover regulatory cooperation frameworks, cross-jurisdictional supervisory coordination, home/host regulatory dialogue, or the specific Basel framework mechanisms for international supervisory cooperation."
+    }
+  ],
+  "summary": {
+    "total_clauses": 14,
+    "average_coverage": 43.4,
+    "full_count": 0,
+    "substantial_count": 2,
+    "partial_count": 7,
+    "weak_count": 5,
+    "none_count": 0
+  }
+}

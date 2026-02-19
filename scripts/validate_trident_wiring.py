@@ -112,14 +112,19 @@ def main():
     node_types = sorted(gs['node_types'].keys())
     edge_types = sorted(gs['edge_types'].keys())
 
-    explorer_js = read_file(EXPLORER_JS)
-    model_js = read_file(MODEL_JS)
-    explorer_astro = read_file(EXPLORER_ASTRO)
-    model_astro = read_file(MODEL_ASTRO)
+    # Website files may not exist in CI (osa-data repo checked out alone)
+    has_website = os.path.isfile(EXPLORER_JS)
+    explorer_js = read_file(EXPLORER_JS) if has_website else ''
+    model_js = read_file(MODEL_JS) if has_website else ''
+    explorer_astro = read_file(EXPLORER_ASTRO) if has_website else ''
+    model_astro = read_file(MODEL_ASTRO) if has_website else ''
 
     errors = []
     warnings = []
     checks = 0
+
+    if not has_website:
+        warnings.append('Website files not found — skipping Explorer/ERD JS checks (data-only mode)')
 
     # ═══════════════════════════════════════════════════════════
     # Mapping completeness (catches new types before anything else)
@@ -142,45 +147,8 @@ def main():
         warnings.append(f'EDGE_TYPE_MAP stale entries: {", ".join(sorted(stale_edges))}')
 
     # ═══════════════════════════════════════════════════════════
-    # ERD checks — data-driven contract validation
+    # Data-only checks (always run, even without website checkout)
     # ═══════════════════════════════════════════════════════════
-    # ERD is now fully data-driven: model.astro derives all config from data
-    # at build time and injects it as window.__tridentModel. The JS reads from
-    # modelData, not hardcoded constants. Build-time validation in model.astro
-    # catches any mismatches. Here we verify the contract is intact.
-
-    # Check ERD JS reads from modelData (data-driven, no hardcoded entity types)
-    checks += 1
-    if 'modelData.nodeConfig' not in model_js and 'nc[' not in model_js:
-        errors.append('ERD JS does not read from modelData.nodeConfig (data-driven contract broken)')
-
-    checks += 1
-    if 'modelData.edgeConfig' not in model_js and 'ec[' not in model_js:
-        errors.append('ERD JS does not read from modelData.edgeConfig (data-driven contract broken)')
-
-    checks += 1
-    if 'modelData.pathConfig' not in model_js and 'paths[' not in model_js:
-        errors.append('ERD JS does not read from modelData.pathConfig (data-driven contract broken)')
-
-    # Check model.astro has build-time validation (throws on entity type mismatch)
-    checks += 1
-    if 'validationErrors' not in model_astro or 'build-time validation failed' not in model_astro:
-        errors.append('ERD model.astro missing build-time validation')
-
-    # Check model.astro loads graph-edges.json for edge derivation
-    checks += 1
-    if 'graph-edges.json' not in model_astro:
-        errors.append('ERD model.astro not loading graph-edges.json for edge derivation')
-
-    # Check model.astro generates legend swatches from data (entity-swatch class)
-    checks += 1
-    if 'entity-swatch' not in model_astro:
-        errors.append('ERD model.astro missing data-driven legend swatches')
-
-    # Check model.astro generates node colours from metadata node_types
-    checks += 1
-    if 'metadata.graph_summary.node_types' not in model_astro:
-        errors.append('ERD model.astro not reading metadata.graph_summary.node_types')
 
     # Check edge config covers all metadata edge types (via graph-edges.json)
     graph_edges = load_json(os.path.join(DATA, 'graph-edges.json'))
@@ -189,83 +157,119 @@ def main():
         if et not in graph_edges:
             errors.append(f'graph-edges.json missing edge type: {et}')
 
-    # Check node colour map in model.astro covers all metadata node types
-    for nt in node_types:
-        checks += 1
-        if nt not in model_astro:
-            errors.append(f'ERD model.astro does not reference node type: {nt} (missing from NODE_COLOUR_MAP?)')
-
     # ═══════════════════════════════════════════════════════════
-    # Explorer checks — node types (uses mapped names)
+    # ERD checks — data-driven contract validation (requires website)
     # ═══════════════════════════════════════════════════════════
 
-    for nt in node_types:
-        explorer_name = NODE_TYPE_MAP.get(nt, nt)
-
-        # COLOURS entry
+    if has_website:
+        # Check ERD JS reads from modelData (data-driven, no hardcoded entity types)
         checks += 1
-        if not check_key_in_js(explorer_js, explorer_name):
-            errors.append(f'Explorer COLOURS missing: {explorer_name} (for {nt})')
+        if 'modelData.nodeConfig' not in model_js and 'nc[' not in model_js:
+            errors.append('ERD JS does not read from modelData.nodeConfig (data-driven contract broken)')
 
-        # getNodeData handler (type === 'xxx')
         checks += 1
-        if f"'{explorer_name}'" not in explorer_js and f'"{explorer_name}"' not in explorer_js:
-            errors.append(f'Explorer JS not referencing node type: {explorer_name} (for {nt})')
+        if 'modelData.edgeConfig' not in model_js and 'ec[' not in model_js:
+            errors.append('ERD JS does not read from modelData.edgeConfig (data-driven contract broken)')
 
-        # showDetailPanel handler
         checks += 1
-        panel_pattern = rf"type\s*===\s*'{re.escape(explorer_name)}'"
-        if not re.search(panel_pattern, explorer_js):
-            errors.append(f'Explorer detail panel missing: {explorer_name} (for {nt})')
+        if 'modelData.pathConfig' not in model_js and 'paths[' not in model_js:
+            errors.append('ERD JS does not read from modelData.pathConfig (data-driven contract broken)')
 
-    # ═══════════════════════════════════════════════════════════
-    # Explorer checks — edge types (uses mapped names)
-    # ═══════════════════════════════════════════════════════════
+        # Check model.astro has build-time validation
+        checks += 1
+        if 'validationErrors' not in model_astro or 'build-time validation failed' not in model_astro:
+            errors.append('ERD model.astro missing build-time validation')
 
-    seen_internal = set()
-    for meta_name, internal_names in EDGE_TYPE_MAP.items():
-        if meta_name not in edge_types:
-            continue
-        for iname in internal_names:
-            if iname in seen_internal:
-                continue  # Skip duplicate internal names (e.g. datatype-control)
-            seen_internal.add(iname)
+        checks += 1
+        if 'graph-edges.json' not in model_astro:
+            errors.append('ERD model.astro not loading graph-edges.json for edge derivation')
 
-            # Edge type referenced in explorer JS
+        checks += 1
+        if 'entity-swatch' not in model_astro:
+            errors.append('ERD model.astro missing data-driven legend swatches')
+
+        checks += 1
+        if 'metadata.graph_summary.node_types' not in model_astro:
+            errors.append('ERD model.astro not reading metadata.graph_summary.node_types')
+
+        # Check node colour map covers all metadata node types
+        for nt in node_types:
             checks += 1
-            if f"'{iname}'" not in explorer_js and f'"{iname}"' not in explorer_js:
-                errors.append(f'Explorer edge type missing: {iname} (for {meta_name})')
+            if nt not in model_astro:
+                errors.append(f'ERD model.astro does not reference node type: {nt} (missing from NODE_COLOUR_MAP?)')
 
-            # Legend data-edge attribute
+    # ═══════════════════════════════════════════════════════════
+    # Explorer checks — node types (requires website)
+    # ═══════════════════════════════════════════════════════════
+
+    if has_website:
+        for nt in node_types:
+            explorer_name = NODE_TYPE_MAP.get(nt, nt)
+
+            # COLOURS entry
             checks += 1
-            if f'data-edge="{iname}"' not in explorer_astro:
-                errors.append(f'Explorer legend missing: data-edge="{iname}" (for {meta_name})')
+            if not check_key_in_js(explorer_js, explorer_name):
+                errors.append(f'Explorer COLOURS missing: {explorer_name} (for {nt})')
 
-    # ═══════════════════════════════════════════════════════════
-    # Catalog loading check — explorer.astro must load each catalog
-    # ═══════════════════════════════════════════════════════════
+            # getNodeData handler (type === 'xxx')
+            checks += 1
+            if f"'{explorer_name}'" not in explorer_js and f'"{explorer_name}"' not in explorer_js:
+                errors.append(f'Explorer JS not referencing node type: {explorer_name} (for {nt})')
 
-    catalog_files = [
-        'technique-catalog.json',
-        'mitigation-catalog.json',
-        'detection-catalog.json',
-        'cis-safeguard-index.json',
-        'weakness-catalog.json',
-        'actor-catalog.json',
-        'process-capability-catalog.json',
-        'technology-capability-catalog.json',
-        'adversary-tier-catalog.json',
-        'human-factors-catalog.json',
-        'cloud-service-catalog.json',
-        'data-classification-catalog.json',
-        'protocol-catalog.json',
-        'insider-stage-catalog.json',
-        'identity-domain-catalog.json',
-    ]
-    for cat_file in catalog_files:
-        checks += 1
-        if cat_file not in explorer_astro:
-            errors.append(f'Explorer build not loading: {cat_file}')
+            # showDetailPanel handler
+            checks += 1
+            panel_pattern = rf"type\s*===\s*'{re.escape(explorer_name)}'"
+            if not re.search(panel_pattern, explorer_js):
+                errors.append(f'Explorer detail panel missing: {explorer_name} (for {nt})')
+
+        # ═══════════════════════════════════════════════════════════
+        # Explorer checks — edge types (uses mapped names)
+        # ═══════════════════════════════════════════════════════════
+
+        seen_internal = set()
+        for meta_name, internal_names in EDGE_TYPE_MAP.items():
+            if meta_name not in edge_types:
+                continue
+            for iname in internal_names:
+                if iname in seen_internal:
+                    continue  # Skip duplicate internal names (e.g. datatype-control)
+                seen_internal.add(iname)
+
+                # Edge type referenced in explorer JS
+                checks += 1
+                if f"'{iname}'" not in explorer_js and f'"{iname}"' not in explorer_js:
+                    errors.append(f'Explorer edge type missing: {iname} (for {meta_name})')
+
+                # Legend data-edge attribute
+                checks += 1
+                if f'data-edge="{iname}"' not in explorer_astro:
+                    errors.append(f'Explorer legend missing: data-edge="{iname}" (for {meta_name})')
+
+        # ═══════════════════════════════════════════════════════════
+        # Catalog loading check — explorer.astro must load each catalog
+        # ═══════════════════════════════════════════════════════════
+
+        catalog_files = [
+            'technique-catalog.json',
+            'mitigation-catalog.json',
+            'detection-catalog.json',
+            'cis-safeguard-index.json',
+            'weakness-catalog.json',
+            'actor-catalog.json',
+            'process-capability-catalog.json',
+            'technology-capability-catalog.json',
+            'adversary-tier-catalog.json',
+            'human-factors-catalog.json',
+            'cloud-service-catalog.json',
+            'data-classification-catalog.json',
+            'protocol-catalog.json',
+            'insider-stage-catalog.json',
+            'identity-domain-catalog.json',
+        ]
+        for cat_file in catalog_files:
+            checks += 1
+            if cat_file not in explorer_astro:
+                errors.append(f'Explorer build not loading: {cat_file}')
 
     # ═══════════════════════════════════════════════════════════
     # Output

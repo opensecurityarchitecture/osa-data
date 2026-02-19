@@ -1,0 +1,608 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "eba_ict",
+  "framework_name": "EBA ICT Guidelines (EBA/GL/2019/04)",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis of EBA/GL/2019/04 Guidelines on ICT and Security Risk Management. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. The EBA ICT Guidelines have EU-specific supervisory expectations, PSD2 payment service linkages, and outsourcing provisions that extend beyond SP 800-53 scope. DORA supersedes most sections from January 2025, but the guidelines remain widely referenced as interpretive basis. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "3.1",
+      "title": "Proportionality",
+      "controls": [
+        "PL-10",
+        "PL-11",
+        "PM-01",
+        "RA-01"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PL-10 (new in Rev 5) baseline selection and PL-11 (new in Rev 5) baseline tailoring provide a risk-based approach to control selection (low/moderate/high baselines), partially aligning with the proportionality principle. PM-01 programme plan and RA-01 risk assessment policy support scaling controls to the institution's risk profile.",
+      "gaps": "The EBA proportionality principle allows institutions to scale ICT risk management measures based on size, internal organisation, nature, scale, complexity, and risk profile of activities. SP 800-53 uses system-based categorisation (low/moderate/high) rather than institution-based proportionality. No equivalent of the EBA's entity-level proportionality that considers business model complexity, interconnectedness, and systemic importance."
+    },
+    {
+      "id": "3.2.1",
+      "title": "Governance — management body responsibility and accountability",
+      "controls": [
+        "AC-01",
+        "CA-01",
+        "PL-01",
+        "PL-09",
+        "PM-01",
+        "PM-02",
+        "PM-29"
+      ],
+      "coverage_pct": 68,
+      "rationale": "AC-01, CA-01, PL-01 establish organisational security policies. PM-01 programme plan and PM-02 senior information security role provide governance structure. PL-09 (new in Rev 5) central management enables unified governance across the organisation. PM-29 (new in Rev 5) risk management programme leadership provides senior leadership engagement in risk management, partially aligning with management body oversight.",
+      "gaps": "EBA requires the management body to have ultimate responsibility for setting and approving ICT and security risk management strategy, including defining appropriate risk tolerance/appetite for ICT risk. SP 800-53 establishes policy ownership but lacks specific board-level accountability, personal liability, and the requirement for the management body to ensure adequate budget and staffing for ICT risk management. PM-29 improves senior leadership engagement but does not create the EU regulatory expectation of management body personal responsibility."
+    },
+    {
+      "id": "3.2.2",
+      "title": "Governance — ICT strategy",
+      "controls": [
+        "PL-01",
+        "PL-02",
+        "PL-09",
+        "PM-01",
+        "PM-03",
+        "SA-02"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PL-01 security planning policy and PL-02 system security plans address planning. PM-01 programme plan and PM-03 capital planning provide strategic resource allocation. SA-02 allocation of resources addresses the budgeting process. PL-09 (new in Rev 5) central management supports a unified ICT strategy across the organisation.",
+      "gaps": "EBA requires a specific ICT strategy aligned with the overall business strategy, approved by the management body, and regularly updated. The strategy must cover evolution of ICT architecture, key dependencies on third-party providers, and ICT response and recovery objectives. SP 800-53 covers planning and resource allocation but lacks the concept of a unified ICT strategy document with business alignment. PM-03 and SA-02 address budgeting but not the strategic direction-setting EBA requires."
+    },
+    {
+      "id": "3.2.3",
+      "title": "Governance — use of third-party providers",
+      "controls": [
+        "AC-20",
+        "PS-07",
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06"
+      ],
+      "coverage_pct": 72,
+      "rationale": "AC-20 use of external systems, SA-04 acquisition process, SA-09 external information system services, and SR-01 through SR-06 supply chain risk management provide a comprehensive third-party risk foundation. PS-07 external personnel security addresses third-party personnel. SR-05 acquisition strategies and SR-06 supplier assessments enable ongoing monitoring.",
+      "gaps": "EBA requires institutions to retain full responsibility for compliance when outsourcing ICT services, maintain adequate oversight capabilities, and ensure the management body approves third-party arrangements for critical functions. SP 800-53 supply chain controls address vendor risk but do not require management body approval for critical outsourcing, explicit retention of regulatory responsibility, or alignment with EBA Outsourcing Guidelines (EBA/GL/2019/02) and EBA Cloud Outsourcing Guidelines."
+    },
+    {
+      "id": "3.3.1",
+      "title": "ICT and security risk management framework — organisation and objectives",
+      "controls": [
+        "AC-01",
+        "CA-01",
+        "PL-01",
+        "PL-09",
+        "PL-10",
+        "PL-11",
+        "PM-01",
+        "PM-02",
+        "PM-28",
+        "PM-29",
+        "RA-01"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-01, CA-01, PL-01, RA-01 provide policy and planning foundations. PM-01 programme plan, PM-02 senior information security role, and PM-28 (new in Rev 5) risk framing establish governance structure. PL-09 central management, PL-10 baseline selection, and PL-11 baseline tailoring (all new in Rev 5) enable systematic framework implementation. PM-29 (new in Rev 5) risk management programme leadership ensures senior engagement.",
+      "gaps": "EBA requires three lines of defence, with the ICT risk management function independent from ICT operations and development. The framework must have clear objectives and be proportionate. SP 800-53 supports multi-tiered governance through PM-family controls but does not prescribe the three lines of defence model or require specific organisational independence of risk management from operational ICT functions."
+    },
+    {
+      "id": "3.3.2",
+      "title": "ICT and security risk management framework — identification of functions, processes and assets",
+      "controls": [
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "PM-05",
+        "PM-11",
+        "RA-02",
+        "RA-09",
+        "SA-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CM-08 component inventory provides asset identification. RA-02 security categorisation classifies assets by criticality. CM-12 (new in Rev 5) information location identifies where data resides. CM-13 (new in Rev 5) data action mapping documents data processing flows. RA-09 (new in Rev 5) criticality analysis identifies critical components and functions. PM-05 system inventory and PM-11 mission/business process definition support business function mapping. SA-05 system documentation.",
+      "gaps": "EBA requires identification of all business functions, supporting processes, information assets, and ICT assets with interdependencies and criticality assessment. SP 800-53 provides strong asset and data identification with Rev 5 additions. Minor gap: EBA specifically requires mapping interdependencies between ICT assets and business processes with explicit criticality tiers to inform risk tolerance levels."
+    },
+    {
+      "id": "3.3.3",
+      "title": "ICT and security risk management framework — classification and risk assessment",
+      "controls": [
+        "PM-09",
+        "PM-28",
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-07",
+        "RA-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "RA-01 policy, RA-02 security categorisation, and RA-03 risk assessment provide comprehensive risk assessment. RA-07 (new in Rev 5) risk response adds explicit risk treatment decisions. RA-09 (new in Rev 5) criticality analysis identifies critical assets. PM-09 risk management strategy and PM-28 (new in Rev 5) risk framing establish the organisational risk management approach.",
+      "gaps": "EBA requires classification of ICT assets and information according to criticality and sensitivity, with risk assessments conducted at least annually or upon major changes. SP 800-53 risk assessment is strong and Rev 5 additions improve coverage. Minor gap: EBA's specific requirement for annual review cycle and the link between classification and proportionate protection measures in a banking context."
+    },
+    {
+      "id": "3.3.4",
+      "title": "ICT and security risk management framework — risk mitigation",
+      "controls": [
+        "CA-05",
+        "PL-10",
+        "PL-11",
+        "PM-04",
+        "RA-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-05 plan of action and milestones tracks remediation. RA-07 (new in Rev 5) risk response provides explicit risk treatment options (accept, avoid, mitigate, share, transfer). PL-10 and PL-11 (new in Rev 5) baseline selection and tailoring ensure controls match risk. PM-04 plan of action and milestones addresses ongoing tracking of mitigation actions.",
+      "gaps": "EBA requires risk mitigation measures proportionate to identified risks, with clear timelines for implementation. SP 800-53 provides strong risk mitigation frameworks. Minor gap: EBA's specific requirement that residual risks be formally accepted by the management body and documented within the institution's risk appetite."
+    },
+    {
+      "id": "3.3.5",
+      "title": "ICT and security risk management framework — reporting",
+      "controls": [
+        "AU-01",
+        "CA-07",
+        "PM-06",
+        "RA-03",
+        "RA-04",
+        "RA-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AU-01 audit policy, CA-07 continuous monitoring, and RA-03/RA-04 risk assessment and updates produce risk information. PM-06 security measures of performance provides metrics reporting. RA-07 (new in Rev 5) risk response generates documented risk treatment decisions that could inform management reporting.",
+      "gaps": "EBA requires periodic reporting to the management body on ICT risks, ICT risk management activities, and the status of risk mitigation measures. Reporting must also be provided to competent authorities upon request. SP 800-53 generates risk information but has no specific requirement for management body or regulatory authority reporting on ICT risk. The EU supervisory reporting obligation to national competent authorities is entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "3.3.6",
+      "title": "ICT and security risk management framework — audit",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "CA-09"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CA-02 security assessments and CA-07 continuous monitoring provide review mechanisms. CA-05 plan of action and milestones tracks findings. CA-09 (new in Rev 5) internal system connections adds authorisation and monitoring of internal connections, extending audit scope.",
+      "gaps": "EBA requires ICT audits by internal or external auditors with appropriate qualifications, independence, and adequate budget. The audit function must cover the ICT risk management framework, ICT systems, and compliance with the institution's ICT policies. SP 800-53 provides assessment controls but does not prescribe the EBA's specific requirements for auditor independence, qualification, EU regulatory audit expectations, or the link to the institution's internal audit function under the three lines of defence model."
+    },
+    {
+      "id": "3.4.1",
+      "title": "Information security — information security policy",
+      "controls": [
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PL-01",
+        "PM-01",
+        "PM-09",
+        "PS-01",
+        "PT-01",
+        "RA-01",
+        "SA-01",
+        "SC-01",
+        "SI-01",
+        "SR-01"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SP 800-53 policy controls across all families (-01 controls) provide comprehensive information security policy foundations, including PT-01 privacy policy and procedures which addresses data protection within the security policy scope. PM-01 programme plan and PM-09 risk management strategy address enterprise-level policy. The breadth of NIST policy controls across all 20 families aligns well with EBA's requirement for a comprehensive information security policy approved by the management body.",
+      "gaps": "EBA requires the information security policy to be approved by the management body, communicated to all staff and relevant third parties, and reviewed at least annually. SP 800-53 provides comprehensive policy coverage but does not mandate management body approval of the overarching security policy or specific annual review requirements as the EBA does."
+    },
+    {
+      "id": "3.4.2",
+      "title": "Information security — logical security",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-17",
+        "AC-24",
+        "IA-01",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-08",
+        "IA-12",
+        "SC-10"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-01 through AC-12 provide comprehensive logical access control including account management, enforcement, information flow, separation of duties, least privilege, unsuccessful logon attempts, concurrent sessions, session lock, and session termination. AC-17 remote access, AC-24 (new in Rev 5) access control decisions address dynamic authorisation. IA-01 through IA-06, IA-08 cover identification and authentication comprehensively. IA-12 identity proofing strengthens user verification. SC-10 network disconnect.",
+      "gaps": "Minimal. EBA requires documented procedures for logical access control (identity and access management) that are implemented, enforced, monitored, and periodically reviewed. SP 800-53 AC and IA families provide thorough coverage. AC-24 adds attribute-based access decisions. Minor gap: EBA requires access control monitoring for anomaly detection specific to banking systems."
+    },
+    {
+      "id": "3.4.3",
+      "title": "Information security — physical security",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-08",
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-17",
+        "PE-18"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PE-01 through PE-06 provide physical access policy, authorisations, enforcement, monitoring, and visitor control. PE-08 visitor records, PE-09 power equipment, PE-10 emergency shutoff, PE-11 emergency power, PE-12 emergency lighting, PE-13 fire protection, PE-14 temperature/humidity controls, and PE-15 water damage protection address environmental hazards comprehensively. PE-17 alternate work site and PE-18 location of system components address facility planning.",
+      "gaps": "Minimal. EBA requires physical access to be limited to authorised individuals based on tasks and responsibilities, with regular review and prompt revocation. Environmental protection must be commensurate with building importance and criticality of operations. SP 800-53 PE family provides comprehensive physical security. Minor gap: EBA's specific requirement to link physical access to the criticality classification of ICT systems in each facility."
+    },
+    {
+      "id": "3.4.4",
+      "title": "Information security — ICT operations security",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-11",
+        "SA-08",
+        "SC-07",
+        "SC-28",
+        "SI-02",
+        "SI-03",
+        "SI-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CM-02 baseline configuration, CM-03 configuration change control, CM-05 access restrictions for change, CM-06 configuration settings, CM-07 least functionality, and CM-08 component inventory provide operations security foundations. CM-11 user-installed software controls shadow IT. SA-08 security and privacy engineering principles guide secure operations. SC-07 boundary protection and SC-28 protection of information at rest address network and data security. SI-02 flaw remediation, SI-03 malicious code protection, and SI-07 software integrity verification ensure operational integrity.",
+      "gaps": "Minor. EBA requires documented procedures for ICT operations including scheduling, monitoring, backup and restore, and error/exception handling. SP 800-53 provides strong operational security coverage. Minor gap: EBA's specific requirements for batch scheduling procedures and IT operations run-book documentation are operational process requirements not fully addressed by SP 800-53 control objectives."
+    },
+    {
+      "id": "3.4.5",
+      "title": "Information security — security monitoring",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-11",
+        "AU-12",
+        "AU-13",
+        "AU-14",
+        "CA-07",
+        "SI-04",
+        "SI-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AU-02 through AU-12 provide comprehensive audit logging including event definition, content, storage capacity, failure response, review and analysis, reduction and reporting, time stamps, protection, retention, and generation. AU-13 (new in Rev 5) monitoring for information disclosure addresses data leak detection. AU-14 session audit enables detailed session recording. CA-07 continuous monitoring and SI-04 information system monitoring provide real-time detection capabilities. SI-05 security alerts and advisories.",
+      "gaps": "Minimal. EBA requires continuous monitoring and timely detection of anomalous ICT activities, with procedures to detect and report security events. SP 800-53 audit and monitoring controls are comprehensive. AU-13 adds disclosure monitoring. Minor gap: EBA's specific requirement to define and maintain detection thresholds aligned with the institution's risk appetite."
+    },
+    {
+      "id": "3.4.6",
+      "title": "Information security — information security reviews, assessment and testing",
+      "controls": [
+        "CA-02",
+        "CA-04",
+        "CA-07",
+        "CA-08",
+        "CM-04",
+        "RA-05",
+        "SA-11",
+        "SA-15",
+        "SI-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-02 security assessments and CA-08 penetration testing directly address security testing. CA-04 security certification and CA-07 continuous monitoring support ongoing assessment. RA-05 vulnerability scanning addresses technical testing. SA-11 developer security testing and SA-15 development process and standards cover application security testing. CM-04 monitoring configuration changes for security impact. SI-06 security functionality verification ensures controls operate correctly.",
+      "gaps": "EBA requires periodic reviews of compliance with the information security policy, with testing scope including threat-led penetration testing for institutions with critical ICT systems. SP 800-53 provides strong assessment and testing controls. Gap: EBA's specific requirement for risk-based testing frequency (at least annually for critical systems), the link to the overall ICT risk management framework, and the requirement to report test findings to the management body."
+    },
+    {
+      "id": "3.4.7",
+      "title": "Information security — information security training and awareness",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-05",
+        "AT-06",
+        "PL-04",
+        "PM-13",
+        "PM-14"
+      ],
+      "coverage_pct": 87,
+      "rationale": "AT-01 security awareness and training policy, AT-02 literacy training and awareness, AT-03 role-based training, and AT-04 training records provide comprehensive training foundations. AT-05 contacts with security groups and AT-06 (new in Rev 5) training feedback measure effectiveness. PL-04 rules of behaviour communicates security expectations. PM-13 security and privacy workforce and PM-14 testing, training, and monitoring address workforce competency.",
+      "gaps": "EBA requires mandatory ICT security awareness programmes for all staff and contractors, with training content reviewed regularly and updated to reflect the evolving threat landscape. SP 800-53 training controls are comprehensive. AT-06 improves effectiveness measurement. Minor gap: EBA requires training specifically tailored to the institution's ICT risk profile and business environment, including awareness of payment fraud schemes for relevant staff."
+    },
+    {
+      "id": "3.5(a)",
+      "title": "ICT operations management — ICT operations procedures and capacity management",
+      "controls": [
+        "CM-02",
+        "CM-06",
+        "CM-08",
+        "CP-02",
+        "MA-01",
+        "MA-02",
+        "MA-05",
+        "MA-06",
+        "PM-05",
+        "SA-03",
+        "SC-05",
+        "SC-06",
+        "SI-13"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CM-02 baseline configuration, CM-06 configuration settings, and CM-08 component inventory support operational documentation. MA-01, MA-02, MA-05, and MA-06 provide maintenance controls. PM-05 system inventory and SA-03 lifecycle support address asset lifecycle. SC-05 denial of service protection, SC-06 resource availability, and SI-13 (new in Rev 5) predictive maintenance support capacity management. CP-02 contingency plan addresses operational resilience.",
+      "gaps": "EBA requires documented ICT operations procedures including capacity and performance management, ensuring sufficient ICT capacity to meet current and forecast requirements. SP 800-53 provides good operational and capacity controls. SI-13 predictive maintenance strengthens capacity management. Gap: EBA's specific expectations for ICT operations run-books, capacity planning documentation, and formal performance benchmarking against business requirements."
+    },
+    {
+      "id": "3.5(b)",
+      "title": "ICT operations management — asset lifecycle and patch management",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "CM-08",
+        "MA-02",
+        "MA-06",
+        "SA-03",
+        "SA-22",
+        "SI-02"
+      ],
+      "coverage_pct": 87,
+      "rationale": "CM-03 configuration change control and CM-04 impact analysis support controlled changes. CM-08 component inventory tracks assets. MA-02 controlled maintenance and MA-06 timely maintenance address maintenance lifecycle. SA-03 system development lifecycle support and SA-22 unsupported system components directly address legacy and end-of-life management. SI-02 flaw remediation covers patch management.",
+      "gaps": "Minimal. EBA requires institutions to manage ICT assets through their full lifecycle including timely patching and end-of-life planning. SP 800-53 covers lifecycle management comprehensively. SA-22 addresses unsupported components. Minor gap: EBA's specific expectation for documented end-of-life and replacement strategies linked to the ICT strategy."
+    },
+    {
+      "id": "3.5(c)",
+      "title": "ICT operations management — logging and monitoring",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-08",
+        "AU-09",
+        "AU-11",
+        "AU-12",
+        "SI-04",
+        "SI-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AU-02 event logging, AU-03 content of audit records, AU-06 audit review and analysis, AU-08 time stamps, AU-09 protection of audit information, AU-11 audit record retention, and AU-12 audit record generation provide comprehensive logging. SI-04 system monitoring and SI-11 error handling support operational monitoring. Logging is a strong area of SP 800-53 alignment.",
+      "gaps": "Minimal. EBA requires logging of ICT operations activities to enable detection and resolution of ICT incidents and to facilitate forensic analysis. SP 800-53 audit family is comprehensive. Minor gap: EBA's specific requirement for log correlation with ICT incident management processes."
+    },
+    {
+      "id": "3.5(d)",
+      "title": "ICT operations management — ICT incident and problem management",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-01 incident response policy, IR-04 incident handling, IR-05 incident monitoring, IR-06 incident reporting, IR-07 incident response assistance, and IR-08 incident response plan provide comprehensive incident management. IR-02 incident response training and IR-03 incident response testing ensure preparedness. IR-09 (new in Rev 5) information spillage response adds data breach-specific handling.",
+      "gaps": "EBA requires ICT incident classification based on priority and severity, root cause analysis for significant incidents, and reporting to the management body and competent authorities. SP 800-53 IR family provides strong incident management. Gap: EBA's specific requirements for problem management (root cause trending), incident classification criteria aligned with EU supervisory expectations, and mandatory reporting of major incidents to national competent authorities."
+    },
+    {
+      "id": "3.6.1",
+      "title": "ICT project and change management — ICT project management",
+      "controls": [
+        "PL-01",
+        "PL-02",
+        "PL-07",
+        "PM-01",
+        "PM-03",
+        "PM-10",
+        "SA-01",
+        "SA-02",
+        "SA-03",
+        "SA-04",
+        "SA-08"
+      ],
+      "coverage_pct": 77,
+      "rationale": "PL-01, PL-02, PL-07 security planning and assessment. PM-01 programme plan, PM-03 capital planning, and PM-10 authorisation process. SA-01 system and services acquisition policy, SA-02 resource allocation, SA-03 lifecycle support, SA-04 acquisition process, and SA-08 security and privacy engineering principles address project acquisition and design phases.",
+      "gaps": "EBA requires ICT project management governance with clear objectives, roles, resources, risk assessment, and milestone tracking. Projects must consider ICT risk and security requirements from inception. SP 800-53 acquisition and planning controls cover project security requirements but do not prescribe the EBA's specific project governance framework including milestone-based risk assessment, project steering, and formal post-implementation reviews."
+    },
+    {
+      "id": "3.6.2",
+      "title": "ICT project and change management — ICT systems acquisition and development",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-16",
+        "SA-17",
+        "SA-20",
+        "SA-21"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-03 lifecycle support, SA-04 acquisition process, and SA-08 security engineering principles cover acquisition. SA-10 developer configuration management, SA-11 developer security testing, SA-15 development process, SA-16 developer-provided training, and SA-17 developer security and privacy architecture address development security. SA-20 (new in Rev 5) customised development of critical components and SA-21 (new in Rev 5) developer screening add assurance for high-risk development.",
+      "gaps": "EBA requires separation of development, testing, and production environments, with clear procedures for systems acquisition and development including security requirements definition, testing, and approval. SP 800-53 SA family provides strong development security controls. SA-20/SA-21 add assurance. Minor gap: EBA's specific requirement for mandatory separation of environments and formal pre-production security sign-off processes."
+    },
+    {
+      "id": "3.6.3",
+      "title": "ICT project and change management — ICT change management",
+      "controls": [
+        "CM-01",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-09",
+        "CM-14",
+        "SA-10"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CM-01 configuration management policy, CM-03 configuration change control, CM-04 impact analysis, CM-05 access restrictions for change, and CM-09 configuration management plan provide comprehensive change management. CM-14 (new in Rev 5) signed components verifies change integrity through cryptographic signatures. SA-10 developer configuration management extends to development changes.",
+      "gaps": "Minimal. EBA requires documented change management procedures with risk assessment, testing, approval, and rollback capabilities. SP 800-53 CM family provides thorough change management. CM-14 adds cryptographic integrity for changes. Minor gap: EBA's specific requirement for emergency change procedures and post-implementation reviews linked to ICT incident records."
+    },
+    {
+      "id": "3.7.1",
+      "title": "Business continuity management — business impact analysis",
+      "controls": [
+        "CP-02",
+        "PM-09",
+        "PM-11",
+        "RA-03",
+        "RA-09"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CP-02 contingency plan includes BIA concepts. RA-03 risk assessment and RA-09 (new in Rev 5) criticality analysis identify critical functions and their dependencies. PM-09 risk management strategy and PM-11 mission/business process definition support impact analysis at the enterprise level.",
+      "gaps": "EBA requires a business impact analysis assessing the potential impact of severe business disruptions, identifying critical business processes and their dependencies on ICT systems and third-party providers. SP 800-53 covers BIA within contingency planning and RA-09 improves criticality assessment. Gap: EBA's specific requirement for quantified impact assessment with recovery time and recovery point objectives for each critical business function, and explicit consideration of third-party dependencies."
+    },
+    {
+      "id": "3.7.2",
+      "title": "Business continuity management — business continuity planning",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "CP-11",
+        "CP-12",
+        "CP-13"
+      ],
+      "coverage_pct": 87,
+      "rationale": "CP-01 contingency planning policy and CP-02 contingency plan address planning. CP-06 alternate storage, CP-07 alternate processing, CP-08 telecommunications, and CP-09 system backup provide recovery infrastructure. CP-10 system recovery and reconstitution. CP-11 alternate communications provides resilient communications. CP-12 (new in Rev 5) safe mode enables degraded but functional operations. CP-13 (new in Rev 5) alternative security mechanisms provides fallback controls during disruptions.",
+      "gaps": "Minor. EBA requires business continuity plans ensuring the institution can operate critical business processes during disruptions including ICT service failures and provider outages. SP 800-53 CP family is comprehensive. CP-12/CP-13 improve degraded-mode operations. Minor gap: EBA's specific requirement for BCPs to cover third-party provider failures and to be aligned with the institution's overall business continuity framework."
+    },
+    {
+      "id": "3.7.3",
+      "title": "Business continuity management — response and recovery plans",
+      "controls": [
+        "CP-02",
+        "CP-10",
+        "IR-01",
+        "IR-04",
+        "IR-08",
+        "SC-24"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-02 contingency plan and CP-10 system recovery address recovery planning. IR-01, IR-04, and IR-08 provide incident response planning and handling. SC-24 (new in Rev 5) fail in known state ensures systems fail to a secure, defined state, supporting predictable recovery.",
+      "gaps": "EBA requires specific response and recovery plans that are activated in the event of significant ICT disruptions, with defined escalation procedures and communication plans. SP 800-53 provides strong recovery and incident response controls. SC-24 improves fail-safe behaviour. Gap: EBA's specific requirement for escalation to the management body and communication to national competent authorities during major disruptions."
+    },
+    {
+      "id": "3.7.4",
+      "title": "Business continuity management — testing of plans",
+      "controls": [
+        "CP-03",
+        "CP-04",
+        "CP-05",
+        "IR-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-03 contingency training, CP-04 contingency plan testing, and CP-05 contingency plan update provide comprehensive testing and maintenance of continuity plans. IR-03 incident response testing supports incident-focused testing.",
+      "gaps": "Minor. EBA requires testing of business continuity and response/recovery plans at least annually or after significant changes, with test scenarios covering severe but plausible disruptions. SP 800-53 CP-04 addresses testing. Minor gap: EBA's specific requirement for the annual testing minimum, testing with third-party providers, and reporting of test results and improvement plans to the management body."
+    },
+    {
+      "id": "3.7.5",
+      "title": "Business continuity management — crisis communications",
+      "controls": [
+        "CP-02",
+        "IR-06",
+        "IR-07"
+      ],
+      "coverage_pct": 52,
+      "rationale": "CP-02 contingency plan includes some communication elements. IR-06 incident reporting and IR-07 incident response assistance provide communication mechanisms.",
+      "gaps": "EBA requires effective crisis communication measures including designated crisis communication staff, procedures for communicating with internal and external stakeholders (including clients, counterparts, media, and competent authorities). SP 800-53 IR-06/IR-07 cover incident reporting but do not address the EBA's specific requirements for external crisis communication plans, client notification procedures, media handling, or designated crisis communication roles."
+    },
+    {
+      "id": "3.8(a)",
+      "title": "Payment service user relationship management — PSU awareness and communication",
+      "controls": [
+        "AT-02",
+        "PM-20",
+        "PM-21",
+        "SC-15"
+      ],
+      "coverage_pct": 45,
+      "rationale": "AT-02 literacy training and awareness addresses general security awareness. PM-20 (new in Rev 5) dissemination of privacy programme information and PM-21 (new in Rev 5) accounting of disclosures support transparency requirements. SC-15 collaborative computing restrictions covers controlled communications.",
+      "gaps": "EBA requires PSPs to provide payment service users with assistance on security matters, inform them of security risks, keep them updated on changes, and provide secure communication channels. SP 800-53 is inward-facing (organisational security) and does not address customer-facing security communications, user assistance, or the PSD2-specific transparency obligations for payment services. This is a significant gap as PSD2 user relationship requirements are entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "3.8(b)",
+      "title": "Payment service user relationship management — secure authentication and communication channels",
+      "controls": [
+        "IA-02",
+        "IA-05",
+        "IA-08",
+        "IA-11",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IA-02 identification and authentication, IA-05 authenticator management, and IA-08 non-organisational users address authentication. IA-11 re-authentication supports strong customer authentication (SCA) concepts. SC-08 transmission confidentiality and integrity, SC-12 cryptographic key management, SC-13 cryptographic protection, and SC-23 session authenticity provide secure communication channel controls.",
+      "gaps": "EBA requires PSPs to implement strong customer authentication (SCA) under PSD2, provide secure communication channels for payment initiation and notifications, and support customer device authentication. SP 800-53 IA and SC families provide strong authentication and channel security. Gap: EBA's specific SCA requirements (two-factor authentication for payment transactions), dynamic linking for remote payment transactions, and PSD2-specific exemptions from SCA are entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "3.8(c)",
+      "title": "Payment service user relationship management — transaction monitoring and fraud prevention",
+      "controls": [
+        "AU-06",
+        "SI-04",
+        "SI-20"
+      ],
+      "coverage_pct": 50,
+      "rationale": "AU-06 audit review and analysis and SI-04 system monitoring support general transaction monitoring. SI-20 (new in Rev 5) tainting tracks data provenance through system execution, which could support fraud detection by tracing transaction data flows.",
+      "gaps": "EBA requires PSPs to implement transaction monitoring mechanisms to detect and prevent fraudulent payment transactions, including real-time analysis and behavioural pattern detection. SP 800-53 monitoring controls address security monitoring but are not designed for financial transaction fraud detection. The specific requirements for payment fraud monitoring, suspicious transaction flagging, and PSD2 reporting obligations are outside SP 800-53 scope."
+    },
+    {
+      "id": "3.8(d)",
+      "title": "Payment service user relationship management — PSU notification and incident handling",
+      "controls": [
+        "IR-06",
+        "IR-07",
+        "SI-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "IR-06 incident reporting and IR-07 incident response assistance provide internal incident handling. SI-05 security alerts and advisories covers alert distribution.",
+      "gaps": "EBA requires PSPs to notify payment service users of security incidents affecting their payment services, provide guidance on protective measures, and maintain communication channels for incident-related queries. SP 800-53 incident reporting is internally focused and does not address customer notification obligations, user guidance during incidents, or the PSD2-specific requirements for incident communication to payment service users and competent authorities."
+    }
+  ],
+  "summary": {
+    "total_clauses": 33,
+    "average_coverage": 75.9,
+    "full_count": 13,
+    "substantial_count": 14,
+    "partial_count": 6,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

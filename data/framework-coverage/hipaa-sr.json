@@ -1,0 +1,722 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "hipaa_sr",
+  "framework_name": "HIPAA SR",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on NIST SP 800-66 Rev. 2 (Feb 2024) crosswalk and NIST CPRT mappings. Incorporates SP 800-53 Rev 5 controls including new PT (Privacy) family. HIPAA Security Rule has excellent NIST alignment — SP 800-66 was purpose-built for this mapping. Gaps arise from HIPAA-specific legal/regulatory requirements (business associate agreements, OCR enforcement, minimum necessary standard, addressable vs required distinction). Validate with qualified HIPAA compliance professionals for audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "§164.308(a)(1)(i)",
+      "title": "Security Management Process (Standard)",
+      "controls": [
+        "PL-01", "PL-02", "PM-01", "PM-03", "PM-09", "PM-10", "PM-11",
+        "RA-01", "RA-02", "RA-03", "CA-02", "CA-05", "CA-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "The Security Management Process standard requires implementing policies and procedures to prevent, detect, contain, and correct security violations. SP 800-53 provides comprehensive coverage: PL-01/PL-02 (security planning), PM-01/PM-03/PM-09/PM-10/PM-11 (program management, risk management strategy, authorization process), RA-01/RA-02/RA-03 (risk assessment framework), CA-02/CA-05/CA-07 (security assessments, plan of action and milestones, continuous monitoring). Per SP 800-66r2, this is one of the best-aligned HIPAA standards.",
+      "gaps": "SP 800-53 does not specifically address ePHI as the protected asset class. HIPAA's Security Management Process is scoped exclusively to electronic protected health information, whereas NIST controls apply to all information types. The HIPAA-specific concept of 'reasonable and appropriate' safeguard selection (§164.306(b)) has no direct NIST equivalent."
+    },
+    {
+      "id": "§164.308(a)(1)(ii)(A)",
+      "title": "Risk Analysis (Required)",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-05", "RA-07", "RA-09",
+        "PM-09", "CA-02", "CA-07"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Risk Analysis requires conducting an accurate and thorough assessment of potential risks and vulnerabilities to the confidentiality, integrity, and availability of ePHI. RA-03 (Risk Assessment) directly maps. RA-02 (Security Categorization) supports asset identification. RA-05 (Vulnerability Monitoring and Scanning) provides technical risk discovery. RA-07 (new in Rev 5, Risk Response) addresses risk treatment decisions. RA-09 (new in Rev 5, Criticality Analysis) supports the ePHI asset criticality dimension. CA-02 and CA-07 provide assessment methodology. SP 800-66r2 identifies this as a core mapping.",
+      "gaps": "HIPAA risk analysis is specifically scoped to ePHI and must consider all forms of ePHI (in transit, at rest, in use). SP 800-53 risk assessment is broader in scope. HIPAA requires documentation of risk analysis as an ongoing process for OCR audit evidence, with specific retention requirements under §164.316(b)(2)."
+    },
+    {
+      "id": "§164.308(a)(1)(ii)(B)",
+      "title": "Risk Management (Required)",
+      "controls": [
+        "RA-03", "RA-07", "PM-09", "PM-10",
+        "CA-05", "CA-07", "PL-02", "PL-10", "PL-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Risk Management requires implementing security measures sufficient to reduce risks and vulnerabilities to a reasonable and appropriate level. PM-09 (Risk Management Strategy) and PM-10 (Authorization Process) provide the governance framework. RA-07 (new in Rev 5, Risk Response) directly addresses risk treatment. CA-05 (Plan of Action and Milestones) tracks remediation. CA-07 (Continuous Monitoring) ensures ongoing risk management. PL-10/PL-11 (Baseline Selection/Tailoring, new in Rev 5) support the selection of appropriate safeguards.",
+      "gaps": "HIPAA's 'reasonable and appropriate' standard (§164.306(b)) requires consideration of entity size, complexity, capabilities, technical infrastructure, cost, and probability/criticality of risks — a specific balancing test without a direct NIST equivalent. OCR enforcement actions define the practical floor for acceptable risk management."
+    },
+    {
+      "id": "§164.308(a)(1)(ii)(C)",
+      "title": "Sanction Policy (Required)",
+      "controls": [
+        "PS-08", "PL-04", "PS-01", "PS-06"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Sanction Policy requires applying appropriate sanctions against workforce members who fail to comply with security policies and procedures. PS-08 (Personnel Sanctions) directly maps. PL-04 (Rules of Behavior) establishes the baseline expectations. PS-01 (Personnel Security Policy and Procedures) provides the governance framework. PS-06 (Access Agreements) documents security obligations.",
+      "gaps": "HIPAA sanction policy must be specific to ePHI violations and must cover the full range of workforce members (not just employees — also volunteers, trainees, and other persons under entity control). SP 800-53 sanctions are broader and do not distinguish ePHI-specific violations from other security policy violations."
+    },
+    {
+      "id": "§164.308(a)(1)(ii)(D)",
+      "title": "Information System Activity Review (Required)",
+      "controls": [
+        "AU-01", "AU-02", "AU-03", "AU-06", "AU-07", "AU-09",
+        "AU-11", "AU-12", "AU-13", "AU-14",
+        "SI-04", "CA-07"
+      ],
+      "coverage_pct": 93,
+      "rationale": "Information System Activity Review requires implementing procedures to regularly review records of information system activity such as audit logs, access reports, and security incident tracking reports. AU-02/AU-03/AU-12 (Event Logging, Content of Audit Records, Audit Record Generation) establish logging. AU-06 (Audit Record Review, Analysis, and Reporting) directly maps to the review requirement. AU-07/AU-09/AU-11 support log management. AU-13/AU-14 (new in Rev 5) add monitoring of open-source information and session audit. SI-04 (System Monitoring) and CA-07 (Continuous Monitoring) provide continuous review capability.",
+      "gaps": "HIPAA requires review of all ePHI access activity specifically, which may require healthcare-specific audit capabilities (e.g., break-the-glass access monitoring, patient record access tracking). SP 800-53 audit controls are comprehensive but not ePHI-specific."
+    },
+    {
+      "id": "§164.308(a)(2)",
+      "title": "Assigned Security Responsibility (Standard, Required)",
+      "controls": [
+        "PM-02", "PM-01", "PL-01", "PM-10",
+        "PS-01", "PM-24"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Assigned Security Responsibility requires identifying the security official responsible for development and implementation of security policies and procedures. PM-02 (Information Security Program Leadership Role) directly maps to designating a responsible official. PM-01 (Information Security Program Plan) defines program scope. PM-24 (new in Rev 5, Data Integrity Board) adds governance oversight. PL-01 and PS-01 provide policy framework.",
+      "gaps": "HIPAA requires a single identified 'Security Official' responsible for the entity's entire security program. SP 800-53 allows distributed security roles. HIPAA's Security Official has specific regulatory accountability to HHS/OCR that goes beyond NIST role definitions. Small covered entities may need one person to fulfill this role — a constraint not addressed by NIST."
+    },
+    {
+      "id": "§164.308(a)(3)(i)",
+      "title": "Workforce Security (Standard)",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-05", "AC-06",
+        "PS-01", "PS-02", "PS-03", "PS-04", "PS-05", "PS-06", "PS-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Workforce Security requires implementing policies and procedures to ensure all workforce members have appropriate access to ePHI and to prevent unauthorized access. AC-01/AC-02/AC-03 (Access Control Policy, Account Management, Access Enforcement) establish access governance. AC-05/AC-06 (Separation of Duties, Least Privilege) ensure appropriate access levels. PS-01 through PS-07 provide comprehensive personnel security including screening (PS-03), termination (PS-04), transfer (PS-05), access agreements (PS-06), and external personnel (PS-07).",
+      "gaps": "HIPAA's 'workforce' definition is broader than typical employment — it includes volunteers, trainees, and other persons whose conduct is under the direct control of the entity whether or not they are paid. SP 800-53 personnel controls assume a more traditional employer-employee relationship."
+    },
+    {
+      "id": "§164.308(a)(3)(ii)(A)",
+      "title": "Authorization and/or Supervision (Addressable)",
+      "controls": [
+        "AC-02", "AC-03", "AC-05", "AC-06",
+        "PS-02", "PS-03"
+      ],
+      "coverage_pct": 88,
+      "rationale": "This addressable specification requires implementing procedures for authorizing and/or supervising workforce members who work with ePHI or in locations where it might be accessed. AC-02 (Account Management) governs authorization. AC-06 (Least Privilege) ensures minimal necessary access. PS-02 (Position Risk Designation) and PS-03 (Personnel Screening) support authorization decisions based on risk.",
+      "gaps": "HIPAA specifically requires supervision of workforce members in locations where ePHI might be accessed — a physical proximity concern not fully addressed by logical access controls in SP 800-53. The addressable nature means entities can implement alternatives with documentation."
+    },
+    {
+      "id": "§164.308(a)(3)(ii)(B)",
+      "title": "Workforce Clearance Procedure (Addressable)",
+      "controls": [
+        "PS-02", "PS-03", "PS-06",
+        "AC-02", "AC-06"
+      ],
+      "coverage_pct": 88,
+      "rationale": "This addressable specification requires implementing procedures to determine that workforce member access to ePHI is appropriate. PS-02 (Position Risk Designation) categorizes positions. PS-03 (Personnel Screening) performs background checks. PS-06 (Access Agreements) formalizes access terms. AC-02/AC-06 enforce access decisions.",
+      "gaps": "HIPAA clearance procedures must be linked to the entity's access authorization policies and role-based ePHI access needs. SP 800-53 screening is broader and not specific to healthcare data access appropriateness."
+    },
+    {
+      "id": "§164.308(a)(3)(ii)(C)",
+      "title": "Termination Procedures (Addressable)",
+      "controls": [
+        "PS-04", "PS-05", "PS-08",
+        "AC-02", "IA-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing procedures for terminating access to ePHI when employment ends or as required by workforce clearance determinations. PS-04 (Personnel Termination) directly maps, including revoking access, retrieving credentials, and conducting exit interviews. PS-05 (Personnel Transfer) covers role changes. AC-02 (Account Management) handles account deactivation. IA-04 (Identifier Management) covers credential revocation.",
+      "gaps": "HIPAA termination procedures must also cover non-employee workforce members (volunteers, trainees). SP 800-53 termination procedures focus on employees and contractors."
+    },
+    {
+      "id": "§164.308(a)(4)(i)",
+      "title": "Information Access Management (Standard)",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-04", "AC-06", "AC-24",
+        "SC-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Information Access Management requires implementing policies and procedures for authorizing access to ePHI consistent with the Privacy Rule's minimum necessary standard. AC-01/AC-02/AC-03 establish access control governance. AC-04 (Information Flow Enforcement) controls data flows. AC-06 (Least Privilege) supports minimum necessary. AC-24 (new in Rev 5, Access Control Decisions) supports dynamic authorization. SC-04 (Information in Shared System Resources) prevents unauthorized data exposure.",
+      "gaps": "HIPAA requires consistency with the Privacy Rule's minimum necessary standard (§164.502(b)) — a healthcare-specific concept requiring that access to ePHI be limited to the minimum necessary to accomplish the intended purpose. SP 800-53 least privilege is similar but not identical to minimum necessary."
+    },
+    {
+      "id": "§164.308(a)(4)(ii)(A)",
+      "title": "Isolating Healthcare Clearinghouse Functions (Required)",
+      "controls": [
+        "AC-04", "SC-02", "SC-03", "SC-07",
+        "SC-32"
+      ],
+      "coverage_pct": 78,
+      "rationale": "This required specification mandates that if a healthcare clearinghouse is part of a larger organization, it must protect ePHI from unauthorized access by the larger organization. SC-07 (Boundary Protection) provides network segmentation. SC-02 (Separation of System and User Functionality) and SC-03 (Security Function Isolation) support logical isolation. SC-32 (System Partitioning) enables organizational separation. AC-04 (Information Flow Enforcement) controls data flows between segments.",
+      "gaps": "This is a healthcare-specific organizational requirement that applies only to clearinghouses within larger organizations. SP 800-53 provides the technical isolation mechanisms but does not address the specific HIPAA requirement for clearinghouse function separation or the regulatory context of healthcare clearinghouse operations."
+    },
+    {
+      "id": "§164.308(a)(4)(ii)(B)",
+      "title": "Access Authorization (Addressable)",
+      "controls": [
+        "AC-02", "AC-03", "AC-06", "AC-24",
+        "PS-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing policies and procedures for granting access to ePHI. AC-02 (Account Management) governs account creation and access provisioning. AC-03 (Access Enforcement) implements authorization decisions. AC-06 (Least Privilege) enforces minimum access. AC-24 (new in Rev 5, Access Control Decisions) adds attribute-based and policy-based access decisions. PS-06 (Access Agreements) formalizes access grants.",
+      "gaps": "HIPAA access authorization must align with the minimum necessary standard and role-based access appropriate to healthcare workflows. SP 800-53 provides the mechanisms but not the healthcare-specific role definitions."
+    },
+    {
+      "id": "§164.308(a)(4)(ii)(C)",
+      "title": "Access Establishment and Modification (Addressable)",
+      "controls": [
+        "AC-02", "AC-03", "AC-05", "AC-06",
+        "IA-04", "IA-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing policies and procedures that establish, document, review, and modify a user's right of access. AC-02 (Account Management) provides comprehensive lifecycle management including creation, modification, review, and removal. AC-05 (Separation of Duties) and AC-06 (Least Privilege) govern access levels. IA-04 (Identifier Management) and IA-05 (Authenticator Management) handle credential lifecycle.",
+      "gaps": "HIPAA requires that access modification procedures be documented and reviewed periodically. While AC-02 covers this, HIPAA-specific documentation requirements for OCR audit evidence go beyond standard NIST documentation."
+    },
+    {
+      "id": "§164.308(a)(5)(i)",
+      "title": "Security Awareness and Training (Standard)",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-06",
+        "PM-13", "PM-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Security Awareness and Training requires implementing a security awareness and training program for all workforce members including management. AT-01 (Policy and Procedures) establishes the training program. AT-02 (Literacy Training and Awareness) covers general awareness. AT-03 (Role-Based Training) addresses specialized training. AT-04 (Training Records) documents completion. AT-06 (new in Rev 5, Training Feedback) improves program effectiveness. PM-13 (Security and Privacy Workforce) and PM-14 (Testing, Training, and Monitoring) provide program management.",
+      "gaps": "HIPAA training must be specifically focused on ePHI handling, and must be provided to all 'workforce members' (broader than employees). Training must cover entity-specific policies and procedures. SP 800-53 training controls are more general and do not prescribe healthcare-specific content."
+    },
+    {
+      "id": "§164.308(a)(5)(ii)(A)",
+      "title": "Security Reminders (Addressable)",
+      "controls": [
+        "AT-02", "AT-06", "SI-05",
+        "PM-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "This addressable specification requires periodic security reminders. AT-02 (Literacy Training and Awareness) includes ongoing awareness activities. AT-06 (new in Rev 5, Training Feedback) supports iterative awareness improvement. SI-05 (Security Alerts, Advisories, and Directives) provides security communications. PM-13 (Security and Privacy Workforce) supports ongoing awareness.",
+      "gaps": "HIPAA security reminders are specifically about ePHI protection policies. SP 800-53 covers general security awareness but does not prescribe healthcare-specific reminder content or frequency."
+    },
+    {
+      "id": "§164.308(a)(5)(ii)(B)",
+      "title": "Protection from Malicious Software (Addressable)",
+      "controls": [
+        "SI-03", "SI-04", "SI-08",
+        "AT-02", "SC-44"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires procedures for guarding against, detecting, and reporting malicious software. SI-03 (Malicious Code Protection) directly maps. SI-04 (System Monitoring) provides detection. SI-08 (Spam Protection) addresses email-borne threats. AT-02 awareness training covers user reporting. SC-44 (Detonation Chambers) adds sandboxing capability for Rev 5.",
+      "gaps": "HIPAA focuses on malware as a threat to ePHI specifically. SP 800-53 malware controls are comprehensive and exceed HIPAA requirements in most areas."
+    },
+    {
+      "id": "§164.308(a)(5)(ii)(C)",
+      "title": "Log-in Monitoring (Addressable)",
+      "controls": [
+        "AC-07", "AU-02", "AU-06", "AU-12",
+        "SI-04"
+      ],
+      "coverage_pct": 92,
+      "rationale": "This addressable specification requires procedures for monitoring log-in attempts and reporting discrepancies. AC-07 (Unsuccessful Logon Attempts) directly addresses failed login handling. AU-02/AU-12 (Event Logging/Audit Record Generation) capture login events. AU-06 (Audit Record Review, Analysis, and Reporting) provides review and reporting. SI-04 (System Monitoring) enables real-time detection of anomalous login patterns.",
+      "gaps": "Minimal gaps. SP 800-53 login monitoring controls are comprehensive. HIPAA may require ePHI-system-specific monitoring thresholds that differ from general system monitoring."
+    },
+    {
+      "id": "§164.308(a)(5)(ii)(D)",
+      "title": "Password Management (Addressable)",
+      "controls": [
+        "IA-01", "IA-04", "IA-05", "IA-06", "IA-11"
+      ],
+      "coverage_pct": 92,
+      "rationale": "This addressable specification requires procedures for creating, changing, and safeguarding passwords. IA-05 (Authenticator Management) comprehensively addresses password lifecycle including creation, distribution, storage, and revocation. IA-04 (Identifier Management) manages user identifiers. IA-06 (Authentication Feedback) protects password entry. IA-11 (Re-Authentication) addresses session management. Strong alignment per SP 800-66r2.",
+      "gaps": "Minimal gaps. HIPAA password management is well covered by NIST IA controls. Modern HIPAA guidance increasingly emphasizes multi-factor authentication beyond passwords, which IA-02 enhancements address."
+    },
+    {
+      "id": "§164.308(a)(6)(i)",
+      "title": "Security Incident Procedures (Standard)",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05", "IR-06",
+        "IR-07", "IR-08", "IR-09"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Security Incident Procedures require implementing policies and procedures to address security incidents. IR-01 (Policy and Procedures) establishes the incident response program. IR-02/IR-03 (Incident Response Training/Testing) ensure readiness. IR-04/IR-05 (Incident Handling/Monitoring) address response. IR-06 (Incident Reporting) covers notification. IR-07 (Incident Response Assistance) and IR-08 (Incident Response Plan) provide operational support. IR-09 (new in Rev 5, Information Spillage Response) addresses data breach scenarios.",
+      "gaps": "HIPAA has specific breach notification requirements under §164.400-414 (Breach Notification Rule) that are separate from but related to the Security Rule's incident procedures. SP 800-53 IR controls do not address HHS/OCR notification timelines (60 days for breaches affecting 500+ individuals), state attorney general notification, or media notification requirements."
+    },
+    {
+      "id": "§164.308(a)(6)(ii)",
+      "title": "Response and Reporting (Required)",
+      "controls": [
+        "IR-04", "IR-05", "IR-06", "IR-07",
+        "AU-06", "SI-04", "SI-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "This required specification mandates identifying and responding to suspected or known security incidents, mitigating harmful effects, and documenting incidents and outcomes. IR-04 (Incident Handling) covers identification and response. IR-05 (Incident Monitoring) tracks incidents. IR-06 (Incident Reporting) addresses documentation and reporting. SI-04 (System Monitoring) supports detection. AU-06 provides audit analysis supporting incident identification.",
+      "gaps": "HIPAA requires documenting security incidents and their outcomes specifically for ePHI breaches. The Breach Notification Rule (§164.400-414) imposes specific reporting obligations to HHS, affected individuals, and potentially media — requirements that go beyond SP 800-53 incident reporting controls."
+    },
+    {
+      "id": "§164.308(a)(7)(i)",
+      "title": "Contingency Plan (Standard)",
+      "controls": [
+        "CP-01", "CP-02", "CP-03", "CP-04",
+        "CP-06", "CP-07", "CP-08", "CP-09", "CP-10"
+      ],
+      "coverage_pct": 92,
+      "rationale": "The Contingency Plan standard requires establishing policies and procedures for responding to emergencies or occurrences that damage systems containing ePHI. CP-01 (Policy and Procedures) establishes the framework. CP-02 (Contingency Plan) is the core plan. CP-03/CP-04 (Training/Testing) ensure readiness. CP-06/CP-07/CP-08 (Alternate Sites/Processing/Telecommunications) provide resilience. CP-09 (System Backup) and CP-10 (System Recovery and Reconstitution) ensure data availability. Excellent alignment per SP 800-66r2.",
+      "gaps": "HIPAA contingency planning is focused on ePHI availability specifically. SP 800-53 contingency controls are comprehensive and generally exceed HIPAA requirements. Minor gap: HIPAA requires consideration of the entity's specific operational environment and criticality of ePHI systems."
+    },
+    {
+      "id": "§164.308(a)(7)(ii)(A)",
+      "title": "Data Backup Plan (Required)",
+      "controls": [
+        "CP-09", "CP-06",
+        "MP-04", "MP-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "This required specification mandates establishing procedures to create and maintain retrievable exact copies of ePHI. CP-09 (System Backup) directly maps — it covers backup frequency, scope, and storage. CP-06 (Alternate Storage Site) addresses offsite backup storage. MP-04 (Media Storage) and MP-05 (Media Transport) protect backup media.",
+      "gaps": "HIPAA specifically requires 'retrievable exact copies' of ePHI, not just system backups. SP 800-53 backup controls are comprehensive. Minor gap: HIPAA backup requirements must consider the 6-year documentation retention period under §164.316(b)(2)."
+    },
+    {
+      "id": "§164.308(a)(7)(ii)(B)",
+      "title": "Disaster Recovery Plan (Required)",
+      "controls": [
+        "CP-02", "CP-07", "CP-08", "CP-10",
+        "CP-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This required specification mandates establishing procedures to restore any loss of data. CP-02 (Contingency Plan) provides the overall recovery framework. CP-07 (Alternate Processing Site) and CP-08 (Telecommunications Services) ensure alternative processing capability. CP-10 (System Recovery and Reconstitution) addresses restoration procedures. CP-06 (Alternate Storage Site) supports data restoration.",
+      "gaps": "HIPAA disaster recovery is specifically focused on ePHI restoration. SP 800-53 provides excellent coverage. Minor gap: HIPAA does not specify Recovery Time Objectives (RTOs) but OCR enforcement expects reasonable restoration timelines."
+    },
+    {
+      "id": "§164.308(a)(7)(ii)(C)",
+      "title": "Emergency Mode Operation Plan (Required)",
+      "controls": [
+        "CP-02", "CP-10", "CP-11", "CP-12", "CP-13",
+        "PE-10", "PE-11"
+      ],
+      "coverage_pct": 88,
+      "rationale": "This required specification mandates establishing procedures to enable continuation of critical business processes for ePHI protection while operating in emergency mode. CP-02 covers emergency operations planning. CP-10/CP-11 (Safe Mode, new in Rev 5) address degraded operations. CP-12/CP-13 (new in Rev 5) provide fail-safe and restore capabilities. PE-10/PE-11 (Emergency Shutoff/Emergency Power) address physical emergency operations.",
+      "gaps": "HIPAA emergency mode specifically concerns maintaining ePHI security during emergencies (natural disasters, system failures, cyberattacks). SP 800-53 addresses emergency operations broadly. Gap: HIPAA entities must ensure clinical workflow continuity for patient safety — a healthcare-specific requirement beyond SP 800-53 scope."
+    },
+    {
+      "id": "§164.308(a)(7)(ii)(D)",
+      "title": "Testing and Revision Procedures (Addressable)",
+      "controls": [
+        "CP-03", "CP-04",
+        "CA-02", "CA-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing procedures for periodic testing and revision of contingency plans. CP-04 (Contingency Plan Testing) directly maps. CP-03 (Contingency Plan Training) ensures personnel readiness. CA-02 (Control Assessments) and CA-07 (Continuous Monitoring) provide the evaluation framework.",
+      "gaps": "Minimal gaps. SP 800-53 contingency testing controls are well-aligned. HIPAA does not specify testing frequency, but OCR expects regular testing appropriate to the entity's environment."
+    },
+    {
+      "id": "§164.308(a)(7)(ii)(E)",
+      "title": "Applications and Data Criticality Analysis (Addressable)",
+      "controls": [
+        "RA-02", "RA-09", "CP-02",
+        "PM-11"
+      ],
+      "coverage_pct": 88,
+      "rationale": "This addressable specification requires assessing the relative criticality of specific applications and data in support of contingency plan components. RA-02 (Security Categorization) categorizes information and systems by impact. RA-09 (new in Rev 5, Criticality Analysis) directly maps to analyzing application and data criticality. CP-02 contingency planning incorporates criticality. PM-11 (Mission and Business Process Definition) establishes operational priorities.",
+      "gaps": "HIPAA criticality analysis must specifically identify which ePHI applications and datasets are critical to operations. SP 800-53 provides the methodology but does not prescribe healthcare-specific criticality factors (e.g., patient safety implications, clinical workflow dependencies)."
+    },
+    {
+      "id": "§164.308(a)(8)",
+      "title": "Evaluation (Standard, Required)",
+      "controls": [
+        "CA-01", "CA-02", "CA-05", "CA-07",
+        "RA-03", "RA-05", "PM-06", "PM-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Evaluation requires performing periodic technical and nontechnical evaluation based initially on the standards implemented and subsequently in response to environmental or operational changes. CA-02 (Control Assessments) directly maps to both technical and nontechnical evaluation. CA-07 (Continuous Monitoring) provides ongoing evaluation. CA-05 (Plan of Action and Milestones) tracks identified issues. RA-03/RA-05 support technical risk evaluation. PM-06 (Measures of Performance) and PM-14 (Testing, Training, and Monitoring) provide program evaluation.",
+      "gaps": "HIPAA evaluation must be triggered by environmental or operational changes affecting ePHI security — a reactive requirement alongside periodic review. SP 800-53 provides continuous monitoring but does not specifically mandate change-triggered reassessment in the same way. OCR expects documented evaluation results."
+    },
+    {
+      "id": "§164.308(b)(1)",
+      "title": "Business Associate Contracts and Other Arrangements (Standard)",
+      "controls": [
+        "SA-04", "SA-09", "PS-07",
+        "CA-03", "PM-08", "PT-01"
+      ],
+      "coverage_pct": 72,
+      "rationale": "This standard requires obtaining satisfactory assurances from business associates that they will appropriately safeguard ePHI, documented through contracts or other arrangements. SA-04 (Acquisition Process) and SA-09 (External System Services) address third-party security requirements. PS-07 (External Personnel Security) covers third-party personnel. CA-03 (Information Exchange) governs interconnection agreements. PM-08 (Critical Infrastructure Plan) addresses supply chain. PT-01 (Privacy Policy and Procedures) covers privacy obligations.",
+      "gaps": "HIPAA Business Associate Agreements (BAAs) have specific required provisions defined in §164.314(a)(2) including permitted uses/disclosures, safeguard requirements, breach reporting, and subcontractor flow-down. SP 800-53 addresses third-party risk management but does not prescribe the specific contractual terms required by HIPAA. This is a legal/regulatory requirement that technical controls cannot fully address."
+    },
+    {
+      "id": "§164.308(b)(3)",
+      "title": "Written Contract or Other Arrangement (Required)",
+      "controls": [
+        "SA-04", "SA-09",
+        "CA-03", "PS-07"
+      ],
+      "coverage_pct": 68,
+      "rationale": "This required specification mandates that contracts or other arrangements document satisfactory assurances as required by §164.314(a). SA-04 (Acquisition Process) supports security requirements in contracts. SA-09 (External System Services) covers external service provider agreements. CA-03 (Information Exchange) and PS-07 (External Personnel Security) support contractual arrangements.",
+      "gaps": "HIPAA mandates specific BAA provisions under §164.314(a)(2): permitted and required uses/disclosures, appropriate safeguards, individual access rights, breach reporting to covered entity, return/destruction of ePHI at termination, extension of requirements to subcontractors. These are legal requirements that SP 800-53 controls cannot fully substitute."
+    },
+    {
+      "id": "§164.310(a)(1)",
+      "title": "Facility Access Controls (Standard)",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-04", "PE-05", "PE-06",
+        "PE-07", "PE-08", "PE-18"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Facility Access Controls require implementing policies and procedures to limit physical access to electronic information systems and the facilities in which they are housed. PE-01 (Physical and Environmental Protection Policy) establishes the framework. PE-02 (Physical Access Authorizations) governs authorization. PE-03 (Physical Access Control) implements access mechanisms. PE-04/PE-05 (Access Control for Transmission/Output Devices) protect ePHI output. PE-06/PE-07 (Monitoring Physical Access/Visitor Control) provide oversight. PE-08 (Visitor Access Records) documents access. PE-18 (Location of System Components) addresses placement.",
+      "gaps": "Minimal gaps. SP 800-53 physical access controls are comprehensive and well-aligned with HIPAA facility access requirements. HIPAA-specific consideration: healthcare facilities have unique physical access challenges (patient areas adjacent to ePHI systems, 24/7 operations, emergency department access)."
+    },
+    {
+      "id": "§164.310(a)(2)(i)",
+      "title": "Contingency Operations (Addressable)",
+      "controls": [
+        "PE-01", "PE-03", "CP-02", "CP-07",
+        "PE-10", "PE-11"
+      ],
+      "coverage_pct": 88,
+      "rationale": "This addressable specification requires procedures to allow facility access in support of data restoration under the disaster recovery and emergency mode operations plans. CP-02 (Contingency Plan) covers overall emergency procedures. CP-07 (Alternate Processing Site) addresses alternative facility access. PE-03 provides access control mechanisms for emergency access. PE-10/PE-11 address emergency shutoff and emergency power.",
+      "gaps": "HIPAA contingency operations specifically concern physical facility access during emergencies for ePHI restoration. SP 800-53 covers this well. Minor gap: healthcare facilities may have emergency access requirements different from typical IT facilities."
+    },
+    {
+      "id": "§164.310(a)(2)(ii)",
+      "title": "Facility Security Plan (Addressable)",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-06",
+        "PL-02"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing policies and procedures to safeguard the facility and equipment from unauthorized physical access, tampering, and theft. PE-01/PE-02/PE-03 establish physical access policy, authorization, and enforcement. PE-06 (Monitoring Physical Access) provides security monitoring. PL-02 (Security and Privacy Plans) integrates physical security into overall planning.",
+      "gaps": "Minimal gaps. SP 800-53 physical security controls comprehensively address facility security. HIPAA-specific: healthcare facilities often have complex access patterns (multiple buildings, clinical vs. administrative areas) that may require more granular facility security plans."
+    },
+    {
+      "id": "§164.310(a)(2)(iii)",
+      "title": "Access Control and Validation Procedures (Addressable)",
+      "controls": [
+        "PE-02", "PE-03", "PE-06", "PE-08",
+        "IA-02", "IA-08"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing procedures to control and validate person's access to facilities based on their role or function, including visitor control and access to software programs for testing and revision. PE-02/PE-03 authorize and enforce physical access. PE-06 (Monitoring) and PE-08 (Visitor Access Records) provide validation. IA-02 (Identification and Authentication) and IA-08 (Authentication of External Users) validate identities.",
+      "gaps": "Minimal gaps. The requirement for 'access to software programs for testing and revision' suggests development/testing environment controls, which are partially addressed by CM-04 (Impact Analyses) but not a primary focus of PE controls."
+    },
+    {
+      "id": "§164.310(a)(2)(iv)",
+      "title": "Maintenance Records (Addressable)",
+      "controls": [
+        "MA-01", "MA-02", "MA-03", "MA-05", "MA-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing policies and procedures to document repairs and modifications to physical components of a facility related to security. MA-01 (System Maintenance Policy and Procedures) establishes the framework. MA-02 (Controlled Maintenance) governs maintenance activities. MA-03 (Maintenance Tools) controls tools used. MA-05 (Maintenance Personnel) manages maintenance access. MA-06 (Timely Maintenance) ensures repairs are completed.",
+      "gaps": "Minimal gaps. SP 800-53 maintenance controls are comprehensive. HIPAA focuses specifically on physical components related to security (hardware, walls, doors, locks), while SP 800-53 maintenance controls cover both physical and logical systems."
+    },
+    {
+      "id": "§164.310(b)",
+      "title": "Workstation Use (Standard, Required)",
+      "controls": [
+        "AC-01", "AC-11", "AC-17", "AC-20",
+        "PL-04", "SC-15", "PE-18"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Workstation Use requires implementing policies and procedures that specify proper functions, the manner in which those functions are performed, and the physical attributes of the surroundings of workstations that can access ePHI. AC-11 (Device Lock) controls unattended workstation behavior. AC-17 (Remote Access) addresses remote workstation use. AC-20 (External Systems) covers BYOD scenarios. PL-04 (Rules of Behavior) defines acceptable use. SC-15 (Collaborative Computing Devices) addresses shared devices. PE-18 (Location of System Components) covers workstation placement.",
+      "gaps": "HIPAA workstation use addresses both the logical use and the physical environment of workstations — screen positioning to prevent shoulder surfing, workstation placement in restricted areas, etc. SP 800-53 addresses workstation security primarily through logical controls rather than physical environment specifications."
+    },
+    {
+      "id": "§164.310(c)",
+      "title": "Workstation Security (Standard, Required)",
+      "controls": [
+        "PE-01", "PE-02", "PE-03",
+        "AC-11", "MP-02", "SC-28"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Workstation Security requires implementing physical safeguards for all workstations that access ePHI to restrict access to authorized users. PE-01/PE-02/PE-03 provide physical access control to workstation areas. AC-11 (Device Lock) secures unattended workstations. MP-02 (Media Access) restricts access to workstation media. SC-28 (Protection of Information at Rest) protects stored ePHI on workstations.",
+      "gaps": "HIPAA workstation security includes physical safeguards for laptops, mobile devices, and home workstations — a broader scope than typical PE controls which focus on facility-based systems. The proliferation of remote work and mobile ePHI access creates gaps in traditional physical security models."
+    },
+    {
+      "id": "§164.310(d)(1)",
+      "title": "Device and Media Controls (Standard)",
+      "controls": [
+        "MP-01", "MP-02", "MP-03", "MP-04", "MP-05",
+        "MP-06", "MP-07"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Device and Media Controls require implementing policies and procedures that govern the receipt, removal, and movement of hardware and electronic media containing ePHI. MP-01 (Media Protection Policy) establishes the framework. MP-02/MP-04 (Media Access/Media Storage) control access and storage. MP-03/MP-05 (Media Marking/Media Transport) address handling and transport. MP-06 (Media Sanitization) covers data removal. MP-07 (Media Use) restricts media usage. Excellent alignment per SP 800-66r2.",
+      "gaps": "Minimal gaps. SP 800-53 media protection controls are comprehensive and well-aligned with HIPAA device and media control requirements."
+    },
+    {
+      "id": "§164.310(d)(2)(i)",
+      "title": "Disposal (Required)",
+      "controls": [
+        "MP-06", "MP-01",
+        "SR-12"
+      ],
+      "coverage_pct": 92,
+      "rationale": "This required specification mandates implementing policies and procedures to address final disposition of ePHI and/or the hardware or electronic media on which it is stored. MP-06 (Media Sanitization) directly maps — it covers sanitization methods (clearing, purging, destroying) appropriate to data sensitivity. SR-12 (Component Disposal) addresses hardware disposal.",
+      "gaps": "Minimal gaps. SP 800-53 media sanitization is well-aligned with HIPAA disposal requirements. HIPAA entities should reference NIST SP 800-88 (Guidelines for Media Sanitization) for specific methods."
+    },
+    {
+      "id": "§164.310(d)(2)(ii)",
+      "title": "Media Re-use (Required)",
+      "controls": [
+        "MP-06", "MP-07"
+      ],
+      "coverage_pct": 92,
+      "rationale": "This required specification mandates implementing procedures for removal of ePHI from electronic media before reuse. MP-06 (Media Sanitization) directly addresses data removal before reuse. MP-07 (Media Use) governs media use policies including reuse scenarios.",
+      "gaps": "Minimal gaps. SP 800-53 MP-06 comprehensively covers media sanitization for reuse. HIPAA-specific consideration: healthcare organizations frequently reuse devices between departments and facilities, requiring consistent sanitization procedures."
+    },
+    {
+      "id": "§164.310(d)(2)(iii)",
+      "title": "Accountability (Addressable)",
+      "controls": [
+        "MP-04", "MP-05", "CM-08",
+        "PE-16", "PE-20"
+      ],
+      "coverage_pct": 88,
+      "rationale": "This addressable specification requires maintaining a record of the movements of hardware and electronic media and any person responsible. CM-08 (System Component Inventory) provides asset tracking. MP-04/MP-05 (Media Storage/Transport) track media movement. PE-16 (Delivery and Removal) controls physical asset movement. PE-20 (Asset Monitoring and Tracking) provides ongoing tracking capability.",
+      "gaps": "SP 800-53 provides good coverage for device/media tracking. Minor gap: HIPAA accountability specifically requires tracking the person responsible for each movement, which may require more granular chain-of-custody documentation than standard asset management."
+    },
+    {
+      "id": "§164.310(d)(2)(iv)",
+      "title": "Data Backup and Storage (Addressable)",
+      "controls": [
+        "CP-09", "CP-06",
+        "MP-04", "SC-28"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires creating a retrievable exact copy of ePHI when needed before movement of equipment. CP-09 (System Backup) provides comprehensive backup procedures. CP-06 (Alternate Storage Site) addresses backup storage location. MP-04 (Media Storage) governs storage of backup media. SC-28 (Protection of Information at Rest) protects stored backup data.",
+      "gaps": "Minimal gaps. The requirement to create backups 'before movement of equipment' is a specific trigger condition. SP 800-53 backup controls are comprehensive but may not specifically tie backup execution to equipment relocation events."
+    },
+    {
+      "id": "§164.312(a)(1)",
+      "title": "Access Control (Standard)",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-06", "AC-07",
+        "AC-11", "AC-17", "AC-24",
+        "SC-13", "SC-28"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Access Control requires implementing technical policies and procedures for electronic information systems that maintain ePHI to allow access only to authorized persons or software programs. AC-01 through AC-03 establish policy, account management, and enforcement. AC-06 (Least Privilege) and AC-07 (Unsuccessful Logon Attempts) strengthen access. AC-11 (Device Lock) and AC-17 (Remote Access) cover session management and remote access. AC-24 (new in Rev 5, Access Control Decisions) adds dynamic authorization. SC-13/SC-28 support encryption for access protection. Excellent alignment per SP 800-66r2.",
+      "gaps": "SP 800-53 access controls are comprehensive and exceed HIPAA requirements in most areas. HIPAA-specific: access control must implement the minimum necessary standard for ePHI and support role-based access appropriate to healthcare workflows."
+    },
+    {
+      "id": "§164.312(a)(2)(i)",
+      "title": "Unique User Identification (Required)",
+      "controls": [
+        "IA-01", "IA-02", "IA-04", "IA-08",
+        "AC-02"
+      ],
+      "coverage_pct": 95,
+      "rationale": "This required specification mandates assigning a unique name and/or number for identifying and tracking user identity. IA-02 (Identification and Authentication) requires unique identification for all users. IA-04 (Identifier Management) governs the identifier lifecycle. IA-08 (Identification and Authentication for Non-Organizational Users) extends to external users. AC-02 (Account Management) enforces unique account assignment. This is one of the strongest HIPAA-NIST alignments.",
+      "gaps": "Essentially no gaps. SP 800-53 identification controls comprehensively address unique user identification. HIPAA prohibition of shared accounts for ePHI access is fully supported by IA-02 and AC-02."
+    },
+    {
+      "id": "§164.312(a)(2)(ii)",
+      "title": "Emergency Access Procedure (Required)",
+      "controls": [
+        "AC-02", "AC-14",
+        "CP-02", "CP-10"
+      ],
+      "coverage_pct": 82,
+      "rationale": "This required specification mandates establishing procedures for obtaining necessary ePHI during an emergency. AC-02 (Account Management) can include emergency access provisions. AC-14 (Permitted Actions without Identification or Authentication) addresses emergency access scenarios. CP-02 (Contingency Plan) and CP-10 (System Recovery and Reconstitution) cover emergency operations.",
+      "gaps": "HIPAA emergency access ('break-the-glass') is a healthcare-specific concept allowing clinicians to access ePHI outside normal authorization in patient care emergencies. SP 800-53 does not specifically address this healthcare workflow requirement. Organizations must implement break-the-glass procedures with post-access audit and review."
+    },
+    {
+      "id": "§164.312(a)(2)(iii)",
+      "title": "Automatic Logoff (Addressable)",
+      "controls": [
+        "AC-11", "AC-12",
+        "SC-10"
+      ],
+      "coverage_pct": 95,
+      "rationale": "This addressable specification requires implementing electronic procedures that terminate an electronic session after a predetermined time of inactivity. AC-11 (Device Lock) directly maps to session timeout. AC-12 (Session Termination) provides session termination capability. SC-10 (Network Disconnect) addresses network session termination.",
+      "gaps": "Essentially no gaps. SP 800-53 session management controls fully address automatic logoff. HIPAA-specific consideration: timeout periods must balance ePHI security with clinical workflow needs (too-short timeouts can impact patient care)."
+    },
+    {
+      "id": "§164.312(a)(2)(iv)",
+      "title": "Encryption and Decryption (Addressable)",
+      "controls": [
+        "SC-12", "SC-13", "SC-28"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This addressable specification requires implementing a mechanism to encrypt and decrypt ePHI. SC-13 (Cryptographic Protection) provides the encryption framework. SC-12 (Cryptographic Key Management) governs key lifecycle. SC-28 (Protection of Information at Rest) specifically addresses data-at-rest encryption. Per HHS guidance, encryption to NIST standards renders ePHI 'unusable, unreadable, or indecipherable' — a safe harbor under the Breach Notification Rule.",
+      "gaps": "HIPAA encryption is addressable (not required), but HHS has stated that encryption is an 'expected' safeguard and lack of encryption is a common OCR finding. SP 800-53 provides the technical framework. Gap: HIPAA provides an encryption safe harbor for breach notification that has no NIST equivalent — this is a HIPAA-specific incentive mechanism."
+    },
+    {
+      "id": "§164.312(b)",
+      "title": "Audit Controls (Standard, Required)",
+      "controls": [
+        "AU-01", "AU-02", "AU-03", "AU-04", "AU-05",
+        "AU-06", "AU-07", "AU-08", "AU-09", "AU-11",
+        "AU-12", "AU-14"
+      ],
+      "coverage_pct": 95,
+      "rationale": "Audit Controls require implementing hardware, software, and/or procedural mechanisms that record and examine activity in information systems that contain or use ePHI. AU-01 (Policy and Procedures) establishes audit governance. AU-02/AU-03/AU-12 (Event Logging, Content, Generation) implement comprehensive logging. AU-04/AU-05 (Storage Capacity, Response to Failures) ensure logging reliability. AU-06/AU-07 (Review and Analysis, Reduction and Report Generation) support examination. AU-08 (Time Stamps) ensures log accuracy. AU-09 (Protection of Audit Information) maintains integrity. AU-11 (Retention) addresses retention. AU-14 (Session Audit) provides detailed session tracking. One of the strongest HIPAA-NIST alignments.",
+      "gaps": "Essentially no gaps. SP 800-53 audit controls are comprehensive and exceed HIPAA audit control requirements. HIPAA-specific: audit logs must be able to track all ePHI access and modifications by user, which may require application-level audit capabilities beyond system-level logging."
+    },
+    {
+      "id": "§164.312(c)(1)",
+      "title": "Integrity (Standard)",
+      "controls": [
+        "SI-01", "SI-07", "SC-08", "SC-28",
+        "SI-10"
+      ],
+      "coverage_pct": 88,
+      "rationale": "The Integrity standard requires implementing policies and procedures to protect ePHI from improper alteration or destruction. SI-07 (Software, Firmware, and Information Integrity) provides integrity verification mechanisms. SC-08 (Transmission Confidentiality and Integrity) protects data in transit. SC-28 (Protection of Information at Rest) protects stored data. SI-10 (Information Input Validation) prevents improper data modification.",
+      "gaps": "HIPAA integrity focuses specifically on ePHI — ensuring patient records are not improperly altered or destroyed. SP 800-53 provides the technical mechanisms. Gap: Healthcare-specific integrity requirements (e.g., ensuring clinical data integrity for patient safety) go beyond standard information integrity controls."
+    },
+    {
+      "id": "§164.312(c)(2)",
+      "title": "Mechanism to Authenticate Electronic Protected Health Information (Addressable)",
+      "controls": [
+        "SI-07", "SC-08", "SC-28",
+        "AU-10"
+      ],
+      "coverage_pct": 88,
+      "rationale": "This addressable specification requires implementing electronic mechanisms to corroborate that ePHI has not been altered or destroyed in an unauthorized manner. SI-07 (Software, Firmware, and Information Integrity) provides integrity verification including hashing and digital signatures. SC-08 (Transmission Confidentiality and Integrity) protects data in transit. AU-10 (Non-Repudiation) supports integrity verification of audit records.",
+      "gaps": "SP 800-53 integrity verification mechanisms are well-aligned. HIPAA-specific: ePHI authentication must cover the full data lifecycle including creation, storage, transmission, and archival. Healthcare interoperability standards (HL7, FHIR) have their own integrity mechanisms not addressed by SP 800-53."
+    },
+    {
+      "id": "§164.312(d)",
+      "title": "Person or Entity Authentication (Standard, Required)",
+      "controls": [
+        "IA-01", "IA-02", "IA-03", "IA-04", "IA-05",
+        "IA-06", "IA-07", "IA-08", "IA-09", "IA-11", "IA-12"
+      ],
+      "coverage_pct": 95,
+      "rationale": "Person or Entity Authentication requires implementing procedures to verify that a person or entity seeking access to ePHI is who they claim to be. IA-02 (Identification and Authentication) is the core control including multi-factor authentication options. IA-03 (Device Identification and Authentication) covers entity authentication. IA-04/IA-05 manage identifiers and authenticators. IA-06/IA-07 (Authentication Feedback/Cryptographic Module Authentication) protect the authentication process. IA-08 handles external users. IA-09 (Service Authentication) covers system-to-system authentication. IA-11 (Re-Authentication) addresses session management. IA-12 (new in Rev 5, Identity Proofing) adds identity verification. One of the strongest HIPAA-NIST alignments.",
+      "gaps": "Essentially no gaps. SP 800-53 identification and authentication controls are comprehensive and exceed HIPAA requirements. Modern HIPAA guidance strongly recommends multi-factor authentication, which IA-02 enhancements fully support."
+    },
+    {
+      "id": "§164.312(e)(1)",
+      "title": "Transmission Security (Standard)",
+      "controls": [
+        "SC-01", "SC-07", "SC-08", "SC-12", "SC-13",
+        "SC-23", "AC-17", "AC-18"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Transmission Security requires implementing technical security measures to guard against unauthorized access to ePHI being transmitted over an electronic communications network. SC-08 (Transmission Confidentiality and Integrity) directly maps. SC-07 (Boundary Protection) protects network boundaries. SC-12/SC-13 (Cryptographic Key Management/Cryptographic Protection) support encrypted transmission. SC-23 (Session Authenticity) prevents session hijacking. AC-17 (Remote Access) secures remote ePHI access. AC-18 (Wireless Access) addresses wireless transmission security.",
+      "gaps": "SP 800-53 transmission security controls are comprehensive. HIPAA-specific: the rule covers all electronic networks including the internet, private networks, and dial-up lines. HHS guidance emphasizes that encryption of ePHI in transit is an 'expected' safeguard, creating a de facto requirement despite the addressable designation of the encryption specification."
+    },
+    {
+      "id": "§164.312(e)(2)(i)",
+      "title": "Integrity Controls (Addressable)",
+      "controls": [
+        "SC-08", "SI-07",
+        "AU-10"
+      ],
+      "coverage_pct": 92,
+      "rationale": "This addressable specification requires implementing security measures to ensure that electronically transmitted ePHI is not improperly modified without detection until disposed of. SC-08 (Transmission Confidentiality and Integrity) provides integrity protection for data in transit using mechanisms such as TLS, IPsec, and message authentication codes. SI-07 (Software, Firmware, and Information Integrity) provides integrity verification. AU-10 (Non-Repudiation) supports transmission integrity verification.",
+      "gaps": "Minimal gaps. SP 800-53 transmission integrity controls are well-aligned. HIPAA-specific: integrity must be maintained across all healthcare data exchange scenarios including claims processing, clinical messaging, and health information exchange."
+    },
+    {
+      "id": "§164.312(e)(2)(ii)",
+      "title": "Encryption (Addressable)",
+      "controls": [
+        "SC-08", "SC-12", "SC-13",
+        "SC-17"
+      ],
+      "coverage_pct": 92,
+      "rationale": "This addressable specification requires implementing a mechanism to encrypt ePHI whenever deemed appropriate. SC-08 (Transmission Confidentiality and Integrity) mandates encryption for communications. SC-12/SC-13 (Key Management/Cryptographic Protection) provide the encryption framework. SC-17 (Public Key Infrastructure Certificates) supports certificate-based encryption. Per HHS, encryption to NIST standards creates a breach notification safe harbor.",
+      "gaps": "Minimal gaps. SP 800-53 encryption controls fully support HIPAA transmission encryption requirements. The 'whenever deemed appropriate' language gives entities flexibility, but OCR enforcement increasingly treats transmission encryption as expected. NIST controls do not address the HIPAA-specific breach notification safe harbor."
+    },
+    {
+      "id": "§164.314(a)(1)",
+      "title": "Business Associate Contracts or Other Arrangements (Standard)",
+      "controls": [
+        "SA-04", "SA-09", "PS-07",
+        "CA-03", "PM-08", "SR-01", "SR-02", "SR-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "This standard requires that covered entities obtain satisfactory assurances from business associates that they will appropriately safeguard ePHI. SA-04 (Acquisition Process) includes security requirements in contracts. SA-09 (External System Services) governs external service security. PS-07 (External Personnel Security) covers third-party personnel. SR-01/SR-02/SR-03 (new in Rev 5, Supply Chain Risk Management) strengthen third-party risk management. CA-03 (Information Exchange) and PM-08 (Critical Infrastructure Plan) support vendor management.",
+      "gaps": "HIPAA BAA requirements are prescriptive legal obligations under §164.314(a)(2) specifying exact contractual terms: permitted uses/disclosures, safeguard requirements, breach reporting, individual access rights, return/destruction of ePHI at termination, subcontractor flow-down, and termination provisions. SP 800-53 provides risk-based third-party management but cannot substitute for these specific contractual requirements. This is fundamentally a legal/regulatory gap."
+    },
+    {
+      "id": "§164.314(a)(2)",
+      "title": "Business Associate Contract Requirements (Required)",
+      "controls": [
+        "SA-04", "SA-09",
+        "CA-03", "PS-07", "SR-03"
+      ],
+      "coverage_pct": 65,
+      "rationale": "This required specification details the specific provisions that must be included in business associate contracts: safeguard implementation, reporting of security incidents, ensuring subcontractor compliance, and return/destruction of ePHI. SA-04/SA-09 address security requirements in agreements. CA-03 governs information exchange. SR-03 (Supply Chain Controls and Processes) addresses subcontractor flow-down requirements.",
+      "gaps": "HIPAA §164.314(a)(2) prescribes 10+ specific contractual provisions including: not using/disclosing ePHI beyond permitted purposes, using appropriate safeguards, reporting security incidents and breaches, ensuring subcontractor compliance, providing access to ePHI for individual rights requests, making information available to HHS, returning/destroying ePHI at termination, and authorizing termination for material breach. These are legal requirements with no technical control equivalents."
+    },
+    {
+      "id": "§164.314(b)(1)",
+      "title": "Requirements for Group Health Plans (Standard)",
+      "controls": [
+        "AC-04", "SC-07",
+        "SA-09", "PM-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "Group health plans must ensure that plan documents provide for adequate separation of ePHI, restricting plan sponsor access, and ensuring return/destruction of ePHI when no longer needed. AC-04 (Information Flow Enforcement) and SC-07 (Boundary Protection) support data separation. SA-09 (External System Services) addresses third-party access.",
+      "gaps": "This is a highly HIPAA-specific organizational requirement governing the relationship between group health plans and their plan sponsors. Specific requirements include: plan document amendments, restrictions on sponsor access, certification requirements, and adequate separation provisions. SP 800-53 provides technical separation mechanisms but does not address the specific governance and legal requirements for group health plan ePHI."
+    },
+    {
+      "id": "§164.314(b)(2)",
+      "title": "Group Health Plan Implementation Specifications (Required)",
+      "controls": [
+        "AC-03", "AC-04", "AC-06",
+        "SC-07", "SC-32"
+      ],
+      "coverage_pct": 58,
+      "rationale": "This required specification mandates that group health plan documents require the plan sponsor to implement administrative, physical, and technical safeguards; report security incidents; ensure agent compliance; and ensure adequate separation. AC-03/AC-04/AC-06 enforce access control and data flow restrictions. SC-07/SC-32 provide network segmentation and system partitioning.",
+      "gaps": "This specification requires plan document amendments with specific legal provisions — plan sponsor must reasonably and appropriately safeguard ePHI, report security incidents to the group health plan, ensure agent/subcontractor compliance, and return/destroy ePHI. These are governance and legal requirements that SP 800-53 technical controls cannot fully satisfy."
+    },
+    {
+      "id": "§164.316(a)",
+      "title": "Policies and Procedures (Standard, Required)",
+      "controls": [
+        "PL-01", "PL-02", "PL-04",
+        "PM-01", "PM-03", "PM-09",
+        "AC-01", "AT-01", "AU-01", "CA-01", "CM-01", "CP-01",
+        "IA-01", "IR-01", "MA-01", "MP-01", "PE-01", "PS-01",
+        "RA-01", "SA-01", "SC-01", "SI-01", "SR-01", "PT-01"
+      ],
+      "coverage_pct": 90,
+      "rationale": "This standard requires implementing reasonable and appropriate policies and procedures to comply with the Security Rule standards and implementation specifications. SP 800-53 has a comprehensive '-01' (Policy and Procedures) control in every family, directly mapping to HIPAA's requirement for security policies across all safeguard categories. PL-01/PL-02 provide security planning. PM-01/PM-03/PM-09 address program management. The complete set of family-level policy controls (AC-01 through SR-01 and PT-01) provides comprehensive coverage.",
+      "gaps": "HIPAA policies must be 'reasonable and appropriate' considering entity size, complexity, capabilities, and cost — a specific balancing test. SP 800-53 policy controls are comprehensive but do not incorporate this HIPAA-specific proportionality principle. HIPAA policies must be specifically tailored to ePHI protection."
+    },
+    {
+      "id": "§164.316(b)(1)",
+      "title": "Documentation (Standard)",
+      "controls": [
+        "PL-02", "PM-01",
+        "AU-01", "CA-01", "CM-01",
+        "SA-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "This standard requires that policies, procedures, actions, activities, and assessments required by the Security Rule be maintained in written (which may be electronic) form. PL-02 (Security and Privacy Plans) provides documentation framework. PM-01 (Information Security Program Plan) documents the overall program. SA-05 (System Documentation) covers system-level documentation. The '-01' controls across all families require documented policies.",
+      "gaps": "HIPAA documentation requirements have specific provisions: if an action, activity, or assessment is required, a written record must be maintained. SP 800-53 requires documentation broadly, but HIPAA's documentation standard applies to every required and addressable specification implementation decision — including documented rationale for not implementing addressable specifications."
+    },
+    {
+      "id": "§164.316(b)(2)(i)",
+      "title": "Time Limit (Required)",
+      "controls": [
+        "AU-11", "SI-12"
+      ],
+      "coverage_pct": 75,
+      "rationale": "This required specification mandates retaining required documentation for 6 years from the date of creation or the date when it was last in effect, whichever is later. AU-11 (Audit Record Retention) addresses retention of audit records. SI-12 (Information Management and Retention) provides the general retention framework.",
+      "gaps": "HIPAA's 6-year retention requirement is a specific regulatory mandate. SP 800-53 requires retention policies but does not prescribe a 6-year minimum. Organizations must configure retention controls to meet the HIPAA-specific 6-year requirement for all Security Rule documentation, not just audit records."
+    },
+    {
+      "id": "§164.316(b)(2)(ii)",
+      "title": "Availability (Required)",
+      "controls": [
+        "SA-05", "CM-06",
+        "PM-01", "PL-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "This required specification requires making documentation available to those persons responsible for implementing the procedures to which the documentation pertains. SA-05 (System Documentation) requires documentation accessibility. CM-06 (Configuration Settings) documents operational configurations. PM-01/PL-02 address security plan availability.",
+      "gaps": "HIPAA requires documentation to be accessible to personnel responsible for implementing security procedures. SP 800-53 addresses documentation availability but does not specifically mandate personnel access to compliance documentation as a distinct requirement."
+    },
+    {
+      "id": "§164.316(b)(2)(iii)",
+      "title": "Updates (Required)",
+      "controls": [
+        "PL-02", "PM-01",
+        "CA-07", "CM-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "This required specification requires reviewing documentation periodically and updating as needed in response to environmental or operational changes. PL-02 (Security and Privacy Plans) requires periodic plan updates. PM-01 (Information Security Program Plan) mandates program review. CA-07 (Continuous Monitoring) drives ongoing assessment. CM-03 (Configuration Change Control) manages operational changes that trigger documentation updates.",
+      "gaps": "HIPAA requires documentation updates in response to environmental or operational changes affecting ePHI security. SP 800-53 continuous monitoring and change management controls align well, but HIPAA's specific trigger for documentation review (any change affecting ePHI security) is more prescriptive than general SP 800-53 review cycles."
+    }
+  ],
+  "summary": {
+    "total_clauses": 63,
+    "average_coverage": 86.6,
+    "full_count": 52,
+    "substantial_count": 9,
+    "partial_count": 2,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

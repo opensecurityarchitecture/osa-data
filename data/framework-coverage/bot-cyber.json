@@ -1,0 +1,559 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "bot_cyber",
+  "framework_name": "BOT Cyber",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. Validate with qualified assessors for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "Ch1.1",
+      "title": "IT Governance and Board Oversight",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-09",
+        "PM-13",
+        "PS-09",
+        "PL-01"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PM-01 information security program plan establishes the governance framework. PM-02 senior information security officer and PM-03 security resources address leadership accountability. PM-09 risk management strategy provides risk appetite context. PM-13 security workforce aligns personnel to governance needs. PS-09 (Rev 5) position descriptions formalises security responsibilities in organisational roles, strengthening board-level accountability linkage. PL-01 planning policy establishes governance procedures.",
+      "gaps": "BOT SorNorChor 5/2566 requires explicit board-level IT risk committee with defined charter, CIO/CISO reporting lines to the board, and annual board approval of IT risk appetite statements. BOT mandates board-approved IT strategic plans and technology roadmaps. PS-09 improves role definition but Thai regulatory-specific board governance structures and BOT examination expectations remain outside SP 800-53 scope."
+    },
+    {
+      "id": "Ch1.2",
+      "title": "IT Risk Management Framework",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "PM-28",
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-07",
+        "RA-09",
+        "PL-09",
+        "PM-32"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-01/PM-09 establish security program and risk strategy. RA-01 risk assessment policy, RA-02 security categorisation, and RA-03 risk assessment provide the assessment framework. PM-28 risk framing defines risk context and tolerance. RA-07 (Rev 5) risk response adds explicit risk treatment actions. RA-09 (Rev 5) criticality analysis identifies critical components for risk-based prioritisation. PL-09 (Rev 5) central management enables unified control governance. PM-32 (Rev 5) purposing enhances system classification for risk management.",
+      "gaps": "BOT requires IT risk self-assessment results reported to the regulator within 30 days of calendar year-end. BOT-specific risk appetite integration with enterprise risk management and three-lines-of-defence model tailored to Thai financial sector supervision. PM-28/RA-07/RA-09/PL-09 significantly strengthen alignment but BOT examination procedures and regulatory reporting cycles remain gaps."
+    },
+    {
+      "id": "Ch1.3",
+      "title": "IT Compliance and Regulatory Reporting",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "CA-07",
+        "PM-14",
+        "PM-15",
+        "PM-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-01 assessment policy, CA-02 control assessments, and CA-07 continuous monitoring provide the compliance assessment framework. PM-14 testing/training/monitoring and PM-15 security groups/associations support compliance activities. PM-04 plan of action and milestones tracks remediation of compliance findings.",
+      "gaps": "BOT mandates specific regulatory reporting formats, timelines (30-day IT risk self-assessment submission), and BOT-prescribed examination procedures. Thai PDPA integration requirements for financial data, BOT notification obligations for material IT incidents, and coordination with Thailand Banking Sector CERT (TB-CERT) are Thailand-specific requirements not addressed by SP 800-53. BOT inspection and on-site examination cooperation requirements have no NIST equivalent."
+    },
+    {
+      "id": "Ch2.1",
+      "title": "IT Asset Management and Configuration",
+      "controls": [
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-09",
+        "CM-10",
+        "CM-11",
+        "CM-12",
+        "CM-14",
+        "RA-09"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CM-08 system component inventory directly addresses IT asset inventory requirements. CM-02 baseline configuration and CM-06 configuration settings establish secure baselines. CM-03 configuration change control and CM-05 access restrictions for change manage change processes. CM-07 least functionality, CM-10 software usage restrictions, and CM-11 user-installed software prevent unauthorised software execution. CM-12 (Rev 5) information location identifies where critical data resides. CM-14 (Rev 5) signed components ensures cryptographic verification of software integrity. RA-09 (Rev 5) criticality analysis supports risk-based asset prioritisation.",
+      "gaps": "Minor: BOT requires asset classification aligned to Thai banking business criticality tiers. BOT-specific asset lifecycle management requirements and asset registers with BOT-prescribed categorisation formats need supplementation."
+    },
+    {
+      "id": "Ch2.2",
+      "title": "Identity and Access Management",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-08",
+        "AC-09",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-13",
+        "AC-14",
+        "AC-16",
+        "AC-17",
+        "AC-24",
+        "AC-25",
+        "IA-01",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-07",
+        "IA-08",
+        "IA-09",
+        "IA-10",
+        "IA-11",
+        "IA-12"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AC and IA families provide comprehensive identity and access management coverage. AC-02 account management, AC-03 access enforcement, AC-05 separation of duties, and AC-06 least privilege are core requirements. AC-07 unsuccessful logon attempts and AC-11 device lock address session security. AC-17 remote access covers remote and mobile banking administration. IA-02 multi-factor authentication addresses BOT's MFA requirements. IA-12 (Rev 5) identity proofing strengthens customer and staff identity verification. AC-24 (Rev 5) access control decisions based on real-time attributes enables risk-based access. AC-25 (Rev 5) reference monitor ensures complete access mediation.",
+      "gaps": "BOT Notification 4/2568 (March 2025) imposes specific mobile banking biometric authentication, device binding, and facial recognition requirements for Thai financial services. BOT requires identity verification aligned to Thai national ID system and PromptPay ecosystem integration. These Thai-specific authentication standards extend beyond general SP 800-53 coverage."
+    },
+    {
+      "id": "Ch2.3",
+      "title": "Data Security and Classification",
+      "controls": [
+        "MP-01",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "MP-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "SI-12",
+        "SI-19",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "MP family provides media protection covering storage, transport, and sanitisation. SC-08 transmission confidentiality and SC-28 protection of information at rest address encryption requirements. SC-12 cryptographic key management and SC-13 cryptographic protection establish crypto framework. SI-12 information management and SI-19 (Rev 5) de-identification address data lifecycle. PT-02/PT-03/PT-04/PT-05 (Rev 5) privacy controls provide data minimisation, handling, and consent requirements aligned with BOT data governance expectations.",
+      "gaps": "BOT's Data Governance Policy Statement (FPG 2564) requires data classification aligned to Thai PDPA categories and BOT-specified data protection tiers. Thai PDPA cross-border data transfer restrictions for financial data, BOT data residency expectations for critical banking data within Thailand, and BOT-specific consent management requirements for financial services data sharing need supplementation."
+    },
+    {
+      "id": "Ch2.4",
+      "title": "Network Security",
+      "controls": [
+        "SC-01",
+        "SC-02",
+        "SC-03",
+        "SC-04",
+        "SC-05",
+        "SC-07",
+        "SC-08",
+        "SC-10",
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "SC-23",
+        "SC-32",
+        "SC-39",
+        "SC-40",
+        "SC-47",
+        "AC-04",
+        "AC-17",
+        "AC-18"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-07 boundary protection is central to network security. SC-02 application partitioning and SC-03 security function isolation enforce segmentation. SC-05 denial-of-service protection and SC-10 network disconnect address availability. SC-08 transmission confidentiality/integrity covers in-transit encryption. SC-20/SC-21/SC-22 secure name/address resolution protects DNS infrastructure. SC-23 session authenticity protects online banking sessions. SC-32 (Rev 5) system partitioning enables network-level segmentation for financial systems. SC-40 (Rev 5) wireless link protection addresses branch and mobile banking network security. SC-47 (Rev 5) alternate communications safeguards provides resilient financial network communications. AC-04 information flow enforcement and AC-17/AC-18 remote/wireless access complement network controls.",
+      "gaps": "Minor: BOT requires specific network architecture documentation and network segmentation aligned to Thai payment infrastructure (PromptPay, BAHTNET, ITMX). SC-32/SC-40/SC-47 strengthen network security coverage significantly. BOT-specific requirements for financial network interconnections and real-time payment system security need supplementation."
+    },
+    {
+      "id": "Ch2.5",
+      "title": "Application Security",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-16",
+        "SA-17",
+        "SA-20",
+        "SA-21",
+        "SA-22",
+        "SI-10",
+        "SI-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA family provides comprehensive software development security. SA-03 system development lifecycle, SA-08 security and privacy engineering, and SA-10/SA-11 developer configuration/testing address secure SDLC. SA-15 development process/standards and SA-17 developer security architecture establish development governance. SA-20 (Rev 5) customised development for critical components addresses bespoke financial application development. SA-21 (Rev 5) developer screening adds personnel vetting. SA-22 (Rev 5) unsupported system components manages legacy application risk. SI-10/SI-11 input validation and error handling protect application interfaces.",
+      "gaps": "BOT requires specific application security testing for mobile banking and e-payment applications. SA-20/SA-21/SA-22 strengthen application security governance. BOT-specific requirements for Thai character set handling, PromptPay API security, and mobile banking application integrity verification (per Notification 4/2568) need supplementation."
+    },
+    {
+      "id": "Ch2.6",
+      "title": "Endpoint Security",
+      "controls": [
+        "SC-41",
+        "SC-42",
+        "SI-03",
+        "SI-04",
+        "SI-07",
+        "SI-16",
+        "CM-07",
+        "CM-11",
+        "AC-19",
+        "AC-20"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SI-03 malicious code protection and SI-04 system monitoring provide core endpoint defence. SI-07 software/firmware/information integrity verification detects tampering. CM-07 least functionality and CM-11 user-installed software restrict endpoint attack surface. AC-19 access control for mobile devices and AC-20 use of external systems address mobile/BYOD. SC-41 (Rev 5) port and I/O device access restriction strengthens endpoint physical controls. SC-42 (Rev 5) sensor capability restricts sensing devices. SI-16 (Rev 5) memory protection adds DEP/ASLR-type controls against exploitation.",
+      "gaps": "BOT Notification 4/2568 requires specific endpoint security measures for mobile banking devices including device integrity checking, jailbreak/root detection, screen overlay protection, and remote app functionality suspension for compromised devices. These mobile-specific endpoint controls for Thai financial services extend beyond general SP 800-53 endpoint protection scope."
+    },
+    {
+      "id": "Ch2.7",
+      "title": "Cryptographic Controls",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-08",
+        "SC-17",
+        "SC-28",
+        "SC-40"
+      ],
+      "coverage_pct": 87,
+      "rationale": "SC-12 cryptographic key management establishes the key lifecycle. SC-13 cryptographic protection mandates approved algorithms. SC-08 transmission confidentiality/integrity and SC-28 protection at rest cover encryption in transit and at rest. SC-17 public key infrastructure certificates addresses certificate management. SC-40 (Rev 5) wireless link protection adds cryptographic protection for wireless communications relevant to branch and ATM networks.",
+      "gaps": "Minor: BOT aligns with international cryptographic standards but requires specific key management procedures for Thai payment infrastructure including BAHTNET HSM requirements and PromptPay encryption. SC-40 extends crypto to wireless links. Thai-specific algorithm approval processes and crypto module certification expectations need supplementation."
+    },
+    {
+      "id": "Ch2.8",
+      "title": "Physical and Environmental Security",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-08",
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-17",
+        "PE-18"
+      ],
+      "coverage_pct": 86,
+      "rationale": "PE family comprehensive for physical security of data centres and critical IT infrastructure. PE-02/PE-03 physical access authorisations and control, PE-06 monitoring physical access, PE-08 visitor access records cover access management. PE-09 power equipment, PE-10 emergency shutoff, PE-11 emergency power, PE-12 emergency lighting, PE-13 fire protection, PE-14 environmental controls, and PE-15 water damage protection address environmental controls. PE-17 (Rev 5) alternate work site enables secure remote operations. PE-18 (Rev 5) location of system components addresses secure placement of critical infrastructure.",
+      "gaps": "Minor: BOT requires data centre standards aligned with Thai building codes, Bangkok flood risk management provisions, and specific environmental controls for tropical climate conditions. PE-17/PE-18 add remote work and component placement controls. Thailand-specific disaster resilience for flooding and seismic risks need supplementation."
+    },
+    {
+      "id": "Ch3.1",
+      "title": "Security Monitoring and Threat Detection",
+      "controls": [
+        "SI-04",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-06",
+        "AU-07",
+        "AU-09",
+        "AU-12",
+        "AU-13",
+        "AU-14",
+        "CA-07",
+        "PM-16",
+        "RA-10",
+        "SC-26",
+        "SC-44"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SI-04 system monitoring and AU family provide comprehensive detection capabilities. AU-02/AU-03/AU-12 audit events, content, and generation establish logging. AU-06 audit record review and AU-07 audit record reduction support analysis. AU-09 protection of audit information and AU-14 session audit ensure log integrity. CA-07 continuous monitoring enables real-time oversight. PM-16 threat awareness program supports threat intelligence. RA-10 (Rev 5) threat hunting enables proactive threat detection. SC-26 (Rev 5) honeypots provide deception technology. SC-44 (Rev 5) detonation chambers enable sandbox analysis of suspicious files. AU-13 (Rev 5) monitoring for information disclosure detects data exfiltration.",
+      "gaps": "Minor: BOT requires SOC capabilities and coordination with Thailand Banking Sector CERT (TB-CERT) and ThaiCERT for threat intelligence sharing. SC-26/SC-44/RA-10 add advanced cyber operations capabilities. BOT-specific threat monitoring for Thai payment fraud patterns and PromptPay transaction anomaly detection extend beyond SP 800-53 scope."
+    },
+    {
+      "id": "Ch3.2",
+      "title": "Vulnerability Management and Penetration Testing",
+      "controls": [
+        "RA-05",
+        "CA-02",
+        "CA-08",
+        "SI-02",
+        "SI-05",
+        "PM-14",
+        "RA-09"
+      ],
+      "coverage_pct": 87,
+      "rationale": "RA-05 vulnerability monitoring and scanning provides continuous vulnerability assessment. CA-08 penetration testing addresses BOT requirements for security testing. SI-02 flaw remediation ensures timely patching. PM-14 testing, training, monitoring establishes testing program governance. CA-02 control assessments and SI-05 security alerts support vulnerability management processes. RA-09 (Rev 5) criticality analysis enables risk-prioritised vulnerability remediation for critical financial systems.",
+      "gaps": "Minor: BOT requires annual penetration testing aligned with Thai banking sector standards and may require red team exercises for systemically important financial institutions. RA-09 enables criticality-based prioritisation. BOT-specific vulnerability disclosure timelines and coordination with TB-CERT for vulnerability intelligence need supplementation."
+    },
+    {
+      "id": "Ch4.1",
+      "title": "Cyber Incident Response and Management",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09",
+        "PM-16",
+        "SI-05"
+      ],
+      "coverage_pct": 75,
+      "rationale": "IR family provides comprehensive incident response covering policy (IR-01), training (IR-02), testing (IR-03), handling (IR-04), monitoring (IR-05), reporting (IR-06), assistance (IR-07), and planning (IR-08). IR-09 information spillage response addresses data breach scenarios. PM-16 threat awareness program supports incident intelligence. SI-05 security alerts/advisories provides vulnerability and threat advisory integration.",
+      "gaps": "BOT mandates specific incident notification timelines to the regulator (material cyber incidents must be reported to BOT within prescribed timeframes). BOT requires incident coordination with TB-CERT and ThaiCERT. Thai PDPA requires data breach notification to PDPC within 72 hours. BOT examination cooperation during incident investigation and BOT-prescribed incident classification for Thai financial sector are not covered by SP 800-53."
+    },
+    {
+      "id": "Ch4.2",
+      "title": "Business Continuity and IT Disaster Recovery",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "CP-11",
+        "CP-12",
+        "CP-13",
+        "SC-24",
+        "SI-13",
+        "SI-17"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP family comprehensive for business continuity covering contingency planning (CP-01/02), training (CP-03), testing (CP-04), alternate sites (CP-06/07), telecommunications (CP-08), backup (CP-09), and recovery (CP-10). CP-11 alternate communications and CP-12 safe mode address resilient operations. CP-13 (Rev 5) alternate security mechanisms enables fallback controls. SC-24 (Rev 5) fail in known state ensures secure failure modes for financial transactions. SI-13 (Rev 5) predictive maintenance enables proactive failure prevention. SI-17 (Rev 5) fail-safe procedures provide additional failure handling.",
+      "gaps": "BOT requires specific RPO/RTO targets for critical Thai payment infrastructure (BAHTNET, PromptPay). BOT mandates annual DR testing with BOT-prescribed scenarios and may require cross-institution DR exercises. SC-24/SI-13/SI-17 strengthen resilience coverage. BOT-specific requirements for Bangkok metropolitan area disaster recovery and geographic diversity of backup sites within Thailand need supplementation."
+    },
+    {
+      "id": "Ch5.1",
+      "title": "IT Outsourcing and Third-Party Risk Management",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-04",
+        "SR-05",
+        "SR-06",
+        "SR-07",
+        "SR-08",
+        "SA-21",
+        "PM-30"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-04 acquisition process and SA-09 external system services address procurement and service management. SR family provides supply chain risk management covering policy (SR-01), supply chain controls (SR-02/03), provenance (SR-04), tamper resistance (SR-05), supplier assessment (SR-06), operations security (SR-07), and notification agreements (SR-08). SA-21 (Rev 5) developer screening adds third-party personnel vetting. PM-30 (Rev 5) supply chain risk management strategy establishes organisational-level supply chain governance.",
+      "gaps": "BOT SorNorSor 21/2562 mandates specific third-party risk management covering: risk assessment before engagement, due diligence for service provider selection, agreement preparation with prescribed clauses, ongoing performance monitoring, and exit/termination management. BOT requires regulatory notification for critical IT outsourcing and cloud service usage by financial institutions. FPG 19/2599 addresses the IT Triad (security, integrity, availability) for outsourcing. Thai data residency expectations for outsourced services and BOT approval requirements for cross-border IT outsourcing are not addressed by SP 800-53."
+    },
+    {
+      "id": "Ch5.2",
+      "title": "Cloud Services Risk Management",
+      "controls": [
+        "SA-09",
+        "AC-20",
+        "SC-07",
+        "CA-03",
+        "CA-09",
+        "SR-01",
+        "PM-30"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SA-09 external system services is central to cloud service governance. AC-20 use of external systems controls access to cloud resources. SC-07 boundary protection manages cloud-on-premises boundaries. CA-03 information exchange and CA-09 internal system connections address cloud interconnections. SR-01 supply chain risk management policy and PM-30 (Rev 5) supply chain risk management strategy provide cloud vendor governance.",
+      "gaps": "BOT imposes specific cloud governance requirements for financial institutions including: multi-cloud risk assessment, cloud provider due diligence with BOT-prescribed criteria, data residency within Thailand or approved jurisdictions, cloud service exit strategies, and BOT notification before cloud migration of critical systems. BOT requires shared responsibility models documented and approved by the board. Google Cloud and AWS have published specific BOT compliance mappings highlighting these Thailand-specific cloud requirements."
+    },
+    {
+      "id": "Ch6.1",
+      "title": "IT Audit",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "CA-05",
+        "CA-06",
+        "CA-07",
+        "AU-01",
+        "AU-02",
+        "AU-06",
+        "AU-16",
+        "PM-14"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CA-02 control assessments and CA-07 continuous monitoring address audit and assessment activities. CA-05 plan of action and milestones tracks audit findings remediation. CA-06 authorisation enables formal acceptance of risk. AU-01/AU-02 audit policies and events provide audit infrastructure. AU-06 audit record review and AU-16 cross-organisational audit support collaborative audit activities. PM-14 testing/training/monitoring establishes periodic assessment governance.",
+      "gaps": "BOT requires annual IT risk self-assessment submitted within 30 days of year-end. BOT mandates independent IT audit function with specific qualifications and reporting lines. BOT examination cooperation and on-site inspection support are regulatory requirements with no SP 800-53 equivalent. Thai-specific IT audit standards prescribed by the Office of the Auditor General and professional bodies need supplementation."
+    },
+    {
+      "id": "Ch6.2",
+      "title": "IT Project Management",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-15",
+        "SA-17",
+        "PM-07",
+        "SA-20",
+        "PL-07",
+        "PL-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-03 system development lifecycle and SA-08 security/privacy engineering principles address security-by-design in projects. SA-04 acquisition process and SA-15 development process standards provide project governance. SA-17 developer security architecture and PM-07 enterprise architecture link projects to enterprise strategy. SA-20 (Rev 5) customised development for critical components addresses bespoke financial system projects. PL-07 (Rev 5) concept of operations defines system purpose. PL-08 (Rev 5) security/privacy architectures ensures architectural alignment.",
+      "gaps": "BOT IT project management requirements extend beyond security to include full project governance methodology, budget oversight, stakeholder management, and delivery assurance. BOT requires project risk assessment and board approval for material IT projects. SA-20/PL-07/PL-08 strengthen project security but general project management discipline remains outside SP 800-53 scope."
+    },
+    {
+      "id": "Ch7.1",
+      "title": "Cybersecurity Awareness and Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-06",
+        "PM-13",
+        "PM-16"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AT-01 training policy, AT-02 literacy training and awareness, and AT-03 role-based training provide the awareness framework. AT-04 training records tracks completion. AT-06 (Rev 5) training feedback enables continuous improvement of training programmes. PM-13 security workforce and PM-16 threat awareness program support skills development and threat intelligence dissemination.",
+      "gaps": "BOT requires cybersecurity awareness training specific to Thai financial fraud patterns including voice phishing (call centre scams prevalent in Thailand), PromptPay fraud, and mule account awareness. AT-06 strengthens training feedback loops. BOT-specific training requirements for board members on cyber risk and Thai-language phishing simulation exercises extend beyond SP 800-53 scope."
+    },
+    {
+      "id": "Ch7.2",
+      "title": "Personnel Security",
+      "controls": [
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-05",
+        "PS-06",
+        "PS-07",
+        "PS-08",
+        "PS-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PS family provides comprehensive personnel security covering policy (PS-01), position risk designation (PS-02), personnel screening (PS-03), personnel termination (PS-04), personnel transfer (PS-05), access agreements (PS-06), external personnel security (PS-07), and personnel sanctions (PS-08). PS-09 (Rev 5) position descriptions formalises security responsibilities in all organisational roles.",
+      "gaps": "Minor: BOT requires personnel screening aligned with Thai Anti-Money Laundering Office (AMLO) requirements and Bank of Thailand fit-and-proper criteria for key IT personnel. PS-09 strengthens role definition. Background check requirements specific to Thai financial sector and National Police Bureau clearance processes need supplementation."
+    },
+    {
+      "id": "Ch8.1",
+      "title": "Cyber Threat Intelligence and Information Sharing",
+      "controls": [
+        "PM-15",
+        "PM-16",
+        "SI-05",
+        "RA-03",
+        "RA-10",
+        "SC-26"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PM-15 security groups/associations and PM-16 threat awareness program support information sharing and threat intelligence activities. SI-05 security alerts/advisories provides vulnerability and threat advisory integration. RA-03 risk assessment incorporates threat intelligence. RA-10 (Rev 5) threat hunting enables proactive threat detection using shared intelligence. SC-26 (Rev 5) honeypots provide deception capability for threat intelligence collection.",
+      "gaps": "BOT requires participation in Thailand Banking Sector CERT (TB-CERT) and coordination with ThaiCERT (national CERT). BOT mandates threat intelligence sharing among Thai financial institutions through prescribed channels. RA-10/SC-26 add proactive intelligence capabilities. BOT-specific requirements for financial sector ISAC participation and regulatory threat briefing attendance are Thailand-specific obligations not covered by SP 800-53."
+    },
+    {
+      "id": "Ch8.2",
+      "title": "Digital Fraud Prevention",
+      "controls": [
+        "SI-04",
+        "SI-03",
+        "AU-06",
+        "SC-07",
+        "AC-02",
+        "AC-07",
+        "IA-02",
+        "SC-23"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SI-04 system monitoring and AU-06 audit review support fraud detection. SI-03 malicious code protection guards against malware-based fraud. SC-07 boundary protection and SC-23 session authenticity protect transaction channels. AC-02 account management and AC-07 unsuccessful logon attempts address account-level fraud controls. IA-02 multi-factor authentication provides strong authentication for transactions.",
+      "gaps": "BOT has issued specific digital fraud management guidelines (draft 2025) covering mule account detection, customer due diligence enhancements, and real-time fraud monitoring for Thai payment systems. BOT requires transaction velocity limits, PromptPay fraud pattern detection, and coordination with Thai Police Cyber Crime Investigation Bureau (CCIB). Call centre scam prevention measures and cross-bank fraud intelligence sharing specific to the Thai financial ecosystem are not addressed by SP 800-53."
+    },
+    {
+      "id": "Ch9.1",
+      "title": "Mobile Banking and E-Payment Security",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "SC-13",
+        "SC-23",
+        "SC-45",
+        "IA-02",
+        "AC-17",
+        "AC-19",
+        "SI-07"
+      ],
+      "coverage_pct": 62,
+      "rationale": "SC-07 boundary protection and SC-08 transmission confidentiality secure payment channels. SC-13 cryptographic protection and SC-23 session authenticity protect transaction integrity. IA-02 multi-factor authentication and AC-17 remote access provide authentication for mobile/e-payment. AC-19 access control for mobile devices addresses mobile device management. SI-07 software integrity verification supports application integrity. SC-45 (Rev 5) system time synchronisation ensures accurate transaction timestamps.",
+      "gaps": "BOT Notification 4/2568 (March 2025) imposes extensive mobile banking security requirements including: biometric authentication (facial recognition), device binding, one-device-per-account restrictions, transaction limits for new devices, screen overlay detection, jailbreak/root detection, and remote suspension of compromised apps. BOT mandates specific e-payment security for PromptPay, QR payment, and mobile banking channels aligned with the Thai payment ecosystem. SC-45 adds timestamp reliability but mobile-banking-specific controls remain significant gaps."
+    },
+    {
+      "id": "Ch9.2",
+      "title": "Customer Data Protection and Privacy",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05",
+        "PT-06",
+        "PT-07",
+        "PT-08",
+        "SI-12",
+        "SI-19",
+        "PM-20",
+        "PM-25",
+        "PM-26"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PT family (Rev 5) provides privacy controls covering authority (PT-01), purpose specification (PT-02), minimisation (PT-03), consent (PT-04), privacy notice (PT-05), system of records (PT-06), identity resolution (PT-07), and computer matching (PT-08). SI-12 information management and SI-19 (Rev 5) de-identification address data lifecycle and anonymisation. PM-20 (Rev 5) dissemination of privacy impact assessments supports transparency. PM-25 (Rev 5) minimisation of personally identifiable information and PM-26 (Rev 5) data quality address data governance.",
+      "gaps": "Thai PDPA (Personal Data Protection Act B.E. 2562) imposes specific consent requirements, data subject rights (access, erasure, portability), cross-border transfer restrictions, and data breach notification to PDPC within 72 hours. BOT data governance framework requires data classification aligned to PDPA categories. BOT-specific requirements for financial data sharing consent, PromptPay data protection, and Thai PDPC examination cooperation are not fully addressed by SP 800-53 PT controls."
+    },
+    {
+      "id": "Ch10.1",
+      "title": "IT Operations Management",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "SI-02",
+        "SI-06",
+        "SI-14",
+        "MA-01",
+        "MA-02",
+        "MA-03",
+        "MA-04",
+        "MA-05",
+        "MA-06",
+        "CA-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-03/CM-04 change control and impact analysis manage operational changes. SI-02 flaw remediation addresses patching. SI-06 security function verification validates control effectiveness. SI-14 (Rev 5) non-persistence reduces persistent attack surfaces. MA family provides system maintenance covering policy (MA-01), controlled maintenance (MA-02), tools (MA-03), remote maintenance (MA-04), personnel (MA-05), and timely maintenance (MA-06). CA-07 continuous monitoring provides operational oversight.",
+      "gaps": "BOT requires ITIL-aligned IT operations management including problem management, release management, capacity management, and SLA management which extend beyond SP 800-53 security scope. SI-14 adds non-persistence capability. BOT-specific operational requirements for 24/7 Thai payment system availability and BAHTNET operational windows need supplementation."
+    }
+  ],
+  "summary": {
+    "total_clauses": 26,
+    "average_coverage": 76.9,
+    "full_count": 9,
+    "substantial_count": 14,
+    "partial_count": 3,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

@@ -1,0 +1,705 @@
+{
+  "version": "1.0",
+  "title": "TRIDENT Core Data Model",
+  "subtitle": "Attack / Weakness / Control Graph",
+  "description": "Single authoritative definition of the TRIDENT conceptual model — domains, entity types, relationship types, and analytical paths. Data-backed nodes and edges are validated against metadata.json and graph-edges.json at build time.",
+  "authors": ["Vinylwasp", "Vitruvius"],
+  "domains": {
+    "risk": {
+      "name": "Risk Domain",
+      "color": "#8b5cf6",
+      "gradient": ["#ede9fe:0.6", "#ddd6fe:0.3"],
+      "border": "#8b5cf6"
+    },
+    "threat": {
+      "name": "Threat Domain",
+      "color": "#ef4444",
+      "gradient": ["#fee2e2:0.6", "#fecaca:0.3"],
+      "border": "#dc2626"
+    },
+    "weakness": {
+      "name": "Weakness Domain",
+      "color": "#f59e0b",
+      "gradient": ["#fef3c7:0.6", "#fde68a:0.3"],
+      "border": "#d97706"
+    },
+    "defense": {
+      "name": "Defense Domain",
+      "color": "#2563eb",
+      "gradient": ["#dbeafe:0.6", "#bfdbfe:0.3"],
+      "border": "#2563eb"
+    },
+    "human_factors": {
+      "name": "Human Factors (THFM)",
+      "color": "#db2777",
+      "gradient": ["#fce7f3:0.6", "#fbcfe8:0.3"],
+      "border": "#db2777"
+    },
+    "asset": {
+      "name": "Asset Domain",
+      "color": "#6b7280",
+      "gradient": ["#e5e7eb:0.6", "#d1d5db:0.3"],
+      "border": "#6b7280"
+    },
+    "capability": {
+      "name": "Capability Domain (TPCE / TTCE)",
+      "color": "#10b981",
+      "gradient": ["#d1fae5:0.6", "#a7f3d0:0.3"],
+      "border": "#10b981"
+    },
+    "governance": {
+      "name": "Governance Path",
+      "color": "#0d9488",
+      "gradient": ["#ccfbf1:0.6", "#99f6e4:0.3"],
+      "border": "#0d9488"
+    },
+    "platform": {
+      "name": "Platform Domain",
+      "color": "#92400e",
+      "gradient": ["#fef3c7:0.6", "#fde68a:0.3"],
+      "border": "#92400e"
+    },
+    "identity": {
+      "name": "Identity Domain (TIDM)",
+      "color": "#6366f1",
+      "gradient": ["#e0e7ff:0.6", "#c7d2fe:0.3"],
+      "border": "#6366f1"
+    }
+  },
+  "nodeTypes": {
+    "technique": {
+      "name": "Technique",
+      "domain": "threat",
+      "color": "#EF4444",
+      "hasData": true,
+      "description": "ATT&CK technique or sub-technique (Enterprise)",
+      "catalog": "technique-catalog.json"
+    },
+    "threat_actor": {
+      "name": "Threat Actor",
+      "domain": "threat",
+      "color": "#DC2626",
+      "hasData": true,
+      "description": "ATT&CK intrusion set (threat group)",
+      "catalog": "actor-catalog.json"
+    },
+    "adversary_tier": {
+      "name": "Adversary Tier",
+      "domain": "threat",
+      "color": "#10B981",
+      "hasData": true,
+      "description": "TACM adversary capability tier (T1-T5)",
+      "catalog": "adversary-tier-catalog.json"
+    },
+    "weakness_class": {
+      "name": "Weakness Class",
+      "domain": "weakness",
+      "color": "#F59E0B",
+      "hasData": true,
+      "description": "CWE weakness class mapped via CAPEC bridge",
+      "catalog": "weakness-catalog.json"
+    },
+    "mitigation": {
+      "name": "Mitigation",
+      "domain": "defense",
+      "color": "#3B82F6",
+      "hasData": true,
+      "description": "ATT&CK mitigation (M-series)",
+      "catalog": "mitigation-catalog.json"
+    },
+    "detection_strategy": {
+      "name": "Detection Strategy",
+      "domain": "defense",
+      "color": "#8B5CF6",
+      "hasData": true,
+      "description": "ATT&CK v18 detection strategy (DET-series)",
+      "catalog": "detection-catalog.json"
+    },
+    "cis_safeguard": {
+      "name": "CIS Safeguard",
+      "domain": "defense",
+      "color": "#14B8A6",
+      "hasData": true,
+      "description": "CIS Controls v8 safeguard",
+      "catalog": "cis-safeguard-index.json"
+    },
+    "control": {
+      "name": "Control",
+      "domain": "defense",
+      "color": "#007EA7",
+      "hasData": true,
+      "description": "NIST SP 800-53 Rev 5 security control (PRIMARY KEY)",
+      "catalog": "controls/"
+    },
+    "human_factor": {
+      "name": "Human Factor",
+      "domain": "human_factors",
+      "color": "#A78BFA",
+      "hasData": true,
+      "description": "THFM cognitive vulnerability class",
+      "catalog": "human-factors-catalog.json"
+    },
+    "insider_stage": {
+      "name": "Insider Stage",
+      "domain": "human_factors",
+      "color": "#F43F5E",
+      "hasData": true,
+      "description": "THFM insider threat progression stage (Stage 0-4)",
+      "catalog": "insider-stage-catalog.json"
+    },
+    "data_type": {
+      "name": "Data Type",
+      "domain": "asset",
+      "color": "#D946EF",
+      "hasData": true,
+      "description": "TDCE data classification type with protection requirements",
+      "catalog": "data-classification-catalog.json"
+    },
+    "cloud_service": {
+      "name": "Cloud Service",
+      "domain": "asset",
+      "color": "#6366F1",
+      "hasData": true,
+      "description": "TCSE cloud service with shared responsibility splits",
+      "catalog": "cloud-service-catalog.json"
+    },
+    "process_capability": {
+      "name": "Process Capability",
+      "domain": "capability",
+      "color": "#06B6D4",
+      "hasData": true,
+      "description": "TPCE process capability class",
+      "catalog": "process-capability-catalog.json"
+    },
+    "technology_capability": {
+      "name": "Technology Capability",
+      "domain": "capability",
+      "color": "#0EA5E9",
+      "hasData": true,
+      "description": "TTCE technology capability class with D3FEND alignment",
+      "catalog": "technology-capability-catalog.json"
+    },
+    "protocol": {
+      "name": "Protocol",
+      "domain": "platform",
+      "color": "#84CC16",
+      "hasData": true,
+      "description": "TPE network/application protocol with attack surface",
+      "catalog": "protocol-catalog.json"
+    },
+    "identity_provider": {
+      "name": "Identity Provider",
+      "domain": "identity",
+      "color": "#0EA5E9",
+      "hasData": true,
+      "description": "TIDM identity provider class with NIST 800-63 assurance",
+      "catalog": "identity-domain-catalog.json"
+    },
+    "access_policy": {
+      "name": "Access Policy",
+      "domain": "identity",
+      "color": "#F472B6",
+      "hasData": true,
+      "description": "TIDM access policy class",
+      "catalog": "identity-domain-catalog.json"
+    },
+    "identity_principal": {
+      "name": "Identity Principal",
+      "domain": "identity",
+      "color": "#FBBF24",
+      "hasData": true,
+      "description": "TIDM identity principal class",
+      "catalog": "identity-domain-catalog.json"
+    },
+    "federation_pattern": {
+      "name": "Federation Pattern",
+      "domain": "identity",
+      "color": "#34D399",
+      "hasData": true,
+      "description": "TIDM federation topology pattern",
+      "catalog": "identity-domain-catalog.json"
+    },
+    "loss_scenario": {
+      "name": "Loss Scenario",
+      "domain": "risk",
+      "color": "#8b5cf6",
+      "hasData": false,
+      "description": "Business impact scenario driving risk quantification (planned)"
+    },
+    "attack_path": {
+      "name": "Attack Path",
+      "domain": "risk",
+      "color": "#8b5cf6",
+      "hasData": false,
+      "description": "Chained technique sequence realising a loss scenario (planned)"
+    },
+    "defence_capability": {
+      "name": "Defence Capability",
+      "domain": "risk",
+      "color": "#8b5cf6",
+      "hasData": false,
+      "description": "Composite capability required to counter an attack path (planned)"
+    },
+    "tactic": {
+      "name": "Tactic",
+      "domain": "threat",
+      "color": "#ef4444",
+      "hasData": false,
+      "description": "ATT&CK tactic — high-level adversary objective (planned)"
+    },
+    "procedure": {
+      "name": "Procedure",
+      "domain": "threat",
+      "color": "#ef4444",
+      "hasData": false,
+      "description": "Concrete tool/method instance of a technique (planned)"
+    },
+    "vulnerability": {
+      "name": "Vulnerability",
+      "domain": "weakness",
+      "color": "#f59e0b",
+      "hasData": false,
+      "description": "CVE vulnerability instance of a weakness class (planned)"
+    },
+    "implementation": {
+      "name": "Implementation",
+      "domain": "defense",
+      "color": "#2563eb",
+      "hasData": false,
+      "description": "Concrete product/config/process/policy realising a control (planned)"
+    },
+    "asset": {
+      "name": "Asset",
+      "domain": "asset",
+      "color": "#6b7280",
+      "hasData": false,
+      "description": "Target system, service, or data store under protection (planned)"
+    },
+    "compliance_framework": {
+      "name": "Compliance Framework",
+      "domain": "governance",
+      "color": "#0d9488",
+      "hasData": false,
+      "description": "Regulatory or industry framework satisfied by controls (planned — data exists in control compliance_mappings)"
+    },
+    "cpe": {
+      "name": "CPE",
+      "domain": "platform",
+      "color": "#92400e",
+      "hasData": false,
+      "description": "Common Platform Enumeration — product/version identifier (planned)"
+    },
+    "xccdf_checklist": {
+      "name": "XCCDF Checklist",
+      "domain": "platform",
+      "color": "#92400e",
+      "hasData": false,
+      "description": "SCAP configuration checklist targeting CPE (planned)"
+    }
+  },
+  "edgeTypes": {
+    "COUNTERS": {
+      "name": "Counters",
+      "from": "mitigation",
+      "to": "technique",
+      "hasData": true,
+      "description": "Mitigation counters/mitigates an ATT&CK technique"
+    },
+    "PRESCRIBES": {
+      "name": "Prescribes",
+      "from": "control",
+      "to": "mitigation",
+      "hasData": true,
+      "description": "Control prescribes a mitigation strategy"
+    },
+    "ALIGNS_TO": {
+      "name": "Aligns To",
+      "from": ["mitigation", "cis_safeguard"],
+      "to": ["cis_safeguard", "mitigation"],
+      "hasData": true,
+      "style": "dashed",
+      "description": "Cross-reference alignment between mitigations and CIS safeguards (legacy)"
+    },
+    "DETECTS": {
+      "name": "Detects",
+      "from": "detection_strategy",
+      "to": "technique",
+      "hasData": true,
+      "description": "Detection strategy identifies technique execution"
+    },
+    "DETECTED_BY": {
+      "name": "Detected By",
+      "from": "detection_strategy",
+      "to": "technology_capability",
+      "hasData": true,
+      "description": "Detection strategy implemented by technology capability"
+    },
+    "IMPLEMENTED_BY": {
+      "name": "Implemented By",
+      "from": "cis_safeguard",
+      "to": "control",
+      "hasData": true,
+      "description": "CIS safeguard implemented by SP800-53 control"
+    },
+    "EXPLOITS": {
+      "name": "Exploits",
+      "from": "technique",
+      "to": "weakness_class",
+      "hasData": true,
+      "description": "Technique exploits a CWE weakness class"
+    },
+    "USES": {
+      "name": "Uses",
+      "from": "threat_actor",
+      "to": "technique",
+      "hasData": true,
+      "description": "Threat actor uses technique in observed campaigns"
+    },
+    "CLASSIFIED_BY": {
+      "name": "Classified By",
+      "from": "process_capability",
+      "to": "control",
+      "hasData": true,
+      "description": "Process capability classifies control implementation"
+    },
+    "PROVIDES_CAPABILITY": {
+      "name": "Provides Capability",
+      "from": "technology_capability",
+      "to": "control",
+      "hasData": true,
+      "description": "Technology capability provides control implementation"
+    },
+    "TIER_CONTAINS": {
+      "name": "Tier Contains",
+      "from": "adversary_tier",
+      "to": "technique",
+      "hasData": true,
+      "description": "Adversary tier contains technique at minimum sophistication level"
+    },
+    "EXPLOITS_HUMAN": {
+      "name": "Exploits Human",
+      "from": "technique",
+      "to": "human_factor",
+      "hasData": true,
+      "description": "Technique exploits cognitive vulnerability class"
+    },
+    "PARENT_OF": {
+      "name": "Parent Of",
+      "from": "technique",
+      "to": "technique",
+      "hasData": true,
+      "description": "Parent technique contains sub-technique"
+    },
+    "CAPABILITY_SUPPORTS_CIS": {
+      "name": "Capability Supports CIS",
+      "from": ["process_capability", "technology_capability"],
+      "to": "cis_safeguard",
+      "hasData": true,
+      "description": "Capability supports CIS safeguard implementation"
+    },
+    "CAPABILITY_SUPPORTS_MITIGATION": {
+      "name": "Capability Supports Mitigation",
+      "from": ["process_capability", "technology_capability"],
+      "to": "mitigation",
+      "hasData": true,
+      "description": "Capability supports ATT&CK mitigation"
+    },
+    "REQUIRES_PROTECTION": {
+      "name": "Requires Protection",
+      "from": "data_type",
+      "to": "control",
+      "hasData": true,
+      "description": "Data type requires protection by control"
+    },
+    "PROTECTS_DATA": {
+      "name": "Protects Data",
+      "from": "control",
+      "to": "data_type",
+      "hasData": true,
+      "description": "Control protects data type"
+    },
+    "PROVIDER_IMPLEMENTS": {
+      "name": "Provider Implements",
+      "from": "cloud_service",
+      "to": "control",
+      "hasData": true,
+      "description": "Cloud provider inherently implements control"
+    },
+    "CUSTOMER_IMPLEMENTS": {
+      "name": "Customer Implements",
+      "from": "cloud_service",
+      "to": "control",
+      "hasData": true,
+      "description": "Customer must implement control for cloud service"
+    },
+    "TARGETS_PROTOCOL": {
+      "name": "Targets Protocol",
+      "from": "technique",
+      "to": "protocol",
+      "hasData": true,
+      "description": "Technique targets network/application protocol"
+    },
+    "UPGRADES_TO": {
+      "name": "Upgrades To",
+      "from": "protocol",
+      "to": "protocol",
+      "hasData": true,
+      "description": "Protocol upgrades to more secure alternative"
+    },
+    "TRANSITIONS_TO": {
+      "name": "Transitions To",
+      "from": "insider_stage",
+      "to": "insider_stage",
+      "hasData": true,
+      "description": "Insider threat progresses from one stage to next"
+    },
+    "INDICATED_BY": {
+      "name": "Indicated By",
+      "from": "insider_stage",
+      "to": "human_factor",
+      "hasData": true,
+      "description": "Insider stage indicated by cognitive vulnerability indicators"
+    },
+    "STAGE_DETECTED_BY": {
+      "name": "Stage Detected By",
+      "from": "insider_stage",
+      "to": "control",
+      "hasData": true,
+      "description": "Insider stage detected by SP800-53 control"
+    },
+    "SATISFIES": {
+      "name": "Satisfies",
+      "from": ["identity_provider", "access_policy", "identity_principal"],
+      "to": "control",
+      "hasData": true,
+      "description": "Identity entity satisfies SP800-53 control requirement"
+    },
+    "MITIGATES": {
+      "name": "Mitigates",
+      "from": "access_policy",
+      "to": "technique",
+      "hasData": true,
+      "description": "Access policy mitigates ATT&CK technique"
+    },
+    "IMPLEMENTS_CLASS": {
+      "name": "Implements Class",
+      "from": "identity_provider",
+      "to": "technology_capability",
+      "hasData": true,
+      "description": "Identity provider implements TTCE technology class"
+    },
+    "USES_PROTOCOL": {
+      "name": "Uses Protocol",
+      "from": "identity_provider",
+      "to": "protocol",
+      "hasData": true,
+      "description": "Identity provider uses network protocol"
+    },
+    "FEDERATES_TO": {
+      "name": "Federates To",
+      "from": "identity_provider",
+      "to": "identity_provider",
+      "hasData": true,
+      "description": "Identity provider federates to another provider"
+    },
+    "REALISED_BY": {
+      "name": "Realised By",
+      "from": "loss_scenario",
+      "to": "attack_path",
+      "hasData": false,
+      "description": "Loss scenario realised by attack path (planned)"
+    },
+    "DEMANDS": {
+      "name": "Demands",
+      "from": "attack_path",
+      "to": "defence_capability",
+      "hasData": false,
+      "description": "Attack path demands defence capability (planned)"
+    },
+    "COMPOSED_OF": {
+      "name": "Composed Of",
+      "from": "attack_path",
+      "to": "technique",
+      "hasData": false,
+      "description": "Attack path composed of chained techniques (planned)"
+    },
+    "GROUPS": {
+      "name": "Groups",
+      "from": "tactic",
+      "to": "technique",
+      "hasData": false,
+      "description": "Tactic groups techniques by adversary objective (planned)"
+    },
+    "INSTANCE_OF_PROCEDURE": {
+      "name": "Instance Of",
+      "from": "procedure",
+      "to": "technique",
+      "hasData": false,
+      "description": "Procedure is concrete instance of technique (planned)"
+    },
+    "INSTANCE_OF_VULNERABILITY": {
+      "name": "Instance Of",
+      "from": "vulnerability",
+      "to": "weakness_class",
+      "hasData": false,
+      "description": "CVE vulnerability is instance of CWE weakness class (planned)"
+    },
+    "CHAINS_TO": {
+      "name": "Chains To",
+      "from": "technique",
+      "to": "technique",
+      "hasData": false,
+      "description": "Technique chains to subsequent technique in attack path (planned)"
+    },
+    "REQUIRES": {
+      "name": "Requires",
+      "from": "defence_capability",
+      "to": "cis_safeguard",
+      "hasData": false,
+      "description": "Defence capability requires CIS safeguard (planned)"
+    },
+    "SATISFIED_BY": {
+      "name": "Satisfied By",
+      "from": "compliance_framework",
+      "to": "control",
+      "hasData": false,
+      "description": "Compliance framework satisfied by control (planned — data exists in control compliance_mappings)"
+    },
+    "REALISED_BY_IMPL": {
+      "name": "Realised By",
+      "from": "control",
+      "to": "implementation",
+      "hasData": false,
+      "description": "Control realised by concrete implementation (planned)"
+    },
+    "APPLIED_TO": {
+      "name": "Applied To",
+      "from": "implementation",
+      "to": "asset",
+      "hasData": false,
+      "description": "Implementation applied to target asset (planned)"
+    },
+    "DEGRADES": {
+      "name": "Degrades",
+      "from": "technique",
+      "to": "asset",
+      "hasData": false,
+      "description": "Technique degrades asset confidentiality/integrity/availability (planned)"
+    },
+    "AFFECTS": {
+      "name": "Affects",
+      "from": "vulnerability",
+      "to": "cpe",
+      "hasData": false,
+      "description": "CVE vulnerability affects CPE product (planned)"
+    },
+    "APPLIES_TO": {
+      "name": "Applies To",
+      "from": "xccdf_checklist",
+      "to": "cpe",
+      "hasData": false,
+      "description": "XCCDF checklist applies to CPE product (planned)"
+    },
+    "DESCRIBED_BY": {
+      "name": "Described By",
+      "from": "asset",
+      "to": "cpe",
+      "hasData": false,
+      "description": "Asset described by CPE identifier (planned)"
+    }
+  },
+  "analyticalPaths": {
+    "defense_path": {
+      "name": "Defense Path",
+      "description": "Control -> Mitigation -> Technique: How controls prescribe mitigations that counter techniques",
+      "nodes": ["control", "mitigation", "technique"],
+      "edges": ["PRESCRIBES", "COUNTERS"]
+    },
+    "detection_path": {
+      "name": "Detection Path",
+      "description": "Technology Capability -> Detection Strategy -> Technique: How technology enables detection of techniques",
+      "nodes": ["technology_capability", "detection_strategy", "technique"],
+      "edges": ["DETECTED_BY", "DETECTS"]
+    },
+    "weakness_path": {
+      "name": "Weakness Path",
+      "description": "Technique -> Weakness Class: Which CWE weaknesses are exploited by techniques",
+      "nodes": ["technique", "weakness_class"],
+      "edges": ["EXPLOITS"]
+    },
+    "threat_path": {
+      "name": "Threat Path",
+      "description": "Threat Actor -> Technique: Actor technique repertoire from observed campaigns",
+      "nodes": ["threat_actor", "technique"],
+      "edges": ["USES"]
+    },
+    "process_capability_path": {
+      "name": "Process Capability Path",
+      "description": "Process Capability -> Control: TPCE process implementation classification",
+      "nodes": ["process_capability", "control"],
+      "edges": ["CLASSIFIED_BY"]
+    },
+    "technology_capability_path": {
+      "name": "Technology Capability Path",
+      "description": "Technology Capability -> Control: TTCE technology capability profiling",
+      "nodes": ["technology_capability", "control"],
+      "edges": ["PROVIDES_CAPABILITY"]
+    },
+    "adversary_capability_path": {
+      "name": "Adversary Capability Path",
+      "description": "Adversary Tier -> Technique: TACM capability tier classification",
+      "nodes": ["adversary_tier", "technique"],
+      "edges": ["TIER_CONTAINS"]
+    },
+    "human_factors_path": {
+      "name": "Human Factors Path",
+      "description": "Human Factor -> Technique: THFM cognitive vulnerability exploitation",
+      "nodes": ["human_factor", "technique"],
+      "edges": ["EXPLOITS_HUMAN"]
+    },
+    "data_classification_path": {
+      "name": "Data Classification Path",
+      "description": "Data Type <-> Control: TDCE regulatory-driven control derivation",
+      "nodes": ["data_type", "control"],
+      "edges": ["REQUIRES_PROTECTION", "PROTECTS_DATA"]
+    },
+    "cloud_service_path": {
+      "name": "Cloud Service Path",
+      "description": "Cloud Service -> Control: TCSE shared responsibility derivation",
+      "nodes": ["cloud_service", "control"],
+      "edges": ["PROVIDER_IMPLEMENTS", "CUSTOMER_IMPLEMENTS"]
+    },
+    "protocol_path": {
+      "name": "Protocol Path",
+      "description": "Technique -> Protocol: TPE protocol-specific attack surface",
+      "nodes": ["protocol", "technique"],
+      "edges": ["TARGETS_PROTOCOL"]
+    },
+    "insider_stage_path": {
+      "name": "Insider Progression Path",
+      "description": "Insider Stage -> Human Factor -> Control: THFM insider threat progression and detection",
+      "nodes": ["insider_stage", "human_factor", "control"],
+      "edges": ["TRANSITIONS_TO", "INDICATED_BY", "STAGE_DETECTED_BY"]
+    },
+    "identity_domain_path": {
+      "name": "Identity Domain Path",
+      "description": "Identity entities -> Control/Technique/Capability/Protocol: TIDM identity-aware derivation",
+      "nodes": ["identity_provider", "access_policy", "identity_principal", "control", "technique", "technology_capability", "protocol"],
+      "edges": ["SATISFIES", "MITIGATES", "IMPLEMENTS_CLASS", "USES_PROTOCOL", "FEDERATES_TO"]
+    },
+    "derivation_chain": {
+      "name": "Derivation Chain",
+      "description": "Loss Scenario -> Attack Path -> Defence Capability -> CIS Safeguard -> Control (planned end-to-end)",
+      "nodes": ["loss_scenario", "attack_path", "defence_capability", "cis_safeguard", "control"],
+      "edges": ["REALISED_BY", "DEMANDS", "REQUIRES", "IMPLEMENTED_BY"],
+      "planned": true
+    },
+    "governance_path": {
+      "name": "Governance Path",
+      "description": "Compliance Framework -> Control: Regulatory convergence through SP800-53 (planned as explicit edges)",
+      "nodes": ["compliance_framework", "control"],
+      "edges": ["SATISFIED_BY"],
+      "planned": true
+    }
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "cmmc_2",
+  "framework_name": "CMMC 2.0 Level 2",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on NIST SP 800-171 Rev 2 Appendix D mapping tables (800-171 to 800-53) and the CMMC 2.0 Model Overview (December 2021). CMMC Level 2 aligns directly to NIST SP 800-171 Rev 2 (110 security requirements across 14 domains), which itself derives from SP 800-53 moderate baseline. SP 800-53 Rev 5 provides broader and deeper coverage than CMMC requires. Gaps arise from DoD-specific CUI marking/handling, DFARS 252.204-7012 clause requirements, C3PAO assessment methodology, and SPRS scoring model which are regulatory rather than technical. Validate with qualified CMMC Registered Practitioners or C3PAOs for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "AC",
+      "title": "Access Control",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-04", "AC-05", "AC-06", "AC-07", "AC-08",
+        "AC-09", "AC-10", "AC-11", "AC-12", "AC-13", "AC-14", "AC-16", "AC-17",
+        "AC-18", "AC-19", "AC-20", "AC-21", "AC-22", "AC-24",
+        "IA-02", "IA-04", "IA-05"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CMMC Access Control (22 practices from 800-171 3.1.1-3.1.22) derives directly from SP 800-53. 3.1.1 (limit system access) maps to AC-02; 3.1.2 (transaction control) maps to AC-03/AC-17; 3.1.3 (CUI flow control) maps to AC-04; 3.1.4 (separation of duties) maps to AC-05; 3.1.5 (least privilege) maps to AC-06; 3.1.6-3.1.7 (non-privileged accounts/privileged functions) map to AC-06; 3.1.8 (unsuccessful logon) maps to AC-07; 3.1.9 (privacy/security notices) maps to AC-08; 3.1.10 (session lock) maps to AC-11; 3.1.11 (session termination) maps to AC-12; 3.1.12-3.1.15 (remote access monitoring, crypto, routing, privileged commands) map to AC-17; 3.1.16-3.1.17 (wireless access) map to AC-18; 3.1.18-3.1.19 (mobile device connections, CUI encryption) map to AC-19; 3.1.20-3.1.21 (external systems, portable storage) map to AC-20; 3.1.22 (publicly accessible content) maps to AC-22. SP 800-53 Rev 5 adds AC-09 (previous logon notification), AC-10 (concurrent session control), AC-13 (supervision/review), AC-14 (permitted actions without identification), AC-16 (security/privacy attributes), AC-21 (information sharing), and AC-24 (access control decisions) which extend coverage well beyond 800-171 minimum. IA-02/IA-04/IA-05 support authenticator and identifier management requirements embedded in access control practices.",
+      "gaps": "CMMC requires CUI-specific access control scoping — determining which systems process, store, or transmit CUI and delineating the CUI boundary. SP 800-53 treats information categorization generically (FIPS 199/200) without CUI-specific boundary determination guidance. CMMC assessment methodology evaluates maturity of access control implementation through 320 assessment objectives, a granularity not captured in SP 800-53 control descriptions."
+    },
+    {
+      "id": "AT",
+      "title": "Awareness and Training",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-05", "AT-06",
+        "PM-13", "PM-14",
+        "PL-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CMMC Awareness and Training (3 practices from 800-171 3.2.1-3.2.3) has strong SP 800-53 coverage. 3.2.1 (ensure managers/users aware of security risks) and 3.2.2 (ensure personnel trained) map to AT-02 (awareness training) and AT-03 (role-based training). 3.2.3 (insider threat awareness) maps to AT-02 with insider threat emphasis. SP 800-53 Rev 5 significantly extends coverage with AT-01 (training policy), AT-04 (training records), AT-05 (contacts with security groups/associations), AT-06 (training feedback — new in Rev 5), PM-13 (security workforce development), PM-14 (testing/training/monitoring), and PL-04 (rules of behavior). The 800-53 training family is substantially broader than the three 800-171 requirements.",
+      "gaps": "CMMC specifically requires CUI handling awareness — personnel must understand what CUI is, how to identify it, marking requirements (per 32 CFR Part 2002), and consequences of mishandling. SP 800-53 training controls are information-type agnostic. DoD-specific phishing awareness and social engineering training expectations for CMMC assessments are not codified in 800-53."
+    },
+    {
+      "id": "AU",
+      "title": "Audit and Accountability",
+      "controls": [
+        "AU-01", "AU-02", "AU-03", "AU-04", "AU-05", "AU-06", "AU-07",
+        "AU-08", "AU-09", "AU-10", "AU-11", "AU-12", "AU-13", "AU-14",
+        "AU-16",
+        "SI-04"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CMMC Audit and Accountability (9 practices from 800-171 3.3.1-3.3.9) maps comprehensively to SP 800-53. 3.3.1 (create/retain system audit logs) maps to AU-02/AU-03/AU-12; 3.3.2 (trace actions to individual users) maps to AU-03/AU-12; 3.3.3 (review/update audited events) maps to AU-02; 3.3.4 (alert on audit process failure) maps to AU-05; 3.3.5 (correlate audit review/analysis/reporting) maps to AU-06; 3.3.6 (audit record reduction and report generation) maps to AU-07; 3.3.7 (authoritative time source) maps to AU-08; 3.3.8 (protect audit information) maps to AU-09; 3.3.9 (limit audit log management) maps to AU-09. SP 800-53 extends coverage substantially with AU-01 (audit policy), AU-04 (audit log storage capacity), AU-10 (non-repudiation), AU-11 (audit record retention), AU-13 (monitoring for information disclosure), AU-14 (session audit), AU-16 (cross-organizational audit logging). SI-04 (system monitoring) reinforces real-time audit capabilities.",
+      "gaps": "CMMC requires audit logging specifically scoped to CUI access events and CUI system boundaries. The SPRS scoring methodology assigns specific point values to audit practices (3.3.1 is worth 5 points), creating a quantified compliance metric that SP 800-53 does not address. DFARS 252.204-7012 requires 72-hour incident reporting with audit log preservation for DoD — a specific retention/reporting timeline not in SP 800-53."
+    },
+    {
+      "id": "CM",
+      "title": "Configuration Management",
+      "controls": [
+        "CM-01", "CM-02", "CM-03", "CM-04", "CM-05", "CM-06", "CM-07",
+        "CM-08", "CM-09", "CM-10", "CM-11", "CM-12", "CM-13", "CM-14",
+        "SA-10"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CMMC Configuration Management (9 practices from 800-171 3.4.1-3.4.9) aligns tightly with SP 800-53. 3.4.1 (establish/maintain baseline configurations and inventories) maps to CM-02/CM-08; 3.4.2 (establish/enforce security configuration settings) maps to CM-06; 3.4.3 (track/review/approve/disapprove changes) maps to CM-03; 3.4.4 (analyze security impact of changes) maps to CM-04; 3.4.5 (define/document/approve physical and logical access restrictions) maps to CM-05; 3.4.6 (employ principle of least functionality) maps to CM-07; 3.4.7 (restrict/disable/prevent nonessential programs, functions, ports, protocols) maps to CM-07; 3.4.8 (apply deny-by-exception/allow-by-exception policy) maps to CM-07; 3.4.9 (control/monitor user-installed software) maps to CM-11. SP 800-53 extends with CM-01 (policy), CM-09 (configuration management plan), CM-10 (software usage restrictions), CM-12 (information system component inventory — new Rev 5), CM-13 (data action mapping — new Rev 5), CM-14 (signed components — new Rev 5), and SA-10 (developer configuration management).",
+      "gaps": "CMMC requires configuration management specifically within the CUI boundary. CMMC assessment methodology (per CMMC Assessment Guide Level 2 v2.13) evaluates documentation quality and implementation maturity for each configuration practice — assessor judgment criteria that go beyond SP 800-53's control descriptions. Federal Desktop Core Configuration (FDCC)/USGCB settings referenced in DoD STIG guidance are DoD-specific configuration baselines not prescribed by 800-53."
+    },
+    {
+      "id": "IA",
+      "title": "Identification and Authentication",
+      "controls": [
+        "IA-01", "IA-02", "IA-03", "IA-04", "IA-05", "IA-06", "IA-07",
+        "IA-08", "IA-09", "IA-10", "IA-11", "IA-12"
+      ],
+      "coverage_pct": 95,
+      "rationale": "CMMC Identification and Authentication (11 practices from 800-171 3.5.1-3.5.11) maps directly to SP 800-53 IA family. 3.5.1-3.5.2 (identify/authenticate system users, processes, devices) map to IA-02/IA-05; 3.5.3 (multifactor authentication for privileged accounts) maps to IA-02; 3.5.4 (replay-resistant authentication) maps to IA-02; 3.5.5-3.5.6 (identifier management — disable after inactivity, disable identifiers) map to IA-04; 3.5.7-3.5.10 (password complexity, prohibited passwords, temp passwords, crypto-protected storage) map to IA-05; 3.5.11 (obscure authentication feedback) maps to IA-06. SP 800-53 extends coverage with IA-01 (I&A policy), IA-03 (device identification/authentication), IA-07 (cryptographic module authentication), IA-08 (non-organizational user I&A), IA-09 (service identification — new Rev 5), IA-10 (adaptive identification — new Rev 5), IA-11 (re-authentication — new Rev 5), IA-12 (identity proofing — new Rev 5). The IA family provides comprehensive coverage of all authentication and identity lifecycle requirements.",
+      "gaps": "CMMC practice 3.5.3 specifically requires multifactor authentication for both local and network access to privileged accounts and for network access to non-privileged accounts — a nuanced scoping requirement. DoD CAC/PKI-based authentication is the de facto standard for many DoD systems but is not prescribed in SP 800-53. CMMC Level 2 assessment evaluates MFA implementation maturity (phishing-resistant MFA is increasingly expected), which is an evolving DoD interpretation beyond 800-53 text."
+    },
+    {
+      "id": "IR",
+      "title": "Incident Response",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05", "IR-06", "IR-07",
+        "IR-08", "IR-09",
+        "PM-12",
+        "SI-05"
+      ],
+      "coverage_pct": 83,
+      "rationale": "CMMC Incident Response (3 practices from 800-171 3.6.1-3.6.3) maps well to SP 800-53. 3.6.1 (establish incident-handling capability including preparation, detection, analysis, containment, recovery, and user response activities) maps to IR-02/IR-04/IR-05/IR-06/IR-07; 3.6.2 (track, document, and report incidents to designated officials and/or authorities) maps to IR-06; 3.6.3 (test the organizational incident response capability) maps to IR-03. SP 800-53 extends with IR-01 (incident response policy/procedures), IR-08 (incident response plan), IR-09 (information spillage response — new Rev 5), PM-12 (insider threat program), and SI-05 (security alerts/advisories). The IR family provides a mature incident response lifecycle framework.",
+      "gaps": "CMMC has a critical gap that SP 800-53 does not address: DFARS 252.204-7012 mandates cyber incident reporting to the DoD Cyber Crime Center (DC3) within 72 hours, preservation of forensic evidence for 90 days, and provision of access to additional information/equipment. This is a contractual and regulatory obligation specific to the defense industrial base. Additionally, CMMC requires the incident response plan to specifically address CUI spillage scenarios and CUI breach notification — DoD-specific requirements beyond 800-53."
+    },
+    {
+      "id": "MA",
+      "title": "Maintenance",
+      "controls": [
+        "MA-01", "MA-02", "MA-03", "MA-04", "MA-05", "MA-06", "MA-07"
+      ],
+      "coverage_pct": 92,
+      "rationale": "CMMC Maintenance (6 practices from 800-171 3.7.1-3.7.6) maps directly to SP 800-53 MA family. 3.7.1 (perform maintenance on organizational systems) maps to MA-02/MA-03; 3.7.2 (provide controls on tools, techniques, mechanisms for maintenance) maps to MA-02/MA-03; 3.7.3 (ensure equipment removed for offsite maintenance is sanitized) maps to MA-02; 3.7.4 (check media containing diagnostic/test programs for malicious code) maps to MA-03; 3.7.5 (require multifactor authentication for nonlocal maintenance sessions and terminate when complete) maps to MA-04; 3.7.6 (supervise maintenance activities of personnel without required access authorization) maps to MA-05. SP 800-53 extends with MA-01 (maintenance policy), MA-06 (timely maintenance), and MA-07 (field maintenance — new Rev 5). The maintenance family comprehensively addresses system upkeep, tool control, and maintenance personnel security.",
+      "gaps": "CMMC specifically requires that maintenance activities be conducted within the CUI boundary scope and that maintenance records demonstrate CUI protection during maintenance windows. DoD-specific supply chain concerns for maintenance parts/tools (counterfeit parts detection) and cleared maintenance personnel requirements under NISPOM go beyond SP 800-53."
+    },
+    {
+      "id": "MP",
+      "title": "Media Protection",
+      "controls": [
+        "MP-01", "MP-02", "MP-03", "MP-04", "MP-05", "MP-06", "MP-07", "MP-08",
+        "CP-09",
+        "SC-28"
+      ],
+      "coverage_pct": 92,
+      "rationale": "CMMC Media Protection (9 practices from 800-171 3.8.1-3.8.9) maps comprehensively to SP 800-53. 3.8.1 (protect/control system media containing CUI, both paper and digital) maps to MP-02; 3.8.2 (limit access to CUI on system media to authorized users) maps to MP-04; 3.8.3 (sanitize or destroy system media containing CUI before disposal or release) maps to MP-06; 3.8.4 (mark media with necessary CUI markings and distribution limitations) maps to MP-03; 3.8.5 (control access to media containing CUI and maintain accountability during transport) maps to MP-05; 3.8.6 (implement cryptographic mechanisms to protect CUI during transport) maps to MP-05; 3.8.7 (control the use of removable media on system components) maps to MP-07; 3.8.8 (prohibit the use of portable storage devices with no identifiable owner) maps to MP-07; 3.8.9 (protect the confidentiality of backup CUI at storage locations) maps to CP-09. SP 800-53 extends with MP-01 (media protection policy), MP-08 (media downgrading), and SC-28 (protection of information at rest) for comprehensive media lifecycle coverage.",
+      "gaps": "CMMC requires CUI-specific media marking per 32 CFR Part 2002 and DoD CUI Registry categories. Practice 3.8.4 requires CUI Banner Markings, Category Markings, and Distribution/Dissemination controls — a prescriptive marking taxonomy not in SP 800-53. NIST SP 800-88 (media sanitization guidelines) is referenced by both frameworks, but CMMC assessors evaluate media sanitization procedures specifically for CUI media types."
+    },
+    {
+      "id": "PS",
+      "title": "Personnel Security",
+      "controls": [
+        "PS-01", "PS-02", "PS-03", "PS-04", "PS-05", "PS-06", "PS-07",
+        "PS-08", "PS-09"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CMMC Personnel Security (2 practices from 800-171 3.9.1-3.9.2) has excellent SP 800-53 coverage despite having the fewest 800-171 requirements. 3.9.1 (screen individuals prior to authorizing access to systems containing CUI) maps to PS-03; 3.9.2 (ensure CUI and CUI systems are protected during and after personnel actions such as terminations and transfers) maps to PS-04/PS-05. SP 800-53 substantially extends with PS-01 (personnel security policy), PS-02 (position risk designation), PS-06 (access agreements), PS-07 (external personnel security), PS-08 (personnel sanctions), and PS-09 (position descriptions — new Rev 5). The PS family provides a complete personnel security lifecycle from position designation through termination.",
+      "gaps": "CMMC for defense contractors often interacts with NISPOM (National Industrial Security Program Operating Manual) requirements for cleared personnel. Personnel security clearance processes (SF-86, DCSA investigations) are DoD/IC-specific and not addressed in SP 800-53. CMMC assessors may evaluate whether personnel screening is commensurate with CUI sensitivity, applying a DoD-specific risk threshold."
+    },
+    {
+      "id": "PE",
+      "title": "Physical Protection",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-04", "PE-05", "PE-06", "PE-07",
+        "PE-08", "PE-09", "PE-10", "PE-11", "PE-12", "PE-13", "PE-14",
+        "PE-15", "PE-16", "PE-17", "PE-18"
+      ],
+      "coverage_pct": 92,
+      "rationale": "CMMC Physical Protection (6 practices from 800-171 3.10.1-3.10.6) maps well to SP 800-53 PE family. 3.10.1 (limit physical access to systems, equipment, and operating environments to authorized individuals) maps to PE-02/PE-05; 3.10.2 (protect and monitor the physical facility and support infrastructure) maps to PE-02/PE-05/PE-06; 3.10.3 (escort visitors and monitor visitor activity) maps to PE-03; 3.10.4 (maintain audit logs of physical access) maps to PE-03; 3.10.5 (control and manage physical access devices) maps to PE-03; 3.10.6 (enforce safeguarding measures for CUI at alternate work sites) maps to PE-17. SP 800-53 Rev 5 provides extensive additional coverage with PE-01 (physical security policy), PE-04 (access control for transmission), PE-07 (visitor control), PE-08 (visitor access records), PE-09 (power equipment and cabling), PE-10 (emergency shutoff), PE-11 (emergency power), PE-12 (emergency lighting), PE-13 (fire protection), PE-14 (environmental controls), PE-15 (water damage protection), PE-16 (delivery and removal), PE-18 (location of system components). The PE family is comprehensive for facility security.",
+      "gaps": "CMMC practice 3.10.6 (alternate work site safeguarding) has gained significant importance for DIB organizations with remote/hybrid workforces handling CUI. DoD interpretation increasingly requires specific CUI handling procedures for home offices and telework environments. SP 800-53 PE-17 addresses alternate work sites generically but does not prescribe CUI-specific physical safeguards for non-traditional work environments. Additionally, DoD Instruction 5200.48 (CUI program) physical safeguarding requirements are more prescriptive than 800-53."
+    },
+    {
+      "id": "RA",
+      "title": "Risk Assessment",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-04", "RA-05", "RA-06", "RA-07",
+        "RA-08", "RA-09", "RA-10",
+        "PM-09", "PM-28",
+        "CA-02", "CA-08"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CMMC Risk Assessment (3 practices from 800-171 3.11.1-3.11.3) maps to SP 800-53 RA family. 3.11.1 (periodically assess the risk to organizational operations, assets, and individuals) maps to RA-03; 3.11.2 (scan for vulnerabilities periodically and when new vulnerabilities are identified) maps to RA-05; 3.11.3 (remediate vulnerabilities in accordance with risk assessments) maps to RA-05. SP 800-53 extends substantially with RA-01 (risk assessment policy), RA-02 (security categorization), RA-04 (risk assessment update), RA-06 (technical surveillance countermeasures survey), RA-07 (risk response — new Rev 5), RA-08 (privacy impact assessments), RA-09 (criticality analysis — new Rev 5), RA-10 (threat hunting — new Rev 5), PM-09 (risk management strategy), PM-28 (risk framing — new Rev 5), CA-02 (control assessments), and CA-08 (penetration testing).",
+      "gaps": "CMMC requires vulnerability scanning and remediation specifically scoped to the CUI environment. The SPRS scoring methodology assigns point values to risk assessment practices (3.11.2 vulnerability scanning is worth 5 points) — quantified compliance scoring is CMMC-specific. DoD mandates ACAS (Assured Compliance Assessment Solution) or equivalent vulnerability scanning tools and DISA STIGs as remediation benchmarks, which are DoD-specific implementations not referenced in SP 800-53."
+    },
+    {
+      "id": "CA",
+      "title": "Security Assessment",
+      "controls": [
+        "CA-01", "CA-02", "CA-03", "CA-04", "CA-05", "CA-06", "CA-07",
+        "CA-08", "CA-09",
+        "PM-06", "PM-10", "PM-14",
+        "PL-01", "PL-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CMMC Security Assessment (3 practices from 800-171 3.12.1-3.12.3) maps to SP 800-53 CA family. 3.12.1 (periodically assess the security controls to determine if controls are effective in their application) maps to CA-02; 3.12.2 (develop and implement plans of action designed to correct deficiencies and reduce or eliminate vulnerabilities) maps to CA-05; 3.12.3 (monitor security controls on an ongoing basis) maps to CA-07. SP 800-53 extends with CA-01 (assessment policy), CA-03 (information exchange), CA-04 (security certification), CA-06 (authorization), CA-08 (penetration testing), CA-09 (internal system connections — new Rev 5), PM-06 (measures of performance), PM-10 (authorization process), PM-14 (testing/training/monitoring), PL-01 (planning policy), and PL-02 (system security plans). Security planning controls support the System Security Plan (SSP) requirement.",
+      "gaps": "CMMC has a unique and prescriptive assessment methodology: C3PAO (CMMC Third Party Assessment Organization) assessments follow the CMMC Assessment Guide with specific objective-level scoring (MET/NOT MET/NOT APPLICABLE). The SSP requirement (implicit in 3.12.4 but not separately numbered) is a critical CMMC artifact that must document the CUI boundary, data flows, and all 110 practice implementations. The POA&M process in CMMC has specific constraints — six practices cannot be on a POA&M for conditional certification, and the maximum POA&M closure period is 180 days. These are CMMC-specific assessment constructs with no SP 800-53 equivalent."
+    },
+    {
+      "id": "SC",
+      "title": "System and Communications Protection",
+      "controls": [
+        "SC-01", "SC-02", "SC-03", "SC-04", "SC-05", "SC-07", "SC-08",
+        "SC-10", "SC-11", "SC-12", "SC-13", "SC-15", "SC-17", "SC-18",
+        "SC-20", "SC-21", "SC-22", "SC-23", "SC-28", "SC-39",
+        "SA-08"
+      ],
+      "coverage_pct": 92,
+      "rationale": "CMMC System and Communications Protection (16 practices from 800-171 3.13.1-3.13.16) maps extensively to SP 800-53. 3.13.1 (monitor/control/protect communications at external and key internal boundaries) maps to SC-07; 3.13.2 (employ architectural designs, software development techniques, and systems engineering principles that promote effective information security) maps to SA-08; 3.13.3 (separate user functionality from system management functionality) maps to SC-02; 3.13.4 (prevent unauthorized/unintended information transfer via shared resources) maps to SC-04; 3.13.5 (implement subnetworks for publicly accessible components separated from internal networks) maps to SC-07; 3.13.6 (deny network communications traffic by default, allow by exception) maps to SC-07; 3.13.7 (prevent remote devices from simultaneously establishing non-remote connections with the system and communicating via other connections) maps to SC-07; 3.13.8 (implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission) maps to SC-08; 3.13.9 (terminate network connections associated with communications sessions at the end of the sessions or after a defined period of inactivity) maps to SC-10; 3.13.10 (establish and manage cryptographic keys) maps to SC-12; 3.13.11 (employ FIPS-validated cryptography) maps to SC-13; 3.13.12 (prohibit remote activation of collaborative computing devices; provide indication of devices in use to users) maps to SC-15; 3.13.13 (control and monitor mobile code) maps to SC-18; 3.13.15 (protect the authenticity of communications sessions) maps to SC-23; 3.13.16 (protect the confidentiality of CUI at rest) maps to SC-28. SP 800-53 extends coverage with SC-01 (policy), SC-03 (security function isolation), SC-05 (denial of service protection), SC-11 (trusted path), SC-17 (PKI certificates), SC-20/SC-21/SC-22 (secure name/address resolution), and SC-39 (process isolation).",
+      "gaps": "CMMC practice 3.13.11 (FIPS-validated cryptography) is a critical requirement with DoD-specific enforcement: all cryptographic modules must be FIPS 140-2/140-3 validated, and the Cryptographic Module Validation Program (CMVP) certificate must be active. SP 800-53 SC-13 references FIPS-validated cryptography but does not prescribe the DoD enforcement posture or the implications for commercial products. Practice 3.13.14 (control and monitor VoIP) was mapped to SC-19 in 800-171, but SC-19 was withdrawn in 800-53 Rev 5 — the requirement is now distributed across SC-07 and other controls. Cloud environments handling CUI must additionally meet FedRAMP Moderate baseline, creating a layered compliance requirement beyond 800-53."
+    },
+    {
+      "id": "SI",
+      "title": "System and Information Integrity",
+      "controls": [
+        "SI-01", "SI-02", "SI-03", "SI-04", "SI-05", "SI-06", "SI-07",
+        "SI-08", "SI-10", "SI-11", "SI-12", "SI-16",
+        "RA-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "CMMC System and Information Integrity (7 practices from 800-171 3.14.1-3.14.7) maps well to SP 800-53. 3.14.1 (identify, report, and correct system flaws in a timely manner) maps to SI-02; 3.14.2 (provide protection from malicious code at designated locations) maps to SI-03; 3.14.3 (monitor system security alerts and advisories and take action in response) maps to SI-05; 3.14.4 (update malicious code protection mechanisms when new releases are available) maps to SI-03; 3.14.5 (perform periodic scans and real-time scans of files from external sources) maps to SI-03; 3.14.6 (monitor organizational systems including inbound/outbound communications for attacks and indicators of potential attacks) maps to SI-04; 3.14.7 (identify unauthorized use of organizational systems) maps to SI-04. SP 800-53 extends significantly with SI-01 (system integrity policy), SI-06 (security/privacy function verification), SI-07 (software, firmware, and information integrity), SI-08 (spam protection), SI-10 (information input validation), SI-11 (error handling), SI-12 (information management and retention), SI-16 (memory protection — new Rev 5). RA-05 (vulnerability monitoring and scanning) complements flaw remediation.",
+      "gaps": "CMMC requires malware protection and monitoring specifically within the CUI boundary, with DoD-specific expectations for endpoint detection and response (EDR) capabilities. The DoD increasingly expects behavioral-based detection beyond signature-based antivirus (3.14.2/3.14.4). DFARS 252.204-7012 requires the contractor to conduct a review for evidence of compromise when notified by DoD of a cyber incident, including analysis of CUI exfiltration — a response obligation not captured in SP 800-53 integrity controls."
+    }
+  ],
+  "summary": {
+    "total_clauses": 14,
+    "average_coverage": 90.8,
+    "full_count": 12,
+    "substantial_count": 2,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

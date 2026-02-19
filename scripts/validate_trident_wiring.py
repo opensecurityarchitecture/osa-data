@@ -57,7 +57,7 @@ EDGE_TYPE_MAP = {
     'PRESCRIBES':                     ['control-mitigation'],
     'ALIGNS_TO':                      ['mitigation-cis'],
     'DETECTS':                        ['detection-technique'],
-    'DETECTED_BY':                    ['detection-control'],
+    'DETECTED_BY':                    [],  # Build-time only: populates detection detail panel, no explorer edge type
     'IMPLEMENTED_BY':                 ['cis-control'],
     'EXPLOITS':                       ['technique-weakness'],
     'USES':                           ['actor-technique'],

@@ -1,0 +1,285 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "popia",
+  "framework_name": "POPIA",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. POPIA is a data protection/privacy law — many requirements are legal/privacy obligations outside the scope of technical security controls. Expect low coverage for legal/rights conditions. Validate with qualified data protection professionals for compliance/audit use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "s5",
+      "title": "Rights of data subjects",
+      "controls": ["PT-01", "PT-04", "PT-05", "PT-06"],
+      "coverage_pct": 25,
+      "rationale": "PT-05 (Privacy Notice) addresses the right to be notified. PT-06 (System of Records Notice) partially supports access rights in a US federal context. PT-04 (Consent) addresses the right to withdraw consent. PT-01 (Policy and Procedures) provides a privacy governance framework. However, POPIA Section 5 enumerates broad data subject rights (notification, access, correction, deletion, objection, automated decision-making protection) that go far beyond what SP 800-53 privacy controls cover.",
+      "gaps": "POPIA data subject rights include: right to be notified of collection, right to request access, right to request correction/deletion, right to object to processing, right to not be subject to automated decisions. SP 800-53 is a security standard with limited privacy controls — it does not provide mechanisms for fulfilling individual rights requests, processing objections, or managing consent withdrawal workflows. These are legal/operational obligations outside SP 800-53 scope."
+    },
+    {
+      "id": "s8",
+      "title": "Condition 1 — Accountability",
+      "controls": ["PT-01", "PM-01", "PM-02", "PM-03", "PM-09", "AU-01", "AU-02", "CM-13", "PL-01"],
+      "coverage_pct": 45,
+      "rationale": "PM-01 (Information Security Program Plan), PM-02 (Senior Information Security Officer), PM-03 (Information Security Resources) establish organisational accountability structures. PT-01 (Policy and Procedures) provides the privacy policy framework. AU-01 (Audit and Accountability Policy) establishes accountability for audit. CM-13 (new in Rev 5) Data Action Mapping documents processing activities systematically, supporting POPIA accountability by recording what data actions occur and who performs them. PL-01 (Security Planning Policy) underpins planning accountability.",
+      "gaps": "POPIA accountability requires the responsible party to ensure compliance with ALL conditions for lawful processing at all times — both at the time of determining purpose/means and during processing itself. SP 800-53 provides security program accountability but not the broader POPIA accountability principle, which encompasses legal compliance with all eight conditions. The responsible party must be able to demonstrate compliance to the Information Regulator, which goes beyond security documentation."
+    },
+    {
+      "id": "s9",
+      "title": "Condition 2 — Lawfulness of processing",
+      "controls": ["PT-01", "PT-02"],
+      "coverage_pct": 20,
+      "rationale": "PT-01 (Policy and Procedures) provides a general privacy framework. PT-02 (Authority to Process Personally Identifiable Information) covers authority concepts in a US federal context, partially addressing the requirement that processing must be lawful.",
+      "gaps": "POPIA Section 9 requires that personal information must be processed lawfully and in a reasonable manner that does not infringe the privacy of the data subject. This is a legal standard that depends on South African constitutional privacy rights. SP 800-53 PT-02 addresses US federal processing authority — it does not address the broader lawfulness standard under South African law. No new Rev 5 controls address this gap."
+    },
+    {
+      "id": "s10",
+      "title": "Condition 2 — Minimality",
+      "controls": ["AC-06", "PT-07", "CM-12"],
+      "coverage_pct": 50,
+      "rationale": "PT-07 (Specific Categories of Personally Identifiable Information) supports minimality by addressing category-specific processing. AC-06 (Least Privilege) applies the minimality principle to access rights. CM-12 (new in Rev 5) Information Location identifies where personal information resides across systems, supporting the data inventory needed to assess whether collection is 'adequate, relevant and not excessive'.",
+      "gaps": "POPIA Section 10 requires that personal information may only be processed if it is adequate, relevant, and not excessive given the purpose. This is a stricter data minimisation standard than SP 800-53's approach. CM-12 helps locate data but does not enforce the minimality principle itself — there is no SP 800-53 control that assesses whether data collection is proportionate to the stated purpose."
+    },
+    {
+      "id": "s11",
+      "title": "Condition 2 — Consent, justification and objection",
+      "controls": ["PT-02", "PT-04"],
+      "coverage_pct": 25,
+      "rationale": "PT-04 (Consent) addresses the consent mechanism for processing. PT-02 (Authority to Process) covers processing authority concepts. POPIA Section 11 provides six justifications for lawful processing: consent, contractual necessity, legal obligation, protection of legitimate interests, public law duty, and legitimate interests of the responsible party.",
+      "gaps": "SP 800-53 PT-04 covers consent mechanically but POPIA requires specific, voluntary, informed consent that can be withdrawn. The other five justifications (contract, legal obligation, data subject interest, public body duty, legitimate interests) are entirely legal concepts outside SP 800-53 scope. POPIA also grants data subjects the right to object on reasonable grounds — SP 800-53 has no equivalent objection mechanism."
+    },
+    {
+      "id": "s12",
+      "title": "Condition 2 — Collection directly from data subject",
+      "controls": ["PT-05"],
+      "coverage_pct": 20,
+      "rationale": "PT-05 (Privacy Notice) partially addresses the transparency needed when collecting data, but does not address the POPIA requirement to collect data directly from the data subject.",
+      "gaps": "POPIA Section 12 requires personal information to be collected directly from the data subject, except in limited circumstances (public record, consent, non-prejudicial, compliance with obligation, national security, law enforcement). SP 800-53 has no concept of direct vs. indirect collection. This is a data protection principle with no technical control parallel."
+    },
+    {
+      "id": "s13",
+      "title": "Condition 3 — Collection for a specific purpose",
+      "controls": ["PT-01", "PT-03", "PT-05", "CM-13"],
+      "coverage_pct": 50,
+      "rationale": "PT-03 (Personally Identifiable Information Processing Purposes) requires purpose specification for processing. PT-05 (Privacy Notice) supports informing data subjects of the purpose. CM-13 (new in Rev 5) Data Action Mapping documents processing activities against stated purposes, strengthening purpose limitation traceability. Together these controls provide a reasonable foundation for purpose specification documentation.",
+      "gaps": "POPIA Section 13 requires collection for a specific, explicitly defined, and lawful purpose related to a function or activity of the responsible party. The data subject must be aware of the purpose unless certain exceptions apply. SP 800-53 addresses purpose specification but lacks the POPIA requirement that the purpose be explicitly defined and communicated to the data subject at collection time. CM-13 improves documentation but not the active purpose communication requirement."
+    },
+    {
+      "id": "s14",
+      "title": "Condition 3 — Retention and restriction of records",
+      "controls": ["AU-11", "SI-12", "CM-12", "MP-06"],
+      "coverage_pct": 55,
+      "rationale": "SI-12 (Information Management and Retention) addresses retention limits and data handling. AU-11 (Audit Record Retention) models retention policy enforcement. MP-06 (Media Sanitization) covers secure disposal when retention periods expire. CM-12 (new in Rev 5) Information Location identifies where data resides across systems, supporting identification of all data stores subject to retention policies.",
+      "gaps": "POPIA Section 14 provides that records must not be retained longer than necessary to achieve the purpose of collection, unless retention is required by law, reasonably necessary for a lawful purpose, or the data subject consents. SP 800-53 covers retention schedules and disposal mechanics but does not tie retention to the original processing purpose. The 'purpose-linked retention' concept and the requirement to destroy or de-identify records when no longer needed are not fully captured."
+    },
+    {
+      "id": "s15",
+      "title": "Condition 4 — Further processing limitation",
+      "controls": ["PT-03", "PT-07", "CM-13"],
+      "coverage_pct": 35,
+      "rationale": "PT-03 (Personally Identifiable Information Processing Purposes) and PT-07 (Specific Categories) partially address purpose compatibility. CM-13 (new in Rev 5) Data Action Mapping documents processing flows which supports assessing whether further processing is compatible with the original purpose.",
+      "gaps": "POPIA Section 15 prohibits further processing incompatible with the original collection purpose. It lists criteria for compatibility assessment: data subject consent, public record source, necessary for law enforcement, and several other exceptions. SP 800-53 covers purpose specification but lacks the explicit compatibility test and the specific exceptions framework. CM-13 provides documentation but not the compatibility assessment methodology required by POPIA."
+    },
+    {
+      "id": "s16",
+      "title": "Condition 5 — Information quality",
+      "controls": ["SI-01", "SI-06", "SI-07", "SI-10", "SI-18"],
+      "coverage_pct": 45,
+      "rationale": "SI-10 (Information Input Validation) partially addresses accuracy through validation at input. SI-18 (new in Rev 5) PII Quality Operations directly addresses data quality by requiring organisations to check accuracy, relevance, timeliness, and completeness of PII — the most relevant new control for POPIA information quality. SI-07 (Software, Firmware, and Information Integrity) ensures information integrity. SI-06 (Security and Privacy Function Verification) supports verification processes.",
+      "gaps": "POPIA Section 16 requires the responsible party to take reasonably practicable steps to ensure personal information is complete, accurate, not misleading, and updated where necessary having regard to the purpose. SI-18 is highly relevant but POPIA's quality obligation is broader — it requires proactive steps to maintain quality, not just quality checks. The obligation to update information and correct inaccuracies on an ongoing basis goes beyond SI-18's scope."
+    },
+    {
+      "id": "s17",
+      "title": "Condition 6 — Documentation by responsible party",
+      "controls": ["AU-01", "AU-02", "CM-08", "CM-12", "CM-13", "RA-02", "PL-02"],
+      "coverage_pct": 50,
+      "rationale": "CM-08 (System Component Inventory), CM-12 (new in Rev 5) Information Location, and CM-13 (new in Rev 5) Data Action Mapping together provide a framework for documenting processing activities. AU-01 (Audit and Accountability Policy) and AU-02 (Event Logging) establish documentation standards. RA-02 (Security Categorization) supports data classification documentation. PL-02 (System Security and Privacy Plans) addresses planning documentation.",
+      "gaps": "POPIA Section 17 requires the responsible party to maintain documentation of all processing operations, including the purpose, categories of data subjects, recipients, planned transborder transfers, security measures description, and deletion timelines. SP 800-53 provides comprehensive system documentation but not the specific POPIA-mandated processing register fields. CM-13 is closest but does not capture all required elements."
+    },
+    {
+      "id": "s18",
+      "title": "Condition 6 — Notification to data subject when collecting personal information",
+      "controls": ["AC-08", "PT-05"],
+      "coverage_pct": 30,
+      "rationale": "PT-05 (Privacy Notice) addresses notice requirements at the time of collection. AC-08 (System Use Notification) provides a technical notification mechanism at system access points.",
+      "gaps": "POPIA Section 18 requires specific notification at time of collection including: information being collected, name and address of responsible party, purpose of collection, whether supply is voluntary or mandatory, consequences of failure to provide, any law authorising the collection, whether information will be transferred to a third country, and data subject rights. PT-05 covers some elements but not the full POPIA notification requirements, particularly the South Africa-specific obligations around voluntary/mandatory disclosure and legal basis communication."
+    },
+    {
+      "id": "s19",
+      "title": "Condition 7 — Security measures on integrity and confidentiality of personal information",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-04", "AC-05", "AC-06", "AC-07",
+        "AU-01", "AU-02", "AU-06", "AU-09",
+        "CA-01", "CA-02", "CA-07",
+        "CM-01", "CM-02", "CM-03", "CM-06", "CM-07",
+        "CP-01", "CP-02", "CP-09", "CP-10",
+        "IA-01", "IA-02", "IA-04", "IA-05",
+        "IR-01", "IR-04",
+        "MA-01", "MA-02",
+        "MP-01", "MP-02", "MP-04", "MP-06",
+        "PE-01", "PE-02", "PE-03",
+        "PL-01", "PL-02",
+        "PM-01", "PM-09",
+        "PS-01", "PS-03", "PS-06",
+        "RA-01", "RA-03", "RA-05", "RA-07",
+        "SC-01", "SC-07", "SC-08", "SC-12", "SC-13", "SC-28",
+        "SI-01", "SI-02", "SI-03", "SI-04", "SI-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "POPIA Section 19 requires appropriate, reasonable technical and organisational measures to prevent loss, damage, unauthorised destruction, unlawful access, or unlawful processing. SP 800-53 excels here: AC family (access control), AU family (audit and accountability), CA family (assessment and authorisation), CM family (configuration management), CP family (contingency planning), IA family (identification and authentication), IR family (incident response), MA family (maintenance), MP family (media protection), PE family (physical protection), SC family (system and communications protection including SC-08 transmission confidentiality, SC-13 cryptographic protection, SC-28 protection at rest), SI family (system and information integrity). RA-07 (new in Rev 5) Risk Response strengthens risk-based security measure selection. This is the core security safeguards condition and SP 800-53 provides comprehensive coverage.",
+      "gaps": "Minimal gap. SP 800-53 provides excellent coverage of technical and organisational security measures. POPIA Section 19 additionally requires: (a) identification of all reasonably foreseeable internal and external risks, (b) establishment and maintenance of appropriate safeguards against identified risks, (c) regular verification that safeguards are effectively implemented, and (d) continuous updating of safeguards in response to new risks or deficiencies. SP 800-53 RA-03/RA-05/CA-07 address these but the POPIA language is broader and explicitly ties security measures to personal information protection specifically."
+    },
+    {
+      "id": "s20",
+      "title": "Condition 7 — Information processed by operator",
+      "controls": ["SA-09", "PS-07", "SR-01", "SR-02", "SR-03"],
+      "coverage_pct": 55,
+      "rationale": "SA-09 (External Information System Services) addresses third-party processing requirements. PS-07 (External Personnel Security) covers personnel obligations for third parties. SR-01 (Supply Chain Risk Management Policy) establishes supply chain governance. SR-02 (Supply Chain Risk Management Plan) addresses security requirements for third parties. SR-03 (Supply Chain Controls and Processes) covers supply chain controls.",
+      "gaps": "POPIA Section 20 requires that an operator (processor) may only process personal information with the knowledge or authorisation of the responsible party, and must treat it as confidential. SP 800-53 covers external system services and supply chain management but does not specifically address the 'operator' concept as defined in POPIA — a party that processes information on behalf of the responsible party under a contractual relationship. The knowledge/authorisation requirement and confidentiality obligation are broader than supply chain security controls."
+    },
+    {
+      "id": "s21",
+      "title": "Condition 7 — Security measures regarding information processed by operator",
+      "controls": ["SA-04", "SA-09", "SR-01", "SR-02", "SR-03", "SR-05"],
+      "coverage_pct": 60,
+      "rationale": "SA-04 (Acquisition Process) addresses security requirements in acquisitions. SA-09 (External Information System Services) covers external processing arrangements. SR-01 through SR-05 (Supply Chain family) address supply chain governance and requirements. These controls collectively support the requirement for written contracts with operators that establish security obligations.",
+      "gaps": "POPIA Section 21 requires a written contract with the operator ensuring: (a) the operator establishes and maintains the same security measures applying to the responsible party, (b) the operator notifies the responsible party of any unauthorised access or acquisition. SP 800-53 covers contractual security requirements for third parties but does not specifically require the same standard of security from processors as from the responsible party, nor the specific breach notification chain from operator to responsible party."
+    },
+    {
+      "id": "s22",
+      "title": "Condition 7 — Notification of security compromises",
+      "controls": ["IR-01", "IR-02", "IR-04", "IR-05", "IR-06", "IR-07", "IR-08", "IR-09", "AU-06"],
+      "coverage_pct": 55,
+      "rationale": "IR-06 (Incident Reporting) addresses incident reporting mechanisms. IR-01 (Incident Response Policy) establishes reporting procedures. IR-04 (Incident Handling) covers containment and response. IR-05 (Incident Monitoring) tracks incidents. IR-07 (Incident Response Assistance) provides support mechanisms. IR-08 (Incident Response Plan) establishes the response framework. IR-09 (new in Rev 5) Information Spillage Response adds specific handling for data breach/spillage incidents, directly relevant to POPIA security compromise notification. AU-06 (Audit Review, Analysis, and Reporting) supports breach investigation.",
+      "gaps": "POPIA Section 22 requires notification to both the Information Regulator and the data subject 'as soon as reasonably possible' when there are reasonable grounds to believe personal information has been accessed or acquired by an unauthorised person. The notification must include: description of possible consequences, measures taken or proposed, recommendations for data subjects, and identity of the unauthorised person if known. SP 800-53 IR-06 covers general incident reporting but does not specify notification to a data protection regulator or directly to affected individuals. The specific content requirements, the dual notification obligation (regulator + data subject), and the South African Information Regulator reporting channel are not addressed."
+    },
+    {
+      "id": "s23-24",
+      "title": "Condition 8 — Access to personal information and correction of personal information",
+      "controls": ["PT-06", "SI-18"],
+      "coverage_pct": 20,
+      "rationale": "PT-06 (System of Records Notice) covers individual access concepts in a US Privacy Act context. SI-18 (new in Rev 5) PII Quality Operations addresses data correction and accuracy, providing the first SP 800-53 control relevant to rectification of personal information.",
+      "gaps": "POPIA Sections 23-24 grant data subjects the right to request access to their personal information and to request correction or deletion of information that is inaccurate, irrelevant, excessive, out of date, incomplete, misleading, or obtained unlawfully. The responsible party must correct, destroy, or delete the information, and notify third parties of the correction. SP 800-53 PT-06 is specific to US Privacy Act system of records. SI-18 addresses data quality but not the individual rights-based access and correction workflow. There are no SP 800-53 controls for managing data subject access requests, processing timelines, or third-party notification of corrections."
+    },
+    {
+      "id": "s25",
+      "title": "Condition 8 — Manner of access",
+      "controls": ["PT-06"],
+      "coverage_pct": 15,
+      "rationale": "PT-06 (System of Records Notice) partially relevant for access procedures in US federal context.",
+      "gaps": "POPIA Section 25 provides that a data subject may request access in the prescribed manner and form as provided in the Promotion of Access to Information Act (PAIA). SP 800-53 has no equivalent to PAIA or the structured access request process. The linkage between POPIA and PAIA for access requests is a South African legal framework construct entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "s26-27",
+      "title": "Prohibition on processing special personal information — general authorisation",
+      "controls": ["AC-16", "PT-01", "PT-03", "PT-07"],
+      "coverage_pct": 25,
+      "rationale": "PT-07 (Specific Categories of Personally Identifiable Information) addresses special categories in a US federal context. AC-16 (Security and Privacy Attributes) enables data classification including sensitive categories. PT-03 (Personally Identifiable Information Processing Purposes) supports purpose-bound processing. PT-01 (Policy and Procedures) provides the governance framework.",
+      "gaps": "POPIA Sections 26-27 prohibit processing of special personal information (religious/philosophical beliefs, race/ethnic origin, trade union membership, political persuasion, health/sex life, biometric information) unless specific authorisations apply (consent, required by law, public interest, etc.). SP 800-53 PT-07 covers some sensitive PII categories but the POPIA prohibition model with specific exceptions is a legal framework concept. The special categories defined by POPIA are broader than US federal sensitive PII categories, and the authorisation framework is entirely South African legal construct."
+    },
+    {
+      "id": "s28-33",
+      "title": "Authorisation for processing specific categories of special personal information",
+      "controls": ["PT-07", "AC-16"],
+      "coverage_pct": 15,
+      "rationale": "PT-07 (Specific Categories of Personally Identifiable Information) partially addresses category-specific processing rules. AC-16 (Security and Privacy Attributes) supports data classification.",
+      "gaps": "POPIA Sections 28-33 provide detailed authorisation conditions for processing each category of special personal information: religious beliefs (s28), race/ethnic origin (s29), trade union membership (s30), political persuasion (s31), health/sex life (s32), and criminal behaviour/biometric information (s33). Each section specifies distinct conditions under which processing is permitted. SP 800-53 has no equivalent category-specific authorisation framework. These are South African legal requirements without technical control parallels."
+    },
+    {
+      "id": "s34-35",
+      "title": "Processing of personal information of children",
+      "controls": ["PT-04", "PT-07"],
+      "coverage_pct": 15,
+      "rationale": "PT-04 (Consent) partially relevant as parental/guardian consent is required. PT-07 (Specific Categories of Personally Identifiable Information) supports identification of children's data as a special category.",
+      "gaps": "POPIA Sections 34-35 prohibit processing of children's personal information (under 18) unless specific conditions are met: competent person consent, necessary for establishment of a child's legal right, compliance with international public law obligation, historical/statistical/research purposes with safeguards. SP 800-53 has no age-specific consent requirements or child-specific processing restrictions. The Information Regulator may authorise processing of children's information if in the public interest with appropriate safeguards — entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "s55",
+      "title": "Information officer — duties and responsibilities",
+      "controls": ["PM-02", "PS-09"],
+      "coverage_pct": 20,
+      "rationale": "PM-02 (Senior Information Security Officer) assigns a senior security role, partially analogous to the information officer concept. PS-09 (new in Rev 5) Position Descriptions enables formal role definition with privacy responsibilities, partially supporting information officer designation.",
+      "gaps": "POPIA Section 55 establishes the information officer role with specific duties: encouraging compliance with the conditions for lawful processing, dealing with data subject requests, working with the Information Regulator on investigations, and ensuring all processing activities are documented. The information officer must be registered with the Information Regulator. SP 800-53 PM-02 covers a senior security officer role but does not address the POPIA-specific information officer duties, registration requirements, or the accountability model where the officer retains responsibility even when delegating to deputies. PS-09 helps define the role but not its POPIA-specific functions."
+    },
+    {
+      "id": "s56",
+      "title": "Deputy information officers — designation and delegation",
+      "controls": ["PS-09"],
+      "coverage_pct": 15,
+      "rationale": "PS-09 (new in Rev 5) Position Descriptions supports formal role definition and delegation of privacy responsibilities to deputy positions.",
+      "gaps": "POPIA Section 56 allows designation of deputy information officers with delegated powers, but accountability remains with the information officer. SP 800-53 has no equivalent delegation framework for privacy officer roles. The concept of retained accountability despite delegation is a POPIA governance requirement outside SP 800-53 scope."
+    },
+    {
+      "id": "s57-59",
+      "title": "Prior authorisation by Information Regulator",
+      "controls": ["CA-06", "PT-02"],
+      "coverage_pct": 10,
+      "rationale": "CA-06 (Authorisation) covers general security authorisation. PT-02 (Authority to Process Personally Identifiable Information) addresses processing authority concepts.",
+      "gaps": "POPIA Sections 57-59 require prior authorisation from the Information Regulator before processing in specified high-risk scenarios: unique identifier linking across responsible parties, criminal/objectionable conduct processing for third parties, credit reporting, and transborder transfers of special/children's information to inadequately protected countries. Failure to notify is a criminal offence (up to R10 million fine or 12 months imprisonment). SP 800-53 CA-06 covers system authorisation but not regulatory pre-approval for specific processing activities. This is a regulatory framework requirement entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "s69",
+      "title": "Direct marketing by means of unsolicited electronic communications",
+      "controls": ["PT-04", "PT-05"],
+      "coverage_pct": 15,
+      "rationale": "PT-04 (Consent) addresses the consent requirement. PT-05 (Privacy Notice) partially supports the transparency obligations in marketing communications.",
+      "gaps": "POPIA Section 69 prohibits direct marketing via electronic communications (automatic calling machines, fax, SMS, email) unless the data subject consents or is an existing customer. Only one contact is permitted to obtain consent. Existing customer exception requires: contact details obtained during a sale, marketing of similar products/services, and reasonable opportunity to opt out at each communication. Marketing communications must identify the sender and provide opt-out contact details. SP 800-53 has no controls addressing direct marketing restrictions, opt-out mechanisms, or electronic communication marketing rules. These are sector-specific regulatory requirements."
+    },
+    {
+      "id": "s70",
+      "title": "Directories",
+      "controls": ["PT-05"],
+      "coverage_pct": 10,
+      "rationale": "PT-05 (Privacy Notice) partially relevant for notice requirements when including personal information in directories.",
+      "gaps": "POPIA Section 70 regulates electronic directories (e.g., telephone directories, databases). It requires that data subjects be informed before inclusion in a directory, given the opportunity to verify and correct their information, and allowed to opt out of having their information used for direct marketing. SP 800-53 does not address directory-specific privacy requirements."
+    },
+    {
+      "id": "s71",
+      "title": "Automated decision-making",
+      "controls": ["PT-08"],
+      "coverage_pct": 10,
+      "rationale": "PT-08 (Computer Matching) covers automated matching in US federal context only, partially relevant to automated decision-making concepts.",
+      "gaps": "POPIA Section 71 prohibits decisions that result in legal consequences for, or substantially affect, a data subject if based solely on automated processing intended to provide a profile (including work performance, creditworthiness, reliability, location, health, personal preferences, or conduct). Exceptions apply for contractual necessity with safeguards, or where governed by law/code of conduct. Data subjects must be given an opportunity to make representations and be provided with information about the underlying logic. SP 800-53 PT-08 is limited to US federal computer matching. POPIA Section 71 is broader — covering all automated profiling decisions — and requires explainability and the right to contest, which have no SP 800-53 equivalents."
+    },
+    {
+      "id": "s72",
+      "title": "Transborder information flows — transfers outside the Republic",
+      "controls": ["AC-04", "SA-09", "SC-07"],
+      "coverage_pct": 10,
+      "rationale": "AC-04 (Information Flow Enforcement) addresses information flow control. SA-09 (External Information System Services) covers external system service agreements. SC-07 (Boundary Protection) enforces boundary controls.",
+      "gaps": "POPIA Section 72 prohibits transfer of personal information to a third party in a foreign country unless: the recipient is subject to adequate protection (substantially similar laws, binding corporate rules, or binding agreement), the data subject consents, transfer is necessary for contractual performance, transfer is for the benefit of the data subject, or transfer is necessary for international cooperation. SP 800-53 has no data localisation or cross-border transfer adequacy requirements. The adequacy assessment, binding corporate rules, and contractual safeguards for international transfers are entirely legal/regulatory constructs outside SP 800-53 scope. AC-04 and SC-07 can enforce technical flow restrictions but cannot assess legal adequacy."
+    },
+    {
+      "id": "s73-99",
+      "title": "Enforcement — complaints, investigations, and regulatory powers",
+      "controls": ["AU-06", "IR-06"],
+      "coverage_pct": 5,
+      "rationale": "AU-06 (Audit Review, Analysis, and Reporting) and IR-06 (Incident Reporting) provide basic reporting and investigation support capabilities.",
+      "gaps": "POPIA Sections 73-99 establish the Information Regulator's enforcement powers including: receiving and investigating complaints, conducting own-initiative investigations, issuing enforcement notices, conducting search and seizure, requiring production of documents, holding hearings, and referring matters to the courts. Responsible parties must cooperate with investigations and comply with enforcement notices. SP 800-53 is designed for organisational security programs, not for interfacing with external data protection regulators. Complaint handling, regulatory cooperation, and compliance with enforcement orders are legal obligations entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "s100-109",
+      "title": "Offences, penalties, and administrative fines",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 controls address criminal offences, penalties, or administrative fines for data protection violations. This is entirely a legal/penal framework.",
+      "gaps": "POPIA Sections 100-109 define criminal offences including: obstruction of the Regulator (s100), breach of confidentiality (s101), obstruction of warrant execution (s102), failure to comply with enforcement/information notices (s103), unlawful processing of account numbers (s104), fraud using personal information (s105), selling personal information unlawfully obtained (s106), penalties up to R10 million fines and/or 10 years imprisonment (s107), and administrative fines via infringement notices up to R10 million (s109). SP 800-53 is a security control framework, not a criminal law or regulatory penalties framework. These provisions have no technical control parallels whatsoever."
+    }
+  ],
+  "summary": {
+    "total_clauses": 30,
+    "average_coverage": 29.8,
+    "full_count": 1,
+    "substantial_count": 0,
+    "partial_count": 9,
+    "weak_count": 19,
+    "none_count": 1
+  }
+}

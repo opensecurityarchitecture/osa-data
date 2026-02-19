@@ -19,6 +19,7 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(SCRIPT_DIR, '..')
 DATA = os.path.join(ROOT, 'data', 'attack')
+TRIDENT_MODEL = os.path.join(DATA, 'trident-model.json')
 EXPLORER_JS = os.path.join(ROOT, 'website', 'public', 'js', 'trident-explorer.js')
 MODEL_JS = os.path.join(ROOT, 'website', 'public', 'js', 'trident-model.js')
 EXPLORER_ASTRO = os.path.join(ROOT, 'website', 'src', 'pages', 'trident', 'explorer.astro')
@@ -158,6 +159,83 @@ def main():
             errors.append(f'graph-edges.json missing edge type: {et}')
 
     # ═══════════════════════════════════════════════════════════
+    # trident-model.json validation (always run)
+    # ═══════════════════════════════════════════════════════════
+
+    has_model = os.path.isfile(TRIDENT_MODEL)
+    if has_model:
+        model = load_json(TRIDENT_MODEL)
+        model_domains = set(model.get('domains', {}).keys())
+        model_node_types = model.get('nodeTypes', {})
+        model_edge_types = model.get('edgeTypes', {})
+        model_paths = model.get('analyticalPaths', {})
+        all_model_nodes = set(model_node_types.keys())
+
+        # Every hasData nodeType must exist in metadata
+        for nt_id, nt in model_node_types.items():
+            if nt.get('hasData'):
+                checks += 1
+                if nt_id not in node_types:
+                    errors.append(f'Model nodeType "{nt_id}" (hasData=true) not in metadata node_types')
+            # Domain must be valid
+            checks += 1
+            if nt.get('domain') not in model_domains:
+                errors.append(f'Model nodeType "{nt_id}" references unknown domain "{nt.get("domain")}"')
+
+        # Every hasData edgeType must exist in graph-edges
+        for et_id, et in model_edge_types.items():
+            if et.get('hasData'):
+                checks += 1
+                if et_id not in graph_edges:
+                    errors.append(f'Model edgeType "{et_id}" (hasData=true) not in graph-edges.json')
+            # from/to must reference valid nodeTypes
+            froms = et.get('from', [])
+            if isinstance(froms, str):
+                froms = [froms]
+            tos = et.get('to', [])
+            if isinstance(tos, str):
+                tos = [tos]
+            for f in froms:
+                checks += 1
+                if f not in all_model_nodes:
+                    errors.append(f'Model edgeType "{et_id}": from "{f}" not in model nodeTypes')
+            for t in tos:
+                checks += 1
+                if t not in all_model_nodes:
+                    errors.append(f'Model edgeType "{et_id}": to "{t}" not in model nodeTypes')
+
+        # Every metadata node type must appear in model (hasData=true)
+        for nt in node_types:
+            checks += 1
+            if nt not in model_node_types:
+                errors.append(f'Metadata node type "{nt}" not in trident-model.json nodeTypes')
+            elif not model_node_types[nt].get('hasData'):
+                errors.append(f'Metadata node type "{nt}" in model but hasData is not true')
+
+        # Every metadata edge type must appear in model (hasData=true)
+        for et in edge_types:
+            checks += 1
+            if et not in model_edge_types:
+                errors.append(f'Metadata edge type "{et}" not in trident-model.json edgeTypes')
+            elif not model_edge_types[et].get('hasData'):
+                errors.append(f'Metadata edge type "{et}" in model but hasData is not true')
+
+        # Validate analytical path references
+        for path_id, path_def in model_paths.items():
+            if path_def.get('planned'):
+                continue  # Skip planned-only paths
+            for n in path_def.get('nodes', []):
+                checks += 1
+                if n not in all_model_nodes:
+                    errors.append(f'Model path "{path_id}": node "{n}" not in model nodeTypes')
+            for e in path_def.get('edges', []):
+                checks += 1
+                if e not in model_edge_types and e not in graph_edges:
+                    errors.append(f'Model path "{path_id}": edge "{e}" not in model edgeTypes or graph-edges')
+    else:
+        warnings.append('trident-model.json not found — skipping model validation')
+
+    # ═══════════════════════════════════════════════════════════
     # ERD checks — data-driven contract validation (requires website)
     # ═══════════════════════════════════════════════════════════
 
@@ -192,11 +270,20 @@ def main():
         if 'metadata.graph_summary.node_types' not in model_astro:
             errors.append('ERD model.astro not reading metadata.graph_summary.node_types')
 
-        # Check node colour map covers all metadata node types
-        for nt in node_types:
-            checks += 1
-            if nt not in model_astro:
-                errors.append(f'ERD model.astro does not reference node type: {nt} (missing from NODE_COLOUR_MAP?)')
+        # Check model.astro loads trident-model.json
+        checks += 1
+        if 'trident-model.json' not in model_astro:
+            errors.append('ERD model.astro not loading trident-model.json for model-driven config')
+
+        # Check model.astro injects domainConfig
+        checks += 1
+        if 'domainConfig' not in model_astro:
+            errors.append('ERD model.astro not injecting domainConfig')
+
+        # Check model.astro injects conceptualNodes
+        checks += 1
+        if 'conceptualNodes' not in model_astro:
+            errors.append('ERD model.astro not injecting conceptualNodes')
 
     # ═══════════════════════════════════════════════════════════
     # Explorer checks — node types (requires website)

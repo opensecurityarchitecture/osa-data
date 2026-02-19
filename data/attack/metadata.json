@@ -255,6 +255,27 @@
       "enrichment_date": "2026-02-16",
       "notes": "37 protocol entries across 11 categories covering network transport, name resolution, authentication, file sharing, web/API, remote access, email/messaging, database, infrastructure, cloud/container, and industrial protocols. Each protocol carries ATT&CK technique references (TARGETS_PROTOCOL edges), secure alternative references (UPGRADES_TO edges), and SP800-53 control references. 3 ICS protocols (Modbus, OPC UA, BACnet) included with empty technique arrays \u2014 their techniques are ICS ATT&CK domain, not in the Enterprise catalog. SECURES_PROTOCOL edges (Control -> Protocol) deferred to separate design pass."
     },
+    "cpe_reference_catalog": {
+      "source": "NVD CPE Dictionary (NIST) + OSA-minted identifiers",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "cpe-reference-catalog-design.md",
+      "total_entries": 274,
+      "layer_distribution": {
+        "L1_major_platforms": 31,
+        "L2_enterprise_applications": 73,
+        "L3_enterprise_infrastructure": 90,
+        "L4_fs_applications": 80
+      },
+      "source_attribution": {
+        "nvd": 205,
+        "osa": 69
+      },
+      "fs_categories": ["CB", "AML", "PAY", "PTS", "HSM", "TRD", "MKD", "RSK", "CLR", "REG"],
+      "kev_validated": 100,
+      "parent_of_edges": 24,
+      "enrichment_date": "2026-02-19",
+      "notes": "Version-less CPE reference catalog (Option A). 4-layer model: L1-L3 general IT platforms, L4 financial services applications across 10 TFSP categories. OSA-minted CPEs for FS platforms absent from NVD carry source='osa'. 24 PARENT_OF hierarchy edges for product families. Designed as Tier 1 (fixed reference) of a two-tier architecture; Tier 2 (user runtime data) adds version-specific entries from asset inventory."
+    },
     "identity_domain_catalog": {
       "source": "OSA TIDM (Trident Identity Domain Model)",
       "author": "Chris Lethaby (Vinylwasp)",
@@ -329,7 +350,8 @@
       "identity_provider": 10,
       "access_policy": 12,
       "identity_principal": 8,
-      "federation_pattern": 5
+      "federation_pattern": 5,
+      "cpe": 274
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -368,6 +390,8 @@
     "cloud-service-catalog.json": "22 TCSE cloud service entries across 7 providers with shared responsibility splits and customer/provider control mappings",
     "protocol-catalog.json": "37 TPE protocol entries across 11 categories with technique references, secure alternatives, and SP800-53 control mappings",
     "identity-domain-catalog.json": "35 TIDM identity domain entries: 10 identity providers, 12 access policies, 8 identity principals, 5 federation patterns with NIST 800-63 assurance profiles",
+    "cpe-catalog.json": "274 CPE reference entries across 4 layers: L1 Major Platforms (31), L2 Enterprise Apps (73), L3 Infrastructure (90), L4 FS Applications (80). 205 NVD-sourced, 69 OSA-minted. 10 TFSP sub-categories.",
+    "cpe-parent-of-edges.json": "24 CPE PARENT_OF hierarchy edges (product family relationships)",
     "graph-edges.json": "18,084 explicit TRIDENT graph edges across 29 relationship types",
     "trident-model.json": "Single authoritative TRIDENT model definition — 10 domains, 29 node types (19 data + 10 conceptual), 44 edge types (29 data + 15 conceptual), 15 analytical paths",
     "metadata.json": "This file \u2014 provenance, version info, graph summary"

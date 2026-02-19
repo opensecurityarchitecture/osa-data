@@ -41,7 +41,8 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 - **37 protocols** across 11 categories (TARGETS_PROTOCOL + UPGRADES_TO edges)
 - **14 data types** with classification tiers (REQUIRES_PROTECTION + PROTECTS_DATA edges)
 - **5 insider stages** with progression model (TRANSITIONS_TO + INDICATED_BY + STAGE_DETECTED_BY edges)
-- **20,560 TRIDENT graph edges** across 29 relationship types, 19 entity types
+- **274 CPE reference entries** across 4 layers (major platforms, enterprise apps, infrastructure, FS applications) with 24 PARENT_OF hierarchy edges. 205 NVD-sourced, 69 OSA-minted for FS platforms.
+- **20,584 TRIDENT graph edges** across 29 relationship types, 20 entity types
 
 ## Directory Structure
 
@@ -67,6 +68,8 @@ data/
 │   ├── data-classification-catalog.json # 14 TDCE data types with protection requirements
 │   ├── protocol-catalog.json            # 37 TPE protocols with technique attack surface
 │   ├── insider-stage-catalog.json       # 5 THFM insider threat progression stages
+│   ├── cpe-catalog.json                 # 274 CPE reference entries (L1-L4, 205 NVD + 69 OSA-minted)
+│   ├── cpe-parent-of-edges.json         # 24 CPE PARENT_OF hierarchy edges
 │   ├── graph-edges.json                 # 20,454 explicit TRIDENT graph edges
 │   └── metadata.json                    # Provenance, version info, graph summary
 ├── verticals/
@@ -99,6 +102,7 @@ Each layer in the TRIDENT graph has different source authority and validation ch
 | DataType→Control | TDCE (Vinylwasp design) | OSA first-party | No (data classification) | 14 types, 140 REQUIRES_PROTECTION + 140 PROTECTS_DATA edges |
 | Technique→Protocol | TPE (Vinylwasp design) | OSA first-party | No (protocol attack surface) | 37 protocols, 54 TARGETS_PROTOCOL + 4 UPGRADES_TO edges |
 | InsiderStage→HumanFactor | THFM (Vinylwasp design) | OSA first-party | No (CERT CPIR progression) | 5 stages, 4 TRANSITIONS_TO + 16 INDICATED_BY + 26 STAGE_DETECTED_BY edges |
+| CPE Reference Catalog | NVD CPE Dictionary + OSA | NVD (205) + OSA (69) | No (reference catalog) | 274 CPE entries across 4 layers, 24 PARENT_OF edges. L4 FS apps: 10 TFSP categories. |
 
 ## Naming Conventions
 

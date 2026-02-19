@@ -23,9 +23,9 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 
 ## Current Data
 
-- **48 security patterns** (SP-001 to SP-046) + SP-000 reference/style guide + SP-999 test
+- **48 security patterns** (SP-001 to SP-047) + SP-000 reference/style guide + SP-999 test
 - **315 NIST 800-53 Rev 5 controls** across 20 families
-- **30 compliance frameworks** with cross-references
+- **36 compliance frameworks** (1,840 clauses) with cross-references
 - **472 MITRE ATT&CK techniques** mapped to 108 controls via CTID (ATT&CK v16.1)
 - **163 ATT&CK threat groups** with 2,921 technique USES edges
 - **44 ATT&CK mitigations** (M-series, v18.1) with 1,445 technique COUNTERS edges
@@ -36,11 +36,12 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 - **28 TTCE technology classes** with 86 D3FEND-aligned capabilities (PROVIDES_CAPABILITY edges)
 - **5 TACM adversary tiers** classifying all 469 techniques by minimum sophistication (TIER_CONTAINS edges)
 - **24 THFM cognitive vulnerability classes** across 6 categories with 31 EXPLOITS_HUMAN edges
+- **35 TIDM identity entities** (10 IDPs, 12 policies, 8 principals, 5 federation patterns) with 171 edges
 - **22 cloud services** with shared responsibility splits (PROVIDER_IMPLEMENTS + CUSTOMER_IMPLEMENTS edges)
 - **37 protocols** across 11 categories (TARGETS_PROTOCOL + UPGRADES_TO edges)
 - **14 data types** with classification tiers (REQUIRES_PROTECTION + PROTECTS_DATA edges)
 - **5 insider stages** with progression model (TRANSITIONS_TO + INDICATED_BY + STAGE_DETECTED_BY edges)
-- **20,454 TRIDENT graph edges** across 24 relationship types, 15 entity types
+- **20,560 TRIDENT graph edges** across 29 relationship types, 19 entity types
 
 ## Directory Structure
 

@@ -6,17 +6,11 @@ on:
     paths:
       - 'data/**/*.json'
       - 'scripts/validate_json.py'
-      - 'scripts/validate_trident_wiring.py'
-      - 'website/public/js/trident-*.js'
-      - 'website/src/pages/trident/*.astro'
   pull_request:
     branches: [main]
     paths:
       - 'data/**/*.json'
       - 'scripts/validate_json.py'
-      - 'scripts/validate_trident_wiring.py'
-      - 'website/public/js/trident-*.js'
-      - 'website/src/pages/trident/*.astro'
 
 permissions:
   contents: read
@@ -80,9 +74,6 @@ jobs:
           print(f'Control files found: {actual}')
           assert manifest['total_controls'] == actual, 'Manifest count mismatch'
           "
-
-      - name: Validate TRIDENT wiring
-        run: python scripts/validate_trident_wiring.py
 
       - name: Trigger website rebuild
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

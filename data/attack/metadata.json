@@ -296,10 +296,32 @@
       "total_new_edges": 171,
       "enrichment_date": "2026-02-18",
       "notes": "35 identity domain reference entries across 4 entity types: 10 IdentityProvider classes (enterprise directory, cloud IdP, federation broker, MFA, PAM, CIAM, CA/PKI, device trust, workload identity, NAC), 12 AccessPolicy classes (conditional access, RBAC, ABAC, SCP, credential, JIT, session, federation trust, network, data, API, lifecycle), 8 IdentityPrincipal classes (human interactive, human privileged, service account, managed identity, workload, device, API key, external), and 5 FederationPattern classes (hub-and-spoke, mesh, cascading, B2B, workload-to-cloud). NIST 800-63 assurance profiles (IAL, AAL, FAL) on identity providers. Provides SATISFIES edges (IDP/POL/PRI -> Control), MITIGATES edges (POL -> Technique), IMPLEMENTS_CLASS edges (IDP -> TTCE), USES_PROTOCOL edges (IDP -> TPE), and FEDERATES_TO edges (IDP -> IDP) for identity-aware threat-led pattern derivation."
+    },
+    "fs_platform_catalog": {
+      "source": "OSA TFSP (Trident Financial Services Platform Types)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "fs-technology-primitives-design.md",
+      "total_types": 43,
+      "categories": 10,
+      "category_breakdown": {
+        "CB": "Core Banking",
+        "AML": "AML/KYC",
+        "PAY": "Payments",
+        "PTS": "POS/Card",
+        "HSM": "HSM/Key Management",
+        "TRD": "Trading",
+        "MKD": "Market Data",
+        "RSK": "Risk",
+        "CLR": "Clearing/Settlement",
+        "REG": "Regulatory"
+      },
+      "instance_of_edges": 80,
+      "enrichment_date": "2026-02-20",
+      "notes": "43 abstract financial services technology primitives across 10 categories. Each primitive represents a functional slot in an FS institution's architecture with assurance framework mappings. L4 FS CPE products map to TFSP types via INSTANCE_OF edges."
     }
   },
   "graph_summary": {
-    "total_edges": 18108,
+    "total_edges": 18193,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
@@ -329,7 +351,8 @@
       "MITIGATES": 23,
       "IMPLEMENTS_CLASS": 6,
       "USES_PROTOCOL": 13,
-      "FEDERATES_TO": 10
+      "FEDERATES_TO": 10,
+      "INSTANCE_OF": 80
     },
     "node_types": {
       "technique": 472,
@@ -351,7 +374,8 @@
       "access_policy": 12,
       "identity_principal": 8,
       "federation_pattern": 5,
-      "cpe": 274
+      "cpe": 274,
+      "fs_platform_type": 43
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -372,9 +396,10 @@
       "identity_mitigates_path": "AccessPolicy -MITIGATES-> Technique (TIDM policy-based technique mitigation)",
       "identity_federation_path": "IdentityProvider -FEDERATES_TO-> IdentityProvider (TIDM federation chain traversal)",
       "identity_capability_path": "IdentityProvider -IMPLEMENTS_CLASS-> TechnologyCapability / -USES_PROTOCOL-> Protocol (TIDM identity-to-capability cross-domain)",
-      "platform_hierarchy_path": "CPE -PARENT_OF-> CPE (product family hierarchy — version-less parent to versioned child, or product family to variant)"
+      "platform_hierarchy_path": "CPE -PARENT_OF-> CPE (product family hierarchy — version-less parent to versioned child, or product family to variant)",
+      "fs_platform_instance_path": "CPE -INSTANCE_OF-> FSPlatformType (L4 FS product to TFSP abstract technology primitive mapping)"
     },
-    "total_edge_types": 29
+    "total_edge_types": 31
   },
   "files": {
     "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[], actors[], minTier back-references",
@@ -393,7 +418,8 @@
     "identity-domain-catalog.json": "35 TIDM identity domain entries: 10 identity providers, 12 access policies, 8 identity principals, 5 federation patterns with NIST 800-63 assurance profiles",
     "cpe-catalog.json": "274 CPE reference entries across 4 layers: L1 Major Platforms (31), L2 Enterprise Apps (73), L3 Infrastructure (90), L4 FS Applications (80). 205 NVD-sourced, 69 OSA-minted. 10 TFSP sub-categories.",
     "cpe-parent-of-edges.json": "24 CPE PARENT_OF hierarchy edges (product family relationships)",
-    "graph-edges.json": "18,108 explicit TRIDENT graph edges across 29 relationship types (includes 24 CPE PARENT_OF hierarchy edges)",
+    "fs-platform-catalog.json": "43 TFSP financial services platform types across 10 categories with assurance framework mappings",
+    "graph-edges.json": "18,193 explicit TRIDENT graph edges across 31 relationship types (includes INSTANCE_OF CPE-to-TFSP and PARENT_OF hierarchy edges)",
     "trident-model.json": "Single authoritative TRIDENT model definition — 10 domains, 29 node types (19 data + 10 conceptual), 44 edge types (29 data + 15 conceptual), 15 analytical paths",
     "metadata.json": "This file \u2014 provenance, version info, graph summary"
   },

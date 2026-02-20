@@ -27,7 +27,7 @@
       "deprecation": {
         "deprecated_date": "2026-02-16",
         "reason": "Superseded by TRIDENT mitigation path (Control -> Mitigation -> Technique) which uses MITRE first-party data. CTID is a third-party interpretive mapping with 99.5% overlap with the mitigation path but lower authority.",
-        "superseded_by": "mitigations + graph-edges (COUNTERS, PRESCRIBES, ALIGNS_TO)",
+        "superseded_by": "mitigations + graph-edges (COUNTERS, PRESCRIBES)",
         "retained_for": "backtesting, quality assurance, coverage validation against TRIDENT mitigation path",
         "removed_from": [
           "trident-explorer",
@@ -35,7 +35,7 @@
         ],
         "data_preserved": true
       },
-      "notes": "CTID maps 11 NIST families. Controls in other families (AT, AU, IR, MA, PE, PL, PM, PS, PT) have no ATT&CK mappings in this dataset. LEGACY: retained for validation only \u2014 the TRIDENT mitigation path (Mitigation -COUNTERS-> Technique, CIS Safeguard -ALIGNS_TO-> Mitigation, Control -IMPLEMENTED_BY-> CIS Safeguard) provides equivalent coverage using MITRE first-party data."
+      "notes": "CTID maps 11 NIST families. Controls in other families (AT, AU, IR, MA, PE, PL, PM, PS, PT) have no ATT&CK mappings in this dataset. LEGACY: retained for validation only \u2014 the TRIDENT mitigation path (Control -PRESCRIBES-> Mitigation -COUNTERS-> Technique) provides equivalent coverage using MITRE first-party data."
     },
     "mitigations": {
       "source": "MITRE ATT&CK STIX Data",
@@ -435,7 +435,7 @@
       "zone_archetype": 20
     },
     "trident_paths": {
-      "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
+      "defense_path": "Technique <-COUNTERS- Mitigation <-PRESCRIBES- Control",
       "detection_path": "Technique <-DETECTS- Detection Strategy -DETECTED_BY-> TechnologyCapability",
       "weakness_path": "Technique -EXPLOITS-> WeaknessClass(CWE)",
       "threat_path": "ThreatActor -USES-> Technique (actor technique repertoire)",

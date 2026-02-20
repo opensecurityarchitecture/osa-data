@@ -344,14 +344,35 @@
       },
       "enrichment_date": "2026-02-20",
       "notes": "55 abstract energy sector technology primitives across 15 categories. Each primitive represents a functional slot in an energy organisation's architecture with Purdue level, safety classification, OT protocols, and applicable framework mappings. L4 energy CPE products map to TEPE types via INSTANCE_OF_ENERGY edges."
+    },
+    "vertical_profile_catalog": {
+      "source": "OSA Vertical Profiles",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "vertical-profile-catalog-design.md",
+      "total_profiles": 13,
+      "profile_expects_fs_edges": 112,
+      "profile_expects_energy_edges": 78,
+      "profile_scopes_tier_edges": 51,
+      "enrichment_date": "2026-02-20",
+      "notes": "13 vertical profile entries defining expected platform types and adversary tier scoping for financial services and energy sector verticals. Provides PROFILE_EXPECTS_FS, PROFILE_EXPECTS_ENERGY, and PROFILE_SCOPES_TIER edges for vertical-specific threat-led pattern derivation."
+    },
+    "zone_archetype_catalog": {
+      "source": "OSA TZAT (Trident Zone Archetype Taxonomy)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "zone-archetype-taxonomy-design.md",
+      "total_archetypes": 20,
+      "zone_hosts_edges": 10,
+      "zone_hosts_energy_edges": 16,
+      "zone_requires_edges": 175,
+      "enrichment_date": "2026-02-20",
+      "notes": "20 zone archetype entries defining standard network zones with hosting relationships to platform types and control requirements. Provides ZONE_HOSTS, ZONE_HOSTS_ENERGY, and ZONE_REQUIRES edges for zone-based security architecture derivation."
     }
   },
   "graph_summary": {
-    "total_edges": 18193,
+    "total_edges": 13856,
     "edge_types": {
       "COUNTERS": 1445,
       "PRESCRIBES": 2049,
-      "ALIGNS_TO": 4815,
       "DETECTS": 691,
       "DETECTED_BY": 2696,
       "IMPLEMENTED_BY": 468,
@@ -378,7 +399,14 @@
       "IMPLEMENTS_CLASS": 6,
       "USES_PROTOCOL": 13,
       "FEDERATES_TO": 10,
-      "INSTANCE_OF": 80
+      "INSTANCE_OF": 80,
+      "INSTANCE_OF_ENERGY": 41,
+      "PROFILE_EXPECTS_FS": 112,
+      "PROFILE_EXPECTS_ENERGY": 78,
+      "PROFILE_SCOPES_TIER": 51,
+      "ZONE_HOSTS": 10,
+      "ZONE_HOSTS_ENERGY": 16,
+      "ZONE_REQUIRES": 175
     },
     "node_types": {
       "technique": 472,
@@ -402,7 +430,9 @@
       "federation_pattern": 5,
       "cpe": 274,
       "fs_platform_type": 43,
-      "energy_platform_type": 55
+      "energy_platform_type": 55,
+      "vertical_profile": 13,
+      "zone_archetype": 20
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -425,9 +455,14 @@
       "identity_capability_path": "IdentityProvider -IMPLEMENTS_CLASS-> TechnologyCapability / -USES_PROTOCOL-> Protocol (TIDM identity-to-capability cross-domain)",
       "platform_hierarchy_path": "CPE -PARENT_OF-> CPE (product family hierarchy — version-less parent to versioned child, or product family to variant)",
       "fs_platform_instance_path": "CPE -INSTANCE_OF-> FSPlatformType (L4 FS product to TFSP abstract technology primitive mapping)",
-      "energy_platform_instance_path": "CPE -INSTANCE_OF_ENERGY-> EnergyPlatformType (L4 energy product to TEPE abstract technology primitive mapping)"
+      "energy_platform_instance_path": "CPE -INSTANCE_OF_ENERGY-> EnergyPlatformType (L4 energy product to TEPE abstract technology primitive mapping)",
+      "vertical_profile_fs_path": "VerticalProfile -PROFILE_EXPECTS_FS-> FSPlatformType (vertical profile to expected FS platform types)",
+      "vertical_profile_energy_path": "VerticalProfile -PROFILE_EXPECTS_ENERGY-> EnergyPlatformType (vertical profile to expected energy platform types)",
+      "vertical_profile_tier_path": "VerticalProfile -PROFILE_SCOPES_TIER-> AdversaryTier (vertical profile to relevant adversary capability tiers)",
+      "zone_hosting_path": "ZoneArchetype -ZONE_HOSTS-> FSPlatformType / -ZONE_HOSTS_ENERGY-> EnergyPlatformType (zone to hosted platform types)",
+      "zone_control_path": "ZoneArchetype -ZONE_REQUIRES-> Control (zone archetype to required security controls)"
     },
-    "total_edge_types": 31
+    "total_edge_types": 36
   },
   "files": {
     "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[], actors[], minTier back-references",
@@ -447,10 +482,12 @@
     "cpe-catalog.json": "274 CPE reference entries across 4 layers: L1 Major Platforms (31), L2 Enterprise Apps (73), L3 Infrastructure (90), L4 FS Applications (80). 205 NVD-sourced, 69 OSA-minted. 10 TFSP sub-categories.",
     "cpe-parent-of-edges.json": "24 CPE PARENT_OF hierarchy edges (product family relationships)",
     "fs-platform-catalog.json": "43 TFSP financial services platform types across 10 categories with assurance framework mappings",
-    "graph-edges.json": "18,193 explicit TRIDENT graph edges across 31 relationship types (includes INSTANCE_OF CPE-to-TFSP and PARENT_OF hierarchy edges)",
-    "trident-model.json": "Single authoritative TRIDENT model definition — 10 domains, 29 node types (19 data + 10 conceptual), 44 edge types (29 data + 15 conceptual), 15 analytical paths",
+    "vertical-profile-catalog.json": "13 vertical profile entries (FS and energy) with platform type expectations and TACM tier scoping",
+    "zone-archetype-catalog.json": "20 zone archetype entries with hosting relationships and control requirements",
+    "graph-edges.json": "13,856 explicit TRIDENT graph edges across 36 relationship types (includes vertical profile, zone archetype, and platform instance edges)",
+    "trident-model.json": "Single authoritative TRIDENT model definition — domains, node types, edge types, analytical paths",
     "metadata.json": "This file \u2014 provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",
-  "last_updated": "2026-02-19"
+  "last_updated": "2026-02-20"
 }

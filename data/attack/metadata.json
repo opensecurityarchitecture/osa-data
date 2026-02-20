@@ -318,6 +318,32 @@
       "instance_of_edges": 80,
       "enrichment_date": "2026-02-20",
       "notes": "43 abstract financial services technology primitives across 10 categories. Each primitive represents a functional slot in an FS institution's architecture with assurance framework mappings. L4 FS CPE products map to TFSP types via INSTANCE_OF edges."
+    },
+    "energy_platform_catalog": {
+      "source": "OSA TEPE (Trident Energy Platform Types)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "energy-technology-primitives-design.md",
+      "total_types": 55,
+      "categories": 15,
+      "category_breakdown": {
+        "EMS": "Energy Management",
+        "DMS": "Distribution Management",
+        "DER": "Distributed Energy Resources",
+        "AMI": "Advanced Metering",
+        "OMS": "Outage Management",
+        "ETR": "Energy Trading",
+        "MKT": "Market Operations",
+        "NUC": "Nuclear",
+        "PIP": "Pipeline",
+        "SUB": "Substation",
+        "HIS": "Historian",
+        "DCS": "Distributed Control",
+        "REN": "Renewables",
+        "SIS": "Safety Instrumented",
+        "WAT": "Water/Utilities"
+      },
+      "enrichment_date": "2026-02-20",
+      "notes": "55 abstract energy sector technology primitives across 15 categories. Each primitive represents a functional slot in an energy organisation's architecture with Purdue level, safety classification, OT protocols, and applicable framework mappings. L4 energy CPE products map to TEPE types via INSTANCE_OF_ENERGY edges."
     }
   },
   "graph_summary": {
@@ -375,7 +401,8 @@
       "identity_principal": 8,
       "federation_pattern": 5,
       "cpe": 274,
-      "fs_platform_type": 43
+      "fs_platform_type": 43,
+      "energy_platform_type": 55
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation -ALIGNS_TO-> CIS Safeguard -IMPLEMENTED_BY-> Control",
@@ -397,7 +424,8 @@
       "identity_federation_path": "IdentityProvider -FEDERATES_TO-> IdentityProvider (TIDM federation chain traversal)",
       "identity_capability_path": "IdentityProvider -IMPLEMENTS_CLASS-> TechnologyCapability / -USES_PROTOCOL-> Protocol (TIDM identity-to-capability cross-domain)",
       "platform_hierarchy_path": "CPE -PARENT_OF-> CPE (product family hierarchy — version-less parent to versioned child, or product family to variant)",
-      "fs_platform_instance_path": "CPE -INSTANCE_OF-> FSPlatformType (L4 FS product to TFSP abstract technology primitive mapping)"
+      "fs_platform_instance_path": "CPE -INSTANCE_OF-> FSPlatformType (L4 FS product to TFSP abstract technology primitive mapping)",
+      "energy_platform_instance_path": "CPE -INSTANCE_OF_ENERGY-> EnergyPlatformType (L4 energy product to TEPE abstract technology primitive mapping)"
     },
     "total_edge_types": 31
   },

@@ -1,0 +1,271 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "iaea_nss",
+  "framework_name": "IAEA NSS 17-T Rev.1",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on IAEA Nuclear Security Series No. 17-T (Rev.1) Computer Security at Nuclear Facilities and expert analysis mapping to SP 800-53 Rev 5. IAEA NSS provides international guidance for nuclear facility computer security with specific requirements for safety-critical I&C systems, physical protection integration, and nuclear material security not captured in SP 800-53. Nuclear facility cybersecurity requires integration with safety analysis, regulatory licensing, and physical protection programs. Validate with nuclear security professionals and national regulatory authorities for compliance use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "Sec 3",
+      "title": "Computer Security Management",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-09",
+        "PM-10",
+        "PL-01",
+        "PL-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PM-01 establishes the organizational information security program providing the foundation for computer security management at nuclear facilities. PM-02 assigns senior information security officer roles analogous to the facility computer security officer. PM-03 addresses resource allocation for security programs. PM-09 defines risk management strategy supporting the graded approach. PM-10 security authorization process provides governance oversight. PL-01 and PL-02 establish security planning policy and system security plans covering the programmatic elements of computer security management.",
+      "gaps": "IAEA-specific governance structures are not addressed by SP 800-53, including the role of the competent authority (national nuclear regulatory body) in overseeing computer security programs, the integration of the facility computer security officer with the physical protection regime, and the requirement for a nuclear security culture that embeds computer security awareness throughout the organization. Integration with the broader nuclear security framework -- particularly NSS 13 (Nuclear Security Recommendations on Physical Protection) and the facility's Integrated Management System -- is a nuclear-specific requirement beyond SP 800-53 scope."
+    },
+    {
+      "id": "Sec 4",
+      "title": "Risk Management",
+      "controls": [
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "RA-09",
+        "PM-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "RA-01 establishes risk assessment policy providing a foundation for nuclear facility risk management. RA-02 security categorization supports the graded approach by classifying systems based on impact. RA-03 risk assessment identifies threats and vulnerabilities to nuclear facility computer systems. RA-05 vulnerability monitoring and scanning detects weaknesses in I&C systems. RA-07 risk response defines treatment strategies for identified risks. RA-09 criticality analysis identifies mission-critical systems analogous to safety-significant digital assets. PM-09 risk management strategy establishes the organizational risk framework.",
+      "gaps": "The IAEA nuclear-specific graded approach requires risk assessment proportional to consequence severity -- ranging from radiological sabotage to theft of nuclear material -- using consequence categories not present in SP 800-53. The Design Basis Threat (DBT) concept for cyber attacks, which defines the maximum credible adversary capability a facility must defend against, is a nuclear regulatory construct without equivalent in SP 800-53. Integration with nuclear security risk assessment methodology (NSS 26-G) and the requirement to consider both safety and security consequences of computer system compromise are domain-specific gaps."
+    },
+    {
+      "id": "Sec 5.1",
+      "title": "Defense-in-Depth",
+      "controls": [
+        "SC-07",
+        "SC-32",
+        "AC-04",
+        "PL-08",
+        "SC-46",
+        "SA-08"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SC-07 boundary protection supports network segmentation between nuclear facility security levels. SC-32 system partitioning enables separation of safety-critical and non-safety systems. AC-04 information flow enforcement controls data movement between security zones. PL-08 security and privacy architectures provides the architectural framework for defense-in-depth design. SC-46 cross-domain policy enforcement addresses inter-level data transfer controls. SA-08 security and privacy engineering principles supports secure-by-design approaches for I&C system architecture.",
+      "gaps": "IAEA NSS 17-T defines a nuclear facility-specific 5-level security architecture: Level 5 (safety systems with highest integrity requirements), Level 4 (safety-related support systems), Level 3 (site operational systems), Level 2 (site business network), and Level 1 (connection to external networks). Unidirectional gateways (data diodes) between levels -- particularly between safety and non-safety zones -- are a fundamental nuclear requirement not specifically addressed by SP 800-53 boundary controls. Deterministic I&C isolation requirements, nuclear safety system air-gap mandates, and the prohibition of bidirectional communication paths to safety-critical networks exceed the logical separation concepts in SP 800-53."
+    },
+    {
+      "id": "Sec 5.2",
+      "title": "Identification and Authentication",
+      "controls": [
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-08",
+        "AC-02"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IA-02 identification and authentication of organizational users provides the core authentication framework for nuclear facility personnel. IA-03 device identification and authentication addresses I&C system and component authentication. IA-04 identifier management governs the lifecycle of user and device identifiers. IA-05 authenticator management controls credential policies including complexity and rotation. IA-08 identification and authentication of non-organizational users addresses contractor and vendor access. AC-02 account management provides comprehensive lifecycle management for user accounts on nuclear facility systems.",
+      "gaps": "Nuclear control room operator authentication presents unique challenges not addressed by SP 800-53, including safety panel access mechanisms where authentication delays could compromise reactor operator response time during transient events. Emergency bypass mechanisms that allow operators to take immediate safety actions (such as manual reactor trip or emergency core cooling activation) without authentication delays are nuclear-specific requirements. Physical key-switch controls for safety function activation -- hardware-enforced access mechanisms that bypass digital authentication entirely -- are fundamental to nuclear I&C design but outside SP 800-53 scope."
+    },
+    {
+      "id": "Sec 5.3",
+      "title": "Access Control",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-17",
+        "AC-20"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-02 account management provides lifecycle management for user accounts on nuclear facility systems. AC-03 access enforcement implements authorization policies on digital assets. AC-05 separation of duties prevents single-person control of safety-critical functions. AC-06 least privilege restricts access to the minimum necessary for assigned duties. AC-07 unsuccessful logon attempts provides lockout mechanisms for nuclear facility systems. AC-17 remote access controls restrict remote connectivity to nuclear I&C systems with stringent limitations. AC-20 use of external systems addresses third-party system connections to the nuclear facility network.",
+      "gaps": "Nuclear-specific access control requirements include vital area access integration where physical and logical access controls must be coordinated -- access to safety system engineering workstations requires both vital area physical access authorization and digital authentication. The two-person rule (or two-person integrity) for safety system modifications mandates that no single individual can make changes to safety-critical configurations. Engineering workstation restrictions for I&C system programming and maintenance, including dedicated isolated workstations with strict media controls, exceed standard access control provisions in SP 800-53."
+    },
+    {
+      "id": "Sec 5.4",
+      "title": "System Integrity",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-06",
+        "CM-07",
+        "SI-02",
+        "SI-03",
+        "SI-07",
+        "CM-14"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-02 baseline configuration establishes approved configurations for nuclear I&C systems. CM-03 configuration change control manages modifications through a formal review process. CM-06 configuration settings enforces secure settings on nuclear facility systems. CM-07 least functionality disables unnecessary services and ports on I&C systems. SI-02 flaw remediation addresses patching and vulnerability management. SI-03 malicious code protection provides anti-malware capabilities appropriate for nuclear environments. SI-07 software, firmware, and information integrity uses cryptographic verification for I&C software. CM-14 signed components ensures authenticity of software distributed to nuclear systems.",
+      "gaps": "Nuclear qualification of software changes requires formal Verification and Validation (V&V) processes specific to safety-critical I&C systems, including independent review and 10 CFR 50.59-equivalent screening to determine if modifications could affect safety functions. Safety system configuration control demands QA-grade oversight with documented basis for every setting. Vendor-qualified patches -- where I&C system vendors must certify patch compatibility with real-time safety system operation -- represent a domain-specific supply chain constraint. Anti-malware compatibility with real-time I&C systems is a significant challenge, as signature updates and scanning activities must not interfere with deterministic safety function execution."
+    },
+    {
+      "id": "Sec 5.5",
+      "title": "Audit and Monitoring",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-09",
+        "SI-04",
+        "CA-07",
+        "SC-48"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AU-02 defines auditable events for nuclear facility computer systems. AU-03 specifies audit record content including user identity, timestamp, and event outcome. AU-06 provides audit review, analysis, and reporting capabilities for security event investigation. AU-09 protects audit records from unauthorized modification ensuring evidence integrity. SI-04 system monitoring enables detection of anomalies and intrusions on nuclear facility networks. CA-07 continuous monitoring maintains ongoing awareness of security posture. SC-48 sensor relocation provides dynamic monitoring capability adjustments.",
+      "gaps": "Nuclear-specific monitoring requirements include I&C system health monitoring (setpoint changes, safety function activation, control rod position logging), which requires domain-specific event taxonomies not defined in SP 800-53. Deterministic network monitoring for safety-grade communication networks must operate without introducing latency or jitter into safety system communications. Long-term audit retention for nuclear regulatory compliance -- typically spanning the facility operating license period (40+ years) -- far exceeds standard retention requirements. QA records requirements under nuclear regulatory frameworks impose specific quality assurance controls for safety-related audit data."
+    },
+    {
+      "id": "Sec 5.6",
+      "title": "Communication Security",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23",
+        "SC-07",
+        "AC-04"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SC-08 transmission confidentiality and integrity protects data in transit on nuclear facility networks. SC-12 cryptographic key establishment and management provides key lifecycle controls. SC-13 cryptographic protection implements encryption for sensitive nuclear facility communications. SC-23 session authenticity prevents session hijacking on nuclear system interfaces. SC-07 boundary protection provides network segmentation between security levels. AC-04 information flow enforcement controls data movement between nuclear facility network zones.",
+      "gaps": "Nuclear I&C communication protocols -- including IEC 61784-3 functional safety communication profiles -- impose deterministic communication requirements (bounded response times, fail-safe behavior) not addressed by SP 800-53. Safety-grade communication protocols require formal qualification and are fundamentally different from standard IT protocols. Deterministic communication requirements for safety I&C systems mandate bounded latency and guaranteed delivery with fail-safe defaults on communication failure. EMI/RFI (electromagnetic interference / radio frequency interference) considerations for nuclear facility communication systems, including qualification for harsh environments and seismic events, are domain-specific requirements beyond SP 800-53 scope."
+    },
+    {
+      "id": "Sec 6",
+      "title": "Supply Chain Security",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SR-09",
+        "SR-10",
+        "SR-11",
+        "SA-04"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SR-01 establishes supply chain risk management policy for nuclear facility procurement. SR-02 supply chain risk assessment evaluates vendor and component risks. SR-03 supply chain controls and processes implements protections throughout the acquisition lifecycle. SR-05 acquisition strategies addresses procurement security for I&C components. SR-06 supplier assessments and reviews evaluates vendor security posture and nuclear qualification. SR-09 tamper resistance and detection protects component integrity during transit. SR-10 inspection of systems or components verifies delivered items. SR-11 component authenticity ensures genuine components through verification. SA-04 acquisition process integrates security requirements into procurement.",
+      "gaps": "Nuclear supply chain requirements include mandatory defect and noncompliance reporting to the competent authority (analogous to 10 CFR 21 in the US regulatory context) -- a regulatory obligation with no SP 800-53 equivalent. Counterfeit, fraudulent, and suspect items (CFSI) programs specific to nuclear safety-grade components require specialized inspection and testing. Safety-grade component qualification -- including environmental qualification, seismic qualification, and electromagnetic compatibility testing -- imposes procurement standards beyond standard supply chain controls. Long equipment lifecycles (40+ years for nuclear facilities) create unique obsolescence management and long-term vendor support challenges not addressed by SP 800-53."
+    },
+    {
+      "id": "Sec 7",
+      "title": "Incident Response",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-08"
+      ],
+      "coverage_pct": 75,
+      "rationale": "IR-01 establishes incident response policy for nuclear facility computer security events. IR-02 incident response training prepares personnel for cyber incident handling. IR-04 incident handling provides structured response processes including containment, eradication, and recovery. IR-05 incident monitoring tracks and documents computer security incidents. IR-06 incident reporting establishes channels and timelines for reporting to management and external authorities. IR-08 incident response plan defines the comprehensive plan for responding to computer security events at the facility.",
+      "gaps": "Nuclear incident coordination requires reporting to multiple nuclear-specific stakeholders not addressed by SP 800-53: the IAEA Incident and Emergency Centre (IEC), national nuclear CERTs, and the competent authority (national nuclear regulatory body) with specific notification timelines. Integration with nuclear emergency plans -- including Emergency Operating Procedures (EOPs) and site emergency response organization activation -- is essential when cyber incidents could affect safety system availability. Radiological consequence assessment of cyber incidents -- evaluating whether a computer security event could lead to radiological release or compromise nuclear material security -- is a nuclear-specific triage requirement beyond SP 800-53 incident response."
+    },
+    {
+      "id": "Sec 8",
+      "title": "Contingency Planning",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-04",
+        "CP-06",
+        "CP-09",
+        "CP-10",
+        "SC-24"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CP-01 establishes contingency planning policy for nuclear facility computer systems. CP-02 contingency plan addresses recovery procedures for critical digital assets. CP-04 contingency plan testing validates recovery procedures through exercises. CP-06 alternate processing site provides for continuity of critical functions. CP-09 system backup ensures data protection for nuclear facility systems. CP-10 system recovery provides restoration capabilities. SC-24 fail in known state ensures systems fail to a secure and safe configuration, directly supporting nuclear safety principles.",
+      "gaps": "Nuclear operational continuity requirements include safe shutdown capability -- the ability to bring the reactor to a safe state independent of compromised computer systems, using manual operation fallback procedures. Safety system independence mandates that no single computer security event can simultaneously compromise both safety and non-safety systems, a design principle beyond SP 800-53 contingency planning. Post-incident nuclear restart authorization requires regulatory approval before resuming power operations after a significant cyber event, including demonstration that all safety systems are verified and functional -- a regulatory gate with no SP 800-53 equivalent."
+    },
+    {
+      "id": "Sec 9",
+      "title": "Personnel Security",
+      "controls": [
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-06",
+        "PS-07",
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PS-01 establishes personnel security policy for nuclear facility staff. PS-02 position risk designation categorizes roles by sensitivity aligned with access to safety-critical systems. PS-03 personnel screening conducts background investigations proportionate to access level. PS-04 personnel termination manages access revocation when personnel leave. PS-06 access agreements formalizes security responsibilities for personnel with access to nuclear facility systems. PS-07 external personnel security extends controls to contractors and vendor personnel. AT-01 establishes security awareness and training policy. AT-02 provides security awareness training to all personnel. AT-03 delivers role-based training for I&C system administrators and operators. AT-04 maintains training records.",
+      "gaps": "Nuclear personnel reliability programs -- including trustworthiness determination through comprehensive background investigations, psychological assessments, and ongoing behavioral observation -- far exceed standard personnel screening in SP 800-53. Nuclear security clearance requirements mandate vetting against national security standards specific to access to nuclear material and nuclear facilities. Nuclear security culture training (as described in IAEA NSS 7) requires embedding security awareness into the organizational culture beyond standard awareness programs, including insider threat awareness and the responsibility to report security concerns through nuclear-specific reporting channels."
+    },
+    {
+      "id": "Sec 10",
+      "title": "Physical Security Integration",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "PE-08"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PE-01 establishes physical and environmental protection policy. PE-02 physical access authorizations manages access rights to areas containing nuclear facility computer systems. PE-03 physical access control implements entry controls to protected and vital areas. PE-06 monitoring physical access provides surveillance of areas housing critical digital assets. PE-08 visitor access records tracks non-authorized personnel in areas with computer systems.",
+      "gaps": "Nuclear physical protection integration as defined in IAEA NSS 13 requires coordination of computer security with the facility's physical protection system (PPS) at a depth far beyond SP 800-53 physical security controls. Vital area protection -- where computer systems supporting safety functions are located within armed-response-protected vital areas -- integrates physical and cyber defenses in a manner not addressed by standard data center controls. Central alarm station integration requires that computer security alerts are correlated with physical security alarms and monitored by armed security personnel. Armed response integration with cyber incident response, and nuclear material accounting system (NMAC) security to prevent diversion, are nuclear-specific requirements with no SP 800-53 equivalent."
+    },
+    {
+      "id": "Sec 11",
+      "title": "Assessment and Testing",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "CA-08",
+        "PM-14"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-01 establishes assessment and authorization policy for nuclear facility computer security. CA-02 control assessments evaluate the effectiveness of security controls on critical digital assets. CA-05 plan of action and milestones tracks remediation of identified deficiencies. CA-07 continuous monitoring maintains ongoing awareness of security posture. CA-08 penetration testing validates defenses through adversarial simulation appropriate to the nuclear threat environment. PM-14 testing, training, and monitoring ensures ongoing program effectiveness through regular evaluation.",
+      "gaps": "Nuclear-specific assessment requirements include competent authority inspections conducted by the national nuclear regulatory body using nuclear-specific inspection procedures and criteria. IAEA peer review missions -- International Physical Protection Advisory Service (IPPAS) missions that include computer security evaluation -- provide an international assessment mechanism with no SP 800-53 equivalent. OT penetration testing constraints are significant: live safety systems cannot be tested during power operations due to the risk of inadvertent safety system actuation, requiring nuclear facility-specific test environments that replicate safety I&C configurations. Test environment fidelity and regulatory oversight of testing activities are nuclear-specific considerations beyond standard assessment controls."
+    }
+  ],
+  "summary": {
+    "total_clauses": 14,
+    "average_coverage": 76.6,
+    "full_count": 0,
+    "substantial_count": 14,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

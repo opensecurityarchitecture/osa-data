@@ -1,0 +1,212 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "tsa_psd",
+  "framework_name": "TSA Pipeline Security Directives",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on publicly available TSA Security Directives Pipeline-2021-01 (SD-1) and Pipeline-2021-02 (SD-2) and expert analysis mapping to SP 800-53 Rev 5. TSA Pipeline Security Directives are mandatory requirements for owner/operators of hazardous liquid and natural gas pipelines with specific reporting, implementation timelines, and TSA oversight not captured in SP 800-53. Validate with TSA-qualified pipeline security professionals for compliance use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "SD-1 Sec 1",
+      "title": "Cybersecurity Coordinator",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-10"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-01 establishes the information security program requiring a designated program manager. PM-02 assigns security roles and responsibilities including coordination duties. PM-10 security authorization process provides governance structure for security oversight. Together these controls establish organizational security leadership and coordination roles.",
+      "gaps": "TSA-mandated 24/7 coordinator availability with direct communication channels to TSA and CISA is not addressed by SP 800-53. Pipeline operations authority integration requiring the coordinator to have operational decision-making power over pipeline systems is sector-specific. TSA requires named individual designation with contact details reported to TSA, beyond generic role assignment."
+    },
+    {
+      "id": "SD-1 Sec 2",
+      "title": "Incident Reporting",
+      "controls": [
+        "IR-01",
+        "IR-06",
+        "PM-15"
+      ],
+      "coverage_pct": 68,
+      "rationale": "IR-01 establishes incident response policy and procedures including reporting requirements. IR-06 addresses incident reporting to designated authorities and external organizations. PM-15 covers contacts and information sharing with security groups and external organizations including government agencies.",
+      "gaps": "TSA mandates 24-hour reporting to CISA, which is significantly shorter than typical NIST reporting timelines. Pipeline-specific incident categories such as OT system disruption, safety instrumented system compromise, and pipeline operational impact are not defined in SP 800-53. TSA prescribes a specific reporting format and communication channel to CISA that is not captured in generic incident reporting controls."
+    },
+    {
+      "id": "SD-1 Sec 3",
+      "title": "Vulnerability Assessment",
+      "controls": [
+        "RA-03",
+        "RA-05",
+        "CA-02",
+        "CA-08"
+      ],
+      "coverage_pct": 80,
+      "rationale": "RA-03 provides comprehensive risk assessment methodology. RA-05 addresses vulnerability monitoring and scanning across IT systems. CA-02 establishes security assessment processes including assessment plans and evidence collection. CA-08 penetration testing validates vulnerability identification through active testing.",
+      "gaps": "TSA requires a TSA-specific assessment methodology tailored to pipeline infrastructure. Pipeline architecture review requirements covering SCADA, DCS, and field device networks are not addressed. OT/IT convergence assessment examining the security boundary between pipeline operational technology and enterprise IT systems is a pipeline-sector requirement not captured in SP 800-53."
+    },
+    {
+      "id": "SD-1 Sec 4",
+      "title": "Remediation Measures",
+      "controls": [
+        "CA-05",
+        "PM-04",
+        "RA-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CA-05 establishes plan of action and milestones (POA&M) for tracking remediation of identified weaknesses. PM-04 provides the plan of action and milestones process at the organizational level. RA-07 addresses risk response actions including remediation, mitigation, acceptance, and transfer decisions.",
+      "gaps": "TSA requires explicit approval of remediation plans by TSA before implementation. Compliance timeline mandates with specific deadlines set by TSA are not captured in SP 800-53 generic remediation tracking. Pipeline operational continuity during remediation, ensuring remediation activities do not disrupt pipeline operations or create safety hazards, is a sector-specific requirement."
+    },
+    {
+      "id": "SD-2 Sec A",
+      "title": "Network Segmentation",
+      "controls": [
+        "SC-07",
+        "SC-32",
+        "AC-04",
+        "SC-46"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-07 provides boundary protection including managed interfaces and traffic filtering between network segments. SC-32 addresses system partitioning into separate physical or logical domains. AC-04 enforces information flow control policies between interconnected systems. SC-46 provides cross-domain policy enforcement for managing data flows across security domains.",
+      "gaps": "Pipeline-specific IT/OT segmentation requirements covering SCADA networks, distributed control systems (DCS), and remote terminal units (RTU) are not addressed. Gas and liquid pipeline operational zones with distinct safety and process control requirements need sector-specific segmentation architectures. Segmentation of compressor stations, pump stations, and regional control centers is a pipeline-specific requirement beyond generic boundary protection."
+    },
+    {
+      "id": "SD-2 Sec B",
+      "title": "Access Control Measures",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-17",
+        "IA-02",
+        "IA-05",
+        "IA-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-02 provides account management including account types, creation, modification, and removal. AC-03 enforces access control policies on system resources. AC-05 implements separation of duties. AC-06 enforces least privilege. AC-07 limits unsuccessful login attempts. AC-17 addresses remote access controls including MFA requirements. IA-02 provides identification and authentication for organizational users including multi-factor authentication. IA-05 manages authenticators including password policies. IA-08 addresses identification and authentication of non-organizational users.",
+      "gaps": "Pipeline SCADA operator access constraints where operators need immediate access to safety-critical controls during emergencies are not addressed. Shared HMI accounts in pipeline control rooms, common in OT environments, conflict with individual accountability requirements. Emergency access procedures during pipeline events such as pipeline ruptures or pressure excursions require sector-specific bypass mechanisms not covered in SP 800-53."
+    },
+    {
+      "id": "SD-2 Sec C",
+      "title": "Continuous Monitoring and Detection",
+      "controls": [
+        "SI-04",
+        "CA-07",
+        "AU-02",
+        "AU-06",
+        "SC-48",
+        "IR-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SI-04 provides system monitoring including intrusion detection, malware detection, and unauthorized connection identification. CA-07 establishes continuous monitoring strategy with defined metrics and frequencies. AU-02 defines auditable events for logging pipeline-relevant security events. AU-06 provides audit review, analysis, and reporting capabilities. SC-48 supports sensor relocation for adaptable monitoring deployment. IR-04 addresses incident handling including detection and analysis of anomalous activity.",
+      "gaps": "Pipeline-specific OT protocol monitoring for Modbus, DNP3, OPC-UA, and other industrial protocols requires deep packet inspection capabilities not addressed in SP 800-53. SCADA process variable anomaly detection identifying abnormal pressure, flow, temperature, or valve positions is a pipeline-specific monitoring requirement. Compressor station and pump station monitoring for cyber-physical anomalies is not captured in generic continuous monitoring controls."
+    },
+    {
+      "id": "SD-2 Sec D",
+      "title": "Patch Management",
+      "controls": [
+        "SI-02",
+        "CM-03",
+        "CM-04",
+        "RA-05",
+        "SA-22"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-02 addresses flaw remediation including patch identification, testing, and installation. CM-03 provides configuration change control processes for managing patches as system changes. CM-04 requires impact analysis before implementing changes including patches. RA-05 covers vulnerability scanning to identify missing patches. SA-22 addresses unsupported system components requiring compensating controls when patches are unavailable.",
+      "gaps": "Pipeline OT patching constraints where pipelines cannot be shut down for patching of safety-critical control systems are not addressed. Compensating controls for unpatched legacy SCADA systems that cannot accept modern patches require pipeline-specific guidance. Vendor patch qualification for safety instrumented systems (SIS) where improper patches could compromise pipeline safety functions is a sector-specific requirement beyond generic patch management."
+    },
+    {
+      "id": "SD-2 Sec E",
+      "title": "Cybersecurity Implementation Plan",
+      "controls": [
+        "PL-01",
+        "PL-02",
+        "PM-01",
+        "PM-09",
+        "CA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PL-01 establishes planning policy and procedures for security planning activities. PL-02 defines system security and privacy plans documenting implemented controls. PM-01 provides the organizational information security program plan. PM-09 establishes risk management strategy and implementation approach. CA-05 provides plan of action and milestones for tracking implementation progress.",
+      "gaps": "TSA review and approval process requiring the implementation plan to be submitted to and approved by TSA before execution is not captured. Pipeline-specific implementation milestones with TSA-mandated timelines for achieving compliance are sector-specific. Compliance reporting to TSA including periodic status updates and evidence of implementation progress is a regulatory oversight requirement beyond SP 800-53."
+    },
+    {
+      "id": "SD-2 Sec F",
+      "title": "Cybersecurity Architecture Design Review",
+      "controls": [
+        "PL-08",
+        "SA-08",
+        "SA-17",
+        "SC-07",
+        "SC-32"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PL-08 provides security and privacy architecture guidance for information system design. SA-08 establishes security and privacy engineering principles for system development. SA-17 addresses developer security and privacy architecture and design documentation. SC-07 provides boundary protection architecture requirements. SC-32 addresses system partitioning into security domains.",
+      "gaps": "Pipeline-specific architecture patterns covering regional control centers, field sites, compressor stations, and pump stations are not addressed in SP 800-53. SCADA communication architecture review including telemetry networks, satellite links, and microwave communications used in pipeline operations requires sector-specific expertise. The integration of safety instrumented systems (SIS) with cybersecurity architecture for pipeline operations is a critical sector-specific gap."
+    },
+    {
+      "id": "SD-2 Sec G",
+      "title": "Cybersecurity Testing",
+      "controls": [
+        "CA-08",
+        "CA-02",
+        "RA-05",
+        "SA-11"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CA-08 provides penetration testing requirements including scope, methodology, and reporting. CA-02 establishes security assessment processes including independent assessments. RA-05 addresses vulnerability scanning and analysis. SA-11 covers developer testing and evaluation including security testing methodologies.",
+      "gaps": "Pipeline OT penetration testing constraints prohibiting active testing on live SCADA and safety systems due to risk of pipeline disruption or safety incidents are not addressed. Tabletop exercises for pipeline cyber-physical scenarios such as ransomware affecting compressor station control or valve manipulation are sector-specific testing requirements. Testing of emergency shutdown systems and safety instrumented systems requires pipeline-specific test protocols not captured in SP 800-53."
+    },
+    {
+      "id": "SD-2 Sec H",
+      "title": "Cybersecurity Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "PM-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AT-01 establishes training policy and procedures for security awareness and training programs. AT-02 provides security literacy training for all personnel. AT-03 delivers role-based security training for personnel with assigned security responsibilities. AT-04 maintains training records documenting completion and competency. PM-13 establishes the organizational security workforce including skills development and training requirements.",
+      "gaps": "Pipeline-specific OT security training covering SCADA system security, industrial control system threats, and pipeline-specific attack scenarios is not addressed. SCADA operator cyber awareness training addressing social engineering targeting control room operators and recognizing anomalous system behavior is sector-specific. Field technician device handling procedures for secure configuration and deployment of RTUs, flow computers, and other pipeline field devices require specialized training content."
+    }
+  ],
+  "summary": {
+    "total_clauses": 12,
+    "average_coverage": 78.3,
+    "full_count": 2,
+    "substantial_count": 10,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

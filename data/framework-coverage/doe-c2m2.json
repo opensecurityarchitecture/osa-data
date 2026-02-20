@@ -1,0 +1,227 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "doe_c2m2",
+  "framework_name": "DOE C2M2 v2.1",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on DOE Cybersecurity Capability Maturity Model (C2M2) v2.1 and expert analysis mapping to SP 800-53 Rev 5. C2M2 is a voluntary maturity model designed for the energy sector with maturity indicator levels (MIL 0-3) that assess organizational capability progression rather than prescribing specific technical controls. SP 800-53 maps well to C2M2 practices but does not capture the maturity assessment methodology or energy sector-specific operational context. Validate with DOE C2M2 facilitators for self-assessment use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "ASSET",
+      "title": "Asset, Change, and Configuration Management",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-09",
+        "PM-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-08 system component inventory provides the foundation for IT and OT asset identification, tracking, and lifecycle management required by the ASSET domain. CM-02 baseline configuration establishes documented baselines for hardware, software, and firmware across the asset inventory. CM-03 configuration change control addresses the change management process including authorization, testing, and documentation of changes to managed assets. CM-05 access restrictions for change limits who can modify system configurations. CM-06 configuration settings addresses security-relevant parameters for managed assets. CM-07 least functionality supports reducing attack surface by disabling unnecessary services and ports on inventoried assets. CM-09 configuration management plan provides the overarching plan governing all configuration management activities. PM-05 system inventory maintains the organization-wide inventory of systems supporting mission/business functions. Together these controls comprehensively address the asset identification, configuration management, and change management practices in the ASSET domain.",
+      "gaps": "C2M2 maturity progression (MIL 0-3) for asset management is not directly mapped by SP 800-53; the maturity model assesses organizational capability progression from ad hoc (MIL 0) through managed (MIL 3), which is a process maturity concept beyond prescriptive controls. OT asset management presents specific inventory challenges beyond IT asset management, including embedded controllers, programmable logic controllers (PLCs), remote terminal units (RTUs), field devices, and legacy systems that may lack standard discovery protocols. The ASSET domain also addresses IT and OT asset prioritization based on criticality to energy delivery functions, which requires energy sector context not present in SP 800-53."
+    },
+    {
+      "id": "THREAT",
+      "title": "Threat and Vulnerability Management",
+      "controls": [
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "RA-09",
+        "PM-15",
+        "PM-16",
+        "SI-02",
+        "SI-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "RA-05 vulnerability assessment provides the core vulnerability scanning, analysis, and remediation tracking required by the THREAT domain. RA-03 risk assessment supports the threat identification and analysis process including threat source characterization. RA-02 security categorization helps prioritize vulnerability management efforts based on system criticality. RA-07 risk response addresses the decision framework for accepting, mitigating, transferring, or avoiding identified risks from threats and vulnerabilities. RA-09 criticality analysis supports prioritization of vulnerability remediation based on asset criticality. PM-15 security and privacy groups and associations covers participation in threat intelligence sharing communities. PM-16 threat awareness program establishes the organizational capability to receive, analyze, and disseminate threat intelligence. SI-02 flaw remediation addresses the patching and remediation of identified software and firmware vulnerabilities. SI-05 security alerts, advisories, and directives covers the receipt and response to vulnerability notifications from external sources including vendors and government agencies.",
+      "gaps": "Energy sector-specific threat intelligence sources including DOE CESER (Cybersecurity, Energy Security, and Emergency Response), E-ISAC (Electricity Information Sharing and Analysis Center), and ONG-ISAC (Oil and Natural Gas ISAC) are not addressed by SP 800-53 controls. OT vulnerability management operates under significant constraints including patch deferral for operational availability, testing requirements in representative environments before deployment to production OT systems, and compensating controls when patches cannot be applied due to vendor support limitations or operational risk. The THREAT domain also encompasses energy-specific threat scenarios such as coordinated attacks on grid infrastructure, ICS-targeting malware (e.g., CRASHOVERRIDE, TRITON), and nation-state threats to energy delivery."
+    },
+    {
+      "id": "RISK",
+      "title": "Risk Management",
+      "controls": [
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-07",
+        "PM-09",
+        "PM-28"
+      ],
+      "coverage_pct": 85,
+      "rationale": "RA-01 risk assessment policy and procedures establishes the organizational risk management framework and governance structure. RA-02 security categorization provides the impact-based system classification that feeds into risk-based decision making. RA-03 risk assessment addresses the identification of threat sources, vulnerabilities, likelihood, and impact analysis central to the RISK domain. RA-07 risk response covers the spectrum of risk treatment options (accept, mitigate, transfer, avoid) and the documentation of risk decisions. PM-09 risk management strategy establishes the organization-wide approach to managing risk including risk tolerance, risk assessment methodology, and risk monitoring approach. PM-28 risk framing addresses the context and assumptions under which risk-based decisions are made, including threat landscape characterization and organizational constraints. These controls collectively address the cyber risk strategy, identification, and response practices in the RISK domain.",
+      "gaps": "C2M2 employs a maturity-based approach to risk management where organizations progress through MIL 0 (ad hoc) to MIL 3 (managed) in their risk management capabilities, which is a process maturity assessment concept not captured by SP 800-53 prescriptive controls. The energy sector risk context introduces unique dimensions including safety risk to personnel and the public, grid reliability risk, environmental risk from energy infrastructure incidents, and regulatory risk from NERC/FERC enforcement. Enterprise risk integration for utilities requires coordination across operational risk, financial risk, safety risk, and cybersecurity risk domains, with board-level risk governance expectations specific to critical infrastructure operators."
+    },
+    {
+      "id": "ACCESS",
+      "title": "Identity and Access Management",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-17",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-08",
+        "IA-12"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AC-02 account management provides comprehensive account lifecycle management including creation, modification, disabling, and removal of accounts across IT and OT systems. AC-03 access enforcement implements the access control policies and mechanisms. AC-05 separation of duties addresses the principle of least privilege through role separation. AC-06 least privilege restricts user access to the minimum necessary for job functions. AC-07 unsuccessful logon attempts provides brute-force protection through account lockout mechanisms. AC-17 remote access addresses secure remote connectivity including VPN, encryption, and multi-factor authentication for remote energy system access. IA-02 identification and authentication for organizational users covers user authentication including multi-factor requirements. IA-03 device identification and authentication addresses machine-to-machine authentication relevant to OT device communications. IA-04 identifier management governs the assignment and lifecycle of user and device identifiers. IA-05 authenticator management covers password policies, token management, and credential lifecycle. IA-08 identification and authentication for non-organizational users addresses contractor and vendor authentication. IA-12 identity proofing covers the verification of user identity before credential issuance. This is one of the strongest mappings due to the universal nature of IAM controls.",
+      "gaps": "OT-specific IAM challenges present significant gaps: shared accounts on human-machine interfaces (HMIs) and operator workstations are common operational practice in energy environments where individual authentication may not be feasible during emergency operations. Engineering workstation access often requires privileged accounts with broad system access for maintenance and configuration of industrial control systems. Field device authentication for PLCs, RTUs, and intelligent electronic devices (IEDs) may rely on legacy protocols without modern authentication capabilities. The ACCESS domain also addresses physical access integration with logical access for control rooms, substations, and generation facilities, which requires energy sector operational context."
+    },
+    {
+      "id": "SITUATION",
+      "title": "Situational Awareness",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "SI-04",
+        "CA-07",
+        "SC-48",
+        "IR-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-02 event logging defines the auditable events to be captured across IT and OT systems. AU-03 content of audit records specifies the information to be recorded in each audit event including timestamp, source, and outcome. AU-06 audit record review, analysis, and reporting addresses the analysis and correlation of security event data to identify anomalies and potential incidents. SI-04 system monitoring provides the real-time and near-real-time monitoring capabilities for detecting security-relevant events across network and host layers. CA-07 continuous monitoring establishes the ongoing assessment of security posture and operational status. SC-48 sensor relocation supports adaptive positioning of monitoring sensors for enhanced visibility. IR-05 incident monitoring provides the tracking and documentation of security incidents and events over time. These controls address the core logging, monitoring, and correlation practices in the SITUATION domain.",
+      "gaps": "Energy-specific situational awareness extends beyond traditional IT security monitoring to include SCADA process monitoring, grid state awareness, and power system operational visibility that requires understanding of energy delivery functions. E-ISAC information sharing provides sector-specific threat intelligence and situational awareness reports that supplement internal monitoring capabilities. OT network visibility tools including industrial protocol-aware network monitoring (e.g., Modbus, DNP3, IEC 61850 traffic analysis) are required for comprehensive OT situational awareness. The SITUATION domain also encompasses cross-domain situational awareness spanning IT, OT, and physical security domains, with integration into energy management system (EMS) and distribution management system (DMS) operational displays."
+    },
+    {
+      "id": "RESPONSE",
+      "title": "Event and Incident Response, Continuity of Operations",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-08",
+        "CP-01",
+        "CP-02",
+        "CP-04",
+        "CP-09",
+        "CP-10"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IR-01 incident response policy establishes the incident response program framework and governance. IR-02 incident response training covers training requirements for incident response personnel. IR-03 incident response testing ensures the plan is exercised and validated through tabletop and operational exercises. IR-04 incident handling addresses the full incident lifecycle: detection, analysis, containment, eradication, and recovery. IR-05 incident monitoring provides tracking and documentation of incidents over time. IR-06 incident reporting covers internal and external reporting obligations. IR-08 incident response plan documents roles, responsibilities, and procedures. CP-01 contingency planning policy establishes the continuity program framework. CP-02 contingency plan addresses business continuity and disaster recovery planning. CP-04 contingency plan testing validates recovery procedures through exercises. CP-09 system backup covers backup strategy, frequency, and offsite storage. CP-10 system recovery and reconstitution addresses restoration to operational state. These controls comprehensively address the incident response and continuity lifecycle in the RESPONSE domain.",
+      "gaps": "Energy sector incident response coordination involves specific organizations and processes: DOE CESER for energy sector incident coordination, E-ISAC for electricity subsector information sharing, CISA for cross-sector coordination, and state public utility commission notification requirements. OT incident response requires maintaining energy delivery operations during response activities, which may constrain traditional IT response actions such as system isolation or shutdown. Grid restoration procedures following cyber incidents must coordinate with NERC reliability standards and bulk electric system restoration plans. The RESPONSE domain also addresses cascading failure scenarios where cyber incidents may propagate across interconnected energy delivery systems, requiring coordinated response across multiple utilities."
+    },
+    {
+      "id": "THIRD",
+      "title": "Third-Party Risk Management",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "PM-30"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-04 acquisition process addresses security requirements in contracts and procurement documents for third-party products and services. SA-09 external system services covers the risk management of services provided by external entities including cloud services and managed security services. SR-01 supply chain risk management policy establishes the overarching supply chain risk management program. SR-02 supply chain risk assessment addresses the identification and evaluation of supply chain risks. SR-03 supply chain controls and processes covers the implementation of controls to mitigate supply chain risks. SR-05 acquisition strategies provides procurement-specific risk mitigation approaches including diversification and qualification testing. SR-06 supplier assessments and reviews supports ongoing evaluation of vendor security posture and risk. PM-30 supply chain risk management strategy establishes the organization-wide approach to managing supply chain risks across the enterprise. These controls collectively address the vendor assessment, supply chain management, and service level requirements in the THIRD domain.",
+      "gaps": "Energy sector vendor management presents unique challenges: ICS/SCADA vendors (e.g., ABB, Siemens, GE, Schneider Electric, Honeywell) maintain deep system access for maintenance, configuration, and support of operational technology systems. OT-specific supply chain risks include firmware integrity for RTUs and PLCs, configuration management for protective relay settings, and vendor-managed updates to energy management system software. DOE supply chain guidance addresses energy-specific risks including counterfeit components in safety-critical systems, vendor concentration risk for specialized OT equipment, and geopolitical supply chain considerations for critical energy infrastructure components. The THIRD domain also covers information sharing with vendors about threats and vulnerabilities specific to energy sector deployments."
+    },
+    {
+      "id": "WORKFORCE",
+      "title": "Workforce Management",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-06",
+        "PS-07",
+        "PM-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AT-01 security awareness and training policy establishes the workforce training program framework. AT-02 security awareness training provides general security awareness for all personnel. AT-03 role-based training delivers specialized training based on assigned roles and responsibilities, addressing both IT and OT security competencies. AT-04 training records documents training completion and currency. PS-01 personnel security policy establishes the personnel security program. PS-02 position risk designation categorizes positions by risk level to determine appropriate screening. PS-03 personnel screening covers background investigations and vetting processes. PS-04 personnel termination addresses secure offboarding including access revocation. PS-06 access agreements documents acceptable use and security responsibilities. PS-07 external personnel security extends personnel security requirements to contractors and third-party personnel. PM-13 security and privacy workforce establishes the requirement for trained security professionals. These controls comprehensively address the workforce security, training, and awareness requirements in the WORKFORCE domain.",
+      "gaps": "Energy sector workforce challenges include an aging workforce with deep OT knowledge approaching retirement, the IT/OT convergence skills gap requiring personnel who understand both information technology and operational technology, and competition for cybersecurity talent in critical infrastructure sectors. NERC CIP personnel risk assessment requirements prescribe specific background check criteria (7-year criminal history) and reassessment cycles that go beyond general SP 800-53 personnel screening. Control room operator training for cybersecurity awareness must be integrated with existing operator qualification programs and NERC system operator certification requirements. The WORKFORCE domain also addresses the development of cybersecurity career paths and retention strategies specific to the energy sector."
+    },
+    {
+      "id": "ARCHITECTURE",
+      "title": "Cybersecurity Architecture",
+      "controls": [
+        "SC-07",
+        "SC-32",
+        "AC-04",
+        "PL-08",
+        "SA-08",
+        "SC-46",
+        "SA-17"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SC-07 boundary protection provides network segmentation and perimeter defense capabilities including monitoring and access control at boundaries. SC-32 system partitioning addresses the separation of system components into distinct security domains. AC-04 information flow enforcement controls the flow of information between security domains and network segments. PL-08 security and privacy architectures establishes the enterprise security architecture requirements including defense-in-depth principles. SA-08 security and privacy engineering principles covers secure design principles applied throughout the system development lifecycle. SC-46 cross-domain policy enforcement addresses policy enforcement at domain boundaries including IT/OT boundaries. SA-17 developer security and privacy architecture and design requires vendors to apply security architecture principles in system design. These controls address the network segmentation, secure design, and defense-in-depth practices in the ARCHITECTURE domain.",
+      "gaps": "Energy sector cybersecurity architecture encompasses IT/OT demilitarized zone (DMZ) design, data historian placement between IT and OT networks, and the Purdue Reference Model (ISA-95/IEC 62443) for industrial network segmentation into zones and conduits. Distributed energy resource (DER) integration architecture introduces new attack surfaces as solar, wind, and battery storage systems connect to utility networks via public internet and cloud services. Cloud and edge computing considerations for utilities include SCADA-as-a-Service, cloud-based analytics for grid optimization, and edge computing at substations, all requiring architecture patterns not addressed by traditional SP 800-53 controls. The ARCHITECTURE domain also addresses legacy system integration where decades-old OT systems must coexist with modern IT infrastructure in a defensible architecture."
+    },
+    {
+      "id": "PROGRAM",
+      "title": "Cybersecurity Program Management",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-04",
+        "PM-06",
+        "PM-09",
+        "PM-14",
+        "PL-01",
+        "PL-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PM-01 information security program plan establishes the overarching cybersecurity program including goals, objectives, and milestones. PM-02 information security program leadership designates the senior official responsible for the cybersecurity program. PM-03 information security and privacy resources addresses budget allocation and resource planning for the cybersecurity program. PM-04 plan of action and milestones process tracks remediation of identified weaknesses and deficiencies. PM-06 measures of performance establishes metrics and key performance indicators for evaluating program effectiveness. PM-09 risk management strategy provides the strategic risk context for the cybersecurity program. PM-14 testing, training, and monitoring addresses the ongoing assessment of security controls and program effectiveness. PL-01 planning policy establishes the security planning framework and governance. PL-02 system security and privacy plans documents the security controls and their implementation for each system. These controls comprehensively address the governance, strategy, metrics, and resource allocation requirements of the PROGRAM domain.",
+      "gaps": "C2M2 maturity-based program management employs MIL progression (MIL 0 through MIL 3) as the primary framework for assessing and improving cybersecurity program maturity, which is a capability assessment methodology not captured by SP 800-53 prescriptive controls. Energy sector governance expectations include board-level cybersecurity oversight for utilities, integration with public utility commission regulatory requirements, and alignment with DOE energy sector-specific guidance. The DOE voluntary C2M2 self-assessment program provides a structured facilitated assessment process with benchmarking against energy sector peers, which is a sector-specific governance mechanism. The PROGRAM domain also addresses the integration of cybersecurity program management with safety management systems, reliability compliance programs (NERC), and enterprise risk management frameworks specific to energy utilities."
+    }
+  ],
+  "summary": {
+    "total_clauses": 10,
+    "average_coverage": 83.6,
+    "full_count": 6,
+    "substantial_count": 4,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

@@ -7,12 +7,15 @@
   "url": "https://www.opensecurityarchitecture.org/patterns/ai-governance",
   "metadata": {
     "release": "2.0",
-    "status": "draft",
+    "status": "active",
     "type": "pattern",
     "classification": "Governance & Risk Management",
     "datePublished": "2026-02-13",
     "dateModified": "2026-02-13",
-    "authors": ["Spinoza", "Vitruvius"],
+    "authors": [
+      "Spinoza",
+      "Vitruvius"
+    ],
     "provenance": "Developed in response to community feedback (Reddit r/cybersecurity) requesting deeper AI governance coverage beyond SP-027's operational security focus. Informed by ISO/IEC 42001:2023 gap analysis revealing 53% average coverage against 37 AI management clauses -- with critical gaps in training data quality, transparency, human oversight, and impact assessment that NIST 800-53 alone cannot close."
   },
   "diagram": {
@@ -108,104 +111,329 @@
     }
   ],
   "controls": [
-    { "id": "AC-05", "name": "Separation of Duties", "family": "AC", "emphasis": "important" },
-    { "id": "AC-06", "name": "Least Privilege", "family": "AC", "emphasis": "important" },
-    { "id": "AT-02", "name": "Literacy Training and Awareness", "family": "AT", "emphasis": "important" },
-    { "id": "AT-03", "name": "Role-Based Training", "family": "AT", "emphasis": "important" },
-    { "id": "AU-02", "name": "Event Logging", "family": "AU", "emphasis": "critical" },
-    { "id": "AU-03", "name": "Content of Audit Records", "family": "AU", "emphasis": "critical" },
-    { "id": "AU-06", "name": "Audit Record Review, Analysis, and Reporting", "family": "AU", "emphasis": "important" },
-    { "id": "AU-12", "name": "Audit Record Generation", "family": "AU", "emphasis": "important" },
-    { "id": "CA-02", "name": "Control Assessments", "family": "CA", "emphasis": "important" },
-    { "id": "CA-07", "name": "Continuous Monitoring", "family": "CA", "emphasis": "critical" },
-    { "id": "CM-02", "name": "Baseline Configuration", "family": "CM", "emphasis": "critical" },
-    { "id": "CM-03", "name": "Configuration Change Control", "family": "CM", "emphasis": "important" },
-    { "id": "CM-04", "name": "Impact Analysis", "family": "CM", "emphasis": "important" },
-    { "id": "PL-02", "name": "System Security and Privacy Plans", "family": "PL", "emphasis": "standard" },
-    { "id": "PM-09", "name": "Risk Management Strategy", "family": "PM", "emphasis": "critical" },
-    { "id": "PM-14", "name": "Testing, Training, and Monitoring", "family": "PM", "emphasis": "important" },
-    { "id": "PM-25", "name": "Minimization of Personally Identifiable Information", "family": "PM", "emphasis": "important" },
-    { "id": "PM-28", "name": "Risk Framing", "family": "PM", "emphasis": "important" },
-    { "id": "PM-32", "name": "Purposing", "family": "PM", "emphasis": "important" },
-    { "id": "PS-06", "name": "Access Agreements", "family": "PS", "emphasis": "standard" },
-    { "id": "PT-02", "name": "Authority to Process Personally Identifiable Information", "family": "PT", "emphasis": "important" },
-    { "id": "PT-03", "name": "Personally Identifiable Information Processing Purposes", "family": "PT", "emphasis": "important" },
-    { "id": "PT-04", "name": "Consent", "family": "PT", "emphasis": "critical" },
-    { "id": "PT-05", "name": "Privacy Notice", "family": "PT", "emphasis": "important" },
-    { "id": "RA-03", "name": "Risk Assessment", "family": "RA", "emphasis": "critical" },
-    { "id": "RA-07", "name": "Risk Response", "family": "RA", "emphasis": "important" },
-    { "id": "RA-08", "name": "Privacy Impact Assessments", "family": "RA", "emphasis": "critical" },
-    { "id": "RA-09", "name": "Criticality Analysis", "family": "RA", "emphasis": "important" },
-    { "id": "SA-03", "name": "System Development Life Cycle", "family": "SA", "emphasis": "important" },
-    { "id": "SA-08", "name": "Security and Privacy Engineering Principles", "family": "SA", "emphasis": "important" },
-    { "id": "SA-10", "name": "Developer Configuration Management", "family": "SA", "emphasis": "standard" },
-    { "id": "SA-11", "name": "Developer Testing and Evaluation", "family": "SA", "emphasis": "critical" },
-    { "id": "SI-04", "name": "System Monitoring", "family": "SI", "emphasis": "important" },
-    { "id": "SI-10", "name": "Information Input Validation", "family": "SI", "emphasis": "critical" }
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Record Review, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-02",
+      "name": "Control Assessments",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-04",
+      "name": "Impact Analysis",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security and Privacy Plans",
+      "family": "PL",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-25",
+      "name": "Minimization of Personally Identifiable Information",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-28",
+      "name": "Risk Framing",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-32",
+      "name": "Purposing",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-06",
+      "name": "Access Agreements",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-03",
+      "name": "Personally Identifiable Information Processing Purposes",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-04",
+      "name": "Consent",
+      "family": "PT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PT-05",
+      "name": "Privacy Notice",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-07",
+      "name": "Risk Response",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-08",
+      "name": "Privacy Impact Assessments",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-09",
+      "name": "Criticality Analysis",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-03",
+      "name": "System Development Life Cycle",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-10",
+      "name": "Developer Configuration Management",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Testing and Evaluation",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Input Validation",
+      "family": "SI",
+      "emphasis": "critical"
+    }
   ],
   "threats": [
     {
       "id": "T-AIG-001",
       "name": "Training data bias producing discriminatory AI outputs across protected characteristics",
-      "mitigatedBy": ["SI-10", "SA-11", "CA-07"]
+      "mitigatedBy": [
+        "SI-10",
+        "SA-11",
+        "CA-07"
+      ]
     },
     {
       "id": "T-AIG-002",
       "name": "Opaque AI decisions in regulated contexts without explainability or contestability",
-      "mitigatedBy": ["PT-05", "AU-02", "AU-03"]
+      "mitigatedBy": [
+        "PT-05",
+        "AU-02",
+        "AU-03"
+      ]
     },
     {
       "id": "T-AIG-003",
       "name": "Training data poisoning corrupting model behaviour at scale",
-      "mitigatedBy": ["SI-10", "SA-03", "CM-02"]
+      "mitigatedBy": [
+        "SI-10",
+        "SA-03",
+        "CM-02"
+      ]
     },
     {
       "id": "T-AIG-004",
       "name": "Uncontrolled model deployment without impact assessment or approval gate",
-      "mitigatedBy": ["RA-08", "CM-03", "AC-05"]
+      "mitigatedBy": [
+        "RA-08",
+        "CM-03",
+        "AC-05"
+      ]
     },
     {
       "id": "T-AIG-005",
       "name": "Concept drift degrading model accuracy and fairness over time",
-      "mitigatedBy": ["CA-07", "SI-04", "CM-04"]
+      "mitigatedBy": [
+        "CA-07",
+        "SI-04",
+        "CM-04"
+      ]
     },
     {
       "id": "T-AIG-006",
       "name": "Training data containing PII processed without lawful basis or consent",
-      "mitigatedBy": ["PT-02", "PT-04", "PM-25"]
+      "mitigatedBy": [
+        "PT-02",
+        "PT-04",
+        "PM-25"
+      ]
     },
     {
       "id": "T-AIG-007",
       "name": "Shadow AI models deployed outside governance framework",
-      "mitigatedBy": ["PM-09", "CA-02", "PM-14"]
+      "mitigatedBy": [
+        "PM-09",
+        "CA-02",
+        "PM-14"
+      ]
     },
     {
       "id": "T-AIG-008",
       "name": "Model versioning failure enabling rollback to unsafe or biased version",
-      "mitigatedBy": ["CM-02", "SA-10", "CM-03"]
+      "mitigatedBy": [
+        "CM-02",
+        "SA-10",
+        "CM-03"
+      ]
     },
     {
       "id": "T-AIG-009",
       "name": "Insufficient human oversight of high-risk autonomous AI decisions",
-      "mitigatedBy": ["AC-05", "AT-02", "PS-06"]
+      "mitigatedBy": [
+        "AC-05",
+        "AT-02",
+        "PS-06"
+      ]
     },
     {
       "id": "T-AIG-010",
       "name": "Failure to disclose AI involvement to affected individuals",
-      "mitigatedBy": ["PT-05", "PT-03", "AU-02"]
+      "mitigatedBy": [
+        "PT-05",
+        "PT-03",
+        "AU-02"
+      ]
     },
     {
       "id": "T-AIG-011",
       "name": "Regulatory non-compliance with EU AI Act or equivalent AI legislation",
-      "mitigatedBy": ["RA-08", "RA-03", "PM-09"]
+      "mitigatedBy": [
+        "RA-08",
+        "RA-03",
+        "PM-09"
+      ]
     },
     {
       "id": "T-AIG-012",
       "name": "AI system causing unassessed societal or environmental harm",
-      "mitigatedBy": ["RA-08", "RA-09", "CA-02"]
+      "mitigatedBy": [
+        "RA-08",
+        "RA-09",
+        "CA-02"
+      ]
     }
   ],
-  "relatedPatterns": ["SP-027", "SP-013", "SP-012", "SP-042", "SP-043", "SP-028"],
+  "relatedPatterns": [
+    "SP-027",
+    "SP-013",
+    "SP-012",
+    "SP-042",
+    "SP-043",
+    "SP-028"
+  ],
   "relatedPatternNames": [
     "Secure AI Integration",
     "Data Security",

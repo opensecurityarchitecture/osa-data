@@ -8,7 +8,7 @@
   "metadata": {
     "release": "26.02",
     "classification": "Cryptography and Key Management",
-    "status": "draft",
+    "status": "active",
     "type": "pattern",
     "datePublished": "2026-02-09",
     "dateModified": "2026-02-09",
@@ -24,17 +24,17 @@
     "png": ""
   },
   "content": {
-    "description": "Post-quantum cryptography (PQC) is the replacement of quantum-vulnerable asymmetric algorithms (RSA, ECDSA, ECDH, EdDSA, DH) with algorithms resistant to attack by cryptographically relevant quantum computers (CRQCs). NIST finalised three PQC standards in August 2024: ML-KEM (FIPS 203) for key encapsulation, ML-DSA (FIPS 204) for digital signatures, and SLH-DSA (FIPS 205) as a conservative hash-based signature backup.\n\nThe migration is not a simple algorithm swap. Enterprise cryptography is embedded across TLS endpoints, VPN concentrators, PKI infrastructure, SSH configurations, code signing pipelines, HSMs, key management systems, data-at-rest encryption, IoT devices, and OT/ICS systems with 15-30 year lifecycles. The Harvest Now Decrypt Later (HNDL) threat means nation-state adversaries are already archiving encrypted traffic for future quantum decryption, making the migration urgent for any data with long-term confidentiality requirements.\n\nCrypto agility \u2014 the ability to swap algorithms without major rearchitecture \u2014 is the prerequisite capability. Organisations that invest in crypto agility now gain immediate benefits: faster response to algorithm compromises, easier compliance with evolving standards, and reduced technical debt. The PQC migration is the forcing function, but crypto agility is the enduring architectural improvement.\n\nThis pattern defines a phased migration architecture aligned with CNSA 2.0 (US), NCSC (UK), BSI (Germany), and ETSI (EU) timelines, targeting complete migration by 2035. It covers cryptographic inventory and discovery, hybrid transitional deployments, PKI migration, supply chain assurance, and contingency planning for algorithm compromise.",
+    "description": "Post-quantum cryptography (PQC) is the replacement of quantum-vulnerable asymmetric algorithms (RSA, ECDSA, ECDH, EdDSA, DH) with algorithms resistant to attack by cryptographically relevant quantum computers (CRQCs). NIST finalised three PQC standards in August 2024: ML-KEM (FIPS 203) for key encapsulation, ML-DSA (FIPS 204) for digital signatures, and SLH-DSA (FIPS 205) as a conservative hash-based signature backup.\n\nThe migration is not a simple algorithm swap. Enterprise cryptography is embedded across TLS endpoints, VPN concentrators, PKI infrastructure, SSH configurations, code signing pipelines, HSMs, key management systems, data-at-rest encryption, IoT devices, and OT/ICS systems with 15-30 year lifecycles. The Harvest Now Decrypt Later (HNDL) threat means nation-state adversaries are already archiving encrypted traffic for future quantum decryption, making the migration urgent for any data with long-term confidentiality requirements.\n\nCrypto agility — the ability to swap algorithms without major rearchitecture — is the prerequisite capability. Organisations that invest in crypto agility now gain immediate benefits: faster response to algorithm compromises, easier compliance with evolving standards, and reduced technical debt. The PQC migration is the forcing function, but crypto agility is the enduring architectural improvement.\n\nThis pattern defines a phased migration architecture aligned with CNSA 2.0 (US), NCSC (UK), BSI (Germany), and ETSI (EU) timelines, targeting complete migration by 2035. It covers cryptographic inventory and discovery, hybrid transitional deployments, PKI migration, supply chain assurance, and contingency planning for algorithm compromise.",
     "keyControlAreas": [
-      "Cryptographic Inventory and Discovery (CM-08, PM-05, SA-04): Maintain a complete Cryptographic Bill of Materials (CBOM) covering all X.509 certificates, TLS configurations, VPN transforms, SSH key types, key management systems, data-at-rest encryption, code signing, firmware signing, and application-level cryptography. Use automated discovery across network traffic, host configurations, source code, and cloud services. CycloneDX supports CBOM as a standard capability. Without a complete inventory, systematic migration is impossible \u2014 you cannot migrate what you cannot find.",
+      "Cryptographic Inventory and Discovery (CM-08, PM-05, SA-04): Maintain a complete Cryptographic Bill of Materials (CBOM) covering all X.509 certificates, TLS configurations, VPN transforms, SSH key types, key management systems, data-at-rest encryption, code signing, firmware signing, and application-level cryptography. Use automated discovery across network traffic, host configurations, source code, and cloud services. CycloneDX supports CBOM as a standard capability. Without a complete inventory, systematic migration is impossible — you cannot migrate what you cannot find.",
       "Crypto Agility Architecture (SC-13, SA-08, SA-17): Design abstraction layers between applications and cryptographic implementations. Applications call generic operations (sign, encrypt, key-exchange) with algorithm selection driven by policy configuration, not hard-coded in source. Protocol negotiation (TLS 1.3 cipher suites, IKEv2 transforms, SSH key exchange) already supports this model. Extend to application-layer cryptography, KMS integration, and certificate management. Eliminate hard-coded algorithm choices, proprietary fixed-cipher protocols, and non-upgradeable firmware crypto.",
-      "Post-Quantum Key Exchange (SC-12, SC-13, SC-08): Deploy hybrid key exchange combining classical (X25519/P-256) with PQC (ML-KEM-768) on all TLS, SSH, VPN, and IPsec endpoints. Hybrid mode ensures that both algorithms must be broken to compromise the session \u2014 protecting against both classical and quantum attacks during the transition. OpenSSH 10.0 already defaults to ML-KEM hybrid. Browser support (Chrome, Firefox, Edge) covers approximately 38% of HTTPS traffic via X25519MLKEM768. Enable on load balancers and API gateways immediately.",
-      "Post-Quantum Digital Signatures and PKI (SC-13, SC-17, IA-05): Migrate certificate infrastructure to support hybrid and composite certificates containing both classical and PQC signatures. ML-DSA-65 is the primary signature algorithm; SLH-DSA provides a conservative hash-based backup. IETF LAMPS working group is standardising composite certificate formats. Re-sign long-lived digital signatures (contracts, regulatory filings, archival documents) with PQC algorithms before CRQCs arrive. Note: PQC certificates are significantly larger \u2014 an ML-DSA-65 chain adds approximately 10KB versus 1.5KB for ECDSA.",
+      "Post-Quantum Key Exchange (SC-12, SC-13, SC-08): Deploy hybrid key exchange combining classical (X25519/P-256) with PQC (ML-KEM-768) on all TLS, SSH, VPN, and IPsec endpoints. Hybrid mode ensures that both algorithms must be broken to compromise the session — protecting against both classical and quantum attacks during the transition. OpenSSH 10.0 already defaults to ML-KEM hybrid. Browser support (Chrome, Firefox, Edge) covers approximately 38% of HTTPS traffic via X25519MLKEM768. Enable on load balancers and API gateways immediately.",
+      "Post-Quantum Digital Signatures and PKI (SC-13, SC-17, IA-05): Migrate certificate infrastructure to support hybrid and composite certificates containing both classical and PQC signatures. ML-DSA-65 is the primary signature algorithm; SLH-DSA provides a conservative hash-based backup. IETF LAMPS working group is standardising composite certificate formats. Re-sign long-lived digital signatures (contracts, regulatory filings, archival documents) with PQC algorithms before CRQCs arrive. Note: PQC certificates are significantly larger — an ML-DSA-65 chain adds approximately 10KB versus 1.5KB for ECDSA.",
       "HSM and Key Management Migration (SC-12, AC-06): Upgrade hardware security modules to PQC-capable models with FIPS 140-3 Level 3 validation. Migrate key wrapping from RSA/ECDH to ML-KEM. Ensure all data-at-rest encryption uses AES-256 minimum (AES-128 provides only 64-bit post-quantum security via Grover's algorithm). Centralised KMS must support PQC key types for generation, storage, and distribution without requiring application changes.",
-      "Code and Firmware Signing (SI-07, CM-14): Implement dual-signing with classical and PQC signatures on all firmware, software artifacts, and boot chains. NIST SP 800-208 approves LMS/XMSS (stateful hash-based schemes) for code signing now \u2014 these are already quantum-safe. CNSA 2.0 mandates dual-signing of firmware immediately. Hardware root of trust (secure boot) must support firmware-upgradeable crypto modules.",
-      "Supply Chain Cryptographic Assurance (SR-03, SR-04, SR-05, SA-04): Assess vendor PQC roadmaps covering algorithm support timelines, hybrid mode capability, FIPS 140-3 validation scope, firmware upgradeability, and CBOM availability. Require PQC support in all new procurement contracts. Embedded devices and OT/ICS systems with non-upgradeable crypto are the highest-risk supply chain element \u2014 compensating controls (network segmentation, crypto gateways) may be required for systems that will never support PQC.",
-      "Migration Planning and Governance (PL-02, PM-01, CP-02): Execute phased migration aligned with regulatory timelines: Phase 1 (now to 2028) \u2014 inventory, discovery, planning; Phase 2 (2025-2031) \u2014 hybrid key exchange, SSH migration, firmware dual-signing, HSM upgrades; Phase 3 (2031-2035) \u2014 complete PKI migration, retire quantum-vulnerable algorithms. Apply the Mosher equation: if data shelf life plus migration time exceeds time until CRQCs, the data is already at risk. Maintain contingency plans for premature algorithm compromise \u2014 deploy algorithms from different mathematical families (lattice, hash-based, code-based) to avoid single-point cryptographic failure.",
-      "Monitoring, Compliance, and Algorithm Diversity (CA-07, AU-06, SC-13): Continuously monitor cryptographic algorithm deployment across the estate. Track migration progress against CNSA 2.0, NCSC, and BSI timelines. Verify that hybrid mode is active on all external-facing endpoints. Maintain algorithm diversity \u2014 deploy ML-KEM alongside SLH-DSA and future HQC (code-based backup, expected 2027) to ensure resilience against breakthrough attacks on any single mathematical family."
+      "Code and Firmware Signing (SI-07, CM-14): Implement dual-signing with classical and PQC signatures on all firmware, software artifacts, and boot chains. NIST SP 800-208 approves LMS/XMSS (stateful hash-based schemes) for code signing now — these are already quantum-safe. CNSA 2.0 mandates dual-signing of firmware immediately. Hardware root of trust (secure boot) must support firmware-upgradeable crypto modules.",
+      "Supply Chain Cryptographic Assurance (SR-03, SR-04, SR-05, SA-04): Assess vendor PQC roadmaps covering algorithm support timelines, hybrid mode capability, FIPS 140-3 validation scope, firmware upgradeability, and CBOM availability. Require PQC support in all new procurement contracts. Embedded devices and OT/ICS systems with non-upgradeable crypto are the highest-risk supply chain element — compensating controls (network segmentation, crypto gateways) may be required for systems that will never support PQC.",
+      "Migration Planning and Governance (PL-02, PM-01, CP-02): Execute phased migration aligned with regulatory timelines: Phase 1 (now to 2028) — inventory, discovery, planning; Phase 2 (2025-2031) — hybrid key exchange, SSH migration, firmware dual-signing, HSM upgrades; Phase 3 (2031-2035) — complete PKI migration, retire quantum-vulnerable algorithms. Apply the Mosher equation: if data shelf life plus migration time exceeds time until CRQCs, the data is already at risk. Maintain contingency plans for premature algorithm compromise — deploy algorithms from different mathematical families (lattice, hash-based, code-based) to avoid single-point cryptographic failure.",
+      "Monitoring, Compliance, and Algorithm Diversity (CA-07, AU-06, SC-13): Continuously monitor cryptographic algorithm deployment across the estate. Track migration progress against CNSA 2.0, NCSC, and BSI timelines. Verify that hybrid mode is active on all external-facing endpoints. Maintain algorithm diversity — deploy ML-KEM alongside SLH-DSA and future HQC (code-based backup, expected 2027) to ensure resilience against breakthrough attacks on any single mathematical family."
     ],
     "assumptions": "The organisation uses standard cryptographic protocols (TLS, SSH, IPsec) and has a PKI infrastructure. Hardware security modules are in use for key management. The organisation has data with confidentiality requirements exceeding 10 years. Symmetric encryption (AES) is already deployed for data at rest.",
     "typicalChallenges": "Incomplete cryptographic inventory across a heterogeneous estate. Hard-coded algorithm choices in legacy applications. OT/ICS and embedded systems with non-upgradeable firmware and 15-30 year lifecycles. HSM vendors not yet achieving combined FIPS 140-3 Level 3 with PQC algorithm validation. Larger PQC key and signature sizes impacting constrained devices, certificate transparency logs, and bandwidth-limited channels. Multi-jurisdictional regulatory requirements (CNSA 2.0, NCSC, BSI, ETSI) with differing algorithm preferences and timelines. Fewer than 5% of enterprises currently have a formal quantum-transition plan.",
@@ -56,14 +56,14 @@
       "Complete migration of all NSS by 2035 per NSM-10"
     ],
     "Healthcare with Long-Lived Patient Data": [
-      "HIPAA-mandated patient confidentiality extends for decades \u2014 HNDL threat is immediate",
+      "HIPAA-mandated patient confidentiality extends for decades — HNDL threat is immediate",
       "Priority: encrypt all patient data channels with hybrid TLS, migrate EHR system key wrapping to ML-KEM",
-      "Medical device firmware requires PQC consideration \u2014 many devices have 10-15 year lifecycles",
+      "Medical device firmware requires PQC consideration — many devices have 10-15 year lifecycles",
       "CBOM inventory of all medical device cryptographic capabilities before next procurement cycle"
     ],
     "Enterprise with Crypto Agility Focus (Migros Model)": [
-      "Build crypto agility as investment protection \u2014 benefits accrue before Q-Day through faster incident response and compliance",
-      "Centralise cryptographic configuration management \u2014 policy-driven algorithm selection across the estate",
+      "Build crypto agility as investment protection — benefits accrue before Q-Day through faster incident response and compliance",
+      "Centralise cryptographic configuration management — policy-driven algorithm selection across the estate",
       "Retain control over cryptographic configurations across all vendor products",
       "Use DigiCert/Keyfactor/Venafi for automated certificate lifecycle management with PQC readiness tracking"
     ],
@@ -77,22 +77,22 @@
   },
   "references": [
     {
-      "title": "NIST FIPS 203 \u2014 ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism)",
+      "title": "NIST FIPS 203 — ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism)",
       "url": "https://csrc.nist.gov/pubs/fips/203/final",
       "note": "The primary PQC standard for key exchange, based on CRYSTALS-Kyber. Finalised August 2024."
     },
     {
-      "title": "NIST FIPS 204 \u2014 ML-DSA (Module-Lattice-Based Digital Signature Algorithm)",
+      "title": "NIST FIPS 204 — ML-DSA (Module-Lattice-Based Digital Signature Algorithm)",
       "url": "https://csrc.nist.gov/pubs/fips/204/final",
       "note": "The primary PQC standard for digital signatures, based on CRYSTALS-Dilithium. Finalised August 2024."
     },
     {
-      "title": "NIST FIPS 205 \u2014 SLH-DSA (Stateless Hash-Based Digital Signature Algorithm)",
+      "title": "NIST FIPS 205 — SLH-DSA (Stateless Hash-Based Digital Signature Algorithm)",
       "url": "https://csrc.nist.gov/pubs/fips/205/final",
       "note": "Conservative hash-based signature backup, based on SPHINCS+. For high-assurance scenarios where lattice assumptions are not acceptable."
     },
     {
-      "title": "NIST IR 8547 \u2014 Transition to Post-Quantum Cryptography Standards",
+      "title": "NIST IR 8547 — Transition to Post-Quantum Cryptography Standards",
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "note": "Sets the deprecation timeline: RSA/ECDSA deprecated after 2030, disallowed after 2035."
     },
@@ -112,9 +112,9 @@
       "note": "German BSI guidance favouring hybrid approaches and algorithm diversity including FrodoKEM."
     },
     {
-      "title": "NIST SP 800-208 \u2014 Stateful Hash-Based Signature Schemes",
+      "title": "NIST SP 800-208 — Stateful Hash-Based Signature Schemes",
       "url": "https://csrc.nist.gov/pubs/sp/800/208/final",
-      "note": "Approves LMS/XMSS for code and firmware signing now \u2014 already quantum-safe."
+      "note": "Approves LMS/XMSS for code and firmware signing now — already quantum-safe."
     },
     {
       "title": "CycloneDX CBOM Capability",
@@ -142,7 +142,7 @@
   "threats": [
     {
       "id": "T-40-001",
-      "name": "Harvest Now Decrypt Later (HNDL) \u2014 Nation-state adversaries archive encrypted traffic for future quantum decryption, exposing data with long-term confidentiality requirements",
+      "name": "Harvest Now Decrypt Later (HNDL) — Nation-state adversaries archive encrypted traffic for future quantum decryption, exposing data with long-term confidentiality requirements",
       "mitigatedBy": [
         "SC-08",
         "SC-12",
@@ -151,7 +151,7 @@
     },
     {
       "id": "T-40-002",
-      "name": "Cryptographically Relevant Quantum Computer (CRQC) emergence \u2014 Shor's algorithm breaks RSA, ECDSA, ECDH, EdDSA, DH, rendering all classical asymmetric cryptography obsolete",
+      "name": "Cryptographically Relevant Quantum Computer (CRQC) emergence — Shor's algorithm breaks RSA, ECDSA, ECDH, EdDSA, DH, rendering all classical asymmetric cryptography obsolete",
       "mitigatedBy": [
         "SC-12",
         "SC-13",
@@ -160,7 +160,7 @@
     },
     {
       "id": "T-40-003",
-      "name": "Incomplete cryptographic inventory \u2014 Unknown algorithm usage across the estate prevents systematic migration, leaving quantum-vulnerable endpoints undiscovered",
+      "name": "Incomplete cryptographic inventory — Unknown algorithm usage across the estate prevents systematic migration, leaving quantum-vulnerable endpoints undiscovered",
       "mitigatedBy": [
         "CM-08",
         "PM-05",
@@ -169,7 +169,7 @@
     },
     {
       "id": "T-40-004",
-      "name": "Hard-coded cryptography \u2014 Applications with algorithm choices embedded in source code resist agile migration, creating persistent quantum-vulnerable endpoints",
+      "name": "Hard-coded cryptography — Applications with algorithm choices embedded in source code resist agile migration, creating persistent quantum-vulnerable endpoints",
       "mitigatedBy": [
         "SA-08",
         "SA-17",
@@ -178,7 +178,7 @@
     },
     {
       "id": "T-40-005",
-      "name": "Supply chain cryptographic dependency \u2014 Vendor products using quantum-vulnerable algorithms with no firmware upgrade path, blocking migration of dependent systems",
+      "name": "Supply chain cryptographic dependency — Vendor products using quantum-vulnerable algorithms with no firmware upgrade path, blocking migration of dependent systems",
       "mitigatedBy": [
         "SR-03",
         "SR-04",
@@ -188,7 +188,7 @@
     },
     {
       "id": "T-40-006",
-      "name": "Legacy system stranding \u2014 OT/ICS and embedded systems with 15-30 year lifecycles and non-upgradeable firmware that cannot support PQC algorithms",
+      "name": "Legacy system stranding — OT/ICS and embedded systems with 15-30 year lifecycles and non-upgradeable firmware that cannot support PQC algorithms",
       "mitigatedBy": [
         "SR-03",
         "SC-07",
@@ -197,7 +197,7 @@
     },
     {
       "id": "T-40-007",
-      "name": "Certificate infrastructure disruption \u2014 PKI unable to issue, distribute, or validate PQC or hybrid certificates, breaking authentication chains during migration",
+      "name": "Certificate infrastructure disruption — PKI unable to issue, distribute, or validate PQC or hybrid certificates, breaking authentication chains during migration",
       "mitigatedBy": [
         "SC-17",
         "IA-05",
@@ -206,7 +206,7 @@
     },
     {
       "id": "T-40-008",
-      "name": "Signature forgery and non-repudiation loss \u2014 Quantum computers forge digital signatures on contracts, code, firmware, and regulatory filings, undermining legal and operational trust",
+      "name": "Signature forgery and non-repudiation loss — Quantum computers forge digital signatures on contracts, code, firmware, and regulatory filings, undermining legal and operational trust",
       "mitigatedBy": [
         "SI-07",
         "CM-14",
@@ -215,7 +215,7 @@
     },
     {
       "id": "T-40-009",
-      "name": "Premature PQC algorithm compromise \u2014 A selected algorithm (e.g., lattice-based) is cryptanalytically broken before migration completes, requiring emergency fallback to alternative mathematical families",
+      "name": "Premature PQC algorithm compromise — A selected algorithm (e.g., lattice-based) is cryptanalytically broken before migration completes, requiring emergency fallback to alternative mathematical families",
       "mitigatedBy": [
         "SC-13",
         "CP-02",
@@ -224,7 +224,7 @@
     },
     {
       "id": "T-40-010",
-      "name": "Migration window exhaustion \u2014 Data shelf life plus migration time exceeds time until CRQCs (Mosher equation: X+Y > Z), meaning sensitive data is already irrecoverably exposed",
+      "name": "Migration window exhaustion — Data shelf life plus migration time exceeds time until CRQCs (Mosher equation: X+Y > Z), meaning sensitive data is already irrecoverably exposed",
       "mitigatedBy": [
         "PL-02",
         "PM-01",
@@ -233,7 +233,7 @@
     },
     {
       "id": "T-40-011",
-      "name": "Performance degradation from PQC overhead \u2014 Larger key sizes, signature sizes, and handshake payloads degrade performance on constrained devices, high-throughput systems, and bandwidth-limited channels",
+      "name": "Performance degradation from PQC overhead — Larger key sizes, signature sizes, and handshake payloads degrade performance on constrained devices, high-throughput systems, and bandwidth-limited channels",
       "mitigatedBy": [
         "SA-08",
         "SC-13",
@@ -242,7 +242,7 @@
     },
     {
       "id": "T-40-012",
-      "name": "Regulatory non-compliance \u2014 Failure to meet CNSA 2.0, NIST IR 8547, NCSC, or BSI PQC migration deadlines, resulting in loss of operating authority, contract disqualification, or regulatory sanction",
+      "name": "Regulatory non-compliance — Failure to meet CNSA 2.0, NIST IR 8547, NCSC, or BSI PQC migration deadlines, resulting in loss of operating authority, contract disqualification, or regulatory sanction",
       "mitigatedBy": [
         "PL-02",
         "CA-07",

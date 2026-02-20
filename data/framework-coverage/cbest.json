@@ -1,0 +1,190 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "cbest",
+  "framework_name": "CBEST Threat Intelligence-Led Penetration Testing",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of the CBEST threat intelligence-led penetration testing framework. CBEST is a methodology framework prescribing how to conduct intelligence-led penetration tests of UK financial infrastructure, not a set of security controls. SP 800-53 addresses penetration testing (CA-08) and vulnerability assessment (RA-05) but not the detailed threat intelligence gathering, red team tradecraft, provider accreditation, or regulatory coordination processes that define CBEST. Coverage reflects conceptual alignment rather than direct control equivalence. Validate with CBEST-accredited threat intelligence and penetration testing providers for regulatory compliance."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "CBEST.1",
+      "title": "Governance and Oversight",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PM-14",
+        "PM-29",
+        "PL-01",
+        "PL-02",
+        "CA-01",
+        "CA-06"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-01 information security program plan and PM-09 risk management strategy provide the organisational governance framework within which penetration testing sits. PM-02 senior information security officer establishes executive-level accountability. PM-29 (Rev 5) risk management program leadership addresses board-level engagement. PM-14 testing/training/monitoring programme creates governance oversight of testing activities. PL-01 planning policy and PL-02 system security plans establish the documented framework. CA-01 assessment policy and CA-06 authorisation provide the approval framework for security assessments.",
+      "gaps": "CBEST governance requires specific elements not addressed by SP 800-53: board-level sponsorship and engagement with the Bank of England's CBEST process, formal regulatory coordination with the PRA/FCA on test scope and timing, appointment of a CBEST control group with defined roles (white team lead, executive sponsor, regulatory liaison), and adherence to the BoE's CBEST governance model including mandatory pre-engagement meetings with the regulator. SP 800-53 governance controls address security programme oversight but not the regulatory coordination and structured engagement model that CBEST mandates."
+    },
+    {
+      "id": "CBEST.2",
+      "title": "Threat Intelligence Phase",
+      "controls": [
+        "PM-16",
+        "RA-03",
+        "RA-05",
+        "RA-10",
+        "PM-15",
+        "SI-05"
+      ],
+      "coverage_pct": 48,
+      "rationale": "PM-16 (Rev 5) threat awareness programme establishes an organisational threat intelligence capability. RA-03 risk assessment and RA-05 vulnerability monitoring provide risk identification context. RA-10 (Rev 5) threat hunting addresses proactive threat-based analysis. PM-15 security groups and contacts enables participation in information-sharing communities relevant to threat intelligence. SI-05 security alerts and advisories supports integration of external threat feeds. These controls provide a foundation for threat awareness but do not address the bespoke intelligence gathering that CBEST requires.",
+      "gaps": "CBEST's threat intelligence phase is a specialised intelligence discipline that goes far beyond SP 800-53's threat awareness controls. Gaps include: targeted threat intelligence gathering specific to the firm's critical functions and UK financial infrastructure, development of bespoke threat actor profiles based on intent, capability, and opportunity assessment, creation of attack scenarios derived from real-world adversary tradecraft (TTPs) targeting the specific organisation, CBEST-mandated use of accredited Threat Intelligence Providers (TIPs) with financial sector expertise, delivery of a formal Threat Intelligence Report conforming to CBEST reporting standards, and intelligence-led targeting that drives the penetration test scope rather than generic vulnerability assessment."
+    },
+    {
+      "id": "CBEST.3",
+      "title": "Penetration Testing Scope",
+      "controls": [
+        "CA-08",
+        "PM-11",
+        "PM-08",
+        "RA-09",
+        "RA-02",
+        "CM-08",
+        "CM-12"
+      ],
+      "coverage_pct": 68,
+      "rationale": "CA-08 penetration testing directly addresses the need for offensive security testing and scoping. PM-11 mission/business process definition and PM-08 critical infrastructure plan identify the critical functions and systems that should be in scope. RA-09 (Rev 5) criticality analysis identifies the most critical system components. RA-02 security categorisation classifies assets by impact. CM-08 system component inventory and CM-12 (Rev 5) information location support identification of in-scope systems and data flows.",
+      "gaps": "CBEST scoping is driven by threat intelligence rather than generic risk assessment. Gaps include: identification of critical functions as defined by PRA/FCA operational resilience requirements (not generic FIPS 199 categorisation), scenario-based targeting where the penetration test scope is derived from the Threat Intelligence Report's attack scenarios, regulatory agreement on scope with the PRA/FCA before testing commences, exclusion management specific to live financial infrastructure (settlement systems, payment rails, market operations), and iterative scope refinement during the engagement based on intelligence findings. SP 800-53 addresses system inventory and criticality but not intelligence-led scope derivation."
+    },
+    {
+      "id": "CBEST.4",
+      "title": "Red Team Execution",
+      "controls": [
+        "CA-08",
+        "SC-26",
+        "SC-35",
+        "RA-06",
+        "RA-10"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CA-08 penetration testing is the closest control, authorising controlled attack simulation. SC-26 (Rev 5) honeypots and SC-35 (Rev 5) honeyclients provide deception technology relevant to red team evasion and detection testing. RA-06 technical surveillance countermeasures addresses specialised offensive assessment. RA-10 (Rev 5) threat hunting covers proactive adversary emulation techniques.",
+      "gaps": "CBEST red team execution is a highly specialised adversary simulation discipline that SP 800-53 does not prescribe. Gaps include: controlled multi-vector attack simulation replicating real adversary TTPs across network, application, social engineering, and physical vectors, stealth and evasion techniques that test the organisation's detection capabilities without triggering premature discovery, campaign management spanning weeks or months mimicking advanced persistent threat (APT) lifecycle, use of custom tooling and tradecraft calibrated to the threat intelligence scenarios, real-time coordination with the white team to manage safety and risk during live testing of financial infrastructure, command and control (C2) infrastructure setup and management, and lateral movement and privilege escalation within production environments. CA-08 authorises penetration testing but provides no guidance on red team tradecraft, campaign execution, or adversary emulation methodology."
+    },
+    {
+      "id": "CBEST.5",
+      "title": "Blue Team Assessment",
+      "controls": [
+        "SI-04",
+        "AU-06",
+        "AU-13",
+        "IR-04",
+        "IR-05",
+        "CA-07",
+        "PM-14",
+        "SC-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SI-04 system monitoring and AU-06 audit review/analysis/reporting are the core detection controls tested during a blue team assessment. AU-13 monitoring for information disclosure addresses detection of data exfiltration. IR-04 incident handling and IR-05 incident monitoring evaluate the SOC's response process. CA-07 continuous monitoring and PM-14 testing/training/monitoring programme provide the framework for ongoing detection capability assessment. SC-07 boundary protection addresses network-level detection at security boundaries.",
+      "gaps": "CBEST blue team assessment evaluates detection and response effectiveness against the specific red team activity, going beyond what SP 800-53 detection controls address. Gaps include: measurement of detection time (mean time to detect) against specific adversary techniques, assessment of SOC analyst capability to identify and escalate sophisticated attack activity, evaluation of detection coverage gaps against the MITRE ATT&CK techniques employed by the red team, analysis of alert fidelity and false positive rates under adversary simulation conditions, assessment of the blue team's ability to correlate indicators across multiple detection sources during an active campaign, and evaluation of whether the blue team could have disrupted the attack at key kill chain stages. SP 800-53 mandates monitoring and detection controls but does not prescribe how to evaluate their effectiveness against realistic adversary simulation."
+    },
+    {
+      "id": "CBEST.6",
+      "title": "Findings and Remediation",
+      "controls": [
+        "CA-05",
+        "PM-04",
+        "RA-05",
+        "RA-07",
+        "SI-02",
+        "PM-31"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CA-05 plan of action and milestones (POA&M) and PM-04 plan of action milestones process provide structured remediation tracking. RA-05 vulnerability monitoring addresses technical vulnerability identification and reporting. RA-07 (Rev 5) risk response ensures identified risks receive appropriate treatment decisions (accept, mitigate, transfer, avoid). SI-02 flaw remediation addresses patching and technical remediation. PM-31 (Rev 5) continuous improvement drives systematic improvement based on assessment findings.",
+      "gaps": "CBEST findings and remediation have specific requirements beyond SP 800-53's remediation controls. Gaps include: CBEST-structured vulnerability reporting that maps findings to threat intelligence scenarios and adversary TTPs, risk prioritisation calibrated to the likelihood of exploitation by the threat actors identified in the intelligence phase (not generic CVSS scoring), remediation plans that address detection capability gaps identified during the blue team assessment, regulatory reporting of remediation progress to the PRA/FCA, mandatory remediation timelines agreed with the regulator for critical findings, and executive-level remediation accountability aligned with the CBEST governance model."
+    },
+    {
+      "id": "CBEST.7",
+      "title": "Assurance and Reporting",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "PM-06",
+        "PM-14"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-02 control assessments provide the framework for security assessment reporting. CA-05 POA&M and CA-07 continuous monitoring support ongoing assurance activities. PM-06 measures of performance tracks security programme effectiveness. PM-14 testing/training/monitoring programme governs the overall assessment lifecycle.",
+      "gaps": "CBEST reporting follows a prescribed regulatory format that SP 800-53 does not address. Gaps include: formal regulatory reporting to the PRA/FCA including the CBEST Summary Report and detailed Technical Report, executive summary suitable for board-level presentation covering threat landscape, test outcomes, and strategic risk implications, structured findings classification using the CBEST severity taxonomy (not generic risk ratings), confidential regulatory debrief with the PRA/FCA supervisory team, assurance that findings are communicated through appropriate governance channels including the firm's risk committee, and comparison of findings against the firm's risk appetite and operational resilience self-assessment. SP 800-53 addresses assessment reporting but not the regulatory-specific reporting obligations and formats that CBEST mandates."
+    },
+    {
+      "id": "CBEST.8",
+      "title": "Provider Qualification",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SA-21",
+        "PS-03",
+        "PS-07",
+        "SR-06"
+      ],
+      "coverage_pct": 38,
+      "rationale": "SA-04 acquisition process establishes security requirements for service providers. SA-09 external system services governs the use of external service providers. SA-21 (Rev 5) developer screening addresses personnel vetting for external providers. PS-03 personnel screening provides a framework for background checks on testing personnel. PS-07 external personnel security addresses third-party staffing requirements. SR-06 supplier assessments (Rev 5) enables evaluation of provider capability and trustworthiness.",
+      "gaps": "CBEST provider qualification is a highly specific accreditation regime that SP 800-53 does not address. Gaps include: CBEST Threat Intelligence Provider (TIP) accreditation requiring demonstrated financial sector intelligence expertise, track record, and methodology certification, CBEST Penetration Testing Provider (PTP) certification requiring red team capability assessment, operational security evaluation, and financial sector experience, BoE/CREST-managed accreditation process with regular re-assessment and quality assurance reviews, mandatory use of BoE-accredited providers only (no self-assessment or alternative certification), provider conflict-of-interest management ensuring independence from the firm's existing security suppliers, and specific insurance and liability requirements for providers operating against live financial infrastructure. SP 800-53 addresses supplier evaluation generically but the CBEST accreditation regime is a regulatory function entirely outside its scope."
+    },
+    {
+      "id": "CBEST.9",
+      "title": "Data Handling and Confidentiality",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "MP-01",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "PT-01",
+        "PT-02",
+        "SI-12",
+        "AC-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-08 transmission confidentiality and integrity and SC-28 protection of information at rest protect test data in transit and at rest. SC-12 cryptographic key management and SC-13 cryptographic protection provide the encryption framework for securing sensitive CBEST materials. MP-01 media protection policy, MP-04 media storage, MP-05 media transport, and MP-06 media sanitisation address the lifecycle protection of test evidence and artefacts. PT-01 (Rev 5) PII processing policy and PT-02 (Rev 5) authority to process PII govern handling of personal data encountered during testing. SI-12 information management and retention addresses retention and disposal of test data. AC-03 access enforcement restricts access to CBEST materials.",
+      "gaps": "CBEST data handling requirements have specific elements beyond SP 800-53's data protection controls. Gaps include: specific handling classifications for CBEST materials (threat intelligence reports, test evidence, vulnerability findings, C2 infrastructure details), mandatory secure communications channels between the red team, white team, and regulator throughout the engagement, evidence handling chain of custody requirements for forensic-quality test artefacts, secure destruction requirements for offensive tools, implants, and C2 infrastructure after engagement completion, legal privilege considerations for CBEST findings and their protection from disclosure, and specific data handling agreements between the firm, providers, and the PRA/FCA governing test material classification and sharing restrictions."
+    },
+    {
+      "id": "CBEST.10",
+      "title": "Continuous Improvement",
+      "controls": [
+        "PM-31",
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "IR-03",
+        "AT-06",
+        "PM-06",
+        "PM-14"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PM-31 (Rev 5) continuous improvement directly addresses systematic improvement based on assessment outcomes. CA-02 control assessments, CA-05 POA&M, and CA-07 continuous monitoring form an improvement lifecycle. IR-03 incident response testing validates that remediation actions have improved detection and response capability. AT-06 (Rev 5) training feedback enables adaptive training based on lessons learned from CBEST exercises. PM-06 measures of performance tracks improvement over time. PM-14 testing/training/monitoring programme integrates improvement into governance.",
+      "gaps": "CBEST continuous improvement requirements extend beyond SP 800-53's improvement controls. Gaps include: structured lessons-learned process specific to the CBEST engagement covering threat intelligence quality, red team execution effectiveness, and blue team detection performance, control uplift validation through targeted retesting to confirm that remediation actions have closed identified gaps, integration of CBEST findings into the firm's operational resilience self-assessment and impact tolerance testing, longitudinal tracking of CBEST outcomes across successive engagements to demonstrate maturity improvement, regulatory feedback loop where PRA/FCA supervisory observations inform subsequent CBEST scope and focus areas, and industry-wide lessons learned shared through the BoE's CBEST community to improve collective defence across UK financial infrastructure."
+    }
+  ],
+  "summary": {
+    "total_clauses": 10,
+    "average_coverage": 61.8,
+    "full_count": 0,
+    "substantial_count": 6,
+    "partial_count": 3,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

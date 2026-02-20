@@ -1,0 +1,248 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "pci_pts",
+  "framework_name": "PCI PTS POI Device Security Requirements v6",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on expert analysis of PCI PTS POI Device Security Requirements v6. PCI PTS focuses on physical and logical security of point-of-interaction payment devices (PIN entry, unattended terminals, mobile). Device-specific tamper resistance, hardware security module requirements, and vendor qualification processes have limited SP 800-53 equivalence. Validate with qualified PTS assessors for device certification use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "A",
+      "title": "Device Physical Security — tamper evidence, tamper response, and physical penetration resistance",
+      "controls": [
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-19",
+        "PE-20",
+        "SR-09",
+        "SR-10",
+        "SR-11"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PE-03 physical access control; PE-04 access control for transmission; PE-05 access control for output devices; PE-06 monitoring physical access; PE-19 information leakage (side-channel emanations); PE-20 asset monitoring and tracking; SR-09 tamper resistance and detection; SR-10 inspection of systems; SR-11 component authenticity. SP 800-53 PE and SR families address general physical protection and supply chain tamper resistance.",
+      "gaps": "PCI PTS requires specific hardware tamper-evidence mechanisms (epoxy, mesh, solder masks), tamper-response circuitry that zeroises keys upon intrusion, and quantified physical penetration resistance ratings (attack potential scoring). SP 800-53 addresses physical protection conceptually through PE and SR controls but does not prescribe specific hardware tamper-detection technologies, device enclosure security ratings, or key zeroisation upon physical breach. Device-specific attack potential methodologies have no NIST equivalent."
+    },
+    {
+      "id": "B",
+      "title": "Logical Security — firmware integrity, secure boot, runtime protections, and debug interface controls",
+      "controls": [
+        "SI-07",
+        "CM-03",
+        "CM-05",
+        "CM-14",
+        "SC-34",
+        "SI-16",
+        "SA-10"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SI-07 software, firmware, and information integrity for firmware verification; CM-03 configuration change control; CM-05 access restrictions for change; CM-14 signed components ensures firmware signing verification; SC-34 non-modifiable executables supports immutable boot images; SI-16 memory protection (DEP/ASLR) covers runtime protections; SA-10 developer configuration management for firmware development processes.",
+      "gaps": "PCI PTS mandates secure boot chains with hardware root-of-trust, signed firmware with device-unique keys, disabled JTAG/debug interfaces, and protection against firmware downgrade attacks. SP 800-53 covers firmware integrity (SI-07) and signed components (CM-14) at a policy level but does not address hardware-rooted secure boot, device-specific debug port disablement, or anti-rollback firmware versioning. Embedded device boot-chain security is more granular than NIST information system controls."
+    },
+    {
+      "id": "C",
+      "title": "PIN Entry Device Requirements — PIN pad security, PIN block formatting, and display/keypad isolation",
+      "controls": [
+        "IA-02",
+        "IA-07",
+        "PE-04",
+        "SC-13",
+        "SC-28"
+      ],
+      "coverage_pct": 55,
+      "rationale": "IA-02 identification and authentication covers authenticator entry processes; IA-07 cryptographic module authentication for PIN processing modules; PE-04 access control for transmission medium protects PIN entry paths; SC-13 cryptographic protection for PIN block encryption; SC-28 protection of information at rest for stored PIN-related data.",
+      "gaps": "PCI PTS has highly specific PIN entry device requirements including isolated PIN entry hardware paths (separate bus from application processor), mandatory ISO 9564 PIN block formatting, protection against PIN eavesdropping via emanations or overlays, and tamper-responsive PIN pad mechanisms. SP 800-53 addresses cryptographic protection and authentication generally but has no concept of hardware-isolated PIN entry paths, PIN block format standards, keypad overlay detection, or physical separation between PIN processing and application processing. This is one of the most device-specific areas where NIST controls provide only partial coverage."
+    },
+    {
+      "id": "D",
+      "title": "Key Management — PIN encryption key lifecycle, key injection, DUKPT/AES key schemes, and key loading security",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "PE-03",
+        "PE-18"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-12 cryptographic key establishment and management covers the full key lifecycle including generation, distribution, storage, rotation, and destruction; SC-13 cryptographic protection addresses approved algorithms and key lengths for PIN encryption; SC-17 public key infrastructure certificates for key distribution trust chains; PE-03 physical access control for key injection facility security; PE-18 location of system components for secure key loading environments.",
+      "gaps": "Minor: PCI PTS specifies DUKPT (Derived Unique Key Per Transaction) and TR-31 key block requirements, which are payment-industry-specific key derivation schemes. SP 800-53 SC-12 comprehensively covers key management processes and SC-13 mandates approved cryptography, which aligns well. Gaps exist in PTS-specific requirements for hardware security module (HSM) key injection ceremonies, split-knowledge/dual-control for key components, and key loading device (KLD) security. These are operational payment-industry procedures rather than information security control gaps."
+    },
+    {
+      "id": "E",
+      "title": "Communication Security — device-to-host encryption, TLS requirements, and communication channel integrity",
+      "controls": [
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23",
+        "AC-17",
+        "AC-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-07 boundary protection for device communication boundaries; SC-08 transmission confidentiality and integrity with TLS/encryption requirements; SC-12 key management for session keys; SC-13 cryptographic protection mandating approved algorithms; SC-23 session authenticity for device-host session integrity; AC-17 remote access controls for remote device management channels; AC-04 information flow enforcement for transaction data paths.",
+      "gaps": "Minimal gap. SP 800-53 transmission protection controls are comprehensive. Minor PTS-specific gaps in requirements for mutual authentication between POI device and payment host, and specific TLS cipher suite mandates for payment terminal communications. SC-08 and SC-23 substantially address these through general transmission and session controls."
+    },
+    {
+      "id": "F",
+      "title": "Software Security Requirements — application separation, privilege isolation, and secure update mechanisms",
+      "controls": [
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-17",
+        "CM-03",
+        "CM-14",
+        "SI-02",
+        "SI-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-08 security and privacy engineering principles for secure design; SA-10 developer configuration management; SA-11 developer testing and evaluation; SA-15 development process standards; SA-17 developer security and privacy architecture; CM-03 configuration change control for update management; CM-14 signed components for signed firmware/software updates; SI-02 flaw remediation for patch management; SI-07 integrity verification for software validation.",
+      "gaps": "Minor: PCI PTS requires application-level privilege separation on the POI device (payment application isolated from non-payment applications), signed update packages verified by device hardware, and restrictions on sideloading or unapproved software installation. SP 800-53 SA and CM families cover secure development and change management comprehensively. Device-specific application sandboxing and hardware-enforced privilege isolation are more granular than NIST system-level controls."
+    },
+    {
+      "id": "G",
+      "title": "Integration and Assembly Security — secure manufacturing, component provenance, and anti-counterfeiting",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SR-09",
+        "SR-10",
+        "SR-11",
+        "SR-12",
+        "SA-04"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SR-01 supply chain risk management policy; SR-02 supply chain risk assessment; SR-03 supply chain controls and processes; SR-05 acquisition strategies for supply chain integrity; SR-06 supplier assessments and reviews; SR-09 tamper resistance and detection; SR-10 inspection of systems or components; SR-11 component authenticity verification; SR-12 component disposal; SA-04 acquisition process for security requirements in procurement.",
+      "gaps": "PCI PTS has stringent integration/assembly requirements including secure manufacturing facility audits, component serialisation and traceability from wafer to finished device, anti-counterfeiting measures (unique device identifiers, holographic seals), and assembly line tamper-evidence. While SP 800-53 SR family addresses supply chain risk comprehensively, PCI PTS goes deeper into physical manufacturing security: clean-room assembly requirements, component-level provenance tracking, production lot integrity verification, and factory security certifications. Manufacturing-floor controls and hardware anti-counterfeiting have limited NIST equivalence."
+    },
+    {
+      "id": "H",
+      "title": "Vendor Qualification and Development Practices — secure development environment, personnel security, and quality assurance",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-09",
+        "SA-15",
+        "SA-16",
+        "SA-21",
+        "PS-03",
+        "PS-06",
+        "PS-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-03 system development lifecycle; SA-04 acquisition process with security requirements; SA-09 external system services for third-party vendor management; SA-15 development process, standards, and tools; SA-16 developer-provided training; SA-21 developer screening; PS-03 personnel screening for vendor staff; PS-06 access agreements; PS-07 external personnel security.",
+      "gaps": "PCI PTS requires vendor qualification through PCI-administered laboratory evaluation, including on-site facility audits of development and manufacturing environments, vendor staff background checks specific to payment security roles, and ongoing vendor compliance monitoring. SP 800-53 covers developer screening (SA-21) and external personnel (PS-07) but does not address PCI-specific vendor qualification programs, lab evaluation processes, or payment-industry certification of development environments. The PCI vendor qualification model is a certification regime rather than a risk-based control framework."
+    },
+    {
+      "id": "I",
+      "title": "Unattended Payment Terminal (UPT) Requirements — kiosk security, anti-skimming, and remote monitoring",
+      "controls": [
+        "PE-03",
+        "PE-06",
+        "PE-20",
+        "SC-08",
+        "SI-04",
+        "SR-09",
+        "SR-10",
+        "AC-17"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PE-03 physical access control for terminal enclosures; PE-06 monitoring physical access for surveillance of unattended locations; PE-20 asset monitoring and tracking for remote terminal inventory; SC-08 transmission protection for unattended terminal communications; SI-04 system monitoring for remote health/tamper monitoring; SR-09 tamper resistance for anti-skimming overlays; SR-10 inspection of systems for periodic device inspection; AC-17 remote access for secure remote management channels.",
+      "gaps": "PCI PTS UPT module requires specific anti-skimming mechanisms (bezel design, card slot anti-shimming), physical attack resistance ratings for outdoor/unattended deployment, remote tamper alert systems, and hardened enclosure standards for kiosk environments. SP 800-53 addresses physical security and monitoring but does not cover payment-specific anti-skimming hardware, card reader anti-shimming design, or environmental hardening standards for unattended payment terminals exposed to public access. The UPT threat model (card skimming, overlay attacks, device substitution in public locations) is more specific than general IT physical security."
+    },
+    {
+      "id": "J",
+      "title": "Open Protocol Requirements — contactless interface security, NFC protocol protection, and kernel isolation",
+      "controls": [
+        "SC-08",
+        "SC-13",
+        "SC-40",
+        "AC-18",
+        "AC-04",
+        "SI-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SC-08 transmission confidentiality and integrity for contactless communication channels; SC-13 cryptographic protection for NFC transaction encryption; SC-40 wireless link protection for RF interface security; AC-18 wireless access control; AC-04 information flow enforcement between contactless and contact interfaces; SI-04 system monitoring for protocol anomaly detection.",
+      "gaps": "PCI PTS open protocol requirements include specific EMV contactless kernel isolation (separating payment kernel from non-payment NFC applications), NFC relay attack prevention, and contactless transaction amount limits enforced in device firmware. SP 800-53 SC-40 addresses wireless link protection and AC-18 covers wireless access, but EMV kernel architecture, contactless-specific relay attack countermeasures, and payment protocol-level controls are industry-specific requirements not addressed by NIST. Protocol-level payment security (EMV L1/L2 certification) is outside NIST scope."
+    },
+    {
+      "id": "K",
+      "title": "Device Management Lifecycle — provisioning, deployment, maintenance, decommissioning, and key destruction",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-08",
+        "CM-09",
+        "MA-02",
+        "MA-03",
+        "MA-04",
+        "MA-06",
+        "MP-06",
+        "SR-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-02 baseline configuration for device provisioning standards; CM-03 configuration change control for deployment changes; CM-08 system component inventory for device tracking; CM-09 configuration management plan for lifecycle procedures; MA-02 controlled maintenance; MA-03 maintenance tools for approved diagnostic equipment; MA-04 nonlocal maintenance for remote device servicing; MA-06 timely maintenance for device refresh schedules; MP-06 media sanitisation for data/key destruction; SR-12 component disposal for secure decommissioning.",
+      "gaps": "Minor: PCI PTS requires specific device lifecycle procedures including cryptographic key zeroisation at end-of-life, tamper-evident packaging during transport between facilities, chain-of-custody documentation for device movements, and approved destruction methods for payment terminals. SP 800-53 CM and MA families cover lifecycle management comprehensively. Gaps are in PTS-specific requirements for HSM key ceremony during provisioning and certified destruction processes for tamper-responsive hardware."
+    },
+    {
+      "id": "L",
+      "title": "Accountability and Audit — event logging, tamper event recording, and device integrity attestation",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-09",
+        "AU-12",
+        "SI-04",
+        "SI-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AU-02 audit events for defining loggable device events; AU-03 content of audit records for event detail requirements; AU-06 audit record review and analysis; AU-09 protection of audit information for tamper-proof log storage; AU-12 audit record generation; SI-04 system monitoring for real-time device health monitoring; SI-07 software, firmware, and information integrity for device attestation.",
+      "gaps": "Minimal gap. SP 800-53 AU family provides comprehensive audit and logging controls. Minor PTS-specific requirements for tamper event logging (recording physical intrusion attempts in device-internal secure logs), hardware integrity attestation to payment hosts, and device-to-acquirer audit trail requirements. These are well-addressed by AU-09 (tamper-proof logs) and SI-07 (integrity verification) at the information system level."
+    }
+  ],
+  "summary": {
+    "total_clauses": 12,
+    "average_coverage": 76.8,
+    "full_count": 5,
+    "substantial_count": 5,
+    "partial_count": 2,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

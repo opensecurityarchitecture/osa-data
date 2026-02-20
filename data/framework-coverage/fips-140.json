@@ -1,0 +1,203 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "fips_140",
+  "framework_name": "FIPS 140-3",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of FIPS 140-3 (ISO/IEC 19790:2012). FIPS 140-3 defines security requirements for cryptographic modules at four increasing security levels. SP 800-53 addresses cryptographic protection policy (SC-12, SC-13) but not the detailed hardware/firmware validation, side-channel resistance testing, CAVP algorithm certification, and CMVP laboratory assessment processes that constitute the core of FIPS 140-3. Validate with CMVP-accredited testing laboratories for module certification use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "FIPS 140-3 §7.2",
+      "title": "Cryptographic Module Specification",
+      "controls": [
+        "SC-13",
+        "SA-04",
+        "SA-08",
+        "SA-17",
+        "CM-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-13 mandates use of FIPS-validated cryptography and establishes cryptographic protection policy. SA-04 acquisition requirements can specify FIPS 140-3 validated modules. SA-08 security and privacy engineering principles and SA-17 developer security and privacy architecture address module design documentation. CM-06 configuration settings supports specification of approved modes of operation.",
+      "gaps": "SP 800-53 requires use of validated modules but does not define how to specify module boundaries, interfaces, approved algorithms, or modes of operation at the level required by FIPS 140-3. The CMVP security policy document requirements, finite state model documentation, and algorithm-level specification of approved functions are outside SP 800-53 scope."
+    },
+    {
+      "id": "FIPS 140-3 §7.3",
+      "title": "Cryptographic Module Interfaces",
+      "controls": [
+        "SC-13",
+        "AC-04",
+        "SC-07",
+        "SC-03"
+      ],
+      "coverage_pct": 62,
+      "rationale": "SC-13 addresses cryptographic module usage at a policy level. AC-04 information flow enforcement and SC-07 boundary protection address logical separation of data paths. SC-03 security function isolation supports the concept of separating cryptographic processing from other functions.",
+      "gaps": "FIPS 140-3 defines four specific interface types (data input, data output, control input, status output) plus an optional power interface, with requirements for logical/physical separation at higher security levels. SP 800-53 does not address hardware interface specification, data path isolation within cryptographic modules, or the controlled output of plaintext/keys through defined interfaces. Hardware-level interface design and testing are entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "FIPS 140-3 §7.4",
+      "title": "Roles, Services, and Authentication",
+      "controls": [
+        "AC-02",
+        "AC-05",
+        "AC-06",
+        "IA-02",
+        "IA-05",
+        "IA-07",
+        "AC-07"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-02 account management and AC-05 separation of duties map directly to the FIPS 140-3 requirement for distinct Crypto Officer and User roles. AC-06 least privilege aligns with service authorization requirements. IA-02 identification and authentication of organizational users and IA-05 authenticator management address operator authentication. IA-07 cryptographic module authentication directly requires FIPS-validated mechanisms. AC-07 unsuccessful login attempts supports authentication failure handling.",
+      "gaps": "Minor gaps: FIPS 140-3 defines specific minimum authentication strength requirements per security level (e.g., Level 3 requires identity-based authentication with minimum probability thresholds). SP 800-53 does not prescribe authentication strength in terms of probability of false acceptance/rejection as FIPS 140-3 does."
+    },
+    {
+      "id": "FIPS 140-3 §7.5",
+      "title": "Software/Firmware Security",
+      "controls": [
+        "SI-07",
+        "CM-14",
+        "SA-10",
+        "SA-11",
+        "SC-34"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SI-07 software, firmware, and information integrity verification directly addresses integrity checking of executable code. CM-14 signed components requires cryptographic verification of software/firmware components before installation. SA-10 developer configuration management and SA-11 developer testing and evaluation address secure development practices. SC-34 non-modifiable executable programs supports the FIPS 140-3 concept of immutable firmware.",
+      "gaps": "FIPS 140-3 requires approved integrity techniques (e.g., HMAC, digital signature) applied to all software/firmware components within the cryptographic boundary, with specific algorithm requirements per security level. SP 800-53 does not specify which integrity mechanisms qualify as approved, does not address the concept of a cryptographic boundary for integrity scope, and does not cover the FIPS requirement for secure execution environments or the distinction between modifiable and non-modifiable operational environments."
+    },
+    {
+      "id": "FIPS 140-3 §7.6",
+      "title": "Operational Environment",
+      "controls": [
+        "CM-06",
+        "CM-07",
+        "SC-39",
+        "SI-03",
+        "CM-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-06 configuration settings and CM-07 least functionality address operating system hardening for platforms hosting software cryptographic modules. SC-39 process isolation supports the FIPS 140-3 requirement for OS-enforced process separation. SI-03 malicious code protection addresses protection of the operational environment. CM-02 baseline configuration supports the concept of a known-good platform configuration.",
+      "gaps": "FIPS 140-3 requires specific operational environment controls depending on security level: Level 1 requires a general-purpose OS, Level 2 requires CC EAL2+ evaluated OS or equivalent with role-based access control, and Levels 3-4 require formal reference monitor concepts. SP 800-53 does not address Common Criteria evaluation levels for operating systems, reference monitor requirements, or the specific OS capability requirements mandated at each FIPS 140-3 security level."
+    },
+    {
+      "id": "FIPS 140-3 §7.7",
+      "title": "Physical Security",
+      "controls": [
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-19",
+        "PE-20"
+      ],
+      "coverage_pct": 62,
+      "rationale": "PE-03 physical access control, PE-04 access control for transmission, PE-05 access control for output devices, and PE-06 monitoring physical access address general physical security of facilities and equipment. PE-19 information leakage partially addresses emanation security relevant to physical security at higher levels. PE-20 asset monitoring and tracking supports tracking of cryptographic hardware.",
+      "gaps": "FIPS 140-3 physical security requirements are specific to the cryptographic module enclosure: tamper-evident coatings/seals (Level 2), tamper-detection/response circuitry with zeroisation (Level 3), and environmental failure protection/response envelopes (Level 4). SP 800-53 PE controls address facility-level physical security (doors, guards, cameras) but do not address module-level tamper evidence, tamper detection circuitry, hard opaque epoxy coatings, pick-resistant locks on module covers, environmental failure protection (EFP), or environmental failure response (EFR) mechanisms."
+    },
+    {
+      "id": "FIPS 140-3 §7.8",
+      "title": "Non-Invasive Security",
+      "controls": [
+        "PE-19",
+        "RA-03",
+        "SC-28"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PE-19 information leakage addresses electromagnetic emanation security, which partially relates to side-channel leakage. RA-03 risk assessment can identify side-channel attack risks at a general level. SC-28 protection of information at rest addresses key storage but not side-channel resistance during cryptographic operations.",
+      "gaps": "FIPS 140-3 §7.8 (new in FIPS 140-3 vs 140-2) requires documented mitigation of non-invasive attacks including simple power analysis (SPA), differential power analysis (DPA), timing attacks, electromagnetic analysis (EMA), and other side-channel techniques. SP 800-53 has no controls addressing resistance to power analysis, timing attacks, electromagnetic emanation analysis during cryptographic processing, or fault injection attacks. Side-channel testing methodology, countermeasure validation, and leakage assessment are entirely outside SP 800-53 scope. This is the domain of specialised CMVP testing laboratories."
+    },
+    {
+      "id": "FIPS 140-3 §7.9",
+      "title": "Sensitive Security Parameter Management",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "SC-28",
+        "IA-05",
+        "MP-06"
+      ],
+      "coverage_pct": 92,
+      "rationale": "SC-12 cryptographic key establishment and management directly addresses key generation, distribution, storage, destruction, and archiving requirements. SC-13 cryptographic protection mandates use of approved algorithms for key generation and establishment. SC-17 public key infrastructure certificates addresses certificate-based key establishment. SC-28 protection of information at rest covers key storage protection. IA-05 authenticator management addresses secret/private key lifecycle. MP-06 media sanitisation supports key zeroisation requirements.",
+      "gaps": "FIPS 140-3 specifies precise requirements for SSP zeroisation timing (immediate upon request), approved key generation methods (SP 800-133), approved key establishment schemes (SP 800-56A/B/C), and specific SSP entry/output procedures via split knowledge. SP 800-53 addresses key management policy but does not prescribe zeroisation response times, approved random number generator requirements (SP 800-90A/B/C), or the procedural separation of key components during manual entry."
+    },
+    {
+      "id": "FIPS 140-3 §7.10",
+      "title": "Self-Tests",
+      "controls": [
+        "SI-06",
+        "SI-07",
+        "CA-08"
+      ],
+      "coverage_pct": 52,
+      "rationale": "SI-06 security function verification addresses verification that security functions operate correctly, partially mapping to self-test concepts. SI-07 software, firmware, and information integrity verification covers integrity testing at startup. CA-08 penetration testing addresses validation of security mechanisms but at a system rather than module level.",
+      "gaps": "FIPS 140-3 requires specific self-tests: pre-operational self-tests (power-up known-answer tests for each approved algorithm, firmware integrity check) and conditional self-tests (pair-wise consistency for key generation, software load test, manual key entry, continuous random number generator test, bypass test). SP 800-53 does not address algorithm-level known-answer tests, conditional self-tests triggered by specific cryptographic events, CAVP algorithm validation testing, or the requirement that a module enter an error state and halt cryptographic operations upon self-test failure. The entire CAVP/CMVP testing methodology is absent from SP 800-53."
+    },
+    {
+      "id": "FIPS 140-3 §7.11",
+      "title": "Life-Cycle Assurance",
+      "controls": [
+        "SA-03",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "CM-03",
+        "CM-05",
+        "SA-04"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-03 system development life cycle addresses secure development practices. SA-10 developer configuration management covers CM requirements for module development. SA-11 developer testing and evaluation addresses vendor testing requirements. SA-15 development process, standards, and tools covers development environment controls. CM-03 configuration change control and CM-05 access restrictions for change address development and production environment integrity. SA-04 acquisition process supports specification of validated module requirements in procurement.",
+      "gaps": "FIPS 140-3 requires vendor evidence including detailed design documentation, source code review by CMVP-accredited laboratories, finite state model analysis, and specific delivery and operation procedures (installation, initialization, startup). SP 800-53 addresses developer security practices generally but does not require third-party laboratory assessment of source code, CMVP-accredited testing laboratory involvement, or the specific vendor evidence package (test report, security policy, finite state model) required for FIPS 140-3 validation."
+    },
+    {
+      "id": "FIPS 140-3 §7.12",
+      "title": "Mitigation of Other Attacks",
+      "controls": [
+        "RA-03",
+        "RA-05",
+        "SI-02",
+        "RA-07",
+        "SA-11"
+      ],
+      "coverage_pct": 68,
+      "rationale": "RA-03 risk assessment and RA-05 vulnerability monitoring and scanning address identification of attacks outside the standard FIPS 140-3 categories. SI-02 flaw remediation covers patching and mitigation of newly discovered vulnerabilities. RA-07 risk response supports structured treatment of identified attack vectors. SA-11 developer testing and evaluation addresses vendor responsibility for documenting and mitigating additional attack types.",
+      "gaps": "FIPS 140-3 §7.12 requires vendors to document any attacks outside the scope of other sections (e.g., differential fault analysis, cold boot attacks, rowhammer) and provide evidence of specific mitigations implemented in the module. SP 800-53 addresses vulnerability management and risk assessment at a system level but does not require per-module documentation of attack-specific countermeasures, vendor attestation of mitigation effectiveness, or the formal evidence of mitigation that CMVP testing laboratories evaluate during validation."
+    }
+  ],
+  "summary": {
+    "total_clauses": 11,
+    "average_coverage": 70.9,
+    "full_count": 2,
+    "substantial_count": 5,
+    "partial_count": 3,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

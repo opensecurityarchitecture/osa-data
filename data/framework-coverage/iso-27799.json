@@ -1,0 +1,542 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "iso_27799",
+  "framework_name": "ISO 27799 Health Informatics",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of ISO 27799:2016 — Health informatics: Information security management in health using ISO/IEC 27002. ISO 27799 provides health-sector-specific implementation guidance for ISO/IEC 27002 controls, with additional considerations for personal health information (PHI) protection, clinical system availability, patient safety, and health data sharing. Since ISO 27799 builds on ISO 27002 which has well-established mappings to SP 800-53, coverage is naturally high for information security controls. However, ISO 27799 adds health-specific guidance on clinical workflow integration, health information exchange, and patient consent that extends beyond SP 800-53 scope. Validate with qualified health information security assessors for compliance use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "5.1",
+      "title": "Health organisation information security policy",
+      "controls": [
+        "PL-01", "PM-01", "AC-01", "AT-01", "AU-01", "CA-01", "CM-01",
+        "CP-01", "IA-01", "IR-01", "MA-01", "MP-01", "PE-01", "PS-01",
+        "RA-01", "SA-01", "SC-01", "SI-01", "PT-01", "SR-01"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires health organisations to establish information security policies that explicitly address PHI protection, clinical system availability, and patient safety alongside standard information security objectives. SP 800-53 provides comprehensive policy controls (-01) across all 20 families, with PL-01 as the overarching planning policy and PM-01 establishing the program plan. PT-01 adds privacy policy requirements relevant to health data. The full set of family-level policy controls provides strong coverage of the base security policy requirements.",
+      "gaps": "ISO 27799 requires health-specific policy elements including explicit reference to the organisation's duty of care for patient information, alignment with national health data legislation (e.g., HIPAA, GDPR health provisions, national eHealth laws), and policy coverage of clinical workflow integration. SP 800-53 policies are sector-agnostic and do not prescribe health-specific policy content such as patient safety implications of security decisions or clinical data governance."
+    },
+    {
+      "id": "5.2",
+      "title": "Review of health information security policies",
+      "controls": [
+        "PL-01", "PM-01", "PM-06", "CA-07"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 requires periodic review of health information security policies, triggered by changes in the health regulatory environment, clinical practice, or technology landscape. PL-01 requires policy review at defined intervals. PM-01 mandates program plan updates. PM-06 provides measures of performance to evaluate policy effectiveness. CA-07 continuous monitoring supports ongoing policy relevance assessment.",
+      "gaps": "ISO 27799 specifies health-specific review triggers including changes to national health data protection regulations, new clinical systems deployment, health information exchange partnerships, and patient safety incidents that reveal policy inadequacies. SP 800-53 does not prescribe healthcare-specific review triggers or require policy alignment with evolving clinical standards of care."
+    },
+    {
+      "id": "5.3",
+      "title": "Health data classification policy",
+      "controls": [
+        "RA-02", "AC-16", "MP-03", "PT-02", "PT-03"
+      ],
+      "coverage_pct": 78,
+      "rationale": "ISO 27799 requires classification of health data into categories including PHI, clinical records, administrative data, research data, and genomic information, each with specific handling requirements. RA-02 provides security categorization. AC-16 supports association of security and privacy attributes with information. MP-03 covers media marking. PT-02 and PT-03 address authority to collect and processing purposes for personal data.",
+      "gaps": "ISO 27799 prescribes health-specific classification tiers based on clinical sensitivity (e.g., mental health records, HIV status, genetic data requiring heightened protection under most jurisdictions). SP 800-53 uses FIPS 199 categorization which does not differentiate between health data sensitivity levels. The standard also requires classification of research data versus clinical data with distinct handling rules, which has no NIST equivalent."
+    },
+    {
+      "id": "6.1",
+      "title": "Internal organisation for health information security",
+      "controls": [
+        "PM-01", "PM-02", "PM-10", "PM-29", "PS-01", "PS-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 requires health organisations to establish internal security governance with designated roles including a health information security officer, clinical information governance lead, and Caldicott Guardian (or equivalent patient data guardian). PM-02 assigns the senior information security role. PM-29 addresses risk management program leadership. PS-09 requires security responsibilities in position descriptions. PM-01 and PM-10 establish the governance framework.",
+      "gaps": "ISO 27799 mandates health-specific governance roles such as the Caldicott Guardian (UK) or equivalent patient data guardian role with statutory responsibilities for PHI protection. It requires clinical representation in information security governance to ensure patient safety is considered in security decisions. SP 800-53 does not address health-specific governance structures or the integration of clinical expertise into security decision-making."
+    },
+    {
+      "id": "6.2",
+      "title": "Health information security roles and responsibilities",
+      "controls": [
+        "PM-02", "PS-01", "PS-02", "PS-09", "PL-01"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires clearly defined security roles and responsibilities across clinical, administrative, and IT functions within health organisations. PM-02 assigns the senior security role. PS-01 and PS-02 cover personnel security policies and position risk designation. PS-09 explicitly requires incorporating security responsibilities into position descriptions. PL-01 establishes overall security planning roles.",
+      "gaps": "ISO 27799 requires health-specific role definitions including clinical system administrators, health records managers, and research data custodians with distinct PHI handling responsibilities. The standard expects security role definitions to account for the complex staffing structures in healthcare (locum staff, agency nurses, visiting consultants, medical students) which differ from typical corporate employee models."
+    },
+    {
+      "id": "6.3",
+      "title": "Mobile devices and teleworking in clinical contexts",
+      "controls": [
+        "AC-17", "AC-19", "AC-20", "PE-17", "SC-28", "CM-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "ISO 27799 addresses the use of mobile devices and remote working in clinical settings, including tablets at point of care, mobile clinical applications, and telehealth consultations. AC-17 covers remote access. AC-19 provides mobile device access control. AC-20 addresses use of external systems. PE-17 covers alternate work sites. SC-28 protects information at rest on mobile devices. CM-07 restricts functionality on clinical mobile devices.",
+      "gaps": "ISO 27799 adds health-specific mobile device guidance including use of tablets and smartphones during ward rounds, BYOD policies for clinicians, telehealth security requirements (video consultations with patients), and mobile access to EHR systems in emergency situations. SP 800-53 provides the technical mobile access controls but does not address clinical workflow-specific mobile use scenarios or the security implications of point-of-care mobile device usage."
+    },
+    {
+      "id": "7.1",
+      "title": "Before employment in health settings",
+      "controls": [
+        "PS-01", "PS-02", "PS-03", "PS-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires thorough pre-employment screening for all personnel who will access PHI, including verification of professional medical registration, clinical qualifications, and fitness to practise. PS-03 covers personnel screening including background checks. PS-02 designates position risk levels. PS-06 formalises access agreements. PS-01 establishes the personnel security governance framework.",
+      "gaps": "ISO 27799 mandates health-specific pre-employment checks including verification of medical/nursing/allied health professional registration with the relevant regulatory body, clinical competency assessment, and fitness-to-practise checks. These go beyond standard background screening to include verification with professional medical councils and nursing boards. SP 800-53 PS-03 does not prescribe professional registration verification."
+    },
+    {
+      "id": "7.2",
+      "title": "During employment in health settings",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-06",
+        "PS-06", "PS-07", "PL-04", "PM-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires ongoing security awareness and training tailored to health sector roles, including clinical staff training on PHI handling, patient consent, and clinical audit trail responsibilities. AT-02 covers security awareness training. AT-03 provides role-based training. AT-04 maintains training records. AT-06 provides training feedback for continuous improvement. PM-13 addresses the security and privacy workforce. PS-06 and PL-04 formalise ongoing security obligations.",
+      "gaps": "ISO 27799 requires health-specific training content including: proper handling of clinical records, patient consent procedures for data sharing, understanding clinical audit trail obligations, recognising and reporting patient safety incidents related to information security, and training on health information exchange protocols. SP 800-53 training controls are comprehensive in structure but do not prescribe healthcare-specific content."
+    },
+    {
+      "id": "7.3",
+      "title": "Termination and change of employment in health settings",
+      "controls": [
+        "PS-04", "PS-05", "AC-02", "IA-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires robust procedures for revoking access to clinical systems and PHI upon employment termination or role change, with particular attention to the complex staffing arrangements in healthcare. PS-04 covers personnel termination including access revocation and asset return. PS-05 addresses personnel transfer. AC-02 provides account management lifecycle controls. IA-04 manages identifier revocation.",
+      "gaps": "ISO 27799 highlights healthcare-specific termination challenges including: revoking access for locum/agency staff who move between health organisations, managing departing clinicians' ongoing legitimate access needs for patient care continuity, and handling medical student rotations. The standard also requires consideration of professional regulatory body notification where security breaches involve clinical malpractice."
+    },
+    {
+      "id": "8.1",
+      "title": "Health information asset inventory and ownership",
+      "controls": [
+        "CM-08", "PM-05", "CM-12", "CM-13", "RA-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires a comprehensive inventory of health information assets including clinical records, diagnostic images, laboratory results, prescribing data, and medical device data streams. CM-08 covers system component inventory. PM-05 provides system-level inventory. CM-12 identifies information locations. CM-13 maps data actions to components. RA-02 categorises information assets.",
+      "gaps": "ISO 27799 requires health-specific asset categorisation including EHR databases, Picture Archiving and Communication Systems (PACS), laboratory information management systems (LIMS), pharmacy systems, and medical device data feeds. The standard also requires identification of clinical data ownership and custodianship models that differ from standard IT asset ownership."
+    },
+    {
+      "id": "8.2",
+      "title": "Classification of health data",
+      "controls": [
+        "RA-02", "AC-16", "MP-03",
+        "PT-02", "PT-03", "PT-06", "PT-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "ISO 27799 mandates classification of health data into PHI, clinical operational data, administrative data, research data, and anonymised/pseudonymised datasets, each requiring distinct handling procedures. RA-02 covers security categorization. AC-16 supports attribute-based classification. PT-02/PT-03 cover authority to collect and processing purposes. PT-06/PT-07 address data processing minimisation and proportionality.",
+      "gaps": "ISO 27799 defines health-specific classification categories including: highly sensitive PHI (mental health, HIV, substance abuse, genetic data), standard clinical data, administrative health data, anonymised research datasets, and patient-identifiable research data. Each category has distinct handling requirements under national health data laws. SP 800-53 does not differentiate health data sensitivity tiers or prescribe handling procedures for specific clinical data types such as genomic information or psychiatric records."
+    },
+    {
+      "id": "8.3",
+      "title": "Acceptable use and return of health assets",
+      "controls": [
+        "PL-04", "AC-20", "MP-07", "PS-04", "PS-05"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires acceptable use policies tailored to health environments, covering appropriate use of clinical systems, patient data access protocols, and return of health assets upon role change. PL-04 covers rules of behaviour and acceptable use. AC-20 addresses use of external systems. MP-07 restricts media use. PS-04/PS-05 handle asset return at termination and transfer.",
+      "gaps": "ISO 27799 adds health-specific acceptable use provisions including prohibitions on inappropriate access to celebrity/family/colleague patient records (a common healthcare breach vector), rules for use of clinical photography, and acceptable use of clinical messaging systems for sharing patient information. These healthcare-specific behavioural controls extend beyond standard IT acceptable use policies."
+    },
+    {
+      "id": "9.1",
+      "title": "Business requirements for health data access control",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-06", "AC-24", "AC-25"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires access control policies based on clinical need-to-know, professional role, and the therapeutic relationship between clinician and patient. AC-01 establishes access control policy. AC-02 provides account management. AC-03 enforces access decisions. AC-06 implements least privilege. AC-24 adds attribute-based access control decisions. AC-25 covers reference monitor concepts for mediated access.",
+      "gaps": "ISO 27799 introduces the concept of access based on the 'therapeutic relationship' between a clinician and a specific patient, meaning only clinicians actively involved in a patient's care should access that patient's records. This relationship-based access model is more nuanced than role-based access control in SP 800-53 and requires integration with patient administration and clinical workflow systems."
+    },
+    {
+      "id": "9.2",
+      "title": "Break-glass and emergency access procedures",
+      "controls": [
+        "AC-02", "AC-14", "CP-02", "CP-10",
+        "AU-02", "AU-06", "AU-12"
+      ],
+      "coverage_pct": 72,
+      "rationale": "ISO 27799 requires formal break-glass (emergency access) procedures that allow clinicians to override normal access controls during clinical emergencies to access PHI necessary for patient care. AC-14 addresses permitted actions without identification or authentication. AC-02 can include emergency access account provisions. CP-02 covers emergency operations. AU-02/AU-06/AU-12 ensure all emergency access is logged and reviewed post-incident.",
+      "gaps": "Break-glass access is a core healthcare-specific concept that SP 800-53 does not directly address. ISO 27799 requires: formal declaration of clinical emergency by the accessing clinician, immediate and complete audit logging of all actions during break-glass access, mandatory post-incident review by information governance, documented justification, and automatic escalation to a supervisor. The standard also requires that break-glass mechanisms be regularly tested and that clinical staff are trained on when and how to invoke emergency access. AC-14 is the closest equivalent but was not designed for healthcare emergency access scenarios."
+    },
+    {
+      "id": "9.3",
+      "title": "User access management for clinical systems",
+      "controls": [
+        "AC-02", "AC-05", "AC-06", "IA-04", "IA-05",
+        "IA-02", "IA-12", "PS-03"
+      ],
+      "coverage_pct": 90,
+      "rationale": "ISO 27799 requires user access management procedures for clinical systems including EHR, pharmacy, radiology, and laboratory systems, with role-based provisioning aligned to clinical roles. AC-02 provides comprehensive account lifecycle management. AC-05 enforces separation of duties. AC-06 implements least privilege. IA-02/IA-04/IA-05 handle identification, identifiers, and authenticators. IA-12 covers identity proofing. PS-03 supports screening prior to access.",
+      "gaps": "ISO 27799 requires clinical system access management to integrate with professional role registries (e.g., medical staff privileges, nursing scope of practice) and to support multi-site access for clinicians who work across multiple health facilities. SP 800-53 provides excellent access management mechanisms but does not address the healthcare-specific requirement for access aligned to clinical privilege and scope-of-practice boundaries."
+    },
+    {
+      "id": "9.4",
+      "title": "Clinical user responsibilities and shared workstations",
+      "controls": [
+        "AC-11", "AC-12", "IA-02", "IA-05",
+        "IA-11", "PL-04", "PE-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 addresses the unique challenge of shared clinical workstations in wards, operating theatres, and emergency departments where multiple clinicians use the same terminal during a shift. AC-11 provides device lock and session timeout. AC-12 covers session termination. IA-02 requires user identification. IA-11 addresses re-authentication. PL-04 defines rules of behaviour. PE-05 controls access to output devices (preventing patient data on shared printers).",
+      "gaps": "ISO 27799 addresses healthcare-specific shared workstation challenges including: fast user switching requirements in clinical environments (session timeouts must balance security with clinical urgency), proximity-based authentication (badge tap), and the reality that clinicians share terminals in time-critical patient care settings. SP 800-53 session and authentication controls are designed for dedicated-user workstation models rather than the rapid multi-user clinical workstation environment."
+    },
+    {
+      "id": "9.5",
+      "title": "System and application access for EHR and clinical systems",
+      "controls": [
+        "AC-03", "AC-04", "AC-06", "AC-07", "AC-08",
+        "AC-10", "AC-17", "SC-10", "SC-23"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires application-level access controls for EHR systems, clinical decision support, e-prescribing, and diagnostic systems. AC-03 enforces access at the system level. AC-04 controls information flow between clinical systems. AC-06 provides granular least privilege. AC-07 handles unsuccessful login attempts. AC-08 displays system use notifications. AC-10 limits concurrent sessions. AC-17 secures remote clinical access. SC-10/SC-23 manage clinical session security.",
+      "gaps": "ISO 27799 requires EHR-specific access controls including: patient-level consent overrides (where a patient restricts access to part of their record), context-based access (different data visibility in emergency department vs. primary care), and integration with clinical decision support that may require broader data access than the clinician's normal authorisation. These application-level healthcare access patterns exceed the scope of SP 800-53 system access controls."
+    },
+    {
+      "id": "10.1",
+      "title": "Cryptographic controls for PHI",
+      "controls": [
+        "SC-12", "SC-13", "SC-28", "SC-08"
+      ],
+      "coverage_pct": 90,
+      "rationale": "ISO 27799 requires encryption of PHI at rest and in transit, with cryptographic controls aligned to national healthcare data protection requirements. SC-13 provides the cryptographic protection framework. SC-12 governs key management. SC-28 addresses protection of information at rest. SC-08 covers transmission confidentiality and integrity. Together these provide comprehensive cryptographic coverage for health data protection.",
+      "gaps": "ISO 27799 recommends encryption standards specific to health data exchange scenarios including encryption of HL7 FHIR payloads, DICOM image transfer encryption, and end-to-end encryption for telehealth sessions. SP 800-53 provides the cryptographic framework but does not address health interoperability protocol-specific encryption requirements. The standard also references national health data encryption mandates that vary by jurisdiction."
+    },
+    {
+      "id": "10.2",
+      "title": "Key management for health data encryption",
+      "controls": [
+        "SC-12", "SC-17"
+      ],
+      "coverage_pct": 90,
+      "rationale": "ISO 27799 requires key management procedures for health data encryption that ensure long-term access to encrypted clinical records across the patient's lifetime. SC-12 provides comprehensive cryptographic key establishment and management including key generation, distribution, storage, and destruction. SC-17 covers public key infrastructure certificates for health data exchange.",
+      "gaps": "ISO 27799 highlights the unique healthcare requirement for cryptographic key lifecycle management that spans decades — clinical records must remain accessible throughout a patient's lifetime and potentially beyond. Key rotation and algorithm migration must ensure continued access to historical clinical records. SP 800-53 key management controls do not address this long-term clinical records accessibility requirement."
+    },
+    {
+      "id": "11.1",
+      "title": "Secure areas in clinical environments",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-04", "PE-05",
+        "PE-06", "PE-07", "PE-08", "PE-18"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires physical security controls for clinical environments including server rooms, medical records storage, pharmacy dispensing areas, and clinical offices where PHI is processed. PE-01 establishes the physical security framework. PE-02/PE-03 govern physical access authorisation and control. PE-04/PE-05 protect transmission media and output devices. PE-06/PE-07/PE-08 provide monitoring, visitor control, and access records. PE-18 addresses system component placement.",
+      "gaps": "ISO 27799 addresses healthcare-specific physical security challenges including: securing workstations in open ward environments accessible to patients and visitors, protecting medical records in shared clinical spaces, securing clinical areas with public access (waiting rooms adjacent to consultation rooms), and managing physical security in community health settings where clinicians may work in patients' homes. SP 800-53 physical controls assume traditional office/data centre environments."
+    },
+    {
+      "id": "11.2",
+      "title": "Equipment security for medical devices and mobile clinical devices",
+      "controls": [
+        "PE-01", "PE-14", "PE-18", "PE-23",
+        "AC-19", "CM-08", "MA-01", "MA-02", "MA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "ISO 27799 requires security controls for medical devices that process or store PHI, including infusion pumps with network connectivity, patient monitoring systems, diagnostic imaging equipment, and mobile clinical devices. PE-14/PE-18/PE-23 address environmental and placement controls. AC-19 covers mobile device security. CM-08 provides device inventory. MA-01/MA-02/MA-05 govern maintenance of medical equipment.",
+      "gaps": "ISO 27799 addresses security of connected medical devices (IoMT) including: devices with legacy operating systems that cannot be patched, medical device regulatory constraints (devices certified under IEC 62443 or FDA premarket approval cannot be freely modified), network segmentation for medical device networks, and the patient safety implications of medical device security failures. SP 800-53 does not address medical device regulatory constraints that limit the application of standard security controls."
+    },
+    {
+      "id": "12.1",
+      "title": "Operational procedures for health IT systems",
+      "controls": [
+        "PL-02", "SA-05", "CM-01", "CM-02", "CM-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 requires documented operational procedures for health IT systems including EHR, laboratory information systems, radiology PACS, and pharmacy systems. PL-02 covers system security plans. SA-05 provides system documentation. CM-01/CM-02/CM-06 establish configuration management procedures, baselines, and settings for clinical systems.",
+      "gaps": "ISO 27799 requires health-specific operational procedures including: clinical system failover procedures that maintain patient care continuity, EHR downtime procedures with paper-based fallback protocols, and documented procedures for clinical system maintenance windows that avoid disruption during peak clinical activity. SP 800-53 addresses operational procedures generically without healthcare-specific operational context."
+    },
+    {
+      "id": "12.2",
+      "title": "Protection from malware in clinical systems",
+      "controls": [
+        "SI-03", "SI-04", "SI-08", "SC-44"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires malware protection for clinical systems with consideration of the unique constraints of healthcare environments. SI-03 provides comprehensive malicious code protection. SI-04 covers system monitoring. SI-08 addresses spam protection. SC-44 adds detonation chamber capabilities for analysing suspicious files before they reach clinical systems.",
+      "gaps": "ISO 27799 acknowledges that some medical devices and legacy clinical systems cannot support standard anti-malware agents, requiring compensating controls such as network-level protection, application whitelisting, and medical device network segmentation. SP 800-53 malware controls assume all systems can run standard anti-malware software, which is not the case in healthcare environments with certified medical devices."
+    },
+    {
+      "id": "12.3",
+      "title": "Backup and clinical data continuity",
+      "controls": [
+        "CP-09", "CP-06", "MP-04", "MP-05", "SC-28"
+      ],
+      "coverage_pct": 90,
+      "rationale": "ISO 27799 requires backup procedures that ensure continuity of clinical data for patient care, with RPO and RTO aligned to clinical requirements. CP-09 provides comprehensive backup procedures. CP-06 addresses alternate storage sites. MP-04/MP-05 govern backup media storage and transport. SC-28 protects backed-up data at rest.",
+      "gaps": "ISO 27799 requires backup strategies that account for clinical data integrity requirements including: transactional consistency of clinical records (incomplete clinical notes must be identifiable), backup of medical images (DICOM) which require significantly more storage, and backup integration with clinical continuity plans that prioritise patient safety over IT recovery. SP 800-53 backup controls are comprehensive but do not address clinical data-specific backup requirements."
+    },
+    {
+      "id": "12.4",
+      "title": "Clinical audit trails and logging",
+      "controls": [
+        "AU-01", "AU-02", "AU-03", "AU-04", "AU-05",
+        "AU-06", "AU-07", "AU-08", "AU-09", "AU-11",
+        "AU-12", "AU-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires comprehensive clinical audit trails that record all access to patient records, with the ability to answer 'who accessed whose record, when, and what they did.' AU-02/AU-03/AU-12 establish auditable events, content, and generation. AU-06/AU-07 provide review and reporting. AU-08 ensures timestamp accuracy for clinical events. AU-09 protects audit integrity. AU-11 addresses retention. AU-14 provides session-level auditing.",
+      "gaps": "ISO 27799 mandates health-specific audit trail requirements including: patient-level access tracking (ability to produce a complete access history for any individual patient's records), audit integration with break-glass access procedures, clinical audit trails that satisfy medical regulatory requirements, and the ability for patients to request access logs for their own records (right of access to audit data). SP 800-53 audit controls are technically comprehensive but are not designed around patient-centric audit reporting."
+    },
+    {
+      "id": "12.5",
+      "title": "Vulnerability management for clinical systems",
+      "controls": [
+        "RA-05", "SI-02", "SI-05", "CM-03", "CM-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 requires vulnerability management that accounts for the constraints of clinical system patching, including medical device certification requirements and clinical system availability demands. RA-05 covers vulnerability scanning. SI-02 addresses flaw remediation and patching. SI-05 provides security advisory tracking. CM-03/CM-04 govern change control and impact analysis for clinical system patches.",
+      "gaps": "ISO 27799 acknowledges that standard vulnerability management is complicated in healthcare by: medical device manufacturer patch approval requirements (devices cannot be patched until the manufacturer validates the patch against device certification), clinical system uptime requirements that limit maintenance windows, and legacy clinical systems that have reached end-of-life but remain in clinical use. SP 800-53 vulnerability management assumes timely patching is always feasible, which is not the case for many medical devices and clinical systems."
+    },
+    {
+      "id": "13.1",
+      "title": "Network security for health information exchange",
+      "controls": [
+        "SC-07", "SC-08", "SC-32", "AC-04",
+        "CA-03", "CA-09", "SC-46"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 requires network security controls for health information exchange including HL7 FHIR, DICOM, and IHE profiles used for clinical data sharing between health organisations. SC-07 provides boundary protection. SC-08 covers transmission confidentiality and integrity. SC-32 enables network partitioning. AC-04 enforces information flow. CA-03 governs information exchange agreements. CA-09 manages internal connections. SC-46 provides cross-domain policy enforcement.",
+      "gaps": "ISO 27799 requires security controls specific to healthcare interoperability protocols: HL7 FHIR API security (OAuth 2.0 scopes aligned to clinical data categories), DICOM network security for medical imaging transfer, IHE XDS/XCA cross-community access controls, and health information exchange network trust frameworks. SP 800-53 provides robust network security but does not address healthcare interoperability protocol security requirements or health information exchange network architectures."
+    },
+    {
+      "id": "13.2",
+      "title": "Information transfer for health data sharing and referrals",
+      "controls": [
+        "SC-08", "AC-04", "AC-20", "CA-03",
+        "MP-05", "SC-12", "SC-13"
+      ],
+      "coverage_pct": 78,
+      "rationale": "ISO 27799 requires controls for secure transfer of clinical information including patient referrals, discharge summaries, laboratory results, and diagnostic images between health organisations. SC-08 protects transmission confidentiality and integrity. AC-04 enforces information flow rules. AC-20 addresses use of external systems. CA-03 governs information exchange agreements. MP-05 covers physical media transport. SC-12/SC-13 provide encryption for transmitted health data.",
+      "gaps": "ISO 27799 addresses health-specific information transfer scenarios including: structured clinical document exchange (CDA, FHIR documents), patient referral workflows with consent verification, multi-party clinical information sharing (e.g., multidisciplinary team communications), and cross-border health data transfer within EU/EEA and internationally. SP 800-53 provides the transport security mechanisms but does not address clinical document exchange standards, patient consent verification during transfer, or health-specific cross-border data transfer rules."
+    },
+    {
+      "id": "14.1",
+      "title": "Security requirements for health IT procurement",
+      "controls": [
+        "SA-04", "SA-08", "SA-09", "SA-03",
+        "SR-01", "SR-02", "SR-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires security requirements to be specified in health IT procurement including EHR systems, clinical applications, and medical devices. SA-04 addresses security requirements in acquisitions. SA-08 covers security engineering principles. SA-09 governs external service providers. SA-03 addresses security in the development lifecycle. SR-01/SR-02/SR-03 provide supply chain risk management.",
+      "gaps": "ISO 27799 requires health-specific procurement security requirements including: compliance with health interoperability standards (HL7, FHIR, DICOM), medical device cybersecurity certification (FDA premarket cybersecurity, EU MDR), clinical safety assessment (e.g., NHS DCB0129/0160), and integration with existing clinical workflows. SP 800-53 provides robust procurement security controls but does not prescribe health IT-specific procurement criteria or medical device cybersecurity certification requirements."
+    },
+    {
+      "id": "14.2",
+      "title": "Security in EHR development and customisation",
+      "controls": [
+        "SA-03", "SA-08", "SA-10", "SA-11",
+        "SA-15", "SA-17", "CM-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires secure development practices for health IT systems including EHR customisation, clinical decision support development, and health application interfaces. SA-03 covers the development lifecycle. SA-08 provides security engineering principles. SA-10/SA-11 address developer configuration management and testing. SA-15/SA-17 cover development standards and security architecture. CM-04 ensures impact analysis for clinical system changes.",
+      "gaps": "ISO 27799 requires clinical safety assessment of health IT changes (development or customisation that could impact patient safety must undergo clinical risk assessment). SP 800-53 covers secure development comprehensively but does not address clinical safety assessment as a distinct requirement separate from information security testing."
+    },
+    {
+      "id": "14.3",
+      "title": "Test data and use of clinical data in testing",
+      "controls": [
+        "SA-11", "SA-15", "SI-19", "PT-06", "PT-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "ISO 27799 restricts use of real patient data in testing and requires anonymisation or use of synthetic data for development and testing of clinical systems. SA-11 covers testing requirements. SA-15 addresses development process standards. SI-19 provides de-identification techniques. PT-06/PT-07 address data processing minimisation.",
+      "gaps": "ISO 27799 mandates that real patient data must not be used in test environments unless explicitly authorised, anonymised, or pseudonymised using validated techniques. The standard requires formal approval processes for any use of clinical data in testing, with data minimisation and purpose limitation. SP 800-53 lacks explicit test data management controls, and SI-19 addresses de-identification but not the specific governance of clinical data use in testing environments."
+    },
+    {
+      "id": "15.1",
+      "title": "Health IT supplier management",
+      "controls": [
+        "SA-04", "SA-09", "SR-01", "SR-02",
+        "SR-03", "SR-05", "SR-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 requires management of health IT suppliers including EHR vendors, clinical system integrators, and health cloud service providers. SA-04 covers acquisition security requirements. SA-09 manages external services. SR-01 through SR-06 provide comprehensive supply chain risk management including supplier assessments.",
+      "gaps": "ISO 27799 requires health-specific supplier management including: vendor compliance with health data protection regulations in each operating jurisdiction, EHR vendor security assessment against healthcare-specific criteria, data portability and exit strategies for clinical data, and ongoing monitoring of supplier access to PHI. SP 800-53 provides robust supplier management but does not address health-specific vendor requirements."
+    },
+    {
+      "id": "15.2",
+      "title": "Medical device supply chain and cloud services for health data",
+      "controls": [
+        "SA-09", "SR-01", "SR-03", "SR-05",
+        "SR-06", "SR-11", "AC-20"
+      ],
+      "coverage_pct": 78,
+      "rationale": "ISO 27799 addresses security of the medical device supply chain and cloud services hosting PHI, including SaaS clinical applications and cloud-hosted EHR systems. SA-09 covers external service providers. SR-01/SR-03/SR-05/SR-06 address supply chain risk management. SR-11 covers component authenticity. AC-20 manages use of external systems.",
+      "gaps": "ISO 27799 requires health-specific supply chain controls including: medical device cybersecurity supply chain verification (manufacturer software bills of materials), cloud service provider compliance with health data residency requirements, multi-tenancy isolation for PHI in cloud environments, and medical device recall/vulnerability notification processes from manufacturers. SP 800-53 supply chain controls do not address medical device-specific supply chain requirements or health data cloud residency."
+    },
+    {
+      "id": "16.1",
+      "title": "Health data breach response planning",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04",
+        "IR-07", "IR-08", "PM-15"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires health data breach response plans that address PHI-specific breach scenarios including unauthorised access to patient records, ransomware affecting clinical systems, and inappropriate disclosure of sensitive health data. IR-01 establishes incident response policy. IR-02/IR-03 cover training and testing. IR-04 addresses incident handling. IR-07 provides assistance. IR-08 covers the incident response plan. PM-15 addresses contacts with authorities.",
+      "gaps": "ISO 27799 requires health-specific breach response elements including: assessment of potential patient harm from data exposure (clinical safety impact), notification to affected patients with guidance on potential risks from health data exposure, coordination with clinical teams to assess patient safety implications, and breach reporting to health-sector regulators (distinct from general data protection authorities). SP 800-53 provides comprehensive incident response but does not address patient harm assessment or health-specific breach notification obligations."
+    },
+    {
+      "id": "16.2",
+      "title": "Clinical safety incidents and information security",
+      "controls": [
+        "IR-04", "IR-05", "IR-06", "IR-09",
+        "SI-04", "SI-05"
+      ],
+      "coverage_pct": 75,
+      "rationale": "ISO 27799 requires integration between information security incident management and clinical safety incident reporting, recognising that security failures can directly impact patient safety. IR-04 covers incident handling. IR-05 provides incident monitoring. IR-06 addresses incident reporting. IR-09 covers information spillage. SI-04/SI-05 provide system monitoring and security alerts.",
+      "gaps": "ISO 27799 requires that information security incidents with potential patient safety impact be reported through clinical safety incident reporting channels (e.g., national patient safety reporting systems), not just IT incident management. This includes: wrong-patient errors caused by system failures, medication errors from compromised e-prescribing systems, and delayed diagnosis from unavailable diagnostic systems. SP 800-53 does not address integration between IT security incident management and clinical safety reporting frameworks."
+    },
+    {
+      "id": "16.3",
+      "title": "Reporting to health regulators and data subjects",
+      "controls": [
+        "IR-06", "PM-15", "PM-26",
+        "PT-04", "PT-05"
+      ],
+      "coverage_pct": 72,
+      "rationale": "ISO 27799 requires breach notification to health-sector regulators, data protection authorities, and affected patients within mandated timeframes. IR-06 covers incident reporting. PM-15 addresses authority contacts. PM-26 covers complaint management. PT-04 addresses consent. PT-05 covers privacy notice requirements including breach notification.",
+      "gaps": "ISO 27799 requires compliance with health-sector-specific breach notification requirements which vary by jurisdiction: HIPAA requires notification within 60 days for breaches affecting 500+ individuals, EU GDPR requires notification within 72 hours, and many national health regulations have distinct notification requirements for health data breaches. The standard also requires patient-facing breach communication that explains potential health risks from data exposure. SP 800-53 PT-04/PT-05 address privacy notification but not health-specific breach notification timelines or patient-focused breach communications."
+    },
+    {
+      "id": "17.1",
+      "title": "Clinical service continuity planning",
+      "controls": [
+        "CP-01", "CP-02", "CP-03", "CP-04",
+        "CP-05", "PM-08", "PM-11"
+      ],
+      "coverage_pct": 82,
+      "rationale": "ISO 27799 requires business continuity planning that prioritises clinical service continuity and patient safety over IT system recovery. CP-01 establishes the continuity framework. CP-02 provides the contingency plan. CP-03/CP-04 cover training and testing. CP-05 addresses plan updates. PM-08/PM-11 cover critical infrastructure and mission/business process definition.",
+      "gaps": "ISO 27799 requires clinical service continuity plans that address: paper-based clinical fallback procedures when IT systems are unavailable, clinical prioritisation of system recovery (emergency department and intensive care systems first), patient transfer protocols when clinical systems fail, and coordination with clinical governance during prolonged outages. SP 800-53 contingency planning does not address clinical service prioritisation or paper-based clinical fallback procedures."
+    },
+    {
+      "id": "17.2",
+      "title": "Information security continuity for patient care",
+      "controls": [
+        "CP-02", "CP-06", "CP-07", "CP-08",
+        "CP-09", "CP-10", "CP-11", "CP-12", "CP-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires that information security controls remain effective during disruptions to protect PHI and maintain clinical system integrity. CP-02 provides the overall continuity plan. CP-06/CP-07/CP-08 cover alternate storage, processing, and telecommunications. CP-09/CP-10 address backup and recovery. CP-11/CP-12/CP-13 (Rev 5 additions) cover alternate communications, safe mode, and alternative security mechanisms — all critical for maintaining security during clinical system disruptions.",
+      "gaps": "ISO 27799 requires that security controls during disruptions specifically protect patient safety: access controls must not prevent emergency clinical access, encryption key availability must be maintained for clinical records, and audit trails must continue (even in degraded mode) to maintain clinical accountability. SP 800-53 provides excellent continuity controls but does not prioritise clinical access and patient safety over security during disruptions."
+    },
+    {
+      "id": "17.3",
+      "title": "Redundancy for critical clinical systems",
+      "controls": [
+        "CP-06", "CP-07", "CP-08",
+        "SC-36", "PE-09", "PE-11"
+      ],
+      "coverage_pct": 88,
+      "rationale": "ISO 27799 requires redundancy for clinical systems that directly support patient care, including EHR, e-prescribing, laboratory, and patient monitoring systems. CP-06/CP-07/CP-08 provide alternate storage, processing, and telecommunications. SC-36 enables distributed processing and storage. PE-09/PE-11 cover power protection and emergency power for clinical system availability.",
+      "gaps": "ISO 27799 requires clinical system redundancy that accounts for patient safety implications of downtime: zero-downtime failover for patient monitoring and life-critical systems, near-zero RPO for e-prescribing and medication administration, and defined maximum acceptable downtime based on clinical risk assessment. SP 800-53 covers redundancy comprehensively but does not prescribe clinical risk-based RTO/RPO thresholds."
+    },
+    {
+      "id": "18.1",
+      "title": "Legal and regulatory requirements for health data",
+      "controls": [
+        "PL-04", "PM-01", "SA-04",
+        "PT-01", "PT-02", "PT-04", "PT-05"
+      ],
+      "coverage_pct": 72,
+      "rationale": "ISO 27799 requires identification and compliance with all applicable health data protection laws and regulations. PL-04 includes legal compliance obligations. PM-01 addresses regulatory compliance in the program plan. SA-04 covers contractual requirements. PT-01/PT-02/PT-04/PT-05 address privacy policy, authority to collect, consent, and privacy notices.",
+      "gaps": "ISO 27799 requires explicit compliance with a complex web of health-specific regulations including: national health data protection laws (HIPAA in the US, national eHealth legislation in EU member states, Health Records Act in Australia), medical professional regulation, patient rights legislation, clinical trial regulations (GCP, ICH), and biobank/genomic data governance. SP 800-53 does not prescribe identification of health-specific legal requirements or provide a framework for mapping the diverse global health data regulatory landscape."
+    },
+    {
+      "id": "18.2",
+      "title": "Patient consent and health data sharing controls",
+      "controls": [
+        "PT-04", "PT-05", "PT-02", "PT-03",
+        "PT-06", "PT-07", "PM-25", "PM-26", "PM-27"
+      ],
+      "coverage_pct": 68,
+      "rationale": "ISO 27799 requires patient consent management for health data processing and sharing, including granular consent for different data uses (treatment, research, secondary use). PT-04 addresses consent requirements. PT-05 covers privacy notices. PT-02/PT-03 address authority to collect and processing purposes. PT-06/PT-07 cover data minimisation. PM-25 addresses minimisation of PII. PM-26 covers complaint management. PM-27 addresses privacy reporting.",
+      "gaps": "ISO 27799 requires health-specific consent models including: granular consent (patient can consent to some data sharing while restricting other categories), dynamic consent (patient can modify consent preferences over time), consent for secondary use of clinical data in research, consent withdrawal mechanisms that respect clinical safety (cannot withdraw consent for information needed for ongoing treatment), and electronic consent management integrated with EHR systems. SP 800-53 PT-04 provides a general consent framework but does not address the complex, multi-layered consent models required in healthcare or the tension between patient autonomy and clinical safety."
+    },
+    {
+      "id": "18.3",
+      "title": "Health information security reviews and audits",
+      "controls": [
+        "CA-01", "CA-02", "CA-05", "CA-07", "CA-08",
+        "PM-06", "PM-14"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires periodic security reviews of health information systems with assessments covering both technical controls and clinical workflow integration. CA-01 establishes the assessment framework. CA-02 provides security assessments. CA-05 tracks remediation via POA&M. CA-07 covers continuous monitoring. CA-08 addresses penetration testing. PM-06/PM-14 cover performance measurement and testing programs.",
+      "gaps": "ISO 27799 requires health-specific security reviews including: assessment of clinical audit trail effectiveness, review of break-glass access usage patterns, evaluation of medical device security posture, and assessment of health information exchange security. SP 800-53 provides comprehensive assessment controls but does not prescribe healthcare-specific audit scope or clinical workflow security review criteria."
+    },
+    {
+      "id": "18.4",
+      "title": "Technical compliance for health systems",
+      "controls": [
+        "CA-02", "CA-08", "RA-05",
+        "SI-02", "CM-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "ISO 27799 requires technical compliance checking for health systems including vulnerability assessment, configuration auditing, and penetration testing of clinical systems. CA-02 covers security assessments. CA-08 addresses penetration testing. RA-05 covers vulnerability scanning. SI-02 addresses flaw remediation. CM-06 ensures configuration settings compliance.",
+      "gaps": "ISO 27799 requires technical compliance assessment to account for healthcare-specific constraints: penetration testing of clinical systems must be coordinated to avoid disruption to patient care, vulnerability scanning of medical devices requires manufacturer coordination, and configuration auditing must verify compliance with health interoperability standards alongside security baselines. SP 800-53 technical compliance controls are comprehensive but do not address healthcare operational constraints on security testing."
+    },
+    {
+      "id": "H.1",
+      "title": "Patient safety integration with information security",
+      "controls": [
+        "PM-01", "PM-09", "PM-11",
+        "RA-03", "PL-02"
+      ],
+      "coverage_pct": 60,
+      "rationale": "ISO 27799 requires explicit integration of patient safety considerations into information security risk management, ensuring that security controls do not compromise patient care and that security failures are assessed for patient safety impact. PM-01 establishes the security program. PM-09 covers risk management strategy. PM-11 defines mission and business processes. RA-03 covers risk assessment. PL-02 provides system security planning.",
+      "gaps": "This is a core ISO 27799 addition beyond ISO 27002. The standard requires: formal patient safety impact assessment for all significant security decisions, clinical risk management frameworks applied alongside information security risk management, and a governance mechanism to resolve conflicts between security controls and clinical care requirements (e.g., when a security lockdown would prevent clinician access to critical patient data). SP 800-53 does not address patient safety as a factor in security risk management or provide for resolution of security-versus-safety conflicts."
+    },
+    {
+      "id": "H.2",
+      "title": "Health information exchange security",
+      "controls": [
+        "CA-03", "SC-07", "SC-08", "SC-12", "SC-13",
+        "AC-04", "AC-20", "SC-46"
+      ],
+      "coverage_pct": 72,
+      "rationale": "ISO 27799 provides detailed guidance on securing health information exchange (HIE) including national health information networks, regional HIE, and point-to-point clinical data sharing. CA-03 covers information exchange agreements. SC-07/SC-08 provide boundary protection and transmission security. SC-12/SC-13 handle cryptographic controls. AC-04 enforces information flow. AC-20 manages external system connections. SC-46 provides cross-domain policy enforcement.",
+      "gaps": "ISO 27799 addresses health information exchange-specific security including: trust framework requirements for HIE networks (participant identity assurance, data use agreements), FHIR API security profiles (SMART on FHIR authorisation), IHE security profiles (ATNA, CT, XUA), patient identity matching across organisations, and semantic interoperability that ensures clinical data integrity across different EHR systems. SP 800-53 provides the transport and boundary security mechanisms but does not address health information exchange architecture, trust frameworks, or clinical interoperability security profiles."
+    },
+    {
+      "id": "H.3",
+      "title": "Medical device security management",
+      "controls": [
+        "CM-08", "RA-05", "SI-02", "SC-07",
+        "MA-01", "MA-02", "MA-06", "SR-11"
+      ],
+      "coverage_pct": 68,
+      "rationale": "ISO 27799 requires a dedicated medical device security programme covering connected medical devices (IoMT) from procurement through decommissioning. CM-08 provides device inventory. RA-05 covers vulnerability assessment. SI-02 addresses patching. SC-07 provides network segmentation. MA-01/MA-02/MA-06 govern device maintenance. SR-11 ensures component authenticity.",
+      "gaps": "ISO 27799 requires healthcare-specific medical device security including: medical device asset management with manufacturer, model, firmware version, and network connectivity tracking; coordinated vulnerability disclosure with medical device manufacturers; compensating controls for devices that cannot be patched (network micro-segmentation, monitoring, whitelisting); medical device procurement security requirements aligned to FDA premarket guidance and EU MDR; and medical device incident response that considers patient safety implications. SP 800-53 does not address medical device regulatory constraints, manufacturer-coordinated patching, or the patient safety dimensions of medical device cybersecurity."
+    },
+    {
+      "id": "H.4",
+      "title": "Research data and biobank security",
+      "controls": [
+        "AC-03", "AC-04", "AC-06",
+        "SI-19", "PT-04", "PT-06", "PT-07",
+        "SC-28", "AU-02", "AU-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "ISO 27799 addresses security requirements for health research data, clinical trial data, and biobank/genomic data that require distinct handling from routine clinical data. AC-03/AC-04/AC-06 enforce access and information flow controls. SI-19 provides de-identification. PT-04 covers consent. PT-06/PT-07 address data minimisation. SC-28 protects data at rest. AU-02/AU-03 provide audit logging.",
+      "gaps": "ISO 27799 requires research data-specific controls including: ethical review board (IRB/REC) approval integration with data access controls, re-identification risk assessment for de-identified datasets, genomic data security (which is inherently identifying and cannot be truly anonymised), clinical trial data integrity requirements per GCP/ICH, and biobank material-to-data linkage security. SP 800-53 provides the technical access and privacy controls but does not address research ethics integration, genomic data-specific risks, or clinical trial regulatory requirements."
+    },
+    {
+      "id": "H.5",
+      "title": "Telehealth and remote clinical services security",
+      "controls": [
+        "AC-17", "SC-08", "SC-13", "SC-23",
+        "IA-02", "IA-08", "AU-02"
+      ],
+      "coverage_pct": 75,
+      "rationale": "ISO 27799 addresses security requirements for telehealth services including video consultations, remote patient monitoring, and mobile health applications. AC-17 covers remote access security. SC-08 provides transmission confidentiality and integrity. SC-13 covers cryptographic protection. SC-23 ensures session authenticity. IA-02/IA-08 handle identification and authentication of clinical users and patients. AU-02 provides audit logging for telehealth sessions.",
+      "gaps": "ISO 27799 requires telehealth-specific security controls including: patient identity verification for remote consultations (distinct from standard user authentication), end-to-end encryption of clinical video sessions with recording controls, remote patient monitoring data integrity and provenance, mobile health application security assessment, and patient-side security guidance (patients connecting from home environments). SP 800-53 provides remote access and session security controls but does not address patient-facing authentication, clinical video session security, or remote patient monitoring-specific requirements."
+    }
+  ],
+  "summary": {
+    "total_clauses": 48,
+    "average_coverage": 81.4,
+    "full_count": 23,
+    "substantial_count": 24,
+    "partial_count": 1,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

@@ -345,6 +345,16 @@
       "enrichment_date": "2026-02-20",
       "notes": "55 abstract energy sector technology primitives across 15 categories. Each primitive represents a functional slot in an energy organisation's architecture with Purdue level, safety classification, OT protocols, and applicable framework mappings. L4 energy CPE products map to TEPE types via INSTANCE_OF_ENERGY edges."
     },
+    "insurance_platform_catalog": {
+      "source": "OSA TISP (Trident Insurance Sector Platform Enumeration)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "insurance-technology-primitives-design.md",
+      "total_types": 37,
+      "categories": 10,
+      "profile_expects_insurance_edges": 14,
+      "enrichment_date": "2026-02-21",
+      "notes": "37 abstract insurance sector technology primitives across 10 categories. Each primitive represents a functional slot in an insurer's architecture with regulatory regime and assurance framework mappings. Provides PROFILE_EXPECTS_INSURANCE edges from vertical profiles to expected insurance platform types."
+    },
     "vertical_profile_catalog": {
       "source": "OSA Vertical Profiles",
       "author": "Chris Lethaby (Vinylwasp)",
@@ -392,14 +402,14 @@
     }
   },
   "graph_summary": {
-    "total_edges": 14697,
+    "total_edges": 15607,
     "edge_types": {
       "COUNTERS": 1530,
       "PRESCRIBES": 2126,
       "DETECTS": 471,
       "DETECTED_BY": 2696,
       "IMPLEMENTED_BY": 468,
-      "EXPLOITS": 1162,
+      "EXPLOITS": 1937,
       "USES": 2921,
       "CLASSIFIED_BY": 99,
       "PROVIDES_CAPABILITY": 99,
@@ -423,9 +433,10 @@
       "USES_PROTOCOL": 13,
       "FEDERATES_TO": 10,
       "INSTANCE_OF": 80,
-      "INSTANCE_OF_ENERGY": 41,
-      "PROFILE_EXPECTS_FS": 112,
+      "INSTANCE_OF_ENERGY": 166,
+      "PROFILE_EXPECTS_FS": 108,
       "PROFILE_EXPECTS_ENERGY": 78,
+      "PROFILE_EXPECTS_INSURANCE": 14,
       "PROFILE_SCOPES_TIER": 51,
       "ZONE_HOSTS": 10,
       "ZONE_HOSTS_ENERGY": 16,
@@ -455,6 +466,7 @@
       "cpe": 274,
       "fs_platform_type": 43,
       "energy_platform_type": 55,
+      "insurance_platform_type": 37,
       "vertical_profile": 13,
       "zone_archetype": 20
     },
@@ -483,11 +495,12 @@
       "vertical_profile_fs_path": "VerticalProfile -PROFILE_EXPECTS_FS-> FSPlatformType (vertical profile to expected FS platform types)",
       "vertical_profile_energy_path": "VerticalProfile -PROFILE_EXPECTS_ENERGY-> EnergyPlatformType (vertical profile to expected energy platform types)",
       "vertical_profile_tier_path": "VerticalProfile -PROFILE_SCOPES_TIER-> AdversaryTier (vertical profile to relevant adversary capability tiers)",
+      "vertical_profile_insurance_path": "VerticalProfile -PROFILE_EXPECTS_INSURANCE-> InsurancePlatformType (vertical profile to expected insurance platform types)",
       "zone_hosting_path": "ZoneArchetype -ZONE_HOSTS-> FSPlatformType / -ZONE_HOSTS_ENERGY-> EnergyPlatformType (zone to hosted platform types)",
       "zone_control_path": "ZoneArchetype -ZONE_REQUIRES-> Control (zone archetype to required security controls)",
       "atlas_crossref_path": "ATLAS Mitigation -RELATED_TO-> ATT&CK Mitigation (cross-framework equivalence for 5 shared mitigations)"
     },
-    "total_edge_types": 37
+    "total_edge_types": 38
   },
   "files": {
     "technique-catalog.json": "627 techniques (472 ATT&CK + 155 ATLAS AI/ML) with mitigations[], detection_strategies[], weaknesses[], actors[], minTier back-references",
@@ -507,9 +520,10 @@
     "cpe-catalog.json": "274 CPE reference entries across 4 layers: L1 Major Platforms (31), L2 Enterprise Apps (73), L3 Infrastructure (90), L4 FS Applications (80). 205 NVD-sourced, 69 OSA-minted. 10 TFSP sub-categories.",
     "cpe-parent-of-edges.json": "24 CPE PARENT_OF hierarchy edges (product family relationships)",
     "fs-platform-catalog.json": "43 TFSP financial services platform types across 10 categories with assurance framework mappings",
+    "insurance-platform-catalog.json": "37 TISP insurance sector platform types across 10 categories with regulatory regime and assurance framework mappings",
     "vertical-profile-catalog.json": "13 vertical profile entries (FS and energy) with platform type expectations and TACM tier scoping",
     "zone-archetype-catalog.json": "20 zone archetype entries with hosting relationships and control requirements",
-    "graph-edges.json": "14,697 explicit TRIDENT graph edges across 37 relationship types (includes ATLAS AI/ML, vertical profile, zone archetype, and platform instance edges)",
+    "graph-edges.json": "15,607 explicit TRIDENT graph edges across 38 relationship types (includes ATLAS AI/ML, vertical profile, zone archetype, insurance platform, and platform instance edges)",
     "trident-model.json": "Single authoritative TRIDENT model definition — domains, node types, edge types, analytical paths",
     "metadata.json": "This file \u2014 provenance, version info, graph summary"
   },

@@ -366,21 +366,44 @@
       "zone_requires_edges": 175,
       "enrichment_date": "2026-02-20",
       "notes": "20 zone archetype entries defining standard network zones with hosting relationships to platform types and control requirements. Provides ZONE_HOSTS, ZONE_HOSTS_ENERGY, and ZONE_REQUIRES edges for zone-based security architecture derivation."
+    },
+    "atlas_ai_ml": {
+      "source": "MITRE ATLAS (Adversarial Threat Landscape for AI Systems)",
+      "source_url": "https://github.com/mitre-atlas/atlas-navigator-data",
+      "atlas_version": "5.4.0",
+      "total_techniques": 155,
+      "total_mitigations": 35,
+      "counters_edges": 246,
+      "prescribes_edges": 77,
+      "parent_of_edges": 58,
+      "tier_contains_edges": 155,
+      "related_to_edges": 5,
+      "total_new_edges": 541,
+      "sp800_53_controls_mapped": 35,
+      "tacm_tier_distribution": {
+        "T2_targeted_criminal": "Realized maturity",
+        "T3_organised_state_proxy": "Demonstrated maturity",
+        "T4_state_directed": "Feasible maturity"
+      },
+      "enrichment_date": "2026-02-21",
+      "authors": ["Vinylwasp", "Vitruvius"],
+      "design_doc": "atlas-integration-design.md",
+      "notes": "155 ATLAS AI/ML techniques (AML.T-series) and 35 mitigations (AML.M-series) merged into existing technique and mitigation catalogs. All 35 mitigations mapped to SP 800-53 controls via design doc Section 4.3 (PRESCRIBES edges). 5 mitigations cross-referenced to ATT&CK equivalents via RELATED_TO edges. TACM tiers derived from ATLAS technique maturity levels. No ATLAS techniques at T1 — minimum is T2 (AI/ML-specific knowledge required)."
     }
   },
   "graph_summary": {
-    "total_edges": 14536,
+    "total_edges": 14697,
     "edge_types": {
-      "COUNTERS": 1445,
-      "PRESCRIBES": 2049,
-      "DETECTS": 691,
+      "COUNTERS": 1530,
+      "PRESCRIBES": 2126,
+      "DETECTS": 471,
       "DETECTED_BY": 2696,
       "IMPLEMENTED_BY": 468,
       "EXPLOITS": 1162,
       "USES": 2921,
       "CLASSIFIED_BY": 99,
       "PROVIDES_CAPABILITY": 99,
-      "TIER_CONTAINS": 469,
+      "TIER_CONTAINS": 624,
       "EXPLOITS_HUMAN": 31,
       "REQUIRES_PROTECTION": 140,
       "PROTECTS_DATA": 140,
@@ -391,12 +414,12 @@
       "TRANSITIONS_TO": 4,
       "INDICATED_BY": 16,
       "STAGE_DETECTED_BY": 26,
-      "PARENT_OF": 325,
+      "PARENT_OF": 383,
       "CAPABILITY_SUPPORTS_CIS": 246,
       "CAPABILITY_SUPPORTS_MITIGATION": 153,
       "SATISFIES": 119,
       "MITIGATES": 23,
-      "IMPLEMENTS_CLASS": 9,
+      "IMPLEMENTS_CLASS": 10,
       "USES_PROTOCOL": 13,
       "FEDERATES_TO": 10,
       "INSTANCE_OF": 80,
@@ -406,11 +429,12 @@
       "PROFILE_SCOPES_TIER": 51,
       "ZONE_HOSTS": 10,
       "ZONE_HOSTS_ENERGY": 16,
-      "ZONE_REQUIRES": 175
+      "ZONE_REQUIRES": 175,
+      "RELATED_TO": 5
     },
     "node_types": {
-      "technique": 472,
-      "mitigation": 44,
+      "technique": 627,
+      "mitigation": 79,
       "detection_strategy": 691,
       "control": 315,
       "cis_safeguard": 171,
@@ -460,13 +484,14 @@
       "vertical_profile_energy_path": "VerticalProfile -PROFILE_EXPECTS_ENERGY-> EnergyPlatformType (vertical profile to expected energy platform types)",
       "vertical_profile_tier_path": "VerticalProfile -PROFILE_SCOPES_TIER-> AdversaryTier (vertical profile to relevant adversary capability tiers)",
       "zone_hosting_path": "ZoneArchetype -ZONE_HOSTS-> FSPlatformType / -ZONE_HOSTS_ENERGY-> EnergyPlatformType (zone to hosted platform types)",
-      "zone_control_path": "ZoneArchetype -ZONE_REQUIRES-> Control (zone archetype to required security controls)"
+      "zone_control_path": "ZoneArchetype -ZONE_REQUIRES-> Control (zone archetype to required security controls)",
+      "atlas_crossref_path": "ATLAS Mitigation -RELATED_TO-> ATT&CK Mitigation (cross-framework equivalence for 5 shared mitigations)"
     },
-    "total_edge_types": 36
+    "total_edge_types": 37
   },
   "files": {
-    "technique-catalog.json": "469 ATT&CK techniques with mitigations[], detection_strategies[], weaknesses[], actors[], minTier back-references",
-    "mitigation-catalog.json": "44 ATT&CK mitigations with techniques[], controls[], cis_safeguards[]",
+    "technique-catalog.json": "627 techniques (472 ATT&CK + 155 ATLAS AI/ML) with mitigations[], detection_strategies[], weaknesses[], actors[], minTier back-references",
+    "mitigation-catalog.json": "79 mitigations (44 ATT&CK + 35 ATLAS AI/ML) with techniques[], controls[], cis_safeguards[]",
     "detection-catalog.json": "691 ATT&CK v18 detection strategies with techniques[]",
     "cis-safeguard-index.json": "171 CIS v8 safeguards with controls[] reverse index",
     "weakness-catalog.json": "135 CWE weakness classes with techniques[] via CAPEC bridge",
@@ -484,10 +509,10 @@
     "fs-platform-catalog.json": "43 TFSP financial services platform types across 10 categories with assurance framework mappings",
     "vertical-profile-catalog.json": "13 vertical profile entries (FS and energy) with platform type expectations and TACM tier scoping",
     "zone-archetype-catalog.json": "20 zone archetype entries with hosting relationships and control requirements",
-    "graph-edges.json": "13,856 explicit TRIDENT graph edges across 36 relationship types (includes vertical profile, zone archetype, and platform instance edges)",
+    "graph-edges.json": "14,697 explicit TRIDENT graph edges across 37 relationship types (includes ATLAS AI/ML, vertical profile, zone archetype, and platform instance edges)",
     "trident-model.json": "Single authoritative TRIDENT model definition — domains, node types, edge types, analytical paths",
     "metadata.json": "This file \u2014 provenance, version info, graph summary"
   },
   "attack_domain": "enterprise",
-  "last_updated": "2026-02-20"
+  "last_updated": "2026-02-21"
 }

@@ -1,0 +1,359 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "fda_21_cfr_11",
+  "framework_name": "FDA 21 CFR Part 11",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of 21 CFR Part 11 — Electronic Records; Electronic Signatures. Part 11 establishes criteria for acceptance of electronic records and electronic signatures by the FDA. SP 800-53 provides comprehensive information security controls that address many Part 11 technical requirements (access control, audit trails, system validation) but does not address FDA-specific concepts such as predicate rule compliance, open vs closed system distinctions, biometric/non-biometric signature requirements, or GxP validation methodology (IQ/OQ/PQ). Coverage reflects overlap between Part 11 technical controls and SP 800-53 control families, not GxP validation equivalence. Validate with qualified FDA compliance professionals for regulatory submission use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "§11.1",
+      "title": "Scope",
+      "controls": [
+        "PL-02", "PM-01", "PM-11", "RA-02"
+      ],
+      "coverage_pct": 45,
+      "rationale": "Part 11 scopes applicability to electronic records created, modified, maintained, archived, retrieved, or transmitted under any FDA-regulated predicate rule. PL-02 (Security and Privacy Plans) and PM-01 (Information Security Program Plan) establish scope for security programs. PM-11 (Mission and Business Process Definition) identifies business processes subject to regulatory requirements. RA-02 (Security Categorization) categorizes information systems by impact level, supporting determination of which systems fall under regulatory scope.",
+      "gaps": "Part 11 scope is defined by FDA predicate rules (e.g., 21 CFR 211 for cGMP, 21 CFR 820 for Quality System Regulation, 21 CFR 58 for GLP). SP 800-53 has no concept of predicate rule compliance, FDA regulatory scope, or the distinction between records required by regulation versus voluntary electronic records. The 2003 FDA Scope and Application guidance introduced a risk-based approach to Part 11 enforcement that has no NIST equivalent. Determination of Part 11 applicability requires FDA regulatory expertise, not information security controls."
+    },
+    {
+      "id": "§11.2",
+      "title": "Implementation — Risk-Based Approach",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-07",
+        "PM-09", "PM-11"
+      ],
+      "coverage_pct": 55,
+      "rationale": "The 2003 FDA guidance on Part 11 Scope and Application established a risk-based approach: organisations should evaluate their use of electronic records against FDA predicate rule requirements and implement Part 11 controls proportional to risk. RA-01/RA-03 (Risk Assessment Policy/Risk Assessment) provide a general risk assessment framework. RA-07 (Risk Response) addresses risk treatment decisions. PM-09 (Risk Management Strategy) establishes organisational risk management approach. PM-11 (Mission and Business Process Definition) supports identifying processes subject to Part 11.",
+      "gaps": "FDA's risk-based approach to Part 11 implementation is specific to GxP regulatory context: risk to product quality, patient safety, and data integrity — not information security risk as framed by SP 800-53. The FDA's Computer Software Assurance (CSA) guidance (2022) further refines this risk-based approach to validation, replacing the traditional GAMP5 validation lifecycle. SP 800-53 risk assessment does not address FDA-specific risk categories (patient safety, product quality, data reliability) or the regulatory concept of justified deviation from Part 11 controls."
+    },
+    {
+      "id": "§11.3",
+      "title": "Definitions — Electronic Record, Electronic Signature, Digital Signature",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "Section 11.3 provides FDA-specific definitions for key terms: electronic record (any combination of text, graphics, data, audio, pictorial, or other information in digital form created, modified, maintained, archived, retrieved, or transmitted by a computer system), electronic signature (a computer data compilation of any symbol or series of symbols executed by an individual to be the legally binding equivalent of a handwritten signature), digital signature (an electronic signature based on cryptographic methods of originator authentication), open system, closed system, and biometrics.",
+      "gaps": "These are FDA-specific legal definitions with no SP 800-53 equivalent. The distinction between electronic signatures and digital signatures is an FDA regulatory concept — SP 800-53 addresses cryptographic signatures (SC-13, AU-10) and authentication (IA family) but does not define the legal equivalence of electronic and handwritten signatures. The open system vs closed system distinction (defining the regulatory boundary based on whether the system's access is controlled by the responsible entity) is an FDA construct with no NIST counterpart."
+    },
+    {
+      "id": "§11.10(a)",
+      "title": "Closed Systems — Validation of Systems",
+      "controls": [
+        "SA-03", "SA-08", "SA-10", "SA-11", "SA-15", "SA-17",
+        "CA-02", "CA-07", "CM-04",
+        "SI-06"
+      ],
+      "coverage_pct": 65,
+      "rationale": "System validation is a cornerstone of Part 11 compliance — systems used to create, modify, maintain, or transmit electronic records must be validated to ensure accuracy, reliability, consistent intended performance, and the ability to discern invalid or altered records. SA-03 (System Development Life Cycle) provides development lifecycle governance. SA-08/SA-17 (Security Engineering Principles/Developer Security Architecture) support design documentation. SA-10/SA-11 (Developer Configuration Management/Developer Testing) address development controls and testing. SA-15 (Development Process, Standards, and Tools) covers development standards. CA-02 (Control Assessments) and CA-07 (Continuous Monitoring) provide ongoing validation assessment. CM-04 (Impact Analyses) addresses change impact assessment. SI-06 (Security Function Verification) supports functional verification.",
+      "gaps": "FDA system validation (IQ/OQ/PQ — Installation Qualification, Operational Qualification, Performance Qualification) is a GxP-specific methodology fundamentally different from SP 800-53 security assessment. Validation requires documented evidence that a system consistently produces results meeting predetermined specifications per 21 CFR 820.3(z). SP 800-53 does not address: the GAMP5 risk-based approach to validation, Computer Software Assurance (CSA) methodology, validation master plans, traceability matrices linking user requirements to test cases, formal validation protocols and reports, periodic re-validation, or the FDA expectation that validation documentation be available for inspection. This is the single largest gap between Part 11 and SP 800-53."
+    },
+    {
+      "id": "§11.10(b)",
+      "title": "Closed Systems — Generating Accurate and Complete Copies",
+      "controls": [
+        "CP-09", "SI-07",
+        "AU-09", "AU-11",
+        "SC-28"
+      ],
+      "coverage_pct": 72,
+      "rationale": "Part 11 requires the ability to generate accurate and complete copies of records in both human-readable and electronic form suitable for inspection, review, and copying by the FDA. CP-09 (System Backup) addresses creation of complete copies of data. SI-07 (Software, Firmware, and Information Integrity) ensures copy accuracy through integrity verification. AU-09 (Protection of Audit Information) protects audit trail copies. AU-11 (Audit Record Retention) addresses retention of records. SC-28 (Protection of Information at Rest) protects stored record copies.",
+      "gaps": "Part 11 specifically requires that copies be suitable for FDA inspection — meaning records must be producible in formats the FDA can review (e.g., PDF, XML, printed output). SP 800-53 addresses data backup and integrity but does not address: production of records in FDA-acceptable formats, the ability to reproduce records with all associated metadata and audit trails, export capabilities for regulatory submission (eCTD format for drug submissions), or the requirement that copies include electronic signatures and their associated manifestations. The concept of 'human-readable' copies of electronic records for regulatory inspection is FDA-specific."
+    },
+    {
+      "id": "§11.10(c)",
+      "title": "Closed Systems — Protection of Records for Accurate and Ready Retrieval",
+      "controls": [
+        "CP-09", "CP-06", "CP-10",
+        "SC-28", "MP-04",
+        "SI-12", "AU-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Records must be protected throughout their required retention period to enable their accurate and ready retrieval. CP-09 (System Backup) and CP-06 (Alternate Storage Site) ensure records are preserved and recoverable. CP-10 (System Recovery and Reconstitution) supports restoration. SC-28 (Protection of Information at Rest) protects stored records from tampering. MP-04 (Media Storage) addresses storage media protection. SI-12 (Information Management and Retention) provides the retention framework. AU-11 (Audit Record Retention) specifically addresses audit trail retention.",
+      "gaps": "FDA record retention periods are defined by predicate rules — some require records to be maintained for the life of a product plus additional years (e.g., device master records, batch records). SP 800-53 provides retention mechanisms but does not address FDA-specific retention schedules, the requirement for technology migration plans to ensure records remain readable across platform changes, or the need to maintain the ability to retrieve records when original systems are decommissioned. Long-term readability (20+ years for some drug products) is a challenge that goes beyond standard backup and recovery."
+    },
+    {
+      "id": "§11.10(d)",
+      "title": "Closed Systems — Limiting System Access to Authorised Individuals",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-05", "AC-06", "AC-07",
+        "AC-11", "AC-12",
+        "IA-01", "IA-02", "IA-04", "IA-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Part 11 requires limiting system access to authorised individuals. This is one of the strongest alignments with SP 800-53. AC-01 (Access Control Policies and Procedures) establishes governance. AC-02 (Account Management) provides account lifecycle management. AC-03 (Access Enforcement) implements access decisions. AC-05 (Separation of Duties) and AC-06 (Least Privilege) ensure appropriate access levels. AC-07 (Unsuccessful Logon Attempts) protects against brute-force attacks. AC-11/AC-12 (Device Lock/Session Termination) manage session security. IA-01/IA-02 (Identification and Authentication Policy/Organisational Users) require unique identification. IA-04/IA-05 (Identifier Management/Authenticator Management) govern credential lifecycle.",
+      "gaps": "Minimal technical gaps. SP 800-53 access controls are comprehensive. Part 11 frames access control specifically in the context of electronic records under predicate rules — access must be commensurate with the individual's role in the regulated process (e.g., QA reviewer, production operator, laboratory analyst). SP 800-53 does not prescribe GxP-specific role definitions or the concept that access authorisation must align with validated workflow responsibilities."
+    },
+    {
+      "id": "§11.10(e)",
+      "title": "Closed Systems — Secure, Computer-Generated, Time-Stamped Audit Trails",
+      "controls": [
+        "AU-01", "AU-02", "AU-03", "AU-04", "AU-05",
+        "AU-06", "AU-07", "AU-08", "AU-09", "AU-10",
+        "AU-11", "AU-12", "AU-14"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Part 11 §11.10(e) is the audit trail requirement: secure, computer-generated, time-stamped audit trails must independently record the date and time of operator entries and actions that create, modify, or delete electronic records. Audit trails must not be modified, and changes must not obscure previously recorded information. AU-02/AU-03/AU-12 (Event Logging/Content of Audit Records/Audit Record Generation) establish comprehensive logging of create, modify, and delete operations. AU-08 (Time Stamps) ensures accurate timestamps from a reliable time source. AU-09 (Protection of Audit Information) addresses the requirement that audit trails not be modifiable. AU-10 (Non-Repudiation) supports operator attribution. AU-11 (Audit Record Retention) addresses retention at least as long as the underlying records. AU-14 (Session Audit) adds detailed session tracking. AU-04/AU-05 ensure logging reliability. AU-06/AU-07 support review and reporting.",
+      "gaps": "Part 11 audit trails have specific FDA requirements beyond general audit logging: (1) trails must record the old value and new value for every field modification — not just that a change occurred; (2) trails must capture the reason for change (often required by predicate rules like cGMP); (3) audit trail records must be retained for the same period as the underlying electronic records; (4) audit trails must be available for FDA inspection and review as part of the electronic record. SP 800-53 AU controls capture events and protect audit data but do not require before/after value recording, reason-for-change capture, or alignment with FDA-specific retention periods."
+    },
+    {
+      "id": "§11.10(f)",
+      "title": "Closed Systems — Use of Operational System Checks",
+      "controls": [
+        "SI-07", "SI-10",
+        "CM-02", "CM-06", "CM-07",
+        "SA-11"
+      ],
+      "coverage_pct": 78,
+      "rationale": "Part 11 requires use of operational system checks to enforce permitted sequencing of steps and events as appropriate. SI-07 (Software, Firmware, and Information Integrity) verifies system integrity. SI-10 (Information Input Validation) enforces input constraints and validation rules. CM-02 (Baseline Configuration) and CM-06 (Configuration Settings) ensure systems operate in validated configurations. CM-07 (Least Functionality) restricts system capabilities to authorised functions. SA-11 (Developer Testing and Evaluation) validates that system checks function as designed.",
+      "gaps": "Part 11 operational system checks are workflow-specific: enforcing manufacturing step sequences (e.g., weighing before blending, environmental monitoring before batch release), preventing out-of-sequence operations in laboratory workflows, and ensuring that process steps follow validated procedures. SP 800-53 provides general integrity and input validation controls but does not address GxP-specific workflow enforcement, Manufacturing Execution System (MES) sequencing controls, or the concept of process-specific operational checks tied to validated manufacturing or laboratory procedures."
+    },
+    {
+      "id": "§11.10(g)",
+      "title": "Closed Systems — Use of Authority Checks",
+      "controls": [
+        "AC-02", "AC-03", "AC-05", "AC-06",
+        "AC-16", "AC-24"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Part 11 requires use of authority checks to ensure that only authorised individuals can use the system, electronically sign a record, access the operation or computer system input or output device, alter a record, or perform the operation at hand. AC-02 (Account Management) and AC-03 (Access Enforcement) implement role-based access. AC-05 (Separation of Duties) enforces segregation between operations (e.g., production vs QA). AC-06 (Least Privilege) restricts actions to those necessary for the user's role. AC-16 (Security and Privacy Attributes) supports attribute-based access control. AC-24 (Access Control Decisions) provides dynamic, context-aware authorisation.",
+      "gaps": "Part 11 authority checks are GxP-specific: ensuring that only a qualified QA manager can release a batch, only a validated analyst can approve laboratory results, or only an authorised physician can sign a clinical trial case report form. SP 800-53 provides the technical mechanisms for role-based and attribute-based access control but does not address the regulatory concept of authority based on GxP qualifications, training records, or FDA-defined functional responsibilities within a regulated process."
+    },
+    {
+      "id": "§11.10(h)",
+      "title": "Closed Systems — Use of Device Checks",
+      "controls": [
+        "IA-03", "IA-09",
+        "PE-20", "CM-08",
+        "AC-19"
+      ],
+      "coverage_pct": 78,
+      "rationale": "Part 11 requires use of device checks to determine the validity of the source of data input or operational instruction as appropriate. IA-03 (Device Identification and Authentication) provides device-level identification ensuring that data inputs originate from validated sources. IA-09 (Service Identification and Authentication) extends authentication to system services. PE-20 (Asset Monitoring and Tracking) tracks authorised devices. CM-08 (System Component Inventory) maintains inventory of authorised terminals and devices. AC-19 (Access Control for Mobile Devices) addresses mobile device validation.",
+      "gaps": "Part 11 device checks specifically address validation that data originates from the correct instrument, terminal, or workstation in a regulated environment — for example, ensuring laboratory data comes from a calibrated, qualified instrument, or that a manufacturing system instruction originates from an authorised control terminal. SP 800-53 provides device authentication and asset management but does not address FDA-specific concepts of instrument qualification, calibration status verification, or the linkage between device identity and GxP validation status."
+    },
+    {
+      "id": "§11.10(i)",
+      "title": "Closed Systems — Trained Personnel",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "AT-04",
+        "PS-01", "PS-02", "PS-03"
+      ],
+      "coverage_pct": 68,
+      "rationale": "Part 11 requires determination that persons who develop, maintain, or use electronic record/electronic signature systems have the education, training, and experience to perform their assigned tasks. AT-01 (Training Policy and Procedures) establishes the training program framework. AT-02 (Literacy Training and Awareness) covers general security awareness. AT-03 (Role-Based Training) provides specialised training for system administrators and developers. AT-04 (Training Records) documents training completion. PS-01/PS-02/PS-03 (Personnel Security Policy/Position Risk Designation/Personnel Screening) address personnel qualification and suitability.",
+      "gaps": "FDA training requirements under Part 11 and predicate rules are far more prescriptive than SP 800-53 training controls. GxP training requires: documented evidence of education, training, and experience for each individual in their assigned function; training on Standard Operating Procedures (SOPs) specific to their role; training records maintained per 21 CFR 211.25 (cGMP), 21 CFR 820.25 (QSR), or equivalent predicate rules; periodic re-qualification; and demonstration of competency — not just completion of training. SP 800-53 addresses security training but not GxP-specific competency assessment, SOP-based training programmes, or regulatory training recordkeeping requirements."
+    },
+    {
+      "id": "§11.10(j)",
+      "title": "Closed Systems — Written Policies for Electronic Signature Accountability",
+      "controls": [
+        "PL-01", "PL-02", "PL-04",
+        "PS-06", "PS-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "Part 11 requires establishment of, and adherence to, written policies that hold individuals accountable and responsible for actions initiated under their electronic signatures, to deter record and signature falsification. PL-01/PL-02 (Security Planning Policy/Security Plans) establish policy frameworks. PL-04 (Rules of Behavior) defines acceptable use and individual accountability. PS-06 (Access Agreements) formalises security obligations. PS-08 (Personnel Sanctions) provides the enforcement mechanism for policy violations.",
+      "gaps": "Part 11 signature accountability policies are specifically designed to establish the legal equivalence of electronic signatures with handwritten signatures under FDA regulations. This includes: policies explicitly stating that electronic signatures are legally binding, procedures addressing the consequences of signature falsification (which may include FDA regulatory action, not just organisational sanctions), and documentation that individuals understand and accept the legal significance of their electronic signatures. SP 800-53 addresses security accountability and sanctions but does not address the FDA-specific concept of signature legal equivalence, anti-falsification policies, or the regulatory consequences of electronic signature misuse under federal law."
+    },
+    {
+      "id": "§11.10(k)",
+      "title": "Closed Systems — Controls Over Systems Documentation",
+      "controls": [
+        "SA-05", "CM-03", "CM-05", "CM-09",
+        "PL-02", "SI-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Part 11 requires use of appropriate controls over systems documentation including adequate controls over the distribution of, access to, and use of documentation for system operation and maintenance. SA-05 (System Documentation) requires maintenance and protection of system documentation. CM-03 (Configuration Change Control) governs changes to system documentation. CM-05 (Access Restrictions for Change) restricts who can modify documentation. CM-09 (Configuration Management Plan) establishes documentation control procedures. PL-02 (Security and Privacy Plans) addresses security documentation. SI-12 (Information Management and Retention) covers documentation retention.",
+      "gaps": "Part 11 systems documentation requirements are aligned with GxP documentation practices: controlled document management with version control, formal review and approval workflows, controlled distribution lists, periodic review cycles, and archival procedures. SP 800-53 addresses system documentation and configuration management but does not prescribe the level of formal document control expected in GxP environments (e.g., SOPs with effective dates, change control numbers, training acknowledgements, and controlled copy distribution as required by 21 CFR 211.68 and 21 CFR 820.40)."
+    },
+    {
+      "id": "§11.30",
+      "title": "Controls for Open Systems",
+      "controls": [
+        "SC-08", "SC-12", "SC-13", "SC-17", "SC-23",
+        "SC-07", "AC-17",
+        "AU-10"
+      ],
+      "coverage_pct": 82,
+      "rationale": "Section 11.30 requires that open systems (where system access is not controlled by persons responsible for the content of electronic records) employ all §11.10 controls plus additional measures such as document encryption and use of appropriate digital signature standards to ensure record authenticity, integrity, and confidentiality as appropriate. SC-08 (Transmission Confidentiality and Integrity) provides encrypted communications. SC-12/SC-13 (Cryptographic Key Management/Cryptographic Protection) establish encryption framework. SC-17 (Public Key Infrastructure Certificates) supports digital signature infrastructure. SC-23 (Session Authenticity) protects session integrity. SC-07 (Boundary Protection) provides network segmentation. AC-17 (Remote Access) secures remote access. AU-10 (Non-Repudiation) supports digital signature requirements.",
+      "gaps": "Part 11's open/closed system distinction is based on whether the persons responsible for the content of electronic records also control system access — a regulatory concept with no SP 800-53 equivalent. For open systems, Part 11 requires 'appropriate digital signature standards' but does not specify which standards, leaving flexibility for FDA enforcement. SP 800-53 provides strong cryptographic and transmission controls but does not address the Part 11-specific categorisation of systems as open or closed, or the additional burden of proof that open system operators must meet for FDA acceptance of their electronic records."
+    },
+    {
+      "id": "§11.50",
+      "title": "Signature Manifestations",
+      "controls": [
+        "AU-02", "AU-03", "AU-12",
+        "AU-10"
+      ],
+      "coverage_pct": 60,
+      "rationale": "Section 11.50 requires that signed electronic records contain information associated with the signing that clearly indicates: (1) the printed name of the signer, (2) the date and time when the signature was executed, and (3) the meaning (e.g., review, approval, responsibility, authorship) associated with the signature. AU-02/AU-03/AU-12 (Event Logging/Content of Audit Records/Audit Record Generation) can capture signer identity and timestamps. AU-10 (Non-Repudiation) supports binding signer identity to actions.",
+      "gaps": "Part 11 signature manifestations are a specific regulatory display requirement with no direct SP 800-53 equivalent. SP 800-53 audit controls capture who did what and when, but Part 11 requires the meaning of the signature (review, approval, authorship, responsibility) to be explicitly displayed as part of the signed record — this is an application-level display requirement, not a security control. The signature manifestation must be visible to anyone reviewing the record, including FDA inspectors, and must persist as part of the record throughout its retention period. Application-level signature display and meaning capture are outside SP 800-53 scope."
+    },
+    {
+      "id": "§11.70",
+      "title": "Signature/Record Linking",
+      "controls": [
+        "AU-10", "SI-07",
+        "SC-08", "SC-28"
+      ],
+      "coverage_pct": 65,
+      "rationale": "Section 11.70 requires that electronic signatures and handwritten signatures executed to electronic records shall be linked to their respective electronic records to ensure that the signatures cannot be excised, copied, or otherwise transferred to falsify an electronic record by ordinary means. AU-10 (Non-Repudiation) provides cryptographic binding of actions to identities. SI-07 (Software, Firmware, and Information Integrity) ensures integrity of the signature-record linkage. SC-08 and SC-28 protect the integrity of records and signatures in transit and at rest.",
+      "gaps": "Part 11 signature/record linking is an anti-falsification requirement ensuring that electronic signatures are indelibly bound to the specific record version they were applied to. SP 800-53 provides integrity and non-repudiation controls, but Part 11 requires application-level design ensuring signatures cannot be 'excised, copied, or otherwise transferred' — this is a system design requirement addressing record authenticity, not a deployable security control. Digital signature technology (PKI, hash chaining) provides the technical mechanism, but the regulatory requirement for tamper-proof linking specific to FDA records is not addressed by SP 800-53."
+    },
+    {
+      "id": "§11.100(a)",
+      "title": "Electronic Signatures — Unique to One Individual",
+      "controls": [
+        "IA-02", "IA-04", "IA-05", "IA-08",
+        "AC-02"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Section 11.100(a) requires that each electronic signature be unique to one individual and shall not be reused by, or reassigned to, anyone else. IA-02 (Identification and Authentication) requires unique identification for all users. IA-04 (Identifier Management) governs the identifier lifecycle including preventing identifier reuse after a defined period. IA-05 (Authenticator Management) manages credentials ensuring uniqueness. IA-08 (Identification and Authentication of Non-Organisational Users) extends uniqueness to external users. AC-02 (Account Management) prohibits shared accounts.",
+      "gaps": "Minimal technical gaps. SP 800-53 strongly supports unique identification. Part 11 extends the uniqueness requirement beyond system credentials to the concept of electronic signatures as legally binding personal identifiers — once assigned, an electronic signature cannot be reassigned even after the individual leaves the organisation. IA-04 permits identifier reuse after a time period, which may conflict with Part 11's absolute prohibition on signature reassignment."
+    },
+    {
+      "id": "§11.100(b)",
+      "title": "Electronic Signatures — Identity Verification Before Assignment",
+      "controls": [
+        "IA-12", "IA-04", "IA-05",
+        "PS-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Section 11.100(b) requires that before an organisation establishes, assigns, certifies, or otherwise sanctions an individual's electronic signature, the organisation shall verify the identity of the individual. IA-12 (Identity Proofing) directly addresses identity verification before credential issuance. IA-04 (Identifier Management) and IA-05 (Authenticator Management) govern the assignment process. PS-03 (Personnel Screening) supports identity verification through background checks.",
+      "gaps": "Part 11 identity verification is specifically tied to assigning the legal authority to execute electronic signatures — a higher bar than general user account provisioning. The organisation must verify that the individual is who they claim to be before granting signature authority. SP 800-53 IA-12 provides identity proofing but does not address the FDA-specific context of certifying an individual's authority to execute legally binding electronic signatures on regulated records."
+    },
+    {
+      "id": "§11.100(c)",
+      "title": "Electronic Signatures — Certification to FDA",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "Section 11.100(c) requires that persons using electronic signatures must, prior to or at the time of such use, certify to the FDA that the electronic signatures in their system are intended to be the legally binding equivalent of traditional handwritten signatures. This certification must be submitted in paper form, signed with a traditional handwritten signature, to the FDA's Office of Regional Operations.",
+      "gaps": "This is a purely regulatory/administrative requirement with no information security control equivalent. Certification to the FDA is a legal declaration submitted on paper to a specific FDA office. SP 800-53 has no controls addressing regulatory agency certification, legal declarations of signature intent, or paper-based filings to government agencies. This requirement is entirely outside the scope of any information security framework."
+    },
+    {
+      "id": "§11.200(a)(1)",
+      "title": "Electronic Signature Components — Non-Biometric (Two Components)",
+      "controls": [
+        "IA-02", "IA-05", "IA-06", "IA-07"
+      ],
+      "coverage_pct": 82,
+      "rationale": "Section 11.200(a)(1) requires that electronic signatures not based on biometrics employ at least two distinct identification components such as an identification code (user ID) and password. IA-02 (Identification and Authentication) requires multi-factor identification. IA-05 (Authenticator Management) governs password and credential policies. IA-06 (Authentication Feedback) protects authentication entry from observation. IA-07 (Cryptographic Module Authentication) supports strong authentication mechanisms.",
+      "gaps": "Part 11's two-component requirement (identification code + password) predates modern multi-factor authentication terminology. While SP 800-53 IA-02 supports MFA, Part 11 specifically defines the two components as: (1) an identification code uniquely identifying the individual, and (2) a password known only to the individual. Part 11 does not mandate hardware tokens or biometric factors as SP 800-53 MFA enhancements do — the two-component approach is specific to the regulatory context. The FDA has not updated Part 11 to reflect modern MFA standards, creating an ambiguity about whether token-based or biometric second factors satisfy the 'password' component requirement."
+    },
+    {
+      "id": "§11.200(a)(1)(i)",
+      "title": "Non-Biometric Signatures — Continuous Session Controls",
+      "controls": [
+        "AC-11", "AC-12",
+        "IA-11",
+        "SC-10"
+      ],
+      "coverage_pct": 88,
+      "rationale": "When an individual executes a series of signings during a single continuous period of controlled system access, the first signing must employ all signature components (ID + password); subsequent signings may use at least one component designed to be used only by that individual. AC-11 (Device Lock) and AC-12 (Session Termination) manage session state. IA-11 (Re-Authentication) addresses re-authentication requirements within sessions. SC-10 (Network Disconnect) handles session connectivity.",
+      "gaps": "Part 11's continuous session signing model allows a reduced authentication requirement after the initial full signing — this is an FDA-specific workflow optimisation for regulated environments where multiple signatures may be required in sequence (e.g., reviewing and approving multiple batch records). SP 800-53 session controls do not distinguish between initial and subsequent authentication within a signing session, nor do they address the concept of reduced authentication for subsequent signings within a controlled session period."
+    },
+    {
+      "id": "§11.200(a)(1)(ii)",
+      "title": "Non-Biometric Signatures — Non-Continuous Session Controls",
+      "controls": [
+        "IA-02", "IA-05", "IA-11",
+        "AC-07", "AC-11"
+      ],
+      "coverage_pct": 90,
+      "rationale": "When signings are not performed during a single continuous period of controlled system access, each signing must employ all electronic signature components (both ID and password). IA-02 (Identification and Authentication) requires full authentication. IA-05 (Authenticator Management) governs credential usage. IA-11 (Re-Authentication) mandates re-authentication after session interruption. AC-07 (Unsuccessful Logon Attempts) protects against brute-force attacks between sessions. AC-11 (Device Lock) defines when sessions become non-continuous.",
+      "gaps": "Minimal gaps for the technical requirement. Part 11's definition of 'continuous period of controlled system access' is specific to the FDA regulatory context and may differ from standard session timeout definitions. The determination of when a session becomes 'non-continuous' (triggering full re-authentication for the next signature) is an application-level design decision not prescribed by SP 800-53."
+    },
+    {
+      "id": "§11.200(a)(2)",
+      "title": "Non-Biometric Signatures — Unique Identification Code/Password Pair",
+      "controls": [
+        "IA-02", "IA-04", "IA-05",
+        "AC-02"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Section 11.200(a)(2) requires that identification codes and passwords used in electronic signatures be uniquely paired — no two individuals may have the same combination of identification code and password. IA-02 (Identification and Authentication) requires unique identification. IA-04 (Identifier Management) ensures identifier uniqueness. IA-05 (Authenticator Management) governs password uniqueness policies. AC-02 (Account Management) prevents duplicate accounts.",
+      "gaps": "Minimal gaps. SP 800-53 unique identification requirements align well. The Part 11 requirement for unique ID/password pairing is a legacy requirement from the 1997 rule — modern identity management systems inherently prevent duplicate ID/password combinations through unique identifier assignment. SP 800-53 exceeds this baseline requirement."
+    },
+    {
+      "id": "§11.200(a)(3)",
+      "title": "Electronic Signatures — Biometric Requirements",
+      "controls": [
+        "IA-02", "IA-12",
+        "PE-19"
+      ],
+      "coverage_pct": 55,
+      "rationale": "Section 11.200(a)(3) states that electronic signatures based on biometrics shall be designed to ensure they cannot be used by anyone other than their genuine owners. IA-02 (Identification and Authentication) supports biometric authentication mechanisms. IA-12 (Identity Proofing) addresses identity verification for biometric enrolment. PE-19 (Information Leakage) partially addresses protection of biometric data from interception.",
+      "gaps": "Part 11 biometric requirements are minimal compared to modern biometric standards but are FDA-specific in context. SP 800-53 does not specifically address: biometric template protection, false acceptance rate (FAR) and false rejection rate (FRR) thresholds for regulatory acceptance, anti-spoofing requirements for biometric sensors in regulated environments, or the Part 11-specific requirement that biometric signatures 'cannot be used by anyone other than their genuine owners.' Biometric system validation in a GxP context (ensuring the biometric system itself is validated per Part 11 §11.10(a)) is not addressed by SP 800-53."
+    },
+    {
+      "id": "§11.300(a)",
+      "title": "Controls for ID Codes/Passwords — Maintaining Uniqueness",
+      "controls": [
+        "IA-04", "IA-05",
+        "AC-02"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Section 11.300(a) requires that persons who use electronic signatures based on identification codes and passwords employ controls to ensure their uniqueness. IA-04 (Identifier Management) directly governs identifier uniqueness policies including prohibiting identifier reuse. IA-05 (Authenticator Management) addresses password uniqueness and composition requirements. AC-02 (Account Management) ensures unique account assignment.",
+      "gaps": "Minimal gaps. SP 800-53 identifier and authenticator management controls comprehensively address uniqueness requirements. Part 11 requires that uniqueness be maintained throughout the lifetime of the electronic signatures, which aligns with IA-04 identifier lifecycle management."
+    },
+    {
+      "id": "§11.300(b)",
+      "title": "Controls for ID Codes/Passwords — Periodic Revision and Recall",
+      "controls": [
+        "IA-05",
+        "AC-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 11.300(b) requires that identification code and password issuances are periodically checked, recalled, or revised. IA-05 (Authenticator Management) addresses periodic password changes, password expiry policies, and credential refresh requirements. AC-02 (Account Management) includes periodic review of accounts to identify and remove unnecessary accounts.",
+      "gaps": "Modern NIST guidance (SP 800-63B) has moved away from periodic password rotation in favour of breach-detected rotation, while Part 11 still requires periodic revision. This creates a tension: Part 11's 1997 requirement for periodic password changes may conflict with current NIST best practice of not requiring routine password rotation. Organisations must balance FDA compliance expectations with modern authentication guidance."
+    },
+    {
+      "id": "§11.300(c)",
+      "title": "Controls for ID Codes/Passwords — Loss Management Procedures",
+      "controls": [
+        "IA-04", "IA-05",
+        "IR-06", "AC-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 11.300(c) requires following loss management procedures to electronically de-authorise lost, stolen, missing, or otherwise potentially compromised tokens, cards, and other devices that bear or generate identification code or password information, and to issue temporary or permanent replacements using suitable rigorous controls. IA-04/IA-05 (Identifier/Authenticator Management) address credential revocation and replacement. IR-06 (Incident Reporting) provides the mechanism for reporting compromised credentials. AC-02 (Account Management) supports account suspension and reactivation.",
+      "gaps": "Part 11 loss management specifically addresses physical devices (tokens, cards) bearing credential information — a requirement that predates modern mobile authenticator and cloud-based credential concepts. SP 800-53 addresses credential revocation and replacement comprehensively. Minor gap: Part 11 requires 'suitable rigorous controls' for replacement issuance, which in a GxP context may require documented identity re-verification, supervisory approval, and audit trail entries for each replacement event — more prescriptive than standard SP 800-53 credential replacement procedures."
+    },
+    {
+      "id": "§11.300(d)",
+      "title": "Controls for ID Codes/Passwords — Transaction Safeguards",
+      "controls": [
+        "SC-08", "SC-13", "SC-23",
+        "AC-17", "IA-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Section 11.300(d) requires use of transaction safeguards to prevent unauthorised use of passwords and/or identification codes, and to detect and report in an immediate and urgent manner any attempts at their unauthorised use to the system security unit, and as appropriate, to organisational management. SC-08 (Transmission Confidentiality and Integrity) protects credentials in transit. SC-13 (Cryptographic Protection) supports credential encryption. SC-23 (Session Authenticity) prevents session hijacking. AC-17 (Remote Access) secures remote credential transmission. IA-06 (Authentication Feedback) prevents credential observation during entry.",
+      "gaps": "Part 11 requires 'immediate and urgent' reporting of unauthorised credential use to the 'system security unit' — a more prescriptive alerting requirement than general SP 800-53 incident reporting. SP 800-53 provides comprehensive transmission security and monitoring but does not prescribe the urgency level or specific organisational unit for credential compromise notification as Part 11 does. The concept of a designated 'system security unit' receiving real-time credential misuse alerts is a Part 11-specific organisational requirement."
+    },
+    {
+      "id": "§11.300(e)",
+      "title": "Controls for ID Codes/Passwords — Initial and Periodic Testing",
+      "controls": [
+        "CA-02", "CA-08",
+        "SI-06", "IA-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Section 11.300(e) requires initial and periodic testing of devices such as tokens or cards that bear or generate identification code or password information to ensure that they function properly and have not been altered in an unauthorised manner. CA-02 (Control Assessments) provides a framework for periodic security testing. CA-08 (Penetration Testing) validates security mechanisms. SI-06 (Security Function Verification) addresses functional verification of security devices. IA-05 (Authenticator Management) covers authenticator device management.",
+      "gaps": "Part 11 device testing requirements are specific to authentication tokens and credential-bearing devices in a GxP-validated environment — testing must demonstrate that devices function within validated parameters and have not been tampered with. SP 800-53 addresses security testing generally but does not prescribe: validation testing protocols for authentication devices (as distinct from general IT device testing), tamper-detection testing for credential devices, or the documentation requirements for device testing in a GxP context (test protocols, results, and acceptance criteria per validation methodology)."
+    }
+  ],
+  "summary": {
+    "total_clauses": 30,
+    "average_coverage": 73.0,
+    "full_count": 12,
+    "substantial_count": 12,
+    "partial_count": 4,
+    "weak_count": 0,
+    "none_count": 2
+  }
+}

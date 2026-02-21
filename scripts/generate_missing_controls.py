@@ -24,7 +24,7 @@ FRAMEWORK_KEYS = [
     "iso_27001_2022", "iso_27002_2022", "cobit_2019", "pci_dss_v4",
     "nist_csf_2", "cis_controls_v8", "soc2_tsc", "finos_ccc",
     "iso_42001_2023", "iec_62443", "asd_e8", "nis2", "apra_cps_234",
-    "mas_trm", "uk_pra_fca", "bsi_grundschutz", "anssi", "osfi_b13",
+    "mas_trm", "pra_op_resilience", "bsi_grundschutz", "anssi", "osfi_b13",
     "finma_circular", "gdpr", "dora",
 ]
 

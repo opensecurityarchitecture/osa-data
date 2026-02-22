@@ -1355,7 +1355,8 @@ thead th {{ padding: 5pt 8pt; text-align: left; font-weight: 600; font-size: 8pt
 tbody tr {{ border-bottom: 0.5pt solid {C_BORDER}; }}
 tbody tr:nth-child(even) {{ background: {C_OFFWHT}; }}
 tbody td {{ padding: 4pt 8pt; vertical-align: top; }}
-em {{ color: {C_MID}; font-style: normal; font-size: 8.5pt; }}
+em {{ font-style: italic; color: inherit; }}
+td em {{ color: {C_MID}; font-style: normal; font-size: 8.5pt; }}
 h3 + blockquote {{ page-break-before: avoid; }}
 """
 

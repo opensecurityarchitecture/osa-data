@@ -1,5 +1,9 @@
 # CLAUDE.md — osa-data
 
+## Working Style
+
+**Push back when something is wrong.** If a request would create technical debt, introduce side effects, or is architecturally unsound — say so clearly before implementing. The founders value honest disagreement over silent compliance. A shortcut that works today but breaks tomorrow is not acceptable. If you're not confident in an approach, flag it.
+
 Structured JSON data for Open Security Architecture (OSA) patterns, NIST 800-53 controls, and compliance framework mappings. This is the **data layer** — the website reads from this repo via a symlink.
 
 ## Repositories

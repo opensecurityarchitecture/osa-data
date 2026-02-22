@@ -6,6 +6,9 @@
   "type": "object",
   "required": [
     "description",
+    "graph_version",
+    "graph_schema_version",
+    "graph_build_id",
     "data_layers",
     "graph_summary",
     "files",
@@ -19,6 +22,47 @@
       "type": "string",
       "minLength": 1,
       "description": "Human-readable description of this dataset"
+    },
+    "graph_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version for the graph data (major.minor.patch)"
+    },
+    "graph_schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Must match trident-model.json version. Website build fails on mismatch."
+    },
+    "graph_build_id": {
+      "type": "string",
+      "description": "ISO timestamp of last graph build"
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["version", "date", "type", "changes"],
+        "additionalProperties": false,
+        "properties": {
+          "version": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "type": { "type": "string", "enum": ["major", "minor", "patch"] },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["category", "action", "description"],
+              "additionalProperties": false,
+              "properties": {
+                "category": { "type": "string" },
+                "action": { "type": "string", "enum": ["add", "modify", "remove"] },
+                "description": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "description": "Version history of graph changes"
     },
     "data_layers": {
       "type": "object",
@@ -80,8 +124,18 @@
     "files": {
       "type": "object",
       "minProperties": 1,
-      "additionalProperties": { "type": "string" },
-      "description": "Descriptions of each data file in the attack/ directory"
+      "additionalProperties": {
+        "type": "object",
+        "required": ["description", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "description": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "entity_count": { "type": "integer", "minimum": 0 },
+          "last_modified": { "type": "string" }
+        }
+      },
+      "description": "Data files with integrity checksums and metadata"
     },
     "attack_domain": {
       "type": "string",

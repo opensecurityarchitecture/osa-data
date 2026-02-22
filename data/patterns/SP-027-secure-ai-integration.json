@@ -1,8 +1,8 @@
 {
   "id": "SP-027",
-  "slug": "secure-ai-integration",
-  "title": "Secure AI Integration Pattern",
-  "description": "Security architecture for integrating AI agents, LLMs, and autonomous multi-agent systems into enterprise environments. Covers agent identity, prompt security, data classification, tool authorisation, orchestration trust, and human-in-the-loop controls.",
+  "slug": "secure-llm-usage",
+  "title": "Secure LLM Usage",
+  "description": "Security architecture for integrating large language models (LLMs) into enterprise environments. Covers prompt injection and jailbreaking defences, output validation, provider security, privacy inference attacks on fine-tuned models, model extraction, and LLM interaction audit. For AI agents and agentic frameworks, see SP-047. For enterprise AI governance, see SP-045.",
   "url": "https://www.opensecurityarchitecture.org/patterns/sp-027",
   "metadata": {
     "release": "26.02",
@@ -10,131 +10,122 @@
     "status": "draft",
     "type": "pattern",
     "datePublished": "2026-02-06",
-    "dateModified": "2026-02-06",
+    "dateModified": "2026-02-22",
     "authors": [
       "Aurelius",
       "Vitruvius"
     ],
     "reviewers": [],
-    "provenance": "Written collaboratively between a human security architect and an AI agent operating under the controls described in this pattern. The threat model, control selections, and implementation guidance are derived from direct operational experience of AI-assisted software engineering, security architecture, and infrastructure management."
+    "provenance": "Refocused from Secure AI Integration (covering agents and LLMs) to Secure LLM Usage (model-layer risks only). Agent and agentic framework security has been consolidated in SP-047. LLM-specific threats added: jailbreaking, model extraction, and privacy inference attacks on fine-tuned models. Content derived from OWASP LLM Top 10, NIST AI 100-2, MITRE ATLAS, and direct operational experience of LLM integration security."
   },
   "diagram": {
     "svg": "/images/sp-027-secure-ai-integration.svg",
     "png": ""
   },
   "content": {
-    "description": "Organisations are rapidly integrating AI agents into enterprise operations: code assistance, security analysis, document review, infrastructure management, and autonomous task execution. Unlike traditional software integrations, AI agents introduce fundamentally different security properties. They operate on a spectrum of autonomy from fully supervised to fully autonomous. They consume and produce unstructured data where traditional input validation is insufficient. They exhibit emergent behaviour that cannot be fully predicted from their configuration. And they may chain actions across multiple systems in ways that create transitive trust relationships.\n\nThis pattern identifies four deployment models, each with escalating security requirements: (1) Chat-only assistants with no tool access, where data classification and prompt security are primary concerns; (2) Tool-augmented agents with read/write access to files, APIs, or databases, where authorisation and audit become critical; (3) Orchestrated multi-agent systems where agents delegate tasks to sub-agents, introducing delegation trust and privilege propagation risks; (4) Autonomous agent swarms operating across organisational boundaries with minimal human oversight, requiring the full control set.\n\nThe pattern addresses the security architecture required to deploy AI agents safely within an enterprise at any point on this spectrum. It is deliberately practical: the controls, threats, and mitigations described here were derived from real operational experience. This pattern was itself authored collaboratively between a human security architect and an AI agent with access to shell, file system, version control, and remote servers -- using the controls and principles documented here.",
+    "description": "Large language models introduce fundamentally new security risks compared to traditional software components. A conventional application receives structured inputs, processes them through deterministic logic, and returns predictable outputs. An LLM receives natural language that cannot be formally validated, reasons through processes that are opaque to the caller, and produces outputs that are probabilistic and non-deterministic. These properties — not the power of the model, but the nature of its inputs and outputs — define the LLM security problem.\n\nThis pattern covers the model layer: the security risks that exist whenever an organisation uses an LLM, regardless of whether it is accessed via a chat interface, called through an API, used as the foundation for an agent, or fine-tuned on enterprise data. The threats addressed here — prompt injection, jailbreaking, hallucination, provider-side data exposure, privacy inference attacks on training data, and model extraction — are properties of the LLM interaction itself.\n\nScope: this pattern addresses the LLM model layer. For security architecture of AI agents that take autonomous actions, invoke tools, and orchestrate sub-agents, see SP-047 (Secure Agentic AI Frameworks). For the enterprise governance management system — training data governance, bias, transparency, and impact assessment — see SP-045 (AI Governance and Responsible AI). Reading order for enterprise AI security: SP-027 (LLM layer) → SP-047 (agent/framework layer) → SP-045 (governance layer).",
     "keyControlAreas": [
-      "Agent Identity & Authentication (IA-02, IA-03, IA-04, IA-05): AI agents must have distinct, non-shared identities in enterprise systems. API keys and tokens should be scoped per-agent, rotated automatically, and never embedded in conversation context. In multi-agent architectures, agent-to-agent authentication must prevent impersonation -- an orchestrator spawning a sub-agent must authenticate the delegation, and the sub-agent must verify its orchestrator. Service accounts for AI agents should be tagged as non-human identities in IAM systems to enable distinct policy application and audit filtering.",
-      "Data Classification for AI Contexts (AC-04, PT-02, PT-03, SC-04): Every piece of data entering an AI prompt or conversation context must be classified. Context windows create implicit data aggregation risk: individually innocuous data points may be sensitive in combination. Implement tiered context policies: public data flows freely, internal data requires justification, confidential data requires explicit approval, and restricted data (credentials, PII, regulated data) must never enter a context window without technical controls ensuring it cannot be persisted or exfiltrated. Pay particular attention to information remnance (SC-04) -- data removed from a prompt may persist in model provider logs, fine-tuning datasets, or agent memory stores.",
-      "Prompt Security (SI-10, SI-03, SC-07): Prompt injection is the SQL injection of the AI era. Direct injection attempts to override system instructions via user input. Indirect injection embeds malicious instructions in content the agent fetches or processes -- tool outputs, web pages, documents, even image metadata. Defence requires: strict separation between system instructions and user/tool content; output validation before the agent acts on parsed data; content sanitisation for tool results; and boundary protection (SC-07) between the agent's execution context and untrusted content sources. System prompts should be treated as security policy and protected from extraction or override.",
-      "Tool & Action Authorisation (AC-03, AC-06, CM-07): Apply least privilege rigorously. Define explicit tool allowlists -- what an agent can read, write, execute, push, and delete. Categorise actions by reversibility and blast radius: file reads are low-risk and can be auto-approved; file writes are medium-risk; git pushes, API calls to external services, and destructive operations (delete, drop, kill) are high-risk and should require human approval. Implement permission modes that users can escalate or restrict per session. The principle of least functionality (CM-07) means agents should only have access to the tools required for their current task, not a superset of all possible tools.",
-      "Agent Orchestration & Delegation Trust (AC-05, AC-01): When an agent spawns sub-agents or delegates tasks, security context must not silently escalate. The delegation chain must be explicit and auditable. A sub-agent should inherit at most the permissions of its parent, never exceed them. Shared context between agents in a swarm must be treated as a trust boundary -- one compromised agent (e.g., via indirect prompt injection through a fetched document) must not be able to poison the entire swarm's context. Implement separation of duties (AC-05): the agent that proposes an action should not be the same agent that approves it.",
-      "Memory & Persistence Security (SC-04, CM-02): Persistent agent memory enables productivity across sessions but creates new attack surfaces. Memory stores may contain sensitive data accumulated over time. Memory poisoning attacks plant false context that influences future sessions -- an attacker who can write to an agent's memory can persistently alter its behaviour. Controls: encrypt memory at rest, enforce retention policies, implement integrity checks on memory contents, isolate memory between tenants and security contexts, and provide users with visibility into and control over what the agent remembers. Establish baseline configurations (CM-02) for memory scope and retention.",
-      "Model Supply Chain (SR-01, SR-02, SR-03, SA-04, SA-09): AI model providers are critical third-party dependencies. Assess provider security practices, data handling commitments, and incident response capabilities. Model updates can silently change agent behaviour in security-relevant ways -- a model that previously refused a dangerous action may comply after an update, or vice versa. Pin model versions where possible and test security-relevant behaviours after updates. For self-hosted models, verify model provenance and integrity. Evaluate concentration risk: if your security tooling, code review, and infrastructure management all depend on a single model provider, a provider outage or compromise has cascading impact.",
-      "Human-in-the-Loop Controls (AC-05, PS-06): Define clear approval checkpoints calibrated to action severity. Not every action needs human review -- that creates fatigue and negates AI productivity benefits. Instead, categorise: auto-approve low-risk reversible actions, notify-and-proceed for medium-risk actions, and require explicit approval for high-risk actions (destructive operations, external communications, production deployments, financial transactions). The human must be able to understand and meaningfully review what they are approving -- agent actions presented in opaque or overwhelming formats undermine the control. Access agreements (PS-06) should explicitly address AI-assisted work and the human's residual accountability.",
-      "Audit & Observability (AU-02, AU-03, AU-06, CA-07): Log every agent action, tool invocation, data access, and decision point. Audit records must include: who initiated the session, what model and version was used, what tools were invoked with what parameters, what data was accessed, what outputs were produced, and what approval decisions were made. Enable forensic reconstruction of complete agent sessions. Implement continuous monitoring (CA-07) with anomaly detection for agent behaviour patterns: unusual tool usage, unexpected data access, actions outside normal operating hours, or sudden changes in behaviour after model updates. Retain audit logs independently of the agent and its provider."
+      "Data Classification for LLM Contexts (AC-04, PT-02, PT-03, SC-04): Every piece of data entering an LLM prompt or conversation context must be classified. Context windows create implicit data aggregation risk: individually innocuous data points may become sensitive in combination. Implement tiered context policies: public data flows freely, internal data requires justification, confidential data requires explicit approval, and restricted data (credentials, PII, regulated data) must never enter a context window without technical controls ensuring it cannot be persisted or exfiltrated. Information remnance (SC-04) is a specific risk: data shared with an LLM provider may persist in provider-side logs, training pipelines, or session caches beyond the user's awareness. PT-02 and PT-03 ensure lawful authority exists before personal data enters a context window, satisfying GDPR and equivalent privacy law obligations.",
+      "Prompt Security (SI-10, SI-03, SC-07): Prompt injection is the SQL injection of the AI era — an attacker who controls input content can subvert the LLM's intended behaviour. Direct injection attempts to override system instructions via user-supplied text. Indirect injection embeds malicious instructions in content the LLM fetches or processes: tool outputs, web pages, documents, PDFs, even image metadata. Defence requires strict separation between system instructions and user or retrieved content; output validation before the LLM's parsed data drives any action; content sanitisation for external content; and boundary protection (SC-07) between the LLM's context and untrusted content sources. System prompts should be treated as security policy: protect them from extraction and override, and never assume the LLM will enforce their constraints without application-level controls.",
+      "Jailbreaking and Safety Feature Bypass (SI-10, AC-03, SA-11): Jailbreaking refers to adversarial prompts that circumvent the LLM's built-in safety constraints — role-play scenarios ('pretend you are an AI without restrictions'), hypothetical framing, encoding tricks, and many-shot prompting that gradually shifts the model's response pattern. In enterprise contexts, safety features protect both ethical use and business policy enforcement: a safety bypass that produces harmful content also indicates a policy enforcement failure. Controls: red-team LLM safety boundaries as part of pre-deployment security testing (SA-11) to characterise the model's actual safety envelope; deploy application-layer guardrails that complement but do not solely rely on model-level safety mechanisms; monitor for anomalous prompt patterns indicative of jailbreak attempts; treat the model's built-in safety constraints as a baseline that must be reinforced by application-layer access enforcement (AC-03), not as a complete solution.",
+      "Output Validation and Hallucination Risk (SI-10, CA-07, SA-11): LLMs hallucinate — they produce plausible-sounding but factually incorrect outputs with apparent confidence. The security implications are direct: an AI-generated firewall rule that misinterprets the requirement, a compliance check citing a non-existent regulation, a vulnerability report fabricating CVE details, or infrastructure-as-code with a subtle misconfiguration. Controls: define output verification requirements scaled to the decision stakes (lower for informational output, mandatory human review for configuration changes, policy decisions, or security findings); never use LLM output as the sole authority for security decisions; implement continuous monitoring (CA-07) of LLM output quality with anomaly detection for output pattern shifts that may indicate model degradation or adversarial manipulation; include hallucination boundary testing in developer security testing (SA-11) for any LLM-integrated application.",
+      "Provider Security and Data Residency (SA-09, SA-04, PT-02): LLM providers are critical third-party dependencies. Assess provider security posture: SOC 2 Type II reports, data processing agreements (DPAs), breach notification commitments, and subprocessor chains. Data residency requirements must be met through regional API endpoint selection where providers offer it. Request explicit opt-out from training on your prompts and completions; seek zero data retention agreements for sensitive workloads. For fine-tuning and RAG scenarios, confirm that uploaded data is not used to improve the base model without consent. Evaluate provider concentration risk: if enterprise security tooling, code review, and infrastructure management all depend on a single model provider, a provider outage or compromise has cascading impact. SA-04 acquisition controls apply at the point of provider onboarding and annual review.",
+      "Privacy Inference Attacks on Fine-Tuned Models (PT-02, PT-03, RA-08): When an LLM is fine-tuned on enterprise data, two privacy attacks become relevant. Membership inference: an adversary queries the model in patterns designed to probabilistically determine whether a specific individual's data was in the training set — creating GDPR liability if data was processed without lawful basis or consent. Model inversion: systematic querying to reconstruct examples from the training data, potentially exposing PII, source code, or confidential content. Enterprise relevance: these attacks apply whenever fine-tuning uses customer records, employee data, proprietary documents, or any personally identifiable information. Mitigations: differential privacy techniques in fine-tuning pipelines, strict data minimisation before fine-tuning (only use data necessary and with clear lawful basis), careful review of fine-tuning datasets against these attack vectors. RA-08 (Privacy Impact Assessments) must be conducted before fine-tuning on any personal data, with membership inference risk explicitly identified as a privacy harm vector.",
+      "Model Extraction and System Prompt Protection (SR-02, SA-09, AU-02): Model extraction is systematic API querying designed to approximate or replicate a fine-tuned proprietary model — stealing the intellectual property and competitive advantage embedded in the fine-tuning investment. For organisations with proprietary fine-tuned models, rate limiting, query pattern monitoring (AU-02), and API key scoping are the primary defences. System prompt extraction — inferring or eliciting the system prompt through adversarial queries — leaks business logic, constraint definitions, and the organisation's AI configuration. Treat system prompts as security policy documents: classify them at the same level as the business logic they encode, never include them in logs or error messages, and implement application-layer controls to prevent their disclosure. SR-02 (Supply Chain Risk Management) covers the model itself as a supply chain dependency — pin model versions and test security-relevant behaviours after provider updates.",
+      "Audit of LLM Interactions (AU-02, AU-03, AU-06, CA-07): Log every LLM interaction with sufficient detail for forensic reconstruction: the initiating identity, the model and version used, the system prompt identifier (not content — the reference, to avoid logging sensitive prompts in plaintext), a hash of the user prompt, the response or a hash of it, and the timestamp. For tool-augmented or agentic use, also log what tool invocations were triggered by LLM outputs. Enable anomaly detection (CA-07) for interaction patterns: unusual prompt volumes, queries to topics outside normal usage, or output patterns inconsistent with the model's typical behaviour. Audit records (AU-03) must support attribution of LLM-assisted decisions to the human who initiated the session, maintaining accountability even when the model does the drafting. Retain audit logs independently of the LLM provider."
     ],
-    "assumptions": "AI agents require API access to cloud-hosted model services (Anthropic, OpenAI, Google, etc.) and operate over network connections subject to standard transport security controls. The pattern assumes a spectrum of deployment models from supervised chat to autonomous swarms; organisations should implement controls proportionate to their position on this spectrum. Some agents operate semi-autonomously with periodic human oversight rather than step-by-step approval. Multi-agent architectures coordinate via shared context, message passing, or orchestration layers. AI agents may access sensitive data including source code, infrastructure credentials, and personally identifiable information as part of legitimate operations. Model capabilities are advancing rapidly -- controls designed for current capabilities may be insufficient within 6-12 months. This pattern should be reviewed and updated at shorter intervals (quarterly) than traditional patterns.",
-    "typicalChallenges": "Prompt injection via tool outputs, user content, or fetched web pages remains the most prevalent and difficult-to-mitigate attack vector, analogous to SQL injection in early web applications. Data leakage through model context windows, persistent memory, or provider-side logging is difficult to detect and may violate data residency or privacy requirements. Auditing autonomous agent decisions is inherently challenging: reasoning chains may be opaque, hallucinated justifications can appear convincing, and the volume of actions in a productive session makes manual review impractical. Credential and secret management in AI-accessible environments requires careful architecture -- agents need access to perform their tasks but secrets must not appear in conversation contexts that may be logged or persisted. Meaningful human oversight without productivity-destroying bottlenecks requires thoughtful categorisation of action severity. Shadow AI -- unauthorised use of AI tools outside governed channels -- is pervasive and difficult to detect, particularly when employees use personal devices or browser-based tools. Model provider lock-in creates strategic risk, especially when agents develop provider-specific tool integrations. The pace of capability change means security controls require continuous reassessment.",
-    "indications": "Organisation uses AI assistants for code development, security analysis, document review, or operational tasks. AI agents have access to production systems, source code, version control, CI/CD pipelines, or sensitive data. Multi-agent or swarm architectures are deployed or planned for complex workflows. Autonomous agent actions affect shared systems and require governance. Organisation is building products or services that incorporate AI agents as components. Employees are using AI tools for security-sensitive work including threat modelling, vulnerability analysis, or incident response.",
-    "contraIndications": "Organisation has no AI integration plans and no exposure to AI-assisted tooling in any operational capacity. AI usage is strictly limited to isolated, air-gapped, non-sensitive tasks with no system access, no network connectivity, and no access to enterprise data. Note: this contra-indication is increasingly rare -- even organisations that do not formally deploy AI agents may have employees using AI tools informally.",
-    "threatResistance": "Prompt injection -- both direct (system prompt override via user input) and indirect (malicious instructions embedded in tool outputs, fetched web content, documents, or code comments). Data exfiltration through AI context windows, persistent memory, or provider-side telemetry. Unauthorised autonomous actions including privilege escalation, destructive operations, and unintended external communications. Model supply chain compromise through poisoned models, malicious fine-tuning, or compromised model provider infrastructure. Session hijacking and context poisoning where an attacker manipulates the conversation to alter agent behaviour. Credential exposure when secrets appear in conversation contexts that are logged, persisted, or transmitted to model providers. Memory persistence attacks where false context is planted to influence future agent sessions. Social engineering amplified by AI-generated content that is more convincing and scalable than human-crafted attacks. Delegation chain exploitation in multi-agent systems where a compromised sub-agent escalates privileges through its orchestrator. Denial of service through resource-intensive AI operations or API abuse."
+    "assumptions": "Organisations access LLMs via cloud API services (Anthropic, OpenAI, Google, Azure OpenAI) over TLS-protected network connections. The pattern covers any use of LLMs: direct API integration, embedded enterprise products (Microsoft 365 Copilot, GitHub Copilot, Gemini for Workspace), and fine-tuned models on enterprise data. Some organisations additionally deploy open-weight models (Llama, Mistral) self-hosted on-premises, where provider-side risks shift but model-layer risks remain. The security risks addressed here apply at the model interaction layer regardless of whether the LLM underlies a chat interface, an application, or an agent. For security of AI agents that take autonomous actions and invoke tools, see SP-047 (Secure Agentic AI Frameworks). Model capabilities and the associated attack surface are advancing rapidly — this pattern should be reviewed quarterly.",
+    "typicalChallenges": "Prompt injection defence maturity remains at the equivalent of early SQL injection — the vulnerability class is well-understood but reliable systematic defences do not exist. No framework equivalent to parameterised queries has emerged for prompt injection, and mitigations (input/output filtering, canary tokens, instruction hierarchy) reduce risk but can be bypassed by determined attackers. Provider-side data handling is contractually constrained but practically opaque: what providers log, retain, and potentially use for training is difficult to audit independently. Privacy inference attacks on fine-tuned models (membership inference, model inversion) require ML engineering competence to assess and mitigate that most security teams have not yet developed. Output validation is inherently difficult — there is no deterministic way to verify LLM output correctness, and human review of high-volume LLM output at scale is impractical. Jailbreak techniques evolve continuously as researchers and attackers discover new ways to probe model safety constraints — defences effective today may fail after model updates. Provider lock-in grows as fine-tuned models and proprietary system prompts become tied to specific provider APIs.",
+    "indications": "Organisation uses LLMs via API or embedded enterprise products (Microsoft 365 Copilot, GitHub Copilot, Gemini for Workspace) for business-sensitive tasks including data processing, analysis, or decision support. LLMs are integrated into enterprise applications as a component. Organisation has or is planning to fine-tune LLMs on enterprise data including customer records, employee data, or proprietary content. LLMs are used in security tooling: AI-assisted SIEM analysis, AI-augmented code review, AI-based threat intelligence. Employees use consumer LLM tools for work purposes, introducing enterprise data into provider-side systems.",
+    "contraIndications": "Organisation has no AI integration plans and no employee exposure to LLM tools in any operational capacity. AI usage is strictly limited to isolated, air-gapped, non-sensitive tasks with no enterprise data input. Note: this contra-indication is increasingly rare — even organisations that do not formally deploy LLMs may have employees using AI tools informally, and many enterprise SaaS products now embed LLMs by default.",
+    "threatResistance": "Prompt injection — direct (system prompt override via user input) and indirect (malicious instructions embedded in fetched content, documents, or tool outputs) — addressed through strict instruction/data separation, output validation before LLM-parsed data drives any action, and boundary protection preventing untrusted content from reaching the system prompt context. Jailbreaking and safety feature bypass defended through adversarial pre-deployment testing that characterises the model's actual safety envelope, application-layer guardrails that complement model-level safety, and anomaly monitoring for adversarial prompt patterns. Hallucination-driven misconfiguration mitigated by output verification requirements scaled to decision stakes and mandatory human review for security-critical outputs — never using LLM output as the sole authority for security decisions. Provider-side data exposure addressed through DPAs, training opt-out agreements, zero data retention where required, and data classification controls governing what enters context windows. Privacy inference attacks on fine-tuned models (membership inference, model inversion) mitigated through privacy impact assessments before fine-tuning, differential privacy in training pipelines, and strict data minimisation in fine-tuning datasets. Model extraction and system prompt leakage addressed through rate limiting, query pattern monitoring, and treating system prompts as classified security policy documents. AI-amplified social engineering addressed through awareness training calibrated to the scale and sophistication of AI-generated phishing and pretexting."
   },
   "examples": {
-    "Chat-only assistants (Deployment Model 1)": [
-      "ChatGPT, Claude.ai, Gemini used via browser for research, drafting, and analysis",
-      "Microsoft Copilot in Office 365 for document and email assistance",
-      "GitHub Copilot code completion (suggestion mode, no tool access)"
+    "Chat and completion APIs": [
+      "OpenAI GPT-4o and Claude API called from enterprise applications for text analysis, summarisation, and structured data extraction",
+      "Google Gemini API for document processing pipelines with enterprise data residency requirements",
+      "Azure OpenAI Service for regulated-industry deployments with data residency, DPA, and zero-retention configurations"
     ],
-    "Tool-augmented agents (Deployment Model 2)": [
-      "Claude Code (Anthropic) - CLI agent with shell, file system, and git access",
-      "GitHub Copilot Workspace - code editing with repository access",
-      "Cursor, Windsurf, and similar AI-native IDEs with file read/write capabilities",
-      "Amazon Q Developer - AWS-integrated coding and infrastructure agent"
+    "Embedded LLMs in enterprise productivity tools": [
+      "Microsoft 365 Copilot integrated across Word, Excel, Outlook, and Teams — where data classification controls govern what the LLM context can access",
+      "Google Gemini for Workspace embedded in Docs, Gmail, and Meet",
+      "GitHub Copilot for code assistance — where system prompt protection and output validation apply to AI-suggested code"
     ],
-    "Orchestrated multi-agent systems (Deployment Model 3)": [
-      "Claude Code with Task tool spawning specialist sub-agents for parallel work",
-      "AutoGPT-style architectures with planner, executor, and reviewer agents",
-      "LangGraph and CrewAI orchestration frameworks",
-      "Custom agent pipelines for security analysis, code review, or incident response"
+    "Fine-tuned models on enterprise data": [
+      "Domain-adapted models fine-tuned on proprietary legal, financial, or medical corpora — requiring privacy impact assessment and membership inference risk analysis",
+      "Custom LLMs trained on enterprise customer support history — where GDPR lawful basis and data minimisation must be established before training data selection",
+      "Code generation models fine-tuned on internal codebases — where model extraction risk applies to the embedded IP"
     ],
-    "Autonomous swarms (Deployment Model 4)": [
-      "Multi-agent infrastructure management (monitoring, remediation, scaling)",
-      "Automated security operations: threat detection, triage, and initial response",
-      "Continuous compliance monitoring with agent-driven evidence collection",
-      "AI-driven red team / blue team exercises"
+    "LLMs in security tooling": [
+      "AI-assisted SIEM analysis: LLMs summarising alert clusters and suggesting triage priorities — where output validation prevents hallucinated threat escalations from driving incorrect responses",
+      "AI-augmented code review tools identifying security anti-patterns — where hallucination testing is part of tool validation",
+      "LLM-based threat intelligence: summarisation, indicator extraction, and report generation — where provider data retention agreements cover potentially sensitive intelligence content"
     ],
     "Developing Areas": [
-      "Agentic AI security -- where AI systems autonomously use tools, access APIs, execute code, and interact with real-world systems -- represents the fastest-moving frontier in AI security architecture. Tool-using agents like Claude Code, Devin, and custom LangChain agents can read files, write code, make HTTP requests, and modify infrastructure, creating attack surfaces that traditional application security models were not designed for. The security properties of agent-tool interactions (what happens when an agent processes a malicious tool output?) are being discovered empirically through incidents rather than through proactive security engineering.",
-      "Prompt injection defence maturity remains at the equivalent of early SQL injection -- we know the vulnerability class exists but do not have reliable, systematic defences. Current mitigations (input/output filtering, instruction hierarchy, canary tokens) reduce risk but can be bypassed by motivated attackers with access to the system prompt or knowledge of the defence patterns. No framework equivalent to parameterised queries exists for prompt injection, and the research community is actively debating whether architectural solutions (strict separation of instruction and data channels) or model-level solutions (training models to resist injection) will prove more effective.",
-      "AI red teaming methodologies are forming as a discipline but lack the standardisation that traditional penetration testing has achieved over decades. Organisations are conducting ad-hoc AI security assessments using varying approaches -- automated fuzzing of prompts, manual adversarial testing, model evaluation benchmarks -- with no consensus on scope, methodology, or reporting standards. NIST AI 100-2 and the OWASP LLM Top 10 provide partial frameworks, but the gap between these high-level guidance documents and reproducible testing procedures remains significant.",
-      "Shadow AI governance is emerging as one of the most pressing enterprise security challenges. Surveys indicate that 60-80% of knowledge workers use AI tools without IT approval, including pasting sensitive data into consumer AI interfaces, using browser-based AI assistants with no data processing agreements, and deploying AI-powered plugins with broad system access. Detection of shadow AI usage is difficult because it often occurs through encrypted web traffic to legitimate domains, and blanket blocking of AI services is increasingly impractical as AI becomes embedded in mainstream productivity tools.",
-      "Multi-agent trust and delegation chains present security challenges that have no established solutions. When an orchestrator agent delegates tasks to sub-agents, each potentially running on different infrastructure with different trust levels, the security properties of the delegation chain are poorly understood. A compromised sub-agent can potentially poison the shared context of the entire agent swarm, and current frameworks like LangGraph and CrewAI provide minimal built-in security controls for inter-agent communication. The concept of an agent trust boundary -- analogous to network security zones -- is emerging but not yet formalised."
+      "Jailbreak research and defence maturity: jailbreaking techniques are catalogued by researchers (role-play, many-shot, encoding, context manipulation) but defences remain reactive rather than systematic. The community is debating whether model-level training mitigations or application-layer policy engines are the more durable solution. No consensus has formed on standardised adversarial testing scope or pass/fail criteria for LLM safety assessments.",
+      "Privacy inference attack tooling: membership inference and model inversion attack toolkits (LiRA, MI-BENCH) are maturing as research tools but are not yet routinely used in enterprise security assessments. The gap between academic attack capability and enterprise defensive awareness is significant — organisations fine-tuning on personal data may be exposed to GDPR liability risks they have not assessed.",
+      "EU AI Act Article 50 (synthetic content disclosure): the obligation to disclose AI involvement in content generation creates downstream security implications for phishing detection, forensic attribution, and content authenticity verification. The technical implementation of disclosure (watermarking, provenance metadata) is unresolved and the enforcement ecosystem is not yet mature.",
+      "NIST AI 100-2 and adversarial ML standardisation: NIST's Adversarial Machine Learning taxonomy provides the most structured framework for LLM attack classification, but enterprise implementation guidance translating the taxonomy into specific testing requirements and control baselines is still developing."
     ]
   },
   "references": [
     {
       "title": "OWASP Top 10 for Large Language Model Applications",
       "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
-      "note": "Comprehensive taxonomy of LLM-specific vulnerabilities including prompt injection, data poisoning, and insecure output handling. Essential baseline for AI application security."
+      "note": "Comprehensive taxonomy of LLM-specific vulnerabilities including prompt injection, insecure output handling, training data poisoning, model denial of service, and supply chain vulnerabilities. Essential baseline for LLM application security assessment."
     },
     {
-      "title": "NIST AI Risk Management Framework (AI 100-1)",
+      "title": "NIST AI 100-1: AI Risk Management Framework",
       "url": "https://www.nist.gov/artificial-intelligence/ai-risk-management-framework",
-      "note": "Voluntary framework for managing AI risks across the AI lifecycle. Maps well to enterprise governance structures."
+      "note": "Voluntary framework for managing AI risks across the AI lifecycle. Maps well to enterprise governance structures and provides the Govern-Map-Measure-Manage functions as an organising structure for LLM risk management."
     },
     {
-      "title": "MITRE ATLAS - Adversarial Threat Landscape for AI Systems",
+      "title": "NIST AI 100-2: Adversarial Machine Learning — A Taxonomy and Terminology of Attacks and Mitigations",
+      "url": "https://airc.nist.gov/Docs/2",
+      "note": "NIST's structured taxonomy of adversarial attacks against AI systems including evasion, poisoning, privacy attacks (membership inference, model inversion), and abuse attacks. Provides the authoritative classification framework for LLM-specific threats including those addressed in this pattern."
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
       "url": "https://atlas.mitre.org/",
-      "note": "Knowledge base of adversary tactics and techniques against AI systems, modelled on ATT&CK. Provides structured threat intelligence for AI-specific attacks."
+      "note": "Knowledge base of adversary tactics and techniques against AI systems, modelled on ATT&CK. Provides structured threat intelligence for AI-specific attacks including prompt injection, model extraction, and membership inference."
     },
     {
-      "title": "ISO/IEC 42001:2023 - AI Management System",
+      "title": "ISO/IEC 42001:2023 — AI Management System",
       "url": "https://www.iso.org/standard/81230.html",
-      "note": "International standard for establishing, implementing, and improving an AI management system. Provides certifiable framework for AI governance."
+      "note": "International standard for establishing, implementing, and improving an AI management system. Provides the certifiable governance framework that complements this pattern's technical controls."
     },
     {
       "title": "NCSC Guidelines for Secure AI System Development",
       "url": "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development",
-      "note": "UK National Cyber Security Centre guidance covering secure design, development, deployment, and maintenance of AI systems. Co-signed by agencies from 18 countries."
+      "note": "UK National Cyber Security Centre guidance covering secure design, development, deployment, and maintenance of AI systems. Co-signed by agencies from 18 countries. Addresses supply chain, monitoring, and secure-by-default principles for LLM integrations."
     },
     {
-      "title": "Google Secure AI Framework (SAIF)",
-      "url": "https://safety.google/cybersecurity-advancements/saif/",
-      "note": "Google's conceptual framework for secure AI systems, addressing model theft, data poisoning, and prompt injection with practical mitigations."
+      "title": "EU General Data Protection Regulation — Article 22 (Automated Decision-Making)",
+      "url": "https://gdpr-info.eu/art-22-gdpr/",
+      "note": "Article 22 establishes rights around automated individual decision-making. Relevant to LLM usage where model outputs influence decisions about individuals. Also the legal basis for privacy impact assessment requirements when fine-tuning on personal data."
     },
     {
-      "title": "Anthropic Usage Policy and Security Practices",
-      "url": "https://www.anthropic.com/policies",
-      "note": "Provider-side security commitments and responsible use guidelines. Example of model provider security posture assessment."
-    },
-    {
-      "title": "EU AI Act",
+      "title": "EU AI Act (Regulation 2024/1689)",
       "url": "https://artificialintelligenceact.eu/",
-      "note": "European regulatory framework for AI systems with risk-based classification. High-risk AI systems face mandatory conformity assessments, transparency obligations, and human oversight requirements."
+      "note": "European regulatory framework with risk-based classification of AI systems. Article 50 establishes synthetic content disclosure obligations. High-risk AI systems involving LLMs face conformity assessments and transparency requirements."
     },
     {
-      "title": "NIST SP 800-218A - Secure Software Development Practices for Generative AI",
+      "title": "NIST SP 800-218A — Secure Software Development Practices for Generative AI",
       "url": "https://csrc.nist.gov/pubs/sp/800/218/a/final",
       "note": "Extension of the SSDF specifically addressing generative AI, covering training data integrity, model validation, and AI-specific development practices."
     }
   ],
   "relatedPatterns": [
-    "SP-011",
-    "SP-010",
+    "SP-047",
+    "SP-045",
     "SP-013",
-    "SP-008",
-    "SP-025",
-    "SP-002"
+    "SP-025"
   ],
   "relatedPatternNames": [
-    "Cloud Computing",
-    "Identity Management",
+    "Secure Agentic AI Frameworks",
+    "AI Governance and Responsible AI",
     "Data Security",
-    "Public Web Server",
-    "Advanced Monitoring and Detection",
-    "Server Module"
+    "Advanced Monitoring and Detection"
   ],
   "threats": [
     {
@@ -177,57 +168,6 @@
       ]
     },
     {
-      "id": "T-AI-005",
-      "name": "Unauthorised Autonomous Actions",
-      "mitigatedBy": [
-        "AC-06",
-        "AC-03",
-        "AC-05",
-        "CM-07"
-      ]
-    },
-    {
-      "id": "T-AI-006",
-      "name": "Privilege Escalation via Delegation Chain",
-      "mitigatedBy": [
-        "AC-05",
-        "AC-06",
-        "AC-01",
-        "AU-02"
-      ]
-    },
-    {
-      "id": "T-AI-007",
-      "name": "Memory Persistence Poisoning",
-      "mitigatedBy": [
-        "SC-04",
-        "CM-02",
-        "SI-10",
-        "AU-06"
-      ]
-    },
-    {
-      "id": "T-AI-008",
-      "name": "Model Supply Chain Compromise",
-      "mitigatedBy": [
-        "SR-01",
-        "SR-02",
-        "SR-03",
-        "SA-04",
-        "SA-09"
-      ]
-    },
-    {
-      "id": "T-AI-009",
-      "name": "Shadow AI (Ungoverned Usage)",
-      "mitigatedBy": [
-        "AC-01",
-        "AT-02",
-        "CM-07",
-        "CA-07"
-      ]
-    },
-    {
       "id": "T-AI-010",
       "name": "AI-Amplified Social Engineering",
       "mitigatedBy": [
@@ -239,12 +179,12 @@
     },
     {
       "id": "T-AI-011",
-      "name": "Model Hallucination Leading to Security Misconfiguration",
+      "name": "Hallucination Leading to Security Misconfiguration",
       "mitigatedBy": [
         "SI-10",
         "CA-02",
         "SA-11",
-        "AC-05"
+        "CA-07"
       ]
     },
     {
@@ -256,21 +196,36 @@
         "PT-03",
         "PS-07"
       ]
+    },
+    {
+      "id": "T-AI-013",
+      "name": "Jailbreaking / Safety Feature Bypass",
+      "mitigatedBy": [
+        "SI-10",
+        "SA-11",
+        "AC-03"
+      ]
+    },
+    {
+      "id": "T-AI-014",
+      "name": "Model Extraction via Systematic API Querying",
+      "mitigatedBy": [
+        "SR-02",
+        "SA-09",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-AI-015",
+      "name": "Membership Inference Attack on Fine-Tuned Model",
+      "mitigatedBy": [
+        "PT-02",
+        "RA-08",
+        "PT-03"
+      ]
     }
   ],
   "controls": [
-    {
-      "id": "AC-01",
-      "name": "Access Control Policies and Procedures",
-      "family": "AC",
-      "emphasis": "important"
-    },
-    {
-      "id": "AC-02",
-      "name": "Account Management",
-      "family": "AC",
-      "emphasis": "important"
-    },
     {
       "id": "AC-03",
       "name": "Access Enforcement",
@@ -284,62 +239,38 @@
       "emphasis": "critical"
     },
     {
-      "id": "AC-05",
-      "name": "Separation Of Duties",
-      "family": "AC",
-      "emphasis": "critical"
-    },
-    {
-      "id": "AC-06",
-      "name": "Least Privilege",
-      "family": "AC",
-      "emphasis": "critical"
-    },
-    {
-      "id": "AC-17",
-      "name": "Remote Access",
-      "family": "AC",
-      "emphasis": "standard"
-    },
-    {
-      "id": "AT-01",
-      "name": "Security Awareness And Training Policy And Procedures",
-      "family": "AT",
-      "emphasis": "standard"
-    },
-    {
       "id": "AT-02",
-      "name": "Security Awareness",
+      "name": "Literacy Training and Awareness",
       "family": "AT",
       "emphasis": "important"
     },
     {
       "id": "AT-03",
-      "name": "Security Training",
+      "name": "Role-Based Training",
       "family": "AT",
       "emphasis": "important"
     },
     {
       "id": "AU-02",
-      "name": "Auditable Events",
+      "name": "Event Logging",
       "family": "AU",
       "emphasis": "critical"
     },
     {
       "id": "AU-03",
-      "name": "Content Of Audit Records",
+      "name": "Content of Audit Records",
       "family": "AU",
       "emphasis": "critical"
     },
     {
       "id": "AU-06",
-      "name": "Audit Monitoring, Analysis, And Reporting",
+      "name": "Audit Monitoring, Analysis, and Reporting",
       "family": "AU",
       "emphasis": "important"
     },
     {
       "id": "CA-02",
-      "name": "Security Assessments",
+      "name": "Control Assessments",
       "family": "CA",
       "emphasis": "important"
     },
@@ -350,69 +281,15 @@
       "emphasis": "critical"
     },
     {
-      "id": "CM-02",
-      "name": "Baseline Configuration",
-      "family": "CM",
-      "emphasis": "important"
-    },
-    {
-      "id": "CM-03",
-      "name": "Configuration Change Control",
-      "family": "CM",
-      "emphasis": "important"
-    },
-    {
-      "id": "CM-07",
-      "name": "Least Functionality",
-      "family": "CM",
-      "emphasis": "critical"
-    },
-    {
-      "id": "IA-02",
-      "name": "User Identification And Authentication",
-      "family": "IA",
-      "emphasis": "important"
-    },
-    {
-      "id": "IA-03",
-      "name": "Device Identification And Authentication",
-      "family": "IA",
-      "emphasis": "important"
-    },
-    {
-      "id": "IA-04",
-      "name": "Identifier Management",
-      "family": "IA",
-      "emphasis": "important"
-    },
-    {
       "id": "IA-05",
       "name": "Authenticator Management",
       "family": "IA",
-      "emphasis": "critical"
-    },
-    {
-      "id": "IR-01",
-      "name": "Incident Response Policy And Procedures",
-      "family": "IR",
-      "emphasis": "standard"
+      "emphasis": "important"
     },
     {
       "id": "IR-04",
       "name": "Incident Handling",
       "family": "IR",
-      "emphasis": "important"
-    },
-    {
-      "id": "IR-06",
-      "name": "Incident Reporting",
-      "family": "IR",
-      "emphasis": "important"
-    },
-    {
-      "id": "PS-06",
-      "name": "Access Agreements",
-      "family": "PS",
       "emphasis": "important"
     },
     {
@@ -422,32 +299,38 @@
       "emphasis": "important"
     },
     {
-      "id": "RA-03",
-      "name": "Risk Assessment",
-      "family": "RA",
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
       "emphasis": "important"
     },
     {
-      "id": "RA-05",
-      "name": "Vulnerability Scanning",
+      "id": "PT-03",
+      "name": "Personally Identifiable Information Processing Purposes",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-08",
+      "name": "Privacy Impact Assessments",
       "family": "RA",
-      "emphasis": "standard"
+      "emphasis": "critical"
     },
     {
       "id": "SA-04",
-      "name": "Acquisitions",
+      "name": "Acquisition Process",
       "family": "SA",
       "emphasis": "important"
     },
     {
       "id": "SA-08",
-      "name": "Security Engineering Principles",
+      "name": "Security and Privacy Engineering Principles",
       "family": "SA",
       "emphasis": "important"
     },
     {
       "id": "SA-09",
-      "name": "External Information System Services",
+      "name": "External System Services",
       "family": "SA",
       "emphasis": "critical"
     },
@@ -470,22 +353,10 @@
       "emphasis": "critical"
     },
     {
-      "id": "SC-08",
-      "name": "Transmission Integrity",
-      "family": "SC",
-      "emphasis": "standard"
-    },
-    {
       "id": "SC-12",
-      "name": "Cryptographic Key Establishment And Management",
+      "name": "Cryptographic Key Establishment and Management",
       "family": "SC",
       "emphasis": "important"
-    },
-    {
-      "id": "SC-13",
-      "name": "Use Of Cryptography",
-      "family": "SC",
-      "emphasis": "standard"
     },
     {
       "id": "SI-03",
@@ -495,68 +366,37 @@
     },
     {
       "id": "SI-04",
-      "name": "Information System Monitoring Tools And Techniques",
+      "name": "System Monitoring",
       "family": "SI",
       "emphasis": "important"
-    },
-    {
-      "id": "SI-05",
-      "name": "Security Alerts And Advisories",
-      "family": "SI",
-      "emphasis": "standard"
     },
     {
       "id": "SI-10",
-      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
+      "name": "Information Input Validation",
       "family": "SI",
       "emphasis": "critical"
-    },
-    {
-      "id": "SR-01",
-      "name": "Policy and Procedures",
-      "family": "SR",
-      "emphasis": "important"
     },
     {
       "id": "SR-02",
       "name": "Supply Chain Risk Management Plan",
       "family": "SR",
       "emphasis": "critical"
-    },
-    {
-      "id": "SR-03",
-      "name": "Supply Chain Controls and Processes",
-      "family": "SR",
-      "emphasis": "important"
-    },
-    {
-      "id": "PT-02",
-      "name": "Authority to Process Personally Identifiable Information",
-      "family": "PT",
-      "emphasis": "important"
-    },
-    {
-      "id": "PT-03",
-      "name": "Personally Identifiable Information Processing Purposes",
-      "family": "PT",
-      "emphasis": "important"
     }
   ],
   "controlFamilySummary": {
-    "AC": 7,
-    "AT": 3,
+    "AC": 2,
+    "AT": 2,
     "AU": 3,
     "CA": 2,
-    "CM": 3,
-    "IA": 4,
-    "IR": 3,
-    "PS": 2,
+    "IA": 1,
+    "IR": 1,
+    "PS": 1,
     "PT": 2,
-    "RA": 2,
+    "RA": 1,
     "SA": 4,
-    "SC": 5,
-    "SI": 4,
-    "SR": 3
+    "SC": 3,
+    "SI": 3,
+    "SR": 1
   },
   "$schema": "../schema/pattern.schema.json"
 }

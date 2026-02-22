@@ -27,9 +27,22 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 - **48 security patterns** (SP-001 to SP-047) + SP-000 reference/style guide + SP-999 test
 - **315 NIST 800-53 Rev 5 controls** across 20 families
 - **63 compliance framework coverage files** (79 in website registry) with cross-references
-- `data/attack/metadata.json` — TRIDENT provenance and graph summary (17,332 edges, 29 edge types, 19 entity types)
+- `data/attack/metadata.json` — TRIDENT graph versioning, provenance, checksums, and changelog (15,607 edges, 38 edge types, 22+ entity types)
 
-> **Note:** TRIDENT data catalogs, schemas, and enrichment scripts have moved to [osa-trident](https://github.com/opensecurityarchitecture/osa-trident). Only `metadata.json` and `attack-metadata.schema.json` remain here.
+> **Note:** TRIDENT data catalogs, schemas, and enrichment scripts have moved to [osa-trident](https://github.com/opensecurityarchitecture/osa-trident). Only `metadata.json` and `attack-metadata.schema.json` remain here. Locally, `data/attack/*.json` are symlinks to the osa-trident checkout.
+
+### metadata.json Structure
+
+This file is the **public contract** between osa-trident (private) and osa-website (public). It contains:
+
+- **`graph_version`** (semver): Data version, bumped on significant graph changes
+- **`graph_schema_version`**: Must match `trident-model.json` version (currently `1.1`). Website build fails on mismatch.
+- **`graph_build_id`**: ISO timestamp of last build
+- **`files`**: SHA-256 checksums, entity counts, and last-modified dates for all data files
+- **`changelog`**: Version history with categorised change entries
+- **`edge_types`**, **`entity_schemas`**: Graph structure summary for build-time validation
+
+When osa-trident data changes, update `metadata.json` checksums and bump `graph_version` before pushing to osa-data.
 
 ## Directory Structure
 

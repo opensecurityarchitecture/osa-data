@@ -1,0 +1,321 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-048",
+  "slug": "offensive-ai-deepfake-defence",
+  "title": "Offensive AI and Deepfake Defence",
+  "description": "Security architecture for defending against AI used as a weapon against the enterprise — deepfake executive impersonation, AI-generated phishing and vishing at scale, synthetic identity fraud, voice cloning, AI-accelerated exploit development, and adversarial AI threat intelligence. Complements SP-027 (Secure LLM Usage) and SP-047 (Secure Agentic AI Frameworks) which address AI you deploy; this pattern addresses AI used against you.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-048",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Application & Operations",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-22",
+    "dateModified": "2026-02-22",
+    "authors": ["Aurelius", "Vitruvius"],
+    "reviewers": [],
+    "provenance": "Created in response to the AI Pattern Analysis (2026-02-22) which identified offensive AI as the most significant gap across the OSA AI pattern suite. AI-generated deepfakes, synthetic voice cloning, and AI-generated phishing represent a categorically different risk profile from the AI-as-deployed-system risks addressed in SP-027, SP-045, and SP-047. Informed by FBI IC3 BEC statistics, ENISA AI Threat Landscape 2024, MITRE ATLAS adversarial ML techniques, and the C2PA content provenance ecosystem."
+  },
+  "diagram": {
+    "svg": "/images/sp-048-offensive-ai-deepfake-defence.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "For the first three decades of enterprise security, attackers used software to attack systems. The emergence of capable generative AI adds a new attack surface: the humans inside the organisation. An attacker with access to a voice cloning model and thirty seconds of public audio can produce a convincing synthetic call from the CEO authorising a wire transfer. An attacker with access to a large language model and a LinkedIn profile can produce a spear-phishing email indistinguishable from a colleague's writing style — at a cost measured in fractions of a cent, at a volume measured in thousands per hour.\n\nThis is not a refinement of existing social engineering. It is a phase shift. The traditional mitigations — train employees to spot spelling errors, treat unsolicited requests with scepticism, verify requests that seem unusual — are calibrated to human attackers with human constraints: limited time, imperfect language, detectable patterns. Generative AI removes those constraints. The attacker can now produce perfect grammar, accurate cultural references, plausible business context, and synthetic media (voice, video, image, document) that defeats visual inspection. Detection signals that worked a decade ago are no longer reliable.\n\nThis pattern addresses AI as an attack vector rather than AI as something you deploy and secure. The scope is distinct from SP-027 (LLM security), SP-047 (agentic framework security), and SP-045 (AI governance) — all of which address risks arising from AI systems you operate. This pattern addresses the offensive use of AI by external adversaries and the controls that remain effective when the attacker has access to capable generative AI.\n\nThe control set centres on verification rather than detection. Detection-based controls (is this content AI-generated?) face an adversarial arms race that defenders are currently losing — detection accuracy degrades as generation quality improves, and attackers iterate faster than defenders. Verification-based controls (can we confirm this instruction came from who it claims, through a channel we trust?) are more durable because they rely on cryptographic or procedural guarantees that AI generation cannot bypass. The pattern emphasises out-of-band verification, content provenance standards, identity assurance, and threat intelligence as the primary defensive posture.",
+    "keyControlAreas": [
+      "Deepfake Detection and Content Authenticity Verification (SI-10, SC-23, SA-11, SA-08): Deepfake detection technologies (visual artefact analysis, biological signal detection, model-based classifiers) currently achieve detection rates that are insufficient for security-critical decisions — accuracy degrades with model quality improvement, and open-source generation models are now capable enough that enterprise-grade detectors frequently fail on recent outputs. Detection should be used as a risk signal to trigger additional verification, not as a binary gate. SC-23 (Session Authenticity) provides the architectural principle: communications in security-critical contexts should use channels whose authenticity can be cryptographically verified, not content whose authenticity must be inferred. Content authenticity standards are maturing: C2PA (Coalition for Content Provenance and Authenticity) enables cryptographic signing of media at the point of capture or generation, providing a provenance chain that is technically difficult to fake without access to the signing key. SA-11 (Developer Security Testing) requires that applications processing external media include deepfake risk assessment as part of their threat model. SA-08 (Security Engineering Principles) embeds authenticity-by-design: systems that accept externally provided media for high-stakes decisions should require provenance metadata as a condition of acceptance, not offer it as an optional feature.",
+      "Executive Impersonation and High-Value Instruction Verification (IA-02, IA-03, IR-04, PS-06): The most financially damaging offensive AI use case is executive impersonation for business email compromise (BEC) evolved with synthetic voice and video — an attacker who can produce a convincing call from the CFO requesting an urgent wire transfer has removed the primary friction point that makes BEC detectable. Controls must operate at the process level, not the content level. Define out-of-band verification requirements for all instructions above a defined financial threshold: a wire transfer request received by email, phone, or video must be verified through a second channel (calling back to a pre-registered number, not a number provided in the request). Establish safe-word protocols for executives — a pre-agreed word or phrase that must be included in any voice or video communication authorising high-value actions, which cannot be inferred from publicly available audio. PS-06 (Access Agreements) should document the verification requirements explicitly: no employee should be able to authorise a material financial transaction on the basis of a single communication channel without a callback. IA-02 (User Identification and Authentication) extends to the verification of human identity in communications — for the highest-risk decision categories, strong authentication of the requesting party (not just the receiving system) is required. IR-04 (Incident Handling) must include deepfake impersonation as a specific incident category with a playbook that addresses evidence preservation (the synthetic call or video may be the primary forensic artefact).",
+      "AI-Generated Phishing Detection and Defence (AT-02, AT-03, SI-03, SI-04): AI-generated phishing removes the quality signals that allowed trained employees to identify phishing: grammatical errors, awkward phrasing, implausible scenarios, inconsistent formatting. The defensive posture must shift from content quality detection to process verification. AT-02 and AT-03 (Awareness and Role-Based Training) must be recalibrated: training that teaches employees to spot obvious phishing characteristics is actively counterproductive if it creates false confidence in AI-generated content that has none of those characteristics. Training should instead emphasise the verification principle — any request that asks for credentials, payments, data, or access should be verified through a known-good channel regardless of how convincing the request appears. Technical controls: SI-03 (Malicious Code Protection) — email gateway controls, link analysis, and attachment sandboxing remain effective because AI generation does not change the infrastructure properties of phishing (domain registration recency, certificate age, redirect chains). SI-04 (System Monitoring) — monitor for AI-generated content patterns at the infrastructure level (sending infrastructure, header anomalies, sending volume patterns) rather than content quality. DMARC, DKIM, and SPF remain the most reliable first-line controls because they verify the sending domain, not the content, and AI generation cannot forge a properly implemented DMARC pass without compromising the sender's domain.",
+      "Synthetic Identity Fraud Controls (IA-02, SA-04, SA-11, RA-05): AI enables the generation of photorealistic identity documents, convincing synthetic faces that defeat passive liveness checks in remote onboarding flows, and consistent synthetic identities with coherent backstories sufficient to pass manual review. This threat is most acute in customer onboarding, new supplier registration, and contractor engagement — any process that relies on document verification and visual identity confirmation to establish a new identity in the enterprise or customer base. IA-02 (User Identification and Authentication) must apply appropriately scaled identity proofing requirements: for high-risk onboarding flows, verification through authoritative sources (government databases, credit bureaux with real-time queries) rather than document OCR. Liveness detection must use active challenges (instruction following, 3D depth sensing) rather than passive detection (static face analysis), because passive detection is defeated by high-quality deepfake video. SA-04 (Acquisition Process) governs the selection of identity verification vendors: evaluate whether vendor solutions have been adversarially tested against current generation AI models, not just historical benchmarks. RA-05 (Vulnerability Monitoring) applies to the identity verification pipeline itself — track published research on identity verification bypasses and assess impact on your specific verification stack. Establish graduated verification requirements: low-risk account creation can accept lower assurance; actions above a defined risk threshold require re-verification at higher assurance.",
+      "Voice Cloning and Vishing Defence (IA-02, AT-02, IR-04, SC-23): Voice cloning from thirty seconds of publicly available audio (conference recordings, podcast appearances, public earnings calls) can produce synthetic speech convincing enough to deceive colleagues and subordinates. The primary targets are financial authorisers (CFOs, treasury managers, accounts payable), IT helpdesk staff (who can be manipulated into resetting credentials or creating accounts), and executives whose voices are publicly available. Organisational controls: establish call-back procedures for any telephone request that involves credentials, access changes, or financial authorisation — call back to a number independently retrieved from the directory, not the number provided by the caller. Safe-word systems: pre-agreed challenges between colleagues for sensitive requests, rotated periodically. AT-02 (Awareness Training) should include simulated vishing exercises calibrated to AI voice quality — not obviously robotic synthetic voices but high-quality clones. SC-23 (Session Authenticity): where technically feasible, use end-to-end authenticated communication channels for sensitive calls (Signal, Teams with verified identity, or equivalent) in preference to PSTN calls where caller ID can be spoofed and voice can be intercepted and synthesised. IA-02: the principle that strong authentication of the requesting identity is required for high-risk decisions applies equally to voice channels as to digital channels.",
+      "Adversarial AI Threat Intelligence (PM-16, RA-03, SI-05, CA-07): The offensive AI capability of threat actors is advancing on a different curve from general AI capability — specialised models for phishing generation, voice cloning services available on criminal marketplaces, and deepfake-as-a-service offerings have emerged in parallel with the commercial generative AI ecosystem. Standard threat intelligence feeds do not yet systematically track adversarial AI capability development. PM-16 (Threat Awareness Program) must explicitly include adversarial AI capability as a tracked dimension: which threat actor groups are using AI-generated content, what capability level have they achieved, and how does this compare to your current detection and verification controls? RA-03 (Risk Assessment) should incorporate adversarial AI capability as a risk factor in annual assessments — the threat from AI-assisted social engineering is different depending on whether your primary threat actors are opportunistic criminals (using commodity AI tools) or sophisticated state-sponsored actors (using custom models). SI-05 (Security Alerts and Advisories) — subscribe to AI security threat intelligence sources that track adversarial ML developments: MITRE ATLAS, academic preprint monitoring for novel attack techniques, sector-specific ISACs that are beginning to track AI-enabled threats. CA-07 (Continuous Monitoring) — implement monitoring for indicators of AI-generated content in external communications to the organisation: volume anomalies in phishing campaigns, infrastructure patterns consistent with AI-assisted attack tooling.",
+      "AI-Accelerated Vulnerability Research and Exploit Development (RA-05, SI-05, PM-16, RA-03): AI tools dramatically accelerate the vulnerability research cycle — code analysis, fuzzing, and proof-of-concept exploit development that previously required weeks of skilled researcher time can now be compressed to hours. The mean time between vulnerability disclosure and working exploit is shortening, and the attacker population with access to exploit-capable AI tools is growing. This changes the operative window available for patching. RA-05 (Vulnerability Monitoring) must prioritise and accelerate response for vulnerabilities in internet-facing systems and widely deployed software components — the historical 30-60 day patching cycles for critical vulnerabilities are no longer aligned with realistic exploitation timelines for AI-assisted attackers. SI-05 (Security Alerts and Advisories) — monitor vulnerability intelligence with specific attention to whether exploit code or AI-assisted research is already in circulation, which compresses the practical remediation window regardless of the official CVSS score. PM-16 (Threat Awareness Program) should track the publication of AI-assisted vulnerability research tools and frameworks, as these tools are adopted by offensive operators within months of academic publication. RA-03 (Risk Assessment) should treat AI-accelerated vulnerability research as a systemic risk factor that affects the residual risk of all unpatched vulnerabilities, particularly in externally exposed systems.",
+      "Content Provenance and AI Disclosure Controls (AU-02, SA-08, SC-23): As AI-generated content becomes indistinguishable from human-generated content, enterprises face both offensive risks (attackers using AI to generate fraudulent content submitted to the organisation) and compliance obligations (regulators and counterparties requiring disclosure of AI involvement in content produced by the organisation). C2PA (Coalition for Content Provenance and Authenticity) provides a cryptographic content provenance framework: media signed at point of capture with an identity-linked signing key establishes a provenance chain that subsequent manipulation breaks. SA-08 (Security Engineering Principles) applies at the organisational level: implement content provenance policies for AI-generated content used in regulated workflows (board minutes, legal filings, financial reports, regulatory submissions, audit evidence) — these workflows require clear attribution and should not rely on AI-generated content without human authorship and review attestation. AU-02 (Event Logging) extends to AI content usage: log which documents, communications, and artefacts involved AI assistance, at what stage, and with what human review, to support forensic investigation of content disputes. SC-23 (Session Authenticity) applies to the verification of external content: establish requirements for provenance metadata on externally received media in high-stakes processes (insurance claims, legal evidence, identity documents). EU AI Act Article 50 creates mandatory disclosure obligations for AI-generated content at scale — organisations must implement technical mechanisms to label synthetic content and establish processes to comply with right-to-know requests."
+    ],
+    "assumptions": "The organisation is exposed to externally generated threats including social engineering, phishing, and fraud — this pattern is relevant to any enterprise that handles financial authorisations, manages customer identities, employs staff reachable by external communications, or processes externally submitted documents. AI-generated offensive capabilities are available to a broad range of threat actors, not solely sophisticated nation-state actors — voice cloning, image synthesis, and phishing-generation tools are accessible through criminal marketplaces and open-source repositories. Detection-based controls (AI content classifiers) are treated as risk indicators to trigger verification rather than as binary security gates, reflecting the current state of the arms race between generation and detection quality. The organisation has or is developing employee awareness programmes that can be recalibrated to AI-era threats.",
+    "typicalChallenges": "The detection arms race is the central challenge: AI deepfake detection accuracy is outpaced by generation quality improvement, and investing heavily in detection technology creates false confidence in controls that will degrade. Verification-based controls are more durable but require process change rather than technology deployment — changing financial authorisation workflows and employee verification habits is slower and harder than deploying a detection tool. Voice cloning attacks are particularly difficult to counter because they exploit trust relationships that are legitimate in non-attack contexts — the same trust that makes a call from the CEO actionable is what makes a synthetic call dangerous. Threat intelligence on adversarial AI capability is immature: most enterprise threat intelligence programmes track malware, TTPs, and infrastructure but not AI capability development by threat actors. The regulatory landscape for AI-generated content disclosure (EU AI Act Art.50, emerging US state laws) is moving faster than enterprise compliance programmes. Small and mid-sized organisations face the same offensive AI threats as large enterprises but have less capacity to implement verification programmes and content provenance infrastructure.",
+    "indications": "Organisation handles high-value financial transactions that could be targeted by AI-enhanced BEC (wire transfers, supplier payments, cryptocurrency). Executives have publicly available voice recordings (earnings calls, conference talks, podcast appearances, public video) that could be used for voice cloning. Customer onboarding or contractor engagement involves remote identity verification that could be targeted by synthetic identity fraud. Organisation processes externally submitted documents (claims, applications, legal filings) where AI-generated forgeries are a risk. Organisation is in a sector that has seen AI-enhanced fraud: financial services, insurance, legal, healthcare. Security awareness programme has not been recalibrated to reflect AI-era phishing and social engineering.",
+    "contraIndications": "Organisation operates in a fully air-gapped environment with no external communications exposure. All financial authorisations occur in person with verified identity — no remote authorisation channels exist. Organisation does not process externally submitted documents or onboard external parties remotely. Note: the contraindications for this pattern are narrow — almost all organisations with external communications exposure face some version of the threats addressed here.",
+    "threatResistance": "Executive impersonation via synthetic voice or video is addressed through out-of-band verification requirements and safe-word protocols that cannot be satisfied by an AI-generated call regardless of quality, combined with IR runbooks specific to deepfake impersonation incidents. AI-generated phishing at scale is addressed through verification-centric awareness training that shifts the employee posture from content quality assessment to channel verification, combined with technical controls on email infrastructure that remain effective regardless of content quality. Synthetic identity fraud is addressed through graduated identity proofing requirements using authoritative data sources, active liveness detection that resists injection attacks, and vendor assessment requirements that include adversarial AI testing. Voice cloning and vishing are mitigated through call-back procedures to independently verified numbers, safe-word systems, and authenticated communication channel requirements for sensitive conversations. Adversarial AI capability development is tracked through a structured threat awareness programme covering AI-specific threat intelligence sources and incorporated into risk assessments. AI-accelerated exploit development is countered through shortened critical-vulnerability patching timelines calibrated to the compressed exploitation window. Content provenance obligations are addressed through C2PA implementation for outbound content in regulated workflows and content logging requirements."
+  },
+  "examples": {
+    "Executive Impersonation Controls": [
+      "Financial services firm implements a dual-authorisation callback protocol: any wire transfer above £50,000 initiated by email or phone requires the receiving team to call back the authorising executive on their verified mobile number (stored in the HR system, not provided in the request) before processing",
+      "Board-level safe-word programme: four-character code rotated monthly, known only to the executive team and their EAs, must be included verbally in any phone request to authorise an action above defined thresholds",
+      "AI-enhanced BEC simulation exercise: red team produces synthetic voice call using publicly available audio of the CFO, attempts to authorise a wire transfer through the accounts payable team — used to calibrate awareness training and measure protocol compliance"
+    ],
+    "Deepfake Detection in Practice": [
+      "Media organisation implements C2PA signing on all original content at point of camera capture; published content carries provenance metadata that readers can verify — content without provenance metadata triggers additional editorial review before publication",
+      "Insurance company integrates C2PA verification into claims processing workflow: video evidence submitted with claims is checked for provenance metadata; absence of provenance triggers manual fraud review and additional document verification",
+      "Enterprise implements real-time deepfake risk scoring on video conference calls for board and executive sessions: low confidence scores trigger a safe-word challenge to the flagged participant before sensitive information is shared"
+    ],
+    "AI-Generated Phishing Defence": [
+      "Recalibrated security awareness training: phishing simulation exercises use AI-generated content with no traditional quality signals (perfect grammar, plausible business context, accurate sender details) — measures whether employees verify through independent channels rather than assessing content quality",
+      "Email security gateway configured to flag all first-contact emails from external senders that match executive name-and-email patterns, regardless of content quality — AI-generated BEC is indistinguishable by content but detectable by sender relationship history",
+      "Financial sector firm implements mandatory out-of-band verification for all payment instruction changes: no change to a payment beneficiary or amount is processed on the basis of a single email, regardless of apparent sender authenticity"
+    ],
+    "Synthetic Identity Fraud Controls": [
+      "Digital bank implements active liveness detection using randomised challenge sequences (look left, blink, smile) for all new account openings, with 3D depth estimation to resist injected deepfake video — passive face match alone is insufficient against generative AI",
+      "Enterprise contractor onboarding requires identity verification through a government eID system or in-person notarisation for contractors above a defined access level — document OCR and selfie-to-document comparison are insufficient controls for high-risk access",
+      "Adversarial testing programme: security team purchases current commercial deepfake and synthetic document generation tools, tests them against the organisation's onboarding verification stack quarterly, and uses results to drive vendor re-assessment"
+    ],
+    "Developing Areas": [
+      "C2PA ecosystem maturity: the C2PA (Coalition for Content Provenance and Authenticity) standard is being implemented by major camera manufacturers, social platforms, and content management systems, but enterprise adoption is in early stages. The chain of provenance only works if every step signs — a camera-signed original loses its provenance if processed through software that strips or ignores metadata. Enterprise adoption requires both tooling investment and workflow redesign.",
+      "Deepfake detection arms race: academic research consistently shows that deepfake detectors trained on one generation of synthetic media underperform on the next. Commercial detector vendors claim accuracy rates in controlled conditions that do not reflect adversarial deployment. Security teams should treat deepfake detection scores as probabilistic risk signals rather than binary verdicts, and design their verification protocols to function even when detection fails completely.",
+      "Voice authentication recalibration: organisations that use voice biometrics for customer authentication (common in contact centres) are exposed to voice cloning attacks that the original voiceprint cannot defend against. The 2023 and 2024 generation of voice cloning tools can replicate a voiceprint from a short sample with quality sufficient to defeat many deployed voice authentication systems. Banks and insurers using voice authentication should conduct adversarial testing and consider migration to knowledge-based or device-based verification for high-risk transactions.",
+      "EU AI Act Article 50 implementation: the mandatory synthetic content disclosure obligations under EU AI Act Article 50 require organisations deploying AI to generate text, audio, video, or image content at scale to implement technical watermarking or labelling. The harmonised technical standards defining how this must be implemented are not yet finalised by CEN/CENELEC, creating compliance uncertainty. Organisations subject to the regulation should implement best-effort watermarking now (C2PA provenance, invisible watermarking) and prepare for mandatory standard adoption once the technical specifications are published."
+    ]
+  },
+  "references": [
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/",
+      "note": "Knowledge base of adversary tactics and techniques against AI systems. Covers techniques relevant to both the attacker (using AI offensively) and defender (protecting against AI-assisted attacks), including model evasion, data poisoning, and AI system abuse."
+    },
+    {
+      "title": "C2PA — Coalition for Content Provenance and Authenticity",
+      "url": "https://c2pa.org/",
+      "note": "Open technical standard for certifying the origin and history of media content using cryptographic provenance. Supported by Adobe, Microsoft, BBC, Sony, Nikon, and others. The primary technical standard for content authenticity verification in enterprise and media contexts."
+    },
+    {
+      "title": "NCSC — Deepfakes and Fraud",
+      "url": "https://www.ncsc.gov.uk/guidance/deepfakes",
+      "note": "UK National Cyber Security Centre guidance on deepfake threats to organisations, covering executive impersonation, financial fraud, and organisational controls. Provides practical mitigation guidance calibrated to current attacker capability."
+    },
+    {
+      "title": "ENISA AI Threat Landscape",
+      "url": "https://www.enisa.europa.eu/topics/artificial-intelligence",
+      "note": "European Union Agency for Cybersecurity analysis of AI-specific threats including offensive use of AI, deepfakes, and AI-assisted attacks. Provides threat taxonomy and risk analysis aligned with the EU AI Act regulatory context."
+    },
+    {
+      "title": "NIST AI 100-1: AI Risk Management Framework",
+      "url": "https://www.nist.gov/artificial-intelligence/ai-risk-management-framework",
+      "note": "Provides the broader AI risk management context including AI system abuse and misuse risks. The Govern and Map functions apply to organisational assessment of offensive AI risks."
+    },
+    {
+      "title": "EU AI Act — Article 50 (Transparency Obligations for Synthetic Content)",
+      "url": "https://artificialintelligenceact.eu/article/50/",
+      "note": "Legal basis for mandatory disclosure of AI-generated content and watermarking obligations. Applies to organisations deploying AI systems that generate synthetic audio, video, image, or text content at scale."
+    },
+    {
+      "title": "FBI Internet Crime Complaint Center — Business Email Compromise",
+      "url": "https://www.ic3.gov/",
+      "note": "Annual IC3 reports provide quantitative data on BEC losses, which increasingly involve AI-enhanced social engineering. Provides business case evidence for executive impersonation controls."
+    },
+    {
+      "title": "OWASP Top 10 for Large Language Model Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "note": "LLM08 covers model theft and LLM06 covers sensitive information disclosure — both relevant to the offensive AI attacker using LLMs to generate attack content. Complementary to this pattern's defensive focus."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-014",
+    "SP-025",
+    "SP-027",
+    "SP-036"
+  ],
+  "relatedPatternNames": [
+    "Awareness and Training",
+    "Advanced Monitoring and Detection",
+    "Secure LLM Usage",
+    "Incident Response"
+  ],
+  "threats": [
+    {
+      "id": "T-OAI-001",
+      "name": "Executive deepfake impersonation — synthetic voice or video used to authorise fraudulent financial transactions",
+      "mitigatedBy": ["IA-02", "IR-04", "PS-06", "SC-23"]
+    },
+    {
+      "id": "T-OAI-002",
+      "name": "AI-generated spear-phishing at scale — personalised, high-quality phishing content without detectable quality signals",
+      "mitigatedBy": ["AT-02", "AT-03", "SI-03", "SI-04"]
+    },
+    {
+      "id": "T-OAI-003",
+      "name": "Voice cloning for vishing — synthetic voice targeting financial authorisers or IT helpdesk for access or payment fraud",
+      "mitigatedBy": ["IA-02", "AT-02", "SC-23", "IR-04"]
+    },
+    {
+      "id": "T-OAI-004",
+      "name": "Synthetic identity fraud — AI-generated identity documents and faces defeating remote onboarding verification",
+      "mitigatedBy": ["IA-02", "SA-04", "SA-11", "RA-05"]
+    },
+    {
+      "id": "T-OAI-005",
+      "name": "AI-generated fraudulent content in business processes — fake claims, filings, applications, or evidence defeating document review",
+      "mitigatedBy": ["SI-10", "SA-11", "SA-08", "AU-02"]
+    },
+    {
+      "id": "T-OAI-006",
+      "name": "AI-accelerated exploit development shortening the vulnerability-to-exploitation window for unpatched systems",
+      "mitigatedBy": ["RA-05", "SI-05", "PM-16", "RA-03"]
+    },
+    {
+      "id": "T-OAI-007",
+      "name": "Adversarial AI capability development by threat actors outpacing organisational threat awareness and defensive controls",
+      "mitigatedBy": ["PM-16", "RA-03", "CA-07", "SI-05"]
+    },
+    {
+      "id": "T-OAI-008",
+      "name": "Brand impersonation using AI-generated content — fake websites, social media profiles, and communications targeting customers",
+      "mitigatedBy": ["SI-04", "CA-07", "AT-02", "PM-16"]
+    },
+    {
+      "id": "T-OAI-009",
+      "name": "Biometric authentication bypass — AI-synthesised faces or voices defeating liveness detection in remote identity verification",
+      "mitigatedBy": ["IA-02", "IA-03", "SA-11", "SA-04"]
+    },
+    {
+      "id": "T-OAI-010",
+      "name": "AI-generated disinformation targeting organisational reputation, customer trust, or market position",
+      "mitigatedBy": ["AT-02", "PM-16", "CA-07", "IR-04"]
+    },
+    {
+      "id": "T-OAI-011",
+      "name": "AI-assisted malware development and polymorphic obfuscation increasing evasion of signature-based detection",
+      "mitigatedBy": ["SI-03", "SI-04", "RA-05", "CA-07"]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification and Authentication",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-03",
+      "name": "Device Identification and Authentication",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-16",
+      "name": "Threat Awareness Program",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PS-06",
+      "name": "Access Agreements",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security and Privacy Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-03",
+      "name": "Malicious Code Protection",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-05",
+      "name": "Security Alerts, Advisories, and Directives",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Input Validation",
+      "family": "SI",
+      "emphasis": "important"
+    }
+  ],
+  "controlFamilySummary": {
+    "AT": 2,
+    "AU": 2,
+    "CA": 1,
+    "IA": 2,
+    "IR": 2,
+    "PM": 1,
+    "PS": 1,
+    "RA": 2,
+    "SA": 3,
+    "SC": 1,
+    "SI": 4
+  }
+}

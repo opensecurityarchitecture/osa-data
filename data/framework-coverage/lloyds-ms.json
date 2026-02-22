@@ -1,0 +1,662 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "lloyds_ms",
+  "framework_name": "Lloyd's Minimum Standards",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of Lloyd's Minimum Standards for managing agents, including MS1 (Underwriting), MS2 (Claims), MS5 (Financial Controls), MS6 (Reinsurance), MS7 (Compliance), MS8 (Information Technology), MS9 (Operational Resilience), MS10 (Risk Management), and MS13 (Delegated Authority), supplemented by Lloyd's Cyber Risk Management requirements, Blueprint Two digital platform standards, and Crystal data standards. Lloyd's Minimum Standards are prescriptive operational requirements for the London insurance market with significant Lloyd's-specific governance, reporting, and market infrastructure obligations that extend beyond SP 800-53 scope. Validate with qualified Lloyd's compliance professionals and managing agent compliance officers for regulatory use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "MS8.1",
+      "title": "IT Governance and Strategy",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PM-29",
+        "PL-01",
+        "PL-02",
+        "PL-09",
+        "SA-02",
+        "PS-09"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PM-01 information security program plan and PM-09 risk management strategy provide foundational IT governance. PM-02 senior information security officer and PM-29 (Rev 5) risk management program leadership establish executive accountability. PL-01 planning policy, PL-02 system security plans, and PL-09 (Rev 5) central management support strategic planning and unified governance. SA-02 allocation of resources addresses IT investment planning. PS-09 (Rev 5) position descriptions formalises IT security responsibilities in organisational roles.",
+      "gaps": "Lloyd's MS8 requires IT strategy aligned with the managing agent's business plan and approved by the board, with formal IT governance structures including an IT steering committee, defined roles for the CIO/CTO, and regular board reporting on IT performance and risk. SP 800-53 addresses security programme governance but not the specific Lloyd's requirement for IT strategy alignment with insurance business objectives, board-level IT steering, or Lloyd's market-specific technology roadmap considerations."
+    },
+    {
+      "id": "MS8.2",
+      "title": "Information Security Policy and Standards",
+      "controls": [
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PL-01",
+        "PM-01",
+        "PS-01",
+        "PT-01",
+        "RA-01",
+        "SA-01",
+        "SC-01",
+        "SI-01",
+        "SR-01"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SP 800-53 Rev 5 policy controls across all 20 families (AC-01, AT-01, AU-01, CA-01, CM-01, CP-01, IA-01, IR-01, MA-01, MP-01, PE-01, PL-01, PM-01, PS-01, PT-01, RA-01, SA-01, SC-01, SI-01, SR-01) provide comprehensive coverage of information security policy requirements. Each family's -01 control mandates organisational policy development, dissemination, review, and update. PT-01 (Rev 5) and SR-01 (Rev 5) add privacy and supply chain policy dimensions respectively.",
+      "gaps": "Minor gap. Lloyd's MS8 requires information security policies to be approved by the managing agent's board and reviewed at least annually, with specific reference to Lloyd's market security requirements and the handling of Lloyd's market data. SP 800-53 policy controls are comprehensive but do not address Lloyd's-specific data classification for market information or the specific board approval requirement mandated by Lloyd's."
+    },
+    {
+      "id": "MS8.3",
+      "title": "Access Management and Identity Controls",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-08",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-14",
+        "AC-17",
+        "AC-19",
+        "AC-20",
+        "AC-24",
+        "AC-25",
+        "IA-01",
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "IA-08",
+        "IA-12",
+        "PS-04",
+        "PS-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AC-02 through AC-25 provide comprehensive access management including account management, enforcement, separation of duties, least privilege, unsuccessful login attempts, system use notification, concurrent sessions, session lock/termination, remote access, mobile devices, and external systems. AC-24 (Rev 5) access control decisions and AC-25 (Rev 5) reference monitor add architectural access enforcement. IA-01 through IA-12 cover identification, authentication, authenticator management, and identity proofing. PS-04 personnel termination and PS-05 personnel transfer address access lifecycle aligned with HR processes.",
+      "gaps": "Minimal gap. Lloyd's MS8 requires access controls for Lloyd's market systems including the Electronic Claims File (ECF), Lloyd's Market Association systems, and coverholder portals. SP 800-53 access controls are comprehensive but do not address access governance specific to Lloyd's market infrastructure or integration with Lloyd's Central Services authentication."
+    },
+    {
+      "id": "MS8.4",
+      "title": "Change Management",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-09",
+        "CM-10",
+        "CM-11",
+        "CM-14",
+        "SA-10",
+        "SA-11",
+        "SI-02",
+        "SI-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "CM-02 baseline configuration, CM-03 configuration change control, CM-04 impact analysis, and CM-05 access restrictions for change provide a robust change management framework. CM-06 configuration settings, CM-07 least functionality, CM-08 system component inventory, CM-09 configuration management plan, and CM-10/CM-11 software usage restrictions complete configuration discipline. CM-14 (Rev 5) signed components adds cryptographic integrity verification for changes. SA-10 developer configuration management and SA-11 developer testing address development lifecycle changes. SI-02 flaw remediation covers patch management and SI-07 software integrity verification validates change integrity.",
+      "gaps": "Minor gap. Lloyd's MS8 requires change management processes that account for dependencies on Lloyd's market systems and settlement infrastructure, with specific consideration of Lloyd's reporting windows and market settlement cycles. SP 800-53 change management is comprehensive but does not address coordination with external market infrastructure change windows or the specific change advisory board structures Lloyd's expects for market-facing systems."
+    },
+    {
+      "id": "MS8.5",
+      "title": "Incident Management and Cyber Response",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09",
+        "AU-06",
+        "SI-04",
+        "SI-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-01 through IR-08 provide comprehensive incident response policy, training, testing, handling, monitoring, reporting, assistance, and planning. IR-09 (Rev 5) information spillage response adds specific data breach handling. AU-06 audit review, analysis, and reporting supports incident detection. SI-04 system monitoring and SI-05 security alerts and advisories provide detection and notification capabilities.",
+      "gaps": "Lloyd's MS8 requires incident management processes that include specific escalation to Lloyd's, notification to the Lloyd's Market Association, and coordination with Lloyd's crisis management team for significant incidents affecting market operations. The Lloyd's Cyber Risk Management addendum mandates reporting of material cyber incidents to Lloyd's within defined timescales. SP 800-53 incident management is strong but does not address Lloyd's-specific reporting obligations, escalation to Lloyd's Corporation, or coordination with the London insurance market's shared incident response capabilities."
+    },
+    {
+      "id": "MS8.6",
+      "title": "Business Continuity and Disaster Recovery",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "CP-12",
+        "CP-13",
+        "SC-24",
+        "SI-17"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-01 through CP-10 provide comprehensive contingency planning, training, testing, alternate sites, backup, and recovery. CP-12 safe mode enables degraded operation maintaining essential functions. CP-13 alternative security mechanisms provides fallback controls. SC-24 (Rev 5) fail in known state ensures predictable failure behaviour supporting recovery planning. SI-17 (Rev 5) fail-safe procedures add additional failure handling. Together these address the core IT DR/BC requirements.",
+      "gaps": "Lloyd's MS8 BC/DR requirements include specific recovery objectives for Lloyd's market-facing systems (ECF, bureau settlements, premium processing), mandatory participation in Lloyd's market-wide business continuity exercises, and demonstrated ability to continue underwriting and claims processing within defined recovery timeframes. SP 800-53 BC/DR controls are strong but do not address Lloyd's market-specific recovery priorities or participation in Lloyd's-coordinated market resilience testing."
+    },
+    {
+      "id": "MS8.7",
+      "title": "Data Management and Quality",
+      "controls": [
+        "CM-12",
+        "CM-13",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "SI-12",
+        "AC-16",
+        "PT-03",
+        "PT-04",
+        "PT-05"
+      ],
+      "coverage_pct": 62,
+      "rationale": "CM-12 (Rev 5) information location identifies where data resides across systems. CM-13 (Rev 5) data action mapping documents data processing flows. MP-02 through MP-06 protect media throughout its lifecycle. SI-12 information management and retention addresses data retention. AC-16 security and privacy attributes enables data classification. PT-03 (Rev 5) PII minimisation, PT-04 (Rev 5) consent, and PT-05 (Rev 5) privacy notice support data governance principles.",
+      "gaps": "Lloyd's MS8 data management requirements are extensive and insurance-market-specific. Gaps include: Lloyd's data quality standards requiring accuracy, completeness, timeliness, and consistency of underwriting, claims, and financial data; adherence to Lloyd's Core Data Record (CDR) and Insurance Market Repository (IMR) standards; data lineage tracking from risk submission through to settlement; Lloyd's-mandated data quality metrics and reporting to Lloyd's Performance Management Directorate; and specific data governance frameworks aligned with the London Market Data Council standards. SP 800-53 addresses data protection and privacy but not insurance data quality, market data standards, or Lloyd's-specific data governance requirements."
+    },
+    {
+      "id": "MS8.8",
+      "title": "Third Party and Outsourcing Management",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-04",
+        "SA-21",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SR-08",
+        "SR-10",
+        "PS-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-04 acquisition process and SA-09 external system services establish third-party security requirements. SA-12 supply chain protection and SA-21 (Rev 5) developer screening address supply chain assurance and personnel vetting. SR-01 through SR-03 supply chain policy, plan, and controls provide governance. SR-05 acquisition strategies, SR-06 supplier assessments, SR-08 notification agreements, and SR-10 inspection of systems address ongoing oversight. PS-07 external personnel security covers third-party staffing.",
+      "gaps": "Lloyd's MS8 third-party management requires specific considerations for outsourcing to Managing General Agents (MGAs), Third Party Administrators (TPAs), and technology service providers within the Lloyd's ecosystem. Gaps include: Lloyd's-mandated notification to Lloyd's before material outsourcing, specific due diligence requirements for providers handling Lloyd's market data, contractual requirements ensuring Lloyd's audit access rights over outsourced functions, sub-outsourcing controls aligned with Lloyd's expectations, and ongoing oversight calibrated to Lloyd's materiality thresholds. SP 800-53 supply chain controls are solid but do not address Lloyd's-specific outsourcing notification and approval requirements."
+    },
+    {
+      "id": "MS8.9",
+      "title": "Cyber Security — Network and Perimeter Defence",
+      "controls": [
+        "AC-04",
+        "AC-17",
+        "AC-18",
+        "CA-03",
+        "SC-05",
+        "SC-07",
+        "SC-08",
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "SC-46",
+        "SC-47"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-04 information flow enforcement, AC-17 remote access, and AC-18 wireless access control network traffic flows. CA-03 system interconnections governs external connections. SC-05 denial of service protection, SC-07 boundary protection, and SC-08 transmission confidentiality and integrity form the core perimeter defence controls. SC-20 through SC-22 address DNS security. SC-46 (Rev 5) cross-domain policy enforcement strengthens network segmentation. SC-47 (Rev 5) alternate communications safeguards provides resilient network paths.",
+      "gaps": "Minor gap. Lloyd's Cyber Risk Management requirements emphasise network security controls to protect connections to Lloyd's market systems including the London Market Infrastructure. SP 800-53 network security controls are comprehensive. The specific Lloyd's requirement for secure connectivity to Lloyd's Central Services and market-facing systems (e.g., secure API gateways for Blueprint Two) is not addressed."
+    },
+    {
+      "id": "MS8.10",
+      "title": "Cyber Security — Endpoint and Malware Protection",
+      "controls": [
+        "SC-18",
+        "SI-03",
+        "SI-04",
+        "SI-07",
+        "SI-08",
+        "SI-16",
+        "CM-07",
+        "CM-11",
+        "SC-44"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SI-03 malicious code protection and SI-04 system monitoring provide core endpoint protection. SI-07 software and information integrity verification and SI-08 spam protection add detection layers. SI-16 (Rev 5) memory protection prevents exploitation of memory corruption vulnerabilities. SC-18 mobile code restrictions, CM-07 least functionality, and CM-11 user-installed software restrictions reduce the attack surface. SC-44 detonation chambers (sandboxing) enables advanced malware analysis.",
+      "gaps": "Minor gap. Lloyd's Cyber Risk Management requirements specify endpoint detection and response (EDR) capabilities and advanced threat protection aligned with the threat landscape facing the London insurance market. SP 800-53 addresses malware protection comprehensively. Lloyd's expectation for managed detection and response (MDR) services and specific endpoint hardening standards for devices accessing Lloyd's market systems are not directly prescribed."
+    },
+    {
+      "id": "MS8.11",
+      "title": "Cyber Security — Vulnerability Management and Patching",
+      "controls": [
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "SI-02",
+        "SI-05",
+        "SA-11",
+        "CA-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "RA-05 vulnerability monitoring and scanning is the core vulnerability management control. RA-03 risk assessment and RA-07 (Rev 5) risk response provide risk-based prioritisation of remediation. SI-02 flaw remediation addresses patching processes. SI-05 security alerts and advisories supports threat intelligence integration into patch prioritisation. SA-11 developer security testing and CA-08 penetration testing provide proactive vulnerability identification.",
+      "gaps": "Minor gap. Lloyd's Cyber Risk Management requirements mandate specific patching timescales for critical vulnerabilities affecting market-facing systems. SP 800-53 vulnerability management is strong. Lloyd's-specific requirements for coordinated vulnerability management with Lloyd's CISO team and participation in Lloyd's market-wide vulnerability sharing are not addressed."
+    },
+    {
+      "id": "MS8.12",
+      "title": "Cyber Security — Security Monitoring and Logging",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "AU-12",
+        "AU-13",
+        "AU-14",
+        "CA-07",
+        "SI-04"
+      ],
+      "coverage_pct": 92,
+      "rationale": "AU-02 through AU-12 provide comprehensive audit event definition, content, storage, processing, review, reduction, timestamps, protection, non-repudiation, retention, and event generation. AU-13 monitoring for information disclosure and AU-14 (Rev 5) session audit enable advanced monitoring capabilities including detection of data exfiltration and detailed session recording. CA-07 continuous monitoring and SI-04 system monitoring establish the security operations framework.",
+      "gaps": "Minimal gap. Lloyd's Cyber Risk Management requirements specify 24/7 security monitoring capability with defined detection and response times. SP 800-53 audit and monitoring controls are thorough. The specific Lloyd's requirement for SOC capability with Lloyd's market threat intelligence integration is not prescribed by SP 800-53."
+    },
+    {
+      "id": "MS8.13",
+      "title": "Cyber Security — Awareness and Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-05",
+        "AT-06",
+        "PL-04",
+        "PM-13",
+        "PM-14"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AT-01 through AT-05 provide security awareness and training policy, literacy training, role-based training, training records, and contacts with security groups. AT-06 (Rev 5) training feedback enables measurement of training effectiveness. PL-04 rules of behaviour establishes acceptable use standards. PM-13 security and privacy workforce and PM-14 testing, training, and monitoring programme address workforce development and programme governance.",
+      "gaps": "Minor gap. Lloyd's MS8 requires cyber awareness training tailored to the insurance market including phishing awareness, social engineering risks specific to Lloyd's market operations, and handling of sensitive underwriting and claims data. SP 800-53 training controls are comprehensive. Lloyd's-specific training on market data handling, coverholder oversight responsibilities, and insurance-industry threat scenarios is not addressed."
+    },
+    {
+      "id": "MS9.1",
+      "title": "Operational Resilience — Important Business Services",
+      "controls": [
+        "PM-08",
+        "PM-11",
+        "CP-02",
+        "CM-12",
+        "CM-13",
+        "RA-09"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-11 mission/business process definition and PM-08 critical infrastructure plan identify critical functions. CP-02 contingency planning identifies essential services. CM-12 (Rev 5) information location and CM-13 (Rev 5) data action mapping support service-to-asset mapping. RA-09 (Rev 5) criticality analysis identifies critical components supporting important business services.",
+      "gaps": "Lloyd's MS9 requires managing agents to identify important business services aligned with PRA/FCA operational resilience requirements and Lloyd's own expectations for market participants. Gaps include: Lloyd's-specific definition of important business services encompassing underwriting, claims, premium collection, and settlement processing; mapping of services against Lloyd's market dependencies and central services; and Lloyd's-mandated impact tolerance setting for services affecting policyholders and the market. SP 800-53 supports mission process identification but does not address the Lloyd's/PRA framework for important business services or the specific impact tolerance methodology."
+    },
+    {
+      "id": "MS9.2",
+      "title": "Operational Resilience — Scenario Testing and Exercising",
+      "controls": [
+        "CP-04",
+        "IR-03",
+        "PM-14",
+        "CA-08",
+        "CP-03"
+      ],
+      "coverage_pct": 58,
+      "rationale": "CP-04 contingency plan testing and IR-03 incident response testing provide core testing capabilities. PM-14 testing, training, and monitoring programme governs the exercise programme. CA-08 penetration testing adds adversarial testing. CP-03 contingency training prepares staff for disruption scenarios.",
+      "gaps": "Lloyd's MS9 requires severe but plausible scenario testing against impact tolerances, including scenarios affecting Lloyd's market infrastructure (settlement, ECF, market messaging). Gaps include: Lloyd's-mandated participation in market-wide resilience exercises coordinated by Lloyd's, scenario design that reflects systemic risks to the London insurance market (e.g., simultaneous loss of multiple managing agents' systems), testing of alternative operating procedures for continued market participation during disruption, and evidencing to Lloyd's that impact tolerances can be met. SP 800-53 covers testing broadly but not Lloyd's market-specific scenario testing or impact tolerance validation."
+    },
+    {
+      "id": "MS9.3",
+      "title": "Operational Resilience — Third Party Dependencies and Concentration Risk",
+      "controls": [
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "RA-09",
+        "CM-08"
+      ],
+      "coverage_pct": 52,
+      "rationale": "SA-09 external system services and SR-01 through SR-03 supply chain risk management provide third-party governance. RA-09 (Rev 5) criticality analysis identifies critical dependencies. CM-08 system component inventory maps technology dependencies.",
+      "gaps": "Lloyd's MS9 requires managing agents to identify and manage concentration risk in technology and outsourcing, including shared dependencies across the Lloyd's market. Gaps include: Lloyd's-specific concentration risk assessment for technology providers serving multiple managing agents, mapping of dependencies on Lloyd's Central Services and market infrastructure, managing agent self-assessment of substitutability for critical technology providers, and Lloyd's-mandated reporting on material outsourcing and concentration. SP 800-53 addresses supply chain risk but not market-wide concentration risk or the specific Lloyd's oversight of shared dependencies across market participants."
+    },
+    {
+      "id": "MS10.1",
+      "title": "Enterprise Risk Management Framework",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "PM-28",
+        "PM-29",
+        "PM-30",
+        "PM-31",
+        "PM-32",
+        "RA-01",
+        "RA-03",
+        "RA-07"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-01 program plan, PM-09 risk management strategy, and PM-28 through PM-32 (Rev 5) provide comprehensive risk management governance including risk framing, risk management program leadership, supply chain risk strategy, continuous improvement, and defined risk management roles. RA-01 risk assessment policy, RA-03 risk assessment, and RA-07 (Rev 5) risk response establish the risk identification, analysis, and treatment cycle.",
+      "gaps": "Lloyd's MS10 requires an enterprise risk management framework encompassing all risk categories (underwriting, reserving, credit, market, liquidity, operational, and group risk) with IT and cyber risk as a defined sub-category of operational risk. Gaps include: Lloyd's-specific risk taxonomy and risk appetite framework approved by the managing agent's board, integration of IT/cyber risk into the overall insurance risk profile, risk reporting aligned with Lloyd's Solvency II reporting requirements, and risk management governance structures satisfying Lloyd's Principles of Business requirements. SP 800-53 risk management controls are strong for information security risk but do not address the broader insurance enterprise risk management framework Lloyd's requires."
+    },
+    {
+      "id": "MS10.2",
+      "title": "Operational Risk Management — IT Risk",
+      "controls": [
+        "PM-09",
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "RA-09",
+        "RA-10",
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-09 risk management strategy establishes the IT risk governance framework. RA-01 through RA-03 provide risk assessment policy, security categorisation, and risk assessment. RA-05 vulnerability monitoring, RA-07 (Rev 5) risk response, RA-09 (Rev 5) criticality analysis, and RA-10 (Rev 5) threat hunting provide advanced risk identification and treatment. CA-02 security assessments and CA-07 continuous monitoring enable ongoing IT risk evaluation.",
+      "gaps": "Lloyd's MS10 requires IT risk to be managed within the operational risk framework with specific risk indicators, loss event reporting, and risk and control self-assessment (RCSA) processes. Gaps include: Lloyd's-specific IT risk appetite metrics and key risk indicators (KRIs), operational loss event reporting to Lloyd's for significant IT incidents, integration with the managing agent's internal capital model for IT/cyber risk quantification, and Lloyd's-mandated operational risk governance structures including a dedicated operational risk function with IT risk expertise."
+    },
+    {
+      "id": "MS1.1",
+      "title": "Underwriting Systems and Data Quality",
+      "controls": [
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "SA-03",
+        "SA-08",
+        "SI-01",
+        "SI-10",
+        "SI-12",
+        "AC-03",
+        "AC-06"
+      ],
+      "coverage_pct": 48,
+      "rationale": "CM-08 component inventory and CM-12 (Rev 5) information location identify underwriting system assets. CM-13 (Rev 5) data action mapping documents data flows through pricing and underwriting systems. SA-03 system development lifecycle and SA-08 security and privacy engineering principles support system reliability. SI-01 system and information integrity policy, SI-10 information input validation, and SI-12 information management address data quality. AC-03 access enforcement and AC-06 least privilege protect underwriting system integrity.",
+      "gaps": "Lloyd's MS1 underwriting management standards require specific IT capabilities that extend well beyond SP 800-53 scope. Gaps include: underwriting pricing tool validation and model governance, data quality standards for Lloyd's risk codes, class of business classifications, and Market Reform Contract (MRC) data, integration with Lloyd's placing platforms (PPL/Whitespace), actuarial model data integrity and version control, and Lloyd's-mandated underwriting data quality metrics including data accuracy for regulatory returns. SP 800-53 provides foundational data integrity and system controls but does not address insurance underwriting system requirements or Lloyd's market data standards."
+    },
+    {
+      "id": "MS2.1",
+      "title": "Claims Systems and Fraud Detection",
+      "controls": [
+        "AC-03",
+        "AC-05",
+        "AU-02",
+        "AU-06",
+        "AU-12",
+        "CM-12",
+        "SI-04",
+        "SI-10",
+        "SI-12",
+        "PM-12"
+      ],
+      "coverage_pct": 50,
+      "rationale": "AC-03 access enforcement and AC-05 separation of duties protect claims processing integrity. AU-02 audit events, AU-06 audit review, and AU-12 audit generation support claims transaction audit trails. CM-12 (Rev 5) information location tracks claims data across systems. SI-04 system monitoring and SI-10 information input validation support fraud detection. SI-12 information management and PM-12 insider threat programme provide additional controls.",
+      "gaps": "Lloyd's MS2 claims management standards require specific IT capabilities for insurance claims processing. Gaps include: integration with the Electronic Claims File (ECF) and claims settlement infrastructure, claims reserving data integrity and actuarial system controls, automated fraud detection rules aligned with Lloyd's Claims Management Principles, claims data quality standards for Lloyd's reporting (bordereau, triangulations), and three-line-of-defence claims assurance including IT controls over the claims workflow. SP 800-53 provides access control, audit, and monitoring foundations but does not address insurance claims system requirements or Lloyd's ECF integration."
+    },
+    {
+      "id": "MS5.1",
+      "title": "Financial Systems and Reporting Integrity",
+      "controls": [
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AU-02",
+        "AU-06",
+        "AU-10",
+        "CM-03",
+        "CM-05",
+        "SI-10",
+        "SI-12"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-03 access enforcement, AC-05 separation of duties, and AC-06 least privilege protect financial system integrity. AU-02 audit events, AU-06 audit review, and AU-10 non-repudiation provide financial transaction audit trails. CM-03 configuration change control and CM-05 access restrictions for change protect financial system configurations. SI-10 information input validation and SI-12 information management support financial data quality.",
+      "gaps": "Lloyd's MS5 financial controls require IT capabilities specific to insurance accounting and Lloyd's settlement. Gaps include: controls for Lloyd's bureau settlement processes and premium trust fund management, reconciliation system integrity for syndicate accounting, Solvency II regulatory reporting system controls and data quality, Lloyd's-mandated quarterly and annual return data integrity, and IT controls over financial close processes including actuarial reserving system integration. SP 800-53 provides strong access control and audit foundations but does not address insurance financial reporting systems or Lloyd's-specific settlement infrastructure."
+    },
+    {
+      "id": "MS6.1",
+      "title": "Reinsurance Systems and Data Exchange",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-20",
+        "CM-12",
+        "CM-13",
+        "SA-09",
+        "SC-08",
+        "SC-16",
+        "SI-10",
+        "SI-12"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-03 access enforcement and AC-04 information flow enforcement protect reinsurance data flows. AC-20 use of external systems governs connections to reinsurer systems. CM-12 (Rev 5) information location and CM-13 (Rev 5) data action mapping track reinsurance data across systems. SA-09 external system services governs reinsurance platform providers. SC-08 transmission confidentiality and SC-16 transmission of security and privacy attributes protect reinsurance data exchange. SI-10 information input validation and SI-12 information management support data quality.",
+      "gaps": "Lloyd's MS6 reinsurance management requires specific IT capabilities for the reinsurance lifecycle. Gaps include: bordereaux data quality and exchange standards with reinsurers, reinsurance asset management system controls, Lloyd's-mandated reinsurance data quality for Solvency II and Lloyd's reporting, integration with Lloyd's reinsurance settlement processes, and controls over reinsurance programme modelling and catastrophe exposure aggregation systems. SP 800-53 provides data protection and system integrity controls but does not address insurance reinsurance system requirements or bordereaux data standards."
+    },
+    {
+      "id": "MS7.1",
+      "title": "Regulatory Compliance and Data Protection",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05",
+        "PT-06",
+        "PT-07",
+        "PT-08",
+        "PM-18",
+        "PM-20",
+        "PM-25",
+        "PM-26",
+        "SI-12",
+        "AC-16"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PT-01 through PT-08 (Rev 5) provide comprehensive privacy and data protection controls including processing policies, authority to process, data minimisation, consent, privacy notices, impact assessments, specific categories, and computer matching. PM-18 (Rev 5) privacy program plan, PM-20 (Rev 5) dissemination of privacy program information, PM-25 (Rev 5) minimisation of PII, and PM-26 (Rev 5) complaint management address privacy governance. SI-12 information management and AC-16 security and privacy attributes support data governance.",
+      "gaps": "Lloyd's MS7 compliance standards require IT capabilities to support regulatory reporting and compliance management across multiple jurisdictions. Gaps include: Lloyd's-specific regulatory reporting systems for the PRA, FCA, and Lloyd's Corporation, GDPR compliance controls specific to policyholder and claimant personal data in insurance processing, sanctions screening system controls and integration with Lloyd's sanctions requirements, anti-money laundering (AML) system controls for premium and claims payments, and compliance monitoring tools for managing agent conduct obligations. SP 800-53 Rev 5 privacy controls are strong but do not address the multi-jurisdictional insurance regulatory reporting or Lloyd's-specific compliance requirements."
+    },
+    {
+      "id": "MS13.1",
+      "title": "Delegated Authority — MGA Oversight and System Integration",
+      "controls": [
+        "AC-20",
+        "CA-03",
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-06",
+        "SR-08",
+        "CM-12",
+        "CM-13",
+        "PS-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-20 use of external systems and CA-03 system interconnections govern connections to MGA/coverholder systems. SA-04 acquisition process and SA-09 external system services establish security requirements for delegated authority arrangements. SR-01 through SR-02 supply chain risk management and SR-06 supplier assessments provide oversight governance. SR-08 notification agreements ensure incident notification from coverholders. CM-12 (Rev 5) information location and CM-13 (Rev 5) data action mapping track data flows with delegated authorities. PS-07 external personnel security covers coverholder staffing.",
+      "gaps": "Lloyd's MS13 delegated authority management has extensive IT requirements specific to the coverholder/MGA model. Gaps include: coverholder system assessment and approval aligned with Lloyd's Coverholder Approval Guidelines, real-time or near-real-time bordereaux data exchange standards with coverholders, Lloyd's-mandated coverholder system audits and IT due diligence, integration requirements for coverholder data into the managing agent's underwriting and claims systems, Lloyd's Crystal messaging standards compliance for delegated authority data exchange, and performance management data quality for Lloyd's coverholder oversight reporting. SP 800-53 provides third-party oversight controls but does not address the insurance-specific coverholder oversight model or Lloyd's delegated authority data standards."
+    },
+    {
+      "id": "MS13.2",
+      "title": "Delegated Authority — Data Flows and Reporting",
+      "controls": [
+        "AC-04",
+        "CM-13",
+        "SC-08",
+        "SI-10",
+        "SI-12",
+        "AU-02",
+        "AU-11"
+      ],
+      "coverage_pct": 48,
+      "rationale": "AC-04 information flow enforcement governs data exchange with coverholders. CM-13 (Rev 5) data action mapping documents the data processing flows in delegated authority arrangements. SC-08 transmission confidentiality protects data in transit. SI-10 information input validation and SI-12 information management support data quality. AU-02 audit events and AU-11 audit record retention provide audit trails for delegated authority transactions.",
+      "gaps": "Lloyd's MS13 requires specific IT controls for delegated authority data management. Gaps include: bordereaux data quality standards (timeliness, accuracy, completeness) aligned with Lloyd's reporting requirements, automated bordereaux validation and exception handling, premium and claims data reconciliation between coverholder and managing agent systems, Lloyd's Crystal message standards for electronic data exchange, and Lloyd's-mandated delegated authority management information (MI) reporting. SP 800-53 provides data flow and integrity controls but does not address insurance bordereaux standards or Lloyd's-specific delegated authority data quality requirements."
+    },
+    {
+      "id": "CRM.1",
+      "title": "Lloyd's Cyber Risk Management — Cyber Governance",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PM-29",
+        "PL-09",
+        "PS-09",
+        "AT-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PM-01 information security program plan and PM-09 risk management strategy establish cyber governance. PM-02 senior information security officer and PM-29 (Rev 5) risk management program leadership provide executive accountability. PL-09 (Rev 5) central management supports unified cyber governance. PS-09 (Rev 5) position descriptions formalises cyber responsibilities. AT-03 role-based training addresses board and executive cyber awareness.",
+      "gaps": "Lloyd's Cyber Risk Management requirements specify board-level cyber risk governance with named accountability for cyber security, regular board reporting on cyber risk posture, and integration of cyber risk into the managing agent's risk appetite statement. Gaps include: Lloyd's-specific cyber risk reporting to the Lloyd's CISO and Corporation of Lloyd's, named board member accountability for cyber risk as required by Lloyd's, and cyber risk appetite metrics aligned with Lloyd's expectations for managing agents."
+    },
+    {
+      "id": "CRM.2",
+      "title": "Lloyd's Cyber Risk Management — Threat Assessment and Intelligence",
+      "controls": [
+        "PM-16",
+        "RA-03",
+        "RA-05",
+        "RA-10",
+        "SI-05",
+        "PM-15"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-16 (Rev 5) threat awareness programme establishes threat intelligence capability. RA-03 risk assessment and RA-05 vulnerability monitoring provide risk identification. RA-10 (Rev 5) threat hunting enables proactive adversary detection. SI-05 security alerts and advisories integrates external threat feeds. PM-15 security groups and contacts enables participation in industry sharing communities.",
+      "gaps": "Lloyd's Cyber Risk Management requires managing agents to maintain awareness of the cyber threat landscape affecting the London insurance market and participate in Lloyd's market-wide threat intelligence sharing. Gaps include: participation in Lloyd's Cyber Intelligence Sharing Platform, threat assessments calibrated to the insurance market threat landscape (nation-state targeting of insurance data, ransomware threats to claims processing), and Lloyd's-mandated cyber threat reporting to the Corporation of Lloyd's."
+    },
+    {
+      "id": "CRM.3",
+      "title": "Lloyd's Cyber Risk Management — Incident Response and Recovery",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-06",
+        "IR-08",
+        "CP-02",
+        "CP-04",
+        "CP-10"
+      ],
+      "coverage_pct": 75,
+      "rationale": "IR-01 through IR-08 provide comprehensive incident response policy, training, testing, handling, reporting, and planning. CP-02 contingency plan, CP-04 contingency testing, and CP-10 system recovery address recovery planning and execution.",
+      "gaps": "Lloyd's Cyber Risk Management requires specific cyber incident response capabilities including: mandatory notification to Lloyd's CISO within defined timescales for material cyber incidents, coordination with Lloyd's crisis management team for incidents affecting market operations, cyber incident response playbooks for insurance-specific scenarios (e.g., ransomware affecting claims processing, data exfiltration of policyholder data), and demonstrated ability to maintain Lloyd's market participation during a significant cyber incident. SP 800-53 incident response is strong but does not address Lloyd's-specific notification obligations or market continuity requirements."
+    },
+    {
+      "id": "BP2.1",
+      "title": "Blueprint Two — Digital Platform Requirements",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-11",
+        "SA-17",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23",
+        "IA-08",
+        "IA-12",
+        "AC-24"
+      ],
+      "coverage_pct": 62,
+      "rationale": "SA-03 system development lifecycle, SA-04 acquisition process, SA-08 security engineering, SA-11 developer testing, and SA-17 developer security and privacy architecture address secure system development. SC-08 transmission confidentiality, SC-12 cryptographic key management, SC-13 cryptographic protection, and SC-23 session authenticity protect digital platform communications. IA-08 non-organisational user identification, IA-12 identity proofing, and AC-24 (Rev 5) access control decisions support federated identity and API security.",
+      "gaps": "Lloyd's Blueprint Two establishes the digital transformation roadmap for the London insurance market, requiring managing agents to adopt modern digital platforms and APIs. Gaps include: Lloyd's Core Data Record (CDR) compliance and structured data exchange, API security standards for integration with Lloyd's digital ecosystem (placement, claims, settlement), adoption of Lloyd's digital placing platform standards, compliance with Lloyd's messaging standards and ACORD data models, and participation in Lloyd's market modernisation initiatives including e-trading and digital claims. SP 800-53 provides strong system development and API security foundations but does not address London insurance market digital transformation requirements or Lloyd's-specific data exchange standards."
+    },
+    {
+      "id": "BP2.2",
+      "title": "Blueprint Two — Data Standards and Crystal Messaging",
+      "controls": [
+        "AC-04",
+        "CM-13",
+        "SC-08",
+        "SC-16",
+        "SI-10",
+        "SI-12",
+        "SA-09"
+      ],
+      "coverage_pct": 42,
+      "rationale": "AC-04 information flow enforcement and CM-13 (Rev 5) data action mapping govern data exchange flows. SC-08 transmission confidentiality and SC-16 transmission of security and privacy attributes protect data in transit. SI-10 information input validation supports data quality. SI-12 information management addresses data lifecycle. SA-09 external system services governs the use of Lloyd's market platforms.",
+      "gaps": "Lloyd's Crystal data standards and electronic messaging requirements are insurance-market-specific with no SP 800-53 equivalent. Gaps include: compliance with Lloyd's Crystal electronic messaging standards for risk placement, endorsements, and claims, adoption of ACORD messaging standards for London market electronic trading, Lloyd's Core Data Record (CDR) field-level data quality requirements, structured data exchange with Lloyd's bureau for settlement and reporting, integration with the Insurance Market Repository (IMR) for electronic document management, and participation in London Market Group electronic trading initiatives. These are industry data standards beyond SP 800-53 scope."
+    },
+    {
+      "id": "PHYS.1",
+      "title": "Physical Security and Environmental Controls",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-08",
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-16",
+        "PE-17",
+        "PE-18",
+        "PE-19",
+        "PE-20",
+        "PE-21",
+        "PE-22",
+        "PE-23"
+      ],
+      "coverage_pct": 87,
+      "rationale": "PE-01 through PE-23 provide comprehensive physical and environmental protection including physical access policy, authorisation, enforcement, access control for transmission, monitoring, delivery and removal, visitor access, power equipment, emergency shutoff, emergency power, emergency lighting, fire protection, temperature/humidity, water damage, asset delivery, alternate work site, location of components, information leakage, facility monitoring, facility power, and component marking. This addresses the full spectrum of data centre and office physical security requirements.",
+      "gaps": "Minor gap. Lloyd's MS8 physical security requirements align well with SP 800-53 PE family controls. The specific Lloyd's requirements for physical security of underwriting rooms at Lloyd's of London (One Lime Street) and the handling of physical documents in the Lloyd's subscription market are not addressed. PE-22 (Rev 5) component marking and PE-23 (Rev 5) facility location improve asset tracking and site selection but do not address Lloyd's-specific premises requirements."
+    },
+    {
+      "id": "GOV.1",
+      "title": "Board Oversight and Senior Management Accountability",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-29",
+        "PS-09",
+        "PM-09",
+        "PL-09"
+      ],
+      "coverage_pct": 52,
+      "rationale": "PM-01 information security program plan provides governance structure. PM-02 senior information security officer and PM-29 (Rev 5) risk management program leadership establish executive-level accountability. PS-09 (Rev 5) position descriptions formalises security in role definitions. PM-09 risk management strategy and PL-09 (Rev 5) central management support unified governance.",
+      "gaps": "Lloyd's Minimum Standards across all domains require managing agent boards to take direct accountability for compliance. Gaps include: Lloyd's-specific board accountability framework for each Minimum Standard domain, named individual responsibility under the Lloyd's Principles for Doing Business and Senior Manager and Certification Regime (SM&CR), managing agent board attestation to Lloyd's on compliance with each Minimum Standard, Lloyd's performance management reviews and oversight visits assessing board-level governance, and the Lloyd's franchise board relationship requiring managing agents to satisfy Corporation of Lloyd's governance expectations. SP 800-53 establishes programme governance but the specific Lloyd's market governance, franchise board oversight, and individual accountability framework are regulatory constructs entirely outside its scope."
+    }
+  ],
+  "summary": {
+    "total_clauses": 32,
+    "average_coverage": 69.3,
+    "full_count": 10,
+    "substantial_count": 8,
+    "partial_count": 14,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

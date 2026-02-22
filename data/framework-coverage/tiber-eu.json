@@ -1,0 +1,201 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "tiber_eu",
+  "framework_name": "TIBER-EU Framework for Threat Intelligence-Based Ethical Red Teaming",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of the TIBER-EU Framework for Threat Intelligence-Based Ethical Red Teaming. TIBER-EU is a testing methodology framework prescribing how to conduct threat intelligence-based red team tests of financial entities across the EU, not a set of security controls. SP 800-53 addresses penetration testing (CA-08) and threat assessment (RA-03) but not the detailed threat intelligence gathering, red team engagement models, cross-border mutual recognition, or regulatory coordination processes that define TIBER-EU. Coverage reflects conceptual alignment rather than direct control equivalence. Validate with TIBER-EU-accredited providers and national competent authorities for regulatory compliance."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "TIBER.GTL",
+      "title": "Generic Threat Landscape — Sector-wide threat landscape report and macro-level threat assessment",
+      "controls": [
+        "PM-15",
+        "PM-16",
+        "RA-03",
+        "RA-05",
+        "SI-05",
+        "SR-08"
+      ],
+      "coverage_pct": 52,
+      "rationale": "RA-03 risk assessment provides the closest alignment with threat landscape analysis, addressing threat identification at an organisational level. PM-16 (Rev 5) threat awareness programme establishes a formal programme for monitoring threat intelligence, which parallels the GTL's sector-wide threat monitoring. PM-15 security/privacy groups and contacts supports participation in information-sharing communities that contribute to threat landscape understanding. RA-05 vulnerability monitoring identifies technical vulnerabilities that feed into threat landscape assessments. SI-05 security alerts and advisories enables receipt of external threat intelligence. SR-08 (Rev 5) notification agreements cover supply chain threat intelligence sharing. These controls collectively support threat awareness but are oriented toward organisational defence rather than the structured, sector-wide threat landscape report that TIBER-EU mandates.",
+      "gaps": "The TIBER-EU Generic Threat Landscape (GTL) is a formal, structured deliverable produced by accredited threat intelligence providers that analyses the entire financial sector threat landscape for a specific jurisdiction. SP 800-53 lacks: the concept of a sector-wide threat landscape report as a formal deliverable, requirements for accredited third-party threat intelligence providers to produce the GTL, macro-level analysis of threat actor targeting patterns across the financial sector, structured assessment of sector-specific attack vectors, campaign analysis, and emerging TTPs, integration with national competent authority threat intelligence and ECB/ECRB situational awareness, and the GTL's role as the foundational input to entity-specific Targeted Threat Intelligence (TTI). The GTL is a methodology artefact with no direct SP 800-53 equivalent."
+    },
+    {
+      "id": "TIBER.PREP",
+      "title": "Preparation Phase — Scope definition, entity engagement, regulatory coordination, and white team formation",
+      "controls": [
+        "CA-08",
+        "PL-01",
+        "PL-02",
+        "PL-04",
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PM-14",
+        "PM-28",
+        "PM-29"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-01 information security programme plan and PM-09 risk management strategy provide governance context for scoping a TIBER-EU test. PM-02 senior information security officer and PM-29 (Rev 5) risk management programme leadership establish executive accountability required during the preparation phase. PM-28 (Rev 5) risk framing helps define the risk appetite that shapes test scope. CA-08 penetration testing establishes the organisational requirement for offensive testing and its governance. PL-01 planning policy and PL-02 system security plan define the system boundaries relevant to scoping. PL-04 rules of behaviour and PM-14 testing/training/monitoring provide governance frameworks for test activities. These controls support test governance and scoping but do not address the specific TIBER-EU preparation methodology.",
+      "gaps": "TIBER-EU preparation is a highly structured, multi-party process with no SP 800-53 equivalent. Key gaps include: the white team concept (a small, security-cleared group within the entity that manages the test in secrecy from the blue team), regulatory coordination with the national competent authority (TIBER Cyber Team or TCT) who oversees the entire test, formal scope definition that identifies critical functions and flags to be targeted, procurement of accredited threat intelligence and red team providers through a specific qualification process, legal and contractual frameworks governing the test including liability and indemnification, mandatory confidentiality agreements and information barriers between white team and blue team, and the TIBER-EU test management process including kick-off meetings, milestone reviews, and governance reporting to the TCT. SP 800-53 CA-08 covers penetration testing governance at a basic level but none of the multi-stakeholder preparation structure."
+    },
+    {
+      "id": "TIBER.TTI",
+      "title": "Targeted Threat Intelligence — Entity-specific threat intelligence, attack scenario development, and flag planting",
+      "controls": [
+        "PM-16",
+        "RA-03",
+        "RA-05",
+        "RA-10",
+        "SI-05"
+      ],
+      "coverage_pct": 42,
+      "rationale": "RA-03 risk assessment and RA-05 vulnerability monitoring provide foundational threat and vulnerability identification. PM-16 (Rev 5) threat awareness programme establishes organisational threat intelligence capabilities. RA-10 (Rev 5) threat hunting represents proactive, intelligence-driven security assessment. SI-05 security alerts and advisories enables external intelligence consumption. These controls support threat identification and assessment but are designed for continuous organisational defence, not the bespoke intelligence report that TIBER-EU TTI requires.",
+      "gaps": "TIBER-EU Targeted Threat Intelligence (TTI) is a bespoke, entity-specific intelligence product produced by accredited threat intelligence providers. SP 800-53 fundamentally lacks: the TTI report concept — a detailed intelligence assessment of the specific entity's threat landscape, attack surface, and likely adversary targeting, attack scenario development where TTI providers design realistic multi-phase attack scenarios based on the entity's specific infrastructure, flag planting — the process of defining specific objectives (flags) that the red team must attempt to reach during testing (e.g. accessing SWIFT terminals, exfiltrating customer data, disrupting settlement processing), OSINT and HUMINT gathering specifically targeting the entity's employees, infrastructure, and third-party relationships, threat actor profiling for actors most likely to target the specific financial entity, and the TTI's role as the formal bridge between the generic threat landscape and the red team's attack plan. TTI is the most intelligence-heavy phase of TIBER-EU and has essentially no SP 800-53 counterpart."
+    },
+    {
+      "id": "TIBER.RT",
+      "title": "Red Team Testing — Controlled adversary simulation, multi-phase attack execution, and live production testing",
+      "controls": [
+        "CA-08",
+        "PM-14",
+        "RA-05",
+        "RA-06",
+        "RA-10",
+        "SC-26",
+        "SC-35"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-08 penetration testing is the primary anchor control, establishing the organisational requirement and governance for adversarial testing. RA-10 (Rev 5) threat hunting and RA-05 vulnerability monitoring support the identification of attack vectors the red team may exploit. SC-26 (Rev 5) honeypots/honeynets and SC-35 (Rev 5) honeyclients provide deception technology relevant to adversary simulation and detection. RA-06 technical surveillance countermeasures covers specialised offensive assessment. PM-14 testing/training/monitoring integrates testing into the broader security programme. These controls provide a foundation for adversarial testing but do not approach the specific rigour and methodology of TIBER-EU red teaming.",
+      "gaps": "TIBER-EU red team testing is fundamentally different from SP 800-53 CA-08 penetration testing in scope, methodology, and execution. Critical gaps include: mandatory testing on live production systems — TIBER-EU requires red team testing against the entity's actual production environment, not test or staging systems, multi-phase attack execution spanning weeks to months, simulating the full adversary kill chain from initial access through lateral movement to objective completion, accredited red team provider requirements including team qualifications, tool restrictions, and rules of engagement approved by the TCT, flag-based objectives where the red team must attempt to reach specific targets defined in the TTI phase, covert execution where the blue team and wider organisation are unaware the test is taking place, real-time risk management with abort procedures and the white team monitoring to prevent unintended operational impact, TTPs drawn from the TTI report simulating realistic adversary behaviour specific to the entity's threat profile, and mandatory documentation of every attack phase including successful and failed techniques. SP 800-53 CA-08 covers basic penetration testing requirements but nothing approaching this level of structured adversary simulation."
+    },
+    {
+      "id": "TIBER.BT",
+      "title": "Blue Team Response — Real-time detection assessment, incident response evaluation, and escalation procedures",
+      "controls": [
+        "AU-02",
+        "AU-06",
+        "AU-12",
+        "AU-14",
+        "CA-07",
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "PM-14",
+        "SI-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "IR-01 through IR-08 provide comprehensive incident response capabilities: policy (IR-01), training (IR-02), testing (IR-03), handling (IR-04), monitoring (IR-05), reporting (IR-06), assistance (IR-07), and response plan (IR-08). SI-04 system monitoring and AU-02/AU-06/AU-12/AU-14 audit logging, review, generation, and session audit deliver the detection and monitoring capabilities that the blue team's performance is measured against. CA-07 continuous monitoring and PM-14 testing/training/monitoring provide the ongoing assessment programmes. These controls comprehensively address the technical capabilities the blue team should demonstrate, though the blue team assessment itself is a TIBER-EU methodology concept.",
+      "gaps": "TIBER-EU blue team assessment evaluates the entity's detection and response capabilities under realistic attack conditions where the blue team is unaware a test is taking place. SP 800-53 provides strong detection and IR controls but lacks: the concept of blind assessment — evaluating detection and response without the blue team's knowledge that an attack is simulated, structured blue team performance metrics including time-to-detect, time-to-respond, accuracy of attribution, and completeness of response, assessment of the blue team's ability to detect specific TTPs from the threat intelligence-derived attack scenarios, evaluation of escalation procedures under realistic conditions (does the blue team escalate to the right people at the right time?), purple teaming integration where red team and blue team collaborate post-test to understand detection gaps, and the formal blue team debrief and capability assessment report that feeds into remediation planning. The blue team phase is where TIBER-EU uniquely measures actual defensive capability rather than theoretical control existence."
+    },
+    {
+      "id": "TIBER.CLOSE",
+      "title": "Closure Phase — 360-degree feedback, red team report, threat intelligence report, and remediation plan",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "PM-04",
+        "PM-06",
+        "PM-14",
+        "PM-31"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IR-04 incident handling with lessons learned and IR-03 incident response testing provide the post-exercise review and improvement mechanisms. CA-02 control assessment and CA-05 plan of action and milestones support structured evaluation and remediation tracking. PM-04 plan of action and milestones process and PM-06 measures of performance establish remediation governance. PM-14 testing/training/monitoring integrates findings into the broader programme. PM-31 (Rev 5) continuous improvement directly supports the learning and improvement cycle. IR-05 incident monitoring feeds ongoing improvement. These controls align with the remediation and improvement intent of the closure phase.",
+      "gaps": "TIBER-EU closure is a structured, multi-stakeholder process with specific deliverable requirements that SP 800-53 does not address. Key gaps include: the 360-degree feedback process involving the white team, red team, threat intelligence provider, and TIBER Cyber Team (TCT), mandatory formal deliverables — a red team report documenting all attack phases, a threat intelligence report summarising the TTI findings, and a blue team assessment report, the structured replay session where the red team walks the blue team through every attack phase (often the most valuable learning moment), remediation plan development that must be approved by the entity's board and shared with the national competent authority, the TCT's role in reviewing all closure deliverables and providing supervisory feedback, mandatory attestation process where the entity and TCT jointly confirm the test met TIBER-EU requirements, and integration of findings into the entity's broader cyber resilience programme and future TIBER test cycles. The closure phase transforms test results into regulatory-grade outputs."
+    },
+    {
+      "id": "TIBER.REM",
+      "title": "Remediation and Follow-Up — Remediation tracking, control improvement validation, and attestation",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "PM-04",
+        "PM-06",
+        "PM-31",
+        "RA-07",
+        "SI-02"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CA-05 plan of action and milestones and PM-04 plan of action and milestones process establish formal remediation tracking mechanisms. RA-07 risk response ensures identified risks from the test receive appropriate treatment. SI-02 flaw remediation addresses technical vulnerability remediation. CA-02 control assessment and CA-07 continuous monitoring validate that remediation actions are effective. PM-06 measures of performance tracks remediation progress. PM-31 (Rev 5) continuous improvement directly supports the ongoing improvement cycle that TIBER-EU remediation drives. These controls provide robust remediation governance and tracking capabilities.",
+      "gaps": "TIBER-EU remediation goes beyond standard vulnerability remediation to address systemic capability gaps identified through realistic adversary simulation. SP 800-53 lacks: mandatory board-level reporting and approval of the remediation plan, TCT (TIBER Cyber Team) oversight of remediation progress and validation of control improvements, the attestation process where the entity formally confirms remediation completion to the national competent authority, follow-up testing requirements to validate that identified gaps have been effectively addressed before the next TIBER cycle, integration of remediation findings into the entity's DORA ICT risk management framework and digital operational resilience testing programme, remediation prioritisation based on the realistic impact demonstrated during the red team test (not theoretical risk ratings), and the formal linkage between TIBER-EU remediation and the entity's regulatory standing with its competent authority."
+    },
+    {
+      "id": "TIBER.XB",
+      "title": "Cross-Border Coordination — Mutual recognition, multi-authority testing, and joint assessments",
+      "controls": [
+        "PM-08",
+        "PM-15"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-08 critical infrastructure plan provides limited alignment with cross-jurisdictional coordination for critical financial infrastructure. PM-15 security/privacy groups and contacts supports engagement with external stakeholders across jurisdictions. These are the only SP 800-53 controls with any conceptual alignment to cross-border regulatory coordination, and even this alignment is tenuous. SP 800-53 is fundamentally a single-jurisdiction framework with no provisions for mutual recognition or multi-authority oversight.",
+      "gaps": "Cross-border coordination is unique to TIBER-EU and has essentially no SP 800-53 equivalent. This clause addresses: mutual recognition of TIBER-EU tests across EU member states so that a test conducted under one national authority can satisfy requirements in other jurisdictions, the Joint Test Protocol for entities operating across multiple EU member states where multiple national competent authorities must coordinate oversight, lead authority designation when an entity is supervised in multiple jurisdictions, standardised reporting formats that enable cross-border comparability of test results, the TIBER-EU Knowledge Centre's role in maintaining framework consistency across adopting jurisdictions, coordination between the ECB Banking Supervision (SSM), national competent authorities, and designated TIBER Cyber Teams, legal frameworks governing cross-border data sharing of sensitive test results (including threat intelligence and vulnerability information), and alignment with DORA's regulatory technical standards on TLPT which embed TIBER-EU methodology for cross-border financial entities. This is a regulatory coordination mechanism entirely outside the scope of SP 800-53."
+    },
+    {
+      "id": "TIBER.PROV",
+      "title": "Provider Requirements — Threat intelligence provider and red team provider qualification standards",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SA-21",
+        "SR-01",
+        "SR-02",
+        "SR-06"
+      ],
+      "coverage_pct": 48,
+      "rationale": "SA-04 acquisition process and SA-09 external system services address procurement and management of third-party service providers. SA-21 (Rev 5) developer screening provides personnel vetting requirements for external providers. SR-01 supply chain risk management policy, SR-02 (Rev 5) supply chain risk assessment, and SR-06 supplier assessments establish governance over third-party providers including qualification and ongoing assessment. These controls provide a general framework for managing external service providers, offering partial alignment with TIBER-EU's provider qualification requirements.",
+      "gaps": "TIBER-EU mandates specific qualification standards for both threat intelligence providers and red team providers that far exceed SP 800-53's general supply chain controls. Key gaps include: accreditation requirements — providers must meet specific TIBER-EU qualification criteria defined by each national competent authority, including demonstrated experience in financial sector testing, threat intelligence provider qualifications including financial sector expertise, access to classified or restricted threat intelligence sources, OSINT/HUMINT capabilities, and ability to produce TTI reports meeting TIBER-EU format requirements, red team provider qualifications including certified offensive security professionals, experience with financial sector infrastructure, ability to conduct multi-week covert operations on live production systems, and safe operational procedures, conflict of interest management — TIBER-EU mandates separation between the entity's existing security vendors and the TIBER test providers, national competent authority approval of provider selection before testing can commence, provider rotation requirements in some jurisdictions to prevent familiarity bias, and specific contractual requirements including liability frameworks, data handling obligations, and post-test evidence destruction. SP 800-53 addresses general supplier management but not the specialised provider ecosystem TIBER-EU creates."
+    },
+    {
+      "id": "TIBER.CONF",
+      "title": "Confidentiality and Risk Management — Test risk mitigation, operational safeguards, and data protection",
+      "controls": [
+        "AC-01",
+        "AC-03",
+        "AC-06",
+        "MP-01",
+        "MP-06",
+        "PE-03",
+        "PL-04",
+        "PM-09",
+        "PM-28",
+        "PT-01",
+        "PT-03",
+        "RA-07",
+        "SC-08",
+        "SC-28",
+        "SI-12"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SC-08 transmission confidentiality/integrity and SC-28 protection of information at rest protect sensitive test data. AC-01 access control policy, AC-03 access enforcement, and AC-06 least privilege restrict access to test information. PM-09 risk management strategy and PM-28 (Rev 5) risk framing address the risk appetite and tolerance for conducting the test. RA-07 risk response provides risk treatment for test-related risks. PL-04 rules of behaviour and PE-03 physical access control govern handling of sensitive test materials. MP-01 media protection policy and MP-06 media sanitisation address data lifecycle for test artefacts. PT-01 (Rev 5) PII processing policy and PT-03 (Rev 5) PII processing purposes address data protection for any personal data involved in testing. SI-12 information management and retention covers data retention and destruction requirements. These controls provide a strong foundation for protecting confidential test information.",
+      "gaps": "TIBER-EU has specific confidentiality and risk management requirements that extend beyond standard SP 800-53 data protection. Key gaps include: the white team secrecy requirement — ensuring the blue team and wider organisation remain unaware that a TIBER-EU test is in progress, which requires specific information barriers and cover stories, operational risk management during live production testing including real-time abort procedures, impact containment protocols, and rollback capabilities to prevent unintended business disruption, test data classification and handling requirements specific to TIBER-EU artefacts including threat intelligence reports, red team tooling, vulnerability details, and attack logs, legal privilege and confidentiality frameworks that protect test findings from disclosure in legal proceedings or regulatory actions beyond the competent authority, secure communication channels between the white team, providers, and TCT during the test, post-test evidence destruction requirements for red team tooling, implants, and access credentials, and GDPR compliance for any personal data collected during OSINT/HUMINT phases of the TTI and during red team social engineering activities."
+    }
+  ],
+  "summary": {
+    "total_clauses": 10,
+    "average_coverage": 58.0,
+    "full_count": 0,
+    "substantial_count": 4,
+    "partial_count": 5,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

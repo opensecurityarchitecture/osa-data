@@ -1,0 +1,275 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "nerc_cip",
+  "framework_name": "NERC CIP Standards",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on publicly available NERC CIP Standards (v5-7) and expert analysis mapping to SP 800-53 Rev 5. NERC CIP is a mandatory reliability standard for the Bulk Electric System (BES) with specific registration, compliance, and enforcement mechanisms not captured in SP 800-53. Validate with NERC-certified professionals and Registered Entities for compliance use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "CIP-002-7",
+      "title": "BES Cyber System Categorization",
+      "controls": [
+        "RA-02",
+        "RA-03",
+        "PM-07",
+        "PM-11",
+        "SC-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "RA-02 security categorization provides a general framework for classifying systems by impact level. RA-03 risk assessment supports the analysis process for determining criticality. PM-07 enterprise architecture helps identify system boundaries and interdependencies. PM-11 mission/business process definition supports identification of critical BES functions. SC-07 boundary protection provides context for defining electronic perimeters around categorized systems. Together these controls address the intent of impact-based categorization but lack BES-specific methodology.",
+      "gaps": "NERC CIP-002 requires BES-specific impact rating methodology (high/medium/low) based on Bulk Electric System reliability criteria, NERC registration categories, and BES Cyber System/Asset identification criteria (including BES Cyber Assets, Protected Cyber Assets, and Electronic Access Control or Monitoring Systems). The NERC Glossary definitions and Attachment 1 criteria for high/medium impact ratings are sector-specific and not captured in SP 800-53."
+    },
+    {
+      "id": "CIP-003-9",
+      "title": "Security Management Controls",
+      "controls": [
+        "PL-01",
+        "PL-02",
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-09",
+        "AC-01",
+        "AT-01"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PL-01 planning policy and PL-02 system security plan establish the policy framework. PM-01 information security program provides the overarching governance structure. PM-02 senior information security officer designates the CIP Senior Manager equivalent role. PM-03 information security resources addresses budget and staffing. PM-09 risk management strategy covers the strategic governance layer. AC-01 access control policy and AT-01 training policy address the policy requirements for electronic/physical access and awareness. These controls collectively cover governance, policy documentation, and senior management accountability.",
+      "gaps": "CIP-003 requires BES-specific policy elements for low-impact BES Cyber Systems including Transient Cyber Asset and Removable Media management policies. The CIP Senior Manager designation with specific delegation authority requirements and the low-impact asset policy structure (Sections 1-5 of Attachment 1) are NERC-specific constructs not addressed in SP 800-53."
+    },
+    {
+      "id": "CIP-004-7",
+      "title": "Personnel & Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-05",
+        "PS-06",
+        "PS-07",
+        "AC-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AT-01 security awareness policy and AT-02 security awareness training address CIP-004 R1 security awareness requirements. AT-03 role-based training covers the CIP-specific training program for personnel with authorized access. AT-04 training records provides the documentation requirements. PS-01 through PS-07 comprehensively address personnel security: PS-01 policy, PS-02 position risk designation, PS-03 personnel screening (background checks), PS-04 personnel termination, PS-05 personnel transfer, PS-06 access agreements, PS-07 external personnel security. AC-02 account management covers authorization and access revocation. This is one of the strongest mappings due to the universal nature of personnel security controls.",
+      "gaps": "NERC CIP-004 requires specific Personnel Risk Assessment (PRA) criteria including 7-year criminal history checks, identity verification, and PRA updates every 7 years. The 24-hour access revocation requirement upon personnel termination and the specific quarterly review of user access are more prescriptive than SP 800-53 PS-family controls. BES-specific training content requirements (e.g., CIP Exceptional Circumstances) are not addressed."
+    },
+    {
+      "id": "CIP-005-7",
+      "title": "Electronic Security Perimeter",
+      "controls": [
+        "SC-07",
+        "AC-04",
+        "AC-17",
+        "AC-20",
+        "IA-02",
+        "IA-08",
+        "CM-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-07 boundary protection is the primary mapping, addressing perimeter definition, access control at boundaries, and monitoring. AC-04 information flow enforcement supports the inbound/outbound access permission controls at Electronic Access Points. AC-17 remote access covers the Interactive Remote Access (IRA) requirements including encryption and multi-factor authentication. AC-20 use of external systems addresses vendor remote access scenarios. IA-02 identification and authentication and IA-08 identification and authentication for non-organizational users support authentication at Electronic Access Points. CM-07 least functionality addresses disabling unnecessary ports and services.",
+      "gaps": "CIP-005 uses BES-specific architectural concepts: Electronic Security Perimeter (ESP), Electronic Access Points (EAPs), and Interactive Remote Access (IRA) with mandatory intermediate systems (jump hosts). The vendor remote access requirements (CIP-005 R2.4-R2.5) including session termination controls and the Dial-up Connectivity provisions are sector-specific. The routable vs. non-routable protocol distinctions in ESP boundary definitions are not addressed in SP 800-53."
+    },
+    {
+      "id": "CIP-006-6",
+      "title": "Physical Security of BES Cyber Systems",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-08",
+        "PE-16",
+        "PE-18"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PE-01 physical and environmental protection policy establishes the Physical Security Plan equivalent. PE-02 physical access authorizations covers the authorization of individuals for unescorted physical access. PE-03 physical access control addresses Physical Access Control Systems (PACS) and multi-factor authentication at Physical Security Perimeter (PSP) access points. PE-04 access control for transmission medium and PE-05 access control for output devices address cabling and device-level protections. PE-06 monitoring physical access addresses alerting and logging of physical access events. PE-08 visitor access records supports the visitor control program. PE-16 delivery and removal covers equipment management. PE-18 location of information system components addresses facility siting considerations.",
+      "gaps": "CIP-006 defines Physical Security Perimeters (PSPs) with BES-specific requirements: two or more different physical access controls at PSP entry points, 90-day alarm/access log review cycles, PACS protection requirements (the PACS itself must be within a PSP), and visitor escort/logging requirements specific to BES facilities. The Defined Physical Boundary concept and six-wall barrier requirements for PSPs are sector-specific physical security constructs not in SP 800-53."
+    },
+    {
+      "id": "CIP-007-6",
+      "title": "System Security Management",
+      "controls": [
+        "CM-07",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "AU-02",
+        "AU-06",
+        "AC-02",
+        "AC-03",
+        "IA-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-07 least functionality covers CIP-007 R1 ports and services management (disabling/restricting unnecessary logical ports). SI-02 flaw remediation maps to CIP-007 R2 security patch management including tracking, evaluating, and installing patches. SI-03 malicious code protection addresses CIP-007 R3 malware prevention including antivirus, application whitelisting, or other mitigation methods. SI-04 system monitoring and AU-02 audit events cover CIP-007 R4 security event monitoring including logging of authentication attempts and security events. AU-06 audit review, analysis, and reporting supports the log review requirements. AC-02 account management and AC-03 access enforcement address CIP-007 R5 system access controls including shared account management. IA-05 authenticator management covers password complexity and change requirements.",
+      "gaps": "CIP-007 prescribes a 35-calendar-day patch assessment cycle for applicable security patches and a specific mitigation plan process when patches cannot be installed. The Technical Feasibility Exception (TFE) process for legacy systems that cannot meet requirements is a NERC-specific compliance mechanism. BES-specific monitoring requirements include mandatory alerting for detected malicious code and specific event log retention periods (90 days online). Password parameters (8+ characters, complexity, 15-month change) are more prescriptive than SP 800-53 guidance."
+    },
+    {
+      "id": "CIP-008-6",
+      "title": "Incident Reporting and Response Planning",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-08"
+      ],
+      "coverage_pct": 78,
+      "rationale": "IR-01 incident response policy establishes the Cyber Security Incident Response Plan framework. IR-02 incident response training covers training requirements for incident response team members. IR-04 incident handling addresses the detection, analysis, containment, eradication, and recovery phases. IR-05 incident monitoring provides the tracking and documentation requirements. IR-06 incident reporting covers the general reporting requirements. IR-08 incident response plan provides the plan development, testing (annually), and update requirements. These controls comprehensively address the lifecycle of incident response planning and execution.",
+      "gaps": "CIP-008 mandates 1-hour reporting of Reportable Cyber Security Incidents to the Electricity Subsector Coordinating Center (E-ISAC) and CISA (formerly ICS-CERT). The definition of Reportable Cyber Security Incident (actual or attempted compromise of a BES Cyber System that compromises or disrupts reliability) is BES-specific. The 15-month plan testing cycle, specific reporting templates, and NERC lessons-learned requirements are sector-specific obligations not in SP 800-53."
+    },
+    {
+      "id": "CIP-009-6",
+      "title": "Recovery Plans for BES Cyber Systems",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-04",
+        "CP-09",
+        "CP-10",
+        "IR-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-01 contingency planning policy establishes the recovery plan governance framework. CP-02 contingency plan addresses the development of recovery plans specifying the conditions for activation, roles, and recovery procedures. CP-04 contingency plan testing covers the plan exercise requirements including paper drills, tabletop exercises, and operational exercises. CP-09 system backup addresses backup and storage of BES Cyber System information and configuration data. CP-10 system recovery and reconstitution covers the actual recovery procedures and restoration to operational state. IR-04 incident handling supports the coordination between incident response and recovery processes.",
+      "gaps": "CIP-009 requires BES-specific recovery plan activation conditions tied to BES reliability impacts and specifies a 15-month testing/exercise cycle. The standard requires testing information used for recovery (backup verification) including successful restoration of a representative BES Cyber System from backup. Data preservation requirements during recovery for forensic/compliance purposes and the specific 15-month exercise interval are more prescriptive than SP 800-53 CP-family controls."
+    },
+    {
+      "id": "CIP-010-4",
+      "title": "Configuration Change Management and Vulnerability Assessments",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-06",
+        "CM-08",
+        "RA-05",
+        "CA-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-02 baseline configuration establishes the documented baseline covering OS, firmware, ports/services, custom software, and security patches. CM-03 configuration change control addresses the change management process including authorization and documentation of changes. CM-04 security impact analysis covers the analysis of changes for potential security impacts before implementation. CM-06 configuration settings addresses the specific security-relevant configuration parameters. CM-08 system component inventory supports the asset identification and tracking requirements. RA-05 vulnerability assessment covers both the paper-based and active vulnerability assessments required by CIP-010. CA-08 penetration testing supports the active vulnerability assessment component.",
+      "gaps": "CIP-010 requires 35-calendar-day baseline deviation detection for unauthorized changes and a 15-month active vulnerability assessment cycle. The baseline configuration must specifically document five elements: OS/firmware, commercially available software, custom software, logical network accessible ports, and applied security patches. The Transient Cyber Asset management requirements (CIP-010 R4) including software verification and patching before connection are BES-specific requirements not in SP 800-53."
+    },
+    {
+      "id": "CIP-011-3",
+      "title": "Information Protection",
+      "controls": [
+        "MP-01",
+        "MP-02",
+        "MP-04",
+        "MP-06",
+        "SC-28",
+        "AC-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "MP-01 media protection policy establishes the information protection program framework. MP-02 media access addresses access restrictions to BES Cyber System Information (BCSI) storage locations. MP-04 media storage covers the protection requirements for stored BCSI. MP-06 media sanitization addresses the secure disposal of media containing BCSI through clearing, purging, or destruction. SC-28 protection of information at rest supports encryption and protection of stored BCSI. AC-03 access enforcement provides the logical access controls for BCSI in electronic form, restricting access to authorized personnel.",
+      "gaps": "CIP-011 defines BES Cyber System Information (BCSI) as a specific classification category encompassing network diagrams, floor plans, equipment layouts, IP addressing, and security configurations of BES Cyber Systems. The designated BCSI storage locations concept, BCSI access authorization and revocation procedures, and the requirement to prevent unauthorized retrieval of BCSI from disposed media are more specific than general SP 800-53 media protection. BCSI risk-based assessment for storage location changes is sector-specific."
+    },
+    {
+      "id": "CIP-012-1",
+      "title": "Communications between Control Centers",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SC-08 transmission confidentiality and integrity directly addresses the protection of real-time Assessment and real-time monitoring data transmitted between Control Centers. SC-12 cryptographic key management covers the key establishment and management for encrypted control center communications. SC-13 cryptographic protection addresses the specific cryptographic mechanisms (encryption, hashing) used to protect data in transit. SC-23 session authenticity provides session integrity protections for communication channels between Control Centers.",
+      "gaps": "CIP-012 specifically addresses real-time data communications between Control Centers using protocols such as ICCP/TASE.2 (Inter-Control Center Communications Protocol). The standard focuses on real-time Assessment and real-time monitoring data availability requirements during cryptographic transitions, which must not disrupt BES reliability operations. The one-to-many communication topology of control center data exchange and the requirement to maintain real-time data availability during security mechanism changes are sector-specific requirements not addressed in SP 800-53."
+    },
+    {
+      "id": "CIP-013-2",
+      "title": "Supply Chain Risk Management",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SR-11",
+        "SA-04",
+        "SA-09",
+        "SA-22",
+        "CM-14"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SR-01 supply chain risk management policy establishes the overarching supply chain cyber security risk management plan. SR-02 supply chain risk assessment addresses the identification and assessment of supply chain risks during procurement. SR-03 supply chain controls and processes covers the implementation of controls to mitigate identified supply chain risks. SR-05 acquisition strategies provides procurement-specific risk mitigation approaches. SR-06 supplier assessments and reviews supports ongoing vendor risk evaluation. SR-11 component authenticity covers software integrity and authenticity verification. SA-04 acquisition process addresses security requirements in procurement. SA-09 external system services covers vendor-provided services and third-party risk. SA-22 unsupported system components addresses end-of-life vendor product risks. CM-14 signed components ensures cryptographic verification of software and firmware integrity from vendors.",
+      "gaps": "CIP-013 requires BES-specific vendor notification obligations including vendor notification when remote/onsite access is no longer needed and vendor disclosure of known vulnerabilities. The standard requires a supply chain cyber security risk management plan that addresses six specific risk areas during procurement including software integrity/authenticity verification, vendor remote access controls, and vendor event notification processes. NERC supply chain risk assessment criteria specific to BES reliability impacts and the coordination with E-ISAC for supply chain threat intelligence are not captured in SP 800-53."
+    },
+    {
+      "id": "CIP-014-3",
+      "title": "Physical Security",
+      "controls": [
+        "PE-01",
+        "PE-03",
+        "PE-06",
+        "RA-03",
+        "RA-05",
+        "PM-12"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PE-01 physical and environmental protection policy provides the physical security policy foundation. PE-03 physical access control addresses physical access controls at transmission stations and substations. PE-06 monitoring physical access covers the security monitoring and surveillance aspects. RA-03 risk assessment supports the threat and vulnerability assessment of identified critical facilities. RA-05 vulnerability assessment addresses the evaluation of physical security vulnerabilities. PM-12 insider threat program provides some coverage for the security personnel threat assessment aspects. However, significant sector-specific gaps reduce coverage substantially.",
+      "gaps": "CIP-014 is a transmission-specific physical security standard driven by FERC Order 802. It requires Transmission Owners to perform specific analyses: identification of critical Transmission stations/substations based on Instability, Uncontrolled Separation, or Cascading criteria (Section 501 of NERC Planning Standards). The mandatory third-party verification of physical security plans, the unaffiliated third-party threat assessment requirement, and geographic/electric system impact analysis for critical facilities are all sector-specific. The 120-day evaluation cycle and FERC-mandated risk criteria are unique to the electric sector and not addressed in SP 800-53."
+    },
+    {
+      "id": "CIP-015-1",
+      "title": "Internal Network Security Monitoring (INSM)",
+      "controls": [
+        "SI-04",
+        "SC-07",
+        "CA-07",
+        "IR-04",
+        "SC-48",
+        "AU-06"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SI-04 system monitoring provides the general monitoring framework for detecting anomalous activity on internal networks. SC-07 boundary protection supports monitoring at network boundaries and internal segmentation points. CA-07 continuous monitoring addresses the ongoing assessment of security controls and network activity. IR-04 incident handling covers the response to anomalies detected through INSM. SC-48 sensor relocation supports the adaptive positioning of network monitoring sensors within BES trust zones. AU-06 audit review, analysis, and reporting covers the analysis of monitoring data for security events. While these controls address general monitoring concepts, INSM represents a significant expansion into east-west traffic analysis.",
+      "gaps": "CIP-015 is a new standard (approved 2024, compliance dates 2027-2030) requiring east-west traffic monitoring inside Electronic Security Perimeters that goes significantly beyond traditional boundary/perimeter monitoring. It mandates network visibility analytics for detecting lateral movement, anomalous internal traffic patterns, and unauthorized connections within BES trust zones. The BES-specific network baseline development, INSM data retention requirements, and the phased implementation timeline (high impact by 2027, medium impact by 2030) are sector-specific. The standard reflects lessons learned from sophisticated ICS-targeting threats (e.g., CRASHOVERRIDE, TRITON) that move laterally within OT networks after initial compromise. SP 800-53 monitoring controls focus primarily on boundary monitoring rather than comprehensive internal network traffic analysis."
+    }
+  ],
+  "summary": {
+    "total_clauses": 14,
+    "average_coverage": 78.1,
+    "full_count": 3,
+    "substantial_count": 11,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

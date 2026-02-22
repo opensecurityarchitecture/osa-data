@@ -1,0 +1,515 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "naic_ds",
+  "framework_name": "NAIC Insurance Data Security Model Law",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of the NAIC Insurance Data Security Model Law (MDL-668). This model law has been adopted in varying forms by 20+ US states. SP 800-53 provides strong technical control coverage but does not address state-specific adoption variations, insurance commissioner notification timelines, or licensee-specific governance requirements. Validate with state insurance regulatory counsel for compliance use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "3",
+      "title": "Definitions",
+      "controls": [
+        "RA-02",
+        "PM-05",
+        "PM-11",
+        "PT-03",
+        "PT-04",
+        "CM-08",
+        "CM-12"
+      ],
+      "coverage_pct": 55,
+      "rationale": "Section 3 defines key terms including nonpublic information (NPI), licensee, information system, cybersecurity event, and consumer. RA-02 security categorization supports the classification of information types, including the distinction between personal and business information that underpins the NPI definition. PM-05 system inventory and CM-08 system component inventory help identify information systems in scope. CM-12 information location identifies where NPI resides. PT-03 personally identifiable information processing and PT-04 consent align with the definition of nonpublic information as it encompasses both PII and non-publicly available business information. PM-11 mission/business process definition supports licensee scoping.",
+      "gaps": "Section 3's definitions are legal constructs with no direct technical control equivalents. The definition of 'nonpublic information' combines personal information (SSNs, financial account numbers, health data) with non-publicly available business information specific to an individual \u2014 a broader scope than PII as defined by NIST. 'Licensee' is defined by state insurance licensing law. 'Cybersecurity event' has a specific legal trigger threshold ('acts that result in unauthorized access to, disruption of, or misuse of an information system or nonpublic information') that differs from NIST incident definitions. 'Information system' includes the insurance-specific scope of policyholder and claims data systems."
+    },
+    {
+      "id": "4",
+      "title": "Information Security Program \u2014 Comprehensive Written Program",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-04",
+        "PM-06",
+        "PM-09",
+        "PM-11",
+        "PM-14",
+        "PL-01",
+        "PL-02",
+        "PL-07",
+        "PL-08",
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "RA-01",
+        "RA-03",
+        "SI-04",
+        "SC-07",
+        "IR-04",
+        "CP-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Section 4 requires each licensee to develop, implement, and maintain a comprehensive written information security program based on its risk assessment. PM-01 information security program plan directly maps to the requirement for a comprehensive written program. PM-02 senior information security officer establishes leadership accountability. PM-03 security resources ensures adequate funding. PM-04 plan of action and milestones tracks remediation. PM-06 security measures of performance supports program effectiveness evaluation. PM-09 risk management strategy and PM-11 mission/business process definition ensure the program is risk-based and aligned with business operations. PM-14 testing, training, and monitoring provides ongoing program evaluation. PL-01/PL-02 establish security planning governance. PL-07/PL-08 support security architecture. CA-02/CA-05/CA-07 provide assessment and continuous monitoring. RA-01/RA-03 establish risk assessment. SI-04 system monitoring, SC-07 boundary protection, IR-04 incident handling, and CP-02 contingency planning address the five core security functions.",
+      "gaps": "NAIC Section 4 requires the program to be 'commensurate with the size and complexity of the licensee, the nature and scope of the licensee's activities, and the sensitivity of the nonpublic information used by the licensee.' This proportionality principle is regulatory-specific. SP 800-53 uses impact-level tailoring (low/moderate/high) rather than the NAIC's business-characteristic-based proportionality. The requirement that the program must specifically protect the security and confidentiality of 'nonpublic information' \u2014 an insurance-specific term \u2014 and protect against threats to policyholder and claimant data is sector-specific."
+    },
+    {
+      "id": "4A",
+      "title": "Risk Assessment",
+      "controls": [
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "RA-09",
+        "PM-08",
+        "PM-09",
+        "PM-16",
+        "CA-02",
+        "CA-05",
+        "CA-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 4A requires licensees to conduct a risk assessment that identifies reasonably foreseeable internal and external threats, assesses the likelihood and potential damage of those threats, and assesses the sufficiency of existing controls. RA-03 risk assessment directly maps to the core requirement. RA-01 risk assessment policy establishes the governance framework. RA-02 security categorization supports asset identification and classification. RA-05 vulnerability monitoring and scanning identifies technical vulnerabilities. RA-07 risk response (new in Rev 5) strengthens risk treatment decisions. RA-09 criticality analysis (new in Rev 5) supports identification of critical NPI systems. PM-08 critical infrastructure plan and PM-09 risk management strategy provide strategic context. PM-16 threat awareness program supports identification of evolving threats. CA-02/CA-05/CA-07 provide assessment methodology, remediation tracking, and continuous monitoring.",
+      "gaps": "Section 4A requires risk assessment to specifically address threats to nonpublic information held by the licensee and to evaluate insurance-specific risk scenarios (policyholder data exposure, claims fraud, agent/broker channel risks). SP 800-53 risk assessment is comprehensive but not tailored to insurance industry threat landscapes. The NAIC does not prescribe a specific risk assessment methodology, but state examiners may expect alignment with NIST RMF or similar frameworks \u2014 creating an implicit expectation gap."
+    },
+    {
+      "id": "4B",
+      "title": "Risk Management \u2014 Security Program Design",
+      "controls": [
+        "PL-02",
+        "PL-08",
+        "PL-09",
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "IA-01",
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07",
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-12",
+        "MP-02",
+        "MP-04",
+        "MP-06",
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "PS-03",
+        "PS-04",
+        "PS-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Section 4B requires the information security program to be designed based on the risk assessment and to include administrative, technical, and physical safeguards. SP 800-53 provides excellent breadth across all three safeguard categories. Access controls (AC-01 through AC-06) address user access management. Authentication (IA-01/IA-02/IA-04/IA-05) covers identity verification. Network and data protection (SC-07/SC-08/SC-12/SC-13/SC-28) addresses encryption and boundary protection. Configuration management (CM-02/CM-06/CM-07) ensures secure system configurations. System integrity (SI-02/SI-03/SI-04/SI-07) covers patching, malware protection, monitoring, and integrity verification. Audit controls (AU-02/AU-03/AU-06/AU-12) provide logging and review. Media protection (MP-02/MP-04/MP-06) governs physical media. Physical security (PE-02/PE-03/PE-06) addresses facility access. Training (AT-01/AT-02/AT-03) ensures workforce awareness. Personnel security (PS-03/PS-04/PS-06) covers screening and termination. PL-02 system security plans and PL-08 security architecture tie controls to program design. PL-09 central management (new in Rev 5) supports enterprise-wide policy application.",
+      "gaps": "Section 4B specifically requires controls to protect NPI and information systems, including measures to: (1) restrict access at physical locations; (2) restrict access to electronic NPI to authorized individuals; (3) protect NPI in transit and at rest using encryption; (4) develop secure development practices for in-house software; (5) modify the program in response to changes; (6) manage data retention, disposal, and secure destruction. While SP 800-53 covers all these areas technically, the NAIC requirement is expressed in insurance-business terms (policyholder records, claims data, agent credentials) rather than generic information system terms."
+    },
+    {
+      "id": "4C",
+      "title": "Oversight by Board of Directors",
+      "controls": [
+        "PM-02",
+        "PM-01",
+        "PM-03",
+        "PM-13",
+        "PM-29",
+        "PL-01",
+        "RA-01"
+      ],
+      "coverage_pct": 62,
+      "rationale": "Section 4C requires the board of directors or appropriate governing body to oversee the development, implementation, and maintenance of the licensee's information security program. PM-02 senior information security officer establishes the leadership role and provides a reporting pathway to senior management. PM-01 information security program plan defines the program for board review. PM-03 information security resources addresses the board's role in approving budgets. PM-13 security and privacy workforce ensures adequate staffing, a board governance concern. PM-29 risk management program leadership (new in Rev 5) establishes executive-level accountability. PL-01 planning policy provides the governance framework. RA-01 risk assessment policy supports the board's risk oversight function.",
+      "gaps": "Significant regulatory gap. Section 4C specifically requires the board of directors to: (1) require the executive management or designated committee to develop and maintain the information security program; (2) require executive management to report in writing at least annually on the status of the program, compliance with the model law, and material matters related to the program including risk assessment, risk management, third-party service provider oversight, cybersecurity events, and responses. SP 800-53 establishes senior leadership roles (PM-02, PM-29) but does not mandate board-level fiduciary oversight, written annual board reporting, or insurance commissioner examination readiness. This board governance mandate is characteristic of insurance regulatory frameworks and has no direct SP 800-53 equivalent."
+    },
+    {
+      "id": "4D",
+      "title": "Oversight of Third-Party Service Provider Arrangements",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "PS-07",
+        "CA-03",
+        "PM-30",
+        "PM-31",
+        "AC-20"
+      ],
+      "coverage_pct": 78,
+      "rationale": "Section 4D requires licensees to exercise due diligence in selecting third-party service providers and to require them to implement appropriate safeguards. SA-04 acquisition process and SA-09 external system services address security requirements in vendor contracts. SR-01 supply chain risk management policy, SR-02 supply chain risk assessment, and SR-03 supply chain controls and processes (all new or enhanced in Rev 5) provide strong third-party risk governance. SR-05 acquisition strategies and SR-06 supplier assessments and reviews support due diligence. PS-07 external personnel security addresses third-party workforce. CA-03 information exchange governs secure interconnections. PM-30 supply chain risk management strategy and PM-31 supply chain risk management plan (new in Rev 5) strengthen enterprise-level vendor governance. AC-20 use of external systems restricts third-party system access.",
+      "gaps": "Section 4D has insurance-specific requirements that go beyond SP 800-53: (1) due diligence must be exercised in the selection of third-party service providers that maintain, process, or otherwise have access to NPI; (2) contractual requirements must include provisions requiring third parties to implement appropriate administrative, technical, and physical measures to protect NPI; (3) the licensee must monitor the third-party's adherence to the contractual requirements, which may include requiring third-party certifications (SOC 2, ISO 27001). The insurance industry's extensive use of managing general agents (MGAs), third-party administrators (TPAs), and reinsurance intermediaries creates a complex service provider ecosystem not contemplated by SP 800-53's generic supply chain controls."
+    },
+    {
+      "id": "4E",
+      "title": "Program Adjustments",
+      "controls": [
+        "PM-01",
+        "PM-04",
+        "PM-06",
+        "PM-14",
+        "PL-02",
+        "PL-03",
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "RA-03",
+        "RA-07",
+        "CM-03",
+        "CM-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Section 4E requires licensees to monitor, evaluate, and adjust their information security program consistent with relevant changes in technology, sensitivity of NPI, internal and external threats, and the licensee's own changing business arrangements. PM-01 information security program plan and PM-04 plan of action and milestones support program lifecycle management. PM-06 security measures of performance provides effectiveness metrics. PM-14 testing, training, and monitoring drives continuous improvement. PL-02 system security plans and PL-03 rules of behavior require periodic review and update. CA-02 control assessments and CA-07 continuous monitoring ensure ongoing evaluation. CA-05 plan of action and milestones tracks identified deficiencies. RA-03 risk assessment and RA-07 risk response (new in Rev 5) support change-driven reassessment. CM-03 configuration change control and CM-04 impact analyses address technology change management.",
+      "gaps": "Section 4E's requirement for program adjustment in response to changes in business arrangements (mergers, acquisitions, divestitures, new product lines, geographic expansion) is insurance-business-specific. SP 800-53 addresses change management for technology and operations but does not specifically trigger security program reassessment based on insurance business events such as new lines of business, entry into new state markets, or changes in distribution channel structures."
+    },
+    {
+      "id": "4F-a",
+      "title": "Incident Response Plan \u2014 Written Plan Requirements",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "PM-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 4F requires each licensee to establish a written incident response plan designed to promptly respond to and recover from any cybersecurity event. IR-01 incident response policy and procedures establishes the framework. IR-02 incident response training ensures personnel readiness. IR-03 incident response testing validates plan effectiveness. IR-04 incident handling covers detection, analysis, containment, eradication, and recovery \u2014 the core response lifecycle. IR-05 incident monitoring tracks events. IR-06 incident reporting addresses notification requirements. IR-07 incident response assistance provides support mechanisms. IR-08 incident response plan directly maps to the written plan requirement. PM-14 testing, training, and monitoring supports annual plan testing.",
+      "gaps": "Section 4F requires the incident response plan to address specific elements that go slightly beyond IR-08: (1) internal processes for responding to a cybersecurity event; (2) goals of the incident response plan; (3) definition of clear roles, responsibilities, and levels of decision-making authority; (4) external and internal communications and information sharing; (5) identification of requirements for remediation of any identified weaknesses; (6) documentation and reporting regarding cybersecurity events and related incident response activities; (7) evaluation and revision of the plan following a cybersecurity event. While IR-08 and related controls address most of these, the specific insurance regulatory requirement for post-event plan revision and documentation of all response activities for commissioner examination is NAIC-specific."
+    },
+    {
+      "id": "4F-b",
+      "title": "Incident Response Plan \u2014 Business Continuity and Disaster Recovery",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "CP-09",
+        "CP-10",
+        "IR-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 4F also encompasses business continuity and disaster recovery planning as part of the overall incident response capability. CP-01 contingency planning policy and procedures establishes the framework. CP-02 contingency plan provides the written BCP/DR plan. CP-03 contingency training and CP-04 contingency plan testing ensure readiness. CP-06 alternate storage site and CP-07 alternate processing site provide infrastructure resilience. CP-09 system backup ensures data recoverability. CP-10 system recovery and reconstitution addresses restoration procedures. IR-04 incident handling bridges incident response with recovery operations.",
+      "gaps": "NAIC's combination of incident response with business continuity and disaster recovery within a single plan requirement reflects the insurance industry's focus on operational resilience and continuity of policyholder services. SP 800-53 treats these as separate control families (IR and CP), which may result in organizational silos. The insurance-specific requirement to maintain continuity of claims processing, policy servicing, and premium collection during a cybersecurity event is not addressed by generic CP controls."
+    },
+    {
+      "id": "4-access",
+      "title": "Access Controls and Authentication",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-11",
+        "AC-17",
+        "AC-19",
+        "AC-20",
+        "IA-01",
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "IA-08",
+        "PS-04",
+        "PS-05"
+      ],
+      "coverage_pct": 92,
+      "rationale": "Section 4B requires access controls as part of the information security program design, including restricting access to NPI to authorized individuals with a legitimate business need. AC-01 access control policy and AC-02 account management govern access provisioning. AC-03 access enforcement and AC-06 least privilege ensure minimal necessary access. AC-05 separation of duties prevents conflicts of interest. AC-07 unsuccessful logon attempts addresses brute force protection. AC-11 device lock and AC-17 remote access control session security. AC-19 and AC-20 address mobile device and external system access. IA-01/IA-02/IA-04/IA-05/IA-08 provide comprehensive identification and authentication including multi-factor authentication. PS-04 personnel termination and PS-05 personnel transfer ensure prompt access revocation.",
+      "gaps": "Minor gaps. NAIC's access control requirements are principles-based and SP 800-53 provides comprehensive technical coverage. The NAIC requirement to restrict access based on 'legitimate business need' aligns with least privilege but is expressed in insurance business terms (e.g., underwriters accessing only relevant policy data, claims adjusters limited to their assigned claims). The model law does not mandate specific MFA requirements as NYDFS 500.12 does, giving licensees more discretion."
+    },
+    {
+      "id": "4-encryption",
+      "title": "Encryption of Nonpublic Information",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "MP-04",
+        "MP-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Section 4B requires protection of NPI in transit over external networks and at rest, including through the use of encryption or other equivalent measures. SC-08 transmission confidentiality and integrity directly addresses encryption in transit. SC-12 cryptographic key establishment and management governs key lifecycle. SC-13 cryptographic protection provides the core encryption framework. SC-28 protection of information at rest addresses encryption at rest. MP-04 media storage and MP-05 media transport cover encrypted media handling.",
+      "gaps": "NAIC uses the phrase 'encryption or other equivalent measures' rather than mandating encryption specifically, giving licensees flexibility to use alternative safeguards with appropriate justification. SP 800-53 SC-08/SC-28 fully cover encryption technical requirements. Minor gap: the NAIC's acceptance of equivalent measures means licensees may employ tokenization, data masking, or other techniques that are not directly addressed by the SC encryption controls. State-specific adoptions may impose stricter encryption requirements than the model law."
+    },
+    {
+      "id": "4-audit",
+      "title": "Audit Trail and Logging",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-11",
+        "AU-12",
+        "SI-04",
+        "AC-06",
+        "AC-17"
+      ],
+      "coverage_pct": 90,
+      "rationale": "Section 4B implicitly requires audit capabilities as part of the information security program's detection and response functions. AU-02 event logging defines auditable events. AU-03 content of audit records specifies required information. AU-04 audit log storage capacity ensures sufficient retention. AU-05 response to audit logging process failures addresses reliability. AU-06 audit review, analysis, and reporting supports detection of cybersecurity events. AU-07 audit record reduction and report generation enables analysis. AU-08 time stamps ensures chronological accuracy. AU-09 protection of audit information prevents tampering. AU-11 audit record retention supports retention requirements. AU-12 audit record generation implements logging. SI-04 system monitoring provides continuous surveillance. AC-06 least privilege and AC-17 remote access support access audit trails.",
+      "gaps": "NAIC MDL-668 does not prescribe specific audit trail retention periods (unlike NYDFS 500.6 which mandates five years). However, state insurance examination cycles typically run three to five years, creating an implicit retention expectation. SP 800-53 AU controls provide comprehensive technical coverage. The model law's principles-based approach means audit requirements are driven by the risk assessment rather than prescribed minimums, which may create ambiguity for licensees."
+    },
+    {
+      "id": "4-monitoring",
+      "title": "Monitoring and Testing",
+      "controls": [
+        "SI-03",
+        "SI-04",
+        "SI-05",
+        "CA-02",
+        "CA-07",
+        "CA-08",
+        "RA-05",
+        "RA-07",
+        "PM-14",
+        "SC-07",
+        "SC-44"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 4B and 4E require ongoing monitoring and testing of the information security program. SI-03 malicious code protection addresses anti-malware. SI-04 system monitoring provides continuous monitoring of information systems. SI-05 security alerts and advisories supports threat intelligence. CA-02 control assessments provides formal testing methodology. CA-07 continuous monitoring ensures ongoing effectiveness evaluation. CA-08 penetration testing validates security posture. RA-05 vulnerability monitoring and scanning identifies weaknesses. RA-07 risk response (new in Rev 5) supports remediation prioritization. PM-14 testing, training, and monitoring provides the overarching framework. SC-07 boundary protection and SC-44 detonation chambers (new in Rev 5) support network-level detection.",
+      "gaps": "NAIC does not prescribe specific testing frequencies (e.g., annual penetration testing) as NYDFS 500.5 does. Testing requirements are driven by the licensee's risk assessment, which may result in less frequent testing for smaller licensees. SP 800-53 provides comprehensive monitoring and testing controls but the NAIC's principles-based approach means the appropriate level of monitoring must be determined by each licensee based on its risk profile, size, and complexity."
+    },
+    {
+      "id": "4-training",
+      "title": "Security Awareness Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-06",
+        "PM-13",
+        "PM-14",
+        "PL-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 4B requires the information security program to include cybersecurity awareness training for all employees, agents, and representatives. AT-01 security awareness and training policy establishes the framework. AT-02 literacy training and awareness covers general security awareness including social engineering and phishing. AT-03 role-based training addresses specialized training for personnel with elevated access or specific security responsibilities. AT-04 training records documents completion. AT-06 training feedback (new in Rev 5) supports continuous improvement of training effectiveness. PM-13 security and privacy workforce ensures adequate expertise. PM-14 testing, training, and monitoring provides the governance framework. PL-04 rules of behavior establishes acceptable use expectations.",
+      "gaps": "Section 4B requires training for employees, agents, and representatives \u2014 the insurance industry's workforce extends to independent agents, brokers, and managing general agents who may not be traditional employees. SP 800-53 training controls assume an organizational employment model. The requirement to train independent insurance agents on NPI handling is insurance-specific and may require different delivery mechanisms (e.g., online modules for independent agents) not contemplated by AT-02. State-specific adoptions may impose additional training requirements (e.g., annual refresher mandates)."
+    },
+    {
+      "id": "4-personnel",
+      "title": "Personnel Security and Staffing",
+      "controls": [
+        "PM-02",
+        "PM-13",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-05",
+        "PS-06",
+        "PS-07",
+        "SA-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "Section 4 requires the licensee to designate one or more employees, an affiliate, or an outside vendor to act as the person responsible for the information security program. PM-02 senior information security officer maps to the designated responsible person. PM-13 security and privacy workforce ensures qualified cybersecurity personnel. PS-01 through PS-07 provide comprehensive personnel security: policy and procedures, position risk designation, personnel screening, termination, transfer, access agreements, and external personnel. SA-09 external system services addresses the outsourcing option for the information security program function.",
+      "gaps": "NAIC allows the information security program function to be outsourced to an affiliate or outside vendor, reflecting the insurance industry's practice of shared services within holding company structures. SP 800-53 SA-09 addresses external services but does not specifically contemplate the insurance holding company affiliate model where a parent company's cybersecurity team may serve multiple subsidiary licensees. The model law does not require a CISO specifically (unlike NYDFS 500.4), accepting broader designation flexibility. Smaller licensees may designate existing officers (e.g., a VP of Operations) rather than dedicated cybersecurity professionals."
+    },
+    {
+      "id": "4-asset",
+      "title": "Asset Management and Data Governance",
+      "controls": [
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "PM-05",
+        "MP-06",
+        "SI-12",
+        "SA-22",
+        "PT-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Section 4B requires controls over information systems and NPI, which implies asset management and data governance capabilities. CM-08 system component inventory tracks hardware and software assets. CM-12 information location (new in Rev 5) identifies where NPI resides across the enterprise. CM-13 data action mapping (new in Rev 5) documents data flows. PM-05 system inventory provides enterprise-level tracking. MP-06 media sanitization addresses secure disposal. SI-12 information management and retention governs data lifecycle. SA-22 unsupported system components identifies end-of-life systems. PT-03 personally identifiable information processing covers data classification.",
+      "gaps": "NAIC's NPI definition encompasses insurance-specific data categories: policy application information, claims history, medical information from insurance transactions, premium payment records, and agent/producer information. SP 800-53 data governance controls are generic and do not address insurance-specific data taxonomies. The model law's requirement to protect NPI throughout its lifecycle \u2014 from policy application through claims settlement to record retention \u2014 follows insurance business processes not contemplated by SP 800-53. State insurance data retention requirements (often seven to ten years for policy records) may exceed typical SP 800-53 retention guidance."
+    },
+    {
+      "id": "4-config",
+      "title": "System Configuration and Change Management",
+      "controls": [
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-09",
+        "SA-03",
+        "SA-08",
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Section 4B requires controls over information systems including secure development practices, change management, and baseline configuration management. CM-01 configuration management policy establishes the governance framework. CM-02 baseline configuration defines secure system states. CM-03 configuration change control manages changes. CM-04 impact analyses assesses change risks. CM-05 access restrictions for change prevents unauthorized modifications. CM-06 configuration settings enforces secure settings. CM-07 least functionality reduces attack surface. CM-09 configuration management plan documents the approach. SA-03 system development lifecycle addresses secure development. SA-08 security engineering principles provides design guidance. SA-11 developer testing and evaluation supports code review and testing. SA-15 development process, standards, and tools establishes development security standards.",
+      "gaps": "Section 4B mentions the need for secure development practices for in-house applications and testing of externally developed applications. SP 800-53 SA family controls provide strong coverage. Minor gap: the insurance industry's reliance on legacy policy administration systems, claims platforms, and actuarial systems means configuration management often involves mainframe and older technology stacks that may not align with modern SP 800-53 configuration management assumptions."
+    },
+    {
+      "id": "5",
+      "title": "Investigation of a Cybersecurity Event",
+      "controls": [
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "AU-06",
+        "AU-07",
+        "SI-04",
+        "SI-07",
+        "CA-07",
+        "PM-14"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Section 5 requires licensees to investigate cybersecurity events promptly, determine whether a cybersecurity event has occurred, assess the nature and scope of the event, identify the NPI involved, and take reasonable measures to restore the security of the compromised systems. IR-04 incident handling covers the investigation lifecycle (detection, analysis, containment, eradication, recovery). IR-05 incident monitoring tracks events across the enterprise. IR-06 incident reporting supports documentation of investigation findings. AU-06 audit review, analysis, and reporting supports forensic analysis. AU-07 audit record reduction and report generation enables investigation data processing. SI-04 system monitoring provides detection capabilities. SI-07 software, firmware, and information integrity supports compromise assessment. CA-07 continuous monitoring ensures ongoing surveillance. PM-14 testing, training, and monitoring provides the governance framework.",
+      "gaps": "Section 5 has specific requirements beyond SP 800-53: (1) the licensee must determine whether a cybersecurity event has occurred \u2014 this is a legal determination with regulatory consequences, not just a technical assessment; (2) the investigation must assess the nature, scope, and impact specifically on NPI; (3) the licensee must identify what NPI was involved, which requires insurance-specific data classification capabilities; (4) the licensee must perform or oversee reasonable measures to restore security; (5) the investigation must determine whether the event triggers notification obligations under Section 6. This legal-regulatory investigation framework extends beyond technical incident handling into regulatory compliance territory."
+    },
+    {
+      "id": "6-a",
+      "title": "Notification to Commissioner of Insurance",
+      "controls": [
+        "IR-06",
+        "PM-26",
+        "AU-06"
+      ],
+      "coverage_pct": 45,
+      "rationale": "Section 6 requires licensees to notify the commissioner of the state of domicile within 72 hours after determining that a cybersecurity event has occurred if the event involves NPI in the licensee's possession or under its control, or if the licensee is an insurer or insurance producer and an independent third-party service provider experiences a cybersecurity event affecting NPI. IR-06 incident reporting provides the general framework for reporting security incidents to appropriate authorities. PM-26 complaint management (new in Rev 5) supports regulatory communication processes. AU-06 audit review, analysis, and reporting supports the identification of reportable events.",
+      "gaps": "Significant regulatory gap. Section 6 has highly specific notification requirements with no SP 800-53 equivalents: (1) 72-hour notification deadline to the insurance commissioner after determination that a cybersecurity event has occurred \u2014 this is event-determination-triggered rather than discovery-triggered; (2) notification must be provided to the commissioner of the state of domicile (not all states where licensed); (3) the commissioner has the right to share information with other state insurance departments via the NAIC's secure communication platform; (4) notification must include specific content: date of the event, description of how NPI was exposed, how the event was discovered, remediation efforts, and contact information for the investigating individual; (5) multi-state licensees must navigate varying state adoption timelines and requirements. SP 800-53 IR-06 provides generic incident reporting but does not address insurance commissioner notification protocols, the 72-hour timeline, or multi-state regulatory coordination."
+    },
+    {
+      "id": "6-b",
+      "title": "Notification to Consumers",
+      "controls": [
+        "IR-06",
+        "PT-04",
+        "PT-05",
+        "PM-20",
+        "PM-22"
+      ],
+      "coverage_pct": 48,
+      "rationale": "Section 6 requires licensees to comply with applicable state breach notification laws regarding notification to consumers whose NPI was accessed or reasonably believed to have been accessed by an unauthorized person. IR-06 incident reporting provides the reporting framework. PT-04 consent and PT-05 privacy notice (new in Rev 5) support privacy communication obligations. PM-20 dissemination of privacy program information and PM-22 personally identifiable information quality management (new in Rev 5) support consumer notification processes.",
+      "gaps": "Significant regulatory gap. Consumer notification under Section 6 is governed by each state's existing breach notification law, creating a patchwork of requirements: (1) varying notification timeframes (30 to 90 days depending on the state); (2) different definitions of what constitutes 'personal information' triggering notification; (3) state-specific content requirements for notification letters; (4) credit monitoring and identity theft protection service requirements vary by state; (5) state attorney general notification requirements in addition to insurance commissioner notification; (6) substitute notice procedures differ by state. SP 800-53 provides no coverage of these state-specific consumer notification legal requirements. Insurance licensees operating across multiple states must comply with the strictest applicable standard."
+    },
+    {
+      "id": "7",
+      "title": "Power of Commissioner",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "AU-01",
+        "AU-09",
+        "PM-01"
+      ],
+      "coverage_pct": 40,
+      "rationale": "Section 7 grants the insurance commissioner the authority to examine and investigate licensees to determine compliance with the model law, consistent with the commissioner's general examination powers under state insurance law. CA-02 control assessments provides a framework for independent evaluation. CA-07 continuous monitoring supports ongoing compliance assessment. AU-01 audit and accountability policy and AU-09 protection of audit information ensure audit trail integrity for examination purposes. PM-01 information security program plan provides the documented program for commissioner review.",
+      "gaps": "Substantial regulatory gap. Section 7 is an enforcement provision granting regulatory powers with no SP 800-53 equivalent: (1) the commissioner may examine licensees as part of regular financial examinations or targeted IT/cyber examinations; (2) the commissioner's examination authority follows the NAIC Market Regulation Handbook and Financial Condition Examiners Handbook; (3) licensees must cooperate with examinations and produce requested documents; (4) the commissioner may share examination findings with other state regulators; (5) examination findings may lead to corrective orders, consent agreements, or enforcement actions. These regulatory examination powers are sovereign authority provisions entirely outside the scope of technical security controls."
+    },
+    {
+      "id": "8",
+      "title": "Confidentiality",
+      "controls": [
+        "PT-01",
+        "PT-03",
+        "PT-04",
+        "AC-04",
+        "AC-21",
+        "SI-12"
+      ],
+      "coverage_pct": 45,
+      "rationale": "Section 8 provides that documents, materials, or other information in the control or possession of the insurance department that are furnished by a licensee, obtained or created by the commissioner in connection with an examination or investigation, shall be treated as confidential and privileged. PT-01 policy and procedures for personally identifiable information addresses information protection. PT-03 personally identifiable information processing and PT-04 consent support privacy-related handling. AC-04 information flow enforcement and AC-21 information sharing restrict unauthorized disclosure. SI-12 information management and retention governs data handling.",
+      "gaps": "Substantial regulatory gap. Section 8 establishes regulatory privilege and confidentiality protections that are entirely legal constructs: (1) documents shared with the commissioner are confidential by operation of law; (2) this confidentiality is not subject to subpoena or discoverable in private litigation; (3) the commissioner may share confidential documents with other state, federal, or international regulatory agencies under specific conditions; (4) sharing does not waive any applicable privilege; (5) the NAIC and third-party consultants engaged by the commissioner must maintain confidentiality. SP 800-53 addresses information protection technically but has no concept of regulatory examination privilege, statutory confidentiality, or sovereign immunity provisions."
+    },
+    {
+      "id": "9",
+      "title": "Exceptions",
+      "controls": [
+        "PM-01",
+        "PM-11",
+        "PL-02",
+        "PL-10"
+      ],
+      "coverage_pct": 30,
+      "rationale": "Section 9 provides exemptions from certain requirements for licensees meeting specific criteria. PM-01 information security program plan addresses the concept of tailoring security requirements to organizational needs and capabilities. PM-11 mission/business process definition helps determine organizational scope. PL-02 system security and privacy plans and PL-10 baseline selection (new in Rev 5) support the concept of tailoring controls to organizational characteristics.",
+      "gaps": "Significant regulatory gap. Section 9 provides specific exemptions entirely outside SP 800-53 scope: (1) licensees with fewer than 10 employees (including independent contractors) are exempt from Section 4 requirements; (2) licensees subject to and in compliance with HIPAA are deemed to satisfy the model law's data security requirements (reciprocity provision); (3) an employee, agent, representative, or designee of a licensee who is also a licensee is exempt if the parent licensee's program covers the individual; (4) exempt licensees must still comply with investigation (Section 5) and notification (Section 6) requirements. SP 800-53 uses impact-level tailoring (FIPS 199/200) rather than employee-count exemptions or cross-regulatory reciprocity. These are regulatory scoping provisions with no technical control equivalents."
+    },
+    {
+      "id": "10",
+      "title": "Penalties",
+      "controls": [
+        "PM-01",
+        "PS-08",
+        "PL-04"
+      ],
+      "coverage_pct": 25,
+      "rationale": "Section 10 provides that a licensee in violation of the model law is subject to the penalties applicable under the state's insurance laws. PM-01 information security program plan supports compliance documentation to avoid penalties. PS-08 personnel sanctions addresses internal disciplinary actions for policy violations. PL-04 rules of behavior establishes enforceable conduct standards for personnel.",
+      "gaps": "Near-total regulatory gap. Section 10 invokes existing state insurance law penalty frameworks which typically include: (1) monetary fines per violation (varying by state, often $1,000 to $10,000 per violation with aggregate caps); (2) license suspension or revocation; (3) cease and desist orders; (4) consent agreements with corrective action requirements; (5) restitution to affected consumers; (6) referral to state attorney general for criminal prosecution in cases of willful violations. These are sovereign enforcement mechanisms entirely outside the scope of technical security controls. SP 800-53 PS-08 addresses internal sanctions but has no concept of state regulatory penalties, license revocation, or statutory enforcement actions against regulated entities."
+    }
+  ],
+  "summary": {
+    "total_clauses": 24,
+    "average_coverage": 72.1,
+    "full_count": 12,
+    "substantial_count": 4,
+    "partial_count": 6,
+    "weak_count": 2,
+    "none_count": 0
+  }
+}

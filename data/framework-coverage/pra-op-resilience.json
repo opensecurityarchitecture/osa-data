@@ -1,0 +1,476 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "pra_op_resilience",
+  "framework_name": "PRA SS1/21 & SS2/21 — Operational Resilience and Outsourcing",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of PRA Supervisory Statement SS1/21 (Operational resilience: Impact tolerances for important business services), PRA Supervisory Statement SS2/21 (Outsourcing and third-party risk management), and PRA Policy Statement PS6/21 which packages both SSs. SS1/21 establishes requirements for identifying important business services, setting impact tolerances, mapping resources, scenario testing, and self-assessment. SS2/21 establishes requirements for outsourcing governance, materiality assessment, due diligence, contractual arrangements, sub-outsourcing, intra-group outsourcing, and exit strategies. SP 800-53 provides information security controls that support operational resilience infrastructure but does not address UK-specific regulatory concepts such as important business service methodology, impact tolerance setting, or PRA outsourcing materiality assessment. Validate with PRA-regulated firm operational resilience teams for compliance use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "SS1/21-3.1",
+      "title": "Identify important business services (IBS)",
+      "controls": [
+        "PM-11",
+        "PM-08",
+        "CP-02",
+        "CM-12",
+        "CM-13",
+        "RA-09"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-11 mission/business process definition identifies processes critical to organisational mission. PM-08 critical infrastructure plan addresses protection of key resources. CP-02 contingency planning identifies critical functions and recovery priorities. CM-12 information location identifies where information assets reside, supporting IBS mapping. CM-13 data action mapping documents data flows underpinning business services. RA-09 criticality analysis identifies critical components supporting important business services.",
+      "gaps": "PRA 'important business service' is a UK-specific regulatory concept — services whose disruption could cause intolerable harm to consumers, market integrity, or firm safety and soundness. SP 800-53 identifies critical functions but does not implement the PRA's IBS identification methodology which requires a consumer-harm and market-integrity lens rather than a purely IT availability perspective. The board-level approval of the IBS list and annual review cycle are not addressed."
+    },
+    {
+      "id": "SS1/21-3.2",
+      "title": "Board governance of operational resilience",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PM-29",
+        "PL-01"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PM-01 information security program plan provides overarching governance structure. PM-02 senior information security officer designates executive accountability. PM-09 risk management strategy establishes risk appetite. PM-29 risk management program leadership formalises senior accountability. PL-01 security planning policy establishes governance framework.",
+      "gaps": "SS1/21 requires the board to own operational resilience, approve the list of important business services, set impact tolerances, and receive regular reporting on the firm's ability to remain within tolerance. SP 800-53 establishes security governance at the organisational level but does not mandate board-level accountability for operational resilience specifically, nor the UK Senior Managers and Certification Regime (SM&CR) accountability that underpins PRA expectations for named individual responsibility."
+    },
+    {
+      "id": "SS1/21-4.1",
+      "title": "Set impact tolerances for each IBS",
+      "controls": [
+        "CP-02",
+        "PM-11",
+        "PM-09",
+        "RA-03"
+      ],
+      "coverage_pct": 35,
+      "rationale": "CP-02 contingency planning includes RTO/RPO concepts related to tolerance. PM-11 mission/business process definition identifies service criticality. PM-09 risk management strategy establishes organisational risk appetite. RA-03 risk assessment quantifies risk to inform tolerance-setting decisions.",
+      "gaps": "Significant gap. PRA impact tolerances define the maximum tolerable disruption to an important business service — measured by the time within which the service must be restored, and potentially by other metrics (volume, value). This is distinct from IT RTO/RPO: impact tolerances are set at the business service level, not the system level, and must reflect consumer harm and market integrity thresholds. SP 800-53 has no equivalent concept. The requirement for board approval and regular recalibration of impact tolerances is not addressed."
+    },
+    {
+      "id": "SS1/21-5.1",
+      "title": "Map resources supporting each IBS — people",
+      "controls": [
+        "PM-11",
+        "PM-13",
+        "PS-01",
+        "PS-02",
+        "CP-02"
+      ],
+      "coverage_pct": 40,
+      "rationale": "PM-11 mission/business process definition identifies business processes requiring people. PM-13 security and privacy workforce addresses workforce planning. PS-01 personnel security policy and PS-02 position risk designation support role identification. CP-02 contingency planning identifies key personnel for critical functions.",
+      "gaps": "SS1/21 requires mapping all people (staff, contractors, third-party personnel) who support each IBS, including identifying single points of failure, key-person dependencies, and cross-training needs. SP 800-53 addresses personnel security and workforce development but does not require end-to-end people mapping against specific business services, identification of human single points of failure, or succession planning tied to IBS continuity."
+    },
+    {
+      "id": "SS1/21-5.2",
+      "title": "Map resources supporting each IBS — technology and information",
+      "controls": [
+        "CM-08",
+        "CM-12",
+        "CM-13",
+        "PL-08",
+        "SA-09",
+        "RA-09"
+      ],
+      "coverage_pct": 62,
+      "rationale": "CM-08 system component inventory identifies technology assets. CM-12 information location identifies where data resides across the estate. CM-13 data action mapping documents data flows through systems supporting business services. PL-08 security and privacy architectures describes system dependencies. SA-09 external system services identifies third-party technology dependencies. RA-09 criticality analysis prioritises components by business impact.",
+      "gaps": "SP 800-53 provides strong technology and data mapping capabilities. The gap is in requiring this mapping at the IBS granularity — linking every technology component and data store to the specific important business service it supports, rather than mapping at the system or organisational level. The PRA expects firms to identify the complete technology chain from front-end to back-end for each IBS."
+    },
+    {
+      "id": "SS1/21-5.3",
+      "title": "Map resources supporting each IBS — facilities and third parties",
+      "controls": [
+        "PE-01",
+        "PE-17",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "CP-06",
+        "CP-07"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PE-01 physical and environmental protection policy governs facility security. PE-17 alternate work site provides alternative facility planning. SA-09 external system services identifies third-party dependencies. SR-01/SR-02 supply chain risk management policy and plan address third-party governance. CP-06 alternate storage site and CP-07 alternate processing site support facility resilience.",
+      "gaps": "SS1/21 requires mapping all facilities (offices, data centres, call centres) and all third-party providers supporting each IBS, including concentration risk where multiple IBS depend on the same provider or location. SP 800-53 addresses alternate sites and supply chain governance but does not require mapping these dependencies at the IBS level or assessing concentration risk across service providers and geographic locations."
+    },
+    {
+      "id": "SS1/21-6.1",
+      "title": "Scenario testing — severe but plausible scenarios",
+      "controls": [
+        "CP-04",
+        "IR-03",
+        "PM-14",
+        "CA-08",
+        "RA-03"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CP-04 contingency plan testing exercises recovery procedures. IR-03 incident response testing validates response capabilities. PM-14 testing, training, and monitoring coordinates exercise programmes. CA-08 penetration testing provides adversarial testing methodology. RA-03 risk assessment identifies scenarios for testing.",
+      "gaps": "SS1/21 requires firms to test their ability to remain within impact tolerances for each IBS under severe but plausible disruption scenarios — including technology failure, cyber attack, third-party failure, and loss of key staff or premises. Scenarios must escalate in severity over time. SP 800-53 covers security and contingency testing but does not require testing specifically against impact tolerance thresholds, nor the PRA's scenario severity calibration methodology."
+    },
+    {
+      "id": "SS1/21-6.2",
+      "title": "Scenario testing — lessons learned and remediation",
+      "controls": [
+        "IR-03",
+        "CA-05",
+        "PM-06",
+        "AT-06",
+        "CP-04"
+      ],
+      "coverage_pct": 65,
+      "rationale": "IR-03 incident response testing includes post-exercise review and improvement. CA-05 plan of action and milestones tracks remediation of identified weaknesses. PM-06 measures of performance tracks improvement metrics. AT-06 training feedback supports measurement of improvement actions. CP-04 contingency testing includes lessons-learned processes.",
+      "gaps": "SP 800-53 provides good coverage for post-test improvement cycles. The gap is in the PRA's requirement that lessons learned are specifically evaluated against impact tolerance achievement — did the firm remain within tolerance? If not, what remediation is needed to achieve tolerance? The PRA also expects a clear escalation path to the board when scenario testing reveals the firm cannot remain within tolerance."
+    },
+    {
+      "id": "SS1/21-7.1",
+      "title": "Self-assessment and ongoing monitoring",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-06",
+        "PM-14",
+        "PM-31"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-02 control assessments provides independent assessment methodology. CA-07 continuous monitoring establishes ongoing assessment cadence. PM-06 measures of performance enables quantitative tracking. PM-14 testing, training, and monitoring programme coordinates monitoring activities. PM-31 continuous monitoring strategy establishes the monitoring approach.",
+      "gaps": "SS1/21 requires firms to conduct a self-assessment of their operational resilience capabilities, document the results, and make it available to the PRA. The self-assessment must demonstrate progress toward the ability to remain within impact tolerances by March 2025. SP 800-53 addresses continuous monitoring and assessment but does not require a consolidated self-assessment document in the format expected by the PRA, nor the specific regulatory reporting obligations."
+    },
+    {
+      "id": "SS1/21-8.1",
+      "title": "Communication strategy during disruption",
+      "controls": [
+        "IR-01",
+        "IR-04",
+        "IR-06",
+        "IR-07",
+        "CP-02"
+      ],
+      "coverage_pct": 60,
+      "rationale": "IR-01 incident response policy establishes communication governance. IR-04 incident handling includes internal and external communication procedures. IR-06 incident reporting enables regulatory and stakeholder notification. IR-07 incident response assistance provides communication support. CP-02 contingency planning includes communication procedures during disruption.",
+      "gaps": "SS1/21 expects firms to have clear communication strategies for engaging with consumers, counterparties, FMI providers, and the PRA during disruptions to important business services. SP 800-53 covers incident communication but is primarily internally focused and does not address the specific stakeholder communication requirements of a PRA-regulated firm, including consumer harm mitigation communications."
+    },
+    {
+      "id": "SS1/21-9.1",
+      "title": "Interconnections and dependencies between IBS",
+      "controls": [
+        "PM-11",
+        "PL-08",
+        "CM-13",
+        "SA-09",
+        "RA-09"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-11 mission/business process definition identifies business process dependencies. PL-08 security and privacy architectures describes system interconnections. CM-13 data action mapping documents data flows between services. SA-09 external system services identifies external dependencies. RA-09 criticality analysis assesses cascading failure potential.",
+      "gaps": "SS1/21 requires firms to understand how disruption to one IBS may cascade to other IBS — for example, a payments IBS depending on a settlements IBS. SP 800-53 addresses system interconnections but not at the business service level. The PRA expects firms to model cascading disruption scenarios and consider whether impact tolerances for interdependent IBS are coherent."
+    },
+    {
+      "id": "SS2/21-3.1",
+      "title": "Outsourcing governance framework",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "PM-09",
+        "PM-01"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SA-04 acquisition process establishes procurement governance. SA-09 external system services defines oversight of third-party services. SR-01 supply chain risk management policy provides governance framework. SR-02 supply chain risk management plan operationalises the framework. PM-09 risk management strategy sets risk appetite for outsourcing. PM-01 information security program plan addresses third-party security governance.",
+      "gaps": "SS2/21 requires a comprehensive outsourcing framework with board-approved outsourcing policy, clear roles and responsibilities, and a central outsourcing register. SP 800-53 supply chain risk management addresses vendor governance but does not prescribe a central outsourcing register, board-level outsourcing policy approval, or the PRA's requirement that the firm retains the ability to oversee and control all outsourced activities as if they were performed internally."
+    },
+    {
+      "id": "SS2/21-4.1",
+      "title": "Materiality assessment of outsourcing arrangements",
+      "controls": [
+        "RA-03",
+        "RA-09",
+        "PM-09",
+        "PM-11"
+      ],
+      "coverage_pct": 35,
+      "rationale": "RA-03 risk assessment evaluates risk associated with outsourcing decisions. RA-09 criticality analysis assesses the criticality of outsourced functions. PM-09 risk management strategy provides risk appetite context. PM-11 mission/business process definition identifies which business processes are outsourced.",
+      "gaps": "Significant gap. SS2/21 requires firms to assess the materiality of each outsourcing arrangement based on the criticality of the business function, the degree of difficulty in replacing the provider, the impact of disruption, and the operational, reputational, and regulatory risks. Material outsourcing requires enhanced governance including PRA notification. SP 800-53 does not define outsourcing materiality, does not require a formal materiality assessment methodology, and does not address regulatory notification obligations for material outsourcing."
+    },
+    {
+      "id": "SS2/21-5.1",
+      "title": "Pre-outsourcing due diligence",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SA-21",
+        "SR-06",
+        "RA-03",
+        "PS-07"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SA-04 acquisition process establishes due diligence requirements for procured services. SA-09 external system services defines security requirements for external providers. SA-21 developer screening adds personnel vetting for service provider staff. SR-06 supplier assessments and reviews provides assessment methodology. RA-03 risk assessment evaluates provider risk. PS-07 external personnel security governs third-party personnel.",
+      "gaps": "SS2/21 requires comprehensive pre-outsourcing due diligence covering the provider's financial stability, regulatory status, insurance adequacy, business continuity capabilities, data protection practices, and the geopolitical and concentration risks of the provider's operating locations. SP 800-53 addresses technical security due diligence and supplier assessment but does not cover financial stability analysis, insurance adequacy, geopolitical risk assessment, or concentration risk evaluation across the firm's outsourcing portfolio."
+    },
+    {
+      "id": "SS2/21-6.1",
+      "title": "Contractual requirements — service levels and security",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-03",
+        "SR-06",
+        "PS-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-04 acquisition process includes security requirements in contracts. SA-09 external system services mandates security controls for third-party services. SR-03 supply chain controls and processes establishes required supply chain protections. SR-06 supplier assessments and reviews ensures ongoing compliance. PS-07 external personnel security addresses third-party personnel requirements in contracts.",
+      "gaps": "SS2/21 specifies minimum contractual provisions including: service description, service levels, audit and access rights, data location and processing restrictions, security requirements, business continuity obligations, termination provisions with adequate notice, intellectual property rights, and the right to sub-outsource only with the firm's prior consent. SP 800-53 covers security clauses and supplier requirements but does not prescribe the full range of PRA-mandated contractual provisions, particularly around termination rights, sub-outsourcing consent, and data location restrictions."
+    },
+    {
+      "id": "SS2/21-6.2",
+      "title": "Contractual requirements — audit and access rights",
+      "controls": [
+        "CA-02",
+        "SA-09",
+        "SR-06",
+        "AU-01"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-02 control assessments provides methodology for assessing third-party controls. SA-09 external system services includes oversight requirements. SR-06 supplier assessments and reviews mandates periodic assessment of suppliers. AU-01 audit and accountability policy establishes audit governance.",
+      "gaps": "SS2/21 requires contracts to include unrestricted audit and access rights — the firm (and its regulators including the PRA and FCA) must have the right to audit the provider's premises, systems, and records at any time. This includes access for the firm's internal audit function and the right to commission independent third-party audits. SP 800-53 addresses third-party assessment but does not mandate the specific unrestricted regulatory access rights required by the PRA."
+    },
+    {
+      "id": "SS2/21-7.1",
+      "title": "Ongoing monitoring and oversight of outsourced providers",
+      "controls": [
+        "CA-07",
+        "SR-06",
+        "SA-09",
+        "PM-14",
+        "SI-04"
+      ],
+      "coverage_pct": 58,
+      "rationale": "CA-07 continuous monitoring establishes ongoing assessment capability for third-party services. SR-06 supplier assessments and reviews mandates periodic supplier review. SA-09 external system services defines oversight requirements. PM-14 testing, training, and monitoring coordinates monitoring activities. SI-04 system monitoring provides technical monitoring of outsourced service performance.",
+      "gaps": "SS2/21 requires firms to maintain ongoing oversight of service providers commensurate with the materiality of the arrangement. This includes monitoring SLA performance, security posture, financial health, and regulatory standing. SP 800-53 covers technical monitoring and periodic assessment but does not address monitoring provider financial health, regulatory standing, or the graduated oversight model based on outsourcing materiality."
+    },
+    {
+      "id": "SS2/21-8.1",
+      "title": "Sub-outsourcing chains",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SA-09"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SR-01/SR-02 supply chain risk management policy and plan address supply chain governance. SR-03 supply chain controls and processes establishes supply chain protections. SA-09 external system services includes requirements for external service oversight.",
+      "gaps": "SS2/21 requires firms to understand, monitor, and control sub-outsourcing chains — providers who themselves outsource elements of the service. The firm must have contractual right to approve or reject sub-outsourcing, receive notification of sub-outsourcing changes, and assess the risk of the complete outsourcing chain including nth-party dependencies. SP 800-53 addresses first-tier supply chain risk but does not prescribe sub-outsourcing approval rights, notification requirements, or end-to-end chain visibility expectations."
+    },
+    {
+      "id": "SS2/21-9.1",
+      "title": "Intra-group outsourcing",
+      "controls": [
+        "SA-09",
+        "CA-03",
+        "AC-20",
+        "PM-09"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-09 external system services applies to group entities providing services. CA-03 system interconnections governs connections between organisational entities. AC-20 use of external systems addresses access to systems operated by other entities. PM-09 risk management strategy sets risk appetite applicable to group arrangements.",
+      "gaps": "SS2/21 requires that intra-group outsourcing arrangements (services provided by group entities, including shared service centres) are subject to the same governance rigour as external outsourcing. The PRA recognises that group entities may create concentration risk and that the firm must not assume group entities will always prioritise the UK-regulated entity's interests in a stress scenario. SP 800-53 does not distinguish between intra-group and external arrangements and does not address the specific governance challenges of group outsourcing including conflicts of interest, resolution planning considerations, and jurisdictional risk."
+    },
+    {
+      "id": "SS2/21-10.1",
+      "title": "Business continuity for outsourced services",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "SA-09"
+      ],
+      "coverage_pct": 62,
+      "rationale": "CP-01 contingency planning policy establishes BCP governance. CP-02 contingency plan includes recovery procedures for outsourced services. CP-04 contingency plan testing exercises third-party failure scenarios. CP-06 alternate storage site and CP-07 alternate processing site support geographic resilience. SA-09 external system services includes continuity requirements for third-party services.",
+      "gaps": "SS2/21 requires firms to ensure outsourced service providers have adequate business continuity arrangements that align with the firm's own operational resilience requirements and impact tolerances. SP 800-53 covers contingency planning and testing but does not require alignment between the firm's impact tolerances and the provider's recovery capabilities, nor the contractual requirement for joint testing of business continuity arrangements."
+    },
+    {
+      "id": "SS2/21-11.1",
+      "title": "Data protection and information security for outsourced services",
+      "controls": [
+        "SC-08",
+        "SC-13",
+        "SC-28",
+        "SA-09",
+        "MP-04",
+        "MP-05",
+        "AC-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SC-08 transmission confidentiality and integrity protects data in transit to/from providers. SC-13 cryptographic protection mandates encryption standards. SC-28 protection of information at rest secures data stored by providers. SA-09 external system services defines security requirements. MP-04/MP-05 media storage and transport protects physical media. AC-04 information flow enforcement controls data movement to/from outsourced environments.",
+      "gaps": "SP 800-53 provides strong data protection controls. The gap is in the PRA's requirement for data location restrictions — the firm must know where its data is processed and stored, comply with applicable data protection legislation, and assess the legal and regulatory regime of the provider's operating jurisdiction. Data sovereignty and jurisdictional risk assessment are not addressed by SP 800-53."
+    },
+    {
+      "id": "SS2/21-12.1",
+      "title": "Exit strategies and transition planning",
+      "controls": [
+        "CP-02",
+        "SA-09",
+        "SR-01",
+        "PM-09"
+      ],
+      "coverage_pct": 38,
+      "rationale": "CP-02 contingency planning includes transition planning elements. SA-09 external system services can include exit provisions. SR-01 supply chain risk management policy addresses supply chain disruption. PM-09 risk management strategy covers risk of provider failure.",
+      "gaps": "Significant gap. SS2/21 requires firms to develop and maintain exit strategies for all material outsourcing arrangements, including defined triggers for exit, transition plans, alternative provider options, data migration and extraction capabilities, and adequate notice periods. Exit plans must be tested periodically. SP 800-53 does not prescribe exit strategy planning for third-party services, transition management, data portability requirements, or the obligation to maintain service continuity during provider transitions."
+    },
+    {
+      "id": "SS2/21-13.1",
+      "title": "Outsourcing register and record-keeping",
+      "controls": [
+        "CM-08",
+        "PM-05",
+        "SA-09",
+        "AU-11"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CM-08 system component inventory provides asset registration capability. PM-05 system inventory identifies organisational systems including outsourced components. SA-09 external system services documents external service dependencies. AU-11 audit record retention ensures retention of outsourcing records.",
+      "gaps": "SS2/21 requires firms to maintain a complete outsourcing register documenting all outsourcing arrangements, their materiality classification, provider details, contract terms, and risk assessment. The register must be available to the PRA on request. SP 800-53 asset inventory covers technology assets but does not prescribe a dedicated outsourcing register with the commercial and governance metadata required by the PRA."
+    },
+    {
+      "id": "SS2/21-14.1",
+      "title": "Cloud outsourcing — specific considerations",
+      "controls": [
+        "SA-09",
+        "AC-20",
+        "SC-07",
+        "CM-12",
+        "SR-03"
+      ],
+      "coverage_pct": 50,
+      "rationale": "SA-09 external system services applies to cloud service providers. AC-20 use of external systems governs access to cloud environments. SC-07 boundary protection secures cloud network boundaries. CM-12 information location identifies data location in cloud environments. SR-03 supply chain controls and processes addresses cloud provider supply chain.",
+      "gaps": "SS2/21 highlights cloud outsourcing as requiring additional consideration including: multi-tenancy risks, lock-in risk, data location and sovereignty, encryption key management, shared responsibility model clarity, and the ability to conduct meaningful audits and testing in cloud environments. SP 800-53 provides general security controls applicable to cloud but does not address cloud-specific outsourcing governance such as lock-in assessment, meaningful auditability of hyperscaler environments, or the shared responsibility model negotiations specific to PRA-regulated firms."
+    },
+    {
+      "id": "PS6/21-1.1",
+      "title": "Transition period and compliance expectations",
+      "controls": [
+        "PM-01",
+        "PM-04",
+        "CA-05",
+        "PM-31"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-01 information security program plan provides a governance structure for programme implementation. PM-04 plan of action and milestones tracks compliance remediation. CA-05 plan of action and milestones manages findings and timelines. PM-31 continuous monitoring strategy establishes ongoing compliance monitoring.",
+      "gaps": "PS6/21 provided a transition period (to March 2022 for identification and tolerance-setting, to March 2025 for full compliance) during which firms were expected to demonstrate continuous improvement toward operational resilience maturity. SP 800-53 provides programme management and remediation tracking controls but does not address the PRA's specific transition timeline, regulatory reporting expectations during the transition period, or the concept of demonstrated continuous improvement toward a regulatory compliance deadline."
+    },
+    {
+      "id": "PS6/21-2.1",
+      "title": "Proportionality and complexity",
+      "controls": [
+        "PM-09",
+        "PL-10",
+        "PL-11",
+        "RA-02"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-09 risk management strategy establishes risk appetite that informs proportionate implementation. PL-10 baseline selection supports selecting controls appropriate to organisational risk. PL-11 baseline tailoring enables proportionate control implementation. RA-02 security categorisation supports risk-based scoping.",
+      "gaps": "PS6/21 states that the PRA's expectations are proportionate to the nature, scale, and complexity of the firm. Smaller firms may have fewer important business services and simpler mapping requirements. SP 800-53 supports tailoring and proportionality through the baseline selection and tailoring controls but does not address PRA-specific proportionality guidance tied to firm size, systemically important bank status, or the nature of financial services activities."
+    },
+    {
+      "id": "SS1/21-10.1",
+      "title": "Operational resilience and financial resilience linkage",
+      "controls": [
+        "PM-09",
+        "RA-03",
+        "CP-02"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PM-09 risk management strategy establishes the risk management context linking operational and financial risk. RA-03 risk assessment evaluates operational disruption impact. CP-02 contingency planning addresses recovery from disruption.",
+      "gaps": "SS1/21 requires firms to consider the interplay between operational resilience and financial resilience — a severe operational disruption could cause financial loss that threatens the firm's solvency, and conversely, financial stress could compromise the firm's ability to maintain operational resilience. SP 800-53 does not address the linkage between operational and financial resilience, capital adequacy implications of operational disruptions, or the PRA's expectation that firms consider operational resilience in their recovery and resolution planning."
+    },
+    {
+      "id": "SS2/21-15.1",
+      "title": "PRA notification and regulatory reporting",
+      "controls": [
+        "IR-06",
+        "PM-27",
+        "AU-06"
+      ],
+      "coverage_pct": 30,
+      "rationale": "IR-06 incident reporting includes reporting to external authorities. PM-27 privacy reporting addresses regulatory reporting obligations. AU-06 audit review, analysis, and reporting supports compliance reporting.",
+      "gaps": "SS2/21 requires firms to notify the PRA before entering into material outsourcing arrangements, and to report significant changes to existing arrangements. The PRA also expects firms to report material incidents affecting outsourced services. SP 800-53 addresses incident reporting to authorities but does not cover pre-outsourcing regulatory notification, material change reporting for outsourcing arrangements, or the PRA's specific reporting format and timeline expectations."
+    },
+    {
+      "id": "SS2/21-16.1",
+      "title": "Concentration risk across outsourcing portfolio",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "RA-03",
+        "SA-09",
+        "PM-30"
+      ],
+      "coverage_pct": 42,
+      "rationale": "SR-01/SR-02 supply chain risk management addresses supply chain risk at the portfolio level. RA-03 risk assessment evaluates concentration risks. SA-09 external system services identifies external dependencies. PM-30 supply chain risk management strategy provides the strategic approach.",
+      "gaps": "SS2/21 requires firms to assess and manage concentration risk across their outsourcing portfolio — where multiple critical functions depend on the same provider, technology, or geographic location. This includes systemically important third parties where multiple firms in the sector depend on the same provider (e.g., major cloud hyperscalers). SP 800-53 addresses supply chain risk at the organisational level but does not address sector-wide concentration risk, systemic third-party dependency, or the requirement to assess whether the failure of a single provider could disrupt multiple important business services simultaneously."
+    },
+    {
+      "id": "SS1/21-11.1",
+      "title": "Change management impact on operational resilience",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "SA-10",
+        "PM-11"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CM-03 configuration change control provides formal change governance. CM-04 impact analysis assesses the effect of changes on system operation. SA-10 developer configuration management ensures controlled changes. PM-11 mission/business process definition identifies processes affected by change.",
+      "gaps": "SS1/21 expects firms to consider the impact of material changes (system migrations, organisational restructuring, product launches, M&A activity) on their ability to remain within impact tolerances for important business services. SP 800-53 covers IT change management but does not require change impact assessment specifically against IBS impact tolerances, nor the broader organisational change assessment (restructuring, M&A) expected by the PRA."
+    },
+    {
+      "id": "SS2/21-17.1",
+      "title": "Skills and resources for outsourcing oversight",
+      "controls": [
+        "PM-02",
+        "PM-13",
+        "PS-02",
+        "AT-03"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PM-02 senior information security officer designates oversight responsibility. PM-13 security and privacy workforce addresses workforce capability. PS-02 position risk designation categorises oversight roles. AT-03 role-based training ensures oversight staff have required competencies.",
+      "gaps": "SS2/21 requires firms to retain sufficient skills and resources to oversee and manage outsourced activities effectively — including the ability to take back control if necessary. The firm must not become so dependent on a provider that it loses the expertise to understand, challenge, and if necessary replace the outsourced service. SP 800-53 addresses workforce development but does not mandate retention of internal expertise as a hedge against outsourcing dependency, nor the ability to repatriate outsourced services."
+    }
+  ],
+  "summary": {
+    "total_clauses": 31,
+    "average_coverage": 48.5,
+    "full_count": 0,
+    "substantial_count": 4,
+    "partial_count": 18,
+    "weak_count": 9,
+    "none_count": 0
+  }
+}

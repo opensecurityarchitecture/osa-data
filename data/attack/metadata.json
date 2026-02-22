@@ -1,9 +1,36 @@
 {
   "description": "TRIDENT attack/weakness/control graph data for Open Security Architecture",
-  "graph_version": "2.2.0",
+  "graph_version": "2.3.0",
   "graph_schema_version": "1.1",
-  "graph_build_id": "2026-02-22T18:00:00Z",
+  "graph_build_id": "2026-02-22T20:30:00Z",
   "changelog": [
+    {
+      "version": "2.3.0",
+      "date": "2026-02-22",
+      "type": "minor",
+      "changes": [
+        {
+          "category": "entity",
+          "action": "add",
+          "description": "CVE/NVD vulnerability ingestion: 53,957 vulnerabilities via NVD API v2"
+        },
+        {
+          "category": "edge",
+          "action": "add",
+          "description": "AFFECTS edges (59,077): vulnerability -> cpe product mapping from NVD"
+        },
+        {
+          "category": "edge",
+          "action": "add",
+          "description": "MISCONFIGURES edges (15,622): CCE weakness_class -> cpe platform mapping"
+        },
+        {
+          "category": "entity",
+          "action": "modify",
+          "description": "CWE weakness catalog expanded from 135 to 944 entries via full MITRE CWE XML ingestion"
+        }
+      ]
+    },
     {
       "version": "2.2.0",
       "date": "2026-02-22",
@@ -138,14 +165,32 @@
       "notes": "Reverse index of CIS v8 safeguard -> SP800-53 controls from existing OSA compliance mappings. Provides the IMPLEMENTED_BY edges in the TRIDENT model."
     },
     "weakness_catalog": {
-      "source": "MITRE CWE via CAPEC bridge",
+      "source": "MITRE CWE XML + CAPEC bridge",
+      "cwe_version": "4.19.1",
       "capec_version": "3.9",
-      "source_url": "https://capec.mitre.org/data/xml/capec_latest.xml",
-      "total_cwe_entries": 135,
-      "cwe_technique_edges": 1162,
+      "source_url": "https://cwe.mitre.org/data/xml/cwec_latest.xml",
+      "total_cwe_entries": 944,
+      "cwe_technique_edges": 1937,
       "techniques_with_cwe": 340,
-      "enrichment_date": "2026-02-14",
-      "notes": "CWE weakness classes mapped to ATT&CK techniques via CAPEC bridge + TRIDENT enrichment (parent inheritance, sub-technique roll-up, curated direct mappings). 135 CWEs map to 340 techniques through 1,162 EXPLOITS edges. 100% T1/T2 TACM tier coverage."
+      "enrichment_date": "2026-02-22",
+      "notes": "944 CWE weakness classes (expanded from 135 via full MITRE CWE XML ingestion). Mapped to ATT&CK techniques via CAPEC bridge + TRIDENT enrichment. Includes CCE entries with MISCONFIGURES edges to CPE products."
+    },
+    "vulnerability_catalog": {
+      "source": "NVD (National Vulnerability Database) API v2",
+      "source_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "nvd_api_version": "2.0",
+      "total_vulnerabilities": 53957,
+      "affects_edges": 59077,
+      "enrichment_date": "2026-02-22",
+      "notes": "53,957 CVE vulnerabilities ingested from NVD API v2. Each vulnerability maps to CPE products via AFFECTS edges. Provides vulnerability-to-product impact analysis for the TRIDENT graph."
+    },
+    "cce_integration": {
+      "source": "CCE (Common Configuration Enumeration) via CWE/weakness catalog",
+      "design_doc": "cce-design.md",
+      "total_cce_entries": 17486,
+      "misconfigures_edges": 15622,
+      "enrichment_date": "2026-02-22",
+      "notes": "CCE misconfiguration entries integrated as weakness_class entities with MISCONFIGURES edges to CPE products. CCE entries are identifiable by source='CCE' in the weakness catalog."
     },
     "threat_actors": {
       "source": "MITRE ATT&CK STIX Data",
@@ -489,7 +534,7 @@
     }
   },
   "graph_summary": {
-    "total_edges": 15802,
+    "total_edges": 90501,
     "edge_types": {
       "COUNTERS": 1530,
       "PRESCRIBES": 2126,
@@ -531,7 +576,9 @@
       "RELATED_TO": 5,
       "PROFILE_DESCRIBES": 30,
       "DEFAULT_WEAKNESS": 93,
-      "DEFAULT_USES_PROTOCOL": 72
+      "DEFAULT_USES_PROTOCOL": 72,
+      "AFFECTS": 59077,
+      "MISCONFIGURES": 15622
     },
     "node_types": {
       "technique": 627,
@@ -539,7 +586,7 @@
       "detection_strategy": 691,
       "control": 315,
       "cis_safeguard": 171,
-      "weakness_class": 135,
+      "weakness_class": 944,
       "threat_actor": 163,
       "process_capability": 30,
       "technology_capability": 28,
@@ -553,6 +600,7 @@
       "access_policy": 12,
       "identity_principal": 8,
       "federation_pattern": 5,
+      "vulnerability": 53957,
       "cpe": 274,
       "fs_platform_type": 43,
       "energy_platform_type": 55,
@@ -590,9 +638,11 @@
       "zone_hosting_path": "ZoneArchetype -ZONE_HOSTS-> FSPlatformType / -ZONE_HOSTS_ENERGY-> EnergyPlatformType (zone to hosted platform types)",
       "zone_control_path": "ZoneArchetype -ZONE_REQUIRES-> Control (zone archetype to required security controls)",
       "atlas_crossref_path": "ATLAS Mitigation -RELATED_TO-> ATT&CK Mitigation (cross-framework equivalence for 5 shared mitigations)",
-      "behavioral_profile_path": "InfrastructureBehavioralProfile -PROFILE_DESCRIBES-> CPE / -DEFAULT_WEAKNESS-> WeaknessClass / -DEFAULT_USES_PROTOCOL-> Protocol (TIBP infrastructure behavioral profiling)"
+      "behavioral_profile_path": "InfrastructureBehavioralProfile -PROFILE_DESCRIBES-> CPE / -DEFAULT_WEAKNESS-> WeaknessClass / -DEFAULT_USES_PROTOCOL-> Protocol (TIBP infrastructure behavioral profiling)",
+      "vulnerability_path": "Vulnerability -AFFECTS-> CPE (NVD CVE-to-product impact mapping)",
+      "misconfiguration_path": "WeaknessClass -MISCONFIGURES-> CPE (CCE misconfiguration-to-platform mapping)"
     },
-    "total_edge_types": 41
+    "total_edge_types": 43
   },
   "files": {
     "technique-catalog.json": {
@@ -620,10 +670,16 @@
       "last_modified": "2026-02-22T09:13:23Z"
     },
     "weakness-catalog.json": {
-      "description": "135 CWE weakness classes with techniques[] via CAPEC bridge",
-      "sha256": "759261dc009e5972d873b5649615d15347113371c6990ca46fe46039a0342f0c",
-      "entity_count": 135,
-      "last_modified": "2026-02-22T09:13:23Z"
+      "description": "944 CWE weakness classes (including CCE entries) with techniques[] and applicableCPEs[]",
+      "sha256": "910011c74aa30858214a7e5da63db58ee378d94ce697a2f20e6ee7369ee9fb62",
+      "entity_count": 944,
+      "last_modified": "2026-02-22T20:30:00Z"
+    },
+    "vulnerability-catalog.json": {
+      "description": "53,957 CVE vulnerabilities from NVD API v2 with AFFECTS edges to CPE products",
+      "sha256": "2c6e729010bbf369dda97f8049acbc9c2c40a61bbb26d901e7ff7918a29c559c",
+      "entity_count": 53957,
+      "last_modified": "2026-02-22T20:30:00Z"
     },
     "actor-catalog.json": {
       "description": "163 ATT&CK threat groups with techniques[], aliases",
@@ -716,16 +772,16 @@
       "last_modified": "2026-02-22T09:13:23Z"
     },
     "graph-edges.json": {
-      "description": "15,607 explicit TRIDENT graph edges across 38 relationship types (includes ATLAS AI/ML, vertical profile, zone archetype, insurance platform, and platform instance edges)",
-      "sha256": "c43bfb382011ec07fe2cdce87b86360f0d0b34b9a1e93a231e5252e4b37540fa",
-      "entity_count": 15607,
-      "last_modified": "2026-02-22T09:13:23Z"
+      "description": "90,501 explicit TRIDENT graph edges across 43 relationship types (includes ATLAS, vertical profile, zone archetype, insurance, platform instance, vulnerability AFFECTS, and CCE MISCONFIGURES edges)",
+      "sha256": "e43480cbaa974948d976245dbc4f3ee9db55470e191ececbf24df2046c009035",
+      "entity_count": 90501,
+      "last_modified": "2026-02-22T20:30:00Z"
     },
     "trident-model.json": {
       "description": "Single authoritative TRIDENT model definition \u2014 domains, node types, edge types, analytical paths",
-      "sha256": "9285c78a725e31cc7e43a4a51e9163276b98910fd7664e6fb065c5544cf9588a",
+      "sha256": "cc9a158230e3b15099aac16c67816a86b7139bf18bac7b94c27de81ddeb8e326",
       "entity_count": 11,
-      "last_modified": "2026-02-22"
+      "last_modified": "2026-02-22T20:30:00Z"
     },
     "metadata.json": {
       "description": "This file \u2014 provenance, version info, graph summary",

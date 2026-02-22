@@ -27,7 +27,7 @@ The website repo is checked out as a subdirectory at `./website/` and reads data
 - **48 security patterns** (SP-001 to SP-047) + SP-000 reference/style guide + SP-999 test
 - **315 NIST 800-53 Rev 5 controls** across 20 families
 - **63 compliance framework coverage files** (79 in website registry) with cross-references
-- `data/attack/metadata.json` — TRIDENT graph versioning, provenance, checksums, and changelog (15,607 edges, 38 edge types, 22+ entity types)
+- `data/attack/metadata.json` — TRIDENT graph versioning, provenance, checksums, and changelog (90,501 edges, 43 edge types, 27 entity types)
 
 > **Note:** TRIDENT data catalogs, schemas, and enrichment scripts have moved to [osa-trident](https://github.com/opensecurityarchitecture/osa-trident). Only `metadata.json` and `attack-metadata.schema.json` remain here. Locally, `data/attack/*.json` are symlinks to the osa-trident checkout.
 
@@ -42,7 +42,20 @@ This file is the **public contract** between osa-trident (private) and osa-websi
 - **`changelog`**: Version history with categorised change entries
 - **`edge_types`**, **`entity_schemas`**: Graph structure summary for build-time validation
 
-When osa-trident data changes, update `metadata.json` checksums and bump `graph_version` before pushing to osa-data.
+**CRITICAL — CI will break if this file is not kept in sync with osa-trident.** The website build validates that:
+
+1. Every `hasData: true` nodeType in `trident-model.json` exists in `graph_summary.node_types`
+2. Every edge type in `graph-edges.json` exists in `graph_summary.edge_types`
+
+When osa-trident data changes (new entity types, edge types, or catalogs), you MUST update `metadata.json`:
+
+- Add new node types to `graph_summary.node_types` with entity count
+- Add new edge types to `graph_summary.edge_types` with edge count
+- Update `total_edges` and `total_edge_types`
+- Add new files to `files` section (SHA-256, entity_count, description)
+- Update checksums for modified files (`graph-edges.json`, `trident-model.json`, etc.)
+- Add `data_layers` entry and `changelog` entry
+- Bump `graph_version`
 
 ## Directory Structure
 

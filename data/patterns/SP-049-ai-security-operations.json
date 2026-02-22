@@ -1,0 +1,351 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-049",
+  "slug": "ai-security-operations",
+  "title": "AI in Security Operations",
+  "description": "Security architecture for the use of AI in defensive security operations — AI-augmented threat detection, AI-assisted incident triage and response, AI-generated threat intelligence, and automated security analysis. Addresses the specific risks this introduces: detection model evasion, hallucination in security-critical decisions, training data poisoning, analyst skill atrophy, and over-automation. Distinct from SP-027 (model-layer LLM security) and SP-047 (agentic frameworks) — this pattern addresses AI deployed for defensive security purposes and the failure modes that matter in a SOC context.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-049",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Application & Operations",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-02-22",
+    "dateModified": "2026-02-22",
+    "authors": ["Aurelius", "Vitruvius"],
+    "reviewers": [],
+    "provenance": "Created in response to the AI Pattern Analysis (2026-02-22) which identified AI in security operations as a distinct gap in the OSA pattern suite — neither SP-027 (LLM security), SP-047 (agentic frameworks), nor SP-045 (AI governance) adequately address the specific failure modes of AI deployed for defensive purposes. Informed by MITRE ATLAS, NIST AI RMF, and operational experience deploying ML-based detection, AI-assisted triage, and automated threat intelligence enrichment in enterprise security operations."
+  },
+  "diagram": {
+    "svg": "/images/sp-049-ai-security-operations.svg",
+    "png": ""
+  },
+  "content": {
+    "description": "AI is now embedded in every tier of security operations. SIEM platforms run ML-based anomaly detection models trained on behavioural baselines. XDR products use AI to correlate alerts across telemetry sources and surface prioritised investigations. Threat intelligence platforms automate IOC enrichment, actor attribution, and TTP mapping. Incident response platforms trigger automated playbook steps based on AI classification of alert type and severity. Security copilots draft investigation summaries, suggest queries, and synthesise threat reports. The productivity case is real — AI that reduces SIEM alert volume through false-positive suppression, or that drafts a coherent incident timeline from log data in seconds, directly addresses the analyst capacity problem every SOC faces.\n\nThe security risks introduced by security AI are equally real and specifically consequential. Security AI operates on sensitive data (security telemetry, vulnerability data, incident records), influences or automates decisions with real-world impact (blocking network flows, quarantining endpoints, escalating incidents), and is itself a target for adversarial manipulation — threat actors who understand a deployed detection model can craft activity patterns designed to evade it. A false negative in a recommendation system means a user makes a suboptimal choice. A false negative in a security detection model means an intrusion goes undetected.\n\nThis pattern has a distinct scope from the other OSA AI patterns. SP-027 (Secure LLM Usage) addresses model-layer risks when the organisation uses LLMs — prompt injection, provider security, privacy attacks on fine-tuned models. SP-047 (Secure Agentic AI Frameworks) addresses agentic framework infrastructure for deploying autonomous AI systems. SP-045 (AI Governance) addresses the enterprise management system — bias, explainability, training data governance at the AIMS level. This pattern addresses the use of AI for defensive security — the SOC architect's question rather than the application architect's question. The primary control families are AU (audit), IR (incident response), SI (system integrity), and CA (continuous monitoring), with CM (configuration management) governing the model lifecycle.\n\nThe central tension this pattern addresses is between automation and accountability. AI in security operations delivers its value by reducing human workload — but every automated decision that removes a human from the loop also removes a human from the accountability chain. The pattern establishes a tiered autonomy model calibrated to consequence: AI can act autonomously on low-impact reversible actions, must notify for medium-impact actions, and must obtain human approval for high-impact or irreversible actions. It also addresses the long-term risk that is hardest to measure: the gradual atrophy of analyst capability as AI handles the tasks that build and maintain those skills.",
+    "keyControlAreas": [
+      "AI-Augmented Threat Detection Governance (CA-07, SI-04, CM-02, SA-11): ML-based detection models embedded in SIEM and XDR platforms require the same governance rigour as other critical security infrastructure — but most organisations apply none. CM-02 (Baseline Configuration) mandates a documented baseline for every detection model in production: training data timeframe, feature set, threshold settings, false positive and false negative rates at deployment, and the model version identifier. Without this baseline, there is no basis for detecting model degradation, evaluating the impact of model updates, or rolling back to a known-good state after a bad update. CA-07 (Continuous Monitoring) applied reflexively to the monitoring system itself: detection model performance metrics (alert volume, true positive rate as validated by analyst feedback, false negative rate on known-attack simulations) must be tracked continuously, not reviewed annually. SI-04 (System Monitoring) — establish monitoring for anomalous detection model behaviour: sudden drops in alert volume may indicate model evasion or data pipeline failure, not an improvement in security posture. SA-11 (Developer Security Testing) — before any detection model or updated threshold reaches production, validate its performance against a holdout dataset that includes labelled attack scenarios representative of current threat actor TTPs, not just clean traffic baselines.",
+      "Detection Model Data Governance and Adversarial Robustness (SI-10, SC-28, SA-03, CM-08): Detection models are trained on data that adversaries can influence. An attacker who understands a deployed detection model — its feature set, thresholds, and training data sources — can craft activity patterns specifically designed to evade it: staying below anomaly thresholds, mimicking legitimate traffic patterns during intrusion, fragmenting malicious activity across time to defeat temporal correlations, or injecting log entries that confuse feature extraction. If the model retrains on analyst-labelled data, a patient adversary can poison the feedback loop by generating events that analysts consistently label as false positives. SI-10 (Information Input Validation) — validate the integrity and provenance of training data sources; implement anomaly detection on the training pipeline itself, flagging unexpected changes in data distribution or volume that may indicate adversarial manipulation. SC-28 (Protection of Information at Rest) — training datasets for security AI contain sensitive telemetry; encrypt, access-control, and audit them accordingly — a breach of training data reveals the feature set an adversary can target. SA-03 (System Development Life Cycle) — include adversarial robustness testing in the security AI development lifecycle: specifically evaluate whether the detection model's performance can be systematically degraded by a knowledgeable attacker who understands its feature set and thresholds. CM-08 (System Component Inventory) — maintain a complete inventory of all detection models in production, their data provenance, current performance metrics, and dependency on external data sources.",
+      "AI-Assisted Incident Triage and Human Accountability (IR-04, AU-02, AU-03, AC-05): AI-assisted triage changes incident response in three ways: classification (AI determines severity and category), recommendation (AI suggests response actions), and execution (AI triggers playbook steps automatically). Each role requires different human oversight. For classification: the AI's severity assessment must be visible to the analyst and overridable without friction — analyst overrides should be logged and feed into model monitoring. For recommendation: the AI must explain its reasoning in terms the analyst can evaluate, cite the evidence that drove the recommendation, and present alternatives. For execution: define explicit blast radius limits on what the AI can do without human approval — isolating a suspected endpoint is high-impact and potentially irreversible in terms of business disruption; blocking a single IP is low-impact and reversible. IR-04 (Incident Handling) — document the AI's role in each triage workflow explicitly, calibrate approval requirements to consequence severity, and include AI failure modes in IR playbooks: what does the analyst do when the AI triage tool is unavailable, produces clearly incorrect output, or is suspected of being manipulated? AU-02 and AU-03 — AI-assisted triage audit trails must capture the AI's classification and confidence score, the evidence cited, the human reviewer identity, and the action taken, to support post-incident review and model improvement. AC-05 (Separation of Duties) — the AI that classifies an incident must not be the sole actor that determines and executes the response for high-severity or high-impact scenarios.",
+      "Hallucination Risk in Security Decision Support (SI-10, CA-07, SA-11, AU-03): Security AI hallucination has domain-specific consequences. An LLM-based security copilot that fabricates a CVE number sends analysts investigating a non-existent vulnerability. An AI threat attribution system that misidentifies a threat actor based on superficial TTP similarity may direct an entire IR investigation toward the wrong hypothesis, consuming analyst capacity and potentially alerting the real attacker that they have been detected. An AI that summarises an alert with contextual threat intelligence may confidently cite information that is outdated, incorrect, or extrapolated beyond the training data. Controls operate at two levels. Technical: SI-10 (Information Input Validation) applied to AI outputs — implement output validation requirements scaled to the decision stakes of the AI's role. AI threat intelligence summaries must cite their sources; AI alert classifications above a defined severity threshold must be reviewed by an analyst before driving automated response; AI-generated queries and detection rules must be tested before deployment. Operational: establish explicit verification requirements in analyst workflows — the AI output is a starting hypothesis, not a conclusion. SA-11 — include hallucination testing in security AI acceptance testing: probe the model with scenarios where confabulation is likely (novel threat actors, recently disclosed vulnerabilities not in training data, ambiguous alert patterns) and evaluate whether the output is appropriately uncertain or falsely confident. CA-07 — monitor AI output quality metrics over time: analyst override rates, flagged hallucination instances, and cases where AI assessment diverged significantly from post-incident ground truth.",
+      "AI Threat Intelligence: Automation, Provenance, and Confidence Scoring (SI-04, AU-03, PM-16, RA-03): Automated threat intelligence enrichment — IOC lookup and context, actor attribution, TTP mapping to MITRE ATT&CK, vulnerability correlation — accelerates analyst workflows by eliminating manual lookups. AI-generated threat reports can synthesise large volumes of intelligence into coherent narratives in seconds. The risks are provenance opacity (where did this assessment come from?), knowledge currency (the model's training data has a cutoff, and threat actor TTPs change), and confidence inflation (AI-generated assessments often appear equally confident regardless of the underlying evidence quality). AU-03 (Content of Audit Records) — all AI-generated or AI-enriched threat intelligence must be traceable: what sources were queried, what model or service produced the enrichment, what confidence score was assigned, and when. This supports both forensic review of IR decisions and quality assurance of the intelligence programme. Implement explicit confidence tiers for AI-generated intelligence: high confidence (multiple consistent sources, recent data, corroborated by analyst review), medium confidence (limited sources, moderate recency, not independently verified), low confidence (single source, stale data, or model extrapolation) — and require the tier to be visible in any workflow where the intelligence drives a decision. PM-16 (Threat Awareness Program) — include systematic evaluation of AI threat intelligence quality: review a sample of AI-generated assessments against ground truth, track cases where AI attribution or assessment was later revised, and feed findings into the threat intelligence programme governance. RA-03 (Risk Assessment) — assess the organisation's dependency on specific AI threat intelligence providers and the risk of provider knowledge currency gaps for your specific threat landscape.",
+      "Over-Reliance, Skill Atrophy, and Analyst Capability Maintenance (AT-02, AT-03, PS-06, PM-14): Security AI that handles routine triage, alert classification, and investigation summary generation allows analysts to focus on higher-order work — but it also removes the routine practice that builds and maintains the underlying analytical skills. A SOC that has relied on AI for alert triage for eighteen months may, in an AI outage or an adversarial attack on the AI system itself, find that its analysts have lost the manual workflow competence that the AI replaced. This risk is slow to accumulate and difficult to measure before it becomes visible in a crisis. AT-02 and AT-03 (Awareness and Role-Based Training) must include mandatory AI-free capability maintenance exercises: periodic tabletop exercises and live simulations where analysts perform triage, investigation, and response without AI assistance, to validate that baseline skills are intact and identify capability gaps before they matter. Include AI-specific failure scenarios in tabletops: what does the team do when the SIEM ML engine is unavailable, when the AI triage tool is suspected of being compromised, or when AI-generated assessments are systematically incorrect? PS-06 (Access Agreements) — establish explicit expectations in role descriptions and agreements: AI augmentation tools are assistants, analysts retain professional accountability for security decisions made with AI assistance. Analysts should be able to articulate the basis for their decisions independent of AI output. PM-14 (Testing, Training, and Monitoring) — establish analyst capability metrics alongside AI performance metrics in the security operations programme: analyst assessment capability should not be treated as solved by AI deployment.",
+      "Security AI Governance and Model Lifecycle (CM-03, CM-04, SA-11, RA-03, CM-02): Security AI systems require a governance structure equivalent to other critical security infrastructure, but most organisations have not yet established one. Define ownership: who is accountable for the performance of each detection model? Who can change its thresholds? Who approves a model update before it reaches production? CM-03 (Configuration Change Control) — all changes to detection model parameters, thresholds, feature sets, training data sources, and ML engine configurations require formal change control with security review, testing in a staging environment, and a rollback plan. A threshold adjustment that reduces false positives may simultaneously reduce true positive detection rate — this is a security-relevant change that deserves the same rigor as a firewall rule change. CM-04 (Impact Analysis) — assess the downstream impact of any model change on the analyst workflow, alert volume, and detection coverage before deployment. SA-11 (Developer Security Testing) — test each model version against the detection coverage requirements, including performance on specific attack scenarios relevant to the organisation's threat profile. RA-03 (Risk Assessment) — formal risk assessment for new security AI deployments should address: adversarial robustness, dependency on external data sources, failure modes and blast radius, and coverage gaps relative to the current threat landscape. Define a model retirement process: when a detection model is replaced or decommissioned, ensure that its detection coverage is transferred to the replacement before the old model is disabled.",
+      "Security AI Supply Chain and Third-Party Risk (SA-09, SR-02, SA-04, CM-08): Most enterprise security AI is procured from vendors — SIEM platforms with embedded ML detection engines, XDR products with AI correlation, threat intelligence platforms with AI enrichment services. The security properties of these AI components (what they detect, how they can be evaded, what data they expose) depend on vendor decisions that are typically opaque to the customer: model training data, update cadence, detection logic, and data processing arrangements. SA-09 (External System Services) — vendor assessment for security AI products must go beyond standard SaaS security evaluation to include: what training data underpins the detection model, how frequently and through what process models are updated, what the disclosure process is when a model update changes detection coverage, and what the data residency and processing arrangements are for security telemetry sent to the vendor. SR-02 (Supply Chain Risk Management) — treat AI detection models embedded in security products as software supply chain components: subscribe to the vendor's model update notifications, test updates in a staging environment before production rollout, and maintain rollback capability if an update degrades detection performance. SA-04 (Acquisition Process) — security AI product evaluations should explicitly assess adversarial robustness (has the model been tested against adversarial evasion?), model governance documentation, and the vendor's process for handling zero-day detection gaps. CM-08 (System Component Inventory) — include AI components in the security technology inventory, with model version, data residency, and update history recorded."
+    ],
+    "assumptions": "The organisation operates a security operations capability (internal SOC, managed SOC, or hybrid) that uses one or more AI-augmented security tools: SIEM with ML detection, XDR, AI-based threat intelligence enrichment, or AI-assisted triage. AI components in security tooling may be embedded (invisible in commercial products) or explicit (deployed and configured as AI services). Some security AI is provided as a managed service by vendors who operate the model infrastructure; others run on-premises or in customer-controlled cloud. The pattern applies to both scenarios with emphasis varying by deployment model. Analysts interact with AI outputs in triage, investigation, and response workflows — the human-AI handoff points are the primary design decisions.",
+    "typicalChallenges": "Detection model governance is the most commonly missing control — organisations that would never deploy a firewall rule change without a change ticket routinely allow SIEM ML thresholds to be adjusted informally. Vendor opacity is pervasive: SIEM and XDR vendors treat their detection models as proprietary IP and provide minimal documentation about model architecture, training data, or update logic, making independent assessment of adversarial robustness or coverage gaps nearly impossible. Hallucination risk is poorly understood in security operations contexts — analysts who are trained to trust outputs from deterministic security tools apply the same trust to probabilistic AI outputs, increasing the risk that AI-generated threat assessments drive response without appropriate verification. Skill atrophy is a slow-moving risk that organisations typically discover only during a crisis (AI outage, adversarial attack on security AI). Adversarial evasion of ML detection requires significant attacker sophistication today but this capability is diffusing as attack tooling incorporates AI-evasion features. The boundary between security AI governance (this pattern) and enterprise AI governance (SP-045) requires explicit organisational decision — avoid split accountability where neither the CISO nor the AI governance function clearly owns security AI model risk.",
+    "indications": "Organisation uses SIEM with ML-based anomaly detection or AI-based alert prioritisation. XDR or EDR products with AI detection are in production. AI threat intelligence enrichment is used in analyst workflows. AI-assisted triage, investigation summaries, or response playbook automation are deployed. Organisation is evaluating AI security copilots (Microsoft Security Copilot, Google SecOps AI, or custom LLM-based security tools). SOC is experiencing alert fatigue and evaluating AI as a solution to analyst capacity constraints.",
+    "contraIndications": "Organisation has no security operations function and no security monitoring tooling. All security monitoring is entirely outsourced with no visibility into or control over the MSSP's tooling. Organisation uses only traditional signature-based security tools with no ML or AI components. Note: even organisations that do not explicitly deploy AI security tools may be running AI components embedded in commercial security products — verify before applying this contra-indication.",
+    "threatResistance": "Detection model evasion is addressed through adversarial robustness testing in the model development and acceptance process, continuous monitoring of detection model performance for anomalous drops in alert volume or detection rate, and analyst review requirements that ensure human eyes on the telemetry independent of model output. Training data poisoning is mitigated through data provenance validation, integrity monitoring of training pipelines, and separation of analyst feedback loops from automatic retraining. Hallucination in security decision support is mitigated through output verification requirements scaled to decision stakes, source citation requirements for AI threat intelligence, and analyst override friction reduction so that challenging AI output is easy and expected rather than exceptional. Analyst skill atrophy is addressed through mandatory capability maintenance exercises without AI assistance and explicit role definitions that preserve analyst accountability. Over-automation and disproportionate AI-triggered response actions are controlled through tiered autonomy limits, blast radius constraints on automated actions, and human approval requirements for high-impact response. Third-party security AI supply chain risk is addressed through vendor assessment requirements, staged model update deployment, and rollback capability for detection model changes."
+  },
+  "examples": {
+    "Detection Model Governance": [
+      "Enterprise SOC establishes a detection model register: every ML model active in the SIEM has a documented entry with training data timeframe, feature set, threshold settings, validated false positive and true positive rates, deployment date, and change history. Model updates from the vendor trigger a 48-hour staging evaluation before production rollout",
+      "Quarterly detection coverage review: SOC team runs a set of known attack simulations (drawn from recent incident reports and red team exercises) against the current detection stack and measures which simulations generate alerts, which do not, and whether AI-based detection adds coverage beyond signature-based rules",
+      "Model performance dashboard: real-time visibility into SIEM ML alert volume, analyst override rate (how often analysts close AI-prioritised alerts as false positives), and deviation from the deployment-time performance baseline — 20% drop in alert volume without a corresponding change in environment triggers investigation"
+    ],
+    "AI-Assisted Triage Controls": [
+      "Tiered AI autonomy framework: Tier 1 (AI enriches alert with context and suggests priority — analyst decides all actions), Tier 2 (AI can add observables to watchlists and send analyst notification — human approves investigation opening), Tier 3 (AI can isolate endpoints or block IPs — requires named analyst approval within 5 minutes or action is reversed automatically)",
+      "AI triage audit trail: every AI-assisted triage decision is logged with the AI's classification, confidence score, cited evidence, analyst identity, analyst decision (accept / modify / reject), and rationale for any override. Override patterns feed into monthly model quality review",
+      "Hallucination testing programme: quarterly red-team exercise submits alerts with fabricated or ambiguous context to the AI triage tool, measuring whether the AI produces appropriately uncertain outputs or confidently asserts incorrect assessments — results inform analyst training on AI output limitations"
+    ],
+    "Threat Intelligence AI": [
+      "Confidence-tiered intelligence workflow: AI-generated IOC enrichment is tagged with confidence tier (High / Medium / Low) based on source count, data currency, and corroboration. Tier ratings are visible in the analyst interface and change the required verification step before the intelligence drives a blocking action",
+      "AI threat report audit trail: every AI-generated threat summary cites its underlying sources, records the model version and service that generated it, and notes the knowledge cutoff date. Analysts are trained to treat the report as a hypothesis requiring verification, not a concluded assessment",
+      "Monthly intelligence quality review: a random sample of AI-generated threat assessments from the prior month is reviewed against available ground truth — where AI attribution or IOC assessment was revised, the case is analysed to identify systematic model limitations"
+    ],
+    "Analyst Capability Maintenance": [
+      "Bi-annual AI-free simulation: full-day tabletop exercise where analysts perform alert triage, investigation, and incident response using only the underlying telemetry and traditional tools, with AI systems deliberately unavailable. Results compared against AI-assisted baseline to measure capability maintenance",
+      "Detection engineering rotation: analysts rotate through detection rule writing and tuning tasks that require understanding the underlying telemetry and attack patterns — maintaining skills that AI-assisted detection would otherwise allow to atrophy",
+      "SOC competency framework updated for AI era: role definitions explicitly distinguish AI-delegated tasks (routine alert triage) from analyst-accountable tasks (investigation conclusions, escalation decisions, customer notification) — analysts are assessed on the latter category"
+    ],
+    "Developing Areas": [
+      "Adversarial evasion of ML security detection is maturing as an attacker capability. Research demonstrates that adversarial perturbations can defeat ML-based malware classifiers, network anomaly detectors, and behavioural detection models. These techniques are beginning to appear in offensive tooling. Security teams deploying ML-based detection should assume that sophisticated adversaries targeting them specifically may have invested in understanding the detection model's feature set and limitations — a threat model calibration that most security AI deployments currently do not include.",
+      "Security AI regulatory scope is unclear. The EU AI Act's risk classification includes AI systems used in critical infrastructure security — whether enterprise security AI falls under high-risk classification is being clarified through the Commission's guidance on AI in cybersecurity. DORA (EU Digital Operational Resilience Act) applies to ICT risk management including AI components in financial sector security operations. Organisations in regulated sectors should assess whether their security AI deployments require conformity assessment or regulatory notification.",
+      "AI security copilot evaluation maturity: Microsoft Security Copilot, Google SecOps AI, and emerging competitors offer LLM-based interfaces to security telemetry and threat intelligence. Evaluating these products requires assessing hallucination behaviour in security-specific contexts (not just general LLM benchmarks), data residency for the security queries and telemetry sent to the provider, and the accountability model when a copilot recommendation drives an incorrect response action. Vendor evaluation frameworks for AI security copilots are not yet standardised.",
+      "Detection-as-code and AI-generated rules: AI tools that generate SIEM detection rules from natural language descriptions or threat intelligence reports are emerging. These tools reduce the time to develop new detections but introduce quality and adversarial robustness questions — AI-generated rules may have subtle logic errors, over-fit to specific attack patterns in training data, or be susceptible to evasion by adversaries who know the rule generation approach. Testing and review requirements for AI-generated detection rules are not yet standardised."
+    ]
+  },
+  "references": [
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/",
+      "note": "Provides structured taxonomy of adversarial attacks against AI systems including ML detection evasion (AML.T0015), training data poisoning (AML.T0020), and model inversion — all directly relevant to AI deployed in security operations."
+    },
+    {
+      "title": "NIST AI 100-1: AI Risk Management Framework",
+      "url": "https://www.nist.gov/artificial-intelligence/ai-risk-management-framework",
+      "note": "The Govern, Map, Measure, and Manage functions apply to security AI deployments. The Measure function (performance monitoring, testing, evaluation) is particularly relevant to the continuous monitoring and model governance requirements in this pattern."
+    },
+    {
+      "title": "NIST AI 100-2: Adversarial Machine Learning",
+      "url": "https://airc.nist.gov/Docs/2",
+      "note": "Taxonomy of adversarial attacks against ML systems including evasion attacks, data poisoning, and model extraction — provides the threat vocabulary for detection model adversarial robustness assessment."
+    },
+    {
+      "title": "MITRE ATT&CK — Techniques for Evading Defenses",
+      "url": "https://attack.mitre.org/tactics/TA0005/",
+      "note": "Defense Evasion tactic encompasses techniques adversaries use to avoid detection. Understanding the evasion techniques in scope for your threat actors is the basis for adversarial testing of ML detection coverage."
+    },
+    {
+      "title": "NCSC Guidelines for Secure AI System Development",
+      "url": "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development",
+      "note": "Sections on model supply chain, monitoring deployed models, and incident response for AI systems apply directly to security operations AI deployments."
+    },
+    {
+      "title": "NIST SP 800-61: Computer Security Incident Handling Guide",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final",
+      "note": "The incident handling lifecycle provides the process foundation on which AI-assisted triage, response automation, and accountability requirements in this pattern are built."
+    },
+    {
+      "title": "ISO/IEC 42001:2023 — AI Management System",
+      "url": "https://www.iso.org/standard/81230.html",
+      "note": "AI management system requirements apply to security AI deployments. Clause 9 (Performance Evaluation) and Clause 10 (Improvement) map directly to detection model performance monitoring and lifecycle governance."
+    },
+    {
+      "title": "ENISA AI Threat Landscape",
+      "url": "https://www.enisa.europa.eu/topics/artificial-intelligence",
+      "note": "ENISA analysis of AI-specific threats includes threats to AI systems used in cybersecurity contexts, providing regulatory and threat landscape context for European organisations deploying security AI."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-025",
+    "SP-027",
+    "SP-031",
+    "SP-036",
+    "SP-045"
+  ],
+  "relatedPatternNames": [
+    "Advanced Monitoring and Detection",
+    "Secure LLM Usage",
+    "Security Monitoring and Response",
+    "Incident Response",
+    "AI Governance and Responsible AI"
+  ],
+  "threats": [
+    {
+      "id": "T-AISO-001",
+      "name": "Detection model evasion — adversary crafts activity patterns to stay below ML anomaly detection thresholds",
+      "mitigatedBy": ["CA-07", "SI-04", "CM-02", "SA-11"]
+    },
+    {
+      "id": "T-AISO-002",
+      "name": "Training data poisoning — adversary manipulates security telemetry to degrade detection model accuracy over time",
+      "mitigatedBy": ["SI-10", "CM-08", "SA-03", "SC-28"]
+    },
+    {
+      "id": "T-AISO-003",
+      "name": "AI triage hallucination — AI incorrectly classifies a critical incident as low priority, causing delayed or absent response",
+      "mitigatedBy": ["IR-04", "AU-02", "AC-05", "SA-11"]
+    },
+    {
+      "id": "T-AISO-004",
+      "name": "AI threat intelligence fabrication — hallucinated IOCs, CVE references, or threat actor attributions misdirecting investigation",
+      "mitigatedBy": ["AU-03", "SI-10", "SA-11", "CA-07"]
+    },
+    {
+      "id": "T-AISO-005",
+      "name": "Detection model concept drift — model trained on historical traffic fails to detect novel attack patterns without refresh",
+      "mitigatedBy": ["CA-07", "CM-02", "SA-11", "CM-03"]
+    },
+    {
+      "id": "T-AISO-006",
+      "name": "Analyst skill atrophy — SOC loses manual investigation capability after sustained AI dependency",
+      "mitigatedBy": ["AT-02", "AT-03", "PM-14", "PS-06"]
+    },
+    {
+      "id": "T-AISO-007",
+      "name": "Security AI system compromise — adversary targets the detection model or AI triage tool to suppress alerting",
+      "mitigatedBy": ["SI-04", "CA-07", "AU-02", "CM-02"]
+    },
+    {
+      "id": "T-AISO-008",
+      "name": "Over-automation — AI-triggered response actions causing disproportionate business disruption without human review",
+      "mitigatedBy": ["AC-05", "IR-04", "CM-03", "AU-03"]
+    },
+    {
+      "id": "T-AISO-009",
+      "name": "Third-party detection model supply chain risk — vendor model updates silently reducing detection coverage or introducing regression",
+      "mitigatedBy": ["SR-02", "SA-04", "CM-08", "SA-09"]
+    },
+    {
+      "id": "T-AISO-010",
+      "name": "Security telemetry data exposure — sensitive log and alert data processed by vendor AI with insufficient residency or access controls",
+      "mitigatedBy": ["SA-09", "SC-28", "PT-02", "AU-02"]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-02",
+      "name": "Literacy Training and Awareness",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, and Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-04",
+      "name": "Impact Analysis",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-14",
+      "name": "Testing, Training, and Monitoring",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-16",
+      "name": "Threat Awareness Program",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-06",
+      "name": "Access Agreements",
+      "family": "PS",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-03",
+      "name": "System Development Life Cycle",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-04",
+      "name": "System Monitoring",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Input Validation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-02",
+      "name": "Supply Chain Risk Management Plan",
+      "family": "SR",
+      "emphasis": "important"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 1,
+    "AT": 2,
+    "AU": 3,
+    "CA": 1,
+    "CM": 4,
+    "IR": 2,
+    "PM": 2,
+    "PS": 1,
+    "PT": 1,
+    "RA": 1,
+    "SA": 4,
+    "SC": 1,
+    "SI": 2,
+    "SR": 1
+  }
+}

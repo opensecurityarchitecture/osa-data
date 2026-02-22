@@ -1,18 +1,23 @@
 {
   "description": "TRIDENT attack/weakness/control graph data for Open Security Architecture",
-  "graph_version": "2.1.1",
+  "graph_version": "2.2.0",
   "graph_schema_version": "1.1",
-  "graph_build_id": "2026-02-22T17:40:00Z",
+  "graph_build_id": "2026-02-22T18:00:00Z",
   "changelog": [
     {
-      "version": "2.1.1",
+      "version": "2.2.0",
       "date": "2026-02-22",
-      "type": "patch",
+      "type": "minor",
       "changes": [
         {
-          "category": "model",
+          "category": "entity",
           "action": "add",
-          "description": "Declare infrastructure_behavioral_profile node type and PROFILE_DESCRIBES, DEFAULT_WEAKNESS, DEFAULT_USES_PROTOCOL edge types in metadata (counts pending full graph sync)"
+          "description": "TIBP: 29 infrastructure behavioral profiles with default weakness and protocol mappings"
+        },
+        {
+          "category": "edge",
+          "action": "add",
+          "description": "3 new edge types: PROFILE_DESCRIBES (30), DEFAULT_WEAKNESS (93), DEFAULT_USES_PROTOCOL (72)"
         }
       ]
     },
@@ -484,7 +489,7 @@
     }
   },
   "graph_summary": {
-    "total_edges": 15607,
+    "total_edges": 15802,
     "edge_types": {
       "COUNTERS": 1530,
       "PRESCRIBES": 2126,
@@ -524,9 +529,9 @@
       "ZONE_HOSTS_ENERGY": 16,
       "ZONE_REQUIRES": 175,
       "RELATED_TO": 5,
-      "PROFILE_DESCRIBES": 0,
-      "DEFAULT_WEAKNESS": 0,
-      "DEFAULT_USES_PROTOCOL": 0
+      "PROFILE_DESCRIBES": 30,
+      "DEFAULT_WEAKNESS": 93,
+      "DEFAULT_USES_PROTOCOL": 72
     },
     "node_types": {
       "technique": 627,
@@ -554,7 +559,7 @@
       "insurance_platform_type": 37,
       "vertical_profile": 13,
       "zone_archetype": 20,
-      "infrastructure_behavioral_profile": 0
+      "infrastructure_behavioral_profile": 29
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation <-PRESCRIBES- Control",
@@ -584,7 +589,8 @@
       "vertical_profile_insurance_path": "VerticalProfile -PROFILE_EXPECTS_INSURANCE-> InsurancePlatformType (vertical profile to expected insurance platform types)",
       "zone_hosting_path": "ZoneArchetype -ZONE_HOSTS-> FSPlatformType / -ZONE_HOSTS_ENERGY-> EnergyPlatformType (zone to hosted platform types)",
       "zone_control_path": "ZoneArchetype -ZONE_REQUIRES-> Control (zone archetype to required security controls)",
-      "atlas_crossref_path": "ATLAS Mitigation -RELATED_TO-> ATT&CK Mitigation (cross-framework equivalence for 5 shared mitigations)"
+      "atlas_crossref_path": "ATLAS Mitigation -RELATED_TO-> ATT&CK Mitigation (cross-framework equivalence for 5 shared mitigations)",
+      "behavioral_profile_path": "InfrastructureBehavioralProfile -PROFILE_DESCRIBES-> CPE / -DEFAULT_WEAKNESS-> WeaknessClass / -DEFAULT_USES_PROTOCOL-> Protocol (TIBP infrastructure behavioral profiling)"
     },
     "total_edge_types": 41
   },

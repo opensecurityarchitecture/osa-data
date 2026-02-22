@@ -1,1 +1,376 @@
-/Users/russellwing/osa-trident/data/schema/attack-technique-catalog.schema.json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensecurityarchitecture.org/schema/attack-technique-catalog.schema.json",
+  "title": "OSA ATT&CK + ATLAS Technique Catalog",
+  "description": "Catalog of MITRE ATT&CK Enterprise and ATLAS AI/ML techniques with tactic, platform, and URL metadata. Keyed by technique ID.",
+  "type": "object",
+  "minProperties": 1,
+
+  "patternProperties": {
+    "^T[0-9]{4}(\\.[0-9]{3})?$": {
+      "type": "object",
+      "required": ["name", "tactics", "url", "platforms", "is_subtechnique"],
+      "additionalProperties": false,
+      "properties": {
+        "_meta": {
+          "type": "object",
+          "description": "Entity lifecycle metadata (createdAt, createdBy, version, sourceSystem, updatedAt, updatedBy)",
+          "additionalProperties": true
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "ATT&CK technique name"
+        },
+        "tactics": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "reconnaissance",
+              "resource-development",
+              "initial-access",
+              "execution",
+              "persistence",
+              "privilege-escalation",
+              "defense-evasion",
+              "credential-access",
+              "discovery",
+              "lateral-movement",
+              "collection",
+              "command-and-control",
+              "exfiltration",
+              "impact"
+            ]
+          },
+          "description": "ATT&CK tactics (kill chain phases)"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://attack\\.mitre\\.org/techniques/T[0-9]{4}(/[0-9]{3})?$",
+          "description": "Direct URL to the ATT&CK technique page"
+        },
+        "platforms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Target platforms (e.g., Windows, Linux, macOS, IaaS, SaaS)"
+        },
+        "is_subtechnique": {
+          "type": "boolean",
+          "description": "True if this is a sub-technique (e.g., T1078.001)"
+        },
+        "mitigations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^M[0-9]{4}$",
+                "description": "ATT&CK mitigation ID (e.g., M1032)"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Mitigation name"
+              }
+            }
+          },
+          "description": "ATT&CK mitigations that counter this technique (COUNTERS edge)"
+        },
+        "detection_strategies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^DET[0-9]{4}$",
+                "description": "ATT&CK v18 detection strategy ID (e.g., DET0001)"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Detection strategy name"
+              }
+            }
+          },
+          "description": "ATT&CK v18 detection strategies that detect this technique (DETECTS edge)"
+        },
+        "weaknesses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^CWE-[0-9]+$",
+                "description": "CWE weakness ID (e.g., CWE-522)"
+              },
+              "source": {
+                "type": "string",
+                "description": "Weakness source (e.g., CWE)"
+              }
+            }
+          },
+          "description": "CWE weakness classes this technique exploits (EXPLOITS edge, via CAPEC bridge)"
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^G[0-9]{4}$",
+                "description": "ATT&CK threat group ID (e.g., G0016)"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Threat group name"
+              }
+            }
+          },
+          "description": "ATT&CK threat groups known to use this technique (USES edge)"
+        },
+        "description": {
+          "type": "string",
+          "description": "ATT&CK technique description from STIX data"
+        },
+        "parent": {
+          "type": ["string", "null"],
+          "pattern": "^T[0-9]{4}$",
+          "description": "Parent technique ID for sub-techniques (e.g., T1001 for T1001.001). Null for top-level techniques."
+        },
+        "minTier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "TACM minimum adversary capability tier (1=Opportunistic, 2=Targeted Criminal, 3=Organised/State-Proxy, 4=State-Directed, 5=Strategic)"
+        },
+        "humanFactors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^THFM-[A-Z]{2}-[0-9]{2}$",
+                "description": "THFM cognitive vulnerability class ID (e.g., THFM-AU-01)"
+              }
+            }
+          },
+          "description": "THFM cognitive vulnerability classes exploited by this technique (EXPLOITS_HUMAN edge)"
+        }
+      }
+    },
+    "^AML\\.T[0-9]{4}(\\.[0-9]{3})?$": {
+      "type": "object",
+      "required": ["name", "tactics", "url", "platforms", "is_subtechnique"],
+      "additionalProperties": false,
+      "properties": {
+        "_meta": {
+          "type": "object",
+          "description": "Entity lifecycle metadata (createdAt, createdBy, version, sourceSystem, updatedAt, updatedBy)",
+          "additionalProperties": true
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "ATLAS technique name"
+        },
+        "tactics": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "reconnaissance",
+              "resource-development",
+              "initial-access",
+              "execution",
+              "persistence",
+              "privilege-escalation",
+              "defense-evasion",
+              "credential-access",
+              "discovery",
+              "lateral-movement",
+              "collection",
+              "command-and-control",
+              "exfiltration",
+              "impact",
+              "ai-model-access",
+              "ai-attack-staging"
+            ]
+          },
+          "description": "ATT&CK + ATLAS tactics (kill chain phases)"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://atlas\\.mitre\\.org/techniques/AML\\.T[0-9]{4}(\\.[0-9]{3})?$",
+          "description": "Direct URL to the ATLAS technique page"
+        },
+        "platforms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Target platforms (may be empty for ATLAS techniques)"
+        },
+        "is_subtechnique": {
+          "type": "boolean",
+          "description": "True if this is a sub-technique (e.g., AML.T0051.001)"
+        },
+        "mitigations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^(M[0-9]{4}|AML\\.M[0-9]{4})$",
+                "description": "Mitigation ID (ATT&CK M-series or ATLAS AML.M-series)"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Mitigation name"
+              }
+            }
+          },
+          "description": "Mitigations that counter this technique (COUNTERS edge)"
+        },
+        "detection_strategies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Detection strategy ID"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Detection strategy name"
+              }
+            }
+          },
+          "description": "Detection strategies (currently empty for ATLAS techniques)"
+        },
+        "weaknesses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Weakness ID"
+              },
+              "source": {
+                "type": "string",
+                "description": "Weakness source"
+              }
+            }
+          },
+          "description": "Weakness classes (currently empty for ATLAS techniques)"
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Threat group ID"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Threat group name"
+              }
+            }
+          },
+          "description": "Threat groups (currently empty for ATLAS techniques)"
+        },
+        "description": {
+          "type": "string",
+          "description": "ATLAS technique description from STIX data"
+        },
+        "parent": {
+          "type": ["string", "null"],
+          "pattern": "^AML\\.T[0-9]{4}$",
+          "description": "Parent ATLAS technique ID for sub-techniques (e.g., AML.T0000 for AML.T0000.001). Null for top-level techniques."
+        },
+        "minTier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "TACM minimum adversary capability tier derived from ATLAS maturity (Realized=T2, Demonstrated=T3, Feasible=T4)"
+        },
+        "source": {
+          "type": "string",
+          "const": "ATLAS",
+          "description": "Data source identifier"
+        },
+        "sourceVersion": {
+          "type": "string",
+          "description": "ATLAS version (e.g., 5.4.0)"
+        },
+        "techniqueMaturity": {
+          "type": ["string", "null"],
+          "enum": ["Realized", "Demonstrated", "Feasible", null],
+          "description": "ATLAS technique maturity level"
+        },
+        "technologyClass": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "AI technology classes applicable to this technique (e.g., llm-api, training-data, ai-agent)"
+        },
+        "atlasCategory": {
+          "type": "string",
+          "description": "ATLAS technique category (e.g., traditional-ml, genai, agentic)"
+        },
+        "attackCrossRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$"
+          },
+          "description": "Cross-references to ATT&CK technique IDs"
+        }
+      }
+    }
+  },
+
+  "additionalProperties": false
+}

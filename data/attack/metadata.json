@@ -1,9 +1,26 @@
 {
   "description": "TRIDENT attack/weakness/control graph data for Open Security Architecture",
-  "graph_version": "2.3.0",
+  "graph_version": "2.4.0",
   "graph_schema_version": "1.1",
-  "graph_build_id": "2026-02-22T20:30:00Z",
+  "graph_build_id": "2026-02-22T21:30:00Z",
   "changelog": [
+    {
+      "version": "2.4.0",
+      "date": "2026-02-22",
+      "type": "minor",
+      "changes": [
+        {
+          "category": "entity",
+          "action": "add",
+          "description": "CCI (Common Configuration Issues): 5,137 entries from DISA CCI XML ingestion"
+        },
+        {
+          "category": "edge",
+          "action": "add",
+          "description": "ASSESSES edges (1,877): cci -> control mapping from DISA CCI-to-NIST-800-53 crosswalk"
+        }
+      ]
+    },
     {
       "version": "2.3.0",
       "date": "2026-02-22",
@@ -191,6 +208,14 @@
       "misconfigures_edges": 15622,
       "enrichment_date": "2026-02-22",
       "notes": "CCE misconfiguration entries integrated as weakness_class entities with MISCONFIGURES edges to CPE products. CCE entries are identifiable by source='CCE' in the weakness catalog."
+    },
+    "cci_catalog": {
+      "source": "DISA (Defense Information Systems Agency) CCI XML",
+      "source_url": "https://public.cyber.mil/stigs/cci/",
+      "total_entries": 5137,
+      "assesses_edges": 1877,
+      "enrichment_date": "2026-02-22",
+      "notes": "5,137 Common Configuration Issues (CCI) from DISA CCI XML. Each CCI maps to NIST 800-53 controls via ASSESSES edges. Provides compliance assessment granularity — CCI items are specific testable statements that evaluate whether a control is correctly implemented."
     },
     "threat_actors": {
       "source": "MITRE ATT&CK STIX Data",
@@ -534,7 +559,7 @@
     }
   },
   "graph_summary": {
-    "total_edges": 90501,
+    "total_edges": 92378,
     "edge_types": {
       "COUNTERS": 1530,
       "PRESCRIBES": 2126,
@@ -578,7 +603,8 @@
       "DEFAULT_WEAKNESS": 93,
       "DEFAULT_USES_PROTOCOL": 72,
       "AFFECTS": 59077,
-      "MISCONFIGURES": 15622
+      "MISCONFIGURES": 15622,
+      "ASSESSES": 1877
     },
     "node_types": {
       "technique": 627,
@@ -607,7 +633,8 @@
       "insurance_platform_type": 37,
       "vertical_profile": 13,
       "zone_archetype": 20,
-      "infrastructure_behavioral_profile": 29
+      "infrastructure_behavioral_profile": 29,
+      "cci": 5137
     },
     "trident_paths": {
       "defense_path": "Technique <-COUNTERS- Mitigation <-PRESCRIBES- Control",
@@ -640,9 +667,10 @@
       "atlas_crossref_path": "ATLAS Mitigation -RELATED_TO-> ATT&CK Mitigation (cross-framework equivalence for 5 shared mitigations)",
       "behavioral_profile_path": "InfrastructureBehavioralProfile -PROFILE_DESCRIBES-> CPE / -DEFAULT_WEAKNESS-> WeaknessClass / -DEFAULT_USES_PROTOCOL-> Protocol (TIBP infrastructure behavioral profiling)",
       "vulnerability_path": "Vulnerability -AFFECTS-> CPE (NVD CVE-to-product impact mapping)",
-      "misconfiguration_path": "WeaknessClass -MISCONFIGURES-> CPE (CCE misconfiguration-to-platform mapping)"
+      "misconfiguration_path": "WeaknessClass -MISCONFIGURES-> CPE (CCE misconfiguration-to-platform mapping)",
+      "cci_assessment_path": "CCI -ASSESSES-> Control (DISA CCI testable statements to NIST 800-53 control assessment)"
     },
-    "total_edge_types": 43
+    "total_edge_types": 44
   },
   "files": {
     "technique-catalog.json": {
@@ -771,24 +799,35 @@
       "entity_count": 20,
       "last_modified": "2026-02-22T09:13:23Z"
     },
-    "graph-edges.json": {
-      "description": "90,501 explicit TRIDENT graph edges across 43 relationship types (includes ATLAS, vertical profile, zone archetype, insurance, platform instance, vulnerability AFFECTS, and CCE MISCONFIGURES edges)",
-      "sha256": "e43480cbaa974948d976245dbc4f3ee9db55470e191ececbf24df2046c009035",
-      "entity_count": 90501,
+    "infrastructure-behavioral-profile-catalog.json": {
+      "description": "29 TIBP infrastructure behavioral profiles with CPE, protocol, weakness, and control mappings",
+      "sha256": "4566558e080c3db0696587d5dd1646720c3eadd348a571a0dc701429a0ecc815",
+      "entity_count": 29,
       "last_modified": "2026-02-22T20:30:00Z"
+    },
+    "cci-catalog.json": {
+      "description": "5,137 DISA CCI (Common Configuration Issues) with ASSESSES edges to NIST 800-53 controls",
+      "sha256": "a605b59b2c22f87dd705d7f8d36dabe136b90889fe01d4e5420aa498035c90ae",
+      "entity_count": 5137,
+      "last_modified": "2026-02-22T21:12:00Z"
+    },
+    "graph-edges.json": {
+      "description": "92,378 explicit TRIDENT graph edges across 44 relationship types (includes ATLAS, vertical profile, zone archetype, insurance, platform instance, vulnerability AFFECTS, CCE MISCONFIGURES, and CCI ASSESSES edges)",
+      "sha256": "6dc523e46e42555006117df32c6e02b7db2cfc51d4caf2363002dcb932977855",
+      "entity_count": 92378,
+      "last_modified": "2026-02-22T21:12:00Z"
     },
     "trident-model.json": {
       "description": "Single authoritative TRIDENT model definition \u2014 domains, node types, edge types, analytical paths",
-      "sha256": "cc9a158230e3b15099aac16c67816a86b7139bf18bac7b94c27de81ddeb8e326",
+      "sha256": "8d4510d8f5af4b38fbffb307d4d1f1ae8289dcaac4e0a86172a61fa78b1acc2c",
       "entity_count": 11,
-      "last_modified": "2026-02-22T20:30:00Z"
+      "last_modified": "2026-02-22T21:12:00Z"
     },
     "metadata.json": {
       "description": "This file \u2014 provenance, version info, graph summary",
-      "sha256": "99b91555202d8f0319c3fb7172ed3a6160a6173a830e3f0674303fd398567e5a",
       "last_modified": "2026-02-22"
     }
   },
   "attack_domain": "enterprise",
-  "last_updated": "2026-02-21"
+  "last_updated": "2026-02-22"
 }

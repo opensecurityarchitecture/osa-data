@@ -1,0 +1,285 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "common_criteria",
+  "framework_name": "Common Criteria for IT Security Evaluation (ISO/IEC 15408)",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of the Common Criteria for IT Security Evaluation (ISO/IEC 15408:2022, CC v3.1 R5) and the Common Evaluation Methodology (CEM). Common Criteria defines an evaluation framework for IT security products through Security Functional Requirements (SFRs) and Security Assurance Requirements (SARs) at Evaluation Assurance Levels (EAL 1-7). While SFR classes (audit, cryptography, access control, identification) align conceptually with SP 800-53 control families, the evaluation methodology, Protection Profile conformance, and mutual recognition processes have no SP 800-53 equivalence. Coverage reflects conceptual security alignment, not evaluation equivalence. Validate with Common Criteria Testing Laboratories (CCTL) for product evaluation and certification use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "CC Part 2 — FAU",
+      "title": "Security Audit (FAU) — audit data generation, analysis, review, event storage, and selection",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "AU-12",
+        "AU-13",
+        "AU-14",
+        "SI-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "The FAU class defines SFRs for security audit data generation (FAU_GEN), audit analysis (FAU_SAA), audit review (FAU_SAR), audit event selection (FAU_SEL), and audit event storage (FAU_STG). SP 800-53 AU family provides direct functional equivalence: AU-02 auditable events maps to FAU_GEN, AU-06/AU-07 audit review and reduction maps to FAU_SAA/FAU_SAR, AU-04/AU-05 storage capacity and failure response maps to FAU_STG, AU-09 protection of audit information addresses audit trail integrity, and AU-12 audit generation with AU-14 session audit provide comprehensive audit record generation. SI-04 system monitoring extends coverage to real-time audit analysis capabilities.",
+      "gaps": "CC FAU defines audit at the TOE (Target of Evaluation) boundary level with specific SFR component granularity (e.g., FAU_GEN.1 audit data generation for specific TOE security functions). SP 800-53 AU controls are system-level and do not address TOE-scoped audit or the CC concept of audit event selection based on SFR component attributes. The CC evaluation of audit completeness through evaluator actions has no 800-53 equivalent."
+    },
+    {
+      "id": "CC Part 2 — FCS",
+      "title": "Cryptographic Support (FCS) — key management and cryptographic operations",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "SC-08",
+        "SC-28",
+        "IA-07",
+        "CM-14"
+      ],
+      "coverage_pct": 78,
+      "rationale": "The FCS class defines SFRs for cryptographic key management (FCS_CKM) and cryptographic operation (FCS_COP). SC-12 cryptographic key establishment and management maps directly to FCS_CKM key generation, distribution, access, and destruction. SC-13 cryptographic protection maps to FCS_COP cryptographic operation requirements. SC-17 public key infrastructure certificates, SC-08 transmission confidentiality/integrity, and SC-28 protection of information at rest use cryptographic mechanisms. IA-07 cryptographic module authentication and CM-14 signed components address cryptographic module validation relevant to FCS.",
+      "gaps": "CC FCS requires cryptographic operations to be evaluated against specific standards (e.g., FIPS 140, CAVP algorithm validation) within the TOE boundary and specifies key lifecycle management at component level (generation, distribution, access, destruction per FCS_CKM.1-4). SP 800-53 references FIPS 140 validation but does not define the CC evaluation methodology for verifying cryptographic implementation correctness within a specific product boundary. FCS_CKM.4 cryptographic key destruction specificity exceeds SP 800-53 SC-12 general key management."
+    },
+    {
+      "id": "CC Part 2 — FDP",
+      "title": "User Data Protection (FDP) — access control policy, information flow control, data exchange, and residual information",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-16",
+        "AC-24",
+        "SC-04",
+        "SC-07",
+        "SC-08",
+        "SC-16",
+        "SI-12",
+        "MP-06"
+      ],
+      "coverage_pct": 75,
+      "rationale": "The FDP class defines SFRs for access control policy (FDP_ACC), information flow control (FDP_IFC), data authentication (FDP_DAU), export/import (FDP_ETC/FDP_ITC), internal TOE transfer (FDP_ITT), residual information protection (FDP_RIP), rollback (FDP_ROL), and stored data integrity (FDP_SDI). AC-03 access enforcement and AC-04 information flow enforcement map to FDP_ACC and FDP_IFC core policies. AC-06 least privilege and AC-05 separation of duties support access control policy refinement. AC-16 security/privacy attributes and AC-24 access control decisions support attribute-based access policies. SC-04 information in shared resources maps to FDP_RIP residual information protection. SC-07/SC-08 boundary protection and transmission integrity support FDP_ETC/FDP_ITC/FDP_ITT. MP-06 media sanitisation supports residual information destruction.",
+      "gaps": "CC FDP defines formal access control and information flow models (e.g., FDP_ACC.2 complete access control, FDP_IFC.2 complete information flow control) requiring mathematical or semi-formal specification of access control policy completeness. SP 800-53 AC-03/AC-04 enforce access policy but do not require formal policy modelling. FDP_ROL rollback capability and FDP_SDI stored data integrity monitoring at the TOE level have limited SP 800-53 equivalence. The CC concept of subject-object-operation access control triples within a defined security policy is more granular than 800-53 access enforcement."
+    },
+    {
+      "id": "CC Part 2 — FIA",
+      "title": "Identification and Authentication (FIA) — user identification, authentication mechanisms, and authentication failure handling",
+      "controls": [
+        "IA-01",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-07",
+        "IA-08",
+        "IA-09",
+        "IA-10",
+        "IA-11",
+        "IA-12",
+        "AC-07"
+      ],
+      "coverage_pct": 82,
+      "rationale": "The FIA class defines SFRs for authentication failure handling (FIA_AFL), user attribute definition (FIA_ATD), specification of secrets (FIA_SOS), user authentication (FIA_UAU), and user identification (FIA_UID). IA-02 user identification and authentication maps directly to FIA_UAU and FIA_UID. IA-04 identifier management maps to FIA_ATD user attribute definition. IA-05 authenticator management and IA-06 authenticator feedback map to FIA_SOS specification of secrets. IA-03 device I&A, IA-08 non-organisational users, IA-09 service identification, and IA-10 adaptive identification extend coverage. IA-12 identity proofing maps to FIA_UID identity verification. AC-07 unsuccessful logon attempts maps directly to FIA_AFL authentication failure handling.",
+      "gaps": "CC FIA defines authentication mechanisms at the TOE interface level with specific timing requirements (e.g., FIA_UAU.1 timing of authentication — actions before authentication). SP 800-53 IA controls define authentication policy and mechanism requirements but not the precise sequencing of pre-authentication actions permitted by the TOE. FIA_SOS.2 TSF generation of secrets specifies TOE-level secret generation quality metrics beyond SP 800-53 IA-05 authenticator management."
+    },
+    {
+      "id": "CC Part 2 — FMT",
+      "title": "Security Management (FMT) — management functions, security roles, TSF data management, and revocation",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-05",
+        "AC-06",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-09",
+        "PL-09",
+        "PM-02",
+        "PS-06"
+      ],
+      "coverage_pct": 72,
+      "rationale": "The FMT class defines SFRs for management of functions in the TSF (FMT_MOF), management of security attributes (FMT_MSA), management of TSF data (FMT_MTD), revocation (FMT_REV), security attribute expiration (FMT_SAE), and specification of management functions (FMT_SMF), and security roles (FMT_SMR). AC-01/AC-02 access control policy and account management map to FMT_SMR security roles and FMT_SMF management function specification. AC-05/AC-06 separation of duties and least privilege support role-based management. CM-05/CM-06/CM-07/CM-09 configuration management controls map to FMT_MOF management of functions and FMT_MTD data management. PL-09 central management supports unified security management. PM-02 senior information security officer maps to FMT_SMR role definition.",
+      "gaps": "CC FMT defines management functions at the TSF (TOE Security Functionality) boundary — specifying which roles can modify which security attributes and TSF data. SP 800-53 defines management roles and configuration management broadly but not at the granular TSF attribute level. FMT_REV revocation of security attributes and FMT_SAE security attribute expiration define precise attribute lifecycle management within the TOE that exceeds SP 800-53 configuration management scope. The CC concept of restricting management functions to specific authorised roles with TSF enforcement has no direct 800-53 equivalent."
+    },
+    {
+      "id": "CC Part 2 — FPR",
+      "title": "Privacy (FPR) — anonymity, pseudonymity, unlinkability, and unobservability",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05",
+        "PT-06",
+        "PT-07",
+        "PT-08",
+        "SI-19"
+      ],
+      "coverage_pct": 55,
+      "rationale": "The FPR class defines SFRs for anonymity (FPR_ANO), pseudonymity (FPR_PSE), unlinkability (FPR_UNL), and unobservability (FPR_UNO). SP 800-53 Rev 5 PT family (Personally Identifiable Information Processing and Transparency) provides some conceptual alignment: PT-01/PT-02 policy and authority for processing, PT-06/PT-07 system of records and specific categories address privacy governance. SI-19 de-identification maps partially to FPR_ANO/FPR_PSE concepts. PT-03 purposes of processing and PT-05 privacy notice address transparency aspects.",
+      "gaps": "CC FPR defines technical privacy mechanisms at the TOE level — anonymity, pseudonymity, unlinkability, and unobservability as enforced security functions within the product. SP 800-53 PT controls are organisational privacy governance controls, not technical privacy enforcement mechanisms. FPR_UNL unlinkability (preventing correlation of user actions) and FPR_UNO unobservability (preventing observation of resource usage) describe technical capabilities with no SP 800-53 equivalent. The gap is fundamental: CC defines privacy as a technical security function; SP 800-53 treats privacy as governance and policy."
+    },
+    {
+      "id": "CC Part 2 — FPT",
+      "title": "Protection of the TSF (FPT) — fail secure, self-testing, internal TOE transfer, TSF data integrity, replay detection, and state management",
+      "controls": [
+        "SC-04",
+        "SC-07",
+        "SC-08",
+        "SC-24",
+        "SI-06",
+        "SI-07",
+        "SI-16",
+        "CM-14",
+        "CP-12",
+        "SA-11"
+      ],
+      "coverage_pct": 68,
+      "rationale": "The FPT class defines SFRs for fail secure (FPT_FLS), availability of exported TSF data (FPT_ITA), confidentiality of exported TSF data (FPT_ITC), integrity of exported TSF data (FPT_ITI), internal TOE TSF data transfer protection (FPT_ITT), TSF physical protection (FPT_PHP), trusted recovery (FPT_RCV), replay detection (FPT_RPL), state synchrony (FPT_SSP), time stamps (FPT_STM), inter-TSF TSF data consistency (FPT_TDC), internal TOE TSF data replication consistency (FPT_TRC), and TSF self test (FPT_TST). SC-24 fail in known state maps to FPT_FLS. SI-06 security function verification and SI-07 software/firmware integrity map to FPT_TST self-testing. SC-08 transmission protection and SC-07 boundary protection support FPT_ITA/ITC/ITI/ITT data transfer protection. SI-16 memory protection addresses TSF integrity. CM-14 signed components supports TSF data integrity. CP-12 safe mode supports trusted recovery concepts. SA-11 developer testing addresses TSF testing methodology.",
+      "gaps": "CC FPT defines protection of the security enforcement mechanism itself (the TSF) — a self-referential security property that SP 800-53 does not directly address. FPT_RPL replay detection is a specific TSF capability not covered by 800-53. FPT_RCV trusted recovery defines precise recovery states (secure state, maintenance mode) for the TOE that exceeds CP-12 safe mode. FPT_PHP physical protection of the TSF (tamper detection, tamper response, tamper resistance) addresses hardware security mechanisms beyond PE-family physical security. The CC concept of TSF self-protection and domain separation is architecturally more specific than SP 800-53 integrity controls."
+    },
+    {
+      "id": "CC Part 2 — FRU/FTA/FTP",
+      "title": "Resource Utilisation (FRU), TOE Access (FTA), and Trusted Path/Channels (FTP)",
+      "controls": [
+        "SC-05",
+        "SC-06",
+        "SC-10",
+        "SC-23",
+        "AC-07",
+        "AC-08",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-17",
+        "CA-03",
+        "SC-11"
+      ],
+      "coverage_pct": 70,
+      "rationale": "FRU defines SFRs for fault tolerance (FRU_FLT), priority of service (FRU_PRS), and resource allocation (FRU_RSA). FTA defines SFRs for limitation on scope of selectable attributes (FTA_LSA), limitation on multiple concurrent sessions (FTA_MCS), session locking and termination (FTA_SSL), TOE access banners (FTA_TAB), TOE access history (FTA_TAH), and session establishment (FTA_TSE). FTP defines SFRs for inter-TSF trusted channel (FTP_ITC) and trusted path (FTP_TRP). SC-05/SC-06 denial-of-service protection and resource availability map to FRU. AC-10/AC-11/AC-12 concurrent sessions, session lock, and session termination map to FTA_MCS/FTA_SSL. AC-08 system use notification maps to FTA_TAB. AC-07 unsuccessful logon attempts supports FTA_TSE session establishment. SC-23 session authenticity and SC-11 trusted path support FTP_TRP. CA-03 system interconnections and AC-17 remote access support FTP_ITC inter-TSF trusted channels.",
+      "gaps": "CC FTP_TRP trusted path requires a hardware/software-enforced communication channel between the user and the TSF that cannot be imitated or intercepted — a product-level security property (e.g., Ctrl+Alt+Del secure attention sequence) beyond SP 800-53 session management. FRU_FLT fault tolerance at the TOE level and FRU_PRS priority of service define availability mechanisms within the product boundary that SP 800-53 addresses at the system/organisational level. FTA_LSA limitation on scope of selectable attributes is a CC-specific concept with no 800-53 equivalent."
+    },
+    {
+      "id": "CC Part 3 — SAR",
+      "title": "Security Assurance Requirements (SAR) — EAL levels, vulnerability analysis, development documentation, testing, and life-cycle support",
+      "controls": [
+        "SA-03",
+        "SA-04",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-17",
+        "CA-02",
+        "CA-08",
+        "RA-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "CC Part 3 defines SARs organised into assurance classes: development (ADV), guidance documents (AGD), life-cycle support (ALC), security target evaluation (ASE), tests (ATE), and vulnerability assessment (AVA), composed into Evaluation Assurance Levels (EAL 1-7). SA-03 system development lifecycle, SA-10 developer configuration management, and SA-15 development process/standards map partially to ALC life-cycle support. SA-11 developer testing maps to ATE tests. SA-17 developer security architecture maps to ADV_ARC architecture description. SA-08 security engineering principles supports ADV_FSP/ADV_TDS functional specification and design. CA-08 penetration testing maps partially to AVA_VAN vulnerability analysis. RA-05 vulnerability scanning supports AVA concepts. SA-04 acquisition requirements can specify EAL requirements.",
+      "gaps": "CC SARs define a structured evaluation methodology with seven assurance levels (EAL 1-7) requiring progressively rigorous evidence from developers and evaluators. SP 800-53 SA controls address secure development practices but not the CC evaluation framework: ADV_ARC security architecture description, ADV_FSP functional specification with formal/semiformal modelling (EAL 5+), ADV_IMP implementation representation (source code review at EAL 4+), ADV_TDS TOE design decomposition, AGD guidance documents evaluation, and ATE independent testing by evaluators have no SP 800-53 parallels. The entire concept of third-party evaluation at defined assurance levels with evaluator verdicts is outside 800-53 scope."
+    },
+    {
+      "id": "CC Part 1 — PP",
+      "title": "Protection Profile (PP) Development — PP structure, conformance claims, security problem definition, and PP evaluation",
+      "controls": [
+        "PL-02",
+        "PL-07",
+        "PL-08",
+        "SA-04",
+        "SA-08",
+        "PM-07"
+      ],
+      "coverage_pct": 30,
+      "rationale": "CC Part 1 defines Protection Profiles as reusable security requirement templates for product categories. A PP contains a security problem definition (threats, OSPs, assumptions), security objectives, and SFR/SAR selections. PL-02 system security plans and PL-08 security architecture provide partial conceptual alignment to PP security requirement documentation. PL-07 security concept of operations relates to PP assumptions and environment. SA-04 acquisition requirements can reference PP compliance. SA-08 security engineering principles supports security objective derivation. PM-07 enterprise architecture aligns with PP technology categorisation.",
+      "gaps": "Protection Profiles are a CC-specific construct with no SP 800-53 equivalent. PPs define implementation-independent security requirements for product categories (e.g., firewalls, smartcards, operating systems) evaluated against CC Part 3 APE assurance class. The PP conformance model (strict, demonstrable, exact conformance), PP registry processes (e.g., NIAP, BSI, ANSSI PP catalogs), and PP evaluation methodology (APE_CCL, APE_ECD, APE_INT, APE_OBJ, APE_REQ, APE_SPD) are entirely outside SP 800-53 scope. SP 800-53 is an organisational controls framework, not a product security requirements specification system."
+    },
+    {
+      "id": "CC Part 1 — ST",
+      "title": "Security Target (ST) Development — TOE description, security objectives, SFR/SAR selection, and conformance claims",
+      "controls": [
+        "PL-02",
+        "PL-08",
+        "SA-04",
+        "SA-08",
+        "SA-17",
+        "CA-06"
+      ],
+      "coverage_pct": 35,
+      "rationale": "A Security Target is the product-specific security specification for CC evaluation, containing the TOE description, conformance claims, security problem definition, security objectives, extended component definitions, and security requirements (SFR/SAR selections). PL-02 system security plan and PL-08 security architecture provide partial alignment to ST documentation concepts. SA-04 acquisition requirements and SA-08 security engineering principles relate to specifying security requirements. SA-17 developer security architecture maps to TOE design description within the ST. CA-06 authorisation provides a distant parallel to the evaluation/certification decision based on the ST.",
+      "gaps": "The Security Target is a CC-specific evaluation artefact with no SP 800-53 equivalent. ST components (ASE_CCL conformance claims, ASE_ECD extended component definitions, ASE_INT ST introduction, ASE_OBJ security objectives, ASE_REQ security requirements, ASE_SPD security problem definition, ASE_TSS TOE summary specification) define a structured product security specification evaluated by CCTLs. The TOE boundary concept, security problem definition methodology (threats, organisational security policies, assumptions), and formal derivation of security objectives from the security problem have no SP 800-53 parallels."
+    },
+    {
+      "id": "CEM",
+      "title": "Common Evaluation Methodology (CEM) — evaluator actions, verdict criteria, evidence requirements, and evaluation technical reports",
+      "controls": [
+        "CA-02",
+        "CA-04",
+        "CA-07",
+        "CA-08",
+        "SA-11"
+      ],
+      "coverage_pct": 22,
+      "rationale": "The Common Evaluation Methodology (CEM, ISO/IEC 18045) defines how evaluators conduct CC evaluations: evaluator actions for each SAR, evidence requirements, verdict criteria (pass/fail/inconclusive), and evaluation technical report (ETR) structure. CA-02 security assessments and CA-07 continuous monitoring provide distant conceptual parallels to evaluation activities. CA-04 security certification relates abstractly to CC certification. CA-08 penetration testing maps partially to CEM AVA_VAN evaluator penetration testing actions. SA-11 developer testing relates to CEM ATE_IND evaluator independent testing.",
+      "gaps": "The CEM defines a rigorous third-party evaluation methodology entirely outside SP 800-53 scope. CEM evaluator actions (work units per SAR component), evidence requirements (design documents, test documentation, vulnerability analysis reports), verdict criteria with defined pass/fail conditions, evaluator independence requirements, evaluation technical report format, and the certification body oversight model have no SP 800-53 equivalents. SP 800-53 CA controls address organisational security assessment and authorisation processes (e.g., FedRAMP, ATO), not product evaluation by accredited testing laboratories."
+    },
+    {
+      "id": "CCRA",
+      "title": "Common Criteria Recognition Arrangement (CCRA) — mutual recognition, certificate acceptance levels, and certification body accreditation",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "PM-08",
+        "CA-06"
+      ],
+      "coverage_pct": 15,
+      "rationale": "The CCRA is an international arrangement among 31 nations for mutual recognition of CC evaluation certificates. SA-04 acquisition requirements can specify CC certification as a procurement criterion. SA-09 external information system services relates to accepting certified products from third parties. PM-08 critical infrastructure plan considers international supply chain security. CA-06 authorisation provides a remote parallel to certification acceptance decisions.",
+      "gaps": "The CCRA defines an international mutual recognition framework entirely outside SP 800-53 scope. CCRA certificate acceptance levels (collaborative Protection Profiles at higher assurance vs. general recognition up to EAL 2+ALC_FLR), certification body accreditation requirements, national scheme governance (e.g., NIAP for USA, BSI for Germany, ANSSI for France), CCTL laboratory accreditation (ISO/IEC 17025), certificate maintenance and assurance continuity (CCDB-2017-05-002), and international recognition governance have no SP 800-53 equivalents. This is a government-to-government recognition framework, not an organisational security control."
+    }
+  ],
+  "summary": {
+    "total_clauses": 13,
+    "average_coverage": 55.9,
+    "full_count": 1,
+    "substantial_count": 6,
+    "partial_count": 2,
+    "weak_count": 4,
+    "none_count": 0
+  }
+}

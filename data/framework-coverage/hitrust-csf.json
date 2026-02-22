@@ -1,0 +1,590 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "hitrust_csf",
+  "framework_name": "HITRUST CSF v11",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of HITRUST CSF v11. HITRUST CSF is a comprehensive framework that integrates requirements from HIPAA, NIST 800-53, ISO 27001/27002, COBIT, PCI DSS, and other standards into a unified control framework for health information. Since HITRUST CSF explicitly incorporates SP 800-53 controls as one of its authoritative sources, coverage is naturally high. However, HITRUST adds implementation maturity scoring (PRISMA-based), alternative controls, scoping factors, and certification assessment methodology that extend beyond SP 800-53 scope. Validate with HITRUST-authorised external assessors for certification use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "00.a",
+      "title": "Information Security Management Program — ISMS Establishment and Governance",
+      "controls": [
+        "PM-01", "PM-02", "PM-03", "PM-05", "PM-06", "PM-07", "PM-09", "PM-10", "PM-11",
+        "PL-01", "PL-02", "PL-04", "PL-10", "PL-11"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST Domain 00 requires establishing a comprehensive information security management program with executive sponsorship, governance structure, defined scope, and resource allocation. PM-01 (Information Security Program Plan) directly maps to ISMS establishment. PM-02 (Information Security Program Leadership Role) addresses the required CISO or equivalent security officer designation. PM-03 (Information Security and Privacy Resources) covers resource allocation for the security program. PM-05/PM-06 (Measures of Performance/Information Security Measures of Performance) support HITRUST's emphasis on measurable security programme outcomes. PM-07 (Enterprise Architecture) and PM-09/PM-10/PM-11 (Risk Management Strategy, Authorization Process, Mission and Business Process Definition) provide the governance framework. PL-01/PL-02 (Security Planning Policy, Security and Privacy Plans) establish systematic planning. PL-10/PL-11 (Baseline Selection, Baseline Tailoring) support HITRUST's risk-based control selection methodology.",
+      "gaps": "HITRUST adds a PRISMA-based maturity model (Policy, Procedures, Implemented, Measured, Managed) that requires demonstrating progressive maturity across five levels for each control — SP 800-53 does not prescribe maturity scoring. HITRUST's scoping and risk factor methodology (organizational, regulatory, system, compliance) for determining applicable requirement statements has no direct NIST equivalent. HITRUST certification assessment methodology (i1 or r2) imposes specific evidentiary standards and scoring algorithms beyond SP 800-53 assessment guidance."
+    },
+    {
+      "id": "00.b",
+      "title": "Information Security Management Program — Risk Management Framework",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-07", "RA-09",
+        "PM-09", "PM-28",
+        "CA-02", "CA-05", "CA-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "HITRUST requires a formal risk management framework embedded within the ISMS, incorporating risk identification, assessment, treatment, and monitoring cycles. RA-01/RA-02/RA-03 (Risk Assessment Policy, Security Categorization, Risk Assessment) provide the core risk assessment framework. RA-07 (Risk Response) and RA-09 (Criticality Analysis) address risk treatment decisions and asset criticality — both new in Rev 5 and well-aligned with HITRUST's risk-based approach. PM-09 (Risk Management Strategy) and PM-28 (Risk Framing) establish the organisational risk context. CA-02 (Control Assessments) supports periodic risk reassessment. CA-05 (Plan of Action and Milestones) tracks risk remediation. CA-07 (Continuous Monitoring) ensures ongoing risk awareness. HITRUST's incorporation of multiple source frameworks (HIPAA, ISO 27005, NIST RMF) for its risk management approach means SP 800-53's risk framework aligns well as one of the primary sources.",
+      "gaps": "HITRUST's risk management extends to health information-specific risk factors including clinical workflow disruption, patient safety impact, and regulatory enforcement risk (OCR/state attorneys general). HITRUST's Control Maturity and Assessment (PRISMA) scoring methodology quantifies risk management maturity in ways SP 800-53 does not prescribe. HITRUST's 'MyCSF' tool provides a proprietary risk scoring and benchmarking platform with no NIST equivalent."
+    },
+    {
+      "id": "00.c",
+      "title": "Information Security Management Program — Programme Maintenance and Continuous Improvement",
+      "controls": [
+        "CA-07", "PM-06", "PM-14",
+        "PL-02", "PM-01", "PM-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "HITRUST requires ongoing programme maintenance, periodic review, and continuous improvement of the ISMS aligned with PDCA (Plan-Do-Check-Act) principles derived from ISO 27001. CA-07 (Continuous Monitoring) supports ongoing programme evaluation. PM-06 (Information Security Measures of Performance) and PM-14 (Testing, Training, and Monitoring) provide the measurement and evaluation framework. PM-05 (System Inventory) ensures programme scope remains current. PL-02 (Security and Privacy Plans) and PM-01 require periodic plan review and updates.",
+      "gaps": "HITRUST's continuous improvement model includes PRISMA maturity progression requirements — organisations must demonstrate advancement through maturity levels over successive assessment cycles. The HITRUST Assurance Program requires interim assessments and corrective action plan tracking between full r2 certifications. SP 800-53 supports continuous monitoring but does not prescribe maturity progression or certification lifecycle management."
+    },
+    {
+      "id": "01.a",
+      "title": "Access Control — Access Control Policy and User Registration",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-05", "AC-06",
+        "IA-01", "IA-02", "IA-04", "IA-05",
+        "PS-06"
+      ],
+      "coverage_pct": 95,
+      "rationale": "HITRUST Domain 01 access control requirements derive primarily from ISO 27002 and NIST 800-53, making this one of the strongest alignment areas. AC-01 (Access Control Policy and Procedures) directly maps to the requirement for a formal access control policy based on business and security requirements. AC-02 (Account Management) comprehensively addresses user registration and de-registration, including provisioning, review, disabling, and removal of access rights. AC-03 (Access Enforcement) implements role-based access decisions. AC-05 (Separation of Duties) and AC-06 (Least Privilege) enforce the principle of minimum necessary access — critical for HIPAA-aligned HITRUST implementations. IA-01/IA-02/IA-04/IA-05 govern identification, authentication, identifier management, and authenticator lifecycle. PS-06 (Access Agreements) formalises user access obligations before provisioning.",
+      "gaps": "HITRUST adds healthcare-specific access control scoping including ePHI minimum necessary access aligned with HIPAA §164.502(b), break-the-glass emergency access procedures for clinical systems, and role-based access templates specific to healthcare roles (physician, nurse, administrator, billing). SP 800-53 provides the technical mechanisms but not healthcare-specific access role definitions."
+    },
+    {
+      "id": "01.b",
+      "title": "Access Control — Network Access Control",
+      "controls": [
+        "AC-04", "AC-17", "AC-18", "AC-19", "AC-20",
+        "SC-07", "SC-08", "SC-10", "SC-23"
+      ],
+      "coverage_pct": 93,
+      "rationale": "HITRUST requires comprehensive network access control including policy on use of network services, user authentication for external connections, equipment identification in networks, remote diagnostic and configuration port protection, and network segregation. AC-04 (Information Flow Enforcement) controls data flows between network segments. AC-17 (Remote Access) addresses external connection requirements including VPN, encrypted channels, and authentication. AC-18/AC-19 (Wireless Access/Access Control for Mobile Devices) cover wireless and mobile network access. AC-20 (Use of External Systems) governs connections from external networks and systems. SC-07 (Boundary Protection) provides network segmentation and DMZ architecture. SC-08 (Transmission Confidentiality and Integrity) protects data in transit. SC-10 (Network Disconnect) handles session termination. SC-23 (Session Authenticity) prevents session hijacking.",
+      "gaps": "HITRUST includes healthcare-specific network segmentation requirements such as isolation of clinical systems, medical device network zones, and health information exchange (HIE) connectivity controls. HITRUST's network access controls incorporate PCI DSS requirements for payment card processing environments within healthcare, creating dual-scope segmentation requirements not addressed by SP 800-53 alone."
+    },
+    {
+      "id": "01.c",
+      "title": "Access Control — Operating System and Application Access Control",
+      "controls": [
+        "AC-03", "AC-07", "AC-08", "AC-09", "AC-10", "AC-11", "AC-12",
+        "IA-02", "IA-05", "IA-06", "IA-11",
+        "SC-13"
+      ],
+      "coverage_pct": 93,
+      "rationale": "HITRUST requires secure log-on procedures, user identification and authentication, password management systems, use of system utilities, session time-out, and limitation of connection time. AC-03 (Access Enforcement) implements access decisions at the OS and application level. AC-07 (Unsuccessful Logon Attempts) addresses account lockout and failed login handling. AC-08 (System Use Notification) provides logon banners. AC-09/AC-10 (Previous Logon Notification/Concurrent Session Control) enhance session security. AC-11/AC-12 (Device Lock/Session Termination) handle inactivity timeout and session management. IA-02 (Identification and Authentication) and IA-05 (Authenticator Management) cover authentication including MFA requirements. IA-06 (Authentication Feedback) protects password entry. IA-11 (Re-Authentication) addresses session re-authentication. SC-13 (Cryptographic Protection) supports encrypted authentication.",
+      "gaps": "HITRUST incorporates PCI DSS requirements for application-level access controls in payment processing systems, requiring additional authentication mechanisms for cardholder data environments. HITRUST's maturity scoring evaluates the sophistication of access control implementations (e.g., adaptive authentication, context-aware access) beyond SP 800-53's binary implemented/not-implemented assessment."
+    },
+    {
+      "id": "01.d",
+      "title": "Access Control — Mobile Computing and Teleworking",
+      "controls": [
+        "AC-17", "AC-19", "AC-20",
+        "PE-17",
+        "SC-07", "SC-28",
+        "MP-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST requires policies for mobile computing and communications, teleworking, and bring-your-own-device (BYOD) scenarios — particularly important for healthcare organisations with clinicians accessing ePHI from multiple locations. AC-17 (Remote Access) covers remote/teleworking access controls. AC-19 (Access Control for Mobile Devices) directly addresses mobile device management including containerisation, remote wipe, and encryption requirements. AC-20 (Use of External Systems) governs BYOD and third-party device access to organisational systems. PE-17 (Alternate Work Site) addresses physical security at telework locations. SC-07 (Boundary Protection) enforces network controls for remote connections. SC-28 (Protection of Information at Rest) ensures data-at-rest encryption on mobile devices. MP-07 (Media Use) restricts removable media on mobile devices.",
+      "gaps": "HITRUST adds healthcare-specific mobile computing requirements including mobile health (mHealth) application security, clinical mobile device management policies that balance security with patient care workflows, and ePHI-specific remote wipe and encryption requirements aligned with the HIPAA Breach Notification Rule safe harbour. SP 800-53 provides the technical controls but not healthcare-specific mobile policy guidance."
+    },
+    {
+      "id": "02.a",
+      "title": "Human Resources Security — Prior to Employment",
+      "controls": [
+        "PS-01", "PS-02", "PS-03", "PS-06",
+        "PL-04"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires background verification checks, terms and conditions of employment, and security responsibilities defined prior to employment — derived from ISO 27001 A.6.1-A.6.3 and HIPAA workforce security provisions. PS-01 (Personnel Security Policy and Procedures) establishes the framework. PS-02 (Position Risk Designation) categorises positions by sensitivity level, supporting HITRUST's requirement to assess risk based on role and ePHI access. PS-03 (Personnel Screening) directly maps to background verification requirements. PS-06 (Access Agreements) formalises security responsibilities and acceptable use terms before access is granted. PL-04 (Rules of Behavior) documents expected behaviour and consequences of non-compliance.",
+      "gaps": "HITRUST requires that screening processes be proportionate to the sensitivity of health information accessed, incorporating healthcare-specific checks such as OIG exclusion list verification, state licensure validation for clinical staff, and sanctions screening — requirements specific to the healthcare regulatory environment not addressed by SP 800-53."
+    },
+    {
+      "id": "02.b",
+      "title": "Human Resources Security — During Employment",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-06",
+        "PM-13", "PM-14",
+        "PS-06", "PS-07", "PS-08",
+        "PL-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "HITRUST requires management responsibilities for security, security awareness education and training, and a disciplinary process for security violations during the employment lifecycle. AT-01 through AT-04 (Training Policy, Awareness Training, Role-Based Training, Training Records) provide comprehensive training programme management. AT-06 (Training Feedback) supports continuous improvement of training effectiveness. PM-13 (Security and Privacy Workforce) and PM-14 (Testing, Training, and Monitoring) provide programmatic oversight. PS-06 (Access Agreements) maintains ongoing security obligations. PS-07 (External Personnel Security) extends requirements to contractors and third parties. PS-08 (Personnel Sanctions) implements the disciplinary process. PL-04 (Rules of Behavior) reinforces ongoing behavioural expectations.",
+      "gaps": "HITRUST requires healthcare-specific training content including HIPAA Privacy and Security Rule awareness, ePHI handling procedures, breach notification obligations, and patient rights. Training must address the broader HITRUST 'workforce' definition (including volunteers, trainees, and non-employee clinicians). The HITRUST maturity model evaluates training programme effectiveness through measured outcomes, not just completion rates."
+    },
+    {
+      "id": "02.c",
+      "title": "Human Resources Security — Termination and Change of Employment",
+      "controls": [
+        "PS-04", "PS-05",
+        "AC-02", "IA-04",
+        "PE-02"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires formal termination responsibilities, return of assets, and removal of access rights — aligned with both ISO 27001 and HIPAA workforce security provisions. PS-04 (Personnel Termination) comprehensively addresses access revocation, credential deactivation, exit interviews, and asset return upon separation. PS-05 (Personnel Transfer) handles role changes and internal transfers requiring access modification. AC-02 (Account Management) enforces account deactivation and removal. IA-04 (Identifier Management) manages credential revocation. PE-02 (Physical Access Authorizations) addresses removal of physical access upon termination.",
+      "gaps": "HITRUST requires that termination procedures specifically address ePHI access revocation across all systems (clinical, billing, pharmacy, laboratory) which may span multiple disparate systems in healthcare environments. The HITRUST workforce definition includes non-traditional roles (medical students, rotating physicians, volunteers) whose access termination processes differ from standard employment termination."
+    },
+    {
+      "id": "03.a",
+      "title": "Risk Management — Risk Assessment Methodology and Execution",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-05", "RA-07", "RA-09",
+        "PM-09", "PM-28"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST Domain 03 requires a formal risk assessment methodology incorporating threat identification, vulnerability analysis, likelihood determination, impact analysis, and risk determination — closely aligned with NIST SP 800-30 and the SP 800-53 RA family. RA-01 (Risk Assessment Policy) establishes the programme. RA-02 (Security Categorization) supports asset classification by sensitivity. RA-03 (Risk Assessment) is the core control covering the complete risk assessment lifecycle. RA-05 (Vulnerability Monitoring and Scanning) provides technical vulnerability discovery. RA-07 (Risk Response) addresses risk treatment decisions (accept, mitigate, transfer, avoid). RA-09 (Criticality Analysis) prioritises assets by operational importance. PM-09 (Risk Management Strategy) and PM-28 (Risk Framing) establish the organisational risk appetite and tolerance levels.",
+      "gaps": "HITRUST's risk assessment must consider health information-specific threat scenarios (ransomware targeting clinical systems, insider access to patient records, medical device compromise). HITRUST's proprietary risk factor methodology categorises risk across organisational, regulatory, system, and compliance dimensions — a structured approach beyond SP 800-53's general risk assessment guidance. The HITRUST Threat Catalogue provides healthcare-specific threat scenarios not available in NIST guidance."
+    },
+    {
+      "id": "03.b",
+      "title": "Risk Management — Risk Treatment and Monitoring",
+      "controls": [
+        "RA-07", "CA-05", "CA-07",
+        "PM-04", "PM-09", "PM-10",
+        "PL-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST requires formal risk treatment plans, acceptance criteria, residual risk documentation, and ongoing risk monitoring — drawing from ISO 27005 and NIST RMF. RA-07 (Risk Response) directly maps to risk treatment decision-making. CA-05 (Plan of Action and Milestones) tracks risk remediation activities. CA-07 (Continuous Monitoring) ensures ongoing risk monitoring and reassessment. PM-04 (Plan of Action and Milestones Process) provides the governance for remediation tracking. PM-09 (Risk Management Strategy) defines acceptable risk levels. PM-10 (Authorization Process) formalises risk acceptance decisions. PL-02 (Security and Privacy Plans) documents the risk treatment approach.",
+      "gaps": "HITRUST requires that risk treatment decisions be linked to the HITRUST maturity model — immature controls increase residual risk even when implemented. The HITRUST risk acceptance process requires documented approval by authorised management with specific justification for residual risk, particularly for ePHI-related risks where regulatory penalties may apply. HITRUST's Corrective Action Plan (CAP) process has specific timelines and re-assessment requirements not prescribed by SP 800-53."
+    },
+    {
+      "id": "04.a",
+      "title": "Security Policy — Information Security Policy Document and Review",
+      "controls": [
+        "PL-01", "PL-02", "PL-04",
+        "PM-01", "PM-02", "PM-03",
+        "AC-01", "AT-01", "AU-01", "CA-01", "CM-01", "CP-01",
+        "IA-01", "IR-01", "MA-01", "MP-01", "PE-01", "PS-01",
+        "RA-01", "SA-01", "SC-01", "SI-01", "SR-01", "PT-01"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST Domain 04 requires a comprehensive information security policy document approved by management, communicated to all relevant personnel, and reviewed at planned intervals or when significant changes occur. SP 800-53 has a '-01' (Policy and Procedures) control in every family, providing direct coverage for each policy area. PL-01/PL-02 (Security Planning Policy, Security and Privacy Plans) establish the overarching security policy framework. PM-01 (Information Security Program Plan) documents the complete security programme. PM-02 (Information Security Program Leadership Role) ensures policy ownership by a designated security officer. PM-03 (Information Security and Privacy Resources) ensures resources for policy implementation. PL-04 (Rules of Behavior) communicates policy expectations to all personnel. The complete set of 20 family-level '-01' policy controls provides comprehensive coverage across all security domains.",
+      "gaps": "HITRUST requires that security policies specifically reference all authoritative sources integrated into the CSF (HIPAA, ISO 27001, PCI DSS, COBIT, etc.) and demonstrate how each source's requirements are addressed. The HITRUST policy maturity model evaluates not just policy existence but policy governance including version control, stakeholder review, exception management, and enforcement effectiveness. SP 800-53 requires policies but does not prescribe the multi-framework integration approach central to HITRUST."
+    },
+    {
+      "id": "04.b",
+      "title": "Security Policy — Policy Review, Exception Management, and Compliance Monitoring",
+      "controls": [
+        "CA-02", "CA-07",
+        "PM-05", "PM-06", "PM-14",
+        "PL-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "HITRUST requires periodic policy review, formal exception management processes, and ongoing compliance monitoring to ensure policies remain current and effective. CA-02 (Control Assessments) supports periodic policy effectiveness evaluation. CA-07 (Continuous Monitoring) provides ongoing compliance monitoring. PM-05 (System Inventory) ensures policy scope remains aligned with the organisational environment. PM-06 (Information Security Measures of Performance) measures policy compliance rates. PM-14 (Testing, Training, and Monitoring) integrates policy compliance into the broader testing programme. PL-02 (Security and Privacy Plans) mandates periodic plan review and updates.",
+      "gaps": "HITRUST's policy exception process requires formal documented exceptions with compensating controls, management approval, time-limited validity, and periodic re-evaluation — a structured exception management framework not prescribed by SP 800-53. HITRUST's MyCSF platform provides automated policy compliance tracking and benchmarking against peer organisations, a proprietary capability with no NIST equivalent."
+    },
+    {
+      "id": "05.a",
+      "title": "Organisation of Information Security — Internal Organisation and Security Roles",
+      "controls": [
+        "PM-01", "PM-02", "PM-10", "PM-24",
+        "PL-01", "PL-09",
+        "PS-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "HITRUST Domain 05 requires a defined information security organisation with clear roles, responsibilities, and reporting lines — derived from ISO 27001 clause 5 and HIPAA's assigned security responsibility requirement. PM-01 (Information Security Program Plan) defines the security organisation structure. PM-02 (Information Security Program Leadership Role) mandates a designated security officer. PM-10 (Authorization Process) establishes governance authority. PM-24 (Data Integrity Board) adds oversight governance. PL-01 (Security Planning Policy and Procedures) establishes planning authority. PL-09 (Central Management) supports centralised security coordination. PS-07 (External Personnel Security) extends security roles to third parties.",
+      "gaps": "HITRUST requires a cross-functional information security steering committee or equivalent governance body with representation from business, clinical, IT, legal, and compliance functions — a healthcare-specific governance structure not prescribed by SP 800-53. HITRUST also requires clear delineation between the HIPAA Security Official, Privacy Official, and IT leadership roles, which are distinct healthcare regulatory roles."
+    },
+    {
+      "id": "05.b",
+      "title": "Organisation of Information Security — External Parties and Third-Party Risk",
+      "controls": [
+        "SA-04", "SA-09", "SR-04",
+        "PS-07",
+        "CA-03",
+        "SR-01", "SR-02", "SR-03", "SR-05", "SR-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "HITRUST requires identification of risks from external party access, security requirements in third-party agreements, and ongoing vendor risk management. SA-04 (Acquisition Process) embeds security requirements in procurement. SA-09 (External System Services) governs external service provider security. SA-12 (Supply Chain Protection) addresses supply chain risk. PS-07 (External Personnel Security) covers third-party personnel. CA-03 (Information Exchange) governs interconnection agreements. SR-01 through SR-06 (Supply Chain Risk Management family, new in Rev 5) provide comprehensive third-party risk management including risk assessment, controls and processes, provenance tracking, supplier assessments, and supply chain communications.",
+      "gaps": "HITRUST requires healthcare-specific third-party risk management including HIPAA Business Associate Agreement (BAA) provisions, downstream subcontractor security verification, and ePHI access controls for external parties. HITRUST's third-party assurance programme accepts HITRUST certifications as evidence of vendor compliance — a reciprocal assurance model not available in SP 800-53. Cloud service provider assessments must address HITRUST's shared responsibility model for health information."
+    },
+    {
+      "id": "05.c",
+      "title": "Organisation of Information Security — Mobile Devices and Remote Working Policy",
+      "controls": [
+        "AC-17", "AC-19", "AC-20",
+        "PE-17",
+        "CM-08", "SC-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST requires formal policies for mobile device management and teleworking arrangements, covering device registration, configuration management, and secure remote access. AC-17 (Remote Access) provides comprehensive remote working controls. AC-19 (Access Control for Mobile Devices) addresses mobile device management including policy enforcement, containerisation, and encryption. AC-20 (Use of External Systems) governs BYOD and personal device usage. PE-17 (Alternate Work Site) addresses security at remote work locations. CM-08 (System Component Inventory) supports mobile device inventory. SC-07 (Boundary Protection) enforces network controls for mobile connections.",
+      "gaps": "HITRUST adds healthcare-specific mobile device requirements including mHealth application vetting, clinical mobile device policies that address point-of-care workflows, and medical device connectivity controls. HITRUST's mobile device requirements integrate HIPAA ePHI encryption mandates with PCI DSS mobile payment security where healthcare organisations process payments."
+    },
+    {
+      "id": "06.a",
+      "title": "Compliance — Legal and Regulatory Requirements Identification",
+      "controls": [
+        "PM-08", "PM-11",
+        "SA-04",
+        "PT-01", "PT-02", "PT-03",
+        "PL-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "HITRUST Domain 06 requires identification of all applicable legal, regulatory, and contractual requirements relating to information security and privacy — a critical requirement given healthcare's complex regulatory landscape. PM-08 (Critical Infrastructure Plan) identifies regulatory obligations. PM-11 (Mission and Business Process Definition) maps business processes to compliance requirements. SA-04 (Acquisition Process) addresses contractual requirements. PT-01/PT-02/PT-03 (Privacy Policy, Authority to Process, Privacy Requirements for Contractors) cover privacy regulatory compliance. PL-02 (Security and Privacy Plans) documents the compliance posture.",
+      "gaps": "HITRUST's compliance domain must address a complex web of healthcare-specific regulations: HIPAA Privacy and Security Rules, HITECH Act, 42 CFR Part 2 (substance abuse records), state privacy laws (which may be stricter than HIPAA), FDA regulations for medical devices, and international health data requirements (GDPR for EU patient data). SP 800-53 provides a general compliance framework but does not address healthcare-specific regulatory mapping or the concept of 'preemption analysis' for conflicting state and federal laws."
+    },
+    {
+      "id": "06.b",
+      "title": "Compliance — Intellectual Property, Records Management, and Data Protection",
+      "controls": [
+        "SI-12", "AU-11",
+        "MP-06",
+        "PM-25", "PM-26",
+        "PT-01", "PT-02", "PT-04", "PT-05"
+      ],
+      "coverage_pct": 75,
+      "rationale": "HITRUST requires protection of intellectual property rights, records retention and disposal, and data protection/privacy controls aligned with applicable regulations. SI-12 (Information Management and Retention) provides the general retention framework. AU-11 (Audit Record Retention) addresses audit record-specific retention. MP-06 (Media Sanitization) covers records disposal. PM-25 (Minimization of Personally Identifiable Information) and PM-26 (Complaint Management) support privacy compliance. PT-01 through PT-05 (Privacy Policy, Authority, Contractors, Consent, Notice) provide privacy-specific controls added in Rev 5.",
+      "gaps": "HITRUST must address healthcare-specific records retention requirements including HIPAA's 6-year retention for Security Rule documentation, state medical records retention laws (often 7-10 years, longer for minors), and clinical research data retention requirements. HITRUST's data protection requirements integrate HIPAA Privacy Rule concepts (minimum necessary, individual rights, designated record sets) with security controls — a convergence approach that SP 800-53 does not fully address."
+    },
+    {
+      "id": "06.c",
+      "title": "Compliance — Security Reviews, Audits, and Technical Compliance",
+      "controls": [
+        "CA-01", "CA-02", "CA-05", "CA-07", "CA-08",
+        "RA-05",
+        "PM-06", "PM-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST requires independent review of information security, compliance with security policies and standards, and technical compliance checking. CA-01 (Assessment Policy) establishes the audit framework. CA-02 (Control Assessments) provides both internal and external assessment methodology. CA-05 (Plan of Action and Milestones) tracks remediation of audit findings. CA-07 (Continuous Monitoring) supports ongoing compliance verification. CA-08 (Penetration Testing) addresses technical compliance checking. RA-05 (Vulnerability Monitoring and Scanning) provides automated technical compliance assessment. PM-06 (Measures of Performance) and PM-14 (Testing, Training, and Monitoring) support programme-level compliance monitoring.",
+      "gaps": "HITRUST has its own prescriptive assessment methodology (HITRUST Assessment Methodology) with specific scoring criteria, assessor qualifications, and evidence requirements that differ from NIST SP 800-53A. HITRUST r2 validated assessments require HITRUST-authorised external assessors — a certification programme with no NIST equivalent. HITRUST's Quality Assurance programme reviews and validates assessment results, adding an additional layer of assurance beyond standard audit processes."
+    },
+    {
+      "id": "07.a",
+      "title": "Asset Management — Asset Inventory and Ownership",
+      "controls": [
+        "CM-08", "CM-09", "CM-12", "CM-13",
+        "PM-05",
+        "RA-02", "RA-09"
+      ],
+      "coverage_pct": 90,
+      "rationale": "HITRUST Domain 07 requires a comprehensive asset inventory including hardware, software, data, and information assets with designated owners and custodians. CM-08 (System Component Inventory) directly maps to the hardware and software inventory requirement. CM-09 (Configuration Management Plan) supports systematic asset tracking. CM-12 (Information System Component Inventory, new in Rev 5) provides automated inventory capabilities. CM-13 (Data Action Mapping, new in Rev 5) tracks data flows across assets. PM-05 (System Inventory) maintains the enterprise system inventory. RA-02 (Security Categorization) supports asset classification by sensitivity. RA-09 (Criticality Analysis) prioritises assets by operational importance.",
+      "gaps": "HITRUST requires asset inventories to specifically identify systems that create, receive, maintain, or transmit ePHI — a healthcare-specific scoping requirement aligned with HIPAA. Medical device inventory (including IoMT — Internet of Medical Things) presents unique asset management challenges not addressed by SP 800-53, particularly regarding device manufacturers' control over software updates and security configurations."
+    },
+    {
+      "id": "07.b",
+      "title": "Asset Management — Information Classification and Handling",
+      "controls": [
+        "RA-02",
+        "AC-16",
+        "MP-02", "MP-03", "MP-04", "MP-05",
+        "SC-16"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST requires a formal information classification scheme, labelling procedures, and handling procedures appropriate to the classification level. RA-02 (Security Categorization) provides the classification methodology aligned with FIPS 199. AC-16 (Security and Privacy Attributes) supports information labelling and attribute-based handling. MP-02 (Media Access) restricts access based on classification. MP-03 (Media Marking) addresses labelling requirements. MP-04/MP-05 (Media Storage/Media Transport) enforce handling procedures for classified information. SC-16 (Transmission of Security and Privacy Attributes) maintains classification metadata during data exchange.",
+      "gaps": "HITRUST requires healthcare-specific classification categories including ePHI, de-identified data, limited data sets, and research data — classifications derived from HIPAA definitions with distinct handling requirements for each. The intersection of ePHI classification with PCI DSS cardholder data classification in healthcare payment systems creates dual-classification scenarios not addressed by SP 800-53."
+    },
+    {
+      "id": "08.a",
+      "title": "Physical and Environmental Security — Secure Areas and Facility Access",
+      "controls": [
+        "PE-01", "PE-02", "PE-03", "PE-04", "PE-05", "PE-06",
+        "PE-07", "PE-08", "PE-18"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST Domain 08 requires physical security perimeters, physical entry controls, securing offices and rooms, protection against external and environmental threats, and secure areas controls. PE-01 (Physical and Environmental Protection Policy) establishes the framework. PE-02 (Physical Access Authorizations) governs who is permitted facility access. PE-03 (Physical Access Control) implements entry mechanisms (badge readers, biometrics, mantraps). PE-04 (Access Control for Transmission) protects communications infrastructure. PE-05 (Access Control for Output Devices) secures printers and displays. PE-06 (Monitoring Physical Access) provides surveillance and detection. PE-07 (Visitor Control) and PE-08 (Visitor Access Records) manage third-party physical access. PE-18 (Location of System Components) addresses secure placement of critical systems.",
+      "gaps": "Healthcare facilities present unique physical security challenges: 24/7 emergency department access, patient areas adjacent to clinical workstations displaying ePHI, medical device locations in patient rooms, and pharmacy/controlled substance areas with additional DEA regulatory requirements. HITRUST addresses these healthcare-specific physical security considerations beyond SP 800-53's general facility security model."
+    },
+    {
+      "id": "08.b",
+      "title": "Physical and Environmental Security — Equipment Security and Protection",
+      "controls": [
+        "PE-09", "PE-10", "PE-11", "PE-12", "PE-13", "PE-14", "PE-15",
+        "PE-16", "PE-20",
+        "MA-02", "MA-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "HITRUST requires equipment siting and protection, supporting utilities, cabling security, equipment maintenance, security of equipment off-premises, and secure disposal or reuse of equipment. PE-09 (Power Equipment and Cabling) protects infrastructure. PE-10/PE-11 (Emergency Shutoff/Emergency Power) ensure power continuity. PE-12 (Emergency Lighting) supports emergency operations. PE-13 (Fire Protection) and PE-14 (Environmental Controls) address environmental threats. PE-15 (Water Damage Protection) prevents water-related damage. PE-16 (Delivery and Removal) controls equipment movement. PE-20 (Asset Monitoring and Tracking) tracks equipment location. MA-02 (Controlled Maintenance) ensures proper equipment servicing. MA-06 (Timely Maintenance) addresses maintenance scheduling.",
+      "gaps": "Healthcare equipment security includes medical device physical protection requirements (infusion pumps, imaging systems, surgical robots) that have patient safety implications beyond information security. HITRUST addresses equipment in clinical environments where physical access restrictions must balance security with clinical workflow and emergency access requirements."
+    },
+    {
+      "id": "09.a",
+      "title": "Communications and Operations Management — Operational Procedures and Responsibilities",
+      "controls": [
+        "CM-01", "CM-02", "CM-03", "CM-04", "CM-05",
+        "CM-06", "CM-07",
+        "SA-10"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST Domain 09 requires documented operating procedures, change management, segregation of duties, and separation of development, testing, and operational environments. CM-01 (Configuration Management Policy) establishes operational governance. CM-02 (Baseline Configuration) defines standard operating configurations. CM-03 (Configuration Change Control) provides formal change management. CM-04 (Impact Analyses) requires security impact analysis before changes. CM-05 (Access Restrictions for Change) limits who can make configuration changes. CM-06 (Configuration Settings) enforces security configuration parameters. CM-07 (Least Functionality) minimises unnecessary services. SA-10 (Developer Configuration Management) extends change control to development environments.",
+      "gaps": "HITRUST's change management requirements incorporate healthcare-specific considerations including clinical system change windows (avoiding changes during peak clinical hours), medical device change management (coordination with device manufacturers), and regulatory change impact analysis for FDA-regulated systems. SP 800-53 provides the change management framework but not healthcare-specific operational constraints."
+    },
+    {
+      "id": "09.b",
+      "title": "Communications and Operations Management — Capacity Management and System Acceptance",
+      "controls": [
+        "SA-03", "SA-04", "SA-08", "SA-11",
+        "PE-11", "PE-14",
+        "CP-02"
+      ],
+      "coverage_pct": 82,
+      "rationale": "HITRUST requires capacity management planning, system acceptance criteria, and operational resilience for information processing facilities. SA-03 (System Development Life Cycle) addresses system acceptance through lifecycle management. SA-04 (Acquisition Process) embeds security requirements in system procurement. SA-08 (Security and Privacy Engineering Principles) ensures systems are designed for operational requirements. SA-11 (Developer Testing and Evaluation) supports system acceptance testing. PE-11 (Emergency Power) and PE-14 (Environmental Controls) support infrastructure capacity. CP-02 (Contingency Plan) addresses capacity planning for continuity.",
+      "gaps": "HITRUST's capacity management must address healthcare-specific scaling requirements including Electronic Health Record (EHR) system performance, clinical imaging storage growth, telehealth platform capacity, and seasonal demand variations (flu season, pandemic surge). SP 800-53 does not specifically address healthcare workload capacity planning or clinical system availability requirements."
+    },
+    {
+      "id": "09.c",
+      "title": "Communications and Operations Management — Malware Protection and Technical Vulnerability Management",
+      "controls": [
+        "SI-02", "SI-03", "SI-04", "SI-05", "SI-07", "SI-08",
+        "RA-05", "RA-10",
+        "SC-44"
+      ],
+      "coverage_pct": 93,
+      "rationale": "HITRUST requires controls against malicious code, technical vulnerability management, and system integrity monitoring. SI-02 (Flaw Remediation) addresses timely patching. SI-03 (Malicious Code Protection) provides comprehensive malware defence including signature and behaviour-based detection. SI-04 (System Monitoring) enables real-time threat detection and response. SI-05 (Security Alerts, Advisories, and Directives) ensures awareness of new threats. SI-07 (Software, Firmware, and Information Integrity) detects unauthorised modifications. SI-08 (Spam Protection) addresses email-borne threats. RA-05 (Vulnerability Monitoring and Scanning) provides systematic vulnerability discovery. RA-10 (Threat Hunting, new in Rev 5) adds proactive threat detection. SC-44 (Detonation Chambers) supports advanced malware analysis.",
+      "gaps": "HITRUST adds healthcare-specific vulnerability management considerations including medical device patching constraints (devices that cannot be patched without manufacturer certification or FDA re-approval), legacy clinical system vulnerabilities (systems that cannot be upgraded due to clinical dependencies), and healthcare-targeted ransomware threat scenarios. SP 800-53 provides the technical controls but does not address the unique constraints healthcare organisations face in vulnerability remediation."
+    },
+    {
+      "id": "09.d",
+      "title": "Communications and Operations Management — Backup and Recovery",
+      "controls": [
+        "CP-01", "CP-02", "CP-06", "CP-09", "CP-10",
+        "MP-04"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires information backup procedures, secure backup storage, and recovery procedures aligned with both ISO 27002 and HIPAA contingency requirements. CP-01 (Contingency Planning Policy) establishes the backup governance framework. CP-02 (Contingency Plan) defines overall recovery procedures. CP-06 (Alternate Storage Site) addresses offsite backup storage. CP-09 (System Backup) directly maps to the backup requirement covering scope, frequency, testing, and media management. CP-10 (System Recovery and Reconstitution) addresses restoration procedures. MP-04 (Media Storage) governs backup media security.",
+      "gaps": "HITRUST's backup requirements must address healthcare-specific data types including clinical records, medical imaging (DICOM), pharmacy data, and laboratory results — each with potentially different retention and recovery requirements. HIPAA requires 'retrievable exact copies' of ePHI, which may require application-aware backup strategies beyond standard system-level backups."
+    },
+    {
+      "id": "09.e",
+      "title": "Communications and Operations Management — Network Security Management",
+      "controls": [
+        "SC-01", "SC-05", "SC-07", "SC-08", "SC-20", "SC-21", "SC-22",
+        "AC-04",
+        "SI-04"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires network controls, security of network services, and network segregation to protect information services and connected systems. SC-01 (System and Communications Protection Policy) establishes network security governance. SC-05 (Denial-of-Service Protection) addresses availability threats. SC-07 (Boundary Protection) provides comprehensive network segmentation including DMZs, firewalls, and boundary monitoring. SC-08 (Transmission Confidentiality and Integrity) protects data in transit. SC-20/SC-21/SC-22 (Secure Name/Address Resolution) protect DNS infrastructure. AC-04 (Information Flow Enforcement) controls data flows between network segments. SI-04 (System Monitoring) provides network-level intrusion detection and monitoring.",
+      "gaps": "HITRUST includes healthcare-specific network security requirements including clinical network segmentation (separating medical device networks, clinical workstation networks, and administrative networks), health information exchange (HIE) connectivity controls, and telehealth network security. Medical device network zones require special consideration due to the limited security capabilities of many medical devices."
+    },
+    {
+      "id": "09.f",
+      "title": "Communications and Operations Management — Media Handling and Information Exchange",
+      "controls": [
+        "MP-01", "MP-02", "MP-03", "MP-04", "MP-05", "MP-06", "MP-07", "MP-08",
+        "SC-08", "SC-28",
+        "PE-16"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires management of removable media, disposal of media, information handling procedures, and security of system documentation. MP-01 (Media Protection Policy) establishes the governance framework. MP-02/MP-04 (Media Access/Media Storage) restrict access and secure storage. MP-03 (Media Marking) addresses labelling. MP-05 (Media Transport) protects media in transit. MP-06 (Media Sanitization) covers secure disposal per NIST SP 800-88. MP-07 (Media Use) restricts removable media usage. MP-08 (Media Downgrading) addresses declassification. SC-08/SC-28 protect data in transit and at rest on media. PE-16 (Delivery and Removal) controls physical media movement.",
+      "gaps": "HITRUST's media handling requirements include healthcare-specific scenarios: clinical media containing ePHI (CDs with medical images, USB drives with patient data), disposal of decommissioned medical devices containing ePHI, and secure handling of media during healthcare system migrations. HITRUST incorporates HIPAA's breach notification safe harbour for encrypted media."
+    },
+    {
+      "id": "09.g",
+      "title": "Communications and Operations Management — Monitoring, Logging, and Audit",
+      "controls": [
+        "AU-01", "AU-02", "AU-03", "AU-04", "AU-05", "AU-06", "AU-07",
+        "AU-08", "AU-09", "AU-11", "AU-12", "AU-14",
+        "SI-04"
+      ],
+      "coverage_pct": 95,
+      "rationale": "HITRUST requires audit logging, monitoring system use, protection of log information, administrator and operator logs, fault logging, and clock synchronisation — one of the strongest alignment areas between HITRUST and SP 800-53. AU-01 (Audit Policy) establishes the monitoring framework. AU-02/AU-03/AU-12 (Event Logging, Content, Generation) define what is logged and how. AU-04/AU-05 (Storage Capacity/Response to Failures) ensure logging reliability. AU-06/AU-07 (Review and Analysis/Reduction and Reporting) support log analysis. AU-08 (Time Stamps) ensures accurate timestamping. AU-09 (Protection of Audit Information) maintains log integrity. AU-11 (Audit Record Retention) addresses retention. AU-14 (Session Audit) provides detailed session tracking. SI-04 (System Monitoring) enables real-time security monitoring.",
+      "gaps": "HITRUST requires healthcare-specific audit capabilities including ePHI access monitoring, patient record access logging for HIPAA compliance, break-the-glass access auditing, and clinical audit trail requirements for EHR systems. Audit logs must be sufficient to support HIPAA breach investigation and OCR enforcement inquiries — specific evidentiary requirements beyond SP 800-53."
+    },
+    {
+      "id": "10.a",
+      "title": "Information Systems Acquisition, Development, and Maintenance — Security Requirements Analysis",
+      "controls": [
+        "SA-01", "SA-02", "SA-03", "SA-04", "SA-08",
+        "PL-07", "PL-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST Domain 10 requires that information security be an integral part of information systems throughout the lifecycle, beginning with security requirements specification. SA-01 (System and Services Acquisition Policy) establishes procurement governance. SA-02 (Allocation of Resources) ensures security budgets in system projects. SA-03 (System Development Life Cycle) integrates security throughout the SDLC. SA-04 (Acquisition Process) embeds security requirements in procurement. SA-08 (Security and Privacy Engineering Principles) ensures security-by-design. PL-07 (Concept of Operations) and PL-08 (Security and Privacy Architectures) ensure security requirements are captured in system design.",
+      "gaps": "HITRUST requires healthcare-specific security requirements analysis including ePHI protection requirements, HIPAA Security Rule compliance by design, FDA pre-market cybersecurity guidance for medical device software (per FDA final guidance 2023), and interoperability security requirements for HL7 FHIR and other healthcare data exchange standards. SP 800-53 provides the general security requirements framework but not healthcare-specific security engineering guidance."
+    },
+    {
+      "id": "10.b",
+      "title": "Information Systems Acquisition, Development, and Maintenance — Correct Processing and Input/Output Validation",
+      "controls": [
+        "SI-10", "SI-11", "SI-15",
+        "SA-11", "SA-15", "SA-17"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST requires input data validation, control of internal processing, message integrity, and output data validation to prevent data corruption and processing errors. SI-10 (Information Input Validation) directly maps to input validation requirements. SI-11 (Error Handling) addresses secure error processing. SI-15 (Information Output Filtering) controls output data. SA-11 (Developer Testing and Evaluation) supports validation through testing including static and dynamic analysis. SA-15 (Development Process, Standards, and Tools) governs development methodology. SA-17 (Developer Security and Privacy Architecture and Design) ensures validation is designed into system architecture.",
+      "gaps": "HITRUST's data validation requirements include healthcare-specific data integrity controls: clinical data validation for patient safety (preventing medication dosing errors, ensuring lab result accuracy), HL7 message validation, and FHIR resource validation. Clinical data integrity errors can have patient safety consequences beyond standard information security impacts."
+    },
+    {
+      "id": "10.c",
+      "title": "Information Systems Acquisition, Development, and Maintenance — Cryptographic Controls",
+      "controls": [
+        "SC-12", "SC-13", "SC-17",
+        "SC-08", "SC-28",
+        "IA-07"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires a policy on the use of cryptographic controls and key management — integrated from ISO 27002, NIST, and PCI DSS requirements. SC-12 (Cryptographic Key Establishment and Management) provides comprehensive key lifecycle management. SC-13 (Cryptographic Protection) establishes the encryption framework including algorithm selection and FIPS 140-2/140-3 validation requirements. SC-17 (Public Key Infrastructure Certificates) supports PKI management. SC-08 (Transmission Confidentiality and Integrity) applies encryption to data in transit. SC-28 (Protection of Information at Rest) addresses data-at-rest encryption. IA-07 (Cryptographic Module Authentication) ensures cryptographic module integrity.",
+      "gaps": "HITRUST integrates PCI DSS cryptographic requirements (for healthcare payment processing) with HIPAA encryption specifications, creating dual-standard cryptographic obligations. HITRUST's encryption requirements reference the HIPAA Breach Notification Rule safe harbour — encryption to NIST standards renders ePHI 'unusable, unreadable, or indecipherable,' providing a safe harbour from breach notification. SP 800-53 does not address this HIPAA-specific incentive mechanism."
+    },
+    {
+      "id": "10.d",
+      "title": "Information Systems Acquisition, Development, and Maintenance — Security in Development and Support Processes",
+      "controls": [
+        "SA-03", "SA-08", "SA-10", "SA-11", "SA-15", "SA-16", "SA-17",
+        "CM-03", "CM-04",
+        "SI-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "HITRUST requires change control procedures for system development, technical review of applications after operating platform changes, restrictions on changes to software packages, secure development environments, outsourced development controls, and system security testing. SA-03 (System Development Life Cycle) provides the SDLC framework. SA-08 (Security and Privacy Engineering Principles) ensures secure design. SA-10 (Developer Configuration Management) controls development environment changes. SA-11 (Developer Testing and Evaluation) mandates security testing. SA-15/SA-16/SA-17 (Development Process/Developer-Provided Training/Developer Architecture) strengthen development security. CM-03/CM-04 (Change Control/Impact Analyses) ensure changes are controlled and assessed. SI-06 (Security and Privacy Function Verification) validates security functions after changes.",
+      "gaps": "HITRUST's development security requirements incorporate healthcare-specific considerations including FDA software validation guidance (21 CFR Part 11), EHR system development standards, and clinical decision support system testing requirements. HITRUST's outsourced development controls must address offshore development risks specific to ePHI, including international data transfer restrictions."
+    },
+    {
+      "id": "10.e",
+      "title": "Information Systems Acquisition, Development, and Maintenance — Technical Vulnerability Management",
+      "controls": [
+        "RA-05", "RA-10",
+        "SI-02", "SI-05",
+        "CM-08"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires timely identification, assessment, and remediation of technical vulnerabilities across all information systems. RA-05 (Vulnerability Monitoring and Scanning) provides systematic vulnerability discovery including authenticated scanning, credentialed assessment, and vulnerability database correlation. RA-10 (Threat Hunting, new in Rev 5) adds proactive vulnerability research. SI-02 (Flaw Remediation) ensures timely patching with defined remediation timelines. SI-05 (Security Alerts, Advisories, and Directives) ensures awareness of newly disclosed vulnerabilities. CM-08 (System Component Inventory) supports vulnerability scope identification.",
+      "gaps": "HITRUST's vulnerability management must account for medical device patching constraints — many medical devices cannot be patched without manufacturer coordination and may require FDA re-certification for significant software changes. Healthcare organisations must maintain compensating controls for unpatched systems, a scenario more prevalent in healthcare than other industries. HITRUST references CISA advisories for medical device vulnerabilities, a healthcare-specific threat intelligence source."
+    },
+    {
+      "id": "11.a",
+      "title": "Information Security Incident Management — Incident Reporting and Response",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05", "IR-06", "IR-07", "IR-08",
+        "SI-04", "SI-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "HITRUST Domain 11 requires reporting information security events, reporting security weaknesses, and establishing incident response capabilities with defined procedures. IR-01 (Incident Response Policy) establishes the programme. IR-02/IR-03 (Incident Response Training/Testing) ensure readiness. IR-04 (Incident Handling) covers the complete incident lifecycle: preparation, detection, analysis, containment, eradication, and recovery. IR-05 (Incident Monitoring) tracks incidents and trends. IR-06 (Incident Reporting) addresses notification requirements. IR-07 (Incident Response Assistance) provides operational support. IR-08 (Incident Response Plan) documents the response approach. SI-04/SI-05 (System Monitoring/Security Alerts) support detection and awareness.",
+      "gaps": "HITRUST's incident management integrates HIPAA Breach Notification Rule requirements (§164.400-414) including specific notification timelines: 60 days for breaches affecting 500+ individuals, individual notification for all breaches, state attorney general notification, media notification for large breaches, and HHS wall of shame reporting. These are prescriptive legal obligations with no SP 800-53 equivalent. HITRUST also requires the four-factor breach risk assessment (nature/extent of PHI, unauthorized person, acquired/viewed, risk mitigated)."
+    },
+    {
+      "id": "11.b",
+      "title": "Information Security Incident Management — Incident Management and Improvement",
+      "controls": [
+        "IR-04", "IR-05", "IR-06", "IR-09",
+        "AU-06",
+        "CA-07",
+        "PM-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST requires management responsibilities and procedures for incident response, collection of evidence, and learning from information security incidents to improve the programme. IR-04 (Incident Handling) provides the response management framework. IR-05 (Incident Monitoring) supports pattern analysis and trend identification. IR-06 (Incident Reporting) ensures proper documentation. IR-09 (Information Spillage Response, new in Rev 5) addresses data breach containment — directly relevant to ePHI breach scenarios. AU-06 (Audit Record Review) supports forensic analysis. CA-07 (Continuous Monitoring) enables lessons-learned integration. PM-04 (Plan of Action and Milestones Process) tracks remediation.",
+      "gaps": "HITRUST requires healthcare-specific incident management including ePHI breach forensic investigation procedures, chain-of-custody for digital evidence in healthcare contexts, and integration with OCR breach investigation processes. HITRUST's post-incident improvement process must feed into the PRISMA maturity model, demonstrating that incidents drive measurable security programme improvements. SP 800-53 supports incident learning but does not prescribe the healthcare regulatory interface."
+    },
+    {
+      "id": "11.c",
+      "title": "Information Security Incident Management — Evidence Collection and Forensic Readiness",
+      "controls": [
+        "AU-09", "AU-11", "AU-14",
+        "IR-04",
+        "SI-04", "SI-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "HITRUST requires procedures for collection, acquisition, and preservation of information that can serve as evidence, supporting both internal investigation and regulatory or legal proceedings. AU-09 (Protection of Audit Information) ensures evidence integrity through tamper-proof log storage. AU-11 (Audit Record Retention) addresses evidence preservation timelines. AU-14 (Session Audit) provides detailed session-level evidence. IR-04 (Incident Handling) includes evidence handling procedures. SI-04 (System Monitoring) captures real-time evidence. SI-07 (Software, Firmware, and Information Integrity) detects evidence tampering.",
+      "gaps": "HITRUST's evidence requirements must support HIPAA enforcement proceedings, OCR investigations, state attorney general actions, and potential patient litigation. Healthcare-specific forensic requirements include EHR audit trail preservation, medical device log collection (which may require manufacturer cooperation), and clinical system evidence preservation that does not disrupt patient care. SP 800-53 provides forensic readiness controls but does not address healthcare-specific evidentiary standards."
+    },
+    {
+      "id": "12.a",
+      "title": "Business Continuity Management — BCM Framework and Business Impact Analysis",
+      "controls": [
+        "CP-01", "CP-02",
+        "PM-08", "PM-09", "PM-11",
+        "RA-09"
+      ],
+      "coverage_pct": 88,
+      "rationale": "HITRUST Domain 12 requires a business continuity management framework including business impact analysis, continuity strategy, and integration with the risk management programme. CP-01 (Contingency Planning Policy) establishes the BCM governance framework. CP-02 (Contingency Plan) is the core business continuity plan addressing essential missions, recovery priorities, and restoration procedures. PM-08 (Critical Infrastructure Plan) identifies critical business functions. PM-09 (Risk Management Strategy) integrates continuity risk into the overall risk framework. PM-11 (Mission and Business Process Definition) maps business processes to systems. RA-09 (Criticality Analysis, new in Rev 5) directly supports business impact analysis by identifying critical assets and their operational importance.",
+      "gaps": "HITRUST's BCM framework must address healthcare-specific continuity requirements including clinical care continuity during system outages, patient safety during degraded operations, coordination with public health emergency response, and continuity of pharmacy, laboratory, and imaging services. Healthcare BIA must assess patient harm potential — a dimension beyond standard business impact analysis. SP 800-53 addresses information system continuity but not clinical care continuity."
+    },
+    {
+      "id": "12.b",
+      "title": "Business Continuity Management — Business Continuity Plans and Implementation",
+      "controls": [
+        "CP-02", "CP-03", "CP-04", "CP-06", "CP-07", "CP-08",
+        "CP-09", "CP-10"
+      ],
+      "coverage_pct": 92,
+      "rationale": "HITRUST requires developing, implementing, and maintaining business continuity plans that include all information security requirements. CP-02 (Contingency Plan) provides the comprehensive continuity plan. CP-03 (Contingency Training) ensures personnel readiness. CP-04 (Contingency Plan Testing) validates plan effectiveness. CP-06 (Alternate Storage Site) addresses offsite data resilience. CP-07 (Alternate Processing Site) provides failover capabilities. CP-08 (Telecommunications Services) ensures communications continuity. CP-09 (System Backup) supports data recovery. CP-10 (System Recovery and Reconstitution) addresses full system restoration. This is one of the strongest alignment areas — SP 800-53 CP family comprehensively addresses HITRUST BCM requirements.",
+      "gaps": "HITRUST's continuity plans must address healthcare-specific recovery scenarios including EHR system failover with clinical data integrity, medical device system continuity, pharmacy system recovery (time-critical for patient medications), and coordination with clinical staff for manual downtime procedures. HITRUST requires integration with healthcare emergency preparedness (CMS Emergency Preparedness Rule) which has specific testing and coordination requirements."
+    },
+    {
+      "id": "12.c",
+      "title": "Business Continuity Management — Testing, Maintenance, and Reassessment",
+      "controls": [
+        "CP-03", "CP-04",
+        "CA-02", "CA-07",
+        "PM-14"
+      ],
+      "coverage_pct": 90,
+      "rationale": "HITRUST requires regular testing of business continuity plans, maintenance of plan currency, and periodic reassessment of the BCM framework. CP-03 (Contingency Training) ensures testing participants are prepared. CP-04 (Contingency Plan Testing) provides the testing framework including tabletop exercises, functional tests, and full-scale exercises. CA-02 (Control Assessments) supports BCM effectiveness evaluation. CA-07 (Continuous Monitoring) ensures ongoing awareness of changes affecting continuity. PM-14 (Testing, Training, and Monitoring) integrates BCM testing into the broader security programme.",
+      "gaps": "HITRUST requires healthcare-specific continuity testing including clinical downtime procedure exercises, medical device failover testing, and coordination with healthcare coalition partners. Testing scenarios must include healthcare-specific events: ransomware attacks on clinical systems, pandemic response, natural disasters affecting patient care, and utility failures in clinical environments. SP 800-53 testing controls are comprehensive but do not prescribe healthcare-specific testing scenarios."
+    },
+    {
+      "id": "13.a",
+      "title": "Privacy Practices — Privacy Programme Establishment and Governance",
+      "controls": [
+        "PT-01", "PT-02", "PT-03",
+        "PM-01", "PM-02", "PM-18", "PM-19", "PM-20",
+        "PL-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "HITRUST Domain 13 establishes comprehensive privacy practices derived primarily from HIPAA Privacy Rule, with additional requirements from GDPR, state privacy laws, and international standards. PT-01 (Privacy Policy and Procedures) establishes the privacy programme framework. PT-02 (Authority to Process Personally Identifiable Information) addresses lawful basis for processing — aligned with both HIPAA and GDPR. PT-03 (Personally Identifiable Information Processing Purposes) ensures purpose limitation. PM-18 (Privacy Program Plan) documents the privacy programme. PM-19 (Privacy Program Leadership Role) mandates a privacy officer. PM-20 (Dissemination of Privacy Program Information) supports privacy notice distribution. PM-01 and PM-02 provide programme and leadership governance.",
+      "gaps": "HITRUST's privacy programme requirements incorporate HIPAA Privacy Rule concepts that extend significantly beyond SP 800-53: Designated Privacy Official designation with specific OCR accountability, Notice of Privacy Practices (NPP) requirements with specific content mandates, privacy board or institutional review board requirements for research uses, and privacy impact assessments for new clinical systems. The HITRUST privacy domain integrates requirements from multiple privacy regimes (HIPAA, HITECH, state laws, GDPR for international healthcare) that collectively exceed SP 800-53 PT family coverage."
+    },
+    {
+      "id": "13.b",
+      "title": "Privacy Practices — Notice, Consent, and Choice",
+      "controls": [
+        "PT-04", "PT-05",
+        "PM-20", "PM-21", "PM-22"
+      ],
+      "coverage_pct": 62,
+      "rationale": "HITRUST requires providing individuals with notice of information practices, obtaining consent for data collection and use, and providing choice mechanisms for limiting data use. PT-04 (Consent) addresses consent mechanisms for data processing. PT-05 (Privacy Notice) covers notice requirements. PM-20 (Dissemination of Privacy Program Information) supports notice distribution. PM-21 (Accounting of Disclosures) addresses the requirement to account for how data has been used — partially supporting the choice/limitation requirement. PM-22 (Personally Identifiable Information Quality Management) supports accuracy of consent records.",
+      "gaps": "HITRUST's notice and consent requirements incorporate HIPAA-specific provisions that SP 800-53 does not address: Notice of Privacy Practices (NPP) with mandatory content elements (uses/disclosures, individual rights, entity duties), authorisation requirements for uses beyond treatment/payment/healthcare operations (45 CFR §164.508), right to request restrictions on certain disclosures, and minimum necessary standard application. HIPAA's distinction between 'consent' (optional for TPO), 'authorisation' (required for non-TPO uses), and 'agreement' (required for facility directories) creates a nuanced consent taxonomy with no NIST equivalent. State laws may impose additional consent requirements."
+    },
+    {
+      "id": "13.c",
+      "title": "Privacy Practices — Collection Limitation, Use, Disclosure, and Retention",
+      "controls": [
+        "PM-25", "PM-26",
+        "SI-12",
+        "PT-02", "PT-03", "PT-06", "PT-07",
+        "AC-06"
+      ],
+      "coverage_pct": 60,
+      "rationale": "HITRUST requires limiting collection to what is necessary, using data only for stated purposes, restricting disclosures, and retaining data only as long as necessary — core privacy principles derived from HIPAA's minimum necessary standard and Fair Information Practice Principles. PM-25 (Minimization of Personally Identifiable Information) supports collection limitation. PM-26 (Complaint Management) addresses complaints about data practices. SI-12 (Information Management and Retention) provides the retention framework. PT-02/PT-03 (Authority to Process/Processing Purposes) restrict processing to authorised purposes. PT-06 (System of Records Notice) supports transparency. PT-07 (Specific Categories of Personally Identifiable Information) addresses sensitive data categories. AC-06 (Least Privilege) supports the minimum necessary access principle.",
+      "gaps": "HITRUST's collection, use, disclosure, and retention requirements derive extensively from HIPAA Privacy Rule provisions: the minimum necessary standard (§164.502(b)), permitted and required disclosures (§164.502(a)), accounting of disclosures obligation (§164.528), 42 CFR Part 2 restrictions for substance abuse records, research use limitations and IRB/Privacy Board requirements, and state-specific disclosure restrictions. These are detailed legal and regulatory requirements that fundamentally differ from SP 800-53's technical privacy controls. HIPAA's retention requirements interact with state medical records retention laws, creating jurisdiction-specific obligations."
+    },
+    {
+      "id": "13.d",
+      "title": "Privacy Practices — Individual Access, Amendment, and Complaints",
+      "controls": [
+        "PM-21", "PM-22", "PM-26",
+        "PT-05", "PT-06"
+      ],
+      "coverage_pct": 52,
+      "rationale": "HITRUST requires providing individuals with access to their health information, mechanisms to request amendments, and a complaints process — implementing HIPAA individual rights provisions. PM-21 (Accounting of Disclosures) supports the right to receive an accounting of disclosures. PM-22 (Personally Identifiable Information Quality Management) addresses data accuracy supporting amendment rights. PM-26 (Complaint Management) directly maps to the complaints process requirement. PT-05 (Privacy Notice) informs individuals of their rights. PT-06 (System of Records Notice) supports access requests.",
+      "gaps": "HITRUST's individual rights requirements derive from HIPAA §164.524-528 and include: right to access ePHI in a designated record set (including in electronic format per HITECH), right to request amendments with specific response timelines (60 days), right to an accounting of disclosures (6-year look-back), right to request restrictions, right to confidential communications, and the complaints process (both internal and to HHS). The 21st Century Cures Act 'information blocking' provisions add further access obligations. These are detailed healthcare-specific individual rights with procedural requirements that have no SP 800-53 equivalent."
+    },
+    {
+      "id": "13.e",
+      "title": "Privacy Practices — Health-Specific Privacy Requirements (PHI/ePHI)",
+      "controls": [
+        "PT-01", "PT-02", "PT-04",
+        "PM-25",
+        "AC-03", "AC-06",
+        "SC-28"
+      ],
+      "coverage_pct": 48,
+      "rationale": "HITRUST includes health-specific privacy requirements addressing protected health information (PHI) handling, de-identification standards, limited data sets, and healthcare operations privacy provisions. PT-01/PT-02 (Privacy Policy/Authority to Process) provide the privacy governance framework. PT-04 (Consent) supports authorisation requirements for PHI use. PM-25 (Minimization of PII) partially supports the minimum necessary standard. AC-03/AC-06 (Access Enforcement/Least Privilege) implement technical access controls for PHI. SC-28 (Protection of Information at Rest) protects stored PHI. However, SP 800-53 was not designed to address healthcare-specific privacy requirements.",
+      "gaps": "HITRUST's health-specific privacy requirements include provisions with no SP 800-53 equivalent: HIPAA de-identification standards (Safe Harbor method with 18 identifiers and Expert Determination method per §164.514), limited data set requirements with data use agreements, treatment/payment/healthcare operations (TPO) use framework, psychotherapy notes protections (§164.508(a)(2)), genetic information non-discrimination (GINA) requirements, 42 CFR Part 2 substance abuse confidentiality requirements, state-specific health privacy laws (which may be more restrictive than HIPAA), reproductive health information protections (per 2024 HIPAA updates), and research use provisions including IRB waivers and preparatory research exceptions. These are fundamentally healthcare regulatory requirements outside SP 800-53's scope."
+    }
+  ],
+  "summary": {
+    "total_clauses": 47,
+    "average_coverage": 86.0,
+    "full_count": 39,
+    "substantial_count": 4,
+    "partial_count": 4,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

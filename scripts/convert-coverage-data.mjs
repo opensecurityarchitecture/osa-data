@@ -28,7 +28,7 @@ const FRAMEWORKS = [
   { id: 'finos_ccc',       name: 'FINOS CCC',             output: 'finos-ccc.json',            variable: 'finos_ccc_data',           source: 'data_remaining_part1.py' },
   { id: 'iec_62443',       name: 'IEC 62443',             output: 'iec-62443.json',            variable: 'iec62443_data',            source: 'data_remaining_part1.py' },
   { id: 'nis2',            name: 'NIS2 Directive',         output: 'nis2.json',                 variable: 'nis2_data',                source: 'data_remaining_part1.py' },
-  { id: 'uk_pra_fca',      name: 'UK PRA/FCA',             output: 'uk-pra-fca.json',           variable: 'uk_pra_fca_data',          source: 'data_remaining_part2.py' },
+  { id: 'pra_op_resilience', name: 'PRA Operational Resilience', output: 'pra-op-resilience.json',  variable: 'pra_op_resilience_data',   source: 'data_remaining_part2.py' },
   { id: 'mas_trm',         name: 'MAS TRM',                output: 'mas-trm.json',              variable: 'mas_trm_data',             source: 'data_remaining_part2.py' },
   { id: 'apra_cps_234',    name: 'APRA CPS 234',           output: 'apra-cps-234.json',         variable: 'apra_cps234_data',         source: 'data_remaining_part2.py' },
   { id: 'asd_e8',          name: 'ASD Essential Eight',     output: 'asd-essential-eight.json',  variable: 'asd_essential_eight_data', source: 'data_remaining_part3.py' },

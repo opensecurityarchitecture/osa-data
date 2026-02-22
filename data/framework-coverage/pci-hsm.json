@@ -1,0 +1,219 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "pci_hsm",
+  "framework_name": "PCI PIN Security Requirements v3.1",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of PCI PIN Security Requirements v3.1 and associated HSM security requirements. PCI PIN Security focuses on the protection of PIN data during processing, transmission, and storage at acquirers and their agents, with specific requirements for Hardware Security Modules (HSMs), key injection facilities, and PIN translation. SP 800-53 addresses cryptographic protection (SC-12, SC-13) and physical security (PE family) but not PIN block format standards (ISO 9564), key injection ceremony procedures, DUKPT key derivation, or HSM vendor-specific firmware validation. Validate with qualified PCI PIN assessors for compliance use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "1",
+      "title": "PIN Security Management",
+      "controls": [
+        "PL-01",
+        "PL-02",
+        "AC-01",
+        "AC-05",
+        "AC-06",
+        "PS-01",
+        "PS-02",
+        "PS-06",
+        "PM-01",
+        "PM-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PL-01/PL-02 establish security planning and policy documentation for PIN processing operations. AC-01/AC-05/AC-06 address access control policy, separation of duties between key custodians, and least privilege for PIN-handling personnel. PS-01/PS-02/PS-06 cover personnel security policy, position risk designation for key custodian roles, and access agreements. PM-01/PM-02 provide programme management and senior leadership accountability.",
+      "gaps": "PCI PIN Security requires specific PIN security policy elements including designated key custodians with formal acknowledgment, PIN processing role definitions tied to payment network rules, and documented procedures for PIN compromise notification to card brands. SP 800-53 covers general security governance but lacks payment-network-specific custodian and notification requirements."
+    },
+    {
+      "id": "2",
+      "title": "PIN Entry Devices",
+      "controls": [
+        "PE-03",
+        "CM-08",
+        "SR-09",
+        "SR-10",
+        "SR-11",
+        "SA-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PE-03 controls physical access to areas containing PIN entry devices. CM-08 provides component inventory tracking for deployed PEDs. SR-09/SR-10/SR-11 address tamper resistance, inspection of components, and component authenticity verification. SA-04 covers acquisition requirements including security specifications for PED procurement.",
+      "gaps": "PCI PIN Security mandates that PIN entry devices must appear on the PCI PTS (PIN Transaction Security) approved device list, with specific requirements for device encryption capabilities, key loading interfaces, and hardware tamper-detection mechanisms. SP 800-53 does not address PCI PTS device certification, PED form-factor requirements, point-of-interaction terminal validation, or the mandatory retirement of devices removed from the PCI PTS approved list."
+    },
+    {
+      "id": "3",
+      "title": "PIN Transmission",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23",
+        "AC-04",
+        "AC-17"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SC-08 provides transmission confidentiality and integrity protection for PIN data in transit. SC-12/SC-13 address cryptographic key management and cryptographic protection mechanisms used to encrypt PIN blocks during transmission. SC-23 session authenticity protects PIN transmission sessions. AC-04 enforces information flow policies between PIN processing endpoints. AC-17 covers remote access encryption for administrative connections to PIN processing systems.",
+      "gaps": "PCI PIN Security requires PIN blocks to conform to ISO 9564 format standards (Format 0, 1, 3, 4), mandates specific PIN block encryption algorithms (TDEA/AES), and prohibits clear-text PIN transmission at any point. SP 800-53 addresses encrypted transmission generically but does not specify ISO 9564 PIN block formatting, PIN block translation requirements between encryption zones, or the prohibition against PIN block re-encryption without format validation."
+    },
+    {
+      "id": "4",
+      "title": "PIN Processing",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "CM-03",
+        "CM-05",
+        "AC-03",
+        "AC-06"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SC-12/SC-13 address cryptographic key management and protection for HSM operations including key encryption keys and PIN encryption keys. CM-03/CM-05 cover change control and access restrictions for changes to HSM configurations. AC-03/AC-06 enforce access controls and least privilege for personnel performing PIN processing operations such as key injection and translation.",
+      "gaps": "PCI PIN Security defines specific HSM operational procedures including PIN translation between encryption zones, key injection into payment terminals using secure key-loading devices, PIN verification using offset or PVV methods, and HSM command filtering to prevent unauthorized PIN derivation. SP 800-53 does not address PIN translation operations, key injection facility procedures, HSM command-set restrictions, or the requirement that PINs never exist in clear text outside a certified HSM boundary."
+    },
+    {
+      "id": "5",
+      "title": "Key Management",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "AC-05",
+        "AC-06",
+        "PS-06",
+        "CM-03",
+        "MP-04",
+        "MP-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-12 directly addresses cryptographic key establishment and management, covering the full symmetric key lifecycle including generation, distribution, storage, rotation, and destruction. SC-13 specifies cryptographic protection mechanisms. AC-05/AC-06 enforce split knowledge and dual control through separation of duties and least privilege. PS-06 formalises access agreements for key custodians. CM-03 manages key changes through formal change control. MP-04/MP-06 address secure storage and destruction of key material on physical media.",
+      "gaps": "PCI PIN Security requires specific symmetric key component management including split knowledge where no single person knows a complete key, dual control requiring two or more persons for key ceremonies, and documented key component conveyance procedures. While SC-12 and AC-05 substantially address these concepts, PCI PIN Security adds prescriptive detail on key component generation using approved random number generators, key check value verification, and key component custodian acknowledgment forms."
+    },
+    {
+      "id": "6",
+      "title": "Key Loading",
+      "controls": [
+        "PE-03",
+        "PE-02",
+        "PE-06",
+        "AC-05",
+        "PS-06",
+        "PS-07",
+        "SC-12",
+        "AU-02",
+        "AU-12"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PE-03/PE-02/PE-06 provide physical access control, access authorizations, and monitoring for key injection facilities. AC-05 enforces dual control during key loading ceremonies. PS-06/PS-07 address access agreements for key custodians and third-party key injection personnel. SC-12 covers cryptographic key distribution procedures. AU-02/AU-12 provide audit event definition and generation for key loading activities.",
+      "gaps": "PCI PIN Security specifies detailed key injection facility requirements including physically secured rooms with access limited to authorised key custodians, specific key-loading device (KLD) certification requirements, procedures for remote key injection (RKI) using mutual authentication, and chain-of-custody documentation for devices transiting key injection. SP 800-53 does not address key injection facility design, KLD device certification, RKI protocol requirements, or the specific ceremony procedures mandating witnessed key component entry."
+    },
+    {
+      "id": "7",
+      "title": "HSM Physical Security",
+      "controls": [
+        "PE-01",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-09",
+        "PE-13",
+        "PE-15",
+        "PE-18",
+        "SR-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PE-01 establishes physical protection policy covering HSM installations. PE-03/PE-04/PE-05 address physical access control, access control for transmission medium, and access control for output devices connected to HSMs. PE-06 provides monitoring of physical access to HSM locations. PE-09/PE-13/PE-15 cover power protection, fire protection, and water damage protection for HSM environments. PE-18 addresses location of HSM components within facilities. SR-09 addresses tamper resistance and detection for hardware security modules.",
+      "gaps": "PCI PIN Security requires HSMs to carry FIPS 140-2/140-3 Level 3 or PCI PTS HSM certification with specific tamper-evident and tamper-responsive characteristics including zeroisation of keys upon tamper detection, environmental failure protection that triggers key erasure, and physical inspection procedures for tamper-evident seals. SP 800-53 PE controls address facility-level physical security but do not specify HSM hardware tamper-response mechanisms, zeroisation requirements, or PCI PTS HSM device certification standards."
+    },
+    {
+      "id": "8",
+      "title": "HSM Logical Security",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-06",
+        "SI-07",
+        "AC-03",
+        "AC-06",
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-12"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-02/CM-03/CM-06 address baseline configuration, change control, and configuration settings for HSM firmware and software. SI-07 provides software and firmware integrity verification for HSM code. AC-03/AC-06 enforce logical access controls and least privilege for HSM administration interfaces. AU-02/AU-03/AU-06/AU-12 cover audit event definition, audit content, audit review, and audit generation for HSM operations including key usage, administrative commands, and security events.",
+      "gaps": "PCI PIN Security requires HSM firmware to be digitally signed by the manufacturer with verified integrity before deployment, mandates HSM command filtering to restrict available cryptographic operations to only those authorised for the deployment context, and specifies that HSM audit logs must capture all key usage events with non-repudiation. SP 800-53 SI-07 addresses firmware integrity generically but does not cover HSM vendor-specific firmware signing validation, command-set restriction configurations, or the specific HSM audit requirements for cryptographic operation logging."
+    },
+    {
+      "id": "9",
+      "title": "Certificate and Asymmetric Key Management",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "IA-05",
+        "IA-08",
+        "CM-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-12 covers asymmetric key management including RSA key pair generation, distribution, and lifecycle management. SC-13 specifies cryptographic algorithms and key lengths for asymmetric operations. SC-17 provides PKI certificate management including certificate authority operations, certificate revocation, and certificate validation. IA-05/IA-08 address authenticator management and identification/authentication for non-organisational users through certificate-based authentication. CM-03 manages changes to certificate infrastructure and key configurations.",
+      "gaps": "PCI PIN Security specifies DUKPT (Derived Unique Key Per Transaction) key management for point-of-sale environments, requires specific RSA key lengths and padding schemes for PIN block encryption during remote key distribution, and mandates certificate pinning for HSM-to-HSM communication channels. SP 800-53 covers PKI and asymmetric key management comprehensively through SC-12/SC-17 but does not address DUKPT key derivation hierarchies, payment-specific RSA key wrapping procedures, or the certificate management requirements specific to payment HSM trust chains."
+    },
+    {
+      "id": "10",
+      "title": "Audit and Compliance",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "AU-01",
+        "AU-06",
+        "AU-11",
+        "IR-01",
+        "IR-04",
+        "IR-06",
+        "PM-06"
+      ],
+      "coverage_pct": 83,
+      "rationale": "CA-02/CA-05/CA-07 provide security assessments, plan of action and milestones for remediation, and continuous monitoring for ongoing compliance validation. AU-01/AU-06/AU-11 cover audit policy, audit review and analysis, and audit record retention for PIN security event records. IR-01/IR-04/IR-06 address incident response policy, incident handling, and incident reporting for PIN compromise events. PM-06 provides security metrics and compliance measurement.",
+      "gaps": "PCI PIN Security requires annual self-assessment using the PCI PIN Security Assessment and specific reporting to acquiring banks and payment brands. The standard mandates compliance validation by a qualified PCI PIN assessor (QPA), requires specific incident notification timelines to payment card brands upon PIN compromise, and defines remediation validation procedures. SP 800-53 covers assessment and incident response comprehensively but does not address PCI-specific assessment methodologies, QPA qualification requirements, or payment brand notification obligations."
+    }
+  ],
+  "summary": {
+    "total_clauses": 10,
+    "average_coverage": 74.0,
+    "full_count": 1,
+    "substantial_count": 7,
+    "partial_count": 2,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

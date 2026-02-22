@@ -1,0 +1,465 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "nhs_dspt",
+  "framework_name": "NHS Data Security and Protection Toolkit (DSPT)",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of the NHS Data Security and Protection Toolkit (DSPT), which implements the National Data Guardian's 10 data security standards. The DSPT is a mandatory self-assessment for all organisations that have access to NHS patient data and systems. SP 800-53 provides comprehensive security controls that address many DSPT assertions, but does not address NHS-specific requirements such as Caldicott Guardian appointment, NHS mail/network connectivity standards, NHS Digital registration, Data Protection Impact Assessments under UK GDPR, or NHS-specific data sharing agreements. Coverage reflects overlap between DSPT security assertions and SP 800-53 control families. Validate with NHS Digital/NHS England and qualified Data Protection Officers for compliance use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "NDG-1.1",
+      "title": "Standard 1 — Confidentiality of personal confidential data",
+      "controls": [
+        "AC-01", "AC-03", "AC-06", "MP-01", "MP-02", "MP-04", "MP-05",
+        "SC-08", "SC-13", "SC-28", "PT-01", "PT-02", "PT-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "Standard 1 requires all staff to ensure personal confidential data (PCD) is handled, stored, and transmitted securely. AC-01/AC-03/AC-06 establish access control policies and least privilege for PCD. MP-01/MP-02/MP-04/MP-05 govern media handling, storage, and transport of physical and electronic records containing patient data. SC-08 (Transmission Confidentiality and Integrity) and SC-13 (Cryptographic Protection) secure PCD in transit. SC-28 protects data at rest. PT-01/PT-02/PT-03 (Rev 5 Privacy family) address privacy policies, authority to process, and processing purposes.",
+      "gaps": "DSPT confidentiality requirements are specifically scoped to NHS personal confidential data (PCD) as defined by the Caldicott principles and the NHS Confidentiality Code of Practice. SP 800-53 provides the technical safeguards but does not address NHS-specific confidentiality concepts: Caldicott principles (justify purpose, do not use unless necessary, use minimum data, access on need-to-know basis, everyone must understand responsibilities, understand and comply with the law, duty to share is as important as duty to protect). The NHS Confidentiality Code of Practice and common law duty of confidence are UK-specific legal frameworks outside SP 800-53 scope."
+    },
+    {
+      "id": "NDG-1.2",
+      "title": "Standard 1 — Caldicott Guardian appointment and registration",
+      "controls": [
+        "PM-02", "PM-29", "PS-09"
+      ],
+      "coverage_pct": 30,
+      "rationale": "The DSPT requires organisations to appoint a Caldicott Guardian — a senior person responsible for protecting the confidentiality of patient information and enabling appropriate information sharing. PM-02 (Information Security Program Leadership Role) and PM-29 (Risk Management Program Leadership Roles) address the appointment of senior security/privacy officials. PS-09 (Position Descriptions, new in Rev 5) formalises security responsibilities in organisational roles.",
+      "gaps": "The Caldicott Guardian is an NHS-specific statutory role established under the Health and Social Care (Safety and Quality) Act 2015. Requirements include: board-level appointment, registration with NHS Digital, specific responsibilities for PCD access decisions, oversight of Caldicott principles, annual review of data sharing arrangements, and participation in the Caldicott Guardian Council network. SP 800-53 addresses senior security roles generically but cannot substitute for this NHS-specific statutory appointment. Registration on the NHS Digital Caldicott Guardian directory is entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "NDG-1.3",
+      "title": "Standard 1 — Staff understanding of DPA 2018 and UK GDPR obligations",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "PL-04",
+        "PT-01", "PT-04", "PT-05", "PT-06"
+      ],
+      "coverage_pct": 55,
+      "rationale": "The DSPT requires all staff to understand their responsibilities under the Data Protection Act 2018 and UK GDPR. AT-01/AT-02/AT-03 provide the training programme framework including role-based training. PL-04 (Rules of Behavior) establishes behavioural expectations for handling personal data. PT-01 (Privacy Policy and Procedures) defines the privacy framework. PT-04/PT-05/PT-06 (Consent, Privacy Notice, System of Records) address specific UK GDPR concepts around lawful processing, transparency, and records management.",
+      "gaps": "UK GDPR and DPA 2018 impose specific legal obligations that SP 800-53 cannot address: lawful bases for processing (Article 6), special category data protections (Article 9 — particularly health data), data subject rights (access, rectification, erasure, portability), Data Protection Officer appointment, accountability principle documentation, and ICO registration. Staff understanding must extend to NHS-specific aspects: Section 251 of the NHS Act 2006, NHS Digital data sharing directions, and NHS-specific lawful basis guidance. These are legal education requirements beyond technical security training."
+    },
+    {
+      "id": "NDG-2.1",
+      "title": "Standard 2 — Staff understand NDG data security standards",
+      "controls": [
+        "AT-01", "AT-02", "AT-04", "PL-04",
+        "PM-13"
+      ],
+      "coverage_pct": 60,
+      "rationale": "Standard 2 requires all staff to understand their obligations under the NDG data security standards. AT-01 (Policy and Procedures) establishes the training programme. AT-02 (Literacy Training and Awareness) covers general data security awareness. AT-04 (Training Records) documents completion and enables compliance tracking. PL-04 (Rules of Behavior) defines expected conduct. PM-13 (Security and Privacy Workforce) ensures adequate staffing of the awareness programme.",
+      "gaps": "The NDG's 10 data security standards are NHS-specific requirements that staff must understand in context — including how they map to their daily clinical or administrative roles. SP 800-53 training controls provide the delivery mechanism but not the NHS-specific content. The DSPT specifically references the Data Security Awareness Level 1 training on the NHS e-learning platform, which covers NHS-specific scenarios (patient data sharing, Caldicott principles, subject access requests, NHS mail usage). Content-specific training requirements cannot be addressed by generic security awareness controls."
+    },
+    {
+      "id": "NDG-2.2",
+      "title": "Standard 2 — Annual data security awareness training completion",
+      "controls": [
+        "AT-02", "AT-03", "AT-04", "AT-06",
+        "PM-14"
+      ],
+      "coverage_pct": 75,
+      "rationale": "The DSPT mandates that all staff complete annual data security awareness training, with at least 95% completion rate as a key assertion. AT-02 (Literacy Training and Awareness) covers awareness training delivery. AT-03 (Role-Based Training) addresses role-specific requirements. AT-04 (Training Records) enables tracking of completion rates against the 95% target. AT-06 (Training Feedback, new in Rev 5) supports continuous improvement of training programmes. PM-14 (Testing, Training, and Monitoring) provides the overarching programme management.",
+      "gaps": "SP 800-53 mandates periodic training but does not specify a 95% completion threshold — this is an NHS-specific operational target. The DSPT requires use of, or equivalence to, the NHS Data Security Awareness e-learning module which covers NHS-specific scenarios. Induction training for new starters within a specified timeframe is an NHS operational requirement. SP 800-53 does not address sector-specific training content or minimum completion rate targets."
+    },
+    {
+      "id": "NDG-2.3",
+      "title": "Standard 2 — Data security induction for new starters",
+      "controls": [
+        "AT-02", "AT-03", "PS-01", "PS-06"
+      ],
+      "coverage_pct": 68,
+      "rationale": "The DSPT requires that induction programmes include data security training for all new starters. AT-02/AT-03 cover awareness and role-based training. PS-01 (Personnel Security Policy and Procedures) establishes personnel security at onboarding. PS-06 (Access Agreements) formalises data handling obligations before access is granted.",
+      "gaps": "DSPT requires induction to cover NHS-specific data security topics including Caldicott principles, NHS Confidentiality Code of Practice, information governance policies, and how to report data security incidents to the organisation and (where required) to NHS Digital via the Data Security and Protection Incident Reporting Tool. SP 800-53 addresses onboarding security training generically but not the NHS-specific induction content requirements."
+    },
+    {
+      "id": "NDG-3.1",
+      "title": "Standard 3 — Role-appropriate data security training",
+      "controls": [
+        "AT-01", "AT-02", "AT-03", "AT-04", "AT-06",
+        "PM-13"
+      ],
+      "coverage_pct": 78,
+      "rationale": "Standard 3 requires that all staff receive data security training appropriate to their role, with specialist training for those in key data security positions. AT-01 establishes the training policy. AT-02 covers general awareness. AT-03 (Role-Based Training) directly maps to the requirement for role-appropriate training. AT-04 records completions. AT-06 (Training Feedback, new in Rev 5) enables measurement of training effectiveness. PM-13 (Security and Privacy Workforce) ensures specialist staff are identified and receive appropriate development.",
+      "gaps": "DSPT requires a training needs analysis (TNA) to be completed annually, identifying which roles require specialist training beyond Level 1 awareness. Specialist roles include: Senior Information Risk Owners (SIROs), Caldicott Guardians, Data Protection Officers, clinical system administrators, and information asset owners. These are NHS-specific roles with NHS-specific competency requirements. SP 800-53 provides the role-based training mechanism but not the NHS-specific role taxonomy or competency framework."
+    },
+    {
+      "id": "NDG-3.2",
+      "title": "Standard 3 — Annual training needs analysis",
+      "controls": [
+        "AT-01", "AT-03", "PM-13", "PM-14"
+      ],
+      "coverage_pct": 70,
+      "rationale": "The DSPT requires an annual training needs analysis to identify data security training requirements across the organisation. AT-01 (Policy and Procedures) mandates training programme planning. AT-03 (Role-Based Training) requires identification of role-specific needs. PM-13 (Security and Privacy Workforce) supports workforce capability assessment. PM-14 (Testing, Training, and Monitoring) provides the programme management framework for annual review.",
+      "gaps": "DSPT training needs analysis must map to NHS-specific roles and competency frameworks. SP 800-53 requires training needs identification but does not prescribe an annual TNA cycle or the specific NHS competencies (information governance, Caldicott awareness, data quality, records management) that must be assessed. Integration with NHS Knowledge and Skills Framework (KSF) and professional development requirements is outside SP 800-53 scope."
+    },
+    {
+      "id": "NDG-4.1",
+      "title": "Standard 4 — Role-based access controls for personal confidential data",
+      "controls": [
+        "AC-01", "AC-02", "AC-03", "AC-05", "AC-06", "AC-24",
+        "IA-01", "IA-02", "IA-04", "IA-05"
+      ],
+      "coverage_pct": 88,
+      "rationale": "Standard 4 requires that only those with a legitimate relationship and need can access personal confidential data. AC-01/AC-02/AC-03 establish access control governance, account management, and enforcement. AC-05 (Separation of Duties) and AC-06 (Least Privilege) ensure minimum necessary access. AC-24 (Access Control Decisions, new in Rev 5) supports dynamic, context-aware authorisation aligned with legitimate relationship requirements. IA-01/IA-02/IA-04/IA-05 provide identification, authentication, and credential management. Strong alignment between RBAC requirements and SP 800-53 access control family.",
+      "gaps": "DSPT role-based access must reflect NHS organisational structures (clinical roles, administrative roles, research roles) and the Caldicott principle of need-to-know specifically for patient data. SP 800-53 provides the RBAC mechanisms but not the NHS-specific role definitions or the 'legitimate relationship' concept from the NHS Care Record Guarantee. Clinical context-based access (e.g., only the treating clinician accessing a patient's record) requires healthcare-specific access models beyond standard RBAC."
+    },
+    {
+      "id": "NDG-4.2",
+      "title": "Standard 4 — Access reviews (joiners, movers, leavers)",
+      "controls": [
+        "AC-02", "PS-04", "PS-05", "PS-07",
+        "IA-04", "IA-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "The DSPT requires formal processes for managing access when staff join, move roles, or leave the organisation. AC-02 (Account Management) provides comprehensive account lifecycle management including creation, modification, disabling, and removal. PS-04 (Personnel Termination) handles leavers — revoking access and retrieving credentials. PS-05 (Personnel Transfer) manages movers — modifying access rights to match new roles. PS-07 (External Personnel Security) covers temporary and agency staff. IA-04/IA-05 manage identifier and authenticator lifecycle. Excellent alignment.",
+      "gaps": "NHS organisations have complex workforce models including bank staff, agency staff, honorary contract holders, students, volunteers, and cross-organisational workers (e.g., staff working across multiple NHS trusts). SP 800-53 JML processes focus on employees and contractors. The DSPT requires specific attention to NHS SmartCard (now replaced by NHS Care Identity Service CIS2) identity lifecycle, ESR (Electronic Staff Record) integration, and managing access across federated NHS systems."
+    },
+    {
+      "id": "NDG-4.3",
+      "title": "Standard 4 — Multi-factor authentication",
+      "controls": [
+        "IA-02", "IA-05", "IA-08", "IA-11", "IA-12",
+        "AC-07"
+      ],
+      "coverage_pct": 88,
+      "rationale": "The DSPT requires multi-factor authentication where appropriate, particularly for remote access and systems holding sensitive patient data. IA-02 (Identification and Authentication) including multi-factor authentication mechanisms directly maps. IA-05 (Authenticator Management) governs credential strength and lifecycle. IA-08 (Authentication of External Users) addresses federated and external access. IA-11 (Re-Authentication) manages session re-verification. IA-12 (Identity Proofing, new in Rev 5) ensures initial identity verification. AC-07 (Unsuccessful Logon Attempts) provides brute-force protection.",
+      "gaps": "DSPT MFA requirements must integrate with NHS identity infrastructure: NHS Care Identity Service (CIS2), NHS login, and NHS App authentication. SP 800-53 provides the MFA framework but does not address NHS-specific identity federation, NHS SmartCard/CIS2 authentication standards, or the NHSX Identity and Access Management guidance. Clinical workstation authentication in acute care settings (shared workstations, rapid user-switching) presents unique challenges not addressed by standard MFA models."
+    },
+    {
+      "id": "NDG-4.4",
+      "title": "Standard 4 — Least privilege principle",
+      "controls": [
+        "AC-05", "AC-06", "AC-16", "AC-24",
+        "CM-05", "CM-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "The DSPT requires implementation of the least privilege principle ensuring staff can only access the minimum data necessary for their role. AC-05 (Separation of Duties) prevents concentration of access. AC-06 (Least Privilege) is the core mapping. AC-16 (Security and Privacy Attributes) supports attribute-based access. AC-24 (Access Control Decisions, new in Rev 5) enables dynamic, fine-grained access. CM-05 (Access Restrictions for Change) limits system modification rights. CM-07 (Least Functionality) minimises system exposure.",
+      "gaps": "Minimal technical gaps. The DSPT requirement aligns closely with SP 800-53 least privilege controls. The NHS-specific nuance is that least privilege must be applied in the context of clinical workflows where over-restriction can impact patient safety. The Caldicott principle 'access on a strict need-to-know basis' is philosophically identical to least privilege but carries specific NHS legal weight."
+    },
+    {
+      "id": "NDG-5.1",
+      "title": "Standard 5 — Annual process reviews for data security improvement",
+      "controls": [
+        "CA-01", "CA-02", "CA-05", "CA-07",
+        "PM-06", "PM-14", "PL-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "Standard 5 requires annual review of processes to identify and improve data security. CA-01/CA-02 (Security Assessment Policy, Security Assessments) provide the assessment framework. CA-05 (Plan of Action and Milestones) tracks remediation of identified issues. CA-07 (Continuous Monitoring) ensures ongoing process review. PM-06 (Measures of Performance) and PM-14 (Testing, Training, and Monitoring) support continuous improvement. PL-02 (Security and Privacy Plans) requires annual plan review.",
+      "gaps": "DSPT process reviews must align with the NHS Information Governance Management Framework and the Care Quality Commission (CQC) inspection regime. SP 800-53 provides the review methodology but not the NHS-specific review criteria, which include compliance with Caldicott principles, NHS Digital standards, and integration with the organisation's Data Security and Protection Toolkit submission cycle. The annual DSPT submission itself is a process review mechanism without an SP 800-53 equivalent."
+    },
+    {
+      "id": "NDG-5.2",
+      "title": "Standard 5 — Data Protection Impact Assessments",
+      "controls": [
+        "RA-03", "RA-08", "PT-01", "PT-02",
+        "PM-09", "PM-25"
+      ],
+      "coverage_pct": 52,
+      "rationale": "The DSPT requires Data Protection Impact Assessments (DPIAs) to be completed for processing activities likely to result in high risk to individuals. RA-03 (Risk Assessment) provides general risk assessment methodology. RA-08 (Privacy Impact Assessment, new in Rev 5) is the closest SP 800-53 equivalent but addresses federal PII rather than UK GDPR-scoped personal data. PT-01/PT-02 address privacy governance and authority to process. PM-09 (Risk Management Strategy) and PM-25 (Minimization of PII) support privacy-oriented risk management.",
+      "gaps": "DPIAs under UK GDPR Article 35 have specific mandatory requirements that RA-08 does not fully address: systematic description of processing operations, necessity and proportionality assessment, data protection by design and default consideration, consultation with the ICO where risk cannot be mitigated, and documentation of decisions. NHS-specific DPIA requirements include consultation with the Caldicott Guardian, consideration of NHS Digital data sharing frameworks, and alignment with NHS Digital's DPIA template. SP 800-53 privacy impact assessments are US federal-focused and do not map to the UK GDPR DPIA framework."
+    },
+    {
+      "id": "NDG-5.3",
+      "title": "Standard 5 — Information asset register and data flow mapping",
+      "controls": [
+        "CM-08", "CM-12", "CM-13", "PM-05",
+        "RA-02", "RA-09"
+      ],
+      "coverage_pct": 80,
+      "rationale": "The DSPT requires organisations to maintain an information asset register (IAR) and data flow maps. CM-08 (System Component Inventory) provides the asset inventory framework. CM-12 (Information Location, new in Rev 5) identifies where data resides — directly supporting the IAR requirement. CM-13 (Data Action Mapping, new in Rev 5) documents data flows including processing activities. PM-05 (System Inventory) tracks organisational systems. RA-02 (Security Categorization) supports asset classification. RA-09 (Criticality Analysis, new in Rev 5) enables criticality assessment of information assets.",
+      "gaps": "DSPT information asset registers must include NHS-specific metadata: data controller/processor roles under UK GDPR, lawful basis for processing, Caldicott Guardian oversight status, data sharing agreements with other NHS organisations, and retention schedules aligned with the NHS Records Management Code of Practice. SP 800-53 provides strong asset management mechanisms (particularly with Rev 5 additions CM-12 and CM-13), but the NHS-specific metadata requirements and integration with the organisation's ROPA (Records of Processing Activities) under UK GDPR Article 30 are not addressed."
+    },
+    {
+      "id": "NDG-5.4",
+      "title": "Standard 5 — Records of processing activities (ROPA)",
+      "controls": [
+        "CM-13", "PT-01", "PT-03", "PT-07",
+        "PM-25", "SI-12"
+      ],
+      "coverage_pct": 50,
+      "rationale": "The DSPT requires organisations to maintain Records of Processing Activities as mandated by UK GDPR Article 30. CM-13 (Data Action Mapping, new in Rev 5) documents processing activities against data categories. PT-01/PT-03 (Privacy Policy, Processing Purposes) address governance of processing purposes. PT-07 (Specific Categories of PII) identifies special category data including health data. PM-25 (Minimization of PII) supports data minimisation documentation. SI-12 (Information Management and Retention) addresses retention policies.",
+      "gaps": "UK GDPR Article 30 ROPAs require specific fields: controller/processor details, processing purposes, categories of data subjects and personal data, recipients, international transfers, retention periods, and technical/organisational security measures. SP 800-53 privacy controls address some elements but are designed for US federal privacy requirements (e.g., Privacy Act, FIPS), not UK GDPR. The NHS context adds requirements for documenting lawful basis per processing activity, identifying special category data (health data under Article 9), and documenting the legal gateway for each data sharing arrangement."
+    },
+    {
+      "id": "NDG-6.1",
+      "title": "Standard 6 — Incident response plan for cyber attacks and data breaches",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05",
+        "IR-06", "IR-07", "IR-08"
+      ],
+      "coverage_pct": 82,
+      "rationale": "Standard 6 requires organisations to identify and respond to cyber attacks and data breaches. IR-01 (Incident Response Policy and Procedures) establishes the framework. IR-02/IR-03 (Incident Response Training/Testing) ensure readiness. IR-04 (Incident Handling) covers detection, analysis, containment, eradication, and recovery. IR-05 (Incident Monitoring) tracks incidents. IR-06 (Incident Reporting) addresses notification. IR-07 (Incident Response Assistance) provides support. IR-08 (Incident Response Plan) documents the overall plan. Strong alignment with SP 800-53 IR family.",
+      "gaps": "DSPT incident response must integrate with NHS-specific reporting channels: the Data Security and Protection Incident Reporting Tool (DSPT incident reporting), NHS England regional teams, and (for severe incidents) the National Cyber Security Centre (NCSC) and NHS Digital's Cyber Security Operations Centre (CSOC). SP 800-53 provides comprehensive incident response capabilities but does not address NHS-specific escalation paths, CareCERT alerting, or the clinical safety implications of cyber incidents affecting patient care systems."
+    },
+    {
+      "id": "NDG-6.2",
+      "title": "Standard 6 — Data breach notification to ICO",
+      "controls": [
+        "IR-06", "IR-09",
+        "PT-01", "PT-08"
+      ],
+      "coverage_pct": 48,
+      "rationale": "The DSPT requires notification to the Information Commissioner's Office (ICO) within 72 hours for personal data breaches likely to result in risk to individuals, as mandated by UK GDPR Article 33. IR-06 (Incident Reporting) addresses incident notification in general terms. IR-09 (Information Spillage Response, new in Rev 5) covers data breach-specific response. PT-01 (Privacy Policy) and PT-08 (Computer Matching Requirements) provide some privacy governance framework.",
+      "gaps": "Significant gaps. UK GDPR Article 33 imposes a strict 72-hour notification deadline to the ICO with specific content requirements: nature of the breach, categories and approximate number of affected individuals, likely consequences, measures taken or proposed. Article 34 requires notification to affected individuals where there is high risk. SP 800-53 incident reporting (IR-06) does not specify regulatory notification timelines or content requirements. The NHS context adds additional reporting to NHS England, and for breaches affecting 500+ records, there are specific DSPT reporting thresholds. The ICO's enforcement powers (fines up to GBP 17.5 million under UK GDPR) create regulatory obligations entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "NDG-6.3",
+      "title": "Standard 6 — Major incident (CareCERT) reporting",
+      "controls": [
+        "IR-04", "IR-05", "IR-06",
+        "SI-05", "PM-16"
+      ],
+      "coverage_pct": 55,
+      "rationale": "The DSPT requires reporting of significant cyber security incidents to NHS Digital's CareCERT (Cyber Security Operations Centre) and NHS England. IR-04/IR-05 (Incident Handling/Monitoring) support incident identification and tracking. IR-06 (Incident Reporting) addresses reporting in general terms. SI-05 (Security Alerts, Advisories, and Directives) covers receipt and response to external security advisories. PM-16 (Threat Awareness Program) supports threat intelligence sharing.",
+      "gaps": "CareCERT reporting is an NHS-specific incident reporting pathway with defined severity levels, escalation timescales, and reporting formats. Major incidents affecting clinical systems or patient safety require immediate escalation to NHS England regional teams. SP 800-53 provides incident reporting mechanisms but does not address NHS-specific reporting channels, the Clinical Safety (DCB0129/DCB0160) implications of cyber incidents, or the requirement to participate in NHS Digital's threat intelligence sharing and coordinated response processes."
+    },
+    {
+      "id": "NDG-6.4",
+      "title": "Standard 6 — Root cause analysis and lessons learned",
+      "controls": [
+        "IR-04", "IR-06", "CA-05",
+        "PM-06", "AT-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "The DSPT requires root cause analysis following data security incidents and implementation of lessons learned. IR-04 (Incident Handling) includes post-incident analysis. IR-06 (Incident Reporting) documents outcomes. CA-05 (Plan of Action and Milestones) tracks remediation actions from incident analysis. PM-06 (Measures of Performance) supports measuring improvement. AT-06 (Training Feedback, new in Rev 5) enables incorporation of lessons learned into training programmes.",
+      "gaps": "DSPT root cause analysis must feed back into the annual DSPT submission and inform the organisation's data security improvement plan. NHS-specific requirements include sharing lessons learned through NHS networks (Patient Safety Learning System, IG toolkit improvement plans) and integrating findings with CQC regulatory compliance. SP 800-53 provides strong post-incident analysis controls but does not address NHS-specific feedback loops or regulatory reporting of improvement actions."
+    },
+    {
+      "id": "NDG-7.1",
+      "title": "Standard 7 — Business continuity planning for data security",
+      "controls": [
+        "CP-01", "CP-02", "CP-03", "CP-04",
+        "CP-06", "CP-07", "CP-08", "PM-08", "PM-11"
+      ],
+      "coverage_pct": 82,
+      "rationale": "Standard 7 requires continuity plans for responding to threats to data security, including loss of or disruption to clinical systems. CP-01/CP-02 (Contingency Planning Policy, Contingency Plan) establish the framework. CP-03/CP-04 (Contingency Training/Testing) ensure staff readiness and plan validation. CP-06/CP-07/CP-08 (Alternate Storage/Processing/Telecommunications) provide resilience. PM-08 (Critical Infrastructure Plan) and PM-11 (Mission/Business Process Definition) support identification of critical services.",
+      "gaps": "DSPT business continuity must address clinical system availability and patient safety — the impact of system downtime on clinical care is fundamentally different from standard IT service disruption. SP 800-53 contingency planning does not address: NHS-specific clinical safety standards (DCB0129/DCB0160), clinical downtime procedures, manual fallback processes for patient care, and integration with NHS England's Emergency Preparedness, Resilience and Response (EPRR) framework. Mutual aid arrangements between NHS trusts are also outside SP 800-53 scope."
+    },
+    {
+      "id": "NDG-7.2",
+      "title": "Standard 7 — Disaster recovery",
+      "controls": [
+        "CP-02", "CP-07", "CP-09", "CP-10",
+        "CP-06", "CP-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "The DSPT requires disaster recovery plans for all critical systems holding patient data. CP-02 (Contingency Plan) provides the overall recovery framework. CP-07 (Alternate Processing Site) addresses alternative facility capability. CP-09 (System Backup) ensures data recoverability. CP-10 (System Recovery and Reconstitution) covers restoration procedures. CP-06 (Alternate Storage Site) supports offsite backup. CP-08 (Telecommunications Services) ensures network recovery.",
+      "gaps": "SP 800-53 disaster recovery controls are well-aligned with DSPT requirements. Residual gaps are NHS-specific: recovery priorities must reflect clinical criticality (patient-facing systems before administrative systems), integration with NHS Digital's Technical Architecture Standards, and compliance with NHS Digital's cloud and data centre hosting standards. Recovery testing must include clinical system validation — ensuring patient data integrity post-recovery."
+    },
+    {
+      "id": "NDG-7.3",
+      "title": "Standard 7 — Backup and restore testing",
+      "controls": [
+        "CP-04", "CP-09",
+        "CA-02", "CA-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "The DSPT requires regular testing of backup and restore procedures to ensure data can be recovered. CP-09 (System Backup) directly addresses backup procedures and scope. CP-04 (Contingency Plan Testing) mandates testing of recovery procedures including backup restoration. CA-02 (Security Assessments) provides the assessment framework for validating backup effectiveness. CA-07 (Continuous Monitoring) ensures ongoing backup capability assurance.",
+      "gaps": "Minimal technical gaps. SP 800-53 backup and testing controls are comprehensive. NHS-specific requirements include: testing restoration of clinical records to ensure data integrity and completeness, validating backup coverage of NHS Spine-connected systems, and ensuring compliance with the NHS Records Management Code of Practice for retention periods. The DSPT requires documented evidence of successful restore tests."
+    },
+    {
+      "id": "NDG-7.4",
+      "title": "Standard 7 — Critical clinical system availability",
+      "controls": [
+        "CP-02", "CP-11", "CP-12", "CP-13",
+        "SC-24", "SI-17"
+      ],
+      "coverage_pct": 72,
+      "rationale": "The DSPT requires that critical clinical systems have appropriate availability controls to ensure continuity of patient care. CP-02 (Contingency Plan) identifies critical systems and recovery priorities. CP-11 (Alternate Communications Protocols, new in Rev 5) provides backup communication capability. CP-12 (Safe Mode, new in Rev 5) enables degraded but functional operation. CP-13 (Alternative Security Mechanisms, new in Rev 5) allows continued operation when primary security mechanisms fail. SC-24 (Fail in Known State, new in Rev 5) and SI-17 (Fail-Safe Procedures, new in Rev 5) ensure systems fail safely.",
+      "gaps": "DSPT clinical system availability extends beyond IT resilience to clinical safety. SP 800-53 does not address: NHS Clinical Safety Standards (DCB0129 for manufacturers, DCB0160 for deploying organisations), clinical risk management for health IT systems, the MHRA medical device software requirements, or the specific availability requirements for NHS Spine, GP Connect, Electronic Prescribing, and other national clinical systems. Downtime procedures for clinical environments (paper-based fallback) are entirely NHS-specific."
+    },
+    {
+      "id": "NDG-8.1",
+      "title": "Standard 8 — Unsupported system management and end-of-life planning",
+      "controls": [
+        "CM-08", "SA-22", "SI-02",
+        "PM-05", "RA-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Standard 8 requires that no unsupported operating systems, software, or internet browsers are in use, or where they are, appropriate risk mitigations are in place. CM-08 (System Component Inventory) provides the asset register needed to identify all systems. SA-22 (Unsupported System Components, new in Rev 5) directly addresses identification and management of unsupported components including migration planning and compensating controls. SI-02 (Flaw Remediation) covers patching of supported systems. PM-05 (System Inventory) provides organisational system tracking. RA-05 (Vulnerability Monitoring and Scanning) identifies vulnerabilities in ageing systems.",
+      "gaps": "SA-22 (new in Rev 5) significantly improves alignment by directly addressing unsupported system components. Residual NHS gaps: many NHS organisations operate legacy clinical systems (e.g., older radiology, pathology, or patient administration systems) that cannot be easily upgraded. The DSPT requires specific risk assessments for any unsupported systems, approved by the SIRO, with documented migration plans. NHS Digital maintains lists of approved and supported software which have no SP 800-53 equivalent."
+    },
+    {
+      "id": "NDG-8.2",
+      "title": "Standard 8 — Vulnerability patching within 14 days",
+      "controls": [
+        "SI-02", "RA-05", "CM-03", "CM-04",
+        "SI-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "The DSPT requires patching of critical and high-severity vulnerabilities within 14 days. SI-02 (Flaw Remediation) directly addresses patching including timely deployment of security patches. RA-05 (Vulnerability Monitoring and Scanning) identifies vulnerabilities requiring remediation. CM-03 (Configuration Change Control) governs the change management process for patch deployment. CM-04 (Impact Analyses) ensures patches are tested before deployment. SI-05 (Security Alerts, Advisories, and Directives) supports awareness of critical patches including CareCERT advisories.",
+      "gaps": "SP 800-53 SI-02 mandates timely patching but does not specify a 14-day SLA for critical/high vulnerabilities — the DSPT is more prescriptive. NHS organisations face unique patching challenges: clinical systems may have vendor-controlled patch cycles, medical device software (under MHRA regulation) cannot be patched without manufacturer approval, and patching windows for 24/7 clinical environments require careful scheduling. The DSPT 14-day target applies specifically to internet-facing and critical systems."
+    },
+    {
+      "id": "NDG-8.3",
+      "title": "Standard 8 — IT asset inventory",
+      "controls": [
+        "CM-08", "PM-05", "CM-02", "CM-09",
+        "CM-12", "RA-09"
+      ],
+      "coverage_pct": 90,
+      "rationale": "The DSPT requires a comprehensive IT asset inventory covering all hardware, software, and network assets. CM-08 (System Component Inventory) is the core control providing authoritative asset inventory. PM-05 (System Inventory) tracks system-level assets. CM-02 (Baseline Configuration) documents approved configurations. CM-09 (Configuration Management Plan) establishes inventory management processes. CM-12 (Information Location, new in Rev 5) identifies where information assets reside. RA-09 (Criticality Analysis, new in Rev 5) enables criticality-based prioritisation. Excellent alignment.",
+      "gaps": "Minimal technical gaps. SP 800-53 asset inventory controls are comprehensive. NHS-specific requirements include: integration with the NHS Digital Asset Register requirements, identification of NHS Spine-connected systems, classification of assets by clinical safety impact, and tracking of medical device software under MHRA regulations. Connected medical devices (IoMT) present inventory challenges not typical of standard IT environments."
+    },
+    {
+      "id": "NDG-9.1",
+      "title": "Standard 9 — Cyber security strategy",
+      "controls": [
+        "PM-01", "PM-09", "PL-01", "PL-02",
+        "PL-09", "PL-10", "PL-11", "RA-01"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Standard 9 requires a strategy for protecting IT systems from cyber threats. PM-01 (Information Security Program Plan) provides the overarching security strategy. PM-09 (Risk Management Strategy) defines the risk-based approach. PL-01/PL-02 (Security Planning Policy, Security and Privacy Plans) establish planning frameworks. PL-09 (Central Management, new in Rev 5) enables unified policy governance. PL-10/PL-11 (Baseline Selection/Tailoring, new in Rev 5) support systematic control selection based on risk. RA-01 (Risk Assessment Policy) grounds the strategy in risk assessment.",
+      "gaps": "DSPT cyber security strategy must align with the NHS Cyber Security Strategy (2023) and integrate with NHS Digital's Cyber Security Framework. SP 800-53 provides comprehensive security programme management but does not address: Cyber Essentials/Cyber Essentials Plus certification (often referenced by DSPT), alignment with the NCSC's 10 Steps to Cyber Security, or participation in NHS Digital's threat intelligence and coordinated response programmes."
+    },
+    {
+      "id": "NDG-9.2",
+      "title": "Standard 9 — Firewalls and network segmentation",
+      "controls": [
+        "SC-07", "AC-04", "SC-08",
+        "SC-32", "SC-39"
+      ],
+      "coverage_pct": 92,
+      "rationale": "The DSPT requires firewalls and network segmentation to protect IT systems. SC-07 (Boundary Protection) is the core control covering firewalls, DMZ architecture, and network segmentation. AC-04 (Information Flow Enforcement) controls data flows between network segments. SC-08 (Transmission Confidentiality and Integrity) protects inter-segment communications. SC-32 (System Partitioning, new in Rev 5) enables architectural separation. SC-39 (Process Isolation) provides system-level isolation. Excellent alignment.",
+      "gaps": "Minimal technical gaps. SP 800-53 boundary protection controls are comprehensive. NHS-specific requirements include: compliance with the Health and Social Care Network (HSCN) connectivity standards (successor to N3), segmentation of clinical networks from administrative networks, network isolation requirements for medical devices, and compliance with NHS Digital's network security policies. Connection to NHS Spine requires specific network architecture that SP 800-53 does not prescribe."
+    },
+    {
+      "id": "NDG-9.3",
+      "title": "Standard 9 — Malware protection",
+      "controls": [
+        "SI-03", "SI-04", "SI-08",
+        "SC-44", "SC-18"
+      ],
+      "coverage_pct": 92,
+      "rationale": "The DSPT requires malware protection across all systems. SI-03 (Malicious Code Protection) directly maps to anti-malware requirements including signature updates and real-time scanning. SI-04 (System Monitoring) provides continuous detection. SI-08 (Spam Protection) addresses email-borne malware. SC-44 (Detonation Chambers, new in Rev 5) adds sandboxing capability. SC-18 (Mobile Code) addresses web-based malware vectors. Excellent alignment.",
+      "gaps": "Minimal technical gaps. SP 800-53 malware protection controls are comprehensive and typically exceed DSPT requirements. NHS-specific considerations: malware protection must cover clinical workstations, medical devices where possible (some medical devices cannot run endpoint protection), and NHS mail systems. Integration with NHS Digital's malware intelligence feeds is an NHS-specific operational requirement."
+    },
+    {
+      "id": "NDG-9.4",
+      "title": "Standard 9 — Email security (DMARC, SPF, DKIM)",
+      "controls": [
+        "SI-08", "SC-07", "SC-08",
+        "SI-03"
+      ],
+      "coverage_pct": 78,
+      "rationale": "The DSPT requires email security measures including DMARC, SPF, and DKIM implementation. SI-08 (Spam Protection) addresses email filtering and protection. SC-07 (Boundary Protection) covers email gateway security. SC-08 (Transmission Confidentiality and Integrity) protects email in transit. SI-03 (Malicious Code Protection) addresses email-borne malware scanning.",
+      "gaps": "SP 800-53 addresses email security at the control level but does not specifically mandate DMARC, SPF, or DKIM — these are specific email authentication protocols. The DSPT (aligned with NCSC guidance) requires: DMARC policy at p=quarantine or p=reject, SPF records for all sending domains, DKIM signing, and compliance with NHS Digital's email security standards. NHS organisations are expected to use NHSmail (Microsoft 365-based) or achieve equivalent security standards. SP 800-53 does not prescribe specific email authentication protocols."
+    },
+    {
+      "id": "NDG-9.5",
+      "title": "Standard 9 — Web filtering",
+      "controls": [
+        "SC-07", "AC-04", "SI-04",
+        "SC-18"
+      ],
+      "coverage_pct": 82,
+      "rationale": "The DSPT requires web filtering to protect against malicious websites. SC-07 (Boundary Protection) covers web proxy/filtering at the network boundary. AC-04 (Information Flow Enforcement) controls web traffic flows. SI-04 (System Monitoring) enables detection of malicious web activity. SC-18 (Mobile Code) addresses web-based active content threats.",
+      "gaps": "SP 800-53 addresses web traffic protection but does not specifically prescribe web content filtering categories or URL reputation services. DSPT web filtering must comply with NCSC's Protective DNS guidance and NHS organisations are expected to use NHS-specific DNS filtering services. SP 800-53 provides the technical framework but not the NHS-specific web filtering policies or integration with NCSC's Protective DNS service."
+    },
+    {
+      "id": "NDG-9.6",
+      "title": "Standard 9 — Encryption in transit and at rest",
+      "controls": [
+        "SC-08", "SC-12", "SC-13", "SC-28",
+        "SC-17"
+      ],
+      "coverage_pct": 92,
+      "rationale": "The DSPT requires encryption for data in transit and at rest, particularly for personal confidential data. SC-08 (Transmission Confidentiality and Integrity) mandates encryption in transit. SC-12 (Cryptographic Key Management) governs key lifecycle. SC-13 (Cryptographic Protection) establishes the encryption framework. SC-28 (Protection of Information at Rest) covers data-at-rest encryption. SC-17 (Public Key Infrastructure Certificates) supports certificate-based encryption. Excellent alignment.",
+      "gaps": "Minimal technical gaps. SP 800-53 encryption controls are comprehensive. NHS-specific requirements: encryption standards must comply with NCSC guidance on TLS configuration (TLS 1.2 minimum), NHS Digital's encryption standards for patient data, and specific requirements for encrypting data on portable devices and removable media. NHS mail encryption standards and the use of NHS-approved encryption solutions are NHS-specific operational requirements."
+    },
+    {
+      "id": "NDG-9.7",
+      "title": "Standard 9 — Mobile device management",
+      "controls": [
+        "AC-19", "AC-20", "CM-08", "SC-28",
+        "MP-07", "AC-17"
+      ],
+      "coverage_pct": 85,
+      "rationale": "The DSPT requires mobile device management (MDM) for devices accessing NHS data. AC-19 (Access Control for Mobile Devices) directly maps to MDM policy and technical controls. AC-20 (Use of External Systems) covers BYOD and personal device access. CM-08 (System Component Inventory) tracks enrolled devices. SC-28 (Protection of Information at Rest) protects data on mobile devices. MP-07 (Media Use) restricts data transfer via mobile media. AC-17 (Remote Access) secures mobile connectivity.",
+      "gaps": "DSPT mobile device management must comply with NHS Digital's mobile device guidance including: remote wipe capability for lost/stolen devices containing patient data, containerisation of NHS data on BYOD devices, PIN/biometric device lock enforcement, and NHS App authentication standards. SP 800-53 provides the MDM framework but does not address NHS-specific mobile security requirements or the need to manage clinician-owned devices accessing patient data through NHS apps."
+    },
+    {
+      "id": "NDG-9.8",
+      "title": "Standard 9 — Annual penetration testing",
+      "controls": [
+        "CA-08", "RA-05", "RA-10",
+        "PM-14", "PM-16"
+      ],
+      "coverage_pct": 88,
+      "rationale": "The DSPT requires annual penetration testing of internet-facing systems and critical clinical systems. CA-08 (Penetration Testing) directly maps including scope, methodology, and reporting. RA-05 (Vulnerability Monitoring and Scanning) provides ongoing vulnerability discovery. RA-10 (Threat Hunting, new in Rev 5) adds proactive threat identification. PM-14 (Testing, Training, and Monitoring) and PM-16 (Threat Awareness Program) provide programme management.",
+      "gaps": "SP 800-53 penetration testing controls are well-aligned. DSPT-specific requirements include: testing must cover NHS Spine-connected systems, results must be shared with NHS Digital where significant vulnerabilities are found, and testing must be conducted by CHECK/CREST/STAR certified testers. The DSPT also expects alignment with Cyber Essentials Plus testing methodology for some assertions. NHS organisations providing IT services to other NHS bodies may face additional testing requirements under the HSCN Code of Practice."
+    },
+    {
+      "id": "NDG-9.9",
+      "title": "Standard 9 — Vulnerability scanning",
+      "controls": [
+        "RA-05", "SI-02", "CM-06",
+        "CA-07", "SI-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "The DSPT requires regular vulnerability scanning across the IT estate. RA-05 (Vulnerability Monitoring and Scanning) is the core control covering scan frequency, scope, and remediation tracking. SI-02 (Flaw Remediation) addresses patch management for identified vulnerabilities. CM-06 (Configuration Settings) supports secure configuration assessment. CA-07 (Continuous Monitoring) provides the ongoing assurance framework. SI-04 (System Monitoring) enables continuous vulnerability detection.",
+      "gaps": "Minimal technical gaps. SP 800-53 vulnerability management controls are comprehensive. NHS-specific requirements include: scanning results must inform the DSPT submission, critical findings must be reported to the organisation's SIRO, and scanning must cover medical devices where technically feasible. Integration with NHS Digital's vulnerability alerting service and CareCERT advisories is an operational requirement outside SP 800-53 scope."
+    },
+    {
+      "id": "NDG-10.1",
+      "title": "Standard 10 — IT supplier security assessments",
+      "controls": [
+        "SA-04", "SA-09", "SR-04", "SR-01", "SR-02",
+        "SR-03", "SR-05", "SR-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "Standard 10 requires that IT suppliers are held accountable for protecting data through contracts and security assessments. SA-04 (Acquisition Process) establishes security requirements in procurement. SA-09 (External System Services) governs external service provider security. SA-12 (Supply Chain Protection) addresses supply chain risk. SR-01 (Supply Chain Risk Management Policy) provides governance. SR-02 (Supply Chain Risk Assessment) mandates supplier risk evaluation. SR-03 (Supply Chain Controls and Processes) implements controls. SR-05/SR-06 (Acquisition Strategies/Supplier Assessments) address procurement and evaluation.",
+      "gaps": "DSPT supplier management must comply with NHS-specific procurement requirements: NHS Digital's Data Security and Protection requirements for suppliers, the Data Security Standard 10 supplier assurance framework, and supplier DSPT completion requirements. Many NHS suppliers are themselves required to complete a DSPT submission. SP 800-53 supply chain controls provide the risk management framework but do not address NHS-specific supplier accreditation, NHS Digital's Supplier Assurance Framework, or the requirement for suppliers to demonstrate their own DSPT compliance."
+    },
+    {
+      "id": "NDG-10.2",
+      "title": "Standard 10 — Data processing agreements",
+      "controls": [
+        "SA-04", "SA-09", "CA-03",
+        "PT-01", "PT-02"
+      ],
+      "coverage_pct": 62,
+      "rationale": "The DSPT requires data processing agreements (DPAs) with all suppliers processing personal data on the organisation's behalf, as mandated by UK GDPR Article 28. SA-04 (Acquisition Process) addresses security requirements in contracts. SA-09 (External System Services) covers third-party service security. CA-03 (Information Exchange) governs data sharing agreements. PT-01/PT-02 (Privacy Policy, Authority to Process) provide privacy governance.",
+      "gaps": "UK GDPR Article 28 data processing agreements have specific mandatory clauses: processing only on documented instructions, confidentiality obligations, appropriate security measures, sub-processor consent and flow-down, data subject rights assistance, breach notification, audit rights, return/deletion of data at contract end, and making available all information to demonstrate compliance. SP 800-53 addresses third-party security requirements but does not prescribe the specific DPA content required by UK GDPR. NHS-specific additions include: compliance with the NHS Data Processing Agreement template, reference to the NHS Standard Contract data processing schedule, and Caldicott Guardian oversight of data processing arrangements."
+    },
+    {
+      "id": "NDG-10.3",
+      "title": "Standard 10 — Sub-processor controls",
+      "controls": [
+        "SR-01", "SR-03", "SA-09",
+        "SA-04", "CA-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "The DSPT requires controls over sub-processors — ensuring suppliers do not subcontract the processing of NHS data without appropriate authorisation and equivalent security measures. SR-01 (Supply Chain Risk Management Policy) establishes the governance framework. SR-03 (Supply Chain Controls and Processes) addresses sub-contractor controls and flow-down requirements. SA-09 (External System Services) governs external service chains. SA-04 (Acquisition Process) embeds security requirements in contracts. CA-03 (Information Exchange) covers data sharing through the supply chain.",
+      "gaps": "UK GDPR Article 28(2) requires prior specific or general written authorisation for sub-processors, with the same data protection obligations imposed on the sub-processor as in the primary DPA. SP 800-53 SR family addresses supply chain risk management and flow-down but does not prescribe the specific sub-processor authorisation and contractual requirements of UK GDPR. NHS-specific requirements include: visibility of the complete sub-processor chain for patient data, right to object to sub-processor changes, and ensuring sub-processors meet NHS Data Security Standards."
+    },
+    {
+      "id": "NDG-10.4",
+      "title": "Standard 10 — Supply chain security",
+      "controls": [
+        "SR-01", "SR-02", "SR-03", "SR-05", "SR-06",
+        "SR-09", "SR-10", "SR-11", "SR-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "The DSPT requires organisations to manage supply chain security risks across their IT and data processing supply chains. SR-01/SR-02/SR-03 establish supply chain risk management governance, assessment, and controls. SR-05 (Acquisition Strategies for Supply Chain) and SR-06 (Supplier Assessments) address procurement-level risk management. SR-09 (Tamper Resistance and Detection) and SR-10 (Inspection of Systems or Components) protect against supply chain compromise. SR-11 (Component Authenticity) ensures genuine components. SA-12 (Supply Chain Protection) provides the overarching framework.",
+      "gaps": "SP 800-53 Rev 5 supply chain controls (SR family) provide strong coverage of supply chain security. NHS-specific gaps: organisations must comply with NHS Digital's Supplier Assurance Framework, maintain supply chain visibility for clinical system dependencies, and ensure suppliers participate in NHS Digital's cyber security incident response coordination. The NHS Digital Commercial Supplier Framework and NHS Shared Business Services procurement requirements add sector-specific supply chain governance not addressed by SP 800-53."
+    }
+  ],
+  "summary": {
+    "total_clauses": 40,
+    "average_coverage": 76.7,
+    "full_count": 17,
+    "substantial_count": 15,
+    "partial_count": 7,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

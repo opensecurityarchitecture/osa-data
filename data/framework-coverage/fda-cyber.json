@@ -1,0 +1,495 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "fda_cyber",
+  "framework_name": "FDA Cybersecurity Guidance for Medical Devices",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on expert analysis of FDA guidance documents: 'Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions' (September 2023) and 'Postmarket Management of Cybersecurity in Medical Devices' (December 2016). These guidance documents represent FDA's current thinking on medical device cybersecurity but are not legally binding regulations. SP 800-53 provides comprehensive security controls that address many FDA cybersecurity expectations but does not address medical device-specific concepts such as Software Bill of Materials (SBOM) requirements, patient safety risk analysis, total product lifecycle (TPLC) approach, or coordinated vulnerability disclosure for medical devices. Coverage reflects overlap between FDA cybersecurity expectations and SP 800-53 control families. Validate with qualified regulatory affairs professionals for FDA submission use."
+  },
+  "weight_scale": {
+    "full": { "min": 85, "max": 100, "label": "Fully addressed" },
+    "substantial": { "min": 65, "max": 84, "label": "Well addressed, notable gaps" },
+    "partial": { "min": 40, "max": 64, "label": "Partially addressed" },
+    "weak": { "min": 1, "max": 39, "label": "Weakly addressed" },
+    "none": { "min": 0, "max": 0, "label": "No mapping" }
+  },
+  "clauses": [
+    {
+      "id": "SPDF-1",
+      "title": "Secure Product Development Framework — Lifecycle Integration",
+      "controls": [
+        "SA-03", "SA-08", "SA-15", "SA-17",
+        "PL-02", "PL-08", "PM-01", "PM-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "FDA's SPDF requires integrating cybersecurity throughout the total product lifecycle (TPLC), aligning with IEC 62443-4-1 secure development lifecycle requirements. SA-03 (System Development Life Cycle) directly addresses SDLC integration. SA-08 (Security and Privacy Engineering Principles) covers security-by-design. SA-15 (Development Process, Standards, and Tools) governs development methodology. SA-17 (Developer Security and Privacy Architecture and Design) requires documented security architecture. PL-08 (Security and Privacy Architectures) and PM-07 (Enterprise Architecture) provide the planning framework. SP 800-53 covers the general SDLC discipline well.",
+      "gaps": "FDA's SPDF is specifically tailored to medical device development under Quality System Regulation (21 CFR 820) and requires integration with design controls (design input, output, review, verification, validation, transfer). The TPLC approach extends from concept through decommissioning with patient safety as the primary driver. SP 800-53 does not address FDA design control requirements, IEC 62443-4-1 alignment, medical device regulatory submission documentation, or the concept of cybersecurity as a component of device safety and effectiveness."
+    },
+    {
+      "id": "SPDF-2",
+      "title": "Secure Product Development Framework — Security Risk Management",
+      "controls": [
+        "RA-01", "RA-02", "RA-03", "RA-07", "RA-09",
+        "PM-09", "PM-28", "CA-02"
+      ],
+      "coverage_pct": 68,
+      "rationale": "FDA requires security risk management aligned with the safety risk management process defined in ISO 14971. RA-03 (Risk Assessment) provides the core risk assessment methodology. RA-02 (Security Categorization) supports asset classification. RA-07 (Risk Response) addresses risk treatment decisions. RA-09 (Criticality Analysis) supports prioritisation of device functions. PM-09 (Risk Management Strategy) and PM-28 (Risk Framing) establish the organisational risk framework. CA-02 (Control Assessments) validates risk control effectiveness.",
+      "gaps": "FDA's security risk management must be integrated with ISO 14971 safety risk management, producing a unified risk analysis that considers both cybersecurity exploitability and patient safety severity. The FDA requires a specific exploitability assessment methodology and a patient harm severity scale that maps cyber vulnerabilities to clinical consequences. SP 800-53 risk assessment does not address patient safety impact categories, medical device hazard analysis, or the concept of residual risk acceptability in a clinical context. The FDA's risk acceptance criteria are fundamentally different from IT risk frameworks."
+    },
+    {
+      "id": "SPDF-3",
+      "title": "Secure Product Development Framework — Security Architecture Documentation",
+      "controls": [
+        "SA-17", "SA-08", "PL-02", "PL-07", "PL-08",
+        "SA-05", "CM-06"
+      ],
+      "coverage_pct": 75,
+      "rationale": "FDA requires comprehensive security architecture documentation as part of premarket submissions, including network diagrams, data flow diagrams, trust boundaries, and security control descriptions. SA-17 (Developer Security and Privacy Architecture and Design) directly requires security architecture documentation. SA-08 (Security and Privacy Engineering Principles) covers design principles. PL-02 (Security and Privacy Plans) and PL-08 (Security and Privacy Architectures) provide the planning and architecture framework. SA-05 (System Documentation) covers system-level documentation. CM-06 (Configuration Settings) documents baseline configurations.",
+      "gaps": "FDA requires device-specific architecture documentation including: system diagrams showing all external interfaces, data flow diagrams for all data types (ePHI, device configuration, firmware updates), trust boundary identification for the device and its ecosystem, and a complete description of how each security control is implemented in the device. This documentation must be submitted to FDA as part of 510(k) or PMA premarket submissions — a regulatory filing requirement with no SP 800-53 equivalent."
+    },
+    {
+      "id": "TM-1",
+      "title": "Threat Modelling — Threat Identification and Characterisation",
+      "controls": [
+        "RA-03", "RA-05", "RA-10",
+        "PM-12", "PM-16", "SA-11"
+      ],
+      "coverage_pct": 75,
+      "rationale": "FDA requires formal threat modelling to identify and characterise threats to the medical device and its broader ecosystem, including connected hospital networks and cloud backends. RA-03 (Risk Assessment) encompasses threat identification. RA-05 (Vulnerability Monitoring and Scanning) identifies exploitable weaknesses. RA-10 (Threat Hunting) supports proactive threat discovery. PM-12 (Insider Threat Program) addresses internal threat actors. PM-16 (Threat Awareness Program) provides organisational threat intelligence. SA-11 (Developer Testing and Evaluation) includes security testing during development.",
+      "gaps": "FDA's threat modelling expectations are medical-device-specific: threat actors include nation-state actors targeting healthcare infrastructure, disgruntled insiders with physical access to devices, and malware propagating through hospital networks to connected devices. SP 800-53 does not address device-specific threat scenarios such as manipulation of therapy delivery, falsification of diagnostic data, or compromise of implanted device communication protocols. FDA expects use of established methodologies (STRIDE, attack trees) tailored to the medical device context."
+    },
+    {
+      "id": "TM-2",
+      "title": "Threat Modelling — Attack Vectors and Trust Boundaries",
+      "controls": [
+        "RA-03", "SA-08", "SA-17",
+        "SC-07", "AC-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "FDA requires identification of all attack vectors (network interfaces, USB ports, wireless protocols, cloud connections, maintenance ports) and documentation of trust boundaries between the device, its ecosystem, and external networks. SA-17 (Developer Security and Privacy Architecture and Design) addresses trust boundary documentation. SC-07 (Boundary Protection) enforces network trust boundaries. AC-04 (Information Flow Enforcement) controls data flows across boundaries. SA-08 (Security and Privacy Engineering Principles) supports defence-in-depth design.",
+      "gaps": "Medical devices have unique attack surfaces not addressed by SP 800-53: proprietary wireless protocols (e.g., Bluetooth Low Energy for insulin pumps), serial interfaces for legacy clinical equipment, firmware update mechanisms over USB, and physical interfaces on devices in uncontrolled patient environments. Trust boundary analysis for medical devices must consider the clinical workflow context — devices may legitimately need to communicate across network segments that would normally be isolated. SP 800-53 boundary protection assumes enterprise IT architectures, not medical device ecosystems."
+    },
+    {
+      "id": "TM-3",
+      "title": "Threat Modelling — Assumptions and Mitigations",
+      "controls": [
+        "RA-03", "RA-07", "PL-02",
+        "SA-08", "PM-09"
+      ],
+      "coverage_pct": 72,
+      "rationale": "FDA requires documenting all assumptions underlying the threat model, including assumptions about the use environment (e.g., hospital network provides perimeter security), user behaviour, and compensating controls provided by the healthcare delivery organisation. RA-03 (Risk Assessment) captures assumptions. RA-07 (Risk Response) documents risk treatment decisions. PM-09 (Risk Management Strategy) establishes the risk framework including assumptions. PL-02 (Security and Privacy Plans) captures the overall security posture.",
+      "gaps": "FDA's concept of 'shared responsibility' between device manufacturer and healthcare delivery organisation is unique to medical devices. Manufacturers must document which security controls are the responsibility of the hospital/clinic environment and provide guidance on compensating controls. SP 800-53 does not address this shared responsibility model, the concept of 'intended use environment' assumptions, or the need to communicate residual risks to healthcare organisations for their own risk management."
+    },
+    {
+      "id": "CRA-1",
+      "title": "Cybersecurity Risk Assessment — Exploitability Assessment",
+      "controls": [
+        "RA-03", "RA-05", "RA-10",
+        "CA-08", "SA-11"
+      ],
+      "coverage_pct": 68,
+      "rationale": "FDA requires assessing the exploitability of identified vulnerabilities using established scoring systems such as CVSS and considering factors like attack complexity, required privileges, and user interaction. RA-05 (Vulnerability Monitoring and Scanning) identifies vulnerabilities. RA-03 (Risk Assessment) evaluates severity. RA-10 (Threat Hunting) supports proactive vulnerability research. CA-08 (Penetration Testing) validates exploitability. SA-11 (Developer Testing and Evaluation) includes security testing during development.",
+      "gaps": "FDA's exploitability assessment must be tied to clinical impact — a high-CVSS vulnerability in a non-safety-critical function may be acceptable, while a moderate-CVSS vulnerability affecting therapy delivery requires immediate attention. SP 800-53 vulnerability assessment does not incorporate patient safety severity scales, clinical workflow disruption analysis, or the FDA's specific risk matrix that cross-references exploitability with patient harm categories (negligible, minor, serious, critical, catastrophic)."
+    },
+    {
+      "id": "CRA-2",
+      "title": "Cybersecurity Risk Assessment — Patient Safety Impact",
+      "controls": [
+        "RA-03", "RA-09", "PM-09",
+        "PM-11"
+      ],
+      "coverage_pct": 45,
+      "rationale": "FDA requires assessing cybersecurity risks in terms of potential patient harm severity, using categories aligned with ISO 14971 hazard analysis. RA-03 (Risk Assessment) provides general risk assessment methodology. RA-09 (Criticality Analysis) supports analysis of critical device functions. PM-09 (Risk Management Strategy) establishes risk evaluation criteria. PM-11 (Mission and Business Process Definition) identifies critical operational functions. However, SP 800-53 fundamentally addresses information system risks, not patient safety risks.",
+      "gaps": "This is a fundamental scope gap between SP 800-53 and FDA requirements. FDA requires patient safety impact assessment using clinical harm categories: negligible injury, minor injury (no intervention required), serious injury (intervention required), critical injury (life-threatening), and catastrophic (death). SP 800-53 categorises impact in terms of confidentiality, integrity, and availability of information — not in terms of physical harm to patients. The connection between a cybersecurity vulnerability and a patient safety hazard requires clinical domain expertise and hazard analysis methodology (ISO 14971, IEC 62304) that is entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "CRA-3",
+      "title": "Cybersecurity Risk Assessment — Residual Risk Documentation",
+      "controls": [
+        "RA-03", "RA-07", "CA-05",
+        "PM-09", "PL-02"
+      ],
+      "coverage_pct": 65,
+      "rationale": "FDA requires comprehensive documentation of residual risks after all mitigations are applied, including risk acceptance rationale and justification that residual risks are acceptable in the context of device benefits. RA-07 (Risk Response) addresses risk acceptance decisions. CA-05 (Plan of Action and Milestones) tracks residual risk items. PM-09 (Risk Management Strategy) establishes risk acceptance criteria. PL-02 (Security and Privacy Plans) documents the overall security posture including accepted risks.",
+      "gaps": "FDA's residual risk documentation must demonstrate that the benefit-risk profile of the device remains favourable — a fundamentally medical concept where cybersecurity risks are weighed against therapeutic benefits. SP 800-53 risk acceptance is based on organisational risk tolerance, not clinical benefit-risk analysis. FDA requires residual risk documentation to be included in premarket submissions (510(k)/PMA) as evidence that the device provides reasonable assurance of safety and effectiveness despite known cybersecurity risks."
+    },
+    {
+      "id": "SA-1",
+      "title": "Security Architecture — Authentication and Authorisation",
+      "controls": [
+        "IA-01", "IA-02", "IA-03", "IA-04", "IA-05", "IA-06",
+        "IA-07", "IA-08", "IA-09", "IA-11", "IA-12",
+        "AC-01", "AC-02", "AC-03", "AC-06", "AC-07", "AC-14", "AC-24"
+      ],
+      "coverage_pct": 88,
+      "rationale": "FDA requires that medical devices implement authentication and authorisation mechanisms appropriate to the device's intended use, including multi-factor authentication for privileged access, role-based access control, and user session management. The SP 800-53 IA family provides comprehensive coverage: IA-02 (Identification and Authentication) covers user authentication including MFA. IA-03 (Device Identification) addresses device-to-device authentication. IA-09 (Service Identification) covers API authentication. IA-12 (Identity Proofing) supports user enrolment. The AC family provides authorisation: AC-02 (Account Management), AC-03 (Access Enforcement), AC-06 (Least Privilege), AC-07 (Unsuccessful Logon Attempts), AC-14 (Permitted Actions without Identification), and AC-24 (Access Control Decisions). This is one of the strongest alignment areas.",
+      "gaps": "Medical devices have unique authentication challenges not fully addressed by SP 800-53: emergency access ('break-the-glass') scenarios where authentication cannot impede urgent patient care, devices operated by multiple clinicians in rapid succession (shared workstations in operating theatres), devices with limited user interfaces that cannot support complex authentication (implantable devices, infusion pumps), and legacy devices that cannot be updated to support modern authentication protocols."
+    },
+    {
+      "id": "SA-2",
+      "title": "Security Architecture — Cryptographic Controls",
+      "controls": [
+        "SC-08", "SC-12", "SC-13", "SC-17",
+        "SC-23", "SC-28"
+      ],
+      "coverage_pct": 88,
+      "rationale": "FDA requires appropriate cryptographic controls for protecting data confidentiality and integrity, including encryption of data at rest and in transit, cryptographic authentication, and secure key management. SC-13 (Cryptographic Protection) provides the core encryption framework. SC-12 (Cryptographic Key Management) addresses key lifecycle management. SC-08 (Transmission Confidentiality and Integrity) protects data in transit. SC-28 (Protection of Information at Rest) addresses data-at-rest encryption. SC-17 (Public Key Infrastructure Certificates) supports certificate-based security. SC-23 (Session Authenticity) protects session integrity. Strong alignment — cryptographic controls are well-standardised.",
+      "gaps": "Medical devices may have constrained computing resources (embedded processors, battery-powered implants) that limit cryptographic algorithm selection. FDA expects cryptographic agility — the ability to update cryptographic algorithms when current ones become deprecated. SP 800-53 addresses cryptographic standards but does not address device-specific constraints such as real-time processing requirements for life-critical functions, power consumption limitations for implanted devices, or the challenge of updating cryptographic implementations in fielded devices with long product lifecycles (10-20 years)."
+    },
+    {
+      "id": "SA-3",
+      "title": "Security Architecture — Code, Data, and Execution Integrity",
+      "controls": [
+        "SI-07", "SI-16", "SA-10",
+        "CM-02", "CM-03", "CM-05",
+        "SC-34"
+      ],
+      "coverage_pct": 82,
+      "rationale": "FDA requires mechanisms to ensure the integrity of device software code, configuration data, and execution environment. SI-07 (Software, Firmware, and Information Integrity) directly addresses code and data integrity verification including cryptographic hashing and code signing. SI-16 (Memory Protection) prevents code injection. SA-10 (Developer Configuration Management) ensures development integrity. CM-02/CM-03/CM-05 (Baseline Configuration, Change Control, Access Restrictions for Change) protect the configuration baseline. SC-34 (Non-Modifiable Execution Programs) provides immutable execution environments.",
+      "gaps": "FDA expects device-specific integrity mechanisms including: secure boot chains that verify firmware authenticity before execution, hardware root of trust (TPM/secure enclave), runtime integrity monitoring for embedded systems, and protection against physical tampering with device hardware. SP 800-53 addresses software integrity at an enterprise IT level but does not prescribe embedded systems integrity mechanisms, secure boot architecture, or hardware-based integrity protection specific to medical device platforms."
+    },
+    {
+      "id": "SA-4",
+      "title": "Security Architecture — Confidentiality Protections",
+      "controls": [
+        "SC-04", "SC-08", "SC-28",
+        "AC-03", "AC-04", "AC-06",
+        "MP-02", "MP-04", "MP-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "FDA requires confidentiality protections for patient data and other sensitive information processed by medical devices, including protection at rest, in transit, and during processing. SC-08 (Transmission Confidentiality and Integrity) protects data in transit. SC-28 (Protection of Information at Rest) addresses stored data. SC-04 (Information in Shared System Resources) prevents information leakage. AC-03/AC-04/AC-06 enforce access controls and information flow restrictions. MP-02/MP-04/MP-06 protect removable media containing patient data.",
+      "gaps": "Medical devices frequently process protected health information (PHI) subject to HIPAA, adding a regulatory overlay that SP 800-53 addresses through separate HIPAA mappings but is not integrated into the FDA cybersecurity guidance context. FDA also considers device operational data (therapy parameters, diagnostic readings) as sensitive data requiring confidentiality protection — a scope broader than typical data classification in SP 800-53."
+    },
+    {
+      "id": "SA-5",
+      "title": "Security Architecture — Event Detection and Logging",
+      "controls": [
+        "AU-02", "AU-03", "AU-04", "AU-05", "AU-06",
+        "AU-08", "AU-09", "AU-12",
+        "SI-04", "SI-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "FDA requires medical devices to implement security event detection and logging capabilities proportionate to the device's risk profile. AU-02/AU-03/AU-12 (Event Logging, Content, Generation) establish comprehensive logging. AU-04/AU-05 (Storage Capacity, Response to Failures) ensure logging reliability. AU-06 (Audit Record Review) supports event analysis. AU-08 (Time Stamps) ensures log accuracy. AU-09 (Protection of Audit Information) maintains log integrity. SI-04 (System Monitoring) provides real-time detection. SI-06 (Security and Privacy Function Verification) validates control operation.",
+      "gaps": "Medical devices operate in clinical environments where logging must balance security visibility with device performance and storage constraints. Many medical devices have limited storage capacity for audit logs and limited network connectivity for log forwarding. FDA expects devices to log cybersecurity-relevant events (authentication failures, configuration changes, anomalous behaviour) but recognises that embedded devices cannot implement the same logging depth as enterprise IT systems. SP 800-53 audit controls assume enterprise-grade logging infrastructure that may not exist on resource-constrained medical devices."
+    },
+    {
+      "id": "SA-6",
+      "title": "Security Architecture — Resilience and Recovery",
+      "controls": [
+        "CP-02", "CP-09", "CP-10", "CP-11", "CP-12", "CP-13",
+        "SI-13", "SI-17",
+        "SC-24"
+      ],
+      "coverage_pct": 78,
+      "rationale": "FDA requires medical devices to maintain essential clinical functions during and after cybersecurity incidents, including fail-safe modes and recovery capabilities. CP-02 (Contingency Plan) addresses recovery planning. CP-09/CP-10 (System Backup/Recovery and Reconstitution) support data recovery and system restoration. CP-11/CP-12/CP-13 (Alternate Communications/Safe Mode/Alternative Security Mechanisms) address degraded operation modes. SI-13 (Predictable Failure Prevention) supports reliability. SI-17 (Fail-Safe Procedures) covers fail-safe operation. SC-24 (Fail in Known State) ensures predictable failure behaviour.",
+      "gaps": "FDA's resilience requirements are patient-safety-driven: devices must fail in a clinically safe state, maintain critical therapeutic functions even when cybersecurity controls are compromised, and provide clear indication to clinicians when operating in degraded mode. SP 800-53 resilience controls focus on information system availability and data recovery, not on maintaining safety-critical medical functions. The concept of 'essential clinical performance' — the minimum device functionality needed to avoid unacceptable patient risk — has no SP 800-53 equivalent."
+    },
+    {
+      "id": "ST-1",
+      "title": "Security Testing — Static and Dynamic Analysis",
+      "controls": [
+        "SA-11", "SA-15",
+        "SI-07", "RA-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "FDA requires static code analysis (SAST) and dynamic application security testing (DAST) as part of the premarket cybersecurity evidence. SA-11 (Developer Testing and Evaluation) directly requires security testing including static analysis, dynamic analysis, and penetration testing. SA-15 (Development Process, Standards, and Tools) governs the tooling and methodology. SI-07 (Software, Firmware, and Information Integrity) supports code integrity verification. RA-05 (Vulnerability Monitoring and Scanning) addresses ongoing vulnerability identification.",
+      "gaps": "FDA expects testing evidence to be included in premarket submissions as part of the cybersecurity documentation package. The FDA requires testing to cover the complete software stack including third-party libraries, RTOS components, and firmware. SP 800-53 requires developer testing but does not prescribe the specific testing artefacts (SAST/DAST reports, code coverage metrics, defect resolution evidence) expected in FDA premarket submissions. FDA also expects testing against medical-device-specific threat scenarios, not just generic vulnerability patterns."
+    },
+    {
+      "id": "ST-2",
+      "title": "Security Testing — Penetration Testing",
+      "controls": [
+        "CA-08", "SA-11",
+        "RA-05", "RA-10"
+      ],
+      "coverage_pct": 80,
+      "rationale": "FDA requires penetration testing of medical devices, including testing of all external interfaces, communication protocols, and device management capabilities. CA-08 (Penetration Testing) directly maps. SA-11 (Developer Testing and Evaluation) includes penetration testing as a development activity. RA-05 (Vulnerability Monitoring and Scanning) supports vulnerability identification. RA-10 (Threat Hunting) complements penetration testing with proactive threat research.",
+      "gaps": "FDA expects penetration testing to be conducted against the complete device ecosystem (device, cloud backend, mobile companion app, update infrastructure) and to include device-specific attack scenarios such as firmware extraction and reverse engineering, protocol fuzzing of proprietary interfaces, physical attack vectors (JTAG, UART debug ports), and wireless protocol manipulation. SP 800-53 penetration testing is scoped to information systems and does not prescribe the medical-device-specific test scenarios expected by FDA reviewers."
+    },
+    {
+      "id": "ST-3",
+      "title": "Security Testing — Fuzz Testing and Robustness",
+      "controls": [
+        "SA-11", "SI-10",
+        "RA-05"
+      ],
+      "coverage_pct": 72,
+      "rationale": "FDA specifically requires fuzz testing (sending malformed, unexpected, or random data to device interfaces) to evaluate device robustness against malformed inputs. SA-11 (Developer Testing and Evaluation) encompasses fuzz testing as part of security testing. SI-10 (Information Input Validation) requires input validation that fuzz testing verifies. RA-05 (Vulnerability Monitoring and Scanning) identifies input handling vulnerabilities.",
+      "gaps": "FDA's fuzz testing requirements are protocol-specific: manufacturers must fuzz all network protocols (DICOM, HL7, FHIR), wireless interfaces (Bluetooth, Wi-Fi, Zigbee), USB interfaces, and proprietary communication channels. SP 800-53 does not specifically require fuzz testing or prescribe fuzz testing methodology. FDA expects documented fuzz testing results showing protocol coverage, crash analysis, and remediation of identified defects — specific testing artefacts not addressed by SP 800-53."
+    },
+    {
+      "id": "ST-4",
+      "title": "Security Testing — Vulnerability Scanning and SCA",
+      "controls": [
+        "RA-05", "SA-11",
+        "CM-08", "SR-04", "SR-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "FDA requires vulnerability scanning and software composition analysis (SCA) to identify known vulnerabilities in device software and third-party components. RA-05 (Vulnerability Monitoring and Scanning) directly addresses vulnerability scanning. SA-11 (Developer Testing and Evaluation) includes SCA as a testing activity. CM-08 (System Component Inventory) supports tracking software components. SR-04 (Provenance) tracks component origin. SR-05 (Acquisition Strategies, Tools, and Methods) addresses software supply chain analysis tools.",
+      "gaps": "FDA requires SCA results as premarket submission evidence, demonstrating that all known vulnerabilities in third-party components have been assessed and either remediated or accepted with justification. SP 800-53 requires vulnerability scanning but does not prescribe SCA-specific methodology, the level of component-level vulnerability assessment expected by FDA, or the documentation of vulnerability disposition decisions for each identified CVE in device software components."
+    },
+    {
+      "id": "SBOM-1",
+      "title": "Software Bill of Materials — Component Inventory",
+      "controls": [
+        "CM-08", "SR-04", "SR-05",
+        "SA-04", "SA-10"
+      ],
+      "coverage_pct": 55,
+      "rationale": "FDA requires a complete Software Bill of Materials listing all software components including commercial, open-source, and off-the-shelf software. CM-08 (System Component Inventory) requires maintaining an inventory of system components. SR-04 (Provenance) tracks the origin and custody of components. SR-05 (Acquisition Strategies, Tools, and Methods) addresses supply chain tools. SA-04 (Acquisition Process) includes software component requirements. SA-10 (Developer Configuration Management) tracks software components during development.",
+      "gaps": "FDA's SBOM requirements (codified in Section 524B of the FD&C Act) go significantly beyond SP 800-53 component inventory. FDA requires machine-readable SBOM in standard formats (SPDX or CycloneDX), listing every software component including version, supplier, dependency relationships, and component-level vulnerability status. SP 800-53 CM-08 and SR-04 address component inventory and provenance at a general level but do not prescribe SBOM-specific formats, depth of dependency tracking (transitive dependencies), or the ongoing maintenance of SBOM as components are updated throughout the device lifecycle."
+    },
+    {
+      "id": "SBOM-2",
+      "title": "Software Bill of Materials — Machine-Readable Format and Maintenance",
+      "controls": [
+        "CM-08", "SR-04",
+        "SA-10", "SI-02"
+      ],
+      "coverage_pct": 42,
+      "rationale": "FDA requires SBOM to be provided in machine-readable format (SPDX or CycloneDX) and maintained throughout the device lifecycle as components are updated or patched. CM-08 (System Component Inventory) supports component tracking. SR-04 (Provenance) addresses component lineage. SA-10 (Developer Configuration Management) covers software version management. SI-02 (Flaw Remediation) supports the patching process that triggers SBOM updates.",
+      "gaps": "SP 800-53 does not address SBOM-specific format requirements (SPDX, CycloneDX), SBOM generation tooling, SBOM distribution to customers and regulators, or SBOM lifecycle management. FDA expects SBOM to be a living document updated with each software release, enabling healthcare delivery organisations to assess their exposure when new vulnerabilities are disclosed. The concept of SBOM as a regulatory deliverable to FDA and an operational tool for hospital cybersecurity teams has no SP 800-53 equivalent."
+    },
+    {
+      "id": "SBOM-3",
+      "title": "Software Bill of Materials — Component-Level Vulnerability Tracking",
+      "controls": [
+        "RA-05", "SR-04", "SR-06",
+        "CM-08", "SI-02", "SI-05"
+      ],
+      "coverage_pct": 58,
+      "rationale": "FDA requires manufacturers to monitor known vulnerabilities in all SBOM components and assess their impact on device security. RA-05 (Vulnerability Monitoring and Scanning) supports ongoing vulnerability monitoring. SR-04 (Provenance) enables tracing vulnerabilities to specific components. SR-06 (Supplier Assessments and Reviews) addresses third-party component risk. SI-02 (Flaw Remediation) covers vulnerability patching. SI-05 (Security Alerts, Advisories, and Directives) supports vulnerability notification tracking.",
+      "gaps": "FDA expects manufacturers to continuously monitor vulnerability databases (NVD, vendor advisories) for all SBOM components and proactively assess whether disclosed vulnerabilities affect their devices. SP 800-53 vulnerability scanning is oriented toward deployed systems, not toward tracking vulnerabilities in software supply chain components throughout a product's market life. The obligation to correlate NVD disclosures with specific SBOM components and communicate affected-device status to healthcare organisations is a medical-device-specific requirement."
+    },
+    {
+      "id": "TR-1",
+      "title": "Transparency — Cybersecurity Documentation for Users",
+      "controls": [
+        "SA-05", "PL-02", "PL-04",
+        "PM-20", "PM-21"
+      ],
+      "coverage_pct": 60,
+      "rationale": "FDA requires manufacturers to provide comprehensive cybersecurity documentation to healthcare delivery organisations, including recommended security configurations, hardening guides, and network requirements. SA-05 (System Documentation) addresses system documentation for users. PL-02 (Security and Privacy Plans) documents the security posture. PL-04 (Rules of Behavior) establishes usage expectations. PM-20 (Dissemination of Privacy Program Information) and PM-21 (Accounting of Disclosures) support transparency requirements.",
+      "gaps": "FDA's transparency requirements are specifically medical-device-oriented: manufacturers must provide healthcare organisations with a Manufacturer Disclosure Statement for Medical Device Security (MDS2), network deployment guides, recommended firewall rules, anti-malware compatibility information, and instructions for secure configuration. SP 800-53 documentation controls are oriented toward system operators, not toward device manufacturers providing security guidance to customer organisations. The MDS2 form (an industry standard for medical device security disclosure) has no SP 800-53 equivalent."
+    },
+    {
+      "id": "TR-2",
+      "title": "Transparency — Residual Risk Communication",
+      "controls": [
+        "RA-03", "RA-07", "PM-09",
+        "SA-05"
+      ],
+      "coverage_pct": 55,
+      "rationale": "FDA requires manufacturers to communicate known residual cybersecurity risks to healthcare delivery organisations so they can incorporate these into their own risk management programs. RA-03 (Risk Assessment) and RA-07 (Risk Response) document residual risks. PM-09 (Risk Management Strategy) establishes the framework for risk communication. SA-05 (System Documentation) supports documentation of known limitations.",
+      "gaps": "FDA's residual risk communication requirement is a product transparency obligation: manufacturers must clearly articulate what cybersecurity risks remain after all mitigations, what compensating controls the hospital should implement, and what patient safety implications exist if compensating controls are not implemented. This is a manufacturer-to-customer risk communication paradigm that SP 800-53 does not address — SP 800-53 assumes a single organisation managing its own risk, not a product manufacturer communicating device risks to downstream operators."
+    },
+    {
+      "id": "TR-3",
+      "title": "Transparency — Compensating Controls Guidance",
+      "controls": [
+        "SA-05", "SA-09",
+        "PL-02", "PL-04"
+      ],
+      "coverage_pct": 52,
+      "rationale": "FDA requires manufacturers to provide guidance to healthcare delivery organisations on compensating controls that can reduce residual device cybersecurity risks in their operational environment. SA-05 (System Documentation) supports providing deployment and configuration guidance. SA-09 (External System Services) addresses dependencies on external security controls. PL-02 (Security and Privacy Plans) and PL-04 (Rules of Behavior) establish security expectations.",
+      "gaps": "FDA expects manufacturers to provide actionable compensating control recommendations tailored to healthcare environments: network segmentation strategies for the device, monitoring recommendations to detect device compromise, backup and recovery procedures specific to the device, and end-of-support planning guidance. SP 800-53 addresses compensating controls from the perspective of the implementing organisation, not from the perspective of a product manufacturer advising downstream customers. The concept of manufacturer-prescribed compensating controls for a commercial product has no SP 800-53 analogue."
+    },
+    {
+      "id": "MON-1",
+      "title": "Postmarket Monitoring — Cybersecurity Information Sources",
+      "controls": [
+        "SI-05", "PM-15", "PM-16",
+        "RA-05", "SR-08"
+      ],
+      "coverage_pct": 78,
+      "rationale": "FDA requires manufacturers to establish and maintain a process for monitoring cybersecurity information sources (NVD, ICS-CERT, vendor advisories, security researcher reports) for vulnerabilities relevant to their marketed devices. SI-05 (Security Alerts, Advisories, and Directives) directly addresses monitoring security information sources. PM-15 (Security and Privacy Groups and Associations) supports engagement with information sharing organisations. PM-16 (Threat Awareness Program) establishes organisational threat intelligence. RA-05 (Vulnerability Monitoring and Scanning) provides ongoing vulnerability identification. SR-08 (Notification Agreements) covers vendor notification arrangements.",
+      "gaps": "FDA's monitoring requirements extend throughout the entire marketed life of the device (potentially 10-20 years), far exceeding typical IT system monitoring lifecycles. Manufacturers must monitor for vulnerabilities in all SBOM components, assess relevance to their specific device implementation, and determine patient safety impact. SP 800-53 monitoring is oriented toward deployed IT systems, not toward a product manufacturer's obligation to monitor vulnerability sources for a distributed fleet of medical devices operating in environments outside the manufacturer's control."
+    },
+    {
+      "id": "MON-2",
+      "title": "Postmarket Monitoring — Vulnerability Identification and Assessment",
+      "controls": [
+        "RA-05", "RA-03", "RA-07",
+        "SI-02", "SI-05"
+      ],
+      "coverage_pct": 72,
+      "rationale": "FDA requires manufacturers to assess identified vulnerabilities for exploitability in the device context and determine whether they create controlled or uncontrolled risk to patient safety. RA-05 (Vulnerability Monitoring and Scanning) identifies vulnerabilities. RA-03 (Risk Assessment) evaluates risk severity. RA-07 (Risk Response) determines response. SI-02 (Flaw Remediation) addresses remediation. SI-05 (Security Alerts, Advisories, and Directives) supports vulnerability tracking.",
+      "gaps": "FDA's postmarket vulnerability assessment requires a patient safety impact determination for each vulnerability — whether the vulnerability, if exploited, could result in patient harm, and whether existing mitigations maintain risk at an acceptable level (controlled risk) or not (uncontrolled risk). The controlled/uncontrolled risk categorisation triggers different remediation timelines and regulatory obligations. SP 800-53 vulnerability assessment does not incorporate patient safety impact scales or the FDA's binary controlled/uncontrolled risk determination that drives regulatory response requirements."
+    },
+    {
+      "id": "MON-3",
+      "title": "Postmarket Monitoring — Threat Intelligence",
+      "controls": [
+        "PM-15", "PM-16",
+        "RA-10", "SI-04", "SI-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "FDA encourages manufacturers to participate in Information Sharing and Analysis Organizations (ISAOs), particularly the Health Information Sharing and Analysis Center (H-ISAC), to receive and share threat intelligence relevant to medical devices. PM-15 (Security and Privacy Groups and Associations) directly supports ISAO participation. PM-16 (Threat Awareness Program) establishes threat intelligence capabilities. RA-10 (Threat Hunting) supports proactive threat identification. SI-04 (System Monitoring) and SI-05 (Security Alerts) enable threat detection and response.",
+      "gaps": "FDA specifically encourages participation in H-ISAC and the Medical Device Innovation Consortium (MDIC) — healthcare-specific threat intelligence organisations. SP 800-53 supports generic threat intelligence sharing but does not address sector-specific sharing requirements, medical device threat taxonomies, or the role of CISA/ICS-CERT in coordinating medical device vulnerability disclosures."
+    },
+    {
+      "id": "VR-1",
+      "title": "Vulnerability Response — Controlled vs Uncontrolled Risk",
+      "controls": [
+        "RA-07", "RA-03",
+        "IR-04", "IR-05", "PM-09"
+      ],
+      "coverage_pct": 58,
+      "rationale": "FDA's postmarket guidance establishes a framework for categorising vulnerability risk as controlled (acceptable residual risk with existing mitigations) or uncontrolled (risk exceeds acceptable levels). RA-07 (Risk Response) addresses risk treatment decisions. RA-03 (Risk Assessment) evaluates risk levels. IR-04/IR-05 (Incident Handling/Monitoring) support vulnerability response tracking. PM-09 (Risk Management Strategy) establishes risk acceptance criteria.",
+      "gaps": "FDA's controlled/uncontrolled risk framework is unique to medical device regulation. Uncontrolled risk requires remediation 'as soon as possible' and may require field safety corrective actions, customer notifications, or FDA recall reporting. Controlled risk allows continued marketing with monitoring and planned remediation. SP 800-53 risk response does not incorporate this binary categorisation, the associated regulatory response timelines, or the concept of field safety corrective actions for distributed products. This is a fundamentally regulatory construct with no SP 800-53 equivalent."
+    },
+    {
+      "id": "VR-2",
+      "title": "Vulnerability Response — Remediation Timeline Expectations",
+      "controls": [
+        "SI-02", "RA-07",
+        "CA-05", "PM-04"
+      ],
+      "coverage_pct": 62,
+      "rationale": "FDA establishes expectations for timely remediation based on risk categorisation, with uncontrolled risks requiring more urgent response than controlled risks. SI-02 (Flaw Remediation) addresses patching timelines. RA-07 (Risk Response) governs response prioritisation. CA-05 (Plan of Action and Milestones) tracks remediation progress. PM-04 (Plan of Action and Milestones Process) manages the overall remediation pipeline.",
+      "gaps": "FDA's remediation expectations are regulatory: for uncontrolled risk, manufacturers must remediate as soon as possible and may need to file adverse event reports (MDRs) or initiate recalls. For controlled risk, remediation is part of regular update cycles. SP 800-53 flaw remediation requires timely patching but does not prescribe the specific timelines tied to patient safety risk categorisation, nor does it address the unique challenges of medical device patching (validation requirements, deployment to clinical environments, coordination with healthcare organisations for update installation)."
+    },
+    {
+      "id": "CVD-1",
+      "title": "Coordinated Vulnerability Disclosure — Policy and Process",
+      "controls": [
+        "PM-15", "SI-05",
+        "IR-06", "IR-07", "PM-22"
+      ],
+      "coverage_pct": 55,
+      "rationale": "FDA requires manufacturers to establish and implement a coordinated vulnerability disclosure (CVD) policy and process, enabling security researchers and other parties to report vulnerabilities responsibly. PM-15 (Security and Privacy Groups and Associations) supports engagement with the security research community. SI-05 (Security Alerts, Advisories, and Directives) addresses vulnerability communication. IR-06/IR-07 (Incident Reporting/Assistance) provide reporting infrastructure. PM-22 (Personally Identifiable Information Quality Management) tangentially supports data quality in vulnerability reports.",
+      "gaps": "FDA's CVD requirement is a product-manufacturer obligation to maintain a publicly accessible vulnerability reporting mechanism, provide timely acknowledgement to reporters, coordinate disclosure timelines with security researchers, and publish advisories. SP 800-53 does not address manufacturer-side CVD processes, security researcher engagement protocols, disclosure timeline negotiation, or the publication of security advisories for commercial products. FDA specifically expects manufacturers to have a dedicated security contact and published CVD policy — requirements oriented toward product companies rather than IT system operators."
+    },
+    {
+      "id": "CVD-2",
+      "title": "Coordinated Vulnerability Disclosure — CISA/ICS-CERT Coordination",
+      "controls": [
+        "IR-06", "PM-15",
+        "SI-05"
+      ],
+      "coverage_pct": 50,
+      "rationale": "FDA expects manufacturers to coordinate vulnerability disclosures with CISA (Cybersecurity and Infrastructure Security Agency) and its ICS-CERT (Industrial Control Systems Cyber Emergency Response Team) for vulnerabilities affecting medical devices. IR-06 (Incident Reporting) covers external incident reporting. PM-15 (Security and Privacy Groups and Associations) supports engagement with government cybersecurity organisations. SI-05 (Security Alerts, Advisories, and Directives) addresses processing government-issued advisories.",
+      "gaps": "FDA's expectation for CISA/ICS-CERT coordination is a sector-specific regulatory interface requirement. Manufacturers should report medical device vulnerabilities to CISA for coordinated advisory publication, participate in multi-party coordination when vulnerabilities affect multiple manufacturers, and align disclosure timelines with CISA's process. SP 800-53 incident reporting is oriented toward federal agencies reporting to US-CERT, not toward commercial medical device manufacturers coordinating with CISA/ICS-CERT. The specific workflow for medical device vulnerability coordination through CISA has no SP 800-53 equivalent."
+    },
+    {
+      "id": "PU-1",
+      "title": "Patching and Updates — Validated Software Updates",
+      "controls": [
+        "SI-02", "CM-03", "CM-04",
+        "SA-10", "SA-11"
+      ],
+      "coverage_pct": 75,
+      "rationale": "FDA requires manufacturers to design devices with the ability to receive validated software updates throughout the device lifecycle, including both security patches and software upgrades. SI-02 (Flaw Remediation) directly addresses patching. CM-03 (Configuration Change Control) governs change management for updates. CM-04 (Impact Analyses) requires analysing update impact before deployment. SA-10 (Developer Configuration Management) covers version management. SA-11 (Developer Testing and Evaluation) ensures updates are tested before release.",
+      "gaps": "Medical device software updates require FDA regulatory consideration — certain updates may require new 510(k) premarket submissions, adding regulatory overhead not present in IT patching. Devices must maintain safety and effectiveness after updates, requiring clinical validation beyond standard IT regression testing. SP 800-53 patching controls assume IT systems where patches can be deployed without regulatory approval. FDA also expects update mechanisms to be secure (authenticated, integrity-verified) and resilient (recovery from failed updates without device bricking)."
+    },
+    {
+      "id": "PU-2",
+      "title": "Patching and Updates — Patch Management for Device Software",
+      "controls": [
+        "SI-02", "CM-02", "CM-03", "CM-06",
+        "SA-22"
+      ],
+      "coverage_pct": 70,
+      "rationale": "FDA requires manufacturers to have a plan for providing security patches throughout the supported life of the device, including patching of third-party components (operating systems, libraries, RTOS). SI-02 (Flaw Remediation) provides the core patching framework. CM-02/CM-03/CM-06 (Baseline Configuration, Change Control, Configuration Settings) manage the configuration impact of patches. SA-22 (Unsupported System Components) addresses end-of-support planning for components that can no longer be patched.",
+      "gaps": "Medical device patch management faces unique challenges not addressed by SP 800-53: devices operate in clinical environments where downtime for patching may impact patient care, devices may use embedded operating systems or RTOS that do not receive regular vendor patches, devices have long market lives (10-20 years) that outlast OS vendor support, and each patch must be validated to ensure it does not impact device safety or effectiveness. SP 800-53 patch management assumes vendor-supported IT infrastructure with regular maintenance windows."
+    },
+    {
+      "id": "PU-3",
+      "title": "Patching and Updates — Compensating Controls When Patches Unavailable",
+      "controls": [
+        "SI-02", "SA-22",
+        "SC-07", "SI-03", "SI-04"
+      ],
+      "coverage_pct": 68,
+      "rationale": "FDA acknowledges that patches may not always be immediately available for medical devices and requires manufacturers to provide compensating control guidance for healthcare organisations to implement in the interim. SI-02 (Flaw Remediation) addresses the overall remediation approach. SA-22 (Unsupported System Components) covers end-of-life component management. SC-07 (Boundary Protection) provides network segmentation as a compensating control. SI-03 (Malicious Code Protection) and SI-04 (System Monitoring) offer additional compensating measures.",
+      "gaps": "FDA's compensating controls for unpatched devices are healthcare-environment-specific: network isolation of the device, enhanced monitoring of device traffic, restricting device connectivity to essential clinical functions, and providing detailed guidance to healthcare organisations on risk-reducing measures. SP 800-53 addresses compensating controls generically but does not address the manufacturer's obligation to prescribe compensating controls for their customers when device-specific patches are unavailable."
+    },
+    {
+      "id": "INC-1",
+      "title": "Incident Response — Medical Device-Specific Response",
+      "controls": [
+        "IR-01", "IR-02", "IR-03", "IR-04", "IR-05",
+        "IR-06", "IR-07", "IR-08"
+      ],
+      "coverage_pct": 75,
+      "rationale": "FDA requires manufacturers to maintain incident response capabilities that address cybersecurity events affecting their medical devices in the field. IR-01 (Incident Response Policy) establishes the governance framework. IR-02/IR-03 (Training/Testing) ensure readiness. IR-04 (Incident Handling) covers containment, eradication, and recovery. IR-05 (Incident Monitoring) tracks events. IR-06/IR-07 (Reporting/Assistance) address external coordination. IR-08 (Incident Response Plan) documents the response approach. SP 800-53's IR family provides strong foundational coverage.",
+      "gaps": "Medical device incident response has unique characteristics not addressed by SP 800-53: incidents may directly impact patient care (requiring immediate clinical risk mitigation before technical response), devices are operated by healthcare organisations outside the manufacturer's control (requiring coordinated response), and incidents involving certain device malfunctions require Medical Device Reporting (MDR) to FDA within specific timeframes. The manufacturer's role in supporting customer incident response for their products is not addressed by SP 800-53, which assumes the organisation operates and responds to incidents on its own systems."
+    },
+    {
+      "id": "INC-2",
+      "title": "Incident Response — Safety-Focused Triage",
+      "controls": [
+        "IR-04", "IR-05",
+        "RA-03", "RA-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "FDA requires incident triage to prioritise patient safety above all other considerations, including data confidentiality and system availability. IR-04 (Incident Handling) provides the incident triage framework. IR-05 (Incident Monitoring) supports event classification. RA-03 (Risk Assessment) and RA-07 (Risk Response) support risk-based prioritisation.",
+      "gaps": "FDA's safety-focused triage paradigm fundamentally differs from SP 800-53's confidentiality-integrity-availability model. In medical device incident response, maintaining device therapeutic function (even if cybersecurity controls are compromised) may take priority over containing the cybersecurity incident. A clinician's ability to deliver patient care through a compromised device may be preferable to shutting down the device. SP 800-53 incident handling does not address this patient-safety-first triage model or the clinical judgment required to balance cybersecurity response with ongoing patient care."
+    },
+    {
+      "id": "INC-3",
+      "title": "Incident Response — Medical Device Reporting (MDR) Obligations",
+      "controls": [
+        "IR-06", "PM-04",
+        "SI-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "FDA requires manufacturers to determine whether cybersecurity incidents meet Medical Device Reporting (MDR) criteria under 21 CFR 803, which mandates reporting events where a device may have caused or contributed to death or serious injury. IR-06 (Incident Reporting) provides the general reporting framework. PM-04 (Plan of Action and Milestones Process) tracks regulatory obligations. SI-05 (Security Alerts, Advisories, and Directives) supports advisory-driven reporting.",
+      "gaps": "MDR obligations are a purely regulatory requirement: manufacturers must report to FDA within 30 days (or 5 days for urgent situations) when a cybersecurity event causes or contributes to a death or serious injury, or when a malfunction would likely cause or contribute to death or serious injury if it were to recur. SP 800-53 incident reporting addresses internal and federal agency reporting but does not address FDA-specific MDR regulatory reporting, the legal determination of whether a cybersecurity event constitutes a 'reportable event' under 21 CFR 803, or the intersection of cybersecurity incidents with product safety recall obligations."
+    },
+    {
+      "id": "524B-1",
+      "title": "Section 524B — Mandatory SBOM for Premarket Submissions",
+      "controls": [
+        "CM-08", "SR-04", "SR-05",
+        "SA-04", "SA-10"
+      ],
+      "coverage_pct": 48,
+      "rationale": "Section 524B of the FD&C Act (codified March 2023) makes SBOM a statutory requirement for premarket cybersecurity submissions, not merely a recommendation. CM-08 (System Component Inventory) provides component inventory capabilities. SR-04 (Provenance) tracks software component origins. SR-05 (Acquisition Strategies, Tools, and Methods) addresses supply chain analysis. SA-04 (Acquisition Process) includes component requirements. SA-10 (Developer Configuration Management) manages software components.",
+      "gaps": "Section 524B elevates SBOM from FDA guidance to statutory law. The requirement mandates SBOM including 'commercial, open-source, and off-the-shelf software components' for all cyber devices. SP 800-53's CM-08 and SR-04/SR-05 address component inventory and supply chain provenance at a general level but do not satisfy the specific statutory mandate for a machine-readable SBOM as a regulatory submission artefact. The legal force of this requirement (enforceable by law, not merely guidance) and its integration with the premarket review process have no SP 800-53 parallel."
+    },
+    {
+      "id": "524B-2",
+      "title": "Section 524B — Postmarket Vulnerability Monitoring Plan",
+      "controls": [
+        "RA-05", "SI-02", "SI-05",
+        "PM-04", "PM-15", "CA-07"
+      ],
+      "coverage_pct": 68,
+      "rationale": "Section 524B requires manufacturers to submit a plan to monitor, identify, and address postmarket cybersecurity vulnerabilities and exploits, including coordinated vulnerability disclosure and related procedures. RA-05 (Vulnerability Monitoring and Scanning) supports ongoing vulnerability identification. SI-02 (Flaw Remediation) addresses remediation. SI-05 (Security Alerts, Advisories, and Directives) covers advisory monitoring. PM-04 (Plan of Action and Milestones Process) tracks remediation commitments. PM-15 (Security and Privacy Groups and Associations) supports ISAO participation. CA-07 (Continuous Monitoring) provides the ongoing monitoring framework.",
+      "gaps": "Section 524B requires a specific plan that must be submitted to FDA as part of the premarket submission and that commits the manufacturer to postmarket cybersecurity activities. SP 800-53 continuous monitoring and vulnerability management controls provide the technical capabilities but do not address the regulatory commitment aspect — the plan is a binding representation to FDA that the manufacturer will maintain cybersecurity vigilance for the life of the device. This regulatory obligation enforceable by FDA enforcement actions has no SP 800-53 equivalent."
+    },
+    {
+      "id": "524B-3",
+      "title": "Section 524B — Coordinated Vulnerability Disclosure Requirement",
+      "controls": [
+        "PM-15", "IR-06", "IR-07",
+        "SI-05"
+      ],
+      "coverage_pct": 50,
+      "rationale": "Section 524B makes coordinated vulnerability disclosure a statutory requirement for cyber device manufacturers. PM-15 (Security and Privacy Groups and Associations) supports engagement with security researchers and ISAOs. IR-06 (Incident Reporting) and IR-07 (Incident Response Assistance) provide vulnerability reporting infrastructure. SI-05 (Security Alerts, Advisories, and Directives) covers advisory dissemination.",
+      "gaps": "Section 524B codifies CVD as a legal obligation, requiring manufacturers to establish processes for receiving, assessing, and publicly disclosing vulnerabilities in their devices. SP 800-53 does not address manufacturer-side CVD obligations, security researcher engagement, responsible disclosure timelines, or the publication of product security advisories. The statutory nature of this requirement (backed by FDA enforcement authority) means non-compliance can result in device marketing prohibition — a regulatory consequence entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "524B-4",
+      "title": "Section 524B — Reasonable Assurance of Cybersecurity",
+      "controls": [
+        "CA-02", "CA-07", "PM-01", "PM-09",
+        "PL-02", "SA-11", "RA-03"
+      ],
+      "coverage_pct": 65,
+      "rationale": "Section 524B requires that premarket submissions include evidence providing reasonable assurance that the device and related systems are cybersecure. CA-02 (Control Assessments) provides the assessment framework. CA-07 (Continuous Monitoring) demonstrates ongoing security. PM-01/PM-09 (Information Security Program Plan/Risk Management Strategy) establish the governance. PL-02 (Security and Privacy Plans) documents the security posture. SA-11 (Developer Testing and Evaluation) provides testing evidence. RA-03 (Risk Assessment) demonstrates risk management.",
+      "gaps": "FDA's 'reasonable assurance' standard is a legal/regulatory threshold specific to device safety and effectiveness determinations. Evidence must demonstrate that cybersecurity risks have been adequately addressed such that the device's benefits outweigh its risks. SP 800-53 provides the technical control framework but the concept of 'reasonable assurance' as a regulatory evidentiary standard — where FDA reviewers evaluate whether the manufacturer's cybersecurity program is sufficient for device marketing authorisation — has no SP 800-53 equivalent. This is fundamentally a product regulatory determination, not an enterprise IT security assessment."
+    }
+  ],
+  "summary": {
+    "total_clauses": 42,
+    "average_coverage": 67.0,
+    "full_count": 3,
+    "substantial_count": 24,
+    "partial_count": 15,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

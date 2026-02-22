@@ -1,0 +1,182 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "ieee_1686",
+  "framework_name": "IEEE 1686-2022",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on IEEE 1686-2022 Standard for Intelligent Electronic Devices Cyber Security Capabilities and expert analysis mapping to SP 800-53 Rev 5. IEEE 1686 defines product-level security capabilities for substation IEDs (protective relays, bay controllers) that are vendor-implemented features rather than operational security controls. SP 800-53 addresses organizational security controls, creating an inherent scope gap with product capability standards. Validate with power systems security engineers for procurement and compliance use."
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "5.1",
+      "title": "Electronic Access Control",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "IA-02",
+        "IA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-02 account management provides individual user account lifecycle requirements; AC-03 access enforcement supports role-based access control; AC-05 separation of duties addresses operator/engineer role separation; AC-06 least privilege restricts IED access to minimum necessary; IA-02 identification and authentication covers user authentication mechanisms; IA-05 authenticator management addresses credential policies for IED access.",
+      "gaps": "IED-specific access control constraints not addressed: limited display interface for authentication entry, field deployment scenarios requiring emergency access, protection relay role definitions (viewer/operator/engineer/admin) beyond generic RBAC, and IEC 61850 RBAC profiles for substation automation systems."
+    },
+    {
+      "id": "5.2",
+      "title": "Audit Trail",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-06",
+        "AU-09",
+        "AU-12"
+      ],
+      "coverage_pct": 75,
+      "rationale": "AU-02 auditable events defines which security events to log; AU-03 content of audit records specifies required log fields; AU-04 audit log storage capacity addresses retention; AU-06 audit review and analysis covers log examination; AU-09 protection of audit information prevents log tampering; AU-12 audit record generation ensures logging is active.",
+      "gaps": "IED storage constraints not addressed: limited flash memory on embedded devices restricts log volume, requiring prioritisation of substation-specific audit events such as relay settings changes, trip/close commands, protection element modifications, and Sequence of Events (SOE) recording with sub-millisecond timestamps for fault analysis."
+    },
+    {
+      "id": "5.3",
+      "title": "Firmware Integrity and Authentication",
+      "controls": [
+        "SI-07",
+        "CM-14",
+        "SI-16"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SI-07 software, firmware, and information integrity covers integrity verification mechanisms; CM-14 signed components ensures cryptographic verification of firmware before installation; SI-16 memory protection prevents unauthorized code execution on the IED platform.",
+      "gaps": "IED firmware signing specific to protection relay vendors (SEL, GE, ABB, Siemens) not addressed, including proprietary signing schemes and vendor trust chains. NERC CIP-010 firmware verification requirements for bulk electric system assets not covered. Field update constraints where the relay must remain operational during firmware update (no process interruption for protection functions) are outside SP 800-53 scope."
+    },
+    {
+      "id": "5.4",
+      "title": "Configuration Management",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-05",
+        "CM-06",
+        "CM-08"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-02 baseline configuration establishes approved IED settings; CM-03 configuration change control manages modifications to relay settings; CM-05 access restrictions for change limits who can alter IED configurations; CM-06 configuration settings enforces security-relevant parameters; CM-08 system component inventory tracks deployed IED assets and firmware versions.",
+      "gaps": "IED-specific configuration formats not addressed: vendor-proprietary setting files (SEL relay database files, GE UR configuration, ABB PCM600 projects), IEC 61850 SCL/SCD file management for substation configuration, and integration with substation configuration tools used for relay setting calculations and coordination studies."
+    },
+    {
+      "id": "5.5",
+      "title": "Communication Security",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-23",
+        "IA-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SC-08 transmission confidentiality and integrity covers encrypted communications; SC-12 cryptographic key establishment and management addresses certificate lifecycle; SC-13 cryptographic protection specifies approved algorithms; SC-23 session authenticity ensures communication channel integrity; IA-03 device identification and authentication supports IED-to-IED and IED-to-SCADA authentication.",
+      "gaps": "IEC 62351 compliance for power system communications not addressed, including DNP3 Secure Authentication (SA) for serial and TCP transport, GOOSE and MMS encryption per IEC 62351-6, and real-time determinism requirements that limit cryptographic overhead on time-critical protection messaging (4ms GOOSE trip signals cannot tolerate TLS handshake latency)."
+    },
+    {
+      "id": "5.6",
+      "title": "Network Access and Filtering",
+      "controls": [
+        "SC-07",
+        "CM-07",
+        "AC-04"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SC-07 boundary protection addresses network access control and port filtering at the IED network interface; CM-07 least functionality supports disabling unnecessary protocols and services on the IED; AC-04 information flow enforcement controls traffic between IED network segments.",
+      "gaps": "IED-specific port and protocol requirements not addressed: IEC 61850 GOOSE multicast traffic requiring layer-2 filtering, IEEE 1588 Precision Time Protocol (PTP) for time synchronisation that must pass through filters, and limited firewall capability in embedded devices that lack stateful inspection. Substation network architectures with process bus and station bus segmentation are outside SP 800-53 scope."
+    },
+    {
+      "id": "5.7",
+      "title": "Password Management",
+      "controls": [
+        "IA-05",
+        "AC-07"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IA-05 authenticator management comprehensively covers password complexity, aging, history, and storage requirements; AC-07 unsuccessful logon attempts provides account lockout after failed authentication, protecting IED access from brute-force attacks.",
+      "gaps": "IED password constraints not addressed: display-based entry on front panel with limited character sets on some legacy devices, field emergency access procedures when passwords are unavailable during storm restoration or equipment failure, and the tension between security lockout policies and operational continuity requirements for critical protection relays."
+    },
+    {
+      "id": "5.8",
+      "title": "Session Management",
+      "controls": [
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "SC-10",
+        "SC-23"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-10 concurrent session control limits simultaneous connections to the IED; AC-11 device lock provides session locking after inactivity; AC-12 session termination enforces automatic logout; SC-10 network disconnect terminates idle network sessions; SC-23 session authenticity ensures session integrity for remote IED access.",
+      "gaps": "IED session constraints not addressed: serial console sessions via RS-232/RS-485 with different timeout behaviours than network sessions, local HMI display timeout requirements for front-panel access, and maintenance session requirements during commissioning where engineers need extended sessions for protection testing and setting verification."
+    },
+    {
+      "id": "5.9",
+      "title": "Physical Port Security",
+      "controls": [
+        "CM-07",
+        "PE-04",
+        "AC-03",
+        "MP-07"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-07 least functionality supports disabling unused physical ports on the IED; PE-04 access control for transmission addresses physical port monitoring; AC-03 access enforcement covers logical access control over physical interfaces; MP-07 media use restricts removable media connections to IED USB ports.",
+      "gaps": "IED physical port types not fully addressed: serial RS-232/RS-485 maintenance ports, Ethernet ports (front and rear), IRIG-B time synchronisation ports, USB ports for setting file transfer, and fibre optic ports for protection signalling. Substation environment physical access considerations including cabinet locking, relay panel access, and front panel security for outdoor switchyard installations are outside SP 800-53 scope."
+    },
+    {
+      "id": "5.10",
+      "title": "Secure Development Practices",
+      "controls": [
+        "SA-03",
+        "SA-08",
+        "SA-11",
+        "SA-15",
+        "SA-22"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SA-03 system development lifecycle covers secure development processes for IED vendors; SA-08 security and privacy engineering principles addresses design-level security requirements; SA-11 developer testing and evaluation requires security testing of IED firmware; SA-15 development process, standards, and tools governs vendor development environments; SA-22 unsupported system components addresses end-of-life IED management.",
+      "gaps": "IED vendor-specific secure development requirements not addressed: IEC 62443-4-1 product development requirements for industrial component vendors, coordinated vulnerability disclosure for deployed relay fleets across multiple utilities, long product lifecycles (20+ years for protection relays) requiring sustained security support, and the challenge of patching embedded devices in operational substations where downtime requires planned outages."
+    }
+  ],
+  "summary": {
+    "total_clauses": 10,
+    "average_coverage": 73.5,
+    "full_count": 0,
+    "substantial_count": 10,
+    "partial_count": 0,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

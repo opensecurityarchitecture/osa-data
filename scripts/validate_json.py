@@ -235,6 +235,25 @@ def main():
                 validated += 1
                 print(f"  OK: {ttce_path.name} ({len(data)} classes, {total_caps} capabilities)")
 
+    # Validate framework-coverage files
+    fc_dir = DATA_DIR / "framework-coverage"
+    fc_schema_path = DATA_DIR / "schema" / "framework-coverage.schema.json"
+    if fc_dir.exists() and fc_schema_path.exists():
+        fc_schema = load_schema(fc_schema_path)
+        print("\nFramework Coverage:")
+        for filepath in sorted(fc_dir.glob("*.json")):
+            if not validate_json_syntax(filepath):
+                errors += 1
+                continue
+            with open(filepath, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            if HAS_JSONSCHEMA:
+                if not validate_against_schema(data, fc_schema, filepath):
+                    errors += 1
+                    continue
+            validated += 1
+            print(f"  OK: {filepath.name} ({len(data.get('clauses', []))} clauses, {data.get('summary', {}).get('average_coverage', 0)}%)")
+
     # Validate THFM human factors catalog
     thfm_path = attack_dir / "human-factors-catalog.json"
     if thfm_path.exists():

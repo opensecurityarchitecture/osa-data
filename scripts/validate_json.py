@@ -153,6 +153,8 @@ def main():
                 else:
                     validated += 1
                     print(f"  OK: {metadata_path.name}")
+        else:
+            print(f"  SKIP: metadata.json (maintained in osa-trident, not present in osa-data CI)")
 
         actor_catalog_schema_path = DATA_DIR / "schema" / "attack-actor-catalog.schema.json"
         actor_catalog_schema = load_schema(actor_catalog_schema_path) if actor_catalog_schema_path.exists() else None

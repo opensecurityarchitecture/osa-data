@@ -5,7 +5,11 @@
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
     "version": "2.0",
-    "disclaimer": "Based on expert analysis of PRA Supervisory Statement SS1/23 (Model risk management principles for banks), published May 2023 with compliance deadline May 2024. SS1/23 addresses model governance, validation, and lifecycle management for models used in risk, pricing, reserving, and capital calculations at UK-incorporated banks, building societies, and PRA-designated investment firms with internal model approval. SP 800-53 provides information security controls that support model infrastructure security but does not address model validation methodology, model performance monitoring, actuarial/quantitative model governance, or statistical soundness assessment. Coverage reflects overlap between model risk management IT infrastructure requirements and SP 800-53 control families, not model validation equivalence. Validate with PRA-regulated firm model risk management teams for compliance use."
+    "disclaimer": "Based on expert analysis of PRA Supervisory Statement SS1/23 (Model risk management principles for banks), published May 2023 with compliance deadline May 2024. SS1/23 addresses model governance, validation, and lifecycle management for models used in risk, pricing, reserving, and capital calculations at UK-incorporated banks, building societies, and PRA-designated investment firms with internal model approval. SP 800-53 provides information security controls that support model infrastructure security but does not address model validation methodology, model performance monitoring, actuarial/quantitative model governance, or statistical soundness assessment. Coverage reflects overlap between model risk management IT infrastructure requirements and SP 800-53 control families, not model validation equivalence. Validate with PRA-regulated firm model risk management teams for compliance use.",
+    "jurisdictions": [
+      "GB"
+    ],
+    "applicability_type": "mandatory"
   },
   "weight_scale": {
     "full": {
@@ -63,7 +67,7 @@
       ],
       "coverage_pct": 35,
       "rationale": "RA-02 security categorisation assigns impact levels (low/moderate/high) to information and systems, providing a classification methodology analogous to model tiering. RA-03 risk assessment evaluates threats and likelihood. RA-09 criticality analysis identifies critical components and functions. PM-09 risk management strategy establishes organisational risk appetite that informs model tier thresholds. PM-11 mission/business process definition links models to the business processes they support.",
-      "gaps": "SS1/23 requires firms to classify models into tiers based on materiality, complexity, and the criticality of the decisions they inform \u2014 including regulatory capital models, pricing models, and risk measurement models. Tier classification drives the depth of validation, frequency of review, and level of governance oversight. SP 800-53 risk categorisation is information security-focused (confidentiality, integrity, availability) and does not address model-specific tiering criteria such as financial materiality, model complexity relative to the risk being modelled, degree of expert judgement, or the regulatory significance of model outputs for capital adequacy."
+      "gaps": "SS1/23 requires firms to classify models into tiers based on materiality, complexity, and the criticality of the decisions they inform — including regulatory capital models, pricing models, and risk measurement models. Tier classification drives the depth of validation, frequency of review, and level of governance oversight. SP 800-53 risk categorisation is information security-focused (confidentiality, integrity, availability) and does not address model-specific tiering criteria such as financial materiality, model complexity relative to the risk being modelled, degree of expert judgement, or the regulatory significance of model outputs for capital adequacy."
     },
     {
       "id": "P1.3",
@@ -112,7 +116,7 @@
       ],
       "coverage_pct": 45,
       "rationale": "AC-05 separation of duties enforces segregation between model development and validation functions, a core three lines of defence requirement. PM-01/PM-02 security program and senior officer roles establish first and second line governance structures. PM-10 security authorisation process creates approval gates analogous to second line review. CA-01 assessment policy and CA-02 control assessments provide second-line assurance methodology. CA-06 authorisation establishes formal approval processes. PS-02 position risk designation and PS-07 external personnel security support role-based access appropriate to line of defence.",
-      "gaps": "SS1/23 requires a clear three lines of defence structure: first line (model owners, developers, users) responsible for model development and day-to-day use; second line (Model Risk Management Function \u2014 MRMF) providing independent oversight, challenge, and validation; third line (internal audit) providing independent assurance over the entire MRM framework. The MRMF must be independent of model development and have sufficient authority, stature, and resources. SP 800-53 separation of duties addresses functional segregation but does not prescribe a three lines of defence model, does not define the specific independence requirements for a dedicated model validation function, and does not address the MRMF's authority to restrict or retire models that fail validation."
+      "gaps": "SS1/23 requires a clear three lines of defence structure: first line (model owners, developers, users) responsible for model development and day-to-day use; second line (Model Risk Management Function — MRMF) providing independent oversight, challenge, and validation; third line (internal audit) providing independent assurance over the entire MRM framework. The MRMF must be independent of model development and have sufficient authority, stature, and resources. SP 800-53 separation of duties addresses functional segregation but does not prescribe a three lines of defence model, does not define the specific independence requirements for a dedicated model validation function, and does not address the MRMF's authority to restrict or retire models that fail validation."
     },
     {
       "id": "P2.3",
@@ -134,7 +138,7 @@
     },
     {
       "id": "P2.4",
-      "title": "Roles and responsibilities \u2014 model owners, developers, validators, users",
+      "title": "Roles and responsibilities — model owners, developers, validators, users",
       "controls": [
         "PS-01",
         "PS-02",
@@ -190,7 +194,7 @@
     },
     {
       "id": "P3.3",
-      "title": "Model implementation controls \u2014 code review, testing, version control",
+      "title": "Model implementation controls — code review, testing, version control",
       "controls": [
         "SA-10",
         "SA-11",
@@ -207,7 +211,7 @@
         "AU-12"
       ],
       "coverage_pct": 70,
-      "rationale": "SA-10 developer configuration management requires version control, change tracking, and integrity verification for development artefacts \u2014 directly addressing model code version control. SA-11 developer testing and evaluation requires security testing including code review, static analysis, and dynamic testing. SA-15 development process, standards, and tools prescribes approved development environments and coding standards. SA-16 developer-provided training supports model implementation knowledge transfer. CM-02 baseline configuration establishes approved model configurations. CM-03 configuration change control governs changes to model code and parameters. CM-04 impact analysis assesses the effect of changes before implementation. CM-05 access restrictions for change limits who can modify model code. CM-06 configuration settings enforces approved parameter settings. CM-09 configuration management plan provides governance. AC-03 access enforcement and AC-06 least privilege restrict model code access. AU-12 audit record generation captures model implementation changes.",
+      "rationale": "SA-10 developer configuration management requires version control, change tracking, and integrity verification for development artefacts — directly addressing model code version control. SA-11 developer testing and evaluation requires security testing including code review, static analysis, and dynamic testing. SA-15 development process, standards, and tools prescribes approved development environments and coding standards. SA-16 developer-provided training supports model implementation knowledge transfer. CM-02 baseline configuration establishes approved model configurations. CM-03 configuration change control governs changes to model code and parameters. CM-04 impact analysis assesses the effect of changes before implementation. CM-05 access restrictions for change limits who can modify model code. CM-06 configuration settings enforces approved parameter settings. CM-09 configuration management plan provides governance. AC-03 access enforcement and AC-06 least privilege restrict model code access. AU-12 audit record generation captures model implementation changes.",
       "gaps": "SS1/23 requires rigorous implementation controls including independent code review (four-eyes principle), comprehensive unit and integration testing, regression testing after changes, version control with full audit trail, and controlled promotion from development through testing to production environments. SP 800-53 provides strong coverage of configuration management, code review, and testing requirements through the SA and CM families. The gap is primarily in model-specific testing requirements: numerical accuracy verification, comparison of implementation output against theoretical specification, replication testing across platforms, and validation that the coded implementation faithfully represents the intended mathematical model."
     },
     {
@@ -244,7 +248,7 @@
     },
     {
       "id": "P3.6",
-      "title": "Model use \u2014 ensuring models used within intended purpose",
+      "title": "Model use — ensuring models used within intended purpose",
       "controls": [
         "PL-04",
         "AT-02",
@@ -260,7 +264,7 @@
     },
     {
       "id": "P4.1",
-      "title": "Independent model validation \u2014 scope, frequency, and depth",
+      "title": "Independent model validation — scope, frequency, and depth",
       "controls": [
         "CA-02",
         "CA-07",
@@ -270,7 +274,7 @@
       ],
       "coverage_pct": 30,
       "rationale": "CA-02 control assessments provides a methodology for independent assessment with defined scope and frequency. CA-07 continuous monitoring establishes ongoing assessment cadence. CA-01 assessment policy governs the assessment framework. AC-05 separation of duties enforces independence between model development and validation functions. PM-14 testing, training, and monitoring programme coordinates periodic review activities.",
-      "gaps": "SS1/23 requires independent model validation covering conceptual soundness (is the methodology appropriate?), implementation verification (does the code correctly implement the methodology?), and outcomes analysis (do model outputs match observed outcomes?). Validation scope and frequency must be commensurate with model tier \u2014 Tier 1 models require more frequent and deeper validation. Validators must be independent, technically competent, and have authority to require remediation or restrict model use. SP 800-53 assessment controls address information security control assessment but do not cover statistical model validation methodology, conceptual soundness review of quantitative approaches, outcomes analysis (backtesting), or the specific competency requirements for model validators with expertise in the relevant quantitative discipline."
+      "gaps": "SS1/23 requires independent model validation covering conceptual soundness (is the methodology appropriate?), implementation verification (does the code correctly implement the methodology?), and outcomes analysis (do model outputs match observed outcomes?). Validation scope and frequency must be commensurate with model tier — Tier 1 models require more frequent and deeper validation. Validators must be independent, technically competent, and have authority to require remediation or restrict model use. SP 800-53 assessment controls address information security control assessment but do not cover statistical model validation methodology, conceptual soundness review of quantitative approaches, outcomes analysis (backtesting), or the specific competency requirements for model validators with expertise in the relevant quantitative discipline."
     },
     {
       "id": "P4.2",
@@ -282,7 +286,7 @@
       ],
       "coverage_pct": 15,
       "rationale": "CA-02 control assessments provides a framework for comparative assessment. SA-11 developer testing and evaluation includes validation testing methodologies. CA-08 penetration testing provides an analogy for adversarial testing approaches, though applied to security rather than model performance.",
-      "gaps": "SS1/23 expects validators to use challenger models \u2014 independent alternative implementations or simpler benchmark models \u2014 to assess whether the primary model produces reasonable outputs. This includes sensitivity analysis, stress testing of model assumptions, and comparison of model outputs against industry benchmarks or simpler approaches. SP 800-53 has no concept of challenger models, model benchmarking, alternative methodology comparison, sensitivity analysis of model parameters, or the use of independent replication to validate quantitative model outputs. This is fundamentally a quantitative methodology discipline outside SP 800-53 scope."
+      "gaps": "SS1/23 expects validators to use challenger models — independent alternative implementations or simpler benchmark models — to assess whether the primary model produces reasonable outputs. This includes sensitivity analysis, stress testing of model assumptions, and comparison of model outputs against industry benchmarks or simpler approaches. SP 800-53 has no concept of challenger models, model benchmarking, alternative methodology comparison, sensitivity analysis of model parameters, or the use of independent replication to validate quantitative model outputs. This is fundamentally a quantitative methodology discipline outside SP 800-53 scope."
     },
     {
       "id": "P4.3",
@@ -311,7 +315,7 @@
       ],
       "coverage_pct": 25,
       "rationale": "AU-02/AU-03 audit events and content capture when adjustments are made. AU-10 non-repudiation ensures accountability for who made adjustments. CM-03 configuration change control provides a process framework for managing adjustments. AC-06 least privilege restricts who can apply post-model adjustments.",
-      "gaps": "SS1/23 requires governance over post-model adjustments (PMAs) \u2014 manual overlays or overrides applied to model outputs by expert judgement. PMAs must be documented with rationale, approved by an appropriate authority, subject to independent review, time-limited, and tracked for ongoing appropriateness. Persistent PMAs should trigger model redevelopment. SP 800-53 captures audit trails and change control but has no concept of expert overlay governance, PMA approval hierarchies, time-limiting of manual adjustments, materiality thresholds for PMA review, or the expectation that recurring adjustments indicate model deficiency requiring remediation."
+      "gaps": "SS1/23 requires governance over post-model adjustments (PMAs) — manual overlays or overrides applied to model outputs by expert judgement. PMAs must be documented with rationale, approved by an appropriate authority, subject to independent review, time-limited, and tracked for ongoing appropriateness. Persistent PMAs should trigger model redevelopment. SP 800-53 captures audit trails and change control but has no concept of expert overlay governance, PMA approval hierarchies, time-limiting of manual adjustments, materiality thresholds for PMA review, or the expectation that recurring adjustments indicate model deficiency requiring remediation."
     },
     {
       "id": "P4.5",
@@ -341,11 +345,11 @@
       ],
       "coverage_pct": 40,
       "rationale": "PM-09 risk management strategy establishes risk appetite for accepting model limitations with compensating controls. RA-03 risk assessment identifies risks arising from known model weaknesses. RA-07 risk response provides a framework for selecting and implementing mitigating controls. CA-05 plan of action and milestones tracks compensating control implementation. PL-02 system security plans document the control environment. PL-10 baseline selection and PL-11 tailoring analysis support selecting appropriate compensating controls based on risk.",
-      "gaps": "SS1/23 requires firms to implement compensating controls where models have known limitations \u2014 including conservative parameter adjustments, additional capital buffers, enhanced monitoring, restriction of model use to specific conditions, or parallel running with alternative approaches. Compensating controls must be proportionate to the materiality of the limitation and subject to periodic review. SP 800-53 addresses compensating controls in the information security context but does not cover model-specific mitigants such as capital add-ons, conservative parameter overlays, output floors, or the assessment of whether compensating controls adequately offset the specific quantitative risk arising from model limitations."
+      "gaps": "SS1/23 requires firms to implement compensating controls where models have known limitations — including conservative parameter adjustments, additional capital buffers, enhanced monitoring, restriction of model use to specific conditions, or parallel running with alternative approaches. Compensating controls must be proportionate to the materiality of the limitation and subject to periodic review. SP 800-53 addresses compensating controls in the information security context but does not cover model-specific mitigants such as capital add-ons, conservative parameter overlays, output floors, or the assessment of whether compensating controls adequately offset the specific quantitative risk arising from model limitations."
     },
     {
       "id": "P5.2",
-      "title": "Model performance monitoring \u2014 backtesting and outcome analysis",
+      "title": "Model performance monitoring — backtesting and outcome analysis",
       "controls": [
         "CA-07",
         "SI-04",
@@ -419,7 +423,7 @@
       ],
       "coverage_pct": 80,
       "rationale": "AC-01 access control policy establishes governance for model environment access. AC-02 account management controls user provisioning and deprovisioning for model systems. AC-03 access enforcement implements access control mechanisms. AC-05 separation of duties enforces developer/validator segregation at the system level. AC-06 least privilege limits model access to minimum necessary permissions. AC-17 remote access secures remote model development and execution. AC-24 access control decisions supports dynamic access decisions for model environments. IA-02 identification and authentication ensures model system users are authenticated. IA-04 identifier management governs model system accounts. IA-05 authenticator management secures authentication credentials.",
-      "gaps": "SP 800-53 provides comprehensive access control coverage for model infrastructure. The remaining gap is model-specific access granularity \u2014 controlling access to individual model parameters, production calibration data, and model output databases separately from general system access. SS1/23 expects fine-grained access controls that distinguish between read access to model outputs, write access to model parameters, and execute access to model code, which may require application-level access controls beyond what SP 800-53 typically prescribes."
+      "gaps": "SP 800-53 provides comprehensive access control coverage for model infrastructure. The remaining gap is model-specific access granularity — controlling access to individual model parameters, production calibration data, and model output databases separately from general system access. SS1/23 expects fine-grained access controls that distinguish between read access to model outputs, write access to model parameters, and execute access to model code, which may require application-level access controls beyond what SP 800-53 typically prescribes."
     },
     {
       "id": "P-IT.2",
@@ -439,7 +443,7 @@
       ],
       "coverage_pct": 75,
       "rationale": "AU-01 audit and accountability policy establishes logging governance. AU-02 audit events defines auditable events including model execution and parameter changes. AU-03 content of audit records specifies required record content (who, what, when, where, outcome). AU-06 audit review, analysis, and reporting enables review of model activity logs. AU-07 audit record reduction and report generation supports model activity reporting. AU-08 time stamps ensures chronological accuracy of model execution records. AU-09 protection of audit information prevents tampering with model audit trails. AU-10 non-repudiation ensures accountability for model parameter changes. AU-11 audit record retention preserves model activity logs for regulatory and audit purposes. AU-12 audit record generation captures model events in real time. AU-14 session audit provides detailed capture of model user sessions.",
-      "gaps": "SP 800-53 provides strong audit trail coverage. The gap is in model-specific audit content \u2014 SS1/23 expects audit trails to capture model version used for each run, input data snapshot, parameter values at execution time, model output values, and linkage to downstream consumption. SP 800-53 defines audit trail requirements generically; the specific content requirements for model execution audit trails (capturing mathematical inputs and outputs) require supplementation by model-specific logging standards."
+      "gaps": "SP 800-53 provides strong audit trail coverage. The gap is in model-specific audit content — SS1/23 expects audit trails to capture model version used for each run, input data snapshot, parameter values at execution time, model output values, and linkage to downstream consumption. SP 800-53 defines audit trail requirements generically; the specific content requirements for model execution audit trails (capturing mathematical inputs and outputs) require supplementation by model-specific logging standards."
     },
     {
       "id": "P-IT.3",

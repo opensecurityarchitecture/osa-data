@@ -1,9 +1,41 @@
 {
   "description": "TRIDENT attack/weakness/control graph data for Open Security Architecture",
-  "graph_version": "2.4.0",
+  "graph_version": "2.5.0",
   "graph_schema_version": "1.1",
-  "graph_build_id": "2026-02-22T21:30:00Z",
+  "graph_build_id": "2026-02-23T16:08:00Z",
   "changelog": [
+    {
+      "version": "2.5.0",
+      "date": "2026-02-23",
+      "type": "minor",
+      "changes": [
+        {
+          "category": "entity",
+          "action": "modify",
+          "description": "applicableWeaknesses[] curated on 133 vertical primitives (37 TISP + 41 TFSP + 55 TEPE) — expert-curated CWE mappings for bespoke development weakness exposure"
+        },
+        {
+          "category": "edge",
+          "action": "add",
+          "description": "EXPOSES_WEAKNESS edges (165): fs_platform_type -> weakness_class from applicableWeaknesses[]"
+        },
+        {
+          "category": "edge",
+          "action": "add",
+          "description": "EXPOSES_WEAKNESS_ENERGY edges (220): energy_platform_type -> weakness_class from applicableWeaknesses[]"
+        },
+        {
+          "category": "edge",
+          "action": "add",
+          "description": "EXPOSES_WEAKNESS_INSURANCE edges (151): insurance_platform_type -> weakness_class from applicableWeaknesses[]"
+        },
+        {
+          "category": "model",
+          "action": "add",
+          "description": "3 EXPOSES_WEAKNESS edge types added to trident-model.json with explorerPlacement entries"
+        }
+      ]
+    },
     {
       "version": "2.4.0",
       "date": "2026-02-22",
@@ -531,6 +563,21 @@
       "enrichment_date": "2026-02-20",
       "notes": "20 zone archetype entries defining standard network zones with hosting relationships to platform types and control requirements. Provides ZONE_HOSTS, ZONE_HOSTS_ENERGY, and ZONE_REQUIRES edges for zone-based security architecture derivation."
     },
+    "exposes_weakness": {
+      "source": "OSA Expert Curation (CWE Two-Dimension Model)",
+      "author": "Chris Lethaby (Vinylwasp)",
+      "design_doc": "cwe-two-dimension-design.md",
+      "total_edges": 536,
+      "edge_breakdown": {
+        "EXPOSES_WEAKNESS": 165,
+        "EXPOSES_WEAKNESS_ENERGY": 220,
+        "EXPOSES_WEAKNESS_INSURANCE": 151
+      },
+      "primitives_mapped": 133,
+      "unique_cwes_referenced": 47,
+      "enrichment_date": "2026-02-23",
+      "notes": "536 EXPOSES_WEAKNESS edges mapping 133 vertical platform primitives (37 TISP + 41 TFSP + 55 TEPE) to CWE weakness classes. This is the application-level CWE dimension — weaknesses inherent to bespoke development on a platform type, distinct from infrastructure defaults (TIBP DEFAULT_WEAKNESS edges). Expert-curated per primitive with relevance qualifier (primary/secondary) and rationale."
+    },
     "atlas_ai_ml": {
       "source": "MITRE ATLAS (Adversarial Threat Landscape for AI Systems)",
       "source_url": "https://github.com/mitre-atlas/atlas-navigator-data",
@@ -559,7 +606,7 @@
     }
   },
   "graph_summary": {
-    "total_edges": 92378,
+    "total_edges": 92914,
     "edge_types": {
       "COUNTERS": 1530,
       "PRESCRIBES": 2126,
@@ -604,7 +651,10 @@
       "DEFAULT_USES_PROTOCOL": 72,
       "AFFECTS": 59077,
       "MISCONFIGURES": 15622,
-      "ASSESSES": 1877
+      "ASSESSES": 1877,
+      "EXPOSES_WEAKNESS": 165,
+      "EXPOSES_WEAKNESS_ENERGY": 220,
+      "EXPOSES_WEAKNESS_INSURANCE": 151
     },
     "node_types": {
       "technique": 627,
@@ -668,9 +718,10 @@
       "behavioral_profile_path": "InfrastructureBehavioralProfile -PROFILE_DESCRIBES-> CPE / -DEFAULT_WEAKNESS-> WeaknessClass / -DEFAULT_USES_PROTOCOL-> Protocol (TIBP infrastructure behavioral profiling)",
       "vulnerability_path": "Vulnerability -AFFECTS-> CPE (NVD CVE-to-product impact mapping)",
       "misconfiguration_path": "WeaknessClass -MISCONFIGURES-> CPE (CCE misconfiguration-to-platform mapping)",
-      "cci_assessment_path": "CCI -ASSESSES-> Control (DISA CCI testable statements to NIST 800-53 control assessment)"
+      "cci_assessment_path": "CCI -ASSESSES-> Control (DISA CCI testable statements to NIST 800-53 control assessment)",
+      "exposes_weakness_path": "FSPlatformType/EnergyPlatformType/InsurancePlatformType -EXPOSES_WEAKNESS-> WeaknessClass (application-level CWE exposure for bespoke development on vertical platform primitives)"
     },
-    "total_edge_types": 44
+    "total_edge_types": 47
   },
   "files": {
     "technique-catalog.json": {
@@ -776,16 +827,22 @@
       "last_modified": "2026-02-19"
     },
     "fs-platform-catalog.json": {
-      "description": "43 TFSP financial services platform types across 10 categories with assurance framework mappings",
-      "sha256": "aaf8706959cba435646bbe6a48bf8b359130beda3ec8b3284fc83c8907750e22",
+      "description": "43 TFSP financial services platform types across 10 categories with assurance framework mappings and applicableWeaknesses[]",
+      "sha256": "0942dae3fd49ca938ad23c954262b05cb043c5970f5afb2a4d06f7fb35df3ac8",
       "entity_count": 43,
-      "last_modified": "2026-02-22T09:13:23Z"
+      "last_modified": "2026-02-23T16:08:00Z"
     },
     "insurance-platform-catalog.json": {
-      "description": "37 TISP insurance sector platform types across 10 categories with regulatory regime and assurance framework mappings",
-      "sha256": "f914b3c02190bb437e6ca5e66de438cca1fb14edcc8abb1ca45cc53e287c47b5",
+      "description": "37 TISP insurance sector platform types across 10 categories with regulatory regime, assurance framework mappings, and applicableWeaknesses[]",
+      "sha256": "b7116b746dc5c113c68b9a9666cd5f91d336b826c60a11f455f00a8374d91f70",
       "entity_count": 37,
-      "last_modified": "2026-02-22T09:13:23Z"
+      "last_modified": "2026-02-23T16:08:00Z"
+    },
+    "energy-platform-catalog.json": {
+      "description": "55 TEPE energy sector platform types across 15 categories with Purdue level, safety classification, OT protocols, and applicableWeaknesses[]",
+      "sha256": "f8740a3c2027339bcb1c110774262c396da1b34a0944c887a2cde9ea0acd4c07",
+      "entity_count": 55,
+      "last_modified": "2026-02-23T16:08:00Z"
     },
     "vertical-profile-catalog.json": {
       "description": "13 vertical profile entries (FS and energy) with platform type expectations and TACM tier scoping",
@@ -812,16 +869,16 @@
       "last_modified": "2026-02-22T21:12:00Z"
     },
     "graph-edges.json": {
-      "description": "92,378 explicit TRIDENT graph edges across 44 relationship types (includes ATLAS, vertical profile, zone archetype, insurance, platform instance, vulnerability AFFECTS, CCE MISCONFIGURES, and CCI ASSESSES edges)",
-      "sha256": "6dc523e46e42555006117df32c6e02b7db2cfc51d4caf2363002dcb932977855",
-      "entity_count": 92378,
-      "last_modified": "2026-02-22T21:12:00Z"
+      "description": "94,655 explicit TRIDENT graph edges across 48 relationship types (includes ATLAS, vertical profile, zone archetype, insurance, platform instance, vulnerability AFFECTS, CCE MISCONFIGURES, CCI ASSESSES, and EXPOSES_WEAKNESS edges)",
+      "sha256": "3c18d61b9e8c00a3a31b6dc54536366615d22e83efc8a731f183837890e73ccd",
+      "entity_count": 94655,
+      "last_modified": "2026-02-23T16:08:00Z"
     },
     "trident-model.json": {
       "description": "Single authoritative TRIDENT model definition \u2014 domains, node types, edge types, analytical paths",
-      "sha256": "8d4510d8f5af4b38fbffb307d4d1f1ae8289dcaac4e0a86172a61fa78b1acc2c",
+      "sha256": "610919ccdb21e380d1816d3b977baaac0392b58590ffa50c1f3710a2261a8423",
       "entity_count": 11,
-      "last_modified": "2026-02-22T21:12:00Z"
+      "last_modified": "2026-02-23T16:08:00Z"
     },
     "metadata.json": {
       "description": "This file \u2014 provenance, version info, graph summary",
@@ -830,5 +887,5 @@
     }
   },
   "attack_domain": "enterprise",
-  "last_updated": "2026-02-22"
+  "last_updated": "2026-02-23"
 }

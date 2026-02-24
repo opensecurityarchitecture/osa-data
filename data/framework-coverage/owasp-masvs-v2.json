@@ -1,0 +1,374 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "owasp_masvs_v2",
+  "framework_name": "OWASP MASVS v2.1",
+  "metadata": {
+    "source": "OWASP_MASVS_v2.1_Expert_Analysis",
+    "version": "1.0",
+    "disclaimer": "Based on expert analysis mapping OWASP Mobile Application Security Verification Standard v2.1 requirements to NIST SP 800-53 Rev 5 controls. MASVS is mobile-specific and includes implementation-level requirements (code obfuscation, anti-debugging) that have no direct NIST control equivalent. Validate with qualified mobile security assessors for compliance use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "voluntary"
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "MASVS-STORAGE-1",
+      "title": "The app securely stores sensitive data",
+      "controls": [
+        "SC-28",
+        "SC-12",
+        "SC-13",
+        "MP-06",
+        "AC-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-28 directly addresses protection of information at rest. SC-12 and SC-13 cover cryptographic key management and approved algorithms for encrypting stored data. MP-06 covers media sanitisation. AC-03 enforces access to stored data. Strong mapping for data-at-rest protection principles.",
+      "gaps": "MASVS specifies mobile-specific storage locations (Keychain, KeyStore, internal storage vs. external storage) that NIST addresses at a principle level rather than platform-specific implementation."
+    },
+    {
+      "id": "MASVS-STORAGE-2",
+      "title": "The app prevents leakage of sensitive data",
+      "controls": [
+        "SC-04",
+        "SI-11",
+        "AU-02",
+        "AC-04",
+        "SC-28"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-04 prevents information leakage through shared resources. SI-11 restricts error message content that could leak data. AU-02 ensures logging does not capture sensitive data. AC-04 controls information flow. SC-28 protects data at rest including caches and backups.",
+      "gaps": "Mobile-specific leakage vectors -- clipboard exposure, screenshot capture in app switcher, keyboard cache, pasteboard -- are not individually addressed by NIST controls. NIST covers the principle (prevent leakage) but not mobile-specific implementation mechanisms."
+    },
+    {
+      "id": "MASVS-CRYPTO-1",
+      "title": "The app employs current strong cryptography and uses it according to industry best practices",
+      "controls": [
+        "SC-13",
+        "SC-12",
+        "SA-08",
+        "CM-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-13 mandates use of approved cryptographic algorithms (FIPS-validated or NSA-approved). SC-12 governs key establishment and management. SA-08 requires security engineering principles including cryptographic design. CM-06 ensures proper configuration of cryptographic settings. Excellent coverage of cryptographic requirements.",
+      "gaps": "Minimal. MASVS specifies avoiding deprecated algorithms (MD5, SHA-1, DES) which NIST covers through SC-13 approved algorithm requirements."
+    },
+    {
+      "id": "MASVS-CRYPTO-2",
+      "title": "The app performs key management according to industry best practices",
+      "controls": [
+        "SC-12",
+        "SC-17",
+        "SA-08",
+        "CM-06"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-12 directly addresses cryptographic key establishment, distribution, storage, access, and destruction. SC-17 covers PKI certificate management. SA-08 addresses secure key storage design principles. CM-06 ensures proper key management configuration. NIST key management guidance is comprehensive.",
+      "gaps": "MASVS specifically references hardware-backed key storage (Android Keystore, iOS Secure Enclave) which NIST addresses conceptually through SC-12 but without mobile platform specifics."
+    },
+    {
+      "id": "MASVS-AUTH-1",
+      "title": "The app uses secure authentication and authorization protocols and follows the relevant best practices",
+      "controls": [
+        "IA-02",
+        "IA-05",
+        "AC-03",
+        "IA-08",
+        "SC-23"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-02 covers user identification and authentication. IA-05 addresses authenticator management including password policies. AC-03 enforces authorization. IA-08 handles identification of non-organisational users. SC-23 ensures session authenticity. Comprehensive auth coverage.",
+      "gaps": "Mobile-specific auth patterns like biometric local authentication triggering token refresh, and OAuth 2.0 PKCE flow specifics for native apps, are covered at the protocol level but not the mobile implementation level."
+    },
+    {
+      "id": "MASVS-AUTH-2",
+      "title": "The app performs local authentication securely",
+      "controls": [
+        "IA-02",
+        "IA-05",
+        "IA-07",
+        "SC-13",
+        "AC-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "IA-02 and IA-05 cover authentication mechanisms and authenticator management. IA-07 addresses cryptographic module authentication. SC-13 ensures strong cryptography for local credential validation. AC-07 handles unsuccessful authentication attempts (lockout). Substantial coverage of principles.",
+      "gaps": "MASVS covers biometric authentication specifics (FaceID, fingerprint, fallback to PIN) and local authentication APIs (LocalAuthentication, BiometricPrompt) that NIST addresses only at the principle level. Android Keystore vs. iOS Secure Enclave implementation differences not covered."
+    },
+    {
+      "id": "MASVS-AUTH-3",
+      "title": "The app secures sensitive operations with additional authentication",
+      "controls": [
+        "IA-10",
+        "AC-03",
+        "IA-02",
+        "IA-11",
+        "SC-23"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IA-10 addresses adaptive identification and authentication for sensitive transactions. AC-03 enforces access based on context. IA-02 covers multi-factor authentication. IA-11 handles re-authentication for sensitive operations. SC-23 ensures session authenticity. Good step-up auth coverage.",
+      "gaps": "MASVS specifically addresses mobile step-up authentication patterns (biometric re-auth before payment, device unlock confirmation) which NIST covers at the policy level but without mobile-specific UI and timing guidance."
+    },
+    {
+      "id": "MASVS-NETWORK-1",
+      "title": "The app secures all network traffic according to the current best practices",
+      "controls": [
+        "SC-08",
+        "SC-13",
+        "SC-23",
+        "AC-17",
+        "SC-07"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-08 directly mandates transmission confidentiality and integrity (TLS). SC-13 requires approved cryptographic algorithms for transport. SC-23 covers session authenticity. AC-17 addresses remote access protections. SC-07 provides boundary protection. Excellent TLS/transport coverage.",
+      "gaps": "Minimal. MASVS requirement aligns closely with NIST SC-08 for transport security. Mobile-specific concerns like cleartext traffic detection (NSAppTransportSecurity, android:usesCleartextTraffic) are implementation-level."
+    },
+    {
+      "id": "MASVS-NETWORK-2",
+      "title": "The app performs identity pinning for all remote endpoints under the developer's control",
+      "controls": [
+        "SC-08",
+        "SC-17",
+        "SC-23",
+        "IA-05"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SC-08 covers transmission integrity. SC-17 addresses PKI certificate management and trust validation. SC-23 ensures session authenticity. IA-05 covers authenticator management including certificate validation. NIST covers the principle of verifying server identity.",
+      "gaps": "Certificate pinning (pin-sha256, public key pinning) is a mobile-specific technique not explicitly addressed by NIST. NIST SC-17 covers certificate management broadly but does not prescribe pinning as a mechanism. The gap between 'verify server identity' (NIST) and 'pin specific certificates/keys' (MASVS) is notable."
+    },
+    {
+      "id": "MASVS-PLATFORM-1",
+      "title": "The app uses IPC mechanisms securely",
+      "controls": [
+        "AC-04",
+        "SC-07",
+        "AC-03",
+        "CM-07",
+        "SI-10"
+      ],
+      "coverage_pct": 75,
+      "rationale": "AC-04 controls information flow between components. SC-07 provides boundary protection between app components. AC-03 enforces access to IPC endpoints. CM-07 restricts unnecessary functionality (exported components). SI-10 validates input from IPC sources. Good principle coverage.",
+      "gaps": "Mobile IPC specifics -- Android Intents (implicit vs. explicit), Content Providers, iOS URL schemes, Universal Links, App Extensions -- are platform-specific mechanisms that NIST addresses only at the information flow control level."
+    },
+    {
+      "id": "MASVS-PLATFORM-2",
+      "title": "The app uses WebViews securely",
+      "controls": [
+        "SI-10",
+        "SC-07",
+        "CM-07",
+        "SA-11",
+        "AC-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SI-10 covers input validation for WebView content. SC-07 provides boundary protection between native and web contexts. CM-07 disables unnecessary WebView features (JavaScript bridges, file access). SA-11 covers secure development practices. AC-04 controls data flow between native and WebView.",
+      "gaps": "WebView-specific security concerns (JavaScript bridge exploitation, WebView file access, mixed content, WKWebView vs. UIWebView, WebViewClient overrides) are mobile-specific attack surfaces not individually addressed by NIST."
+    },
+    {
+      "id": "MASVS-PLATFORM-3",
+      "title": "The app uses the user interface securely",
+      "controls": [
+        "SC-04",
+        "AC-04",
+        "SI-11",
+        "PE-18"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SC-04 addresses information leakage through shared resources including UI elements. AC-04 controls information flow. SI-11 prevents sensitive data in error messages. PE-18 covers location of system components (relevant to physical shoulder surfing). Partial coverage.",
+      "gaps": "Mobile UI security concerns -- screenshot prevention in app switcher (FLAG_SECURE, UIApplicationProtectedDataDidBecomeAvailable), tapjacking/overlay attacks, notification content exposure on lock screen, auto-fill/autosuggest leaking sensitive fields -- have limited NIST equivalents. These are mobile OS-specific UI protection mechanisms."
+    },
+    {
+      "id": "MASVS-CODE-1",
+      "title": "The app requires an up-to-date platform version",
+      "controls": [
+        "SI-02",
+        "CM-06",
+        "SA-22",
+        "CM-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-02 addresses flaw remediation and keeping software up to date. CM-06 covers baseline configuration including minimum OS version requirements. SA-22 requires supported system components. CM-02 defines baseline configurations. Good coverage of update requirements.",
+      "gaps": "MASVS specifies mobile OS minimum version enforcement (minSdkVersion, deployment target) which NIST covers through general patch management. The rapid mobile OS release cycle (annual major versions) creates a more aggressive update cadence than traditional systems."
+    },
+    {
+      "id": "MASVS-CODE-2",
+      "title": "The app has a mechanism for enforcing app updates",
+      "controls": [
+        "SI-02",
+        "CM-03",
+        "SA-22",
+        "CM-02"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SI-02 covers flaw remediation including timely updates. CM-03 governs configuration change control. SA-22 addresses component supportability. CM-02 defines baseline configurations. NIST covers the principle of enforcing current software versions.",
+      "gaps": "Mobile-specific forced update mechanisms (in-app update APIs, app store version checks, remote kill switches) are implementation patterns not individually addressed by NIST. The distribution model (app stores as intermediary) differs from traditional enterprise patching."
+    },
+    {
+      "id": "MASVS-CODE-3",
+      "title": "The app only uses software components without known vulnerabilities",
+      "controls": [
+        "RA-05",
+        "SI-02",
+        "SA-11",
+        "SR-03",
+        "CM-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "RA-05 covers vulnerability monitoring and scanning. SI-02 addresses flaw remediation. SA-11 includes developer security testing and dependency analysis. SR-03 addresses supply chain controls. CM-08 tracks component inventory including third-party libraries. Strong SCA coverage.",
+      "gaps": "Minimal. MASVS requirement for vulnerability-free dependencies maps well to NIST supply chain and vulnerability management controls. Mobile SDK and framework specific dependency tracking (CocoaPods, Gradle) is implementation-level."
+    },
+    {
+      "id": "MASVS-CODE-4",
+      "title": "The app validates and sanitizes all untrusted inputs",
+      "controls": [
+        "SI-10",
+        "SI-16",
+        "SA-11",
+        "SC-18"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SI-10 directly addresses information input validation. SI-16 covers memory protection against injection. SA-11 requires secure development practices including input validation. SC-18 covers mobile code protections. Comprehensive input validation coverage.",
+      "gaps": "Mobile-specific input vectors (deep links, custom URL schemes, NFC data, QR code payloads, Bluetooth data) are covered by the general input validation principle in SI-10 but not enumerated individually."
+    },
+    {
+      "id": "MASVS-RESILIENCE-1",
+      "title": "The app validates the integrity of the platform",
+      "controls": [
+        "SI-07",
+        "SI-06",
+        "SA-11",
+        "CM-14"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SI-07 covers software and firmware integrity verification. SI-06 provides security function verification. SA-11 includes integrity checks in development. CM-14 addresses signed components. These cover integrity verification principles.",
+      "gaps": "Jailbreak/root detection is a mobile-specific technique. NIST SI-07 covers integrity in principle but does not address detecting platform integrity compromise (rooted Android, jailbroken iOS) as a client-side check. The NIST model assumes the platform is trusted, not that the app must verify platform integrity."
+    },
+    {
+      "id": "MASVS-RESILIENCE-2",
+      "title": "The app implements anti-tampering mechanisms",
+      "controls": [
+        "SI-07",
+        "SA-08",
+        "CM-14",
+        "SC-13"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-07 addresses integrity verification of software. SA-08 covers security engineering principles including tamper resistance. CM-14 requires signed components. SC-13 covers cryptographic integrity. These address tampering detection at the principle level.",
+      "gaps": "Mobile app integrity checks (signature verification at runtime, binary integrity hashes, debugger detection) go beyond what NIST covers. NIST assumes server-side integrity verification; MASVS requires the app to detect its own tampering -- a fundamentally different trust model."
+    },
+    {
+      "id": "MASVS-RESILIENCE-3",
+      "title": "The app implements anti-static analysis mechanisms",
+      "controls": [
+        "SA-08",
+        "SI-07",
+        "SC-13"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-08 covers security engineering principles. SI-07 addresses software integrity. SC-13 covers cryptographic protection that can protect sensitive logic. These provide only high-level principle coverage for anti-analysis.",
+      "gaps": "Code obfuscation, string encryption, control flow obfuscation, and symbol stripping are software protection techniques with no direct NIST equivalent. NIST does not address making software resistant to reverse engineering -- this is a mobile/embedded-specific concern rooted in the client-side deployment model."
+    },
+    {
+      "id": "MASVS-RESILIENCE-4",
+      "title": "The app implements anti-dynamic analysis mechanisms",
+      "controls": [
+        "SA-08",
+        "SI-07",
+        "SC-13",
+        "SI-04"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-08 covers security engineering principles. SI-07 addresses integrity verification. SC-13 covers cryptographic protection. SI-04 provides monitoring capabilities. Only principle-level coverage for anti-debugging.",
+      "gaps": "Anti-debugging (ptrace detection, Frida detection, emulator detection, hook detection) are mobile-specific runtime protection techniques with no NIST equivalent. NIST SI-04 covers monitoring from the defender's perspective, not detecting that the app itself is being dynamically analysed by an attacker."
+    },
+    {
+      "id": "MASVS-PRIVACY-1",
+      "title": "The app minimizes access to sensitive data and resources",
+      "controls": [
+        "PT-02",
+        "PM-25",
+        "AC-06",
+        "AC-03",
+        "PT-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PT-02 covers authority to process PII. PM-25 addresses PII minimisation. AC-06 enforces least privilege. AC-03 provides access enforcement. PT-03 defines processing purposes. Strong data minimisation coverage.",
+      "gaps": "Mobile permission model specifics (runtime permissions, permission groups, background location access, approximate vs. precise location) are covered by the least-privilege principle but not at the mobile OS API level."
+    },
+    {
+      "id": "MASVS-PRIVACY-2",
+      "title": "The app prevents identification of the user",
+      "controls": [
+        "PT-02",
+        "PT-06",
+        "PM-25",
+        "SA-08"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PT-02 covers processing authority. PT-06 addresses system of records notice. PM-25 mandates PII minimisation. SA-08 includes privacy engineering principles. Covers anonymisation and de-identification principles.",
+      "gaps": "Mobile-specific identifiers (IDFA, GAID, device fingerprinting, carrier info) and their tracking implications are not individually addressed. NIST covers data minimisation but does not enumerate mobile advertising and device identifier concerns."
+    },
+    {
+      "id": "MASVS-PRIVACY-3",
+      "title": "The app is transparent about the collection and use of data",
+      "controls": [
+        "PT-04",
+        "PT-05",
+        "PT-03",
+        "PL-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-04 covers consent. PT-05 addresses privacy notice. PT-03 defines processing purposes. PL-04 covers rules of behaviour. Good transparency coverage through privacy controls.",
+      "gaps": "App store privacy labels (Apple Privacy Nutrition Labels, Google Data Safety Section) and in-app consent mechanisms (ATT framework, consent management platforms) are mobile distribution-specific requirements not directly mapped in NIST."
+    },
+    {
+      "id": "MASVS-PRIVACY-4",
+      "title": "The app offers user control over their data",
+      "controls": [
+        "PT-04",
+        "PT-05",
+        "PT-06",
+        "AC-03",
+        "PT-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-04 covers consent and data subject rights. PT-05 and PT-06 address privacy notices and records. AC-03 enforces access to personal data. PT-03 covers processing purpose limitations. Covers data subject rights principles.",
+      "gaps": "Mobile-specific data control (app data deletion, account deletion requirement per Apple/Google store policies, data export from app, offline data management) extends beyond NIST's organisational privacy controls into consumer mobile app store policy territory."
+    }
+  ],
+  "summary": {
+    "total_clauses": 24,
+    "average_coverage": 73.3,
+    "full_count": 7,
+    "substantial_count": 13,
+    "partial_count": 4,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

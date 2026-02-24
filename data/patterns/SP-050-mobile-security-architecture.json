@@ -1,0 +1,497 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-050",
+  "slug": "mobile-security-architecture",
+  "title": "Mobile Security Architecture",
+  "description": "Comprehensive mobile security architecture pattern covering certificate pinning, secure enclave usage, biometric authentication, mobile payment security (PCI DSS scope), application integrity, and data privacy for enterprise iOS and Android deployments. Bridges OWASP MASVS, PCI DSS, and NIST 800-53 with practical architecture guidance for native, hybrid, and cross-platform mobile applications. Maps 38 NIST 800-53 controls across SC, IA, AC, SI, AU, CM, SA, PT, PM, RA, SR, and MP families.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-050",
+  "metadata": {
+    "release": "26.02",
+    "classification": "Application & Infrastructure",
+    "status": "active",
+    "type": "pattern",
+    "datePublished": "2026-02-24",
+    "dateModified": "2026-02-24",
+    "authors": [
+      "Spinoza",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from enterprise mobile banking deployments, retail payment app architecture reviews, and healthcare mobile application security assessments. Incorporates lessons from OWASP MASVS adoption in financial services, PCI DSS mobile payment scoping decisions, and real-world certificate pinning failures during CA rotations. The legacy OSA mobile patterns (SP-003 Privacy Mobile Device, SP-024 iPhone Pattern) predate modern platform security features (Secure Enclave, StrongBox, BiometricPrompt, App Attest) and the contemporary threat landscape of sophisticated mobile malware, banking trojans, and supply chain attacks targeting mobile SDKs."
+  },
+  "diagram": {
+    "svg": "/images/sp-050-mobile-security-architecture.svg",
+    "png": ""
+  },
+  "legend": "The diagram shows a layered mobile security architecture. The mobile application (top) communicates through a TLS 1.3 transport layer with certificate pinning to backend services (right). The mobile platform layer (centre) provides hardware-backed security via Secure Enclave/StrongBox for key storage and biometric authentication. A PCI CDE boundary (bottom-right) isolates cardholder data flows. NIST control badges are clickable and linked to the corresponding control detail pages.",
+  "content": {
+    "description": "Mobile applications operate in a fundamentally different trust model from server-side systems. The device is physically possessed by the user -- and potentially by an attacker. The application binary is distributed to millions of devices outside the organisation's control. The operating system mediates all hardware access through permission models that the user controls. Network connectivity is intermittent and traverses untrusted infrastructure. These constraints demand a security architecture that assumes the client environment is hostile while still delivering a seamless user experience.\n\nThis pattern addresses six interconnected security domains: transport security with certificate pinning, hardware-backed cryptography via secure enclaves, biometric authentication for local identity, mobile payment security within PCI DSS scope, application integrity and resilience against tampering, and data protection with privacy controls. Each domain maps to specific NIST 800-53 controls while acknowledging the mobile-specific implementation techniques that NIST covers at the principle level.\n\nThe architecture centres on defence-in-depth. Transport security (TLS 1.3 with certificate pinning) protects data in transit. The platform's hardware security module (Apple Secure Enclave, Android StrongBox/TEE) protects cryptographic keys -- keys generated in the secure enclave never leave it, even the OS kernel cannot extract them. Biometric authentication (Face ID, Touch ID, fingerprint, iris) gates access to enclave-protected keys, creating a hardware-rooted chain of trust from biometric sensor to cryptographic operation. For payment applications, this chain extends to PCI DSS compliance: cardholder data is encrypted with enclave-held keys, tokenised before transmission, and the payment flow is isolated within a defined Cardholder Data Environment (CDE) boundary.\n\nApplication integrity checks detect jailbroken/rooted devices, debugger attachment, and binary tampering -- not as absolute defences (a sufficiently motivated attacker can bypass any client-side check) but as layers that raise the cost of attack and detect commodity malware. Privacy controls enforce data minimisation, restrict identifier usage, and provide transparency through consent mechanisms aligned with GDPR, CCPA, and app store policies.\n\nThe pattern applies to native iOS and Android applications, cross-platform frameworks (React Native, Flutter, Kotlin Multiplatform), and hybrid WebView-based applications. Architecture decisions differ by deployment model: native apps have full access to platform security APIs; cross-platform frameworks access them through bridges with varying fidelity; hybrid apps must carefully manage the boundary between WebView and native contexts to prevent JavaScript bridge exploitation.",
+    "keyControlAreas": [
+      "Certificate Pinning and Transport Security (SC-08, SC-17, SC-23, SC-13, IA-05): Transport security for mobile applications requires more than standard TLS. SC-08 mandates transmission confidentiality and integrity -- for mobile, this means TLS 1.3 with strong cipher suites and strict certificate validation. SC-17 addresses PKI certificate management, which for mobile includes certificate pinning: the app embeds expected server certificate public keys or hashes and rejects connections to servers presenting different certificates, defeating man-in-the-middle attacks via rogue CAs or compromised certificate authorities. Implementation options include public key pinning (preferred for rotation resilience), certificate pinning (simpler but breaks on rotation), and Certificate Transparency log monitoring. SC-23 ensures session authenticity across intermittent mobile connections -- session tokens must survive network transitions (Wi-Fi to cellular) without re-authentication. SC-13 mandates approved cipher suites; mobile apps must enforce minimum TLS versions and disable fallback to deprecated protocols. IA-05 covers authenticator management for client certificates in mutual TLS deployments. Key risk: certificate pinning failures during CA rotation can brick apps at scale -- pin backup keys and implement pin list update mechanisms via a secure out-of-band channel.",
+      "Secure Enclave and Hardware-Backed Cryptography (SC-12, SC-13, IA-07, SI-07, SC-28): Modern mobile devices provide hardware security modules that offer a qualitatively different level of key protection. SC-12 governs cryptographic key establishment and management -- for mobile, this means generating keys inside the Secure Enclave (iOS) or StrongBox/TEE (Android) where keys are hardware-bound and non-extractable. Even a full OS compromise cannot extract enclave-held keys; cryptographic operations execute inside the secure processor. SC-13 mandates approved algorithms: ECDSA P-256 for signing and ECDH for key agreement are the standard enclave-supported algorithms. IA-07 addresses cryptographic module authentication -- the enclave authenticates the calling application before performing operations, preventing unauthorised apps from using stored keys. SI-07 covers integrity verification: Apple's DeviceCheck and App Attest APIs provide hardware-backed attestation that the app binary is genuine and running on a non-compromised device. SC-28 addresses protection at rest: enclave-encrypted data is protected even if the device storage is directly accessed (e.g., via JTAG or chip-off forensics). Architecture decision: prefer Secure Enclave/StrongBox for all sensitive key material; fall back to software KeyStore only when hardware backing is unavailable, and document the reduced assurance.",
+      "Biometric Authentication and Local Identity (IA-02, IA-05, IA-07, IA-12, AC-07): Biometrics on mobile devices provide convenient local authentication bound to hardware security. IA-02 covers user identification and authentication -- biometric authentication (Face ID, Touch ID, fingerprint via BiometricPrompt) verifies the device owner's identity locally before releasing enclave-held keys or authorising sensitive operations. IA-05 governs authenticator management: biometric templates are stored in the secure enclave, never accessible to the OS or applications; the app only receives a success/failure signal. IA-07 ensures the biometric module itself is authenticated and tamper-resistant. IA-12 addresses identity proofing: biometric enrollment is a device-level operation tied to the device owner's identity; the app relies on the platform's enrollment integrity. AC-07 handles unsuccessful authentication attempts: configurable lockout thresholds prevent brute-force attacks on biometric fallback mechanisms (PIN, password). Architecture considerations: never use biometrics as the sole factor for high-value operations -- pair biometric unlock with a server-side token or session that the biometric gates access to. Provide non-biometric fallback (PIN/password) for accessibility. Handle biometric enrollment changes (new fingerprint added) as a security event that may require re-authentication with the server.",
+      "Mobile Payment Security and PCI DSS Scope (SC-12, SC-13, SC-28, AC-03, AU-02, CM-08): Mobile payment applications that store, process, or transmit cardholder data fall within PCI DSS scope. SC-12 and SC-13 mandate encryption of cardholder data using approved algorithms -- for mobile payments, this typically means tokenisation: the actual PAN (Primary Account Number) is replaced with a device-specific token before any network transmission, and the real PAN exists only within a tightly scoped CDE boundary on the device or in the payment processor's environment. SC-28 protects stored payment credentials at rest using enclave-backed encryption. AC-03 enforces access to payment functions -- payment flows should be isolated from general app functionality, with separate API endpoints, authentication tokens, and audit trails. AU-02 defines auditable events for payment transactions: amount, timestamp, token (never PAN), merchant, authorisation result, and any fallback to non-tokenised flow. CM-08 tracks payment-related components including third-party SDKs (payment gateways, card scanners, NFC libraries) that enter PCI scope. Architecture approach: minimise PCI scope by using hosted payment fields (payment processor's iframe/WebView) so the app never handles raw card data. For NFC tap-to-pay, rely on platform payment frameworks (Apple Pay, Google Pay) that manage HCE (Host Card Emulation) within the platform's PCI-validated infrastructure. For hybrid apps handling cardholder data, the WebView displaying card entry fields is in-scope -- ensure no JavaScript bridge can extract card data into the native layer.",
+      "Application Integrity and Resilience (SI-07, SI-06, CM-14, SA-11, CM-07): Client-side integrity is a defence-in-depth layer, not an absolute guarantee -- a sufficiently resourced attacker with physical device access can bypass any client-side check. The goal is to detect commodity malware, automated attacks, and unsophisticated tampering. SI-07 covers software integrity verification: runtime checks should verify the app's code signature, detect repackaging (modified APK/IPA), and identify code injection via dynamic libraries. SI-06 provides security functionality verification: the app should verify that its security functions (encryption, pinning, authentication) are operating correctly and have not been hooked or replaced. CM-14 requires signed components: ensure all app binaries, frameworks, and embedded libraries are code-signed and that signatures are verified at launch. SA-11 covers developer security testing: integrate static analysis (SAST), dynamic analysis (DAST), and mobile-specific tools (MobSF, objection, frida-based tests) into the CI/CD pipeline. CM-07 enforces least functionality: disable debugging interfaces, remove logging of sensitive data, strip debug symbols from release builds, and disable WebView debugging in production. Jailbreak/root detection should be layered: check for known jailbreak artefacts, attempt to write outside the sandbox, detect Substrate/Frida hooks, and verify kernel integrity. Respond proportionally: degrade gracefully (disable payment features) rather than crashing, which creates denial-of-service against legitimate users on managed jailbroken devices.",
+      "Data Protection, Privacy, and Regulatory Compliance (SC-28, PT-02, PT-04, PM-25, AC-04, AC-06): Mobile applications collect rich contextual data -- location, device identifiers, contacts, photos, health data -- that demands rigorous privacy engineering. SC-28 protects sensitive data at rest: use platform encryption (Data Protection/file-based encryption) and supplement with app-level encryption for high-sensitivity data using enclave-held keys. PT-02 establishes authority to process personal data: request only necessary permissions (camera, location, contacts) and only at the point of use, not at app launch. PT-04 covers consent: implement transparent consent flows that explain why each permission is needed and allow granular opt-out. PM-25 mandates data minimisation: avoid collecting device identifiers (IDFA/GAID) unless essential for functionality; use ephemeral identifiers where possible; anonymise analytics data before transmission. AC-04 controls information flow: sensitive data should not leak through pasteboard, app switcher screenshots, keyboard caches, backup files, or system logs. AC-06 enforces least privilege: the app should request the minimum permission set and degrade gracefully when permissions are denied. Regulatory considerations: GDPR requires privacy by design (Art. 25) and data protection impact assessments for high-risk processing; CCPA/CPRA grants consumers deletion rights that the app must honour; Apple App Tracking Transparency (ATT) and Google's Privacy Sandbox impose platform-level consent requirements for cross-app tracking."
+    ],
+    "assumptions": "The target mobile application runs on iOS 15+ and Android 10+ (API 29+), providing access to modern platform security APIs including Secure Enclave, StrongBox, BiometricPrompt, App Attest, and file-based encryption. The backend infrastructure supports TLS 1.3, token-based authentication (OAuth 2.0 with PKCE), and can validate device attestation tokens. For payment scenarios, a PCI DSS-compliant payment processor or gateway is available to handle tokenisation. The organisation has mobile device management (MDM) or at minimum app-level configuration management for enterprise deployments. Developers have access to mobile-specific security testing tools in the CI/CD pipeline.",
+    "typicalChallenges": "Certificate pinning is the most operationally fragile control: CA rotations, CDN provider changes, and certificate renewals can break pinned connections, causing app-wide outages that require app store updates to fix. Pin backup keys and implement server-driven pin list updates. Secure Enclave key access requires biometric or device passcode authentication, which creates UX friction -- balance security with usability by caching authentication state for short durations. PCI DSS scope for mobile is poorly understood: many organisations incorrectly believe tokenisation removes them from scope entirely, when in reality the tokenisation process itself, the token vault mapping, and any moment where raw cardholder data exists in memory are in-scope. Hybrid apps (WebView-based) create complex security boundaries: the JavaScript bridge between web and native contexts is a high-value attack surface that must be carefully audited. Cross-platform frameworks (React Native, Flutter) abstract platform security APIs, sometimes with reduced capability or delayed support for new platform features. Application integrity checks generate false positives on legitimate enterprise-managed devices with MDM profiles, developer mode enabled, or accessibility services running -- tune detection to distinguish attacker behaviour from legitimate enterprise configurations.",
+    "indications": "Enterprise mobile banking and financial services applications requiring PCI DSS compliance and strong authentication. Healthcare mobile applications handling PHI under HIPAA or patient data under GDPR. Any mobile application processing payment card data via NFC, camera-based card scanning, or manual entry. Government and defence mobile applications with high assurance requirements. Consumer applications handling sensitive personal data (health, financial, identity documents) where a breach would cause significant harm. Mobile applications deployed in high-threat environments where targeted attacks on mobile devices are likely (executive communications, journalism, human rights).",
+    "contraIndications": "Simple content-consumption apps with no sensitive data processing or user authentication -- the overhead of enclave-backed cryptography and integrity checks is disproportionate. Applications targeting very old OS versions (pre-iOS 13, pre-Android 8) where hardware security features are unavailable or limited. Rapid prototyping and MVP phases where security architecture investment should be deferred until product-market fit is validated (but plan for retrofit). Progressive Web Apps (PWAs) that cannot access native platform security APIs -- these should use the Web Crypto API pattern (SP-039) instead. Applications where all sensitive operations are server-side and the mobile client is a thin presentation layer with no local data storage or processing.",
+    "threatResistance": "This pattern provides layered defence against the mobile threat landscape. Man-in-the-middle attacks are countered by TLS 1.3 with certificate pinning (SC-08, SC-17), preventing interception even when the attacker controls the network infrastructure (rogue Wi-Fi, compromised carrier). Cryptographic key extraction is resisted by hardware-backed key storage (SC-12, SC-13) -- keys in the Secure Enclave/StrongBox cannot be extracted even with full OS compromise. Biometric bypass and credential theft are mitigated by hardware-rooted biometric authentication (IA-02, IA-07) that binds identity verification to the physical device. Payment data leakage is prevented by tokenisation and CDE boundary enforcement (SC-28, AC-03), minimising the window where raw cardholder data exists. Reverse engineering and binary tampering are detected by integrity checks (SI-07, CM-14), raising the cost of attack for banking trojans and repackaged malware. Jailbreak/root exploitation is detected and mitigated through platform integrity verification (SI-06), with proportional response that degrades sensitive features without denying service. Privacy violations and over-collection are prevented by data minimisation (PM-25, PT-02) and least-privilege permission requests (AC-06). The residual risks are: a sufficiently resourced attacker with physical device access can eventually bypass all client-side controls (the 'evil maid' problem for mobile); supply chain attacks on mobile SDKs can compromise the app at build time; and platform zero-day vulnerabilities can undermine the hardware security assumptions."
+  },
+  "examples": {
+    "Financial Services Mobile Banking": [
+      "Generate ECDSA P-256 signing key in Secure Enclave at account enrollment; key is non-extractable and biometric-gated",
+      "All API requests signed with enclave key -- server verifies signature to confirm request originates from enrolled device",
+      "Certificate pinning with backup pins: primary pin for current certificate, backup for next rotation, pin list update via signed server response",
+      "Payment flows use hosted card entry (processor's WebView) -- app never handles raw PAN, minimising PCI scope to SAQ A-EP equivalent",
+      "Jailbreak detection degrades payment features (disables NFC tap-to-pay, requires step-up auth) rather than blocking app entirely",
+      "Biometric re-authentication required for transactions above configurable threshold; hardware-backed session token expires after 5 minutes of inactivity"
+    ],
+    "Healthcare Patient Application": [
+      "Patient health records encrypted with AES-256-GCM using enclave-backed key before local storage; key released only after biometric auth",
+      "TLS 1.3 with mutual certificate authentication for connections to hospital EHR system; client certificate stored in Keychain/KeyStore",
+      "Minimal permissions: camera only for document scanning (requested at point of use), location only for emergency services (with explicit consent)",
+      "App switcher screenshot protection: sensitive screens show privacy overlay when app moves to background",
+      "HIPAA audit trail: all PHI access events logged with timestamp, user ID, and data category -- never PHI content in logs",
+      "Offline mode: encrypted local cache of recent records available without network; cache auto-purges after configurable period"
+    ],
+    "Retail Mobile Payments (Hybrid PCI Scope)": [
+      "NFC tap-to-pay via Apple Pay / Google Pay -- PCI scope limited to platform payment framework integration; no direct card data handling",
+      "In-app card-on-file uses payment processor's drop-in UI (Stripe, Adyen); card data enters processor's iframe, never touches app code",
+      "Loyalty and rewards features outside PCI scope: clear architectural boundary between payment CDE and general app functionality",
+      "Receipt storage uses tokenised transaction references; actual payment details retrievable only from processor's PCI-compliant dashboard",
+      "Third-party SDK inventory maintained per CM-08; all payment-adjacent SDKs reviewed for PCI scope implications before integration",
+      "Quarterly mobile-specific penetration testing per PCI DSS Req 11.3 including dynamic analysis of IPC, WebView bridges, and local storage"
+    ],
+    "Developing Areas": [
+      "Passkeys (FIDO2/WebAuthn on mobile) are displacing traditional passwords and OTP-based MFA. Platform authenticators (Face ID, fingerprint) create passkeys stored in the Secure Enclave with cloud sync via iCloud Keychain or Google Password Manager. This collapses the authentication stack: biometric verification, hardware-backed key, and phishing resistance in a single gesture. Adoption is accelerating but cross-platform passkey portability remains fragmented.",
+      "Post-quantum readiness for mobile is an emerging concern. Current enclave-supported algorithms (ECDSA P-256, ECDH) are vulnerable to future quantum computers. NIST PQC standards (ML-KEM, ML-DSA) are not yet supported by mobile hardware security modules. Organisations should implement crypto-agility: abstract cryptographic operations behind interfaces that can swap algorithms when platform support arrives. See SP-040 Post-Quantum Cryptography.",
+      "On-device machine learning creates new data protection opportunities: processing sensitive data (health metrics, face recognition, voice analysis) entirely on-device avoids transmitting raw data to servers. Apple's Core ML and Google's ML Kit provide on-device inference. However, model updates, federated learning telemetry, and crash reports can leak information about user data -- privacy engineering must extend to the ML pipeline.",
+      "Supply chain security for mobile SDKs is a growing attack vector. Banking trojans distributed through compromised advertising SDKs, analytics libraries with hidden data exfiltration, and dependency confusion attacks on package managers (CocoaPods, Maven) have all been observed in the wild. SR-03 supply chain controls must extend to mobile SDK vetting, version pinning, and runtime SDK behaviour monitoring."
+    ]
+  },
+  "references": [
+    {
+      "title": "OWASP Mobile Application Security Verification Standard (MASVS) v2.1",
+      "url": "https://mas.owasp.org/MASVS/",
+      "note": "The community standard for mobile application security requirements. 24 verification requirements across 8 groups. This pattern's control mappings bridge MASVS to NIST 800-53."
+    },
+    {
+      "title": "OWASP Mobile Application Security Testing Guide (MASTG)",
+      "url": "https://mas.owasp.org/MASTG/",
+      "note": "Comprehensive testing guide for iOS and Android applications. Provides test cases for every MASVS requirement with platform-specific implementation guidance."
+    },
+    {
+      "title": "Apple Platform Security Guide",
+      "url": "https://support.apple.com/en-gb/guide/security/welcome/web",
+      "note": "Apple's authoritative documentation on iOS security architecture including Secure Enclave, Data Protection, App Attest, and biometric authentication."
+    },
+    {
+      "title": "Android Security Architecture",
+      "url": "https://source.android.com/docs/security",
+      "note": "Google's documentation on Android security architecture including StrongBox, TEE, BiometricPrompt, SafetyNet/Play Integrity, and file-based encryption."
+    },
+    {
+      "title": "PCI DSS v4.0.1 — Requirements for Mobile Payment Applications",
+      "url": "https://www.pcisecuritystandards.org/document_library/",
+      "note": "PCI DSS requirements applicable to mobile payment acceptance. Covers cardholder data protection, tokenisation, and mobile-specific scoping guidance."
+    },
+    {
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue referenced throughout this pattern. SC, IA, and SI families are primary for mobile security architecture."
+    },
+    {
+      "title": "NIST SP 800-124 Rev 2: Guidelines for Managing the Security of Mobile Devices in the Enterprise",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-124/rev-2/final",
+      "note": "NIST guidance on mobile device security management including threat assessment, security technologies, and deployment lifecycle."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-003",
+    "SP-024",
+    "SP-026",
+    "SP-029",
+    "SP-032",
+    "SP-033",
+    "SP-039"
+  ],
+  "relatedPatternNames": [
+    "Privacy Mobile Device Pattern",
+    "iPhone Pattern",
+    "PCI Full Environment",
+    "Zero Trust Architecture",
+    "Modern Authentication",
+    "Passkey Authentication",
+    "Client-Side Encryption and Data Privacy"
+  ],
+  "threats": [
+    {
+      "id": "T-MS-001",
+      "name": "Man-in-the-middle attack intercepting mobile app traffic via rogue Wi-Fi or compromised carrier",
+      "mitigatedBy": [
+        "SC-08",
+        "SC-17",
+        "SC-13",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "T-MS-002",
+      "name": "Certificate pinning bypass using proxy tools or compromised device trust store",
+      "mitigatedBy": [
+        "SC-17",
+        "SC-08",
+        "SI-07",
+        "CM-14"
+      ]
+    },
+    {
+      "id": "T-MS-003",
+      "name": "Cryptographic key extraction from device storage or memory",
+      "mitigatedBy": [
+        "SC-12",
+        "SC-13",
+        "IA-07",
+        "SC-28"
+      ]
+    },
+    {
+      "id": "T-MS-004",
+      "name": "Biometric authentication bypass via presentation attack or API hooking",
+      "mitigatedBy": [
+        "IA-02",
+        "IA-07",
+        "SI-06",
+        "AC-07"
+      ]
+    },
+    {
+      "id": "T-MS-005",
+      "name": "Payment cardholder data leakage through insecure local storage or logging",
+      "mitigatedBy": [
+        "SC-28",
+        "AU-02",
+        "AC-03",
+        "SC-12"
+      ]
+    },
+    {
+      "id": "T-MS-006",
+      "name": "Reverse engineering of application binary to extract business logic or credentials",
+      "mitigatedBy": [
+        "SI-07",
+        "CM-14",
+        "SA-11",
+        "CM-07"
+      ]
+    },
+    {
+      "id": "T-MS-007",
+      "name": "Jailbreak or root exploitation undermining platform security guarantees",
+      "mitigatedBy": [
+        "SI-06",
+        "SI-07",
+        "CM-14",
+        "SC-12"
+      ]
+    },
+    {
+      "id": "T-MS-008",
+      "name": "Sensitive data leakage via screenshots, clipboard, keyboard cache, or device backups",
+      "mitigatedBy": [
+        "SC-04",
+        "AC-04",
+        "SC-28",
+        "CM-07"
+      ]
+    },
+    {
+      "id": "T-MS-009",
+      "name": "Insecure inter-process communication exploited via malicious app on same device",
+      "mitigatedBy": [
+        "AC-04",
+        "SC-07",
+        "SI-10",
+        "AC-03"
+      ]
+    },
+    {
+      "id": "T-MS-010",
+      "name": "Supply chain attack via compromised third-party mobile SDK or dependency",
+      "mitigatedBy": [
+        "SR-03",
+        "SR-04",
+        "SA-11",
+        "CM-08"
+      ]
+    },
+    {
+      "id": "T-MS-011",
+      "name": "Location tracking and device fingerprinting enabling user surveillance",
+      "mitigatedBy": [
+        "PM-25",
+        "PT-02",
+        "PT-04",
+        "AC-06"
+      ]
+    },
+    {
+      "id": "T-MS-012",
+      "name": "Offline device exposure when lost or stolen with sensitive data cached locally",
+      "mitigatedBy": [
+        "SC-28",
+        "SC-12",
+        "AC-07",
+        "MP-06"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-07",
+      "name": "Unsuccessful Login Attempts",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AT-02",
+      "name": "Security Awareness",
+      "family": "AT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-06",
+      "name": "Configuration Settings",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "Information System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-14",
+      "name": "Signed Components",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification and Authentication",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-07",
+      "name": "Cryptographic Module Authentication",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-12",
+      "name": "Identity Proofing",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "MP-06",
+      "name": "Media Sanitization and Disposal",
+      "family": "MP",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-25",
+      "name": "Minimization of Personally Identifiable Information Used in Testing, Training, and Research",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-04",
+      "name": "Consent",
+      "family": "PT",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-08",
+      "name": "Security Engineering Principles",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-22",
+      "name": "Unsupported System Components",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-04",
+      "name": "Information Remnance",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use of Cryptography",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-17",
+      "name": "Public Key Infrastructure Certificates",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-23",
+      "name": "Session Authenticity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-06",
+      "name": "Security Functionality Verification",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software and Information Integrity",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Accuracy, Completeness, Validity, and Authenticity",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-04",
+      "name": "Provenance",
+      "family": "SR",
+      "emphasis": "standard"
+    }
+  ],
+  "controlFamilySummary": {
+    "AC": 5,
+    "AT": 1,
+    "AU": 2,
+    "CM": 4,
+    "IA": 4,
+    "MP": 1,
+    "PM": 1,
+    "PT": 2,
+    "RA": 1,
+    "SA": 3,
+    "SC": 8,
+    "SI": 4,
+    "SR": 2
+  }
+}

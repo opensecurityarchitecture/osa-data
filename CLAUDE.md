@@ -101,6 +101,10 @@ data/
 - White lozenge technique: `rect fill="white" opacity="0.9" rx="3"` behind arrow text
 - Icons from OSA icon library (`website/public/icons/`)
 
+## GitHub Issues
+
+When creating issues in any OSA repo, **always add them to the "OSA Delivery Board" project** so Chris and the other founders can see them. Use: `gh issue create --project "OSA Delivery Board"`. When closing issues, the board updates automatically.
+
 ## Commands
 
 ```bash

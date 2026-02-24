@@ -94,11 +94,31 @@ data/
 
 ## SVG Diagram Conventions
 
-- ViewBox: `960 x 720`
-- Palette: `#003459`, `#007EA7`, `#00A8E8`, `#00171F`, `#FFFFFF`
-- NIST badges: clickable `xlink:href` to `/controls/XX-NN`
-- Reference taglines: clickable links at bottom
-- White lozenge technique: `rect fill="white" opacity="0.9" rx="3"` behind arrow text
+**Canonical reference: `data/patterns/SP-000-reference-pattern.json`** — always check this before creating or editing SVGs.
+
+### Structure
+- **ViewBox**: `960 x 720` (may extend to 750 for larger diagrams)
+- **Background**: `fill="#f8fafc" rx="8"` (slate-50, rounded corners) — NOT white
+- **Title bar**: `rect fill="#00171F" rx="6"` (Midnight), title text `fill="white" font-weight="700"`
+- **Font stack**: `font-family="system-ui, -apple-system, sans-serif"` — NOT named fonts like GillSans
+
+### Palette
+`#003459` (Navy), `#007EA7` (OSA Blue), `#00A8E8` (Sky), `#00171F` (Midnight), `#FFFFFF` (White)
+
+### Interactive Elements
+- **NIST badges**: clickable `<a xlink:href="/controls/xx-nn" target="_top">` — **lowercase** control IDs, always include `target="_top"`
+- **Inline badges** (on light backgrounds): `fill` at `opacity="0.12"`, **NO stroke**, text `fill` at full colour
+- **Dark-bar badges** (on dark backgrounds): `fill` at `opacity="0.35"` **with** `stroke` and `stroke-opacity`
+- **Reference taglines**: clickable links at bottom — authoritative sources for the pattern topic
+- **Related patterns**: `<a xlink:href="/patterns/sp-NNN" target="_top">`
+
+### Required Sections
+- **Legend/Key**: colour-coded key explaining zone/component colours
+- **Reference bar**: clickable links to authoritative sources
+- **opensecurityarchitecture.org**: right-aligned at bottom
+
+### Techniques
+- White lozenge: `rect fill="white" opacity="0.9" rx="3"` behind arrow text
 - Icons from OSA icon library (`website/public/icons/`)
 
 ## GitHub Issues

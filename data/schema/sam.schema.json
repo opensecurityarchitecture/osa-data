@@ -1,0 +1,413 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensecurityarchitecture.org/schema/sam/v0.1",
+  "title": "Security Architecture Manifest (SAM) v0.1",
+  "description": "A lightweight, JSON-based schema for describing the security-relevant aspects of an IT architecture. Designed as the canonical input format for the TRIDENT Derivation Engine.",
+  "type": "object",
+  "required": ["sam", "metadata", "zones", "components"],
+  "additionalProperties": false,
+  "properties": {
+    "sam": {
+      "description": "Schema version identifier",
+      "type": "string",
+      "const": "0.1"
+    },
+
+    "metadata": {
+      "description": "Manifest metadata and organisational context",
+      "type": "object",
+      "required": ["name", "orgProfile"],
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "description": "Human-readable name for this architecture",
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "description": "Brief description of the system or environment",
+          "type": "string"
+        },
+        "version": {
+          "description": "Architecture version (semantic or free-form)",
+          "type": "string"
+        },
+        "created": {
+          "description": "ISO 8601 creation timestamp",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated": {
+          "description": "ISO 8601 last-modified timestamp",
+          "type": "string",
+          "format": "date-time"
+        },
+        "authors": {
+          "description": "Authors of this manifest",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sourceChannel": {
+          "description": "How this manifest was produced",
+          "type": "string",
+          "enum": ["manual", "wizard", "terraform", "drawio", "interview", "discovery", "api"]
+        },
+        "sourceRef": {
+          "description": "Reference to the source artifact (file path, URL, session ID)",
+          "type": "string"
+        },
+        "orgProfile": {
+          "description": "Organisational context for derivation",
+          "type": "object",
+          "required": ["vertical", "subVertical", "jurisdiction"],
+          "additionalProperties": true,
+          "properties": {
+            "vertical": {
+              "description": "Industry vertical (matches TRIDENT vertical profile catalog)",
+              "type": "string",
+              "examples": ["financial-services", "energy", "healthcare", "insurance"]
+            },
+            "subVertical": {
+              "description": "Sub-vertical specialisation",
+              "type": "string",
+              "examples": ["retail-banking", "investment-banking", "oil-gas-upstream"]
+            },
+            "verticalProfileId": {
+              "description": "TRIDENT vertical profile entity ID",
+              "type": "string",
+              "pattern": "^(VP|TP)-"
+            },
+            "jurisdiction": {
+              "description": "ISO 3166-1 alpha-2 country codes or region codes (EU, GCC)",
+              "type": "array",
+              "items": { "type": "string", "minLength": 2, "maxLength": 3 },
+              "minItems": 1
+            },
+            "size": {
+              "description": "Organisation size classification",
+              "type": "string",
+              "enum": ["small", "medium", "large", "xlarge"]
+            },
+            "systemicClassification": {
+              "description": "Regulatory systemic importance classification (e.g., G-SIB, D-SIB, significant institution)",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+
+    "zones": {
+      "description": "Trust zones / security boundaries in the architecture",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "trustLevel"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "description": "Unique zone identifier within this manifest",
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          },
+          "name": {
+            "description": "Human-readable zone name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Purpose and scope of this zone",
+            "type": "string"
+          },
+          "archetypeId": {
+            "description": "TRIDENT zone archetype entity ID (e.g., ZA-DMZ, ZA-INTERNAL)",
+            "type": "string",
+            "pattern": "^ZA-"
+          },
+          "trustLevel": {
+            "description": "Trust classification for this zone",
+            "type": "string",
+            "enum": ["untrusted", "semi-trusted", "trusted", "highly-trusted", "restricted"]
+          },
+          "networkSegment": {
+            "description": "Optional network segment identifier (VLAN, subnet, VPC)",
+            "type": "string"
+          },
+          "parentZone": {
+            "description": "Parent zone ID for nested boundaries",
+            "type": "string"
+          }
+        }
+      }
+    },
+
+    "components": {
+      "description": "Security-relevant components in the architecture",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "zone"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "description": "Unique component identifier within this manifest",
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          },
+          "name": {
+            "description": "Human-readable component name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Purpose and function of this component",
+            "type": "string"
+          },
+          "zone": {
+            "description": "Zone ID this component resides in",
+            "type": "string"
+          },
+          "platformTypeId": {
+            "description": "TRIDENT platform type entity ID (e.g., FSPT-001 for core banking)",
+            "type": "string"
+          },
+          "cpeId": {
+            "description": "CPE 2.3 URI identifying the specific product/version",
+            "type": "string",
+            "pattern": "^cpe:2\\.3:"
+          },
+          "cloudServiceId": {
+            "description": "TRIDENT cloud service entity ID for shared-responsibility mapping",
+            "type": "string"
+          },
+          "developmentModel": {
+            "description": "How this component was built — determines weakness stage applicability",
+            "type": "string",
+            "enum": ["bespoke", "cots-customised", "cots", "saas", "open-source"]
+          },
+          "technologyStack": {
+            "description": "Technology identifiers for weakness analysis (languages, frameworks)",
+            "type": "array",
+            "items": { "type": "string" },
+            "examples": [["java", "spring-boot", "postgresql"]]
+          },
+          "technologyClasses": {
+            "description": "TRIDENT technology class IDs (TTCE)",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "dataTypes": {
+            "description": "Data type IDs handled by this component (references data catalog)",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "protocols": {
+            "description": "Protocol IDs used by this component",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "authentication": {
+            "description": "Authentication model for this component",
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": ["none", "api-key", "basic", "certificate", "oauth2", "saml", "mfa", "passkey"]
+              },
+              "identityProviderId": {
+                "description": "TRIDENT identity provider entity ID",
+                "type": "string"
+              }
+            }
+          },
+          "exposure": {
+            "description": "Network exposure model",
+            "type": "string",
+            "enum": ["internet-facing", "internal", "air-gapped", "partner-facing"]
+          }
+        }
+      }
+    },
+
+    "connections": {
+      "description": "Data flows and integration points between components",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "additionalProperties": true,
+        "properties": {
+          "from": {
+            "description": "Source component ID",
+            "type": "string"
+          },
+          "to": {
+            "description": "Destination component ID",
+            "type": "string"
+          },
+          "description": {
+            "description": "What data or control flows along this connection",
+            "type": "string"
+          },
+          "protocol": {
+            "description": "Protocol used (e.g., https, grpc, sftp, kafka)",
+            "type": "string"
+          },
+          "encrypted": {
+            "description": "Whether the connection is encrypted in transit",
+            "type": "boolean",
+            "default": false
+          },
+          "authenticated": {
+            "description": "Whether the connection requires authentication",
+            "type": "boolean",
+            "default": false
+          },
+          "dataClassification": {
+            "description": "Highest data classification flowing through this connection",
+            "type": "string",
+            "enum": ["public", "internal", "confidential", "restricted"]
+          },
+          "crossesBoundary": {
+            "description": "Whether this connection crosses a trust boundary (derived from zone assignments if omitted)",
+            "type": "boolean"
+          }
+        }
+      }
+    },
+
+    "data": {
+      "description": "Data catalog — data types handled by this architecture with classification and residency",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "classification"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "description": "Data type identifier (referenced by components)",
+            "type": "string"
+          },
+          "name": {
+            "description": "Human-readable name",
+            "type": "string"
+          },
+          "description": {
+            "description": "What this data type represents",
+            "type": "string"
+          },
+          "classification": {
+            "description": "Data classification level",
+            "type": "string",
+            "enum": ["public", "internal", "confidential", "restricted"]
+          },
+          "pii": {
+            "description": "Whether this data type contains personally identifiable information",
+            "type": "boolean",
+            "default": false
+          },
+          "regulated": {
+            "description": "Whether this data type is subject to specific regulation",
+            "type": "boolean",
+            "default": false
+          },
+          "residency": {
+            "description": "Required data residency jurisdictions (ISO 3166-1 alpha-2)",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "retention": {
+            "description": "Data retention requirement (ISO 8601 duration, e.g., P7Y for 7 years)",
+            "type": "string"
+          },
+          "tridentDataTypeId": {
+            "description": "TRIDENT data type entity ID for graph traversal",
+            "type": "string"
+          }
+        }
+      }
+    },
+
+    "annotations": {
+      "description": "Design decisions, pattern references, and constraints",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "patterns": {
+          "description": "OSA security pattern IDs recognised in this architecture",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^SP-\\d{3}$"
+          },
+          "examples": [["SP-029", "SP-003", "SP-014"]]
+        },
+        "designDecisions": {
+          "description": "Key security design decisions and their rationale",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "decision"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "decision": {
+                "description": "The design decision made",
+                "type": "string"
+              },
+              "rationale": {
+                "description": "Why this decision was made",
+                "type": "string"
+              },
+              "alternatives": {
+                "description": "Alternatives considered",
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "affectedComponents": {
+                "description": "Component IDs affected by this decision",
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "constraints": {
+          "description": "External constraints on the architecture",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["constraint"],
+            "properties": {
+              "constraint": { "type": "string" },
+              "source": {
+                "description": "Where this constraint comes from (regulation, policy, vendor)",
+                "type": "string"
+              },
+              "affectedComponents": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "assumptions": {
+          "description": "Security assumptions that should be validated",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["assumption"],
+            "properties": {
+              "assumption": { "type": "string" },
+              "risk": {
+                "description": "What happens if this assumption is wrong",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

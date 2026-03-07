@@ -1,0 +1,2860 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "csa_aicm",
+  "framework_name": "CSA AI Controls Matrix v1.0.3",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on expert analysis mapping AICM v1.0.3 control objectives to NIST SP 800-53 Rev 5 controls. AICM extends CSA CCM v4 with 46 AI-specific controls across 18 domains including the new Model Security (MDS) domain. Coverage percentages reflect NIST addressing of cloud and AI security intent. Validate with qualified assessors for compliance/audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "market_driven"
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "A&A-01",
+      "title": "Audit and Assurance Policy and Procedures",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "AU-01"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-01 establishes assessment policy and procedures; CA-02 defines control assessments; AU-01 covers audit and accountability policy. Together these address the policy and procedural foundations for audit and assurance.",
+      "gaps": "AICM requires AI-specific audit policies covering model governance, algorithmic accountability, and AI system lifecycle audit trails that NIST does not explicitly address."
+    },
+    {
+      "id": "A&A-02",
+      "title": "Independent Assessments",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "CA-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CA-02 requires independent assessments of security controls; CA-07 provides continuous monitoring; CA-08 covers penetration testing.",
+      "gaps": "AICM emphasizes independent assessment of AI systems including model validation, bias auditing, and algorithmic impact assessments not covered by NIST."
+    },
+    {
+      "id": "A&A-03",
+      "title": "Risk Based Planning Assessment",
+      "controls": [
+        "CA-02",
+        "RA-03",
+        "RA-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "RA-03 covers risk assessment; CA-02 addresses control assessment planning; RA-07 covers risk response.",
+      "gaps": "AICM requires risk-based assessment planning that accounts for AI-specific risks (model drift, adversarial attacks, training data bias) beyond traditional IT risk."
+    },
+    {
+      "id": "A&A-04",
+      "title": "Requirements Compliance",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 assesses control compliance; CA-05 produces plans of action and milestones; CA-09 covers internal system connections.",
+      "gaps": "AICM focuses on demonstrating compliance with AI-specific regulations (EU AI Act, NIST AI RMF) and cloud-specific evidence requirements."
+    },
+    {
+      "id": "A&A-05",
+      "title": "Audit Management Process",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "AU-06"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-02 manages security assessments; CA-05 tracks remediation via POA&M; AU-06 covers audit review, analysis, and reporting.",
+      "gaps": "AICM requires structured audit management including AI model audit trails, training data provenance audits, and algorithmic decision logging."
+    },
+    {
+      "id": "A&A-06",
+      "title": "Remediation",
+      "controls": [
+        "CA-05",
+        "CA-02",
+        "RA-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-05 establishes remediation plans (POA&M); CA-02 provides assessment framework; RA-07 addresses risk response.",
+      "gaps": "AICM specifies AI-specific remediation including model retraining schedules, bias correction plans, and AI incident response procedures."
+    },
+    {
+      "id": "AIS-01",
+      "title": "Application and Interface Security Policy and Procedures",
+      "controls": [
+        "SA-01",
+        "SA-08",
+        "SI-01"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-01 establishes system acquisition policy; SA-08 covers security engineering principles; SI-01 provides system and information integrity policy.",
+      "gaps": "AICM extends to AI application security policies including ML pipeline security, model serving infrastructure, and AI API protection requirements."
+    },
+    {
+      "id": "AIS-02",
+      "title": "Application Security Baseline Requirements",
+      "controls": [
+        "SA-08",
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SA-08 defines security engineering principles; SA-11 covers developer testing and evaluation; SA-15 addresses development process and standards.",
+      "gaps": "AICM baseline requirements extend to AI-specific secure development practices including adversarial robustness, model integrity verification, and ML framework security."
+    },
+    {
+      "id": "AIS-03",
+      "title": "Application Security Metrics",
+      "controls": [
+        "CA-07",
+        "PM-06",
+        "SA-11"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-07 provides continuous monitoring; PM-06 covers security metrics; SA-11 addresses developer security testing.",
+      "gaps": "AICM requires AI-specific application security metrics including model performance degradation monitoring, drift detection, and adversarial input detection."
+    },
+    {
+      "id": "AIS-04",
+      "title": "Secure Application Development Lifecycle",
+      "controls": [
+        "SA-03",
+        "SA-08",
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-03 covers system development lifecycle; SA-08 addresses security engineering; SA-11 covers developer testing; SA-15 covers development standards.",
+      "gaps": "AICM extends SDLC to MLOps lifecycle including model training, validation, deployment, and monitoring phases with AI-specific security gates."
+    },
+    {
+      "id": "AIS-05",
+      "title": "Application Security Testing",
+      "controls": [
+        "CA-08",
+        "RA-05",
+        "SA-11"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-08 covers penetration testing; RA-05 addresses vulnerability scanning; SA-11 covers developer security testing.",
+      "gaps": "AICM requires AI-specific security testing including adversarial robustness testing, model extraction attacks, and training data poisoning assessments."
+    },
+    {
+      "id": "AIS-06",
+      "title": "Secure Application Deployment",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "SA-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-02 provides baseline configurations; CM-03 covers configuration change control; SA-03 addresses system development lifecycle.",
+      "gaps": "AICM addresses automated secure deployment pipelines for ML models including model versioning, rollback capabilities, and deployment validation."
+    },
+    {
+      "id": "AIS-07",
+      "title": "Application Vulnerability Remediation",
+      "controls": [
+        "RA-05",
+        "SA-11"
+      ],
+      "coverage_pct": 72,
+      "rationale": "RA-05 covers vulnerability monitoring and scanning; SA-11 addresses developer security testing and evaluation.",
+      "gaps": "AICM requires AI-specific vulnerability assessment including model vulnerability scanning, dependency analysis for ML frameworks, and AI supply chain security."
+    },
+    {
+      "id": "AIS-08",
+      "title": "Input Validation",
+      "controls": [
+        "SA-08",
+        "SC-07",
+        "AC-04"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SA-08 covers security engineering principles; SC-07 provides boundary protection; AC-04 addresses information flow enforcement for API security.",
+      "gaps": "AICM AIS-08 specifically addresses AI API security including model inference endpoint protection, rate limiting for AI services, and input validation for model queries. NIST lacks AI API-specific controls."
+    },
+    {
+      "id": "AIS-09",
+      "title": "Output Validation",
+      "controls": [
+        "SA-11",
+        "SI-07",
+        "CM-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SA-11 covers developer testing; SI-07 addresses software integrity; CM-03 covers change control. These partially address AI model integrity.",
+      "gaps": "AICM requires AI model integrity verification including cryptographic model signing, tamper detection for model weights, and inference integrity validation."
+    },
+    {
+      "id": "AIS-10",
+      "title": "API Security",
+      "controls": [
+        "SA-08",
+        "SA-11",
+        "RA-05"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-08/SA-11 cover security engineering and testing; RA-05 covers vulnerability scanning. These provide a general framework but lack AI specificity.",
+      "gaps": "AICM addresses adversarial robustness requirements including adversarial input detection, model hardening against evasion attacks, and robustness testing methodologies."
+    },
+    {
+      "id": "AIS-11",
+      "title": "Agents Security Boundaries",
+      "controls": [
+        "SA-03",
+        "SA-15",
+        "CM-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SA-03 covers development lifecycle; SA-15 addresses development standards; CM-03 covers change control for ML pipeline security.",
+      "gaps": "AICM requires ML pipeline security controls including secure training infrastructure, feature store protection, and automated ML security gates."
+    },
+    {
+      "id": "AIS-12",
+      "title": "Source Code Managemement",
+      "controls": [
+        "SI-04",
+        "CA-07",
+        "AU-06"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-04 covers information system monitoring; CA-07 provides continuous monitoring; AU-06 covers audit review and analysis.",
+      "gaps": "AICM addresses AI-specific runtime monitoring including model behavior anomaly detection, inference drift monitoring, and automated model rollback triggers."
+    },
+    {
+      "id": "AIS-13",
+      "title": "AI Sandboxing",
+      "controls": [
+        "SA-11",
+        "CA-08",
+        "SI-07"
+      ],
+      "coverage_pct": 58,
+      "rationale": "SA-11 covers developer testing; CA-08 addresses penetration testing; SI-07 covers software integrity verification.",
+      "gaps": "AICM requires AI red teaming including adversarial ML attacks, prompt injection testing, model extraction attempts, and AI-specific threat simulation."
+    },
+    {
+      "id": "AIS-14",
+      "title": "AI Cache Protection",
+      "controls": [
+        "SA-08",
+        "SC-13",
+        "SI-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-08 covers security engineering; SC-13 addresses cryptographic protection; SI-07 covers software integrity.",
+      "gaps": "AICM addresses model provenance and supply chain security including model origin verification, training data lineage, and third-party model validation."
+    },
+    {
+      "id": "AIS-15",
+      "title": "Prompt Differentation",
+      "controls": [
+        "SA-03",
+        "SA-08",
+        "SA-11"
+      ],
+      "coverage_pct": 52,
+      "rationale": "SA-03/SA-08/SA-11 provide general software security lifecycle controls applicable to AI development.",
+      "gaps": "AICM requires responsible AI development practices including fairness testing, explainability requirements, and human oversight integration. NIST 800-53 does not address responsible AI."
+    },
+    {
+      "id": "BCR-01",
+      "title": "Business Continuity Management Policy and Procedures",
+      "controls": [
+        "CP-01",
+        "CP-02"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-01 establishes contingency planning policy; CP-02 defines contingency plans.",
+      "gaps": "AICM extends BCR to AI system resilience including model failover, graceful degradation of AI services, and fallback to non-AI decision paths."
+    },
+    {
+      "id": "BCR-02",
+      "title": "Risk Assessment and Impact Analysis",
+      "controls": [
+        "CP-02",
+        "RA-03",
+        "RA-09"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CP-02 covers contingency planning; RA-03 addresses risk assessment; RA-09 covers criticality analysis.",
+      "gaps": "AICM requires AI-specific business impact analysis including model dependency mapping and AI service criticality assessment."
+    },
+    {
+      "id": "BCR-03",
+      "title": "Business Continuity Strategy",
+      "controls": [
+        "CP-02",
+        "CP-07",
+        "CP-08"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CP-02/CP-07/CP-08 address contingency planning, alternate processing sites, and telecommunications services.",
+      "gaps": "AICM extends to AI-specific redundancy including model replication, distributed inference capabilities, and training infrastructure resilience."
+    },
+    {
+      "id": "BCR-04",
+      "title": "Business Continuity Planning",
+      "controls": [
+        "CP-02",
+        "CP-03",
+        "CP-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-02 covers contingency planning; CP-03/CP-04 address testing and training for continuity.",
+      "gaps": "AICM requires AI system continuity testing including model failover validation and AI service degradation drills."
+    },
+    {
+      "id": "BCR-05",
+      "title": "Documentation",
+      "controls": [
+        "PL-02",
+        "PL-07",
+        "CP-02"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PL-02 covers security concept of operations; PL-07 covers security concept consistency; CP-02 addresses contingency planning.",
+      "gaps": "AICM documentation requirements extend to AI model documentation, training data documentation, and AI system architecture records."
+    },
+    {
+      "id": "BCR-06",
+      "title": "Business Continuity Exercises",
+      "controls": [
+        "CP-03",
+        "CP-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-03 covers contingency plan testing; CP-04 addresses training for contingency roles.",
+      "gaps": "AICM testing extends to AI-specific scenarios including model corruption recovery and training data restoration."
+    },
+    {
+      "id": "BCR-07",
+      "title": "Communication",
+      "controls": [
+        "CP-02",
+        "CP-08",
+        "IR-06"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CP-02/CP-08 address contingency and telecommunications; IR-06 covers incident reporting.",
+      "gaps": "AICM addresses AI-specific communication plans during outages including model performance degradation notifications."
+    },
+    {
+      "id": "BCR-08",
+      "title": "Backup",
+      "controls": [
+        "CP-06",
+        "CP-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-06 covers alternate storage sites; CP-09 addresses information system backup.",
+      "gaps": "AICM extends backup to AI artifacts including model checkpoints, training data snapshots, and feature store backups."
+    },
+    {
+      "id": "BCR-09",
+      "title": "Disaster Response Plan",
+      "controls": [
+        "CP-02",
+        "CP-10",
+        "IR-01"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CP-02 addresses contingency planning; CP-10 covers system recovery; IR-01 establishes incident response policy.",
+      "gaps": "AICM requires AI-specific recovery including model restoration, training pipeline recovery, and AI service reconstitution procedures."
+    },
+    {
+      "id": "BCR-10",
+      "title": "Response Plan Exercise",
+      "controls": [
+        "CP-04",
+        "IR-03"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CP-04 covers contingency training; IR-03 addresses incident response testing.",
+      "gaps": "AICM requires impact analysis specific to AI system failures including cascading model dependency impacts."
+    },
+    {
+      "id": "BCR-11",
+      "title": "Equipment Redundancy",
+      "controls": [
+        "CP-07",
+        "CP-08",
+        "PE-11"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-07/CP-08 cover alternate processing and telecommunications; PE-11 addresses emergency power.",
+      "gaps": "AICM extends to AI infrastructure resilience including GPU cluster failover and distributed training resilience."
+    },
+    {
+      "id": "CCC-01",
+      "title": "Change Management Policy and Procedures",
+      "controls": [
+        "CM-01",
+        "CM-03",
+        "CM-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CM-01 establishes configuration management policy; CM-03 covers change control; CM-09 addresses configuration management plans.",
+      "gaps": "AICM extends to AI model versioning, ML experiment tracking, and model configuration management."
+    },
+    {
+      "id": "CCC-02",
+      "title": "Quality Testing",
+      "controls": [
+        "CM-03",
+        "CM-04",
+        "SA-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-03 covers change control; CM-04 addresses impact analysis; SA-11 covers developer testing.",
+      "gaps": "AICM requires AI-specific change impact analysis including model performance regression testing and bias impact assessment."
+    },
+    {
+      "id": "CCC-03",
+      "title": "Change Management Technology",
+      "controls": [
+        "CM-03",
+        "CM-05",
+        "CM-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CM-03 covers change control processes; CM-05 addresses access restrictions; CM-09 covers configuration plans.",
+      "gaps": "AICM extends change control to AI model deployment pipelines and training data change management."
+    },
+    {
+      "id": "CCC-04",
+      "title": "Change Authorization",
+      "controls": [
+        "CM-05",
+        "SI-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-05 restricts changes to configuration items; SI-07 provides software and information integrity verification.",
+      "gaps": "AICM requires model integrity verification during deployment and runtime integrity monitoring."
+    },
+    {
+      "id": "CCC-05",
+      "title": "Change Agreements",
+      "controls": [
+        "SA-04",
+        "CM-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-04 covers acquisition processes; CM-03 addresses change control.",
+      "gaps": "AICM addresses change control for third-party AI models and pre-trained model integration."
+    },
+    {
+      "id": "CCC-06",
+      "title": "Change Management Baseline",
+      "controls": [
+        "CM-02",
+        "CM-06"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-02 establishes baseline configurations; CM-06 covers configuration settings enforcement.",
+      "gaps": "AICM extends to AI infrastructure baseline configurations including GPU cluster settings and model serving configurations."
+    },
+    {
+      "id": "CCC-07",
+      "title": "Detection of Baseline Deviation",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "SI-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-02/CM-03 cover baselines and change control; SI-07 provides integrity verification.",
+      "gaps": "AICM requires detection of unauthorized changes to AI models, training data, and inference pipelines."
+    },
+    {
+      "id": "CCC-08",
+      "title": "Exception Management",
+      "controls": [
+        "CA-05",
+        "PM-09",
+        "PL-02"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-05 tracks remediation via POA&M; PM-09 covers risk management strategy; PL-02 covers security concept of operations.",
+      "gaps": "AICM technology risk management extends to AI technology risk including model risk, data risk, and algorithmic risk."
+    },
+    {
+      "id": "CCC-09",
+      "title": "Change Restoration",
+      "controls": [
+        "CP-09",
+        "CP-10",
+        "CM-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CP-09 covers backup; CP-10 addresses recovery; CM-03 covers change control for rollback procedures.",
+      "gaps": "AICM requires AI-specific rollback including model version rollback, training data rollback, and feature store restoration."
+    },
+    {
+      "id": "CEK-01",
+      "title": "Encryption and Key Management Policy and Procedures",
+      "controls": [
+        "SC-01",
+        "SC-12",
+        "SC-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-01 establishes system and communications protection policy; SC-12 covers key establishment; SC-13 addresses cryptographic protection.",
+      "gaps": "AICM extends to encryption for AI training data, model weights, and inference data in transit/at rest."
+    },
+    {
+      "id": "CEK-02",
+      "title": "CEK Roles and Responsibilities",
+      "controls": [
+        "PS-01",
+        "PL-02",
+        "SC-12"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PS-01 covers personnel security policy; PL-02 covers security concepts; SC-12 addresses key management roles.",
+      "gaps": "AICM specifies key management roles for AI systems including model encryption key custodians."
+    },
+    {
+      "id": "CEK-03",
+      "title": "Data Encryption",
+      "controls": [
+        "SC-08",
+        "SC-13",
+        "SC-28"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-08 covers transmission confidentiality; SC-13 addresses cryptographic protection; SC-28 covers protection at rest.",
+      "gaps": "AICM extends data encryption to AI-specific data including training datasets, model parameters, and inference results."
+    },
+    {
+      "id": "CEK-04",
+      "title": "Encryption Algorithm",
+      "controls": [
+        "SC-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-13 directly addresses the use of approved cryptographic algorithms and mechanisms.",
+      "gaps": "AICM may require emerging cryptographic standards for AI-specific use cases like homomorphic encryption for privacy-preserving ML."
+    },
+    {
+      "id": "CEK-05",
+      "title": "Encryption Change Management",
+      "controls": [
+        "CM-03",
+        "SC-13"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-03 covers change control; SC-13 addresses cryptographic mechanisms. Together they support encryption change management.",
+      "gaps": "AICM addresses cryptographic agility for AI systems including post-quantum readiness for model protection."
+    },
+    {
+      "id": "CEK-06",
+      "title": "Encryption Change Cost Benefit Analysis",
+      "controls": [
+        "RA-03",
+        "SC-13"
+      ],
+      "coverage_pct": 78,
+      "rationale": "RA-03 covers risk assessment; SC-13 addresses cryptographic protection. Together they support risk-based encryption.",
+      "gaps": "AICM requires risk assessment of cryptographic approaches for AI data including training data sensitivity classification."
+    },
+    {
+      "id": "CEK-07",
+      "title": "Encryption Risk Management",
+      "controls": [
+        "RA-03",
+        "RA-07",
+        "SC-13"
+      ],
+      "coverage_pct": 78,
+      "rationale": "RA-03/RA-07 cover risk assessment and response; SC-13 addresses cryptography.",
+      "gaps": "AICM extends to AI-specific risk assessment of cryptographic controls for model and data protection."
+    },
+    {
+      "id": "CEK-08",
+      "title": "Customer Key Management Capability",
+      "controls": [
+        "SC-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-12 directly addresses cryptographic key establishment and management.",
+      "gaps": "AICM extends key management to AI-specific scenarios including federated learning key distribution."
+    },
+    {
+      "id": "CEK-09",
+      "title": "Encryption and Key Management Audit",
+      "controls": [
+        "AU-02",
+        "CA-02",
+        "SC-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-02 covers audit events; CA-02 addresses assessments; SC-12 covers key management.",
+      "gaps": "AICM requires monitoring and auditing of cryptographic operations in AI pipelines."
+    },
+    {
+      "id": "CEK-10",
+      "title": "Key Generation",
+      "controls": [
+        "SC-12",
+        "SC-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-12/SC-13 comprehensively cover key management and cryptographic protection.",
+      "gaps": "AICM specifies key generation requirements for AI-specific encryption including hardware security module integration."
+    },
+    {
+      "id": "CEK-11",
+      "title": "Key Purpose",
+      "controls": [
+        "SC-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-12 addresses key establishment and management including key distribution.",
+      "gaps": "AICM extends to secure key distribution for distributed AI systems and federated learning."
+    },
+    {
+      "id": "CEK-12",
+      "title": "Key Rotation",
+      "controls": [
+        "SC-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-12 addresses key management including key access and authorization.",
+      "gaps": "AICM extends key access controls to AI pipeline components and model serving infrastructure."
+    },
+    {
+      "id": "CEK-13",
+      "title": "Key Revocation",
+      "controls": [
+        "SC-12",
+        "SC-17"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-12 covers key management; SC-17 addresses public key infrastructure certificates.",
+      "gaps": "AICM extends certificate management to AI service endpoints and model signing certificates."
+    },
+    {
+      "id": "CEK-14",
+      "title": "Key Destruction",
+      "controls": [
+        "MP-06",
+        "SC-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "MP-06 covers media sanitization; SC-12 addresses key management including destruction.",
+      "gaps": "AICM extends key destruction to AI-specific contexts including model decommissioning and training data deletion keys."
+    },
+    {
+      "id": "CEK-15",
+      "title": "Key Activation",
+      "controls": [
+        "SC-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-12 comprehensively covers key lifecycle management including activation and suspension.",
+      "gaps": "AICM extends key activation/deactivation to AI model lifecycle events."
+    },
+    {
+      "id": "CEK-16",
+      "title": "Key Suspension",
+      "controls": [
+        "SC-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-12 covers key management including key recovery mechanisms.",
+      "gaps": "AICM extends key recovery to AI-specific disaster recovery scenarios."
+    },
+    {
+      "id": "CEK-17",
+      "title": "Key Deactivation",
+      "controls": [
+        "SC-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-12 covers key management including key escrow where applicable.",
+      "gaps": "AICM addresses AI-specific key escrow requirements for regulated AI systems."
+    },
+    {
+      "id": "CEK-18",
+      "title": "Key Archival",
+      "controls": [
+        "CP-09",
+        "SC-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-09 covers backup; SC-12 addresses key management including key archiving.",
+      "gaps": "AICM extends key archiving to long-term AI model preservation and reproducibility requirements."
+    },
+    {
+      "id": "CEK-19",
+      "title": "Key Compromise",
+      "controls": [
+        "IR-01",
+        "IR-06",
+        "SC-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IR-01/IR-06 cover incident response; SC-12 addresses key management during security incidents.",
+      "gaps": "AICM addresses key compromise response in AI contexts including model re-encryption procedures."
+    },
+    {
+      "id": "CEK-20",
+      "title": "Key Recovery",
+      "controls": [
+        "CP-09",
+        "SC-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CP-09 covers backup; SC-12 addresses key management including key backup procedures.",
+      "gaps": "AICM extends key backup to AI-specific infrastructure including training cluster key management."
+    },
+    {
+      "id": "CEK-21",
+      "title": "Key Inventory Management",
+      "controls": [
+        "CM-08",
+        "SC-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-08 covers information system component inventory; SC-12 addresses key management inventory.",
+      "gaps": "AICM requires comprehensive key inventory for AI systems including model encryption keys and data protection keys."
+    },
+    {
+      "id": "DCS-01",
+      "title": "Off-Site Equipment Disposal Policy and Procedures",
+      "controls": [
+        "MP-06",
+        "PE-01"
+      ],
+      "coverage_pct": 85,
+      "rationale": "MP-06 covers media sanitization; PE-01 addresses physical access authorizations.",
+      "gaps": "AICM extends to security of AI-specific hardware including GPU clusters and specialized AI accelerators."
+    },
+    {
+      "id": "DCS-02",
+      "title": "Off-Site Transfer Authorization Policy and Procedures",
+      "controls": [
+        "MP-05",
+        "PE-01",
+        "PE-16"
+      ],
+      "coverage_pct": 82,
+      "rationale": "MP-05 covers media transport; PE-01/PE-16 address physical access and delivery/removal.",
+      "gaps": "AICM addresses secure handling of AI hardware and specialized computing equipment."
+    },
+    {
+      "id": "DCS-03",
+      "title": "Secure Area Policy and Procedures",
+      "controls": [
+        "PE-01",
+        "PE-02",
+        "PE-03"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-01/PE-02/PE-03 comprehensively cover physical access authorization, enforcement, and monitoring.",
+      "gaps": "AICM extends physical access controls to AI training facilities and GPU datacenters."
+    },
+    {
+      "id": "DCS-04",
+      "title": "Secure Media Transportation Policy and Procedures",
+      "controls": [
+        "MP-01",
+        "MP-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "MP-01 establishes media protection policy; MP-05 covers media transport.",
+      "gaps": "AICM addresses handling of AI-specific media including training data storage and model weight archives."
+    },
+    {
+      "id": "DCS-05",
+      "title": "Assets Classification",
+      "controls": [
+        "CM-08",
+        "MP-04",
+        "RA-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-08 covers asset inventory; MP-04 addresses media storage; RA-02 covers security categorization.",
+      "gaps": "AICM extends asset classification to AI-specific assets including training data, models, and inference endpoints."
+    },
+    {
+      "id": "DCS-06",
+      "title": "Assets Cataloguing and Tracking",
+      "controls": [
+        "CM-08",
+        "PE-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-08 covers component inventory; PE-05 addresses physical access monitoring.",
+      "gaps": "AICM extends asset management to AI infrastructure lifecycle including GPU deprecation and AI hardware refresh."
+    },
+    {
+      "id": "DCS-07",
+      "title": "Controlled Physical Access Points",
+      "controls": [
+        "PE-03",
+        "PE-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PE-03 covers physical access monitoring; PE-06 addresses visitor management.",
+      "gaps": "AICM extends visitor controls to sensitive AI facilities."
+    },
+    {
+      "id": "DCS-08",
+      "title": "Equipment Identification",
+      "controls": [
+        "CM-08",
+        "IA-03"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-08 covers component inventory; IA-03 addresses device identification and authentication.",
+      "gaps": "AICM extends device management to AI training nodes and inference hardware."
+    },
+    {
+      "id": "DCS-09",
+      "title": "Secure Area Authorization",
+      "controls": [
+        "PE-02",
+        "PE-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PE-02/PE-03 cover physical access control and monitoring.",
+      "gaps": "AICM extends to access control for AI compute facilities."
+    },
+    {
+      "id": "DCS-10",
+      "title": "Surveillance System",
+      "controls": [
+        "PE-06",
+        "PE-08"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PE-06 covers monitoring; PE-08 addresses visitor access records.",
+      "gaps": "AICM extends surveillance to AI-specific facilities."
+    },
+    {
+      "id": "DCS-11",
+      "title": "Adverse Event Response Training",
+      "controls": [
+        "AT-03",
+        "IR-02",
+        "PE-06"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AT-03 covers security training; IR-02 addresses incident response training; PE-06 covers monitoring.",
+      "gaps": "AICM requires AI facility-specific security awareness including handling of sensitive training data."
+    },
+    {
+      "id": "DCS-12",
+      "title": "Cabling Security",
+      "controls": [
+        "PE-04",
+        "PE-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PE-04 covers transmission medium access control; PE-09 addresses power and cabling.",
+      "gaps": "AICM extends cabling security to high-bandwidth AI training interconnects."
+    },
+    {
+      "id": "DCS-13",
+      "title": "Environmental Systems",
+      "controls": [
+        "PE-13",
+        "PE-14",
+        "PE-15"
+      ],
+      "coverage_pct": 88,
+      "rationale": "PE-13/PE-14/PE-15 comprehensively cover fire, temperature/humidity, and water damage protection.",
+      "gaps": "AICM extends environmental controls to high-density AI compute environments with specific cooling requirements."
+    },
+    {
+      "id": "DCS-14",
+      "title": "Secure Utilities",
+      "controls": [
+        "PE-09",
+        "PE-10",
+        "PE-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PE-09 covers power equipment; PE-10 addresses emergency shutoff; PE-11 covers emergency power.",
+      "gaps": "AICM extends power management to high-power AI training clusters."
+    },
+    {
+      "id": "DCS-15",
+      "title": "Equipment Location",
+      "controls": [
+        "PE-05",
+        "PE-18"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PE-05 covers access control for output devices; PE-18 addresses location of information system components.",
+      "gaps": "AICM extends equipment location considerations to AI infrastructure placement and edge AI deployment."
+    },
+    {
+      "id": "DSP-01",
+      "title": "Security and Privacy Policy and Procedures",
+      "controls": [
+        "AC-01",
+        "PL-01",
+        "PT-01"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-01 establishes access control policy; PL-01 covers planning policy; PT-01 addresses personally identifiable information processing policy.",
+      "gaps": "AICM extends to AI-specific data security policies including training data governance, model data handling, and AI output data protection."
+    },
+    {
+      "id": "DSP-02",
+      "title": "Secure Disposal",
+      "controls": [
+        "MP-06",
+        "SI-12"
+      ],
+      "coverage_pct": 78,
+      "rationale": "MP-06 covers media sanitization; SI-12 addresses information management and retention.",
+      "gaps": "AICM extends data handling to AI training data lifecycle, model artifact management, and synthetic data governance."
+    },
+    {
+      "id": "DSP-03",
+      "title": "Data Inventory",
+      "controls": [
+        "CM-08",
+        "PM-05",
+        "PT-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-08 covers inventory; PM-05 addresses information security workforce; PT-03 covers data minimization.",
+      "gaps": "AICM requires AI-specific data inventory including training datasets, feature stores, and model registries."
+    },
+    {
+      "id": "DSP-04",
+      "title": "Data Classification",
+      "controls": [
+        "AC-16",
+        "RA-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-16 covers security and privacy attributes; RA-02 addresses security categorization.",
+      "gaps": "AICM extends data classification to AI data types including training data sensitivity, model weight classification, and inference data categorization."
+    },
+    {
+      "id": "DSP-05",
+      "title": "Data Flow Documentation",
+      "controls": [
+        "AC-04",
+        "CA-09",
+        "PL-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-04 covers information flow enforcement; CA-09 addresses internal connections; PL-02 covers security concepts.",
+      "gaps": "AICM extends data flow mapping to AI pipelines including training data flows, model serving paths, and feedback loops."
+    },
+    {
+      "id": "DSP-06",
+      "title": "Data Ownership and Stewardship",
+      "controls": [
+        "AC-16",
+        "PM-05",
+        "PT-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "AC-16 covers security attributes; PM-05 addresses workforce; PT-01 covers PII processing.",
+      "gaps": "AICM requires data ownership for AI systems including training data provenance, model IP ownership, and synthetic data rights."
+    },
+    {
+      "id": "DSP-07",
+      "title": "Data Protection by Design and Default",
+      "controls": [
+        "SA-08",
+        "SC-28",
+        "PT-01"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-08 covers security engineering; SC-28 provides protection at rest; PT-01 addresses PII processing policy.",
+      "gaps": "AICM extends privacy by design to AI systems including privacy-preserving ML techniques, differential privacy, and federated learning."
+    },
+    {
+      "id": "DSP-08",
+      "title": "Data Privacy by Design and Default",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PT-01/PT-02/PT-03 address PII processing, authority, and data minimization.",
+      "gaps": "AICM extends personal data handling to AI-specific scenarios including automated profiling, AI-driven decision making, and training data containing PII."
+    },
+    {
+      "id": "DSP-09",
+      "title": "Data Protection Impact Assessment",
+      "controls": [
+        "PT-01",
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PT-01 covers PII processing; RA-03/RA-08 address risk assessment and privacy impact.",
+      "gaps": "AICM requires AI-specific data protection impact assessments including algorithmic impact assessments and AI bias assessments."
+    },
+    {
+      "id": "DSP-10",
+      "title": "Sensitive Data Transfer",
+      "controls": [
+        "AC-04",
+        "SC-08",
+        "SC-13"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-04 enforces information flow; SC-08 provides transmission confidentiality; SC-13 covers cryptographic protection.",
+      "gaps": "AICM extends data transfer controls to AI-specific transfers including model weight distribution and federated learning communications."
+    },
+    {
+      "id": "DSP-11",
+      "title": "Personal Data Access, Reversal, Rectification and Deletion",
+      "controls": [
+        "PT-04",
+        "PT-05",
+        "PT-06"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PT-04/PT-05/PT-06 cover individual consent, privacy notice, and system of records.",
+      "gaps": "AICM extends consent management to AI-specific scenarios including consent for automated decision-making and AI training data usage."
+    },
+    {
+      "id": "DSP-12",
+      "title": "Limitation of Purpose in Personal Data Processing",
+      "controls": [
+        "PT-02",
+        "PT-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "PT-02 covers authority for PII processing; PT-03 addresses data minimization and retention.",
+      "gaps": "AICM extends data purpose limitation to AI including training data reuse restrictions, model purpose limitations, and transfer learning constraints."
+    },
+    {
+      "id": "DSP-13",
+      "title": "Personal Data Sub-processing",
+      "controls": [
+        "PT-01",
+        "SA-04",
+        "SA-09"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-01 covers PII processing; SA-04/SA-09 address acquisition and external systems.",
+      "gaps": "AICM extends to third-party AI data processing including cloud AI services, third-party model APIs, and data annotation services."
+    },
+    {
+      "id": "DSP-14",
+      "title": "Disclosure of Data Sub-processors",
+      "controls": [
+        "PT-01",
+        "SA-09"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-01 covers PII processing policy; SA-09 addresses external information system services.",
+      "gaps": "AICM addresses cross-border AI data transfer restrictions including model training across jurisdictions and AI service localization requirements."
+    },
+    {
+      "id": "DSP-15",
+      "title": "Limitation of Production Data Use",
+      "controls": [
+        "CM-04",
+        "PT-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "CM-04 covers security impact analysis; PT-03 addresses data minimization.",
+      "gaps": "AICM extends data retention to AI including training data retention, model artifact retention, and experiment metadata preservation."
+    },
+    {
+      "id": "DSP-16",
+      "title": "Data Retention and Deletion",
+      "controls": [
+        "MP-06",
+        "PT-01",
+        "SI-12"
+      ],
+      "coverage_pct": 78,
+      "rationale": "MP-06 covers sanitization; PT-01 addresses PII processing; SI-12 covers information management.",
+      "gaps": "AICM extends secure disposal to AI artifacts including model deletion, training data sanitization, and inference log purging."
+    },
+    {
+      "id": "DSP-17",
+      "title": "Sensitive Data Protection",
+      "controls": [
+        "AC-03",
+        "SC-08",
+        "SC-28"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-03 covers access enforcement; SC-08/SC-28 address data protection in transit and at rest.",
+      "gaps": "AICM extends data protection to AI-specific data including model weights, embeddings, and training data encryption."
+    },
+    {
+      "id": "DSP-18",
+      "title": "Disclosure Notification",
+      "controls": [
+        "IR-06",
+        "PT-01"
+      ],
+      "coverage_pct": 72,
+      "rationale": "IR-06 covers incident reporting; PT-01 addresses PII processing policy.",
+      "gaps": "AICM extends breach notification to AI-specific incidents including model compromise, training data exposure, and adversarial attack disclosure."
+    },
+    {
+      "id": "DSP-19",
+      "title": "Data Location",
+      "controls": [
+        "PT-01",
+        "SA-09"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-01 covers PII processing; SA-09 addresses external information system services.",
+      "gaps": "AICM extends subprocessor management to AI-specific scenarios including third-party model providers and data annotation subcontractors."
+    },
+    {
+      "id": "DSP-20",
+      "title": "Data Provenance and Transparency",
+      "controls": [
+        "PT-01",
+        "PT-03",
+        "SA-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PT-01/PT-03 cover PII processing and minimization; SA-08 covers security engineering principles.",
+      "gaps": "AICM addresses training data governance including data provenance, consent for training use, data quality requirements, and bias assessment in training datasets. NIST lacks AI training data-specific controls."
+    },
+    {
+      "id": "DSP-21",
+      "title": "Data Poisoning Prevention & Detection",
+      "controls": [
+        "PT-01",
+        "SI-12",
+        "RA-03"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PT-01 covers PII processing; SI-12 addresses information management; RA-03 covers risk assessment.",
+      "gaps": "AICM addresses synthetic data governance including generation controls, privacy guarantees, utility validation, and synthetic data lineage tracking."
+    },
+    {
+      "id": "DSP-22",
+      "title": "Privacy Enhancing Technologies",
+      "controls": [
+        "AC-04",
+        "PT-01",
+        "SC-13"
+      ],
+      "coverage_pct": 52,
+      "rationale": "AC-04 covers information flow; PT-01 addresses PII processing; SC-13 covers cryptographic protection for privacy-preserving computation.",
+      "gaps": "AICM addresses privacy-preserving machine learning techniques including differential privacy, federated learning governance, and secure multi-party computation for AI. NIST does not address these AI-specific privacy techniques."
+    },
+    {
+      "id": "DSP-23",
+      "title": "Data Integrity Check",
+      "controls": [
+        "PT-01",
+        "PT-04",
+        "SA-09"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PT-01/PT-04 cover PII processing and consent; SA-09 addresses external services.",
+      "gaps": "AICM addresses AI output data governance including generated content attribution, deepfake detection requirements, and AI-generated data labeling obligations."
+    },
+    {
+      "id": "DSP-24",
+      "title": "Data Differentiation and Relevance",
+      "controls": [
+        "SI-12",
+        "PT-03",
+        "AU-02"
+      ],
+      "coverage_pct": 50,
+      "rationale": "SI-12 covers information management; PT-03 addresses data minimization; AU-02 covers audit events.",
+      "gaps": "AICM addresses model data lineage requirements including end-to-end traceability from training data through model artifacts to inference outputs. NIST does not address AI data lineage."
+    },
+    {
+      "id": "GRC-01",
+      "title": "Governance Program Policy and Procedures",
+      "controls": [
+        "PL-01",
+        "PM-01",
+        "PM-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PL-01/PM-01/PM-02 establish security planning, program, and roles.",
+      "gaps": "AICM extends governance to AI-specific oversight including AI ethics boards, model governance committees, and algorithmic accountability structures."
+    },
+    {
+      "id": "GRC-02",
+      "title": "Risk Management Program",
+      "controls": [
+        "PM-09",
+        "RA-01",
+        "RA-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-09 covers risk management strategy; RA-01/RA-03 establish risk assessment policy and process.",
+      "gaps": "AICM extends risk management to AI-specific risks including model risk, algorithmic bias, and AI system safety."
+    },
+    {
+      "id": "GRC-03",
+      "title": "Organizational Policy Reviews",
+      "controls": [
+        "PL-01",
+        "PM-01"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PL-01 covers planning policy; PM-01 establishes information security program.",
+      "gaps": "AICM requires AI-specific security program elements including AI governance frameworks and responsible AI programs."
+    },
+    {
+      "id": "GRC-04",
+      "title": "Policy Exception Process",
+      "controls": [
+        "CA-05",
+        "PL-02"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-05 covers plans of action; PL-02 addresses security concept of operations.",
+      "gaps": "AICM extends to AI governance roadmaps and AI security program maturity tracking."
+    },
+    {
+      "id": "GRC-05",
+      "title": "Information Security Program",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-03"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PM-01/PM-02/PM-03 cover security program, roles, and capital planning.",
+      "gaps": "AICM extends to AI-specific resource allocation including AI security budget, AI talent requirements, and AI infrastructure investment."
+    },
+    {
+      "id": "GRC-06",
+      "title": "Governance Responsibility Model",
+      "controls": [
+        "PL-02",
+        "PM-01",
+        "PM-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PL-02 covers security concepts; PM-01/PM-02 establish program and roles.",
+      "gaps": "AICM extends security program to AI-specific components including AI risk management frameworks and AI security operations."
+    },
+    {
+      "id": "GRC-07",
+      "title": "Information System Regulatory Mapping",
+      "controls": [
+        "CA-02",
+        "PM-01",
+        "PL-02"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 covers assessments; PM-01 establishes program; PL-02 covers security concepts.",
+      "gaps": "AICM requires AI-specific policy review cycles including updates for emerging AI threats and regulatory changes."
+    },
+    {
+      "id": "GRC-08",
+      "title": "Special Interest Groups",
+      "controls": [
+        "PM-15",
+        "PM-16"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PM-15 covers security groups and associations; PM-16 addresses threat awareness program.",
+      "gaps": "AICM extends stakeholder engagement to AI-specific parties including AI researchers, ethics boards, and AI regulators."
+    },
+    {
+      "id": "GRC-09",
+      "title": "Acceptable Use of the AI Service",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "RA-01"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-01/PM-09 cover security program and risk strategy; RA-01 establishes risk assessment policy.",
+      "gaps": "AICM addresses AI governance frameworks including responsible AI principles, AI ethics policies, and organizational AI strategy alignment. NIST 800-53 does not address AI governance specifically."
+    },
+    {
+      "id": "GRC-10",
+      "title": "AI Impact Assessment",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-01/PM-02 establish security program and roles; PM-09 covers risk management strategy.",
+      "gaps": "AICM requires AI ethics oversight including ethics review boards, algorithmic impact assessments, and human rights due diligence for AI systems."
+    },
+    {
+      "id": "GRC-11",
+      "title": "Bias and Fairness Assessment",
+      "controls": [
+        "RA-01",
+        "RA-03",
+        "PM-09"
+      ],
+      "coverage_pct": 55,
+      "rationale": "RA-01/RA-03 cover risk assessment; PM-09 addresses risk management strategy.",
+      "gaps": "AICM addresses AI-specific risk management including model risk quantification, AI system risk taxonomy, and AI risk appetite definition."
+    },
+    {
+      "id": "GRC-12",
+      "title": "Ethics Committee",
+      "controls": [
+        "PM-01",
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 52,
+      "rationale": "PM-01 establishes program; CA-02/CA-07 cover assessment and monitoring.",
+      "gaps": "AICM addresses AI regulatory compliance monitoring including tracking of emerging AI regulations (EU AI Act, state AI laws) and proactive compliance adaptation."
+    },
+    {
+      "id": "GRC-13",
+      "title": "Explainability Requirement",
+      "controls": [
+        "PM-02",
+        "PS-01",
+        "AT-01"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-02 covers roles; PS-01 addresses personnel security; AT-01 covers training policy.",
+      "gaps": "AICM requires AI-specific roles and responsibilities including AI safety officers, model validators, and AI ethics leads."
+    },
+    {
+      "id": "GRC-14",
+      "title": "Explainability Evaluation",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "RA-03"
+      ],
+      "coverage_pct": 48,
+      "rationale": "PM-01/PM-09/RA-03 provide general governance and risk management frameworks.",
+      "gaps": "AICM addresses responsible AI principles including fairness, accountability, transparency, and explainability (FATE) requirements not covered by NIST 800-53."
+    },
+    {
+      "id": "GRC-15",
+      "title": "Human supervision",
+      "controls": [
+        "PM-15",
+        "PM-16",
+        "CA-07"
+      ],
+      "coverage_pct": 52,
+      "rationale": "PM-15/PM-16 cover external engagement and threat awareness; CA-07 covers continuous monitoring.",
+      "gaps": "AICM requires AI incident reporting to regulators and stakeholders including mandatory disclosure of AI system failures and bias incidents."
+    },
+    {
+      "id": "HRS-01",
+      "title": "Background Screening Policy and Procedures",
+      "controls": [
+        "PS-01",
+        "PS-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PS-01 establishes personnel security policy; PS-03 covers personnel screening.",
+      "gaps": "AICM extends screening to AI-specific roles including data scientists, ML engineers, and AI ethics reviewers."
+    },
+    {
+      "id": "HRS-02",
+      "title": "Acceptable Use of Technology Policy and Procedures",
+      "controls": [
+        "AC-20",
+        "PL-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-20 covers use of external systems; PL-04 addresses rules of behavior.",
+      "gaps": "AICM extends acceptable use to AI systems including acceptable use of AI tools, model usage policies, and AI output verification requirements."
+    },
+    {
+      "id": "HRS-03",
+      "title": "Clean Desk Policy and Procedures",
+      "controls": [
+        "AC-11",
+        "MP-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-11 covers session lock; MP-02 addresses media access.",
+      "gaps": "AICM extends clean desk to AI workstation security including training data access and model development environment protection."
+    },
+    {
+      "id": "HRS-04",
+      "title": "Remote and Home Working Policy and Procedures",
+      "controls": [
+        "AC-17",
+        "PE-17"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-17 covers remote access; PE-17 addresses alternate work site security.",
+      "gaps": "AICM extends remote work security to AI development including remote access to training infrastructure and model repositories."
+    },
+    {
+      "id": "HRS-05",
+      "title": "Asset returns",
+      "controls": [
+        "PS-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PS-04 covers personnel termination procedures.",
+      "gaps": "AICM extends termination to AI-specific access revocation including model repositories, training infrastructure, and AI service accounts."
+    },
+    {
+      "id": "HRS-06",
+      "title": "Employment Termination",
+      "controls": [
+        "PS-04",
+        "PS-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "PS-04/PS-05 cover personnel termination and transfer procedures.",
+      "gaps": "AICM extends role change procedures to AI-specific access including model governance roles and data access permissions."
+    },
+    {
+      "id": "HRS-07",
+      "title": "Employment Agreement Process",
+      "controls": [
+        "PS-01",
+        "PS-06"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PS-01 covers personnel security policy; PS-06 addresses access agreements.",
+      "gaps": "AICM extends non-disclosure to AI-specific intellectual property including model architectures, training methodologies, and AI research."
+    },
+    {
+      "id": "HRS-08",
+      "title": "Employment Agreement Content",
+      "controls": [
+        "PL-04",
+        "PS-06"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PL-04 covers rules of behavior; PS-06 addresses access agreements.",
+      "gaps": "AICM extends rules of behavior to AI-specific requirements including responsible AI use and AI ethics obligations."
+    },
+    {
+      "id": "HRS-09",
+      "title": "Personnel Roles and Responsibilities",
+      "controls": [
+        "PL-02",
+        "PM-02",
+        "PS-01"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PL-02 covers security concepts; PM-02 addresses roles; PS-01 covers personnel security.",
+      "gaps": "AICM extends security roles to AI-specific positions and responsibilities."
+    },
+    {
+      "id": "HRS-10",
+      "title": "Non-Disclosure Agreements",
+      "controls": [
+        "PS-06",
+        "PS-09"
+      ],
+      "coverage_pct": 78,
+      "rationale": "PS-06 covers access agreements; PS-09 addresses position categorization.",
+      "gaps": "AICM extends compliance monitoring to AI-specific obligations and ethical commitments."
+    },
+    {
+      "id": "HRS-11",
+      "title": "Security Awareness Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AT-01/AT-02/AT-03 comprehensively cover security awareness training policy, content, and role-based training.",
+      "gaps": "AICM extends security training to AI-specific topics including adversarial ML awareness, AI ethics training, and responsible AI use."
+    },
+    {
+      "id": "HRS-12",
+      "title": "Personal and Sensitive Data Awareness and Training",
+      "controls": [
+        "AT-02",
+        "AT-03",
+        "PT-01"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AT-02/AT-03 cover security awareness and role-based training; PT-01 addresses PII processing.",
+      "gaps": "AICM extends personal data training to AI-specific scenarios including training data handling, AI privacy risks, and automated decision-making implications."
+    },
+    {
+      "id": "HRS-13",
+      "title": "Compliance User Responsibility",
+      "controls": [
+        "AT-02",
+        "PL-04",
+        "PS-06"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AT-02 covers awareness training; PL-04/PS-06 address rules of behavior and agreements.",
+      "gaps": "AICM extends to AI ethics and responsible use training."
+    },
+    {
+      "id": "HRS-14",
+      "title": "AI Competency Training",
+      "controls": [
+        "AT-02",
+        "AT-03",
+        "PM-02"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AT-02/AT-03 cover security awareness and role-based training; PM-02 addresses roles.",
+      "gaps": "AICM requires AI-specific competency development including ML security skills, adversarial ML knowledge, and AI safety training programs. NIST does not address AI competency frameworks."
+    },
+    {
+      "id": "HRS-15",
+      "title": "AI Acceptable Use",
+      "controls": [
+        "AT-01",
+        "PM-02",
+        "PS-01"
+      ],
+      "coverage_pct": 52,
+      "rationale": "AT-01 covers training policy; PM-02 addresses roles; PS-01 covers personnel security.",
+      "gaps": "AICM requires AI ethics training and certification including responsible AI practices, bias awareness, and AI governance education."
+    },
+    {
+      "id": "IAM-01",
+      "title": "Identity and Access Management Policy and Procedures",
+      "controls": [
+        "AC-01",
+        "IA-01"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-01 establishes access control policy; IA-01 covers identification and authentication policy.",
+      "gaps": "AICM extends IAM policies to AI systems including model access control, training infrastructure authentication, and AI API authorization."
+    },
+    {
+      "id": "IAM-02",
+      "title": "Strong Password Policy and Procedures",
+      "controls": [
+        "IA-01",
+        "IA-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-01/IA-05 cover identification/authentication policy and authenticator management.",
+      "gaps": "AICM extends identity management to AI-specific identities including service accounts for AI pipelines and model signing identities."
+    },
+    {
+      "id": "IAM-03",
+      "title": "Identity Inventory",
+      "controls": [
+        "AC-02",
+        "IA-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-02 covers account management; IA-04 addresses identifier management.",
+      "gaps": "AICM extends account management to AI system accounts including training job identities and inference service accounts."
+    },
+    {
+      "id": "IAM-04",
+      "title": "Separation of Duties",
+      "controls": [
+        "AC-05",
+        "AC-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-05 covers separation of duties; AC-06 addresses least privilege.",
+      "gaps": "AICM extends separation of duties to AI roles including model development, validation, and deployment role separation."
+    },
+    {
+      "id": "IAM-05",
+      "title": "Least Privilege",
+      "controls": [
+        "AC-02",
+        "AC-06"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-02 covers account management; AC-06 addresses least privilege.",
+      "gaps": "AICM extends least privilege to AI systems including fine-grained model access control and training data access restrictions."
+    },
+    {
+      "id": "IAM-06",
+      "title": "User Access Provisioning",
+      "controls": [
+        "AC-02",
+        "IA-04",
+        "IA-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-02 covers account management; IA-04/IA-05 address identifier and authenticator management.",
+      "gaps": "AICM extends to lifecycle management for AI service identities and model access credentials."
+    },
+    {
+      "id": "IAM-07",
+      "title": "User Access Changes and Revocation",
+      "controls": [
+        "AC-02",
+        "PS-04",
+        "PS-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-02 covers account management; PS-04/PS-05 address personnel changes.",
+      "gaps": "AICM extends deprovisioning to AI access including model repository access and training infrastructure permissions."
+    },
+    {
+      "id": "IAM-08",
+      "title": "User Access Review",
+      "controls": [
+        "AC-02",
+        "AC-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-02 covers account management; AC-06 addresses least privilege and access reviews.",
+      "gaps": "AICM extends access reviews to AI system access including periodic review of model access permissions and data access rights."
+    },
+    {
+      "id": "IAM-09",
+      "title": "Segregation of Privileged Access Roles",
+      "controls": [
+        "AC-05",
+        "AC-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-05 covers separation of duties; AC-06 addresses least privilege.",
+      "gaps": "AICM extends segregation to AI operations including separation between training, validation, and production environments."
+    },
+    {
+      "id": "IAM-10",
+      "title": "Management of Privileged Access Roles",
+      "controls": [
+        "AC-02",
+        "AC-06",
+        "IA-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-02 covers account management; AC-06 addresses least privilege; IA-02 covers identification and authentication.",
+      "gaps": "AICM extends privileged access to AI systems including admin access to ML platforms and model management systems."
+    },
+    {
+      "id": "IAM-11",
+      "title": "Customers' Approval for Agreed Privileged Access Roles",
+      "controls": [
+        "AC-02",
+        "AC-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-02/AC-06 cover account management and least privilege.",
+      "gaps": "AICM extends access authorization to AI-specific resources including training compute, model endpoints, and data pipelines."
+    },
+    {
+      "id": "IAM-12",
+      "title": "Safeguard Logs Integrity",
+      "controls": [
+        "AU-09",
+        "AU-10"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-09 covers protection of audit information; AU-10 addresses non-repudiation.",
+      "gaps": "AICM extends user accountability to AI operations including audit trails for model modifications and training data changes."
+    },
+    {
+      "id": "IAM-13",
+      "title": "Uniquely Identifiable Users",
+      "controls": [
+        "AC-02",
+        "IA-02",
+        "IA-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-02 covers account management; IA-02/IA-04 address authentication and identifier management.",
+      "gaps": "AICM extends user identification to AI platform users including federated identity for multi-cloud AI environments."
+    },
+    {
+      "id": "IAM-14",
+      "title": "Strong Authentication",
+      "controls": [
+        "IA-02",
+        "IA-05",
+        "IA-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-02/IA-05/IA-08 comprehensively cover authentication, authenticator management, and cross-org identification.",
+      "gaps": "AICM extends strong authentication to AI systems including MFA for model deployment and training infrastructure access."
+    },
+    {
+      "id": "IAM-15",
+      "title": "Passwords and Secrets Management",
+      "controls": [
+        "IA-02",
+        "IA-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IA-02/IA-05 cover identification/authentication and authenticator management including password policies.",
+      "gaps": "AICM extends password management to AI system credentials including API keys, model access tokens, and service account credentials."
+    },
+    {
+      "id": "IAM-16",
+      "title": "Authorization Mechanisms",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AC-16"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-03 covers access enforcement; AC-06 addresses least privilege; AC-16 covers security attributes.",
+      "gaps": "AICM extends authorization to AI-specific resources including fine-grained model access control and data access governance."
+    },
+    {
+      "id": "IAM-17",
+      "title": "Knowledge Access Control - Need to Know",
+      "controls": [
+        "AC-02",
+        "IA-02",
+        "SC-07"
+      ],
+      "coverage_pct": 60,
+      "rationale": "AC-02 covers account management; IA-02 covers authentication; SC-07 provides boundary protection for AI API access.",
+      "gaps": "AICM addresses AI API authentication and authorization including model inference API security, rate limiting, and API key management for AI services."
+    },
+    {
+      "id": "IAM-18",
+      "title": "Output Modification and Special Authorization",
+      "controls": [
+        "AC-02",
+        "AC-06",
+        "IA-03"
+      ],
+      "coverage_pct": 58,
+      "rationale": "AC-02 covers account management; AC-06 addresses least privilege; IA-03 covers device identification.",
+      "gaps": "AICM addresses machine-to-machine identity for AI systems including model-to-model authentication, pipeline service identities, and automated AI agent identity management."
+    },
+    {
+      "id": "IAM-19",
+      "title": "Agent Access Restriction",
+      "controls": [
+        "AC-05",
+        "AC-06",
+        "CM-05"
+      ],
+      "coverage_pct": 60,
+      "rationale": "AC-05 covers separation of duties; AC-06 addresses least privilege; CM-05 restricts changes.",
+      "gaps": "AICM requires role-based access control specific to AI lifecycle including separate roles for data scientists, ML engineers, model validators, and AI operations staff."
+    },
+    {
+      "id": "IPY-01",
+      "title": "Interoperability and Portability Policy and Procedures",
+      "controls": [
+        "SA-01",
+        "SA-04"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-01 covers acquisition policy; SA-04 addresses acquisition process and interoperability requirements.",
+      "gaps": "AICM extends interoperability to AI systems including model portability, ML framework interoperability, and AI service migration."
+    },
+    {
+      "id": "IPY-02",
+      "title": "Application Interface Availability",
+      "controls": [
+        "SA-04",
+        "SA-09"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-04 covers acquisition processes; SA-09 addresses external services.",
+      "gaps": "AICM extends data portability to AI including training data export, model format standards (ONNX, PMML), and inference compatibility."
+    },
+    {
+      "id": "IPY-03",
+      "title": "Secure Interoperability and Portability Management",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SC-08"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-04 covers acquisition; SA-09 addresses external services; SC-08 covers transmission security.",
+      "gaps": "AICM extends policy compatibility to AI services including API compatibility, model serving standards, and AI service level agreements."
+    },
+    {
+      "id": "IPY-04",
+      "title": "Data Portability Contractual Obligations",
+      "controls": [
+        "SA-04"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SA-04 covers acquisition process including portability and interoperability requirements.",
+      "gaps": "AICM extends portability to AI-specific scenarios including multi-cloud ML deployment and vendor-neutral AI infrastructure."
+    },
+    {
+      "id": "I&S-01",
+      "title": "Infrastructure and Virtualization Security Policy and Procedures",
+      "controls": [
+        "SA-01",
+        "SC-01",
+        "CM-01"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-01 covers acquisition policy; SC-01 covers system protection policy; CM-01 addresses configuration management.",
+      "gaps": "AICM extends infrastructure security to AI-specific infrastructure including GPU clusters, ML platforms, and model serving infrastructure."
+    },
+    {
+      "id": "I&S-02",
+      "title": "Capacity and Resource Planning",
+      "controls": [
+        "CP-02",
+        "SC-05",
+        "SC-06"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CP-02 covers contingency planning; SC-05 addresses denial of service protection; SC-06 covers resource availability.",
+      "gaps": "AICM extends capacity planning to AI compute including GPU/TPU allocation, training job scheduling, and inference scaling."
+    },
+    {
+      "id": "I&S-03",
+      "title": "Network Security",
+      "controls": [
+        "AC-04",
+        "SC-07",
+        "SC-08"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-04 enforces information flow; SC-07 provides boundary protection; SC-08 covers transmission security.",
+      "gaps": "AICM extends network security to AI infrastructure including training network isolation and model serving network segmentation."
+    },
+    {
+      "id": "I&S-04",
+      "title": "OS Hardening and Base Controls",
+      "controls": [
+        "CM-02",
+        "CM-06",
+        "SI-02"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-02/CM-06 cover baseline configurations and settings; SI-02 addresses flaw remediation.",
+      "gaps": "AICM extends OS hardening to AI infrastructure including ML framework patching and GPU driver security."
+    },
+    {
+      "id": "I&S-05",
+      "title": "Production and Non-Production Environments",
+      "controls": [
+        "CM-02",
+        "CM-04",
+        "SC-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-02 covers baselines; CM-04 addresses impact analysis; SC-07 covers boundary protection.",
+      "gaps": "AICM extends to AI infrastructure hardening including container security for model serving and Kubernetes security for ML platforms."
+    },
+    {
+      "id": "I&S-06",
+      "title": "Segmentation and Segregation",
+      "controls": [
+        "AC-04",
+        "SC-03",
+        "SC-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-04 covers information flow; SC-03 addresses security function isolation; SC-07 covers boundary protection.",
+      "gaps": "AICM extends segmentation to AI environments including training/inference isolation and model environment separation."
+    },
+    {
+      "id": "I&S-07",
+      "title": "Migration to Hosted Environments",
+      "controls": [
+        "CM-03",
+        "SA-03",
+        "SA-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-03 covers change control; SA-03 addresses development lifecycle; SA-04 covers acquisition processes.",
+      "gaps": "AICM extends migration security to AI workloads including model migration, training data transfer, and AI environment portability."
+    },
+    {
+      "id": "I&S-08",
+      "title": "Network Architecture Documentation",
+      "controls": [
+        "CA-09",
+        "PL-02",
+        "SC-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-09 covers internal connections; PL-02 addresses security concepts; SC-07 covers boundary protection.",
+      "gaps": "AICM extends network architecture to AI infrastructure including dedicated AI network segments and high-bandwidth training interconnects."
+    },
+    {
+      "id": "I&S-09",
+      "title": "Network Defense",
+      "controls": [
+        "SC-05",
+        "SC-07",
+        "SI-04"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-05 covers denial of service protection; SC-07 provides boundary protection; SI-04 covers system monitoring.",
+      "gaps": "AICM extends network monitoring to AI infrastructure including training traffic analysis and inference endpoint monitoring."
+    },
+    {
+      "id": "LOG-01",
+      "title": "Logging and Monitoring Policy and Procedures",
+      "controls": [
+        "AU-01",
+        "AU-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-01 establishes audit policy; AU-02 defines auditable events.",
+      "gaps": "AICM extends logging to AI-specific events including model inference logs, training events, and AI system decision logs."
+    },
+    {
+      "id": "LOG-02",
+      "title": "Audit Logs Protection",
+      "controls": [
+        "AU-09",
+        "AU-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-09 covers audit information protection; AU-11 addresses audit record retention.",
+      "gaps": "AICM extends log protection to AI audit trails including model decision logs and training provenance records."
+    },
+    {
+      "id": "LOG-03",
+      "title": "Security Monitoring and Alerting",
+      "controls": [
+        "AU-06",
+        "CA-07",
+        "SI-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AU-06 covers audit review; CA-07 provides continuous monitoring; SI-04 covers system monitoring.",
+      "gaps": "AICM extends security monitoring to AI systems including model behavior monitoring and adversarial input detection."
+    },
+    {
+      "id": "LOG-04",
+      "title": "Audit Logs Access and Accountability",
+      "controls": [
+        "AC-06",
+        "AU-06",
+        "AU-09"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-06 covers least privilege; AU-06/AU-09 address audit review and protection.",
+      "gaps": "AICM extends audit access controls to AI logs including restricted access to model decision explanations."
+    },
+    {
+      "id": "LOG-05",
+      "title": "Audit Logs Monitoring and Response",
+      "controls": [
+        "AU-06",
+        "IR-04",
+        "SI-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AU-06 covers audit analysis; IR-04 addresses incident handling; SI-04 covers monitoring.",
+      "gaps": "AICM extends audit procedures to AI-specific analysis including AI anomaly investigation and model drift forensics."
+    },
+    {
+      "id": "LOG-06",
+      "title": "Clock Synchronization",
+      "controls": [
+        "AU-08"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AU-08 directly addresses time stamps and clock synchronization for audit records.",
+      "gaps": "AICM extends time synchronization to distributed AI systems including training cluster clocks and inference endpoint timestamps."
+    },
+    {
+      "id": "LOG-07",
+      "title": "Logging Scope",
+      "controls": [
+        "AU-02",
+        "AU-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-02 defines auditable events; AU-03 specifies audit record content.",
+      "gaps": "AICM extends logging content to AI-specific data including model version, input features, confidence scores, and decision explanations."
+    },
+    {
+      "id": "LOG-08",
+      "title": "Log Records",
+      "controls": [
+        "AU-02",
+        "AU-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AU-02/AU-03 cover audit event types and record content for log sanitization requirements.",
+      "gaps": "AICM addresses log sanitization for AI systems including removal of sensitive training data from logs and PII scrubbing from inference logs."
+    },
+    {
+      "id": "LOG-09",
+      "title": "Log Protection",
+      "controls": [
+        "AU-09",
+        "AU-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-09 protects audit information; AU-11 addresses retention.",
+      "gaps": "AICM extends log storage to AI-specific retention requirements including model decision log retention for regulatory compliance."
+    },
+    {
+      "id": "LOG-10",
+      "title": "Encryption Monitoring and Reporting",
+      "controls": [
+        "AU-02",
+        "CA-07",
+        "SC-13"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-02 defines events; CA-07 provides continuous monitoring; SC-13 covers cryptographic protection of logs.",
+      "gaps": "AICM extends encryption monitoring to AI system logs including protection of model inference logs and training event records."
+    },
+    {
+      "id": "LOG-11",
+      "title": "Transaction/Activity Logging",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-02/AU-03/AU-12 comprehensively cover event definition, content, and generation.",
+      "gaps": "AICM extends key event logging to AI-specific events including model deployment, retraining triggers, and bias threshold alerts."
+    },
+    {
+      "id": "LOG-12",
+      "title": "Access Control Logs",
+      "controls": [
+        "AC-02",
+        "AU-02",
+        "AU-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-02 covers account management; AU-02/AU-03 cover audit events and content.",
+      "gaps": "AICM extends access logging to AI systems including model access, training data access, and AI API usage tracking."
+    },
+    {
+      "id": "LOG-13",
+      "title": "Failures and Anomalies Reporting",
+      "controls": [
+        "AU-05",
+        "AU-06",
+        "SI-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AU-05 covers audit processing failures; AU-06 addresses audit review; SI-04 covers monitoring.",
+      "gaps": "AICM extends failures and anomalies monitoring to AI systems including training failures, model serving errors, and inference anomalies."
+    },
+    {
+      "id": "LOG-14",
+      "title": "Input Monitoring",
+      "controls": [
+        "AU-02",
+        "AU-06",
+        "SI-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AU-02 covers audit events; AU-06 addresses audit review; SI-04 covers system monitoring.",
+      "gaps": "AICM requires AI decision logging including model inference decision trails, feature importance logs, and explanation records for automated decisions. NIST does not address AI decision transparency."
+    },
+    {
+      "id": "LOG-15",
+      "title": "Output Monitoring",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "CA-07"
+      ],
+      "coverage_pct": 52,
+      "rationale": "AU-02/AU-03 cover audit events and content; CA-07 provides continuous monitoring.",
+      "gaps": "AICM requires model performance monitoring logs including drift detection metrics, accuracy degradation alerts, and model health dashboards."
+    },
+    {
+      "id": "MDS-01",
+      "title": "Training Pipeline Security",
+      "controls": [
+        "SA-08",
+        "CM-01",
+        "PL-01"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-08 covers security engineering principles; CM-01 establishes configuration management; PL-01 covers planning. These provide general framework for model security governance.",
+      "gaps": "AICM MDS-01 establishes comprehensive model security policy and procedures including model lifecycle governance, model risk management, and model security standards. NIST 800-53 has no equivalent model security controls."
+    },
+    {
+      "id": "MDS-02",
+      "title": "Model Artifact Scanning",
+      "controls": [
+        "CM-08",
+        "SA-03"
+      ],
+      "coverage_pct": 42,
+      "rationale": "CM-08 covers component inventory; SA-03 addresses development lifecycle. These partially support model inventory.",
+      "gaps": "AICM requires model inventory and registry including model cards, versioning, lineage tracking, and model deprecation management. NIST has no model registry equivalent."
+    },
+    {
+      "id": "MDS-03",
+      "title": "Model Documentation",
+      "controls": [
+        "SA-11",
+        "CA-08",
+        "RA-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-11 covers developer testing; CA-08 addresses penetration testing; RA-05 covers vulnerability scanning. These provide a testing framework adaptable to models.",
+      "gaps": "AICM requires model validation and testing including accuracy validation, bias testing, robustness testing, and adversarial evaluation. NIST testing controls are not designed for ML model validation."
+    },
+    {
+      "id": "MDS-04",
+      "title": "Model Documentation Requirements",
+      "controls": [
+        "CM-03",
+        "CM-05",
+        "SA-03"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CM-03/CM-05 cover change control and access restrictions; SA-03 addresses development lifecycle.",
+      "gaps": "AICM requires model deployment security including deployment approval workflows, canary deployments, model signing, and deployment rollback procedures."
+    },
+    {
+      "id": "MDS-05",
+      "title": "Model Documentation Validation",
+      "controls": [
+        "SI-04",
+        "CA-07",
+        "AU-06"
+      ],
+      "coverage_pct": 42,
+      "rationale": "SI-04/CA-07 cover monitoring; AU-06 addresses audit review.",
+      "gaps": "AICM requires model monitoring including performance drift detection, data drift monitoring, concept drift alerts, and model behavior anomaly detection. NIST monitoring controls are infrastructure-focused."
+    },
+    {
+      "id": "MDS-06",
+      "title": "Adversarial Attack Analysis",
+      "controls": [
+        "SI-07",
+        "SC-13",
+        "CM-03"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SI-07 covers integrity verification; SC-13 addresses cryptographic protection; CM-03 covers change control.",
+      "gaps": "AICM requires model integrity protection including cryptographic model signing, weight tampering detection, and model provenance verification."
+    },
+    {
+      "id": "MDS-07",
+      "title": "Robustness against Adversarial Attack  / Model Hardening",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "CM-05"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-03/AC-06 cover access enforcement and least privilege; CM-05 restricts changes.",
+      "gaps": "AICM requires model access control including inference API authorization, model weight access restrictions, and model management role separation."
+    },
+    {
+      "id": "MDS-08",
+      "title": "Model Integrity Checks",
+      "controls": [
+        "SA-11",
+        "RA-05",
+        "SI-07"
+      ],
+      "coverage_pct": 38,
+      "rationale": "SA-11/RA-05 cover testing and vulnerability assessment; SI-07 covers integrity.",
+      "gaps": "AICM requires adversarial robustness including adversarial attack testing, evasion resistance, and model hardening against adversarial inputs. NIST has no adversarial ML controls."
+    },
+    {
+      "id": "MDS-09",
+      "title": "Model Signing/Ownership Verification",
+      "controls": [
+        "PT-01",
+        "PT-03",
+        "SA-08"
+      ],
+      "coverage_pct": 40,
+      "rationale": "PT-01/PT-03 cover PII processing and minimization; SA-08 covers security engineering.",
+      "gaps": "AICM requires model privacy including membership inference protection, model inversion defense, differential privacy integration, and training data extraction prevention."
+    },
+    {
+      "id": "MDS-10",
+      "title": "Model Continuous Monitoring",
+      "controls": [
+        "SA-03",
+        "SA-08",
+        "SA-15"
+      ],
+      "coverage_pct": 42,
+      "rationale": "SA-03/SA-08/SA-15 cover development lifecycle, security engineering, and development standards.",
+      "gaps": "AICM requires explainability and interpretability requirements including feature importance, decision explanation, and model transparency standards."
+    },
+    {
+      "id": "MDS-11",
+      "title": "Model Failure",
+      "controls": [
+        "CM-03",
+        "CM-09",
+        "SA-03"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CM-03/CM-09 cover change control and configuration plans; SA-03 addresses development lifecycle.",
+      "gaps": "AICM requires model versioning and lifecycle management including model retirement, version compatibility, and model lineage tracking across training iterations."
+    },
+    {
+      "id": "MDS-12",
+      "title": "Open Model Risk Assessment",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "RA-03"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-04/SA-09 cover acquisition and external services; RA-03 addresses risk assessment.",
+      "gaps": "AICM requires third-party model governance including pre-trained model validation, foundation model risk assessment, and model supply chain security."
+    },
+    {
+      "id": "MDS-13",
+      "title": "Secure Model Format",
+      "controls": [
+        "RA-03",
+        "PM-09",
+        "SI-01"
+      ],
+      "coverage_pct": 38,
+      "rationale": "RA-03/PM-09 cover risk assessment and strategy; SI-01 addresses integrity policy.",
+      "gaps": "AICM requires model risk quantification including model risk scoring, risk-based model tiering, and model failure impact assessment. NIST risk assessment is not designed for ML model risk."
+    },
+    {
+      "id": "SEF-01",
+      "title": "Security Incident Management Policy and Procedures",
+      "controls": [
+        "IR-01",
+        "IR-08"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-01 establishes incident response policy; IR-08 covers incident response plan.",
+      "gaps": "AICM extends incident management to AI-specific incidents including model compromise, adversarial attacks, and AI system failures."
+    },
+    {
+      "id": "SEF-02",
+      "title": "Service Management Policy and Procedures",
+      "controls": [
+        "IR-01",
+        "IR-04",
+        "PM-01"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IR-01/IR-04 cover incident response policy and handling; PM-01 establishes program.",
+      "gaps": "AICM extends incident management to AI-specific roles and procedures."
+    },
+    {
+      "id": "SEF-03",
+      "title": "Incident Response Plans",
+      "controls": [
+        "IR-02",
+        "IR-04",
+        "IR-08"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IR-02/IR-04/IR-08 cover incident training, handling, and response plans.",
+      "gaps": "AICM extends incident response to AI-specific scenarios including model poisoning incidents and adversarial attack playbooks."
+    },
+    {
+      "id": "SEF-04",
+      "title": "Incident Response Testing",
+      "controls": [
+        "IR-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-03 directly addresses incident response testing.",
+      "gaps": "AICM extends testing to AI-specific incident scenarios including model failure drills and adversarial response exercises."
+    },
+    {
+      "id": "SEF-05",
+      "title": "Incident Response Metrics",
+      "controls": [
+        "CA-07",
+        "IR-04",
+        "PM-06"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-07 covers continuous monitoring; IR-04 addresses incident handling; PM-06 covers security metrics.",
+      "gaps": "AICM extends metrics to AI-specific incident KPIs including model recovery time and AI attack detection rate."
+    },
+    {
+      "id": "SEF-06",
+      "title": "Event Triage Processes",
+      "controls": [
+        "AU-06",
+        "IR-04",
+        "IR-05"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AU-06 covers audit analysis; IR-04/IR-05 address incident handling and monitoring.",
+      "gaps": "AICM extends evidence collection to AI-specific forensics including model state snapshots and inference log analysis."
+    },
+    {
+      "id": "SEF-07",
+      "title": "Security Breach Notification",
+      "controls": [
+        "IR-06",
+        "IR-07"
+      ],
+      "coverage_pct": 82,
+      "rationale": "IR-06 covers incident reporting; IR-07 addresses incident response assistance.",
+      "gaps": "AICM extends incident communication to AI-specific stakeholders including AI safety boards and regulatory bodies."
+    },
+    {
+      "id": "SEF-08",
+      "title": "Points of Contact Maintenance",
+      "controls": [
+        "IR-01",
+        "IR-06",
+        "PM-15"
+      ],
+      "coverage_pct": 80,
+      "rationale": "IR-01/IR-06 cover incident response and reporting; PM-15 addresses security groups and coordination.",
+      "gaps": "AICM extends external coordination to AI-specific organizations including AI safety organizations and industry AI security groups."
+    },
+    {
+      "id": "SEF-09",
+      "title": "Incident Response",
+      "controls": [
+        "IR-01",
+        "IR-04",
+        "IR-06"
+      ],
+      "coverage_pct": 58,
+      "rationale": "IR-01/IR-04/IR-06 cover incident response policy, handling, and reporting.",
+      "gaps": "AICM requires AI-specific incident response procedures including adversarial attack playbooks, model compromise response, training data breach protocols, and AI system failure escalation paths."
+    },
+    {
+      "id": "STA-01",
+      "title": "Supply Chain Risk  Management Policies  and Procedures",
+      "controls": [
+        "PM-01",
+        "SA-01",
+        "SR-01"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-01 establishes program; SA-01/SR-01 cover acquisition and supply chain policy.",
+      "gaps": "AICM extends supply chain to AI-specific requirements including AI vendor assessment, model supply chain, and training data provenance."
+    },
+    {
+      "id": "STA-02",
+      "title": "SSRM Policy and Procedures",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "SR-03"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SR-01/SR-02/SR-03 cover supply chain risk management, controls, and plan.",
+      "gaps": "AICM extends supply chain controls to AI-specific risks including pre-trained model risks and ML framework dependencies."
+    },
+    {
+      "id": "STA-03",
+      "title": "SSRM Supply Chain",
+      "controls": [
+        "SA-04",
+        "SR-01"
+      ],
+      "coverage_pct": 78,
+      "rationale": "SA-04 covers acquisition processes; SR-01 addresses supply chain risk management.",
+      "gaps": "AICM extends supplier agreements to AI-specific SLAs including model performance guarantees and AI service availability."
+    },
+    {
+      "id": "STA-04",
+      "title": "SSRM Guidance",
+      "controls": [
+        "PM-02",
+        "SR-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-02 covers roles; SR-01 addresses supply chain risk management.",
+      "gaps": "AICM extends supply chain oversight to AI-specific vendor management and AI provider risk assessment."
+    },
+    {
+      "id": "STA-05",
+      "title": "SSRM Control Ownership",
+      "controls": [
+        "CA-02",
+        "SR-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 covers assessments; SR-01 addresses supply chain risk management.",
+      "gaps": "AICM extends supplier assessment to AI-specific evaluation criteria including model quality, training data practices, and AI ethics compliance."
+    },
+    {
+      "id": "STA-06",
+      "title": "SSRM Documentation Review",
+      "controls": [
+        "CA-02",
+        "SA-09",
+        "SR-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 covers assessments; SA-09/SR-01 address external services and supply chain.",
+      "gaps": "AICM extends cloud provider assessment to AI service provider evaluation including AI-specific security certifications."
+    },
+    {
+      "id": "STA-07",
+      "title": "SSRM Control Implementation",
+      "controls": [
+        "CM-08",
+        "SR-01",
+        "SR-02"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-08 covers inventory; SR-01/SR-02 address supply chain risk management.",
+      "gaps": "AICM extends supply chain inventory to AI components including model dependencies, ML library supply chain, and training data sources."
+    },
+    {
+      "id": "STA-08",
+      "title": "Supply Chain Inventory",
+      "controls": [
+        "RA-03",
+        "SR-01",
+        "SR-02",
+        "SR-03"
+      ],
+      "coverage_pct": 78,
+      "rationale": "RA-03/SR-01/SR-02/SR-03 comprehensively cover risk assessment and supply chain management.",
+      "gaps": "AICM extends supply chain risk assessment to AI-specific threats including model tampering and training data supply chain attacks."
+    },
+    {
+      "id": "STA-09",
+      "title": "Supply Chain Risk Management",
+      "controls": [
+        "SA-04",
+        "SA-09"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-04 covers acquisition; SA-09 addresses external services.",
+      "gaps": "AICM extends service agreements to AI-specific terms including model SLAs and AI service guarantees."
+    },
+    {
+      "id": "STA-10",
+      "title": "Primary Service and Contractual Agreement",
+      "controls": [
+        "SA-04",
+        "SR-01"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SA-04 covers acquisition processes; SR-01 addresses supply chain risk management.",
+      "gaps": "AICM extends supplier agreements to AI-specific compliance requirements."
+    },
+    {
+      "id": "STA-11",
+      "title": "Supply Chain Agreement Review",
+      "controls": [
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-02/CA-07 cover assessments and continuous monitoring.",
+      "gaps": "AICM extends compliance monitoring to AI-specific regulatory requirements."
+    },
+    {
+      "id": "STA-12",
+      "title": "Supply Chain  Compliance  Assessment",
+      "controls": [
+        "CA-02",
+        "SA-09",
+        "SR-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 covers assessments; SA-09/SR-01 address external services and supply chain.",
+      "gaps": "AICM extends supply chain transparency to AI model provenance and training data sourcing."
+    },
+    {
+      "id": "STA-13",
+      "title": "Supply Chain Service Agreement Compliance",
+      "controls": [
+        "CA-02",
+        "PM-01",
+        "SR-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 covers assessments; PM-01 establishes program; SR-01 addresses supply chain.",
+      "gaps": "AICM extends reporting to AI-specific supply chain metrics and AI vendor performance reporting."
+    },
+    {
+      "id": "STA-14",
+      "title": "Supply Chain Governance Review",
+      "controls": [
+        "RA-03",
+        "SR-01",
+        "SR-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "RA-03 covers risk assessment; SR-01/SR-03 address supply chain risk management.",
+      "gaps": "AICM extends to AI-specific supply chain risk mitigation including model source verification."
+    },
+    {
+      "id": "STA-15",
+      "title": "Supply Chain Data Security Assessment",
+      "controls": [
+        "SR-01",
+        "SA-04",
+        "CM-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SR-01 covers supply chain; SA-04 covers acquisition; CM-08 covers inventory.",
+      "gaps": "AICM addresses AI model supply chain security including foundation model provenance, pre-trained model validation, and AI library dependency management."
+    },
+    {
+      "id": "STA-16",
+      "title": "Service Bill of Material (BOM)",
+      "controls": [
+        "SR-01",
+        "SR-02",
+        "SA-09"
+      ],
+      "coverage_pct": 52,
+      "rationale": "SR-01/SR-02 cover supply chain management; SA-09 addresses external services.",
+      "gaps": "AICM addresses AI vendor accountability including AI service provider transparency, algorithmic audit rights, and AI output responsibility allocation."
+    },
+    {
+      "id": "TVM-01",
+      "title": "Threat and Vulnerability Management Policy and Procedures",
+      "controls": [
+        "RA-01",
+        "RA-05",
+        "SI-01"
+      ],
+      "coverage_pct": 82,
+      "rationale": "RA-01/RA-05 cover risk assessment and vulnerability scanning; SI-01 addresses system integrity policy.",
+      "gaps": "AICM extends threat management to AI-specific threats including adversarial ML attacks, model poisoning, and AI supply chain threats."
+    },
+    {
+      "id": "TVM-02",
+      "title": "Malware and Malicious Instructions Protection Policy and Procedures",
+      "controls": [
+        "SI-01",
+        "SI-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-01 covers system integrity policy; SI-03 addresses malicious code protection.",
+      "gaps": "AICM extends malware protection to AI-specific threats including model malware and malicious training data."
+    },
+    {
+      "id": "TVM-03",
+      "title": "Vulnerability Identification",
+      "controls": [
+        "RA-05",
+        "SI-02"
+      ],
+      "coverage_pct": 82,
+      "rationale": "RA-05 covers vulnerability scanning; SI-02 addresses flaw remediation.",
+      "gaps": "AICM extends vulnerability management to AI infrastructure including ML framework vulnerabilities and model serving platform patches."
+    },
+    {
+      "id": "TVM-04",
+      "title": "Detection Updates",
+      "controls": [
+        "SI-02",
+        "SI-03"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-02/SI-03 cover flaw remediation and malicious code protection.",
+      "gaps": "AICM extends detection updates to AI-specific threat signatures and adversarial pattern detection."
+    },
+    {
+      "id": "TVM-05",
+      "title": "External Library Vulnerabilities",
+      "controls": [
+        "RA-05",
+        "SA-11",
+        "SR-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "RA-05 covers vulnerability scanning; SA-11 covers developer testing; SR-04 addresses provenance.",
+      "gaps": "AICM extends vulnerability management to AI-specific libraries and ML framework dependencies."
+    },
+    {
+      "id": "TVM-06",
+      "title": "Penetration Testing",
+      "controls": [
+        "CA-08",
+        "RA-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-08 covers penetration testing; RA-05 addresses vulnerability scanning.",
+      "gaps": "AICM extends penetration testing to AI-specific attack vectors including adversarial inputs and model extraction attempts."
+    },
+    {
+      "id": "TVM-07",
+      "title": "Vulnerability Remediation Schedule",
+      "controls": [
+        "RA-05",
+        "SI-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "RA-05 covers vulnerability monitoring; SI-05 addresses security alerts and advisories.",
+      "gaps": "AICM extends vulnerability reporting to AI-specific disclosures including model vulnerability advisories."
+    },
+    {
+      "id": "TVM-08",
+      "title": "Vulnerability Prioritization",
+      "controls": [
+        "RA-03",
+        "RA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "RA-03/RA-05 cover risk assessment and vulnerability scanning.",
+      "gaps": "AICM extends vulnerability prioritization to AI-specific risk factors including model criticality and data sensitivity."
+    },
+    {
+      "id": "TVM-09",
+      "title": "Vulnerability Management Reporting",
+      "controls": [
+        "CA-07",
+        "PM-06",
+        "RA-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CA-07 covers continuous monitoring; PM-06 addresses security metrics; RA-05 covers vulnerability scanning.",
+      "gaps": "AICM extends exception management to AI-specific vulnerability exceptions and accepted model risks."
+    },
+    {
+      "id": "TVM-10",
+      "title": "Vulnerability Management Metrics",
+      "controls": [
+        "CA-07",
+        "PM-06",
+        "RA-05"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CA-07/PM-06/RA-05 cover monitoring, metrics, and vulnerability management.",
+      "gaps": "AICM extends metrics to AI-specific vulnerability management KPIs including model patch rates and AI attack surface metrics."
+    },
+    {
+      "id": "TVM-11",
+      "title": "Guardrails",
+      "controls": [
+        "RA-03",
+        "RA-05",
+        "SI-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "RA-03 covers risk assessment; RA-05 covers vulnerability scanning; SI-04 covers system monitoring.",
+      "gaps": "AICM addresses AI-specific threat intelligence including adversarial ML attack patterns, AI vulnerability databases, and model-specific threat feeds."
+    },
+    {
+      "id": "TVM-12",
+      "title": "Threat Analysis and Modelling",
+      "controls": [
+        "CA-08",
+        "RA-05",
+        "SA-11"
+      ],
+      "coverage_pct": 52,
+      "rationale": "CA-08 covers penetration testing; RA-05 covers vulnerability scanning; SA-11 covers developer testing.",
+      "gaps": "AICM addresses AI red teaming including systematic adversarial testing of AI systems, automated attack generation, and AI-specific penetration testing methodologies."
+    },
+    {
+      "id": "TVM-13",
+      "title": "Threat Response",
+      "controls": [
+        "SI-04",
+        "CA-07",
+        "RA-05"
+      ],
+      "coverage_pct": 50,
+      "rationale": "SI-04/CA-07 cover monitoring; RA-05 covers vulnerability scanning.",
+      "gaps": "AICM addresses AI attack surface management including model endpoint enumeration, training infrastructure exposure assessment, and AI service attack surface reduction."
+    },
+    {
+      "id": "UEM-01",
+      "title": "Endpoint Devices Policy and Procedures",
+      "controls": [
+        "AC-19",
+        "CM-01",
+        "SC-42"
+      ],
+      "coverage_pct": 78,
+      "rationale": "AC-19 covers access control for mobile devices; CM-01 establishes configuration management; SC-42 covers sensor capability.",
+      "gaps": "AICM extends endpoint management to AI-specific devices including edge AI devices and AI development workstations."
+    },
+    {
+      "id": "UEM-02",
+      "title": "Application and Service Approval",
+      "controls": [
+        "CM-07",
+        "CM-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-07 covers least functionality; CM-11 addresses user-installed software.",
+      "gaps": "AICM extends software restrictions to AI tools including ML framework installation policies and AI development tool management."
+    },
+    {
+      "id": "UEM-03",
+      "title": "Compatibility",
+      "controls": [
+        "CM-02",
+        "SA-04"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-02 covers baseline configurations; SA-04 addresses acquisition processes.",
+      "gaps": "AICM extends compatibility to AI software including ML framework version management and GPU driver compatibility."
+    },
+    {
+      "id": "UEM-04",
+      "title": "Endpoint Inventory",
+      "controls": [
+        "CM-08"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-08 directly addresses information system component inventory.",
+      "gaps": "AICM extends inventory to AI-specific endpoints including GPU workstations, edge AI devices, and AI development environments."
+    },
+    {
+      "id": "UEM-05",
+      "title": "Endpoint Management",
+      "controls": [
+        "CM-02",
+        "CM-03",
+        "CM-06"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CM-02/CM-03/CM-06 comprehensively cover baselines, change control, and configuration settings.",
+      "gaps": "AICM extends configuration management to AI endpoint configurations including ML framework settings and AI development environment standards."
+    },
+    {
+      "id": "UEM-06",
+      "title": "Automatic Lock Screen",
+      "controls": [
+        "AC-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AC-11 directly addresses session lock and screen lock functionality.",
+      "gaps": "AICM extends device lock to AI workstations with access to sensitive training data and models."
+    },
+    {
+      "id": "UEM-07",
+      "title": "Operating Systems",
+      "controls": [
+        "CM-02",
+        "CM-06",
+        "SI-02"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CM-02/CM-06 cover baselines and settings; SI-02 addresses flaw remediation.",
+      "gaps": "AICM extends OS security to AI endpoint operating systems including ML framework security patches."
+    },
+    {
+      "id": "UEM-08",
+      "title": "Storage Encryption",
+      "controls": [
+        "SC-13",
+        "SC-28"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-13/SC-28 cover cryptographic protection and protection at rest.",
+      "gaps": "AICM extends storage encryption to AI data at rest including local model caches and training data on endpoints."
+    },
+    {
+      "id": "UEM-09",
+      "title": "Anti-Malware Detection and Prevention",
+      "controls": [
+        "SI-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SI-03 directly addresses malicious code protection including anti-malware.",
+      "gaps": "AICM extends anti-malware to AI-specific threats on endpoints including adversarial sample detection."
+    },
+    {
+      "id": "UEM-10",
+      "title": "Software Firewall",
+      "controls": [
+        "CM-07",
+        "SC-07"
+      ],
+      "coverage_pct": 80,
+      "rationale": "CM-07 covers least functionality; SC-07 provides boundary protection including firewall.",
+      "gaps": "AICM extends software firewalls to AI endpoint network protection."
+    },
+    {
+      "id": "UEM-11",
+      "title": "Data Loss Prevention",
+      "controls": [
+        "AC-04",
+        "SC-07",
+        "SI-04"
+      ],
+      "coverage_pct": 82,
+      "rationale": "AC-04 covers information flow; SC-07 provides boundary protection; SI-04 covers monitoring.",
+      "gaps": "AICM extends data loss prevention to AI data including preventing unauthorized model exfiltration and training data leakage."
+    },
+    {
+      "id": "UEM-12",
+      "title": "Remote Locate",
+      "controls": [
+        "CM-08"
+      ],
+      "coverage_pct": 78,
+      "rationale": "CM-08 covers component inventory for remote access devices.",
+      "gaps": "AICM extends remote device management to AI development devices used remotely."
+    },
+    {
+      "id": "UEM-13",
+      "title": "Remote Wipe",
+      "controls": [
+        "AC-19",
+        "MP-06"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-19 covers mobile device access control; MP-06 addresses media sanitization.",
+      "gaps": "AICM extends BYOD/mobile to AI workload access from personal devices."
+    },
+    {
+      "id": "UEM-14",
+      "title": "Third-Party Endpoint Security Posture",
+      "controls": [
+        "AC-20",
+        "SA-09",
+        "SR-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "AC-20 covers external system use; SA-09/SR-01 address external services and supply chain.",
+      "gaps": "AICM extends third-party endpoint management to AI vendor devices and contractor AI development environments."
+    }
+  ],
+  "summary": {
+    "total_clauses": 243,
+    "average_coverage": 74.4,
+    "full_count": 37,
+    "substantial_count": 161,
+    "partial_count": 43,
+    "weak_count": 2,
+    "none_count": 0
+  }
+}

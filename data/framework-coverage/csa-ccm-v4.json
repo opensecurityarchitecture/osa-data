@@ -1,0 +1,1628 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "csa_ccm_v4",
+  "framework_name": "CSA Cloud Controls Matrix v4",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "2.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Incorporates SP 800-53 Rev 5 controls. Covers CCM v4.0 control objectives (197 controls across 17 domains); CCM v4.1 adds 10 additional controls not yet mapped. Validate with qualified assessors for compliance/audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "market_driven"
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "AA-01",
+      "title": "Audit and Assurance Policy and Procedures",
+      "controls": ["CA-01", "CA-02", "AU-01"],
+      "coverage_pct": 85,
+      "rationale": "CA-01 establishes assessment policy and procedures; CA-02 defines control assessments; AU-01 covers audit and accountability policy. Together these address the policy and procedural foundations for audit and assurance.",
+      "gaps": "CCM specifies cloud-specific audit policy requirements including multi-tenant audit scope delineation and CSP/CSC shared responsibility for audit that NIST does not explicitly address."
+    },
+    {
+      "id": "AA-02",
+      "title": "Independent Assessments",
+      "controls": ["CA-02", "CA-07", "CA-08"],
+      "coverage_pct": 85,
+      "rationale": "CA-02 requires independent assessments of security controls; CA-07 provides continuous monitoring; CA-08 covers penetration testing. These directly support independent assessment requirements.",
+      "gaps": "CCM emphasizes cloud-specific independent audit requirements (e.g., SOC 2 Type II, ISO 27001 certification for CSPs) and tenant-accessible audit artifacts not explicitly required by NIST."
+    },
+    {
+      "id": "AA-03",
+      "title": "Risk Based Planning Assessment",
+      "controls": ["CA-02", "RA-03", "RA-07"],
+      "coverage_pct": 80,
+      "rationale": "RA-03 covers risk assessment; CA-02 addresses control assessment planning; RA-07 covers risk response. These establish a risk-based approach to security assessment planning.",
+      "gaps": "CCM requires risk-based assessment planning that accounts for cloud service model differences (IaaS/PaaS/SaaS) and shared responsibility boundaries. NIST risk assessment is general-purpose."
+    },
+    {
+      "id": "AA-04",
+      "title": "Requirements Compliance",
+      "controls": ["CA-02", "CA-05", "CA-09"],
+      "coverage_pct": 75,
+      "rationale": "CA-02 assesses control compliance; CA-05 produces plans of action and milestones; CA-09 covers internal system connections. These support compliance verification processes.",
+      "gaps": "CCM focuses on demonstrating compliance to cloud customers and regulators with cloud-specific evidence. NIST compliance is internally focused and does not address multi-tenant compliance reporting."
+    },
+    {
+      "id": "AA-05",
+      "title": "Audit Management Process",
+      "controls": ["CA-02", "CA-05", "AU-06"],
+      "coverage_pct": 78,
+      "rationale": "CA-02 manages security assessments; CA-05 tracks remediation via POA&M; AU-06 covers audit review, analysis, and reporting. Together these form a comprehensive audit management lifecycle.",
+      "gaps": "CCM requires structured audit management including cloud-specific audit trail management, coordination between CSP and CSC auditors, and standardised audit report formats."
+    },
+    {
+      "id": "AA-06",
+      "title": "Remediation",
+      "controls": ["CA-05", "CA-02", "RA-07"],
+      "coverage_pct": 85,
+      "rationale": "CA-05 directly addresses plans of action and milestones for remediation; CA-02 supports reassessment after remediation; RA-07 covers risk response including remediation decisions.",
+      "gaps": "CCM requires cloud-specific remediation timelines and customer notification of remediation status. NIST remediation tracking is general-purpose."
+    },
+    {
+      "id": "AIS-01",
+      "title": "Application and Interface Security Policy and Procedures",
+      "controls": ["SA-01", "SA-08", "SI-01"],
+      "coverage_pct": 80,
+      "rationale": "SA-01 covers system and services acquisition policy; SA-08 addresses security and privacy engineering principles; SI-01 establishes system and information integrity policy. These provide the policy framework for application security.",
+      "gaps": "CCM requires cloud-specific API security policies, multi-tenant application isolation requirements, and CSP interface security standards not explicitly covered by NIST."
+    },
+    {
+      "id": "AIS-02",
+      "title": "Application Security Baseline Requirements",
+      "controls": ["SA-08", "SA-11", "SA-15"],
+      "coverage_pct": 78,
+      "rationale": "SA-08 defines security engineering principles; SA-11 covers developer testing and evaluation; SA-15 addresses development process standards. These establish baseline security requirements for application development.",
+      "gaps": "CCM specifies cloud-native application security baselines including container security, serverless security patterns, and API gateway requirements that NIST addresses only generically."
+    },
+    {
+      "id": "AIS-03",
+      "title": "Application Security Metrics",
+      "controls": ["SA-11", "CA-07", "PM-06"],
+      "coverage_pct": 65,
+      "rationale": "SA-11 covers developer testing metrics; CA-07 provides continuous monitoring metrics; PM-06 addresses measures of performance. These support application security measurement.",
+      "gaps": "CCM requires specific cloud application security metrics (e.g., vulnerability density, mean time to remediate, API error rates) that NIST does not prescribe at this granularity."
+    },
+    {
+      "id": "AIS-04",
+      "title": "Secure Application Design and Development",
+      "controls": ["SA-03", "SA-08", "SA-11", "SA-15"],
+      "coverage_pct": 85,
+      "rationale": "SA-03 covers the system development lifecycle; SA-08 addresses security engineering principles; SA-11 covers developer testing; SA-15 establishes development process standards. Comprehensive SDLC coverage.",
+      "gaps": "CCM emphasizes cloud-native secure design patterns (multi-tenancy isolation, API-first security, infrastructure-as-code security) not explicitly addressed in NIST SDLC controls."
+    },
+    {
+      "id": "AIS-05",
+      "title": "Automated Application Security Testing",
+      "controls": ["SA-11", "CA-08", "RA-05"],
+      "coverage_pct": 78,
+      "rationale": "SA-11 covers developer security testing including SAST/DAST; CA-08 addresses penetration testing; RA-05 covers vulnerability monitoring and scanning. Strong coverage of automated testing.",
+      "gaps": "CCM requires CI/CD pipeline-integrated automated security testing, container image scanning, and cloud API fuzz testing that NIST addresses at a higher level of abstraction."
+    },
+    {
+      "id": "AIS-06",
+      "title": "Automated Secure Application Deployment",
+      "controls": ["SA-03", "CM-03", "CM-02"],
+      "coverage_pct": 68,
+      "rationale": "SA-03 covers system development lifecycle including deployment; CM-03 addresses change control; CM-02 covers baseline configuration. These support secure deployment processes.",
+      "gaps": "CCM specifically requires automated secure deployment pipelines (CI/CD), immutable infrastructure, and infrastructure-as-code security validation. NIST deployment controls are manual-process oriented."
+    },
+    {
+      "id": "AIS-07",
+      "title": "Application Vulnerability Remediation",
+      "controls": ["RA-05", "SI-02", "SA-11"],
+      "coverage_pct": 82,
+      "rationale": "RA-05 covers vulnerability scanning and remediation; SI-02 addresses flaw remediation; SA-11 supports developer testing for vulnerability verification. Strong remediation coverage.",
+      "gaps": "CCM requires cloud-specific vulnerability remediation SLAs, coordinated disclosure processes between CSP and CSC, and automated patching for cloud-native applications."
+    },
+    {
+      "id": "BCR-01",
+      "title": "Business Continuity Management Policy and Procedures",
+      "controls": ["CP-01", "CP-02"],
+      "coverage_pct": 85,
+      "rationale": "CP-01 directly establishes contingency planning policy and procedures; CP-02 covers contingency plan development. These fully address business continuity policy requirements.",
+      "gaps": "CCM requires cloud-specific BCP considerations including multi-region failover policies, CSP dependency management, and shared responsibility for continuity that NIST addresses generically."
+    },
+    {
+      "id": "BCR-02",
+      "title": "Risk Assessment and Impact Analysis",
+      "controls": ["CP-02", "RA-03", "RA-09"],
+      "coverage_pct": 82,
+      "rationale": "CP-02 includes business impact analysis; RA-03 covers risk assessment; RA-09 addresses criticality analysis. Together these support comprehensive risk and impact assessment.",
+      "gaps": "CCM requires cloud-specific BIA including dependency mapping for cloud services, cascading failure analysis, and multi-tenant impact assessment not covered by NIST."
+    },
+    {
+      "id": "BCR-03",
+      "title": "Business Continuity Strategy",
+      "controls": ["CP-02", "CP-07", "CP-08"],
+      "coverage_pct": 78,
+      "rationale": "CP-02 covers contingency planning strategy; CP-07 addresses alternate processing sites; CP-08 covers telecommunications services. These support continuity strategy development.",
+      "gaps": "CCM requires cloud-native continuity strategies including multi-cloud failover, region evacuation procedures, and CSP service dependency strategies not explicitly in NIST."
+    },
+    {
+      "id": "BCR-04",
+      "title": "Business Continuity Planning",
+      "controls": ["CP-02", "CP-03", "CP-04"],
+      "coverage_pct": 88,
+      "rationale": "CP-02 directly addresses contingency plan content and structure; CP-03 covers contingency training; CP-04 covers contingency plan testing. Comprehensive planning coverage.",
+      "gaps": "CCM requires cloud-specific continuity plan elements such as CSP failover runbooks, data residency considerations during failover, and customer notification procedures."
+    },
+    {
+      "id": "BCR-05",
+      "title": "Documentation",
+      "controls": ["CP-02", "PL-02", "PL-07"],
+      "coverage_pct": 75,
+      "rationale": "CP-02 requires documented contingency plans; PL-02 covers system security plans; PL-07 addresses concept of operations. These support documentation requirements.",
+      "gaps": "CCM requires cloud-specific documentation including service dependency maps, recovery architecture diagrams, and CSP/CSC responsibility matrices not prescribed by NIST."
+    },
+    {
+      "id": "BCR-06",
+      "title": "Business Continuity Exercises",
+      "controls": ["CP-04", "CP-03"],
+      "coverage_pct": 88,
+      "rationale": "CP-04 directly covers contingency plan testing and exercises; CP-03 addresses contingency training. Together these comprehensively address exercise requirements.",
+      "gaps": "CCM requires cloud-specific exercises including cross-CSP failover drills, tenant-involved recovery testing, and chaos engineering approaches not explicitly in NIST."
+    },
+    {
+      "id": "BCR-07",
+      "title": "Communication",
+      "controls": ["CP-02", "IR-06", "CP-08"],
+      "coverage_pct": 72,
+      "rationale": "CP-02 includes communication procedures; IR-06 covers incident reporting; CP-08 addresses telecommunications services. These support continuity communications.",
+      "gaps": "CCM requires structured cloud customer notification during service disruptions, status page requirements, and multi-tenant communication protocols not addressed by NIST."
+    },
+    {
+      "id": "BCR-08",
+      "title": "Backup",
+      "controls": ["CP-09", "CP-06"],
+      "coverage_pct": 88,
+      "rationale": "CP-09 directly addresses information system backup including frequency, scope, and testing; CP-06 covers alternate storage sites. Strong backup coverage.",
+      "gaps": "CCM requires cloud-specific backup considerations including cross-region replication, tenant data isolation in backups, and CSP backup SLA commitments."
+    },
+    {
+      "id": "BCR-09",
+      "title": "Disaster Response Plan",
+      "controls": ["CP-02", "CP-10", "IR-01"],
+      "coverage_pct": 82,
+      "rationale": "CP-02 covers contingency planning including disaster recovery; CP-10 addresses system recovery and reconstitution; IR-01 covers incident response policy. Strong DR planning coverage.",
+      "gaps": "CCM requires cloud-specific disaster response including automated region failover, cloud-native recovery orchestration, and CSP disaster communication SLAs."
+    },
+    {
+      "id": "BCR-10",
+      "title": "Response Plan Exercise",
+      "controls": ["CP-04", "IR-03"],
+      "coverage_pct": 85,
+      "rationale": "CP-04 directly covers contingency plan testing; IR-03 addresses incident response testing. Together these address disaster response exercise requirements comprehensively.",
+      "gaps": "CCM requires cloud-specific disaster exercises including multi-region failover testing and coordinated CSP/CSC recovery drills."
+    },
+    {
+      "id": "BCR-11",
+      "title": "Equipment Redundancy",
+      "controls": ["CP-07", "CP-08", "PE-11"],
+      "coverage_pct": 78,
+      "rationale": "CP-07 addresses alternate processing sites; CP-08 covers telecommunications redundancy; PE-11 addresses emergency power. These support equipment redundancy requirements.",
+      "gaps": "CCM requires cloud-specific redundancy including availability zone design, hypervisor-level redundancy, and automated scaling for resilience not addressed by NIST."
+    },
+    {
+      "id": "CCC-01",
+      "title": "Change Management Policy and Procedures",
+      "controls": ["CM-01", "CM-03", "CM-09"],
+      "coverage_pct": 88,
+      "rationale": "CM-01 establishes configuration management policy; CM-03 covers configuration change control; CM-09 addresses configuration management plans. Comprehensive change management policy coverage.",
+      "gaps": "CCM requires cloud-specific change management including CSP infrastructure change notification to tenants and shared responsibility change coordination."
+    },
+    {
+      "id": "CCC-02",
+      "title": "Quality Testing",
+      "controls": ["CM-03", "SA-11", "CM-04"],
+      "coverage_pct": 80,
+      "rationale": "CM-03 includes testing requirements for changes; SA-11 covers developer testing; CM-04 addresses impact analyses including testing. Good quality testing coverage.",
+      "gaps": "CCM requires cloud-specific quality testing including multi-tenant regression testing, canary deployments, and blue/green deployment validation not explicitly in NIST."
+    },
+    {
+      "id": "CCC-03",
+      "title": "Change Management Technology",
+      "controls": ["CM-03", "CM-05", "CM-09"],
+      "coverage_pct": 75,
+      "rationale": "CM-03 covers change control processes; CM-05 addresses access restrictions for change; CM-09 covers configuration management plans. These support technology-based change management.",
+      "gaps": "CCM requires automated change management tooling, infrastructure-as-code change tracking, and cloud-native deployment automation that NIST does not specify."
+    },
+    {
+      "id": "CCC-04",
+      "title": "Unauthorized Change Protection",
+      "controls": ["CM-03", "CM-05", "SI-07"],
+      "coverage_pct": 85,
+      "rationale": "CM-03 enforces change control; CM-05 restricts change access; SI-07 provides software, firmware, and information integrity verification. Strong unauthorized change protection.",
+      "gaps": "CCM requires cloud-specific unauthorized change detection including infrastructure drift detection, immutable infrastructure enforcement, and CSP platform integrity."
+    },
+    {
+      "id": "CCC-05",
+      "title": "Change Agreements",
+      "controls": ["CM-03", "SA-04"],
+      "coverage_pct": 70,
+      "rationale": "CM-03 covers change control agreements; SA-04 addresses acquisition process agreements including security requirements. These support change agreement requirements.",
+      "gaps": "CCM requires cloud-specific change agreements between CSP and CSC including change notification windows, impact assessment sharing, and rollback commitments."
+    },
+    {
+      "id": "CCC-06",
+      "title": "Change Management Baseline",
+      "controls": ["CM-02", "CM-06"],
+      "coverage_pct": 88,
+      "rationale": "CM-02 directly establishes baseline configurations; CM-06 covers configuration settings. Together these comprehensively address configuration baseline management.",
+      "gaps": "CCM requires cloud-specific baselines including cloud service configuration baselines, infrastructure-as-code templates, and cloud security posture management integration."
+    },
+    {
+      "id": "CCC-07",
+      "title": "Detection of Baseline Deviation",
+      "controls": ["CM-02", "SI-07", "CM-03"],
+      "coverage_pct": 82,
+      "rationale": "CM-02 supports baseline comparison; SI-07 covers integrity monitoring for deviation detection; CM-03 enforces change control. Good deviation detection coverage.",
+      "gaps": "CCM requires automated cloud configuration drift detection, CSPM tool integration, and real-time deviation alerting specific to cloud environments."
+    },
+    {
+      "id": "CCC-08",
+      "title": "Exception Management",
+      "controls": ["CM-03", "CA-05", "PL-02"],
+      "coverage_pct": 70,
+      "rationale": "CM-03 includes exception processes for change control; CA-05 manages POA&Ms for exceptions; PL-02 documents security plan exceptions. These support exception management.",
+      "gaps": "CCM requires formal cloud configuration exception management with risk acceptance, compensating controls documentation, and exception expiry specific to cloud deployments."
+    },
+    {
+      "id": "CCC-09",
+      "title": "Change Restoration",
+      "controls": ["CM-03", "CP-10", "CP-09"],
+      "coverage_pct": 78,
+      "rationale": "CM-03 covers change rollback procedures; CP-10 addresses system recovery; CP-09 covers backups for restoration. These support change restoration capabilities.",
+      "gaps": "CCM requires cloud-specific change restoration including automated rollback capabilities, blue/green deployment rollback, and infrastructure-as-code state restoration."
+    },
+    {
+      "id": "CEK-01",
+      "title": "Encryption and Key Management Policy and Procedures",
+      "controls": ["SC-12", "SC-13", "SC-01"],
+      "coverage_pct": 85,
+      "rationale": "SC-12 establishes cryptographic key management policy; SC-13 covers cryptographic protection mechanisms; SC-01 addresses system and communications protection policy. Comprehensive crypto policy coverage.",
+      "gaps": "CCM requires cloud-specific encryption policies including BYOK/HYOK policies, cloud KMS governance, and multi-tenant key isolation requirements."
+    },
+    {
+      "id": "CEK-02",
+      "title": "CEK Roles and Responsibilities",
+      "controls": ["SC-12", "PS-01", "PL-02"],
+      "coverage_pct": 72,
+      "rationale": "SC-12 covers key management roles; PS-01 addresses personnel security roles; PL-02 documents security responsibilities. These support crypto role definitions.",
+      "gaps": "CCM requires explicit delineation of CSP vs CSC key management responsibilities, cloud KMS administrator roles, and shared responsibility for encryption operations."
+    },
+    {
+      "id": "CEK-03",
+      "title": "Data Encryption",
+      "controls": ["SC-13", "SC-28", "SC-08"],
+      "coverage_pct": 88,
+      "rationale": "SC-13 covers cryptographic protection; SC-28 addresses protection of information at rest; SC-08 covers transmission confidentiality and integrity. Comprehensive data encryption coverage.",
+      "gaps": "CCM requires cloud-specific encryption including client-side encryption options, cloud storage encryption defaults, and multi-tenant data isolation through encryption."
+    },
+    {
+      "id": "CEK-04",
+      "title": "Encryption Algorithm",
+      "controls": ["SC-13"],
+      "coverage_pct": 85,
+      "rationale": "SC-13 directly addresses the use of approved cryptographic algorithms and key lengths in accordance with applicable laws and regulations.",
+      "gaps": "CCM requires cloud-specific algorithm guidance including quantum-safe algorithm readiness and cloud KMS supported algorithm documentation."
+    },
+    {
+      "id": "CEK-05",
+      "title": "Encryption Change Management",
+      "controls": ["SC-13", "CM-03"],
+      "coverage_pct": 72,
+      "rationale": "SC-13 covers cryptographic protection changes; CM-03 addresses change control for encryption modifications. These support encryption change management.",
+      "gaps": "CCM requires cloud-specific encryption change management including CSP-initiated algorithm deprecation, key rotation coordination, and tenant notification of crypto changes."
+    },
+    {
+      "id": "CEK-06",
+      "title": "Encryption Change Cost Benefit Analysis",
+      "controls": ["SC-13", "RA-03"],
+      "coverage_pct": 55,
+      "rationale": "SC-13 covers cryptographic requirements; RA-03 supports risk-based analysis. However, cost-benefit analysis for encryption changes is not a NIST focus.",
+      "gaps": "NIST does not address cost-benefit analysis for encryption changes. CCM requires assessment of migration costs, performance impacts, and business justification for crypto changes."
+    },
+    {
+      "id": "CEK-07",
+      "title": "Encryption Risk Management",
+      "controls": ["SC-13", "RA-03", "RA-07"],
+      "coverage_pct": 75,
+      "rationale": "SC-13 covers cryptographic protection; RA-03 addresses risk assessment including crypto risks; RA-07 covers risk response. These support encryption risk management.",
+      "gaps": "CCM requires specific encryption risk management including crypto agility assessment, quantum computing threat timelines, and cloud key exposure risk analysis."
+    },
+    {
+      "id": "CEK-08",
+      "title": "CSC Key Management Capability",
+      "controls": ["SC-12"],
+      "coverage_pct": 50,
+      "rationale": "SC-12 covers key management requirements but does not address the cloud-specific concept of customer-managed keys. Partial coverage of key management capabilities.",
+      "gaps": "CCM requires CSPs to provide customer key management capabilities (BYOK, HYOK, customer-managed KMS). This cloud-specific shared responsibility concept is not in NIST."
+    },
+    {
+      "id": "CEK-09",
+      "title": "Encryption and Key Management Audit",
+      "controls": ["SC-12", "AU-02", "CA-02"],
+      "coverage_pct": 75,
+      "rationale": "SC-12 covers key management oversight; AU-02 addresses audit event logging; CA-02 covers security assessments. These support crypto audit requirements.",
+      "gaps": "CCM requires cloud-specific crypto auditing including KMS audit logs, key usage analytics, and customer-accessible encryption audit reports."
+    },
+    {
+      "id": "CEK-10",
+      "title": "Key Generation",
+      "controls": ["SC-12", "SC-13"],
+      "coverage_pct": 82,
+      "rationale": "SC-12 covers cryptographic key establishment including generation; SC-13 addresses approved cryptographic mechanisms for key generation.",
+      "gaps": "CCM requires cloud-specific key generation including HSM-backed generation in cloud KMS, tenant-isolated key generation, and entropy source documentation."
+    },
+    {
+      "id": "CEK-11",
+      "title": "Key Purpose",
+      "controls": ["SC-12"],
+      "coverage_pct": 72,
+      "rationale": "SC-12 covers key management including key usage restrictions. It addresses key purpose separation at a general level.",
+      "gaps": "CCM requires explicit key purpose documentation, prevention of key reuse across purposes, and cloud KMS key policy enforcement for purpose limitation."
+    },
+    {
+      "id": "CEK-12",
+      "title": "Key Rotation",
+      "controls": ["SC-12"],
+      "coverage_pct": 75,
+      "rationale": "SC-12 covers key management lifecycle including periodic key rotation as part of key management practices.",
+      "gaps": "CCM requires cloud-specific automated key rotation schedules, rotation without downtime, and customer-configurable rotation policies in cloud KMS."
+    },
+    {
+      "id": "CEK-13",
+      "title": "Key Revocation",
+      "controls": ["SC-12", "SC-17"],
+      "coverage_pct": 78,
+      "rationale": "SC-12 covers key management lifecycle including revocation; SC-17 addresses PKI certificate management and revocation. Good revocation coverage.",
+      "gaps": "CCM requires cloud-specific key revocation including immediate tenant-initiated revocation, CRL/OCSP for cloud services, and revocation impact assessment."
+    },
+    {
+      "id": "CEK-14",
+      "title": "Key Destruction",
+      "controls": ["SC-12", "MP-06"],
+      "coverage_pct": 80,
+      "rationale": "SC-12 covers key destruction as part of lifecycle management; MP-06 addresses media sanitization which includes cryptographic key destruction. Good coverage.",
+      "gaps": "CCM requires cloud-specific key destruction including cryptographic erasure verification, destruction across replicated cloud storage, and customer-verifiable destruction."
+    },
+    {
+      "id": "CEK-15",
+      "title": "Key Activation",
+      "controls": ["SC-12"],
+      "coverage_pct": 70,
+      "rationale": "SC-12 covers key management lifecycle including activation procedures as part of key establishment and management.",
+      "gaps": "CCM requires cloud-specific key activation including activation logging, dual-control activation in cloud KMS, and automated activation workflows."
+    },
+    {
+      "id": "CEK-16",
+      "title": "Key Suspension",
+      "controls": ["SC-12"],
+      "coverage_pct": 65,
+      "rationale": "SC-12 covers key management lifecycle. Key suspension is implicitly supported through key state management but not explicitly addressed.",
+      "gaps": "CCM requires explicit key suspension capability in cloud KMS, reversible suspension without key destruction, and suspension audit logging."
+    },
+    {
+      "id": "CEK-17",
+      "title": "Key Deactivation",
+      "controls": ["SC-12"],
+      "coverage_pct": 68,
+      "rationale": "SC-12 covers key management lifecycle including deactivation as part of key state transitions in the key management process.",
+      "gaps": "CCM requires cloud-specific key deactivation including grace periods, impact assessment before deactivation, and automated deactivation scheduling."
+    },
+    {
+      "id": "CEK-18",
+      "title": "Key Archival",
+      "controls": ["SC-12", "CP-09"],
+      "coverage_pct": 70,
+      "rationale": "SC-12 covers key management lifecycle including archival; CP-09 supports backup of cryptographic material. These address key archival requirements.",
+      "gaps": "CCM requires cloud-specific key archival including long-term archival in cloud HSMs, archived key access controls, and retrieval procedures for cloud-stored keys."
+    },
+    {
+      "id": "CEK-19",
+      "title": "Key Compromise",
+      "controls": ["SC-12", "IR-06", "IR-01"],
+      "coverage_pct": 75,
+      "rationale": "SC-12 covers key management including compromise response; IR-06 addresses incident reporting; IR-01 covers incident response policy. These support key compromise procedures.",
+      "gaps": "CCM requires cloud-specific key compromise response including automated key revocation and re-encryption, tenant notification of compromise, and forensic analysis of key exposure."
+    },
+    {
+      "id": "CEK-20",
+      "title": "Key Recovery",
+      "controls": ["SC-12", "CP-09"],
+      "coverage_pct": 72,
+      "rationale": "SC-12 covers key management including recovery procedures; CP-09 addresses backup and recovery. These support key recovery requirements.",
+      "gaps": "CCM requires cloud-specific key recovery including escrow arrangements, multi-party recovery for cloud KMS, and recovery without exposing key material to CSP."
+    },
+    {
+      "id": "CEK-21",
+      "title": "Key Inventory Management",
+      "controls": ["SC-12", "CM-08"],
+      "coverage_pct": 72,
+      "rationale": "SC-12 covers key management oversight; CM-08 addresses system component inventory which can include crypto assets. These support key inventory management.",
+      "gaps": "CCM requires cloud-specific key inventory including automated discovery of all encryption keys across cloud services, key-to-data mapping, and key lifecycle state tracking."
+    },
+    {
+      "id": "DCS-01",
+      "title": "Off-Site Equipment Disposal Policy and Procedures",
+      "controls": ["MP-06", "PE-01"],
+      "coverage_pct": 82,
+      "rationale": "MP-06 covers media sanitization and equipment disposal; PE-01 establishes physical protection policy. These address off-site equipment disposal requirements.",
+      "gaps": "CCM requires cloud-specific disposal including CSP chain of custody for retired hardware, tenant data sanitization verification, and disposal certification for cloud infrastructure."
+    },
+    {
+      "id": "DCS-02",
+      "title": "Off-Site Transfer Authorization Policy and Procedures",
+      "controls": ["MP-05", "PE-01", "PE-16"],
+      "coverage_pct": 82,
+      "rationale": "MP-05 covers media transport; PE-01 establishes physical protection policy; PE-16 addresses delivery and removal authorization. Good off-site transfer coverage.",
+      "gaps": "CCM requires cloud-specific transfer authorization including data centre decommissioning procedures and cross-border equipment transfer controls."
+    },
+    {
+      "id": "DCS-03",
+      "title": "Secure Area Policy and Procedures",
+      "controls": ["PE-01", "PE-02", "PE-03"],
+      "coverage_pct": 88,
+      "rationale": "PE-01 establishes physical protection policy; PE-02 covers physical access authorizations; PE-03 addresses physical access control. Comprehensive secure area coverage.",
+      "gaps": "CCM requires cloud data centre-specific secure area designations including multi-tenant physical isolation zones and customer audit access to secure areas."
+    },
+    {
+      "id": "DCS-04",
+      "title": "Secure Media Transportation Policy and Procedures",
+      "controls": ["MP-05", "MP-01"],
+      "coverage_pct": 85,
+      "rationale": "MP-05 directly covers media transport protection including encryption and custody controls; MP-01 establishes media protection policy. Strong media transport coverage.",
+      "gaps": "CCM requires cloud-specific media transportation including data migration media handling, HSM transport for cloud key material, and chain of custody for cloud storage media."
+    },
+    {
+      "id": "DCS-05",
+      "title": "Assets Classification",
+      "controls": ["CM-08", "RA-02", "MP-04"],
+      "coverage_pct": 80,
+      "rationale": "CM-08 covers component inventory; RA-02 addresses security categorization; MP-04 covers media storage. These support asset classification requirements.",
+      "gaps": "CCM requires cloud-specific asset classification including virtual asset tagging, cloud service tier classification, and multi-tenant asset ownership delineation."
+    },
+    {
+      "id": "DCS-06",
+      "title": "Assets Cataloguing and Tracking",
+      "controls": ["CM-08", "PE-05"],
+      "coverage_pct": 78,
+      "rationale": "CM-08 covers component inventory and tracking; PE-05 addresses access control for output devices. These support asset cataloguing and tracking.",
+      "gaps": "CCM requires cloud-specific asset tracking including automated cloud resource discovery, CMDB integration for cloud assets, and real-time cloud inventory management."
+    },
+    {
+      "id": "DCS-07",
+      "title": "Controlled Access Points",
+      "controls": ["PE-03", "PE-06"],
+      "coverage_pct": 88,
+      "rationale": "PE-03 directly covers physical access control at facility access points; PE-06 addresses monitoring physical access. Comprehensive access point coverage.",
+      "gaps": "CCM requires cloud data centre-specific access controls including biometric access for server rooms, mantrap/interlock systems, and tenant-specific access logging."
+    },
+    {
+      "id": "DCS-08",
+      "title": "Equipment Identification",
+      "controls": ["CM-08", "IA-03"],
+      "coverage_pct": 78,
+      "rationale": "CM-08 covers component inventory including equipment identification; IA-03 addresses device identification and authentication. These support equipment identification.",
+      "gaps": "CCM requires cloud-specific equipment identification including rack-level tracking, automated hardware lifecycle management, and serialisation across multi-site data centres."
+    },
+    {
+      "id": "DCS-09",
+      "title": "Secure Area Authorization",
+      "controls": ["PE-02", "PE-03"],
+      "coverage_pct": 88,
+      "rationale": "PE-02 directly covers physical access authorizations; PE-03 addresses physical access control enforcement. Comprehensive secure area authorization.",
+      "gaps": "CCM requires cloud-specific authorization including customer escort procedures, zone-based authorization tiers, and real-time authorization verification for data centre access."
+    },
+    {
+      "id": "DCS-10",
+      "title": "Surveillance System",
+      "controls": ["PE-06", "PE-08"],
+      "coverage_pct": 85,
+      "rationale": "PE-06 covers monitoring physical access including surveillance systems; PE-08 addresses visitor access records. Strong surveillance coverage.",
+      "gaps": "CCM requires cloud data centre-specific surveillance including 24/7 CCTV with retention requirements, AI-assisted anomaly detection, and customer-accessible surveillance logs."
+    },
+    {
+      "id": "DCS-11",
+      "title": "Unauthorized Access Response Training",
+      "controls": ["AT-03", "PE-06", "IR-02"],
+      "coverage_pct": 75,
+      "rationale": "AT-03 covers role-based training; PE-06 addresses physical access monitoring response; IR-02 covers incident response training. These support unauthorized access response training.",
+      "gaps": "CCM requires cloud-specific unauthorized access training including data centre-specific response procedures, escalation to tenant security teams, and physical intrusion drill exercises."
+    },
+    {
+      "id": "DCS-12",
+      "title": "Cabling Security",
+      "controls": ["PE-04", "PE-09"],
+      "coverage_pct": 85,
+      "rationale": "PE-04 directly addresses access control for transmission medium including cabling; PE-09 covers power equipment and cabling protection. Strong cabling security coverage.",
+      "gaps": "CCM requires cloud data centre-specific cabling security including fibre optic tamper detection, structured cabling standards, and tenant-isolated cable pathways."
+    },
+    {
+      "id": "DCS-13",
+      "title": "Environmental Systems",
+      "controls": ["PE-13", "PE-14", "PE-15"],
+      "coverage_pct": 88,
+      "rationale": "PE-13 covers fire protection; PE-14 addresses environmental controls (temperature/humidity); PE-15 covers water damage protection. Comprehensive environmental coverage.",
+      "gaps": "CCM requires cloud data centre-specific environmental systems including PUE monitoring, hot/cold aisle containment, and environmental monitoring dashboards accessible to tenants."
+    },
+    {
+      "id": "DCS-14",
+      "title": "Secure Utilities",
+      "controls": ["PE-09", "PE-10", "PE-11"],
+      "coverage_pct": 85,
+      "rationale": "PE-09 covers power equipment protection; PE-10 addresses emergency shutoff; PE-11 covers emergency power. Strong utility security coverage.",
+      "gaps": "CCM requires cloud-specific utility security including dual-feed power design, generator testing schedules, and utility redundancy SLAs for data centres."
+    },
+    {
+      "id": "DCS-15",
+      "title": "Equipment Location",
+      "controls": ["PE-18", "PE-05"],
+      "coverage_pct": 72,
+      "rationale": "PE-18 addresses location of information system components; PE-05 covers access control for output devices. These support equipment location requirements.",
+      "gaps": "CCM requires cloud-specific equipment location including geographic redundancy requirements, data sovereignty-aware placement, and rack location security zoning."
+    },
+    {
+      "id": "DSP-01",
+      "title": "Security and Privacy Policy and Procedures",
+      "controls": ["PT-01", "PL-01", "AC-01"],
+      "coverage_pct": 82,
+      "rationale": "PT-01 covers PII processing policy; PL-01 addresses planning policy; AC-01 covers access control policy. Together these establish security and privacy policy foundations.",
+      "gaps": "CCM requires cloud-specific data security and privacy policies including multi-tenant data isolation policies, data residency policies, and cloud DLP governance."
+    },
+    {
+      "id": "DSP-02",
+      "title": "Secure Disposal",
+      "controls": ["MP-06", "SI-12"],
+      "coverage_pct": 85,
+      "rationale": "MP-06 directly covers media sanitization and secure disposal; SI-12 addresses information management and retention. Strong secure disposal coverage.",
+      "gaps": "CCM requires cloud-specific secure disposal including cryptographic erasure of cloud storage, verification of disposal across replicated storage, and tenant disposal certification."
+    },
+    {
+      "id": "DSP-03",
+      "title": "Data Inventory",
+      "controls": ["CM-08", "PM-05", "PT-03"],
+      "coverage_pct": 72,
+      "rationale": "CM-08 covers component inventory; PM-05 addresses system inventory; PT-03 covers data processing inventory. These support data inventory requirements.",
+      "gaps": "CCM requires cloud-specific data inventory including automated data discovery across cloud services, data flow mapping for multi-cloud, and tenant data location tracking."
+    },
+    {
+      "id": "DSP-04",
+      "title": "Data Classification",
+      "controls": ["RA-02", "AC-16"],
+      "coverage_pct": 80,
+      "rationale": "RA-02 covers security categorization; AC-16 addresses security and privacy attributes for access control. These support data classification requirements.",
+      "gaps": "CCM requires cloud-specific data classification including automated classification for cloud storage, classification-based encryption policies, and cross-CSP classification consistency."
+    },
+    {
+      "id": "DSP-05",
+      "title": "Data Flow Documentation",
+      "controls": ["PL-02", "AC-04", "CA-09"],
+      "coverage_pct": 75,
+      "rationale": "PL-02 covers system security plans including data flows; AC-04 addresses information flow enforcement; CA-09 covers internal system connections. These support data flow documentation.",
+      "gaps": "CCM requires cloud-specific data flow documentation including cross-border data transfer maps, CSP internal data flows, and API data flow diagrams."
+    },
+    {
+      "id": "DSP-06",
+      "title": "Data Ownership and Stewardship",
+      "controls": ["PM-05", "AC-16", "PT-01"],
+      "coverage_pct": 60,
+      "rationale": "PM-05 addresses system inventory and ownership; AC-16 covers security attributes; PT-01 covers PII processing policies. Partial ownership coverage.",
+      "gaps": "CCM requires explicit cloud data ownership delineation between CSP and CSC, data stewardship roles for cloud environments, and contractual ownership provisions. NIST does not address multi-party data ownership."
+    },
+    {
+      "id": "DSP-07",
+      "title": "Data Protection by Design and Default",
+      "controls": ["SA-08", "PT-01", "SC-28"],
+      "coverage_pct": 72,
+      "rationale": "SA-08 covers security engineering principles (protection by design); PT-01 addresses privacy processing policies; SC-28 covers protection of information at rest. Good design-level coverage.",
+      "gaps": "CCM requires cloud-specific data protection by design including default encryption, tenant isolation by design, and privacy-preserving cloud architecture patterns."
+    },
+    {
+      "id": "DSP-08",
+      "title": "Data Privacy by Design and Default",
+      "controls": ["PT-01", "PT-02", "PT-03"],
+      "coverage_pct": 75,
+      "rationale": "PT-01 covers PII processing policies; PT-02 addresses authority for PII processing; PT-03 covers PII processing purposes. Strong privacy-by-design coverage.",
+      "gaps": "CCM requires cloud-specific privacy by design including data minimisation in cloud services, privacy-preserving computation, and default privacy settings in cloud platforms."
+    },
+    {
+      "id": "DSP-09",
+      "title": "Data Protection Impact Assessment",
+      "controls": ["PT-01", "RA-03", "RA-08"],
+      "coverage_pct": 70,
+      "rationale": "PT-01 covers PII processing governance; RA-03 addresses risk assessment; RA-08 covers privacy impact assessments. These support DPIA requirements.",
+      "gaps": "CCM requires cloud-specific DPIAs including assessment of CSP data processing, cross-border transfer impact analysis, and multi-tenant privacy risk assessment."
+    },
+    {
+      "id": "DSP-10",
+      "title": "Sensitive Data Transfer",
+      "controls": ["SC-08", "SC-13", "AC-04"],
+      "coverage_pct": 82,
+      "rationale": "SC-08 covers transmission confidentiality and integrity; SC-13 addresses cryptographic protection; AC-04 covers information flow enforcement. Strong data transfer coverage.",
+      "gaps": "CCM requires cloud-specific data transfer controls including cross-region transfer encryption, API data transfer security, and tenant-controlled data export mechanisms."
+    },
+    {
+      "id": "DSP-11",
+      "title": "Personal Data Access, Reversal, Rectification and Deletion",
+      "controls": ["PT-04", "PT-05", "PT-06"],
+      "coverage_pct": 72,
+      "rationale": "PT-04 covers consent for PII processing; PT-05 addresses privacy notice; PT-06 covers system of records notice. These support data subject rights.",
+      "gaps": "CCM requires cloud-specific data subject rights including automated data subject access requests across cloud services, right to erasure in distributed cloud storage, and data portability mechanisms."
+    },
+    {
+      "id": "DSP-12",
+      "title": "Limitation of Purpose in Personal Data Processing",
+      "controls": ["PT-02", "PT-03"],
+      "coverage_pct": 78,
+      "rationale": "PT-02 covers authority for PII processing limiting scope; PT-03 addresses PII processing purposes directly. Good purpose limitation coverage.",
+      "gaps": "CCM requires cloud-specific purpose limitation including CSP data use restrictions, telemetry data purpose limitation, and purpose limitation enforcement in multi-tenant environments."
+    },
+    {
+      "id": "DSP-13",
+      "title": "Personal Data Sub-processing",
+      "controls": ["PT-01", "SA-04", "SA-09"],
+      "coverage_pct": 62,
+      "rationale": "PT-01 covers PII processing governance; SA-04 addresses acquisition agreements; SA-09 covers external system services. Partial sub-processing coverage.",
+      "gaps": "CCM requires cloud-specific sub-processing controls including sub-processor disclosure, contractual flow-down of data protection requirements, and sub-processor audit rights. NIST does not address data processing chains."
+    },
+    {
+      "id": "DSP-14",
+      "title": "Disclosure of Data Sub-processors",
+      "controls": ["SA-09", "PT-01"],
+      "coverage_pct": 55,
+      "rationale": "SA-09 covers external system services documentation; PT-01 addresses PII processing governance. Partial sub-processor disclosure coverage.",
+      "gaps": "CCM requires explicit sub-processor disclosure to cloud customers, notification of sub-processor changes, and sub-processor location disclosure. This transparency requirement has no NIST equivalent."
+    },
+    {
+      "id": "DSP-15",
+      "title": "Limitation of Production Data Use",
+      "controls": ["PT-03", "CM-04"],
+      "coverage_pct": 62,
+      "rationale": "PT-03 covers PII processing purpose limitations; CM-04 addresses impact analysis including test environments. Partial production data limitation coverage.",
+      "gaps": "CCM requires cloud-specific controls on production data use in non-production environments, data masking/anonymisation for testing, and prohibition of production data in development."
+    },
+    {
+      "id": "DSP-16",
+      "title": "Data Retention and Deletion",
+      "controls": ["SI-12", "MP-06", "PT-01"],
+      "coverage_pct": 78,
+      "rationale": "SI-12 covers information management and retention; MP-06 addresses media sanitization; PT-01 covers PII processing governance including retention. Good retention coverage.",
+      "gaps": "CCM requires cloud-specific retention including automated retention enforcement across cloud storage, tenant data deletion verification, and retention policy inheritance in cloud tiers."
+    },
+    {
+      "id": "DSP-17",
+      "title": "Sensitive Data Protection",
+      "controls": ["SC-28", "SC-08", "AC-03"],
+      "coverage_pct": 82,
+      "rationale": "SC-28 covers protection of information at rest; SC-08 addresses transmission protection; AC-03 covers access enforcement. Strong sensitive data protection coverage.",
+      "gaps": "CCM requires cloud-specific sensitive data protection including tokenisation, cloud DLP integration, and classification-driven encryption for cloud-stored sensitive data."
+    },
+    {
+      "id": "DSP-18",
+      "title": "Disclosure Notification",
+      "controls": ["IR-06", "PT-01"],
+      "coverage_pct": 65,
+      "rationale": "IR-06 covers incident reporting including data breach notification; PT-01 addresses PII processing governance including disclosure. Partial notification coverage.",
+      "gaps": "CCM requires cloud-specific disclosure notification including legally mandated breach notification, government access disclosure to tenants, and proactive security event transparency."
+    },
+    {
+      "id": "DSP-19",
+      "title": "Data Location",
+      "controls": ["PT-01", "SA-09"],
+      "coverage_pct": 45,
+      "rationale": "PT-01 covers PII processing governance; SA-09 addresses external information system services. Limited coverage of data location requirements.",
+      "gaps": "CCM requires explicit data location controls including data residency guarantees, data sovereignty compliance, geographic processing restrictions, and tenant-visible data location information. NIST does not address data location."
+    },
+    {
+      "id": "GRC-01",
+      "title": "Governance Program Policy and Procedures",
+      "controls": ["PL-01", "PM-01", "PM-02"],
+      "coverage_pct": 85,
+      "rationale": "PL-01 covers planning policy; PM-01 addresses information security program plan; PM-02 covers information security program leadership. Comprehensive governance coverage.",
+      "gaps": "CCM requires cloud-specific governance including cloud security governance frameworks, multi-cloud governance, and CSP governance transparency."
+    },
+    {
+      "id": "GRC-02",
+      "title": "Risk Management Program",
+      "controls": ["RA-01", "RA-03", "PM-09"],
+      "coverage_pct": 85,
+      "rationale": "RA-01 covers risk assessment policy; RA-03 addresses risk assessment; PM-09 covers risk management strategy. Comprehensive risk management coverage.",
+      "gaps": "CCM requires cloud-specific risk management including shared responsibility risk allocation, cloud concentration risk, and CSP dependency risk assessment."
+    },
+    {
+      "id": "GRC-03",
+      "title": "Organizational Policy Reviews",
+      "controls": ["PL-01", "PM-01"],
+      "coverage_pct": 80,
+      "rationale": "PL-01 requires periodic policy review and updates; PM-01 addresses program plan review. These support organizational policy review requirements.",
+      "gaps": "CCM requires cloud-specific policy review triggers including CSP service changes, cloud threat landscape updates, and regulatory changes affecting cloud services."
+    },
+    {
+      "id": "GRC-04",
+      "title": "Policy Exception Process",
+      "controls": ["PL-02", "CA-05"],
+      "coverage_pct": 72,
+      "rationale": "PL-02 covers security plan documentation including exceptions; CA-05 manages plans of action and milestones. These support policy exception processes.",
+      "gaps": "CCM requires formal cloud policy exception management including risk acceptance documentation, compensating controls, exception expiry, and cloud-specific exception reporting."
+    },
+    {
+      "id": "GRC-05",
+      "title": "Information Security Program",
+      "controls": ["PM-01", "PM-02", "PM-03"],
+      "coverage_pct": 85,
+      "rationale": "PM-01 covers information security program plan; PM-02 addresses program leadership; PM-03 covers information security and privacy resources. Comprehensive program coverage.",
+      "gaps": "CCM requires cloud-specific security program elements including cloud security operations, cloud security architecture review, and CSP security program transparency."
+    },
+    {
+      "id": "GRC-06",
+      "title": "Governance Responsibility Model",
+      "controls": ["PM-02", "PL-02", "PM-01"],
+      "coverage_pct": 68,
+      "rationale": "PM-02 covers security program leadership; PL-02 documents responsibilities; PM-01 addresses program structure. These support governance responsibility models.",
+      "gaps": "CCM requires cloud-specific shared responsibility models (SSRM) delineating CSP vs CSC governance responsibilities. This cloud-specific concept has no direct NIST equivalent."
+    },
+    {
+      "id": "GRC-07",
+      "title": "Information System Regulatory Mapping",
+      "controls": ["PM-01", "PL-02", "CA-02"],
+      "coverage_pct": 65,
+      "rationale": "PM-01 covers program planning including compliance; PL-02 documents system security plans; CA-02 addresses control assessments. Partial regulatory mapping coverage.",
+      "gaps": "CCM requires explicit regulatory mapping for cloud services including jurisdiction-specific compliance matrices, cross-border regulatory analysis, and regulatory change tracking for cloud environments."
+    },
+    {
+      "id": "GRC-08",
+      "title": "Special Interest Groups",
+      "controls": ["PM-15", "PM-16"],
+      "coverage_pct": 78,
+      "rationale": "PM-15 covers security and privacy groups and associations; PM-16 addresses threat awareness program. These support special interest group engagement.",
+      "gaps": "CCM requires cloud-specific industry group participation including CSA STAR working groups, cloud security information sharing, and cloud-focused ISACs."
+    },
+    {
+      "id": "HRS-01",
+      "title": "Background Screening Policy and Procedures",
+      "controls": ["PS-01", "PS-03"],
+      "coverage_pct": 88,
+      "rationale": "PS-01 establishes personnel security policy; PS-03 directly covers personnel screening. Comprehensive background screening coverage.",
+      "gaps": "CCM requires cloud-specific screening including privileged cloud administrator enhanced screening, contractor screening for data centre access, and periodic re-screening."
+    },
+    {
+      "id": "HRS-02",
+      "title": "Acceptable Use of Technology Policy and Procedures",
+      "controls": ["PL-04", "AC-20"],
+      "coverage_pct": 85,
+      "rationale": "PL-04 covers rules of behavior for acceptable use; AC-20 addresses use of external systems. Strong acceptable use coverage.",
+      "gaps": "CCM requires cloud-specific acceptable use policies including cloud service usage guidelines, shadow IT restrictions, and acceptable use of cloud development environments."
+    },
+    {
+      "id": "HRS-03",
+      "title": "Clean Desk Policy and Procedures",
+      "controls": ["MP-02", "AC-11"],
+      "coverage_pct": 72,
+      "rationale": "MP-02 covers media access restrictions supporting clean desk; AC-11 addresses session lock. These partially support clean desk requirements.",
+      "gaps": "CCM requires explicit clean desk policy including clear screen requirements, physical document security, and clean desk verification procedures. NIST does not have a dedicated clean desk control."
+    },
+    {
+      "id": "HRS-04",
+      "title": "Remote and Home Working Policy and Procedures",
+      "controls": ["AC-17", "PE-17"],
+      "coverage_pct": 82,
+      "rationale": "AC-17 directly covers remote access policy and procedures; PE-17 addresses alternate work site protections. Strong remote working coverage.",
+      "gaps": "CCM requires cloud-specific remote work policies including cloud console access from remote locations, VPN requirements for cloud administration, and home network security requirements."
+    },
+    {
+      "id": "HRS-05",
+      "title": "Asset returns",
+      "controls": ["PS-04"],
+      "coverage_pct": 80,
+      "rationale": "PS-04 covers personnel termination procedures including asset return and access revocation. Good asset return coverage.",
+      "gaps": "CCM requires cloud-specific asset return including cloud credential revocation, virtual asset recovery, and SaaS license reclamation upon termination."
+    },
+    {
+      "id": "HRS-06",
+      "title": "Employment Termination",
+      "controls": ["PS-04", "PS-05"],
+      "coverage_pct": 88,
+      "rationale": "PS-04 directly covers personnel termination procedures; PS-05 addresses personnel transfer. Comprehensive employment termination coverage.",
+      "gaps": "CCM requires cloud-specific termination procedures including immediate cloud admin access revocation, API key invalidation, and cross-CSP access deprovisioning."
+    },
+    {
+      "id": "HRS-07",
+      "title": "Employment Agreement Process",
+      "controls": ["PS-06", "PS-01"],
+      "coverage_pct": 80,
+      "rationale": "PS-06 covers access agreements; PS-01 addresses personnel security policy. These support employment agreement processes.",
+      "gaps": "CCM requires cloud-specific employment agreements including cloud data handling obligations, IP protection for cloud-developed assets, and cloud security responsibility acknowledgement."
+    },
+    {
+      "id": "HRS-08",
+      "title": "Employment Agreement Content",
+      "controls": ["PS-06", "PL-04"],
+      "coverage_pct": 78,
+      "rationale": "PS-06 covers access agreements content; PL-04 addresses rules of behavior. These support employment agreement content requirements.",
+      "gaps": "CCM requires cloud-specific agreement content including confidentiality of customer data, cloud security training commitments, and post-employment cloud access restrictions."
+    },
+    {
+      "id": "HRS-09",
+      "title": "Personnel Roles and Responsibilities",
+      "controls": ["PS-01", "PL-02", "PM-02"],
+      "coverage_pct": 82,
+      "rationale": "PS-01 covers personnel security roles; PL-02 documents security responsibilities; PM-02 addresses program leadership roles. Good role and responsibility coverage.",
+      "gaps": "CCM requires cloud-specific roles including cloud security architect, DevSecOps roles, and shared responsibility role mapping between CSP and CSC."
+    },
+    {
+      "id": "HRS-10",
+      "title": "Non-Disclosure Agreements",
+      "controls": ["PS-06", "PS-09"],
+      "coverage_pct": 80,
+      "rationale": "PS-06 covers access agreements including confidentiality; PS-09 addresses position descriptions with security responsibilities. Good NDA coverage.",
+      "gaps": "CCM requires cloud-specific NDAs including customer data confidentiality, cross-border NDA applicability, and NDA coverage for sub-contractors with cloud access."
+    },
+    {
+      "id": "HRS-11",
+      "title": "Security Awareness Training",
+      "controls": ["AT-01", "AT-02", "AT-03"],
+      "coverage_pct": 88,
+      "rationale": "AT-01 covers training policy; AT-02 addresses literacy training and awareness; AT-03 covers role-based training. Comprehensive security awareness training coverage.",
+      "gaps": "CCM requires cloud-specific training content including cloud security best practices, shared responsibility model training, and cloud-native threat awareness."
+    },
+    {
+      "id": "HRS-12",
+      "title": "Personal and Sensitive Data Awareness and Training",
+      "controls": ["AT-02", "AT-03", "PT-01"],
+      "coverage_pct": 78,
+      "rationale": "AT-02 covers awareness including privacy topics; AT-03 addresses role-based training; PT-01 covers PII processing governance. Good data awareness training coverage.",
+      "gaps": "CCM requires cloud-specific data handling training including cloud data classification procedures, cross-border data handling awareness, and cloud privacy incident recognition."
+    },
+    {
+      "id": "HRS-13",
+      "title": "Compliance User Responsibility",
+      "controls": ["PL-04", "PS-06", "AT-02"],
+      "coverage_pct": 78,
+      "rationale": "PL-04 covers rules of behavior; PS-06 addresses access agreements; AT-02 covers awareness training. These support user compliance responsibility.",
+      "gaps": "CCM requires cloud-specific user compliance responsibilities including acceptable cloud usage, shadow IT avoidance, and cloud security policy adherence reporting."
+    },
+    {
+      "id": "IAM-01",
+      "title": "Identity and Access Management Policy and Procedures",
+      "controls": ["AC-01", "IA-01"],
+      "coverage_pct": 88,
+      "rationale": "AC-01 establishes access control policy and procedures; IA-01 covers identification and authentication policy. Comprehensive IAM policy coverage.",
+      "gaps": "CCM requires cloud-specific IAM policies including cloud identity federation policies, multi-tenant access governance, and CSP administrative access policies."
+    },
+    {
+      "id": "IAM-02",
+      "title": "Strong Password Policy and Procedures",
+      "controls": ["IA-05", "IA-01"],
+      "coverage_pct": 85,
+      "rationale": "IA-05 directly covers authenticator management including password requirements; IA-01 establishes identification and authentication policy. Strong password policy coverage.",
+      "gaps": "CCM requires cloud-specific password policies including cloud console password complexity, API key management policies, and service account credential requirements."
+    },
+    {
+      "id": "IAM-03",
+      "title": "Identity Inventory",
+      "controls": ["AC-02", "IA-04"],
+      "coverage_pct": 82,
+      "rationale": "AC-02 covers account management including identity inventory; IA-04 addresses identifier management. Good identity inventory coverage.",
+      "gaps": "CCM requires cloud-specific identity inventory including cross-CSP identity federation tracking, service account discovery, and API key inventory across cloud platforms."
+    },
+    {
+      "id": "IAM-04",
+      "title": "Separation of Duties",
+      "controls": ["AC-05", "AC-06"],
+      "coverage_pct": 88,
+      "rationale": "AC-05 directly covers separation of duties; AC-06 addresses least privilege supporting duty separation. Comprehensive separation of duties coverage.",
+      "gaps": "CCM requires cloud-specific duty separation including CSP operational role separation, cloud deployment pipeline role segregation, and administrative access role isolation."
+    },
+    {
+      "id": "IAM-05",
+      "title": "Least Privilege",
+      "controls": ["AC-06", "AC-02"],
+      "coverage_pct": 90,
+      "rationale": "AC-06 directly implements least privilege access; AC-02 supports least privilege through account management. Comprehensive least privilege coverage.",
+      "gaps": "CCM requires cloud-specific least privilege including cloud IAM policy minimization, service-linked role restrictions, and cross-account privilege management."
+    },
+    {
+      "id": "IAM-06",
+      "title": "User Access Provisioning",
+      "controls": ["AC-02", "IA-04", "IA-05"],
+      "coverage_pct": 88,
+      "rationale": "AC-02 covers account management including provisioning; IA-04 addresses identifier management; IA-05 covers authenticator management. Comprehensive provisioning coverage.",
+      "gaps": "CCM requires cloud-specific provisioning including automated cloud identity provisioning (SCIM), just-in-time access for cloud resources, and cross-CSP provisioning."
+    },
+    {
+      "id": "IAM-07",
+      "title": "User Access Changes and Revocation",
+      "controls": ["AC-02", "PS-04", "PS-05"],
+      "coverage_pct": 88,
+      "rationale": "AC-02 covers access modifications and removal; PS-04 addresses termination access revocation; PS-05 covers transfer access changes. Comprehensive access lifecycle coverage.",
+      "gaps": "CCM requires cloud-specific access revocation including real-time cloud session termination, API key revocation, and cascading access removal across federated cloud services."
+    },
+    {
+      "id": "IAM-08",
+      "title": "User Access Review",
+      "controls": ["AC-02", "AC-06"],
+      "coverage_pct": 85,
+      "rationale": "AC-02 covers periodic account review and access recertification; AC-06 addresses least privilege review. Strong access review coverage.",
+      "gaps": "CCM requires cloud-specific access reviews including cloud entitlement review, over-privileged cloud role detection, and automated cloud access certification."
+    },
+    {
+      "id": "IAM-09",
+      "title": "Segregation of Privileged Access Roles",
+      "controls": ["AC-05", "AC-06"],
+      "coverage_pct": 85,
+      "rationale": "AC-05 covers separation of duties; AC-06 addresses least privilege including privileged role segregation. Strong privileged access segregation coverage.",
+      "gaps": "CCM requires cloud-specific privileged role segregation including cloud root account isolation, break-glass procedure separation, and cross-cloud administrative role boundaries."
+    },
+    {
+      "id": "IAM-10",
+      "title": "Management of Privileged Access Roles",
+      "controls": ["AC-02", "AC-06", "IA-02"],
+      "coverage_pct": 85,
+      "rationale": "AC-02 covers privileged account management; AC-06 addresses privileged access restrictions; IA-02 covers identification and authentication for privileged users. Strong privileged access management.",
+      "gaps": "CCM requires cloud-specific privileged access management including PAM for cloud consoles, ephemeral privileged sessions, and cloud admin MFA enforcement."
+    },
+    {
+      "id": "IAM-11",
+      "title": "CSCs Approval for Agreed Privileged Access Roles",
+      "controls": ["AC-02", "AC-06"],
+      "coverage_pct": 60,
+      "rationale": "AC-02 covers access authorization; AC-06 addresses privileged access restrictions. Partial coverage of customer-approved CSP privileged access.",
+      "gaps": "CCM requires CSP transparency about privileged access to customer environments, customer approval workflows for CSP administrative access, and audit trails of CSP privileged operations. This shared responsibility concept has limited NIST coverage."
+    },
+    {
+      "id": "IAM-12",
+      "title": "Safeguard Logs Integrity",
+      "controls": ["AU-09", "AU-10"],
+      "coverage_pct": 85,
+      "rationale": "AU-09 directly covers protection of audit information including integrity; AU-10 addresses non-repudiation. Strong log integrity coverage.",
+      "gaps": "CCM requires cloud-specific log integrity including immutable cloud audit logs, cross-CSP log chain integrity, and customer-verifiable log authenticity."
+    },
+    {
+      "id": "IAM-13",
+      "title": "Uniquely Identifiable Users",
+      "controls": ["IA-02", "IA-04", "AC-02"],
+      "coverage_pct": 90,
+      "rationale": "IA-02 requires unique user identification; IA-04 covers identifier management; AC-02 addresses individual account management. Comprehensive unique identification coverage.",
+      "gaps": "CCM requires cloud-specific unique identification including service account attribution, API call identity tracking, and federated identity uniqueness across cloud platforms."
+    },
+    {
+      "id": "IAM-14",
+      "title": "Strong Authentication",
+      "controls": ["IA-02", "IA-05", "IA-08"],
+      "coverage_pct": 88,
+      "rationale": "IA-02 covers identification and authentication including multi-factor; IA-05 addresses authenticator management; IA-08 covers external user authentication. Comprehensive strong authentication coverage.",
+      "gaps": "CCM requires cloud-specific strong authentication including cloud console MFA, API authentication standards (OAuth/OIDC), and hardware security key support for cloud admin access."
+    },
+    {
+      "id": "IAM-15",
+      "title": "Passwords Management",
+      "controls": ["IA-05", "IA-02"],
+      "coverage_pct": 85,
+      "rationale": "IA-05 directly covers authenticator management including password lifecycle; IA-02 covers identification and authentication. Strong password management coverage.",
+      "gaps": "CCM requires cloud-specific password management including cloud vault integration, service account password rotation, and automated credential management for cloud services."
+    },
+    {
+      "id": "IAM-16",
+      "title": "Authorization Mechanisms",
+      "controls": ["AC-03", "AC-06", "AC-16"],
+      "coverage_pct": 85,
+      "rationale": "AC-03 covers access enforcement; AC-06 addresses least privilege; AC-16 covers security and privacy attributes for authorization. Strong authorization coverage.",
+      "gaps": "CCM requires cloud-specific authorization including cloud IAM policy engines, attribute-based access control for cloud resources, and dynamic authorization for cloud APIs."
+    },
+    {
+      "id": "IPY-01",
+      "title": "Interoperability and Portability Policy and Procedures",
+      "controls": ["SA-01", "SA-04"],
+      "coverage_pct": 55,
+      "rationale": "SA-01 covers acquisition policy; SA-04 addresses acquisition requirements. Partial coverage as NIST does not focus on interoperability and portability.",
+      "gaps": "CCM requires cloud-specific interoperability policies including data format standards, API compatibility requirements, and cloud exit strategy planning. NIST does not address cloud lock-in prevention."
+    },
+    {
+      "id": "IPY-02",
+      "title": "Application Interface Availability",
+      "controls": ["SA-04", "SA-09"],
+      "coverage_pct": 52,
+      "rationale": "SA-04 covers acquisition requirements including API specifications; SA-09 addresses external system services. Partial interface availability coverage.",
+      "gaps": "CCM requires cloud-specific API availability including documented API contracts, API versioning and deprecation policies, and programmatic access to all cloud service functions."
+    },
+    {
+      "id": "IPY-03",
+      "title": "Secure Interoperability and Portability Management",
+      "controls": ["SA-04", "SC-08", "SA-09"],
+      "coverage_pct": 55,
+      "rationale": "SA-04 covers security requirements for acquisitions; SC-08 addresses transmission security; SA-09 covers external services. Partial interoperability security coverage.",
+      "gaps": "CCM requires cloud-specific secure interoperability including standardised data exchange formats, secure API gateways for multi-cloud, and encrypted data portability mechanisms."
+    },
+    {
+      "id": "IPY-04",
+      "title": "Data Portability Contractual Obligations",
+      "controls": ["SA-04"],
+      "coverage_pct": 42,
+      "rationale": "SA-04 covers acquisition agreements which can include data portability requirements. Limited contractual portability coverage.",
+      "gaps": "CCM requires cloud-specific data portability obligations including data export formats, data retrieval timelines after contract termination, and data deletion verification post-migration. NIST does not address cloud contract data rights."
+    },
+    {
+      "id": "IVS-01",
+      "title": "Infrastructure and Virtualization Security Policy and Procedures",
+      "controls": ["SC-01", "CM-01", "SA-01"],
+      "coverage_pct": 78,
+      "rationale": "SC-01 covers system and communications protection policy; CM-01 addresses configuration management policy; SA-01 covers acquisition policy. Good infrastructure policy coverage.",
+      "gaps": "CCM requires cloud-specific infrastructure security policies including hypervisor security, container orchestration security, and virtual network security policies."
+    },
+    {
+      "id": "IVS-02",
+      "title": "Capacity and Resource Planning",
+      "controls": ["SC-05", "SC-06", "CP-02"],
+      "coverage_pct": 65,
+      "rationale": "SC-05 covers denial of service protection (capacity); SC-06 addresses resource availability; CP-02 supports capacity in contingency planning. Partial capacity planning coverage.",
+      "gaps": "CCM requires cloud-specific capacity planning including auto-scaling policies, resource quota management, and cloud cost optimization alongside capacity. NIST capacity controls are narrowly focused."
+    },
+    {
+      "id": "IVS-03",
+      "title": "Network Security",
+      "controls": ["SC-07", "SC-08", "AC-04"],
+      "coverage_pct": 85,
+      "rationale": "SC-07 covers boundary protection; SC-08 addresses transmission security; AC-04 covers information flow enforcement. Comprehensive network security coverage.",
+      "gaps": "CCM requires cloud-specific network security including virtual network isolation, cloud-native firewalls, and software-defined network security policies."
+    },
+    {
+      "id": "IVS-04",
+      "title": "OS Hardening and Base Controls",
+      "controls": ["CM-06", "CM-02", "SI-02"],
+      "coverage_pct": 85,
+      "rationale": "CM-06 covers configuration settings (hardening); CM-02 addresses baseline configurations; SI-02 covers flaw remediation. Strong OS hardening coverage.",
+      "gaps": "CCM requires cloud-specific OS hardening including cloud marketplace image hardening, container base image security, and serverless runtime hardening."
+    },
+    {
+      "id": "IVS-05",
+      "title": "Production and Non-Production Environments",
+      "controls": ["CM-02", "CM-04", "SC-07"],
+      "coverage_pct": 78,
+      "rationale": "CM-02 covers baseline configurations per environment; CM-04 addresses impact analysis including test environments; SC-07 supports boundary protection between environments. Good environment separation.",
+      "gaps": "CCM requires cloud-specific environment separation including separate cloud accounts/subscriptions, network isolation between environments, and data flow restrictions between production and non-production."
+    },
+    {
+      "id": "IVS-06",
+      "title": "Segmentation and Segregation",
+      "controls": ["SC-07", "AC-04", "SC-03"],
+      "coverage_pct": 82,
+      "rationale": "SC-07 covers boundary protection and segmentation; AC-04 addresses information flow enforcement; SC-03 covers security function isolation. Strong segmentation coverage.",
+      "gaps": "CCM requires cloud-specific segmentation including virtual network segmentation, micro-segmentation for cloud workloads, and tenant isolation at the hypervisor level."
+    },
+    {
+      "id": "IVS-07",
+      "title": "Migration to Cloud Environments",
+      "controls": ["SA-03", "CM-03", "SA-04"],
+      "coverage_pct": 55,
+      "rationale": "SA-03 covers system development lifecycle; CM-03 addresses change management; SA-04 covers acquisition requirements. Partial migration coverage.",
+      "gaps": "CCM requires cloud-specific migration controls including workload migration security assessment, data migration encryption, and cloud migration testing and validation. NIST does not address cloud migration."
+    },
+    {
+      "id": "IVS-08",
+      "title": "Network Architecture Documentation",
+      "controls": ["PL-02", "SC-07", "CA-09"],
+      "coverage_pct": 78,
+      "rationale": "PL-02 covers system security plans including architecture; SC-07 defines boundary protection architecture; CA-09 documents internal connections. Good architecture documentation coverage.",
+      "gaps": "CCM requires cloud-specific network architecture documentation including virtual network diagrams, cloud connectivity maps, and multi-cloud network topology documentation."
+    },
+    {
+      "id": "IVS-09",
+      "title": "Network Defense",
+      "controls": ["SC-07", "SI-04", "SC-05"],
+      "coverage_pct": 85,
+      "rationale": "SC-07 covers boundary protection; SI-04 addresses system monitoring including network defense; SC-05 covers denial of service protection. Strong network defense coverage.",
+      "gaps": "CCM requires cloud-specific network defense including cloud WAF, DDoS protection services, and cloud-native network threat detection."
+    },
+    {
+      "id": "LOG-01",
+      "title": "Logging and Monitoring Policy and Procedures",
+      "controls": ["AU-01", "AU-02"],
+      "coverage_pct": 88,
+      "rationale": "AU-01 establishes audit and accountability policy and procedures; AU-02 covers event logging requirements. Comprehensive logging policy coverage.",
+      "gaps": "CCM requires cloud-specific logging policies including cloud service audit log requirements, tenant-accessible logging, and cross-CSP log aggregation policies."
+    },
+    {
+      "id": "LOG-02",
+      "title": "Audit Logs Protection",
+      "controls": ["AU-09", "AU-11"],
+      "coverage_pct": 88,
+      "rationale": "AU-09 directly covers protection of audit information; AU-11 addresses audit record retention. Strong audit log protection coverage.",
+      "gaps": "CCM requires cloud-specific log protection including immutable cloud audit trails, customer-owned log storage, and tamper-evident logging for cloud environments."
+    },
+    {
+      "id": "LOG-03",
+      "title": "Security Monitoring and Alerting",
+      "controls": ["SI-04", "AU-06", "CA-07"],
+      "coverage_pct": 88,
+      "rationale": "SI-04 covers system monitoring; AU-06 addresses audit review and analysis; CA-07 covers continuous monitoring. Comprehensive monitoring and alerting coverage.",
+      "gaps": "CCM requires cloud-specific monitoring including cloud SIEM integration, cloud-native security monitoring services, and tenant-configurable alerting for cloud events."
+    },
+    {
+      "id": "LOG-04",
+      "title": "Audit Logs Access and Accountability",
+      "controls": ["AU-09", "AU-06", "AC-06"],
+      "coverage_pct": 85,
+      "rationale": "AU-09 covers access restrictions to audit information; AU-06 addresses audit review; AC-06 covers least privilege for log access. Strong log access control.",
+      "gaps": "CCM requires cloud-specific log access including tenant self-service log access, API-based log retrieval, and cross-CSP log access federation."
+    },
+    {
+      "id": "LOG-05",
+      "title": "Audit Logs Monitoring and Response",
+      "controls": ["AU-06", "SI-04", "IR-04"],
+      "coverage_pct": 85,
+      "rationale": "AU-06 covers audit review and analysis; SI-04 addresses system monitoring; IR-04 covers incident handling based on monitoring. Strong monitoring and response coverage.",
+      "gaps": "CCM requires cloud-specific log monitoring including automated cloud log analysis, cloud-native SOAR integration, and tenant-visible monitoring dashboards."
+    },
+    {
+      "id": "LOG-06",
+      "title": "Clock Synchronization",
+      "controls": ["AU-08"],
+      "coverage_pct": 90,
+      "rationale": "AU-08 directly covers time stamps and clock synchronization using authoritative time sources. Comprehensive clock synchronization coverage.",
+      "gaps": "CCM requires cloud-specific clock synchronization including NTP source documentation for cloud services and cross-region time consistency verification."
+    },
+    {
+      "id": "LOG-07",
+      "title": "Logging Scope",
+      "controls": ["AU-02", "AU-03"],
+      "coverage_pct": 85,
+      "rationale": "AU-02 covers event logging scope determination; AU-03 addresses content of audit records. Strong logging scope definition.",
+      "gaps": "CCM requires cloud-specific logging scope including cloud control plane logging, data plane logging options, and management API activity logging."
+    },
+    {
+      "id": "LOG-08",
+      "title": "Log Records",
+      "controls": ["AU-03", "AU-02"],
+      "coverage_pct": 88,
+      "rationale": "AU-03 directly covers content of audit records; AU-02 addresses event identification. Comprehensive log record content coverage.",
+      "gaps": "CCM requires cloud-specific log records including cloud resource identifiers, tenant context, and cloud service-specific event attributes."
+    },
+    {
+      "id": "LOG-09",
+      "title": "Log Protection",
+      "controls": ["AU-09", "AU-11"],
+      "coverage_pct": 88,
+      "rationale": "AU-09 directly covers protection of audit information; AU-11 addresses audit record retention. Strong log protection coverage.",
+      "gaps": "CCM requires cloud-specific log protection including customer-managed log encryption keys, cross-region log replication, and log export to customer-controlled storage."
+    },
+    {
+      "id": "LOG-10",
+      "title": "Encryption Monitoring and Reporting",
+      "controls": ["AU-02", "SC-13", "CA-07"],
+      "coverage_pct": 68,
+      "rationale": "AU-02 covers event logging including crypto events; SC-13 addresses cryptographic protection; CA-07 covers continuous monitoring. Partial encryption monitoring coverage.",
+      "gaps": "CCM requires cloud-specific encryption monitoring including KMS usage logging, encryption status reporting for cloud resources, and crypto certificate expiry monitoring."
+    },
+    {
+      "id": "LOG-11",
+      "title": "Transaction/Activity Logging",
+      "controls": ["AU-02", "AU-03", "AU-12"],
+      "coverage_pct": 88,
+      "rationale": "AU-02 covers event logging; AU-03 addresses audit record content; AU-12 covers audit record generation. Comprehensive activity logging coverage.",
+      "gaps": "CCM requires cloud-specific transaction logging including API call logging, cloud resource state change logging, and cross-service activity correlation."
+    },
+    {
+      "id": "LOG-12",
+      "title": "Access Control Logs",
+      "controls": ["AU-02", "AU-03", "AC-02"],
+      "coverage_pct": 85,
+      "rationale": "AU-02 covers event logging including access events; AU-03 addresses audit record content; AC-02 covers account management logging. Strong access control logging.",
+      "gaps": "CCM requires cloud-specific access logging including cloud IAM policy evaluation logging, cross-cloud access attempt correlation, and real-time access anomaly detection."
+    },
+    {
+      "id": "LOG-13",
+      "title": "Failures and Anomalies Reporting",
+      "controls": ["AU-05", "SI-04", "AU-06"],
+      "coverage_pct": 82,
+      "rationale": "AU-05 covers response to audit logging failures; SI-04 addresses system monitoring for anomalies; AU-06 covers audit analysis. Good failure and anomaly reporting.",
+      "gaps": "CCM requires cloud-specific failure reporting including cloud service health monitoring, automated anomaly detection using cloud-native ML, and customer-facing failure dashboards."
+    },
+    {
+      "id": "SEF-01",
+      "title": "Security Incident Management Policy and Procedures",
+      "controls": ["IR-01", "IR-08"],
+      "coverage_pct": 88,
+      "rationale": "IR-01 establishes incident response policy and procedures; IR-08 covers incident response plan. Comprehensive incident management policy coverage.",
+      "gaps": "CCM requires cloud-specific incident management including CSP/CSC incident responsibility delineation, cloud forensics procedures, and multi-tenant incident isolation."
+    },
+    {
+      "id": "SEF-02",
+      "title": "Service Management Policy and Procedures",
+      "controls": ["IR-01", "IR-04", "PM-01"],
+      "coverage_pct": 75,
+      "rationale": "IR-01 covers incident response policy; IR-04 addresses incident handling; PM-01 covers security program management. Partial service management coverage.",
+      "gaps": "CCM requires cloud-specific service management including ITIL/ITSM integration for cloud services, service level incident management, and cloud service continuity procedures."
+    },
+    {
+      "id": "SEF-03",
+      "title": "Incident Response Plans",
+      "controls": ["IR-08", "IR-04", "IR-02"],
+      "coverage_pct": 88,
+      "rationale": "IR-08 covers incident response plan; IR-04 addresses incident handling procedures; IR-02 covers incident response training. Comprehensive incident response plan coverage.",
+      "gaps": "CCM requires cloud-specific incident response plans including cloud-native forensic collection, CSP coordination playbooks, and multi-tenant incident containment procedures."
+    },
+    {
+      "id": "SEF-04",
+      "title": "Incident Response Testing",
+      "controls": ["IR-03"],
+      "coverage_pct": 88,
+      "rationale": "IR-03 directly covers incident response testing including tabletop exercises and simulations. Comprehensive incident response testing coverage.",
+      "gaps": "CCM requires cloud-specific incident response exercises including cloud breach simulation, cross-CSP incident coordination drills, and cloud forensics capability testing."
+    },
+    {
+      "id": "SEF-05",
+      "title": "Incident Response Metrics",
+      "controls": ["IR-04", "CA-07", "PM-06"],
+      "coverage_pct": 72,
+      "rationale": "IR-04 covers incident handling tracking; CA-07 addresses continuous monitoring; PM-06 covers measures of performance. Partial incident metrics coverage.",
+      "gaps": "CCM requires cloud-specific incident metrics including mean time to detect/respond for cloud incidents, cloud incident frequency trends, and CSP incident notification timeliness."
+    },
+    {
+      "id": "SEF-06",
+      "title": "Event Triage Processes",
+      "controls": ["IR-04", "IR-05", "AU-06"],
+      "coverage_pct": 82,
+      "rationale": "IR-04 covers incident handling including triage; IR-05 addresses incident monitoring; AU-06 covers audit review and analysis for triage. Good event triage coverage.",
+      "gaps": "CCM requires cloud-specific event triage including cloud-native threat intelligence integration, automated cloud event classification, and tenant-relevant event prioritisation."
+    },
+    {
+      "id": "SEF-07",
+      "title": "Security Breach Notification",
+      "controls": ["IR-06", "IR-07"],
+      "coverage_pct": 78,
+      "rationale": "IR-06 covers incident reporting; IR-07 addresses incident response assistance. These support breach notification requirements.",
+      "gaps": "CCM requires cloud-specific breach notification including tenant notification timelines, regulatory notification coordination across jurisdictions, and CSP transparency about breaches affecting customer data."
+    },
+    {
+      "id": "SEF-08",
+      "title": "Points of Contact Maintenance",
+      "controls": ["IR-06", "IR-01", "PM-15"],
+      "coverage_pct": 78,
+      "rationale": "IR-06 covers incident reporting contacts; IR-01 addresses incident response organization; PM-15 covers security groups and contacts. Good contact maintenance coverage.",
+      "gaps": "CCM requires cloud-specific contact management including CSP security contact APIs, automated incident escalation contacts, and 24/7 cloud security operations contacts."
+    },
+    {
+      "id": "STA-01",
+      "title": "SSRM Policy and Procedures",
+      "controls": ["SR-01", "SA-01", "PM-01"],
+      "coverage_pct": 68,
+      "rationale": "SR-01 covers supply chain risk management policy; SA-01 addresses acquisition policy; PM-01 covers security program. Partial SSRM policy coverage.",
+      "gaps": "CCM Shared Security Responsibility Model (SSRM) requires explicit CSP/CSC responsibility delineation across all control domains. NIST supply chain controls do not address cloud shared responsibility models."
+    },
+    {
+      "id": "STA-02",
+      "title": "SSRM Supply Chain",
+      "controls": ["SR-01", "SR-02", "SR-03"],
+      "coverage_pct": 72,
+      "rationale": "SR-01 covers supply chain policy; SR-02 addresses supply chain controls; SR-03 covers supply chain controls and processes. Good supply chain coverage.",
+      "gaps": "CCM requires cloud-specific supply chain SSRM including CSP sub-processor responsibility chains, cloud marketplace third-party responsibility, and shared responsibility inheritance models."
+    },
+    {
+      "id": "STA-03",
+      "title": "SSRM Guidance",
+      "controls": ["SR-01", "SA-04"],
+      "coverage_pct": 58,
+      "rationale": "SR-01 covers supply chain risk management; SA-04 addresses acquisition requirements. Partial SSRM guidance coverage.",
+      "gaps": "CCM requires CSP-published SSRM guidance documentation, customer-facing responsibility matrices, and per-service responsibility breakdowns. This cloud-specific transparency has no NIST equivalent."
+    },
+    {
+      "id": "STA-04",
+      "title": "SSRM Control Ownership",
+      "controls": ["SR-01", "PM-02"],
+      "coverage_pct": 55,
+      "rationale": "SR-01 covers supply chain risk management; PM-02 addresses security program leadership. Partial control ownership coverage.",
+      "gaps": "CCM requires explicit CSP/CSC/shared control ownership for each control domain, documented responsibility transfers, and control ownership verification. NIST does not address multi-party control ownership."
+    },
+    {
+      "id": "STA-05",
+      "title": "SSRM Documentation Review",
+      "controls": ["SR-01", "CA-02"],
+      "coverage_pct": 60,
+      "rationale": "SR-01 covers supply chain risk management review; CA-02 addresses security assessments. Partial documentation review coverage.",
+      "gaps": "CCM requires periodic SSRM documentation review between CSP and CSC, responsibility change notification, and SSRM alignment verification during cloud service changes."
+    },
+    {
+      "id": "STA-06",
+      "title": "SSRM Control Implementation",
+      "controls": ["SR-01", "CA-02", "SA-09"],
+      "coverage_pct": 62,
+      "rationale": "SR-01 covers supply chain controls; CA-02 addresses control assessment; SA-09 covers external system services. Partial SSRM implementation coverage.",
+      "gaps": "CCM requires CSP evidence of control implementation for their SSRM scope, customer-verifiable implementation status, and SSRM gap analysis tooling."
+    },
+    {
+      "id": "STA-07",
+      "title": "Supply Chain Inventory",
+      "controls": ["SR-01", "SR-02", "CM-08"],
+      "coverage_pct": 75,
+      "rationale": "SR-01 covers supply chain management; SR-02 addresses supply chain controls; CM-08 covers component inventory. Good supply chain inventory coverage.",
+      "gaps": "CCM requires cloud-specific supply chain inventory including cloud service dependency mapping, sub-processor registries, and software bill of materials for cloud services."
+    },
+    {
+      "id": "STA-08",
+      "title": "Supply Chain Risk Management",
+      "controls": ["SR-01", "SR-02", "SR-03", "RA-03"],
+      "coverage_pct": 82,
+      "rationale": "SR-01 covers supply chain risk management policy; SR-02 addresses supply chain controls; SR-03 covers continuous monitoring; RA-03 covers risk assessment. Strong supply chain risk management.",
+      "gaps": "CCM requires cloud-specific supply chain risk including CSP concentration risk, cloud service dependency risk, and geopolitical supply chain risk for cloud infrastructure."
+    },
+    {
+      "id": "STA-09",
+      "title": "Primary Service and Contractual Agreement",
+      "controls": ["SA-04", "SA-09"],
+      "coverage_pct": 72,
+      "rationale": "SA-04 covers acquisition agreements with security requirements; SA-09 addresses external system services. Good contractual agreement coverage.",
+      "gaps": "CCM requires cloud-specific contract provisions including SLA enforcement, data processing agreements, right to audit clauses, and cloud service termination provisions."
+    },
+    {
+      "id": "STA-10",
+      "title": "Supply Chain Agreement Review",
+      "controls": ["SA-04", "SR-01"],
+      "coverage_pct": 70,
+      "rationale": "SA-04 covers acquisition agreement requirements; SR-01 addresses supply chain risk management. Good agreement review coverage.",
+      "gaps": "CCM requires cloud-specific agreement review including periodic SLA review, data residency clause updates, and supply chain agreement alignment with regulatory changes."
+    },
+    {
+      "id": "STA-11",
+      "title": "Internal Compliance Testing",
+      "controls": ["CA-02", "CA-07"],
+      "coverage_pct": 82,
+      "rationale": "CA-02 covers security control assessments; CA-07 addresses continuous monitoring for compliance. Strong internal compliance testing coverage.",
+      "gaps": "CCM requires cloud-specific compliance testing including CSP self-assessment for shared responsibilities, automated cloud compliance scanning, and compliance-as-code validation."
+    },
+    {
+      "id": "STA-12",
+      "title": "Supply Chain Service Agreement Compliance",
+      "controls": ["SA-09", "CA-02", "SR-01"],
+      "coverage_pct": 72,
+      "rationale": "SA-09 covers external system services compliance; CA-02 addresses control assessments; SR-01 covers supply chain management. Good supply chain compliance coverage.",
+      "gaps": "CCM requires cloud-specific supply chain compliance including CSP SOC 2 report review, sub-processor compliance verification, and automated SLA compliance monitoring."
+    },
+    {
+      "id": "STA-13",
+      "title": "Supply Chain Governance Review",
+      "controls": ["SR-01", "PM-01", "CA-02"],
+      "coverage_pct": 72,
+      "rationale": "SR-01 covers supply chain risk management; PM-01 addresses security program governance; CA-02 covers assessments. Good governance review coverage.",
+      "gaps": "CCM requires cloud-specific supply chain governance including CSP board-level supply chain oversight, multi-tier supplier governance, and cloud vendor management frameworks."
+    },
+    {
+      "id": "STA-14",
+      "title": "Supply Chain Data Security Assessment",
+      "controls": ["SR-01", "SR-03", "RA-03"],
+      "coverage_pct": 72,
+      "rationale": "SR-01 covers supply chain risk management; SR-03 addresses supply chain controls; RA-03 covers risk assessment including data security. Good data security assessment coverage.",
+      "gaps": "CCM requires cloud-specific supply chain data security including data flow analysis through supply chain, sub-processor data handling assessment, and data breach risk in supply chain."
+    },
+    {
+      "id": "TVM-01",
+      "title": "Threat and Vulnerability Management Policy and Procedures",
+      "controls": ["RA-01", "RA-05", "SI-01"],
+      "coverage_pct": 85,
+      "rationale": "RA-01 covers risk assessment policy; RA-05 addresses vulnerability monitoring and scanning; SI-01 covers system integrity policy. Comprehensive TVM policy coverage.",
+      "gaps": "CCM requires cloud-specific TVM policies including cloud vulnerability disclosure, CSP vulnerability notification to tenants, and cloud-native vulnerability management."
+    },
+    {
+      "id": "TVM-02",
+      "title": "Malware Protection Policy and Procedures",
+      "controls": ["SI-03", "SI-01"],
+      "coverage_pct": 85,
+      "rationale": "SI-03 directly covers malicious code protection; SI-01 establishes system integrity policy. Comprehensive malware protection coverage.",
+      "gaps": "CCM requires cloud-specific malware protection including cloud workload protection platforms, container malware scanning, and serverless malware detection."
+    },
+    {
+      "id": "TVM-03",
+      "title": "Vulnerability Remediation Schedule",
+      "controls": ["RA-05", "SI-02"],
+      "coverage_pct": 82,
+      "rationale": "RA-05 covers vulnerability scanning and remediation timelines; SI-02 addresses flaw remediation. Strong vulnerability remediation scheduling.",
+      "gaps": "CCM requires cloud-specific remediation SLAs including CSP platform vulnerability remediation timelines, shared vulnerability remediation coordination, and automated cloud patching schedules."
+    },
+    {
+      "id": "TVM-04",
+      "title": "Detection Updates",
+      "controls": ["SI-03", "SI-02"],
+      "coverage_pct": 85,
+      "rationale": "SI-03 covers malicious code protection updates; SI-02 addresses flaw remediation including signature updates. Strong detection update coverage.",
+      "gaps": "CCM requires cloud-specific detection updates including cloud-native threat feed integration, real-time signature deployment, and cloud workload detection rule updates."
+    },
+    {
+      "id": "TVM-05",
+      "title": "External Library Vulnerabilities",
+      "controls": ["RA-05", "SA-11", "SR-04"],
+      "coverage_pct": 78,
+      "rationale": "RA-05 covers vulnerability scanning; SA-11 addresses developer testing including dependency scanning; SR-04 covers component provenance. Good external library coverage.",
+      "gaps": "CCM requires cloud-specific library management including SBOM for cloud applications, automated dependency scanning in CI/CD, and open source license compliance in cloud deployments."
+    },
+    {
+      "id": "TVM-06",
+      "title": "Penetration Testing",
+      "controls": ["CA-08", "RA-05"],
+      "coverage_pct": 85,
+      "rationale": "CA-08 directly covers penetration testing; RA-05 addresses vulnerability scanning. Comprehensive penetration testing coverage.",
+      "gaps": "CCM requires cloud-specific penetration testing including CSP-approved testing scopes, cloud API penetration testing, and multi-tenant testing isolation requirements."
+    },
+    {
+      "id": "TVM-07",
+      "title": "Vulnerability Identification",
+      "controls": ["RA-05", "SI-05"],
+      "coverage_pct": 85,
+      "rationale": "RA-05 covers vulnerability monitoring and scanning; SI-05 addresses security alerts and advisories. Strong vulnerability identification coverage.",
+      "gaps": "CCM requires cloud-specific vulnerability identification including cloud misconfiguration scanning, cloud-native vulnerability databases, and CSP-published vulnerability bulletins."
+    },
+    {
+      "id": "TVM-08",
+      "title": "Vulnerability Prioritization",
+      "controls": ["RA-05", "RA-03"],
+      "coverage_pct": 80,
+      "rationale": "RA-05 covers vulnerability assessment and prioritization; RA-03 addresses risk assessment for prioritization. Good vulnerability prioritization coverage.",
+      "gaps": "CCM requires cloud-specific vulnerability prioritization including cloud asset exposure context, multi-tenant impact scoring, and cloud attack surface-aware prioritization."
+    },
+    {
+      "id": "TVM-09",
+      "title": "Vulnerability Management Reporting",
+      "controls": ["RA-05", "CA-07", "PM-06"],
+      "coverage_pct": 78,
+      "rationale": "RA-05 covers vulnerability reporting; CA-07 addresses continuous monitoring reporting; PM-06 covers performance metrics. Good vulnerability reporting coverage.",
+      "gaps": "CCM requires cloud-specific vulnerability reporting including tenant-facing vulnerability dashboards, CSP vulnerability transparency reports, and automated compliance reporting."
+    },
+    {
+      "id": "TVM-10",
+      "title": "Vulnerability Management Metrics",
+      "controls": ["RA-05", "PM-06", "CA-07"],
+      "coverage_pct": 72,
+      "rationale": "RA-05 supports vulnerability metrics; PM-06 covers measures of performance; CA-07 addresses continuous monitoring. Partial vulnerability metrics coverage.",
+      "gaps": "CCM requires cloud-specific vulnerability metrics including mean time to remediate cloud vulnerabilities, cloud-specific KRIs, and trending across cloud service types."
+    },
+    {
+      "id": "UEM-01",
+      "title": "Endpoint Devices Policy and Procedures",
+      "controls": ["CM-01", "AC-19", "SC-42"],
+      "coverage_pct": 82,
+      "rationale": "CM-01 covers configuration management policy; AC-19 addresses access control for mobile devices; SC-42 covers sensor capability. Good endpoint policy coverage.",
+      "gaps": "CCM requires cloud-specific endpoint policies including BYOD cloud access policies, endpoint trust scoring for cloud access, and cloud-managed endpoint requirements."
+    },
+    {
+      "id": "UEM-02",
+      "title": "Application and Service Approval",
+      "controls": ["CM-07", "CM-11"],
+      "coverage_pct": 80,
+      "rationale": "CM-07 covers least functionality including application restrictions; CM-11 addresses user-installed software. Good application approval coverage.",
+      "gaps": "CCM requires cloud-specific app approval including cloud marketplace application vetting, SaaS application risk assessment, and shadow IT discovery and approval workflows."
+    },
+    {
+      "id": "UEM-03",
+      "title": "Compatibility",
+      "controls": ["CM-02", "SA-04"],
+      "coverage_pct": 65,
+      "rationale": "CM-02 covers baseline configurations including compatibility; SA-04 addresses acquisition requirements. Partial compatibility coverage.",
+      "gaps": "CCM requires cloud-specific compatibility management including cloud service agent compatibility testing, browser compatibility for cloud consoles, and OS compatibility for cloud client applications."
+    },
+    {
+      "id": "UEM-04",
+      "title": "Endpoint Inventory",
+      "controls": ["CM-08"],
+      "coverage_pct": 85,
+      "rationale": "CM-08 directly covers system component inventory including endpoints. Comprehensive endpoint inventory coverage.",
+      "gaps": "CCM requires cloud-specific endpoint inventory including automated endpoint discovery, cloud-managed device inventory, and BYOD registration tracking."
+    },
+    {
+      "id": "UEM-05",
+      "title": "Endpoint Management",
+      "controls": ["CM-02", "CM-06", "CM-03"],
+      "coverage_pct": 82,
+      "rationale": "CM-02 covers baseline configurations; CM-06 addresses configuration settings; CM-03 covers change control. Good endpoint management coverage.",
+      "gaps": "CCM requires cloud-specific endpoint management including MDM/UEM platform integration, remote endpoint policy enforcement, and cloud-managed endpoint compliance."
+    },
+    {
+      "id": "UEM-06",
+      "title": "Automatic Lock Screen",
+      "controls": ["AC-11"],
+      "coverage_pct": 88,
+      "rationale": "AC-11 directly covers device lock (session lock) after periods of inactivity. Comprehensive lock screen coverage.",
+      "gaps": "CCM requires cloud-specific lock screen enforcement including policy-driven lock timeout, lock screen complexity requirements across device types, and cloud console session timeout."
+    },
+    {
+      "id": "UEM-07",
+      "title": "Operating Systems",
+      "controls": ["CM-06", "CM-02", "SI-02"],
+      "coverage_pct": 82,
+      "rationale": "CM-06 covers configuration settings; CM-02 addresses baseline configurations; SI-02 covers flaw remediation. Good OS management coverage.",
+      "gaps": "CCM requires cloud-specific OS management including supported OS version enforcement, automated OS patching, and end-of-life OS detection and remediation."
+    },
+    {
+      "id": "UEM-08",
+      "title": "Storage Encryption",
+      "controls": ["SC-28", "SC-13"],
+      "coverage_pct": 88,
+      "rationale": "SC-28 directly covers protection of information at rest including storage encryption; SC-13 addresses cryptographic protection mechanisms. Strong storage encryption coverage.",
+      "gaps": "CCM requires cloud-specific storage encryption including full disk encryption enforcement, removable media encryption, and cloud-managed encryption key integration."
+    },
+    {
+      "id": "UEM-09",
+      "title": "Anti-Malware Detection and Prevention",
+      "controls": ["SI-03"],
+      "coverage_pct": 88,
+      "rationale": "SI-03 directly covers malicious code protection including detection and prevention mechanisms. Comprehensive anti-malware coverage.",
+      "gaps": "CCM requires cloud-specific anti-malware including next-gen endpoint protection, cloud-delivered threat intelligence, and automated quarantine and remediation."
+    },
+    {
+      "id": "UEM-10",
+      "title": "Software Firewall",
+      "controls": ["SC-07", "CM-07"],
+      "coverage_pct": 82,
+      "rationale": "SC-07 covers boundary protection including host-based firewalls; CM-07 addresses least functionality. Good software firewall coverage.",
+      "gaps": "CCM requires cloud-specific software firewalls including host-based firewall policy management, cloud-managed firewall rules, and application-aware endpoint firewalls."
+    },
+    {
+      "id": "UEM-11",
+      "title": "Data Loss Prevention",
+      "controls": ["SC-07", "AC-04", "SI-04"],
+      "coverage_pct": 75,
+      "rationale": "SC-07 covers boundary protection; AC-04 addresses information flow enforcement; SI-04 covers system monitoring. Partial DLP coverage.",
+      "gaps": "CCM requires cloud-specific DLP including endpoint DLP integration with cloud DLP, data classification-driven DLP policies, and cloud storage DLP for endpoints."
+    },
+    {
+      "id": "UEM-12",
+      "title": "Remote Locate",
+      "controls": ["CM-08"],
+      "coverage_pct": 55,
+      "rationale": "CM-08 covers component inventory and location tracking. Limited remote locate coverage as NIST does not specifically address device location tracking.",
+      "gaps": "CCM requires remote device location capabilities including GPS tracking, network-based location, and geofencing for lost/stolen device response. NIST does not address remote device location."
+    },
+    {
+      "id": "UEM-13",
+      "title": "Remote Wipe",
+      "controls": ["MP-06", "AC-19"],
+      "coverage_pct": 72,
+      "rationale": "MP-06 covers media sanitization; AC-19 addresses access control for mobile devices including remote purge. Partial remote wipe coverage.",
+      "gaps": "CCM requires cloud-specific remote wipe including selective wipe of corporate data, immediate remote wipe on theft detection, and wipe verification and confirmation."
+    },
+    {
+      "id": "UEM-14",
+      "title": "Third-Party Endpoint Security Posture",
+      "controls": ["SA-09", "AC-20", "SR-01"],
+      "coverage_pct": 65,
+      "rationale": "SA-09 covers external system services; AC-20 addresses external system use; SR-01 covers supply chain risk management. Partial third-party endpoint posture coverage.",
+      "gaps": "CCM requires cloud-specific third-party endpoint assessment including device trust verification for cloud access, endpoint compliance checking before cloud resource access, and zero trust device posture assessment."
+    }
+  ],
+  "summary": {
+    "total_clauses": 197,
+    "average_coverage": 77.8,
+    "full_count": 71,
+    "substantial_count": 108,
+    "partial_count": 18,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

@@ -11,7 +11,7 @@
     "type": "pattern",
     "classification": "Application & Operations",
     "datePublished": "2026-02-15",
-    "dateModified": "2026-02-15",
+    "dateModified": "2026-03-09",
     "authors": [
       "Aurelius",
       "Vitruvius"
@@ -67,7 +67,7 @@
       "Implement agent-to-agent authentication: agents in a multi-agent system authenticate to each other using short-lived tokens issued by a central authority, preventing a compromised agent from injecting tasks into the workflow by impersonating another agent"
     ],
     "Developing Areas": [
-      "Model Context Protocol (MCP) security: Anthropic's MCP is becoming a de facto standard for connecting AI agents to external tools and data sources. MCP servers provide structured tool interfaces, but the security model is still maturing. Current MCP implementations often run with broad permissions, lack fine-grained authorisation, and do not enforce input validation at the protocol level. Enterprises adopting MCP need to layer their own access controls, audit logging, and input validation on top of the protocol. The MCP specification does not yet include authentication standards for server-to-server communication, leaving each implementation to define its own trust model.",
+      "Model Context Protocol (MCP) security: Anthropic's MCP has become the de facto standard for connecting AI agents to external tools and data sources, with thousands of MCP servers deployed across enterprises. The protocol defines a structured interface for tool discovery, invocation, and result handling, and its security model has matured significantly since initial release — but critical gaps remain that enterprises must address. The MCP threat landscape divides along a critical architectural boundary: local versus remote servers. Local MCP servers (stdio transport) run on the user's machine with the user's privileges, creating a code execution risk if the server source is untrusted — enterprises must display exact commands before execution, require explicit consent with clear warnings, highlight dangerous patterns (sudo, rm -rf, network operations), and execute in sandboxed environments. Remote MCP servers (HTTP/SSE transport) face the full spectrum of web application threats plus MCP-specific attack vectors: tool poisoning via metadata manipulation (T-AAF-013), confused deputy attacks through credential reuse (T-AAF-014), SSRF via OAuth discovery URLs (T-AAF-015), and token passthrough that breaks accountability (T-AAF-016). For remote MCP servers, the specification mandates OAuth 2.1 with PKCE, but critical controls remain implementation-dependent. Enterprises must enforce: per-client consent before third-party authorisation flows, exact redirect URI validation (no wildcards, no pattern matching), audience-bound tokens (tokens issued for one MCP server must be rejected by all others), and SSRF protection on all OAuth discovery and callback URLs — block private IP ranges (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.169.254), enforce HTTPS for all non-loopback connections, and pin DNS resolution between check and use. Tool poisoning (T-AAF-013) is an MCP-specific threat with no direct analogue in traditional API security: tool descriptions and parameter schemas are consumed directly by the LLM, and an attacker controlling an MCP server can embed adversarial instructions invisible in the UI but influential in the model's reasoning. Scope minimisation is critical: request minimal baseline scopes and implement incremental elevation via WWW-Authenticate challenges rather than requesting all permissions at connection time. Auto-run behaviour — where clients automatically execute tool calls without user confirmation — must be disabled by default in enterprise deployments, as it implicitly trusts all responses and maximises blast radius from a compromised server.",
       "Agent-to-agent protocol standardisation: The AI industry lacks a standard protocol for secure multi-agent communication. LangGraph uses graph-based state passing, CrewAI uses role-based delegation, AutoGen uses conversation-based messaging, and Amazon Bedrock uses event-driven orchestration. This fragmentation means security controls must be framework-specific, increasing the cost and complexity of securing heterogeneous agent environments. Proposals for standardised agent communication protocols (Google's A2A, Anthropic's MCP extensions) are emerging but not yet mature enough for enterprise adoption.",
       "Agentic AI in regulated industries: Financial services, healthcare, and government agencies face additional constraints when deploying agentic AI. DORA (EU Digital Operational Resilience Act) requires that ICT third-party risk management covers AI agent infrastructure. FINMA expects Swiss banks to apply operational risk controls to autonomous AI systems. The FDA is developing guidance for AI agents in clinical decision support. These regulatory requirements add a compliance dimension to the security architecture that generic framework guidance does not address. Organisations in regulated industries should expect to demonstrate that their agentic AI deployments satisfy industry-specific resilience, auditability, and transparency requirements.",
       "Hardware-level agent isolation: Current agent isolation relies on container boundaries, which provide process-level separation but share the host kernel. For high-assurance environments, hardware-level isolation using confidential computing (AMD SEV, Intel TDX, ARM CCA) can provide cryptographic guarantees that agent workloads are isolated from each other and from the infrastructure operator. This is particularly relevant for multi-tenant agent platforms where agents from different customers or business units run on shared infrastructure. The performance overhead of confidential computing is decreasing but remains non-trivial for latency-sensitive agent workflows.",
@@ -114,6 +114,16 @@
       "title": "LangChain Security Best Practices",
       "url": "https://python.langchain.com/docs/security/",
       "note": "Framework-specific security guidance from the LangChain project. Covers tool sandboxing, input validation, and credential management. Useful as a baseline but insufficient as an enterprise security standard."
+    },
+    {
+      "title": "Wiz: MCP Security Research Briefing",
+      "url": "https://www.wiz.io/blog/mcp-security-research-briefing",
+      "note": "Comprehensive analysis of MCP security risks including tool poisoning, confused deputy attacks, SSRF via OAuth discovery, auto-run trust, and local versus remote server threat models. Informed the MCP-specific threat additions (T-AAF-013 through T-AAF-016) in this pattern."
+    },
+    {
+      "title": "MCP Security Best Practices — Official Specification",
+      "url": "https://modelcontextprotocol.io/specification/draft/basic/security_best_practices",
+      "note": "Normative security requirements from the MCP specification covering OAuth 2.1 with PKCE, token audience validation, SSRF protection, session security, consent flows, scope minimisation, and the explicit prohibition on token passthrough."
     }
   ],
   "relatedPatterns": [
@@ -250,6 +260,30 @@
       "name": "Shadow agent deployment — unauthorised agentic workflows running outside the governed platform",
       "description": "This is the consolidated shadow AI threat for the OSA pattern suite. Shadow AI at the governance level (SP-045) and ungoverned LLM usage at the model layer (SP-027) both ultimately manifest as unauthorised workloads that bypass the framework-level controls this pattern addresses. When employees or teams deploy agentic workflows outside the governed platform — using personal API keys, unsanctioned frameworks, or consumer AI tools with tool access — they create agent workloads that lack execution isolation, tool registry controls, guardrails, and audit trail. Detection relies on network monitoring for unauthorised agent-to-model-provider traffic patterns and agent inventory requirements enforced through CM-08.",
       "mitigatedBy": ["CM-08", "CM-07", "SI-04", "AC-03"]
+    },
+    {
+      "id": "T-AAF-013",
+      "name": "MCP tool poisoning — malicious logic hidden in tool descriptions, schemas, or metadata that models interpret without human visibility",
+      "description": "MCP servers expose tool definitions including descriptions, parameter schemas, and usage instructions that are consumed directly by the LLM to decide when and how to invoke tools. An attacker who controls or compromises an MCP server can embed adversarial instructions in tool metadata that are invisible in the user interface but influence the model's reasoning — including hidden instructions to exfiltrate data via tool parameters, override user preferences, or invoke other tools in unintended sequences. Unlike prompt injection in user inputs, tool metadata poisoning persists across sessions and affects all agents connected to the compromised server. Detection requires comparing tool definitions against a known-good baseline and alerting on metadata changes.",
+      "mitigatedBy": ["CM-08", "SA-04", "SI-10", "SA-11"]
+    },
+    {
+      "id": "T-AAF-014",
+      "name": "MCP confused deputy — proxy servers reusing credentials without verifying requestor authorisation, enabling cross-user access violations",
+      "description": "When MCP servers act as proxies to downstream services (databases, APIs, SaaS platforms), they may reuse a single set of credentials or OAuth tokens for all requesting agents and users. An attacker exploiting this pattern can access resources belonging to other users through the MCP server's shared credentials. This is exacerbated when MCP OAuth flows use static client IDs without per-user consent, or when redirect URIs are validated with pattern matching rather than exact comparison. The MCP server becomes an unintentional privilege escalation point — the confused deputy — granting access beyond what the original requestor is authorised to receive.",
+      "mitigatedBy": ["AC-03", "IA-05", "IA-08", "AU-02"]
+    },
+    {
+      "id": "T-AAF-015",
+      "name": "MCP server-side request forgery — malicious servers directing OAuth discovery or callbacks to internal resources or cloud metadata endpoints",
+      "description": "Remote MCP servers implementing OAuth 2.1 for authentication require discovery of authorisation endpoints. A malicious or compromised MCP server can populate OAuth discovery URLs pointing to internal network resources (169.254.169.254 cloud metadata, localhost services, internal APIs) or construct redirect URIs that exfiltrate tokens to attacker-controlled endpoints. Because MCP clients follow these URLs automatically as part of the OAuth flow, the client becomes an unwitting proxy for server-side request forgery against the user's network. DNS rebinding attacks can bypass IP-based SSRF protections by resolving to internal addresses after the initial security check.",
+      "mitigatedBy": ["SC-07", "SC-08", "SI-10", "SA-09"]
+    },
+    {
+      "id": "T-AAF-016",
+      "name": "MCP token passthrough — servers accepting tokens not issued for them, bypassing security controls and accountability",
+      "description": "An anti-pattern where MCP servers accept and forward OAuth tokens that were issued for a different audience. This bypasses the MCP server's own security controls — rate limiting, request validation, and audit logging — because the downstream service sees the original token's identity rather than the MCP server's. It breaks accountability: actions performed via token passthrough are attributed to the token's original subject, not the MCP server that initiated them. The MCP specification explicitly states that servers MUST NOT accept tokens not issued for them, but enforcement depends on implementation. Token audience validation and per-server credential issuance are the primary mitigations.",
+      "mitigatedBy": ["IA-05", "IA-08", "AC-03", "AU-02"]
     }
   ],
   "controls": [
@@ -344,6 +378,12 @@
       "emphasis": "important"
     },
     {
+      "id": "IA-08",
+      "name": "Identification and Authentication (Non-Organizational Users)",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
       "id": "IR-01",
       "name": "Incident Response Policy and Procedures",
       "family": "IR",
@@ -416,6 +456,12 @@
       "emphasis": "critical"
     },
     {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
       "id": "SC-28",
       "name": "Protection of Information at Rest",
       "family": "SC",
@@ -457,12 +503,12 @@
     "AU": 3,
     "CA": 1,
     "CM": 5,
-    "IA": 2,
+    "IA": 3,
     "IR": 3,
     "PM": 1,
     "RA": 2,
     "SA": 4,
-    "SC": 4,
+    "SC": 5,
     "SI": 2,
     "SR": 2
   }

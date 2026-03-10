@@ -1,0 +1,546 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-054",
+  "slug": "cbdc-digital-currency-infrastructure",
+  "title": "CBDC and Digital Currency Infrastructure",
+  "description": "Security architecture for central bank digital currency (CBDC) and digital currency infrastructure covering retail and wholesale CBDC models, dual-ledger architecture with RTGS interoperability, offline payment capability with tamper-resistant hardware, tiered privacy models with privacy-enhancing technologies, programmable money and smart contract layers, anti-counterfeiting and double-spend prevention, and monetary policy risk controls. Addresses BIS Project mBridge, ECB Digital Euro, Bank of England digital pound, and Fed Project Hamilton reference architectures. Maps 38 NIST 800-53 controls across SC, AC, AU, IA, CP, PE, CM, IR, CA, SA, RA, PT, PM, and SI families. Designed for central banks, central bank technology partners, commercial bank CBDC intermediaries, and national payment infrastructure operators.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-054",
+  "metadata": {
+    "release": "26.03",
+    "classification": "Financial Infrastructure",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-03-10",
+    "dateModified": "2026-03-10",
+    "authors": [
+      "Spinoza",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from analysis of BIS working papers on CBDC design, the Atlantic Council CBDC Tracker (130+ countries exploring CBDC), Chris Lethaby's (Vinylwasp) CBEST and financial infrastructure APT defence expertise, and Russ Wing's (Spinoza) experience with PCI-DSS payment infrastructure and regulatory compliance frameworks. Informed by Project mBridge (BIS Innovation Hub, multi-CBDC platform), Project Hamilton (Federal Reserve Bank of Boston + MIT), ECB Digital Euro project documentation (Phase 2, 2026), Bank of England CBDC technology working paper, and IMF guidance on CBDC design and financial stability. CBDC represents the most significant transformation of monetary infrastructure since the introduction of electronic interbank settlement — the security architecture must support sovereign monetary policy while protecting citizen privacy and preventing systemic financial risk."
+  },
+  "diagram": {
+    "svg": "/images/sp-054-cbdc-digital-currency-infrastructure.svg",
+    "png": ""
+  },
+  "legend": "The diagram shows a layered CBDC security architecture. The central bank core (top) hosts the authoritative ledger, monetary policy engine, and RTGS gateway. The intermediary distribution layer (middle) shows commercial bank CBDC accounts, wallet providers, and payment processors interacting through the central bank API gateway. The end-user layer (bottom) shows retail wallet types: online wallets (full KYC), pseudonymous wallets (tier-1 privacy, transaction limits), and offline secure-element wallets (anonymous micro-payments within value limits). Privacy tiers and holding limits are enforced at the central bank core. NIST control badges are clickable and link to the corresponding control detail pages.",
+  "content": {
+    "description": "Central bank digital currency (CBDC) is a direct liability of the central bank in digital form — the digital equivalent of banknotes. Unlike commercial bank deposits or payment stablecoins, CBDC carries no counterparty risk: it is as safe as cash. This fundamental property drives both the design and the threat model. A compromise of CBDC infrastructure is not a commercial loss — it is a breach of sovereign monetary infrastructure, with potential systemic consequences for financial stability, public trust in the currency, and national security.\n\nThe architectural choices in CBDC design create fundamental security trade-offs that cannot be resolved purely by adding controls. The direct (single-tier) model — where citizens hold CBDC accounts directly at the central bank — maximises central bank control and eliminates intermediary failure risk, but requires the central bank to operate consumer-facing infrastructure at national scale, exposing it to an unprecedented range of threats. The intermediated (two-tier) model — where commercial banks and payment service providers distribute CBDC on behalf of the central bank — leverages existing financial infrastructure and competitive dynamics but introduces third-party risk and requires the central bank to trust intermediaries with national payment infrastructure. Most central banks exploring retail CBDC have converged on a hybrid intermediated model: the central bank operates the core ledger and monetary policy controls, while licensed intermediaries handle distribution, customer onboarding, and end-user wallets. This pattern addresses this hybrid intermediated architecture.\n\nThe token-based versus account-based distinction matters for security architecture. Account-based CBDC (like most electronic payment systems) requires strong authentication of the account holder for each transaction — privacy and security are both dependent on the integrity of the identity system. Token-based CBDC (analogous to physical cash) validates the token's authenticity rather than the holder's identity — possession is proof of ownership, enabling privacy but requiring cryptographic anti-counterfeiting measures. Most retail CBDC proposals use a tiered model: account-based for large transactions requiring full identity verification, token-based or pseudonymous for small transactions within holding and transaction limits, reflecting the privacy expectations that citizens have for cash-like small payments.\n\nThis pattern addresses seven security domains: (1) CBDC architecture models and central bank core ledger security; (2) dual-ledger architecture with RTGS interoperability for settlement finality; (3) offline payment capability using secure elements, TEE wallets, and hardware security modules; (4) tiered privacy models with privacy-enhancing technologies including blind signatures and e-cash protocols; (5) programmable money and smart contract layer security; (6) anti-counterfeiting and double-spend prevention; and (7) monetary policy controls including holding limits, disintermediation risk management, and systemic risk governance.\n\nThe adversary profile for CBDC infrastructure spans the full spectrum from opportunistic fraud to nation-state attacks on sovereign financial infrastructure. The BIS has identified that CBDC represents a high-value target for state-sponsored actors seeking to undermine a competitor nation's monetary system — attacks could target availability (denial of service during critical economic events), integrity (counterfeiting or balance manipulation), or confidentiality (surveillance of citizen payment patterns at national scale). The insider threat is particularly acute: CBDC systems will be operated by a small number of central bank staff and technology partners with extraordinary access to national payment infrastructure.",
+    "keyControlAreas": [
+      "Central Bank Core Ledger Security (SC-12, SC-13, SC-28, AC-05, AU-02): The central bank core ledger is the authoritative record of all CBDC balances and transactions. It is the monetary equivalent of a nation's gold reserve — its integrity is absolute. SC-12 (Cryptographic Key Establishment and Management) is the anchor control: the central bank's signing keys, which authenticate every CBDC issuance and redemption event, must be protected with the highest available assurance. Recommended minimum: FIPS 140-3 Level 4 HSMs for root key storage, with multi-party signing ceremonies requiring physical co-presence of at least three senior central bank officials. No single person should ever have access to the complete signing key. Key custody must be distributed across geographically separate secure facilities, with a tested recovery procedure that has never been used in a real incident. SC-13 (Use of Cryptography) mandates post-quantum cryptographic readiness — CBDC infrastructure commissioned in 2026 will operate for 20-30 years, well within the cryptographically relevant quantum timeline. The NIST PQC standards (FIPS 203 ML-KEM, FIPS 204 ML-DSA, FIPS 205 SLH-DSA) must be incorporated into the cryptographic architecture from the outset, not retrofitted. SC-28 (Protection of Information at Rest) applies to all ledger data: transaction records, balance snapshots, and audit logs are sensitive both for individual privacy and for monetary policy confidentiality. AC-05 (Separation of Duties) is critical at the central bank operator level: no individual or team should be able to unilaterally issue, redeem, or transfer CBDC without multi-person authorisation. The four-eyes principle must apply to every privileged operation on the core ledger. AU-02 (Auditable Events) must capture a complete, tamper-evident record of every change to the core ledger — issuance, redemption, balance adjustments, configuration changes, and all administrative actions — with the audit log protected against modification even by the system administrators who operate the core ledger.",
+      "Dual-Ledger Architecture and RTGS Interoperability (SC-07, SC-08, CA-07, CM-08, CP-09): CBDC does not replace the existing payment infrastructure — it operates alongside it. The dual-ledger architecture maintains the authoritative CBDC ledger at the central bank while enabling settlement interoperability with the Real-Time Gross Settlement (RTGS) system (TARGET2 in the Eurozone, CHAPS in the UK, Fedwire in the US) for conversion between CBDC and central bank reserves. SC-07 (Boundary Protection) defines the security boundary between the CBDC core ledger and the RTGS system. These are distinct systems with different operational characteristics, security controls, and threat models, connected by a gateway that must enforce strict controls on what can cross the boundary: CBDC-to-reserves conversions require authenticated requests from licensed intermediaries, validated against holding limits and AML rules, with cryptographic binding between the CBDC debit and the reserves credit to ensure atomicity. SC-08 (Transmission Integrity) protects all messaging between the CBDC platform and RTGS. ISO 20022 financial messaging must be transmitted with message-level signing and encryption, using HSM-backed signing keys at the gateway. MitM attacks on RTGS connectivity are a high-priority threat given the systemic value of RTGS flows. CA-07 (Continuous Monitoring) must provide real-time surveillance across both ledgers: total CBDC in circulation must equal total RTGS reserves held as CBDC backing at all times. Any discrepancy — even momentary — is an integrity incident requiring immediate investigation. The monitoring system must operate independently of the systems it monitors, with cryptographic verification of ledger state rather than relying on the ledger system's own reporting. CM-08 (System Component Inventory) must maintain a complete, authoritative inventory of every component in the CBDC-RTGS integration: gateway hardware, network connections, API endpoints, cryptographic materials, and software versions. This inventory is the foundation for the security assessment programme and supply chain risk management. CP-09 (Information System Backup) requires that both the CBDC ledger and the RTGS integration state can be recovered to a known-good point. For monetary infrastructure where the authoritative record of who owns what must never be lost, backup procedures must be tested quarterly with measured RPO and RTO against demanding SLAs.",
+      "Offline Payment Capability and Hardware Security (SC-12, SC-28, PE-03, PE-04, IA-05): Offline CBDC payment — the ability to transact when network connectivity is unavailable — is essential for financial inclusion, resilience, and replication of cash functionality. But offline capability introduces the hardest security problem in CBDC design: how do you prevent double-spending when the central bank ledger cannot be consulted in real-time? The answer requires tamper-resistant hardware. SC-12 (Cryptographic Key Establishment and Management) governs the secure element or TEE (Trusted Execution Environment) wallet architecture for offline CBDC. Each offline wallet contains a device-unique signing key generated and stored within the secure element — it never leaves the hardware boundary. Offline CBDC tokens are cryptographically signed by the central bank and loaded into the secure element via an authenticated protocol. When used for offline payment, the secure element signs a payment message with its device key and simultaneously invalidates the token within its own tamper-resistant storage — the token can only be spent once. SC-28 (Protection of Information at Rest) applies to the offline token store: CBDC tokens held in a device secure element must be protected against extraction even by the device manufacturer, using per-device keys provisioned in a secure hardware manufacturing environment. PE-03 (Physical Access Control) and PE-04 (Access Control for Transmission Medium) apply to the hardware manufacturing and provisioning supply chain — a compromised secure element manufacturing process could produce devices that appear legitimate but contain backdoors. The secure element vendor selection process must include supply chain security assurance, tamper-detection mechanisms, and independent testing against CC EAL5+ or equivalent. IA-05 (Authenticator Management) governs offline wallet authentication — the user's PIN or biometric that authorises spending from the secure element. The PIN must be verified within the secure element, with lockout after failed attempts and tamper-evident reset procedures, to prevent brute-force attacks on extracted device images. Holding limits for offline wallets (typically equivalent to a few hundred units of currency, analogous to the cash you carry in a wallet) are enforced by the secure element hardware and cannot be bypassed by software manipulation.",
+      "Tiered Privacy Model and Privacy-Enhancing Technologies (PT-01, PT-02, PT-03, AC-04, AU-02): CBDC privacy is not a binary choice between surveillance money and anonymous cash — it is a policy design question with profound implications for civil liberties, AML/CFT compliance, and monetary sovereignty. The security architecture must implement whatever privacy tier model the central bank and legislature mandate, without creating technical capabilities that exceed the mandated scope. PT-01 (Policy and Procedures) establishes the governing privacy framework: which transaction types are pseudonymous (small retail payments), which require full KYC identity linking (large transfers, cross-border), and what the data retention and access rules are for each tier. This policy must be formally documented and technically enforced — not just described in policy documents but instantiated in the system's cryptographic architecture so that even the central bank cannot access privacy-tier-1 transaction data without the legally mandated process. PT-02 (Authority to Process Personally Identifiable Information) applies to CBDC transaction metadata. In an account-based CBDC system, every transaction reveals the sender, recipient, amount, and timestamp — a complete financial surveillance apparatus. Even in a token-based system, metadata (device IP addresses, timing patterns, amounts) can enable re-identification. The legal authority to process, retain, and access this data must be explicitly documented for each processing purpose. PT-03 (Personally Identifiable Information Processing Purposes) constrains the use of CBDC transaction data: data collected for AML/CFT purposes cannot be repurposed for tax enforcement or law enforcement surveillance without separate legal authority. Technical controls (data access logging, query auditing, purpose-bound encryption) must enforce these restrictions. Privacy-enhancing technologies for CBDC include: blind signatures (Chaumian e-cash, used in Project Hamilton), which allow the central bank to sign tokens without learning the token-holder's identity; zero-knowledge proofs, which allow users to prove they hold sufficient balance without revealing the balance to the merchant; and threshold decryption, which requires multiple authorities to jointly decrypt transaction data, preventing unilateral surveillance. AC-04 (Information Flow Enforcement) governs which data flows to which parties: central bank AML monitoring systems, commercial bank compliance teams, law enforcement with legal warrants, and cross-border regulators each have different access rights that must be enforced cryptographically. AU-02 (Auditable Events) must log all access to privacy-protected CBDC data with immutable records of who accessed what and why — the access log must be protected even from those who manage the CBDC system.",
+      "Programmable Money and Smart Contract Layer Security (CM-03, SA-11, IA-02, AC-03, IR-04): Programmable money — CBDC with embedded rules that govern how and when it can be spent — enables powerful applications: automated tax collection, conditional welfare payments, corporate treasury automation, and stimulus that expires if unspent. It also creates significant risks: overly restrictive programming could constitute financial censorship or exclusion, bugs in smart contract logic could freeze citizen funds, and malicious programming (from external attackers or insider threats) could enable mass financial manipulation. CM-03 (Configuration Change Control) is the anchor control for programmable money governance: every change to the smart contract logic that governs CBDC behaviour must go through a formal change process with multi-authority approval, mandatory legal review (smart contracts that enforce monetary rules have the force of law), security review, and staged rollout with monitoring. Emergency rollback capability must be available for any deployed programme, with a response time commitment of minutes, not hours. SA-11 (Developer Security Testing) mandates formal verification and independent audit for all CBDC smart contract logic — the stakes are too high for standard software testing alone. For smart contracts that govern citizen access to their own money, the correctness requirement approaches that of safety-critical systems: formal methods (TLA+ for protocol specification, Certora or similar for smart contract verification) must be applied before any production deployment. IA-02 (User Identification and Authentication) governs operator authentication for the programmable money management layer: the ability to create, modify, or deactivate CBDC programmes must require strong multi-factor authentication with hardware tokens, time-limited sessions, and complete audit trails. No programme should be deployable by a single person. AC-03 (Access Enforcement) constrains which parties can create and deploy CBDC programmes: the central bank retains exclusive authority over the base monetary rules; licensed programme operators (government agencies, commercial banks) can create programmes within policy-defined parameters; end users may have no ability to create programmes on their own funds unless explicitly enabled. IR-04 (Incident Handling) must include CBDC programme-specific scenarios: what is the response procedure if a deployed programme is found to have a bug that freezes funds? Who has authority to emergency-pause a programme? How are affected citizens notified? The incident response plan must be rehearsed, as these scenarios could affect millions of citizens simultaneously.",
+      "Anti-Counterfeiting and Double-Spend Prevention (SC-12, SC-13, SC-17, CA-07, AU-03): Counterfeiting CBDC — creating fake currency that the central bank did not issue — would undermine monetary sovereignty and public trust in the digital currency. Double-spending — spending the same CBDC unit twice before the first transaction is confirmed — is the fundamental attack on digital cash, famously solved by Bitcoin's blockchain but addressable by other means in a centralised or quasi-centralised system. SC-12 (Cryptographic Key Establishment and Management) underpins CBDC authenticity: each CBDC token or account balance is cryptographically signed by the central bank's issuance key. Verification of the central bank's signature proves authenticity. The issuance key must be protected with the same rigour as the root CA for a national PKI — its compromise would enable unlimited counterfeiting. SC-13 (Use of Cryptography) mandates specific algorithm requirements: the token signature scheme must be resistant to forgery even with access to signed example tokens, using digital signature algorithms with security level matching the expected value and lifetime of the CBDC (FIPS 204 ML-DSA for quantum-resistant signatures for long-lived infrastructure). SC-17 (Public Key Infrastructure Certificates) governs the CBDC PKI: the central bank root key, intermediary issuance keys, and device-level signing keys form a hierarchy that must be managed with the assurance level of a national PKI, including certificate revocation infrastructure for compromised device keys and key ceremony procedures for root key operations. CA-07 (Continuous Monitoring) must detect double-spend attempts in real-time: for online CBDC, every token redemption is checked against the central bank ledger immediately; for offline CBDC, reconciliation of offline tokens occurs when the device reconnects, with automated detection of any token that has been spent more than once across different offline transactions. When double-spend is detected, the affected tokens are invalidated, the incident is escalated for investigation, and the parties involved are notified per the legal framework. AU-03 (Content of Audit Records) must ensure that every CBDC issuance, transfer, and redemption creates an audit record with sufficient detail to reconstruct the transaction — amount, timestamp, cryptographic reference to the token, and relevant identity attestations — forming the evidentiary basis for any legal proceedings regarding counterfeiting or fraud.",
+      "Monetary Policy and Systemic Risk Controls (AC-06, PM-09, RA-03, CP-07, IR-08): CBDC could cause bank runs at scale if citizens move deposits from commercial banks to the central bank en masse during periods of financial stress — the very safety of CBDC (no counterparty risk) makes it a superior deposit in times of crisis. Preventing this systemic risk while preserving CBDC utility requires architectural controls that implement the central bank's policy choices. AC-06 (Least Privilege) at the macro level means that CBDC holding limits — the maximum amount any individual or entity can hold in CBDC — are enforced by the core ledger as a hard constraint, not a soft policy. Typical proposals range from 3,000-10,000 units of currency per person for retail CBDC. These limits must be enforced even for legitimate commercial bank transfers: a bank cannot move unlimited reserves into CBDC, and the system must prevent automated workarounds (splitting into multiple wallets, round-tripping through intermediaries). PM-09 (Risk Management Strategy) must address CBDC-specific systemic risks in the central bank's enterprise risk framework: the disintermediation scenario (bank deposit flight to CBDC during stress), the operational scenario (CBDC infrastructure outage during a critical payment event), the cyber scenario (attack on CBDC infrastructure coinciding with financial market stress), and the cross-border scenario (sudden capital flows via CBDC that bypass traditional capital flow management mechanisms). RA-03 (Risk Assessment) must quantify the systemic risk parameters: at what CBDC uptake level does disintermediation risk become material? What is the maximum CBDC outflow rate that the banking system can absorb without requiring emergency liquidity intervention? These parameters should be modelled and monitored in real-time, with automated alerts when CBDC flow patterns suggest emerging stress. CP-07 (Alternate Processing Site) recognises that CBDC infrastructure is designated as Critical National Infrastructure: a prolonged CBDC outage during a financial crisis could amplify the crisis. The alternate processing site must be active-active capable (not warm standby) and must be able to assume full CBDC operations within minutes, not hours. IR-08 (Incident Response Plan) for CBDC must include scenarios that no commercial organisation faces: coordinated attacks timed to coincide with market stress events, cross-border attacks using foreign CBDC infrastructure as a vector, and insider threats from staff with access to monetary policy-sensitive systems."
+    ],
+    "assumptions": "The organisation is a central bank, central bank technology partner, or licensed CBDC intermediary (commercial bank, payment service provider) building or operating CBDC infrastructure. The CBDC architecture follows the hybrid intermediated (two-tier) model where the central bank operates the core ledger and licensed intermediaries handle distribution and end-user wallets. At least one retail CBDC use case exists (consumer-facing digital currency). The organisation is subject to central banking law, payment systems regulation, AML/CFT legislation, and applicable data protection law (GDPR or equivalent) in the operating jurisdiction. Existing payment infrastructure (RTGS, commercial bank core banking, payment card networks) is already in operation and this pattern addresses the CBDC layer that integrates with or runs alongside existing infrastructure. Physical security of data centres and key ceremony facilities meets national critical infrastructure standards (equivalent to ISO 27001 with national security overlay). A security operations capability capable of monitoring national-scale payment infrastructure exists or is being established.",
+    "typicalChallenges": "The governance challenge is the hardest: CBDC decisions involve central banks, treasury ministries, data protection authorities, financial regulators, and legislatures — each with different risk tolerances and policy objectives. Security architecture decisions (privacy tier boundaries, holding limits, offline capabilities) require political decisions that no technology team can make unilaterally. The security architect's role is to present the technical implications of each policy choice clearly enough that decision-makers understand what they are approving. Offline CBDC represents an unsolved engineering problem for high-value use cases. Secure element hardware provides strong double-spend prevention but at the cost of complexity, device cost, and failure scenarios (lost device = lost funds). Software-based offline wallets offer usability but require periodic online reconciliation and cannot provide the same cryptographic guarantees as hardware. Privacy-enhancing technologies (blind signatures, ZKPs) are computationally expensive and may not scale to national retail payment volumes without significant infrastructure investment. The tension between AML/CFT compliance (which requires transaction traceability) and privacy (which requires unlinkability) cannot be fully resolved — the legal framework must establish where the line is drawn, and the technology must enforce it without creating technical capabilities that exceed the legal mandate. Interoperability between CBDCs across jurisdictions (mBridge, Nexus, Icebreaker experiments) introduces cross-border trust issues: whose rules govern a payment that originates in one CBDC system and settles in another? Supply chain risk for CBDC hardware (secure elements, HSMs) is acute — state-sponsored supply chain attacks on components that protect national monetary infrastructure are a credible threat. Nation-states with advanced semiconductor capabilities could potentially compromise hardware at the manufacturing level.",
+    "indications": "Central banks in the design, prototyping, or pilot phase of a retail or wholesale CBDC. Commercial banks designated as CBDC intermediaries by their central bank. Payment infrastructure operators building CBDC wallet or distribution platforms. Technology vendors contracted to build CBDC core ledger, gateway, or offline wallet infrastructure. National payment system operators integrating CBDC with existing RTGS or fast payment infrastructure. Central bank technology consultancies advising on CBDC security architecture. Financial stability regulators assessing systemic risk implications of CBDC design choices.",
+    "contraIndications": "Private sector stablecoins (USDC, EURC) — these are commercial instruments with different threat models; see SP-051 Tokenised Asset Security Architecture. Central bank wholesale settlement using existing RTGS infrastructure without a new CBDC ledger. Payment card security for traditional card-present or card-not-present transactions — see SP-026 PCI Full Environment. Digital identity infrastructure that does not specifically handle monetary value — see SP-052 Decentralised Identity. Cryptocurrency exchange or custody operations — see SP-051 Tokenised Asset Security Architecture.",
+    "threatResistance": "This pattern provides layered defences across the CBDC threat landscape. Core ledger integrity attacks — manipulation of the authoritative balance records — are mitigated through cryptographic signing of all ledger state (SC-12, SC-13), separation of duties preventing single-operator manipulation (AC-05), and an independent audit log protected even from system administrators (AU-02, AU-09). Counterfeiting — generating fraudulent CBDC not issued by the central bank — is defeated by the central bank's cryptographic issuance key hierarchy (SC-12, SC-13, SC-17), which cannot be forged without the private key, protected by FIPS 140-3 Level 4 HSMs. Double-spend attacks — spending the same CBDC unit more than once — are prevented in online mode by real-time ledger checking and in offline mode by secure element hardware that invalidates tokens on first use (SC-12, PE-03). Privacy attacks — mass surveillance of citizen payment patterns — are bounded by the tiered privacy architecture (PT-01, PT-02, PT-03, AC-04) and enforced by cryptographic privacy-enhancing technologies including blind signatures and zero-knowledge proofs. Bank-run amplification — CBDC acting as a crisis accelerant by enabling instant mass deposit flight — is controlled by holding limits enforced as hard constraints in the core ledger (AC-06) and monitored in real-time against macroprudential thresholds (RA-03, PM-09). Offline hardware attacks — extraction of CBDC tokens from a compromised secure element — are mitigated by TEE architecture, tamper-detection, and per-device key isolation (SC-12, SC-28, PE-03). Insider threats from central bank or intermediary staff — the highest-impact actor class for monetary infrastructure — are addressed through separation of duties (AC-05), multi-person authorisation for privileged operations (IA-02), comprehensive audit logging (AU-02), and insider threat programme governance (PM-12). Infrastructure availability attacks — denial of service against national payment infrastructure — are mitigated through active-active alternate processing sites (CP-07), incident response plans tested for crisis-coincident attack scenarios (IR-08), and continuous monitoring with rapid detection (CA-07)."
+  },
+  "examples": {
+    "CBDC Core Ledger Architecture": [
+      "Central bank core ledger deployed as a purpose-built financial database with cryptographic state anchoring: every batch of transactions is summarised into a Merkle root signed by the central bank's HSM-backed issuance key. The signed root is published to an external transparency log (analogous to Certificate Transparency for TLS) within 60 seconds of batch close, enabling independent verification of ledger integrity by any party without access to individual transaction data.",
+      "Issuance key ceremony: the central bank's CBDC root signing key is generated in a FIPS 140-3 Level 4 HSM during a formal ceremony attended by the Governor or Deputy Governor, the CISO, the Chief Auditor, and two independent witnesses. The ceremony is video-recorded, the HSM's audit log is exported and archived, and three backup key shares are created using threshold secret sharing and distributed to three physically separate secure vaults under dual-control. The ceremony is conducted annually for key rotation, with the previous year's key retained for verification of historical transactions.",
+      "Four-eyes authorisation for CBDC issuance: any operation that changes the total supply of CBDC in circulation (issuance, redemption, emergency balance adjustments) requires authorisation from two senior central bank officials from different departments, authenticated using hardware security tokens. The authorisation is cryptographically bound to the transaction and included in the audit log. No automated process can trigger issuance without this dual authorisation.",
+      "RTGS interoperability gateway: an ISO 20022-native API gateway mediates CBDC-to-reserves conversions. Each conversion request is authenticated using the intermediary's mTLS client certificate, validated against AML screening and holding limit checks, and only executed once both the CBDC debit and the RTGS reserves credit are atomically committed. If either leg fails, the entire conversion is rolled back. All gateway transactions are logged to both the CBDC audit system and the RTGS reconciliation system, with daily automated reconciliation confirming that total CBDC in circulation equals total reserves held as CBDC backing."
+    ],
+    "Offline Payment Capability": [
+      "Secure element offline wallet architecture: CBDC is loaded onto a device's secure element (CE EAL5+ evaluated, ISO/IEC 7816 compliant) via an authenticated NFC or Bluetooth LE session with a licensed wallet provider. The secure element generates a device-unique key pair during provisioning, and the public key is registered with the central bank. Offline payment uses NFC with a device-signed payment message that binds the token serial number, amount, recipient device identifier, and timestamp. The secure element atomically invalidates the token on signing, preventing double-spend regardless of network connectivity. When reconnected, all offline payments are reconciled with the central bank within 15 minutes, and any tokens found to have been double-spent are investigated per the fraud response procedure.",
+      "Offline value limits: each secure element can hold a maximum offline balance equivalent to 500 currency units (configurable by the central bank per monetary policy). Individual offline transactions are limited to 200 units. A device can execute offline payments for a maximum of 72 hours or 20 transactions before mandatory online reconciliation is required. These limits are enforced by the secure element firmware and cannot be modified by application software. Limits reflect the risk appetite for offline double-spend exposure: if a device is compromised and offline tokens extracted, the maximum loss per device is bounded.",
+      "Deferred settlement for transport and connectivity-challenged environments: in environments with intermittent connectivity (commuter transit, rural areas, disaster response), CBDC terminals can accept offline payment and queue the reconciliation for when connectivity is restored. The terminal hardware (also a secure element device) accumulates offline payment records, generates a signed batch, and submits to the central bank within the offline window. If a terminal fails to reconcile within 48 hours, its offline acceptance capability is suspended until online reconciliation is completed."
+    ],
+    "Privacy Implementation": [
+      "Tiered privacy architecture (ECB Digital Euro model): Tier 1 (anonymous) — transactions below 50 units require no identity verification; the central bank receives only the amount and timestamp, not the payer identity. Technically implemented using Chaumian blind signatures: the user requests a blind token from the central bank (which signs without seeing the token's serial number), then spends it pseudonymously. The central bank cannot link the issued token to the spending transaction, providing cash-equivalent privacy. Tier 2 (pseudonymous) — transactions 50-500 units require wallet registration but not full identity; the central bank sees a pseudonym tied to a wallet, enabling pattern-based AML monitoring without full identity. Tier 3 (identified) — transactions above 500 units or cross-border require full KYC identity binding; all parties are fully identified and the transaction is reported to the AML authority.",
+      "Law enforcement access with legal safeguards: the tiered privacy system technically enforces that Tier 1 transactions cannot be de-anonymised by the central bank or any other party — not even with legal compulsion, because the central bank never holds the linking data. For Tier 2 pseudonymous transactions, de-anonymisation requires a court order presented to the wallet provider (who holds the pseudonym-to-identity mapping). A dedicated legal process system logs all court order requests, their legal basis, the approving judicial officer, and the data disclosed, creating an auditable record of all de-anonymisation events. This log is published in aggregate form annually for public accountability.",
+      "Purpose limitation enforcement: CBDC transaction data collected for AML/CFT purposes is stored in a separate, access-controlled data store from any other data system. Access requires explicit authorisation tied to an AML investigation reference number. Attempts to query CBDC transaction data for purposes other than AML/CFT (e.g., tax compliance, social benefit eligibility, law enforcement surveillance) are blocked at the query layer and logged as policy violations. The data access policy is reviewed annually by the data protection authority and the result published."
+    ],
+    "Programmable Money Governance": [
+      "Government stimulus with expiry: a time-limited CBDC programme allows the treasury to issue stimulus payments that must be spent within 90 days or revert to the treasury. The programme logic is: (a) defined as a formal specification reviewed by legal counsel for statutory compatibility, (b) formally verified using TLA+ before implementation, (c) implemented as a smart contract on the CBDC programmability layer, (d) independently audited by a specialist firm, (e) deployed with a 48-hour timelock requiring approval from Treasury, Central Bank Governor, and the Parliamentary Finance Committee before activation. Citizens whose wallets receive programme funds are notified with clear explanation of the spending conditions.",
+      "Automated tax withholding: a programme that automatically remits the applicable VAT/GST component of qualifying business CBDC payments to the tax authority in real-time, eliminating the quarterly reporting cycle and tax gap. The programme parameters (rates, exemptions, eligible transaction types) are defined by statute, not by the central bank or the programme operator, and can only be modified through the formal legislative process. The programme operator cannot access the CBDC funds in transit — only the central bank can execute the programme logic, and the tax authority receives only the remittance amount and transaction reference, not the underlying commercial transaction details.",
+      "Emergency programme suspension: every deployed CBDC programme must have a tested suspension mechanism that can halt the programme within 60 seconds of authorisation. Suspension requires dual authorisation from the central bank CISO and the responsible business owner. When a programme is suspended, funds in the programme's queue are held in a suspended state — not inaccessible to the citizen — until the programme is resumed or the funds are returned to standard CBDC status. A programme that cannot be suspended within the RTO target cannot be deployed to production."
+    ]
+  },
+  "references": [
+    {
+      "title": "BIS Project mBridge — Experimenting with a Multi-CBDC Platform",
+      "url": "https://www.bis.org/publ/othp59.htm",
+      "note": "Multi-CBDC platform connecting central banks of China, Hong Kong, Thailand, UAE, and Saudi Arabia. Demonstrates cross-border CBDC interoperability, atomic FX-PvP settlement, and shared ledger governance. Minimum Viable Product achieved 2024."
+    },
+    {
+      "title": "ECB Digital Euro — Progress Report on the Preparation Phase",
+      "url": "https://www.ecb.europa.eu/euro/digital_euro/html/index.en.html",
+      "note": "ECB digital euro project in preparation phase (October 2023 – October 2025, extended to 2026). Key design decisions: intermediated model, privacy tiers, offline capability, holding limits, no remuneration."
+    },
+    {
+      "title": "Federal Reserve — Project Hamilton Phase 1 Technical Report",
+      "url": "https://www.bostonfed.org/publications/one-time-pubs/project-hamilton-phase-1-executive-summary.aspx",
+      "note": "MIT Digital Currency Initiative and Federal Reserve Bank of Boston. Demonstrated 1.7M TPS throughput, explored account-based and token-based designs, Chaumian blind signature privacy. Open-source implementation."
+    },
+    {
+      "title": "Bank of England — The Digital Pound: Technology Working Paper",
+      "url": "https://www.bankofengland.co.uk/paper/2023/the-digital-pound-technology-working-paper",
+      "note": "Comprehensive technical architecture for a retail CBDC. Covers API-based platform model, privacy design, offline requirements, and programmability. Reference architecture for the 'digital pound' consultation."
+    },
+    {
+      "title": "BIS Working Paper 1123 — Offline Payments with a CBDC",
+      "url": "https://www.bis.org/publ/work1123.htm",
+      "note": "Comprehensive analysis of offline CBDC architectures: secure elements, TEE wallets, deferred settlement, double-spend prevention. Evaluates security-usability trade-offs across hardware approaches."
+    },
+    {
+      "title": "Atlantic Council CBDC Tracker",
+      "url": "https://www.atlanticcouncil.org/cbdctracker/",
+      "note": "Real-time tracking of CBDC development across 130+ countries. 3 fully launched (Bahamas Sand Dollar, Eastern Caribbean DCash, Nigeria eNaira, Jamaica JAM-DEX), 36 in pilot. Essential for understanding global CBDC landscape."
+    },
+    {
+      "title": "IMF — A Survey of Research on Retail Central Bank Digital Currency",
+      "url": "https://www.imf.org/en/Publications/WP/Issues/2020/06/26/A-Survey-of-Research-on-Retail-Central-Bank-Digital-Currency-49517",
+      "note": "Comprehensive IMF analysis of CBDC design choices, financial stability implications, disintermediation risk, cross-border implications, and privacy trade-offs."
+    },
+    {
+      "title": "NISTIR 8301 — Blockchain Networks: Token Design and Management Overview",
+      "url": "https://www.nist.gov/publications/blockchain-networks-token-design-and-management-overview",
+      "note": "NIST interagency report on token lifecycle management, consensus mechanisms, and smart contract considerations. Applicable to token-based CBDC designs."
+    },
+    {
+      "title": "BIS — Central Bank Digital Currencies: Financial Stability Implications",
+      "url": "https://www.bis.org/publ/work941.htm",
+      "note": "Analysis of CBDC's impact on financial stability: bank run amplification, disintermediation risk, and the design features (holding limits, non-remuneration) that mitigate systemic risk."
+    },
+    {
+      "title": "FATF Guidance on Virtual Assets and Virtual Asset Service Providers (2023 Update)",
+      "url": "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-RBA-virtual-assets-2023.html",
+      "note": "FATF AML/CFT requirements applicable to CBDC intermediaries. Travel Rule, CDD requirements, and special treatment for CBDC as central bank liability."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-019",
+    "SP-026",
+    "SP-029",
+    "SP-040",
+    "SP-051",
+    "SP-052"
+  ],
+  "relatedPatternNames": [
+    "Secure Ad-Hoc File Exchange Pattern",
+    "PCI Full Environment",
+    "Zero Trust Architecture",
+    "Post-Quantum Cryptography and Quantum Readiness",
+    "Tokenised Asset Security Architecture",
+    "Decentralised Identity & Verifiable Credentials"
+  ],
+  "controls": [
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment And Management",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-13",
+      "name": "Use Of Cryptography",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Integrity",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-17",
+      "name": "Public Key Infrastructure Certificates",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-45",
+      "name": "System Time Synchronization",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-01",
+      "name": "Access Control Policies and Procedures",
+      "family": "AC",
+      "emphasis": "standard"
+    },
+    {
+      "id": "AC-02",
+      "name": "Account Management",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation Of Duties",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-17",
+      "name": "Remote Access",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-24",
+      "name": "Access Control Decisions",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-02",
+      "name": "Auditable Events",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content Of Audit Records",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-06",
+      "name": "Audit Monitoring, Analysis, And Reporting",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection Of Audit Information",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-12",
+      "name": "Audit Record Generation",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "IA-01",
+      "name": "Identification And Authentication Policy And Procedures",
+      "family": "IA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "IA-02",
+      "name": "User Identification And Authentication",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-05",
+      "name": "Authenticator Management",
+      "family": "IA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IA-08",
+      "name": "Identification and Authentication (Non-Organizational Users)",
+      "family": "IA",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-06",
+      "name": "Alternate Storage Site",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "CP-07",
+      "name": "Alternate Processing Site",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-09",
+      "name": "Information System Backup",
+      "family": "CP",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CP-10",
+      "name": "Information System Recovery And Reconstitution",
+      "family": "CP",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PE-04",
+      "name": "Access Control For Transmission Medium",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CM-08",
+      "name": "Information System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-01",
+      "name": "Incident Response Policy And Procedures",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "IR-06",
+      "name": "Incident Reporting",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-08",
+      "name": "Incident Response Plan",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-08",
+      "name": "Penetration Testing",
+      "family": "CA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-09",
+      "name": "External Information System Services",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Security Testing",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Scanning",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "PT-01",
+      "name": "Policy and Procedures",
+      "family": "PT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PT-03",
+      "name": "Personally Identifiable Information Processing Purposes",
+      "family": "PT",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-12",
+      "name": "Insider Threat Program",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-02",
+      "name": "Flaw Remediation",
+      "family": "SI",
+      "emphasis": "important"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Accuracy, Completeness, Validity, And Authenticity",
+      "family": "SI",
+      "emphasis": "important"
+    }
+  ],
+  "controlFamilySummary": {
+    "SC": 7,
+    "AC": 8,
+    "AU": 5,
+    "IA": 4,
+    "CP": 4,
+    "PE": 2,
+    "CM": 3,
+    "IR": 4,
+    "CA": 2,
+    "SA": 2,
+    "RA": 2,
+    "PT": 3,
+    "PM": 2,
+    "SI": 2
+  },
+  "threats": [
+    {
+      "id": "T-CBDC-001",
+      "title": "Core Ledger Integrity Attack",
+      "description": "An attacker — nation-state, insider threat, or compromised administrator — manipulates the central bank core ledger to alter CBDC balances, fabricate transactions, or erase transaction history. This is the highest-consequence attack against CBDC: a successful manipulation of the authoritative ledger undermines the integrity of the national currency itself. Attack vectors include direct database access by privileged insiders, compromise of the ledger application layer, or exploitation of the administrative API. Impact: loss of confidence in the currency, inability to determine true balances, potential systemic financial crisis.",
+      "mitigatedBy": ["SC-12", "SC-13", "AC-05", "AU-02", "AU-03", "AU-09", "IA-02", "CM-03"]
+    },
+    {
+      "id": "T-CBDC-002",
+      "title": "CBDC Counterfeiting via Key Compromise",
+      "description": "An attacker compromises the central bank's CBDC issuance signing key, enabling unlimited creation of cryptographically valid but unauthorised CBDC tokens. Unlike banknote counterfeiting, digital counterfeiting at scale could be undetectable until reconciliation reveals the discrepancy between issued CBDC and backing reserves. Attack vectors include insider key theft, HSM firmware compromise, supply chain attack on key management hardware, or cryptanalytic attack on weak key algorithms. Impact: inflation of the CBDC supply, erosion of backing reserves, potential monetary crisis.",
+      "mitigatedBy": ["SC-12", "SC-13", "SC-17", "PE-03", "AC-05", "AU-02", "CA-07", "PM-12"]
+    },
+    {
+      "id": "T-CBDC-003",
+      "title": "Offline Double-Spend Attack",
+      "description": "An attacker extracts CBDC tokens from a secure element offline wallet — through hardware side-channel attacks, fault injection, physical tampering, or exploitation of a secure element vulnerability — and uses the extracted tokens to make multiple payments before online reconciliation detects the anomaly. The attacker may also attempt to clone a device's secure element to enable parallel spending. Impact: financial loss for merchants and the payment system operator, erosion of trust in offline CBDC capability. The offline detection mechanism can identify double-spend post-facto but cannot always recover the funds.",
+      "mitigatedBy": ["SC-12", "SC-28", "PE-03", "PE-04", "IA-05", "CA-07", "AU-03", "IR-04"]
+    },
+    {
+      "id": "T-CBDC-004",
+      "title": "Mass Surveillance via CBDC Transaction Data",
+      "description": "An authorised party (central bank, government agency, commercial bank) or an attacker who has compromised CBDC systems uses CBDC transaction data to conduct mass financial surveillance of citizens — tracking spending patterns, associations, political donations, or religious activities. In account-based CBDC without strong privacy controls, every payment is visible to the platform operator by design. The threat is both the technical capability (if built without privacy controls) and the misuse of legitimate data access (by authorised parties exceeding their mandate). Impact: civil liberties violations, chilling effect on legitimate activities, democratic backsliding if used for political targeting.",
+      "mitigatedBy": ["PT-01", "PT-02", "PT-03", "AC-04", "AU-02", "AU-09", "AC-06", "IA-02"]
+    },
+    {
+      "id": "T-CBDC-005",
+      "title": "Programmable Money Censorship or Weaponisation",
+      "description": "A malicious insider, compromised administrator, or attacker who has gained control of the CBDC programmability layer deploys or modifies CBDC programmes to censor payments (blocking political donations, news subscriptions, or purchases from targeted merchants), freeze citizen funds, or implement discriminatory spending rules without legislative authority. Alternatively, a bug in an authorised programme could inadvertently freeze funds or cause incorrect automatic transfers. Impact: violation of citizens' right to access their own money, financial exclusion, loss of public trust in CBDC.",
+      "mitigatedBy": ["CM-03", "SA-11", "AC-05", "AC-03", "IA-02", "IR-04", "AU-02", "RA-03"]
+    },
+    {
+      "id": "T-CBDC-006",
+      "title": "CBDC-Induced Bank Run Amplification",
+      "description": "During a period of financial stress or loss of confidence in commercial banks, citizens and institutions rapidly convert commercial bank deposits to CBDC at a scale and speed that overwhelms the banking system's liquidity. CBDC's zero counterparty risk makes it a superior safe haven, and the ease of digital transfer enables a bank run at a speed and scale impossible with physical cash. A coordinated campaign — potentially including state-sponsored disinformation — could trigger this at a critical moment. Impact: commercial bank liquidity crisis, potential contagion to the wider financial system, emergency central bank intervention required.",
+      "mitigatedBy": ["AC-06", "PM-09", "RA-03", "CA-07", "IR-04", "IR-08", "CP-07"]
+    },
+    {
+      "id": "T-CBDC-007",
+      "title": "CBDC Infrastructure Availability Attack",
+      "description": "A nation-state, criminal organisation, or hacktivist deploys a sustained DDoS attack, ransomware, or physical destruction of critical infrastructure against the CBDC platform during a critical payment event (payroll day, tax payment deadline, financial market stress event). The attack aims to deny citizens and businesses access to their digital currency at the worst possible moment, amplifying financial distress and eroding public trust. Attack vectors include volumetric DDoS against API endpoints, ransomware targeting core ledger infrastructure, BGP hijacking of CBDC network connectivity, or physical attacks on data centre facilities. Impact: national payment system outage, inability of citizens to access funds, potential financial crisis amplification.",
+      "mitigatedBy": ["SC-07", "CP-07", "CP-09", "CP-10", "CA-07", "IR-04", "IR-08", "CM-02"]
+    },
+    {
+      "id": "T-CBDC-008",
+      "title": "RTGS Gateway Integrity Attack",
+      "description": "An attacker — positioned through supply chain compromise, insider access, or man-in-the-middle on the CBDC-RTGS integration network — manipulates messages between the CBDC ledger and the RTGS system. A successful attack could debit CBDC without crediting reserves (destroying backing), credit reserves without debiting CBDC (creating unbacked currency), or divert settlement payments. The RTGS integration is high-value and has historically been targeted by sophisticated actors (SWIFT Bangladesh Bank attack, $81M stolen by manipulating SWIFT messages in 2016). Impact: unbalanced CBDC-reserves reconciliation, potential monetary loss, loss of confidence in CBDC settlement finality.",
+      "mitigatedBy": ["SC-07", "SC-08", "SC-12", "CA-07", "AU-02", "AU-03", "CM-08", "IR-04"]
+    },
+    {
+      "id": "T-CBDC-009",
+      "title": "Cross-Border CBDC Capital Flow Manipulation",
+      "description": "State-sponsored actors or criminal organisations exploit CBDC interoperability (multi-CBDC platforms, cross-border payment corridors) to conduct rapid, large-scale cross-border capital flows that bypass capital controls, evade AML/CFT monitoring, or destabilise the exchange rate of the target currency. Unlike traditional cross-border payments — which take days and pass through correspondent banking AML checks — well-designed CBDC interoperability could enable near-instant cross-border settlement that outpaces monitoring capacity. Impact: currency destabilisation, capital flow management failure, AML/CFT compliance failure, potential sanctions evasion.",
+      "mitigatedBy": ["AC-04", "AC-06", "AU-02", "CA-07", "IA-08", "PM-09", "RA-03", "IR-06"]
+    },
+    {
+      "id": "T-CBDC-010",
+      "title": "Secure Element Supply Chain Compromise",
+      "description": "A state-sponsored actor with semiconductor manufacturing capability introduces a hardware backdoor into secure elements used for CBDC offline wallets during the manufacturing process. The backdoor enables the attacker to extract device signing keys or CBDC tokens from any affected device, potentially affecting millions of wallets deployed nationally. The attack is particularly insidious because affected devices pass all functional and security tests but contain covert key exfiltration or cloning capability. Nation-states with advanced semiconductor capabilities (including state-sponsored actors with access to foundry processes) have both the motivation and capability to conduct this attack against national monetary infrastructure. Impact: mass offline CBDC theft, undermining of the entire offline payment capability, potential requirement to recall all affected devices.",
+      "mitigatedBy": ["PE-03", "PE-04", "SC-12", "SC-28", "SA-09", "CM-08", "CA-08", "RA-03"]
+    }
+  ],
+  "context": {
+    "assetTypes": [
+      "cbdc-core-ledger",
+      "rtgs-gateway",
+      "hsm",
+      "secure-element",
+      "cbdc-api-gateway",
+      "cbdc-wallet",
+      "key-management-system",
+      "audit-log-system",
+      "aml-monitoring-system"
+    ],
+    "adversaryProfile": {
+      "minTier": "TACM-T3",
+      "relevantActorTypes": [
+        "nation-state",
+        "cybercriminal",
+        "insider-malicious",
+        "hacktivist"
+      ]
+    },
+    "regulatoryScope": [
+      "Central Banking Act",
+      "Payment Systems Regulation",
+      "AML/CFT",
+      "FATF Travel Rule",
+      "GDPR",
+      "DORA",
+      "Capital Flow Management"
+    ]
+  }
+}

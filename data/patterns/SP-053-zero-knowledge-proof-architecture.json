@@ -1,0 +1,492 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-053",
+  "slug": "zero-knowledge-proof-architecture",
+  "title": "Zero-Knowledge Proof Architecture",
+  "description": "Security architecture for zero-knowledge proof (ZKP) systems covering ZK-SNARK and ZK-STARK proof systems, trusted setup ceremony security, ZK-rollup infrastructure security (sequencer, data availability, forced inclusion), privacy-preserving computation, confidential smart contracts, and enterprise ZK applications including interbank settlement, private supply chain verification, and selective disclosure for KYC/AML compliance. Addresses cryptographic circuit security (under-constrained circuits, soundness bugs), proving key management, verification key integrity, and ZK compliance applications (regulatory reporting with privacy, GDPR right to erasure vs. blockchain immutability). Maps 32 NIST 800-53 controls across SC, SA, CA, CM, AU, AC, RA, and SI families.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-053",
+  "metadata": {
+    "release": "26.03",
+    "classification": "Application & Infrastructure",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-03-10",
+    "dateModified": "2026-03-10",
+    "authors": [
+      "Spinoza",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Developed in response to enterprise demand for privacy-preserving computation architectures, particularly in financial services where ZK-rollups (zkSync Era, StarkNet, Polygon zkEVM) are being evaluated for interbank settlement and regulatory reporting. Informed by real-world ZK deployments: JPMorgan Onyx's Project Guardian (MAS, Singapore), Aztec's confidential DeFi protocol, and FATF guidance on privacy-preserving transaction monitoring. The 2024–2025 maturation of ZK proof systems — from research curiosity to production infrastructure — has created an urgent need for security architecture guidance covering trusted setup ceremony risks, circuit auditing standards, proving infrastructure security, and the compliance paradox (proving regulatory compliance without exposing underlying data)."
+  },
+  "diagram": {
+    "svg": "/images/sp-053-zero-knowledge-proof-architecture.svg"
+  },
+  "legend": "The diagram illustrates four architectural layers of a ZK proof system: (1) Application Layer — the business logic that generates proof inputs and consumes verified outputs; (2) Proof Generation Layer — the prover infrastructure (GPU/FPGA clusters) that executes the ZK circuit and produces cryptographic proofs; (3) Verification Layer — on-chain or off-chain verifiers that check proof validity against the verification key; (4) Trust Anchor Layer — the trusted setup ceremony artefacts (reference strings, proving keys, verification keys) and their lifecycle management. Red controls indicate critical cryptographic protections; amber controls indicate important operational security; blue controls indicate standard governance. Circuit auditing (SA-11) and continuous monitoring (CA-07) span all layers.",
+  "content": {
+    "description": "Zero-knowledge proofs allow one party (the prover) to convince another (the verifier) that a statement is true without revealing the underlying data. This has two enterprise-critical applications: (1) privacy — prove that a transaction is valid without revealing sender, receiver, or amount; (2) scalability — batch-prove thousands of transactions and verify with a single compact proof (ZK-rollups). The security architecture must address the full ZK proof lifecycle: circuit design and auditing, trusted setup ceremony management (or transparent setup for STARKs), proving infrastructure security, verification key distribution and integrity, on-chain verifier deployment, and the governance of ZK-enabled applications. The 'toxic waste' problem — trusted setup ceremonies generate trapdoor information ('toxic waste') that must be destroyed — is the single largest systemic risk in SNARK-based systems. If any participant retains toxic waste, they can forge valid proofs for any statement, breaking the system's soundness entirely and with no on-chain evidence of the compromise.",
+    "keyControlAreas": [
+      "Trusted Setup Ceremony Security (SC-12, SC-13, PE-03): Multi-party computation ceremonies (Powers of Tau, Groth16 circuit-specific ceremonies) where each participant contributes randomness and the toxic waste is destroyed. Security requires: diverse, independent participants (cryptographic community, major institutions, adversarial assumptions about all-but-one honesty); hardware isolation (air-gapped systems, entropy from physical sources); verifiable transcripts published to allow anyone to verify their contribution was included; attestation that the participant's hardware was destroyed or securely wiped after ceremony. PLONK-family SNARKs (PLONK, Marlin, Sonic) use universal setups — a single ceremony supports all circuits of bounded size — reducing ceremony overhead but not eliminating it. ZK-STARKs (StarkNet, Polygon Miden) require no trusted setup, using collision-resistant hash functions instead of elliptic curve pairings, making them post-quantum secure by design.",
+      "Circuit Security and Auditing (SA-11, CA-08, SI-10): ZK circuits are arithmetic constraint systems. An under-constrained circuit accepts false proofs as valid — a soundness bug. A perfectly constrained circuit may still have completeness bugs (valid inputs rejected) or implementation bugs (witness computation incorrect). Circuit auditing requires: formal verification of constraint completeness and soundness (using tools such as Circomspect, ZKAP, or manual review); differential testing against a reference implementation; fuzz testing with malformed witnesses; and independent audit by ZK cryptography specialists. Unlike Solidity smart contracts, circuit bugs are often invisible without cryptographic expertise — the circuit may 'look correct' to a non-specialist. The 2023 Circom MIMC hash bug and 2022 Hermez double-spending bug both arose from under-constrained circuits.",
+      "Proving Infrastructure Security (SC-28, AC-06, CM-03): Proof generation is computationally intensive (seconds to minutes on commodity hardware, sub-second on GPU clusters). Proving keys — the large public parameters derived from the trusted setup — must be treated as highly sensitive: compromised proving keys don't break soundness but could enable DoS or privacy leaks via malformed proofs. GPU/FPGA prover clusters are high-value infrastructure targets. Security controls: network isolation of prover nodes; secure distribution of proving keys via authenticated channels; integrity verification of proving keys before use (hash against a known-good reference published at ceremony); rate limiting and job authentication to prevent prover DoS; separate proving key signing keys for different circuit versions.",
+      "Verification Key Integrity and Distribution (SC-13, CM-08, AU-02): The verification key is the on-chain or off-chain parameter used to verify proofs. If an attacker substitutes a malicious verification key (one for which they hold the corresponding proving key), they can forge arbitrary proofs. Controls: verification keys must be derived deterministically from the trusted setup transcript; on-chain verifier contracts should embed the verification key as an immutable constant (not a mutable storage variable); off-chain verifiers must validate verification keys against a signed registry; key rotation requires a new trusted setup ceremony and upgrade governance with time-lock.",
+      "ZK-Rollup Infrastructure Security (SC-07, CA-07, IR-04): ZK-rollups post compressed transaction data and validity proofs to L1. Security concerns: sequencer centralisation (single point of failure and censorship risk — zkSync, StarkNet, Scroll operate centralised sequencers as of 2025); data availability (if compressed data is not available, users cannot reconstruct state — zkSync Era and Polygon zkEVM use Ethereum calldata or blobs; StarkNet uses a DA committee with trust assumptions); forced inclusion (users must be able to force-include transactions if the sequencer censors them — escape hatch mechanisms vary by rollup); proof delay windows (if a validity proof cannot be generated, the rollup halts — requires fallback mode and SLA guarantees for the proving service).",
+      "Privacy-Preserving Applications (AC-04, AU-09, SC-08): Private transactions (Zcash Sapling, Aztec, Tornado Cash successors) use ZK proofs to hide transaction amounts and parties while proving no double-spending. Confidential smart contracts (Aztec, Aleo, Secret Network) allow smart contract execution on private state. Security considerations: nullifier management (prevent double-spending without revealing spent notes); memo field encryption (metadata privacy); view keys (selective disclosure to auditors without exposing private state to the public); compliance modes (regulatory view keys mandated by some jurisdictions — FATF Travel Rule tension with ZK privacy).",
+      "ZK Compliance Applications (CA-07, PM-09, CM-03): Enterprise ZK applications for regulatory compliance: (1) Solvency proofs — prove reserves exceed liabilities without disclosing asset breakdown (applicable to exchanges post-FTX; Kraken and Coinbase exploring); (2) Tax reporting — prove income and gains for HMRC/IRS submission without exposing full transaction history; (3) Sanctions screening — prove no counterparty is sanctioned without revealing counterparty identity (Zcash-based proposals for compliant private transactions); (4) KYC/AML selective disclosure — credential-based ZK proofs (W3C Verifiable Credentials + ZK extension) allowing users to prove they passed KYC at a regulated institution without revealing which institution or their identity attributes. Architecture must include audit trail for ZK credentials, revocation mechanisms (ZK-friendly revocation registries), and compliance with GDPR right to erasure (ZK commitments on-chain are immutable; personal data must not be in the commitment input, only in the private witness that remains off-chain).",
+      "Post-Quantum Considerations (SC-13, SA-15): ZK-STARKs are post-quantum secure (based on hash functions). ZK-SNARKs use elliptic curve pairings that are vulnerable to quantum attack (Shor's algorithm). Migration path: prefer STARK-based systems for new deployments where proof size and verification cost are acceptable (STARKs produce larger proofs than SNARKs but with simpler verifier logic); for SNARK deployments, document the quantum risk timeline and plan migration. Recursive STARK proofs (StarkNet's SHARP prover uses recursive composition to amortise proof costs) maintain post-quantum security throughout the recursion chain. Nova, Supernova, and HyperNova folding schemes introduce new efficiency frontiers but require fresh security analysis."
+    ],
+    "assumptions": "Organisations deploying ZK proof systems are assumed to have cryptographic engineering expertise on staff or through specialist advisors. General software security teams cannot safely audit ZK circuits without ZK-specific training. Trusted setup ceremonies require advance planning (months), diverse international participation, and verifiable contribution tooling. On-chain verifier deployment is assumed to be on an EVM-compatible network (Ethereum, ZK-rollup L2); Solana, Aptos, and Sui have native ZK verification primitives but with different security properties. Off-chain ZK applications (enterprise batch verification) avoid blockchain-specific risks but retain all cryptographic and proving infrastructure risks.",
+    "typicalChallenges": "The most dangerous challenge is the invisible soundness bug: under-constrained circuits can be exploited silently, with no on-chain evidence of forgery. Circuit auditing is a specialised skill requiring months to develop. Trusted setup ceremony logistics are genuinely difficult — coordinating hundreds of participants across jurisdictions with verifiable hardware attestation. Proof generation latency is often unacceptable for real-time applications without GPU/FPGA investment. Verification key governance — updating keys after circuit bug fixes — requires new ceremonies and creates upgrade governance risks. GDPR compliance with ZK commitments is a genuine tension: once a commitment is on-chain it cannot be erased, but if the private witness (containing personal data) is retained, a DSAR could require disclosure of witness data that would reveal proof inputs.",
+    "indications": "Use this pattern when: (1) proving regulatory compliance to regulators or counterparties without disclosing confidential business data; (2) deploying a ZK-rollup for transaction throughput or L2 scaling; (3) building privacy-preserving transaction systems for financial applications; (4) implementing selective disclosure for KYC/AML credentials; (5) building confidential computing applications where even the cloud provider should not see computation inputs.",
+    "contraIndications": "Do not use ZK proofs when: simpler cryptographic techniques (TLS, HSM-based signing, secure multi-party computation) solve the problem without the complexity overhead; the team lacks ZK cryptographic expertise (implementation bugs are catastrophic); real-time performance requirements cannot tolerate proof generation latency; or the regulatory environment explicitly requires full transaction transparency (some jurisdictions prohibit privacy-enhancing technologies for financial transactions).",
+    "threatResistance": "This pattern primarily resists: forged proof acceptance (soundness bugs, compromised trusted setups), proving infrastructure attacks (DoS, key extraction), verification key substitution, ZK-rollup sequencer censorship and data withholding, and privacy compromise through metadata analysis. It does not address: smart contract vulnerabilities in the application layer (see SP-051), consensus-layer attacks on the underlying L1, or regulatory non-compliance where ZK proofs are not accepted as evidence."
+  },
+  "examples": {
+    "Enterprise Deployments": [
+      "JPMorgan Onyx / Project Guardian (MAS Singapore): ZK proofs for interbank FX settlement privacy — proving FX netting positions to a settlement agent without disclosing individual trade details to other banks. Uses Groth16 SNARKs on a permissioned Ethereum derivative. Settlement finality within 4 hours vs. T+2 traditional.",
+      "Polygon zkEVM: EVM-compatible ZK-rollup processing 2,000+ TPS with sub-cent transaction fees. PLONK-based proof system with recursive aggregation. Powers several institutional tokenised asset platforms seeking Ethereum security with L2 cost efficiency.",
+      "StarkNet / StarkEx: STARK-based rollup processing 9,000 TPS (StarkEx in validium mode). dYdX v4 and Sorare use StarkEx. No trusted setup required — pure cryptographic security. Proof generation via SHARP (SHARed Prover) reduces proving costs through batching across multiple applications.",
+      "Aztec Protocol: Privacy-first ZK-rollup with confidential smart contracts. Account abstraction native. Private DeFi applications: confidential AMM swaps, private lending. Uses PLONK + custom UltraPLONK proving system. Enterprise adoption for confidential treasury management and private institutional transfers.",
+      "Zcash Sapling / Orchard: Production ZK privacy for payments. Sapling uses Groth16 over BLS12-381 curve. Orchard uses Halo2 (no trusted setup, recursive proofs). Used by financial institutions in jurisdictions allowing privacy coins with Travel Rule compliance (TRISA-compliant shielded transactions under development)."
+    ],
+    "Compliance Use Cases": [
+      "Proof of Solvency (exchanges): Binance, Kraken, and OKX publish Merkle-tree-based proof of reserves. Next generation uses ZK proofs to prove total user liabilities <= total reserves without revealing individual user balances or reserve wallet addresses. KPMG and Mazars developing ZK-audited reserve attestation standards.",
+      "Tax Reporting with Privacy (HMRC/IRS): ZK proofs allowing taxpayers to submit cryptographically verifiable tax computations derived from private transaction history without disclosing the full blockchain address history to tax authorities. R3 and EMURGO have published proof-of-concept implementations for CBDC tax reporting.",
+      "Sanctions Screening (OFAC compliance): ZK credential allowing a financial institution to prove a counterparty cleared sanctions screening at a regulated institution without revealing which institution performed the check or the counterparty's identity. Parallel to EU AML Package privacy exemptions for law enforcement disclosure.",
+      "KYC Selective Disclosure: W3C Verifiable Credentials with ZK extensions (BBS+ signatures, ZK-VC). User proves 'I am over 18 and a UK resident who passed AML checks' without revealing date of birth, address, or the KYC provider. Reusable across multiple services. GDPR-compliant: personal data stays in the user's wallet, not on-chain."
+    ],
+    "Trusted Setup Ceremonies": [
+      "Zcash Powers of Tau (2017–2022): 87 participants across 6 rounds. Participants used air-gapped hardware including custom-built computers destroyed after use, live CDs booted from verified media, and physical entropy sources (dice, cosmic ray detectors). Ceremony transcript published and independently verified.",
+      "Hermez Network Ceremony (2021): 1,176 participants. First ceremony using a browser-based contribution tool enabling mass participation. All contributions verifiable on-chain. Demonstrates scalable ceremony logistics for application-specific circuit ceremonies.",
+      "Ethereum KZG Ceremony (2023): 141,416 participants — largest cryptographic ceremony in history. Used for EIP-4844 (proto-danksharding) trusted setup. Browser-based participation via ceremony.ethereum.eth.limo. Quasi-universal setup — if any single participant was honest and destroyed their contribution, the resulting reference string is secure."
+    ]
+  },
+  "references": [
+    {
+      "title": "ZKProof Community Reference — Security and Soundness",
+      "url": "https://docs.zkproof.org/",
+      "note": "Community standard for ZK proof system security analysis. Defines soundness, zero-knowledge, completeness properties. Reference for circuit audit methodology and trusted setup security requirements."
+    },
+    {
+      "title": "NIST SP 800-57 Part 1 Rev. 6 — Key Management (Draft)",
+      "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r6/ipd",
+      "note": "Cryptographic key lifecycle management. Applies to ZK proving keys and verification keys. Post-quantum algorithm guidance relevant to SNARK vs. STARK selection decision."
+    },
+    {
+      "title": "Groth16: On the Size of Pairing-based Non-interactive Arguments (Groth, 2016)",
+      "url": "https://eprint.iacr.org/2016/260",
+      "note": "Foundational paper for the most widely deployed ZK-SNARK construction. Security proof requires trusted setup. Verification: 3 pairings (constant). Proof size: 128 bytes. Basis for Zcash Sapling, Hermez v1, Polygon Hermez."
+    },
+    {
+      "title": "PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge",
+      "url": "https://eprint.iacr.org/2019/953",
+      "note": "Universal and updatable trusted setup (one ceremony supports all circuits up to bounded size). Basis for Aztec, Polygon zkEVM (modified PLONK), Scroll. Allows circuit updates without new ceremony."
+    },
+    {
+      "title": "Scalable, transparent, and post-quantum secure computational integrity (STARKs, Ben-Sasson et al.)",
+      "url": "https://eprint.iacr.org/2018/046",
+      "note": "Foundational STARK paper. No trusted setup. Post-quantum secure (based on collision-resistant hash functions). Larger proof sizes than SNARKs (~100x) but simpler verifier. Basis for StarkNet, StarkEx, Polygon Miden."
+    },
+    {
+      "title": "Ethereum KZG Ceremony — Powers of Tau",
+      "url": "https://ceremony.ethereum.eth.limo/",
+      "note": "141,416 participant ceremony for EIP-4844. Largest cryptographic ceremony in history. Demonstrates mass-participation ceremony security properties and transcript verification methodology."
+    },
+    {
+      "title": "Aztec Protocol — Private DeFi and Confidential Smart Contracts",
+      "url": "https://aztec.network/",
+      "note": "Production ZK-rollup with native privacy. PLONK-based proving system. Noir programming language for private circuit development. Reference architecture for confidential smart contract applications."
+    },
+    {
+      "title": "Circomspect — Static Analyser for Circom Circuits",
+      "url": "https://github.com/trailofbits/circomspect",
+      "note": "Trail of Bits static analysis tool for Circom ZK circuits. Detects under-constrained signals, unused outputs, and signal shadowing. Essential component of ZK circuit security review pipeline."
+    },
+    {
+      "title": "FATF Guidance on Virtual Assets — Privacy-Enhancing Technologies",
+      "url": "https://www.fatf-gafi.org/en/topics/virtual-assets.html",
+      "note": "FATF guidance on Travel Rule compliance and privacy coin risks. Defines expectations for VASPs handling shielded transactions. Relevant to ZK compliance application design and regulatory acceptance."
+    },
+    {
+      "title": "ZK Bug Tracker — Known Circuit Vulnerabilities",
+      "url": "https://github.com/0xPARC/zk-bug-tracker",
+      "note": "Community-maintained registry of ZK circuit bugs, categorised by vulnerability type (under-constrained, soundness, completeness). Essential reference for circuit audit methodology."
+    }
+  ],
+  "relatedPatterns": [
+    "SP-019",
+    "SP-040",
+    "SP-051",
+    "SP-052"
+  ],
+  "relatedPatternNames": [
+    "Secure Ad-Hoc File Exchange Pattern",
+    "Post-Quantum Cryptography and Quantum Readiness",
+    "Tokenised Asset Security Architecture",
+    "Decentralised Identity"
+  ],
+  "controls": [
+    {
+      "id": "SC-12",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-13",
+      "name": "Cryptographic Protection",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SA-11",
+      "name": "Developer Testing and Evaluation",
+      "family": "SA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-08",
+      "name": "Penetration Testing",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SI-10",
+      "name": "Information Input Validation",
+      "family": "SI",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-03",
+      "name": "Access Enforcement",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AC-06",
+      "name": "Least Privilege",
+      "family": "AC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-28",
+      "name": "Protection of Information at Rest",
+      "family": "SC",
+      "emphasis": "critical"
+    },
+    {
+      "id": "AU-02",
+      "name": "Event Logging",
+      "family": "AU",
+      "emphasis": "critical"
+    },
+    {
+      "id": "CA-07",
+      "name": "Continuous Monitoring",
+      "family": "CA",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SC-07",
+      "name": "Boundary Protection",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "SC-08",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-04",
+      "name": "Information Flow Enforcement",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "AC-05",
+      "name": "Separation of Duties",
+      "family": "AC",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-03",
+      "name": "Configuration Change Control",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "CM-08",
+      "name": "System Component Inventory",
+      "family": "CM",
+      "emphasis": "important"
+    },
+    {
+      "id": "IR-04",
+      "name": "Incident Handling",
+      "family": "IR",
+      "emphasis": "important"
+    },
+    {
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-15",
+      "name": "Development Process, Standards, and Tools",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SA-17",
+      "name": "Developer Security and Privacy Architecture and Design",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "PE-03",
+      "name": "Physical Access Control",
+      "family": "PE",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-09",
+      "name": "Protection of Audit Information",
+      "family": "AU",
+      "emphasis": "important"
+    },
+    {
+      "id": "AU-03",
+      "name": "Content of Audit Records",
+      "family": "AU",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-02",
+      "name": "Baseline Configuration",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CM-07",
+      "name": "Least Functionality",
+      "family": "CM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SA-04",
+      "name": "Acquisition Process",
+      "family": "SA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR",
+      "emphasis": "standard"
+    },
+    {
+      "id": "RA-05",
+      "name": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "emphasis": "standard"
+    },
+    {
+      "id": "PT-02",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT",
+      "emphasis": "standard"
+    },
+    {
+      "id": "SI-07",
+      "name": "Software, Firmware, and Information Integrity",
+      "family": "SI",
+      "emphasis": "standard"
+    },
+    {
+      "id": "CP-09",
+      "name": "System Backup",
+      "family": "CP",
+      "emphasis": "standard"
+    }
+  ],
+  "controlFamilySummary": {
+    "SC": 5,
+    "SA": 4,
+    "CA": 2,
+    "SI": 2,
+    "AC": 4,
+    "AU": 3,
+    "CM": 4,
+    "IR": 1,
+    "RA": 2,
+    "PE": 1,
+    "PM": 1,
+    "SR": 1,
+    "PT": 1,
+    "CP": 1
+  },
+  "threats": [
+    {
+      "id": "T-ZKP-001",
+      "title": "Under-Constrained Circuit Soundness Bug",
+      "description": "A ZK circuit that fails to constrain all signals allows an attacker to construct a false witness that satisfies the circuit constraints without satisfying the intended statement. This produces a valid-looking proof for a false claim — e.g., proving possession of a secret without knowing it, or proving a balance is positive when it is negative. The 2022 Hermez double-spending bug and 2023 Circom MIMC hash under-constraint are production examples. Unlike smart contract bugs, circuit soundness bugs can be exploited silently with no on-chain evidence.",
+      "mitigatedBy": [
+        "SA-11",
+        "CA-08",
+        "SA-15",
+        "SA-17"
+      ]
+    },
+    {
+      "id": "T-ZKP-002",
+      "title": "Trusted Setup Toxic Waste Retention",
+      "description": "In SNARKs using a structured reference string (Groth16, Marlin), the setup ceremony generates trapdoor parameters ('toxic waste') that must be destroyed. If any participant retains the toxic waste, they can forge valid proofs for any statement without detection — breaking the system's soundness guarantee completely and permanently. A single compromised participant is sufficient if they retained their contribution before it was mixed with others. This is undetectable after the fact.",
+      "mitigatedBy": [
+        "SC-12",
+        "PE-03",
+        "AC-05",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-ZKP-003",
+      "title": "Verification Key Substitution Attack",
+      "description": "An attacker who can replace the verification key used by a verifier (on-chain smart contract or off-chain service) with a key for which they hold the corresponding proving key can forge arbitrary proofs accepted as valid. Attack vectors: mutable verification key storage in smart contract; compromised key distribution channel; supply chain attack on verifier library; governance attack on upgradeable verifier contract. Enables complete system compromise — attacker can prove any statement is true.",
+      "mitigatedBy": [
+        "SC-13",
+        "CM-03",
+        "CM-08",
+        "SI-07"
+      ]
+    },
+    {
+      "id": "T-ZKP-004",
+      "title": "Proving Infrastructure Compromise and Key Extraction",
+      "description": "GPU/FPGA prover clusters are high-value targets holding proving keys (large public parameters) and potentially sensitive witness data (private inputs). Compromise of prover infrastructure could enable: extraction of proving keys to compute proofs externally; privacy breach of witness data for private transaction provers; denial of service (ZK-rollup halts if provers are unavailable); or insertion of malicious proofs that exhaust on-chain gas or exploit verifier edge cases.",
+      "mitigatedBy": [
+        "SC-28",
+        "AC-06",
+        "SC-07",
+        "CM-02"
+      ]
+    },
+    {
+      "id": "T-ZKP-005",
+      "title": "ZK-Rollup Sequencer Censorship and Data Withholding",
+      "description": "Centralised ZK-rollup sequencers (zkSync Era, StarkNet, Scroll as of 2025) can censor transactions by refusing to include them in batches, or withhold compressed transaction data needed for state reconstruction. Data withholding in validium mode (where data is not posted to L1) can make user funds permanently inaccessible. Censorship resistance requires forced inclusion mechanisms and data availability proofs or commitments.",
+      "mitigatedBy": [
+        "SC-07",
+        "CA-07",
+        "IR-04",
+        "RA-03"
+      ]
+    },
+    {
+      "id": "T-ZKP-006",
+      "title": "Privacy Compromise via Metadata Analysis",
+      "description": "Even with cryptographically perfect ZK privacy, metadata can de-anonymise users: timing correlation between shielded pool entries and exits, IP address logging by nodes, denomination pattern analysis (unique amounts identify specific users), graph analysis of nullifier-to-commitment patterns, and note linkage through timing. Tornado Cash OFAC designation and Samourai Wallet prosecution demonstrate regulatory risk of privacy tools. Compliance mode design (viewing keys, regulatory disclosures) must be incorporated into architecture from the outset.",
+      "mitigatedBy": [
+        "SC-08",
+        "AC-04",
+        "AU-09",
+        "PM-09"
+      ]
+    },
+    {
+      "id": "T-ZKP-007",
+      "title": "ZK Credential Forgery and Revocation Bypass",
+      "description": "ZK-based identity credentials (W3C Verifiable Credentials with ZK extensions, BBS+ signatures) must have robust revocation mechanisms. An attacker who forges a ZK credential (e.g., proving KYC completion without actually passing KYC) can access services fraudulently. Revocation bypass — using a revoked credential whose revocation has not been reflected in the ZK revocation registry — is a practical risk in systems with delayed revocation propagation. Nullifier-based revocation schemes must account for nullifier privacy vs. revocation latency tradeoffs.",
+      "mitigatedBy": [
+        "AC-03",
+        "CM-08",
+        "CA-07",
+        "RA-05"
+      ]
+    },
+    {
+      "id": "T-ZKP-008",
+      "title": "GDPR Right to Erasure vs. On-Chain ZK Commitment Immutability",
+      "description": "ZK commitments posted on public blockchains are immutable — they cannot be erased. If private witness data (containing personal data subject to GDPR Art. 17 right to erasure) is linked to on-chain commitments, a DSAR could require disclosure of witness data, compromising other parties' privacy. Alternatively, the organisation holding witness data must demonstrate that on-chain commitments do not constitute personal data. EU Data Strategy and EDPB guidance on blockchain and GDPR remains unsettled. Design must ensure personal data appears only in off-chain witness files, not in public circuit inputs or on-chain commitments.",
+      "mitigatedBy": [
+        "PT-02",
+        "PM-09",
+        "AC-04",
+        "AU-09"
+      ]
+    },
+    {
+      "id": "T-ZKP-009",
+      "title": "Quantum Vulnerability of SNARK-Based Systems",
+      "description": "ZK-SNARKs (Groth16, PLONK) rely on elliptic curve pairings (BLS12-381, BN254) that are broken by Shor's algorithm on a sufficiently powerful quantum computer. Unlike classical digital signatures where the exposed data is limited to the public key, a broken SNARK pairing could allow an attacker to forge proofs for the entire system, retroactively invalidating the soundness of all historical proofs. ZK-STARKs (hash-based) are quantum-resistant but produce larger proofs. Hybrid SNARK/STARK architectures and post-quantum curve research (Bandersnatch, Jubjub upgrades) are active mitigations.",
+      "mitigatedBy": [
+        "SC-13",
+        "SA-15",
+        "RA-03",
+        "PM-09"
+      ]
+    },
+    {
+      "id": "T-ZKP-010",
+      "title": "Proof Generation Denial of Service",
+      "description": "ZK proof generation is computationally intensive. An attacker submitting a large volume of proof generation requests (or crafting adversarially complex witness inputs that maximise prover computation) can exhaust proving infrastructure capacity, causing ZK-rollup transaction processing to halt or ZK application response times to degrade. This is particularly impactful for ZK-rollups where proof generation delay directly blocks transaction finality. Mitigations: resource quotas per proof request, job authentication, circuit complexity limits, prover cluster auto-scaling, and fallback modes when proving capacity is exhausted.",
+      "mitigatedBy": [
+        "AC-06",
+        "CM-07",
+        "SC-07",
+        "CP-09"
+      ]
+    }
+  ],
+  "context": {
+    "dataTypes": [
+      {
+        "ref": "TDCE-FIN-01",
+        "state": ["in-use", "in-transit"],
+        "volume": "medium"
+      },
+      {
+        "ref": "TDCE-PII-01",
+        "state": ["in-use"],
+        "volume": "low"
+      },
+      {
+        "ref": "TDCE-CRY-01",
+        "state": ["at-rest", "in-use"],
+        "volume": "high"
+      }
+    ],
+    "assetTypes": [
+      "cryptographic-prover",
+      "smart-contract-verifier",
+      "proving-key-storage",
+      "verification-key-registry",
+      "zk-rollup-sequencer",
+      "trusted-setup-ceremony-artefacts"
+    ],
+    "adversaryProfile": {
+      "minTier": "TACM-T3",
+      "relevantActorTypes": [
+        "nation-state",
+        "cybercriminal",
+        "insider-malicious"
+      ]
+    },
+    "regulatoryScope": [
+      "GDPR",
+      "DORA",
+      "MiCA",
+      "FATF Travel Rule",
+      "OFAC"
+    ]
+  }
+}

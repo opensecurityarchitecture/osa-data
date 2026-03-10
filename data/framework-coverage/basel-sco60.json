@@ -1,0 +1,854 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "basel_sco60",
+  "framework_name": "Basel Committee SCO60 — Prudential Treatment of Cryptoasset Exposures",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on Basel Committee on Banking Supervision standards SCO60.1-60.99 (d545, July 2024). Basel SCO60 is primarily a prudential capital adequacy framework with operational risk requirements. Many provisions relate to capital calculations, risk weights, and exposure limits that have no direct SP 800-53 equivalent. Security-relevant provisions around custody, key management, and operational risk are mapped where applicable. Validate with qualified assessors for compliance/audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "mandatory"
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "SCO60.1",
+      "title": "Scope — banks with cryptoasset exposures",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "PM-10",
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "PL-01",
+        "PL-02",
+        "CA-06"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-01 information security program plan and PM-09 risk management strategy establish enterprise risk governance applicable to new asset classes. PM-10 security authorisation process supports formal scoping decisions. RA-01/RA-02/RA-03 risk assessment policy and security categorisation provide a methodology for scoping cryptoasset exposures within the risk framework. PL-01/PL-02 security planning and CA-06 security authorisation support system boundary decisions relevant to cryptoasset infrastructure.",
+      "gaps": "SCO60.1 scoping is a prudential regulatory obligation imposed on banks by national supervisors implementing the Basel framework. SP 800-53 provides enterprise risk governance controls but does not address: (a) regulatory scope determinations for capital adequacy purposes; (b) identification of cryptoasset exposures as defined under Basel standards (direct holdings, indirect exposures, issued instruments, trading book positions); or (c) the supervisory notification obligations when a bank first acquires cryptoasset exposures."
+    },
+    {
+      "id": "SCO60.2",
+      "title": "Definitions — cryptoasset types and Group classification",
+      "controls": [
+        "PM-07",
+        "RA-02",
+        "SA-08",
+        "PL-08"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PM-07 enterprise architecture integration and SA-08 security engineering principles support development of taxonomies for novel asset classes. RA-02 security categorisation and PL-08 security and privacy architectures provide partial methodological support for asset classification.",
+      "gaps": "SCO60.2 definitions (cryptoasset, distributed ledger technology, tokenised traditional asset, stablecoin, stabilisation mechanism, unbacked cryptoasset, Group 1a/1b/2) are regulatory constructs with precise legal meaning under Basel capital adequacy rules. SP 800-53 has no controls addressing cryptoasset taxonomy, DLT definitional criteria, or the specific conditions that determine regulatory classification for capital treatment purposes."
+    },
+    {
+      "id": "SCO60.3",
+      "title": "General provisions — governance and supervisory approval",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PM-10",
+        "PM-28",
+        "PL-01",
+        "PL-02",
+        "CA-01",
+        "CA-06",
+        "RA-01",
+        "RA-03",
+        "AT-01",
+        "AT-02"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-01/PM-02 information security program and CISO role establish senior accountability analogous to SCO60 board-level cryptoasset governance. PM-09 risk management strategy and PM-10 authorisation process support governance structures for novel activities. PM-28 risk framing provides methodological grounding. PL-01/PL-02/CA-01/CA-06 planning and authorisation controls support policy development and programme oversight. RA-01/RA-03 risk assessment policy establishes risk identification discipline. AT-01/AT-02 awareness and training supports competency development for cryptoasset risk management.",
+      "gaps": "SCO60.3 general provisions require explicit supervisory approval before a bank can apply Group 1 capital treatment, board-level sign-off on cryptoasset strategies, and integration of cryptoasset risk into ICAAP. SP 800-53 governance controls address information security governance but do not cover: (a) supervisory pre-approval requirements for new business lines; (b) integration of cryptoasset exposures into Pillar 2 internal capital assessment; or (c) the specific regulatory reporting obligations to national supervisors."
+    },
+    {
+      "id": "SCO60.4",
+      "title": "Due diligence and risk assessment before exposure",
+      "controls": [
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "PM-09",
+        "SA-04",
+        "SA-09",
+        "SR-02",
+        "SR-03"
+      ],
+      "coverage_pct": 55,
+      "rationale": "RA-01/RA-02/RA-03 risk assessment policy and methodology support due diligence disciplines prior to acquiring new exposures. RA-05 vulnerability scanning and RA-07 risk response provide ongoing risk management tooling. PM-09 risk management strategy frames the organisation's risk appetite. SA-04/SA-09 acquisition and external services controls govern counterparty selection and service procurement for cryptoasset activity. SR-02/SR-03 supply chain risk management plan and controls are partially applicable to DLT protocol and infrastructure due diligence.",
+      "gaps": "SCO60 due diligence requirements encompass: financial soundness assessment of cryptoasset counterparties; evaluation of protocol security and governance for DLT networks; legal enforceability review; regulatory status of cryptoasset instruments; and assessment of market liquidity and price discovery mechanisms. SP 800-53 supports technical due diligence on IT systems but does not cover financial, legal, or market-structure due diligence for cryptoasset exposures."
+    },
+    {
+      "id": "SCO60.5",
+      "title": "Pillar 2 integration — cryptoasset risks in ICAAP",
+      "controls": [
+        "PM-09",
+        "RA-01",
+        "RA-03",
+        "RA-07",
+        "PM-04",
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PM-09 risk management strategy and RA-01/RA-03 risk assessment policy provide partial support for incorporating cryptoasset risks into the overall risk management framework. RA-07 risk response and PM-04 plan of action and milestones support structured response to identified risks. CA-02/CA-07 security assessments and continuous monitoring provide ongoing risk tracking methodology.",
+      "gaps": "SCO60.5 requires banks to integrate cryptoasset risks into the Internal Capital Adequacy Assessment Process (ICAAP), including quantification of capital needs above Pillar 1 minimums, stress testing for cryptoasset scenarios, and board-approved risk appetite for cryptoasset exposures. SP 800-53 has no controls addressing Pillar 2 capital adequacy, ICAAP methodology, economic capital modelling, or stress testing frameworks for financial risk."
+    },
+    {
+      "id": "SCO60.10",
+      "title": "Classification conditions — Group 1a tokenised traditional assets",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.10 establishes the legal and technical conditions for a cryptoasset to qualify as a Group 1a tokenised traditional asset eligible for the same capital treatment as the underlying asset. These conditions include: legal claim equivalence to the underlying asset; full backing without leverage; legal certainty of settlement; prudent valuation; and reliable redemption mechanisms. None of these conditions have SP 800-53 analogues — they are financial, legal, and prudential criteria outside the scope of information security controls."
+    },
+    {
+      "id": "SCO60.11",
+      "title": "Classification conditions — Group 1b qualifying stablecoins",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "AU-10",
+        "AU-11",
+        "SI-07"
+      ],
+      "coverage_pct": 20,
+      "rationale": "The stabilisation mechanism integrity requirements in SCO60.11 include technical components partially addressable by SP 800-53: SC-12 cryptographic key management and SC-13 cryptographic protection support smart contract integrity for stabilisation mechanisms. SC-17 PKI certificate management supports reliable digital asset redemption infrastructure. AU-10 non-repudiation and AU-11 audit record retention support the audit trail requirements for reserve backing. SI-07 software and information integrity helps validate on-chain/off-chain data consistency.",
+      "gaps": "SCO60.11 Group 1b qualification requires: a peg stabilisation mechanism that maintains value relative to a reference asset; full backing with high-quality liquid assets; redemption rights at par; independent audits of reserve adequacy; robust governance of the issuer; and supervisory recognition of the stabilisation arrangement. The core qualification criteria are financial and legal — reserve adequacy ratios, asset quality of backing assets, legal enforceability of redemption — which have no SP 800-53 equivalents."
+    },
+    {
+      "id": "SCO60.12",
+      "title": "Classification conditions — Group 2 unbacked cryptoassets",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.12 identifies cryptoassets that fail Group 1 classification conditions as Group 2, subject to the most conservative capital treatment (1250% risk weight or full deduction for Group 2b). Classification as Group 2 is a consequence of failing financial and legal criteria — there are no information security controls that can address or remediate this classification. SP 800-53 has no relevant mapping."
+    },
+    {
+      "id": "SCO60.13",
+      "title": "Ongoing monitoring of classification conditions",
+      "controls": [
+        "CA-07",
+        "RA-03",
+        "RA-05",
+        "SI-04",
+        "AU-06",
+        "PM-09",
+        "PM-31"
+      ],
+      "coverage_pct": 35,
+      "rationale": "CA-07 continuous monitoring establishes an ongoing assessment programme applicable to cryptoasset classification monitoring. RA-03 risk assessment and RA-05 vulnerability scanning support periodic re-evaluation of DLT infrastructure conditions. SI-04 system monitoring enables detection of protocol-level changes that could affect classification conditions. AU-06 audit record review supports evidence-based classification reviews. PM-31 continuous monitoring strategy formalises the monitoring cadence.",
+      "gaps": "SCO60.13 ongoing monitoring encompasses financial and legal monitoring that SP 800-53 does not address: continuous monitoring of reserve adequacy for Group 1b stablecoins; tracking of regulatory status changes in multiple jurisdictions; monitoring of market liquidity conditions for classification purposes; legal review of settlement finality; and supervisory notification obligations when classification conditions change."
+    },
+    {
+      "id": "SCO60.14",
+      "title": "Infrastructure assessment for classification eligibility",
+      "controls": [
+        "CA-02",
+        "RA-03",
+        "RA-05",
+        "SA-08",
+        "SA-11",
+        "CM-02",
+        "CM-08",
+        "SI-06",
+        "SI-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-02 security assessments provide a structured methodology for evaluating DLT infrastructure against classification criteria. RA-03/RA-05 risk assessment and vulnerability scanning support technical due diligence on blockchain protocol security. SA-08 security engineering principles and SA-11 developer security testing apply to smart contract and protocol assessment. CM-02/CM-08 configuration baseline and component inventory support infrastructure characterisation. SI-06/SI-07 security function verification and software integrity validation apply to on-chain logic.",
+      "gaps": "SCO60.14 infrastructure assessment for classification includes legal assessment of settlement finality, regulatory recognition of DLT infrastructure by supervisors, and financial assessment of underlying asset quality — none of which are addressable through SP 800-53 controls. Technical assessments also require cryptoasset-specific competencies (smart contract auditing, consensus mechanism analysis, tokenomics review) that go beyond the scope of standard security control frameworks."
+    },
+    {
+      "id": "SCO60.20",
+      "title": "Group 1a capital requirements — credit risk and market risk",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.20 applies existing Basel credit risk and market risk capital frameworks (CRE, MAR chapters) to Group 1a tokenised traditional assets, with the capital requirement determined by the risk weight of the underlying asset. Risk weights, exposure calculations, and capital adequacy ratios are pure prudential financial concepts with no SP 800-53 analogues. Information security controls cannot substitute for or reduce capital requirements."
+    },
+    {
+      "id": "SCO60.21",
+      "title": "Group 1a infrastructure risk add-on",
+      "controls": [
+        "SA-08",
+        "SA-11",
+        "RA-03",
+        "RA-05",
+        "CA-02",
+        "SC-07",
+        "SC-12",
+        "SC-13",
+        "SI-06",
+        "SI-07",
+        "CP-02",
+        "CP-09",
+        "CP-10"
+      ],
+      "coverage_pct": 50,
+      "rationale": "The SCO60.21 infrastructure risk add-on acknowledges DLT-specific operational risks above those of conventional infrastructure. SP 800-53 addresses these partially: SA-08 security engineering and SA-11 developer testing apply to DLT protocol risk assessment. RA-03/RA-05 risk assessment and vulnerability scanning support quantification of technical risks. CA-02 security assessments provide structured evaluation of infrastructure risk. SC-07 boundary protection and SC-12/SC-13 cryptographic controls address network-layer risks. SI-06/SI-07 integrity verification applies to smart contract and node behaviour. CP-02/CP-09/CP-10 contingency planning addresses availability risk components of the infrastructure risk add-on.",
+      "gaps": "The SCO60.21 infrastructure risk add-on is computed as a percentage of the underlying capital requirement based on supervisor-assessed infrastructure risk levels. The quantification methodology, add-on percentages, and supervisory assessment process are prudential mechanisms that SP 800-53 controls cannot address. Strong security controls may reduce the assessed infrastructure risk level but cannot replace the capital calculation itself."
+    },
+    {
+      "id": "SCO60.22",
+      "title": "Group 1b capital requirements — standardised approach for stablecoins",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.22 applies a modified standardised approach to Group 1b stablecoins, with capital requirements reflecting the risk of the stabilisation mechanism failing (peg break risk). Capital requirements are calculated using Basel stress scenario weights applied to notional exposure values. This is a purely financial/actuarial calculation with no SP 800-53 equivalent — security controls cannot reduce the regulatory capital charge for peg break risk."
+    },
+    {
+      "id": "SCO60.23",
+      "title": "Group 1b — operational risk for stabilisation mechanisms",
+      "controls": [
+        "IR-01",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "CP-02",
+        "CP-04",
+        "CP-09",
+        "CP-10",
+        "SI-07",
+        "SC-12",
+        "SC-13",
+        "CA-07",
+        "RA-05",
+        "AU-06",
+        "AU-09"
+      ],
+      "coverage_pct": 60,
+      "rationale": "The operational integrity of Group 1b stabilisation mechanisms has security-relevant dimensions well addressed by SP 800-53: IR-01/IR-04/IR-05 incident response policy and handling cover scenarios where the stabilisation mechanism experiences technical failure. IR-06 incident reporting supports regulatory notification obligations. CP-02/CP-04/CP-09/CP-10 contingency planning and backup/recovery address continuity of peg maintenance operations. SI-07 software integrity verification applies to smart contract stability logic. SC-12/SC-13 cryptographic controls protect the integrity of on-chain reserve attestations. CA-07 continuous monitoring and RA-05 vulnerability scanning support ongoing mechanism health assessment. AU-06/AU-09 audit record review and protection provide evidentiary support.",
+      "gaps": "SCO60.23 operational risk for stabilisation mechanisms includes financial operational risk components (reserve management failures, liquidity crises, market-maker operational failures) that are outside SP 800-53 scope. The operational risk capital charge calculation under the Basel Standardised Measurement Approach (SMA) for cryptoasset-related operational losses has no security control equivalent."
+    },
+    {
+      "id": "SCO60.24",
+      "title": "Group 2a capital requirements — standard conservative treatment",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.24 establishes a 1250% risk weight for Group 2a cryptoassets held in the banking book, calculated on a net long position basis. This is a maximum-severity capital treatment reflecting the absence of reliable valuation, hedging, or risk mitigation for most unbacked cryptoassets. Capital weights, exposure netting rules, and banking/trading book allocation decisions are exclusively prudential financial concepts — SP 800-53 has no applicable controls."
+    },
+    {
+      "id": "SCO60.25",
+      "title": "Group 2b capital requirements — full deduction for high-risk exposures",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.25 requires full deduction from Common Equity Tier 1 (CET1) capital for Group 2b cryptoasset exposures that fail additional supervisory criteria. Full CET1 deduction is equivalent to a >1250% risk weight treatment. This provision is purely prudential — it determines regulatory capital treatment with no information security control dimension. SP 800-53 has no relevant mapping."
+    },
+    {
+      "id": "SCO60.26",
+      "title": "Hedging recognition — Group 2 long/short offset rules",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.26 governs whether banks can recognise short cryptoasset positions as hedges against long positions for capital calculation purposes. The offset rules, basis risk disallowances, and hedging recognition conditions are financial risk management concepts with no SP 800-53 equivalents."
+    },
+    {
+      "id": "SCO60.27",
+      "title": "Minimum capital floors and Pillar 1 capital ratios",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.27 establishes that cryptoasset capital requirements are additive to overall Pillar 1 minimums (CET1 4.5%, Tier 1 6%, Total Capital 8%) plus buffers (capital conservation 2.5%, G-SIB surcharge, countercyclical buffer). Capital ratio maintenance and buffer requirements are core prudential obligations entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "SCO60.40",
+      "title": "Credit risk treatment for cryptoasset exposures",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.40 applies Basel credit risk rules (Standardised Approach or Internal Ratings Based approach where approved) to counterparty credit risk arising from cryptoasset transactions. This encompasses exposure at default (EAD) calculations, probability of default (PD) estimation, loss given default (LGD) assumptions, and credit risk mitigation recognition for DLT-based collateral. These are quantitative financial risk concepts with no SP 800-53 analogues."
+    },
+    {
+      "id": "SCO60.41",
+      "title": "Counterparty credit risk — DeFi and settlement exposures",
+      "controls": [
+        "SA-09",
+        "SR-02",
+        "SR-03",
+        "SR-06",
+        "CA-02",
+        "RA-03",
+        "SC-07",
+        "SC-12"
+      ],
+      "coverage_pct": 30,
+      "rationale": "The operational aspects of DeFi counterparty exposure — smart contract risk, protocol reliability, settlement finality — have partial SP 800-53 coverage: SA-09 external system services governs relationships with DeFi protocol operators. SR-02/SR-03 supply chain risk management addresses DeFi protocol due diligence. SR-06 supplier assessments applies to exchange and custodian counterparties. CA-02 security assessments support protocol-level risk evaluation. RA-03 risk assessment identifies smart contract vulnerabilities. SC-07 boundary protection and SC-12 key management address network-layer counterparty risk factors.",
+      "gaps": "DeFi counterparty credit risk is primarily a financial risk concept: quantifying EAD for permissionless protocol exposures, applying Basel Current Exposure Method or SA-CCR to atomic transactions, and determining whether smart contracts constitute legally enforceable netting agreements. SP 800-53 addresses the technical security aspects of counterparty systems but cannot substitute for financial credit risk measurement and capital allocation."
+    },
+    {
+      "id": "SCO60.42",
+      "title": "Market risk — trading book treatment for cryptoassets",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.42 applies the Basel Fundamental Review of the Trading Book (FRTB) framework to cryptoassets held in the trading book. This involves: Standardised Approach sensitivities-based method (SBM) calculations; Internal Model Approach (IMA) where approved; Expected Shortfall (ES) calculation with cryptoasset stress scenarios; non-modellable risk factor (NMRF) treatment for illiquid cryptoassets; and P&L attribution testing. All are quantitative financial risk methodologies with no SP 800-53 equivalents."
+    },
+    {
+      "id": "SCO60.43",
+      "title": "CVA risk — credit valuation adjustment for cryptoasset derivatives",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.43 applies CVA risk capital requirements to cryptoasset derivative transactions. CVA risk capital is calculated using the BA-CVA or SA-CVA approach, reflecting counterparty credit spread sensitivity of derivative fair values. This is a derivatives pricing and capital calculation methodology with no information security control equivalent."
+    },
+    {
+      "id": "SCO60.44",
+      "title": "Liquidity risk — cryptoassets in LCR and NSFR calculations",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.44 addresses how cryptoassets are treated in Liquidity Coverage Ratio (LCR) and Net Stable Funding Ratio (NSFR) calculations. Cryptoassets generally do not qualify as High Quality Liquid Assets (HQLA) except in limited circumstances. Liquidity risk metrics, buffer requirements, and funding stability calculations are prudential liquidity regulation concepts entirely outside SP 800-53 scope."
+    },
+    {
+      "id": "SCO60.50",
+      "title": "Operational risk framework for cryptoasset activities",
+      "controls": [
+        "PM-01",
+        "PM-09",
+        "RA-01",
+        "RA-03",
+        "RA-07",
+        "IR-01",
+        "IR-04",
+        "IR-08",
+        "CP-01",
+        "CP-02",
+        "CA-01",
+        "CA-07",
+        "AU-01",
+        "AU-02"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SCO60.50 operational risk requirements for cryptoasset activities have strong SP 800-53 alignment in the security operations domain: PM-01/PM-09 program governance and risk strategy establish the framework for cryptoasset operational risk management. RA-01/RA-03/RA-07 risk assessment and response provide identification and treatment methodology. IR-01/IR-04/IR-08 incident response policy, handling, and planning address cryptoasset operational loss events. CP-01/CP-02 contingency planning covers operational continuity. CA-01/CA-07 assessment policy and continuous monitoring provide ongoing operational risk visibility. AU-01/AU-02 audit policy and event logging support loss event documentation.",
+      "gaps": "The Basel operational risk framework for cryptoassets requires quantification of operational risk capital under the Standardised Measurement Approach (SMA), including: business indicator categorisation for cryptoasset revenues; internal loss multiplier (ILM) calculation incorporating cryptoasset loss history; and scenario analysis for extreme cryptoasset operational loss events. These quantitative risk capital methodologies have no SP 800-53 equivalents. SP 800-53 controls address the security management disciplines that reduce operational risk likelihood/impact but cannot replace capital quantification."
+    },
+    {
+      "id": "SCO60.51",
+      "title": "Technology and cyber risk — DLT infrastructure",
+      "controls": [
+        "SA-08",
+        "SA-11",
+        "SA-15",
+        "SA-17",
+        "CM-01",
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "SC-05",
+        "SC-07",
+        "SC-12",
+        "SC-13",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07",
+        "RA-05",
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 70,
+      "rationale": "DLT infrastructure cyber risk is well addressed by SP 800-53: SA-08/SA-11/SA-15/SA-17 security engineering, developer testing, standards, and architecture address secure DLT protocol design and smart contract development practices. CM-01/02/06/07/08 configuration management controls apply to node software configuration and component inventory. SC-05 DoS protection, SC-07 boundary protection, SC-12/13 cryptographic controls address network-layer DLT threats. SI-02 flaw remediation, SI-03 malware protection, SI-04 monitoring, and SI-07 integrity verification apply directly to DLT node management. RA-05 vulnerability scanning and CA-02/CA-07 assessments and continuous monitoring complete the DLT cyber risk control set.",
+      "gaps": "SCO60.51 DLT infrastructure risk includes consensus mechanism governance risk (51% attacks, validator concentration), protocol upgrade risk (hard fork governance failures), and DLT network-level operational dependencies (gas price spikes, network congestion) that have no SP 800-53 analogues. The capital add-on for infrastructure risk is determined by supervisory assessment of these factors — security controls reduce assessed risk but cannot replace the capital charge."
+    },
+    {
+      "id": "SCO60.52",
+      "title": "Smart contract risk management",
+      "controls": [
+        "SA-03",
+        "SA-08",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "SI-06",
+        "SI-07",
+        "RA-05",
+        "CA-02"
+      ],
+      "coverage_pct": 65,
+      "rationale": "Smart contract risk management aligns well with SP 800-53 secure development lifecycle controls: SA-03 system development lifecycle and SA-08 security engineering principles apply to smart contract design. SA-10 developer configuration management and SA-11 developer testing address code review, testing, and auditing requirements. SA-15 development process and standards governs coding standards for smart contracts. CM-03/04/05 change control, impact analysis, and access restrictions for change apply to contract upgrades and proxy patterns. SI-06/07 verification and integrity checking validate deployed contract behaviour. RA-05 vulnerability assessment and CA-02 security assessment support formal smart contract auditing.",
+      "gaps": "SCO60.52 smart contract risk management includes formal verification requirements, on-chain governance risk assessment, and immutability risk (inability to patch deployed contracts) that are not fully addressed by standard SDLC controls in SP 800-53. The requirement for recognised third-party audit firms for smart contract review is a regulatory recognition concept outside SP 800-53 scope."
+    },
+    {
+      "id": "SCO60.53",
+      "title": "Operational resilience for cryptoasset services",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "IR-01",
+        "IR-04",
+        "SC-05",
+        "SC-06",
+        "PE-11",
+        "PE-12",
+        "PE-14",
+        "SA-09"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CP-01/02/03/04 contingency planning policy, plan development, training, and testing provide comprehensive operational resilience coverage for cryptoasset services. CP-07/08/09/10 alternate processing, telecom, backup, and system recovery address continuity of cryptoasset operations. IR-01/04 incident response policy and handling cover operational disruption scenarios. SC-05/06 DoS protection and resource availability address availability risks specific to blockchain networks. PE-11/12/14 power, emergency lighting, and environmental controls apply to node infrastructure. SA-09 external systems services governs reliance on third-party DLT infrastructure providers.",
+      "gaps": "SCO60.53 operational resilience requirements include specific Recovery Time Objectives (RTOs) and Recovery Point Objectives (RPOs) for cryptoasset services that may differ from conventional systems due to on-chain settlement finality constraints. The requirement to maintain operational resilience despite DLT network unavailability (which is outside the bank's control) requires financial continuity arrangements not addressed by SP 800-53."
+    },
+    {
+      "id": "SCO60.54",
+      "title": "Third-party and vendor risk for cryptoasset infrastructure",
+      "controls": [
+        "SA-09",
+        "SA-04",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-04",
+        "SR-05",
+        "SR-06",
+        "SR-07",
+        "SR-08",
+        "SR-09",
+        "SR-10",
+        "SR-11",
+        "SR-12",
+        "CA-03",
+        "RA-03",
+        "PM-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SP 800-53 Rev 5 added the SR (Supply Chain Risk Management) family with 12 controls that comprehensively address third-party risk — directly applicable to cryptoasset custodians, exchange platforms, node operators, oracle providers, and DLT protocol maintainers. SA-09/SA-04 external services and acquisition controls govern contractual requirements for cryptoasset service providers. SR-01 through SR-12 supply chain controls cover: policy, planning, controls, provenance, acquisition strategies, assessments, operational security, notification agreements, tamper resistance, inspection, authenticity, and component disposal. CA-03 system interconnection agreements and RA-03 risk assessment complement the supply chain risk management framework.",
+      "gaps": "SCO60.54 third-party risk for cryptoassets includes concentration risk considerations (systemic dependency on a small number of blockchain infrastructure providers), jurisdictional risk for offshore validators, and regulatory recognition of service providers. The requirement to assess whether counterparties are subject to equivalent regulatory oversight is a regulatory equivalence assessment outside SP 800-53 scope. Exit strategy requirements for DLT dependencies (where migration off a protocol may be technically impossible) present novel challenges beyond standard supply chain risk."
+    },
+    {
+      "id": "SCO60.55",
+      "title": "Fraud risk and market manipulation controls",
+      "controls": [
+        "AC-02",
+        "AC-05",
+        "AC-06",
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-10",
+        "IR-04",
+        "IR-05",
+        "SI-04",
+        "PS-03",
+        "PS-06",
+        "PS-07",
+        "PM-12"
+      ],
+      "coverage_pct": 60,
+      "rationale": "Fraud and market abuse controls for cryptoasset activities align with standard SP 800-53 controls: AC-02/05/06 account management, separation of duties, and least privilege limit insider fraud opportunity. AU-02/03/06 audit events, content, and review provide transaction monitoring capability. AU-10 non-repudiation provides evidentiary support for fraud investigations. IR-04/05 incident handling and monitoring address fraud detection and response. SI-04 system monitoring enables anomalous transaction detection. PS-03/06/07 personnel screening, access agreements, and third-party personnel controls reduce insider and external fraud vectors. PM-12 insider threat program directly addresses privileged insider abuse.",
+      "gaps": "Cryptoasset market manipulation controls (wash trading detection, front-running prevention, MEV/sandwich attack mitigation) require financial market surveillance capabilities that operate at the blockchain transaction layer — outside the scope of enterprise information security controls. Anti-money laundering (AML) and counter-terrorist financing (CTF) obligations for virtual asset service provider (VASP) activities are regulatory financial compliance requirements addressed by FATF standards rather than SP 800-53."
+    },
+    {
+      "id": "SCO60.60",
+      "title": "Custody governance — policies and accountability",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-09",
+        "PM-10",
+        "PL-01",
+        "PL-02",
+        "PL-04",
+        "AC-01",
+        "AC-05",
+        "PS-01",
+        "PS-02",
+        "PS-06",
+        "CA-01",
+        "CA-06",
+        "AT-01",
+        "AT-02",
+        "AT-03"
+      ],
+      "coverage_pct": 72,
+      "rationale": "Custody governance for cryptoassets has strong SP 800-53 alignment: PM-01/PM-02/PM-09 program governance and risk strategy establish the custody framework foundation. PM-10 authorisation process supports formal custody programme approval. PL-01/02/04 planning policy, system security plan, and rules of behaviour define custody operations. AC-01/05 access control policy and separation of duties are core custody security requirements. PS-01/02/06 personnel security policy, position classification, and access agreements govern custody staff. CA-01/06 assessment policy and authorisation support custody programme oversight. AT-01/02/03 awareness and training ensure custody staff competency in cryptoasset security.",
+      "gaps": "SCO60.60 custody governance includes regulatory requirements for licensed custody activities, client asset segregation obligations under applicable laws (MiFID II, MAS MAS-TRM, etc.), insurance and capital requirements for custody operations, and regulatory examination of custody books. These are financial regulatory requirements supplementary to the security governance controls addressable by SP 800-53."
+    },
+    {
+      "id": "SCO60.61",
+      "title": "Cryptographic key management — generation and storage",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "IA-03",
+        "IA-05",
+        "IA-07",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "MP-02",
+        "MP-04",
+        "MP-05",
+        "PE-02",
+        "PE-03",
+        "PE-05"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Cryptographic key management for cryptoasset custody is directly and comprehensively addressed by SP 800-53: SC-12 cryptographic key establishment and management covers the full key lifecycle (generation, distribution, storage, retirement, destruction) as required by SCO60. SC-13 use of cryptography mandates approved algorithms and key sizes for key generation. SC-17 PKI certificates addresses certificate-based key authentication components. IA-03/05/07 device identification, authenticator management, and cryptographic module authentication apply to hardware security modules (HSMs) and secure enclaves used in custody. AC-03/05/06 access enforcement, separation of duties, and least privilege govern access to key material. MP-02/04/05 media access, storage, and transport protect offline cold storage media. PE-02/03/05 physical access controls apply to HSM and cold storage facilities.",
+      "gaps": "SCO60.61 includes requirements for multi-party computation (MPC) key generation schemes that distribute trust across multiple parties without any single party holding a complete key — a cryptographic protocol beyond the scope of standard SP 800-53 key management controls. Threshold signature schemes (TSS) and Shamir Secret Sharing implementation standards are addressed by cryptographic engineering standards (e.g., NIST SP 800-131A, IEEE P1363) rather than SP 800-53 management controls."
+    },
+    {
+      "id": "SCO60.62",
+      "title": "Key management — access controls and ceremony procedures",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-17",
+        "IA-02",
+        "IA-04",
+        "IA-05",
+        "AU-02",
+        "AU-03",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "PE-08",
+        "PS-03",
+        "PS-06",
+        "PS-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "Key ceremony procedures and access controls for private key management are comprehensively addressed: AC-02/03/05/06 account management, access enforcement, separation of duties, and least privilege form the access control foundation for key ceremonies. AC-17 remote access restrictions apply to remote key management operations. IA-02/04/05 authentication, identifier management, and authenticator management govern who can participate in key ceremonies. AU-02/03/09/10/11 audit events, content, protection, non-repudiation, and retention provide comprehensive audit trail for all key management operations. PE-02/03/06/08 physical access, control, monitoring, and records apply to secure key ceremony facilities. PS-03/06/07 background checks, access agreements, and third-party personnel controls apply to key custodians.",
+      "gaps": "Key ceremony procedures for cryptoasset custody have unique requirements not fully captured in SP 800-53: air-gapped ceremony environments, Faraday cage requirements, destruction-audited hardware, geographic distribution of key shares, and notarisation/witnessing requirements for regulatory evidentiary purposes. These are cryptoasset industry practice standards (e.g., BIP-32 HD wallets, SLIP-0039 Shamir sharing) beyond the scope of general SP 800-53 controls."
+    },
+    {
+      "id": "SCO60.63",
+      "title": "Key management — backup, recovery, and continuity",
+      "controls": [
+        "CP-02",
+        "CP-06",
+        "CP-09",
+        "CP-10",
+        "SC-12",
+        "SC-13",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "PE-02",
+        "PE-04",
+        "AC-05",
+        "AU-10",
+        "AU-11",
+        "IR-04"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Key backup and recovery requirements are well addressed: CP-02/06/09/10 contingency plan, alternate storage, backup, and system recovery apply directly to private key backup and recovery procedures. SC-12/13 cryptographic key management and encryption address secure backup of key material. MP-04/05/06 media storage, transport, and sanitisation govern cold backup media lifecycle. PE-02/04 physical access and transmission medium protection apply to geographically distributed backup key stores. AC-05 separation of duties ensures no single custodian can reconstruct keys from backup. AU-10/11 non-repudiation and audit retention document backup operations. IR-04 incident handling covers key recovery scenarios.",
+      "gaps": "Key recovery continuity for cryptoassets must address scenarios where primary key holders are unavailable (death, incapacitation, legal seizure), requiring succession planning mechanisms integrated with legal instruments (e.g., testamentary provisions, legal entity succession). These are legal continuity requirements beyond information security controls. Regulatory requirements for key escrow with national supervisors in some jurisdictions are financial regulatory obligations outside SP 800-53."
+    },
+    {
+      "id": "SCO60.64",
+      "title": "Wallet security — hot, warm, and cold storage architecture",
+      "controls": [
+        "SC-02",
+        "SC-03",
+        "SC-04",
+        "SC-07",
+        "SC-12",
+        "SC-13",
+        "AC-04",
+        "AC-06",
+        "CM-06",
+        "CM-07",
+        "SA-08",
+        "PE-02",
+        "PE-03",
+        "PE-05",
+        "PE-18",
+        "SI-03",
+        "SI-04",
+        "CA-02",
+        "RA-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Wallet security architecture — hot/warm/cold storage segregation — maps directly to SP 800-53 system architecture and protection controls: SC-02/03/04 application partitioning, security function isolation, and information in shared resources provide the logical separation model. SC-07 boundary protection enforces network-layer isolation between hot and cold wallet environments. SC-12/13 cryptographic controls apply to wallet encryption and signing operations. AC-04/06 information flow enforcement and least privilege govern transaction authorisation workflows across wallet tiers. CM-06/07 configuration settings and least functionality harden hot wallet nodes. SA-08 security engineering principles guide wallet architecture design. PE-02/03/05/18 physical access and location controls apply to cold storage vaults. SI-03/04 malware protection and monitoring protect hot wallet infrastructure. CA-02/RA-05 assessment and vulnerability scanning support ongoing wallet security assurance.",
+      "gaps": "Wallet security for cryptoassets includes blockchain-specific attack surfaces (address poisoning, clipboard hijacking, hardware wallet firmware attacks, blind signing vulnerabilities) and cryptoasset-specific security standards (BIP-341 Taproot, EIP-4337 account abstraction, hardware wallet certification under CC EAL5+) that are addressed by cryptoasset industry standards rather than SP 800-53."
+    },
+    {
+      "id": "SCO60.65",
+      "title": "DLT node infrastructure security and governance",
+      "controls": [
+        "CM-01",
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "SA-08",
+        "SA-09",
+        "SC-05",
+        "SC-07",
+        "SC-12",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07",
+        "CA-02",
+        "CA-07",
+        "RA-05",
+        "CP-07",
+        "CP-09",
+        "PE-02",
+        "PE-11"
+      ],
+      "coverage_pct": 75,
+      "rationale": "DLT node operations security is comprehensively addressed by SP 800-53: CM-01/02/06/07/08 configuration management baseline, settings, least functionality, and component inventory apply to blockchain node software management. SA-08 security engineering applies to node architecture design. SA-09 external services governs use of third-party node providers (RPC endpoints, block explorers). SC-05/07/12 DoS protection, boundary protection, and cryptographic controls address network-layer node security. SI-02/03/04/07 flaw remediation, malware protection, monitoring, and integrity verification apply to node software maintenance. CA-02/07/RA-05 continuous assessment and vulnerability management support ongoing node security assurance. CP-07/09 alternate processing and backup support node redundancy. PE-02/11 physical access and power apply to self-hosted nodes.",
+      "gaps": "DLT node infrastructure governance includes permissioned vs. permissionless participation decisions, validator selection for proof-of-stake networks, consensus participation governance, and protocol upgrade governance processes that are DLT-specific governance mechanisms beyond SP 800-53 scope. The decision to run full nodes vs. relying on light clients or third-party RPC providers involves blockchain-specific trust models not captured in standard enterprise security architecture controls."
+    },
+    {
+      "id": "SCO60.66",
+      "title": "Transaction authorisation and signing controls",
+      "controls": [
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "IA-02",
+        "IA-05",
+        "IA-07",
+        "AU-02",
+        "AU-03",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "SC-12",
+        "SC-13",
+        "SI-10",
+        "CM-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "Cryptoasset transaction authorisation controls map directly to SP 800-53: AC-03/05/06 access enforcement, separation of duties, and least privilege implement multi-party transaction approval workflows. IA-02/05/07 user identification, authenticator management, and cryptographic module authentication govern transaction signing authorisation. AU-02/03/09/10/11 audit events, content, protection, non-repudiation, and retention provide irrefutable transaction audit trail — critical for cryptoasset where settlement is irreversible. SC-12/13 cryptographic controls govern the signing algorithms and key material used in transaction authorisation. SI-10 information input validation applies to transaction parameter validation before signing. CM-05 access restrictions for change apply to modifications to transaction authorisation policy.",
+      "gaps": "Transaction authorisation for cryptoassets has unique irreversibility characteristics — once broadcast and confirmed, transactions cannot be reversed (except through exceptional mechanisms like social consensus forks). This places much greater weight on pre-authorisation controls than conventional banking systems. Blind signing vulnerability (signing transaction data without displaying decoded parameters) is a cryptoasset-specific attack vector requiring wallet-level countermeasures beyond SP 800-53 scope."
+    },
+    {
+      "id": "SCO60.70",
+      "title": "Pillar 3 disclosure — cryptoasset exposures and capital",
+      "controls": [
+        "AC-22",
+        "AC-16",
+        "SI-12",
+        "AU-10",
+        "AU-11",
+        "PM-06",
+        "SI-15",
+        "PT-05"
+      ],
+      "coverage_pct": 30,
+      "rationale": "SP 800-53 has limited but relevant applicability to Pillar 3 disclosure: AC-22 publicly accessible content controls govern what information is published in cryptoasset disclosures. AC-16 security and privacy attributes supports labelling of disclosed information by sensitivity. SI-12 information management and retention applies to disclosure document management. AU-10/11 non-repudiation and audit retention support the evidentiary basis for disclosed figures. PM-06 measures of performance provides methodological support for disclosure metrics. SI-15 information output filtering prevents unintended disclosure of sensitive data alongside public disclosures.",
+      "gaps": "Pillar 3 disclosure requirements for cryptoassets specify mandatory disclosure templates (quantitative tables showing exposure amounts, capital requirements, risk weights by Group), narrative disclosures on cryptoasset strategy and risk appetite, and qualitative descriptions of custody and key management arrangements. The content, format, frequency (quarterly/semi-annual), and regulatory review of Pillar 3 disclosures are prudential regulatory obligations — SP 800-53 does not address financial disclosure content or format requirements."
+    },
+    {
+      "id": "SCO60.71",
+      "title": "Regulatory reporting — supervisory data submissions",
+      "controls": [
+        "PM-06",
+        "AU-10",
+        "AU-11",
+        "SI-07",
+        "SI-12",
+        "AC-22",
+        "SC-08",
+        "SC-13",
+        "IA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 35,
+      "rationale": "Regulatory reporting infrastructure has SP 800-53 coverage through: PM-06 measures of performance addresses the metrics and KRI framework underlying supervisory submissions. AU-10/11 non-repudiation and audit retention support data lineage for submitted figures. SI-07/12 software integrity and information management apply to reporting system integrity. AC-22 controls public disclosure alignment with regulatory submissions. SC-08/13 transmission integrity and cryptographic controls secure supervisory data submissions. IA-02 user authentication governs access to regulatory reporting systems. CA-07 continuous monitoring supports data quality assurance for reports.",
+      "gaps": "SCO60 regulatory reporting requires specific data submissions to national supervisors using Basel-mandated templates and taxonomies (including XBRL-tagged submissions in some jurisdictions). The content of supervisory reports — cryptoasset position values, capital ratios, exposure classifications — is determined by Basel prudential rules, not information security standards. Data reconciliation obligations (ensuring reports match internal risk systems) are financial data governance requirements beyond SP 800-53 scope."
+    },
+    {
+      "id": "SCO60.72",
+      "title": "Internal reporting — board and management information",
+      "controls": [
+        "PM-06",
+        "PM-09",
+        "PM-14",
+        "CA-07",
+        "SI-04",
+        "AU-06",
+        "AC-06",
+        "AC-22",
+        "SI-15"
+      ],
+      "coverage_pct": 45,
+      "rationale": "Internal management reporting for cryptoasset risk has reasonable SP 800-53 coverage: PM-06 measures of performance establishes metrics and KRI frameworks for board reporting. PM-09 risk management strategy defines risk appetite reporting thresholds. PM-14 testing/training/monitoring program establishes periodic reporting cadence. CA-07 continuous monitoring generates the data underpinning management reporting. SI-04 system monitoring produces real-time cryptoasset position and risk data. AU-06 audit review provides the review discipline for management information quality. AC-06 least privilege controls access to management reporting systems. SI-15 information output filtering ensures reports contain only appropriate data.",
+      "gaps": "SCO60.72 internal reporting requirements specify that board and senior management must receive comprehensive cryptoasset risk reporting covering: position limits utilisation; capital adequacy status; custody security incidents; operational risk metrics; and liquidity position for cryptoasset portfolios. The format, content hierarchy, and escalation triggers for management information are management and governance requirements beyond the scope of information security controls."
+    },
+    {
+      "id": "SCO60.73",
+      "title": "Incident reporting — material operational and security events",
+      "controls": [
+        "IR-01",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-10",
+        "AU-11",
+        "CA-07",
+        "PM-16"
+      ],
+      "coverage_pct": 75,
+      "rationale": "Incident reporting for cryptoasset operational and security events is comprehensively addressed: IR-01/04/05/06/07/08 incident response policy, handling, monitoring, reporting, assistance, and planning directly address the complete incident response and reporting lifecycle required by SCO60.73. AU-02/03/06/10/11 audit events, content, review, non-repudiation, and retention provide the evidentiary foundation for regulatory incident reports. CA-07 continuous monitoring enables timely detection of reportable incidents. PM-16 threat awareness program supports contextualisation of cryptoasset-specific threat intelligence in incident reports.",
+      "gaps": "SCO60.73 incident reporting includes prescribed timelines (e.g., 24-hour initial notification for major key compromise events, 72-hour detailed report) and content requirements for supervisory notifications that vary by jurisdiction. These regulatory notification obligations go beyond information security incident response — they require integration with the bank's regulatory affairs function and may require disclosure to clients affected by custody incidents."
+    },
+    {
+      "id": "SCO60.74",
+      "title": "Audit and assurance — internal audit of cryptoasset activities",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "PM-10",
+        "PM-14",
+        "AU-01",
+        "AU-06",
+        "AU-11",
+        "RA-03",
+        "RA-05",
+        "AT-03"
+      ],
+      "coverage_pct": 65,
+      "rationale": "Internal audit of cryptoasset activities is well supported by SP 800-53: CA-01/02/05/07 assessment policy, security assessments, plan of action and milestones, and continuous monitoring provide the audit methodology and tracking framework. PM-10/14 authorisation process and testing/training/monitoring program establish audit governance. AU-01/06/11 audit policy, record review, and retention provide the audit trail infrastructure auditors depend on. RA-03/05 risk assessment and vulnerability scanning support risk-based audit planning. AT-03 role-based security training ensures audit staff have cryptoasset-specific competency.",
+      "gaps": "SCO60.74 audit requirements for cryptoassets include specialised audit techniques not addressed by SP 800-53: on-chain address verification and proof-of-reserve auditing; smart contract code review; cryptographic key ceremony witnessing; and blockchain forensics for transaction tracing. Third-party attestation requirements (Type 2 SOC reports for custodians, Agreed-Upon Procedures for reserve verification) are assurance framework requirements, not SP 800-53 controls."
+    },
+    {
+      "id": "SCO60.80",
+      "title": "Aggregate exposure limit — 1% of Tier 1 capital cap",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.80 establishes a hard limit: Group 2 cryptoasset exposures must not exceed 1% of the bank's Tier 1 capital, with a supervisory warning threshold at 0.5%. This is a prudential portfolio limit expressed in terms of regulatory capital ratios — a financial risk management constraint with no SP 800-53 equivalent. The limit applies to net positions calculated according to Basel netting rules and cannot be addressed through information security controls."
+    },
+    {
+      "id": "SCO60.81",
+      "title": "Aggregate exposure limit — Group 1 exposures",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "",
+      "gaps": "SCO60.81 sets supervisory guidance (non-binding but reviewable) on aggregate Group 1 cryptoasset exposures relative to overall portfolio concentrations and single-name limits. Portfolio concentration limits, large exposure rules (CRE70), and single-counterparty limits are financial risk management disciplines — prudential capital regulation concepts outside SP 800-53 scope."
+    },
+    {
+      "id": "SCO60.82",
+      "title": "Supervisory reporting of exposure limit breaches",
+      "controls": [
+        "CA-05",
+        "IR-06",
+        "PM-06",
+        "AU-10",
+        "AU-11",
+        "IR-04",
+        "PM-04"
+      ],
+      "coverage_pct": 30,
+      "rationale": "Breach reporting processes have partial SP 800-53 support: CA-05 plan of action and milestones and PM-04 provide remediation tracking applicable to limit breach resolution. IR-06 incident reporting addresses notification processes when material limit breaches occur. PM-06 measures of performance supports limit monitoring and KRI tracking. AU-10/11 non-repudiation and audit retention support evidence-based breach reporting. IR-04 incident handling governs internal response to limit breaches.",
+      "gaps": "Supervisory notification for exposure limit breaches requires prescribed reporting to national supervisors with specific content (size of breach, cause, remediation plan, timeline). The financial calculation of exposure relative to Tier 1 capital is a regulatory capital computation outside SP 800-53. Remediation of limit breaches requires financial portfolio management actions (position reduction, capital raising) rather than security controls."
+    },
+    {
+      "id": "SCO60.83",
+      "title": "Large exposure rules for cryptoasset counterparties",
+      "controls": [
+        "SA-09",
+        "SR-02",
+        "SR-06",
+        "RA-03",
+        "PM-09"
+      ],
+      "coverage_pct": 20,
+      "rationale": "Large exposure rule support from SP 800-53 is limited: SA-09 external system services governs third-party cryptoasset service providers relevant to counterparty exposure identification. SR-02/06 supply chain risk management plan and supplier assessments support counterparty concentration risk identification. RA-03 risk assessment identifies concentration risks in the cryptoasset ecosystem. PM-09 risk management strategy frames risk appetite for counterparty exposures.",
+      "gaps": "Large exposure rules (CRE70) limit exposures to individual counterparties to 25% of eligible capital, with special rules for G-SIBs and financial institution counterparties. Applied to cryptoassets, this requires identification of all forms of counterparty exposure across DeFi protocols, centralised exchanges, and custodians. Financial quantification of counterparty exposure, netting recognition, and capital calculation are prudential requirements entirely outside SP 800-53."
+    },
+    {
+      "id": "SCO60.84",
+      "title": "Cross-border and jurisdictional exposure considerations",
+      "controls": [
+        "PM-15",
+        "PM-16",
+        "SA-09",
+        "SR-02",
+        "RA-03",
+        "CA-03"
+      ],
+      "coverage_pct": 25,
+      "rationale": "Cross-border risk management has partial SP 800-53 coverage: PM-15/16 security groups and threat awareness programs support cross-jurisdictional intelligence on regulatory changes. SA-09/CA-03 external services and system connections govern cross-border DLT service provider relationships. SR-02 supply chain risk management addresses cross-border DLT infrastructure dependencies. RA-03 risk assessment identifies jurisdictional risks.",
+      "gaps": "Cross-border cryptoasset exposures require: assessment of regulatory status in multiple jurisdictions (where cryptoassets may be securities, commodities, or unregulated); jurisdictional ring-fencing requirements for client assets; legal enforceability of DLT-based claims across borders; and transfer pricing implications for intra-group cryptoasset positions. These are legal, financial, and regulatory compliance considerations outside the scope of information security controls."
+    },
+    {
+      "id": "SCO60.85",
+      "title": "Supervisory discretion — additional requirements and restrictions",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-06",
+        "PM-09",
+        "PM-10",
+        "RA-03",
+        "RA-07"
+      ],
+      "coverage_pct": 30,
+      "rationale": "Supervisory discretion provisions are partially supported: CA-02 security assessments provide the evidence base supervisors use when exercising discretion on capital treatment. CA-05/06 plan of action and authorisation support formal response to supervisory requirements. PM-09/10 risk management strategy and authorisation process support integration of supervisory requirements into internal governance. RA-03/07 risk assessment and response provide the analytical basis for engaging with supervisory discretion decisions.",
+      "gaps": "SCO60.85 supervisory discretion allows national supervisors to impose additional restrictions (lower exposure limits, higher capital requirements, activity prohibitions) or grant reliefs based on institution-specific assessment. The supervisory dialogue, SREP integration, and regulatory engagement process for cryptoasset activities are financial regulatory compliance activities outside SP 800-53 scope."
+    }
+  ],
+  "summary": {
+    "total_clauses": 47,
+    "average_coverage": 37.1,
+    "full_count": 2,
+    "substantial_count": 11,
+    "partial_count": 8,
+    "weak_count": 12,
+    "none_count": 14
+  }
+}

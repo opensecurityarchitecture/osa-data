@@ -1,0 +1,439 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "sec_custody_digital",
+  "framework_name": "SEC Custody Rule Modernization — Digital Asset Securities",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on SEC custody rule modernization framework (December 2025 discussion draft) and related guidance for digital asset securities custody, including the Investment Advisers Act Rule 206(4)-2 safeguarding amendments, Exchange Act Rule 15c3-3 extension to digital assets, and SEC staff guidance on qualified custodians and state-chartered trust companies. SEC requirements include regulatory authorisation, qualified custodian certification, and securities law concepts (net capital, customer protection reserve, fiduciary duties, mandatory audit) that extend well beyond SP 800-53 scope. Security and operational requirements around key management, access controls, and safeguarding are mapped where applicable. Validate with qualified assessors (securities law and cybersecurity) for compliance or audit use. This mapping does not constitute legal advice.",
+    "jurisdictions": [
+      "US"
+    ],
+    "applicability_type": "mandatory"
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "SEC-CD-01",
+      "title": "Qualified custodian eligibility and regulatory authorisation",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "PL-01",
+        "PM-01",
+        "PM-02",
+        "PS-01",
+        "RA-01",
+        "SA-01",
+        "SA-09"
+      ],
+      "coverage_pct": 18,
+      "rationale": "SP 800-53 provides governance and policy controls (CA-01, PL-01, PM-01, PM-02) that support a general security programme, and SA-09 covers third-party service requirements, but none address the SEC's regulatory gate of being a federally or state-chartered entity with specific securities-law authorisation. RA-01 and PS-01 contribute background risk and personnel governance. The core requirement — qualifying as a bank, savings association, state-chartered trust company, or registered broker-dealer under specific statutory criteria — is wholly outside the NIST control framework.",
+      "gaps": "SEC rules require that a qualified custodian hold a specific regulatory licence (bank charter, state trust charter, or broker-dealer registration) and meet financial-soundness tests including net capital and capital adequacy requirements. SP 800-53 has no controls addressing entity-type eligibility, charter requirements, or regulatory capitalisation. Organisations must obtain appropriate regulatory authorisation independently; NIST controls alone cannot satisfy this requirement."
+    },
+    {
+      "id": "SEC-CD-02",
+      "title": "Exclusive control and possession of private keys",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "IA-03",
+        "IA-05",
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "PE-02",
+        "PE-03"
+      ],
+      "coverage_pct": 62,
+      "rationale": "SC-12 (cryptographic key management) and SC-13 (use of cryptography) directly address key protection and cryptographic standards, providing the strongest NIST alignment. AC-01 through AC-06 establish access control policy, account management, and least privilege to restrict who can access key material. IA-05 covers authenticator (credential) management applicable to key-access credentials, and SC-17 covers PKI certificate management. PE-02 and PE-03 address physical access controls relevant to hardware wallets and HSMs in secure facilities. Together these controls address the operational controls around exclusive key custody.",
+      "gaps": "The SEC's exclusive-control standard requires that a custodian hold private keys such that no other party (including the client) can initiate a transaction without the custodian's authorisation — a legal and operational concept beyond NIST's technical scope. SP 800-53 does not address blockchain-specific key mechanics (e.g., deterministic key derivation, address whitelisting), the prohibition on client retention of signing capability, or the regulatory expectation that the custodian can demonstrate exclusive control to SEC examiners. Periodic proof-of-control testing is only partially addressed by CA-02."
+    },
+    {
+      "id": "SEC-CD-03",
+      "title": "Multi-signature and threshold signature scheme (TSS) requirements",
+      "controls": [
+        "AC-05",
+        "AC-06",
+        "IA-02",
+        "IA-05",
+        "SC-12",
+        "SC-13",
+        "SC-23",
+        "CM-06",
+        "SA-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-05 (separation of duties) directly supports the multi-party authorisation model underlying multi-sig and TSS schemes by requiring no single individual to hold complete signing authority. SC-12 and SC-13 address cryptographic key management and algorithm requirements that apply to multi-sig key shares and TSS computations. IA-02 (multi-factor authentication) reinforces the multi-party intent. SA-08 (security engineering principles) and CM-06 (configuration settings) apply to the secure configuration of multi-sig wallets and TSS infrastructure.",
+      "gaps": "SP 800-53 has no controls specific to multi-sig wallet quorum requirements, threshold signature scheme cryptographic protocols (e.g., ECDSA threshold, Schnorr-based TSS, Shamir secret sharing), or the SEC's guidance on minimum signer quorums and geographic/organisational distribution of key shares. The regulatory requirement to ensure no single employee or system can unilaterally sign transactions — and the specific technical architecture to enforce that — is not modelled in NIST 800-53."
+    },
+    {
+      "id": "SEC-CD-04",
+      "title": "Client asset segregation — digital asset securities from firm assets",
+      "controls": [
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "CM-08",
+        "MP-04",
+        "SC-02",
+        "SC-03",
+        "SC-04",
+        "AU-02",
+        "AU-03"
+      ],
+      "coverage_pct": 52,
+      "rationale": "SC-02 (application partitioning) and SC-03 (security function isolation) address technical separation between different system components, applicable to segregating client and firm wallet infrastructure. AC-04 (information flow enforcement) and AC-05 (separation of duties) support preventing commingling of client and firm assets. CM-08 (component inventory) and MP-04 (media storage) cover asset tracking and secure storage. AU-02 and AU-03 provide audit trail requirements relevant to tracking asset ownership and movements.",
+      "gaps": "The SEC's customer protection rule (Exchange Act Rule 15c3-3 extended to digital assets) requires broker-dealers to hold client digital asset securities in a manner legally separated from the firm's own assets, enforceable in insolvency. SP 800-53 does not address the legal concept of asset segregation, trust law requirements for custodial accounts, bankruptcy-remote structures, or the requirement to maintain a reserve of client assets. On-chain wallet address segregation (one address per client or per asset class) is not modelled in NIST."
+    },
+    {
+      "id": "SEC-CD-05",
+      "title": "Dual authorisation and transaction approval controls",
+      "controls": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-05",
+        "AC-06",
+        "AC-17",
+        "AU-02",
+        "AU-09",
+        "AU-10",
+        "IA-02",
+        "IA-05",
+        "CM-05"
+      ],
+      "coverage_pct": 75,
+      "rationale": "AC-05 (separation of duties) is the primary NIST control requiring that no single individual can complete a sensitive operation without a second authorised person, directly mapping to the dual-authorisation requirement for transaction signing. AC-03 (access enforcement) and AC-06 (least privilege) restrict which staff can initiate or approve transactions. IA-02 (multi-factor authentication) and IA-05 (authenticator management) strengthen the authentication layer for authorised signers. CM-05 (access restrictions for change) covers change-approval workflows applicable to transaction parameters. AU-09 and AU-10 ensure audit trail integrity and non-repudiation of approvals.",
+      "gaps": "SP 800-53 does not mandate specific quorum sizes for multi-person authorisation in cryptographic signing contexts, nor does it address the blockchain-specific mechanics of time-locked transactions, whitelisted destination addresses, or velocity-based automatic holds. The SEC's guidance on transaction-level controls includes specific requirements for withdrawal limits and client consent for large transfers that exceed NIST's control-level granularity."
+    },
+    {
+      "id": "SEC-CD-06",
+      "title": "Cryptographic key management — generation, storage, and backup",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "IA-05",
+        "CP-06",
+        "CP-09",
+        "MP-04",
+        "MP-05",
+        "PE-02",
+        "PE-03",
+        "CM-06",
+        "SA-08"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-12 (cryptographic key management) is the central NIST control for key generation, storage, distribution, and backup — directly addressing this requirement. SC-13 covers approved cryptographic algorithms and key sizes. CP-06 and CP-09 address alternate storage sites and system backup, applicable to key backup and recovery procedures. MP-04 (media storage) covers the physical security of key backup media (e.g., metal seed plates, encrypted USB drives). PE-02 and PE-03 address physical access to HSMs and cold storage facilities. SA-08 (security engineering principles) covers secure key generation design. These controls collectively cover most operational aspects of key lifecycle management.",
+      "gaps": "SP 800-53 does not specify approved HSM models or FIPS 140-3 validation levels for digital asset custody (the SEC references HSM requirements in its 2025 guidance). Seed phrase management (BIP-39 mnemonic storage), hardware wallet attestation, and geographically distributed key shard storage with access-control quorums are not explicitly addressed. NIST guidance also predates the specific requirements for air-gapped key generation ceremonies documented in SEC examination procedures."
+    },
+    {
+      "id": "SEC-CD-07",
+      "title": "Key rotation, revocation, and cryptographic end-of-life",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "IA-05",
+        "CM-03",
+        "CM-06",
+        "SI-02",
+        "MA-02",
+        "AU-02"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SC-12 covers the full key lifecycle including rotation and revocation procedures. IA-05 (authenticator management) addresses credential rotation and revocation, applicable to key-access credentials. CM-03 (configuration change control) and CM-06 (configuration settings) apply to changes in wallet configurations necessitated by key rotation. SI-02 (flaw remediation) is relevant when key rotation is triggered by cryptographic vulnerability discovery. AU-02 ensures that key-lifecycle events are recorded as auditable events.",
+      "gaps": "Blockchain-specific key rotation is fundamentally different from traditional PKI: rotating a blockchain signing key requires on-chain transactions to transfer assets to new addresses (potentially incurring transaction fees and creating public blockchain records), not simply issuing a new certificate. SP 800-53 does not address this operational complexity or the SEC expectation that custodians maintain documented procedures for emergency key rotation following suspected compromise — including client notification timelines and regulatory reporting obligations."
+    },
+    {
+      "id": "SEC-CD-08",
+      "title": "HSM, cold storage, warm wallet, and hot wallet tier architecture",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "CM-02",
+        "CM-06",
+        "SA-08",
+        "RA-03",
+        "CP-06"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SC-28 (protection of information at rest) and SC-12 directly address the storage security requirements applicable to cold, warm, and hot wallet tiers. PE-02 and PE-03 (physical access controls) are essential for cold storage facilities and HSM vaults. CM-02 (baseline configuration) and CM-06 (configuration settings) cover the secure configuration of wallet software and HSM firmware. SA-08 (security engineering principles) addresses the design of the tiered architecture. RA-03 (risk assessment) supports the risk-based determination of how much value to hold in each tier.",
+      "gaps": "The SEC's 2025 discussion draft references specific requirements for the percentage of assets held offline (cold storage minimum thresholds), HSM FIPS 140-3 Level 3 certification requirements, and multi-party approval workflows for withdrawals from cold to hot tiers. SP 800-53 does not prescribe these percentages, HSM certification levels, or the specific air-gap requirements for cold storage. The concept of address whitelisting and transaction pre-approval is not modelled in NIST controls."
+    },
+    {
+      "id": "SEC-CD-09",
+      "title": "Distributed ledger and blockchain network risk assessment",
+      "controls": [
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "SA-09",
+        "PM-09",
+        "CM-08",
+        "SI-07",
+        "SC-07",
+        "SR-02"
+      ],
+      "coverage_pct": 48,
+      "rationale": "RA-03 (risk assessment) provides the broadest coverage for assessing blockchain network risks including consensus mechanism vulnerabilities, 51% attack scenarios, and smart contract risk. SA-09 (external system services) applies to blockchain nodes and RPC providers treated as third-party services. SI-07 (software and information integrity) is relevant to validating blockchain transaction integrity and node software. PM-09 (risk management strategy) provides the overarching framework. SR-02 (supply chain risk management plan) applies to node software and wallet library dependencies.",
+      "gaps": "SP 800-53 was designed before distributed ledger technology existed and has no controls specific to: blockchain consensus mechanism risk (proof-of-work vs. proof-of-stake security models), smart contract audit requirements, network fork risk and asset management during hard forks, chain reorganisation (reorg) risk and settlement finality, miner/validator extractable value (MEV) risk, or bridge and cross-chain protocol risk. The SEC's guidance on DLT risk assessment requires technical expertise in blockchain protocol engineering that NIST controls cannot substitute for."
+    },
+    {
+      "id": "SEC-CD-10",
+      "title": "Third-party custodian oversight and sub-custodian due diligence",
+      "controls": [
+        "SA-09",
+        "SA-04",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-06",
+        "CA-02",
+        "CA-07",
+        "PM-09",
+        "AC-20"
+      ],
+      "coverage_pct": 68,
+      "rationale": "SA-09 (external system services) is the primary control for third-party custodian management, requiring security requirements to be documented in contracts and ongoing compliance monitoring. SR-06 (supplier assessments) covers due diligence on sub-custodians. CA-02 (security assessments) and CA-07 (continuous monitoring) address ongoing oversight requirements. SR-01 through SR-03 cover the supply chain risk management framework applicable to outsourced custody relationships. AC-20 (use of external information systems) provides additional governance for custodial platforms operated by third parties.",
+      "gaps": "The SEC's safeguarding rule requires investment advisers to conduct and document specific due diligence before engaging a qualified custodian for client digital assets, including verification of the custodian's regulatory status, financial condition, and insurance coverage. Contractual requirements (right to audit, notification of material events, sub-custodian restrictions) go beyond what SA-09 specifies. The adviser's ongoing obligation to verify that the sub-custodian remains a qualified custodian and to monitor for adverse regulatory actions has no direct NIST equivalent."
+    },
+    {
+      "id": "SEC-CD-11",
+      "title": "Incident response and SEC breach notification for digital asset custody",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09",
+        "AU-06",
+        "SI-04"
+      ],
+      "coverage_pct": 72,
+      "rationale": "IR-01 through IR-08 provide comprehensive incident response lifecycle coverage: policy, training, testing, handling, monitoring, reporting, and assistance. IR-06 (incident reporting) is particularly relevant to the SEC's reporting requirement for material cybersecurity incidents. IR-09 (information spillage response) covers key material compromise scenarios. SI-04 (system monitoring) and AU-06 (audit review and analysis) support real-time detection of custody incidents such as unauthorised transaction attempts or key-access anomalies.",
+      "gaps": "The SEC requires registered broker-dealers and investment advisers to notify the SEC and affected clients within specific timeframes following a material cybersecurity incident (Regulation S-P and related rules). NIST IR controls do not specify regulatory notification timelines, the distinction between 'material' and 'non-material' cybersecurity incidents under securities law, or the disclosure content requirements of Regulation S-P. Blockchain-specific incident scenarios — private key compromise, unauthorised on-chain transfers, smart contract exploits — require specialised response playbooks not captured in NIST's framework."
+    },
+    {
+      "id": "SEC-CD-12",
+      "title": "Business continuity, disaster recovery, and cryptographic key recovery",
+      "controls": [
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "SC-12",
+        "RA-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "The CP control family (CP-01 through CP-10) provides comprehensive BCP and DR coverage applicable to custody infrastructure including alternate processing sites, backup systems, and recovery procedures. CP-09 (system backup) and CP-06 (alternate storage site) are directly applicable to key material backup. CP-10 (system recovery and reconstitution) addresses the restoration of custody operations after a disruptive event. SC-12 covers the cryptographic key recovery process as part of key lifecycle management.",
+      "gaps": "Key recovery in a digital asset custody context is fundamentally more complex than traditional IT disaster recovery: reconstructing private keys from Shamir shares, accessing geographically distributed seed phrase backups, and restoring multi-sig wallet configurations require specific procedures with legal and operational dependencies not covered by NIST CP controls. The SEC expects custodians to demonstrate that BCP testing includes actual key-recovery exercises. NIST does not address RTO/RPO expectations specific to blockchain settlement (e.g., inability to reverse on-chain transactions creates a unique irreversibility risk with no IT analogue)."
+    },
+    {
+      "id": "SEC-CD-13",
+      "title": "Transfer capability verification and proof-of-control testing",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "SC-12",
+        "SI-06",
+        "SI-07",
+        "AU-02",
+        "CP-04"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CA-02 (security assessments) and CA-07 (continuous monitoring) provide the closest NIST analogue to periodic proof-of-control testing — verifying that the custodian retains the ability to sign and broadcast transactions. SI-06 (security function verification) covers testing that security controls remain operational. CP-04 (contingency plan testing) addresses periodic exercises of recovery capabilities. AU-02 ensures that verification activities generate auditable records.",
+      "gaps": "The SEC's December 2025 discussion draft specifically addresses proof-of-control testing: custodians should periodically demonstrate they can move assets (sign and broadcast a test transaction) to verify uninterrupted control of private keys. SP 800-53 has no concept of blockchain-specific capability verification (e.g., test transaction on mainnet or testnet, address ownership verification, on-chain proof of reserves). This requirement requires domain-specific technical procedures that NIST controls cannot substitute for."
+    },
+    {
+      "id": "SEC-CD-14",
+      "title": "Independent examination and annual audit requirements",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "CA-07",
+        "AU-01",
+        "AU-06",
+        "AU-11",
+        "PM-01",
+        "PM-07",
+        "SA-01"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CA-02 (security assessments) and CA-07 (continuous monitoring) cover the internal security assessment aspects of audit readiness. AU-01 and AU-06 address audit policy and review, providing the logging infrastructure that supports independent examination. AU-11 (audit record retention) ensures records are available for examiner review. PM-01 (information security programme plan) and PM-07 (enterprise architecture) support the overall governance structure that examiners assess.",
+      "gaps": "The Investment Advisers Act safeguarding rule requires investment advisers holding client digital asset securities to obtain an annual surprise examination by an independent public accountant, with the examination scope covering digital asset-specific controls. The rule also requires advisers with custody to provide audited financial statements to clients. SP 800-53 does not address the legal requirement for independent audits by registered public accounting firms, the specific scope required by SEC examination staff, or the public accountant's reporting obligations under Rule 206(4)-2. These are securities-law obligations with no NIST equivalent."
+    },
+    {
+      "id": "SEC-CD-15",
+      "title": "Record-keeping, audit trail, and transaction logging",
+      "controls": [
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "AU-12"
+      ],
+      "coverage_pct": 82,
+      "rationale": "The AU control family provides comprehensive coverage of audit and record-keeping requirements. AU-02 (auditable events) defines which events must be logged — directly applicable to custody events (key access, transaction signing, balance queries, administrative changes). AU-03 (content of audit records) ensures logs contain sufficient detail for forensic analysis. AU-09 (protection of audit information) prevents tampering with custody event logs. AU-10 (non-repudiation) is critical for transaction attribution. AU-11 (audit record retention) covers the multi-year retention requirements applicable to regulated custodians.",
+      "gaps": "Securities regulations (Exchange Act Rule 17a-4 for broker-dealers, Advisers Act Rule 204-2 for investment advisers) require records to be maintained in an unalterable format (WORM storage) accessible to SEC/FINRA examiners. The immutability requirement and regulator-access obligations go beyond NIST AU controls. Blockchain transaction records are inherently immutable on-chain, but off-chain custody records (key access logs, client instruction records) must meet broker-dealer record-keeping standards. NIST does not address the WORM storage requirement or the 3-year / 6-year retention schedules under Exchange Act rules."
+    },
+    {
+      "id": "SEC-CD-16",
+      "title": "Safeguarding against theft, loss, misuse, and insider threat",
+      "controls": [
+        "AC-02",
+        "AC-05",
+        "AC-06",
+        "AU-06",
+        "AU-09",
+        "AU-10",
+        "IA-02",
+        "IA-05",
+        "PE-02",
+        "PE-03",
+        "PE-06",
+        "PS-03",
+        "PS-04",
+        "PS-07",
+        "PS-08",
+        "SI-04",
+        "MP-04",
+        "SC-12"
+      ],
+      "coverage_pct": 76,
+      "rationale": "AC-05 (separation of duties) and AC-06 (least privilege) are the primary controls limiting insider threat by ensuring no single employee can unilaterally access and transfer client digital assets. PS-03 (personnel screening), PS-04 (personnel termination), and PS-08 (personnel sanctions) address the human risk side. AU-06 (audit review) and SI-04 (system monitoring) provide detection capability for anomalous access to key material. PE-02, PE-03, and PE-06 address physical safeguarding of cold storage and HSM facilities. SC-12 and MP-04 cover technical and media-level key protection.",
+      "gaps": "The SEC's safeguarding standard requires custodians to adopt measures specifically designed for the irreversible nature of digital asset theft — unlike traditional securities, unauthorised blockchain transfers cannot be reversed by the custodian. This requires pre-emptive controls (multi-sig, time locks, whitelist-only transfers) that NIST does not specifically mandate. The requirement for bonding/insurance coverage against employee theft or error, and for segregating duties between the person instructing a transfer and the person verifying the destination address, are partially covered by AC-05 but require domain-specific implementation guidance beyond NIST's scope."
+    },
+    {
+      "id": "SEC-CD-17",
+      "title": "State-chartered trust company qualified custodian provisions",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "PM-01",
+        "PM-02",
+        "RA-01",
+        "SA-01",
+        "SA-09",
+        "AC-01",
+        "AU-01"
+      ],
+      "coverage_pct": 20,
+      "rationale": "CA-01, PM-01, and RA-01 contribute governance and risk-management foundations that underlie any regulated custodian's operational framework, including state-chartered trust companies. SA-09 applies where a trust company delegates sub-custody or uses third-party systems. AC-01 and AU-01 establish access control and audit policies applicable to trust company operations.",
+      "gaps": "State-chartered trust companies qualify as custodians under SEC rules if they are subject to examination by state banking regulators. The specific regulatory requirements — state trust charter, fiduciary duties under state trust law, state examination requirements, capital adequacy under state banking rules, and whether the state programme is equivalent to federal supervision — are entirely outside NIST 800-53's scope. SP 800-53 cannot substitute for analysis of applicable state trust statutes (e.g., Wyoming SPDI, South Dakota trust law, New York BitLicence trust provisions). The SEC's no-action guidance on state-chartered trust companies requires legal analysis of state-specific regulations that NIST controls do not address."
+    },
+    {
+      "id": "SEC-CD-18",
+      "title": "Customer protection and net capital computations (broker-dealer)",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-11",
+        "CM-08",
+        "PM-01",
+        "PM-09",
+        "RA-01",
+        "RA-03"
+      ],
+      "coverage_pct": 15,
+      "rationale": "AU-02 and AU-03 (audit event logging) and AU-11 (retention) address the record-keeping aspects of customer protection computations. CM-08 (component inventory) provides partial support for tracking digital assets held for customers. PM-01 and RA-03 address programme governance and risk assessment frameworks that underlie net capital management. However, the financial-regulatory core of this requirement is not addressed.",
+      "gaps": "Exchange Act Rule 15c3-3 (Customer Protection Rule) requires broker-dealers to maintain possession or control of all fully paid and excess margin securities and to perform weekly reserve formula computations. The SEC's rulemaking for digital asset securities extends these requirements to digital asset securities held by special-purpose broker-dealers. Net capital computation under Exchange Act Rule 15c3-1, haircut requirements for digital asset securities, and the reserve formula calculation are financial regulatory obligations with no NIST analogue. Compliance requires expertise in broker-dealer accounting rules, not information security controls."
+    },
+    {
+      "id": "SEC-CD-19",
+      "title": "Conflicts of interest and governance for digital asset custodians",
+      "controls": [
+        "AC-05",
+        "PM-01",
+        "PM-02",
+        "PL-01",
+        "PS-01",
+        "PS-06",
+        "RA-01",
+        "CA-01",
+        "AT-03"
+      ],
+      "coverage_pct": 30,
+      "rationale": "AC-05 (separation of duties) and PL-01 (security planning policy) address governance structures that can help manage conflicts, particularly between custodial and proprietary trading functions. PS-06 (access agreements) and PS-01 (personnel security) address employee obligations relevant to conflict-of-interest management. PM-01 and PM-02 establish the programme governance structure. AT-03 (role-based security training) can incorporate conflict-of-interest training.",
+      "gaps": "The SEC's December 2025 discussion draft raises significant concerns about vertical integration by crypto platforms that act simultaneously as custodian, exchange, broker-dealer, and issuer. The regulatory requirements for Chinese walls between custody and trading operations, disclosure of material conflicts to clients, board-level independence requirements, and prohibition of self-dealing are securities law obligations that NIST 800-53 does not address. Governance structures for digital asset custodians — including independent board members, audit committee requirements, and investment adviser fiduciary duties — require legal and governance analysis outside NIST's scope."
+    },
+    {
+      "id": "SEC-CD-20",
+      "title": "Client disclosure and reporting obligations",
+      "controls": [
+        "AC-01",
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-11",
+        "PT-01",
+        "PT-05",
+        "PT-06",
+        "PM-01"
+      ],
+      "coverage_pct": 25,
+      "rationale": "AU-02, AU-03, and AU-06 address the logging and review of client account activity, which underpins account statement and disclosure generation. PT-01 and PT-05 address privacy notice and transparency requirements, partially analogous to disclosure obligations. AU-11 (record retention) covers the retention of client communication records. PM-01 provides the programme governance foundation for compliance reporting.",
+      "gaps": "Investment advisers with custody must provide clients with account statements at least quarterly showing holdings, values, and transactions — with specific requirements for digital asset disclosures under the SEC's safeguarding rule. Regulation S-P requires detailed privacy notices. The SEC's cybersecurity disclosure rules (Rule 10-K Item 1C) require public company disclosures about material cybersecurity risks and incidents. These are securities law obligations with specific content requirements, timing, and materiality standards that NIST 800-53 cannot substitute for. Client notification following a digital asset theft or key compromise has no direct NIST control mapping."
+    }
+  ],
+  "summary": {
+    "total_clauses": 20,
+    "average_coverage": 53.4,
+    "full_count": 0,
+    "substantial_count": 8,
+    "partial_count": 7,
+    "weak_count": 5,
+    "none_count": 0
+  }
+}

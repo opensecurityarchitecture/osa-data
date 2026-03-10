@@ -1,0 +1,469 @@
+{
+  "$schema": "../schema/pattern.schema.json",
+  "id": "SP-051",
+  "slug": "tokenised-asset-security-architecture",
+  "title": "Tokenised Asset Security Architecture",
+  "description": "Security architecture for institutional tokenised asset platforms covering custody architecture (HSM, MPC, threshold signatures), smart contract security lifecycle, oracle and price feed integrity, on-chain/off-chain security boundaries, DeFi protocol integration risks, cross-chain bridge security, and regulatory compliance across MiCA, FCA, SEC, and Basel Committee frameworks. Addresses the OWASP Smart Contract Top 10 (2026) and maps 36 NIST 800-53 controls across SC, AC, AU, SA, CM, IR, RA, SI, CA, CP, PE, and PS families. Focused on tokenised real-world assets (RWA) including bonds, money market funds, equities, and structured products where traditional finance meets distributed ledger infrastructure.",
+  "url": "https://www.opensecurityarchitecture.org/patterns/sp-051",
+  "metadata": {
+    "release": "26.03",
+    "classification": "Application & Infrastructure",
+    "status": "draft",
+    "type": "pattern",
+    "datePublished": "2026-03-10",
+    "dateModified": "2026-03-10",
+    "authors": [
+      "Spinoza",
+      "Vitruvius"
+    ],
+    "reviewers": [],
+    "provenance": "Derived from institutional tokenised asset deployments, smart contract audit findings, and regulatory compliance assessments across MiCA, FCA, and SEC frameworks. Informed by analysis of major protocol exploits 2022-2026 (Wormhole $320M, Ronin $620M, Euler Finance $197M, Bybit $1.5B supply chain attack), the OWASP Smart Contract Top 10 (2026 edition, 122 incidents analysed totalling $905M), Basel Committee prudential treatment of crypto-assets (effective January 2026), and institutional adoption patterns including BlackRock BUIDL ($18B AUM across 9 chains) and Franklin Templeton OnChain ($600M+). The rapid institutional adoption of tokenised assets -- BlackRock BUIDL now trading on Uniswap via UniswapX -- has created an urgent need for security architecture guidance that bridges traditional financial services controls with blockchain-native threat models."
+  },
+  "diagram": {
+    "svg": "/images/sp-051-tokenised-asset-security-architecture.svg",
+    "png": ""
+  },
+  "legend": "The diagram shows a layered tokenised asset security architecture. Institutional investors (top-left) interact through traditional interfaces with a compliance gateway that enforces KYC/AML via on-chain identity (ERC-3643). The custody layer (centre) shows hot/warm/cold wallet tiers with MPC key management and HSM backing. Smart contracts (centre-right) handle token lifecycle within an upgrade governance boundary. Oracles (bottom-right) bridge off-chain price feeds to on-chain execution. Cross-chain bridges (bottom) connect L1/L2 networks with validator security. NIST control badges are clickable and linked to the corresponding control detail pages.",
+  "content": {
+    "description": "Tokenised assets represent the convergence of traditional financial infrastructure with distributed ledger technology. A tokenised bond, money market fund share, or equity instrument exists simultaneously in two worlds: the legal world of SPVs, transfer agents, and securities regulation, and the blockchain world of smart contracts, cryptographic signatures, and atomic settlement. The security architecture must bridge both worlds without the assumptions of either being sufficient alone.\n\nThe fundamental architectural challenge is that the trust models are incompatible. Traditional finance assumes trusted intermediaries, reversible transactions, centralised custody, and regulatory enforcement as the backstop. Blockchain assumes trustless verification, irreversible execution, self-sovereign key management, and code-as-law. A tokenised asset platform must reconcile these: providing the regulatory compliance and institutional controls that traditional finance demands while operating on infrastructure that was designed to eliminate the need for those very controls.\n\nThe threat landscape reflects this duality. Smart contract vulnerabilities (OWASP Smart Contract Top 10, 2026 edition: $905M across 122 incidents in 2025 alone) include reentrancy, access control flaws, oracle manipulation, and flash loan attacks -- none of which have analogues in traditional application security. Custody risks centre on private key management, where a single compromised key can result in irreversible asset loss -- unlike traditional custody where regulators can freeze, reverse, and recover. Cross-chain bridge exploits have caused over $2.8B in losses, representing approximately 40% of all Web3 value hacked. Supply chain attacks on wallet infrastructure (Bybit, February 2025: $1.5B via compromised Safe{Wallet} UI) demonstrate that even robust multi-signature schemes can be bypassed by attacking the signing interface rather than the cryptography.\n\nThis pattern addresses seven security domains for institutional tokenised asset platforms: (1) custody architecture and cryptographic key management across hot, warm, and cold tiers; (2) smart contract security lifecycle from development through audit, deployment, and upgrade governance; (3) oracle and price feed integrity for accurate on-chain valuation; (4) the on-chain/off-chain security boundary where legal settlement meets blockchain finality; (5) DeFi protocol integration risks for platforms that interact with decentralised liquidity; (6) cross-chain bridge and interoperability security; and (7) regulatory compliance across MiCA, FCA, SEC, and Basel Committee frameworks including KYC/AML, travel rule, and prudential capital treatment.\n\nThe pattern is designed for CISOs and security architects at asset managers, custodian banks, exchanges, and fintech firms building or integrating tokenised asset capabilities. It assumes familiarity with traditional financial services security architecture (see SP-026 PCI Full Environment for payment card scope) and provides the blockchain-specific controls that extend the traditional baseline. The focus is on tokenised real-world assets (RWA) -- bonds, money market instruments, equities, structured products -- where regulatory compliance is mandatory, not optional. Pure-play DeFi protocols without regulatory oversight have a different risk appetite and are addressed only where their infrastructure intersects with institutional platforms.",
+    "keyControlAreas": [
+      "Custody Architecture and Cryptographic Key Management (SC-12, SC-13, SC-28, PE-03, CP-09, AC-06): The custody architecture is the most critical security decision for any tokenised asset platform. Private keys control asset ownership, and unlike traditional custody where regulators can freeze and recover assets, a compromised blockchain private key results in irreversible loss. SC-12 (Cryptographic Key Establishment and Management) is the anchor control: the entire key lifecycle -- generation, distribution, storage, usage, rotation, backup, and destruction -- must follow FIPS-compliant processes adapted for blockchain signing operations. Three custody approaches exist, each with distinct security properties. HSM-based custody (FIPS 140-2/3 Level 3+) provides tamper-resistant hardware where keys never leave the device, but creates a single point of failure and requires physical access procedures (PE-03). MPC-based custody distributes key shares across multiple parties and environments (e.g., AWS Nitro Enclave + Azure Confidential Computing + client-controlled share) so that no single party ever possesses the complete key -- joint computation produces valid signatures without key reconstruction. Threshold signature schemes (TSS), a subset of MPC, require t-of-n share holders to cooperate for signing, providing both security (compromise of t-1 shares reveals nothing) and availability (n-t shares can be unavailable). On-chain multi-signature schemes (e.g., Safe{Wallet}) require multiple independent signers but produce on-chain signature verification, adding gas costs and on-chain visibility. SC-13 (Cryptographic Protection) mandates FIPS-validated algorithms: ECDSA secp256k1 for Ethereum/Bitcoin signing, EdDSA Ed25519 for Solana/Cardano, with post-quantum readiness planning per FIPS 203-205 for long-lived assets. SC-28 (Protection of Information at Rest) applies to key-encrypting keys, backup shares, and recovery material. CP-09 (System Backup) governs key backup: MPC share backup across geographically distributed facilities, HSM backup via secure key ceremony, and recovery procedures tested quarterly. AC-06 (Least Privilege) ensures that hot wallet signing keys have transaction-level limits (maximum value, destination whitelist, rate limiting), warm wallet keys require dual authorisation with time-of-day restrictions, and cold wallet keys require multi-person key ceremony with quorum approval. The institutional standard is a tiered architecture: 5-10% of assets in hot wallets for operational liquidity, 5-15% in warm wallets for treasury operations, and 75-90% in air-gapped cold storage. Every tier must have independent monitoring, and movement between tiers requires approval workflows with segregation of duties.",
+      "Smart Contract Security Lifecycle (SA-11, CM-03, SI-10, CA-08, RA-03): Smart contracts are immutable once deployed -- a vulnerability in production cannot be patched in the traditional sense. This makes the pre-deployment security lifecycle critical. SA-11 (Developer Security Testing) must include blockchain-specific testing methodologies beyond traditional SAST/DAST: formal verification (proving mathematical correctness of critical invariants using tools like Certora, Halmos, or Echidna property-based testing), symbolic execution (exploring all possible execution paths to find reachable vulnerabilities), fuzzing (automated input generation targeting edge cases in arithmetic, access control, and state transitions), and manual expert audit by specialist firms with demonstrated smart contract security expertise. The OWASP Smart Contract Top 10 (2026) identifies the primary vulnerability classes: access control flaws (SC01, $953M in 2024 losses), business logic errors (SC02), oracle manipulation (SC03), flash loan exploitation (SC04), input validation failures (SC05), unchecked external calls (SC06), arithmetic errors (SC07), reentrancy (SC08, $325M in 2025), integer overflow (SC09), and proxy/upgradeability vulnerabilities (SC10, new for 2026). SI-10 (Information Input Validation) addresses SC05 directly: every external function must validate parameters, check caller authorisation, verify state preconditions, and handle edge cases in arithmetic (rounding, precision loss, division by zero). CM-03 (Configuration Change Control) governs smart contract upgrades, which for tokenised assets carrying billions in value require exceptional governance rigour. Upgradeable contracts (proxy patterns: transparent proxy, UUPS, diamond/EIP-2535) must enforce: multi-signature approval for upgrade transactions (minimum 3-of-5 for production), mandatory timelock delays (48-72 hours minimum) allowing stakeholders to review proposed changes and exit if they disagree, independent security audit of every upgrade, and a tested rollback or pause mechanism. CA-08 (Penetration Testing) maps to the smart contract audit requirement: every contract handling value must undergo at least two independent audits before mainnet deployment, with re-audit required for any functional change. Bug bounty programmes (Immunefi, HackerOne) provide continuous security testing post-deployment. RA-03 (Risk Assessment) must include blockchain-specific threat modelling: what is the maximum extractable value if any single function is called with adversarial inputs? What happens if the contract is called in an unexpected sequence? What composability risks exist from other protocols interacting with the contract?",
+      "Oracle and Price Feed Security (SI-10, SC-07, CA-07, SC-08): Oracles are the bridge between off-chain data (asset prices, interest rates, FX rates, corporate actions) and on-chain smart contract execution. For tokenised assets, oracle integrity directly determines NAV calculations, collateralisation ratios, margin calls, and settlement values. A manipulated price feed can trigger incorrect liquidations, enable undercollateralised borrowing, or cause NAV miscalculation affecting all token holders. SI-10 (Information Input Validation) requires that smart contracts validate oracle data before use: check data freshness (reject stale prices beyond a configurable staleness threshold), verify the oracle source (confirm the response comes from the expected oracle contract, not a spoofed address), validate price bounds (reject prices that deviate beyond expected ranges from the last known good price), and implement circuit breakers that pause operations when oracle data appears anomalous. SC-07 (Boundary Protection) defines the trust boundary between on-chain and off-chain data: oracle networks (Chainlink, Pyth, Band Protocol) provide decentralised data aggregation where multiple independent node operators submit data and the oracle contract computes a median or weighted average, reducing the impact of any single compromised source. For L2 deployments, contracts must additionally check the L2 sequencer status -- a down sequencer can cause oracle data to appear fresh when it is actually stale, leading to exploitable price discrepancies. CA-07 (Continuous Monitoring) requires real-time monitoring of oracle price feeds: alert on unusual price movements, detect potential manipulation attempts (sudden spikes followed by large protocol interactions), and compare on-chain oracle prices against off-chain reference prices to identify divergence. SC-08 (Transmission Confidentiality and Integrity) addresses the oracle data delivery path: oracle updates should be delivered through authenticated channels, and for high-value operations, multiple independent oracle sources should be required to agree before execution (oracle consensus). Time-Weighted Average Prices (TWAP) calculated over multiple blocks provide manipulation resistance for DEX-derived prices but introduce latency. For institutional tokenised assets where NAV accuracy is regulatory requirement, consider dedicated oracle infrastructure with SLA-backed data providers rather than relying solely on public oracle networks.",
+      "On-Chain/Off-Chain Security Boundary (SC-07, AC-04, AU-02, CM-08): The defining architectural challenge of tokenised assets is the boundary between on-chain token state and off-chain legal reality. A tokenised bond exists as an ERC-20 token on Ethereum and simultaneously as a legal obligation of an SPV incorporated in Luxembourg. The smart contract enforces transfer restrictions and records ownership; the SPV legal structure enforces the economic rights. Neither is sufficient alone, and the security architecture must ensure they remain synchronised. SC-07 (Boundary Protection) defines this as a trust boundary: on-chain state changes (token transfers, minting, burning) must be reflected in off-chain records (transfer agent, registrar, cap table), and off-chain events (corporate actions, coupon payments, regulatory freezes) must be reflected on-chain. AC-04 (Information Flow Enforcement) governs what crosses this boundary: investor identity (via on-chain identity frameworks like ERC-3643/T-REX where compliance is enforced at every transfer through trusted claim issuers and identity registries), transaction data (amount, counterparties, timestamp), and corporate action instructions (dividend distribution, redemption, forced transfer for regulatory compliance per ERC-1644). AU-02 (Event Logging) must capture both sides: on-chain events (Transfer, Approval, ComplianceTransferManager events) provide an immutable audit trail, while off-chain systems must log the corresponding legal and operational events with cross-references to on-chain transaction hashes. CM-08 (System Component Inventory) must catalogue every system that participates in the on-chain/off-chain boundary: the token smart contract, the compliance oracle, the identity registry, the transfer agent system, the NAV calculation engine, the custodian's record-keeping system, and any bridge or relay that connects them. The critical risk is desynchronisation: if the off-chain SPV sells the underlying asset but the on-chain tokens continue trading, token holders lose their claim. Architectural mitigations include: pause functionality (the token issuer can halt all transfers during corporate actions), legal wrapper smart contracts (encoding key legal terms on-chain with references to off-chain legal documentation per ERC-1643), and reconciliation processes that continuously compare on-chain token balances against off-chain records with automated alerting on discrepancy.",
+      "DeFi Protocol Integration and Composability Risk (RA-03, AC-03, AC-06, AU-02, IR-04): Institutional tokenised assets increasingly interact with DeFi protocols -- BlackRock's BUIDL fund now trades on Uniswap, tokenised treasuries serve as collateral in lending protocols, and institutional liquidity pools accept RWA tokens. Each integration creates composability risk: the tokenised asset's security now depends on the security of every protocol it interacts with. RA-03 (Risk Assessment) must evaluate each DeFi integration independently: what is the protocol's audit history, TVL (total value locked), governance structure, upgrade mechanism, and incident track record? Flash loan attacks (OWASP SC04, $33.8M in 2024) can manipulate protocol state within a single atomic transaction -- any integration that depends on instantaneous price or state is potentially vulnerable. AC-03 (Access Enforcement) maps to smart contract access control (OWASP SC01, the highest-loss vulnerability class): token contracts must enforce that only authorised addresses can call privileged functions (minting, burning, pausing, upgrading, modifying compliance rules), and this enforcement must be independent of any external protocol's assumptions. AC-06 (Least Privilege) requires that DeFi integrations receive only the minimum permissions necessary: a lending protocol that accepts the token as collateral needs transfer approval for the collateral amount only, not unlimited approval (which would allow the protocol to drain all tokens if compromised). AU-02 (Event Logging) must capture every DeFi interaction: protocol address, function called, parameters, return values, and gas consumed, creating a forensic trail for incident investigation. IR-04 (Incident Handling) must include DeFi-specific runbooks: if a protocol the token interacts with is exploited, the response must include immediate assessment of exposure (how many tokens are in the compromised protocol?), potential pause of the token contract to prevent further deposits, communication to token holders, and coordination with the protocol's incident response team. MEV (Maximal Extractable Value) is a systemic risk: sandwich attacks constitute 51.6% of total MEV volume ($289.76M as of March 2025), averaging more than one attack per Ethereum block. For institutional transactions, private transaction submission (Flashbots Protect, MEV Blocker) or encrypted mempools (Shutter Network) mitigate front-running risk.",
+      "Cross-Chain Bridge and Interoperability Security (SC-07, IR-04, CA-07, RA-03): Cross-chain bridges are the highest-risk component in the tokenised asset stack. Over $2.8B has been stolen from bridges, representing approximately 40% of all Web3 value hacked. Institutional tokenised assets that operate across multiple chains (BlackRock BUIDL spans 9 networks) depend on bridge security for cross-chain transfers, and a bridge exploit can result in unbacked token creation on the destination chain, effectively counterfeiting the asset. SC-07 (Boundary Protection) applies at the bridge level: each chain connected by a bridge represents a separate security domain, and the bridge is the controlled interface between them. Bridge architectures vary in security properties: lock-and-mint bridges (lock tokens on source chain, mint wrapped tokens on destination) create a single point of failure at the locked asset pool; burn-and-mint bridges (authorised minting on destination with proof of burn on source) reduce locked-asset risk but require trust in the cross-chain proof mechanism; native verification (light client proofs verified on-chain) provides the strongest security but is computationally expensive and chain-pair specific. The Wormhole exploit ($320M, February 2022) exploited a deprecated Solana function that failed to verify the sysvar account, allowing forged signature verification and unauthorised minting. The Ronin exploit ($620M, March 2022) compromised 5 of 9 validator keys through social engineering. Both demonstrate that bridge security depends on the weakest component: the validation logic and the validator set. IR-04 (Incident Handling) for bridges requires: a kill switch that can halt bridge operations within seconds (not minutes), pre-approved emergency procedures that don't require full governance quorum, automated monitoring that detects anomalous minting or transfer patterns, and a communication plan that can reach all affected chains' communities simultaneously. CA-07 (Continuous Monitoring) must track bridge TVL, validator uptime, message latency, and proof verification success rates, with alerts on any deviation from baseline. For institutional deployments, Chainlink's CCIP (Cross-Chain Interoperability Protocol, live on 60+ networks) provides defence-in-depth with timelocked upgrades, independent node operators, and veto mechanisms. Coinbase adopted CCIP as its sole bridge for $7B in wrapped tokens. RA-03 (Risk Assessment) must evaluate bridge trust assumptions: how many validators must collude? What is the upgrade governance? Is there a timelock? Can the bridge operator unilaterally modify the validator set?",
+      "Regulatory Compliance and Digital Asset Lifecycle (AU-02, AC-03, CM-08, PS-06, AC-04): Tokenised assets operate under securities regulation -- this is the fundamental difference from utility tokens or cryptocurrencies. The compliance architecture must enforce regulatory requirements at the protocol level, not just the application level. AU-02 (Event Logging) must satisfy regulatory record-keeping requirements: MiCA mandates transaction reporting in standardised machine-readable JSON; the FATF travel rule requires sender/recipient identifying data on qualifying transfers (full name, account reference, address or date of birth); SEC custody rules require demonstrable control over digital assets with audit trails of all key usage. The EU Transfer of Funds Regulation (effective December 2024) requires that every crypto transfer regardless of size includes full sender and recipient details. AC-03 (Access Enforcement) must implement investor eligibility at the token level: ERC-3643 (T-REX) enforces compliance at every transfer through on-chain identity verification via trusted claim issuers who provide signed attestations of KYC/AML status, accredited investor status, and jurisdictional eligibility. Transfer restrictions (maximum holder counts, lockup periods, jurisdictional limits) are enforced by the compliance smart contract, not by application-layer checks that can be bypassed by interacting directly with the token contract. CM-08 (System Component Inventory) must catalogue the full regulatory technology stack: identity registry contracts, compliance oracle contracts, trusted claim issuer contracts, transfer agent integrations, and regulatory reporting systems. PS-06 (Access Agreements) maps to governance agreements for multi-signature operations: who are the authorised signers for token minting, burning, pausing, and upgrading? What quorum is required? What happens if a signer is unavailable? These agreements must be documented, tested, and subject to regular review. AC-04 (Information Flow Enforcement) ensures that regulated data flows correctly: investor PII must not be stored on-chain (only identity attestation hashes); transaction data must flow to regulatory reporting systems; and cross-border transfers must trigger travel rule data exchange between the originating and beneficiary VASPs. Basel Committee prudential treatment (effective January 2026) classifies tokenised traditional financial instruments as Group 1a (preferential capital treatment) but requires that the institution demonstrates operational risk controls over the blockchain infrastructure, including key management, smart contract risk, and settlement finality. Group 2 crypto-asset exposures (non-qualifying tokens) face conservative capital treatment with a hard cap at 2% of Tier 1 capital.",
+      "Incident Response and Recovery for Digital Assets (IR-04, IR-06, IR-01, CP-09, CA-07): Digital asset incidents are fundamentally different from traditional IT incidents because blockchain transactions are irreversible. There is no 'restore from backup' for a transferred token, no 'rollback transaction' for an executed smart contract call, and no central authority that can freeze assets across a decentralised network (though centralised stablecoin issuers like Circle can blacklist addresses). IR-04 (Incident Handling) must include digital-asset-specific runbooks covering: private key compromise (immediately rotate all potentially affected keys, transfer assets from compromised wallets to new addresses using pre-staged emergency wallets, revoke all API keys and session tokens, notify affected chains' node operators if a bridge or protocol is involved), smart contract exploit (activate pause mechanism if available, assess the blast radius by identifying all affected token holders and protocol integrations, engage the protocol's security council or emergency multi-sig, coordinate with affected DeFi protocols to pause interactions), and oracle manipulation (compare on-chain prices against off-chain reference prices, identify manipulated feeds, pause protocol operations that depend on affected oracles, assess whether any liquidations or settlements executed at manipulated prices need to be addressed). IR-06 (Incident Reporting) must address multi-jurisdictional notification: MiCA requires CASP incident reporting to national competent authorities, DORA mandates ICT incident classification and reporting for financial entities, and SEC-registered entities must report material cybersecurity incidents. IR-01 (Incident Response Policy) must account for the speed of blockchain exploitation: the Bybit attackers converted 86.29% of stolen ETH to BTC within weeks of the $1.5B theft; the window for asset recovery is hours, not days. Pre-staged response capabilities include: emergency multi-sig wallets funded and ready to receive assets, pre-approved address whitelists for emergency transfers, relationships with chain analytics firms (Chainalysis, TRM Labs, Elliptic) for real-time fund tracing, and legal agreements with exchanges for emergency asset freezing. CP-09 (System Backup) for digital assets means MPC key share backup across geographically distributed secure facilities, cold wallet seed phrase backup with tamper-evident storage, and quarterly recovery testing that verifies the organisation can reconstruct signing capability from backup material within a defined RTO. CA-07 (Continuous Monitoring) provides the detection layer: real-time monitoring of all wallet addresses for unexpected transactions, mempool monitoring for pending transactions targeting the organisation's contracts, and chain analytics integration that flags interactions with known malicious addresses, sanctioned entities, or mixer services."
+    ],
+    "assumptions": "The organisation is building or integrating a tokenised asset platform that will issue, manage, or custody tokens representing real-world financial instruments (bonds, equities, fund shares, structured products) on one or more public or permissioned blockchains. The target blockchains support smart contracts (Ethereum, Polygon, Avalanche, Solana, Cardano, or equivalent). The organisation is subject to securities regulation in at least one jurisdiction (EU/MiCA, UK/FCA, US/SEC, Singapore/MAS) and must comply with AML/KYC requirements including the FATF travel rule. A qualified custodian or institutional-grade custody solution (Fireblocks, Copper, Anchorage, or self-operated MPC/HSM infrastructure) is available or being evaluated. The organisation has smart contract development capability or access to specialist blockchain development firms, and budget exists for mandatory pre-deployment security audits by specialist firms. Traditional financial services security controls are already in place (see SP-019 Key Management, SP-026 PCI Full Environment) and this pattern extends the baseline with blockchain-specific controls.",
+    "typicalChallenges": "The most fundamental challenge is key management at institutional scale. Unlike traditional PKI where certificate authorities provide key lifecycle management, blockchain private keys have no recovery mechanism -- if a key is lost, the assets it controls are permanently inaccessible, and if a key is compromised, the assets can be irreversibly stolen. MPC and threshold signature schemes mitigate single-key risk but introduce operational complexity: key ceremony procedures, share rotation, and recovery testing require specialist expertise that most financial institutions lack internally. Smart contract immutability creates a deployment paradox: contracts must be thoroughly audited before deployment because post-deployment fixes require complex upgrade mechanisms (proxy patterns) that themselves introduce new vulnerability classes (OWASP SC10). The cost of comprehensive smart contract auditing is significant ($50K-$500K per audit from specialist firms), and the pool of qualified auditors is small relative to demand, creating bottlenecks. Regulatory fragmentation across jurisdictions creates compliance complexity: the same tokenised bond may be subject to MiCA in the EU, FCA rules in the UK, and SEC custody requirements in the US, each with different record-keeping, reporting, and capital treatment obligations. The Basel Committee's Group 1a/Group 2 classification directly affects the economic viability of holding tokenised assets on a bank's balance sheet. DeFi composability risk is poorly understood by traditional risk frameworks: when a tokenised treasury fund is used as collateral in a lending protocol that sources prices from an oracle that aggregates data from DEXs that are subject to MEV extraction, the risk chain extends far beyond the organisation's direct control. Cross-chain interoperability remains architecturally immature: bridge security is the weakest link in multi-chain deployments, and the $2.8B in bridge losses demonstrates that no current bridge architecture provides the level of assurance that institutional assets require. State-sponsored threat actors (DPRK/Lazarus Group: $2.02B stolen in 2025) specifically target cryptocurrency infrastructure with sophisticated supply chain attacks, as demonstrated by the Bybit incident where the Safe{Wallet} UI was compromised to display correct transaction details to signers while submitting different transactions to the blockchain.",
+    "indications": "Financial institutions building tokenised bond, equity, or fund platforms for institutional investors. Asset managers launching tokenised money market funds or structured products (following BlackRock BUIDL, Franklin Templeton BENJI precedent). Custodian banks adding digital asset custody services following SEC SAB 122 and OCC guidance. Exchanges or trading venues listing tokenised securities or RWA tokens. Fintech firms building tokenisation-as-a-service platforms for issuers. Organisations subject to MiCA, FCA, or SEC regulation that process tokenised financial instruments. Any institution where compromise of private keys could result in loss of client assets exceeding the organisation's risk appetite.",
+    "contraIndications": "Organisations using blockchain solely for internal record-keeping or provenance tracking where no financial assets are at risk -- the custody and key management controls are disproportionate. Pure utility token projects without securities regulation applicability. Organisations with no plans to interact with public blockchain networks (purely internal permissioned ledger deployments may need a subset of controls but not the full DeFi integration, bridge security, or MEV mitigation sections). Retail cryptocurrency exchanges focused on spot trading of Bitcoin/Ethereum where the primary concern is traditional exchange security (see SP-019 Key Management) rather than smart contract and composability risk.",
+    "threatResistance": "This pattern provides defence-in-depth across the tokenised asset threat landscape. Private key compromise -- the highest-impact risk, responsible for 70% of stolen cryptocurrency in 2024 -- is mitigated through MPC/threshold custody architecture (SC-12, SC-13) that eliminates single-key risk and requires multi-party collusion for any signing operation. Smart contract exploitation (OWASP SC01-SC10, $905M in 2025) is addressed through mandatory pre-deployment audits, formal verification of critical invariants, and upgrade governance with timelock and multi-signature controls (SA-11, CM-03, CA-08). Oracle manipulation ($8.8M direct losses but enabling much larger compound attacks) is mitigated through multi-source oracle aggregation, staleness checks, price bound validation, and circuit breakers (SI-10, CA-07). Flash loan attacks are countered by designing contract logic that does not depend on instantaneous state that can be manipulated within a single transaction. Cross-chain bridge exploits ($2.8B total) are addressed through bridge architecture selection (preferring native verification over lock-and-mint), bridge monitoring, kill switch capability, and exposure limits (SC-07, IR-04). Supply chain attacks on wallet infrastructure (Bybit pattern) are mitigated through independent transaction verification: signers must verify transaction details through an independent channel (hardware wallet display, separate verification service) rather than trusting the signing UI alone. MEV/front-running ($289.76M in sandwich attacks) is mitigated through private transaction submission and encrypted mempool services. Regulatory non-compliance is addressed through on-chain compliance enforcement via ERC-3643 identity framework, automated travel rule data exchange, and multi-jurisdictional reporting (AU-02, AC-03). Residual risks include: state-sponsored actors with zero-day capabilities (DPRK teams embedded as insider threats within crypto firms), smart contract logic errors not caught by formal verification or audits, regulatory divergence creating conflicting compliance obligations, and the fundamental irreversibility of blockchain transactions which limits recovery options after successful exploitation."
+  },
+  "examples": {
+    "Custody Architecture": [
+      "Deploy 3-of-5 MPC threshold signing with key shares distributed across three independent cloud security enclaves (AWS Nitro, Azure Confidential Computing, GCP Confidential VMs) plus two offline shares held by senior executives in tamper-evident HSMs stored in separate geographic locations. No single cloud provider compromise can produce a valid signature.",
+      "Implement tiered wallet architecture: hot wallet (5% of AUM, automated signing with per-transaction limits of $100K and daily limits of $1M, destination restricted to whitelisted addresses), warm wallet (15% of AUM, dual-approval MPC signing with 4-hour time-of-day restriction, treasury operations only), cold wallet (80% of AUM, air-gapped HSM requiring physical key ceremony with 3-of-5 executives present, video-recorded, quarterly access only).",
+      "Key rotation protocol: MPC key shares are refreshed quarterly without changing the on-chain public key (proactive share refresh). Share refresh requires 3-of-5 current share holders and produces new shares that invalidate the previous set, mitigating risk from any share that may have been compromised without detection.",
+      "Emergency key migration: pre-staged destination wallets with verified addresses stored in sealed envelopes at two independent law firms. In the event of suspected key compromise, assets can be transferred to pre-verified addresses within 30 minutes without requiring a new key ceremony."
+    ],
+    "Smart Contract Security": [
+      "Pre-deployment security pipeline: static analysis (Slither, Mythril) in CI/CD, property-based fuzzing (Echidna) with 10M iterations targeting arithmetic boundaries, formal verification of critical invariants (total supply conservation, access control correctness, transfer restriction enforcement) using Certora Prover, followed by two independent audits from specialist firms (minimum 4-week engagement each).",
+      "Upgrade governance for production token contracts: UUPS proxy pattern with 72-hour timelock, 3-of-5 multi-signature approval from a security council comprising two internal security leads, two external security advisors, and one legal representative. Any token holder can inspect proposed upgrades during the timelock window and exit (redeem) before the upgrade executes.",
+      "Smart contract monitoring: real-time event monitoring via Forta Network detection bots watching for anomalous minting, unexpected admin function calls, large transfers to unknown addresses, and unusual gas consumption patterns. Alerts trigger automated pause mechanism within 30 seconds, requiring 2-of-5 security council approval to resume.",
+      "Bug bounty programme: Immunefi-hosted with tiered rewards ($10K for low-severity, $100K for high-severity, $1M for critical vulnerabilities affecting asset safety). Scope includes all deployed contracts, oracle integrations, and bridge components. Responsible disclosure process with 48-hour SLA for initial triage."
+    ],
+    "Oracle and Price Feed Integration": [
+      "Dual-oracle architecture for NAV calculation: primary feed from Chainlink Data Feeds (decentralised oracle network with independent node operators), secondary feed from a direct API connection to the fund administrator's NAV calculation system. Smart contract requires both feeds to agree within 0.5% before processing any NAV-dependent operation (subscription, redemption, rebalancing). Disagreement beyond threshold triggers automatic pause.",
+      "Oracle staleness protection: all price feed consumers implement a maximum staleness parameter (configurable per asset, default 1 hour for liquid assets, 24 hours for illiquid). Contract reverts if the oracle's lastUpdatedAt timestamp is older than the threshold. For L2 deployments, additionally check the L2 sequencer uptime feed -- reject oracle data if the sequencer was recently restarted (grace period of 1 hour after sequencer recovery).",
+      "Circuit breaker: if any oracle-reported price deviates more than 10% from the previous update, the contract enters a review state where all NAV-dependent operations are paused until a governance action explicitly confirms the price movement is legitimate. Prevents exploitation during flash crashes, oracle manipulation, or data provider outages."
+    ],
+    "Regulatory Compliance": [
+      "ERC-3643 (T-REX) deployment for compliant security tokens: on-chain identity registry linking investor wallet addresses to verified identity claims issued by KYC/AML trusted claim issuers (qualified trust service providers under eIDAS). Every token transfer is validated against compliance rules: investor accreditation status, jurisdictional restrictions (no transfers to wallets in sanctioned jurisdictions), maximum holder count limits, lockup period enforcement, and aggregate exposure limits per investor category.",
+      "Travel rule automation: integration with TRISA (Travel Rule Information Sharing Architecture) or OpenVASP protocol to automatically exchange originator and beneficiary information for qualifying transfers. Transaction monitoring system flags transfers that trigger travel rule thresholds and blocks execution until counterparty VASP confirms receipt of required data.",
+      "Multi-jurisdictional reporting pipeline: transaction data enriched with investor identity, jurisdiction, and regulatory classification flows to MiCA transaction reporting (EU competent authority, JSON schema), FCA regulatory returns (UK), and SEC Form PF / Form ADV amendments (US). All reporting uses standardised data extracted from on-chain events cross-referenced with off-chain identity records. Reconciliation runs daily with automated alerting on discrepancies."
+    ],
+    "Developing Areas": [
+      "Post-quantum readiness for tokenised assets is an urgent concern for long-dated instruments. A 30-year tokenised bond issued today on Ethereum uses ECDSA secp256k1 signatures that will be vulnerable to quantum attack within the bond's lifetime. NIST PQC standards (ML-KEM in FIPS 203, ML-DSA in FIPS 204, SLH-DSA in FIPS 205) are finalised but not yet supported by major blockchain networks. Organisations should implement crypto-agility: abstract signing operations behind interfaces that can migrate to post-quantum algorithms when blockchain network support arrives. Hybrid signature schemes (classical + PQC) are being explored for transition periods. See SP-040 Post-Quantum Cryptography for algorithm-level guidance.",
+      "Institutional DeFi is emerging as a distinct category: protocols with KYC-gated pools, compliant AMMs (Uniswap v4 hooks enabling compliance checks), and permissioned lending protocols that accept only KYC-verified counterparties. Aave Arc, Compound Treasury, and Maple Finance represent early institutional DeFi. Security architecture must address the tension between DeFi composability (open, permissionless) and institutional compliance (closed, permissioned). ERC-3643 compliance enforcement at the token level provides one solution: the token itself refuses non-compliant transfers regardless of which protocol initiates them.",
+      "L2 sequencer decentralisation is critical for institutional adoption. Most L2 networks (Arbitrum, Optimism, Base) currently operate centralised sequencers, creating a single point of failure and trust dependency that institutional risk frameworks struggle to accept. Arbitrum and OP Mainnet achieved Stage 1 classification with permissionless fraud proofs, but full sequencer decentralisation remains on roadmap. Organisations deploying tokenised assets on L2 should evaluate sequencer trust assumptions, forced exit mechanisms (can assets be withdrawn to L1 if the sequencer is down?), and governance upgrade risks (can a small multi-sig modify the rollup contract?).",
+      "Tokenised asset insurance is an emerging market addressing the gap between traditional financial instrument insurance (covered by existing insurance markets) and blockchain-specific risks (smart contract exploit, bridge failure, oracle manipulation, key compromise). Nexus Mutual, InsurAce, and traditional insurers (Aon, Marsh) are developing products. Underwriting criteria typically require: completed smart contract audits, MPC/threshold custody, real-time monitoring, and incident response capability -- the controls in this pattern directly support insurability.",
+      "Central Bank Digital Currencies (CBDCs) and tokenised asset interoperability: MAS Project Guardian, BIS Project Agorá, and the Bank of England's digital pound exploration all contemplate interoperability between CBDCs and tokenised securities for atomic delivery-versus-payment (DvP). The security architecture for CBDC-settled tokenised assets requires additional controls for central bank interface security, CBDC custody (distinct from commercial token custody), and settlement finality guarantees that differ from standard blockchain confirmation models."
+    ]
+  },
+  "references": [
+    {
+      "title": "OWASP Smart Contract Top 10 (2026 Edition)",
+      "url": "https://scs.owasp.org/sctop10/",
+      "note": "Industry standard vulnerability classification for smart contracts. 122 incidents analysed totalling $905.4M in 2025. This pattern maps each SC01-SC10 category to specific NIST controls."
+    },
+    {
+      "title": "MiCA Regulation (EU) 2023/1114 — Markets in Crypto-Assets",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1114",
+      "note": "EU regulatory framework for crypto-assets and CASPs. Fully in force since 30 December 2024. Stablecoin provisions (ARTs/EMTs) from 30 June 2024. Mandates operational resilience aligned with DORA."
+    },
+    {
+      "title": "Basel Committee — Prudential Treatment of Cryptoasset Exposures (SCO60)",
+      "url": "https://www.bis.org/bcbs/publ/d545.pdf",
+      "note": "Effective 1 January 2026. Group 1a (tokenised traditional assets) receives preferential capital treatment. Group 2 crypto exposures capped at 2% of Tier 1 capital."
+    },
+    {
+      "title": "ERC-3643: Token for Regulated EXchanges (T-REX)",
+      "url": "https://www.erc3643.org/",
+      "note": "Ethereum standard for permissioned security tokens with on-chain compliance enforcement. Identity verification via ONCHAINID and trusted claim issuers."
+    },
+    {
+      "title": "NIST SP 800-57 Part 1 Rev. 6 — Key Management (Draft)",
+      "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r6/ipd",
+      "note": "Includes post-quantum algorithms (FIPS 203-205), updated key establishment guidance. Critical reference for blockchain key lifecycle management."
+    },
+    {
+      "title": "Chainlink CCIP — Cross-Chain Interoperability Protocol",
+      "url": "https://chain.link/cross-chain",
+      "note": "Defence-in-depth bridge architecture live on 60+ networks. Timelocked upgrades, independent node operators, veto mechanisms. Adopted by Coinbase for $7B in wrapped tokens."
+    },
+    {
+      "title": "NISTIR 8301 — Blockchain Networks: Token Design and Management Overview",
+      "url": "https://www.nist.gov/publications/blockchain-networks-token-design-and-management-overview",
+      "note": "NIST interagency report on token lifecycle management, consensus mechanisms, and smart contract considerations."
+    },
+    {
+      "title": "FATF Targeted Update on Virtual Assets and VASPs (2025)",
+      "url": "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/targeted-update-virtual-assets-vasps-2025.html",
+      "note": "85 of 117 jurisdictions implementing Travel Rule. EU TFR requires full sender/recipient details on every crypto transfer regardless of size."
+    },
+    {
+      "title": "SWC Registry — Smart Contract Weakness Classification",
+      "url": "https://swcregistry.io/",
+      "note": "EIP-1470 based classification mapping smart contract vulnerabilities to CWE identifiers. SWC-107 (Reentrancy) → CWE-841, SWC-101 (Integer Overflow) → CWE-682."
+    },
+    {
+      "title": "Chainalysis — 2025 Crypto Theft Report",
+      "url": "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2026/",
+      "note": "$3.4B stolen in 2025 (highest since 2022). DPRK: $2.02B. Bybit supply chain attack ($1.5B) via compromised Safe{Wallet} UI. 70% of losses from private key compromise."
+    }
+  ],
+  "controls": [
+    {
+      "id": "SC-12",
+      "emphasis": "critical",
+      "name": "Cryptographic Key Establishment and Management",
+      "family": "SC"
+    },
+    {
+      "id": "SC-13",
+      "emphasis": "critical",
+      "name": "Cryptographic Protection",
+      "family": "SC"
+    },
+    {
+      "id": "SC-07",
+      "emphasis": "critical",
+      "name": "Boundary Protection",
+      "family": "SC"
+    },
+    {
+      "id": "SC-28",
+      "emphasis": "critical",
+      "name": "Protection of Information at Rest",
+      "family": "SC"
+    },
+    {
+      "id": "SC-08",
+      "emphasis": "important",
+      "name": "Transmission Confidentiality and Integrity",
+      "family": "SC"
+    },
+    {
+      "id": "AC-03",
+      "emphasis": "critical",
+      "name": "Access Enforcement",
+      "family": "AC"
+    },
+    {
+      "id": "AC-06",
+      "emphasis": "critical",
+      "name": "Least Privilege",
+      "family": "AC"
+    },
+    {
+      "id": "AC-04",
+      "emphasis": "important",
+      "name": "Information Flow Enforcement",
+      "family": "AC"
+    },
+    {
+      "id": "AU-02",
+      "emphasis": "critical",
+      "name": "Event Logging",
+      "family": "AU"
+    },
+    {
+      "id": "SA-11",
+      "emphasis": "critical",
+      "name": "Developer Testing and Evaluation",
+      "family": "SA"
+    },
+    {
+      "id": "CM-03",
+      "emphasis": "critical",
+      "name": "Configuration Change Control",
+      "family": "CM"
+    },
+    {
+      "id": "CM-08",
+      "emphasis": "important",
+      "name": "System Component Inventory",
+      "family": "CM"
+    },
+    {
+      "id": "IR-04",
+      "emphasis": "critical",
+      "name": "Incident Handling",
+      "family": "IR"
+    },
+    {
+      "id": "IR-06",
+      "emphasis": "important",
+      "name": "Incident Reporting",
+      "family": "IR"
+    },
+    {
+      "id": "IR-01",
+      "emphasis": "important",
+      "name": "Incident Response Policy and Procedures",
+      "family": "IR"
+    },
+    {
+      "id": "RA-03",
+      "emphasis": "critical",
+      "name": "Risk Assessment",
+      "family": "RA"
+    },
+    {
+      "id": "SI-10",
+      "emphasis": "critical",
+      "name": "Information Input Validation",
+      "family": "SI"
+    },
+    {
+      "id": "CA-08",
+      "emphasis": "critical",
+      "name": "Penetration Testing",
+      "family": "CA"
+    },
+    {
+      "id": "CA-07",
+      "emphasis": "critical",
+      "name": "Continuous Monitoring",
+      "family": "CA"
+    },
+    {
+      "id": "CP-09",
+      "emphasis": "important",
+      "name": "System Backup",
+      "family": "CP"
+    },
+    {
+      "id": "PE-03",
+      "emphasis": "important",
+      "name": "Physical Access Control",
+      "family": "PE"
+    },
+    {
+      "id": "PS-06",
+      "emphasis": "important",
+      "name": "Access Agreements",
+      "family": "PS"
+    },
+    {
+      "id": "CM-07",
+      "emphasis": "standard",
+      "name": "Least Functionality",
+      "family": "CM"
+    },
+    {
+      "id": "CM-02",
+      "emphasis": "standard",
+      "name": "Baseline Configuration",
+      "family": "CM"
+    },
+    {
+      "id": "CM-04",
+      "emphasis": "standard",
+      "name": "Impact Analysis",
+      "family": "CM"
+    },
+    {
+      "id": "AC-05",
+      "emphasis": "important",
+      "name": "Separation of Duties",
+      "family": "AC"
+    },
+    {
+      "id": "IA-04",
+      "emphasis": "important",
+      "name": "Identifier Management",
+      "family": "IA"
+    },
+    {
+      "id": "AU-03",
+      "emphasis": "important",
+      "name": "Content of Audit Records",
+      "family": "AU"
+    },
+    {
+      "id": "SA-04",
+      "emphasis": "standard",
+      "name": "Acquisition Process",
+      "family": "SA"
+    },
+    {
+      "id": "SA-15",
+      "emphasis": "standard",
+      "name": "Development Process, Standards, and Tools",
+      "family": "SA"
+    },
+    {
+      "id": "SR-03",
+      "emphasis": "important",
+      "name": "Supply Chain Controls and Processes",
+      "family": "SR"
+    },
+    {
+      "id": "PM-09",
+      "emphasis": "standard",
+      "name": "Risk Management Strategy",
+      "family": "PM"
+    },
+    {
+      "id": "PM-25",
+      "emphasis": "standard",
+      "name": "Minimization of Personally Identifiable Information",
+      "family": "PM"
+    },
+    {
+      "id": "PT-02",
+      "emphasis": "standard",
+      "name": "Authority to Process Personally Identifiable Information",
+      "family": "PT"
+    },
+    {
+      "id": "CP-02",
+      "emphasis": "standard",
+      "name": "Contingency Plan",
+      "family": "CP"
+    },
+    {
+      "id": "MA-04",
+      "emphasis": "standard",
+      "name": "Nonlocal Maintenance",
+      "family": "MA"
+    }
+  ],
+  "threats": [
+    {
+      "id": "T-DLT-001",
+      "title": "Private Key Compromise via Supply Chain Attack",
+      "description": "Attacker compromises the signing interface or wallet infrastructure (as in Bybit/Safe{Wallet} attack) to manipulate transaction details presented to multi-sig signers, causing them to unknowingly authorise malicious transfers.",
+      "mitigatedBy": [
+        "SC-12",
+        "SR-03",
+        "AC-05",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-DLT-002",
+      "title": "Smart Contract Reentrancy Exploitation",
+      "description": "Attacker exploits reentrancy vulnerability (cross-function, cross-contract, or read-only variant) to drain funds by recursively calling vulnerable functions before state updates complete. $325M in losses in 2025.",
+      "mitigatedBy": [
+        "SA-11",
+        "SI-10",
+        "CA-08"
+      ]
+    },
+    {
+      "id": "T-DLT-003",
+      "title": "Oracle Price Feed Manipulation",
+      "description": "Attacker manipulates oracle-reported prices through direct oracle spoofing, DEX price manipulation, or flash loan-funded market manipulation to trigger incorrect liquidations, enable undercollateralised borrowing, or cause NAV miscalculation.",
+      "mitigatedBy": [
+        "SI-10",
+        "CA-07",
+        "SC-07"
+      ]
+    },
+    {
+      "id": "T-DLT-004",
+      "title": "Cross-Chain Bridge Exploit",
+      "description": "Attacker exploits bridge validation logic or compromises bridge validator keys to mint unbacked tokens on a destination chain, effectively counterfeiting tokenised assets. Over $2.8B in cumulative bridge losses.",
+      "mitigatedBy": [
+        "SC-07",
+        "IR-04",
+        "CA-07",
+        "RA-03"
+      ]
+    },
+    {
+      "id": "T-DLT-005",
+      "title": "Flash Loan Governance Attack",
+      "description": "Attacker borrows governance tokens via flash loan, passes malicious governance proposal, and drains protocol treasury within a single atomic transaction. GreenField DAO lost $31M via this vector in April 2025.",
+      "mitigatedBy": [
+        "AC-03",
+        "CM-03",
+        "AC-05"
+      ]
+    },
+    {
+      "id": "T-DLT-006",
+      "title": "MEV Sandwich Attack on Institutional Transactions",
+      "description": "Validator or searcher observes pending institutional transaction in the mempool, places buy order before and sell order after the target transaction, extracting value from price impact. $289.76M in sandwich attacks as of March 2025.",
+      "mitigatedBy": [
+        "SC-08",
+        "AC-04"
+      ]
+    },
+    {
+      "id": "T-DLT-007",
+      "title": "On-Chain/Off-Chain Desynchronisation",
+      "description": "Off-chain SPV sells or loses the underlying asset while on-chain tokens continue trading, leaving token holders with claims against an empty legal entity. The fundamental trust gap in tokenised RWA.",
+      "mitigatedBy": [
+        "AU-02",
+        "CM-08",
+        "CA-07",
+        "AC-04"
+      ]
+    },
+    {
+      "id": "T-DLT-008",
+      "title": "Compliance Bypass via Direct Contract Interaction",
+      "description": "Investor bypasses application-layer KYC/AML checks by interacting directly with the token smart contract, circumventing transfer restrictions. Mitigated by enforcing compliance at the token contract level (ERC-3643) rather than application layer.",
+      "mitigatedBy": [
+        "AC-03",
+        "AC-04",
+        "IA-04"
+      ]
+    },
+    {
+      "id": "T-DLT-009",
+      "title": "Smart Contract Upgrade Hijack",
+      "description": "Attacker compromises upgrade governance (proxy admin keys, governance multi-sig) to deploy malicious contract implementation that drains assets or modifies compliance rules. OWASP SC10 (new for 2026).",
+      "mitigatedBy": [
+        "CM-03",
+        "AC-06",
+        "PS-06",
+        "AU-02"
+      ]
+    },
+    {
+      "id": "T-DLT-010",
+      "title": "State-Sponsored Cryptocurrency Theft",
+      "description": "Nation-state actors (DPRK Lazarus Group: $2.02B stolen in 2025) target cryptocurrency infrastructure through social engineering, insider placement (embedded IT workers), zero-day exploitation, and supply chain compromise.",
+      "mitigatedBy": [
+        "SC-12",
+        "SR-03",
+        "IR-04",
+        "CA-07",
+        "PE-03"
+      ]
+    }
+  ],
+  "relatedPatterns": [
+    "SP-019",
+    "SP-026",
+    "SP-029",
+    "SP-040",
+    "SP-042",
+    "SP-047"
+  ],
+  "relatedPatternNames": [
+    "Key Management",
+    "PCI Full Environment",
+    "Zero Trust Architecture",
+    "Post-Quantum Cryptography",
+    "Third-Party Risk Management",
+    "Secure Agentic AI Frameworks"
+  ]
+}

@@ -144,6 +144,12 @@ npm --prefix website run dev
 - **osa-website**: Cloudflare Pages auto-deploys on push; also triggered by osa-data dispatch
 - **Cross-repo dispatch**: osa-data push → GitHub Actions → `repository_dispatch` → osa-website rebuild
 
+## Skills
+
+OSA-specific skills live in `.claude/skills/` and are checked into the repo. Current skills: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`.
+
+**Iterative improvement:** Skills should be improved in-context as issues are found. If a skill produces output that needs manual correction, or misses an edge case, fix the SKILL.md in the same session. Do not work around skill bugs — fix them. Keep changes scoped to the OSA context; global skills (`~/.claude/skills/`) may be shared across other projects and should only be modified when the change is universally beneficial.
+
 ## What Goes Where
 
 - Pattern data, controls, schemas → **this repo** (osa-data)

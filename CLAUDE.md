@@ -146,9 +146,9 @@ npm --prefix website run dev
 
 ## Skills
 
-OSA-specific skills live in `.claude/skills/` and are checked into the repo. Current skills: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`.
+OSA skills live in `osa-trident/.claude/skills/` (private repo). Current skills: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`, `review-spec`, `review-tests`.
 
-**Iterative improvement:** Skills should be improved in-context as issues are found. If a skill produces output that needs manual correction, or misses an edge case, fix the SKILL.md in the same session. Do not work around skill bugs — fix them. Keep changes scoped to the OSA context; global skills (`~/.claude/skills/`) may be shared across other projects and should only be modified when the change is universally beneficial.
+**Iterative improvement:** Skills should be improved in-context as issues are found. If a skill produces output that needs manual correction, or misses an edge case, fix the SKILL.md in the same session. Do not work around skill bugs — fix them.
 
 ## What Goes Where
 

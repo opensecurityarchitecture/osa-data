@@ -15,7 +15,7 @@ Structured JSON data for Open Security Architecture (OSA) patterns, NIST 800-53 
 | [osa-trident](https://github.com/opensecurityarchitecture/osa-trident) | TRIDENT data, schemas, scripts, design docs | **Private** |
 | [osa-strategy](https://github.com/opensecurityarchitecture/osa-strategy) | Roadmap, metrics, contacts, social | **Private** |
 
-The website repo is checked out as a subdirectory at `./website/` and reads data via a symlink (`website/src/data -> ../..`). A push to osa-data triggers an osa-website rebuild via GitHub Actions dispatch.
+The website repo is a **sibling** at `~/osa/website/` and reads data via a symlink (`website/src/data -> ../../data`, resolves to `~/osa/data`). A push to osa-data triggers an osa-website rebuild via GitHub Actions dispatch.
 
 ## Founders
 
@@ -69,7 +69,7 @@ data/
 ## Naming Conventions
 
 - **Pattern JSON**: `SP-NNN-descriptive-title.json` (e.g., `SP-029-zero-trust-architecture.json`)
-- **Pattern SVGs**: `sp-NNN-descriptive-title.svg` in `website/public/images/` (e.g., `sp-029-zero-trust-architecture.svg`)
+- **Pattern SVGs**: `sp-NNN-descriptive-title.svg` in `../website/public/images/` (e.g., `sp-029-zero-trust-architecture.svg`) — website is a sibling repo at `~/osa/website/`
 - **Control JSON**: `XX-NN.json` using NIST ID (e.g., `AC-01.json`, `SC-13.json`)
 - **Slugs**: lowercase, hyphenated, no `sp-NNN-` prefix (e.g., `zero-trust-architecture`)
 - **Pattern IDs**: `SP-NNN` format, zero-padded to 3 digits
@@ -78,7 +78,7 @@ data/
 
 1. Create `data/patterns/SP-NNN-descriptive-title.json` following the schema
 2. Add entry to `data/patterns/_manifest.json`
-3. Create SVG diagram at `website/public/images/sp-NNN-descriptive-title.svg`
+3. Create SVG diagram at `../website/public/images/sp-NNN-descriptive-title.svg`
 4. That's it — the website reads the manifest and renders automatically
 
 ## Pattern Schema Key Fields
@@ -119,7 +119,7 @@ data/
 
 ### Techniques
 - White lozenge: `rect fill="white" opacity="0.9" rx="3"` behind arrow text
-- Icons from OSA icon library (`website/public/icons/`)
+- Icons from OSA icon library (`../website/public/icons/`)
 
 ## GitHub Issues
 
@@ -131,11 +131,11 @@ When creating issues in any OSA repo, **always add them to the "OSA Delivery Boa
 # Validate all JSON against schemas
 python3 scripts/validate_json.py
 
-# Website build (from workspace root)
-npm --prefix website run build
+# Website build (from workspace root ~/osa/)
+npm --prefix ~/osa/website run build
 
 # Website dev server
-npm --prefix website run dev
+npm --prefix ~/osa/website run dev
 ```
 
 ## CI/CD
@@ -146,7 +146,7 @@ npm --prefix website run dev
 
 ## Skills
 
-OSA skills live in `osa-trident/.claude/skills/` (private repo). Current skills: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`, `review-spec`, `review-tests`.
+OSA skills live in `~/osa/trident/.claude/skills/` (private repo). Current skills: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`, `review-spec`, `review-tests`.
 
 **Iterative improvement:** Skills should be improved in-context as issues are found. If a skill produces output that needs manual correction, or misses an edge case, fix the SKILL.md in the same session. Do not work around skill bugs — fix them.
 

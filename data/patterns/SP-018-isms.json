@@ -1,140 +1,253 @@
 {
+  "$schema": "../../../osa-workspace/data/schema/pattern.schema.json",
   "id": "SP-018",
   "slug": "isms",
   "joomla_id": 279,
-  "title": "Information Security Management System (ISMS) Module",
-  "description": "Security architecture for establishing, operating, and continuously improving an Information Security Management System aligned with ISO 27001. Covers policy frameworks, risk assessment, security assessment and certification, incident management, continuous monitoring, and the Plan-Do-Check-Act lifecycle.",
+  "title": "Information Security Management System",
+  "description": "The Information Security Management System pattern is the catalogue umbrella under which every other OSA pattern operates. It defines the management capability -- context, leadership, policy, risk treatment, resources, supplier governance, performance evaluation and continual improvement -- that selects, governs, monitors and improves the technical and operational controls described elsewhere. Aligned with ISO/IEC 27001:2022, NIST CSF 2.0, BSI IT-Grundschutz, EU NIS2 and DORA, it speaks to organisations of any sector or size with structured management obligations under regulation, certification or executive accountability.",
   "url": "https://www.opensecurityarchitecture.org/patterns/sp-018",
   "metadata": {
-    "release": "26.02",
+    "release": "26.06",
     "classification": "Governance & People",
     "status": "published",
     "type": "module",
     "datePublished": "2010-05-09",
-    "dateModified": "2026-02-06",
+    "dateModified": "2026-05-09",
     "authors": [
       "Aurelius",
       "Vitruvius"
     ],
-    "reviewers": []
+    "reviewers": [],
+    "provenance": "Originally published in 2010 by Aurelius as the OSA ISMS Module -- a vendor-neutral architectural view of an ISO 27001-aligned management system, drawn from direct experience implementing ISMS programmes in regulated industries. The pattern was reworked from first principles in 2026 by Aurelius and Vitruvius after a structured analysis of five frameworks: ISO/IEC 27001:2022 and 27002:2022 (the canonical management-system standard and its control catalogue), NIST CSF 2.0 with its newly first-class Govern function and NIST SP 800-53 Rev 5 (the underlying control library), BSI IT-Grundschutz with its 200-1/200-2/200-3 methodology and modular Compendium, EU NIS2 (Directive 2022/2555) with its management-body personal liability and mandatory minimum measures, and EU DORA (Regulation 2022/2554) with its prescriptive ICT risk framework, threat-led penetration testing and ICT third-party register. The 2026 rework adopts NIST CSF 2.0's six Govern categories as the structural decomposition while retaining ISO 27001's PDCA cycle as the management lifecycle. It positions SP-018 as the catalogue umbrella under which every other OSA pattern operates, with explicit cross-references to twelve sibling patterns. The pattern is regulator-aware but not regulator-prescriptive: sectoral specifics belong in framework-coverage data and future sectoral patterns. Source research preserved at osa-strategy/patterns/SP-018-rework/."
   },
   "diagram": {
-    "svg": "/images/patterns/08_02_Pattern_018_01_ISMS.svg",
-    "png": "/images/OSA_images/patterns/08_02_Pattern_018_01_ISMS.png"
+    "svg": "/images/sp-018-isms.svg",
+    "png": ""
   },
   "content": {
-    "description": "An Information Security Management System (ISMS) is not a product or a technology -- it is a structured management framework for establishing, implementing, operating, monitoring, reviewing, maintaining, and improving an organisation's information security posture. The ISMS Module provides the governance architecture that all other security patterns operate within. Without an ISMS, individual security controls are isolated implementations without coordinated management, consistent risk assessment, or measurable improvement.\n\nThe ISMS is built on the Plan-Do-Check-Act (PDCA) lifecycle. In the Plan phase, the organisation defines its security policy framework, identifies its information assets, conducts risk assessments, and selects controls proportionate to the identified risks. In the Do phase, those controls are implemented and operated. In the Check phase, the organisation monitors, reviews, and audits the effectiveness of its controls through internal assessments, continuous monitoring, vulnerability scanning, and incident analysis. In the Act phase, corrective and preventive actions are taken based on findings, and the cycle begins again. This iterative approach ensures that security is not a static state but a continuously improving capability.\n\nThe pattern aggregates the policy-level controls from across all NIST 800-53 control families. Each family has a policy and procedures control (XX-01) that establishes the governance foundation for that family's technical and operational controls. These policies collectively form the ISMS documentation framework -- the equivalent of the ISO 27001 mandatory documented information requirements. Policies must be approved by management, communicated to all relevant personnel, and reviewed at planned intervals or when significant changes occur.\n\nBeyond policy, the ISMS requires active security assessment and certification activities. Regular security assessments evaluate whether controls are implemented correctly and operating as intended. Security certification provides formal assurance that system security posture meets requirements. Plans of action and milestones track identified weaknesses through to remediation. Continuous monitoring provides ongoing awareness of the security posture rather than relying solely on periodic assessments.\n\nIncident management is a critical ISMS function. The ability to detect, respond to, contain, and recover from security incidents -- and to learn from them -- is what separates mature security programs from those that simply implement controls and hope for the best. The ISMS integrates incident response policy, incident handling procedures, incident monitoring, incident reporting, and incident response assistance into a coordinated capability that feeds back into risk assessment and control improvement.",
+    "description": "<h3>Context</h3>\n\nAn Information Security Management System is the management capability that turns isolated controls into a governed, measurable, continuously improving security programme. It is not a tool, not a certificate, and not a documentation set -- it is the operating system of the organisation's security function. The ISMS pattern is distinct from the controls it manages: SP-018 describes how an organisation establishes, operates, monitors and improves its security capability; the operational controls live in sibling patterns including SP-013 Data Security, SP-014 Awareness and Training, SP-031 Security Monitoring and Response, SP-036 Incident Response and SP-042 Third-Party Risk Management. Without an ISMS, individual controls are isolated implementations without coordinated management, consistent risk assessment, or measurable improvement.\n\nThe 2026 regulatory and commercial backdrop has changed the ISMS conversation in three ways. First, regulation has elevated board-level accountability: NIS2 Article 20 makes the management body personally liable, and DORA Article 5 requires it to approve a digital operational resilience strategy. Second, the dominant standards have refreshed: NIST CSF 2.0 (2024) elevated Govern to a first-class function alongside Identify, Protect, Detect, Respond and Recover; ISO/IEC 27001:2022 reorganised Annex A into four themes; ISO/IEC 42001:2023 established a parallel management system for AI. Third, evidence has shifted from periodic to contemporaneous: continuous-compliance platforms collect what once required annual audit fieldwork, and cyber-insurance underwriters increasingly demand evidence on demand. Most in-scope organisations operate against three to six frameworks simultaneously, and multi-framework drift is a leading source of audit findings.\n\nThis pattern is the catalogue umbrella. Every other OSA pattern operates within an Information Security Management System defined here. The pattern owns fourteen management capabilities -- context analysis, leadership, policy framework, risk methodology, internal audit, management review, continual improvement, documented information, performance metrics, compliance tracking, board training, crisis communication, and the management system itself -- and stewards eleven operational capabilities (awareness, identity, monitoring, cryptography, business continuity, incident response, vulnerability management, third-party risk, AI governance, and others) by requiring them to exist and cross-referencing the patterns that operate them.\n\n<h3>Summary</h3>\n\nThe ISMS is built on the Plan-Do-Check-Act cycle. In Plan, the organisation defines its context, scope, leadership commitments, policy framework and risk treatment. In Do, it implements controls, allocates resources, develops competence, manages documented information, and governs supplier relationships. In Check, it monitors, measures, audits and reviews. In Act, it learns, corrects and improves. The cycle repeats -- security is a continuously improving capability, not a static state.\n\nSeven Key Control Areas decompose the management cycle. (1) Context, Scope and Stakeholders defines what the ISMS protects and for whom. (2) Leadership and Management Body Accountability commits the executive. (3) Policy Framework codifies the rules. (4) Risk Management and Treatment selects controls based on risk, not appetite for compliance. (5) Resources, Competence and Documented Information sustains the capability. (6) Supplier and Third-Party Governance manages inherited and concentration risk. (7) Performance Evaluation, Audit and Continual Improvement closes the loop. The first six map onto NIST CSF 2.0's Govern function categories; the seventh combines CSF GV.OV (Oversight) with the ISO Clause 9-10 evaluation and improvement activities.\n\nThe pattern uses a three-tier role cut: management body, ISMS lead, and control or asset owner. The management body is responsible and accountable; the ISMS lead operates the management system day-to-day; control or asset owners implement and report on their domain. External roles (regulators, certification bodies, auditors, customers, insurers) are referenced but outside the matrix because they are outside the organisation's accountability boundary. The role cut differs from the developer/architect/business-owner cut used in operational OSA patterns because the audience differs -- this pattern speaks to security-management roles, not engineering roles.\n\n<h3>Key principles</h3>\n\nThree principles cut across all seven Key Control Areas. <strong>Risk drives controls, not the reverse</strong>: controls are selected because of risk, and the choice is documented in a control-applicability artefact (Statement of Applicability for ISO, Current and Target Profile for CSF, Modellierung for BSI). <strong>The management body is responsible and accountable</strong>: in NIS2 and DORA jurisdictions, members may be personally liable, and mandatory training is non-optional. <strong>Documented information is the evidence pipeline</strong>: what is not documented does not exist for assurance purposes, but the choice of tooling -- continuous-compliance platforms, GRC suites, or paper records -- belongs to the implementer.",
     "keyControlAreas": [
-      "Security Policy Framework (AC-01, AT-01, AU-01, CA-01, CM-01, CP-01, IA-01, IR-01, MA-01, MP-01, PE-01, PL-01, PS-01, RA-01, SA-01, SC-01, SI-01): The policy controls form the backbone of the ISMS. Each XX-01 control establishes the policy and procedures for its respective control family. Together, they constitute the organisation's information security policy framework -- the documented management commitment to security that ISO 27001 Clause 5.2 requires. Policies must define scope, objectives, roles, and responsibilities. Procedures must provide actionable implementation guidance that practitioners can follow. The policy framework should be hierarchical: a top-level information security policy approved by senior management, supported by topic-specific policies (access control, cryptography, physical security, etc.), with detailed procedures and standards beneath. All policies require periodic review, version control, and formal approval. Critically, policies without enforcement are decoration -- the framework must include mechanisms for compliance monitoring and consequences for violations.",
-      "Security Assessment and Certification (CA-01, CA-02, CA-04, CA-05, CA-07): These controls provide the assurance function of the ISMS -- the Check phase of PDCA. Security assessment policy (CA-01) establishes the framework for evaluating control effectiveness. Security assessments (CA-02) are the operational evaluations themselves, covering internal audits, control testing, and third-party assessments. They should be conducted at planned intervals and after significant changes. Security certification (CA-04) provides formal validation that a system or environment meets its security requirements -- relevant for systems requiring authorisation to operate. Plan of action and milestones (CA-05) is the remediation tracking mechanism: every assessment finding must be captured, assigned an owner, given a target remediation date, and tracked to closure. Continuous monitoring (CA-07) complements periodic assessments with ongoing technical monitoring of security posture, including automated configuration checks, vulnerability detection, and security metrics dashboards.",
-      "Incident Management Lifecycle (IR-01, IR-04, IR-05, IR-06, IR-07): Incident management is where the ISMS meets operational reality. Incident response policy (IR-01) establishes the organisational commitment to detecting and responding to security events. Incident handling (IR-04) provides the operational procedures for triage, analysis, containment, eradication, and recovery. This must include defined severity levels, escalation paths, communication templates, and decision authorities. Incident monitoring (IR-05) tracks incidents over time, enabling trend analysis and pattern detection that informs risk assessment updates. Incident reporting (IR-06) ensures incidents are reported to appropriate internal stakeholders, management, regulators, and law enforcement where required. Incident response assistance (IR-07) provides support resources for personnel involved in incident handling -- help desks, security operations centres, and external incident response retainer arrangements. Post-incident reviews must feed lessons learned back into policy updates, training programs, and control improvements.",
-      "Risk and Vulnerability Management (RA-01, RA-05): Risk assessment is the engine that drives ISMS decision-making. Risk assessment policy (RA-01) establishes the methodology, criteria, and frequency for evaluating information security risks. The methodology should define how threats and vulnerabilities are identified, how likelihood and impact are assessed, how risk appetite is determined, and how treatment options (accept, mitigate, transfer, avoid) are selected. Vulnerability scanning (RA-05) provides technical evidence of exploitable weaknesses that feed into the risk assessment process. Scan results should be correlated with threat intelligence to prioritise remediation based on actual exploitation risk rather than raw severity scores. The risk register is the central ISMS artefact -- a living document that captures identified risks, their current treatment status, residual risk levels, and risk ownership assignments.",
-      "Access Control and Personnel Governance (AC-01, AC-13, PS-01, AT-01, AT-05): The ISMS must govern how people interact with information systems. Access control policy (AC-01) establishes the principles for granting, reviewing, and revoking access. Supervision and review of access control (AC-13) ensures that access rights remain appropriate over time -- regular access reviews are a fundamental ISMS control and a common audit finding when absent. Personnel security policy (PS-01) covers the human lifecycle from screening through employment to termination. Awareness and training policy (AT-01) ensures all personnel understand their security obligations. Contacts with security groups and associations (AT-05) keeps the organisation connected to the broader security community for threat intelligence, best practice sharing, and professional development.",
-      "Operational and Technical Governance (CM-01, CP-01, MA-01, MP-01, SA-01, SI-01, SI-05): These policy controls ensure that the technical and operational dimensions of security are governed consistently. Configuration management policy (CM-01) establishes how systems are baselined, how changes are controlled, and how configurations are documented. Contingency planning policy (CP-01) governs business continuity and disaster recovery. System maintenance policy (MA-01) ensures systems are maintained securely with appropriate controls over maintenance activities and tools. Media protection policy (MP-01) governs the handling of physical and digital media. System and services acquisition policy (SA-01) ensures security is considered throughout the procurement and development lifecycle. System and information integrity policy (SI-01) governs how system integrity is maintained. Security alerts and advisories (SI-05) ensure the organisation receives and acts on vulnerability disclosures and threat advisories relevant to its technology environment."
+      "Context, Scope and Stakeholders (PM-11, RA-03, RA-09, PL-10): The ISMS begins where the organisation does. ISO 27001 Clause 4.1 requires understanding the internal and external issues that affect the management system -- political, economic, social, technological, legal and environmental -- alongside the explicit security risk landscape. Clause 4.2 identifies the interested parties (regulators, customers, employees, suppliers, society) and their needs and expectations. Clause 4.3 then determines the scope: which business processes, locations, products, services and third parties are covered. NIST CSF 2.0's Govern function names the same activities as Organizational Context (GV.OC) -- mission, stakeholders, legal and regulatory understanding, internal and external dependencies. BSI IT-Grundschutz operationalises it as a structured Strukturanalyse plus a Schutzbedarfsfeststellung (protection-requirements analysis). Scope is itself a documented information artefact (ISO Clause 7.5) and a regulatory artefact (NIS2 essential/important-entity classification triggers off it; DORA's critical-or-important-function tier scales requirements with it). AI systems, OT systems and third-party-hosted services are scope decisions: include explicitly via the scope statement or document the carve-out and its compensating controls. The stakeholder register is a living document -- regulators and underwriters change their expectations, customers add contractual security obligations, partners shift their security postures. T-IS-012 (shadow AI scope leakage) is the modern manifestation of scope drift: when ungoverned AI usage expands the attack surface faster than the management system can re-scope, the scope statement loses authority. PM-11 (Mission and Business Process Definition) anchors the inventory; RA-09 (Criticality Analysis) ranks the components; RA-03 (Risk Assessment) frames the risk context; PL-10 (Baseline Selection) ties scope to control-baseline decisions.",
+      "Leadership and Management Body Accountability (PM-01, PM-02, PM-03, PM-13, PM-29, PS-09): The 2026 ISMS conversation has shifted from CISO-as-owner to management-body-as-owner. NIS2 Article 20(1) makes the management body responsible and potentially personally liable for the organisation's compliance with cybersecurity risk-management measures; Article 20(2) requires members to follow training sufficient to assess cybersecurity risks. DORA Article 5(1) makes the management body of in-scope financial entities ultimately responsible for ICT risk; Article 5(2) requires it to approve a digital operational resilience strategy as a distinct artefact above the ICT risk framework. NIST CSF 2.0 GV.RR-01 is unambiguous: organisational leadership is responsible and accountable for cybersecurity risk and fosters a culture that is risk-aware, ethical and continually improving. ISO 27001 Clause 5.1 makes top-management commitment auditable through specific demonstrable actions: ensuring the policy is established, integrating ISMS requirements into business processes, providing resources, communicating the importance of effective management, ensuring intended outcomes are achieved. BSI IT-Grundschutz mandates an IT-Sicherheitsbeauftragter (IT-SiBe) with a defined reporting line to the management board. PM-02 (Senior Information Security Officer) names the accountable role; PM-29 (Risk Management Program Leadership) names the senior-leadership risk role; PS-09 (Position Descriptions) requires security responsibilities to be incorporated into role definitions; PM-03 (Information Security and Privacy Resources) requires resourcing commensurate with scope; PM-13 (Security and Privacy Workforce) requires a planned competence base. T-IS-015 (management body insufficient training) is a 2026-distinctive threat directly addressed by this control area.",
+      "Policy Framework (PL-01, PL-04, PL-09, AT-01, PS-01): A hierarchical policy framework is the operational expression of leadership commitment. The top-level information security policy, approved by the management body (ISO Clause 5.2), establishes the organisation's commitment, scope, objectives, roles and authorities. Topic-specific policies follow -- access control, cryptography, supplier relationships, incident response, business continuity, awareness, personnel security, physical security, system development -- each cascading to procedures and standards. NIST CSF 2.0 GV.PO requires the policy to be reviewed, updated, communicated and enforced to reflect changes in requirements, threats, technology and organisational mission. NIS2 Article 21(2)(a) and DORA Article 9(1) make policies on risk analysis and information system security a regulatory requirement. ISO 27002:2022 reorganised Annex A into four themes (organisational, people, physical, technological) which provide an alternative organising lens for the policy library. The XX-01 controls in every NIST 800-53 family (AC-01, AT-01, AU-01, etc.) provide the per-family policy spine and are governed centrally through PL-01 (Security Planning Policy and Procedures) and PL-09 (Central Management). Compliance management (legal, regulatory, contractual) is the policy-framework's regulatory-tracking arm: identifying applicable obligations, mapping them to internal controls, monitoring change, reporting non-compliance. T-IS-007 (policy non-compliance by personnel) is mitigated by combining clear policy, role-based training (AT-01) and personnel security (PS-01); T-IS-014 (multi-framework drift) is mitigated by a single internal policy set with thin framework overlays rather than parallel policy sets per framework.",
+      "Risk Management and Treatment (RA-01, RA-02, RA-03, RA-07, RA-09, PM-09, PL-10, CA-05): Risk is the engine of the ISMS. The methodology -- whether ISO 27005-aligned, FAIR, OCTAVE Allegro, BSI 200-3, or a hybrid -- defines how threats and vulnerabilities are identified, how likelihood and impact are assessed, how risk appetite and risk tolerance are set, and how treatment options (mitigate, accept, transfer, avoid) are selected. PM-09 (Risk Management Strategy) establishes the strategy at organisational level; RA-01 (Risk Assessment Policy and Procedures) institutionalises it; RA-03 (Risk Assessment) operationalises it; RA-07 (Risk Response) names the treatment decision; RA-09 (Criticality Analysis) prioritises by component criticality. The control-applicability artefact -- Statement of Applicability for ISO 27001, Current and Target Profile for NIST CSF, Modellierung output for BSI Grundschutz -- is the document that links risk to controls. Each artefact answers the same question (which controls apply, where the organisation is with each, why) in a different shape. NIST GV.RM-02 makes an explicit distinction NIST is unique in highlighting: risk appetite is the strategic level of risk the organisation is willing to accept; risk tolerance is the acceptable variation around that appetite at operational level. NIST GV.RM-07 elevates positive risks (opportunities) alongside negative risks, mirroring ISO Clause 6.1's risks-and-opportunities phrasing. CA-05 (Plan of Action and Milestones) tracks each treatment to closure with named owners and target dates -- a POA&M containing items more than a year past due signals a programme that logs but does not resolve. PL-10 (Baseline Selection) and PL-11 baseline tailoring provide the systematic selection-and-customisation cycle that NIST adds to the ISO SoA approach.",
+      "Resources, Competence and Documented Information (PM-03, PM-13, AT-01, AT-02, AT-03, PL-02, PL-04, AU-01, SA-02, IR-01): The ISMS is sustained through three sub-disciplines that ISO Clause 7 groups together. Resources (Clause 7.1, NIST PM-03, SA-02): adequate funding, headcount, infrastructure and tooling commensurate with scope. Competence (Clause 7.2, NIST PM-13, AT-01 through AT-03): demonstrable ability to apply knowledge and skills, evidenced through training records, certifications and role-based competence frameworks. Documented information (Clause 7.5): the unified ISO concept covering creation, update, distribution, access, storage and disposal of both required documents and retained evidence. The named artefact set is the operational realisation: information security policy, ISMS scope statement, risk register and treatment plan, control-applicability artefact, plan of action and milestones, internal audit reports and audit programme, management review minutes and decisions, performance metrics dashboard, continuous monitoring strategy (NIST PM-31), incident register and lessons-learned (IR-01 stewards SP-036), and -- where DORA applies -- the ICT third-party register (Article 28(4), stewarded by SP-042). PL-02 (System Security Plan) provides per-system documentation; PL-04 (Rules of Behavior) addresses personnel-facing operating norms; AU-01 (Audit and Accountability Policy and Procedures) governs the evidence-trail discipline. Continuous-compliance platforms (Vanta, Drata, Secureframe, Hyperproof) operationalise the documented-information lifecycle; the choice of tooling, including paper-based for very small organisations, belongs to the implementer. T-IS-008 (knowledge loss) is mitigated by ensuring critical knowledge resides in artefacts rather than in individuals; T-IS-013 (cyber-insurance evidence failure) is mitigated by a contemporaneous, defensible artefact pipeline.",
+      "Supplier and Third-Party Governance (SR-01, SR-02, SR-03, CA-03): Recent supply chain incidents -- SolarWinds, MOVEit, Okta, CrowdStrike -- demonstrate that a single supplier compromise can produce simultaneous incidents across hundreds of customer organisations. NIST CSF 2.0 promoted supply chain risk management to a Govern category (GV.SC, ten subcategories) reflecting this learning: programme establishment, supplier criticality and prioritisation, contract integration, due diligence, ongoing monitoring, incident planning with suppliers, post-relationship continuity. ISO 27002:2022 controls A.5.19-A.5.23 cover supplier relationships, agreements, ICT supply chain, monitoring and cloud services. NIS2 Article 21(2)(d) requires supply chain security including security-related aspects of the relationship between each entity and its direct suppliers; Article 22 establishes Union-level coordinated supply chain risk assessments at sector level. DORA Articles 28-30 are the most prescriptive treatment in any framework: a register of all ICT third-party arrangements (Article 28(4)), pre-contract due diligence and risk assessment (Article 28(5)), monitoring and audit rights (Article 28(6)), exit strategies (Article 28(8)), and minimum contractual provisions (Article 30). Article 29 introduces concentration risk: when many financial entities depend on the same critical ICT third-party, a preliminary assessment is mandated before contracting. SR-01 (Supply Chain Risk Management Policy and Procedures) and SR-02 (Supply Chain Risk Management Plan) anchor the programme; SR-03 (Supply Chain Controls and Processes) and CA-03 (Information Exchange) cover the technical interconnection. Operational detail belongs to SP-042 Third-Party Risk Management; this Key Control Area requires the programme to exist. T-IS-009 (supply chain gaps) and T-IS-011 (concentration risk in shared GRC platforms or audit firms) are both owned here.",
+      "Performance Evaluation, Audit and Continual Improvement (CA-01, CA-02, CA-04, CA-05, CA-07, AU-01, PM-06, PM-31, PL-09): The Check and Act phases close the loop. Performance evaluation (ISO Clause 9.1, NIST PM-06 Measures of Performance): determine what to monitor, methods, when, who analyses results, what conclusions follow. PM-31 Continuous Monitoring Strategy is the documented telemetry roadmap -- which metrics, at what cadence, with what tolerances, triggering what actions. CA-07 Continuous Monitoring is the operational implementation. Internal audit (ISO Clause 9.2, NIST CA-02 Control Assessments, AU-01 Audit and Accountability Policy): an independent, planned, periodic evaluation of the ISMS against ISO 27001 itself and the organisation's own documented requirements. ISO insists on auditor independence -- the audit is a different artefact from a self-assessment. ISO 19011:2018 provides the audit-management methodology. CA-01 (Assessment, Authorization, and Monitoring Policy and Procedures) institutionalises the assessment programme; CA-04 (Security Certification) addresses formal certification authority. Management review (ISO Clause 9.3, NIST GV.OV Oversight): a top-management governance event with mandated inputs (audit results, performance data, risk-assessment changes, supplier performance, opportunities for improvement) and mandated outputs (decisions on continual improvement, ISMS changes, resource needs). DORA Article 6(4) requires annual management-body review of the ICT risk framework. Continual improvement (ISO Clause 10.1, NIST ID.IM, DORA Article 13 Learning and Evolving): a process that improves the suitability, adequacy and effectiveness of the ISMS. Nonconformity and corrective action (ISO Clause 10.2): root cause analysis, corrective action implementation, effectiveness review. CA-05 (POA&M) is the tracking mechanism. Multi-framework reporting (T-IS-014 mitigation): one internal control set with thin framework mappings -- ISO 27001, SOC 2, NIST CSF, NIS2, DORA, ISO 42001 -- maintained as a thin overlay rather than parallel control implementations per framework. PL-09 (Central Management) operationalises this single-set discipline. T-IS-002 (regulatory non-compliance), T-IS-003 (undetected incidents), T-IS-004 (control degradation and operational drift), T-IS-013 (cyber-insurance evidence failure) and T-IS-014 (multi-framework drift) are all owned here."
     ],
-    "assumptions": "The Plan-Do-Check-Act model is the basis for the ISMS lifecycle. Senior management commitment exists to fund, support, and actively participate in the ISMS -- ISO 27001 Clause 5.1 explicitly requires leadership commitment and this is not optional for a functioning ISMS. The scope of the ISMS has been defined, identifying which business processes, systems, locations, and data are covered. The organisation is willing to allocate dedicated resources to ISMS operation -- typically a minimum of an information security manager and supporting roles. A risk assessment methodology has been selected or will be established. The organisation has or will establish a document management capability for ISMS documentation. Internal audit competence is available or will be developed.",
-    "typicalChallenges": "A structured planning approach can be extremely difficult to embed into an organisation and requires visible, sustained commitment from senior management over extended periods. Initial enthusiasm for ISMS implementation frequently wanes once the ongoing operational effort becomes apparent -- the Plan phase generates excitement, but the Check and Act phases require disciplined, repetitive work that is less visible. Policy fatigue is real: creating comprehensive policies is straightforward, but ensuring they are read, understood, followed, and kept current is a persistent challenge. Bridging the gap between governance documentation and operational reality is the central ISMS challenge -- organisations that treat the ISMS as a documentation exercise for certification purposes derive minimal security value. Internal audit independence can be difficult to achieve in smaller organisations where the security team may be auditing its own work. Measuring ISMS effectiveness beyond compliance metrics (number of policies, audit findings closed) requires security metrics that demonstrate genuine risk reduction. Integration of the ISMS with other management systems (quality, IT service management, privacy) adds complexity but also efficiency opportunities. Maintaining ISMS relevance as technology and threats evolve requires continuous scope review and control updates.",
-    "indications": "Any organisation with a computing environment that must be secured in a structured manner to meet business, legal, regulatory, or industry requirements. Organisations pursuing or maintaining ISO 27001 certification. Organisations in regulated industries (financial services, healthcare, government, critical infrastructure) where structured security management is mandated. Organisations that have outgrown ad-hoc security management and need repeatable, auditable processes. Organisations preparing for SOC 2 Type II examinations, where the trust services criteria map closely to ISMS processes. Any organisation where security is a board-level concern and structured governance is expected.",
-    "contraIndications": "There are no legitimate contra-indications for this pattern at any meaningful organisational scale. Even very small organisations benefit from a lightweight ISMS, though the formality and documentation depth should be proportionate to the organisation's size, risk profile, and regulatory obligations. The full ISO 27001-aligned ISMS with formal certification may not be cost-effective for very small organisations, but the underlying principles of risk-based security management, policy documentation, and continuous improvement are universally applicable.",
-    "threatResistance": "The ISMS does not directly mitigate specific technical threats -- it provides the management framework that ensures technical controls are selected based on risk, implemented correctly, operated consistently, monitored for effectiveness, and improved over time. It addresses organisational threats including: governance failures where security decisions are made without structured risk assessment; compliance failures where regulatory obligations are not systematically identified and met; operational drift where controls degrade over time without monitoring and review; incident management failures where security events are not detected, reported, or handled effectively; knowledge loss when security expertise leaves the organisation without documented processes; and audit failures where the organisation cannot demonstrate due diligence in security management to regulators, auditors, customers, or insurers."
+    "assumptions": "PDCA-or-equivalent improvement methodology in place; senior management commitment exists, is visible, and is sustained over time; the ISMS scope is defined and documented; resources (budget, headcount, infrastructure, tooling) are allocated commensurate with scope; a risk methodology has been selected or will be established; a documented information lifecycle exists or will be operationalised; internal audit competence is available or will be developed; the organisation is aligned (or aligning) to current standards -- ISO/IEC 27001:2022 with the four-theme Annex A, NIST CSF 2.0 with its first-class Govern function, BSI IT-Grundschutz where applicable, and any sectoral regimes that apply (NIS2, DORA, sector-specific regulators); AI systems are either explicitly in ISMS scope or covered by a parallel ISO/IEC 42001 management system that integrates with the ISMS; the management body has been informed of its accountability and (where required by NIS2 Article 20(2) or DORA Article 5(4)) has access to mandatory training. The pattern assumes that the management body genuinely owns the ISMS rather than treating it as a delegated CISO concern, and that proportionality (ISO Cl. 4.3, NIS2 Art. 21(1), DORA Art. 4 and Art. 15) is applied honestly to scale measures with the organisation's size, exposure and risk profile.",
+    "typicalChallenges": "Sustaining management commitment over time is the primary challenge -- the Plan and Do phases generate visible progress, while the Check and Act phases require disciplined, repetitive work that is less visible. Policy fatigue is real: creating comprehensive policies is straightforward, but ensuring they are read, understood, followed, and kept current is a persistent challenge. Bridging the gap between governance documentation and operational reality is the central ISMS challenge -- organisations that treat the ISMS as a documentation exercise for certification purposes derive minimal security value. Internal audit independence can be difficult to achieve in smaller organisations where the security team may end up auditing its own work. Measuring ISMS effectiveness beyond compliance metrics (number of policies, audit findings closed) requires security metrics that demonstrate genuine risk reduction; ISO 27004 has not been refreshed for the continuous-compliance era. Multi-framework reporting load is now a leading source of dysfunction: organisations subject to ISO 27001, SOC 2, NIST CSF, NIS2, DORA and ISO 42001 simultaneously can spend more time mapping evidence between frameworks than improving controls, and divergence between framework-specific control sets creates inconsistency that auditors then cite as a finding. Concentration risk in shared GRC tooling and audit firms is rising: when a critical mass of an industry sector relies on the same SaaS GRC platform or audit provider, an outage or compromise of that provider becomes a sector-level event. Shadow AI adoption inside the business -- employees using ungoverned models for sensitive work -- expands ISMS scope faster than the ISMS can absorb it, and treating it as an awareness problem rather than a scope problem leaves a structural gap. Cyber-insurance underwriting has shifted from questionnaire-based assessment to evidence-based assessment, exposing gaps in evidence pipelines that ISMS programmes are sometimes slow to fill. Integration of the ISMS with adjacent management systems (quality, IT service management, privacy, AI governance under ISO 42001) adds complexity but also efficiency opportunities.",
+    "indications": "Any organisation with a computing environment that must be secured in a structured manner to meet business, legal, regulatory, or industry requirements. Organisations pursuing or maintaining ISO/IEC 27001 certification, SOC 2 Type II examination, or BSI IT-Grundschutz certification. Organisations classified as essential or important entities under EU NIS2. Financial-sector entities subject to EU DORA. Organisations in regulated industries (financial services, healthcare, government, critical infrastructure, energy, telecommunications, postal, waste, chemicals, food, manufacturing, digital providers, research) where structured security management is mandated. Organisations whose management body is required to demonstrate cybersecurity accountability to regulators, certification bodies, customers, partners, or insurers. Organisations operating AI systems requiring ISO/IEC 42001 alignment. Organisations preparing for cyber-insurance underwriting or claim defence in an evidence-based market. Any organisation where security has become a board-level concern and structured governance is expected.",
+    "contraIndications": "There are no legitimate contra-indications at meaningful organisational scale. Very small organisations may operate a lighter management system -- proportionality (ISO Cl. 4.3, NIS2 Art. 21(1), DORA Art. 4 and Art. 15) is built into every framework -- and may forgo formal certification. The underlying principles, however, are universal: risk-based control selection, documented intent and operation, top-management ownership, periodic review and continual improvement apply regardless of size. The objection 'we are too small for an ISMS' typically conflates the ISMS with formal certification; the management capability is independent of the audit regime. Organisations that operate exclusively through managed SaaS without any custom systems, internal data, or sensitive customer relationships may find a lighter ISMS sufficient -- but the existence of any one of those (which is rare in practice) reintroduces the need for a structured management system.",
+    "threatResistance": "The ISMS does not directly mitigate technical threats -- those are owned by operational patterns. It mitigates twelve organisational and governance threats by ensuring that technical controls are selected based on risk, implemented correctly, operated consistently, monitored for effectiveness, and improved over time. The pattern explicitly addresses: governance failure where security decisions are made without structured risk assessment (T-IS-001); regulatory non-compliance and audit failure (T-IS-002); undetected security incidents persisting due to absent or weak monitoring (T-IS-003); control degradation and operational drift (T-IS-004); policy non-compliance by personnel (T-IS-007); knowledge loss and undocumented security processes (T-IS-008); supply chain security gaps including inherited and concentration risk (T-IS-009); concentration risk in shared GRC platforms or audit firms (T-IS-011); shadow AI usage outside ISMS scope (T-IS-012); cyber-insurance evidence failure (T-IS-013); multi-framework drift across ISO 27001, SOC 2, NIS2, DORA and ISO 42001 (T-IS-014); and management body insufficient training or competence (T-IS-015). Three operational threats are stewarded by sibling patterns and named here for completeness: T-IS-005 (inadequate incident response leading to escalated impact) is owned by SP-036 Incident Response; T-IS-006 (unmanaged vulnerabilities exploited before remediation) by SP-038 Vulnerability Management and Patching; T-IS-010 (inadequate physical and environmental protection enabling tampering, theft or environmental damage) by physical-security patterns including SP-022 Board Room and SP-016 DMZ Module. The ISMS requires their respective programmes to exist; the operational detail lives in those patterns.",
+    "roleResponsibilities": {
+      "introduction": "This pattern uses a three-tier role cut native to ISMS work: management body, ISMS lead, and control or asset owner. The cut differs from the developer / architect / business-owner cut used in operational OSA patterns because the audience differs -- this pattern speaks to security-management roles, not engineering roles. The <strong>management body</strong> is the board, executive committee, or equivalent collective leadership body responsible for the organisation's direction; under NIS2 Art. 20 and DORA Art. 5 its members may be personally accountable. The <strong>ISMS lead</strong> is the named accountable officer for the management system day-to-day -- the Information Security Manager, Senior Information Security Officer, IT-Sicherheitsbeauftragter (BSI), or CISO depending on context -- with a defined reporting line to the management body. <strong>Control or asset owners</strong> are the named individuals who implement and operate the controls in their domain and report on effectiveness. External roles (regulators, certification bodies, auditors, customers, insurers) are referenced where relevant but outside this matrix because they are outside the organisation's accountability boundary.",
+      "keyPrinciple": "The management body's most critical responsibilities are <strong>approving the ISMS scope and policy</strong>, <strong>defining the risk appetite</strong>, <strong>chairing periodic management review with documented decisions</strong>, and <strong>maintaining sufficient training to assess cybersecurity risks</strong>. NIS2 Art. 20 and DORA Art. 5 make these non-delegable; ISO Cl. 5.1 makes the commitment auditable; NIST GV.RR-01 makes leadership accountable for fostering a risk-aware, ethical, continually improving culture. Without explicit decisions from the management body, the ISMS lead makes them implicitly -- and will default to whichever interpretation is cheapest or easiest to defend in audit, which is rarely best for the business.",
+      "areas": [
+        {
+          "area": "Context, Scope and Stakeholders",
+          "controls": "PM-11, RA-03, RA-09, PL-10",
+          "managementBody": "Approves the ISMS scope statement, ratifies major scope changes (e.g., AI inclusion, geographic expansion, new sector entry, new regulatory regime), and signs off on the stakeholder register at least annually.",
+          "ismsLead": "Drafts and maintains the scope statement and stakeholder register. Runs the structured context analysis (PESTLE-style external issues plus internal issues plus dependencies) and presents findings to the management body.",
+          "controlOrAssetOwner": "Identifies their assets, processes, suppliers and dependencies that fall in scope. Reports scope-affecting changes (new systems, retired systems, new third parties, new AI usage) to the ISMS lead."
+        },
+        {
+          "area": "Leadership and Management Body Accountability",
+          "controls": "PM-01, PM-02, PM-03, PM-13, PM-29, PS-09",
+          "managementBody": "<strong>Demonstrates commitment</strong> by allocating resources, communicating the importance of security across the organisation, integrating ISMS requirements into business decisions, and participating personally in management review. <strong>Maintains required training</strong> (NIS2 Art. 20(2), DORA Art. 5(4)) to assess cybersecurity risks competently. Owns concentration-risk decisions and the organisation's overall security culture.",
+          "ismsLead": "Reports directly to the management body or to a member designated for cybersecurity. Maintains the role-responsibility matrix; ensures every accountability is explicitly assigned to a named individual; raises cultural and resource constraints to the management body; coordinates the named-officer relationships (Senior Information Security Officer / IT-SiBe / CISO) with HR and legal.",
+          "controlOrAssetOwner": "Receives and acknowledges assigned accountabilities. Reports control effectiveness, exceptions, and resourcing constraints upward through the ISMS lead. Models security-aware behaviour for direct reports."
+        },
+        {
+          "area": "Policy Framework",
+          "controls": "PL-01, PL-04, PL-09, AT-01, PS-01",
+          "managementBody": "<strong>Approves the top-level information security policy</strong> and ratifies major topic-specific policy changes. Authorises disciplinary consequences for material policy non-compliance.",
+          "ismsLead": "Drafts the policy framework hierarchy (top-level policy supported by topic-specific policies and procedures); manages policy lifecycle (drafting, approval, communication, training, periodic review); maintains compliance tracking against legal, regulatory and contractual obligations; owns multi-framework alignment decisions.",
+          "controlOrAssetOwner": "Implements policy in their domain; surfaces policy ambiguities or conflicts; reports compliance status; trains direct reports on relevant policies."
+        },
+        {
+          "area": "Risk Management and Treatment",
+          "controls": "RA-01, RA-02, RA-03, RA-07, RA-09, PM-09, PL-10, CA-05",
+          "managementBody": "<strong>Defines and approves the risk appetite</strong> (NIST GV.RM-02). Approves treatment decisions for risks above defined thresholds. Ratifies the control-applicability artefact (Statement of Applicability, CSF Profile, or BSI Modellierung).",
+          "ismsLead": "Owns the risk methodology; maintains the risk register; aggregates risks from control or asset owners; recommends treatment options (mitigate, accept, transfer, avoid); maintains the control-applicability artefact; reports risk posture and trend to the management body; manages the POA&M (CA-05).",
+          "controlOrAssetOwner": "Identifies risks in their domain; assesses likelihood and impact using the established methodology; implements approved treatment; reports residual risk back to the ISMS lead; owns the closure of POA&M items in their domain."
+        },
+        {
+          "area": "Resources, Competence and Documented Information",
+          "controls": "PM-03, PM-13, AT-01, AT-02, AT-03, PL-02, PL-04, AU-01, SA-02",
+          "managementBody": "Approves the ISMS resourcing plan (budget, headcount, tooling) and competence requirements for security-critical roles. Receives the documented-information artefact set as part of management review.",
+          "ismsLead": "Operates the documented-information lifecycle (creation, update, distribution, retention, disposal); manages the competence programme (training records, role-based competence, certifications, position descriptions); operates the named artefact set (policy, scope statement, risk register, control-applicability artefact, POA&M, audit reports, management-review minutes, performance-metrics dashboard, continuous-monitoring strategy, incident register, third-party register where applicable).",
+          "controlOrAssetOwner": "Maintains evidence for their domain (configuration baselines, control test results, exception logs, training completion); completes role-based training; produces and updates documented procedures for their controls."
+        },
+        {
+          "area": "Supplier and Third-Party Governance",
+          "controls": "SR-01, SR-02, SR-03, CA-03",
+          "managementBody": "<strong>Approves engagements with critical suppliers</strong> and accepts residual third-party risk. <strong>Owns concentration-risk decisions</strong> when many critical suppliers depend on the same upstream provider. Ratifies exit strategies for ICT third-party arrangements where required (DORA Art. 28(8)).",
+          "ismsLead": "Owns the third-party risk programme requirement (operational details delegated to SP-042). Coordinates with SP-042 on the supplier register, criticality tiering, due diligence, monitoring, and exit. Surfaces concentration risk to the management body. Maintains alignment with NIS2 Art. 21(2)(d) + Art. 22 and DORA Art. 28-30 where applicable.",
+          "controlOrAssetOwner": "Operates supplier relationships in their domain; reports supplier security-relevant changes (incidents, contract changes, M&A, exit triggers) to the ISMS lead and the SP-042 programme; maintains contract clauses meeting the organisation's minimum standards."
+        },
+        {
+          "area": "Performance Evaluation, Audit and Continual Improvement",
+          "controls": "CA-01, CA-02, CA-04, CA-05, CA-07, AU-01, PM-06, PM-31, PL-09",
+          "managementBody": "<strong>Chairs management review at planned intervals</strong> (minimum annually; ISO Cl. 9.3 and DORA Art. 6(4)+(5)). Receives audit reports and KPI dashboards; signs off corrective action; allocates additional resources where the cycle reveals gaps. Reviews the cyber-insurance evidence pipeline.",
+          "ismsLead": "Operates the internal audit programme with auditor independence (ISO Cl. 9.2). Operates the continuous-monitoring strategy (NIST PM-31) and performance-metrics pipeline (PM-06). Maintains the POA&M (CA-05) and the corrective-action process (ISO Cl. 10.2). Maintains framework mappings as a thin overlay (single internal control set; ISO 27001 / SOC 2 / NIS2 / DORA / ISO 42001 mapped on top) to mitigate T-IS-014 multi-framework drift.",
+          "controlOrAssetOwner": "Provides evidence on demand for their controls; closes findings within agreed timelines; maintains the metrics for their domain; participates in retrospectives after incidents and audits."
+        }
+      ]
+    }
   },
   "examples": {
     "ISMS platforms and GRC tools": [
-      "Vanta for automated evidence collection and continuous compliance monitoring",
-      "Drata for SOC 2 and ISO 27001 compliance automation",
-      "OneTrust GRC for integrated risk, compliance, and policy management",
-      "ServiceNow GRC for enterprise governance, risk, and compliance workflows"
+      "Vanta for automated evidence collection and continuous compliance monitoring against ISO 27001, SOC 2, NIST CSF, HIPAA, NIST AI RMF, and CIS frameworks",
+      "Drata for SOC 2 and ISO 27001 compliance automation with continuous control monitoring across 200+ integrations",
+      "Secureframe for multi-framework compliance automation (ISO 27001, SOC 2, HIPAA, PCI DSS, NIST AI RMF, FedRAMP)",
+      "OneTrust GRC for integrated risk, compliance and policy management across enterprise scale",
+      "ServiceNow GRC for enterprise governance, risk and compliance workflows with platform integration",
+      "Hyperproof for GRC programme management with multi-framework mapping",
+      "LogicGate Risk Cloud for risk and compliance automation"
     ],
     "Risk assessment methodologies": [
-      "ISO 27005 information security risk management framework",
-      "NIST SP 800-30 Guide for Conducting Risk Assessments",
-      "FAIR (Factor Analysis of Information Risk) for quantitative risk analysis",
-      "OCTAVE Allegro for rapid security risk assessment"
+      "ISO/IEC 27005:2022 information security risk management framework",
+      "NIST SP 800-30 Rev 1 Guide for Conducting Risk Assessments",
+      "FAIR (Factor Analysis of Information Risk) for quantitative cyber risk analysis",
+      "OCTAVE Allegro for rapid asset-based security risk assessment",
+      "BSI-Standard 200-3 for risk analysis on assets with Hoch / Sehr Hoch protection requirements"
     ],
-    "Audit and assessment": [
-      "ISO 27001 certification audit by accredited certification body (BSI, DNV, SGS)",
-      "SOC 2 Type II examination by licensed CPA firm",
-      "Internal audit programs using ISO 19011 audit management principles",
-      "Penetration testing and red team exercises as technical assessment components"
+    "Audit and certification": [
+      "ISO/IEC 27001:2022 certification audit by accredited certification bodies (BSI Group, DNV, SGS, Schellman, Bureau Veritas)",
+      "SOC 2 Type II examination by licensed CPA firms",
+      "BSI IT-Grundschutz certification (Basis-Absicherung, Standard-Absicherung, or Kern-Absicherung path)",
+      "TIBER-EU threat-led penetration testing under DORA Art. 26 (mandatory for in-scope significant financial entities)",
+      "Internal audit programmes using ISO 19011:2018 audit-management principles"
     ],
-    "Incident management platforms": [
-      "PagerDuty for incident alerting, escalation, and response coordination",
-      "Jira Service Management for incident workflow and tracking",
-      "TheHive open-source security incident response platform",
-      "Splunk SOAR (formerly Phantom) for incident response automation"
+    "Multi-framework mapping": [
+      "Common Controls Hub (CCH) for cross-framework control mapping across major standards",
+      "Secure Controls Framework (SCF) -- open metaframework with mappings to 200+ standards",
+      "OSA framework-coverage data (ISO 27001, ISO 27002, NIST CSF 2.0, NIS2, DORA, BSI Grundschutz, plus 50+ sectoral frameworks)",
+      "Unified Compliance Framework (UCF) for harmonised control mapping and authority documents",
+      "NIST SP 800-53 Rev 5 Appendix C cross-framework crosswalks"
+    ],
+    "Continuous monitoring and metrics": [
+      "NIST SP 800-53 PM-31 Continuous Monitoring Strategy as the documented telemetry roadmap",
+      "ISO/IEC 27004:2016 for ISMS measurement, monitoring, analysis and evaluation methodology",
+      "CIS Critical Security Controls Implementation Group benchmarks (IG1, IG2, IG3) for tiered control adoption",
+      "OWASP Software Assurance Maturity Model (SAMM) for development-side ISMS metrics",
+      "Continuous Compliance Maturity Model (CCMM) frameworks for evidence-pipeline maturity assessment"
     ],
     "Developing Areas": [
-      "Continuous compliance automation is replacing the traditional annual audit cycle, but tooling maturity varies significantly. Platforms like Vanta and Drata can automate evidence collection for perhaps 60-70% of ISO 27001 controls, yet the remaining controls still require manual judgement, and auditors are only beginning to accept machine-generated evidence as primary audit artifacts. The gap between what can be automated and what certification bodies will accept creates a transitional period where organisations run parallel manual and automated processes.",
-      "ISMS scope definition is being fundamentally challenged by cloud-native architectures and permanent remote work. Traditional scope boundaries assumed physical office locations and on-premises data centres, but when employees work from anywhere on personal networks and data resides across multiple cloud providers, the concept of a bounded ISMS scope becomes increasingly artificial. Emerging approaches treat scope as dynamic and identity-centric rather than location-based, but ISO 27001 certification audits have not yet fully adapted to this model.",
-      "Metrics-driven ISMS operation is still immature despite decades of information security management. Most organisations track lagging indicators (audit findings, incidents) rather than leading indicators that predict security posture degradation. Quantitative risk methodologies like FAIR are gaining traction but require data that few organisations systematically collect, and the industry lacks consensus on which security metrics genuinely correlate with risk reduction versus which are compliance theatre.",
-      "GRC platform integration remains fragmented, with most organisations operating multiple disconnected tools for risk registers, policy management, audit tracking, and compliance evidence. True platform convergence where a single system of record drives risk assessment, control mapping, evidence collection, and reporting is an emerging capability that fewer than 20% of enterprises have achieved. The proliferation of compliance frameworks (ISO 27001, SOC 2, NIST CSF, NIS2, DORA) intensifies the need for unified GRC but also increases mapping complexity.",
-      "AI-assisted ISMS operations are in early stages, with generative AI being applied to policy drafting, risk assessment narrative generation, and automated gap analysis against multiple frameworks. The challenge is ensuring AI-generated compliance artifacts reflect genuine organisational reality rather than plausible-sounding boilerplate, and regulators have not yet established positions on the acceptability of AI-assisted audit evidence."
+      "Continuous compliance automation is now table stakes but the maturity gap is widening. Platforms automate evidence collection for perhaps 60-70% of ISO 27001:2022 controls and similar percentages for SOC 2 and NIST CSF, yet the remaining controls -- those requiring judgement, organisational context, or human-process evidence -- still require manual artefact collection. Auditors and certification bodies are only beginning to accept machine-generated evidence as primary audit artefacts, creating a transitional period where organisations run parallel manual and automated processes. The maturity model is unsettled: ISO/IEC 27004 has not been refreshed to address continuous-compliance metrics, and the dominant platform vendors each define their own maturity rubrics. Expect a Common Continuous Compliance Maturity Model to emerge from the standards bodies in the 2026-2028 window.",
+      "ISMS scope definition is being challenged by three forces simultaneously: cloud-native architectures with shared-responsibility boundaries that shift with each provider release; permanent remote and hybrid work with employees on personal networks and devices; and AI usage that expands faster than the management system can re-scope. Traditional scope statements assumed physical office locations, on-premises data centres, and a stable supplier set. Emerging approaches treat scope as dynamic and identity-centric rather than location-based, but ISO 27001:2022 certification audits have not fully adapted. The DORA scope-by-Critical-or-Important-Function model and the NIS2 essential/important-entity classification offer a regulatory shape, but neither addresses scope velocity. Shadow AI is the most acute manifestation: when employees adopt consumer AI tools for sensitive work, the ISMS scope leaks faster than re-scoping cycles can compensate, requiring scope to become a continuously assessed property rather than an annual documented artefact.",
+      "Metrics-driven ISMS operation is still immature despite three decades of management-system practice. Most organisations track lagging indicators (audit findings, incidents, training completion) rather than leading indicators that predict security posture degradation. Quantitative methodologies like FAIR are gaining traction but require data that few organisations systematically collect. NIST PM-06 Measures of Performance and ISO/IEC 27004 provide the structural backbone but the industry lacks consensus on which security metrics genuinely correlate with risk reduction versus which are compliance theatre. AI-assisted analytics applied to ISMS telemetry is opening new measurement possibilities -- anomaly detection on control-effectiveness data, NLP analysis of audit findings to surface latent themes -- but is too new to have produced validated case studies.",
+      "GRC platform integration remains fragmented in 2026, with most organisations operating multiple disconnected tools for risk register, policy library, audit tracking, vendor management, evidence repository, and metrics dashboards. True platform convergence -- where a single system of record drives every ISMS process -- is an emerging capability that fewer than 25% of mid-market enterprises have achieved. Simultaneously, concentration risk in the dominant continuous-compliance platforms is rising: when a critical mass of an industry sector relies on the same SaaS GRC platform, an outage or compromise of that provider becomes a sector-level event. The DORA Art. 31-44 oversight framework for critical ICT third-party providers is the regulatory response, but its operational impact on GRC tooling vendors is still emerging. Open data formats (OSCAL, the Open Security Controls Assessment Language by NIST) may reduce platform lock-in but adoption remains limited.",
+      "DORA's oversight framework for critical ICT third-party providers (Articles 31-44) has begun reshaping the ICT supply landscape from January 2025 onwards. The European Supervisory Authorities (ESAs) designate critical providers -- likely including hyperscale cloud providers, dominant authentication services, and major application platforms -- and assign Lead Overseers with direct supervisory authority. The downstream effect on ISMS programmes is significant: previously the regulatory burden on a SaaS or cloud provider was indirect (via customer financial entities); now the provider can be supervised, examined, and required to remediate findings directly. Financial-entity ISMS programmes will need to monitor their providers' Lead-Overseer engagement, factor it into concentration-risk decisions, and update third-party registers and exit strategies accordingly. The first round of designations and supervisory actions in 2025-2026 will define the operating practice."
     ]
   },
   "references": [
     {
       "title": "ISO/IEC 27001:2022 Information Security Management Systems - Requirements",
       "url": "https://www.iso.org/standard/27001",
-      "note": "The definitive international standard for ISMS requirements. Specifies the management system structure, leadership requirements, planning, support, operation, performance evaluation, and improvement clauses that this pattern implements."
+      "note": "The canonical ISMS standard. Specifies the management-system structure (Clauses 4-10) and the normative Annex A control catalogue. The 2022 revision reorganised Annex A into four themes and added 11 new controls. The vocabulary spine of this pattern is taken from this standard."
     },
     {
       "title": "ISO/IEC 27002:2022 Information Security Controls",
       "url": "https://www.iso.org/standard/75652.html",
-      "note": "Companion to ISO 27001 providing detailed implementation guidance for the Annex A controls. Reorganised in 2022 into four themes: organisational, people, physical, and technological controls."
+      "note": "Companion to ISO 27001 providing implementation guidance for the Annex A controls. Reorganised in 2022 into four themes (organisational, people, physical, technological) with structured control attributes. Most controls are owned by sibling OSA patterns; this pattern owns the management-of-controls capability."
     },
     {
-      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls for Information Systems",
-      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
-      "note": "The control catalog from which this pattern's controls are drawn. The XX-01 policy controls across all families map to the ISMS documentation and governance requirements."
+      "title": "ISO/IEC 27003:2017 ISMS Implementation Guidance",
+      "url": "https://www.iso.org/standard/63417.html",
+      "note": "Implementation guidance for ISO 27001. Useful as a methodology reference for organisations establishing an ISMS for the first time, or formalising one that has grown organically."
     },
     {
-      "title": "NIST Cybersecurity Framework (CSF) 2.0",
+      "title": "ISO/IEC 27004:2016 Monitoring, Measurement, Analysis and Evaluation",
+      "url": "https://www.iso.org/standard/64120.html",
+      "note": "Guidance on ISMS measurement and metrics. Underutilised in practice; this pattern references it for the performance-evaluation discipline. A 2025-2026 refresh to address continuous-compliance metrics is overdue."
+    },
+    {
+      "title": "ISO/IEC 27005:2022 Information Security Risk Management",
+      "url": "https://www.iso.org/standard/80585.html",
+      "note": "Risk management framework aligned with ISO 31000. The methodology reference for KCA 4 risk management."
+    },
+    {
+      "title": "NIST Cybersecurity Framework 2.0 (2024)",
       "url": "https://www.nist.gov/cyberframework",
-      "note": "The NIST CSF Govern function aligns closely with ISMS governance requirements. CSF 2.0 explicitly added Govern as a core function, recognising that cybersecurity risk management requires organisational governance."
+      "note": "The 2024 revision elevated Govern to a first-class function alongside Identify, Protect, Detect, Respond and Recover. The six Govern categories (OC, RM, RR, PO, OV, SC) provided the structural decomposition for this pattern's seven Key Control Areas."
     },
     {
-      "title": "NIST SP 800-39: Managing Information Security Risk",
-      "url": "https://csrc.nist.gov/publications/detail/sp/800-39/final",
-      "note": "Framework for organisation-wide risk management across three tiers: organisation, mission/business process, and information system. Provides the risk management context within which the ISMS operates."
+      "title": "NIST SP 800-53 Rev 5: Security and Privacy Controls for Information Systems and Organizations",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+      "note": "The control catalogue from which this pattern's controls are drawn. The PM family (Program Management) provides the organisation-wide controls that constitute the management system itself, distinct from per-system controls in other families."
     },
     {
-      "title": "ISO 19011:2018 Guidelines for Auditing Management Systems",
-      "url": "https://www.iso.org/standard/70017.html",
-      "note": "Guidance on audit program management, audit planning and execution, and auditor competence. Essential reference for the internal audit function required by ISO 27001 Clause 9.2."
+      "title": "NIST SP 800-37 Rev 2: Risk Management Framework for Information Systems and Organizations",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-37/rev-2/final",
+      "note": "Defines the seven-step Risk Management Framework (Prepare, Categorise, Select, Implement, Assess, Authorise, Monitor). The Prepare and Monitor steps map onto ISO 27001 Clauses 4-7 and 9-10 respectively. Useful for organisations operating against both NIST and ISO obligations."
     },
     {
-      "title": "ISACA COBIT 2019 Framework",
-      "url": "https://www.isaca.org/resources/cobit",
-      "note": "IT governance framework that complements the ISMS by providing governance and management objectives for enterprise IT. COBIT's APO13 process specifically addresses information security management."
+      "title": "BSI-Standards 200-1, 200-2 and 200-3: IT-Grundschutz Methodology",
+      "url": "https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/it-grundschutz_node.html",
+      "note": "BSI's prescriptive methodology for ISMS implementation. 200-1 is the management system itself; 200-2 defines three implementation paths (Basis-Absicherung, Standard-Absicherung, Kern-Absicherung); 200-3 covers risk analysis for higher protection requirements. The most prescriptive method-led standard in this synthesis."
+    },
+    {
+      "title": "Directive (EU) 2022/2555 (NIS2) on Network and Information Security",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj",
+      "note": "EU directive expanding cybersecurity obligations to essential and important entities across critical sectors. Article 20 establishes management body personal liability and mandatory training; Article 21 lists ten mandatory minimum risk-management measures; Article 23 specifies the 24h/72h/1-month incident reporting cadence."
+    },
+    {
+      "title": "Regulation (EU) 2022/2554 (DORA) on Digital Operational Resilience",
+      "url": "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
+      "note": "EU regulation imposing structured ICT risk management on financial-sector entities. Article 5 requires a board-approved digital operational resilience strategy; Articles 28-30 mandate the ICT third-party register, due diligence, contract minima and exit strategies; Articles 26-27 mandate threat-led penetration testing for significant entities; Articles 31-44 establish direct EU oversight of critical ICT third-party providers."
+    },
+    {
+      "title": "ISO/IEC 42001:2023 Artificial Intelligence Management System",
+      "url": "https://www.iso.org/standard/81230.html",
+      "note": "Parallel management system standard for AI. This pattern cross-references ISO 42001 for organisations whose ISMS scope includes AI systems; SP-045 (AI Governance) operates the AI-specific controls. ISO 42001 and ISO 27001 are designed to integrate."
     }
   ],
   "relatedPatterns": [
-    "SP-014",
-    "SP-013",
     "SP-010",
-    "SP-025",
-    "SP-027"
+    "SP-013",
+    "SP-014",
+    "SP-029",
+    "SP-031",
+    "SP-032",
+    "SP-034",
+    "SP-035",
+    "SP-036",
+    "SP-038",
+    "SP-042",
+    "SP-045"
   ],
   "relatedPatternNames": [
-    "Awareness and Training",
-    "Data Security",
     "Identity Management",
-    "Advanced Monitoring and Detection",
-    "Secure AI Integration"
+    "Data Security",
+    "Awareness and Training",
+    "Zero Trust Architecture",
+    "Security Monitoring and Response",
+    "Modern Authentication",
+    "Cyber Resilience",
+    "Offensive Security Testing",
+    "Incident Response",
+    "Vulnerability Management and Patching",
+    "Third Party Risk Management",
+    "AI Governance and Responsible AI"
   ],
   "threats": [
     {
       "id": "T-IS-001",
-      "name": "Governance Failure (Security Decisions Without Risk Assessment)",
+      "name": "Governance failure where security decisions are made without structured risk assessment",
+      "description": "Without a documented risk methodology and an approved risk appetite, individual security decisions are made by whichever team encounters the question first. The result is inconsistent treatment across the organisation -- one business unit accepts what another mitigates -- and aggregate residual risk exceeds what management would have approved had it been visible. This pattern is the root cause of most ISO 27001 nonconformities under Clause 6.1 and is consistently the highest-impact organisational risk in mature ISMS programmes. RA-01 establishes the methodology, PM-09 the strategy, CA-01 the assessment authority and PL-01 the planning artefact that ties them together.",
       "mitigatedBy": [
         "RA-01",
-        "CA-01",
-        "PL-01"
+        "PM-09",
+        "PL-01",
+        "CA-01"
       ]
     },
     {
       "id": "T-IS-002",
-      "name": "Regulatory Non-Compliance and Audit Failure",
+      "name": "Regulatory non-compliance and audit failure leading to fines, certification loss or commercial impact",
+      "description": "Failure to demonstrate structured security management to regulators, certification bodies, customers or insurers translates directly into fines (NIS2 up to EUR 10M or 2% of global turnover; DORA equivalent), certification withdrawal, lost contracts and underwriting penalties. The threat materialises when assessment evidence cannot be produced on demand, when findings are not closed within stated timelines, or when monitoring data does not exist for periods the auditor samples. CA-02 (security assessments), CA-04 (security certification), CA-05 (POA&M) and CA-07 (continuous monitoring) together ensure the organisation can substantiate its claims with contemporaneous evidence rather than reconstructed artefacts.",
       "mitigatedBy": [
         "CA-02",
         "CA-04",
@@ -144,107 +257,137 @@
     },
     {
       "id": "T-IS-003",
-      "name": "Undetected Security Incidents",
+      "name": "Undetected security incidents persisting in the environment due to absent or weak monitoring capability",
+      "description": "An incident the organisation does not detect cannot be contained, and dwell-time studies consistently show that detection failure is the dominant factor in incident impact. The threat manifests where monitoring is partial, alerts are not triaged, or there is no documented monitoring strategy. PM-31 (Continuous Monitoring Strategy) is the documented telemetry roadmap; CA-07 (Continuous Monitoring) is the operational implementation; PM-06 (Measures of Performance) provides the metrics that show monitoring is working. Operational detail is owned by SP-031 Security Monitoring and Response; this pattern requires the strategy and metrics to exist.",
       "mitigatedBy": [
-        "IR-01",
-        "IR-04",
-        "IR-05",
-        "IR-06"
+        "CA-07",
+        "PM-31",
+        "PM-06"
       ]
     },
     {
       "id": "T-IS-004",
-      "name": "Control Degradation and Operational Drift",
+      "name": "Control degradation and operational drift where implemented controls silently lose effectiveness",
+      "description": "Controls that work on day one routinely stop working over time as systems are reconfigured, exceptions accumulate, monitoring gaps appear and ownership turns over. Without continuous monitoring (CA-07), periodic assessment (CA-02) and disciplined POA&M closure (CA-05), an organisation believes it is protected by controls that have effectively failed. Criticality analysis (RA-09) ensures that drift on the most critical components is detected first. The drift is invisible until an incident or audit forces it into view, by which point the residual risk has been carried for an unknown period.",
       "mitigatedBy": [
         "CA-07",
         "CA-02",
-        "RA-05",
-        "CM-01"
-      ]
-    },
-    {
-      "id": "T-IS-005",
-      "name": "Inadequate Incident Response Leading to Escalated Impact",
-      "mitigatedBy": [
-        "IR-04",
-        "IR-07",
-        "IR-06",
-        "IR-01"
-      ]
-    },
-    {
-      "id": "T-IS-006",
-      "name": "Unmanaged Vulnerabilities in Production Systems",
-      "mitigatedBy": [
-        "RA-05",
-        "SI-05",
-        "CA-05",
-        "CM-01"
+        "RA-09",
+        "CA-05"
       ]
     },
     {
       "id": "T-IS-007",
-      "name": "Policy Non-Compliance by Personnel",
+      "name": "Policy non-compliance by personnel due to weak awareness, training or enforcement",
+      "description": "Policies that are not understood, not followed and not enforced are decoration. The threat materialises through preventable incidents -- mishandled data, unauthorised access, social engineering success -- where the post-incident review traces back to a policy the personnel involved had never read or had read but not internalised. AT-01 establishes the awareness and training policy, AT-02 and AT-03 deliver the awareness and role-based training, PL-04 codifies rules of behaviour, and PS-01 covers the personnel security lifecycle. Without measurable awareness coverage, personnel are the highest-likelihood attack vector regardless of technical controls.",
       "mitigatedBy": [
         "AT-01",
-        "AC-01",
-        "PS-01",
-        "AC-13"
+        "AT-02",
+        "AT-03",
+        "PL-04",
+        "PS-01"
       ]
     },
     {
       "id": "T-IS-008",
-      "name": "Knowledge Loss and Undocumented Security Processes",
+      "name": "Knowledge loss and undocumented security processes when expertise leaves the organisation",
+      "description": "Security teams in the post-pandemic labour market have seen turnover rates of 20-30% annually, and an ISMS where critical knowledge resides only in individuals collapses when those individuals leave. Symptoms include incident response that depends on a single named person, control operation nobody can audit independently, and risk assessments whose methodology nobody can re-explain. PL-01 (planning policy) and PL-02 (system security plan) require documented operational detail; PS-09 (position descriptions) ties responsibilities to roles rather than individuals; AT-03 (role-based training) builds competence breadth; PM-13 (security and privacy workforce) ensures the workforce plan addresses succession.",
       "mitigatedBy": [
         "PL-01",
-        "IR-01",
-        "CP-01",
-        "AT-05"
+        "PL-02",
+        "PS-09",
+        "AT-03",
+        "PM-13"
       ]
     },
     {
       "id": "T-IS-009",
-      "name": "Third-Party and Supply Chain Security Gaps",
+      "name": "Third-party and supply chain security gaps creating inherited and concentration risk",
+      "description": "An organisation's security posture is bounded by the weakest link in its supply chain. Recent supply chain incidents -- SolarWinds, MOVEit, Okta, CrowdStrike -- demonstrate that a single supplier compromise can produce simultaneous incidents across hundreds of customer organisations, often with no contractual remedy proportionate to the loss. SR-01 (Supply Chain Risk Management Policy) and SR-02 (Supply Chain Risk Management Plan) establish the programme; SR-03 (Supply Chain Controls and Processes) provides operational controls; CA-03 (Information Exchange) governs the technical interconnections. Operational detail is owned by SP-042 Third-Party Risk Management; this pattern requires the programme to exist and be aligned with NIS2 Art. 21(2)(d) and DORA Art. 28-30 where applicable.",
       "mitigatedBy": [
-        "SA-01",
-        "CA-02",
-        "RA-01"
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "CA-03"
       ]
     },
     {
-      "id": "T-IS-010",
-      "name": "Inadequate Physical and Environmental Protection",
+      "id": "T-IS-011",
+      "name": "Concentration risk in shared GRC platforms and audit firms creating sector-level exposure",
+      "description": "Continuous-compliance platforms (Vanta, Drata, Secureframe, Hyperproof) and a small number of large audit firms now hold ISMS-critical evidence and credentials for substantial portions of entire industry sectors. A compromise, prolonged outage or systemic methodology error at one of these providers becomes a sector-level event rather than an isolated incident. PM-09 (Risk Management Strategy) requires explicit treatment of concentration risk in the risk strategy; SR-01 and SR-02 govern the supply chain dependency; RA-09 (Criticality Analysis) ranks the providers by criticality. The structural mitigation is to keep evidence portable and reproducible without the platform.",
       "mitigatedBy": [
-        "PE-01",
-        "MA-01",
-        "MP-01"
+        "PM-09",
+        "SR-01",
+        "SR-02",
+        "RA-09"
+      ]
+    },
+    {
+      "id": "T-IS-012",
+      "name": "Shadow AI usage outside ISMS scope expanding the attack surface faster than the management system can adapt",
+      "description": "Employees adopting consumer AI tools for sensitive work -- contract drafting, customer data analysis, source code review -- create unmanaged data flows that bypass every ISMS control over data classification, retention, vendor management and access. Treating shadow AI as an awareness problem is insufficient: the ISMS scope itself must absorb AI-system risk through alignment with ISO/IEC 42001 or NIST AI RMF, with explicit policy (PL-01), enforcement of acceptable-use boundaries (AT-01), risk methodology (RA-01), and continuous monitoring (CA-07) of which AI services receive enterprise data. PM-09 requires the risk strategy to recognise AI-system risk as a distinct category. Operational AI-specific controls live in SP-045 AI Governance.",
+      "mitigatedBy": [
+        "PM-09",
+        "RA-01",
+        "PL-01",
+        "AT-01",
+        "CA-07"
+      ]
+    },
+    {
+      "id": "T-IS-013",
+      "name": "Cyber-insurance evidence failure leading to coverage exclusions, claim denial or premium escalation",
+      "description": "Cyber-insurance underwriting has shifted from questionnaire-based assessment to evidence-based assessment, and organisations that cannot produce on-demand evidence of MFA coverage, EDR deployment, backup integrity, patching SLAs and IR readiness face premium increases, coverage exclusions or outright claim denial after an incident. CA-07 (continuous monitoring) and PM-31 (continuous monitoring strategy) provide the evidence pipeline; CA-05 (POA&M) closes findings in a way the underwriter can verify; AU-01 (audit and accountability policy) provides the evidentiary spine that makes the evidence defensible. The risk is not just financial -- a denied claim after a major incident also carries reputational and regulatory consequences.",
+      "mitigatedBy": [
+        "CA-07",
+        "PM-31",
+        "CA-05",
+        "AU-01"
+      ]
+    },
+    {
+      "id": "T-IS-014",
+      "name": "Multi-framework drift where ISO 27001, SOC 2, NIS2, DORA and ISO 42001 control sets diverge over time",
+      "description": "Organisations subject to multiple frameworks simultaneously frequently end up operating parallel control sets per framework, which then drift apart -- the same control is described differently, evidenced differently and remediated differently in each programme. Auditors increasingly cite the divergence as a finding under all the affected frameworks, and the maintenance overhead diverts resources from actual control improvement. PM-31 (continuous monitoring strategy) and CA-07 require a single monitoring backbone; PL-01 (planning) and CA-01 (assessment policy) require unified policy and assessment authority; PL-09 (Central Management) operationalises the single-set discipline. The architectural mitigation is a single internal control set with framework mappings maintained as a thin overlay rather than separate control implementations per framework.",
+      "mitigatedBy": [
+        "PM-31",
+        "CA-07",
+        "PL-01",
+        "CA-01",
+        "PL-09"
+      ]
+    },
+    {
+      "id": "T-IS-015",
+      "name": "Management body insufficient training or competence to discharge ISMS accountability under NIS2 and DORA",
+      "description": "NIS2 Article 20(2) and DORA Article 5(4) require members of the management body to maintain sufficient knowledge and skills to understand and assess cybersecurity risks. The threat materialises where the management body delegates cybersecurity competence wholesale to the CISO and treats ISMS oversight as a status-update exercise -- making approval decisions (risk appetite, scope changes, supplier engagements) without the technical literacy to evaluate trade-offs. Post-incident, regulators and prosecutors examine whether the management body could competently exercise its accountability; gaps invite personal liability under NIS2 Art. 20(1). PM-02 names the Senior Information Security Officer who supports the management body; PM-29 (Risk Management Program Leadership) names the senior-leadership risk role; AT-02 and AT-03 deliver the role-based training; PM-13 (Security and Privacy Workforce) ensures the workforce plan includes management-body competence as a workforce element.",
+      "mitigatedBy": [
+        "PM-02",
+        "PM-29",
+        "AT-02",
+        "AT-03",
+        "PM-13"
       ]
     }
   ],
   "controls": [
     {
-      "id": "AC-01",
-      "name": "Access Control Policies and Procedures",
-      "family": "AC",
-      "emphasis": "critical"
-    },
-    {
-      "id": "AC-13",
-      "name": "Supervision And Review -- Access Control",
-      "family": "AC",
-      "emphasis": "important"
-    },
-    {
       "id": "AT-01",
-      "name": "Security Awareness And Training Policy And Procedures",
+      "name": "Awareness And Training Policy And Procedures",
       "family": "AT",
       "emphasis": "important"
     },
     {
-      "id": "AT-05",
-      "name": "Contacts With Security Groups And Associations",
+      "id": "AT-02",
+      "name": "Security Awareness Training",
       "family": "AT",
-      "emphasis": "standard"
+      "emphasis": "important"
+    },
+    {
+      "id": "AT-03",
+      "name": "Role-Based Training",
+      "family": "AT",
+      "emphasis": "important"
     },
     {
       "id": "AU-01",
@@ -254,15 +397,21 @@
     },
     {
       "id": "CA-01",
-      "name": "Certification, Accreditation, And Security Assessment Policies And Procedures",
+      "name": "Assessment, Authorization, And Monitoring Policy And Procedures",
       "family": "CA",
       "emphasis": "critical"
     },
     {
       "id": "CA-02",
-      "name": "Security Assessments",
+      "name": "Control Assessments",
       "family": "CA",
       "emphasis": "critical"
+    },
+    {
+      "id": "CA-03",
+      "name": "Information Exchange",
+      "family": "CA",
+      "emphasis": "standard"
     },
     {
       "id": "CA-04",
@@ -274,7 +423,7 @@
       "id": "CA-05",
       "name": "Plan Of Action And Milestones",
       "family": "CA",
-      "emphasis": "important"
+      "emphasis": "critical"
     },
     {
       "id": "CA-07",
@@ -283,80 +432,104 @@
       "emphasis": "critical"
     },
     {
-      "id": "CM-01",
-      "name": "Configuration Management Policy And Procedures",
-      "family": "CM",
-      "emphasis": "important"
-    },
-    {
-      "id": "CP-01",
-      "name": "Contingency Planning Policy And Procedures",
-      "family": "CP",
-      "emphasis": "important"
-    },
-    {
-      "id": "IA-01",
-      "name": "Identification And Authentication Policy And Procedures",
-      "family": "IA",
-      "emphasis": "important"
-    },
-    {
       "id": "IR-01",
       "name": "Incident Response Policy And Procedures",
       "family": "IR",
-      "emphasis": "critical"
-    },
-    {
-      "id": "IR-04",
-      "name": "Incident Handling",
-      "family": "IR",
-      "emphasis": "important"
-    },
-    {
-      "id": "IR-05",
-      "name": "Incident Monitoring",
-      "family": "IR",
-      "emphasis": "important"
-    },
-    {
-      "id": "IR-06",
-      "name": "Incident Reporting",
-      "family": "IR",
-      "emphasis": "important"
-    },
-    {
-      "id": "IR-07",
-      "name": "Incident Response Assistance",
-      "family": "IR",
-      "emphasis": "standard"
-    },
-    {
-      "id": "MA-01",
-      "name": "System Maintenance Policy And Procedures",
-      "family": "MA",
-      "emphasis": "standard"
-    },
-    {
-      "id": "MP-01",
-      "name": "Media Protection Policy And Procedures",
-      "family": "MP",
-      "emphasis": "standard"
-    },
-    {
-      "id": "PE-01",
-      "name": "Physical And Environmental Protection Policy And Procedures",
-      "family": "PE",
       "emphasis": "standard"
     },
     {
       "id": "PL-01",
       "name": "Security Planning Policy And Procedures",
       "family": "PL",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PL-02",
+      "name": "System Security Plan",
+      "family": "PL",
       "emphasis": "important"
+    },
+    {
+      "id": "PL-04",
+      "name": "Rules Of Behavior",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-09",
+      "name": "Central Management",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PL-10",
+      "name": "Baseline Selection",
+      "family": "PL",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-01",
+      "name": "Information Security Program Plan",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-02",
+      "name": "Senior Information Security Officer",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-03",
+      "name": "Information Security And Privacy Resources",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-06",
+      "name": "Measures Of Performance",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-09",
+      "name": "Risk Management Strategy",
+      "family": "PM",
+      "emphasis": "critical"
+    },
+    {
+      "id": "PM-11",
+      "name": "Mission And Business Process Definition",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-13",
+      "name": "Security And Privacy Workforce",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-29",
+      "name": "Risk Management Program Leadership",
+      "family": "PM",
+      "emphasis": "important"
+    },
+    {
+      "id": "PM-31",
+      "name": "Continuous Monitoring Strategy",
+      "family": "PM",
+      "emphasis": "critical"
     },
     {
       "id": "PS-01",
       "name": "Personnel Security Policy And Procedures",
+      "family": "PS",
+      "emphasis": "important"
+    },
+    {
+      "id": "PS-09",
+      "name": "Position Descriptions",
       "family": "PS",
       "emphasis": "important"
     },
@@ -367,54 +540,64 @@
       "emphasis": "critical"
     },
     {
-      "id": "RA-05",
-      "name": "Vulnerability Scanning",
+      "id": "RA-02",
+      "name": "Security Categorization",
       "family": "RA",
       "emphasis": "important"
     },
     {
-      "id": "SA-01",
-      "name": "System And Services Acquisition Policy And Procedures",
-      "family": "SA",
-      "emphasis": "standard"
+      "id": "RA-03",
+      "name": "Risk Assessment",
+      "family": "RA",
+      "emphasis": "critical"
     },
     {
-      "id": "SC-01",
-      "name": "System And Communications Protection Policy And Procedures",
-      "family": "SC",
-      "emphasis": "standard"
+      "id": "RA-07",
+      "name": "Risk Response",
+      "family": "RA",
+      "emphasis": "critical"
     },
     {
-      "id": "SI-01",
-      "name": "System And Information Integrity Policy And Procedures",
-      "family": "SI",
+      "id": "RA-09",
+      "name": "Criticality Analysis",
+      "family": "RA",
       "emphasis": "important"
     },
     {
-      "id": "SI-05",
-      "name": "Security Alerts And Advisories",
-      "family": "SI",
+      "id": "SA-02",
+      "name": "Allocation Of Resources",
+      "family": "SA",
+      "emphasis": "important"
+    },
+    {
+      "id": "SR-01",
+      "name": "Supply Chain Risk Management Policy And Procedures",
+      "family": "SR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-02",
+      "name": "Supply Chain Risk Management Plan",
+      "family": "SR",
+      "emphasis": "critical"
+    },
+    {
+      "id": "SR-03",
+      "name": "Supply Chain Controls And Processes",
+      "family": "SR",
       "emphasis": "important"
     }
   ],
   "controlFamilySummary": {
-    "AC": 2,
-    "AT": 2,
+    "AT": 3,
     "AU": 1,
-    "CA": 5,
-    "CM": 1,
-    "CP": 1,
-    "IA": 1,
-    "IR": 5,
-    "MA": 1,
-    "MP": 1,
-    "PE": 1,
-    "PL": 1,
-    "PS": 1,
-    "RA": 2,
+    "CA": 6,
+    "IR": 1,
+    "PL": 5,
+    "PM": 9,
+    "PS": 2,
+    "RA": 5,
     "SA": 1,
-    "SC": 1,
-    "SI": 2
-  },
-  "$schema": "../schema/pattern.schema.json"
+    "SR": 3
+  }
 }

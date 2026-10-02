@@ -146,7 +146,10 @@ npm --prefix ~/osa/website run dev
 
 ## Skills
 
-OSA skills live in `~/osa/trident/.claude/skills/` (private repo). Current skills: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`, `review-spec`, `review-tests`.
+Two kinds, kept apart.
+
+- **Published, for anyone's agent**: `skills/` in this repo. `skills/osa-security-patterns/SKILL.md` teaches an agent to use the site in a few requests. The website serves it at `/skills/osa-security-patterns/SKILL.md` and links it from `llms.txt`. It names routes on the live site, so change it only when the routes it names are live, and keep its numbers (limits, sizes) in step with `llms.txt`.
+- **For maintaining OSA**: `~/osa/trident/.claude/skills/` (private repo). Current skills: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`, `review-spec`, `review-tests`.
 
 **Iterative improvement:** Skills should be improved in-context as issues are found. If a skill produces output that needs manual correction, or misses an edge case, fix the SKILL.md in the same session. Do not work around skill bugs — fix them.
 

@@ -1,16 +1,20 @@
 name: Validate JSON Data
 
+# skills/** is listed so that a change to a published skill rebuilds the
+# website, which serves it.
 on:
   push:
     branches: [main]
     paths:
       - 'data/**/*.json'
       - 'scripts/validate_json.py'
+      - 'skills/**'
   pull_request:
     branches: [main]
     paths:
       - 'data/**/*.json'
       - 'scripts/validate_json.py'
+      - 'skills/**'
 
 permissions:
   contents: read

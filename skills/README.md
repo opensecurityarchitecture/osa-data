@@ -4,7 +4,7 @@ Skill files that teach a coding agent to use OSA in a few requests instead of wo
 
 ## osa-security-patterns
 
-How to find the pattern for a kind of system, get its critical controls with their framework clauses and the threats each one mitigates, and read a framework's clause list. In two test runs, an agent given the skill made about half the requests of one left to work the site out.
+How to find the pattern for a kind of system, get its critical controls with their framework clauses and the threats each one mitigates, and read a framework's clause list. In a test of twelve runs on three tasks in October 2026, agents given the skill answered in a median of 12 requests and about three and a half minutes. Agents left to work the site out took 23 requests and five and a half minutes. Every answer in both groups was correct.
 
 Install for Claude Code, for one user:
 

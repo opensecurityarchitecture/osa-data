@@ -61,7 +61,7 @@
       ],
       "coverage_pct": 72,
       "rationale": "SA-03 system development lifecycle, SA-08 security engineering principles, SA-10 developer configuration management, and SA-11 developer testing provide a strong security-by-design development framework. SA-15 development process/standards and SA-17 developer security architecture ensure structured secure development. PL-08 security architecture and PM-07 enterprise architecture embed security into product design. SR-01/SR-02/SR-03 supply chain risk management addresses component-level security. PM-30 supply chain risk management strategy provides overarching governance.",
-      "gaps": "CRA Art. 10 imposes a general obligation for the entire product lifecycle from design through production and market availability, including CE marking and EU declaration of conformity. NIST 800-53 does not address product conformity assessment, CE marking procedures, or the manufacturer's ongoing obligation to monitor and ensure cybersecurity post-market. The EU market surveillance dimension is entirely absent."
+      "gaps": "CRA Art. 13 imposes a general obligation for the entire product lifecycle from design through production and market availability, including CE marking and EU declaration of conformity. NIST 800-53 does not address product conformity assessment, CE marking procedures, or the manufacturer's ongoing obligation to monitor and ensure cybersecurity post-market. The EU market surveillance dimension is entirely absent."
     },
     {
       "id": "CRA.I.2a",
@@ -93,11 +93,11 @@
       ],
       "coverage_pct": 78,
       "rationale": "CM-02 baseline configuration and CM-06 configuration settings establish secure defaults. CM-07 least functionality ensures minimal attack surface by default. SA-04 acquisition process can mandate secure defaults from suppliers. SA-08 security engineering principles support secure-by-default design. SC-28 protection of information at rest and SI-07 software/firmware/information integrity protect default configuration state.",
-      "gaps": "CRA explicitly requires a factory reset capability to return the product to its secure default state — NIST has no equivalent control for product reset mechanisms. CRA also mandates that default credentials must not be used and that initial configuration must be secure out-of-box without requiring user expertise, which is a product design obligation beyond NIST's organisational configuration management scope."
+      "gaps": "Annex I Part I (2)(b) requires a secure by default configuration, including the possibility to reset the product to its original state, unless otherwise agreed with a business user for a tailor-made product. NIST has no equivalent control for product reset mechanisms. Secure by default is a product design obligation beyond NIST's organisational configuration management scope."
     },
     {
       "id": "CRA.I.2c",
-      "title": "Vulnerability addressable through security updates — automatic update as default, opt-out available",
+      "title": "Vulnerabilities addressable through security updates — where applicable, automatic updates on by default with an opt-out",
       "controls": [
         "SI-02",
         "MA-01",
@@ -108,7 +108,7 @@
       ],
       "coverage_pct": 60,
       "rationale": "SI-02 flaw remediation is the primary control for patch management. MA-01/MA-02 maintenance policy and controlled maintenance address update procedures. CM-03 configuration change control governs how updates are applied. SA-22 unsupported system components addresses end-of-support scenarios. SI-07 ensures integrity of updates.",
-      "gaps": "CRA mandates that automatic security updates must be the default mechanism with a user opt-out option — a specific product design requirement absent from NIST. CRA requires updates to be separate from functionality updates, free of charge, and accompanied by advisory information. NIST treats patching as an organisational process, not a product capability. The CRA's requirement for the manufacturer to maintain update infrastructure for the entire support period (minimum 5 years) has no NIST equivalent."
+      "gaps": "Annex I Part I (2)(c) requires that vulnerabilities can be addressed through security updates including, where applicable, automatic security updates enabled as a default setting, with a clear and easy-to-use opt-out, notification of available updates and the option to postpone them temporarily. This is a product design requirement absent from NIST. Separation from functionality updates and free-of-charge distribution are Part II points (2) and (8), covered under CRA.II.2 and CRA.II.8. NIST treats patching as an organisational process, not a product capability. The manufacturer's duty to handle vulnerabilities for the whole support period (at least five years, or the expected use time if shorter, Art. 13(8)) has no NIST equivalent."
     },
     {
       "id": "CRA.I.2d",
@@ -206,7 +206,7 @@
     },
     {
       "id": "CRA.I.2i",
-      "title": "Minimise negative impact on availability/security of other devices and networks",
+      "title": "Minimise negative impact on the availability of services provided by other devices or networks",
       "controls": [
         "SC-07",
         "SC-44",
@@ -318,7 +318,7 @@
       ],
       "coverage_pct": 68,
       "rationale": "SI-02 flaw remediation is the primary patch management control. RA-05 vulnerability scanning identifies flaws requiring remediation. CM-03/CM-04 change control and impact analysis govern update processes. SA-11 developer testing ensures patches do not introduce regressions. SA-22 unsupported components addresses end-of-support remediation challenges.",
-      "gaps": "CRA imposes a strict timeliness obligation — vulnerabilities must be addressed 'without delay' once identified, which is more demanding than NIST's risk-based remediation timelines. CRA also requires the manufacturer to continue providing security updates for the entire support period (minimum 5 years), whereas NIST treats patching as a deploying organisation's responsibility. The manufacturer's ongoing legal duty to remediate is a product liability concept absent from NIST."
+      "gaps": "CRA imposes a strict timeliness obligation — vulnerabilities must be addressed 'without delay' once identified, which is more demanding than NIST's risk-based remediation timelines. CRA also requires the manufacturer to continue providing security updates for the entire support period (minimum 5 years), whereas NIST treats patching as a deploying organisation's responsibility. The manufacturer's ongoing legal duty to remediate is a product liability concept absent from NIST. Point (2) also requires that, where technically feasible, new security updates are provided separately from functionality updates, a product design requirement absent from NIST."
     },
     {
       "id": "CRA.II.3",
@@ -358,7 +358,7 @@
       ],
       "coverage_pct": 30,
       "rationale": "PM-15 security groups and associations and PM-16 threat awareness programme support participation in vulnerability disclosure ecosystems. SI-05 security alerts and IR-06 incident reporting provide partial frameworks for handling disclosures. However, NIST controls address the receiving side of vulnerability disclosure, not establishing a manufacturer's CVD policy.",
-      "gaps": "CRA mandates manufacturers implement a coordinated vulnerability disclosure (CVD) policy in accordance with ISO/IEC 29147 or equivalent. This requires publishing a CVD policy, accepting reports from external researchers, confirming receipt, providing timelines, and coordinating with CSIRT/ENISA. NIST 800-53 does not address manufacturer-side CVD processes — it assumes the organisation is a consumer of vulnerability information, not a producer/coordinator. The specific ISO 29147 alignment requirement is entirely outside NIST scope."
+      "gaps": "Annex I Part II (5) requires manufacturers to put in place and enforce a policy on coordinated vulnerability disclosure (CVD). The Regulation does not name a standard for the policy or prescribe its content. Point (6) adds a contact address for reporting vulnerabilities, and Annex II point 2 requires the user information to say where the policy can be found. NIST 800-53 does not address manufacturer-side CVD processes: it assumes the organisation is a consumer of vulnerability information, not a producer or coordinator."
     },
     {
       "id": "CRA.II.6",
@@ -395,7 +395,7 @@
       ],
       "coverage_pct": 25,
       "rationale": "SI-02 flaw remediation addresses the patching process. SI-05 security alerts provides a framework for communicating advisory information with updates. However, NIST does not address the economics of update distribution or mandate that updates be free.",
-      "gaps": "CRA mandates that security updates be provided free of charge, disseminated without delay, and accompanied by advisory information including severity, affected products, and user actions required. The free-of-charge requirement is a commercial/legal obligation entirely outside NIST's scope. NIST does not govern pricing of security updates or mandate specific advisory content format. CRA also distinguishes security updates from functionality updates, requiring they be separable — a product design requirement absent from NIST."
+      "gaps": "Annex I Part II (8) requires that security updates are disseminated without delay and, unless otherwise agreed with a business user for a tailor-made product, free of charge, accompanied by advisory messages giving users the relevant information, including on potential action to be taken. The free-of-charge requirement is a commercial/legal obligation entirely outside NIST's scope. NIST does not govern pricing of security updates or mandate advisory content. Separation of security updates from functionality updates is Part II point (2), covered under CRA.II.2."
     },
     {
       "id": "CRA.Info.1",
@@ -544,7 +544,7 @@
     },
     {
       "id": "CRA.Art14",
-      "title": "Incident reporting — 24-hour early warning to CSIRT/ENISA, 72-hour notification, 14-day final report",
+      "title": "Reporting obligations — 24-hour early warning, 72-hour notification, final report (14 days after a fix for an exploited vulnerability, one month for a severe incident)",
       "controls": [
         "IR-01",
         "IR-05",
@@ -555,7 +555,7 @@
       ],
       "coverage_pct": 40,
       "rationale": "IR-06 incident reporting provides a general incident reporting framework. IR-01 policy, IR-05 incident monitoring, and IR-08 incident response plan establish response processes. PM-15 security groups and associations supports external coordination. SI-05 security alerts addresses information sharing. However, NIST addresses internal and US-federal reporting, not EU CSIRT/ENISA reporting.",
-      "gaps": "CRA mandates a three-stage reporting obligation to national CSIRTs and ENISA: (1) 24-hour early warning upon becoming aware of an actively exploited vulnerability or severe incident, (2) 72-hour incident notification with initial assessment and IoCs, (3) 14-day final report with root cause analysis, remediation status, and cross-border impact assessment. These are strict legal deadlines with penalties for non-compliance. NIST IR-06 requires incident reporting but does not prescribe specific timeframes or mandatory reporting to EU authorities. The ENISA single reporting platform and cross-border coordination requirements are entirely EU-specific regulatory obligations outside NIST's scope."
+      "gaps": "CRA Art. 14 mandates three-stage reporting, through the single reporting platform, to the CSIRT designated as coordinator and to ENISA: (1) an early warning within 24 hours of becoming aware of an actively exploited vulnerability or a severe incident, (2) a notification within 72 hours giving the general nature of the vulnerability or incident and any corrective or mitigating measures, (3) a final report. For an actively exploited vulnerability the final report is due no later than 14 days after a corrective or mitigating measure is available (Art. 14(2)(c)). For a severe incident it is due within one month of the incident notification (Art. 14(4)(c)) and covers the likely root cause and the mitigation measures applied. These are legal deadlines with penalties for non-compliance. NIST IR-06 requires incident reporting but does not prescribe specific timeframes or mandatory reporting to EU authorities. The single reporting platform and the roles of the coordinator CSIRT and ENISA are EU-specific regulatory obligations outside NIST's scope."
     }
   ],
   "summary": {

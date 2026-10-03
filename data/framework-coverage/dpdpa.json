@@ -1,0 +1,867 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "dpdpa",
+  "framework_name": "India DPDPA",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "OSA's own analysis of the Digital Personal Data Protection Act, 2023 (No. 22 of 2023) and the Digital Personal Data Protection Rules, 2025 (G.S.R. 846(E), 13 November 2025) against SP 800-53 Rev 5. No published crosswalk between the DPDPA and SP 800-53 was found. The DPDPA is a data protection law: many of its requirements are legal obligations that security and privacy controls support and do not discharge, so expect low coverage for consent, notice and rights. Clause ids: Act.N is a section of the Act, Rules.N a rule, Rules.SchN a Schedule to the Rules. Validate with qualified data protection professionals for compliance or audit use.",
+    "jurisdictions": [
+      "IN"
+    ],
+    "applicability_type": "mandatory",
+    "analysis": {
+      "basis": "OSA's own analysis. No published crosswalk between the DPDPA and SP 800-53 was found in NIST's catalogue of registered crosswalks.",
+      "checked": "2026-10-03",
+      "texts": [
+        {
+          "title": "The Digital Personal Data Protection Act, 2023 (No. 22 of 2023)",
+          "published": "Gazette of India Extraordinary, Part II Section 1, No. 25, 11 August 2023",
+          "sha256": "4deb23981d3010c8225a2ff6149e7243dc2268455b299e283afebdd7b72a7d15"
+        },
+        {
+          "title": "Digital Personal Data Protection Rules, 2025",
+          "published": "G.S.R. 846(E), 13 November 2025, Gazette of India Extraordinary, Part II Section 3(i), English text",
+          "sha256": "63bc7ca508ae4ebbbbf8731d336914d94ee6067e918b719d019193371fcc0763"
+        }
+      ],
+      "controls": "SP 800-53 Rev 5.2.0 base controls. An enhancement that addresses a clause counts for its base control. Controls that Rev 5 withdrew are not used.",
+      "method": "Each clause was rated three times, independently, against the control statements, by AI models. A control is listed for a clause where at least two of the three ratings named it. The coverage figure is the median of the three estimates.",
+      "pairs_named_by_three": 140,
+      "pairs_named_by_two": 55,
+      "pairs_named_by_one_and_left_out": 78,
+      "not_mapped": "Definitions, the duties of Data Principals (section 15), exemptions (section 17, rule 12, Fourth Schedule), the constitution and procedure of the Board (sections 18 to 26, rules 17 to 21), appeals (sections 29 to 32, rule 22) and sections 34, 35 and 37 to 44."
+    }
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "Act.4",
+      "title": "Grounds for processing personal data",
+      "controls": [
+        "PT-02",
+        "PT-03",
+        "PT-04"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PT-02 has the organisation determine and document the authority that permits processing and restrict processing to what is authorised. PT-03 restricts processing to the documented purposes. PT-04 provides the means for individuals to consent before collection.",
+      "gaps": "Whether a purpose is lawful, and whether a use falls within the legitimate uses of section 7, is a legal judgement that no control makes."
+    },
+    {
+      "id": "Act.5(1)",
+      "title": "Notice with or before a request for consent",
+      "controls": [
+        "PT-03",
+        "PT-04",
+        "PT-05"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PT-05 requires a notice in plain language that states the purposes of processing, and its just-in-time notice enhancement presents it when the data is asked for. PT-03 requires the purposes to be described in notices. PT-04 provides the consent mechanism the notice accompanies.",
+      "gaps": "The notice must also say how to withdraw consent, how to use the grievance mechanism and how to complain to the Board. SP 800-53 does not prescribe that content."
+    },
+    {
+      "id": "Act.5(2)",
+      "title": "Notice where consent was given before commencement",
+      "controls": [
+        "PT-03",
+        "PT-05"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PT-05 requires notice when an individual first interacts with the organisation and again at a defined frequency, and PT-03 requires the purposes to be described. Together they support a notice to people whose consent predates the Act.",
+      "gaps": "No control requires a one-off notice to existing Data Principals after a change in the law, or sets when it is due."
+    },
+    {
+      "id": "Act.5(3)",
+      "title": "Notice available in English or a scheduled language",
+      "controls": [
+        "PT-05"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PT-05 requires the notice to be clear, easy to understand and in plain language.",
+      "gaps": "The choice of English or a language in the Eighth Schedule to the Constitution is not addressed."
+    },
+    {
+      "id": "Act.6(1)",
+      "title": "Consent: free, specific, informed, limited to necessary data",
+      "controls": [
+        "PT-03",
+        "PT-04",
+        "SA-08",
+        "SI-12"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PT-04 requires consent mechanisms that support an informed decision, and its tailored consent enhancement lets an individual limit consent to selected data. PT-03 ties processing to stated purposes. SA-08 (minimization) and SI-12 (limit personally identifiable information elements) keep the data to what the purpose needs.",
+      "gaps": "That consent is free, unconditional and unambiguous with a clear affirmative action is a legal standard for the design of the consent request. SP 800-53 does not set it."
+    },
+    {
+      "id": "Act.6(3)",
+      "title": "Request for consent in clear and plain language",
+      "controls": [
+        "PM-20",
+        "PT-04",
+        "PT-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "PT-04 and PT-05 require consent requests and notices that support an informed decision in plain language. PM-20 gives the public a way to reach the senior official for privacy.",
+      "gaps": "The language options, and stating the contact details of the Data Protection Officer or authorised person in the request itself, are not addressed."
+    },
+    {
+      "id": "Act.6(4)",
+      "title": "Right to withdraw consent with comparable ease",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PT-04 (revocation) requires tools or mechanisms for individuals to revoke consent.",
+      "gaps": "That withdrawal must be as easy as giving consent is not stated."
+    },
+    {
+      "id": "Act.6(6)",
+      "title": "Cease processing on withdrawal of consent, including by processors",
+      "controls": [
+        "PT-02",
+        "PT-04",
+        "SA-09"
+      ],
+      "coverage_pct": 40,
+      "rationale": "PT-04 (revocation) provides the means to withdraw. PT-02 restricts processing to what is authorised, which ends when consent does. SA-09 requires external providers to comply with the organisation's privacy requirements, which carries the instruction to processors.",
+      "gaps": "No control sets a time within which processing must stop, or requires proof that processors have stopped."
+    },
+    {
+      "id": "Act.6(7)-(9)",
+      "title": "Consent through a registered Consent Manager",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 20,
+      "rationale": "PT-04 requires tools or mechanisms for consent, which a Consent Manager's platform can be.",
+      "gaps": "Accepting consent through a registered Consent Manager, and that body's accountability and registration, are outside SP 800-53."
+    },
+    {
+      "id": "Act.6(10)",
+      "title": "Proof that notice was given and consent obtained",
+      "controls": [
+        "AU-10"
+      ],
+      "coverage_pct": 45,
+      "rationale": "AU-10 requires irrefutable evidence that an individual performed a defined action, which can cover giving consent and being shown the notice.",
+      "gaps": "The actions covered by AU-10 are chosen by the organisation. No control requires a record of each notice and consent kept so that it can be produced in a proceeding."
+    },
+    {
+      "id": "Act.7",
+      "title": "Certain legitimate uses without consent",
+      "controls": [
+        "PT-02",
+        "PT-03"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PT-02 requires the authority for each kind of processing to be determined and documented, which is where a legitimate use is recorded. PT-03 restricts processing to the purpose the use allows.",
+      "gaps": "Whether a case falls within one of the nine legitimate uses is a legal judgement. The conditions on processing by the State are not addressed."
+    },
+    {
+      "id": "Act.8(1)",
+      "title": "Responsibility for compliance, including processing by a Data Processor",
+      "controls": [
+        "PM-18",
+        "PM-19",
+        "SA-09"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PM-18 and PM-19 establish a privacy programme and an accountable senior official. SA-09 requires external providers to comply with the organisation's privacy requirements, and requires the organisation to define its oversight of them and monitor their compliance.",
+      "gaps": "The Act makes the Data Fiduciary answerable for a Data Processor's acts whatever the contract says. Controls support that responsibility and do not create it."
+    },
+    {
+      "id": "Act.8(2)",
+      "title": "Data Processor engaged only under a valid contract",
+      "controls": [
+        "SA-04",
+        "SA-09"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SA-04 requires security and privacy requirements in the acquisition contract. SA-09 requires external service providers to comply with them.",
+      "gaps": "That processing may take place only under a valid contract is a legal condition. SP 800-53 assumes a contract and governs its content."
+    },
+    {
+      "id": "Act.8(3)",
+      "title": "Completeness, accuracy and consistency of personal data",
+      "controls": [
+        "PM-22",
+        "SI-18"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-18 requires the accuracy, relevance, timeliness and completeness of personal data to be checked across its life cycle and inaccurate data corrected or deleted. PM-22 requires organisation-wide policies and procedures for the same.",
+      "gaps": "Consistency of data disclosed to another Data Fiduciary is not named."
+    },
+    {
+      "id": "Act.8(4)",
+      "title": "Technical and organisational measures to observe the Act",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-14",
+        "PM-18",
+        "PM-19",
+        "PT-01",
+        "SA-08"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-18 and PM-19 establish the privacy programme and its leadership, and PT-01 the policy and procedures for processing personal data. SA-08 applies privacy engineering principles to systems. CA-02, CA-07 and PM-14 assess and monitor whether the measures work.",
+      "gaps": "The measures are those the organisation selects. No control tests them against each provision of the Act and the Rules."
+    },
+    {
+      "id": "Act.8(5)",
+      "title": "Reasonable security safeguards to prevent personal data breach",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AU-06",
+        "CP-09",
+        "IA-02",
+        "IR-04",
+        "RA-03",
+        "RA-05",
+        "SA-09",
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "RA-03 and RA-05 identify risk and vulnerabilities. AC-03, AC-06 and IA-02 control access. SC-07, SC-08, SC-12, SC-13 and SC-28 protect data at boundaries, in transit and at rest. SI-02, SI-03, SI-04 and SI-07 keep systems patched, free of malicious code, monitored and intact. AU-06 and IR-04 detect and handle incidents, CP-09 keeps backups, and SA-09 extends the requirements to processors.",
+      "gaps": "What is reasonable is for the Board to judge after a breach. Rule 6 sets the minimum, mapped clause by clause as Rules.6(1)(a) to (g)."
+    },
+    {
+      "id": "Act.8(6)",
+      "title": "Intimation of a personal data breach to the Board and Data Principals",
+      "controls": [
+        "IR-06",
+        "IR-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IR-06 requires incidents to be reported to defined authorities. IR-08 (breaches) requires the incident response plan to include a process for deciding whether notice to individuals and oversight bodies is needed.",
+      "gaps": "The Act requires intimation of every personal data breach to the Board and to each affected Data Principal, with no threshold of harm. The form and timing are in rule 7."
+    },
+    {
+      "id": "Act.8(7)",
+      "title": "Erasure when consent is withdrawn or the purpose is served",
+      "controls": [
+        "MP-06",
+        "SA-09",
+        "SI-12",
+        "SI-21"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SI-12 (information disposal) and SI-21 require information to be erased after its retention period or when no longer needed, and MP-06 sanitises the media. SA-09 carries the requirement to processors.",
+      "gaps": "Erasure triggered by withdrawal of consent, and causing a processor to erase, are not stated as such."
+    },
+    {
+      "id": "Act.8(9)",
+      "title": "Publish contact information of a person who answers questions",
+      "controls": [
+        "PM-19",
+        "PM-20",
+        "PM-26"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-19 appoints a senior official for privacy. PM-20 requires a public page through which people can reach that official, and PM-26 a process for answering questions from individuals.",
+      "gaps": "Publishing the business contact information in the manner the Rules prescribe is not addressed."
+    },
+    {
+      "id": "Act.8(10)",
+      "title": "Effective mechanism to redress grievances",
+      "controls": [
+        "PM-26"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PM-26 requires a process for receiving and responding to complaints, concerns and questions from individuals, with mechanisms that are easy to use, tracking of each complaint and a response within a defined period.",
+      "gaps": ""
+    },
+    {
+      "id": "Act.9(1)",
+      "title": "Verifiable consent of parent or lawful guardian",
+      "controls": [
+        "IA-12",
+        "PT-04",
+        "PT-07"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PT-04 requires consent mechanisms, and PT-07 lets the organisation set conditions for a specific category of personal data such as that of children. IA-12 requires identity evidence to be collected, validated and verified, which is the means of verifying a parent or guardian.",
+      "gaps": "No control requires a parent's or guardian's consent, or defines a child as a person under eighteen. Rules 10 and 11 set how the consent is verified."
+    },
+    {
+      "id": "Act.9(2)",
+      "title": "No processing detrimental to the well-being of a child",
+      "controls": [
+        "PT-07",
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 30,
+      "rationale": "RA-03 and RA-08 assess the likelihood and impact of adverse effects on individuals from processing their personal data. PT-07 applies conditions to specific categories of personal data.",
+      "gaps": "No control sets a test of detriment to a child's well-being or forbids processing that fails it."
+    },
+    {
+      "id": "Act.9(3)",
+      "title": "No tracking, behavioural monitoring or targeted advertising directed at children",
+      "controls": [
+        "PT-02",
+        "PT-07"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-02 restricts processing to what is authorised and PT-07 applies conditions to specific categories of personal data. An organisation can use them to bar tracking, behavioural monitoring and targeted advertising for children's data.",
+      "gaps": "The prohibition itself is not in SP 800-53. The controls enforce a rule the organisation must write."
+    },
+    {
+      "id": "Act.10(2)(a)",
+      "title": "Significant Data Fiduciary: Data Protection Officer",
+      "controls": [
+        "PM-19"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-19 requires a senior official for privacy with the authority, accountability and resources to run the privacy programme.",
+      "gaps": "That the officer is based in India, answers to the board of directors and is the point of contact for grievances is not addressed."
+    },
+    {
+      "id": "Act.10(2)(b)",
+      "title": "Significant Data Fiduciary: independent data auditor",
+      "controls": [
+        "CA-02"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-02 requires control assessments by a selected assessor, and its independent assessors enhancement requires independence.",
+      "gaps": "A data audit evaluates compliance with the Act, which is wider than an assessment of selected controls. The appointment of an auditor is not addressed."
+    },
+    {
+      "id": "Act.10(2)(c)",
+      "title": "Significant Data Fiduciary: periodic impact assessment and audit",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "RA-08 requires privacy impact assessments and RA-03 a risk assessment that includes adverse effects on individuals. CA-02 and CA-07 provide the periodic assessment and continuing monitoring.",
+      "gaps": "RA-08 is triggered by new systems and new collections, where the Act requires the assessment periodically. The description of Data Principals' rights that the assessment must contain is not addressed."
+    },
+    {
+      "id": "Act.11",
+      "title": "Right to access information about personal data",
+      "controls": [
+        "AC-03",
+        "CM-13",
+        "PM-05",
+        "PM-21"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AC-03 (individual access) requires mechanisms for individuals to see their personal data. PM-21 requires an accounting of disclosures with the recipient of each, available to the individual on request. CM-13 and PM-05 (inventory of personally identifiable information) record the processing from which a summary is drawn.",
+      "gaps": "A summary of processing activities, and naming every Data Processor the data was shared with, go beyond what the controls require to be given to the individual."
+    },
+    {
+      "id": "Act.12(2)",
+      "title": "Right to correction, completion and updating",
+      "controls": [
+        "PM-22",
+        "SI-18"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SI-18 (individual requests) requires personal data to be corrected or deleted on request by the individual. PM-22 requires procedures for correcting inaccurate or outdated data.",
+      "gaps": "Completing incomplete data on request is not named."
+    },
+    {
+      "id": "Act.12(3)",
+      "title": "Right to erasure",
+      "controls": [
+        "SI-12",
+        "SI-18"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SI-18 (individual requests) requires deletion on request. SI-12 (information disposal) requires erasure after the retention period.",
+      "gaps": "The exceptions, where retention is necessary for the specified purpose or for compliance with a law, are legal judgements."
+    },
+    {
+      "id": "Act.13",
+      "title": "Right of grievance redressal",
+      "controls": [
+        "PM-26"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PM-26 requires a complaint process with mechanisms that are readily accessible, tracking, acknowledgement and a response within a defined period.",
+      "gaps": ""
+    },
+    {
+      "id": "Act.14",
+      "title": "Right to nominate",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No control addresses nomination of another individual to exercise a Data Principal's rights on death or incapacity.",
+      "gaps": "The whole clause. It needs a process for recording nominations and for verifying a nominee who later makes a request."
+    },
+    {
+      "id": "Act.16",
+      "title": "Transfer of personal data outside India",
+      "controls": [
+        "AC-04",
+        "CM-12",
+        "SA-09"
+      ],
+      "coverage_pct": 40,
+      "rationale": "CM-12 records where personal data is processed and stored. AC-04 enforces rules on the flow of information between systems. SA-09 (processing, storage and service location) restricts the locations a provider may use.",
+      "gaps": "Which countries are restricted is set by notification. The controls enforce a restriction once the organisation has turned it into a flow or location rule."
+    },
+    {
+      "id": "Act.27-33",
+      "title": "Inquiry by the Board, directions and penalties",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No control addresses the Board's powers of inquiry, its directions or the penalties.",
+      "gaps": "The whole clause. An organisation needs to be able to produce documents and records to the Board and to act on its directions."
+    },
+    {
+      "id": "Act.36",
+      "title": "Furnishing information called for by the Central Government",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No control addresses a requirement to furnish information to the Central Government.",
+      "gaps": "The whole clause."
+    },
+    {
+      "id": "Rules.3",
+      "title": "Content of the notice",
+      "controls": [
+        "PT-03",
+        "PT-04",
+        "PT-05"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PT-05 requires a notice in plain language stating the purposes of processing. PT-03 requires the purposes to be described, and PT-04 requires that the individual can make an informed decision.",
+      "gaps": "An itemised description of the personal data, a notice that stands on its own, and links for withdrawing consent, exercising rights and complaining to the Board are not prescribed."
+    },
+    {
+      "id": "Rules.4",
+      "title": "Consent Manager: registration, conditions and governance obligations",
+      "controls": [
+        "PT-04"
+      ],
+      "coverage_pct": 10,
+      "rationale": "PT-04 requires tools or mechanisms for individuals to consent, which is what the platform provides.",
+      "gaps": "The conditions of registration and the governance obligations, on incorporation, net worth, conflict of interest, sub-contracting and change of control, have no counterpart in SP 800-53."
+    },
+    {
+      "id": "Rules.6(1)(a)",
+      "title": "Security safeguards: encryption, obfuscation, masking or virtual tokens",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "SI-19"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SC-28 protects data at rest and SC-08 data in transit, with SC-13 and SC-12 for the cryptography and its keys. SI-19 (removal, masking, encryption, hashing or replacement of direct identifiers) covers obfuscation, masking and tokens.",
+      "gaps": ""
+    },
+    {
+      "id": "Rules.6(1)(b)",
+      "title": "Security safeguards: control of access to computer resources",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "AC-17",
+        "IA-02",
+        "IA-05",
+        "PE-03"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AC-02, AC-03 and AC-06 manage accounts, enforce authorisations and apply least privilege. IA-02 and IA-05 identify and authenticate users and manage authenticators. AC-17 governs remote access and PE-03 physical access.",
+      "gaps": ""
+    },
+    {
+      "id": "Rules.6(1)(c)",
+      "title": "Security safeguards: logs, monitoring and review of access",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-06",
+        "AU-07",
+        "AU-12",
+        "IR-04",
+        "SI-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "AU-02, AU-03 and AU-12 define, fill and generate audit records. AU-06 and AU-07 review and analyse them and support investigation. SI-04 monitors for unauthorised access, and IR-04 handles the incident and applies the lessons to prevent recurrence.",
+      "gaps": ""
+    },
+    {
+      "id": "Rules.6(1)(d)",
+      "title": "Security safeguards: continued processing, such as data backups",
+      "controls": [
+        "CP-02",
+        "CP-06",
+        "CP-07",
+        "CP-09",
+        "CP-10"
+      ],
+      "coverage_pct": 90,
+      "rationale": "CP-09 requires backups and CP-10 recovery to a known state. CP-02 plans for continued operation, with CP-06 and CP-07 for alternate storage and processing.",
+      "gaps": ""
+    },
+    {
+      "id": "Rules.6(1)(e)",
+      "title": "Security safeguards: logs and personal data retained for one year",
+      "controls": [
+        "AU-11",
+        "SI-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-11 requires audit records to be retained for a defined period to support investigation of incidents. SI-12 manages retention of information in line with applicable law.",
+      "gaps": "The period of one year is a value the organisation must set in both controls."
+    },
+    {
+      "id": "Rules.6(1)(f)",
+      "title": "Security safeguards: provision in the contract with a Data Processor",
+      "controls": [
+        "SA-04",
+        "SA-09"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-04 requires security and privacy requirements in the contract. SA-09 requires external providers to comply with them and to be monitored.",
+      "gaps": ""
+    },
+    {
+      "id": "Rules.6(1)(g)",
+      "title": "Security safeguards: measures to ensure the safeguards are observed",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-01",
+        "PM-14",
+        "SI-06"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-01 sets out the security programme. CA-02 and CA-07 assess and monitor the controls, PM-14 keeps testing, training and monitoring in operation, and SI-06 verifies that security and privacy functions work.",
+      "gaps": "The measures are those the organisation selects. No control checks them against rule 6 item by item."
+    },
+    {
+      "id": "Rules.7(1)",
+      "title": "Intimation of a breach to each affected Data Principal",
+      "controls": [
+        "IR-04",
+        "IR-08"
+      ],
+      "coverage_pct": 50,
+      "rationale": "IR-08 (breaches) requires a process for deciding whether to notify individuals and for assessing the harm to them. IR-04 handles the incident and produces the facts and the measures taken.",
+      "gaps": "Notice to every affected Data Principal without delay, through her account or registered contact, with the five stated items, is not prescribed."
+    },
+    {
+      "id": "Rules.7(2)",
+      "title": "Intimation of a breach to the Board, with detail within seventy-two hours",
+      "controls": [
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-08"
+      ],
+      "coverage_pct": 65,
+      "rationale": "IR-06 requires incident information to be reported to defined authorities. IR-05 tracks and documents incidents, IR-04 establishes cause and remedy, and IR-08 (breaches) covers notice to oversight bodies.",
+      "gaps": "The two stages, a first intimation without delay and detail within seventy-two hours, and the six items of the detailed report, are values and content the organisation must add."
+    },
+    {
+      "id": "Rules.8(1)",
+      "title": "Erasure after the period in the Third Schedule",
+      "controls": [
+        "MP-06",
+        "SI-12",
+        "SI-21"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-12 (information disposal) requires erasure after the retention period and SI-21 deletion when information is no longer needed. MP-06 sanitises the media.",
+      "gaps": "The three-year period counted from the Data Principal's last approach, for the classes in the Third Schedule, must be built by the organisation."
+    },
+    {
+      "id": "Rules.8(2)",
+      "title": "Inform the Data Principal forty-eight hours before erasure",
+      "controls": [
+        "PM-22",
+        "SI-18"
+      ],
+      "coverage_pct": 15,
+      "rationale": "SI-18 (notice of correction or deletion) and PM-22 require individuals to be told that their personal data has been deleted.",
+      "gaps": "Both tell the person after the event. The rule requires notice at least forty-eight hours before, with the chance to prevent the erasure."
+    },
+    {
+      "id": "Rules.8(3)",
+      "title": "Personal data, traffic data and logs retained for at least one year",
+      "controls": [
+        "AU-11",
+        "SI-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-11 requires audit records to be retained for a defined period. SI-12 manages retention of information in line with applicable law, with disposal afterwards.",
+      "gaps": "Keeping the personal data and traffic data themselves for at least a year after processing is a value the organisation must set."
+    },
+    {
+      "id": "Rules.9",
+      "title": "Contact information published on the website or app and in responses",
+      "controls": [
+        "PM-19",
+        "PM-20",
+        "PM-26"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-19 appoints the official. PM-20 requires a public page through which people can reach that official, and PM-26 mechanisms for questions that are readily accessible to the public.",
+      "gaps": "Stating the contact information in every response to a rights request is not addressed."
+    },
+    {
+      "id": "Rules.10",
+      "title": "Verifiable consent for a child: the parent is an identifiable adult",
+      "controls": [
+        "IA-12",
+        "PT-04",
+        "PT-07"
+      ],
+      "coverage_pct": 60,
+      "rationale": "IA-12 requires identity evidence to be collected, validated and verified, and its enhancement accepts identities proofed by another party, which fits a token from an authorised entity. PT-04 provides the consent mechanism and PT-07 the conditions for children's data.",
+      "gaps": "Checking that the person giving consent is an adult and is the parent, and the choice of evidence the rule allows, are not addressed."
+    },
+    {
+      "id": "Rules.11",
+      "title": "Verifiable consent for a person with disability: the guardian's appointment",
+      "controls": [
+        "IA-12",
+        "PT-04"
+      ],
+      "coverage_pct": 20,
+      "rationale": "IA-12 requires identity evidence to be validated and verified. PT-04 provides the consent mechanism.",
+      "gaps": "Verifying that a guardian was appointed by a court, a designated authority or a local level committee is not addressed."
+    },
+    {
+      "id": "Rules.13(1)-(2)",
+      "title": "Significant Data Fiduciary: impact assessment and audit every twelve months, reported to the Board",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-27",
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "RA-08 and RA-03 provide the impact assessment, and CA-02 and CA-07 the audit and continuing monitoring. PM-27 requires privacy reports to be sent to oversight bodies.",
+      "gaps": "The twelve-month cycle and a report of significant observations to the Board are values and content the organisation must add."
+    },
+    {
+      "id": "Rules.13(3)",
+      "title": "Significant Data Fiduciary: due diligence on technical measures and algorithmic software",
+      "controls": [
+        "CM-04",
+        "RA-03",
+        "RA-08",
+        "SA-11"
+      ],
+      "coverage_pct": 50,
+      "rationale": "RA-08 requires a privacy impact assessment before technology that processes personal data is developed or procured. CM-04 analyses the privacy impact of changes, RA-03 assesses adverse effects on individuals, and SA-11 requires developers to test and evaluate.",
+      "gaps": "Algorithmic software is not named, and none of the controls is framed as a check on risk to the rights of Data Principals."
+    },
+    {
+      "id": "Rules.13(4)",
+      "title": "Significant Data Fiduciary: specified personal data kept within India",
+      "controls": [
+        "AC-04",
+        "CM-12",
+        "SA-09",
+        "SC-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CM-12 records where the data is processed and stored. AC-04 and SC-07 control the flow of data across the boundary. SA-09 (processing, storage and service location) restricts where a provider may hold it.",
+      "gaps": "Which personal data is restricted is specified by the Central Government. Traffic data about the flow is not named."
+    },
+    {
+      "id": "Rules.14(1)-(2)",
+      "title": "Means of exercising rights published on the website or app",
+      "controls": [
+        "PM-20",
+        "PM-26"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-20 requires a public page about the privacy programme through which people can reach the organisation. PM-26 requires mechanisms that are easy to use, with the information needed to use them.",
+      "gaps": "Publishing the means of making each kind of rights request, and the identifier a requester must give, is not prescribed."
+    },
+    {
+      "id": "Rules.14(3)",
+      "title": "Grievances answered within a published period of not more than ninety days",
+      "controls": [
+        "PM-20",
+        "PM-26"
+      ],
+      "coverage_pct": 80,
+      "rationale": "PM-26 requires complaints to be tracked and answered within a defined period. PM-20 makes the programme's information public.",
+      "gaps": "The limit of ninety days, and publishing the period, are values and content the organisation must add."
+    },
+    {
+      "id": "Rules.14(4)",
+      "title": "Means of nominating another individual",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No control addresses the means by which a Data Principal nominates another individual.",
+      "gaps": "The whole clause."
+    },
+    {
+      "id": "Rules.15",
+      "title": "Transfer outside India subject to requirements set by the Central Government",
+      "controls": [
+        "AC-04",
+        "AC-21",
+        "CM-12",
+        "SA-09"
+      ],
+      "coverage_pct": 35,
+      "rationale": "CM-12 records where personal data is held. AC-04 enforces rules on flows and AC-21 on sharing with a partner. SA-09 (processing, storage and service location) restricts the locations a provider may use.",
+      "gaps": "The requirements are whatever the Central Government specifies about making data available to a foreign State. The controls enforce them once they are turned into rules."
+    },
+    {
+      "id": "Rules.23",
+      "title": "Furnishing information to the Central Government, without disclosure where required",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No control addresses furnishing information to the Central Government, or keeping that furnishing from the Data Principal.",
+      "gaps": "The whole clause."
+    },
+    {
+      "id": "Rules.Sch1.A.9",
+      "title": "Consent Manager: independent certification of the platform and its measures",
+      "controls": [
+        "CA-02"
+      ],
+      "coverage_pct": 40,
+      "rationale": "CA-02 (independent assessors) requires controls to be assessed by an assessor independent of the organisation.",
+      "gaps": "Certification against the data protection standards and assurance framework that the Board publishes is not addressed."
+    },
+    {
+      "id": "Rules.Sch1.B.2",
+      "title": "Consent Manager: shared personal data not readable by it",
+      "controls": [
+        "SC-08",
+        "SC-12",
+        "SC-13"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SC-08 protects the confidentiality of data in transit, with SC-13 and SC-12 for the cryptography and its keys.",
+      "gaps": "The controls protect data from others. That the Consent Manager itself cannot read what it carries depends on who holds the keys, which is a design choice the controls allow and do not require."
+    },
+    {
+      "id": "Rules.Sch1.B.3-4",
+      "title": "Consent Manager: record of consents, notices and sharing, kept seven years",
+      "controls": [
+        "AC-03",
+        "AU-11",
+        "PM-21",
+        "SI-12"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-21 requires an accounting of each disclosure of personal data, retained and available to the individual. AC-03 (individual access) gives the Data Principal access to the record. AU-11 and SI-12 govern how long it is kept.",
+      "gaps": "A record of consents given, denied and withdrawn and of the notices shown, in machine-readable form and kept for seven years, is not prescribed."
+    },
+    {
+      "id": "Rules.Sch1.B.7",
+      "title": "Consent Manager: reasonable security safeguards",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AU-06",
+        "CP-09",
+        "IA-02",
+        "IR-04",
+        "RA-03",
+        "RA-05",
+        "SA-09",
+        "SC-07",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "The same obligation as Act.8(5), applied to a Consent Manager. The controls and the figure are that clause's.",
+      "gaps": "As for Act.8(5)."
+    },
+    {
+      "id": "Rules.Sch1.B.12",
+      "title": "Consent Manager: audit mechanisms, with the outcome reported to the Board",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-27"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-02 and CA-07 assess and monitor technical and organisational controls. PM-27 requires reports to oversight bodies.",
+      "gaps": "Audit of the conditions of registration and of the obligations under the Act, and reporting when the Board directs, are not addressed."
+    },
+    {
+      "id": "Rules.Sch2",
+      "title": "Standards for processing by the State and for research, archiving or statistics",
+      "controls": [
+        "AC-03",
+        "PM-19",
+        "PM-20",
+        "PM-22",
+        "PM-25",
+        "PT-02",
+        "PT-03",
+        "PT-05",
+        "SA-08",
+        "SC-08",
+        "SC-28",
+        "SI-12",
+        "SI-18"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-02 and PT-03 keep processing lawful and within its purpose. SA-08 (minimization), SI-12 (limit personally identifiable information elements) and PM-25 limit the data, PM-25 for research in particular. SI-18 and PM-22 keep it accurate and SI-12 governs retention. AC-03, SC-08 and SC-28 are among the safeguards. PT-05 and PM-20 give the notice and the contact, and PM-19 the accountable person.",
+      "gaps": "The safeguards item is as wide as Act.8(5) and only three of its controls are listed here. The standards apply to the State and to research, archiving and statistics, which the controls do not single out."
+    }
+  ],
+  "summary": {
+    "total_clauses": 65,
+    "average_coverage": 55.2,
+    "full_count": 10,
+    "substantial_count": 17,
+    "partial_count": 25,
+    "weak_count": 8,
+    "none_count": 5
+  }
+}

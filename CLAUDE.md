@@ -57,6 +57,8 @@ data/
 │   └── _catalog.json
 ├── attack/
 │   └── metadata.json -> osa-trident     # Symlink — provenance, version info, graph summary
+├── nist/
+│   └── sp800-53-rev5.json               # SP 800-53 Release 5.2.0 as NIST publishes it. Generated, not edited
 ├── verticals/
 │   └── financial-services.json          # FS vertical profile with threat profiles
 └── schema/
@@ -65,6 +67,14 @@ data/
     ├── framework-coverage.schema.json
     └── attack-metadata.schema.json      # Validates metadata.json
 ```
+
+## One source for what NIST says
+
+`data/nist/sp800-53-rev5.json` holds every control and enhancement of SP 800-53 Release 5.2.0: name, statement, discussion, related controls, baselines, and whether it was withdrawn and into what. `scripts/build_nist_extract.py` builds it from three things NIST publishes (the CPRT export, the OSCAL catalogue and the four OSCAL baseline profiles) and compares them with each other.
+
+The same facts are also written in the control files, in `data/controls/_manifest.json` and as control names inside the patterns. `scripts/sync_nist.py` writes them there from the extract, and `scripts/validate_json.py` fails if any copy differs. `MANAGED` in `sync_nist.py` lists what is in step so far. Do not hand-edit a managed fact in a control file: change the source and run the sync.
+
+This exists because of October 2026. The baselines were corrected in the control files and the manifest's copy was missed, so the website's controls list went on showing the old ones.
 
 ## Naming Conventions
 

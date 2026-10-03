@@ -110,26 +110,21 @@ def main():
         validated += 1
         print(f"  OK: {filepath.name}")
 
-    # The manifest keeps its own copy of each control's name, family and
-    # baselines, and the website's controls list reads that copy. It must say
-    # what the control's file says.
-    manifest_path = controls_dir / "_manifest.json"
-    if manifest_path.exists():
-        with open(manifest_path, 'r', encoding='utf-8') as f:
-            manifest = json.load(f)
-        copied = ("id", "name", "family", "family_name", "baseline_low", "baseline_moderate", "baseline_high")
-        for entry in manifest.get("controls", []):
-            control_path = controls_dir / entry.get("file", "")
-            if not control_path.is_file():
-                print(f"  FAIL: _manifest.json - {entry.get('id')} names a file that is not there: {entry.get('file')}")
-                errors += 1
-                continue
-            with open(control_path, 'r', encoding='utf-8') as f:
-                control = json.load(f)
-            differing = [k for k in copied if entry.get(k) != control.get(k)]
-            if differing:
-                print(f"  FAIL: _manifest.json - {entry.get('id')} differs from {entry.get('file')} in: {', '.join(differing)}")
-                errors += 1
+    # What NIST says about a control is written in one place, data/nist/, and
+    # copied into the control files, the control manifest and the patterns.
+    # sync_nist.py keeps the copies in step. Here it only reports.
+    if (DATA_DIR / "nist" / "sp800-53-rev5.json").exists():
+        sys.path.insert(0, str(Path(__file__).parent))
+        import sync_nist
+        print("\nNIST SP 800-53 (" + ", ".join(sync_nist.MANAGED) + "):")
+        differences = sync_nist.sync(write=False)
+        for line in differences:
+            print(f"  FAIL: {line}")
+        if differences:
+            print("  Run: python3 scripts/sync_nist.py")
+        else:
+            print("  OK: control files, manifest and patterns agree with data/nist/sp800-53-rev5.json")
+        errors += len(differences)
 
     # Validate ATT&CK data
     attack_dir = DATA_DIR / "attack"

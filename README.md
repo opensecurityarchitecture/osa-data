@@ -13,6 +13,7 @@ Each pattern names the controls that matter for a kind of system, says which are
 - **56 pattern files** in `data/patterns/`: SP-000 to SP-054 and SP-999. SP-000 is the style reference and SP-999 is a rendering test.
 - **315 controls** in `data/controls/`: NIST SP 800-53 Rev 5, across 20 families. Each control file lists its clauses in every framework under `compliance_mappings`. The 17 controls that Rev 5 withdrew are marked, with the controls they moved into.
 - **87 framework coverage files** in `data/framework-coverage/`. For each clause of a framework: the controls that address it, a coverage estimate, the rationale and the gaps.
+- **NIST's own text** in `data/nist/sp800-53-rev5.json`: every control and enhancement of SP 800-53 Release 5.2.0 with its name, statement, discussion, related controls and baselines, built from NIST's published files.
 - **Schemas** in `data/schema/` for patterns, controls and coverage files.
 - **A skill for AI agents** in `skills/osa-security-patterns/`. It teaches a coding agent to answer a question from OSA in a few requests. See [skills/README.md](skills/README.md).
 
@@ -41,6 +42,7 @@ data/
 │   ├── _manifest.json
 │   └── _catalog.json
 ├── framework-coverage/   # one file per framework
+├── nist/                 # SP 800-53 as NIST publishes it, generated
 ├── verticals/            # industry profiles
 ├── templates/            # policy templates
 └── schema/               # JSON schemas
@@ -70,6 +72,8 @@ A new framework mapping needs three things:
 3. An entry in the website's framework registry. The site's source is not in this repository, so we add that.
 
 In the pull request, say what the mapping is based on: a published crosswalk, which you should name, or your own analysis.
+
+What NIST says about a control (its baselines today, and its name, statement and discussion as each is brought into line) is not edited in the control files. It is written there from `data/nist/sp800-53-rev5.json` by `scripts/sync_nist.py`, and the validator fails if a copy differs. A correction to NIST's text belongs in the source: rebuild the file with `scripts/build_nist_extract.py`.
 
 ## Licence
 

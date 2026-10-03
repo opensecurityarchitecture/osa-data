@@ -89,7 +89,8 @@ This exists because of October 2026. The baselines were corrected in the control
 1. Create `data/patterns/SP-NNN-descriptive-title.json` following the schema
 2. Add entry to `data/patterns/_manifest.json`
 3. Create SVG diagram at `../website/public/images/sp-NNN-descriptive-title.svg`
-4. That's it — the website reads the manifest and renders automatically
+4. Run `python3 scripts/sync_nist.py`, which gives each control the pattern lists its name as NIST has it. The validator fails on a name that differs
+5. That's it — the website reads the manifest and renders automatically
 
 ## Pattern Schema Key Fields
 

@@ -11,7 +11,7 @@ Each pattern names the controls that matter for a kind of system, says which are
 ## What's here
 
 - **56 pattern files** in `data/patterns/`: SP-000 to SP-054 and SP-999. SP-000 is the style reference and SP-999 is a rendering test.
-- **315 controls** in `data/controls/`: NIST SP 800-53 Rev 5, across 20 families. Each control file lists its clauses in every framework under `compliance_mappings`. The 17 controls that Rev 5 withdrew are marked, with the controls they moved into.
+- **317 controls** in `data/controls/`: NIST SP 800-53 Rev 5, across 20 families. That is all 300 controls of Release 5.2.0 and the 17 withdrawn ones that OSA's older patterns still name. Each control file lists its clauses in every framework under `compliance_mappings`. The 17 controls that Rev 5 withdrew are marked, with the controls they moved into.
 - **87 framework coverage files** in `data/framework-coverage/`. For each clause of a framework: the controls that address it, a coverage estimate, the rationale and the gaps.
 - **NIST's own text** in `data/nist/sp800-53-rev5.json`: every control and enhancement of SP 800-53 Release 5.2.0 with its name, statement, discussion, related controls and baselines, built from NIST's published files.
 - **Schemas** in `data/schema/` for patterns, controls and coverage files.

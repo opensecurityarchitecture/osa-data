@@ -117,7 +117,7 @@ def main():
         sys.path.insert(0, str(Path(__file__).parent))
         import sync_nist
         print("\nNIST SP 800-53 (" + ", ".join(sync_nist.MANAGED) + "):")
-        differences = sync_nist.sync(write=False)
+        differences = sync_nist.sync(write=False) + sync_nist.MISSING
         for line in differences:
             print(f"  FAIL: {line}")
         if differences:

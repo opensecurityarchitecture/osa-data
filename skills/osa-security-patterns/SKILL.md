@@ -13,7 +13,7 @@ Licence: CC BY-SA 4.0. Credit "Open Security Architecture, opensecurityarchitect
 
 Base URL: `https://www.opensecurityarchitecture.org`. No key needed.
 
-1. **Find the pattern.** `GET /llms.txt` lists every pattern with a one-line scope, in about 4,000 tokens. Or search: `GET /api/v1/patterns?search=card+payment`. Every word must match. Hits are ranked and carry a `score`: each word adds 4 if it is in the title, 2 if in the summary, 1 if only in the body. A hit that scores 1 or 2 is a weak match.
+1. **Find the pattern.** `GET /llms.txt` lists every pattern with a one-line scope, in about 4,000 tokens. Or search: `GET /api/v1/patterns?search=card+payment`. Every word must match. Hits are ranked and carry a `score`: each word adds 4 if it is in the title, 2 if in the summary, 1 if only in the body, and a query of several words adds 3 when it appears whole as a phrase. Deprecated patterns are left out. A hit that scores 1 or 2 is a weak match.
 2. **Get the answer.** `GET /api/v1/patterns/{id}/crosswalk?framework={ids}&emphasis=critical` returns each control, its emphasis, the threat ids it mitigates in that pattern, and its clauses in up to five frameworks. Leave out `emphasis` for every control. `pattern.control_counts` gives the totals for the whole pattern. If you need no framework clauses, the pattern's card is enough: it lists each critical control with the threats it mitigates.
 3. **Choose other patterns that apply, if asked.** Start from the scopes in `llms.txt`. To compare candidates, read their cards: `GET /patterns/{id}.md`, about 1,000 tokens each, with scope, when to use it, when not to, controls by emphasis, what each critical control mitigates, each threat with its controls, and a `Related` line.
 

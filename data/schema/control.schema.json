@@ -80,8 +80,44 @@
     },
 
     "enhancements": {
-      "type": "string",
-      "description": "Control enhancement descriptions (legacy format)"
+      "type": "array",
+      "description": "NIST's enhancements of the control, in number order. Written from data/nist/sp800-53-rev5.json by scripts/sync_nist.py.",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}-\\d{2}\\(\\d{2}\\)$",
+            "description": "For example AC-02(03)"
+          },
+          "name": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string",
+            "description": "NIST's statement of the enhancement. A withdrawn enhancement has none."
+          },
+          "baselines": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["low", "moderate", "high", "privacy"]
+            },
+            "description": "The NIST baselines that include the enhancement"
+          },
+          "withdrawn": {
+            "type": "boolean"
+          },
+          "incorporated_into": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "For a withdrawn enhancement, what NIST moved it into"
+          }
+        }
+      }
     },
 
     "baseline_low": {

@@ -5,9 +5,57 @@
   "family": "MA",
   "family_name": "Maintenance",
   "control_class": "Operational",
-  "description": "a. Approve and monitor nonlocal maintenance and diagnostic activities; b. Allow the use of nonlocal maintenance and diagnostic tools only as consistent with organizational policy and documented in the security plan for the system; c. Employ strong authentication in the establishment of nonlocal maintenance and diagnostic sessions; d. Maintain records for nonlocal maintenance and diagnostic activities; and e. Terminate session and network connections when nonlocal maintenance is completed.",
+  "description": "a. Approve and monitor nonlocal maintenance and diagnostic activities;\nb. Allow the use of nonlocal maintenance and diagnostic tools only as consistent with organizational policy and documented in the security plan for the system;\nc. Employ strong authentication in the establishment of nonlocal maintenance and diagnostic sessions;\nd. Maintain records for nonlocal maintenance and diagnostic activities; and\ne. Terminate session and network connections when nonlocal maintenance is completed.",
   "supplemental_guidance": "Nonlocal maintenance and diagnostic activities are conducted by individuals who communicate through either an external or internal network. Local maintenance and diagnostic activities are carried out by individuals who are physically present at the system location and not communicating across a network connection. Authentication techniques used to establish nonlocal maintenance and diagnostic sessions reflect the network access requirements in IA-02. Strong authentication requires authenticators that are resistant to replay attacks and employ multi-factor authentication. Strong authenticators include PKI where certificates are stored on a token protected by a password, passphrase, or biometric. Enforcing requirements in MA-04 is accomplished, in part, by other controls. [SP 800-63B] provides additional guidance on strong authentication and authenticators.",
-  "enhancements": "",
+  "enhancements": [
+    {
+      "id": "MA-04(01)",
+      "name": "Logging and Review",
+      "statement": "a. Log [Assignment: organization-defined audit events] for nonlocal maintenance and diagnostic sessions; and\nb. Review the audit records of the maintenance and diagnostic sessions to detect anomalous behavior.",
+      "baselines": []
+    },
+    {
+      "id": "MA-04(02)",
+      "name": "Document Nonlocal Maintenance",
+      "withdrawn": true,
+      "incorporated_into": [
+        "MA-01",
+        "MA-04"
+      ]
+    },
+    {
+      "id": "MA-04(03)",
+      "name": "Comparable Security and Sanitization",
+      "statement": "a. Require that nonlocal maintenance and diagnostic services be performed from a system that implements a security capability comparable to the capability implemented on the system being serviced; or\nb. Remove the component to be serviced from the system prior to nonlocal maintenance or diagnostic services; sanitize the component (for organizational information); and after the service is performed, inspect and sanitize the component (for potentially malicious software) before reconnecting the component to the system.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "MA-04(04)",
+      "name": "Authentication and Separation of Maintenance Sessions",
+      "statement": "Protect nonlocal maintenance sessions by:\na. Employing [Assignment: organization-defined authenticators that are replay resistant]; and\nb. Separating the maintenance sessions from other network sessions with the system by either:\n1. Physically separated communications paths; or\n2. Logically separated communications paths.",
+      "baselines": []
+    },
+    {
+      "id": "MA-04(05)",
+      "name": "Approvals and Notifications",
+      "statement": "a. Require the approval of each nonlocal maintenance session by [Assignment: organization-defined personnel or roles]; and\nb. Notify the following personnel or roles of the date and time of planned nonlocal maintenance: [Assignment: organization-defined personnel or roles].",
+      "baselines": []
+    },
+    {
+      "id": "MA-04(06)",
+      "name": "Cryptographic Protection",
+      "statement": "Implement the following cryptographic mechanisms to protect the integrity and confidentiality of nonlocal maintenance and diagnostic communications: [Assignment: organization-defined cryptographic mechanisms].",
+      "baselines": []
+    },
+    {
+      "id": "MA-04(07)",
+      "name": "Disconnect Verification",
+      "statement": "Verify session and network connection termination after the completion of nonlocal maintenance and diagnostic sessions.",
+      "baselines": []
+    }
+  ],
   "baseline_low": true,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -22,7 +70,7 @@
     "rev5": {
       "id": "MA-04",
       "name": "Nonlocal Maintenance",
-      "description": "a. Approve and monitor nonlocal maintenance and diagnostic activities; b. Allow the use of nonlocal maintenance and diagnostic tools only as consistent with organizational policy and documented in the security plan for the system; c. Employ strong authentication in the establishment of nonlocal maintenance and diagnostic sessions; d. Maintain records for nonlocal maintenance and diagnostic activities; and e. Terminate session and network connections when nonlocal maintenance is completed.",
+      "description": "a. Approve and monitor nonlocal maintenance and diagnostic activities;\nb. Allow the use of nonlocal maintenance and diagnostic tools only as consistent with organizational policy and documented in the security plan for the system;\nc. Employ strong authentication in the establishment of nonlocal maintenance and diagnostic sessions;\nd. Maintain records for nonlocal maintenance and diagnostic activities; and\ne. Terminate session and network connections when nonlocal maintenance is completed.",
       "discussion": "Nonlocal maintenance and diagnostic activities are conducted by individuals who communicate through either an external or internal network. Local maintenance and diagnostic activities are carried out by individuals who are physically present at the system location and not communicating across a network connection. Authentication techniques used to establish nonlocal maintenance and diagnostic sessions reflect the network access requirements in IA-02. Strong authentication requires authenticators that are resistant to replay attacks and employ multi-factor authentication. Strong authenticators include PKI where certificates are stored on a token protected by a password, passphrase, or biometric. Enforcing requirements in MA-04 is accomplished, in part, by other controls. [SP 800-63B] provides additional guidance on strong authentication and authenticators.",
       "related_controls": [
         "AC-02",

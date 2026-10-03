@@ -7,7 +7,20 @@
   "control_class": "Technical",
   "description": "Synchronize system clocks within and between systems and system components.",
   "supplemental_guidance": "Time synchronization of system clocks is essential for the correct execution of many system services, including identification and authentication processes that involve certificates and time-of-day restrictions as part of access control. Denial of service or failure to deny expired credentials may result without properly synchronized clocks within and between systems and system components. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC. The granularity of time measurements refers to the degree of synchronization between system clocks and reference clocks, such as clocks synchronizing within hundreds of milliseconds or tens of milliseconds. Organizations may define different time granularities for system components. Time service can be critical to other security capabilities—such as access control and identification and authentication—depending on the nature of the mechanisms used to support the capabilities.",
-  "enhancements": "",
+  "enhancements": [
+    {
+      "id": "SC-45(01)",
+      "name": "Synchronization with Authoritative Time Source",
+      "statement": "a. Compare the internal system clocks [Assignment: organization-defined frequency] with [Assignment: organization-defined authoritative time source]; and\nb. Synchronize the internal system clocks to the authoritative time source when the time difference is greater than [Assignment: organization-defined time period].",
+      "baselines": []
+    },
+    {
+      "id": "SC-45(02)",
+      "name": "Secondary Authoritative Time Source",
+      "statement": "a. Identify a secondary authoritative time source that is in a different geographic region than the primary authoritative time source; and\nb. Synchronize the internal system clocks to the secondary authoritative time source if the primary authoritative time source is unavailable.",
+      "baselines": []
+    }
+  ],
   "baseline_low": false,
   "baseline_moderate": false,
   "baseline_high": false,

@@ -5,9 +5,211 @@
   "family": "SC",
   "family_name": "System and Communications Protection",
   "control_class": "Technical",
-  "description": "a. Monitor and control communications at the external managed interfaces to the system and at key internal managed interfaces within the system; b. Implement subnetworks for publicly accessible system components that are [Selection (one): physically; logically] separated from internal organizational networks; and c. Connect to external networks or systems only through managed interfaces consisting of boundary protection devices arranged in accordance with an organizational security and privacy architecture.",
+  "description": "a. Monitor and control communications at the external managed interfaces to the system and at key internal managed interfaces within the system;\nb. Implement subnetworks for publicly accessible system components that are [Selection (one): physically; logically] separated from internal organizational networks; and\nc. Connect to external networks or systems only through managed interfaces consisting of boundary protection devices arranged in accordance with an organizational security and privacy architecture.",
   "supplemental_guidance": "Managed interfaces include gateways, routers, firewalls, guards, network-based malicious code analysis, virtualization systems, or encrypted tunnels implemented within a security architecture. Subnetworks that are physically or logically separated from internal networks are referred to as demilitarized zones or DMZs. Restricting or prohibiting interfaces within organizational systems includes restricting external web traffic to designated web servers within managed interfaces, prohibiting external traffic that appears to be spoofing internal addresses, and prohibiting internal traffic that appears to be spoofing external addresses. [SP 800-189] provides additional information on source address validation techniques to prevent ingress and egress of traffic with spoofed addresses. Commercial telecommunications services are provided by network components and consolidated management systems shared by customers. These services may also include third party-provided access lines and other service elements. Such services may represent sources of increased risk despite contract security provisions. Boundary protection may be implemented as a common control for all or part of an organizational network such that the boundary to be protected is greater than a system-specific boundary (i.e., an authorization boundary).",
-  "enhancements": "",
+  "enhancements": [
+    {
+      "id": "SC-07(01)",
+      "name": "Physically Separated Subnetworks",
+      "withdrawn": true,
+      "incorporated_into": [
+        "SC-07"
+      ]
+    },
+    {
+      "id": "SC-07(02)",
+      "name": "Public Access",
+      "withdrawn": true,
+      "incorporated_into": [
+        "SC-07"
+      ]
+    },
+    {
+      "id": "SC-07(03)",
+      "name": "Access Points",
+      "statement": "Limit the number of external network connections to the system.",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "SC-07(04)",
+      "name": "External Telecommunications Services",
+      "statement": "a. Implement a managed interface for each external telecommunication service;\nb. Establish a traffic flow policy for each managed interface;\nc. Protect the confidentiality and integrity of the information being transmitted across each interface;\nd. Document each exception to the traffic flow policy with a supporting mission or business need and duration of that need;\ne. Review exceptions to the traffic flow policy [Assignment: organization-defined frequency] and remove exceptions that are no longer supported by an explicit mission or business need;\nf. Prevent unauthorized exchange of control plane traffic with external networks;\ng. Publish information to enable remote networks to detect unauthorized control plane traffic from internal networks; and\nh. Filter unauthorized control plane traffic from external networks.",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "SC-07(05)",
+      "name": "Deny by Default — Allow by Exception",
+      "statement": "Deny network communications traffic by default and allow network communications traffic by exception [Selection (one or more): at managed interfaces; for [Assignment: organization-defined systems]].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "SC-07(06)",
+      "name": "Response to Recognized Failures",
+      "withdrawn": true,
+      "incorporated_into": [
+        "SC-07(18)"
+      ]
+    },
+    {
+      "id": "SC-07(07)",
+      "name": "Split Tunneling for Remote Devices",
+      "statement": "Prevent split tunneling for remote devices connecting to organizational systems unless the split tunnel is securely provisioned using [Assignment: organization-defined safeguards].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "SC-07(08)",
+      "name": "Route Traffic to Authenticated Proxy Servers",
+      "statement": "Route [Assignment: organization-defined internal communications traffic] to [Assignment: organization-defined external networks] through authenticated proxy servers at managed interfaces.",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "SC-07(09)",
+      "name": "Restrict Threatening Outgoing Communications Traffic",
+      "statement": "a. Detect and deny outgoing communications traffic posing a threat to external systems; and\nb. Audit the identity of internal users associated with denied communications.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(10)",
+      "name": "Prevent Exfiltration",
+      "statement": "a. Prevent the exfiltration of information; and\nb. Conduct exfiltration tests [Assignment: organization-defined frequency].",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(11)",
+      "name": "Restrict Incoming Communications Traffic",
+      "statement": "Only allow incoming communications from [Assignment: organization-defined authorized sources] to be routed to [Assignment: organization-defined authorized destinations].",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(12)",
+      "name": "Host-based Protection",
+      "statement": "Implement [Assignment: organization-defined host-based boundary protection mechanisms] at [Assignment: organization-defined system components].",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(13)",
+      "name": "Isolation of Security Tools, Mechanisms, and Support Components",
+      "statement": "Isolate [Assignment: organization-defined information security tools, mechanisms, and support components] from other internal system components by implementing physically separate subnetworks with managed interfaces to other components of the system.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(14)",
+      "name": "Protect Against Unauthorized Physical Connections",
+      "statement": "Protect against unauthorized physical connections at [Assignment: organization-defined managed interfaces].",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(15)",
+      "name": "Networked Privileged Accesses",
+      "statement": "Route networked, privileged accesses through a dedicated, managed interface for purposes of access control and auditing.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(16)",
+      "name": "Prevent Discovery of System Components",
+      "statement": "Prevent the discovery of specific system components that represent a managed interface.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(17)",
+      "name": "Automated Enforcement of Protocol Formats",
+      "statement": "Enforce adherence to protocol formats.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(18)",
+      "name": "Fail Secure",
+      "statement": "Prevent systems from entering unsecure states in the event of an operational failure of a boundary protection device.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "SC-07(19)",
+      "name": "Block Communication from Non-organizationally Configured Hosts",
+      "statement": "Block inbound and outbound communications traffic between [Assignment: organization-defined communication clients] that are independently configured by end users and external service providers.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(20)",
+      "name": "Dynamic Isolation and Segregation",
+      "statement": "Provide the capability to dynamically isolate [Assignment: organization-defined system components] from other system components.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(21)",
+      "name": "Isolation of System Components",
+      "statement": "Employ boundary protection mechanisms to isolate [Assignment: organization-defined system components] supporting [Assignment: organization-defined missions and/or business functions].",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "SC-07(22)",
+      "name": "Separate Subnets for Connecting to Different Security Domains",
+      "statement": "Implement separate network addresses to connect to systems in different security domains.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(23)",
+      "name": "Disable Sender Feedback on Protocol Validation Failure",
+      "statement": "Disable feedback to senders on protocol format validation failure.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(24)",
+      "name": "Personally Identifiable Information",
+      "statement": "For systems that process personally identifiable information:\na. Apply the following processing rules to data elements of personally identifiable information: [Assignment: organization-defined processing rules];\nb. Monitor for permitted processing at the external interfaces to the system and at key internal boundaries within the system;\nc. Document each processing exception; and\nd. Review and remove exceptions that are no longer supported.",
+      "baselines": [
+        "privacy"
+      ]
+    },
+    {
+      "id": "SC-07(25)",
+      "name": "Unclassified National Security System Connections",
+      "statement": "Prohibit the direct connection of [Assignment: organization-defined unclassified national security system] to an external network without the use of [Assignment: organization-defined boundary protection device].",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(26)",
+      "name": "Classified National Security System Connections",
+      "statement": "Prohibit the direct connection of a classified national security system to an external network without the use of [Assignment: organization-defined boundary protection device].",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(27)",
+      "name": "Unclassified Non-national Security System Connections",
+      "statement": "Prohibit the direct connection of [Assignment: organization-defined unclassified non-national security system] to an external network without the use of [Assignment: organization-defined boundary protection device].",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(28)",
+      "name": "Connections to Public Networks",
+      "statement": "Prohibit the direct connection of [Assignment: organization-defined system] to a public network.",
+      "baselines": []
+    },
+    {
+      "id": "SC-07(29)",
+      "name": "Separate Subnets to Isolate Functions",
+      "statement": "Implement [Selection (one): physically; logically] separate subnetworks to isolate the following critical system components and functions: [Assignment: organization-defined critical system components and functions].",
+      "baselines": []
+    }
+  ],
   "baseline_low": true,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -22,7 +224,7 @@
     "rev5": {
       "id": "SC-07",
       "name": "Boundary Protection",
-      "description": "a. Monitor and control communications at the external managed interfaces to the system and at key internal managed interfaces within the system; b. Implement subnetworks for publicly accessible system components that are [Selection (one): physically; logically] separated from internal organizational networks; and c. Connect to external networks or systems only through managed interfaces consisting of boundary protection devices arranged in accordance with an organizational security and privacy architecture.",
+      "description": "a. Monitor and control communications at the external managed interfaces to the system and at key internal managed interfaces within the system;\nb. Implement subnetworks for publicly accessible system components that are [Selection (one): physically; logically] separated from internal organizational networks; and\nc. Connect to external networks or systems only through managed interfaces consisting of boundary protection devices arranged in accordance with an organizational security and privacy architecture.",
       "discussion": "Managed interfaces include gateways, routers, firewalls, guards, network-based malicious code analysis, virtualization systems, or encrypted tunnels implemented within a security architecture. Subnetworks that are physically or logically separated from internal networks are referred to as demilitarized zones or DMZs. Restricting or prohibiting interfaces within organizational systems includes restricting external web traffic to designated web servers within managed interfaces, prohibiting external traffic that appears to be spoofing internal addresses, and prohibiting internal traffic that appears to be spoofing external addresses. [SP 800-189] provides additional information on source address validation techniques to prevent ingress and egress of traffic with spoofed addresses. Commercial telecommunications services are provided by network components and consolidated management systems shared by customers. These services may also include third party-provided access lines and other service elements. Such services may represent sources of increased risk despite contract security provisions. Boundary protection may be implemented as a common control for all or part of an organizational network such that the boundary to be protected is greater than a system-specific boundary (i.e., an authorization boundary).",
       "related_controls": [
         "AC-04",

@@ -5,9 +5,44 @@
   "family": "AU",
   "family_name": "Audit and Accountability",
   "control_class": "Technical",
-  "description": "a. Alert [Assignment: organization-defined personnel or roles] within [Assignment: organization-defined time period] in the event of an audit logging process failure; and b. Take the following additional actions: [Assignment: organization-defined additional actions].",
+  "description": "a. Alert [Assignment: organization-defined personnel or roles] within [Assignment: organization-defined time period] in the event of an audit logging process failure; and\nb. Take the following additional actions: [Assignment: organization-defined additional actions].",
   "supplemental_guidance": "Audit logging process failures include software and hardware errors, failures in audit log capturing mechanisms, and reaching or exceeding audit log storage capacity. Organization-defined actions include overwriting oldest audit records, shutting down the system, and stopping the generation of audit records. Organizations may choose to define additional actions for audit logging process failures based on the type of failure, the location of the failure, the severity of the failure, or a combination of such factors. When the audit logging process failure is related to storage, the response is carried out for the audit log storage repository (i.e., the distinct system component where the audit logs are stored), the system on which the audit logs reside, the total audit log storage capacity of the organization (i.e., all audit log storage repositories combined), or all three. Organizations may decide to take no additional actions after alerting designated roles or personnel.",
-  "enhancements": "",
+  "enhancements": [
+    {
+      "id": "AU-05(01)",
+      "name": "Storage Capacity Warning",
+      "statement": "Provide a warning to [Assignment: organization-defined personnel, roles, and/or locations] within [Assignment: organization-defined time period] when allocated audit log storage volume reaches [Assignment: organization-defined percentage] of repository maximum audit log storage capacity.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "AU-05(02)",
+      "name": "Real-time Alerts",
+      "statement": "Provide an alert within [Assignment: organization-defined real-time period] to [Assignment: organization-defined personnel, roles, and/or locations] when the following audit failure events occur: [Assignment: organization-defined audit logging failure events requiring real-time alerts].",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "AU-05(03)",
+      "name": "Configurable Traffic Volume Thresholds",
+      "statement": "Enforce configurable network communications traffic volume thresholds reflecting limits on audit log storage capacity and [Selection: reject; delay] network traffic above those thresholds.",
+      "baselines": []
+    },
+    {
+      "id": "AU-05(04)",
+      "name": "Shutdown on Failure",
+      "statement": "Invoke a [Selection (one): full system shutdown; partial system shutdown; degraded operational mode with limited mission or business functionality available] in the event of [Assignment: organization-defined audit logging failures], unless an alternate audit logging capability exists.",
+      "baselines": []
+    },
+    {
+      "id": "AU-05(05)",
+      "name": "Alternate Audit Logging Capability",
+      "statement": "Provide an alternate audit logging capability in the event of a failure in primary audit logging capability that implements [Assignment: organization-defined alternate audit logging functionality].",
+      "baselines": []
+    }
+  ],
   "baseline_low": true,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -22,7 +57,7 @@
     "rev5": {
       "id": "AU-05",
       "name": "Response to Audit Logging Process Failures",
-      "description": "a. Alert [Assignment: organization-defined personnel or roles] within [Assignment: organization-defined time period] in the event of an audit logging process failure; and b. Take the following additional actions: [Assignment: organization-defined additional actions].",
+      "description": "a. Alert [Assignment: organization-defined personnel or roles] within [Assignment: organization-defined time period] in the event of an audit logging process failure; and\nb. Take the following additional actions: [Assignment: organization-defined additional actions].",
       "discussion": "Audit logging process failures include software and hardware errors, failures in audit log capturing mechanisms, and reaching or exceeding audit log storage capacity. Organization-defined actions include overwriting oldest audit records, shutting down the system, and stopping the generation of audit records. Organizations may choose to define additional actions for audit logging process failures based on the type of failure, the location of the failure, the severity of the failure, or a combination of such factors. When the audit logging process failure is related to storage, the response is carried out for the audit log storage repository (i.e., the distinct system component where the audit logs are stored), the system on which the audit logs reside, the total audit log storage capacity of the organization (i.e., all audit log storage repositories combined), or all three. Organizations may decide to take no additional actions after alerting designated roles or personnel.",
       "related_controls": [
         "AU-02",

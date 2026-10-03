@@ -20,51 +20,81 @@ if they disagree on a baseline. Differences in text are counted and listed in
 the extract under "checks".
 
 Usage:
-    python3 scripts/build_nist_extract.py --cprt FILE --catalog FILE --profiles DIR
+    python3 scripts/build_nist_extract.py --fetch   # download NIST's files, then build
+    python3 scripts/build_nist_extract.py           # build from the copies already downloaded
 
-    FILE and DIR are local copies. The addresses are in SOURCES below. The
-    profiles are expected as baseline-LOW.json, baseline-MODERATE.json,
-    baseline-HIGH.json and baseline-PRIVACY.json.
+The downloads are kept in .nist-sources/ at the top of the repository, which
+git ignores. They are about 25 MB.
 """
 
-import argparse
 import hashlib
 import html
 import json
 import re
 import sys
+import urllib.request
 from datetime import date
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "data" / "nist" / "sp800-53-rev5.json"
+CACHE = REPO / ".nist-sources"
 RELEASE = "5.2.0"
 OSCAL_BASE = "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/"
-SOURCES = {
-    "cprt": "https://csrc.nist.gov/extensions/nudp/services/json/nudp/framework/version/sp_800_53_5_2_0/export/json?element=all",
-    "catalog": OSCAL_BASE + "NIST_SP-800-53_rev5_catalog.json",
-    "profiles": {name: OSCAL_BASE + f"NIST_SP-800-53_rev5_{name}-baseline_profile.json" for name in ("LOW", "MODERATE", "HIGH", "PRIVACY")},
-}
 BASELINES = ("low", "moderate", "high", "privacy")
+# name of the local copy: where NIST publishes it
+SOURCES = {
+    "cprt.json": "https://csrc.nist.gov/extensions/nudp/services/json/nudp/framework/version/sp_800_53_5_2_0/export/json?element=all",
+    "catalog.json": OSCAL_BASE + "NIST_SP-800-53_rev5_catalog.json",
+    "baseline-low.json": OSCAL_BASE + "NIST_SP-800-53_rev5_LOW-baseline_profile.json",
+    "baseline-moderate.json": OSCAL_BASE + "NIST_SP-800-53_rev5_MODERATE-baseline_profile.json",
+    "baseline-high.json": OSCAL_BASE + "NIST_SP-800-53_rev5_HIGH-baseline_profile.json",
+    "baseline-privacy.json": OSCAL_BASE + "NIST_SP-800-53_rev5_PRIVACY-baseline_profile.json",
+}
 CPRT_BASELINE = {"SB-Low": "low", "SB-Moderate": "moderate", "SB-High": "high", "PB-Yes": "privacy"}
 
 
-def sha256(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def fetch():
+    CACHE.mkdir(exist_ok=True)
+    for name, url in SOURCES.items():
+        request = urllib.request.Request(url, headers={"User-Agent": "osa-data build_nist_extract"})
+        with urllib.request.urlopen(request, timeout=180) as response:
+            (CACHE / name).write_bytes(response.read())
+        print(f"fetched {name}: {(CACHE / name).stat().st_size // 1024} KB")
+
+
+def source(name):
+    path = CACHE / name
+    if not path.is_file():
+        raise SystemExit(f"{path.relative_to(REPO)} is not there. Run with --fetch, or download it from {SOURCES[name]}")
+    return path
+
+
+def read(name):
+    return json.loads(source(name).read_text(encoding="utf-8"))
+
+
+def sha256(name):
+    return hashlib.sha256(source(name).read_bytes()).hexdigest()
 
 
 def one_line(text):
-    return re.sub(r"\s+", " ", text or "").strip()
+    return " ".join((text or "").split())
+
+
+def link_text(match):
+    """A link to an outside document is one of NIST's reference keys, which the
+    publication prints in square brackets: [PRIVACT]. A link to another
+    control is left as its text."""
+    return "[%s]" % match.group(2) if 'href="http' in match.group(1) else match.group(2)
 
 
 def plain(text):
-    """Discussion text in the export is HTML. A link to an outside document is
-    one of NIST's reference keys, which the publication prints in square
-    brackets: [PRIVACT]. A link to another control is left as its text."""
-    text = re.sub(r"</p>\s*<p[^>]*>", " ", text or "")
-    text = re.sub(r'<a\b[^>]*href="https?://[^"]*"[^>]*>(.*?)</a>', r"[\1]", text)
+    """Discussion text in the export is HTML."""
+    text = (text or "").replace("</p>", " ")
+    text = re.sub(r"<a\b([^>]*)>([^<]*)</a>", link_text, text)
     text = re.sub(r"</?q>", '"', text)
-    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"<[^>]*>", "", text)
     return one_line(html.unescape(text))
 
 
@@ -77,6 +107,8 @@ def osa_id(oscal_id):
     return base if m.group(3) is None else "%s(%02d)" % (base, int(m.group(3)))
 
 
+# ---- the CPRT export -------------------------------------------------------
+
 def item_label(depth, title):
     """The publication labels statement items a. then 1. then (a) then (1)."""
     return "%s." % title if depth <= 2 else "(%s)" % title
@@ -86,11 +118,9 @@ def item_order(path):
     return [(0, int(p)) if p.isdigit() else (1, p) for p in path]
 
 
-def load_cprt(path):
-    data = json.load(open(path, encoding="utf-8"))["response"]["elements"]
-    document = data["documents"][0]
-    elements = data["elements"]
-    ids = {e["element_identifier"] for e in elements if e["element_type"] in ("control", "control_enhancement")}
+def statement_items(elements, ids):
+    """The export holds each item of a statement as its own element:
+    CST-PT-01, CST-PT-01-a, CST-PT-01-a-1."""
     items = {}
     for e in elements:
         if e["element_type"] != "control_statement":
@@ -98,9 +128,23 @@ def load_cprt(path):
         m = re.match(r"^CST-([A-Z]{2}-\d{2}(?:\(\d{2}\))?)((?:-[a-z0-9]+)*)$", e["element_identifier"])
         if m and m.group(1) in ids:
             items.setdefault(m.group(1), {})[tuple(p for p in m.group(2).split("-") if p)] = e
-    discussion = {e["element_identifier"][2:]: plain(e["text"]) for e in elements if e["element_type"] == "discussion"}
+    return items
+
+
+def assemble(items):
+    parts = []
+    for key in sorted(items, key=item_order):
+        text = one_line(items[key]["text"])
+        if key:
+            parts.append(("%s %s" % (item_label(len(key), items[key]["title"]), text)).strip())
+        elif text:
+            parts.append(text)
+    return " ".join(parts)
+
+
+def relationships(rows, ids):
     related, baselines = {}, {}
-    for r in data["relationships"]:
+    for r in rows:
         src, dst, kind = r["source_element_identifier"], r["dest_element_identifier"], r["relationship_identifier"]
         if src not in ids:
             continue
@@ -108,25 +152,26 @@ def load_cprt(path):
             related.setdefault(src, set()).add(dst)
         elif kind == "projection" and dst in CPRT_BASELINE:
             baselines.setdefault(src, set()).add(CPRT_BASELINE[dst])
-    out = {}
-    for cid in ids:
-        parts = []
-        for key in sorted(items.get(cid, {}), key=item_order):
-            e = items[cid][key]
-            text = one_line(e["text"])
-            if not key:
-                if text:
-                    parts.append(text)
-            else:
-                parts.append(("%s %s" % (item_label(len(key), e["title"]), text)).strip())
-        out[cid] = {
-            "statement": " ".join(parts),
-            "discussion": discussion.get(cid, ""),
-            "related": related.get(cid, set()),
-            "baselines": baselines.get(cid, set()),
-        }
-    return document, out
+    return related, baselines
 
+
+def load_cprt():
+    data = read("cprt.json")["response"]["elements"]
+    elements = data["elements"]
+    ids = {e["element_identifier"] for e in elements if e["element_type"] in ("control", "control_enhancement")}
+    items = statement_items(elements, ids)
+    discussion = {e["element_identifier"][2:]: plain(e["text"]) for e in elements if e["element_type"] == "discussion"}
+    related, baselines = relationships(data["relationships"], ids)
+    controls = {cid: {
+        "statement": assemble(items.get(cid, {})),
+        "discussion": discussion.get(cid, ""),
+        "related": related.get(cid, set()),
+        "baselines": baselines.get(cid, set()),
+    } for cid in ids}
+    return data["documents"][0], controls
+
+
+# ---- the OSCAL catalogue and profiles --------------------------------------
 
 def render_params(prose, params):
     def one(match):
@@ -152,27 +197,35 @@ def oscal_statement(part, params):
     return one_line(" ".join(out))
 
 
-def load_catalog(path):
-    doc = json.load(open(path, encoding="utf-8"))["catalog"]
+def successors(links):
+    """A withdrawn control points at a control, an enhancement, a statement
+    item (#ac-2_smt.k) or a whole family (#sr). An item is read as its control."""
+    targets = [l["href"][1:].split("_")[0] for l in links
+               if l.get("rel") in ("incorporated-into", "moved-to") and l.get("href", "").startswith("#")]
+    return sorted({osa_id(t) or t.upper() for t in targets})
+
+
+def catalog_entry(control, params):
+    parts = {p["name"]: p for p in control.get("parts", [])}
+    links = control.get("links", [])
+    status = next((p["value"] for p in control.get("props", []) if p.get("name") == "status"), None)
+    return {
+        "name": control["title"].strip(),
+        "withdrawn": status == "withdrawn",
+        "into": successors(links),
+        "statement": oscal_statement(parts["statement"], params) if "statement" in parts else "",
+        "discussion": one_line(render_params(parts.get("guidance", {}).get("prose", ""), params)),
+        "related": {osa_id(l["href"][1:]) for l in links if l.get("rel") == "related" and osa_id(l.get("href", "")[1:])},
+    }
+
+
+def load_catalog():
+    doc = read("catalog.json")["catalog"]
     families, out = {}, {}
 
     def take(control, parent_params):
-        cid = osa_id(control["id"])
         params = dict(parent_params, **{p["id"]: p for p in control.get("params", [])})
-        parts = {p["name"]: p for p in control.get("parts", [])}
-        links = control.get("links", [])
-        status = next((p["value"] for p in control.get("props", []) if p.get("name") == "status"), None)
-        # A withdrawn control points at a control, an enhancement, a statement
-        # item (#ac-2_smt.k) or a whole family (#sr). An item is read as its control.
-        into = [l["href"][1:].split("_")[0] for l in links if l.get("rel") in ("incorporated-into", "moved-to") and l.get("href", "").startswith("#")]
-        out[cid] = {
-            "name": control["title"].strip(),
-            "withdrawn": status == "withdrawn",
-            "into": sorted({osa_id(x) or x.upper() for x in into}),
-            "statement": oscal_statement(parts["statement"], params) if "statement" in parts else "",
-            "discussion": one_line(render_params(parts.get("guidance", {}).get("prose", ""), params)),
-            "related": {osa_id(l["href"][1:]) for l in links if l.get("rel") == "related" and osa_id(l.get("href", "")[1:])},
-        }
+        out[osa_id(control["id"])] = catalog_entry(control, params)
         for enhancement in control.get("controls", []):
             take(enhancement, params)
 
@@ -183,14 +236,17 @@ def load_catalog(path):
     return doc["metadata"], families, out
 
 
-def load_profiles(directory):
+def load_profiles():
     out = {}
-    for name in ("LOW", "MODERATE", "HIGH", "PRIVACY"):
-        doc = json.load(open(Path(directory) / f"baseline-{name}.json", encoding="utf-8"))["profile"]
-        assert doc["metadata"]["version"] == RELEASE, (name, doc["metadata"]["version"])
-        out[name.lower()] = {osa_id(i) for imp in doc["imports"] for inc in imp.get("include-controls", []) for i in inc.get("with-ids", [])}
+    for name in BASELINES:
+        doc = read(f"baseline-{name}.json")["profile"]
+        if doc["metadata"]["version"] != RELEASE:
+            raise SystemExit(f"the {name} baseline profile is release {doc['metadata']['version']}, not {RELEASE}")
+        out[name] = {osa_id(i) for imp in doc["imports"] for inc in imp.get("include-controls", []) for i in inc.get("with-ids", [])}
     return out
 
+
+# ---- putting them together -------------------------------------------------
 
 def comparable(text):
     """Text with the differences of rendering taken out: OSCAL's links, how a
@@ -207,70 +263,76 @@ def comparable(text):
     return re.sub(r"[^a-z0-9§]+", " ", text.lower()).strip()
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--cprt", required=True)
-    parser.add_argument("--catalog", required=True)
-    parser.add_argument("--profiles", required=True)
-    args = parser.parse_args()
+def compare(cid, c, o, checks):
+    """Note where the two sources word the same control differently."""
+    if comparable(c["statement"]) != comparable(o["statement"]):
+        checks["statement_differs"].append(cid)
+    if comparable(c["discussion"]) != comparable(o["discussion"]):
+        checks["discussion_differs"].append(cid)
+    if c["related"] - o["related"]:
+        checks["related_only_in_cprt"][cid] = sorted(c["related"] - o["related"])
+    if o["related"] - c["related"]:
+        checks["related_only_in_catalog"][cid] = sorted(o["related"] - c["related"])
 
-    document, cprt = load_cprt(args.cprt)
-    metadata, families, oscal = load_catalog(args.catalog)
-    profiles = load_profiles(args.profiles)
-    assert document["version"] == RELEASE and metadata["version"] == RELEASE, (document["version"], metadata["version"])
-    assert set(cprt) == set(oscal), sorted(set(cprt) ^ set(oscal))[:10]
+
+def entry(cid, c, o, profiles, checks):
+    in_profiles = {b for b in BASELINES if cid in profiles[b]}
+    if c["baselines"] != in_profiles:
+        raise SystemExit(f"{cid}: the export has baselines {sorted(c['baselines'])} and the profiles {sorted(in_profiles)}")
+    if o["withdrawn"]:
+        return {"name": o["name"], "withdrawn": True, "incorporated_into": o["into"]}
+    compare(cid, c, o, checks)
+    return {
+        "name": o["name"],
+        "statement": c["statement"],
+        "discussion": c["discussion"],
+        "related": sorted(c["related"] & o["related"]),
+        "baselines": [b for b in BASELINES if b in in_profiles],
+    }
+
+
+def nest(entries):
+    """Base controls by id, each with its enhancements."""
+    controls = {}
+    for cid, item in entries.items():
+        if "(" in cid:
+            controls[cid.split("(")[0]].setdefault("enhancements", []).append(dict(id=cid, **item))
+        else:
+            controls[cid] = dict(family=cid.split("-")[0], **item)
+    return controls
+
+
+def counts(controls):
+    enhancements = [e for c in controls.values() for e in c.get("enhancements", [])]
+    return {
+        "controls": sum(1 for c in controls.values() if not c.get("withdrawn")),
+        "controls_withdrawn": sum(1 for c in controls.values() if c.get("withdrawn")),
+        "enhancements": sum(1 for e in enhancements if not e.get("withdrawn")),
+        "enhancements_withdrawn": sum(1 for e in enhancements if e.get("withdrawn")),
+        "baselines": {b: sum(1 for c in controls.values() if b in c.get("baselines", [])) for b in BASELINES},
+    }
+
+
+def main():
+    if "--fetch" in sys.argv:
+        fetch()
+    document, cprt = load_cprt()
+    metadata, families, oscal = load_catalog()
+    profiles = load_profiles()
+    if document["version"] != RELEASE or metadata["version"] != RELEASE:
+        raise SystemExit(f"expected release {RELEASE}: the export is {document['version']} and the catalogue {metadata['version']}")
+    if set(cprt) != set(oscal):
+        raise SystemExit(f"the two sources list different controls: {sorted(set(cprt) ^ set(oscal))[:10]}")
 
     checks = {"statement_differs": [], "discussion_differs": [], "related_only_in_cprt": {}, "related_only_in_catalog": {}}
-    entries = {}
-    for cid in sorted(cprt):
-        c, o = cprt[cid], oscal[cid]
-        in_profiles = {b for b in BASELINES if cid in profiles[b]}
-        if c["baselines"] != in_profiles:
-            raise SystemExit(f"{cid}: the export has baselines {sorted(c['baselines'])} and the profiles {sorted(in_profiles)}")
-        if not o["withdrawn"]:
-            if comparable(c["statement"]) != comparable(o["statement"]):
-                checks["statement_differs"].append(cid)
-            if comparable(c["discussion"]) != comparable(o["discussion"]):
-                checks["discussion_differs"].append(cid)
-            if c["related"] - o["related"]:
-                checks["related_only_in_cprt"][cid] = sorted(c["related"] - o["related"])
-            if o["related"] - c["related"]:
-                checks["related_only_in_catalog"][cid] = sorted(o["related"] - c["related"])
-        entry = {"name": o["name"]}
-        if o["withdrawn"]:
-            entry["withdrawn"] = True
-            entry["incorporated_into"] = o["into"]
-        else:
-            entry["statement"] = c["statement"]
-            entry["discussion"] = c["discussion"]
-            entry["related"] = sorted(c["related"] & o["related"])
-            entry["baselines"] = [b for b in BASELINES if b in in_profiles]
-        entries[cid] = entry
-
-    controls = {}
-    for cid, entry in entries.items():
-        if "(" in cid:
-            controls[cid.split("(")[0]].setdefault("enhancements", []).append(dict(id=cid, **entry))
-        else:
-            controls[cid] = dict(family=cid.split("-")[0], **entry)
-
+    controls = nest({cid: entry(cid, cprt[cid], oscal[cid], profiles, checks) for cid in sorted(cprt)})
     extract = {
         "title": "NIST SP 800-53 Rev 5, Release %s, as OSA uses it" % RELEASE,
         "release": RELEASE,
         "built": date.today().isoformat(),
         "note": "Generated by scripts/build_nist_extract.py. Do not edit by hand. NIST's text is in the public domain in the United States.",
-        "sources": {
-            "cprt": {"what": "The text as NIST renders it: statements, discussion, related controls, baselines.", "url": SOURCES["cprt"], "sha256": sha256(args.cprt)},
-            "catalog": {"what": "Titles, and whether a control was withdrawn and into what.", "url": SOURCES["catalog"], "sha256": sha256(args.catalog)},
-            "profiles": {name: {"url": SOURCES["profiles"][name.upper()], "sha256": sha256(Path(args.profiles) / f"baseline-{name.upper()}.json")} for name in BASELINES},
-        },
-        "counts": {
-            "controls": sum(1 for c in controls.values() if not c.get("withdrawn")),
-            "controls_withdrawn": sum(1 for c in controls.values() if c.get("withdrawn")),
-            "enhancements": sum(1 for c in controls.values() for e in c.get("enhancements", []) if not e.get("withdrawn")),
-            "enhancements_withdrawn": sum(1 for c in controls.values() for e in c.get("enhancements", []) if e.get("withdrawn")),
-            "baselines": {b: sum(1 for c in controls.values() if b in c.get("baselines", [])) for b in BASELINES},
-        },
+        "sources": {name: {"url": url, "sha256": sha256(name)} for name, url in SOURCES.items()},
+        "counts": counts(controls),
         "checks": {
             "what": "Where the CPRT export and the OSCAL catalogue state the same thing, they were compared, with differences of rendering set aside. The text here is the export's. Related controls are those both list. The baselines agree for every control and enhancement.",
             **checks,

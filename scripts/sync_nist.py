@@ -35,7 +35,7 @@ REPO = Path(__file__).resolve().parent.parent
 DATA = REPO / "data"
 EXTRACT = DATA / "nist" / "sp800-53-rev5.json"
 
-MANAGED = ("baselines", "withdrawn", "name")
+MANAGED = ("baselines", "withdrawn", "name", "statement", "discussion", "related")
 LEVELS = ("low", "moderate", "high")
 MANIFEST_COPIES = ("id", "name", "family", "family_name", "baseline_low", "baseline_moderate", "baseline_high")
 MISSING = []  # filled by sync(): what a pattern refers to that the catalogue does not have
@@ -55,6 +55,17 @@ def wanted(control, nist):
     if "name" in MANAGED:
         out.append((("name",), nist["name"]))
         out.append((rev5 + ("name",), nist["name"]))
+    # NIST gives a withdrawn control no text. Its file keeps the statement it
+    # had, so a reader can still see what the control used to require.
+    if not nist.get("withdrawn"):
+        if "statement" in MANAGED:
+            out.append((("description",), nist["statement"]))
+            out.append((rev5 + ("description",), nist["statement"]))
+        if "discussion" in MANAGED:
+            out.append((("supplemental_guidance",), nist["discussion"]))
+            out.append((rev5 + ("discussion",), nist["discussion"]))
+        if "related" in MANAGED:
+            out.append((rev5 + ("related_controls",), nist["related"]))
     if "baselines" in MANAGED:
         for level in LEVELS:
             value = level in nist.get("baselines", [])

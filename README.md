@@ -73,7 +73,7 @@ A new framework mapping needs three things:
 
 In the pull request, say what the mapping is based on: a published crosswalk, which you should name, or your own analysis.
 
-What NIST says about a control (its name and baselines today, and its statement and discussion as each is brought into line) is not edited in the control files, nor is a control's name in a pattern. It is written there from `data/nist/sp800-53-rev5.json` by `scripts/sync_nist.py`, and the validator fails if a copy differs. A correction to NIST's text belongs in the source: rebuild the file with `scripts/build_nist_extract.py`.
+What NIST says about a control (its name, statement, discussion, related controls and baselines) is not edited in the control files, nor is a control's name in a pattern. It is written there from `data/nist/sp800-53-rev5.json` by `scripts/sync_nist.py`, and the validator fails if a copy differs. A correction to NIST's text belongs in the source: rebuild the file with `scripts/build_nist_extract.py`.
 
 ## Licence
 

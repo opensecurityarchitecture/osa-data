@@ -1,7 +1,8 @@
 name: Validate JSON Data
 
 # skills/** is listed so that a change to a published skill rebuilds the
-# website, which serves it.
+# website, which serves it. This file is listed so that a change to the
+# workflow, such as a new version of an action, is run before it is merged.
 on:
   push:
     branches: [main]
@@ -9,12 +10,14 @@ on:
       - 'data/**/*.json'
       - 'scripts/validate_json.py'
       - 'skills/**'
+      - '.github/workflows/validate.yml'
   pull_request:
     branches: [main]
     paths:
       - 'data/**/*.json'
       - 'scripts/validate_json.py'
       - 'skills/**'
+      - '.github/workflows/validate.yml'
 
 permissions:
   contents: read
@@ -25,17 +28,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install jsonschema==4.23.0
+        run: pip install --only-binary :all: jsonschema==4.23.0
 
       - name: Validate JSON syntax
         run: |

@@ -5,9 +5,59 @@
   "family": "AU",
   "family_name": "Audit and Accountability",
   "control_class": "Technical",
-  "description": "a. Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and b. Alert [Assignment: organization-defined personnel or roles] upon detection of unauthorized access, modification, or deletion of audit information.",
+  "description": "a. Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and\nb. Alert [Assignment: organization-defined personnel or roles] upon detection of unauthorized access, modification, or deletion of audit information.",
   "supplemental_guidance": "Audit information includes all information needed to successfully audit system activity, such as audit records, audit log settings, audit reports, and personally identifiable information. Audit logging tools are those programs and devices used to conduct system audit and logging activities. Protection of audit information focuses on technical protection and limits the ability to access and execute audit logging tools to authorized individuals. Physical protection of audit information is addressed by both media protection controls and physical and environmental protection controls.",
-  "enhancements": "(1) The information system produces audit records on hardware-enforced, write-once media.",
+  "enhancements": [
+    {
+      "id": "AU-09(01)",
+      "name": "Hardware Write-once Media",
+      "statement": "Write audit trails to hardware-enforced, write-once media.",
+      "baselines": []
+    },
+    {
+      "id": "AU-09(02)",
+      "name": "Store on Separate Physical Systems or Components",
+      "statement": "Store audit records [Assignment: organization-defined frequency] in a repository that is part of a physically different system or system component than the system or component being audited.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "AU-09(03)",
+      "name": "Cryptographic Protection",
+      "statement": "Implement cryptographic mechanisms to protect the integrity of audit information and audit tools.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "AU-09(04)",
+      "name": "Access by Subset of Privileged Users",
+      "statement": "Authorize access to management of audit logging functionality to only [Assignment: organization-defined subset of privileged users or roles].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "AU-09(05)",
+      "name": "Dual Authorization",
+      "statement": "Enforce dual authorization for [Selection (one or more): movement; deletion] of [Assignment: organization-defined audit information].",
+      "baselines": []
+    },
+    {
+      "id": "AU-09(06)",
+      "name": "Read-only Access",
+      "statement": "Authorize read-only access to audit information to [Assignment: organization-defined subset of privileged users or roles].",
+      "baselines": []
+    },
+    {
+      "id": "AU-09(07)",
+      "name": "Store on Component with Different Operating System",
+      "statement": "Store audit information on a component running a different operating system than the system or component being audited.",
+      "baselines": []
+    }
+  ],
   "baseline_low": true,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -22,7 +72,7 @@
     "rev5": {
       "id": "AU-09",
       "name": "Protection of Audit Information",
-      "description": "a. Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and b. Alert [Assignment: organization-defined personnel or roles] upon detection of unauthorized access, modification, or deletion of audit information.",
+      "description": "a. Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and\nb. Alert [Assignment: organization-defined personnel or roles] upon detection of unauthorized access, modification, or deletion of audit information.",
       "discussion": "Audit information includes all information needed to successfully audit system activity, such as audit records, audit log settings, audit reports, and personally identifiable information. Audit logging tools are those programs and devices used to conduct system audit and logging activities. Protection of audit information focuses on technical protection and limits the ability to access and execute audit logging tools to authorized individuals. Physical protection of audit information is addressed by both media protection controls and physical and environmental protection controls.",
       "related_controls": [
         "AC-03",

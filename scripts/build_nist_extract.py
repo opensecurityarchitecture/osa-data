@@ -90,12 +90,12 @@ def link_text(match):
 
 
 def plain(text):
-    """Discussion text in the export is HTML."""
-    text = (text or "").replace("</p>", " ")
-    text = re.sub(r"<a\b([^>]*)>([^<]*)</a>", link_text, text)
+    """Discussion text in the export is HTML. Its paragraphs are kept, with a
+    blank line between them."""
+    text = re.sub(r"<a\b([^>]*)>([^<]*)</a>", link_text, text or "")
     text = re.sub(r"</?q>", '"', text)
-    text = re.sub(r"<[^>]*>", "", text)
-    return one_line(html.unescape(text))
+    paragraphs = [one_line(html.unescape(re.sub(r"<[^>]*>", "", p))) for p in text.split("</p>")]
+    return "\n\n".join(p for p in paragraphs if p)
 
 
 def osa_id(oscal_id):
@@ -132,6 +132,7 @@ def statement_items(elements, ids):
 
 
 def assemble(items):
+    """The statement with each item on a line of its own, as NIST prints it."""
     parts = []
     for key in sorted(items, key=item_order):
         text = one_line(items[key]["text"])
@@ -139,7 +140,7 @@ def assemble(items):
             parts.append(("%s %s" % (item_label(len(key), items[key]["title"]), text)).strip())
         elif text:
             parts.append(text)
-    return " ".join(parts)
+    return "\n".join(parts)
 
 
 def relationships(rows, ids):

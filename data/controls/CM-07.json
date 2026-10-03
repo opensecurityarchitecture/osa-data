@@ -5,9 +5,73 @@
   "family": "CM",
   "family_name": "Configuration Management",
   "control_class": "Operational",
-  "description": "a. Configure the system to provide only [Assignment: organization-defined mission essential capabilities]; and b. Prohibit or restrict the use of the following functions, ports, protocols, software, and/or services: [Assignment: organization-defined prohibited or restricted functions, system ports, protocols, software, and/or services].",
+  "description": "a. Configure the system to provide only [Assignment: organization-defined mission essential capabilities]; and\nb. Prohibit or restrict the use of the following functions, ports, protocols, software, and/or services: [Assignment: organization-defined prohibited or restricted functions, system ports, protocols, software, and/or services].",
   "supplemental_guidance": "Systems provide a wide variety of functions and services. Some of the functions and services routinely provided by default may not be necessary to support essential organizational missions, functions, or operations. Additionally, it is sometimes convenient to provide multiple services from a single system component, but doing so increases risk over limiting the services provided by that single component. Where feasible, organizations limit component functionality to a single function per component. Organizations consider removing unused or unnecessary software and disabling unused or unnecessary physical and logical ports and protocols to prevent unauthorized connection of components, transfer of information, and tunneling. Organizations employ network scanning tools, intrusion detection and prevention systems, and end-point protection technologies, such as firewalls and host-based intrusion detection systems, to identify and prevent the use of prohibited functions, protocols, ports, and services. Least functionality can also be achieved as part of the fundamental design and development of the system (see SA-08, SC-02, and SC-03).",
-  "enhancements": "(1) The organization reviews the information system [Assignment: organization-defined frequency], to identify and eliminate unnecessary functions, ports, protocols, and/or services.",
+  "enhancements": [
+    {
+      "id": "CM-07(01)",
+      "name": "Periodic Review",
+      "statement": "a. Review the system [Assignment: organization-defined frequency] to identify unnecessary and/or nonsecure functions, ports, protocols, software, and services; and\nb. Disable or remove [Assignment: organization-defined functions, ports, protocols, software, and services within the system deemed to be unnecessary and/or nonsecure].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "CM-07(02)",
+      "name": "Prevent Program Execution",
+      "statement": "Prevent program execution in accordance with [Selection (one or more): [Assignment: organization-defined policies, rules of behavior, and/or access agreements regarding software program usage and restrictions]; rules authorizing the terms and conditions of software program usage].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "CM-07(03)",
+      "name": "Registration Compliance",
+      "statement": "Ensure compliance with [Assignment: organization-defined registration requirements for functions, ports, protocols, and services].",
+      "baselines": []
+    },
+    {
+      "id": "CM-07(04)",
+      "name": "Unauthorized Software — Deny-by-exception",
+      "statement": "a. Identify [Assignment: organization-defined software programs not authorized to execute on the system];\nb. Employ an allow-all, deny-by-exception policy to prohibit the execution of unauthorized software programs on the system; and\nc. Review and update the list of unauthorized software programs [Assignment: organization-defined frequency].",
+      "baselines": []
+    },
+    {
+      "id": "CM-07(05)",
+      "name": "Authorized Software — Allow-by-exception",
+      "statement": "a. Identify [Assignment: organization-defined software programs authorized to execute on the system];\nb. Employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs on the system; and\nc. Review and update the list of authorized software programs [Assignment: organization-defined frequency].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "CM-07(06)",
+      "name": "Confined Environments with Limited Privileges",
+      "statement": "Require that the following user-installed software execute in a confined physical or virtual machine environment with limited privileges: [Assignment: organization-defined user-installed software].",
+      "baselines": []
+    },
+    {
+      "id": "CM-07(07)",
+      "name": "Code Execution in Protected Environments",
+      "statement": "Allow execution of binary or machine-executable code only in confined physical or virtual machine environments and with the explicit approval of [Assignment: organization-defined personnel or roles] when such code is:\na. Obtained from sources with limited or no warranty; and/or\nb. Without the provision of source code.",
+      "baselines": []
+    },
+    {
+      "id": "CM-07(08)",
+      "name": "Binary or Machine Executable Code",
+      "statement": "a. Prohibit the use of binary or machine-executable code from sources with limited or no warranty or without the provision of source code; and\nb. Allow exceptions only for compelling mission or operational requirements and with the approval of the authorizing official.",
+      "baselines": []
+    },
+    {
+      "id": "CM-07(09)",
+      "name": "Prohibiting The Use of Unauthorized Hardware",
+      "statement": "a. Identify [Assignment: organization-defined hardware components authorized for system use];\nb. Prohibit the use or connection of unauthorized hardware components;\nc. Review and update the list of authorized hardware components [Assignment: organization-defined frequency].",
+      "baselines": []
+    }
+  ],
   "baseline_low": true,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -22,7 +86,7 @@
     "rev5": {
       "id": "CM-07",
       "name": "Least Functionality",
-      "description": "a. Configure the system to provide only [Assignment: organization-defined mission essential capabilities]; and b. Prohibit or restrict the use of the following functions, ports, protocols, software, and/or services: [Assignment: organization-defined prohibited or restricted functions, system ports, protocols, software, and/or services].",
+      "description": "a. Configure the system to provide only [Assignment: organization-defined mission essential capabilities]; and\nb. Prohibit or restrict the use of the following functions, ports, protocols, software, and/or services: [Assignment: organization-defined prohibited or restricted functions, system ports, protocols, software, and/or services].",
       "discussion": "Systems provide a wide variety of functions and services. Some of the functions and services routinely provided by default may not be necessary to support essential organizational missions, functions, or operations. Additionally, it is sometimes convenient to provide multiple services from a single system component, but doing so increases risk over limiting the services provided by that single component. Where feasible, organizations limit component functionality to a single function per component. Organizations consider removing unused or unnecessary software and disabling unused or unnecessary physical and logical ports and protocols to prevent unauthorized connection of components, transfer of information, and tunneling. Organizations employ network scanning tools, intrusion detection and prevention systems, and end-point protection technologies, such as firewalls and host-based intrusion detection systems, to identify and prevent the use of prohibited functions, protocols, ports, and services. Least functionality can also be achieved as part of the fundamental design and development of the system (see SA-08, SC-02, and SC-03).",
       "related_controls": [
         "AC-03",

@@ -6,8 +6,207 @@
   "family_name": "Access Control",
   "control_class": "Technical",
   "description": "Enforce approved authorizations for controlling the flow of information within the system and between connected systems based on [Assignment: organization-defined information flow control policies].",
-  "supplemental_guidance": "Information flow control regulates where information can travel within a system and between systems (in contrast to who is allowed to access the information) and without regard to subsequent accesses to that information. Flow control restrictions include blocking external traffic that claims to be from within the organization, keeping export-controlled information from being transmitted in the clear to the Internet, restricting web requests that are not from the internal web proxy server, and limiting information transfers between organizations based on data structures and content. Transferring information between organizations may require an agreement specifying how the information flow is enforced (see CA-03). Transferring information between systems in different security or privacy domains with different security or privacy policies introduces the risk that such transfers violate one or more domain security or privacy policies. In such situations, information owners/stewards provide guidance at designated policy enforcement points between connected systems. Organizations consider mandating specific architectural solutions to enforce specific security and privacy policies. Enforcement includes prohibiting information transfers between connected systems (i.e., allowing access only), verifying write permissions before accepting information from another security or privacy domain or connected system, employing hardware mechanisms to enforce one-way information flows, and implementing trustworthy regrading mechanisms to reassign security or privacy attributes and labels. Organizations commonly employ information flow control policies and enforcement mechanisms to control the flow of information between designated sources and destinations within systems and between connected systems. Flow control is based on the characteristics of the information and/or the information path. Enforcement occurs, for example, in boundary protection devices that employ rule sets or establish configuration settings that restrict system services, provide a packet-filtering capability based on header information, or provide a message-filtering capability based on message content. Organizations also consider the trustworthiness of filtering and/or inspection mechanisms (i.e., hardware, firmware, and software components) that are critical to information flow enforcement. Control enhancements 3 through 32 primarily address cross-domain solution needs that focus on more advanced filtering techniques, in-depth analysis, and stronger flow enforcement mechanisms implemented in cross-domain products, such as high-assurance guards. Such capabilities are generally not available in commercial off-the-shelf products. Information flow enforcement also applies to control plane traffic (e.g., routing and DNS).",
-  "enhancements": "",
+  "supplemental_guidance": "Information flow control regulates where information can travel within a system and between systems (in contrast to who is allowed to access the information) and without regard to subsequent accesses to that information. Flow control restrictions include blocking external traffic that claims to be from within the organization, keeping export-controlled information from being transmitted in the clear to the Internet, restricting web requests that are not from the internal web proxy server, and limiting information transfers between organizations based on data structures and content. Transferring information between organizations may require an agreement specifying how the information flow is enforced (see CA-03). Transferring information between systems in different security or privacy domains with different security or privacy policies introduces the risk that such transfers violate one or more domain security or privacy policies. In such situations, information owners/stewards provide guidance at designated policy enforcement points between connected systems. Organizations consider mandating specific architectural solutions to enforce specific security and privacy policies. Enforcement includes prohibiting information transfers between connected systems (i.e., allowing access only), verifying write permissions before accepting information from another security or privacy domain or connected system, employing hardware mechanisms to enforce one-way information flows, and implementing trustworthy regrading mechanisms to reassign security or privacy attributes and labels.\n\nOrganizations commonly employ information flow control policies and enforcement mechanisms to control the flow of information between designated sources and destinations within systems and between connected systems. Flow control is based on the characteristics of the information and/or the information path. Enforcement occurs, for example, in boundary protection devices that employ rule sets or establish configuration settings that restrict system services, provide a packet-filtering capability based on header information, or provide a message-filtering capability based on message content. Organizations also consider the trustworthiness of filtering and/or inspection mechanisms (i.e., hardware, firmware, and software components) that are critical to information flow enforcement. Control enhancements 3 through 32 primarily address cross-domain solution needs that focus on more advanced filtering techniques, in-depth analysis, and stronger flow enforcement mechanisms implemented in cross-domain products, such as high-assurance guards. Such capabilities are generally not available in commercial off-the-shelf products. Information flow enforcement also applies to control plane traffic (e.g., routing and DNS).",
+  "enhancements": [
+    {
+      "id": "AC-04(01)",
+      "name": "Object Security and Privacy Attributes",
+      "statement": "Use [Assignment: organization-defined security and privacy attributes] associated with [Assignment: organization-defined information, source, and destination objects] to enforce [Assignment: organization-defined information flow control policies] as a basis for flow control decisions.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(02)",
+      "name": "Processing Domains",
+      "statement": "Use protected processing domains to enforce [Assignment: organization-defined information flow control policies] as a basis for flow control decisions.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(03)",
+      "name": "Dynamic Information Flow Control",
+      "statement": "Enforce [Assignment: organization-defined information flow control policies].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(04)",
+      "name": "Flow Control of Encrypted Information",
+      "statement": "Prevent encrypted information from bypassing [Assignment: organization-defined information flow control mechanisms] by [Selection (one or more): decrypting the information; blocking the flow of the encrypted information; terminating communications sessions attempting to pass encrypted information; [Assignment: organization-defined procedure or method]].",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "AC-04(05)",
+      "name": "Embedded Data Types",
+      "statement": "Enforce [Assignment: organization-defined limitations] on embedding data types within other data types.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(06)",
+      "name": "Metadata",
+      "statement": "Enforce information flow control based on [Assignment: organization-defined metadata].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(07)",
+      "name": "One-way Flow Mechanisms",
+      "statement": "Enforce one-way information flows through hardware-based flow control mechanisms.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(08)",
+      "name": "Security and Privacy Policy Filters",
+      "statement": "a. Enforce information flow control using [Assignment: organization-defined security or privacy policy filters] as a basis for flow control decisions for [Assignment: organization-defined information flows]; and\nb. [Selection (one or more): Block; Strip; Modify; Quarantine] data after a filter processing failure in accordance with [Assignment: organization-defined security or privacy policy].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(09)",
+      "name": "Human Reviews",
+      "statement": "Enforce the use of human reviews for [Assignment: organization-defined information flows] under the following conditions: [Assignment: organization-defined conditions].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(10)",
+      "name": "Enable and Disable Security or Privacy Policy Filters",
+      "statement": "Provide the capability for privileged administrators to enable and disable [Assignment: organization-defined security or privacy policy filters] under the following conditions: [Assignment: organization-defined conditions].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(11)",
+      "name": "Configuration of Security or Privacy Policy Filters",
+      "statement": "Provide the capability for privileged administrators to configure [Assignment: organization-defined security or privacy policy filters] to support different security or privacy policies.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(12)",
+      "name": "Data Type Identifiers",
+      "statement": "When transferring information between different security domains, use [Assignment: organization-defined data type identifiers] to validate data essential for information flow decisions.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(13)",
+      "name": "Decomposition into Policy-relevant Subcomponents",
+      "statement": "When transferring information between different security domains, decompose information into [Assignment: organization-defined policy-relevant subcomponents] for submission to policy enforcement mechanisms.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(14)",
+      "name": "Security or Privacy Policy Filter Constraints",
+      "statement": "When transferring information between different security domains, implement [Assignment: organization-defined security or privacy policy filters] requiring fully enumerated formats that restrict data structure and content.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(15)",
+      "name": "Detection of Unsanctioned Information",
+      "statement": "When transferring information between different security domains, examine the information for the presence of [Assignment: organization-defined unsanctioned information] and prohibit the transfer of such information in accordance with the [Assignment: organization-defined security or privacy policy].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(16)",
+      "name": "Information Transfers on Interconnected Systems",
+      "withdrawn": true,
+      "incorporated_into": [
+        "AC-04"
+      ]
+    },
+    {
+      "id": "AC-04(17)",
+      "name": "Domain Authentication",
+      "statement": "Uniquely identify and authenticate source and destination points by [Selection (one or more): organization; system; application; service; individual] for information transfer.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(18)",
+      "name": "Security Attribute Binding",
+      "withdrawn": true,
+      "incorporated_into": [
+        "AC-16"
+      ]
+    },
+    {
+      "id": "AC-04(19)",
+      "name": "Validation of Metadata",
+      "statement": "When transferring information between different security domains, implement [Assignment: organization-defined security or privacy policy filters] on metadata.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(20)",
+      "name": "Approved Solutions",
+      "statement": "Employ [Assignment: organization-defined solutions in approved configurations] to control the flow of [Assignment: organization-defined information] across security domains.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(21)",
+      "name": "Physical or Logical Separation of Information Flows",
+      "statement": "Separate information flows logically or physically using [Assignment: organization-defined mechanisms and/or techniques] to accomplish [Assignment: organization-defined required separations by types of information].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(22)",
+      "name": "Access Only",
+      "statement": "Provide access from a single device to computing platforms, applications, or data residing in multiple different security domains, while preventing information flow between the different security domains.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(23)",
+      "name": "Modify Non-releasable Information",
+      "statement": "When transferring information between different security domains, modify non-releasable information by implementing [Assignment: organization-defined modification action].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(24)",
+      "name": "Internal Normalized Format",
+      "statement": "When transferring information between different security domains, parse incoming data into an internal normalized format and regenerate the data to be consistent with its intended specification.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(25)",
+      "name": "Data Sanitization",
+      "statement": "When transferring information between different security domains, sanitize data to minimize [Selection (one or more): delivery of malicious content, command and control of malicious code, malicious code augmentation, and steganography encoded data; spillage of sensitive information] in accordance with [Assignment: organization-defined policy].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(26)",
+      "name": "Audit Filtering Actions",
+      "statement": "When transferring information between different security domains, record and audit content filtering actions and results for the information being filtered.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(27)",
+      "name": "Redundant/Independent Filtering Mechanisms",
+      "statement": "When transferring information between different security domains, implement content filtering solutions that provide redundant and independent filtering mechanisms for each data type.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(28)",
+      "name": "Linear Filter Pipelines",
+      "statement": "When transferring information between different security domains, implement a linear content filter pipeline that is enforced with discretionary and mandatory access controls.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(29)",
+      "name": "Filter Orchestration Engines",
+      "statement": "When transferring information between different security domains, employ content filter orchestration engines to ensure that:\na. Content filtering mechanisms successfully complete execution without errors; and\nb. Content filtering actions occur in the correct order and comply with [Assignment: organization-defined policy].",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(30)",
+      "name": "Filter Mechanisms Using Multiple Processes",
+      "statement": "When transferring information between different security domains, implement content filtering mechanisms using multiple processes.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(31)",
+      "name": "Failed Content Transfer Prevention",
+      "statement": "When transferring information between different security domains, prevent the transfer of failed content to the receiving domain.",
+      "baselines": []
+    },
+    {
+      "id": "AC-04(32)",
+      "name": "Process Requirements for Information Transfer",
+      "statement": "When transferring information between different security domains, the process that transfers information between filter pipelines:\na. Does not filter message content;\nb. Validates filtering metadata;\nc. Ensures the content associated with the filtering metadata has successfully completed filtering; and\nd. Transfers the content to the destination filter pipeline.",
+      "baselines": []
+    }
+  ],
   "baseline_low": false,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -23,7 +222,7 @@
       "id": "AC-04",
       "name": "Information Flow Enforcement",
       "description": "Enforce approved authorizations for controlling the flow of information within the system and between connected systems based on [Assignment: organization-defined information flow control policies].",
-      "discussion": "Information flow control regulates where information can travel within a system and between systems (in contrast to who is allowed to access the information) and without regard to subsequent accesses to that information. Flow control restrictions include blocking external traffic that claims to be from within the organization, keeping export-controlled information from being transmitted in the clear to the Internet, restricting web requests that are not from the internal web proxy server, and limiting information transfers between organizations based on data structures and content. Transferring information between organizations may require an agreement specifying how the information flow is enforced (see CA-03). Transferring information between systems in different security or privacy domains with different security or privacy policies introduces the risk that such transfers violate one or more domain security or privacy policies. In such situations, information owners/stewards provide guidance at designated policy enforcement points between connected systems. Organizations consider mandating specific architectural solutions to enforce specific security and privacy policies. Enforcement includes prohibiting information transfers between connected systems (i.e., allowing access only), verifying write permissions before accepting information from another security or privacy domain or connected system, employing hardware mechanisms to enforce one-way information flows, and implementing trustworthy regrading mechanisms to reassign security or privacy attributes and labels. Organizations commonly employ information flow control policies and enforcement mechanisms to control the flow of information between designated sources and destinations within systems and between connected systems. Flow control is based on the characteristics of the information and/or the information path. Enforcement occurs, for example, in boundary protection devices that employ rule sets or establish configuration settings that restrict system services, provide a packet-filtering capability based on header information, or provide a message-filtering capability based on message content. Organizations also consider the trustworthiness of filtering and/or inspection mechanisms (i.e., hardware, firmware, and software components) that are critical to information flow enforcement. Control enhancements 3 through 32 primarily address cross-domain solution needs that focus on more advanced filtering techniques, in-depth analysis, and stronger flow enforcement mechanisms implemented in cross-domain products, such as high-assurance guards. Such capabilities are generally not available in commercial off-the-shelf products. Information flow enforcement also applies to control plane traffic (e.g., routing and DNS).",
+      "discussion": "Information flow control regulates where information can travel within a system and between systems (in contrast to who is allowed to access the information) and without regard to subsequent accesses to that information. Flow control restrictions include blocking external traffic that claims to be from within the organization, keeping export-controlled information from being transmitted in the clear to the Internet, restricting web requests that are not from the internal web proxy server, and limiting information transfers between organizations based on data structures and content. Transferring information between organizations may require an agreement specifying how the information flow is enforced (see CA-03). Transferring information between systems in different security or privacy domains with different security or privacy policies introduces the risk that such transfers violate one or more domain security or privacy policies. In such situations, information owners/stewards provide guidance at designated policy enforcement points between connected systems. Organizations consider mandating specific architectural solutions to enforce specific security and privacy policies. Enforcement includes prohibiting information transfers between connected systems (i.e., allowing access only), verifying write permissions before accepting information from another security or privacy domain or connected system, employing hardware mechanisms to enforce one-way information flows, and implementing trustworthy regrading mechanisms to reassign security or privacy attributes and labels.\n\nOrganizations commonly employ information flow control policies and enforcement mechanisms to control the flow of information between designated sources and destinations within systems and between connected systems. Flow control is based on the characteristics of the information and/or the information path. Enforcement occurs, for example, in boundary protection devices that employ rule sets or establish configuration settings that restrict system services, provide a packet-filtering capability based on header information, or provide a message-filtering capability based on message content. Organizations also consider the trustworthiness of filtering and/or inspection mechanisms (i.e., hardware, firmware, and software components) that are critical to information flow enforcement. Control enhancements 3 through 32 primarily address cross-domain solution needs that focus on more advanced filtering techniques, in-depth analysis, and stronger flow enforcement mechanisms implemented in cross-domain products, such as high-assurance guards. Such capabilities are generally not available in commercial off-the-shelf products. Information flow enforcement also applies to control plane traffic (e.g., routing and DNS).",
       "related_controls": [
         "AC-03",
         "AC-06",

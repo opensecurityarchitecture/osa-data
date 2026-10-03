@@ -5,9 +5,132 @@
   "family": "SI",
   "family_name": "System and Information Integrity",
   "control_class": "Operational",
-  "description": "a. Employ integrity verification tools to detect unauthorized changes to the following software, firmware, and information: [Assignment: organization-defined software, firmware, and information]; and b. Take the following actions when unauthorized changes to the software, firmware, and information are detected: [Assignment: organization-defined actions].",
+  "description": "a. Employ integrity verification tools to detect unauthorized changes to the following software, firmware, and information: [Assignment: organization-defined software, firmware, and information]; and\nb. Take the following actions when unauthorized changes to the software, firmware, and information are detected: [Assignment: organization-defined actions].",
   "supplemental_guidance": "Unauthorized changes to software, firmware, and information can occur due to errors or malicious activity. Software includes operating systems (with key internal components, such as kernels or drivers), middleware, and applications. Firmware interfaces include Unified Extensible Firmware Interface (UEFI) and Basic Input/Output System (BIOS). Information includes personally identifiable information and metadata that contains security and privacy attributes associated with information. Integrity-checking mechanisms—including parity checks, cyclical redundancy checks, cryptographic hashes, and associated tools—can automatically monitor the integrity of systems and hosted applications.",
-  "enhancements": "",
+  "enhancements": [
+    {
+      "id": "SI-07(01)",
+      "name": "Integrity Checks",
+      "statement": "Perform an integrity check of [Assignment: organization-defined software, firmware, and information] [Selection (one or more): at startup; at [Assignment: organization-defined transitional states or security-relevant events]; [Assignment: organization-defined frequency]].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "SI-07(02)",
+      "name": "Automated Notifications of Integrity Violations",
+      "statement": "Employ automated tools that provide notification to [Assignment: organization-defined personnel or roles] upon discovering discrepancies during integrity verification.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "SI-07(03)",
+      "name": "Centrally Managed Integrity Tools",
+      "statement": "Employ centrally managed integrity verification tools.",
+      "baselines": []
+    },
+    {
+      "id": "SI-07(04)",
+      "name": "Tamper-evident Packaging",
+      "withdrawn": true,
+      "incorporated_into": [
+        "SR-09"
+      ]
+    },
+    {
+      "id": "SI-07(05)",
+      "name": "Automated Response to Integrity Violations",
+      "statement": "Automatically [Selection (one or more): shut the system down; restart the system; implement [Assignment: organization-defined controls]] when integrity violations are discovered.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "SI-07(06)",
+      "name": "Cryptographic Protection",
+      "statement": "Implement cryptographic mechanisms to detect unauthorized changes to software, firmware, and information.",
+      "baselines": []
+    },
+    {
+      "id": "SI-07(07)",
+      "name": "Integration of Detection and Response",
+      "statement": "Incorporate the detection of the following unauthorized changes into the organizational incident response capability: [Assignment: organization-defined security-relevant changes to the system].",
+      "baselines": [
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "SI-07(08)",
+      "name": "Auditing Capability for Significant Events",
+      "statement": "Upon detection of a potential integrity violation, provide the capability to audit the event and initiate the following actions: [Selection (one or more): generate an audit record; alert current user; alert [Assignment: organization-defined personnel or roles]; [Assignment: organization-defined other actions]].",
+      "baselines": []
+    },
+    {
+      "id": "SI-07(09)",
+      "name": "Verify Boot Process",
+      "statement": "Verify the integrity of the boot process of the following system components: [Assignment: organization-defined system components].",
+      "baselines": []
+    },
+    {
+      "id": "SI-07(10)",
+      "name": "Protection of Boot Firmware",
+      "statement": "Implement the following mechanisms to protect the integrity of boot firmware in [Assignment: organization-defined system components]: [Assignment: organization-defined mechanisms].",
+      "baselines": []
+    },
+    {
+      "id": "SI-07(11)",
+      "name": "Confined Environments with Limited Privileges",
+      "withdrawn": true,
+      "incorporated_into": [
+        "CM-07(06)"
+      ]
+    },
+    {
+      "id": "SI-07(12)",
+      "name": "Integrity Verification",
+      "statement": "Require that the integrity of the following software be verified prior to execution: [Assignment: organization-defined software].",
+      "baselines": []
+    },
+    {
+      "id": "SI-07(13)",
+      "name": "Code Execution in Protected Environments",
+      "withdrawn": true,
+      "incorporated_into": [
+        "CM-07(07)"
+      ]
+    },
+    {
+      "id": "SI-07(14)",
+      "name": "Binary or Machine Executable Code",
+      "withdrawn": true,
+      "incorporated_into": [
+        "CM-07(08)"
+      ]
+    },
+    {
+      "id": "SI-07(15)",
+      "name": "Code Authentication",
+      "statement": "Implement cryptographic mechanisms to authenticate the following software or firmware components prior to installation: [Assignment: organization-defined software or firmware components].",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "SI-07(16)",
+      "name": "Time Limit on Process Execution Without Supervision",
+      "statement": "Prohibit processes from executing without supervision for more than [Assignment: organization-defined time period].",
+      "baselines": []
+    },
+    {
+      "id": "SI-07(17)",
+      "name": "Runtime Application Self-protection",
+      "statement": "Implement [Assignment: organization-defined controls] for application self-protection at runtime.",
+      "baselines": []
+    }
+  ],
   "baseline_low": false,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -22,7 +145,7 @@
     "rev5": {
       "id": "SI-07",
       "name": "Software, Firmware, and Information Integrity",
-      "description": "a. Employ integrity verification tools to detect unauthorized changes to the following software, firmware, and information: [Assignment: organization-defined software, firmware, and information]; and b. Take the following actions when unauthorized changes to the software, firmware, and information are detected: [Assignment: organization-defined actions].",
+      "description": "a. Employ integrity verification tools to detect unauthorized changes to the following software, firmware, and information: [Assignment: organization-defined software, firmware, and information]; and\nb. Take the following actions when unauthorized changes to the software, firmware, and information are detected: [Assignment: organization-defined actions].",
       "discussion": "Unauthorized changes to software, firmware, and information can occur due to errors or malicious activity. Software includes operating systems (with key internal components, such as kernels or drivers), middleware, and applications. Firmware interfaces include Unified Extensible Firmware Interface (UEFI) and Basic Input/Output System (BIOS). Information includes personally identifiable information and metadata that contains security and privacy attributes associated with information. Integrity-checking mechanisms—including parity checks, cyclical redundancy checks, cryptographic hashes, and associated tools—can automatically monitor the integrity of systems and hosted applications.",
       "related_controls": [
         "AC-04",

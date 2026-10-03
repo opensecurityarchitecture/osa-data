@@ -6,8 +6,115 @@
   "family_name": "Identification and Authentication",
   "control_class": "Technical",
   "description": "Uniquely identify and authenticate organizational users and associate that unique identification with processes acting on behalf of those users.",
-  "supplemental_guidance": "Organizations can satisfy the identification and authentication requirements by complying with the requirements in [HSPD 12]. Organizational users include employees or individuals who organizations consider to have an equivalent status to employees (e.g., contractors and guest researchers). Unique identification and authentication of users applies to all accesses other than those that are explicitly identified in AC-14 and that occur through the authorized use of group authenticators without individual authentication. Since processes execute on behalf of groups and roles, organizations may require unique identification of individuals in group accounts or for detailed accountability of individual activity. Organizations employ passwords, physical authenticators, or biometrics to authenticate user identities or, in the case of multi-factor authentication, some combination thereof. Access to organizational systems is defined as either local access or network access. Local access is any access to organizational systems by users or processes acting on behalf of users, where access is obtained through direct connections without the use of networks. Network access is access to organizational systems by users (or processes acting on behalf of users) where access is obtained through network connections (i.e., nonlocal accesses). Remote access is a type of network access that involves communication through external networks. Internal networks include local area networks and wide area networks. The use of encrypted virtual private networks for network connections between organization-controlled endpoints and non-organization-controlled endpoints may be treated as internal networks with respect to protecting the confidentiality and integrity of information traversing the network. Identification and authentication requirements for non-organizational users are described in IA-8.",
-  "enhancements": "",
+  "supplemental_guidance": "Organizations can satisfy the identification and authentication requirements by complying with the requirements in [HSPD 12]. Organizational users include employees or individuals who organizations consider to have an equivalent status to employees (e.g., contractors and guest researchers). Unique identification and authentication of users applies to all accesses other than those that are explicitly identified in AC-14 and that occur through the authorized use of group authenticators without individual authentication. Since processes execute on behalf of groups and roles, organizations may require unique identification of individuals in group accounts or for detailed accountability of individual activity.\n\nOrganizations employ passwords, physical authenticators, or biometrics to authenticate user identities or, in the case of multi-factor authentication, some combination thereof. Access to organizational systems is defined as either local access or network access. Local access is any access to organizational systems by users or processes acting on behalf of users, where access is obtained through direct connections without the use of networks. Network access is access to organizational systems by users (or processes acting on behalf of users) where access is obtained through network connections (i.e., nonlocal accesses). Remote access is a type of network access that involves communication through external networks. Internal networks include local area networks and wide area networks.\n\nThe use of encrypted virtual private networks for network connections between organization-controlled endpoints and non-organization-controlled endpoints may be treated as internal networks with respect to protecting the confidentiality and integrity of information traversing the network. Identification and authentication requirements for non-organizational users are described in IA-8.",
+  "enhancements": [
+    {
+      "id": "IA-02(01)",
+      "name": "Multi-factor Authentication to Privileged Accounts",
+      "statement": "Implement multi-factor authentication for access to privileged accounts.",
+      "baselines": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "IA-02(02)",
+      "name": "Multi-factor Authentication to Non-privileged Accounts",
+      "statement": "Implement multi-factor authentication for access to non-privileged accounts.",
+      "baselines": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "IA-02(03)",
+      "name": "Local Access to Privileged Accounts",
+      "withdrawn": true,
+      "incorporated_into": [
+        "IA-02(01)"
+      ]
+    },
+    {
+      "id": "IA-02(04)",
+      "name": "Local Access to Non-privileged Accounts",
+      "withdrawn": true,
+      "incorporated_into": [
+        "IA-02(02)"
+      ]
+    },
+    {
+      "id": "IA-02(05)",
+      "name": "Individual Authentication with Group Authentication",
+      "statement": "When shared accounts or authenticators are employed, require users to be individually authenticated before granting access to the shared accounts or resources.",
+      "baselines": [
+        "high"
+      ]
+    },
+    {
+      "id": "IA-02(06)",
+      "name": "Access to Accounts —separate Device",
+      "statement": "Implement multi-factor authentication for [Selection (one or more): local; network; remote] access to [Selection (one or more): privileged accounts; non-privileged accounts] such that:\na. One of the factors is provided by a device separate from the system gaining access; and\nb. The device meets [Assignment: organization-defined strength of mechanism requirements].",
+      "baselines": []
+    },
+    {
+      "id": "IA-02(07)",
+      "name": "Network Access to Non-privileged Accounts — Separate Device",
+      "withdrawn": true,
+      "incorporated_into": [
+        "IA-02(06)"
+      ]
+    },
+    {
+      "id": "IA-02(08)",
+      "name": "Access to Accounts — Replay Resistant",
+      "statement": "Implement replay-resistant authentication mechanisms for access to [Selection (one or more): privileged accounts; non-privileged accounts].",
+      "baselines": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "IA-02(09)",
+      "name": "Network Access to Non-privileged Accounts — Replay Resistant",
+      "withdrawn": true,
+      "incorporated_into": [
+        "IA-02(08)"
+      ]
+    },
+    {
+      "id": "IA-02(10)",
+      "name": "Single Sign-on",
+      "statement": "Provide a single sign-on capability for [Assignment: organization-defined system accounts and services].",
+      "baselines": []
+    },
+    {
+      "id": "IA-02(11)",
+      "name": "Remote Access — Separate Device",
+      "withdrawn": true,
+      "incorporated_into": [
+        "IA-02(06)"
+      ]
+    },
+    {
+      "id": "IA-02(12)",
+      "name": "Acceptance of PIV Credentials",
+      "statement": "Accept and electronically verify Personal Identity Verification-compliant credentials.",
+      "baselines": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    {
+      "id": "IA-02(13)",
+      "name": "Out-of-band Authentication",
+      "statement": "Implement the following out-of-band authentication mechanisms under [Assignment: organization-defined conditions]: [Assignment: organization-defined out-of-band authentication].",
+      "baselines": []
+    }
+  ],
   "baseline_low": true,
   "baseline_moderate": true,
   "baseline_high": true,
@@ -23,7 +130,7 @@
       "id": "IA-02",
       "name": "Identification and Authentication (Organizational Users)",
       "description": "Uniquely identify and authenticate organizational users and associate that unique identification with processes acting on behalf of those users.",
-      "discussion": "Organizations can satisfy the identification and authentication requirements by complying with the requirements in [HSPD 12]. Organizational users include employees or individuals who organizations consider to have an equivalent status to employees (e.g., contractors and guest researchers). Unique identification and authentication of users applies to all accesses other than those that are explicitly identified in AC-14 and that occur through the authorized use of group authenticators without individual authentication. Since processes execute on behalf of groups and roles, organizations may require unique identification of individuals in group accounts or for detailed accountability of individual activity. Organizations employ passwords, physical authenticators, or biometrics to authenticate user identities or, in the case of multi-factor authentication, some combination thereof. Access to organizational systems is defined as either local access or network access. Local access is any access to organizational systems by users or processes acting on behalf of users, where access is obtained through direct connections without the use of networks. Network access is access to organizational systems by users (or processes acting on behalf of users) where access is obtained through network connections (i.e., nonlocal accesses). Remote access is a type of network access that involves communication through external networks. Internal networks include local area networks and wide area networks. The use of encrypted virtual private networks for network connections between organization-controlled endpoints and non-organization-controlled endpoints may be treated as internal networks with respect to protecting the confidentiality and integrity of information traversing the network. Identification and authentication requirements for non-organizational users are described in IA-8.",
+      "discussion": "Organizations can satisfy the identification and authentication requirements by complying with the requirements in [HSPD 12]. Organizational users include employees or individuals who organizations consider to have an equivalent status to employees (e.g., contractors and guest researchers). Unique identification and authentication of users applies to all accesses other than those that are explicitly identified in AC-14 and that occur through the authorized use of group authenticators without individual authentication. Since processes execute on behalf of groups and roles, organizations may require unique identification of individuals in group accounts or for detailed accountability of individual activity.\n\nOrganizations employ passwords, physical authenticators, or biometrics to authenticate user identities or, in the case of multi-factor authentication, some combination thereof. Access to organizational systems is defined as either local access or network access. Local access is any access to organizational systems by users or processes acting on behalf of users, where access is obtained through direct connections without the use of networks. Network access is access to organizational systems by users (or processes acting on behalf of users) where access is obtained through network connections (i.e., nonlocal accesses). Remote access is a type of network access that involves communication through external networks. Internal networks include local area networks and wide area networks.\n\nThe use of encrypted virtual private networks for network connections between organization-controlled endpoints and non-organization-controlled endpoints may be treated as internal networks with respect to protecting the confidentiality and integrity of information traversing the network. Identification and authentication requirements for non-organizational users are described in IA-8.",
       "related_controls": [
         "AC-02",
         "AC-03",

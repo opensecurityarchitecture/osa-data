@@ -35,7 +35,7 @@ REPO = Path(__file__).resolve().parent.parent
 DATA = REPO / "data"
 EXTRACT = DATA / "nist" / "sp800-53-rev5.json"
 
-MANAGED = ("baselines", "withdrawn", "name", "statement", "discussion", "related")
+MANAGED = ("baselines", "withdrawn", "name", "statement", "discussion", "related", "enhancements")
 LEVELS = ("low", "moderate", "high")
 MANIFEST_COPIES = ("id", "name", "family", "family_name", "baseline_low", "baseline_moderate", "baseline_high")
 MISSING = []  # filled by sync(): what a pattern refers to that the catalogue does not have
@@ -46,6 +46,14 @@ def base_ids(targets):
     controls only, so an enhancement stands for its control and a family code
     is left out."""
     return sorted({t.split("(")[0] for t in targets if "-" in t})
+
+
+def enhancement(e):
+    """An enhancement as a control file lists it. NIST's discussion of it stays
+    in the extract: it is three times the length of the statements."""
+    if e.get("withdrawn"):
+        return {"id": e["id"], "name": e["name"], "withdrawn": True, "incorporated_into": e.get("incorporated_into", [])}
+    return {"id": e["id"], "name": e["name"], "statement": e["statement"], "baselines": e.get("baselines", [])}
 
 
 def wanted(control, nist):
@@ -66,6 +74,8 @@ def wanted(control, nist):
             out.append((rev5 + ("discussion",), nist["discussion"]))
         if "related" in MANAGED:
             out.append((rev5 + ("related_controls",), nist["related"]))
+    if "enhancements" in MANAGED:
+        out.append((("enhancements",), [enhancement(e) for e in nist.get("enhancements", [])]))
     if "baselines" in MANAGED:
         for level in LEVELS:
             value = level in nist.get("baselines", [])

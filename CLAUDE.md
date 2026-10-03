@@ -74,6 +74,8 @@ data/
 
 The same facts are also written in the control files, in `data/controls/_manifest.json` and as control names inside the patterns. `scripts/sync_nist.py` writes them there from the extract, and `scripts/validate_json.py` fails if any copy differs. `MANAGED` in `sync_nist.py` lists what is in step so far. Do not hand-edit a managed fact in a control file: change the source and run the sync.
 
+A control file says whether Rev 5 withdrew the control (`withdrawn`), and for a withdrawn one names the controls its content moved into (`incorporated_into`). It no longer carries `control_class`, `joomla_id` or the `nist_800_53.rev4` block: the sync takes them out, so the validator fails if one comes back.
+
 A control file lists NIST's enhancements of the control under `enhancements`: id, name, statement and baselines, and for a withdrawn one what NIST moved it into in place of a statement. An enhancement's discussion stays in the extract. Frameworks and patterns refer to controls, not to enhancements.
 
 This exists because of October 2026. The baselines were corrected in the control files and the manifest's copy was missed, so the website's controls list went on showing the old ones.

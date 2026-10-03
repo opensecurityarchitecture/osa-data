@@ -63,10 +63,18 @@
       ]
     },
 
-    "control_class": {
-      "type": "string",
-      "enum": ["Technical", "Operational", "Management", ""],
-      "description": "Control classification"
+    "withdrawn": {
+      "type": "boolean",
+      "description": "Whether SP 800-53 Rev 5 withdrew the control. Written from data/nist/sp800-53-rev5.json by scripts/sync_nist.py."
+    },
+
+    "incorporated_into": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}-\\d{2}$"
+      },
+      "description": "For a withdrawn control, the controls NIST moved its content into. Empty when NIST names none."
     },
 
     "description": {
@@ -135,38 +143,10 @@
       "description": "Included in NIST High baseline"
     },
 
-    "joomla_id": {
-      "type": "integer",
-      "description": "Original Joomla article ID for reference"
-    },
-
     "nist_800_53": {
       "type": "object",
       "description": "NIST 800-53 version-specific information",
       "properties": {
-        "rev4": {
-          "type": "object",
-          "description": "NIST 800-53 Revision 4 (withdrawn Sept 2021)",
-          "properties": {
-            "id": {
-              "type": ["string", "null"],
-              "description": "Control ID in Rev 4 (null if new in Rev 5)"
-            },
-            "name": {
-              "type": ["string", "null"],
-              "description": "Control name in Rev 4 (null if new in Rev 5)"
-            },
-            "withdrawn": {
-              "type": "boolean",
-              "description": "Whether this control was withdrawn in Rev 5"
-            },
-            "incorporated_into": {
-              "type": "array",
-              "items": {"type": "string"},
-              "description": "If withdrawn, which Rev 5 controls incorporate this"
-            }
-          }
-        },
         "rev5": {
           "type": "object",
           "description": "NIST 800-53 Revision 5 (current as of Sept 2020)",

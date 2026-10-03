@@ -18,6 +18,8 @@ is one. validate_json.py runs the check, so a copy cannot drift unnoticed.
 OSA's own fields are never touched: compliance_mappings, function,
 attack_techniques, metadata, and everything in a pattern but a control's name.
 
+It also takes out the fields listed under RETIRED, so they cannot come back.
+
 MANAGED lists what is in step with NIST so far. A fact is added to it in the
 same change that brings the files into line.
 
@@ -39,6 +41,15 @@ MANAGED = ("baselines", "withdrawn", "name", "statement", "discussion", "related
 LEVELS = ("low", "moderate", "high")
 MANIFEST_COPIES = ("id", "name", "family", "family_name", "baseline_low", "baseline_moderate", "baseline_high")
 MISSING = []  # filled by sync(): what a pattern refers to that the catalogue does not have
+
+# What a control file no longer carries. NIST stopped classing controls as
+# technical, operational or management. The Joomla article id belonged to a
+# site that is gone. The Rev 4 block held an older name, and the withdrawn
+# marking that is now at the top level of the file.
+RETIRED = (("control_class",), ("joomla_id",), ("nist_800_53", "rev4"))
+# A flag the file states either way, and where a new top-level key goes.
+EXPLICIT = {("withdrawn",)}
+PLACE_AFTER = {"withdrawn": "family_name", "incorporated_into": "withdrawn"}
 
 
 def base_ids(targets):
@@ -83,9 +94,9 @@ def wanted(control, nist):
             out.append((rev5 + (f"baseline_{level}",), value))
         out.append((rev5 + ("baseline_privacy",), "privacy" in nist.get("baselines", [])))
     if "withdrawn" in MANAGED:
-        out.append((("nist_800_53", "rev4", "withdrawn"), bool(nist.get("withdrawn"))))
+        out.append((("withdrawn",), bool(nist.get("withdrawn"))))
         if nist.get("withdrawn"):
-            out.append((("nist_800_53", "rev4", "incorporated_into"), base_ids(nist.get("incorporated_into", []))))
+            out.append((("incorporated_into",), base_ids(nist.get("incorporated_into", []))))
     return out
 
 
@@ -100,13 +111,32 @@ def get(data, path):
 def put(data, path, value):
     for key in path[:-1]:
         data = data.setdefault(key, {})
-    data[path[-1]] = value
+    key = path[-1]
+    if key in data or len(path) > 1 or PLACE_AFTER.get(key) not in data:
+        data[key] = value
+        return
+    # A new top-level key goes where a reader would look for it.
+    items = list(data.items())
+    data.clear()
+    for existing, kept in items:
+        data[existing] = kept
+        if existing == PLACE_AFTER[key]:
+            data[key] = value
 
 
-def same(current, value):
-    """An empty flag counts as false, so a file is not rewritten to say so."""
+def drop(data, path):
+    for key in path[:-1]:
+        data = data.get(key)
+        if not isinstance(data, dict):
+            return
+    data.pop(path[-1], None)
+
+
+def same(current, value, explicit=False):
+    """An empty flag counts as false, so a file is not rewritten to say so,
+    unless it is a flag the file states either way."""
     if isinstance(value, bool):
-        return bool(current) == value
+        return current is value if explicit else bool(current) == value
     return current == value
 
 
@@ -173,9 +203,14 @@ def sync(write):
             continue
         changed = False
         for field, value in wanted(control, nist[cid]):
-            if not same(get(control, field), value):
+            if not same(get(control, field), value, field in EXPLICIT):
                 differences.append(f"{entry['file']}: {'.'.join(field)} is {get(control, field)!r}, NIST has {value!r}")
                 put(control, field, value)
+                changed = True
+        for field in RETIRED:
+            if get(control, field) is not None:
+                differences.append(f"{entry['file']}: {'.'.join(field)} is no longer kept")
+                drop(control, field)
                 changed = True
         if changed and write:
             path.write_text(dump(control), encoding="utf-8")

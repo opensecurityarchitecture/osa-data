@@ -29,7 +29,7 @@ The website repo is a **sibling** at `~/osa/website/` and reads data via a symli
 ## Current Data
 
 - **56 pattern files**: SP-001 to SP-054, the SP-000 reference/style guide and the SP-999 test pattern
-- **315 NIST 800-53 Rev 5 controls** across 20 families
+- **317 NIST 800-53 Rev 5 controls** across 20 families: the 300 of Release 5.2.0 and 17 withdrawn ones that older patterns still name
 - **87 compliance framework coverage files** (87 in the website registry) with cross-references
 - `data/attack/metadata.json` — symlink to osa-trident (TRIDENT graph versioning, provenance, checksums, and changelog)
 

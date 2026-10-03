@@ -38,6 +38,7 @@ EXTRACT = DATA / "nist" / "sp800-53-rev5.json"
 MANAGED = ("baselines", "withdrawn", "name")
 LEVELS = ("low", "moderate", "high")
 MANIFEST_COPIES = ("id", "name", "family", "family_name", "baseline_low", "baseline_moderate", "baseline_high")
+MISSING = []  # filled by sync(): what a pattern refers to that the catalogue does not have
 
 
 def base_ids(targets):
@@ -97,16 +98,20 @@ PATTERN_CONTROL = re.compile(r'\{[^{}]*?"id":\s*"([A-Z]{2}-\d{2})"[^{}]*?\}')
 PATTERN_NAME = re.compile(r'("name":\s*)"((?:[^"\\]|\\.)*)"')
 
 
-def sync_pattern(path, names, write, differences):
+def sync_pattern(path, names, write, differences, missing):
     """Give each control a pattern lists the name the catalogue gives it. The
-    file is edited as text, so nothing else in it moves."""
+    file is edited as text, so nothing else in it moves. A control the
+    catalogue lacks cannot be put right here and is reported as missing."""
     raw = path.read_text(encoding="utf-8")
     found = []
 
     def fix(match):
         cid, entry = match.group(1), match.group(0)
         name = PATTERN_NAME.search(entry)
-        if cid not in names or '"emphasis"' not in entry or not name:
+        if '"emphasis"' not in entry or not name:
+            return entry
+        if cid not in names:
+            missing.append(f"{path.name}: lists {cid}, which is not a control in the catalogue")
             return entry
         current = json.loads('"%s"' % name.group(2))
         if current == names[cid]:
@@ -129,7 +134,9 @@ def sync_pattern(path, names, write, differences):
 
 
 def sync(write):
-    """Return the differences found. With write, also correct them."""
+    """Return the differences found. With write, also correct them. What this
+    script cannot correct is added to MISSING and is always a failure."""
+    MISSING.clear()
     nist = json.loads(EXTRACT.read_text(encoding="utf-8"))["controls"]
     controls_dir = DATA / "controls"
     manifest_path = controls_dir / "_manifest.json"
@@ -160,9 +167,9 @@ def sync(write):
         manifest_path.write_text(dump(manifest), encoding="utf-8")
 
     if "name" in MANAGED:
-        names = {cid: entry["name"] for cid, entry in nist.items()}
+        names = {entry["id"]: nist[entry["id"]]["name"] for entry in manifest["controls"] if entry["id"] in nist}
         for path in sorted((DATA / "patterns").glob("SP-*.json")):
-            sync_pattern(path, names, write, differences)
+            sync_pattern(path, names, write, differences, MISSING)
     return differences
 
 
@@ -171,8 +178,10 @@ def main():
     differences = sync(write)
     for line in differences:
         print(("corrected: " if write else "differs: ") + line)
+    for line in MISSING:
+        print("cannot correct: " + line)
     print(f"{len(differences)} difference(s) {'corrected' if write else 'found'}; in step with NIST: {', '.join(MANAGED)}")
-    return 1 if differences and not write else 0
+    return 1 if MISSING or (differences and not write) else 0
 
 
 if __name__ == "__main__":

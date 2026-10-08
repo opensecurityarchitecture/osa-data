@@ -45,7 +45,7 @@
     "png": ""
   },
   "content": {
-    "description": "APIs are the connective tissue of modern software architecture. Every microservice, mobile application, SaaS integration, partner onboarding flow, and IoT device communicates through APIs. This expansion of the API attack surface means that API security is no longer an afterthought bolted onto web application controls -- it is a primary security discipline requiring purpose-built architecture.\n\nTraditional web application firewalls are insufficient for API security because APIs expose structured data and business logic, not rendered web pages. Attacks against APIs target authentication mechanisms, authorization logic, data exposure, rate limiting gaps, and business process abuse -- threats that require controls operating at the application semantics layer, not just the network layer.\n\nThis pattern defines the architectural controls required to secure APIs across four layers: an API Gateway that enforces authentication, rate limiting, and schema validation at the edge; an Authorization Layer that makes fine-grained access decisions based on OAuth scopes, roles, and resource ownership; a Validation Layer that sanitises all input against defined schemas before it reaches business logic; and a Monitoring Layer that detects anomalous usage patterns, credential abuse, and data exfiltration in real-time.\n\nThe pattern covers the full API lifecycle: secure design (threat modelling, schema-first development), secure development (input validation, output filtering, error handling), secure deployment (gateway configuration, TLS enforcement, rate limiting), and secure operations (monitoring, incident response, deprecation). It applies equally to REST, GraphQL, gRPC, WebSocket, and event-driven API styles.",
+    "description": "<h3>Context</h3><p>APIs are the connective tissue of modern software. Every microservice, mobile app, SaaS integration, partner onboarding flow and IoT device talks through them, so the API surface is now the largest exposed surface most organisations have. Web application firewalls built for rendered pages see only part of it: APIs expose structured data and business logic, and the attacks that matter target authentication, object-level authorisation, data exposure, rate limits and business process abuse.</p><h3>Summary</h3><p>API security is four layers on every call. An <em>API gateway</em> authenticates the caller, applies rate limits and validates the request against its schema at the edge. An <em>authorisation layer</em> decides, per object, whether this caller may act on this resource. A <em>validation layer</em> sanitises every input before it reaches business logic. A <em>monitoring layer</em> watches for credential abuse, anomalous usage and data exfiltration. Around the call sits the lifecycle: schema-first design, testing in the pipeline, an inventory of every published API, and deprecation.</p><p>The pattern covers that whole lifecycle and applies to REST, GraphQL, gRPC, WebSocket and event-driven styles. Its ArchiMate view is narrower on purpose: it draws one inbound call, from a consumer outside the organisation to a service inside it, and shows which control answers which threat at each step. The 32 controls on that path are the architecture; the other 15 come from the organisation around it.</p><h3>Key principles</h3><p><strong>Validate at three points, not one.</strong> Input is checked at the web application firewall, at the gateway and in the service (SI-10 three times). Teams build one of the three and stop; the service-side check is the one that knows the business rules.</p><p><strong>Rate limiting is an identity control too.</strong> Network throttling (SC-05) stops floods of requests, but a flood of valid sessions passes it. Session limits and session termination (AC-10, AC-12) at the identity provider stop the second kind.</p><p><strong>The API inventory is a security control.</strong> An API that is not in the inventory (CM-08) is not behind the gateway, not tested and not monitored. The same inventory is what tells you which third-party APIs you depend on when a supplier is compromised.</p>",
     "keyControlAreas": [
       "API Authentication and Identity Management (IA-02, IA-04, IA-05, IA-08, IA-09): Every API call must be authenticated. IA-02 mandates identification and authentication for organisational users accessing APIs, requiring OAuth 2.0 bearer tokens, API keys with HMAC signing, or mutual TLS certificates rather than basic authentication over plain HTTP. IA-04 manages the lifecycle of API credentials: provisioning, rotation, suspension, and revocation of API keys and client IDs. IA-05 governs authenticator management -- token signing key rotation, API key entropy requirements, and credential storage using secrets managers rather than embedded in source code or configuration files. IA-08 extends authentication to non-organisational users: third-party developers, partner integrations, and public API consumers who authenticate via OAuth client credentials, API keys, or federated identity. IA-09 addresses service-to-service authentication -- the critical requirement that internal APIs between microservices use mutual TLS, service mesh identity (SPIFFE/SPIRE), or signed JWTs rather than relying on network-level trust. Implementation requires centralised API key management, short-lived token issuance (15-minute access tokens with refresh rotation), and automated credential rotation with zero-downtime deployment.",
       "API Authorization and Access Control (AC-03, AC-04, AC-06, AC-07, AC-10, AC-12): Authorization in API security must operate at multiple granularities: endpoint level, resource level, field level, and operation level. AC-03 enforces access based on OAuth 2.0 scopes, RBAC roles, or ABAC policies -- critically, authorization must check not just whether the authenticated identity can access the endpoint, but whether it can access the specific resource instance (preventing Broken Object Level Authorization, OWASP API #1). AC-04 controls information flow between API boundaries, preventing APIs from leaking data across trust domains or returning more data than the consumer is authorised to see. AC-06 enforces least privilege: API tokens should carry the minimum scopes required for the specific operation, not blanket admin access. AC-07 limits unsuccessful authentication attempts with progressive rate limiting and account lockout to prevent credential stuffing against API authentication endpoints. AC-10 controls concurrent API sessions to prevent token farming and session multiplication attacks. AC-12 enforces token expiration and session termination -- access tokens must have short lifetimes, refresh tokens must be rotation-bound, and revocation must propagate to all enforcement points within seconds.",
@@ -177,10 +177,21 @@
     "Secure DevOps Pipeline",
     "Zero Trust Architecture"
   ],
+  "relatedPatternBoundaries": {
+    "SP-002": "SP-002 hardens the servers the API runs on. SP-030 starts at the API interface and assumes the host baseline is in place.",
+    "SP-004": "SP-004 secures the registry where services are published and discovered. SP-030 secures the calls made to them once found, and relies on that registry for its API inventory (CM-08).",
+    "SP-005": "SP-005 covers calls between internal services. SP-030 covers the API as a product exposed to consumers, internal or external, and draws the inbound call from outside in its ArchiMate view.",
+    "SP-008": "SP-008 secures a public web server that renders pages for browsers. SP-030 secures structured data and business logic exposed to programs; where both sit behind the same web application firewall, SP-030 adds the gateway and service-side checks.",
+    "SP-011": "SP-011 sets the shared-responsibility and provider controls for cloud services. SP-030 applies inside that model to any API, whether hosted in the cloud or on premises.",
+    "SP-016": "SP-016 designs the DMZ itself. SP-030 assumes it: the ArchiMate view places the DDoS protection, web application firewall and API gateway in the DMZ zone (NORA-2) that SP-016 defines.",
+    "SP-028": "SP-028 secures the pipeline that builds and ships APIs. SP-030 relies on it for developer testing (SA-11) and dependency integrity, and starts where the API is deployed.",
+    "SP-029": "SP-029 sets the enterprise zero-trust model: verify every user, device and workload. SP-030 is one application of it to API traffic, including mutual authentication between services (IA-09, SC-23)."
+  },
   "threats": [
     {
       "id": "T-API-001",
       "name": "Broken authentication and credential stuffing",
+      "description": "An attacker replays leaked username and password pairs, or brute-forces API keys, against the token or login endpoint until one works. APIs are an easy target because they return machine-readable success and failure responses and rarely show a CAPTCHA. The attack lands at the identity provider before any business logic runs. Strong authentication for users and partners (IA-02, IA-08), managed authenticators and identifiers (IA-04, IA-05), lockout on repeated failure (AC-07) and monitoring for spray patterns across accounts (SI-04) answer it.",
       "mitigatedBy": [
         "AC-07",
         "IA-02",
@@ -208,6 +219,7 @@
     {
       "id": "T-API-002",
       "name": "Broken object level authorization (BOLA/IDOR)",
+      "description": "An authenticated caller changes an object identifier in the path or body, for example /accounts/1043 to /accounts/1044, and the service returns or changes another customer's record. The token is valid, so the gateway lets the call through; only the service knows who owns the object. This is the most common serious API flaw (OWASP API1). Access enforcement per object in the service (AC-03), least privilege on scopes (AC-06), flow enforcement between tenants (AC-04) and review of access patterns (AU-06, SI-04) answer it.",
       "mitigatedBy": [
         "AC-03",
         "AC-04",
@@ -232,6 +244,7 @@
     {
       "id": "T-API-003",
       "name": "Injection attacks via API parameters",
+      "description": "A caller places SQL, NoSQL, OS command or template syntax in a parameter, header or JSON field, and the service passes it to an interpreter. Schema validation at the gateway catches malformed types but not a well-formed string that carries a payload, which is why validation is needed at the firewall, the gateway and the service (SI-10). Boundary protection (SC-07), malicious content filtering (SI-03), error handling that does not echo internals (SI-11), flow enforcement (AC-04) and monitoring (SI-04) complete the answer.",
       "mitigatedBy": [
         "AC-04",
         "SC-07",
@@ -257,6 +270,7 @@
     {
       "id": "T-API-004",
       "name": "Excessive data exposure in API responses",
+      "description": "The service returns whole database objects and leaves it to the client to show only some fields, so anyone reading the raw response sees internal identifiers, other users' personal data or security attributes. Unlike object-level authorisation failure, the caller is allowed to see the object, just not every field of it. Field-level output filtering (SI-15), access enforcement and least privilege on the response shape (AC-03, AC-06), flow enforcement (AC-04) and review of response volumes (AU-06, SI-04) answer it.",
       "mitigatedBy": [
         "AC-03",
         "AC-04",
@@ -282,6 +296,7 @@
     {
       "id": "T-API-005",
       "name": "Rate limiting bypass and API abuse",
+      "description": "A caller works around per-key or per-IP limits by rotating keys, spreading requests across addresses, or opening many valid sessions, then scrapes data or abuses a business function such as a voucher or price check. Each request is legitimate on its own; the abuse is in the volume and the pattern. Network throttling (SC-05, SC-07) is not enough: concurrent session limits and session termination at the identity provider (AC-10, AC-12), lockout (AC-07), event logging (AU-02), resource quotas (SC-06) and behavioural monitoring (SI-04) answer it.",
       "mitigatedBy": [
         "AC-07",
         "AC-10",
@@ -310,6 +325,7 @@
     {
       "id": "T-API-006",
       "name": "Mass assignment and parameter tampering",
+      "description": "The service binds the request body straight onto an internal object, so a caller who adds a field such as isAdmin or price changes a property the API never meant to expose. It differs from object-level authorisation failure: the caller acts on their own object, but on fields they should not write. Allow-listed input schemas (SI-10), a baseline that defines writable fields (CM-02), secure design of data binding (SA-08), access enforcement and least privilege per field (AC-03, AC-06), flow enforcement (AC-04) and monitoring (SI-04) answer it.",
       "mitigatedBy": [
         "AC-03",
         "AC-04",
@@ -336,6 +352,7 @@
     {
       "id": "T-API-007",
       "name": "Server-side request forgery via API input",
+      "description": "An API that fetches a URL supplied by the caller, for example to import an image or call a webhook, is pointed at an internal address such as a cloud metadata endpoint or an admin interface. The request leaves from inside the network, so perimeter controls do not see it. The ArchiMate view does not yet name this threat. Validation of target URLs against an allow-list (SI-10), egress restriction at the boundary (SC-07), flow enforcement (AC-04) and content filtering (SI-03) answer it.",
       "mitigatedBy": [
         "AC-04",
         "SC-07",
@@ -354,6 +371,7 @@
     {
       "id": "T-API-008",
       "name": "Third-party API supply chain compromise",
+      "description": "A third-party API the organisation calls, or a library or SDK used to build the API, is compromised and starts returning malicious data or leaking what it is sent. The organisation's own controls are intact; the trust placed in the supplier is what fails. An inventory of every external API and dependency (CM-08), rules for using external systems (AC-20), authenticating the services called (IA-09), developer testing of dependencies (SA-11), supply chain risk management (SR-02, SR-03) and monitoring of what comes back (SI-04) answer it.",
       "mitigatedBy": [
         "AC-20",
         "CM-08",
@@ -383,6 +401,7 @@
     {
       "id": "T-API-009",
       "name": "Man-in-the-middle on API traffic",
+      "description": "An attacker positioned on the network path, for example on public Wi-Fi, a compromised proxy or between internal services, reads or alters API traffic, including bearer tokens. Without transport protection a stolen token is as good as a password, and without mutual authentication one service cannot tell another from an impostor. TLS for confidentiality and integrity (SC-08), approved cryptography (SC-13), session authenticity (SC-23) and mutual service authentication (IA-09) answer it.",
       "mitigatedBy": [
         "IA-09",
         "SC-08",
@@ -403,6 +422,7 @@
     {
       "id": "T-API-010",
       "name": "Shadow API and zombie API exposure",
+      "description": "Teams publish APIs outside the gateway, or old versions keep running after their replacement ships. Nobody tests them, monitors them or patches them, and attackers find them by footprinting hostnames, paths and version numbers. Most organisations have several times more APIs than they think. A maintained API inventory (CM-08), configuration baselines and change control that register new endpoints (CM-02, CM-03), removing unused functionality (CM-07), vulnerability scanning (RA-05) and continuous monitoring (CA-07) answer it.",
       "mitigatedBy": [
         "CA-07",
         "CM-02",
@@ -428,6 +448,7 @@
     {
       "id": "T-API-011",
       "name": "Token theft and replay attacks",
+      "description": "An attacker steals an access token or refresh token from browser storage, a log file, a mobile app or a network trace, and replays it to act as the user until it expires. The token is genuine, so authentication succeeds. Short-lived tokens and managed authenticators (IA-05), binding the token to the session or client (SC-23), ending sessions on logout, idle time or risk signals (AC-12) and monitoring for one token used from two places (SI-04) answer it.",
       "mitigatedBy": [
         "AC-12",
         "IA-05",
@@ -451,6 +472,7 @@
     {
       "id": "T-API-012",
       "name": "API denial of service via resource exhaustion",
+      "description": "A caller sends requests that are cheap to make and expensive to answer, such as deeply nested GraphQL queries, huge page sizes or large uploads, until the service or its data store runs out of CPU, memory or connections. It differs from rate-limit abuse in that a handful of requests can be enough. Denial-of-service protection and resource quotas (SC-05, SC-06), query and payload limits enforced at validation (SI-10), boundary protection (SC-07), session limits (AC-07, AC-10, AC-12), event logging (AU-02) and continuous monitoring (CA-07) answer it.",
       "mitigatedBy": [
         "AC-07",
         "AC-10",
@@ -480,6 +502,7 @@
     {
       "id": "T-API-013",
       "name": "Exploit hardware or platform vulnerabilities",
+      "description": "An attacker exploits a known vulnerability in the platform under the API: the gateway product, the container runtime, the operating system or the firmware of the host. Application-level controls do not help if the layer below them is compromised, and the attacker gains the privileges of the platform. This threat comes from the Cyber Security Coalition's ArchiMate model. Removing unneeded functions and services (CM-07), vulnerability scanning and patching (RA-05) and monitoring for exploitation (SI-04) answer it.",
       "mitigatedBy": [
         "CM-07",
         "RA-05",

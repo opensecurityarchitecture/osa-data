@@ -229,6 +229,13 @@
       "description": "Related pattern names (human-readable)"
     },
 
+    "relatedPatternBoundaries": {
+      "type": "object",
+      "description": "One sentence per related pattern saying where this pattern stops and that one takes over, keyed by pattern ID",
+      "propertyNames": {"pattern": "^SP-[0-9]{3}(\\.[0-9]+)?$"},
+      "additionalProperties": {"type": "string"}
+    },
+
     "controls": {
       "type": "array",
       "description": "NIST 800-53 controls applicable to this pattern",
@@ -310,6 +317,7 @@
         "properties": {
           "id": {"type": "string"},
           "name": {"type": "string"},
+          "description": {"type": "string", "description": "Scenario: how the attack works, where it lands and which controls answer it"},
           "mitigatedBy": {
             "type": "array",
             "items": {"type": "string"},

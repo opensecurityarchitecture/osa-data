@@ -1,44 +1,29 @@
 {
-  "$schema": "../schema/pattern.schema.json",
+  "$schema": "../../schema/pattern.schema.json",
   "id": "SP-030",
   "slug": "api-security",
   "title": "API Security",
-  "description": "Comprehensive security pattern for protecting application programming interfaces across their full lifecycle. Maps 47 NIST 800-53 controls to the critical security functions required to defend APIs against the OWASP API Security Top 10: authentication, authorization, input validation, rate limiting, transport security, inventory management, and continuous monitoring.",
+  "description": "Comprehensive security pattern for protecting application programming interfaces across their full lifecycle. Maps 45 NIST 800-53 controls to the critical security functions required to defend APIs against the OWASP API Security Top 10: authentication, authorization, input validation, rate limiting, transport security, inventory management, and continuous monitoring.",
   "url": "https://www.opensecurityarchitecture.org/patterns/sp-030",
   "metadata": {
-    "release": "26.10",
+    "release": "26.02",
     "classification": "Application Security",
-    "status": "active",
+    "status": "deprecated",
     "type": "pattern",
     "datePublished": "2026-02-06",
-    "dateModified": "2026-10-08",
+    "dateModified": "2026-02-06",
     "authors": [
       "Aurelius",
       "Vitruvius"
     ],
     "reviewers": [],
     "provenance": "Derived from securing API-first architectures in financial services, where payment APIs, open banking interfaces, and partner integrations create high-value attack surfaces. Informed by OWASP API Security Top 10, NIST SP 800-204 series on microservices security, and practical experience with API gateways, OAuth 2.0 deployments, and API abuse detection at scale.",
-    "contributors": [
-      {
-        "name": "Cyber Security Coalition, Enterprise Security Architecture focus group",
-        "url": "https://cybersecuritycoalition.be/focus-group/esa-enterprise-security-architecture/",
-        "people": [
-          "Michael Boeynaems",
-          "Fabien Antiga",
-          "Roos Hubrechtsen",
-          "Kris Vercauteren"
-        ],
-        "contribution": "ArchiMate view (threat view and control view), threat-to-control traceability, STRIDE-LM and CAPEC threat classification"
-      }
-    ],
-    "previousVersions": [
-      {
-        "release": "26.02",
-        "dateModified": "2026-02-06",
-        "file": "archive/SP-030-api-security-v26.02.json",
-        "note": "OSA-only version before the Cyber Security Coalition ArchiMate view was added."
-      }
-    ]
+    "supersededBy": "SP-030",
+    "archived": {
+      "date": "2026-10-08",
+      "supersededByRelease": "26.10",
+      "note": "Archived when SP-030 release 26.10 added the Cyber Security Coalition ArchiMate view. The live pattern keeps all 45 controls of this release and adds SC-05 and SC-06."
+    }
   },
   "diagram": {
     "svg": "/images/sp-030-api-security.svg",
@@ -135,26 +120,6 @@
       "title": "Google API Design Guide",
       "url": "https://cloud.google.com/apis/design",
       "note": "Google's API design principles including security considerations. Demonstrates production-proven patterns for authentication, error handling, and versioning at scale."
-    },
-    {
-      "title": "Security Patterns: API Services Security Pattern",
-      "url": "https://securitypatterns.io/docs/06-api-services-security-pattern/",
-      "note": "Cited by the Cyber Security Coalition pattern document behind the ArchiMate view."
-    },
-    {
-      "title": "OWASP API Security Project",
-      "url": "https://owasp.org/www-project-api-security/",
-      "note": "Project page for the OWASP API Security Top 10; the threat table maps to its 2023 edition."
-    },
-    {
-      "title": "OWASP Cheat Sheet: Network Segmentation",
-      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Network_Segmentation_Cheat_Sheet.html",
-      "note": "Background for the External, DMZ and Back Office zoning the ArchiMate view assumes."
-    },
-    {
-      "title": "OWASP Cheat Sheet: OAuth 2.0",
-      "url": "https://cheatsheetseries.owasp.org/cheatsheets/OAuth2_Cheat_Sheet.html",
-      "note": "Token handling behind the identity provider and internal token in the ArchiMate view."
     }
   ],
   "relatedPatterns": [
@@ -182,102 +147,41 @@
       "id": "T-API-001",
       "name": "Broken authentication and credential stuffing",
       "mitigatedBy": [
-        "AC-07",
         "IA-02",
-        "IA-04",
         "IA-05",
-        "IA-08",
+        "AC-07",
         "SI-04"
-      ],
-      "owaspApi": [
-        "API2"
-      ],
-      "archimate": {
-        "threat": "CAPEC-115: Authentication Bypass",
-        "strideLm": "Spoofing",
-        "controls": [
-          "AC-07",
-          "IA-02",
-          "IA-04",
-          "IA-05",
-          "IA-08",
-          "SI-04"
-        ]
-      }
+      ]
     },
     {
       "id": "T-API-002",
       "name": "Broken object level authorization (BOLA/IDOR)",
       "mitigatedBy": [
         "AC-03",
-        "AC-04",
         "AC-06",
         "AU-06",
         "SI-04"
-      ],
-      "owaspApi": [
-        "API1"
-      ],
-      "archimate": {
-        "threat": "Unauthorized changes or manipulation of data records",
-        "strideLm": "Tampering",
-        "controls": [
-          "AC-03",
-          "AC-04",
-          "AC-06",
-          "SI-04"
-        ]
-      }
+      ]
     },
     {
       "id": "T-API-003",
       "name": "Injection attacks via API parameters",
       "mitigatedBy": [
-        "AC-04",
-        "SC-07",
-        "SI-03",
-        "SI-04",
         "SI-10",
-        "SI-11"
-      ],
-      "owaspApi": [],
-      "archimate": {
-        "threat": "CAPEC-242: Code Injection",
-        "strideLm": "Tampering",
-        "controls": [
-          "AC-04",
-          "SC-07",
-          "SI-03",
-          "SI-04",
-          "SI-10",
-          "SI-11"
-        ]
-      }
+        "SI-03",
+        "SI-11",
+        "AC-04"
+      ]
     },
     {
       "id": "T-API-004",
       "name": "Excessive data exposure in API responses",
       "mitigatedBy": [
-        "AC-03",
+        "SI-15",
         "AC-04",
         "AC-06",
-        "AU-06",
-        "SI-04",
-        "SI-15"
-      ],
-      "owaspApi": [
-        "API3"
-      ],
-      "archimate": {
-        "threat": "CAPEC-116: Excavation",
-        "strideLm": "Information disclosure",
-        "controls": [
-          "AC-03",
-          "AC-04",
-          "AC-06",
-          "SI-04"
-        ]
-      }
+        "AU-06"
+      ]
     },
     {
       "id": "T-API-005",
@@ -285,217 +189,79 @@
       "mitigatedBy": [
         "AC-07",
         "AC-10",
-        "AC-12",
-        "AU-02",
-        "SC-05",
-        "SC-06",
         "SC-07",
         "SI-04"
-      ],
-      "owaspApi": [
-        "API4"
-      ],
-      "archimate": {
-        "threat": "CAPEC-125: Flooding",
-        "strideLm": "Denial of service",
-        "controls": [
-          "AC-10",
-          "AC-12",
-          "AU-02",
-          "SC-05",
-          "SC-06"
-        ]
-      }
+      ]
     },
     {
       "id": "T-API-006",
       "name": "Mass assignment and parameter tampering",
       "mitigatedBy": [
+        "SI-10",
         "AC-03",
-        "AC-04",
-        "AC-06",
         "CM-02",
-        "SA-08",
-        "SI-04",
-        "SI-10"
-      ],
-      "owaspApi": [
-        "API3"
-      ],
-      "archimate": {
-        "threat": "Unauthorized changes or manipulation of data records",
-        "strideLm": "Tampering",
-        "controls": [
-          "AC-03",
-          "AC-04",
-          "AC-06",
-          "SI-04"
-        ]
-      }
+        "SA-08"
+      ]
     },
     {
       "id": "T-API-007",
       "name": "Server-side request forgery via API input",
       "mitigatedBy": [
-        "AC-04",
+        "SI-10",
         "SC-07",
-        "SI-03",
-        "SI-10"
-      ],
-      "owaspApi": [
-        "API7"
-      ],
-      "archimate": {
-        "threat": null,
-        "strideLm": null,
-        "controls": []
-      }
+        "AC-04",
+        "SI-03"
+      ]
     },
     {
       "id": "T-API-008",
       "name": "Third-party API supply chain compromise",
       "mitigatedBy": [
         "AC-20",
-        "CM-08",
-        "IA-09",
-        "SA-11",
-        "SI-04",
         "SR-02",
-        "SR-03"
-      ],
-      "owaspApi": [
-        "API10"
-      ],
-      "archimate": {
-        "threat": "API supply chain compromise",
-        "strideLm": "Tampering",
-        "controls": [
-          "AC-20",
-          "CM-08",
-          "IA-09",
-          "SA-11",
-          "SI-04",
-          "SR-02",
-          "SR-03"
-        ]
-      }
+        "SR-03",
+        "SI-04"
+      ]
     },
     {
       "id": "T-API-009",
       "name": "Man-in-the-middle on API traffic",
       "mitigatedBy": [
-        "IA-09",
         "SC-08",
         "SC-13",
-        "SC-23"
-      ],
-      "owaspApi": [],
-      "archimate": {
-        "threat": "CAPEC-94: Adversary in the Middle (AiTM)",
-        "strideLm": "Tampering",
-        "controls": [
-          "SC-08",
-          "SC-13",
-          "SC-23"
-        ]
-      }
+        "SC-23",
+        "IA-09"
+      ]
     },
     {
       "id": "T-API-010",
       "name": "Shadow API and zombie API exposure",
       "mitigatedBy": [
-        "CA-07",
-        "CM-02",
-        "CM-03",
-        "CM-07",
         "CM-08",
-        "RA-05"
-      ],
-      "owaspApi": [
-        "API9"
-      ],
-      "archimate": {
-        "threat": "CAPEC-169: Footprinting",
-        "strideLm": "Information disclosure",
-        "controls": [
-          "CA-07",
-          "CM-02",
-          "CM-03",
-          "CM-08"
-        ]
-      }
+        "CM-07",
+        "RA-05",
+        "CA-07"
+      ]
     },
     {
       "id": "T-API-011",
       "name": "Token theft and replay attacks",
       "mitigatedBy": [
+        "SC-23",
         "AC-12",
         "IA-05",
-        "SC-23",
         "SI-04"
-      ],
-      "owaspApi": [
-        "API2"
-      ],
-      "archimate": {
-        "threat": "CAPEC-21: Exploitation of Trusted Identifiers",
-        "strideLm": "Spoofing",
-        "controls": [
-          "AC-12",
-          "IA-05",
-          "SC-23",
-          "SI-04"
-        ]
-      }
+      ]
     },
     {
       "id": "T-API-012",
       "name": "API denial of service via resource exhaustion",
       "mitigatedBy": [
         "AC-07",
-        "AC-10",
-        "AC-12",
-        "AU-02",
-        "CA-07",
-        "SC-05",
-        "SC-06",
         "SC-07",
-        "SI-10"
-      ],
-      "owaspApi": [
-        "API4"
-      ],
-      "archimate": {
-        "threat": "CAPEC-125: Flooding",
-        "strideLm": "Denial of service",
-        "controls": [
-          "AC-10",
-          "AC-12",
-          "AU-02",
-          "SC-05",
-          "SC-06"
-        ]
-      }
-    },
-    {
-      "id": "T-API-013",
-      "name": "Exploit hardware or platform vulnerabilities",
-      "mitigatedBy": [
-        "CM-07",
-        "RA-05",
-        "SI-04"
-      ],
-      "owaspApi": [],
-      "archimate": {
-        "threat": "Exploit hardware or platform vulnerabilities",
-        "strideLm": "Elevation of privilege",
-        "controls": [
-          "CM-07",
-          "RA-05",
-          "SI-04"
-        ]
-      },
-      "source": "archimate"
+        "SI-10",
+        "CA-07"
+      ]
     }
   ],
   "controls": [
@@ -503,330 +269,271 @@
       "id": "AC-03",
       "name": "Access Enforcement",
       "family": "AC",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "AC-04",
       "name": "Information Flow Enforcement",
       "family": "AC",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "AC-06",
       "name": "Least Privilege",
       "family": "AC",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "AC-07",
       "name": "Unsuccessful Logon Attempts",
       "family": "AC",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "AC-10",
       "name": "Concurrent Session Control",
       "family": "AC",
-      "emphasis": "standard",
-      "scope": "inbound"
+      "emphasis": "standard"
     },
     {
       "id": "AC-12",
       "name": "Session Termination",
       "family": "AC",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "AC-17",
       "name": "Remote Access",
       "family": "AC",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "AC-20",
       "name": "Use of External Systems",
       "family": "AC",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "AC-21",
       "name": "Information Sharing",
       "family": "AC",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "AT-02",
       "name": "Literacy Training and Awareness",
       "family": "AT",
-      "emphasis": "standard",
-      "scope": "organisational"
+      "emphasis": "standard"
     },
     {
       "id": "AT-03",
       "name": "Role-based Training",
       "family": "AT",
-      "emphasis": "standard",
-      "scope": "organisational"
+      "emphasis": "standard"
     },
     {
       "id": "AU-02",
       "name": "Event Logging",
       "family": "AU",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "AU-03",
       "name": "Content of Audit Records",
       "family": "AU",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "AU-06",
       "name": "Audit Record Review, Analysis, and Reporting",
       "family": "AU",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "AU-12",
       "name": "Audit Record Generation",
       "family": "AU",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "CA-02",
       "name": "Control Assessments",
       "family": "CA",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "CA-07",
       "name": "Continuous Monitoring",
       "family": "CA",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "CM-02",
       "name": "Baseline Configuration",
       "family": "CM",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "CM-03",
       "name": "Configuration Change Control",
       "family": "CM",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "CM-07",
       "name": "Least Functionality",
       "family": "CM",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "CM-08",
       "name": "System Component Inventory",
       "family": "CM",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "IA-02",
       "name": "Identification and Authentication (Organizational Users)",
       "family": "IA",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "IA-04",
       "name": "Identifier Management",
       "family": "IA",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "IA-05",
       "name": "Authenticator Management",
       "family": "IA",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "IA-08",
       "name": "Identification and Authentication (Non-organizational Users)",
       "family": "IA",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "IA-09",
       "name": "Service Identification and Authentication",
       "family": "IA",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "IR-04",
       "name": "Incident Handling",
       "family": "IR",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "IR-05",
       "name": "Incident Monitoring",
       "family": "IR",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "PL-08",
       "name": "Security and Privacy Architectures",
       "family": "PL",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "RA-03",
       "name": "Risk Assessment",
       "family": "RA",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "RA-05",
       "name": "Vulnerability Monitoring and Scanning",
       "family": "RA",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "SA-08",
       "name": "Security and Privacy Engineering Principles",
       "family": "SA",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "SA-11",
       "name": "Developer Testing and Evaluation",
       "family": "SA",
-      "emphasis": "important",
-      "scope": "inbound"
-    },
-    {
-      "id": "SC-05",
-      "name": "Denial-of-service Protection",
-      "family": "SC",
-      "emphasis": "important",
-      "scope": "inbound"
-    },
-    {
-      "id": "SC-06",
-      "name": "Resource Availability",
-      "family": "SC",
-      "emphasis": "standard",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "SC-07",
       "name": "Boundary Protection",
       "family": "SC",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "SC-08",
       "name": "Transmission Confidentiality and Integrity",
       "family": "SC",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "SC-13",
       "name": "Cryptographic Protection",
       "family": "SC",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "SC-23",
       "name": "Session Authenticity",
       "family": "SC",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "SC-28",
       "name": "Protection of Information at Rest",
       "family": "SC",
-      "emphasis": "standard",
-      "scope": "organisational"
+      "emphasis": "standard"
     },
     {
       "id": "SI-03",
       "name": "Malicious Code Protection",
       "family": "SI",
-      "emphasis": "standard",
-      "scope": "inbound"
+      "emphasis": "standard"
     },
     {
       "id": "SI-04",
       "name": "System Monitoring",
       "family": "SI",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "SI-10",
       "name": "Information Input Validation",
       "family": "SI",
-      "emphasis": "critical",
-      "scope": "inbound"
+      "emphasis": "critical"
     },
     {
       "id": "SI-11",
       "name": "Error Handling",
       "family": "SI",
-      "emphasis": "important",
-      "scope": "inbound"
+      "emphasis": "important"
     },
     {
       "id": "SI-15",
       "name": "Information Output Filtering",
       "family": "SI",
-      "emphasis": "important",
-      "scope": "organisational"
+      "emphasis": "important"
     },
     {
       "id": "SR-02",
       "name": "Supply Chain Risk Management Plan",
       "family": "SR",
-      "emphasis": "standard",
-      "scope": "inbound"
+      "emphasis": "standard"
     },
     {
       "id": "SR-03",
       "name": "Supply Chain Controls and Processes",
       "family": "SR",
-      "emphasis": "standard",
-      "scope": "inbound"
+      "emphasis": "standard"
     }
   ],
   "controlFamilySummary": {
@@ -840,128 +547,8 @@
     "PL": 1,
     "RA": 2,
     "SA": 2,
-    "SC": 7,
+    "SC": 5,
     "SI": 5,
     "SR": 2
-  },
-  "archimateView": {
-    "name": "API inbound security pattern",
-    "alsoKnownAs": "API inbound - ESA pattern",
-    "version": "0.2",
-    "status": "Draft",
-    "scope": "One inbound API call: a consumer outside the organisation calling a service inside it.",
-    "contributor": {
-      "name": "Cyber Security Coalition, Enterprise Security Architecture focus group",
-      "url": "https://cybersecuritycoalition.be/focus-group/esa-enterprise-security-architecture/",
-      "people": [
-        "Michael Boeynaems",
-        "Fabien Antiga",
-        "Roos Hubrechtsen",
-        "Kris Vercauteren"
-      ]
-    },
-    "license": "CC BY-SA 4.0",
-    "model": "archimate/SP-030-api-inbound.xml",
-    "standards": [
-      "NIST SP 800-53 Rev 5, for the control identifiers and titles. Base controls only.",
-      "MITRE CAPEC, meta attack patterns, for the threat names.",
-      "STRIDE-LM, for the threat categories."
-    ],
-    "intro": "This pattern is available in two notations, and each takes a slightly different angle. The overview gives you a helicopter view of how API security fits into your organisation as a security capability. The ArchiMate view shows the same pattern in ArchiMate notation, and splits it into a threat view, which says what can go wrong, and a control view, which says what we are doing about it. That view should be useful to security architects who work where ArchiMate is the common notation, or to anyone who wants more detail on this pattern.",
-    "overviewNote": "<p>The overview diagram reads top to bottom in six bands.</p><ol><li>Governance, standards and training.</li><li>API consumers: web clients, mobile apps, partners and services.</li><li>The API security stack: the API gateway, the authorisation layer, validation and protection, and service-to-service mTLS.</li><li>Backend services and data.</li><li>API lifecycle management.</li><li>API monitoring and incident response.</li></ol><p>Control identifiers appear as badges beside the block that applies them, and each badge links to that control's page. The legend explains the trust boundary marks. The footer carries the pattern ID and name, the control count, the authors, the status, the date and the standards the pattern addresses.</p>",
-    "views": [
-      {
-        "key": "tm",
-        "label": "What can go wrong (threat view)",
-        "svg": "/archimate/sp-030/threat-view.svg",
-        "description": "<p>This view shows one API interaction: a consumer outside the organisation calling a service inside it. It draws the components that take part, the threats that apply at each step, and the controls those threats need. The scope is the inbound call only.</p><p>Read the interaction from top to bottom. <code>NORA-1: External</code> holds the API consumer, with a web client, a mobile app and a server-based application inside it. <code>NORA-4: Back Office</code> holds the service and the data store. The call runs from External down to Back Office.</p><p>Threats sit in a column beside the zones, each at the height of the step it applies to. Controls follow in the next column, one box each. A control that answers two threats can be drawn twice, once beside each; <code>CM-08</code> is the only one. A narrow column beside the controls holds the four refinements of <code>SI-10</code>: <code>Allowlisting</code>, <code>Blocklisting</code>, <code>Detailed validation</code> and <code>Data sanitization</code>. The view opens with the controls hidden. Tick Controls to show them, and the view becomes a map from each threat to the controls that answer it.</p><p>An arrowhead means the control mitigates the threat it points at, and every mitigation relation has one. A relation running left from a threat to a component means the threat applies there. Every threat also carries a STRIDE-LM category. The view does not draw it. The detail panel beside the diagram shows it when you select a threat.</p>"
-      },
-      {
-        "key": "cr",
-        "label": "What are we doing about it (control view)",
-        "svg": "/archimate/sp-030/control-view.svg",
-        "description": "<p>For every control the threats require, this view shows the security service that delivers it.</p><p>The three network zones run down the middle. <code>NORA-1: External</code> holds the API consumer and its three client types. <code>NORA-2: DMZ</code> holds <code>STS-21</code> distributed denial of service protection, <code>STS-17</code> web application firewall and <code>STS-23</code> secure service gateway. <code>NORA-4: Back Office</code> holds the service, the data store and eight more security services. The controls sit left and right of the zones, each beside the service that delivers it. A control appears once for each service that delivers it. The view draws <code>SI-10</code> three times: at the web application firewall, at the gateway and at the service.</p>"
-      }
-    ],
-    "sidecar": "/archimate/sp-030/sidecar.json",
-    "download": "/archimate/sp-030/sp-030-api-inbound.xml",
-    "keyControlAreaServices": [
-      [
-        "STS-02",
-        "STS-03"
-      ],
-      [
-        "STS-03",
-        "STS-23",
-        "Service"
-      ],
-      [
-        "STS-17",
-        "STS-21",
-        "STS-23",
-        "STS-40"
-      ],
-      [
-        "STS-17",
-        "STS-23",
-        "Service"
-      ],
-      [
-        "STS-03",
-        "STS-17",
-        "Service"
-      ],
-      [
-        "STS-23",
-        "STS-26",
-        "STS-28"
-      ],
-      [
-        "STS-13",
-        "Service"
-      ],
-      [
-        "STS-04",
-        "STS-12"
-      ]
-    ],
-    "services": {
-      "STS-02": "Identity governance and administration service",
-      "STS-03": "Identity provider service",
-      "STS-04": "Security testing service",
-      "STS-12": "Vulnerability management service",
-      "STS-13": "Security information and event management service",
-      "STS-17": "Web application firewall service",
-      "STS-21": "Distributed denial of service protection service",
-      "STS-23": "Secure service gateway (API gateway)",
-      "STS-26": "Asset management service",
-      "STS-28": "Secure configuration management service",
-      "STS-40": "Third party risk management service",
-      "Service": "The API service itself"
-    },
-    "otherControls": {
-      "controls": [
-        "SC-05",
-        "SC-06",
-        "SR-02",
-        "SR-03"
-      ],
-      "deliveredBy": [
-        "STS-21",
-        "STS-40"
-      ]
-    },
-    "notes": {
-      "controls": "Every control on the inbound path answers one of the threats in the ArchiMate view. Organisation-level controls are part of the pattern but sit outside the inbound call: governance, training, incident response, at-rest protection and assessment.",
-      "typicalChallenges": "Three of these challenges appear in the ArchiMate view. Input validation is drawn three times: at the web application firewall, at the gateway and at the service. Teams build one of the three and stop. Rate limiting is not only a network control, because AC-10 and AC-12 sit with the identity provider, and that pair stops a flood of valid sessions. CM-08 answers shadow APIs, and supply chain compromise depends on it too, so an out-of-date inventory of published APIs leaves both threats unanswered.",
-      "threatResistance": "<p>The ArchiMate view does not answer one of OSA's threats: server-side request forgery. It is answered by SI-10 and SC-07, already in the pattern, but no threat in the model names it.</p><p>The OWASP column uses the 2023 edition of the OWASP API Security Top 10. Injection and adversary in the middle have no entry there, so they show a dash. API3 merges the 2019 entries for excessive data exposure and mass assignment, so two rows carry it.</p><p>Two model threats answer two OSA threats each: <em>CAPEC-125: Flooding</em> and <em>Unauthorized changes or manipulation of data records</em>. They should be split in a later version of the model.</p>",
-      "assumptions": "The ArchiMate view adds two assumptions. The organisation enforces a network zoning model, and the view places every element in External, DMZ or Back Office. The consumer holds a valid access token before the first call reaches the web application firewall. An identity provider validates that token and issues the internal token used behind the gateway. Issuing the first token is outside this pattern."
-    },
-    "knownUses": [
-      "Single-page web application calling an API. The browser holds the token, so session handling carries most of the risk.",
-      "Business-to-business API integration. The caller is a server, so IA-09 authenticates the calling service.",
-      "Open banking. The consumer is a third party, so AC-20 and the supply chain controls apply."
-    ],
-    "variants": "The model records one variant, API IA Threat Model, covering identity and authentication in more detail. No others are known."
   }
 }

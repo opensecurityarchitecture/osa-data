@@ -93,6 +93,47 @@
         "provenance": {
           "type": "string",
           "description": "Origin and real-world experience behind the pattern"
+        },
+        "contributors": {
+          "type": "array",
+          "description": "Organisations outside the founders who contributed part of the pattern, and what they contributed",
+          "items": {
+            "type": "object",
+            "required": ["name", "contribution"],
+            "properties": {
+              "name": {"type": "string"},
+              "url": {"type": "string", "format": "uri"},
+              "people": {"type": "array", "items": {"type": "string"}},
+              "contribution": {"type": "string"}
+            }
+          }
+        },
+        "previousVersions": {
+          "type": "array",
+          "description": "Earlier releases kept in data/patterns/archive/",
+          "items": {
+            "type": "object",
+            "required": ["release", "file"],
+            "properties": {
+              "release": {"type": "string"},
+              "dateModified": {"type": "string", "format": "date"},
+              "file": {"type": "string", "description": "Path relative to data/patterns/"},
+              "note": {"type": "string"}
+            }
+          }
+        },
+        "supersededBy": {
+          "type": "string",
+          "description": "Pattern ID that replaces this one (deprecated or archived patterns)"
+        },
+        "archived": {
+          "type": "object",
+          "description": "Set on a copy kept in data/patterns/archive/",
+          "properties": {
+            "date": {"type": "string", "format": "date"},
+            "supersededByRelease": {"type": "string"},
+            "note": {"type": "string"}
+          }
         }
       }
     },
@@ -213,6 +254,11 @@
             "type": "string",
             "enum": ["critical", "important", "standard"],
             "description": "Relative importance for this pattern"
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["inbound", "organisational"],
+            "description": "Where the control applies, for patterns with an ArchiMate view: on the modelled call path (inbound) or at organisation level"
           }
         }
       }
@@ -268,8 +314,93 @@
             "type": "array",
             "items": {"type": "string"},
             "description": "Control IDs that mitigate this threat"
+          },
+          "owaspApi": {
+            "type": "array",
+            "items": {"type": "string", "pattern": "^API[0-9]{1,2}$"},
+            "description": "OWASP API Security Top 10 (2023) entries this threat corresponds to"
+          },
+          "archimate": {
+            "type": "object",
+            "description": "The threat in the pattern's ArchiMate model that answers this one",
+            "properties": {
+              "threat": {"type": ["string", "null"], "description": "Threat name in the model (CAPEC meta attack pattern where one fits); null when the model does not cover it"},
+              "strideLm": {"type": ["string", "null"], "description": "STRIDE-LM category"},
+              "controls": {"type": "array", "items": {"type": "string"}, "description": "Controls the model draws as mitigating it"}
+            }
+          },
+          "source": {
+            "type": "string",
+            "enum": ["osa", "archimate"],
+            "description": "Where the threat comes from; osa when absent"
           }
         }
+      }
+    },
+
+    "archimateView": {
+      "type": "object",
+      "description": "A contributed ArchiMate view of the pattern: the exchange-format model, one SVG per view, and the sidecar describing every element drawn",
+      "required": ["name", "views", "contributor"],
+      "properties": {
+        "name": {"type": "string"},
+        "alsoKnownAs": {"type": "string"},
+        "version": {"type": "string"},
+        "status": {"type": "string"},
+        "scope": {"type": "string"},
+        "contributor": {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": {"type": "string"},
+            "url": {"type": "string", "format": "uri"},
+            "people": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "license": {"type": "string"},
+        "model": {"type": "string", "description": "Exchange-format model, relative to data/"},
+        "standards": {"type": "array", "items": {"type": "string"}},
+        "intro": {"type": "string"},
+        "overviewNote": {"type": "string", "description": "HTML: how to read the OSA overview diagram"},
+        "views": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["key", "label", "svg"],
+            "properties": {
+              "key": {"type": "string", "pattern": "^[a-z]+$"},
+              "label": {"type": "string"},
+              "svg": {"type": "string", "description": "Site path of the view SVG"},
+              "description": {"type": "string", "description": "HTML: how to read the view"}
+            }
+          }
+        },
+        "sidecar": {"type": "string", "description": "Site path of the element sidecar JSON"},
+        "download": {"type": "string", "description": "Site path of the exchange-format download"},
+        "keyControlAreaServices": {
+          "type": "array",
+          "description": "Security services delivering each entry of content.keyControlAreas, in the same order",
+          "items": {"type": "array", "items": {"type": "string"}}
+        },
+        "services": {
+          "type": "object",
+          "description": "Name of each security service code used in keyControlAreaServices and otherControls (e.g. STS-21)",
+          "additionalProperties": {"type": "string"}
+        },
+        "otherControls": {
+          "type": "object",
+          "properties": {
+            "controls": {"type": "array", "items": {"type": "string"}},
+            "deliveredBy": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "notes": {
+          "type": "object",
+          "description": "What the view adds to a content section, keyed by section",
+          "additionalProperties": {"type": "string"}
+        },
+        "knownUses": {"type": "array", "items": {"type": "string"}},
+        "variants": {"type": "string"}
       }
     },
 

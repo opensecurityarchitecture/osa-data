@@ -1,0 +1,413 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "iso_27018_2019",
+  "framework_name": "ISO/IEC 27018:2019",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on publicly available crosswalks and expert analysis. Validate with qualified assessors for compliance/audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "voluntary"
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "5.1.1",
+      "title": "Policies for information security (PII context)",
+      "controls": [
+        "PL-01",
+        "PM-01",
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "PT-01",
+        "SR-01"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SP 800-53 policy controls (-01 series) and PT-01 privacy policy together address information security and privacy policy requirements for cloud PII processing. PM-01 provides overarching programme management and SR-01 extends to supply chain policies relevant to sub-processors.",
+      "gaps": "SP 800-53 does not explicitly require policies to address the rights of data subjects (PII principals) or to distinguish processor versus controller obligations as required by ISO 27018 in a public cloud PII processing context."
+    },
+    {
+      "id": "5.1.2",
+      "title": "Review of the policies for information security (PII context)",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-06",
+        "PL-01"
+      ],
+      "coverage_pct": 82,
+      "rationale": "CA-02 security assessments, CA-07 continuous monitoring, and PM-06 measures of performance provide mechanisms for periodic policy review. PL-01 planning policy requires regular policy updates triggered by changes in cloud PII processing scope.",
+      "gaps": "SP 800-53 does not specifically require policy reviews to be triggered by changes in applicable privacy legislation or by PII processing scope changes in cloud service environments."
+    },
+    {
+      "id": "6.1.1",
+      "title": "Information security roles and responsibilities (PII context)",
+      "controls": [
+        "PM-02",
+        "PS-01",
+        "PS-02",
+        "PL-01",
+        "PM-29"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PM-02 senior information security officer, PS-01/PS-02 personnel security policy and position designations, and PL-01 planning policy address security roles. PM-29 privacy program roles and responsibilities directly address privacy-specific role assignment applicable to cloud PII processing.",
+      "gaps": "SP 800-53 does not explicitly require the designation of a Data Protection Officer or equivalent role specifically for cloud PII processing as may be required by applicable privacy regulations referenced in ISO 27018."
+    },
+    {
+      "id": "8.2.1",
+      "title": "Classification of information (PII)",
+      "controls": [
+        "RA-02",
+        "AC-16",
+        "PT-07"
+      ],
+      "coverage_pct": 78,
+      "rationale": "RA-02 security categorization and AC-16 security and privacy attributes address information classification. PT-07 specific categories of PII directly addresses classification of special categories of PII relevant to cloud PII processing under ISO 27018.",
+      "gaps": "SP 800-53 does not provide a PII-specific classification scheme that aligns with the sensitivity-based classification of PII types required by ISO 27018, such as distinguishing standard PII from sensitive PII categories."
+    },
+    {
+      "id": "9.2.1",
+      "title": "User registration and de-registration (PII context)",
+      "controls": [
+        "AC-02",
+        "IA-04",
+        "IA-12",
+        "PT-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AC-02 account management, IA-04 identifier management, and IA-12 identity proofing address user registration and de-registration lifecycle. PT-02 authority to process PII adds the privacy-specific dimension of ensuring only authorised PII principal accounts are registered in cloud services.",
+      "gaps": "SP 800-53 does not specifically address PII principal rights to request de-registration and deletion of their PII from cloud services, or the cloud processor's obligation to implement such requests."
+    },
+    {
+      "id": "9.2.2",
+      "title": "User access provisioning (PII context)",
+      "controls": [
+        "AC-02",
+        "AC-06",
+        "AC-25"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AC-02 account management, AC-06 least privilege, and AC-25 reference monitor provide comprehensive access provisioning controls ensuring PII is only accessible to authorised users. These controls map well to ISO 27018 requirements for restricting access to PII in cloud processing environments.",
+      "gaps": "SP 800-53 does not specifically address PII principal access rights provisioning, such as granting PII principals access to view and correct their own data held in cloud systems."
+    },
+    {
+      "id": "9.2.3",
+      "title": "Management of privileged access rights (PII context)",
+      "controls": [
+        "AC-02",
+        "AC-06",
+        "AC-25",
+        "IA-04"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AC-06 least privilege, AC-02 account management, AC-25 reference monitor, and IA-04 identifier management address privileged access rights management for PII. These controls support limiting cloud service provider staff access to customer PII to only what is necessary.",
+      "gaps": "SP 800-53 does not specifically address cloud service provider administrator access to customer PII, customer consent requirements for provider privileged access, or customer-controlled access revocation over provider personnel."
+    },
+    {
+      "id": "9.3.1",
+      "title": "Use of secret authentication information (PII context)",
+      "controls": [
+        "IA-05",
+        "IA-06",
+        "AC-14"
+      ],
+      "coverage_pct": 88,
+      "rationale": "IA-05 authenticator management and IA-06 authenticator feedback directly address proper use and protection of secret authentication information. AC-14 permitted actions without identification complements these controls for scenarios involving PII access in cloud environments.",
+      "gaps": "SP 800-53 does not specifically address PII principal authentication requirements or self-service credential management rights for PII subjects accessing their own data in cloud services."
+    },
+    {
+      "id": "9.4.1",
+      "title": "Information access restriction (PII)",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AC-24",
+        "PT-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AC-03 access enforcement, AC-06 least privilege, and AC-24 access control decisions provide strong PII access restriction controls. PT-02 authority to process PII ensures access restrictions align with the legal basis for PII processing in cloud environments.",
+      "gaps": "SP 800-53 does not specifically require cloud processors to restrict access to PII strictly to the purposes for which processing consent was obtained, or to enforce purpose limitation at the access control layer."
+    },
+    {
+      "id": "10.1.1",
+      "title": "Policy on the use of cryptographic controls (PII)",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "PT-07"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-12 cryptographic key management, SC-13 cryptographic protection, and SC-28 protection at rest provide comprehensive cryptographic control policy coverage for PII. PT-07 specific categories of PII adds the requirement for enhanced cryptographic protection of sensitive PII categories in cloud environments.",
+      "gaps": "SP 800-53 does not specifically require cryptographic policies to address PII principal rights related to encryption, such as customer-managed encryption keys that prevent cloud provider access to PII."
+    },
+    {
+      "id": "10.1.2",
+      "title": "Key management (PII)",
+      "controls": [
+        "SC-12",
+        "SC-13",
+        "SC-17",
+        "SC-28"
+      ],
+      "coverage_pct": 88,
+      "rationale": "SC-12 cryptographic key establishment and management is the primary control for PII encryption key lifecycle. SC-13 cryptographic protection, SC-17 PKI certificates, and SC-28 protection at rest provide comprehensive key management coverage for PII in cloud storage and transit.",
+      "gaps": "SP 800-53 does not specifically address bring-your-own-key models, cloud service customer key sovereignty, or hardware security module requirements for PII encryption key management in public cloud environments."
+    },
+    {
+      "id": "12.4.1",
+      "title": "Event logging (PII)",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-08",
+        "AU-12",
+        "PT-02"
+      ],
+      "coverage_pct": 88,
+      "rationale": "AU-02 event logging, AU-03 audit record content, AU-08 time stamps, and AU-12 audit generation provide comprehensive event logging. PT-02 authority to process PII extends logging requirements to ensure PII processing activities are logged in alignment with legal processing authorities.",
+      "gaps": "SP 800-53 does not specifically require logging of PII processing activities for compliance demonstration purposes, such as records of consent, PII access by authorised personnel, or PII disclosure events required by ISO 27018."
+    },
+    {
+      "id": "13.2.1",
+      "title": "Information transfer policies and procedures (PII)",
+      "controls": [
+        "SC-08",
+        "AC-04",
+        "MP-05",
+        "SC-16",
+        "PT-03"
+      ],
+      "coverage_pct": 82,
+      "rationale": "SC-08 transmission confidentiality, AC-04 information flow enforcement, MP-05 media transport, and SC-16 transmission of security and privacy attributes address PII transfer security. PT-03 purpose specification ensures PII transfers are limited to authorised purposes in cloud processing.",
+      "gaps": "SP 800-53 does not specifically address cross-border PII transfer restrictions, adequacy determination requirements, or standard contractual clauses for international PII transfers from cloud services."
+    },
+    {
+      "id": "13.2.4",
+      "title": "Confidentiality or non-disclosure agreements (PII)",
+      "controls": [
+        "SA-04",
+        "PS-06",
+        "SR-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PS-06 access agreements and SA-04 acquisition requirements address confidentiality and non-disclosure agreement requirements. SR-03 supply chain controls extends confidentiality obligations to sub-processors and cloud supply chain partners handling PII.",
+      "gaps": "SP 800-53 does not specifically require cloud service providers to enter into data processing agreements or data protection addenda with cloud service customers as required by ISO 27018 and applicable privacy legislation."
+    },
+    {
+      "id": "15.1.1",
+      "title": "Information security policy for supplier relationships (PII context)",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03",
+        "SR-05"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-04 acquisition requirements, SA-09 external information system services, and SR-01 through SR-05 supply chain risk management controls provide comprehensive coverage of supplier security policy requirements applicable to cloud PII sub-processors and data processors.",
+      "gaps": "SP 800-53 does not specifically require cloud service providers to flow down PII protection obligations to sub-processors, or to maintain an up-to-date list of sub-processors available to cloud service customers."
+    },
+    {
+      "id": "18.1.4",
+      "title": "Privacy and protection of personally identifiable information",
+      "controls": [
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05",
+        "PT-07",
+        "PM-25",
+        "PM-26",
+        "PM-27",
+        "PM-28"
+      ],
+      "coverage_pct": 88,
+      "rationale": "The PT family (privacy policy, authority, purpose, consent, notice, and PII processing) and PM-25 through PM-28 (privacy reports, privacy complaints, privacy incidents, and complaints management) provide comprehensive PII privacy protection coverage directly aligned with ISO 27018 clause 18.1.4 requirements for cloud PII processors.",
+      "gaps": "SP 800-53 does not explicitly address all jurisdiction-specific privacy rights such as the right to erasure, right to data portability, or right to object to processing as required by GDPR, LGPD, and other regulations referenced in ISO 27018."
+    },
+    {
+      "id": "A.1",
+      "title": "Consent and choice (PII principal rights)",
+      "controls": [
+        "PT-04",
+        "PT-02",
+        "PM-25"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PT-04 consent management and PT-02 authority to process PII partially address consent and choice requirements. PM-25 privacy reporting provides oversight context for consent practices in cloud PII processing.",
+      "gaps": "SP 800-53 does not comprehensively address PII principal consent mechanisms, granular consent management, or the right to withdraw consent from cloud PII processing as required by ISO 27018 Annex A.1 and applicable privacy legislation."
+    },
+    {
+      "id": "A.2",
+      "title": "Purpose legitimacy and specification (PII)",
+      "controls": [
+        "PT-03",
+        "PT-01",
+        "PM-25"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-03 processing purposes and PT-01 privacy policy directly address purpose specification and legitimacy for PII processing. PM-25 privacy reporting supports documentation and oversight of processing purpose compliance in cloud environments.",
+      "gaps": "SP 800-53 does not specifically require cloud processors to demonstrate legal basis for each PII processing purpose or to restrict processing strictly to specified and legitimate purposes as required by ISO 27018 Annex A.2."
+    },
+    {
+      "id": "A.3",
+      "title": "Collection limitation (PII minimisation)",
+      "controls": [
+        "PT-07",
+        "PM-25",
+        "SA-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PT-07 specific categories of PII and PM-25 privacy reporting partially address collection limitation. SA-08 security engineering principles support privacy-by-design approaches that can implement data minimisation in cloud system architecture.",
+      "gaps": "SP 800-53 has no direct control mandating PII collection minimisation or requiring cloud processors to collect only PII that is strictly necessary for the specified processing purpose as required by ISO 27018 Annex A.3."
+    },
+    {
+      "id": "A.4",
+      "title": "Data minimisation (PII)",
+      "controls": [
+        "PT-07",
+        "PM-25",
+        "SI-12"
+      ],
+      "coverage_pct": 58,
+      "rationale": "PT-07 specific categories of PII and SI-12 information retention and disposal partially address data minimisation. PM-25 privacy reporting provides oversight of minimisation practices. SI-12 supports disposal of PII no longer required.",
+      "gaps": "SP 800-53 does not specifically require cloud processors to implement technical controls that enforce data minimisation at the point of collection or to demonstrate that only minimal PII is processed as required by ISO 27018 Annex A.4."
+    },
+    {
+      "id": "A.5",
+      "title": "Use, retention, and disclosure limitation (PII)",
+      "controls": [
+        "PT-03",
+        "AU-11",
+        "SI-12",
+        "PM-25"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PT-03 processing purposes addresses use limitation. AU-11 audit record retention and SI-12 information retention and disposal address retention limitation. PM-25 privacy reporting provides oversight of disclosure practices for PII in cloud processing.",
+      "gaps": "SP 800-53 does not specifically require cloud processors to define and enforce maximum PII retention periods, implement automated PII deletion at retention expiry, or restrict PII disclosure to only authorised recipients as required by ISO 27018 Annex A.5."
+    },
+    {
+      "id": "A.6",
+      "title": "Accuracy and quality (PII)",
+      "controls": [
+        "PM-25",
+        "SA-08"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PM-25 privacy reporting provides oversight context for PII accuracy management. SA-08 security engineering principles can be applied to design cloud systems that maintain PII accuracy and support correction workflows.",
+      "gaps": "SP 800-53 has no direct control requiring cloud processors to implement mechanisms for PII principals to correct inaccurate PII, verify PII accuracy before processing, or maintain PII quality standards as required by ISO 27018 Annex A.6."
+    },
+    {
+      "id": "A.7",
+      "title": "Openness, transparency, and notice (PII)",
+      "controls": [
+        "PT-05",
+        "PT-06",
+        "PT-01",
+        "PM-19"
+      ],
+      "coverage_pct": 62,
+      "rationale": "PT-05 privacy notice and PT-01 privacy policy directly address openness and transparency requirements. PT-06 privacy reports and PM-19 privacy strategy support transparency obligations. These controls partially cover ISO 27018 Annex A.7 requirements for PII processing transparency in public cloud services.",
+      "gaps": "SP 800-53 does not specifically require cloud processors to provide PII principals with notice of sub-processor changes, PII disclosure to third parties, or to make processing records accessible to PII principals as required by ISO 27018 Annex A.7."
+    },
+    {
+      "id": "A.8",
+      "title": "Individual participation and access (PII principal rights)",
+      "controls": [
+        "PT-08",
+        "AC-14",
+        "IP-01",
+        "IP-02"
+      ],
+      "coverage_pct": 68,
+      "rationale": "PT-08 complaints management and AC-14 permitted actions without identification partially address individual participation. IP-01 consent and IP-02 individual access partially cover PII principal access rights, though SP 800-53 IP controls are primarily oriented toward federal agency obligations.",
+      "gaps": "SP 800-53 does not comprehensively address PII principal rights to access their PII held in cloud systems, request corrections, obtain copies in portable formats, or lodge complaints with supervisory authorities as required by ISO 27018 Annex A.8."
+    },
+    {
+      "id": "A.9",
+      "title": "Accountability (PII processor)",
+      "controls": [
+        "PM-02",
+        "CA-07",
+        "PM-25",
+        "PM-29"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-02 senior information security officer and PM-29 privacy program roles address accountability assignment. CA-07 continuous monitoring and PM-25 privacy reporting support accountability demonstration for PII processing in cloud environments.",
+      "gaps": "SP 800-53 does not specifically address the cloud processor's accountability obligations to the cloud controller, or require records of processing activities demonstrating compliance with PII processing obligations as required by ISO 27018 Annex A.9."
+    },
+    {
+      "id": "A.10",
+      "title": "Information security (PII protection in transit and at rest)",
+      "controls": [
+        "SC-28",
+        "SC-08",
+        "AC-04",
+        "PT-07"
+      ],
+      "coverage_pct": 72,
+      "rationale": "SC-28 protection of information at rest and SC-08 transmission confidentiality directly address PII protection security requirements. AC-04 information flow enforcement and PT-07 specific categories of PII extend coverage to ensure enhanced protection for sensitive PII categories in cloud transit and storage.",
+      "gaps": "SP 800-53 does not specifically address end-to-end encryption requirements for PII or customer-controlled encryption that prevents cloud provider access to PII as required by ISO 27018 Annex A.10."
+    },
+    {
+      "id": "A.11",
+      "title": "Privacy compliance (PII)",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PT-01",
+        "PM-01",
+        "PM-08"
+      ],
+      "coverage_pct": 68,
+      "rationale": "CA-02 security assessments and CA-07 continuous monitoring support ongoing privacy compliance monitoring. PT-01 privacy policy and PM-01 information security program provide the policy framework. PM-08 critical infrastructure plan extends to privacy compliance obligations in cloud services.",
+      "gaps": "SP 800-53 does not specifically require cloud processors to demonstrate compliance with applicable privacy legislation through formal privacy compliance assessments, third-party audits, or certifications as envisioned by ISO 27018 Annex A.11."
+    }
+  ],
+  "summary": {
+    "total_clauses": 27,
+    "average_coverage": 75.9,
+    "fully_addressed": 11,
+    "substantially_addressed": 11,
+    "partially_addressed": 5,
+    "weakly_addressed": 0,
+    "not_addressed": 0
+  }
+}

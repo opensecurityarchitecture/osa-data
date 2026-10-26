@@ -22,6 +22,7 @@ Other lookups, each one request:
 - A framework's clauses, with OSA's title for each and the controls mapped to it: `GET /frameworks/{id}.md`
 - A control: its statement, NIST's enhancements of it by name, the patterns that use it and its clauses in every framework: `GET /controls/{id}.md`. An enhancement's statement: `GET /api/v1/controls/{id}?fields=enhancements`
 - One framework's control-to-clause mappings as JSON: `/api/v1/frameworks/{id}?fields=mappings&per_page=100`
+- A MITRE ATT&CK technique: the SP 800-53 controls CTID maps to it, MITRE's mitigations and detection strategies, the groups that use it and the patterns with the most of its controls: `GET /attack/{id}.md`, for example `/attack/t1566.md`. As JSON: `/api/v1/attack/techniques/{id}`. The techniques a control mitigates: `/api/v1/controls/{id}?fields=attack`
 - Framework ids: listed at the end of `llms.txt`
 - Everything else: `/openapi.yaml`
 

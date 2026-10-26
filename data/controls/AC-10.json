@@ -202,44 +202,6 @@
     "nist_ai_rmf_1": [],
     "eu_ai_act": []
   },
-  "attack_techniques": [
-    {
-      "id": "T1137",
-      "name": "Office Application Startup",
-      "tactics": [
-        "persistence"
-      ],
-      "mapping_type": "mitigates",
-      "mapping_rationale": "Limiting concurrent sessions restricts Office application startup persistence by reducing the number of simultaneous authenticated sessions where malicious Office add-ins, templates, and startup items can execute."
-    },
-    {
-      "id": "T1185",
-      "name": "Browser Session Hijacking",
-      "tactics": [
-        "collection"
-      ],
-      "mapping_type": "mitigates",
-      "mapping_rationale": "Concurrent session limits constrain browser session hijacking by restricting the number of active sessions per user, making it detectable when adversaries establish additional sessions using stolen browser tokens."
-    },
-    {
-      "id": "T1528",
-      "name": "Steal Application Access Token",
-      "tactics": [
-        "credential-access"
-      ],
-      "mapping_type": "mitigates",
-      "mapping_rationale": "Limiting concurrent sessions helps detect stolen application access tokens because additional sessions created using stolen tokens push users over their session limits, triggering alerts or forcing token invalidation."
-    },
-    {
-      "id": "T1137.002",
-      "name": "Office Test",
-      "tactics": [
-        "persistence"
-      ],
-      "mapping_type": "mitigates",
-      "mapping_rationale": "Concurrent session control restricts Office Test persistence by limiting the number of simultaneous Office sessions where the malicious Office Test registry key can trigger unauthorized DLL loading."
-    }
-  ],
   "metadata": {
     "last_reviewed": "2026-10-03",
     "review_notes": "2026-10-03: nist_csf_2 PR.AA-05 added from NIST's CSF 2.0 to SP 800-53 Rev 5.2.0 crosswalk (OLIR entry 186), which OSA's mapping now takes as its base. 2026-10-03: baselines LMH to --H, from NIST SP 800-53B Release 5.2.0.",

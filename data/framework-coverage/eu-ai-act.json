@@ -1,0 +1,747 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "eu_ai_act",
+  "framework_name": "EU Artificial Intelligence Act (Regulation (EU) 2024/1689)",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "OSA's own analysis of Regulation (EU) 2024/1689, the Artificial Intelligence Act, as amended by Regulation (EU) 2026/1744, against SP 800-53 Rev 5. No published crosswalk between the AI Act and SP 800-53 was found. The Act is a product and market regulation: many of its obligations are legal or market duties (prohibitions, conformity assessment, declarations, CE marking, registration, the duties of importers and distributors) that no security control meets, so expect low coverage there. Clause ids: Art.N is an article, with its paragraph and point where the clause is part of one. Validate with qualified legal and AI governance professionals for compliance or audit use.",
+    "jurisdictions": [
+      "EU"
+    ],
+    "applicability_type": "mandatory",
+    "analysis": {
+      "basis": "OSA's own analysis. NIST's catalogue of registered crosswalks has none for the AI Act, and NIST's crosswalk of January 2023 relates the AI RMF's trustworthiness characteristics to the Act as proposed, not to SP 800-53 (checked 26 October 2026).",
+      "checked": "2026-10-26",
+      "texts": [
+        {
+          "title": "Regulation (EU) 2024/1689 (Artificial Intelligence Act)",
+          "published": "Official Journal of the European Union, 12 July 2024",
+          "url": "https://publications.europa.eu/resource/celex/32024R1689",
+          "sha256": "8f0b656302f9864cc87e040c371f209a9d65ae1a6cecc25ca5eb737e872d721a"
+        },
+        {
+          "title": "Regulation (EU) 2026/1744 (Digital Omnibus on AI), amending it",
+          "published": "Official Journal of the European Union, July 2026; in force 27 July 2026",
+          "url": "https://publications.europa.eu/resource/celex/32026R1744"
+        },
+        {
+          "title": "Consolidated text of Regulation (EU) 2024/1689 as at 27 July 2026, from which the clauses are quoted",
+          "published": "EU Publications Office, CELEX 02024R1689-20260727",
+          "url": "https://publications.europa.eu/resource/celex/02024R1689-20260727",
+          "sha256": "5e7719f77e8a606b257dc25958ee3222c4383300a5a34270a5b850a2ce8b8715"
+        }
+      ],
+      "controls": "SP 800-53 Rev 5.2.0 base controls. An enhancement that addresses a clause counts for its base control. Controls that Rev 5 withdrew are not used.",
+      "method": "Each of the 52 clauses was rated three times, independently, against the control statements, by AI models. A control is listed for a clause where at least two of the three ratings named it. The coverage figure is the median of the three estimates of how much of the clause an organisation would meet by implementing the listed controls. The rationale and gaps were written after the controls were settled.",
+      "pairs_named_by_three": 104,
+      "pairs_named_by_two": 63,
+      "pairs_named_by_one_and_left_out": 47,
+      "not_mapped": "Definitions and scope (Articles 1 to 3), the classification rules other than the provider's documented assessment (Article 6(3) and (4)), notifying authorities and notified bodies (Articles 28 to 39), standards and common specifications (Articles 40 to 42), the procedures of the Commission, the AI Office, the Board and national authorities, regulatory sandboxes and real-world testing (Chapter VI), market surveillance, penalties (Chapter XII), delegated acts and final provisions. The prohibited practices of Article 5 are one clause.",
+      "commencement": {
+        "source": "Article 113 of Regulation (EU) 2024/1689, as amended by Regulation (EU) 2026/1744.",
+        "phases": [
+          {
+            "from": "2025-02-02",
+            "applies": "Chapters I and II: AI literacy (Article 4) and the prohibited practices of Article 5, except the prohibitions added in 2026."
+          },
+          {
+            "from": "2025-08-02",
+            "applies": "The obligations of providers of general-purpose AI models (Chapter V, Articles 53 to 55), with Chapter III Section 4, Chapters VII and XII (except Article 101) and Article 78."
+          },
+          {
+            "from": "2026-07-27",
+            "applies": "Regulation (EU) 2026/1744 in force, with Article 4a, which it inserts."
+          },
+          {
+            "from": "2026-08-02",
+            "applies": "The rest of the Regulation, including the transparency obligations of Article 50, except as below."
+          },
+          {
+            "from": "2026-12-02",
+            "applies": "The prohibitions added in 2026: Article 5(1), first subparagraph, points (ba) and (bb), and Article 5(1a) and (1b)."
+          },
+          {
+            "from": "2027-12-02",
+            "applies": "Chapter III, Sections 1 to 3, for AI systems classified as high-risk under Article 6(2) and Annex III, except Article 6(5)."
+          },
+          {
+            "from": "2028-08-02",
+            "applies": "Chapter III, Sections 1 to 3, for AI systems classified as high-risk under Article 6(1) and Annex I."
+          }
+        ],
+        "note": "Most clauses in this mapping are obligations for high-risk AI systems (Chapter III), which apply from 2 December 2027 or 2 August 2028. AI literacy and the prohibitions have applied since 2 February 2025, the obligations of providers of general-purpose AI models since 2 August 2025, and the transparency obligations of Article 50 from 2 August 2026."
+      }
+    }
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "Art.4",
+      "title": "AI literacy of staff and others operating AI systems",
+      "controls": [
+        "AT-02",
+        "AT-03"
+      ],
+      "coverage_pct": 40,
+      "rationale": "AT-02 gives literacy training and awareness to users, including contractors, and AT-03 role-based training.",
+      "gaps": "The training's content on AI, and measures for others who operate AI systems on the organisation's behalf, are not specified."
+    },
+    {
+      "id": "Art.4a",
+      "title": "Special categories of personal data processed for bias detection and correction, and its safeguards",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-06",
+        "AU-12",
+        "PM-25",
+        "PS-06",
+        "PT-02",
+        "PT-03",
+        "PT-07",
+        "SC-28",
+        "SI-12",
+        "SI-19"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PT-07 sets conditions for specific categories of PII, PT-02 and PT-03 document the authority and purpose, and PM-25 limits the PII used in training and research. SI-19 de-identifies, AC-03, AC-04 and AC-06 restrict access and flows to authorised people, PS-06 binds them by access agreements, AU-12 records access, SC-28 protects the data at rest, and SI-12 disposes of it.",
+      "gaps": "Whether bias detection could be done with other data, and keeping the reasons for processing special categories in the records of processing, are legal judgements no control makes."
+    },
+    {
+      "id": "Art.5",
+      "title": "Prohibited AI practices",
+      "controls": [
+        "PT-03",
+        "PT-04",
+        "SI-15"
+      ],
+      "coverage_pct": 10,
+      "rationale": "PT-03 limits processing to documented purposes, PT-04 asks for consent, and SI-15 checks that output is consistent with expected content.",
+      "gaps": "The prohibitions are legal limits on what may be placed on the market or used. No control prohibits an AI practice."
+    },
+    {
+      "id": "Art.6(4)",
+      "title": "Documented assessment that an Annex III system is not high-risk",
+      "controls": [
+        "RA-02",
+        "RA-03"
+      ],
+      "coverage_pct": 35,
+      "rationale": "RA-02 has the system categorised with the result and its rationale documented, and RA-03 assesses its risk.",
+      "gaps": "The assessment of whether an Annex III system poses a significant risk of harm, and its registration, are legal steps."
+    },
+    {
+      "id": "Art.9(1)-(2)",
+      "title": "Risk management system: established, documented and maintained as a continuous iterative process",
+      "controls": [
+        "CA-07",
+        "PM-09",
+        "RA-01",
+        "RA-03",
+        "RA-07",
+        "SA-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "RA-01 sets risk assessment policy and procedures, RA-03 identifies and updates risks, RA-07 responds to them and PM-09 sets the strategy. SA-03 carries risk management through the life cycle, and CA-07 feeds monitoring back in.",
+      "gaps": "Risks to health, safety and fundamental rights, and those from reasonably foreseeable misuse, go beyond the controls' security and privacy focus."
+    },
+    {
+      "id": "Art.9(5)",
+      "title": "Risk management measures and acceptable residual risk",
+      "controls": [
+        "CA-06",
+        "PM-28",
+        "RA-07",
+        "SA-05",
+        "SA-08",
+        "SA-16"
+      ],
+      "coverage_pct": 55,
+      "rationale": "RA-07 responds to risk, PM-28 documents risk tolerance, CA-06 has residual risk accepted, SA-08 designs risk out, and SA-05 and SA-16 give users documentation and training.",
+      "gaps": "Judging residual risk acceptable against the Act's standard is not covered."
+    },
+    {
+      "id": "Art.9(6)-(8)",
+      "title": "Testing of high-risk AI systems against defined metrics",
+      "controls": [
+        "CA-02",
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-11 plans and carries out developer testing and evaluation, SA-15 sets the development process and tools, and CA-02 assesses the system against a plan.",
+      "gaps": "Testing against prior metrics and probabilistic thresholds for the intended purpose, and in real-world conditions, is not covered."
+    },
+    {
+      "id": "Art.9(9)",
+      "title": "Impact on persons under 18 and other vulnerable groups",
+      "controls": [
+        "RA-03"
+      ],
+      "coverage_pct": 15,
+      "rationale": "RA-03 determines the likelihood and impact of adverse effects on individuals.",
+      "gaps": "No control considers persons under 18 or other vulnerable groups."
+    },
+    {
+      "id": "Art.10(1)-(2)",
+      "title": "Data governance and management practices for training, validation and testing data",
+      "controls": [
+        "CM-13",
+        "PM-22",
+        "PM-23",
+        "PT-03",
+        "SR-04"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-23 sets a data governance body, PM-22 manages data quality, SR-04 documents the provenance of data, PT-03 the purpose of its collection, and CM-13 maps the actions taken on it.",
+      "gaps": "Examining data sets for bias, and measures to detect, prevent and mitigate it, are not covered."
+    },
+    {
+      "id": "Art.10(3)-(4)",
+      "title": "Quality of data sets: relevant, representative, free of errors and complete",
+      "controls": [
+        "PM-22",
+        "SI-10",
+        "SI-18"
+      ],
+      "coverage_pct": 25,
+      "rationale": "SI-18 checks the accuracy, relevance and completeness of PII, PM-22 manages its quality, and SI-10 validates input.",
+      "gaps": "Representativeness, and the statistical properties and context of data sets, are not covered."
+    },
+    {
+      "id": "Art.11",
+      "title": "Technical documentation, drawn up before placing on the market and kept up to date",
+      "controls": [
+        "PL-02",
+        "SA-05",
+        "SA-17"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-05 and SA-17 produce system and design documentation, and PL-02 the system plan.",
+      "gaps": "The contents of Annex IV go beyond them."
+    },
+    {
+      "id": "Art.12",
+      "title": "Record-keeping: automatic logging of events over the system's lifetime",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-08",
+        "AU-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-02 and AU-12 log events, AU-03 sets what each record contains, and AU-08 time-stamps them.",
+      "gaps": "The events particular to high-risk AI systems are not specified."
+    },
+    {
+      "id": "Art.13",
+      "title": "Transparency to deployers and instructions for use",
+      "controls": [
+        "SA-05"
+      ],
+      "coverage_pct": 35,
+      "rationale": "SA-05 gives administrators and users documentation of the system's functions and how to use it.",
+      "gaps": "Accuracy levels, known limits, and what deployers need to interpret the output are not specified."
+    },
+    {
+      "id": "Art.14(1)-(3)",
+      "title": "Human oversight designed into the system",
+      "controls": [
+        "AC-04",
+        "SI-07"
+      ],
+      "coverage_pct": 20,
+      "rationale": "AC-04 can require human review of information flows, and SI-07 detects unauthorised changes to software and information.",
+      "gaps": "Oversight designed into an AI system, commensurate with its risks, is not covered as such."
+    },
+    {
+      "id": "Art.14(4)",
+      "title": "What the people assigned to oversight must be enabled to do",
+      "controls": [
+        "CP-12",
+        "PE-10",
+        "SA-05",
+        "SI-04",
+        "SI-10"
+      ],
+      "coverage_pct": 40,
+      "rationale": "CP-12 enters a safe mode and PE-10 shuts the system off in an emergency, SI-10 provides a manual override, SI-04 monitors for anomalies, and SA-05 gives the overseers documentation.",
+      "gaps": "Awareness of automation bias, and correctly interpreting the output, are not covered."
+    },
+    {
+      "id": "Art.15(1)-(4)",
+      "title": "Accuracy and robustness, with declared levels, resilience to errors and fail-safe plans",
+      "controls": [
+        "CA-07",
+        "CP-02",
+        "CP-09",
+        "SA-24",
+        "SC-24",
+        "SI-10",
+        "SI-13",
+        "SI-17"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SI-13 manages failure and provides standby components, CP-09 backups, CP-02 a contingency plan, SC-24 and SI-17 fail-safe behaviour, SA-24 design for cyber resiliency, SI-10 handling of inconsistent input, and CA-07 monitoring.",
+      "gaps": "Declared levels of accuracy, and feedback loops in systems that keep learning, are not covered."
+    },
+    {
+      "id": "Art.15(5)",
+      "title": "Cybersecurity, including against data poisoning, model poisoning, adversarial examples and confidentiality attacks",
+      "controls": [
+        "AC-03",
+        "AC-23",
+        "CA-08",
+        "IR-04",
+        "RA-05",
+        "SC-28",
+        "SI-02",
+        "SI-04",
+        "SI-07",
+        "SI-10",
+        "SI-15",
+        "SR-04"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SI-07 protects integrity, SR-04 provenance, SI-10 validates input, SI-15 filters output, AC-23 protects against data mining and AC-03 against unauthorised alteration. SC-28 protects data at rest, SI-04 monitors, RA-05 and CA-08 find weaknesses, SI-02 remediates flaws, and IR-04 handles incidents.",
+      "gaps": "Attacks particular to AI, such as data poisoning, model poisoning, adversarial examples and model evasion, are not named."
+    },
+    {
+      "id": "Art.17",
+      "title": "Quality management system",
+      "controls": [
+        "CA-07",
+        "CM-03",
+        "IR-08",
+        "PM-01",
+        "PM-09",
+        "SA-01",
+        "SA-02",
+        "SA-03",
+        "SA-11",
+        "SA-15",
+        "SI-12",
+        "SR-05"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-01 and SA-01 set the programme and its policy, SA-03 and SA-15 the development process, SA-11 testing, CM-03 change control, PM-09 risk management, CA-07 monitoring, IR-08 incident response, SI-12 record-keeping, SA-02 resources and SR-05 acquisition from suppliers.",
+      "gaps": "Communication with authorities and an accountability framework for management are not covered."
+    },
+    {
+      "id": "Art.18",
+      "title": "Keeping documentation for ten years",
+      "controls": [
+        "SI-12"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SI-12 manages and retains information in line with requirements.",
+      "gaps": "The ten-year period and the documents to be kept are the Act's."
+    },
+    {
+      "id": "Art.19",
+      "title": "Keeping automatically generated logs",
+      "controls": [
+        "AU-04",
+        "AU-09",
+        "AU-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-11 retains audit records for a set period, AU-09 protects them and AU-04 provides the storage.",
+      "gaps": "The minimum of six months is the Act's."
+    },
+    {
+      "id": "Art.20",
+      "title": "Corrective actions and duty of information",
+      "controls": [
+        "CA-05",
+        "IR-04",
+        "IR-06",
+        "SI-02",
+        "SR-08"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SI-02 remediates flaws, IR-04 handles incidents, IR-06 reports them, CA-05 plans corrective actions and SR-08 sets notification agreements in the supply chain.",
+      "gaps": "Withdrawing, disabling or recalling a system, and informing authorities of a serious risk, are not covered."
+    },
+    {
+      "id": "Art.21",
+      "title": "Cooperation with competent authorities",
+      "controls": [
+        "AU-07",
+        "AU-16"
+      ],
+      "coverage_pct": 25,
+      "rationale": "AU-16 shares audit information across organisational boundaries, and AU-07 produces reports from audit records on demand.",
+      "gaps": "Supplying an authority with the information and documentation it asks for is not covered."
+    },
+    {
+      "id": "Art.22",
+      "title": "Authorised representatives of providers established outside the Union",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this clause.",
+      "gaps": "Appointing and mandating an authorised representative in the Union is a legal step."
+    },
+    {
+      "id": "Art.23",
+      "title": "Obligations of importers",
+      "controls": [
+        "SI-12",
+        "SR-05",
+        "SR-08",
+        "SR-11"
+      ],
+      "coverage_pct": 20,
+      "rationale": "SR-05 assesses components before acceptance, SR-11 detects counterfeit components, SR-08 sets notification agreements, and SI-12 retains records.",
+      "gaps": "Verifying the conformity assessment, documentation and CE marking before placing a system on the market is not covered."
+    },
+    {
+      "id": "Art.24",
+      "title": "Obligations of distributors",
+      "controls": [
+        "SR-05",
+        "SR-08"
+      ],
+      "coverage_pct": 15,
+      "rationale": "SR-05 assesses components before acceptance, and SR-08 sets notification agreements in the supply chain.",
+      "gaps": "Verifying the CE marking and documentation before making a system available is not covered."
+    },
+    {
+      "id": "Art.25(4)",
+      "title": "Written agreements with suppliers of AI systems, tools, services, components or processes",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SR-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-04 puts requirements in acquisition contracts, SA-09 requires external providers to comply, and SR-08 sets notification agreements with supply chain entities.",
+      "gaps": "The information, technical access and assistance the provider needs to comply with the Act are not specified."
+    },
+    {
+      "id": "Art.26(1)-(2)",
+      "title": "Deployers: use according to the instructions, and human oversight by competent people",
+      "controls": [
+        "AT-03",
+        "PL-04",
+        "PM-32",
+        "PS-09"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PL-04 sets rules of behaviour, PM-32 checks use against intended purpose, AT-03 trains people in their roles, and PS-09 documents their responsibilities.",
+      "gaps": "Assigning human oversight to people with the necessary authority and support is covered only in part."
+    },
+    {
+      "id": "Art.26(4)",
+      "title": "Deployers: input data relevant and representative",
+      "controls": [
+        "SI-10",
+        "SI-18"
+      ],
+      "coverage_pct": 25,
+      "rationale": "SI-10 validates input, and SI-18 checks the quality of PII.",
+      "gaps": "Representativeness of input data for the intended purpose is not covered."
+    },
+    {
+      "id": "Art.26(5)",
+      "title": "Deployers: monitoring the system's operation, informing the provider and suspending use",
+      "controls": [
+        "CA-07",
+        "IR-04",
+        "IR-06",
+        "SI-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-04 and CA-07 monitor the system, IR-04 handles incidents and IR-06 reports them.",
+      "gaps": "Suspending use and informing the provider and authorities of a risk are not covered as such."
+    },
+    {
+      "id": "Art.26(6)",
+      "title": "Deployers: keeping the logs",
+      "controls": [
+        "AU-04",
+        "AU-09",
+        "AU-11"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-11 retains audit records for a set period, AU-09 protects them and AU-04 provides the storage.",
+      "gaps": "The minimum of six months is the Act's."
+    },
+    {
+      "id": "Art.26(7)",
+      "title": "Deployers: informing workers before use at the workplace",
+      "controls": [
+        "PT-05"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PT-05 gives individuals notice about the processing of their PII.",
+      "gaps": "Informing workers' representatives and affected workers before use at the workplace is not covered."
+    },
+    {
+      "id": "Art.26(9)",
+      "title": "Deployers: data protection impact assessment",
+      "controls": [
+        "RA-08"
+      ],
+      "coverage_pct": 65,
+      "rationale": "RA-08 conducts privacy impact assessments.",
+      "gaps": "Using the provider's information for the assessment required under data protection law is not specified."
+    },
+    {
+      "id": "Art.26(11)",
+      "title": "Deployers: informing natural persons subject to the system's decisions",
+      "controls": [
+        "PT-05"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PT-05 gives individuals notice about the processing of their PII.",
+      "gaps": "Notice that a person is subject to a high-risk AI system's decisions is not specified."
+    },
+    {
+      "id": "Art.27",
+      "title": "Fundamental rights impact assessment",
+      "controls": [
+        "PM-26",
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-03 and RA-08 assess risks and privacy impacts, and PM-26 receives complaints.",
+      "gaps": "Fundamental rights beyond privacy, and notifying the market surveillance authority, are not covered."
+    },
+    {
+      "id": "Art.43",
+      "title": "Conformity assessment",
+      "controls": [
+        "CA-02",
+        "CA-06",
+        "CM-04"
+      ],
+      "coverage_pct": 30,
+      "rationale": "CA-02 assesses controls against a plan and reports the results, CA-06 authorises the system, and CM-04 analyses the impact of changes, as a substantial modification needs.",
+      "gaps": "The conformity assessment procedure, and the role of notified bodies, are legal."
+    },
+    {
+      "id": "Art.47",
+      "title": "EU declaration of conformity",
+      "controls": [
+        "SI-12"
+      ],
+      "coverage_pct": 10,
+      "rationale": "SI-12 retains information in line with requirements.",
+      "gaps": "Drawing up, signing and updating the EU declaration of conformity is a legal act."
+    },
+    {
+      "id": "Art.48",
+      "title": "CE marking",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this clause.",
+      "gaps": "CE marking is a legal requirement."
+    },
+    {
+      "id": "Art.49",
+      "title": "Registration in the EU database",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this clause.",
+      "gaps": "Registration in the EU database is a legal requirement."
+    },
+    {
+      "id": "Art.50(1)",
+      "title": "Informing people that they are interacting with an AI system",
+      "controls": [
+        "AC-08",
+        "PT-05"
+      ],
+      "coverage_pct": 50,
+      "rationale": "AC-08 displays a notice to users before they use the system, and PT-05 gives notice about processing.",
+      "gaps": "Telling people that they are interacting with an AI system is not specified."
+    },
+    {
+      "id": "Art.50(2)",
+      "title": "Marking synthetic content as artificially generated, in a machine-readable form",
+      "controls": [
+        "AC-16",
+        "AU-10",
+        "SC-16"
+      ],
+      "coverage_pct": 40,
+      "rationale": "AC-16 associates attributes with information, SC-16 carries them with it in transmission, and AU-10 binds what is produced to its source.",
+      "gaps": "Marking synthetic output as artificially generated, in a machine-readable and detectable form, is not specified."
+    },
+    {
+      "id": "Art.50(3)",
+      "title": "Informing people exposed to emotion recognition or biometric categorisation",
+      "controls": [
+        "PT-02",
+        "PT-05",
+        "PT-07",
+        "SC-42"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PT-05 gives notice, PT-07 sets conditions for specific categories of PII such as biometric data, PT-02 documents the authority to process, and SC-42 controls sensor capability and the use of its data.",
+      "gaps": "Informing people that emotion recognition or biometric categorisation is in use is not specified."
+    },
+    {
+      "id": "Art.50(4)",
+      "title": "Disclosing deep fakes and AI-generated text published to inform the public",
+      "controls": [
+        "AC-16"
+      ],
+      "coverage_pct": 20,
+      "rationale": "AC-16 can display attributes on output, such as a label that content is generated.",
+      "gaps": "Disclosing deep fakes and AI-generated text published to inform the public is not required."
+    },
+    {
+      "id": "Art.53(1)(a)-(b)",
+      "title": "General-purpose AI models: technical documentation, and information for downstream providers",
+      "controls": [
+        "SA-05",
+        "SA-11",
+        "SA-17"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-05 and SA-17 produce documentation of the system and its design, and SA-11 documents its testing and evaluation.",
+      "gaps": "The information in Annexes XI and XII, and giving it to the AI Office and to downstream providers, are not covered."
+    },
+    {
+      "id": "Art.53(1)(c)",
+      "title": "General-purpose AI models: policy to comply with Union copyright law",
+      "controls": [
+        "CM-10"
+      ],
+      "coverage_pct": 15,
+      "rationale": "CM-10 uses software and documentation in accordance with copyright law.",
+      "gaps": "Training data, and reservations of rights for text and data mining, are not covered."
+    },
+    {
+      "id": "Art.53(1)(d)",
+      "title": "General-purpose AI models: public summary of the content used for training",
+      "controls": [
+        "SR-04"
+      ],
+      "coverage_pct": 10,
+      "rationale": "SR-04 documents the provenance of data, from which a summary could be drawn.",
+      "gaps": "No control requires a public summary of training content."
+    },
+    {
+      "id": "Art.55(1)(a)",
+      "title": "Systemic risk: model evaluation, including adversarial testing",
+      "controls": [
+        "CA-08",
+        "SA-11"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CA-08 tests by penetration and red teaming, and SA-11 has the developer test and evaluate.",
+      "gaps": "Evaluation against standardised protocols for systemic risk is not covered."
+    },
+    {
+      "id": "Art.55(1)(b)",
+      "title": "Systemic risk: assessing and mitigating systemic risks",
+      "controls": [
+        "PM-09",
+        "RA-03",
+        "RA-07"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-03 assesses risk, RA-07 responds to it, and PM-09 sets the strategy.",
+      "gaps": "Systemic risks at Union level, and their sources, are beyond them."
+    },
+    {
+      "id": "Art.55(1)(c)",
+      "title": "Systemic risk: tracking, documenting and reporting serious incidents",
+      "controls": [
+        "IR-04",
+        "IR-05",
+        "IR-06"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IR-05 tracks and documents incidents, IR-04 handles them, and IR-06 reports them.",
+      "gaps": "Reporting to the AI Office and national authorities without undue delay is the Act's."
+    },
+    {
+      "id": "Art.55(1)(d)",
+      "title": "Systemic risk: cybersecurity protection for the model and its physical infrastructure",
+      "controls": [
+        "AC-03",
+        "PE-03",
+        "RA-05",
+        "SC-07",
+        "SC-28",
+        "SI-04",
+        "SI-07"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AC-03 and PE-03 control logical and physical access, SC-07 protects the boundary, SC-28 data at rest, SI-07 integrity, SI-04 monitors, and RA-05 finds vulnerabilities.",
+      "gaps": "Protection particular to model weights and the model's physical infrastructure is not named."
+    },
+    {
+      "id": "Art.72",
+      "title": "Post-market monitoring system and plan",
+      "controls": [
+        "CA-07"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-07 implements continuous monitoring.",
+      "gaps": "Collecting and analysing data on performance from deployers, and the post-market monitoring plan in the technical documentation, are not covered."
+    },
+    {
+      "id": "Art.73",
+      "title": "Reporting serious incidents",
+      "controls": [
+        "IR-04",
+        "IR-06"
+      ],
+      "coverage_pct": 65,
+      "rationale": "IR-04 investigates and corrects incidents, and IR-06 reports them.",
+      "gaps": "The deadlines, and not altering the system before informing the authorities, are not covered."
+    },
+    {
+      "id": "Art.86",
+      "title": "Explanation of individual decisions to affected persons",
+      "controls": [
+        "PM-26"
+      ],
+      "coverage_pct": 10,
+      "rationale": "PM-26 receives and responds to questions and complaints from individuals.",
+      "gaps": "No control requires explaining the AI system's role in a decision to the person affected."
+    }
+  ],
+  "summary": {
+    "total_clauses": 52,
+    "average_coverage": 40.6,
+    "full_count": 2,
+    "substantial_count": 7,
+    "partial_count": 22,
+    "weak_count": 18,
+    "none_count": 3
+  }
+}

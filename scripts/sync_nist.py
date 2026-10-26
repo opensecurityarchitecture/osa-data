@@ -16,7 +16,7 @@ With --check it writes nothing, lists every difference and exits 1 if there
 is one. validate_json.py runs the check, so a copy cannot drift unnoticed.
 
 OSA's own fields are never touched: compliance_mappings, function,
-attack_techniques, metadata, and everything in a pattern but a control's name.
+metadata, and everything in a pattern but a control's name.
 
 It also takes out the fields listed under RETIRED, so they cannot come back.
 
@@ -46,7 +46,9 @@ MISSING = []  # filled by sync(): what a pattern refers to that the catalogue do
 # technical, operational or management. The Joomla article id belonged to a
 # site that is gone. The Rev 4 block held an older name, and the withdrawn
 # marking that is now at the top level of the file.
-RETIRED = (("control_class",), ("joomla_id",), ("nist_800_53", "rev4"))
+# attack_techniques: CTID's ATT&CK pairs with model-written rationales, retired in October 2026 (V12).
+# The pairs are in data/mitre-attack/sp800-53-to-attack.json, generated from CTID's published mapping.
+RETIRED = (("control_class",), ("joomla_id",), ("nist_800_53", "rev4"), ("attack_techniques",))
 # A flag the file states either way, and where a new top-level key goes.
 EXPLICIT = {("withdrawn",)}
 PLACE_AFTER = {"withdrawn": "family_name", "incorporated_into": "withdrawn"}

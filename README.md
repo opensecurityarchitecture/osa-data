@@ -14,6 +14,7 @@ Each pattern names the controls that matter for a kind of system, says which are
 - **317 controls** in `data/controls/`: NIST SP 800-53 Rev 5, across 20 families. That is all 300 controls of Release 5.2.0 and the 17 withdrawn ones that OSA's older patterns still name. Each control file lists its clauses in every framework under `compliance_mappings`, and NIST's enhancements of the control under `enhancements`, each with its statement and baselines. Frameworks are mapped to the controls, not to the enhancements. The 17 controls NIST has withdrawn are marked `withdrawn`, with the controls they moved into under `incorporated_into`. NIST's Rev 4 catalogue already lists 15 of them as withdrawn, and Rev 5 withdrew AU-15 and SC-19.
 - **87 framework coverage files** in `data/framework-coverage/`. For each clause of a framework: the controls that address it, a coverage estimate, the rationale and the gaps.
 - **NIST's own text** in `data/nist/sp800-53-rev5.json`: every control and enhancement of SP 800-53 Release 5.2.0 with its name, statement, discussion, related controls and baselines, built from NIST's published files.
+- **MITRE ATT&CK Enterprise** in `data/mitre-attack/`: tactics, techniques, groups, mitigations and detection strategies from MITRE's STIX data, and CTID's mapping of SP 800-53 Rev 5 controls to the techniques they mitigate.
 - **Schemas** in `data/schema/` for patterns, controls and coverage files.
 - **A skill for AI agents** in `skills/osa-security-patterns/`. It teaches a coding agent to answer a question from OSA in a few requests. See [skills/README.md](skills/README.md).
 
@@ -43,6 +44,7 @@ data/
 │   └── _catalog.json
 ├── framework-coverage/   # one file per framework
 ├── nist/                 # SP 800-53 as NIST publishes it, generated
+├── mitre-attack/         # ATT&CK Enterprise and CTID's SP 800-53 mapping, generated
 ├── verticals/            # industry profiles
 ├── templates/            # policy templates
 └── schema/               # JSON schemas
@@ -50,7 +52,7 @@ scripts/                  # validation and the scripts that built the mappings
 skills/                   # skill files for AI agents
 ```
 
-The ATT&CK data behind the coverage matrix on the site is not in this repository.
+`data/mitre-attack/` holds MITRE ATT&CK Enterprise v20.0 and the Center for Threat-Informed Defense's mapping of SP 800-53 Rev 5 to it, both generated from the published sources by `scripts/build_attack_extract.py`. See its README for what was changed and the licences.
 
 ## Validating
 

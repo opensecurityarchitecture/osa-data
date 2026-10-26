@@ -1,0 +1,954 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "nist_ai_rmf_1",
+  "framework_name": "NIST AI Risk Management Framework (AI RMF 1.0)",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "OSA's own analysis of the NIST AI Risk Management Framework (AI RMF 1.0, NIST AI 100-1, January 2023) against SP 800-53 Rev 5. NIST publishes no crosswalk between the AI RMF and SP 800-53. The AI RMF asks for outcomes in AI risk management, and SP 800-53 is a catalogue of security and privacy controls, so expect low coverage where the AI RMF is about trustworthiness characteristics other than security and privacy: validity, safety, explainability, fairness and environmental impact. Clause ids and titles are NIST's. Validate with qualified assessors for compliance or audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "voluntary",
+    "analysis": {
+      "basis": "OSA's own analysis. NIST's catalogue of registered crosswalks has no crosswalk from the AI RMF to SP 800-53 (checked 26 October 2026).",
+      "checked": "2026-10-26",
+      "texts": [
+        {
+          "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1",
+          "published": "National Institute of Standards and Technology, January 2023",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+          "sha256": "7576edb531d9848825814ee88e28b1795d3a84b435b4b797d3670eafdc4a89f1"
+        }
+      ],
+      "controls": "SP 800-53 Rev 5.2.0 base controls. An enhancement that addresses a subcategory counts for its base control. Controls that Rev 5 withdrew are not used.",
+      "method": "Each of the 72 subcategories was rated three times against the control statements, by AI models: twice independently, and once by OSA, starting where it could from a mapping offered by an outside contributor. A control is listed for a subcategory where at least two of the three ratings named it. The coverage figure is the median of the three estimates of how much of the subcategory an organisation would meet by implementing the listed controls. The rationale and gaps were written after the controls were settled.",
+      "pairs_named_by_three": 138,
+      "pairs_named_by_two": 101,
+      "pairs_named_by_one_and_left_out": 102,
+      "contributors": [
+        "felipechalegre-spec on GitHub, who offered a first mapping of 49 subcategories in osa-data pull request 15. Their choices of controls for the 23 subcategories that matched NIST's text were the starting point of one of the three ratings."
+      ]
+    }
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "GOVERN 1.1",
+      "title": "Legal and regulatory requirements involving AI are understood, managed, and documented",
+      "controls": [
+        "CM-10",
+        "PT-02",
+        "SI-12"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-02 has the organisation determine and document the authority that permits processing of PII. SI-12 manages and retains information in line with applicable laws, and CM-10 uses software in accordance with contracts and copyright law.",
+      "gaps": "No control requires the laws and regulations that apply to AI to be identified, understood and tracked as they change."
+    },
+    {
+      "id": "GOVERN 1.2",
+      "title": "The characteristics of trustworthy AI are integrated into organizational policies, processes, procedures, and practices",
+      "controls": [
+        "PM-01",
+        "PM-18",
+        "PT-01",
+        "SA-03",
+        "SA-08"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-01 and PM-18 set the security and privacy programme plans, PT-01 sets privacy policy and procedures, SA-03 builds security and privacy into the system life cycle, and SA-08 applies security and privacy engineering principles.",
+      "gaps": "These reach two of the AI RMF's seven characteristics of trustworthy AI, secure and resilient, and privacy-enhanced. Valid and reliable, safe, accountable and transparent, explainable and interpretable, and fair are not addressed."
+    },
+    {
+      "id": "GOVERN 1.3",
+      "title": "Processes, procedures, and practices are in place to determine the needed level of risk management activities based on the organization's risk tolerance",
+      "controls": [
+        "PL-10",
+        "PL-11",
+        "PM-09",
+        "PM-28",
+        "RA-02"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-09 expresses risk tolerance in the risk management strategy and PM-28 documents it. RA-02 categorises the system, and PL-10 and PL-11 select and tailor the controls to the level its category calls for.",
+      "gaps": "The categories and baselines are built on security and privacy impact. They do not set the level of AI risk management by the harms an AI system can cause."
+    },
+    {
+      "id": "GOVERN 1.4",
+      "title": "The risk management process and its outcomes are established through transparent policies, procedures, and other controls based on organizational risk priorities",
+      "controls": [
+        "PM-09",
+        "PM-10",
+        "PM-28",
+        "RA-01"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-09 has the risk management strategy implemented consistently across the organisation, PM-28 documents its assumptions, constraints and tolerance, PM-10 runs the authorisation process, and RA-01 sets risk assessment policy and procedures.",
+      "gaps": "Transparency of the process and its outcomes to those outside the security function is not required."
+    },
+    {
+      "id": "GOVERN 1.5",
+      "title": "Ongoing monitoring and periodic review of the risk management process and its outcomes are planned and organizational roles and responsibilities clearly defined, including determining the frequency of periodic review",
+      "controls": [
+        "CA-07",
+        "PM-09",
+        "PM-10",
+        "PM-14",
+        "PM-28",
+        "PM-31",
+        "RA-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-31 sets an organisation-wide continuous monitoring strategy with its frequencies, and CA-07 monitors at system level. PM-09 and PM-28 have the strategy and its framing reviewed and updated, PM-14 keeps the plans for testing, training and monitoring, PM-10 the authorisation process, and RA-03 updates the risk assessment.",
+      "gaps": "The review covers the security and privacy risk management process, not the AI risk management process and its outcomes as such."
+    },
+    {
+      "id": "GOVERN 1.6",
+      "title": "Mechanisms are in place to inventory AI systems and are resourced according to organizational risk priorities",
+      "controls": [
+        "CM-08",
+        "PM-05"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-05 keeps an inventory of organisational systems and CM-08 an inventory of system components, so AI systems and their components are inventoried as any other.",
+      "gaps": "No control asks for AI systems to be identified as such in the inventory, or for the inventory to be resourced by risk priority."
+    },
+    {
+      "id": "GOVERN 1.7",
+      "title": "Processes and procedures are in place for decommissioning and phasing out AI systems safely and in a manner that does not increase risks or decrease the organization's trustworthiness",
+      "controls": [
+        "MP-06",
+        "SA-03",
+        "SA-22",
+        "SI-12",
+        "SR-12"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-03 manages the system through a life cycle that includes its disposal. MP-06 sanitises media, SR-12 disposes of components, SI-12 disposes of information as retention requires, and SA-22 replaces components that are no longer supported.",
+      "gaps": "Decommissioning an AI system so that risk does not rise, including its models, training data and dependent systems, is not addressed as such."
+    },
+    {
+      "id": "GOVERN 2.1",
+      "title": "Roles and responsibilities and lines of communication related to mapping, measuring, and managing AI risks are documented and are clear to individuals and teams throughout the organization",
+      "controls": [
+        "PL-02",
+        "PM-10",
+        "PM-29",
+        "PS-09",
+        "SA-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PM-29 appoints a senior accountable official for risk management and a risk executive function, PS-09 puts security and privacy roles into position descriptions, and SA-03 defines roles throughout the life cycle. PL-02 records the roles in the system plan, and PM-10 assigns roles in authorisation.",
+      "gaps": "Lines of communication about AI risk across the organisation are not required."
+    },
+    {
+      "id": "GOVERN 2.2",
+      "title": "The organization's personnel and partners receive AI risk management training to enable them to perform their duties and responsibilities consistent with related policies, procedures, and agreements",
+      "controls": [
+        "AT-02",
+        "AT-03",
+        "PM-13"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AT-02 gives literacy training and awareness to all users, including managers and contractors, AT-03 gives role-based training, and PM-13 develops the security and privacy workforce.",
+      "gaps": "The content of the training on AI risk management is not specified, and partners outside the organisation's users are not covered."
+    },
+    {
+      "id": "GOVERN 2.3",
+      "title": "Executive leadership of the organization takes responsibility for decisions about risks associated with AI system development and deployment",
+      "controls": [
+        "CA-06",
+        "PM-19",
+        "PM-29"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CA-06 has a senior official authorise the system to operate and accept its risk. PM-29 appoints a senior accountable official for risk management, and PM-19 a senior official for privacy.",
+      "gaps": "Executive responsibility is for security and privacy risk. Decisions about AI risks beyond those are not addressed."
+    },
+    {
+      "id": "GOVERN 3.1",
+      "title": "Decision-making related to mapping, measuring, and managing AI risks throughout the lifecycle is informed by a diverse team (e.g., diversity of demographics, disciplines, experience, expertise, and backgrounds)",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this subcategory.",
+      "gaps": "No control asks for decisions on AI risk to be informed by a team diverse in demographics, disciplines, experience, expertise or background."
+    },
+    {
+      "id": "GOVERN 3.2",
+      "title": "Policies and procedures are in place to define and differentiate roles and responsibilities for human-AI configurations and oversight of AI systems",
+      "controls": [
+        "AC-05",
+        "PL-04",
+        "SA-09"
+      ],
+      "coverage_pct": 30,
+      "rationale": "AC-05 identifies and documents the duties to be separated, PL-04 sets out users' responsibilities and expected behaviour, and SA-09 defines oversight and user roles for external system services.",
+      "gaps": "Roles in human-AI configurations, and the oversight of AI systems by people, are not addressed."
+    },
+    {
+      "id": "GOVERN 4.1",
+      "title": "Organizational policies and practices are in place to foster a critical thinking and safety-first mindset in the design, development, deployment, and uses of AI systems to minimize potential negative impacts",
+      "controls": [
+        "AT-02",
+        "SA-03",
+        "SA-08"
+      ],
+      "coverage_pct": 30,
+      "rationale": "SA-03 builds security and privacy into the life cycle, SA-08 applies engineering principles in design and development, and AT-02 builds awareness among users.",
+      "gaps": "A safety-first mindset, and critical thinking about the negative impacts of AI, are outside these controls' words."
+    },
+    {
+      "id": "GOVERN 4.2",
+      "title": "Organizational teams document the risks and potential impacts of the AI technology they design, develop, deploy, evaluate, and use, and they communicate about the impacts more broadly",
+      "controls": [
+        "CM-04",
+        "RA-03",
+        "RA-08",
+        "SA-11"
+      ],
+      "coverage_pct": 45,
+      "rationale": "RA-03 has risk assessment results documented and disseminated, RA-08 conducts privacy impact assessments, CM-04 analyses the impact of changes, and SA-11 documents the results of developer testing.",
+      "gaps": "Impacts on individuals, communities and society beyond security and privacy are not assessed, and wider communication about them is not required."
+    },
+    {
+      "id": "GOVERN 4.3",
+      "title": "Organizational practices are in place to enable AI testing, identification of incidents, and information sharing",
+      "controls": [
+        "CA-08",
+        "IR-04",
+        "IR-06",
+        "PM-14",
+        "PM-15",
+        "PM-16",
+        "SA-11"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-11 and CA-08 provide for testing, IR-04 and IR-06 for handling and reporting incidents, and PM-14 for testing plans. PM-15 and PM-16 provide for sharing information with security groups and across organisations.",
+      "gaps": "Testing for AI-specific risks and sharing information about AI incidents are not addressed as such."
+    },
+    {
+      "id": "GOVERN 5.1",
+      "title": "Organizational policies and practices are in place to collect, consider, prioritize, and integrate feedback from those external to the team that developed or deployed the AI system regarding the potential individual and societal impacts related to AI risks",
+      "controls": [
+        "PM-20",
+        "PM-26"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PM-26 receives and responds to complaints, concerns and questions from individuals about privacy practices, and PM-20 makes privacy programme information public.",
+      "gaps": "Collecting and integrating feedback from outside the team on the individual and societal impacts of an AI system is not covered."
+    },
+    {
+      "id": "GOVERN 5.2",
+      "title": "Mechanisms are established to enable the team that developed or deployed AI systems to regularly incorporate adjudicated feedback from relevant AI actors into system design and implementation",
+      "controls": [
+        "CM-03",
+        "PM-26"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PM-26 responds to complaints from individuals, and CM-03 brings proposed changes to the system under configuration change control.",
+      "gaps": "No control feeds adjudicated feedback from relevant AI actors into the design and implementation of AI systems."
+    },
+    {
+      "id": "GOVERN 6.1",
+      "title": "Policies and procedures are in place that address AI risks associated with third-party entities, including risks of infringement of a third-party's intellectual property or other rights",
+      "controls": [
+        "CM-10",
+        "PM-30",
+        "SA-04",
+        "SA-09",
+        "SR-01",
+        "SR-02",
+        "SR-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SR-01, SR-02 and PM-30 set supply chain risk management policy, plan and strategy, SR-03 sets supply chain controls, and SA-04 and SA-09 govern acquisitions and external services. CM-10 uses software in accordance with contracts and copyright law.",
+      "gaps": "Risks particular to third-party AI, such as models and training data from others, and infringement of others' intellectual property beyond software licences, are addressed only in part."
+    },
+    {
+      "id": "GOVERN 6.2",
+      "title": "Contingency processes are in place to handle failures or incidents in third-party data or AI systems deemed to be high-risk",
+      "controls": [
+        "CP-02",
+        "IR-04",
+        "SI-22",
+        "SR-03",
+        "SR-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CP-02 plans for contingencies, IR-04 handles incidents, SR-03 and SR-08 set supply chain controls and notification agreements, and SI-22 uses an alternative source of information when the primary one is corrupted or unavailable.",
+      "gaps": "Contingency for the failure of third-party AI systems, and for corrupted third-party training data, is not addressed as such."
+    },
+    {
+      "id": "MAP 1.1",
+      "title": "Intended purposes, potentially beneficial uses, context-specific laws, norms and expectations, and prospective settings in which the AI system will be deployed are understood and documented. Considerations include: the specific set or types of users along with their expectations; potential positive and negative impacts of system uses to individuals, communities, organizations, society, and the planet; assumptions and related limitations about AI system purposes, uses, and risks across the development or product AI lifecycle; and related TEVV and system metrics",
+      "controls": [
+        "PL-02",
+        "PL-07",
+        "PM-11",
+        "PT-02",
+        "PT-03",
+        "RA-03"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PM-11 defines mission and business processes, PL-07 a concept of operations, and PL-02 the system's operational context. PT-02 and PT-03 document the authority and purposes for processing PII, and RA-03 assesses impacts.",
+      "gaps": "Intended uses, users and their expectations, settings of deployment, context-specific norms and the limits of the system's purposes are not documented as the AI RMF asks."
+    },
+    {
+      "id": "MAP 1.2",
+      "title": "Interdisciplinary AI actors, competencies, skills, and capacities for establishing context reflect demographic diversity and broad domain and user experience expertise, and their participation is documented. Opportunities for interdisciplinary collaboration are prioritized",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this subcategory.",
+      "gaps": "No control asks for interdisciplinary actors, or diversity in demographics and expertise, in establishing the context of an AI system."
+    },
+    {
+      "id": "MAP 1.3",
+      "title": "The organization's mission and relevant goals for AI technology are understood and documented",
+      "controls": [
+        "PL-02",
+        "PM-11"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-11 defines the organisation's mission and business processes, and PL-02 records how the system supports them.",
+      "gaps": "The organisation's goals for AI technology are not addressed as such."
+    },
+    {
+      "id": "MAP 1.4",
+      "title": "The business value or context of business use has been clearly defined or – in the case of assessing existing AI systems – re-evaluated",
+      "controls": [
+        "PL-02",
+        "PL-07",
+        "PM-11",
+        "PM-32"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PM-11 defines the business processes, PL-02 and PL-07 describe the system's purpose and operation, and PM-32 analyses systems to ensure that resources are used consistent with their intended purpose.",
+      "gaps": "The business value of an AI system is not defined or re-evaluated as such."
+    },
+    {
+      "id": "MAP 1.5",
+      "title": "Organizational risk tolerances are determined and documented",
+      "controls": [
+        "PM-28"
+      ],
+      "coverage_pct": 85,
+      "rationale": "PM-28 identifies and documents organisational risk tolerance.",
+      "gaps": "Risk tolerance is framed for security and privacy risk, not for AI risk generally."
+    },
+    {
+      "id": "MAP 1.6",
+      "title": "System requirements (e.g., \"the system shall respect the privacy of its users\") are elicited from and understood by relevant AI actors. Design decisions take socio-technical implications into account to address AI risks",
+      "controls": [
+        "PL-08",
+        "SA-02",
+        "SA-04",
+        "SA-08"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-02 determines security and privacy requirements in mission and business planning, SA-04 states them in acquisitions, SA-08 applies engineering principles in design, and PL-08 develops security and privacy architectures.",
+      "gaps": "Requirements beyond security and privacy, and the socio-technical implications of design decisions, are not addressed."
+    },
+    {
+      "id": "MAP 2.1",
+      "title": "The specific tasks and methods used to implement the tasks that the AI system will support are defined (e.g., classifiers, generative models, recommenders)",
+      "controls": [
+        "PL-02",
+        "PL-07"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PL-02 and PL-07 describe the system and how it is intended to operate.",
+      "gaps": "The tasks the AI system supports, and the methods used to implement them, such as classifiers or generative models, are not defined as such."
+    },
+    {
+      "id": "MAP 2.2",
+      "title": "Information about the AI system's knowledge limits and how system output may be utilized and overseen by humans is documented. Documentation provides sufficient information to assist relevant AI actors when making decisions and taking subsequent actions",
+      "controls": [
+        "PL-04",
+        "SA-05",
+        "SA-08"
+      ],
+      "coverage_pct": 30,
+      "rationale": "SA-05 gives administrators and users documentation of the system's functions and how to use them, PL-04 sets rules of behaviour for users, and SA-08 applies engineering principles.",
+      "gaps": "The system's knowledge limits, and how its output is to be used and overseen by people, are not documented as such."
+    },
+    {
+      "id": "MAP 2.3",
+      "title": "Scientific integrity and TEVV considerations are identified and documented, including those related to experimental design, data collection and selection (e.g., availability, representativeness, suitability), system trustworthiness, and construct validation",
+      "controls": [
+        "CA-02",
+        "SA-11",
+        "SA-15",
+        "SI-18"
+      ],
+      "coverage_pct": 30,
+      "rationale": "SA-11 plans and carries out developer testing and evaluation, CA-02 plans assessments, SA-15 sets development standards and tools, and SI-18 checks the accuracy, relevance and completeness of PII.",
+      "gaps": "Scientific integrity, experimental design, the representativeness of data and construct validation are not addressed."
+    },
+    {
+      "id": "MAP 3.1",
+      "title": "Potential benefits of intended AI system functionality and performance are examined and documented",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this subcategory.",
+      "gaps": "SP 800-53 deals with risk. The potential benefits of an AI system are not examined."
+    },
+    {
+      "id": "MAP 3.2",
+      "title": "Potential costs, including non-monetary costs, which result from expected or realized AI errors or system functionality and trustworthiness – as connected to organizational risk tolerance – are examined and documented",
+      "controls": [
+        "PM-28",
+        "RA-03"
+      ],
+      "coverage_pct": 30,
+      "rationale": "RA-03 determines the likelihood and magnitude of harm, and PM-28 documents risk tolerance.",
+      "gaps": "Costs from AI errors, including non-monetary ones, are not examined as such."
+    },
+    {
+      "id": "MAP 3.3",
+      "title": "Targeted application scope is specified and documented based on the system's capability, established context, and AI system categorization",
+      "controls": [
+        "CM-07",
+        "PL-02",
+        "PL-07",
+        "RA-02"
+      ],
+      "coverage_pct": 50,
+      "rationale": "RA-02 categorises the system, PL-02 defines its components and boundary, PL-07 its concept of operations, and CM-07 configures it to provide only the capabilities essential to its mission.",
+      "gaps": "The scope is set by security categorisation, not by the AI system's capability and established context."
+    },
+    {
+      "id": "MAP 3.4",
+      "title": "Processes for operator and practitioner proficiency with AI system performance and trustworthiness – and relevant technical standards and certifications – are defined, assessed, and documented",
+      "controls": [
+        "AT-03",
+        "AT-04",
+        "AT-06",
+        "PM-13",
+        "SA-16"
+      ],
+      "coverage_pct": 40,
+      "rationale": "AT-03 gives role-based training, AT-04 keeps training records, AT-06 reports on training results, SA-16 has the developer provide training, and PM-13 develops the workforce.",
+      "gaps": "Proficiency with AI system performance and trustworthiness, and the relevant technical standards and certifications, are not specified."
+    },
+    {
+      "id": "MAP 3.5",
+      "title": "Processes for human oversight are defined, assessed, and documented in accordance with organizational policies from the GOVERN function",
+      "controls": [
+        "AC-04",
+        "SI-07",
+        "SI-10"
+      ],
+      "coverage_pct": 35,
+      "rationale": "AC-04 can enforce human review of information flows, SI-10 provides a manual override for input validation, and SI-07 verifies the integrity of software and information.",
+      "gaps": "Processes for human oversight of an AI system's decisions are not defined as such."
+    },
+    {
+      "id": "MAP 4.1",
+      "title": "Approaches for mapping AI technology and legal risks of its components – including the use of third-party data or software – are in place, followed, and documented, as are risks of infringement of a third party's intellectual property or other rights",
+      "controls": [
+        "CM-10",
+        "RA-03",
+        "SA-09",
+        "SR-03",
+        "SR-04",
+        "SR-06"
+      ],
+      "coverage_pct": 55,
+      "rationale": "RA-03 includes supply chain risk assessment, SR-03, SR-04 and SR-06 address supply chain controls, provenance and supplier reviews, SA-09 external services, and CM-10 software licences and copyright.",
+      "gaps": "Legal risks of AI components, such as training data rights and intellectual property beyond software licences, are covered only in part."
+    },
+    {
+      "id": "MAP 4.2",
+      "title": "Internal risk controls for components of the AI system, including third-party AI technologies, are identified and documented",
+      "controls": [
+        "PL-02",
+        "SA-04",
+        "SA-09",
+        "SA-17",
+        "SR-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "PL-02 documents the controls for the system, SA-17 the developer's security and privacy architecture and design, and SA-04, SA-09 and SR-03 the controls required of suppliers and external services.",
+      "gaps": "Controls particular to AI components, such as third-party models, are not identified as such."
+    },
+    {
+      "id": "MAP 5.1",
+      "title": "Likelihood and magnitude of each identified impact (both potentially beneficial and harmful) based on expected use, past uses of AI systems in similar contexts, public incident reports, feedback from those external to the team that developed or deployed the AI system, or other data are identified and documented",
+      "controls": [
+        "RA-03",
+        "RA-08"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-03 determines the likelihood and magnitude of harm, and RA-08 assesses privacy impacts.",
+      "gaps": "Beneficial impacts, and impacts on groups, communities and society, are not characterised, and past uses of similar AI systems and public incident reports are not required as inputs."
+    },
+    {
+      "id": "MAP 5.2",
+      "title": "Practices and personnel for supporting regular engagement with relevant AI actors and integrating feedback about positive, negative, and unanticipated impacts are in place and documented",
+      "controls": [
+        "PM-20",
+        "PM-26"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PM-26 receives and responds to complaints from individuals, and PM-20 makes privacy programme information public.",
+      "gaps": "Regular engagement with relevant AI actors, and integrating their feedback about impacts, are not covered."
+    },
+    {
+      "id": "MEASURE 1.1",
+      "title": "Approaches and metrics for measurement of AI risks enumerated during the MAP function are selected for implementation starting with the most significant AI risks. The risks or trustworthiness characteristics that will not – or cannot – be measured are properly documented",
+      "controls": [
+        "CA-07",
+        "PM-06",
+        "PM-31"
+      ],
+      "coverage_pct": 40,
+      "rationale": "PM-06 develops and reports measures of performance, and PM-31 and CA-07 establish the metrics to be monitored.",
+      "gaps": "Metrics for AI risks, selected from those mapped, and documentation of the risks that will not or cannot be measured, are not required."
+    },
+    {
+      "id": "MEASURE 1.2",
+      "title": "Appropriateness of AI metrics and effectiveness of existing controls are regularly assessed and updated, including reports of errors and potential impacts on affected communities",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "PM-31"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CA-02 assesses the effectiveness of controls, CA-07 monitors it on an ongoing basis, and PM-31 sets the monitoring strategy.",
+      "gaps": "Whether AI metrics are appropriate, and reports of errors and impacts on affected communities, are not assessed."
+    },
+    {
+      "id": "MEASURE 1.3",
+      "title": "Internal experts who did not serve as front-line developers for the system and/or independent assessors are involved in regular assessments and updates. Domain experts, users, AI actors external to the team that developed or deployed the AI system, and affected communities are consulted in support of assessments as necessary per organizational risk tolerance",
+      "controls": [
+        "CA-02",
+        "CA-07",
+        "CA-08",
+        "SA-11"
+      ],
+      "coverage_pct": 50,
+      "rationale": "CA-02 and CA-07 provide for independent assessors and independent assessment, CA-08 for independent penetration testing, and SA-11 for independent verification of the developer's assessment plans and evidence.",
+      "gaps": "Consulting domain experts, users and affected communities is not required."
+    },
+    {
+      "id": "MEASURE 2.1",
+      "title": "Test sets, metrics, and details about the tools used during TEVV are documented",
+      "controls": [
+        "CA-02",
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-11 documents developer testing and its evidence, CA-02 the assessment plan, procedures and environment, and SA-15 the development tools.",
+      "gaps": "Test sets and metrics for AI systems are not specified."
+    },
+    {
+      "id": "MEASURE 2.2",
+      "title": "Evaluations involving human subjects meet applicable requirements (including human subject protection) and are representative of the relevant population",
+      "controls": [
+        "PM-25",
+        "PT-04"
+      ],
+      "coverage_pct": 25,
+      "rationale": "PT-04 provides for individuals' consent to processing of their PII, and PM-25 minimises the PII used in testing, training and research.",
+      "gaps": "Human subject protection, and the representativeness of evaluations involving human subjects, are not covered."
+    },
+    {
+      "id": "MEASURE 2.3",
+      "title": "AI system performance or assurance criteria are measured qualitatively or quantitatively and demonstrated for conditions similar to deployment setting(s). Measures are documented",
+      "controls": [
+        "CA-02",
+        "SA-11"
+      ],
+      "coverage_pct": 40,
+      "rationale": "SA-11 tests and evaluates the system, and CA-02 assesses it.",
+      "gaps": "AI performance or assurance criteria, measured under conditions similar to deployment, are not required."
+    },
+    {
+      "id": "MEASURE 2.4",
+      "title": "The functionality and behavior of the AI system and its components – as identified in the MAP function – are monitored when in production",
+      "controls": [
+        "AU-06",
+        "CA-07",
+        "SI-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-04 monitors the system, CA-07 monitors it on an ongoing basis, and AU-06 reviews and analyses audit records.",
+      "gaps": "Monitoring the functionality and behaviour of AI components in production, such as model drift, is not addressed as such."
+    },
+    {
+      "id": "MEASURE 2.5",
+      "title": "The AI system to be deployed is demonstrated to be valid and reliable. Limitations of the generalizability beyond the conditions under which the technology was developed are documented",
+      "controls": [
+        "SA-11",
+        "SI-13"
+      ],
+      "coverage_pct": 25,
+      "rationale": "SA-11 tests and evaluates the system, and SI-13 manages mean time to failure for components.",
+      "gaps": "Validity and reliability of the AI system, and the limits of its generalisation, are not demonstrated or documented."
+    },
+    {
+      "id": "MEASURE 2.6",
+      "title": "The AI system is evaluated regularly for safety risks – as identified in the MAP function. The AI system to be deployed is demonstrated to be safe, its residual negative risk does not exceed the risk tolerance, and it can fail safely, particularly if made to operate beyond its knowledge limits. Safety metrics reflect system reliability and robustness, real-time monitoring, and response times for AI system failures",
+      "controls": [
+        "CA-06",
+        "CP-12",
+        "RA-03",
+        "SC-24",
+        "SI-04",
+        "SI-10",
+        "SI-13",
+        "SI-17"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SI-17 and SC-24 have the system fail in a known, safe state, CP-12 enters a safe mode, and SI-13 prevents predictable failures. SI-04 monitors in real time, SI-10 validates input, RA-03 weighs the risk, and CA-06 has residual risk accepted.",
+      "gaps": "Safety risks of AI systems, and safety metrics, are not evaluated as such."
+    },
+    {
+      "id": "MEASURE 2.7",
+      "title": "AI system security and resilience – as identified in the MAP function – are evaluated and documented",
+      "controls": [
+        "CA-02",
+        "CA-08",
+        "CP-04",
+        "RA-05",
+        "SA-11"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 assesses controls, CA-08 tests by penetration, RA-05 scans for vulnerabilities, SA-11 tests during development, and CP-04 tests the contingency plan.",
+      "gaps": "Attacks particular to AI, such as data poisoning, model evasion and model theft, are not named."
+    },
+    {
+      "id": "MEASURE 2.8",
+      "title": "Risks associated with transparency and accountability – as identified in the MAP function – are examined and documented",
+      "controls": [
+        "AU-02"
+      ],
+      "coverage_pct": 20,
+      "rationale": "AU-02 has the events that support audit identified and logged.",
+      "gaps": "Risks to transparency and accountability are not examined and documented as such."
+    },
+    {
+      "id": "MEASURE 2.9",
+      "title": "The AI model is explained, validated, and documented, and AI system output is interpreted within its context – as identified in the MAP function – to inform responsible use and governance",
+      "controls": [
+        "SA-05",
+        "SI-15"
+      ],
+      "coverage_pct": 15,
+      "rationale": "SA-05 documents the system, and SI-15 validates its output against expected content.",
+      "gaps": "Explaining the model, validating it, and interpreting its output in context are not covered."
+    },
+    {
+      "id": "MEASURE 2.10",
+      "title": "Privacy risk of the AI system – as identified in the MAP function – is examined and documented",
+      "controls": [
+        "PL-02",
+        "RA-03",
+        "RA-08",
+        "SI-19"
+      ],
+      "coverage_pct": 80,
+      "rationale": "RA-08 conducts privacy impact assessments, RA-03 assesses privacy risk, SI-19 de-identifies data sets, and PL-02 documents the privacy controls.",
+      "gaps": "Privacy risks particular to AI, such as inference about individuals from model outputs, are not named."
+    },
+    {
+      "id": "MEASURE 2.11",
+      "title": "Fairness and bias – as identified in the MAP function – are evaluated and results are documented",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this subcategory.",
+      "gaps": "No control evaluates fairness or bias."
+    },
+    {
+      "id": "MEASURE 2.12",
+      "title": "Environmental impact and sustainability of AI model training and management activities – as identified in the MAP function – are assessed and documented",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "No SP 800-53 control addresses this subcategory.",
+      "gaps": "No control assesses the environmental impact or sustainability of AI training and management."
+    },
+    {
+      "id": "MEASURE 2.13",
+      "title": "Effectiveness of the employed TEVV metrics and processes in the MEASURE function are evaluated and documented",
+      "controls": [
+        "PM-14",
+        "SA-11",
+        "SA-15",
+        "SI-04"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-14 reviews testing and monitoring plans, SA-11 and SA-15 govern developer testing and its tools, and SI-04 monitors the system.",
+      "gaps": "The effectiveness of TEVV metrics and processes is not evaluated as such."
+    },
+    {
+      "id": "MEASURE 3.1",
+      "title": "Approaches, personnel, and documentation are in place to regularly identify and track existing, unanticipated, and emergent AI risks based on factors such as intended and actual performance in deployed contexts",
+      "controls": [
+        "CA-07",
+        "PM-31",
+        "RA-03"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-07 and PM-31 monitor on an ongoing basis, and RA-03 updates the risk assessment when conditions change.",
+      "gaps": "Tracking unanticipated and emergent AI risks from performance in deployed contexts is not required."
+    },
+    {
+      "id": "MEASURE 3.2",
+      "title": "Risk tracking approaches are considered for settings where AI risks are difficult to assess using currently available measurement techniques or where metrics are not yet available",
+      "controls": [
+        "PM-28"
+      ],
+      "coverage_pct": 15,
+      "rationale": "PM-28 documents the assumptions and uncertainties that affect risk assessment.",
+      "gaps": "Tracking risks that cannot yet be measured is not covered."
+    },
+    {
+      "id": "MEASURE 3.3",
+      "title": "Feedback processes for end users and impacted communities to report problems and appeal system outcomes are established and integrated into AI system evaluation metrics",
+      "controls": [
+        "PM-26",
+        "PT-08",
+        "RA-05"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-26 receives and responds to complaints, RA-05 can include a public channel for reporting vulnerabilities, and PT-08 gives individuals the opportunity to contest the findings of a computer matching programme before adverse action.",
+      "gaps": "Feedback from end users and affected communities, and appeal of AI system outcomes, are not integrated into evaluation metrics."
+    },
+    {
+      "id": "MEASURE 4.1",
+      "title": "Measurement approaches for identifying AI risks are connected to deployment context(s) and informed through consultation with domain experts and other end users. Approaches are documented",
+      "controls": [
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 25,
+      "rationale": "CA-02 and CA-07 assess the system and monitor it in its operational environment.",
+      "gaps": "Connecting measurement to deployment context through consultation with domain experts and end users is not required."
+    },
+    {
+      "id": "MEASURE 4.2",
+      "title": "Measurement results regarding AI system trustworthiness in deployment context(s) and across the AI lifecycle are informed by input from domain experts and relevant AI actors to validate whether the system is performing consistently as intended. Results are documented",
+      "controls": [
+        "CA-02",
+        "CA-07"
+      ],
+      "coverage_pct": 35,
+      "rationale": "CA-02 and CA-07 assess the system and monitor it on an ongoing basis.",
+      "gaps": "Input from domain experts and relevant AI actors to validate trustworthiness is not required."
+    },
+    {
+      "id": "MEASURE 4.3",
+      "title": "Measurable performance improvements or declines based on consultations with relevant AI actors, including affected communities, and field data about context-relevant risks and trustworthiness characteristics are identified and documented",
+      "controls": [
+        "CA-07",
+        "PM-06"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-06 reports measures of performance, and CA-07 tracks them over time.",
+      "gaps": "Improvements or declines identified through consultation with affected communities and field data are not required."
+    },
+    {
+      "id": "MANAGE 1.1",
+      "title": "A determination is made as to whether the AI system achieves its intended purposes and stated objectives and whether its development or deployment should proceed",
+      "controls": [
+        "CA-06",
+        "PM-32",
+        "SA-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "CA-06 has a senior official authorise the system to operate, PM-32 checks that resources are used for their intended purpose, and SA-04 sets the requirements a system must meet when acquired.",
+      "gaps": "Whether the AI system achieves its intended purposes and stated objectives is not determined as such."
+    },
+    {
+      "id": "MANAGE 1.2",
+      "title": "Treatment of documented AI risks is prioritized based on impact, likelihood, and available resources or methods",
+      "controls": [
+        "CA-05",
+        "PM-04",
+        "PM-28",
+        "RA-07"
+      ],
+      "coverage_pct": 65,
+      "rationale": "RA-07 responds to findings in line with risk tolerance, PM-28 documents priorities and trade-offs, and CA-05 and PM-04 plan and prioritise remedial actions.",
+      "gaps": "Prioritisation of AI risks by impact and likelihood is not required as such."
+    },
+    {
+      "id": "MANAGE 1.3",
+      "title": "Responses to the AI risks deemed high priority, as identified by the MAP function, are developed, planned, and documented. Risk response options can include mitigating, transferring, avoiding, or accepting",
+      "controls": [
+        "CA-05",
+        "CA-06",
+        "PM-04",
+        "PM-09",
+        "RA-07"
+      ],
+      "coverage_pct": 75,
+      "rationale": "RA-07 responds to risk findings, CA-05 and PM-04 document the remedial actions planned, PM-09's strategy covers how risk is accepted, mitigated, transferred or avoided, and CA-06 has the residual risk accepted.",
+      "gaps": "Responses are to security and privacy risks. Other high-priority AI risks are not covered."
+    },
+    {
+      "id": "MANAGE 1.4",
+      "title": "Negative residual risks (defined as the sum of all unmitigated risks) to both downstream acquirers of AI systems and end users are documented",
+      "controls": [
+        "CA-05",
+        "CA-06",
+        "RA-03",
+        "SA-05"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-03 documents risk, CA-05 the weaknesses that remain, CA-06 the authorising official's acceptance of risk, and SA-05 the system for its users.",
+      "gaps": "Negative residual risks to downstream acquirers and end users are not documented for them."
+    },
+    {
+      "id": "MANAGE 2.1",
+      "title": "Resources required to manage AI risks are taken into account – along with viable non-AI alternative systems, approaches, or methods – to reduce the magnitude or likelihood of potential impacts",
+      "controls": [
+        "PM-03",
+        "SA-02"
+      ],
+      "coverage_pct": 35,
+      "rationale": "PM-03 includes the resources needed in capital planning, and SA-02 allocates them for the system.",
+      "gaps": "Viable non-AI alternatives are not considered."
+    },
+    {
+      "id": "MANAGE 2.2",
+      "title": "Mechanisms are in place and applied to sustain the value of deployed AI systems",
+      "controls": [
+        "MA-02",
+        "MA-06",
+        "SA-22"
+      ],
+      "coverage_pct": 25,
+      "rationale": "MA-02 and MA-06 maintain system components, controlled and on time, and SA-22 replaces components that are no longer supported.",
+      "gaps": "Mechanisms to sustain the value of deployed AI systems are not addressed."
+    },
+    {
+      "id": "MANAGE 2.3",
+      "title": "Procedures are followed to respond to and recover from a previously unknown risk when it is identified",
+      "controls": [
+        "CP-10",
+        "IR-04",
+        "IR-08",
+        "RA-07"
+      ],
+      "coverage_pct": 65,
+      "rationale": "IR-04 and IR-08 handle incidents from detection to recovery, CP-10 recovers and reconstitutes the system, and RA-07 responds to new risk findings.",
+      "gaps": "Previously unknown AI risks that do not present as security or privacy incidents are not covered."
+    },
+    {
+      "id": "MANAGE 2.4",
+      "title": "Mechanisms are in place and applied, and responsibilities are assigned and understood, to supersede, disengage, or deactivate AI systems that demonstrate performance or outcomes inconsistent with intended use",
+      "controls": [
+        "CP-12",
+        "IR-04",
+        "SI-06",
+        "SI-17"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CP-12 enters a safe mode when set conditions are detected, SI-17 executes fail-safe procedures, SI-06 can shut down or restart the system when verification finds anomalies, and IR-04 contains incidents.",
+      "gaps": "Superseding, disengaging or deactivating an AI system whose performance or outcomes are inconsistent with intended use is not addressed as such."
+    },
+    {
+      "id": "MANAGE 3.1",
+      "title": "AI risks and benefits from third-party resources are regularly monitored, and risk controls are applied and documented",
+      "controls": [
+        "SA-09",
+        "SR-03",
+        "SR-06"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SA-09 monitors external providers' compliance with controls on an ongoing basis, SR-06 assesses and reviews suppliers, and SR-03 applies supply chain controls.",
+      "gaps": "Benefits from third-party resources are not monitored, and risks particular to third-party AI are not named."
+    },
+    {
+      "id": "MANAGE 3.2",
+      "title": "Pre-trained models which are used for development are monitored as part of AI system regular monitoring and maintenance",
+      "controls": [
+        "RA-05",
+        "SI-07",
+        "SR-04"
+      ],
+      "coverage_pct": 40,
+      "rationale": "RA-05 monitors components for vulnerabilities, SI-07 verifies their integrity, and SR-04 documents their provenance.",
+      "gaps": "Monitoring the behaviour of pre-trained models as part of regular maintenance is not addressed as such."
+    },
+    {
+      "id": "MANAGE 4.1",
+      "title": "Post-deployment AI system monitoring plans are implemented, including mechanisms for capturing and evaluating input from users and other relevant AI actors, appeal and override, decommissioning, incident response, recovery, and change management",
+      "controls": [
+        "CA-07",
+        "CM-03",
+        "CP-10",
+        "IR-04",
+        "PM-26",
+        "PT-08",
+        "SR-12"
+      ],
+      "coverage_pct": 60,
+      "rationale": "CA-07 implements continuous monitoring, IR-04 incident handling, CP-10 recovery, CM-03 change control and SR-12 disposal of components. PM-26 takes in complaints, and PT-08 gives individuals the opportunity to contest the findings of a computer matching programme.",
+      "gaps": "Capturing and evaluating input from users and other AI actors, and appeal and override of AI outcomes, are covered only in part."
+    },
+    {
+      "id": "MANAGE 4.2",
+      "title": "Measurable activities for continual improvements are integrated into AI system updates and include regular engagement with interested parties, including relevant AI actors",
+      "controls": [
+        "IR-04",
+        "SA-15"
+      ],
+      "coverage_pct": 30,
+      "rationale": "IR-04 incorporates lessons learned into incident handling, and SA-15 has the development process reviewed.",
+      "gaps": "Measurable activities for continual improvement of AI system updates, and engagement with interested parties, are not required."
+    },
+    {
+      "id": "MANAGE 4.3",
+      "title": "Incidents and errors are communicated to relevant AI actors, including affected communities. Processes for tracking, responding to, and recovering from incidents and errors are followed and documented",
+      "controls": [
+        "CP-10",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-08",
+        "SI-02"
+      ],
+      "coverage_pct": 65,
+      "rationale": "IR-04 handles incidents, IR-05 tracks and documents them, IR-06 reports them, IR-08 sets the plan, CP-10 recovers the system, and SI-02 remediates flaws.",
+      "gaps": "Communicating incidents and errors to affected communities is not required."
+    }
+  ],
+  "summary": {
+    "total_clauses": 72,
+    "average_coverage": 42.2,
+    "full_count": 1,
+    "substantial_count": 9,
+    "partial_count": 32,
+    "weak_count": 25,
+    "none_count": 5
+  }
+}

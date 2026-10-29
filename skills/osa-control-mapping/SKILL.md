@@ -30,7 +30,8 @@ Produce a table: organisation control id, SP 800-53 id, full or partial, quote, 
 
 `GET https://www.opensecurityarchitecture.org/api/v1/crosswalk?controls=AC-02,IA-02,SI-04&framework=nis2,iso_27001_2022`
 
-- Up to 320 controls and five frameworks a request. Framework ids are listed at `/api/v1/frameworks` and at the end of `/llms.txt`.
+- Use the frameworks the person needs; if they have not said which, ask. Any of the 90 will do. Framework ids are listed at `/api/v1/frameworks` and at the end of `/llms.txt`.
+- Up to 320 controls and five frameworks a request. For more than five frameworks, make one request for each five.
 - For each framework: `clauses_total`, `clauses_reached`, `clauses_not_reached`, and `controls_for_not_reached`, the SP 800-53 controls OSA maps to each clause not reached.
 - For each control: its clauses in each framework. Where OSA's mapping takes a published crosswalk as its base, `based_on` names it and a control's `osa_own` lists the clauses OSA adds.
 - `withdrawn_by_nist` and `unknown_controls` name the ids that were not used, and say why.

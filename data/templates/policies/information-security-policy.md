@@ -98,7 +98,7 @@ Asset owners are responsible for classifying their information. Where classifica
 - Applications developed by or for `[ORGANISATION NAME]` shall follow a secure development lifecycle (SDLC) that includes threat modelling, security requirements, secure coding standards, and security testing. `[SA-03]` `[SA-08]`
 - Source code shall undergo security review (automated and/or manual) before release to production. `[SA-11]`
 - Production environments shall be separated from development and testing environments. `[CM-02]`
-- Third-party libraries and dependencies shall be tracked and monitored for known vulnerabilities. `[SA-12]` `[RA-05]`
+- Third-party libraries and dependencies shall be tracked and monitored for known vulnerabilities. `[SR-03]` `[RA-05]`
 
 ### 7.2 Change Management
 

@@ -20,7 +20,7 @@ The skill needs no key. It makes requests to `www.opensecurityarchitecture.org` 
 
 ## osa-control-mapping
 
-How to map an organisation's own controls to NIST SP 800-53, and then carry them to up to five of the frameworks OSA maps in one request, with the clauses they reach and the ones they do not. The method has the agent quote the control text behind every pair, map in both directions separately, check against a published crosswalk and challenge its strongest pairs before a person reviews the table. Only SP 800-53 ids are sent to OSA; the organisation's control texts stay with the agent.
+How to map an organisation's own controls to NIST SP 800-53 and then line them up against any of the frameworks OSA maps, up to five a request, to see the matching clauses and the gaps. The agent quotes the control text behind every pair, maps in both directions separately, checks against a published crosswalk and challenges its strongest pairs, and then a person reviews the table. The agent sends OSA only the SP 800-53 ids, and the organisation's control text stays with it.
 
 Install it the same way, with `osa-control-mapping` in place of `osa-security-patterns`. A guide for people is at https://www.opensecurityarchitecture.org/foundations/map-your-controls/.
 

@@ -40,10 +40,12 @@ Until October 2026 the site also read TRIDENT's catalogues from osa-trident, thr
 ```
 data/
 ├── patterns/           # SP-NNN-descriptive-title.json
-│   └── _manifest.json  # Index of all patterns
+│   ├── _manifest.json  # Index of all patterns
+│   └── archive/        # Earlier releases of patterns
 ├── controls/           # NIST 800-53 Rev 5 (AC-01.json, etc.)
 │   ├── _manifest.json
 │   └── _catalog.json
+├── archimate/                           # ArchiMate views of patterns
 ├── framework-coverage/                  # One file per framework: its clauses and the controls mapped to each
 ├── mitre-attack/                        # ATT&CK Enterprise and CTID's SP 800-53 mapping. Generated, not edited
 ├── nist/
@@ -68,7 +70,7 @@ This exists because of October 2026. The baselines were corrected in the control
 
 ## Framework mappings
 
-How a framework is mapped to SP 800-53, as practised since October 2026. The `add-framework-mapping` and `generate-coverage` skills in osa-trident are older than this.
+How a framework is mapped to SP 800-53, as practised since October 2026. The `add-framework-mapping` skill in `.claude/skills/` walks through it step by step.
 
 - Look first for a published crosswalk to SP 800-53, most often in NIST's catalogue of registered crosswalks (OLIR). Where one exists it is the base: every pair in it with a current control goes into the mapping. OSA's own pairs stay, listed in the framework file's `metadata.crosswalk_check.not_in_source` with the source and the date checked. ISO/IEC 27001:2022, CSF 2.0, the HIPAA Security Rule and NERC CIP work this way.
 - Where there is none, map from the official text by three ratings, OSA's own and two independent ones, and take the pairs at least two of the three list. Record the texts and the method under `metadata.analysis`, and a law's dates of application under `commencement`. India's DPDPA, the NIST AI RMF and the EU AI Act were made this way.
@@ -92,6 +94,8 @@ The method, the figures and each decision are recorded in osa-strategy, `docs/re
 3. Create SVG diagram at `../website/public/images/sp-NNN-descriptive-title.svg`
 4. Run `python3 scripts/sync_nist.py`, which gives each control the pattern lists its name as NIST has it. The validator fails on a name that differs
 5. That's it — the website reads the manifest and renders automatically
+
+The `new-pattern` skill in `.claude/skills/` walks through each step, with the checks on references and the diagram footer.
 
 ## Pattern Schema Key Fields
 
@@ -161,7 +165,7 @@ npm --prefix ~/osa/website run dev
 Two kinds, kept apart.
 
 - **Published, for anyone's agent**: `skills/` in this repo. `skills/osa-security-patterns/SKILL.md` teaches an agent to use the site in a few requests. `skills/osa-control-mapping/SKILL.md` teaches it to map an organisation's own controls to SP 800-53 and carry them to frameworks through `/api/v1/crosswalk`. The website serves each at `/skills/{name}/SKILL.md` and links them from `llms.txt`. Each names routes on the live site, so change one only when the routes it names are live, and keep its numbers (limits, sizes) in step with `llms.txt`.
-- **For maintaining OSA**: `~/osa/trident/.claude/skills/`: `new-pattern`, `pattern-audit`, `enrich-pattern`, `add-framework-mapping`, `generate-coverage`. They were last changed in March 2026 and are archived with osa-trident, so check each step against this file before following it. `review-spec` and `review-tests` are user-level skills.
+- **For maintaining OSA**: `.claude/skills/` in this repo: `new-pattern` and `add-framework-mapping`, rewritten on 29 October 2026 to the rules in this file. The older `enrich-pattern`, `generate-coverage` and `pattern-audit` stay in osa-trident's `.claude/skills/`, archived and last changed in March 2026, so check each step against this file before following one. `review-spec` and `review-tests` are user-level skills.
 
 **Iterative improvement:** Skills should be improved in-context as issues are found. If a skill produces output that needs manual correction, or misses an edge case, fix the SKILL.md in the same session. Do not work around skill bugs — fix them.
 

@@ -1,6 +1,6 @@
 ---
 name: osa-control-mapping
-description: Map an organisation's own security controls to NIST SP 800-53, then carry them through Open Security Architecture (OSA) to NIS2, ISO 27001:2022, DORA, PCI DSS and the other frameworks OSA maps, to see which clauses they reach and which they do not. Use when someone has their own control set, control catalogue or policy and asks how it lines up with a regulation or standard, or what a framework asks for that their controls do not cover.
+description: Map an organisation's own security controls to NIST SP 800-53, then line them up through Open Security Architecture (OSA) against NIS2, ISO 27001:2022, DORA, PCI DSS or any other framework OSA maps, to see the matching clauses and the gaps. Use when someone has their own control set, control catalogue or policy and asks how it lines up with a regulation or standard, or where the gaps are.
 ---
 
 # Mapping your own controls with OSA

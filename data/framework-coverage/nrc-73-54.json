@@ -5,11 +5,61 @@
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
     "version": "1.0",
-    "disclaimer": "Based on publicly available NRC regulations (10 CFR 73.54), Regulatory Guide 5.71, and expert analysis mapping to SP 800-53 Rev 5. It follows the rule of 27 March 2009 and Regulatory Guide 5.71 of 2010. The NRC amended the rule on 2 November 2015, adding event notification under 73.77 as 73.54(d)(4), and issued RG 5.71 Revision 1 in February 2023, which keeps the control numbering. OSA has not yet mapped those changes. Nuclear cybersecurity is governed by NRC licensing with mandatory Cyber Security Plans, integration with physical security programs, and nuclear safety requirements not captured in SP 800-53. Nuclear safety system protections require specialized qualification and defense-in-depth beyond information security controls. Validate with NRC-qualified cyber security professionals for compliance use.",
+    "disclaimer": "Based on 10 CFR 73.54 as amended on 2 November 2015, Regulatory Guide 5.71 Revision 1 (February 2023), and expert analysis mapping to SP 800-53 Rev 5. Nuclear cybersecurity is governed by NRC licensing with mandatory Cyber Security Plans, integration with physical security programs, and nuclear safety requirements not captured in SP 800-53. Nuclear safety system protections require specialized qualification and defense-in-depth beyond information security controls. Validate with NRC-qualified cyber security professionals for compliance use.",
     "jurisdictions": [
       "US"
     ],
-    "applicability_type": "mandatory"
+    "applicability_type": "mandatory",
+    "edition": {
+      "used": "10 CFR 73.54 as amended at 80 FR 67275 on 2 November 2015, with Regulatory Guide 5.71 Revision 1, Cyber Security Programs for Nuclear Power Reactors (February 2023)",
+      "url": "https://www.ecfr.gov/current/title-10/section-73.54",
+      "replaced": "10 CFR 73.54 as made on 27 March 2009, with Regulatory Guide 5.71 of 2010, which this mapping followed until 1 November 2026"
+    },
+    "edition_check": {
+      "checked": "2026-11-01",
+      "basis": "OSA's V13 edition review, rule 3: relabel to the edition in force and edit the clauses that changed.",
+      "sources": [
+        {
+          "title": "10 CFR 73.54, eCFR, Title 10 up to date as of 29 October 2026",
+          "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-10-29/title-10.xml?section=73.54",
+          "sha256": "1ff61e7ce74ecd71dcbea321c102d220192a0d6aa263691003ab094beb011c50"
+        },
+        {
+          "title": "10 CFR 73.77 Cyber security event notifications, eCFR, Title 10 up to date as of 29 October 2026",
+          "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-10-29/title-10.xml?section=73.77",
+          "sha256": "8f9656afdbbc7a1d87b30ca141ce7e96db5d64b094fb8bd167a9e3eeb74802b4"
+        },
+        {
+          "title": "Cyber Security Event Notifications, final rule, 80 FR 67264, 2 November 2015 (FR Doc. 2015-27855)",
+          "url": "https://www.federalregister.gov/documents/2015/11/02/2015-27855/cyber-security-event-notifications"
+        },
+        {
+          "title": "Cyber Security Programs for Nuclear Power Reactors, notice of issuance of RG 5.71 Revision 1, 88 FR 9117, 13 February 2023 (FR Doc. 2023-02941)",
+          "url": "https://www.federalregister.gov/documents/2023/02/13/2023-02941/cyber-security-programs-for-nuclear-power-reactors",
+          "sha256": "4eac6e59e0ee67e77b5a3cc3b7bc28fc58491fedb219eee9417922c41a0d258c"
+        }
+      ],
+      "changes": "The 2015 rule added paragraph (d)(4): licensees conduct cyber security event notifications under 10 CFR 73.77, which the same rule created. It took effect on 2 December 2015, and licensees had to comply by 2 May 2016. RG 5.71 Revision 1 clarifies defence in depth, brings the guidance into line with current NIST and IAEA publications, including SP 800-53 Rev 5, and draws on inspections, SFAQ answers and cyber attacks since 2010, as the NRC's notice of issuance says. The notice names no new control family, and OSA's RG 5.71 rows group the controls by family, so those rows are unchanged.",
+      "clauses_edited": [],
+      "clauses_added": [
+        "73.54(d)(4)"
+      ],
+      "clauses_removed": [],
+      "not_used": "RG 5.71 Revision 1 itself (ADAMS ML22258A204). The NRC's web server refused the request, so the record of what Revision 1 changed is the NRC's notice of issuance.",
+      "pending": "Modernizing Security Requirements, a proposed rule of 26 June 2026 (91 FR 38928), would revise 73.54, and DG-5085 would become RG 5.71 Revision 2. Comments closed on 27 July 2026. Neither is in force.",
+      "one_rater": {
+        "status": "added by one rater, to be checked by three",
+        "clauses": [
+          "73.54(d)(4)"
+        ],
+        "pairs": [
+          "73.54(d)(4) IR-06",
+          "73.54(d)(4) IR-05",
+          "73.54(d)(4) CA-05"
+        ],
+        "method": "Rated once from the text of 10 CFR 73.54(d)(4) and 73.77 and the control statements in data/nist/sp800-53-rev5.json, as data/CLAUDE.md describes. Two independent ratings are still to come, and the pairs two of three name will stay."
+      }
+    }
   },
   "weight_scale": {
     "full": {
@@ -338,13 +388,25 @@
       "coverage_pct": 72,
       "rationale": "CA-07 continuous monitoring maintains ongoing security posture awareness. PM-06 measures of performance tracks security program effectiveness. PM-14 testing, training, and monitoring ensures ongoing program validation. PM-15 security and privacy groups/associations maintains external engagement for threat intelligence. RA-07 risk response ensures risk treatment actions are current and effective.",
       "gaps": "NRC triennial cyber security inspections are conducted by NRC regional inspectors using nuclear-specific inspection procedures -- a regulatory oversight mechanism with no SP 800-53 equivalent. Program review is tied to facility license conditions and must be reported to the NRC. Integration with the Reactor Oversight Process (ROP) means cyber security performance feeds into the NRC's overall facility safety assessment, connecting cyber security program effectiveness to reactor operating license conditions."
+    },
+    {
+      "id": "73.54(d)(4)",
+      "title": "Cyber security event notifications under 10 CFR 73.77",
+      "controls": [
+        "IR-06",
+        "IR-05",
+        "CA-05"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IR-06 covers reporting incidents to named authorities within set times. Set its parameters to the NRC Headquarters Operations Center and to the one-hour, four-hour and eight-hour limits in 73.77(a), and use it for the written follow-up reports. IR-05 tracks and documents incidents, which covers the record of each notification that 73.77(b)(2) asks for in the site corrective action program within 24 hours. CA-05 records weaknesses and deficiencies with the actions planned to correct them, as 73.77(b)(1) asks the corrective action program to do within 24 hours of their discovery.",
+      "gaps": "SP 800-53 leaves reporting thresholds and times to the organisation, and 73.77 sets them. A cyber attack that adversely impacted safety, security or emergency preparedness functions is reported within one hour. One that could have done so, an attack by someone with physical or electronic access, or a report to another agency is reported within four hours. Signs of intelligence gathering or pre-operational planning are reported within eight hours. The rule also sets the channel, the Emergency Notification System, and how a notification may carry Safeguards Information or classified information. It adds an open line to the NRC on request, retractions, and a written follow-up report within 60 days for the more serious notifications. SP 800-53 has none of these."
     }
   ],
   "summary": {
-    "total_clauses": 18,
-    "average_coverage": 75.1,
+    "total_clauses": 19,
+    "average_coverage": 74.8,
     "full_count": 0,
-    "substantial_count": 18,
+    "substantial_count": 19,
     "partial_count": 0,
     "weak_count": 0,
     "none_count": 0

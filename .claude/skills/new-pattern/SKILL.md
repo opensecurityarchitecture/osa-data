@@ -22,7 +22,7 @@ Read `data/patterns/_manifest.json` and take the next number after the highest S
 
 ## 3. Write the pattern
 
-Top level: `$schema` (`"../schema/pattern.schema.json"`), `id`, `slug`, `title`, `description` (three to five sentences on what it protects, its control count and main families, and when it applies), `url` (`https://www.opensecurityarchitecture.org/patterns/sp-nnn`), `metadata`, `diagram` (`/images/sp-nnn-descriptive-title.svg`) and `legend`.
+Top level: `$schema` (`"../schema/pattern.schema.json"`), `id`, `slug`, `title`, `description` (three to five sentences on what it protects, its control count and main families, and when it applies), `url` (`https://www.opensecurityarchitecture.org/patterns/sp-nnn`), `metadata`, `diagram` (`{"svg": "/images/sp-nnn-descriptive-title.svg"}`, which the page and its preview image both read) and `legend`.
 
 `metadata`: `release` (YY.MM), `classification`, `status` `"draft"`, `type` `"pattern"`, `datePublished`, `dateModified`, `authors` by alias (Aurelius, Vinylwasp, Spinoza, Vitruvius), `reviewers` and `provenance`.
 
@@ -53,7 +53,7 @@ python3 scripts/sync_nist.py        # writes each control's name as NIST has it
 python3 scripts/validate_json.py    # ends with 0 errors
 ```
 
-The validator compares every control name in a pattern with NIST's, so let the sync write the names. It also checks that the manifest's title and count match the pattern, that a count the description states ("Maps 38 NIST 800-53 controls") matches the control list, and that each related pattern's name matches its title. When a control list changes later, change the description's count and the manifest's with it.
+The validator compares every control name in a pattern with NIST's, so let the sync write the names. Its Consistency stage checks that the manifest's title and count match the pattern, that a count the description states ("Maps 38 NIST 800-53 controls") matches the control list, and that each related pattern's name matches its title. When a control list changes later, change the description's count and the manifest's with it.
 
 ## 6. The diagram
 
@@ -64,7 +64,9 @@ Draw the SVG at osa-website's `public/images/sp-nnn-descriptive-title.svg`, foll
 
 ## 7. Check it on the site
 
-Build osa-website (`npm --prefix ~/osa/website run build`), serve it (`npx wrangler pages dev dist --port 8788` in `~/osa/website`) and read the pattern page, the card at `/patterns/sp-nnn.md` and `/api/v1/patterns/SP-NNN/crosswalk?emphasis=critical`. Then run `python3 tests/agent-surface/checks.py http://127.0.0.1:8788` in osa-website.
+Build osa-website (`npm --prefix ~/osa/website run build`), serve it (`npx wrangler pages dev dist --port 8788` in `~/osa/website`) and read the pattern page, the card at `/patterns/sp-nnn.md` and `/api/v1/patterns/SP-NNN/crosswalk?emphasis=critical`. Then run `python3 tests/agent-surface/checks.py http://127.0.0.1:8788` in osa-website. From a data worktree, build in a website worktree set up as step 7 of the `add-framework-mapping` skill says.
+
+The build also draws the pattern's preview image, the picture a shared link to its page shows. `scripts/og-images.mjs` runs after `astro build` and writes `dist/og/patterns/sp-nnn.png` from the SVG that `diagram.svg` names, with the id and title in a band at the foot. It cuts a long title at a word. The image is made at each build and stays out of git. A `reserved` pattern, or one whose SVG is missing from `public/`, keeps the site's default image. The build fails, naming the pattern, when its page names an image the script could not draw, such as from an SVG that sharp cannot read. Open the PNG and check that the diagram reads at 1200 by 630.
 
 ## 8. Report
 

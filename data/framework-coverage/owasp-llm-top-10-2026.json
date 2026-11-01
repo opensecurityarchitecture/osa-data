@@ -1,0 +1,302 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "owasp_llm_top10_2026",
+  "framework_name": "OWASP Top 10 for LLM Applications 2026",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "OSA's own analysis of the OWASP Top 10 for LLM Applications 2026 (OWASP GenAI Security Project, August 2026) against SP 800-53 Rev 5. Each clause is one of the ten risks, read with the whole of its section in OWASP's text. The coverage figure estimates how much of the risk, and of OWASP's guidance for preventing it, the listed controls express when put in place as written. Coverage is lower where a risk turns on the model itself, as with misinformation and data and model poisoning. Clause ids are OWASP's without the ':2026' suffix, and the titles are OWASP's. Validate with qualified assessors for compliance or audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "voluntary",
+    "clause_titles_from": "OWASP Top 10 for LLM Applications 2026, by the OWASP GenAI Security Project (August 2026), used unchanged under CC BY-SA 4.0",
+    "clause_titles_licence": "CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/",
+    "clause_titles_url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+    "edition": {
+      "used": "OWASP Top 10 for LLM Applications 2026, Version 2026, August 2026",
+      "url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/"
+    },
+    "analysis": {
+      "basis": "OSA's own analysis, from OWASP's text by three independent ratings. NIST's catalogue of registered crosswalks has none from this list to SP 800-53 (checked 1 November 2026). The OWASP GenAI Security Project also keeps a crosswalk on GitHub that names SP 800-53 controls for each risk.",
+      "checked": "2026-11-01",
+      "texts": [
+        {
+          "title": "OWASP Top 10 for LLM Applications 2026",
+          "published": "OWASP GenAI Security Project, Version 2026, August 2026",
+          "url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+          "sha256": "ef87993a4e50ae9d83b41ff7a3d3e6320a82dfa8d4ec6bf98d0ce264b2e6108e"
+        }
+      ],
+      "controls": "SP 800-53 Rev 5.2.0 base controls, current ones only. An enhancement that addresses a risk counts for its base control, and the rationale names it. For a person approving a high-impact action, all three raters credited AC-03, through AC-03(02) dual authorization. SP 800-53 names no control for that approval as such.",
+      "method": "Each of the ten risks was rated three times, independently, by AI models working from OWASP's text and the control statements. No rater saw another's rating. A control is listed for a risk where at least two of the three ratings named it. The coverage figure is the median of the three estimates of how much of the risk, and of OWASP's guidance for preventing it, the listed controls express. The rationale and gaps were written after the controls were settled, from the raters' reasons and from the gaps at least two of them named.",
+      "pairs_named_by_three": 87,
+      "pairs_named_by_two": 22,
+      "pairs_named_by_one_and_left_out": 24,
+      "pairs_per_rating": {
+        "A": 110,
+        "B": 113,
+        "C": 106
+      },
+      "agreement_measure": "The Jaccard index of each two ratings: the pairs both named, divided by the pairs either named.",
+      "agreement": [
+        {
+          "ratings": "A and B",
+          "jaccard": 0.76,
+          "pairs_named_by_both": 96,
+          "pairs_named_by_either": 127
+        },
+        {
+          "ratings": "A and C",
+          "jaccard": 0.77,
+          "pairs_named_by_both": 94,
+          "pairs_named_by_either": 122
+        },
+        {
+          "ratings": "B and C",
+          "jaccard": 0.74,
+          "pairs_named_by_both": 93,
+          "pairs_named_by_either": 126
+        }
+      ],
+      "not_mapped": "OWASP's letter from the project leads, its summary at a glance and its Appendices A and B. Appendix A maps the risks to nine other frameworks and lists, such as MITRE ATLAS and the NIST AI RMF."
+    }
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "LLM01",
+      "title": "Prompt Injection",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-06",
+        "AC-16",
+        "AC-24",
+        "AU-12",
+        "CA-08",
+        "CM-07",
+        "RA-03",
+        "SC-07",
+        "SI-10",
+        "SI-15"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-06 and CM-07 keep the model and its tools to the privileges and functions each task needs, which limits what an injected model can do with the user's rights. AC-24 makes a policy decision on each privileged call, re-checking intent and arguments as it runs. AC-03 enforces that decision in code that holds the credentials, and AC-03(02) puts a person's confirmation in front of irreversible or outward-facing actions. AC-04 controls where outside content and model output can flow, with outside content in a channel of its own, and AC-16 labels that content with its source. SC-07 limits outbound traffic, which blocks exfiltration through image links and tool calls. SI-10 validates input at every entry point, text read from images and audio included, and strips invisible characters. SI-15 checks each response against a strict schema before anything acts on it. RA-03 assesses the risk left when an agent combines untrusted input with sensitive data or with outside action. AU-12 logs each memory write with the prompt that caused it. CA-08(02) red teams test the defences against attackers who know how they work.",
+      "gaps": "The root cause is a model that reads instructions and data as one stream. A fix like the parameterised query lies outside SP 800-53, so the listed controls limit the harm once an injection succeeds. Detecting injection by meaning needs classifiers that cover images, audio, encodings and less common languages, and jailbreak resistance needs building in through training. An agent that combines untrusted input, sensitive data and outside action needs a person's approval for each action, a rule SP 800-53 leaves unstated. Memory writes need checking for instructions before they persist, and approval screens need to show the exact action. Fine-tuning interfaces that report per-example loss need protecting, since attackers can use them to tune injections."
+    },
+    {
+      "id": "LLM02",
+      "title": "Sensitive Information Disclosure",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-23",
+        "AU-09",
+        "CA-08",
+        "IA-05",
+        "IR-08",
+        "IR-09",
+        "SC-04",
+        "SC-08",
+        "SC-28",
+        "SI-04",
+        "SI-12",
+        "SI-15",
+        "SI-19"
+      ],
+      "coverage_pct": 60,
+      "rationale": "AC-03 authorises at document and chunk level inside the retrieval query, so the model receives only what the user may see. AC-04 sends outside providers only the fields a task needs and keeps internal and external routes apart. SI-19 scrubs personal data from training corpora and logs, and SI-19(06) adds differential privacy. SI-15 classifies and redacts answers, reasoning traces and tool arguments before release. AC-23 sets query budgets and withholds log probabilities, which slows extraction and membership probing. SC-04 partitions shared inference caches between tenants. SC-08 encrypts traffic, and SC-08(04) hides traffic patterns that could reveal a conversation's topic. SC-28 encrypts stored data, vector stores and their backups included. IA-05 keeps credentials out of system prompts. AU-09 restricts access to logs and traces that hold full prompts and answers. SI-12 enforces retention limits and erasure across raw data, embeddings and model artefacts. SI-04 runs continuous data loss prevention and spots covert outbound channels. CA-08 makes disclosure red teaming a release gate. IR-09 handles a disclosure as a spill, and IR-08 puts the playbook, with breach notification, in the incident response plan.",
+      "gaps": "SP 800-53 protects data in stores and in transit. Data held in model weights, adapters and embeddings needs measures of its own. A model can memorise training data and give it up to extraction prompts, so training needs deduplication and fine-tunes need extraction tests. Defences against membership inference and inversion are techniques of machine learning, as is unlearning verified by probes afterwards. Reasoning traces need treating as output in their own right. Facts that are each permitted can combine into a prohibited conclusion, which calls for a policy on joining sources. Side channels in model serving, such as token length, latency and cache hits, go beyond SC-08(04). Confidential computing for inference appears only through general controls."
+    },
+    {
+      "id": "LLM03",
+      "title": "Excessive Agency",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AC-24",
+        "AC-25",
+        "AU-12",
+        "CM-07",
+        "IA-02",
+        "SI-04",
+        "SI-10"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CM-07 keeps tools, and the functions inside each, to the minimum, replaces open-ended tools such as a shell with narrow ones, and its periodic review removes tools left over from development. AC-06 grants each tool's downstream identity only the permissions it needs, such as read access to one table. IA-02 runs tools in the user's own context instead of under a generic privileged identity. AC-24 makes an independent policy decision on every request before the downstream system acts, and AC-24(01) carries the user's authority through chains of tools and agents. AC-25 makes that check a reference monitor that is always invoked and tamper-proof, a role a model can't fill. AC-03 enforces the decision in application logic, and AC-03(02) puts a person's approval in front of high-impact actions. SI-10 validates tool parameters against a strict schema. SI-04 watches tool use, and SI-04(07) halts or escalates when thresholds are crossed, which works as a circuit breaker. AU-12 logs what tools and downstream systems do.",
+      "gaps": "SP 800-53 assumes each component does what it was built to do, while a model chooses tools from its own output. Limits on that autonomy need measures of your own. Enforcement needs to step up from logging to blocking or escalation as actions get harder to undo. A permitted action can still be unsafe in context, and judging that sits outside SP 800-53. Thresholds need to cover running totals, such as the value of refunds a tool has issued. Human approval of agent actions, and a user's authority passed through chains of agents, go beyond what dual authorization and AC-24(01) express."
+    },
+    {
+      "id": "LLM04",
+      "title": "Supply Chain",
+      "controls": [
+        "CM-08",
+        "CM-10",
+        "CM-14",
+        "RA-05",
+        "SA-09",
+        "SA-10",
+        "SA-22",
+        "SI-02",
+        "SI-03",
+        "SI-07",
+        "SR-04",
+        "SR-06",
+        "SR-09",
+        "SR-11"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-08 keeps a signed inventory that covers models, adapters and datasets, the job of an AI bill of materials, and CM-10 tracks their licences. SR-04 documents provenance, and SR-04(03) validates each artefact as genuine at the promotion step. SI-07 pins models and datasets to fixed hashes and verifies them at load, edge devices included, and CM-14 blocks installs without an approved signature. SA-10 controls changes in the pipelines that convert, merge and build models. SR-06 vets suppliers and data sources and reassesses them when their terms change, and SA-09 holds hosted model providers to the organisation's requirements, such as no training on its data. SR-11 keeps out counterfeits, such as look-alike models and packages registered under names that models hallucinate. SR-09 protects on-device models against tampering, with attestation. RA-05 scans components for vulnerabilities, and SI-02 patches them. SI-03 scans model files for malicious payloads, as one layer among several. SA-22 replaces components and models that are no longer supported.",
+      "gaps": "A signature proves who published a model, and the model can still be unsafe. Backdoors hidden in weights or in a model's computational graph need behavioural testing, since inspection misses them. A quantised model can behave differently from the full-precision one that was evaluated. LoRA adapters and model merges need checks of their own. Reused model-hub names and packages registered under hallucinated names fit SR-11 only loosely. An AI bill of materials needs to record models and datasets, and dataset licences need tracking alongside software licences."
+    },
+    {
+      "id": "LLM05",
+      "title": "Data and Model Poisoning",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-06",
+        "CA-08",
+        "CM-03",
+        "CM-14",
+        "SA-10",
+        "SC-07",
+        "SC-39",
+        "SI-04",
+        "SI-07",
+        "SI-10",
+        "SR-04",
+        "SR-06"
+      ],
+      "coverage_pct": 50,
+      "rationale": "AC-03 and AC-06 control who and what can write to training data, knowledge stores and shared memory, insiders included. SI-10 validates incoming data, retraining feedback included, and SI-10(05) restricts training and retrieval to curated sources. SR-04 tracks the lineage of datasets and models across their life, and SR-06 vets the vendors that supply them. AC-04 sets trust boundaries in retrieval, filtering what comes back and keeping system instructions apart from outside data. SC-39 sandboxes models and their loaders, and SC-07 limits their connections to unverified data and systems. SI-07 signs and hash-checks datasets, models and files such as chat templates, tokenizer settings and adapters, and CM-14 requires those signatures before deployment. CM-03 puts dataset and model changes through review, with a person's approval before automated retraining is promoted, and SA-10 keeps dataset versions for rollback. SI-04 watches training loss and model behaviour for drift. CA-08 red teams probe for hidden backdoors after each alignment cycle.",
+      "gaps": "Integrity, provenance and access controls show that data is unchanged and came from where it claims. Poison often arrives through approved channels, such as public web data and open datasets, and passes those checks. A few hundred poisoned documents can be enough. Backdoors in learned weights can survive safety training and need trigger testing of their own. Feedback used for retraining, such as preference ratings, needs protecting and limits on its influence. Retrieved content needs source scoring and checks that answers rest on it."
+    },
+    {
+      "id": "LLM06",
+      "title": "Unbounded Consumption",
+      "controls": [
+        "AC-12",
+        "AC-23",
+        "CM-06",
+        "IA-02",
+        "SC-05",
+        "SC-06",
+        "SC-07",
+        "SI-02",
+        "SI-04",
+        "SI-10"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SI-10 rejects oversized input before inference, using a token estimate up front, and screens images for adversarial perturbations. SC-05 limits the effect of request floods and costly queries, with capacity to scale and degrade gracefully. SC-06 sets quotas per key, user, team and account, covering requests, tokens, spend and the steps in an agent run. IA-02 authenticates every caller, so quotas and caps bind to an identity. AC-12 ends agent runs and long sessions on step, time or cost limits, which works as a circuit breaker. AC-23 limits query volume and withholds log probabilities, which slows model extraction and distillation. SC-07 restricts the model's access to networks and internal services. CM-06 sets serving software to its most restrictive configuration, with unsafe deserialisation turned off, and SI-02 keeps it patched. SI-04 compares token use and tool calls with a baseline to catch runaway sessions.",
+      "gaps": "SP 800-53 treats consumption as a matter of availability. Pay-per-use inference can run up costs before capacity runs out, so the risk needs hard spending caps that stop inference, with costs tracked to whoever incurs them. Limits need to count tokens and estimated cost per request, reasoning tokens included. Agents need loop detection, for example by hashing their state, and limits on recursion depth. Inputs crafted to burn compute need detecting. Images and audio cost more tokens than text, and context grows over long sessions, so budgets need to allow for both. Copying a model by distillation needs defences beyond query limits."
+    },
+    {
+      "id": "LLM07",
+      "title": "Misinformation",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AU-12",
+        "SA-11",
+        "SC-39",
+        "SI-10",
+        "SI-15"
+      ],
+      "coverage_pct": 35,
+      "rationale": "SI-15 checks output before it drives an action, with a check step between generation and execution, groundedness and consistency signals, and structured outputs whose mandatory fields expose omissions. SI-10 checks a tool call's arguments, preconditions and current state before it runs, and treats state reported by another agent as input to verify. SI-10(05) restricts grounding to authoritative sources. AC-03 re-checks authorisation at execution instead of trusting the model's claim, and AC-03(02) adds approval for high-impact actions. AC-06 and SC-39 limit the harm when a wrong answer drives an action. SA-11 tests workflows against misleading scenarios. AU-12 logs claims, evidence and outcomes, so a false output that drove a decision can be traced.",
+      "gaps": "SP 800-53 treats integrity as protection against unauthorised change. Factual accuracy is a different property, and most of this risk turns on it. Claims need grounding in authoritative, current sources, with signals of reliability beyond the model's own confidence. Agents can report tasks done that never ran, cite forged evidence or pass false state to other agents, and each needs detecting. Summaries can leave out what matters. People and systems need help to judge fluent output, with verified facts marked apart from assumptions."
+    },
+    {
+      "id": "LLM08",
+      "title": "Hidden Context Exposure",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AC-25",
+        "IA-05",
+        "SC-03",
+        "SI-10",
+        "SI-15"
+      ],
+      "coverage_pct": 65,
+      "rationale": "IA-05 keeps credentials, tokens and connection strings out of system prompts and other hidden context, and IA-05(07) bars embedding static secrets. AC-03 enforces authorisation in deterministic code outside the model, so a disclosed role rule grants nothing. AC-25 puts critical checks in a reference monitor that is always invoked and auditable. AC-06 separates tasks by authorisation context, each with only the privileges it needs. SC-03 isolates security functions, such as content policy and authorisation, from the model. SI-15 detects harmful output in an outside safeguard, in place of refusal rules written into the prompt. SI-10 validates values downstream instead of trusting format rules an attacker may have read.",
+      "gaps": "The listed controls carry out OWASP's main advice: assume hidden context will be found, and make finding it harmless. Attackers can still extract or rebuild system prompts, tool schemas and refusal rules by probing the model. What a model reveals about its own context sits outside SP 800-53. Keep hidden context to what the model must see, and weigh what each item would tell an attacker, such as a tool list or the rules for refusing."
+    },
+    {
+      "id": "LLM09",
+      "title": "Vector and Embedding Weaknesses",
+      "controls": [
+        "AC-03",
+        "AC-16",
+        "AC-23",
+        "AU-09",
+        "AU-12",
+        "IR-08",
+        "SC-28",
+        "SC-32",
+        "SI-04",
+        "SI-10",
+        "SI-12"
+      ],
+      "coverage_pct": 55,
+      "rationale": "AC-03 enforces tenant scope and chunk-level access inside the index query, checked on the server before the search runs. SC-32 partitions indexes by tenant or trust tier, so content of mixed trust stays apart. AC-16 binds provenance to every embedding, such as source, ingestion time and pipeline version, so a compromised batch can be withdrawn. SI-10 normalises content before embedding, stripping zero-width characters, hidden text and look-alike letters. AC-23 withholds raw similarity scores and rate-limits endpoints that could act as oracles, against membership inference and inversion. SC-28 encrypts embeddings and their backups at rest, since leaked vectors can be turned back into text. SI-12 deletes embeddings within a set time after their source goes, and confirms it by audit. SI-04 spots poisoning and probing, such as vectors that sit close to many queries. AU-12 records each retrieval with its scope and results, and AU-09 keeps the record immutable. IR-08 has the incident plan treat a leak of embeddings alone as a leak of the source data.",
+      "gaps": "The attacks that define this risk work on the geometry of the embedding space, which SP 800-53 leaves to your own measures. Content can be crafted to land near a target query, blocker documents can jam retrieval, and vectors set just across a threshold can poison a semantic cache or slip past deduplication. Images and audio can carry the same attacks. Stored vectors can be inverted back to their source text. When the access filter runs after the search, result counts, scores and timing can leak across tenants. Changing the embedding model calls for re-embedding the whole corpus."
+    },
+    {
+      "id": "LLM10",
+      "title": "Improper Output Handling",
+      "controls": [
+        "AC-04",
+        "AC-06",
+        "AU-12",
+        "CM-07",
+        "SA-11",
+        "SC-07",
+        "SC-18",
+        "SI-04",
+        "SI-10",
+        "SI-15"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SI-10 treats model output as untrusted input to back-end functions such as shells, file paths and databases, with context-aware encoding and parameterised queries through SI-10(06). SI-15 filters output for script, Markdown and control characters before it reaches a browser, terminal, log or IDE. SC-18 controls generated JavaScript as mobile code, for example through a strict Content Security Policy. CM-07 turns off automatic rendering of Markdown images, link previews and iframes. AC-04 stops output from triggering outbound requests that carry context data, and SC-07 restricts any fetches to approved origins or a proxy that strips data from the address. AC-06 limits the privileges of components that act on output, which caps escalation and remote code execution. SA-11 tests and reviews generated code before it ships. SI-04 watches output for signs of exploitation, and AU-12 logs it.",
+      "gaps": "The risk needs a stated rule that model output is untrusted input, which SP 800-53 leaves implicit. Encoding for each destination appears only in general terms, as does neutralising escape sequences before output reaches terminals, logs and IDEs. So do chat clients that fetch images and link previews on their own. Code review needs to keep pace with the volume of code that assistants now write."
+    }
+  ],
+  "summary": {
+    "total_clauses": 10,
+    "average_coverage": 59.0,
+    "full_count": 0,
+    "substantial_count": 4,
+    "partial_count": 5,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

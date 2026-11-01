@@ -94,6 +94,8 @@ python3 scripts/validate_json.py              # ends with 0 errors
 npm --prefix ~/osa/website run build          # builds the framework page, card and API answer
 ```
 
+The validator also checks every framework's two sides: the coverage file and the control files must name the same pairs, and every control a coverage file names must be in the catalogue.
+
 Serve the build (`npx wrangler pages dev dist --port 8788` in `~/osa/website`), read the framework page and its card at `/frameworks/{slug}.md`, and run `python3 tests/agent-surface/checks.py http://127.0.0.1:8788` in osa-website.
 
 ## 8. Report

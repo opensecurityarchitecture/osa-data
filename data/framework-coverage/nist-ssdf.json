@@ -1,0 +1,937 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "nist_ssdf",
+  "framework_name": "NIST Secure Software Development Framework (SSDF 1.1)",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "Based on the SP 800-53 Rev. 5 references NIST gives for each task in SP 800-218, the Secure Software Development Framework (SSDF) Version 1.1 (February 2022), with OSA's coverage estimates. The SSDF sets practices for software producers. Several of the controls NIST names, such as SA-11 and SA-15, have an organisation require these practices of its developers. Where you build the software yourself, read them as applying to your own development teams. NIST names SP 800-53 controls for 35 of the 42 tasks. Validate with qualified assessors for compliance or audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "voluntary",
+    "clause_groups": [
+      "PO",
+      "PS",
+      "PW",
+      "RV"
+    ],
+    "clause_titles_from": "NIST SP 800-218, the SSDF Version 1.1 table (February 2022), without its notes on the former ids of PO.1.3 and PW.1.3",
+    "edition": {
+      "used": "SSDF Version 1.1, NIST SP 800-218, February 2022: the newest final edition on 2026-11-01",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "draft": "SSDF Version 1.2, NIST SP 800-218 Rev. 1, initial public draft of 17 December 2025. Comments closed on 30 January 2026.",
+      "draft_url": "https://csrc.nist.gov/pubs/sp/800/218/r1/ipd"
+    },
+    "crosswalk_check": {
+      "source": "NIST, SP 800-218 Secure Software Development Framework (SSDF) Version 1.1, the SP 800-53 Rev. 5 references in its table (February 2022)",
+      "url": "https://csrc.nist.gov/files/pubs/sp/800/218/final/docs/nist.sp.800-218.ssdf-table.xlsx",
+      "sha256": "f5729c4c6c792cbf6cfbea74eee7cc84c579b2109006fe3cbfa8934eb460bd55",
+      "checked": "2026-11-01",
+      "scope": "Base controls only. NIST's table is the base of this mapping, and every pair in it is here. For each task the table names SP 800-53 Rev. 5 controls under the tag SP80053. It names them for 35 of the 42 tasks, and OSA lists no control for the other 7. A reference to an enhancement, such as SA-15(07), counts for its base control, SA-15. That rule was agreed for this mapping on 2026-11-01. 12 of the 73 pairs come from enhancements alone (from_enhancements_only), and each clause's rationale names the enhancement. None of the controls or enhancements NIST names is withdrawn. All 73 pairs were added on 2026-11-01, and every pair here is NIST's. The table also names SP 800-161 Rev. 1 controls for most tasks. OSA used the SP 800-53 references only. The SP 800-53 references are the same in the table and in the PDF of SP 800-218 for all 35 tasks that have them. The coverage figures, rationales and gaps are OSA's, written on 2026-11-01 for NIST's pairs from the task text and the SP 800-53 statements of the controls and enhancements NIST names. The figures assume those enhancements are in place.",
+      "publication": {
+        "title": "NIST SP 800-218, Secure Software Development Framework (SSDF) Version 1.1, February 2022 (PDF)",
+        "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf",
+        "sha256": "617746e553a9e2da49bfbd4eef0dfc3094758a39b869314e4173ac36605cde22"
+      },
+      "source_has_none": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-08",
+        "AC-09",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-14",
+        "AC-16",
+        "AC-17",
+        "AC-18",
+        "AC-19",
+        "AC-20",
+        "AC-21",
+        "AC-22",
+        "AC-23",
+        "AC-24",
+        "AC-25",
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-06",
+        "AU-01",
+        "AU-02",
+        "AU-03",
+        "AU-04",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "AU-12",
+        "AU-13",
+        "AU-14",
+        "AU-16",
+        "CA-01",
+        "CA-02",
+        "CA-03",
+        "CA-05",
+        "CA-06",
+        "CA-07",
+        "CA-08",
+        "CA-09",
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-09",
+        "CM-10",
+        "CM-11",
+        "CM-12",
+        "CM-13",
+        "CM-14",
+        "CP-01",
+        "CP-02",
+        "CP-03",
+        "CP-04",
+        "CP-06",
+        "CP-07",
+        "CP-08",
+        "CP-09",
+        "CP-10",
+        "CP-11",
+        "CP-12",
+        "CP-13",
+        "IA-01",
+        "IA-02",
+        "IA-03",
+        "IA-04",
+        "IA-05",
+        "IA-06",
+        "IA-07",
+        "IA-08",
+        "IA-09",
+        "IA-10",
+        "IA-11",
+        "IA-12",
+        "IA-13",
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-05",
+        "IR-06",
+        "IR-07",
+        "IR-08",
+        "IR-09",
+        "MA-01",
+        "MA-02",
+        "MA-03",
+        "MA-04",
+        "MA-05",
+        "MA-06",
+        "MA-07",
+        "MP-01",
+        "MP-02",
+        "MP-03",
+        "MP-04",
+        "MP-05",
+        "MP-06",
+        "MP-07",
+        "MP-08",
+        "PE-01",
+        "PE-02",
+        "PE-03",
+        "PE-04",
+        "PE-05",
+        "PE-06",
+        "PE-08",
+        "PE-09",
+        "PE-10",
+        "PE-11",
+        "PE-12",
+        "PE-13",
+        "PE-14",
+        "PE-15",
+        "PE-16",
+        "PE-17",
+        "PE-18",
+        "PE-19",
+        "PE-20",
+        "PE-21",
+        "PE-22",
+        "PE-23",
+        "PL-01",
+        "PL-02",
+        "PL-04",
+        "PL-07",
+        "PL-08",
+        "PL-09",
+        "PL-10",
+        "PL-11",
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-04",
+        "PM-05",
+        "PM-06",
+        "PM-07",
+        "PM-08",
+        "PM-09",
+        "PM-10",
+        "PM-11",
+        "PM-12",
+        "PM-13",
+        "PM-14",
+        "PM-15",
+        "PM-16",
+        "PM-17",
+        "PM-18",
+        "PM-19",
+        "PM-20",
+        "PM-21",
+        "PM-22",
+        "PM-23",
+        "PM-24",
+        "PM-25",
+        "PM-26",
+        "PM-27",
+        "PM-28",
+        "PM-29",
+        "PM-30",
+        "PM-31",
+        "PM-32",
+        "PS-01",
+        "PS-02",
+        "PS-03",
+        "PS-04",
+        "PS-05",
+        "PS-06",
+        "PS-07",
+        "PS-08",
+        "PS-09",
+        "PT-01",
+        "PT-02",
+        "PT-03",
+        "PT-04",
+        "PT-05",
+        "PT-06",
+        "PT-07",
+        "PT-08",
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-05",
+        "RA-06",
+        "RA-07",
+        "RA-08",
+        "RA-09",
+        "RA-10",
+        "SA-02",
+        "SA-16",
+        "SA-20",
+        "SA-21",
+        "SA-22",
+        "SA-23",
+        "SA-24",
+        "SC-01",
+        "SC-02",
+        "SC-03",
+        "SC-04",
+        "SC-05",
+        "SC-06",
+        "SC-07",
+        "SC-08",
+        "SC-10",
+        "SC-11",
+        "SC-12",
+        "SC-13",
+        "SC-15",
+        "SC-16",
+        "SC-17",
+        "SC-18",
+        "SC-20",
+        "SC-21",
+        "SC-22",
+        "SC-23",
+        "SC-24",
+        "SC-25",
+        "SC-26",
+        "SC-27",
+        "SC-28",
+        "SC-29",
+        "SC-30",
+        "SC-31",
+        "SC-32",
+        "SC-34",
+        "SC-35",
+        "SC-36",
+        "SC-37",
+        "SC-38",
+        "SC-39",
+        "SC-40",
+        "SC-41",
+        "SC-42",
+        "SC-43",
+        "SC-44",
+        "SC-45",
+        "SC-46",
+        "SC-47",
+        "SC-48",
+        "SC-49",
+        "SC-50",
+        "SC-51",
+        "SI-01",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-05",
+        "SI-06",
+        "SI-07",
+        "SI-08",
+        "SI-10",
+        "SI-11",
+        "SI-12",
+        "SI-13",
+        "SI-14",
+        "SI-15",
+        "SI-16",
+        "SI-17",
+        "SI-18",
+        "SI-19",
+        "SI-20",
+        "SI-21",
+        "SI-22",
+        "SI-23",
+        "SR-01",
+        "SR-02",
+        "SR-06",
+        "SR-07",
+        "SR-08",
+        "SR-10",
+        "SR-11",
+        "SR-12"
+      ],
+      "not_in_source": {},
+      "added_from_source": {
+        "SA-01": [
+          "PO.1.1"
+        ],
+        "SA-03": [
+          "PO.2.1",
+          "PO.5.1"
+        ],
+        "SA-04": [
+          "PO.1.3",
+          "PW.4.1"
+        ],
+        "SA-05": [
+          "PW.4.1",
+          "PW.9.2",
+          "RV.2.2"
+        ],
+        "SA-08": [
+          "PO.1.1",
+          "PO.1.2",
+          "PO.2.2",
+          "PO.5.1",
+          "PS.2.1",
+          "PS.3.2",
+          "PW.1.1",
+          "PW.1.2",
+          "PW.4.1",
+          "PW.4.2",
+          "PW.9.2"
+        ],
+        "SA-09": [
+          "PO.1.3",
+          "PW.4.4"
+        ],
+        "SA-10": [
+          "PO.1.3",
+          "PS.1.1",
+          "PS.3.1",
+          "PW.1.2",
+          "PW.4.1",
+          "RV.1.1",
+          "RV.2.1",
+          "RV.2.2"
+        ],
+        "SA-11": [
+          "PW.1.1",
+          "PW.7.1",
+          "PW.7.2",
+          "PW.8.1",
+          "PW.8.2",
+          "RV.1.2",
+          "RV.2.2",
+          "RV.3.3"
+        ],
+        "SA-15": [
+          "PO.1.1",
+          "PO.1.2",
+          "PO.1.3",
+          "PO.3.1",
+          "PO.3.2",
+          "PO.3.3",
+          "PO.4.1",
+          "PO.4.2",
+          "PO.5.1",
+          "PO.5.2",
+          "PS.3.1",
+          "PW.1.1",
+          "PW.6.1",
+          "PW.6.2",
+          "PW.7.2",
+          "PW.8.2",
+          "RV.1.3",
+          "RV.2.1",
+          "RV.2.2",
+          "RV.3.4"
+        ],
+        "SA-17": [
+          "PW.1.2"
+        ],
+        "SR-03": [
+          "PO.1.1",
+          "PO.1.2",
+          "PO.1.3",
+          "PS.3.2",
+          "PW.4.1",
+          "PW.4.4",
+          "RV.1.1"
+        ],
+        "SR-04": [
+          "PO.1.3",
+          "PS.3.1",
+          "PS.3.2",
+          "PW.4.1",
+          "PW.4.4",
+          "RV.1.1"
+        ],
+        "SR-05": [
+          "PO.1.3"
+        ],
+        "SR-09": [
+          "PW.6.2"
+        ]
+      },
+      "from_enhancements_only": {
+        "SA-03": [
+          "PO.5.1"
+        ],
+        "SA-08": [
+          "PW.4.1",
+          "PW.4.2",
+          "PW.9.2"
+        ],
+        "SA-10": [
+          "PW.4.1"
+        ],
+        "SA-11": [
+          "PW.1.1"
+        ],
+        "SA-15": [
+          "PW.1.1",
+          "PW.7.2",
+          "PW.8.2",
+          "RV.1.3",
+          "RV.2.1",
+          "RV.2.2"
+        ]
+      }
+    }
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "PO.1.1",
+      "title": "Identify and document all security requirements for the organization’s software development infrastructures and processes, and maintain the requirements over time.",
+      "controls": [
+        "SA-01",
+        "SA-08",
+        "SA-15",
+        "SR-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-15 has the developer follow a documented development process that addresses security requirements and names its standards and tools. The organisation reviews that process on a set cycle. SA-01 sets acquisition policy and procedures and keeps them current. SA-08 applies security engineering principles to development, and SR-03 sets controls against supply chain risk.",
+      "gaps": "The task also covers requirements for the development infrastructure, such as build systems and developer endpoints. These controls reach it through the tools SA-15 names. NIST pairs the environments themselves with SA-03(01), under PO.5.1."
+    },
+    {
+      "id": "PO.1.2",
+      "title": "Identify and document all security requirements for organization-developed software to meet, and maintain the requirements over time.",
+      "controls": [
+        "SA-08",
+        "SA-15",
+        "SR-03"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SA-08 applies security engineering principles to the software's specification and design. NIST also names SA-08(03), modularity and layering, which matches the task's example of modular code with its security components kept apart. SA-15 has the development process address security requirements explicitly, and SR-03 adds the organisation's controls against supply chain risk.",
+      "gaps": "The task asks the producer to identify and document the software's own security requirements and keep them current. These controls take those requirements as given and apply them in design and development."
+    },
+    {
+      "id": "PO.1.3",
+      "title": "Communicate requirements to all third parties who will provide commercial software components to the organization for reuse by the organization’s own software.",
+      "controls": [
+        "SA-04",
+        "SA-09",
+        "SA-10",
+        "SA-15",
+        "SR-03",
+        "SR-04",
+        "SR-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-04 puts security requirements, assurance requirements and acceptance criteria into acquisition contracts, which matches the task directly. SA-09 has external service providers meet the organisation's requirements. SA-10, with SA-10(01), has the developer manage configuration and enable integrity checks of its software. SA-15 has it follow a documented development process. SR-03, SR-04 and SR-05 add supply chain controls, provenance and acquisition strategies.",
+      "gaps": "The task's examples add attestation by the supplier and a process for approved exceptions. SA-04's acceptance criteria and SR-05's contract tools cover them in part."
+    },
+    {
+      "id": "PO.2.1",
+      "title": "Create new roles and alter responsibilities for existing roles as needed to encompass all parts of the SDLC. Periodically review and maintain the defined roles and responsibilities, updating them as needed.",
+      "controls": [
+        "SA-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-03 has the organisation define and document security and privacy roles and responsibilities throughout the system development life cycle, and identify the people who hold them.",
+      "gaps": "The task also asks for the roles to be reviewed and updated over time. Set a review cycle for them alongside SA-03."
+    },
+    {
+      "id": "PO.2.2",
+      "title": "Provide role-based training for all personnel with responsibilities that contribute to secure development. Periodically review personnel proficiency and role-based training, and update the training as needed.",
+      "controls": [
+        "SA-08"
+      ],
+      "coverage_pct": 25,
+      "rationale": "NIST names SA-08. Its discussion lists training developers to build secure software among the security engineering principles.",
+      "gaps": "Role-based training, with regular review of proficiency and of the training itself, is the subject of AT-03 (role-based training). NIST's table leaves AT-03 out for this task."
+    },
+    {
+      "id": "PO.2.3",
+      "title": "Obtain upper management or authorizing official commitment to secure development, and convey that commitment to all with development-related roles and responsibilities.",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "NIST's SSDF table names no SP 800-53 control for this task.",
+      "gaps": "The task asks for upper management's commitment to secure development, conveyed to everyone with a development role. SA-01's acquisition policy addresses management commitment, and NIST's table names SA-01 for PO.1.1."
+    },
+    {
+      "id": "PO.3.1",
+      "title": "Specify which tools or tool types must or should be included in each toolchain to mitigate identified risks, as well as how the toolchain components are to be integrated with each other.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-15 has the developer name the standards and tools used in development and document their options and configurations. The organisation reviews them against its security requirements.",
+      "gaps": "The task also asks how the tools in each toolchain work together, and for tools chosen to mitigate identified risks. Plan the toolchain as a whole on top of SA-15's list of tools."
+    },
+    {
+      "id": "PO.3.2",
+      "title": "Follow recommended security practices to deploy, operate, and maintain tools and toolchains.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-15 has the developer manage changes to its development tools and protect their integrity. The organisation reviews the tools and their configurations on a set cycle.",
+      "gaps": "Running the toolchain securely, for example hardening and patching the tools, draws on SP 800-53's configuration management (CM) and system and information integrity (SI) families. NIST's table leaves those out for this task."
+    },
+    {
+      "id": "PO.3.3",
+      "title": "Configure tools to generate artifacts of their support of secure software development practices as defined by the organization.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 30,
+      "rationale": "SA-15 has the developer document the specific tool options and configurations used in development.",
+      "gaps": "The task asks for tools set up to produce artifacts, such as logs and reports, that show each secure development practice took place. SA-15 records the tools' settings. Collect and keep that evidence as well."
+    },
+    {
+      "id": "PO.4.1",
+      "title": "Define criteria for software security checks and track throughout the SDLC.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 80,
+      "rationale": "NIST names SA-15(01), which has the developer define quality metrics at the start of development and give evidence of meeting them at set points. It counts for SA-15. SA-15 itself has the organisation review the development process against its security requirements.",
+      "gaps": "Quality metrics reach wider than security. Define security criteria as well, such as the checks a release must pass, and track them in the team's workflow."
+    },
+    {
+      "id": "PO.4.2",
+      "title": "Implement processes, mechanisms, etc. to gather and safeguard the necessary information in support of the criteria.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-15(01) has the developer give evidence of meeting the agreed metrics, and SA-15(11) archives each release with the evidence from its final security review. Both count for SA-15. SA-15 itself has the developer protect the integrity of changes to its process and tools.",
+      "gaps": "The task also asks to safeguard the gathered information. Protect it from tampering and unauthorised access with the organisation's own access and integrity controls."
+    },
+    {
+      "id": "PO.5.1",
+      "title": "Separate and protect each environment involved in software development.",
+      "controls": [
+        "SA-03",
+        "SA-08",
+        "SA-15"
+      ],
+      "coverage_pct": 70,
+      "rationale": "NIST names SA-03(01), which has the organisation protect preproduction environments, such as development and test environments, in line with risk. It counts for SA-03. SA-08's principles include clear security boundaries, and SA-15 sets the documented development process those environments serve.",
+      "gaps": "The task asks to separate each environment, with measures such as network segmentation and multi-factor authentication. Those come from SP 800-53's system and communications protection (SC) and identification and authentication (IA) families, which NIST's table leaves out for this task."
+    },
+    {
+      "id": "PO.5.2",
+      "title": "Secure and harden development endpoints (i.e., endpoints for software designers, developers, testers, builders, etc.) to perform development-related tasks using a risk-based approach.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 20,
+      "rationale": "SA-15 covers the development process and its tools, including how the tools are configured.",
+      "gaps": "Hardening the endpoints developers work on is configuration management work, such as CM-06 (configuration settings) and CM-07 (least functionality). NIST's table leaves those out for this task."
+    },
+    {
+      "id": "PS.1.1",
+      "title": "Store all forms of code – including source code, executable code, and configuration-as-code – based on the principle of least privilege so that only authorized personnel, tools, services, etc. have access.",
+      "controls": [
+        "SA-10"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-10 has the developer manage configuration, control the integrity of changes to code and other configuration items, and make only approved changes.",
+      "gaps": "The task's main ask is least-privilege access to stored code. That is the subject of AC-03 (access enforcement) and AC-06 (least privilege), which NIST's table leaves out for this task."
+    },
+    {
+      "id": "PS.2.1",
+      "title": "Make software integrity verification information available to software acquirers.",
+      "controls": [
+        "SA-08"
+      ],
+      "coverage_pct": 15,
+      "rationale": "NIST names SA-08, which applies security engineering principles to the design and development of the software.",
+      "gaps": "Publishing integrity information that acquirers can check, such as hashes or signatures, matches SA-10(01), which has the developer enable integrity verification. NIST's table names SA-10(01) for PO.1.3, and SA-08 alone here."
+    },
+    {
+      "id": "PS.3.1",
+      "title": "Securely archive the necessary files and supporting data (e.g., integrity verification information, provenance data) to be retained for each software release.",
+      "controls": [
+        "SA-10",
+        "SA-15",
+        "SR-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "NIST names SA-15(11), which has the developer archive each release together with the evidence from its final security review. SA-10 keeps the release's configuration items under change control, and SR-04 keeps valid provenance for the release and its components.",
+      "gaps": "These controls say what to keep. Protect the archive itself from change and loss."
+    },
+    {
+      "id": "PS.3.2",
+      "title": "Collect, safeguard, maintain, and share provenance data for all components of each software release (e.g., in a software bill of materials [SBOM]).",
+      "controls": [
+        "SA-08",
+        "SR-03",
+        "SR-04"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SR-04 has the organisation document and maintain valid provenance for its systems, components and their data. SR-03 sets the supply chain processes that provenance supports, and SA-08 applies security engineering principles.",
+      "gaps": "The task also asks to share provenance data with acquirers, for example as a software bill of materials (SBOM). SR-04 keeps provenance for the organisation's own use."
+    },
+    {
+      "id": "PW.1.1",
+      "title": "Use forms of risk modeling – such as threat modeling, attack modeling, or attack surface mapping – to help assess the security risk for the software.",
+      "controls": [
+        "SA-08",
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 90,
+      "rationale": "NIST names SA-11(02), threat modeling and vulnerability analyses during development, and SA-11(06), attack surface reviews, which count for SA-11. It also names SA-15(05), attack surface reduction, which counts for SA-15. SA-08's principles include threat modeling to find the controls needed to mitigate risk.",
+      "gaps": "A close match. Set the inputs, tools and depth of the modeling, which SA-11(02) leaves to the organisation."
+    },
+    {
+      "id": "PW.1.2",
+      "title": "Track and maintain the software’s security requirements, risks, and design decisions.",
+      "controls": [
+        "SA-08",
+        "SA-10",
+        "SA-17"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-17 has the developer produce a design specification and security architecture that describe the security functions and how they work together. SA-10 has it document approved changes with their security impacts and track security flaws. SA-08 applies security engineering principles to the design.",
+      "gaps": "The task also asks to track the risks, and to keep requirements, risks and design decisions linked as the software changes."
+    },
+    {
+      "id": "PW.1.3",
+      "title": "Where appropriate, build in support for using standardized security features and services (e.g., enabling software to integrate with existing log management, identity management, access control, and vulnerability management systems) instead of creating proprietary implementations of security features and services.",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "NIST's SSDF table names no SP 800-53 control for this task.",
+      "gaps": "The task asks the producer to build in support for standard security services, such as the organisation's existing log and identity management systems, in place of its own implementations."
+    },
+    {
+      "id": "PW.2.1",
+      "title": "Have 1) a qualified person (or people) who were not involved with the design and/or 2) automated processes instantiated in the toolchain review the software design to confirm and enforce that it meets all of the security requirements and satisfactorily addresses the identified risk information.",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "NIST's SSDF table names no SP 800-53 control for this task.",
+      "gaps": "The task asks for the design to be reviewed against the security requirements and risks, by qualified people who did not design it or by automated checks in the toolchain. SA-17, which NIST names for PW.1.2, gives the design specification such a review checks."
+    },
+    {
+      "id": "PW.4.1",
+      "title": "Acquire and maintain well-secured software components (e.g., software libraries, modules, middleware, frameworks) from commercial, open-source, and other third-party developers for use by the organization’s software.",
+      "controls": [
+        "SA-04",
+        "SA-05",
+        "SA-08",
+        "SA-10",
+        "SR-03",
+        "SR-04"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-04 puts security requirements into acquisition contracts for components, and SA-05 obtains the documentation on configuring and using them securely. NIST names SA-08(03), modularity and layering, which counts for SA-08, and SA-10(06), trusted distribution of updates, which counts for SA-10. SR-03 and SR-04 add supply chain controls and provenance.",
+      "gaps": "Open-source components come without a contract, so SA-04 reaches commercial components only. For open-source ones, vet the project and keep the components current through SR-03's supply chain processes."
+    },
+    {
+      "id": "PW.4.2",
+      "title": "Create and maintain well-secured software components in-house following SDLC processes to meet common internal software development needs that cannot be better met by third-party software components.",
+      "controls": [
+        "SA-08"
+      ],
+      "coverage_pct": 30,
+      "rationale": "NIST names SA-08(03), which has the organisation build modularity and layering into its systems. It counts for SA-08. Modular design makes shared in-house components possible.",
+      "gaps": "The task asks for shared components built and maintained in-house through the organisation's development life cycle. SA-03 and SA-15 set that life cycle and process, and NIST's table names them for other tasks."
+    },
+    {
+      "id": "PW.4.4",
+      "title": "Verify that acquired commercial, open-source, and all other third-party software components comply with the requirements, as defined by the organization, throughout their life cycles.",
+      "controls": [
+        "SA-09",
+        "SR-03",
+        "SR-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "NIST names SR-04(03), which validates that a component received is genuine and unaltered, and SR-04(04), which validates its internal composition and provenance. Both count for SR-04. SR-03 addresses weaknesses in the supply chain, and SA-09 monitors external providers' compliance on an ongoing basis.",
+      "gaps": "The task asks to verify components against the organisation's requirements throughout their life. Check them for newly published vulnerabilities as well, for example with software composition analysis."
+    },
+    {
+      "id": "PW.5.1",
+      "title": "Follow all secure coding practices that are appropriate to the development languages and environment to meet the organization’s requirements.",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "NIST's SSDF table names no SP 800-53 control for this task.",
+      "gaps": "The task asks developers to follow secure coding practices suited to their languages and environment. SA-15, which NIST names for other tasks, has the development process name its standards."
+    },
+    {
+      "id": "PW.6.1",
+      "title": "Use compiler, interpreter, and build tools that offer features to improve executable security.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 65,
+      "rationale": "SA-15 has the developer name the tools used in development and document their options and configurations. The organisation reviews them against its security requirements.",
+      "gaps": "The task asks for tools that offer features to improve executable security, such as compiler hardening options. Add those features to the requirements SA-15's review checks against."
+    },
+    {
+      "id": "PW.6.2",
+      "title": "Determine which compiler, interpreter, and build tool features should be used and how each should be configured, then implement and use the approved configurations.",
+      "controls": [
+        "SA-15",
+        "SR-09"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-15 has the developer document the specific tool options and configurations used, and the organisation review them on a set cycle. SR-09 adds a tamper protection programme, which can include build features that resist tampering.",
+      "gaps": "The task also asks that builds use the approved configurations every time. Enforce them in the build pipeline."
+    },
+    {
+      "id": "PW.7.1",
+      "title": "Determine whether code review (a person looks directly at the code to find issues) and/or code analysis (tools are used to find issues in code, either in a fully automated way or in conjunction with a person) should be used, as defined by the organization.",
+      "controls": [
+        "SA-11"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-11 has the developer plan ongoing security assessments and run testing and evaluation at a depth and coverage the organisation defines. The choice between code review and code analysis belongs in that plan.",
+      "gaps": "SA-11 frames the choice for testing in general. Decide for each part of the code whether people review it, tools analyse it, or both."
+    },
+    {
+      "id": "PW.7.2",
+      "title": "Perform the code review and/or code analysis based on the organization’s secure coding standards, and record and triage all discovered issues and recommended remediations in the development team’s workflow or issue tracking system.",
+      "controls": [
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 90,
+      "rationale": "NIST names SA-11(01), static code analysis, and SA-11(04), manual code reviews, with SA-11 itself, which has flaws remediated and corrected. It also names SA-15(07), automated vulnerability analysis, which counts for SA-15 and has the results delivered to named people.",
+      "gaps": "A close match. Review against the organisation's own secure coding standards, and triage the findings in the team's issue tracker."
+    },
+    {
+      "id": "PW.8.1",
+      "title": "Determine whether executable code testing should be performed to find vulnerabilities not identified by previous reviews, analysis, or testing and, if so, which types of testing should be used.",
+      "controls": [
+        "SA-11"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-11 has the developer plan ongoing security assessments and choose the kinds of testing, from unit to regression testing, at a depth and coverage the organisation defines.",
+      "gaps": "Testing aimed at finding vulnerabilities, such as penetration testing and dynamic analysis, sits in SA-11's enhancements. NIST names those for PW.8.2."
+    },
+    {
+      "id": "PW.8.2",
+      "title": "Scope the testing, design the tests, perform the testing, and document the results, including recording and triaging all discovered issues and recommended remediations in the development team’s workflow or issue tracking system.",
+      "controls": [
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 90,
+      "rationale": "SA-11 has the developer test at a defined depth and coverage, produce evidence of the results and correct the flaws found. NIST also names SA-11(05), penetration testing, and SA-11(08), dynamic code analysis, with SA-15(07), automated vulnerability analysis, which counts for SA-15.",
+      "gaps": "A close match. Record and triage each finding in the team's issue tracker."
+    },
+    {
+      "id": "PW.9.1",
+      "title": "Define a secure baseline by determining how to configure each setting that has an effect on security or a security-related setting so that the default settings are secure and do not weaken the security functions provided by the platform, network infrastructure, or services.",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "NIST's SSDF table names no SP 800-53 control for this task.",
+      "gaps": "The task asks the producer to define a secure baseline, so that the software's default settings are secure. SA-08(23), secure defaults, which NIST names for PW.9.2, comes closest."
+    },
+    {
+      "id": "PW.9.2",
+      "title": "Implement the default settings (or groups of default settings, if applicable), and document each setting for software administrators.",
+      "controls": [
+        "SA-05",
+        "SA-08"
+      ],
+      "coverage_pct": 85,
+      "rationale": "NIST names SA-08(23), which has the organisation build the principle of secure defaults into its systems. It counts for SA-08. SA-05 has administrator documentation describe how to configure and run the software securely.",
+      "gaps": "Document each security-related setting for administrators, as the task asks."
+    },
+    {
+      "id": "RV.1.1",
+      "title": "Gather information from software acquirers, users, and public sources on potential vulnerabilities in the software and third-party components that the software uses, and investigate all credible reports.",
+      "controls": [
+        "SA-10",
+        "SR-03",
+        "SR-04"
+      ],
+      "coverage_pct": 45,
+      "rationale": "SA-10 has the developer track security flaws and their resolution and report them. SR-03 finds and addresses weaknesses in supply chain elements, and SR-04's provenance records show which components the software uses.",
+      "gaps": "The task asks to gather vulnerability reports from users and public sources. Run a public reporting channel, as in RA-05(11), and watch advisories, as in SI-05. NIST's table leaves both out for this task."
+    },
+    {
+      "id": "RV.1.2",
+      "title": "Review, analyze, and/or test the software’s code to identify or confirm the presence of previously undetected vulnerabilities.",
+      "controls": [
+        "SA-11"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-11 has the developer test and evaluate the software at all stages after design, then remediate and correct the flaws found.",
+      "gaps": "Keep reviewing and testing released code for vulnerabilities, as the task asks."
+    },
+    {
+      "id": "RV.1.3",
+      "title": "Have a policy that addresses vulnerability disclosure and remediation, and implement the roles, responsibilities, and processes needed to support that policy.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 40,
+      "rationale": "NIST names SA-15(10), which has the developer provide, implement and test an incident response plan. It counts for SA-15. Its discussion notes the plan's value when organisations respond to vulnerabilities in commercial products.",
+      "gaps": "The task asks for a vulnerability disclosure policy, with the roles and processes to take reports and remediate. A public reporting channel, as in RA-05(11), comes closer, and NIST's table leaves it out for this task."
+    },
+    {
+      "id": "RV.2.1",
+      "title": "Analyze each vulnerability to gather sufficient information about risk to plan its remediation or other risk response.",
+      "controls": [
+        "SA-10",
+        "SA-15"
+      ],
+      "coverage_pct": 80,
+      "rationale": "NIST names SA-15(07), which counts for SA-15 and has the developer judge the exploitation potential of each vulnerability found and the mitigations open to it. SA-10 tracks security flaws and their resolution.",
+      "gaps": "SA-15(07) covers vulnerabilities found by automated analysis. Analyse reports from other sources the same way."
+    },
+    {
+      "id": "RV.2.2",
+      "title": "Plan and implement risk responses for vulnerabilities.",
+      "controls": [
+        "SA-05",
+        "SA-10",
+        "SA-11",
+        "SA-15"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SA-11 has the developer run a verifiable flaw remediation process and correct flaws, and SA-10 makes only approved changes and tracks flaw resolution. SA-15(07), which counts for SA-15, works out potential mitigations for delivered vulnerabilities. SA-05's documentation covers known vulnerabilities in configuration and use.",
+      "gaps": "The task also asks to tell users about fixes and workarounds, for example in security advisories."
+    },
+    {
+      "id": "RV.3.1",
+      "title": "Analyze identified vulnerabilities to determine their root causes.",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "NIST's SSDF table names no SP 800-53 control for this task.",
+      "gaps": "The task asks for the root cause of each vulnerability to be found."
+    },
+    {
+      "id": "RV.3.2",
+      "title": "Analyze the root causes over time to identify patterns, such as a particular secure coding practice not being followed consistently.",
+      "controls": [],
+      "coverage_pct": 0,
+      "rationale": "NIST's SSDF table names no SP 800-53 control for this task.",
+      "gaps": "The task asks for root causes to be analysed over time to find patterns, such as a secure coding practice applied unevenly."
+    },
+    {
+      "id": "RV.3.3",
+      "title": "Review the software for similar vulnerabilities to eradicate a class of vulnerabilities, and proactively fix them rather than waiting for external reports.",
+      "controls": [
+        "SA-11"
+      ],
+      "coverage_pct": 50,
+      "rationale": "SA-11 has the developer test at a defined depth and coverage and correct the flaws it finds.",
+      "gaps": "The task asks to search the software for a whole class of vulnerability once one instance is found, and to fix them before outsiders report them."
+    },
+    {
+      "id": "RV.3.4",
+      "title": "Review the SDLC process, and update it if appropriate to prevent (or reduce the likelihood of) the root cause recurring in updates to the software or in new software that is created.",
+      "controls": [
+        "SA-15"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SA-15 has the organisation review the development process, standards and tools on a set cycle against its security requirements, and has the developer manage changes to the process.",
+      "gaps": "The task reviews the process in response to the root causes of vulnerabilities. SA-15(06), continuous improvement of the development process, fits it best."
+    }
+  ],
+  "summary": {
+    "total_clauses": 42,
+    "average_coverage": 53.9,
+    "full_count": 6,
+    "substantial_count": 18,
+    "partial_count": 6,
+    "weak_count": 5,
+    "none_count": 7
+  }
+}

@@ -1,0 +1,801 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "ncsc_caf",
+  "framework_name": "NCSC Cyber Assessment Framework (CAF) 4.0",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "OSA's own analysis of the NCSC Cyber Assessment Framework (CAF) 4.0 against SP 800-53 Rev 5. Each clause is one of the CAF's 41 contributing outcomes, read with its indicators of good practice and rated against the Achieved column. The coverage figure estimates how much of the outcome the listed controls achieve when put in place as written. The CAF states outcomes for an assessor to judge, and SP 800-53 states controls, so coverage is lower where an outcome rests on people, such as security culture (B6.a) and the skills of monitoring staff (C1.e). Clause ids, outcome titles and objective names are NCSC's. Check each outcome against the CAF's own indicators, and against the CAF profile your regulator or oversight body sets, before you use this mapping for compliance or audit.",
+    "jurisdictions": [
+      "GB"
+    ],
+    "applicability_type": "voluntary",
+    "clause_groups": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "clause_group_titles": {
+      "A": "Managing security risk",
+      "B": "Protecting against cyber attack",
+      "C": "Detecting Cyber Security Events",
+      "D": "Minimising the impact of cyber security incidents"
+    },
+    "clause_titles_from": "NCSC's Cyber Assessment Framework 4.0, © Crown copyright 2025. Contains public sector information licensed under the Open Government Licence v3.0",
+    "clause_titles_licence": "Open Government Licence v3.0, https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "clause_titles_url": "https://www.ncsc.gov.uk/sites/default/files/documents/NCSC-Cyber-Assessment-Framework-4.0.pdf",
+    "clause_titles_attribution": "Contains public sector information licensed under the Open Government Licence v3.0.",
+    "edition": {
+      "used": "Cyber Assessment Framework 4.0, National Cyber Security Centre, August 2025",
+      "url": "https://www.ncsc.gov.uk/sites/default/files/documents/NCSC-Cyber-Assessment-Framework-4.0.pdf",
+      "note": "NCSC updates the CAF in place: version 4.0 replaced version 3.2 in August 2025. The framework id, ncsc_caf, carries no version, so a later version can replace this mapping under the same id."
+    },
+    "analysis": {
+      "basis": "OSA's own analysis. NIST's catalogue of registered crosswalks has none for the CAF, and NCSC's CAF collection page and its supplementary information page link none (checked 1 November 2026).",
+      "checked": "2026-11-01",
+      "texts": [
+        {
+          "title": "Cyber Assessment Framework 4.0",
+          "published": "National Cyber Security Centre, August 2025, PDF last modified 23 June 2026. © Crown copyright 2025, text licensed under the Open Government Licence v3.0",
+          "url": "https://www.ncsc.gov.uk/sites/default/files/documents/NCSC-Cyber-Assessment-Framework-4.0.pdf",
+          "sha256": "1d735b2b1cae1aadd52756ede5935ccb3824417680482dbe0846b33a1e7fa3ec"
+        }
+      ],
+      "controls": "SP 800-53 Rev 5.2.0 base controls, current ones only. An enhancement that addresses an outcome counts for its base control, and the rationale names it. The privacy family (PT) is left out, since the CAF deals with security and resilience.",
+      "method": "Each of the 41 contributing outcomes was rated three times, independently, by AI models working from the CAF 4.0 text and the control statements. Each rater worked alone. Each rater read the outcome with its indicators of good practice and rated it against the Achieved column. A control is listed for an outcome where at least two of the three ratings named it. The coverage figure is the median of the three estimates of how much of the outcome an organisation would achieve by implementing the listed controls. The rationale and gaps were written after the controls were settled, from the raters' reasons and from the gaps at least two of them named.",
+      "pairs_named_by_three": 267,
+      "pairs_named_by_two": 47,
+      "pairs_named_by_one_and_left_out": 39,
+      "pairs_per_rating": {
+        "A": 307,
+        "B": 302,
+        "C": 325
+      },
+      "agreement_measure": "The Jaccard index of each two ratings: the pairs both named, divided by the pairs either named.",
+      "agreement": [
+        {
+          "ratings": "A and B",
+          "jaccard": 0.82,
+          "pairs_named_by_both": 275,
+          "pairs_named_by_either": 334
+        },
+        {
+          "ratings": "A and C",
+          "jaccard": 0.83,
+          "pairs_named_by_both": 286,
+          "pairs_named_by_either": 346
+        },
+        {
+          "ratings": "B and C",
+          "jaccard": 0.84,
+          "pairs_named_by_both": 287,
+          "pairs_named_by_either": 340
+        }
+      ],
+      "pairs_note": "The file lists 314 pairs, the 267 named by all three ratings and the 47 named by two. B1.a holds 23 of them. All three raters read that outcome as the whole documented set of security policies, so each named the policy and procedures control of all 18 security families, AC-01 to SR-01. C2.a keeps two, RA-10 and SI-04. Rater A also named AU-06 and RA-01, and rater C named PM-16, each alone.",
+      "not_mapped": "Every contributing outcome is mapped. The CAF's introductory pages, which explain indicators of good practice and CAF profiles, hold no outcomes of their own."
+    }
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "A1.a",
+      "title": "Board Direction",
+      "controls": [
+        "PM-01",
+        "PM-02",
+        "PM-06",
+        "PM-09",
+        "PM-11",
+        "PM-29",
+        "PM-31"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PM-01's programme plan, approved by a senior official accountable for the risk and shared across the organisation, carries the direction the board sets. PM-09's risk management strategy and PM-29's senior accountable official for risk turn that direction into practice. PM-02 appoints a senior information security officer to lead the programme. PM-06 performance measures and PM-31 monitoring reports give the board current, accurate information for its discussions. PM-11 defines mission and business processes with security risk in view, so the board can see what a compromise would mean for the essential function.",
+      "gaps": "SP 800-53 places accountability for security with senior officials, and the CAF places it with the board. The CAF also asks the board to own the security policy and to discuss security regularly, with expert advice. It asks for security to be weighed in every relevant decision, with senior managers held to the same policies as everyone else."
+    },
+    {
+      "id": "A1.b",
+      "title": "Roles and Responsibilities",
+      "controls": [
+        "AT-03",
+        "PM-01",
+        "PM-02",
+        "PM-03",
+        "PM-10",
+        "PM-13",
+        "PM-29",
+        "PS-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-01 identifies and assigns security roles and responsibilities in a programme plan that is reviewed and updated. PM-02 and PM-29 make overall accountability clear, through a senior information security officer and a senior accountable official for risk. PM-10 designates people to fill each role in the risk management process. PS-09 writes security duties into position descriptions, so each person knows what they are responsible for. PM-03 plans and releases the resources role holders need. PM-13 and AT-03 keep the people in security roles capable and trained.",
+      "gaps": "The CAF also asks for clear routes to communicate and escalate risk at every level, understood by everyone who uses them. It asks for role holders to have the time and authority to carry out their duties, and for key roles to be reviewed regularly to confirm they stay fit for purpose. SP 800-53 implies these through the programme plan and leaves the detail to the organisation."
+    },
+    {
+      "id": "A1.c",
+      "title": "Decision-making",
+      "controls": [
+        "CA-06",
+        "PM-04",
+        "PM-09",
+        "PM-10",
+        "PM-28",
+        "PM-29",
+        "RA-03",
+        "RA-07"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PM-28 documents and shares the organisation's risk tolerance and priorities, so decision-makers act within the appetite senior management set. RA-07 responds to each finding in line with that tolerance. PM-09 and PM-10 set how risk decisions are made and who makes them. CA-06 has a senior official accept each system's risk and renew the authorisation at a set interval. PM-29's risk executive and PM-04's plans of action give senior management sight of key decisions. RA-03 brings organisation-level decisions into each system's risk assessment.",
+      "gaps": "The CAF also asks for risk decisions to be delegated, or escalated, to people equipped and authorised to make them. It asks for past decisions to be reviewed regularly, and for joint decisions across teams such as IT and OT. It also asks for risk priorities precise enough to tell risks apart. SP 800-53 reviews risk decisions through system reauthorisation under CA-06."
+    },
+    {
+      "id": "A2.a",
+      "title": "Risk Management Process",
+      "controls": [
+        "PL-02",
+        "PM-04",
+        "PM-09",
+        "PM-11",
+        "PM-28",
+        "RA-01",
+        "RA-02",
+        "RA-03",
+        "RA-07",
+        "RA-09"
+      ],
+      "coverage_pct": 75,
+      "rationale": "RA-01 documents the risk assessment policy and procedures, and PM-09 sets the organisation-wide strategy they work within. RA-03 identifies threats and vulnerabilities, judges likelihood and impact, and is updated when systems or threats change. RA-03(03) adds dynamic threat awareness. PM-28 records the threat assumptions behind each assessment. RA-02, RA-09 and PM-11 centre the work on the impact a compromise would have on the essential function. PL-02 records security requirements with the controls chosen and the reasons, so requirements trace back to risks. RA-07 manages each risk to a decision, and PM-04 tracks the remedial actions.",
+      "gaps": "The CAF also asks you to analyse how a threat actor's actions could lead to impact on the essential function, with threat assumptions that draw on your sector and on national infrastructure more widely. It asks you to look ahead to new technology an attacker could turn against your systems. And it asks for a regular review of how well the risk process itself works."
+    },
+    {
+      "id": "A2.b",
+      "title": "Understanding Threat",
+      "controls": [
+        "CA-08",
+        "PL-08",
+        "PM-15",
+        "PM-16",
+        "PM-28",
+        "RA-03",
+        "SI-05"
+      ],
+      "coverage_pct": 50,
+      "rationale": "PM-16's threat awareness programme and PM-15's contacts with security groups keep knowledge of current threats up to date, including threats to the sector. SI-05 brings in alerts and advisories on threat actor methods. RA-03 identifies threats to each system, using all-source intelligence under RA-03(02) and dynamic threat awareness under RA-03(03). PM-28 records the threat assumptions behind risk decisions. CA-08, with red team exercises under CA-08(02), views the systems from an attacker's point of view. PL-08's defence in depth, under PL-08(01), puts reinforcing measures at each layer an attacker must pass.",
+      "gaps": "The CAF also asks for a documented, detailed analysis of how a skilled attacker with ample resources would reach targets that matter to the essential function. The analysis sets out plausible attack scenarios and the steps an attacker would take. It justifies the measures at each step, against the background of your sector and national infrastructure more widely. SP 800-53 identifies threats in risk assessment and tests systems through red teaming, and leaves this analysis to the organisation."
+    },
+    {
+      "id": "A2.c",
+      "title": "Assurance",
+      "controls": [
+        "CA-02",
+        "CA-05",
+        "CA-07",
+        "CA-08",
+        "PM-14",
+        "RA-07",
+        "SA-04",
+        "SI-06"
+      ],
+      "coverage_pct": 75,
+      "rationale": "CA-02 assesses whether controls are implemented correctly and produce the intended outcome, with independent assessors under CA-02(01). CA-07 keeps assessing them through their lifetime. CA-08 and SI-06 test technical measures directly. SA-04 writes assurance requirements and acceptance criteria into contracts, so vendor claims are checked against evidence. CA-05 records the deficiencies found, and RA-07 prioritises their remedy. PM-14 keeps testing and monitoring plans current and reviews them against the risk strategy.",
+      "gaps": "The CAF also asks you to understand the strengths and limits of each assurance method when you choose one, and to review whether your methods work as intended. It looks for confidence in people and processes as well as technology. SP 800-53 assesses controls and leaves the choice and review of methods to the organisation."
+    },
+    {
+      "id": "A3.a",
+      "title": "Asset Management",
+      "controls": [
+        "CM-08",
+        "CM-12",
+        "PL-02",
+        "PM-05",
+        "RA-02",
+        "RA-09",
+        "SA-03",
+        "SI-12",
+        "SR-12"
+      ],
+      "coverage_pct": 70,
+      "rationale": "PM-05 keeps an inventory of the organisation's systems, and CM-08 an inventory of their components at the detail needed, with CM-08(04) naming who is accountable for each. CM-12 records where important information is processed and stored. PL-02 records each system's dependencies on other systems. RA-02 and RA-09 rank assets by the impact of their compromise and their criticality to the essential function. SA-03 manages systems through a life cycle that includes security, from acquisition to retirement. SI-12 keeps information under retention rules, and SR-12 covers disposal.",
+      "gaps": "The CAF also asks you to record dependencies on supporting infrastructure such as power and cooling. It treats people and their knowledge as assets, with succession plans for knowledge held by one or two individuals. SP 800-53's inventories cover systems, components and information."
+    },
+    {
+      "id": "A4.a",
+      "title": "Supply Chain",
+      "controls": [
+        "CA-03",
+        "IR-04",
+        "PM-30",
+        "RA-03",
+        "SA-04",
+        "SA-09",
+        "SR-02",
+        "SR-03",
+        "SR-05",
+        "SR-06",
+        "SR-08"
+      ],
+      "coverage_pct": 75,
+      "rationale": "PM-30 sets an organisation-wide supply chain risk strategy, and SR-02 a plan that runs from design to disposal. RA-03(01) brings supplier risk into risk assessment. SR-06 assesses each supplier and what it provides, and SR-05 builds supply chain risk into purchasing decisions. SA-04 puts security requirements in contracts and allocates responsibility between the parties, and SR-03(03) flows them down to sub-tier suppliers. SA-09 defines oversight of providers and monitors their compliance. CA-03 approves and manages information exchange with third parties, network links included. SR-08 and IR-04(10) cover notice of compromises and joint handling of supply chain incidents.",
+      "gaps": "The CAF also asks you to weigh supplier ownership, nationality, partnerships and competitors in risk assessment and purchasing. It treats subversion of the supply chain by capable, well-resourced actors as a risk in its own right. It asks for a proactive contract management plan, and for confidence that critical suppliers protect your information against capable actors."
+    },
+    {
+      "id": "A4.b",
+      "title": "Secure Software Development and Support",
+      "controls": [
+        "CM-14",
+        "SA-03",
+        "SA-04",
+        "SA-10",
+        "SA-11",
+        "SA-15",
+        "SA-22",
+        "SI-07",
+        "SR-04",
+        "SR-08"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SA-03 and SA-15 build security into a documented development process, and SA-04(03) requires suppliers to show theirs. That is the role a framework such as NIST's SSDF plays. SA-11 tests the software with static and dynamic analysis and threat modelling. SA-10 controls changes to code and tracks flaws to resolution. SR-04 records the provenance and composition of components. CM-14 and SI-07 install software only after checking its signature and integrity, with code authentication under SI-07(15). SA-22 replaces unsupported components or arranges other support. SR-08 has suppliers report compromises that could affect you.",
+      "gaps": "The CAF also asks for a full record of software composition, with third-party components monitored for new vulnerabilities through the product's life. It asks for development environments and source code protected against capable, well-resourced actors. It looks for suppliers that follow an established secure development framework, and for confidence in the open-source software you use."
+    },
+    {
+      "id": "B1.a",
+      "title": "Policy, Process and Procedure Development",
+      "controls": [
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PL-01",
+        "PL-04",
+        "PM-01",
+        "PM-06",
+        "PM-09",
+        "PS-01",
+        "RA-01",
+        "SA-01",
+        "SA-08",
+        "SC-01",
+        "SI-01",
+        "SR-01"
+      ],
+      "coverage_pct": 75,
+      "rationale": "All three raters read this outcome as the organisation's whole documented set of security policies, processes and procedures. So each named the policy and procedures control of all 18 security families, AC-01 to SR-01, and the mapping keeps them. Each documents the policy and procedures for its area in line with applicable law, and has them reviewed at a set interval and after defined events. PT-01 is left out, since PT covers privacy and the CAF deals with security and resilience. PM-01 documents the overall governance approach and PM-09 the risk management approach. PM-06 supplies the performance measures reported to executive management. PL-04 sets clear rules for users. SA-08's secure defaults and human-factored security, SA-08(23) and SA-08(27), keep systems secure when someone skips a procedure.",
+      "gaps": "The CAF also asks for policies that are practical and usable for the people who follow them, and for security to run through all of the organisation's policies. It asks for a review whenever the essential function or the threat to it changes. SP 800-53 leaves the events that trigger a review to the organisation."
+    },
+    {
+      "id": "B1.b",
+      "title": "Policy, Process and Procedure Implementation",
+      "controls": [
+        "AT-02",
+        "AU-06",
+        "CA-02",
+        "CA-07",
+        "PL-04",
+        "PM-06",
+        "PS-02",
+        "PS-03",
+        "PS-08"
+      ],
+      "coverage_pct": 65,
+      "rationale": "AT-02 and PL-04 make sure everyone, senior executives included, knows the policies and their own responsibilities under them. CA-02 and CA-07 check that controls, procedural ones included, are applied correctly and stay effective. PM-06 measures the security benefit the policies achieve. PS-02 and PS-03 tie security policy to HR through position risk designations and screening. AU-06 finds breaches of policy in the audit records, and PS-08 acts on them through a formal sanctions process.",
+      "gaps": "The CAF also asks you to track breaches of policy, aggregated ones included, and to assess them for trends. It asks for security policies integrated with the organisation's other policies beyond HR, and for evidence that every policy, process and procedure is followed."
+    },
+    {
+      "id": "B2.a",
+      "title": "Identity Verification, Authentication and Authorisation",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "AC-17",
+        "IA-02",
+        "IA-03",
+        "IA-05",
+        "IA-08",
+        "IA-09",
+        "IA-12",
+        "PE-02",
+        "PE-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-12 proofs each identity to a defined assurance level before access is granted. IA-02 and IA-08 uniquely identify and authenticate the organisation's users and outside users, with multi-factor authentication under IA-02(01) and IA-02(02). IA-03 and IA-09 authenticate devices and services. IA-05 keeps authenticators strong. AC-02 grants access on approved need and reviews accounts at a set frequency. AC-03 enforces the approved authorisations, and AC-06 keeps access to the minimum each user needs. AC-17 authorises each type of remote access. PE-02 and PE-03 limit physical access to the people on a reviewed list.",
+      "gaps": "The CAF sets a review of who has access at least every six months, and multi-factor authentication for all user access. SP 800-53 leaves the review interval to the organisation and places multi-factor authentication in IA-02's enhancements. The CAF also asks for authentication that keeps pace with current good practice, which the organisation defines for itself under SP 800-53."
+    },
+    {
+      "id": "B2.b",
+      "title": "Device Management",
+      "controls": [
+        "AC-19",
+        "AC-20",
+        "CA-03",
+        "CM-08",
+        "IA-03",
+        "SC-17",
+        "SI-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AC-19 lets mobile devices connect only when authorised and configured to requirements, and AC-20(03) restricts personal and other outside devices. IA-03 authenticates each device before it connects, with cryptographic authentication under IA-03(01). SC-17 issues the certificates that device identity can rest on. CM-08 defines the known devices, and CM-08(03) finds unauthorised ones. SI-04 detects unauthorised connections for investigation. CA-03 sets security requirements for third-party systems before they connect.",
+      "gaps": "The CAF also asks for all privileged operations to run from highly trusted devices kept for that purpose alone, such as privileged access workstations. It asks for independent, professional assurance of any third-party device or network before it connects."
+    },
+    {
+      "id": "B2.c",
+      "title": "Privileged User Management",
+      "controls": [
+        "AC-02",
+        "AC-06",
+        "AU-06",
+        "AU-12",
+        "IA-02",
+        "MA-04",
+        "SI-04"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-02(07) manages privileged accounts by role, and AC-02(02) removes temporary and emergency accounts after a set time. Account reviews follow joiners, movers and leavers. AC-06 grants only the rights a role needs: AC-06(05) restricts privileged accounts, and AC-06(02) keeps separate accounts for other work. AC-06(07) reviews privileges. IA-02(01) requires multi-factor authentication for privileged accounts. AU-12 records privileged actions for later analysis, and AU-06 reviews them. SI-04(20) monitors privileged users closely. MA-04 approves, monitors and ends remote maintenance sessions, which bounds the access third-party support has.",
+      "gaps": "The CAF also asks for privileged rights granted for a limited time, when they are needed. SP 800-53 comes closest with AC-02(02) for temporary accounts and AC-02(06) for dynamic privileges. The CAF asks for physical controls on terminals left running with privileged access, as in a control room."
+    },
+    {
+      "id": "B2.d",
+      "title": "Identity and Access Management (IdAM)",
+      "controls": [
+        "AC-02",
+        "AC-06",
+        "AC-07",
+        "AU-06",
+        "AU-12",
+        "IA-04",
+        "IA-12",
+        "IA-13",
+        "PS-04",
+        "PS-05",
+        "SI-04"
+      ],
+      "coverage_pct": 85,
+      "rationale": "IA-12 verifies each user before access is issued. AC-02 approves requests, grants the minimum access and reviews accounts at a set frequency. IA-04 assigns identifiers to users, devices and services only with authorisation, and IA-13 manages their identities, attributes and rights through identity providers. AC-06 issues minimum rights, and AC-06(07) reviews them. PS-04 removes leavers' access and PS-05 adjusts movers'. AU-12 logs every access by users, devices and systems, and AU-06 reviews and correlates the logs. AC-07 limits failed logons, and SI-04 alerts on unauthorised connection attempts.",
+      "gaps": "The CAF also asks for regular audit of how the procedure for verifying users and issuing access is applied. It asks for access logs to be compared with expected activity, and for the rights of users, devices and systems to be reviewed at least annually. SP 800-53 leaves that interval to the organisation."
+    },
+    {
+      "id": "B3.a",
+      "title": "Understanding Data",
+      "controls": [
+        "CA-03",
+        "CA-09",
+        "CM-08",
+        "CM-12",
+        "RA-02",
+        "RA-03",
+        "SI-12"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-12 records where important information is processed and stored, on which components and who has access, and tracks changes of location. CM-08 lists the devices and media where it may sit. CA-03 and CA-09 document the data links to third parties and between internal systems. RA-02 categorises information by the impact of losing its confidentiality, integrity or availability. RA-03 assesses the harm a compromise would cause and is reviewed at a set frequency. SI-12 manages information to defined retention rules and disposes of it when its retention period ends.",
+      "gaps": "The CAF also asks you to understand the quantity and quality of important data, with its context, limits and dependencies. It asks for a catalogue of data that could help an attacker, such as design details, and for unnecessary copies to be removed. It asks for impact statements validated at least annually, where SP 800-53 leaves the interval to the organisation."
+    },
+    {
+      "id": "B3.b",
+      "title": "Data in Transit",
+      "controls": [
+        "CA-03",
+        "CP-08",
+        "PE-04",
+        "SC-08",
+        "SC-12",
+        "SC-13",
+        "SC-40",
+        "SC-47"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SC-08 protects the confidentiality and integrity of data in transit, with cryptography over untrusted carriers under SC-08(01). SC-13 sets the cryptography for each use, and SC-12 manages its keys. PE-04 protects transmission lines physically, and SC-40 protects wireless links against jamming. CP-08 and SC-47 give alternative paths, so important data keeps flowing when a primary path fails. CA-03 sets security requirements for data sent to third parties.",
+      "gaps": "The CAF also asks for justified confidence in the strength of the protection, such as through assured cryptographic products. It asks you to identify every data link that carries important data."
+    },
+    {
+      "id": "B3.c",
+      "title": "Stored Data",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "CP-09",
+        "MP-02",
+        "MP-04",
+        "SC-12",
+        "SC-13",
+        "SC-28",
+        "SI-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-03 protects stored data from unauthorised access, change and deletion. SC-28 protects information at rest, with cryptography under SC-28(01) and offline storage under SC-28(02). SC-13 sets the cryptography and SC-12 manages its keys. MP-02 and MP-04 restrict access to media, paper included, and store it securely. AC-04 controls what reaches less secure systems, so only reduced or read-only copies go there. CP-09 keeps protected backups for continued operation. SI-12 keeps copies to those needed and secures archives.",
+      "gaps": "The CAF also asks you to confirm that every copy of important data is needed, and for justified confidence in the strength of any encryption. It accepts paper and other alternative forms of backup, a choice SP 800-53 leaves to the organisation."
+    },
+    {
+      "id": "B3.d",
+      "title": "Mobile Data",
+      "controls": [
+        "AC-19",
+        "AC-20",
+        "CM-06",
+        "CM-08",
+        "MP-06",
+        "SC-28",
+        "SI-12"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AC-19 sets configuration and connection requirements for mobile devices, with full-device or container encryption under AC-19(05). AC-20(03) restricts personal and other outside devices. CM-08 catalogues the mobile devices that hold important data, and CM-06 sets them to secure settings for each platform. SC-28 protects the data at rest on the device. SI-12 keeps the data held on devices to what is needed, and MP-06(08) wipes a device remotely.",
+      "gaps": "The CAF also suggests deleting data from mobile devices automatically after a set period. SP 800-53 states information retention in general terms, through SI-12."
+    },
+    {
+      "id": "B3.e",
+      "title": "Media / Equipment Sanitisation",
+      "controls": [
+        "CM-08",
+        "MA-02",
+        "MP-06",
+        "PE-16",
+        "SR-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "MP-06 sanitises media before disposal, release or reuse, with strength matched to the information, and MP-06(01) tracks and verifies the work. MA-02 sanitises equipment before it leaves for off-site maintenance or repair. CM-08 catalogues devices, including those with built-in storage, and PE-16 records equipment entering and leaving the facility. SR-12 disposes of components and data by defined techniques.",
+      "gaps": "The CAF also asks for an assured product or service to do the sanitisation. SP 800-53 matches the strength of sanitisation to the sensitivity of the data and leaves the choice of product to the organisation."
+    },
+    {
+      "id": "B4.a",
+      "title": "Secure by Design",
+      "controls": [
+        "AC-04",
+        "CM-07",
+        "PL-08",
+        "SA-08",
+        "SC-07",
+        "SC-32",
+        "SI-10"
+      ],
+      "coverage_pct": 65,
+      "rationale": "PL-08's architecture, built for defence in depth under PL-08(01), keeps the essential function from resting on any single control. SC-07 and SC-32 place essential function systems in their own, more trusted zones behind strong boundaries. AC-04 keeps data flows between components defined and simple, and filters such as AC-04(25) inspect and sanitise content. SI-10 validates inputs. CM-07 removes unneeded functions, ports and services to shrink the attack surface. SA-08's principles, such as reduced complexity and secure failure and recovery, build security into the design.",
+      "gaps": "The CAF also asks for limits on what automated decision-making technologies can do, and for systems built for easy recovery. It asks for data flows designed to support security monitoring, and for inputs to be transformed as well as validated. It also asks for the design to draw on the right expertise."
+    },
+    {
+      "id": "B4.b",
+      "title": "Secure Configuration",
+      "controls": [
+        "AC-02",
+        "CM-02",
+        "CM-03",
+        "CM-05",
+        "CM-06",
+        "CM-07",
+        "CM-08",
+        "CM-11",
+        "CM-14",
+        "IA-05",
+        "SI-02"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CM-02 sets a documented baseline configuration under configuration control, and CM-08 identifies the assets that need careful configuration. CM-06 applies and monitors secure settings, verified automatically under CM-06(01). CM-03 reviews, approves and records changes, and CM-05 keeps standard users from changing security settings. CM-07(05) lets only authorised software run, and CM-14 installs only signed components. CM-11 enforces rules on user-installed software. AC-02 removes or restricts generic, shared and default accounts. IA-05 changes default authenticators before first use and protects authenticators from disclosure. SI-02 keeps configured assets patched.",
+      "gaps": "The CAF also asks you to understand any automated decision-making technologies well enough to replicate their decisions."
+    },
+    {
+      "id": "B4.c",
+      "title": "Secure Management",
+      "controls": [
+        "AC-06",
+        "CM-07",
+        "CM-08",
+        "MA-02",
+        "MA-04",
+        "MA-05",
+        "PL-02",
+        "SA-05",
+        "SI-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AC-06(05) limits privileged accounts to defined roles, so only authorised people administer systems. MA-02, MA-04 and MA-05 approve and monitor maintenance, local and remote, by authorised staff, with strong authentication for remote sessions. PL-02 keeps a current description of components and connections, protected from disclosure and change. SA-05 keeps administrator documentation on secure configuration and operation. CM-07 stops unauthorised software running, and CM-08(03) detects unauthorised components. SI-03 detects and removes malware.",
+      "gaps": "The CAF also asks for administration from highly trusted devices kept for that purpose alone, such as privileged access workstations. It asks for network diagrams and other technical documentation to be kept current and stored securely. SP 800-53 states this for system security plans."
+    },
+    {
+      "id": "B4.d",
+      "title": "Vulnerability Management",
+      "controls": [
+        "CA-08",
+        "CM-08",
+        "RA-05",
+        "SA-22",
+        "SI-02",
+        "SI-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "RA-05 scans for vulnerabilities, analyses the results and remediates them within set times, which keeps your view of exposure to known vulnerabilities current. SI-05 brings in alerts and advisories, and CM-08 lists the software whose announced vulnerabilities you track. SI-02 installs security updates promptly. CA-08, with an independent team under CA-08(01), verifies your understanding of vulnerabilities. SA-22 replaces unsupported components or arranges other support.",
+      "gaps": "The CAF also asks for temporary mitigations on unsupported technology while you migrate to supported technology. SA-22 offers replacement or alternative support."
+    },
+    {
+      "id": "B5.a",
+      "title": "Resilience Preparation",
+      "controls": [
+        "CP-02",
+        "CP-04",
+        "CP-10",
+        "PM-16",
+        "SI-05"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CP-02 identifies essential functions, recovery objectives and restoration priorities, which sets what to restore and in what order. CP-04 tests the plan for effectiveness and readiness. CP-10 gives the capability to recover to a known state within set times. PM-16's threat awareness programme and SI-05's alerts and directives show when risk is new or rising, and support temporary security measures in response.",
+      "gaps": "The CAF also asks for a defined way to bring in immediate, temporary security measures when threat intelligence shows rising risk, such as during a widespread malware outbreak. It names test methods, red teaming among them, where SP 800-53 leaves the types of test to the organisation."
+    },
+    {
+      "id": "B5.b",
+      "title": "Design for Resilience",
+      "controls": [
+        "CM-07",
+        "CP-07",
+        "CP-08",
+        "PE-23",
+        "SA-24",
+        "SC-05",
+        "SC-06",
+        "SC-07",
+        "SC-32",
+        "SC-36"
+      ],
+      "coverage_pct": 80,
+      "rationale": "SC-07 and SC-32 segregate essential function systems from business and external systems, technically and physically. SA-24 designs systems to defined cyber resiliency goals. CP-07 and SC-36 replicate systems in another location, and PE-23 sites facilities with physical and environmental hazards in mind, which reduces geographical weakness. CP-08 gives alternative network paths and providers. SC-05 and SC-06 manage capacity and allocate resources by priority. CM-07 keeps services such as web browsing and email off essential function systems.",
+      "gaps": "The CAF also asks for the segregated infrastructure to have its own, independent user administration. It asks you to review your assessments of dependencies, resource limits and geographical limits, with their mitigations, when needed."
+    },
+    {
+      "id": "B5.c",
+      "title": "Backups",
+      "controls": [
+        "CP-06",
+        "CP-09",
+        "CP-10"
+      ],
+      "coverage_pct": 85,
+      "rationale": "CP-09 backs up user data, system information and documentation at intervals set by recovery objectives, and protects the backups. CP-09(01) tests them, and CP-09(03) keeps copies in separate storage. CP-06 holds backups at an alternate site with equivalent controls. CP-10 uses them to recover to a known state within set times.",
+      "gaps": "The CAF also asks for automatic backups, and for backups of equipment, processes and knowledge as well as data. It asks for backups that stay usable after an extreme event such as a ransomware attack."
+    },
+    {
+      "id": "B6.a",
+      "title": "Cyber Security Culture",
+      "controls": [
+        "AT-02",
+        "IR-06",
+        "IR-07",
+        "PL-04",
+        "PM-01"
+      ],
+      "coverage_pct": 30,
+      "rationale": "PM-01 states management commitment to security and shares the programme plan across the organisation. AT-02's awareness techniques promote secure attitudes and behaviour among all users. PL-04 sets the security behaviour expected of everyone with access. IR-06 asks people to report suspected incidents, and IR-07 gives them someone to contact for help.",
+      "gaps": "Most of this outcome is about culture, and SP 800-53 supports it in part. The CAF asks for people who raise concerns to be treated positively and recognised, and for managers to show visible commitment and take part. It asks for open communication about security and joint ownership of improvements across teams. It asks for incentives that support secure behaviour, and for the barriers to it to be removed."
+    },
+    {
+      "id": "B6.b",
+      "title": "Cyber Security Training",
+      "controls": [
+        "AT-01",
+        "AT-02",
+        "AT-03",
+        "AT-04",
+        "AT-06",
+        "PM-13",
+        "PM-14"
+      ],
+      "coverage_pct": 75,
+      "rationale": "AT-01 sets the training policy and procedures for all roles. AT-02 gives literacy training to everyone, from senior executives to new starters, at entry and at set intervals. AT-03 gives each role its own training path, and PM-13 builds the skills of security staff. AT-04 keeps each person's training record, and AT-06 feeds back on training results. PM-14 reviews training plans against the risk strategy.",
+      "gaps": "The CAF also asks you to judge training by its effect on security behaviour as well as its reach. It asks for good practice guidance that is easy to find, with evidence that people use it."
+    },
+    {
+      "id": "C1.a",
+      "title": "Sources and Tools for Logging and Monitoring",
+      "controls": [
+        "AU-02",
+        "AU-03",
+        "AU-05",
+        "AU-06",
+        "AU-07",
+        "AU-08",
+        "AU-12",
+        "SC-45",
+        "SI-04"
+      ],
+      "coverage_pct": 80,
+      "rationale": "AU-02 selects the events to log, with a rationale that they support investigations, and reviews the choice regularly. AU-03 records enough detail to detect events and investigate them. AU-12 generates records across components, with a system-wide, time-correlated trail under AU-12(01). AU-08 and SC-45 keep clocks in step with an authoritative source, so separate datasets can be correlated. SI-04 monitors hosts and network traffic for attacks and unauthorised use. AU-06(05) enriches log analysis with other data, and AU-07 lets tools query the logs. AU-05 alerts when logging fails.",
+      "gaps": "The CAF also asks for monitoring designed around the techniques threat actors use, with every new system considered as a log source. It asks for regular review of the data sources and tools you use for logging and monitoring."
+    },
+    {
+      "id": "C1.b",
+      "title": "Securing Logs",
+      "controls": [
+        "AU-01",
+        "AU-07",
+        "AU-09",
+        "AU-10",
+        "AU-11",
+        "SI-12"
+      ],
+      "coverage_pct": 85,
+      "rationale": "AU-09 protects log data and logging tools from unauthorised access, change and deletion, and alerts when it finds any. AU-09(04) limits access to a few privileged users, and AU-09(03) protects integrity with cryptography. AU-01 sets who may access log data and for what reasons. AU-10 traces each action on log data to a unique user or process. AU-07 leaves the original records unaltered, so analysis runs on copies. AU-11 keeps records for a set period, and SI-12(03) deletes them when it ends.",
+      "gaps": "The listed controls express most of this outcome, and what remains depends on how the organisation applies them. That includes which actions on log data it traces, viewing included, and how the logging function protects itself from threats like those it watches for."
+    },
+    {
+      "id": "C1.c",
+      "title": "Generating Alerts",
+      "controls": [
+        "AU-06",
+        "IR-06",
+        "SI-03",
+        "SI-04"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SI-04 detects attacks and indicators of compromise, analyses events in near real time and raises alerts, through SI-04(02), SI-04(05) and SI-04(24). SI-04(09) tests the monitoring tools. AU-06 reviews audit records for unusual activity, with automated analysis under AU-06(01). SI-03 updates malware signatures automatically and alerts on detection. IR-06 gives users a defined route to report what they see.",
+      "gaps": "The CAF also asks for alerts enriched with other data in near real time, carried in the first alert itself. It asks for detection rules that are reviewed and tuned to cut false positives, and for alerts to be prioritised and used in incident management."
+    },
+    {
+      "id": "C1.d",
+      "title": "Triage of Security Alerts",
+      "controls": [
+        "AU-06",
+        "IR-01",
+        "IR-04",
+        "IR-05",
+        "SI-04"
+      ],
+      "coverage_pct": 60,
+      "rationale": "IR-04 handles alerts from detection and analysis to containment, and IR-04(13) analyses anomalous behaviour to inform triage. SI-04 analyses detected events and anomalies in the context of the systems. AU-06 reviews audit records to investigate alerts and report findings. IR-01's procedures hold the playbooks and runbooks used in triage. IR-05 tracks and documents each incident, which records the triage and its outcome.",
+      "gaps": "The CAF also asks you to sort alerts and incidents into types and levels of severity, with playbooks for every plausible use case. It asks for triage records used to drive improvement, and for enough knowledge of how users and systems normally behave to support triage decisions."
+    },
+    {
+      "id": "C1.e",
+      "title": "Personnel Skills for Monitoring and Detection",
+      "controls": [
+        "AT-03",
+        "IR-04",
+        "IR-06",
+        "PM-13",
+        "PS-09",
+        "SA-09"
+      ],
+      "coverage_pct": 45,
+      "rationale": "PS-09 defines monitoring and detection roles, and AT-03 and PM-13 build and maintain the specialist skills they need. IR-04(14) sets up a security operations centre with staff who analyse and investigate alerts. IR-06 sets the internal and external reporting duties monitoring staff work to. SA-09 holds outsourced monitoring providers to the organisation's requirements.",
+      "gaps": "Most of this outcome concerns the maturity of the team, and SP 800-53 supports it in part. The CAF asks for analysts empowered to investigate beyond fixed processes, who know the essential function and the context it operates in. It asks for a workload they can manage, and for staff who help decide which new log data to collect."
+    },
+    {
+      "id": "C1.f",
+      "title": "Understanding User’s and System’s Behaviour, and Threat Intelligence (within Security Monitoring)",
+      "controls": [
+        "AU-06",
+        "PM-15",
+        "PM-16",
+        "SI-04",
+        "SI-05"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-04(13) and SI-04(11) profile normal traffic and event patterns and analyse anomalies, which gives a baseline for spotting abnormal behaviour. SI-04(24) applies indicators of compromise. SI-05 passes alerts and advisories to the people and systems that need them. PM-16 and PM-15 share threat intelligence with sector partners and the wider defender community, with automated sharing under PM-16(01). AU-06 adjusts the level of audit review when intelligence shows a change in risk.",
+      "gaps": "The CAF also asks you to track how useful your threat intelligence is, and to give feedback on indicators to their providers. It asks you to choose feeds to match your risks and your sector, and to put intelligence in context, explaining why and how attacks take place."
+    },
+    {
+      "id": "C2.a",
+      "title": "Threat Hunting",
+      "controls": [
+        "RA-10",
+        "SI-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "RA-10 sets up a threat hunting capability that searches for indicators of compromise and finds threats that evade existing controls, at a frequency the organisation sets. SI-04 turns what hunts find into new automated detections and alerts, with indicators of compromise under SI-04(24).",
+      "gaps": "The CAF also asks for documented hunt methods that focus on attackers' tactics, techniques and procedures more than on single indicators. It asks for records of each hunt and its follow-up, used to drive improvement, and for stages of the hunt to be automated. It looks for justified confidence that hunts work."
+    },
+    {
+      "id": "D1.a",
+      "title": "Response Plan",
+      "controls": [
+        "CP-02",
+        "IR-02",
+        "IR-04",
+        "IR-06",
+        "IR-08",
+        "RA-03"
+      ],
+      "coverage_pct": 75,
+      "rationale": "IR-08 sets out the response plan, with its structure, the incidents to report and who is responsible, and keeps it current and protected. IR-04 covers the whole incident lifecycle, from preparation to recovery. CP-02 coordinates contingency planning with incident handling, and CP-02(01) with related business plans. IR-06 sets internal and external reporting. RA-03 grounds the plan in an understanding of security risks, and IR-02 trains the people who use it.",
+      "gaps": "The CAF also asks the plan to cover new kinds of attack as well as known ones. It asks for the plan to fit with your suppliers' response plans and with dependencies on supporting infrastructure such as power and cooling. And it asks for the plan to stay accessible when IT systems are affected."
+    },
+    {
+      "id": "D1.b",
+      "title": "Response and Recovery Capability",
+      "controls": [
+        "CP-02",
+        "CP-07",
+        "CP-10",
+        "IR-02",
+        "IR-04",
+        "IR-07",
+        "IR-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IR-04 contains incidents to limit harm, and IR-04(03) keeps operations going during an incident. CP-02 plans to keep essential functions running through disruption, with named roles. CP-07 gives an alternate processing site if primary systems fail, and CP-10 recovers systems to a known state within set times. IR-08 defines the resources and management support the response needs. IR-02 gives responders the skills to decide on actions. IR-07 adds specialist help, coordinated with external providers under IR-07(02).",
+      "gaps": "The CAF also asks for key roles to be duplicated and operational knowledge shared across everyone involved. It asks for responders to have the authority to act, and for the information that response decisions need to be available to them."
+    },
+    {
+      "id": "D1.c",
+      "title": "Testing and Exercising",
+      "controls": [
+        "CP-04",
+        "IR-03",
+        "IR-08",
+        "PM-14"
+      ],
+      "coverage_pct": 70,
+      "rationale": "CP-04 tests the contingency plan and takes corrective action, with full recovery and reconstitution tested under CP-04(04). IR-03 tests the incident response capability at a set frequency and uses the results to improve under IR-03(03). IR-08 updates the plan for problems found in testing. PM-14 keeps testing plans current and running, so exercises happen routinely.",
+      "gaps": "The CAF also asks for exercise scenarios drawn from incidents at your own and other organisations, or from threat intelligence, with each scenario documented and validated. It asks you to use exercise findings to improve protective security as well as the response plan."
+    },
+    {
+      "id": "D2.a",
+      "title": "Post Incident Analysis",
+      "controls": [
+        "AU-07",
+        "AU-11",
+        "IR-04",
+        "IR-05",
+        "SI-02"
+      ],
+      "coverage_pct": 50,
+      "rationale": "IR-04 includes analysis of each incident and its lessons, with malicious code and forensic analysis under IR-04(12). IR-05 tracks and documents incidents and collects their data for analysis. AU-11 keeps audit records long enough for after-the-fact investigation, and AU-07 produces the reports it needs. SI-02(07) finds root causes and acts on them.",
+      "gaps": "The CAF also asks for analysis that weighs organisational and human factors alongside technical ones, and changes in the threat. It asks for 'what if' analysis of plausible alternative outcomes, and for investigations that look for systemic causes over individual blame."
+    },
+    {
+      "id": "D2.b",
+      "title": "Using Incidents to Drive Improvements",
+      "controls": [
+        "AT-02",
+        "AT-03",
+        "IR-01",
+        "IR-03",
+        "IR-04",
+        "IR-08",
+        "PM-04",
+        "PM-15",
+        "RA-03"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IR-04 builds the lessons from incidents into procedures, training and testing, and puts the changes in place. IR-01 documents the incident review process. IR-08 updates the response plan for problems found during incidents, and IR-03 retests it. AT-02 and AT-03 bring lessons from internal and external incidents into training. RA-03 feeds incident findings into risk management. PM-04 records remedial actions and reviews them against priorities. PM-15 shares incident information with security groups, so you learn from incidents in your sector.",
+      "gaps": "The CAF also asks you to learn from near misses and to extend the lessons with 'what if' analysis. It asks for lessons that cover governance and reporting, and for the analysis to reach senior management."
+    }
+  ],
+  "summary": {
+    "total_clauses": 41,
+    "average_coverage": 70.9,
+    "full_count": 8,
+    "substantial_count": 25,
+    "partial_count": 7,
+    "weak_count": 1,
+    "none_count": 0
+  }
+}

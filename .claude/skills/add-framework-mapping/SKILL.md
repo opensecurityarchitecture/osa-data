@@ -28,7 +28,7 @@ Search NIST's catalogue of registered crosswalks (OLIR) and the publisher's own 
 ## 3a. With a crosswalk: take it as the base
 
 - Every pair in the crosswalk with a current base control goes into the mapping. Pairs with a withdrawn control stay out.
-- Where the crosswalk pairs a clause with an enhancement such as AC-2(1), the pair counts for the base control (Russell, 1 November 2026). Report how many pairs come from enhancements only. The ISO 27001 and CSF 2.0 mappings still leave those pairs out until they are brought into line.
+- Where the crosswalk pairs a clause with an enhancement such as AC-2(1), the pair counts for the base control (Russell, 1 November 2026). Report how many pairs come from enhancements only, and list them under `metadata.crosswalk_check.from_enhancements_only`, by control.
 - Keep OSA's own pairs, and list them in `metadata.crosswalk_check.not_in_source`. Fill in `source`, `url`, `sha256`, `checked` (the date), `scope`, `source_has_none` (controls the crosswalk maps to no clause) and `added_from_source`. `data/framework-coverage/iso-27001-2022.json` is the model.
 
 ## 3b. Without one: three ratings

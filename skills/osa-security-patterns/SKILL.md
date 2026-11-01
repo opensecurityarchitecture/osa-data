@@ -1,11 +1,11 @@
 ---
 name: osa-security-patterns
-description: Look up Open Security Architecture (OSA) security patterns, the NIST SP 800-53 controls each one calls for, the threats each control mitigates, and the matching clauses in 95 compliance frameworks (ISO 27001, PCI DSS, IEC 62443, NIS2, DORA, the EU Cyber Resilience Act and others). Use when someone asks which security controls matter for a kind of system, how controls map to a framework's clauses, what a framework's clauses are, or wants a security architecture pattern to start from.
+description: Look up Open Security Architecture (OSA) security patterns, the NIST SP 800-53 controls each one calls for, the threats each control mitigates, and the matching clauses in 94 compliance frameworks (ISO 27001, PCI DSS, IEC 62443, NIS2, DORA, the EU Cyber Resilience Act and others). Use when someone asks which security controls matter for a kind of system, how controls map to a framework's clauses, what a framework's clauses are, or wants a security architecture pattern to start from.
 ---
 
 # Open Security Architecture patterns
 
-OSA is a free catalogue of security architecture patterns. Each pattern lists NIST SP 800-53 controls with an emphasis (critical, important, standard), the threats each control mitigates in that pattern, and each control's clauses in 95 compliance frameworks.
+OSA is a free catalogue of security architecture patterns. Each pattern lists NIST SP 800-53 controls with an emphasis (critical, important, standard), the threats each control mitigates in that pattern, and each control's clauses in 94 compliance frameworks.
 
 Licence: CC BY-SA 4.0. Credit "Open Security Architecture, opensecurityarchitecture.org" when you reuse it.
 

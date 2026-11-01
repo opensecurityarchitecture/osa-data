@@ -6,13 +6,13 @@ Security architecture patterns, the NIST SP 800-53 Rev 5 controls they use, and 
 
 OSA provides **operational, ready-to-use security architecture patterns** with compliance control mappings. Unlike SABSA (strategic/business-focused) or O-ESA (policy-driven), OSA patterns are practical and implementable.
 
-Each pattern names the controls that matter for a kind of system, says which are critical, and lists the threats each control mitigates. The framework mappings then show which clauses of ISO 27001, PCI DSS, DORA, NIS2 and 86 other frameworks those controls answer.
+Each pattern names the controls that matter for a kind of system, says which are critical, and lists the threats each control mitigates. The framework mappings then show which clauses of ISO 27001, PCI DSS, DORA, NIS2 and 91 other frameworks those controls answer.
 
 ## What's here
 
 - **56 pattern files** in `data/patterns/`: SP-000 to SP-054 and SP-999. SP-000 is the style reference and SP-999 is a rendering test.
 - **317 controls** in `data/controls/`: NIST SP 800-53 Rev 5, across 20 families. That is all 300 controls of Release 5.2.0 and the 17 withdrawn ones that OSA's older patterns still name. Each control file lists its clauses in every framework under `compliance_mappings`, and NIST's enhancements of the control under `enhancements`, each with its statement and baselines. Frameworks are mapped to the controls, not to the enhancements. The 17 controls NIST has withdrawn are marked `withdrawn`, with the controls they moved into under `incorporated_into`. NIST's Rev 4 catalogue already lists 15 of them as withdrawn, and Rev 5 withdrew AU-15 and SC-19.
-- **94 framework coverage files** in `data/framework-coverage/`. For each clause of a framework: the controls that address it, a coverage estimate, the rationale and the gaps.
+- **95 framework coverage files** in `data/framework-coverage/`. For each clause of a framework: the controls that address it, a coverage estimate, the rationale and the gaps.
 - **NIST's own text** in `data/nist/sp800-53-rev5.json`: every control and enhancement of SP 800-53 Release 5.2.0 with its name, statement, discussion, related controls and baselines, built from NIST's published files.
 - **MITRE ATT&CK Enterprise** in `data/mitre-attack/`: tactics, techniques, groups, mitigations and detection strategies from MITRE's STIX data, and CTID's mapping of SP 800-53 Rev 5 controls to the techniques they mitigate.
 - **Policy templates** in `data/templates/policies/`: an information security policy and an acceptable use policy, each statement tagged with its SP 800-53 controls.
@@ -27,7 +27,7 @@ Each pattern names the controls that matter for a kind of system, says which are
 
 The mappings to ISO/IEC 27001:2022, NIST CSF 2.0, the HIPAA Security Rule and NERC CIP take crosswalks registered in NIST's catalogue (OLIR) as their base. Clauses that OSA adds beyond those crosswalks are recorded in the coverage file, under `metadata.crosswalk_check`, and marked on the site.
 
-India's DPDPA, the NIST AI RMF and the EU AI Act were mapped from their official texts by three ratings, and each file records the texts and the method under `metadata.analysis`. The other mappings are OSA's own analysis. Every coverage file gives its rationale and gaps clause by clause, so you can check the reasoning against the framework's own text. Have a qualified assessor confirm a mapping before you rely on it for compliance or audit.
+India's DPDPA, the NIST AI RMF, the EU AI Act, the NCSC CAF, OWASP's Top 10 lists for agentic and LLM applications, HKMA's TM-E-1 and BSI's Grundschutz++ were mapped from their official texts by three ratings, and each file records the texts and the method under `metadata.analysis`. The other mappings are OSA's own analysis. Every coverage file gives its rationale and gaps clause by clause, so you can check the reasoning against the framework's own text. Have a qualified assessor confirm a mapping before you rely on it for compliance or audit.
 
 ## Using the data
 

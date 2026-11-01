@@ -66,9 +66,7 @@ manifest = json.load(open(DATA / 'controls' / '_manifest.json'))
 for entry in manifest['controls']:
     path = DATA / 'controls' / entry['file']
     control = json.load(open(path), object_pairs_hook=OrderedDict)
-    mappings = OrderedDict((k, v) for k, v in control['compliance_mappings'].items() if k != FRAMEWORK)
-    mappings[FRAMEWORK] = by_control.get(entry['id'], [])
-    control['compliance_mappings'] = mappings
+    control['compliance_mappings'][FRAMEWORK] = by_control.get(entry['id'], [])
     with open(path, 'w') as f:
         json.dump(control, f, indent=2, ensure_ascii=False)
         f.write('\n')
@@ -82,6 +80,8 @@ print('pairs on one side only:', len(coverage_pairs ^ control_pairs))
 ```
 
 Both printed lines should show nothing to fix: an empty list and 0.
+
+The script adds a new framework's key at the end of `compliance_mappings`. On a rebuild the key keeps its place, so the files' framework order stays as it is. Each list follows the coverage file's clause order.
 
 ## 6. Register on the website
 

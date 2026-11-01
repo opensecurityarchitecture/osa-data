@@ -38,6 +38,8 @@ Search NIST's catalogue of registered crosswalks (OLIR) and the publisher's own 
 - Take the pairs that at least two of the three name, and report the agreement between each two raters.
 - Record it under `metadata.analysis`: `basis`, `checked`, `texts`, `method`, the counts of pairs named by three, by two and by one (left out), `pairs_note`, `not_mapped`, and for a law `commencement`, its dates of application by provision. `data/framework-coverage/dpdpa.json` is the model.
 
+Give every rater the house rules that settle common splits: a crosswalk pair on an enhancement counts for its base control, and customer authentication maps to IA-08, with IA-02 added where multi-factor or separate-device authentication is asked for (`data/CLAUDE.md`, "Framework mappings").
+
 ## 4. Write the coverage file
 
 Fields: `framework_id`, `framework_name`, `metadata` (`source`, `version`, `disclaimer`, `jurisdictions`, `applicability_type` and the record from step 3), `weight_scale` (copy it from an existing file), `clauses` (each with `id`, `title`, `controls`, `coverage_pct`, `rationale` and `gaps`) and `summary` (`total_clauses`, `average_coverage` and the count in each coverage band).

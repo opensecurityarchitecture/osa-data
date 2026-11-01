@@ -4,12 +4,88 @@
   "framework_name": "HKMA TM-E-1",
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
-    "version": "2.0",
-    "disclaimer": "Based on publicly available crosswalks and expert analysis of HKMA Supervisory Policy Manual module TM-E-1 (Technology Risk Management, 2020 revision). Incorporates new SP 800-53 Rev 5 controls where they genuinely improve coverage. TM-E-1 has Hong Kong banking-specific requirements including HKMA notification obligations, iCAST/C-RAF requirements, PDPO compliance, and ATM/internet banking controls that extend beyond SP 800-53 scope. Validate with qualified assessors for compliance/audit use.",
+    "version": "3.0",
+    "disclaimer": "OSA's own analysis of HKMA Supervisory Policy Manual module TM-E-1, Risk Management of E-banking, V.4 (25 October 2024), against SP 800-53 Rev 5. TM-E-1 is a statutory guideline the Monetary Authority issues under section 7(3) of the Banking Ordinance, and it applies to all authorized institutions. Each clause is one section of the module, read with its paragraphs, its footnotes and any annex it points to. The coverage figure estimates how much of the section the listed controls meet when put in place as written. SP 800-53 sets controls for an organisation's systems and the people who run them, so coverage is lower where a section asks for duties to customers, such as notifications, advice, help channels and limits on their liability, or for the management of financial risk, such as liquidity risk. Section numbers are HKMA's and the titles are OSA's own. Check each section against the module's own text before you use this mapping for compliance or audit.",
     "jurisdictions": [
       "HK"
     ],
-    "applicability_type": "mandatory"
+    "applicability_type": "mandatory",
+    "clause_groups": [
+      "1",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "clause_group_titles": {
+      "1": "Scope and approach",
+      "3": "Governance of e-banking risk",
+      "4": "Protecting customers",
+      "5": "Securing Internet banking systems",
+      "6": "Services offered over the Internet",
+      "7": "Channels and payment cards",
+      "8": "Fraud and incidents",
+      "9": "Availability and continuity"
+    },
+    "clause_titles_note": "OSA's own short titles. The section numbers and the order of the chapters are HKMA's. HKMA's Terms and Conditions of Use, paragraphs 12 and 13, read on 1 November 2026 and the same on both of its sites, let anyone reproduce its information unchanged, in its original format and for non-commercial purposes, with credit to HKMA. They add an indemnity and a duty to destroy copies on request, and ask for HKMA's written consent for any other use. OSA publishes this mapping under CC BY-SA 4.0, which allows commercial reuse, so the clause titles are OSA's own words in place of the module's headings.",
+    "clause_titles_terms": [
+      "https://brdr.hkma.gov.hk/eng/terms-and-conditions",
+      "https://www.hkma.gov.hk/eng/other-information/terms-and-conditions-of-use/"
+    ],
+    "edition": {
+      "used": "Supervisory Policy Manual module TM-E-1, Risk Management of E-banking, V.4, 25 October 2024",
+      "url": "https://brdr.hkma.gov.hk/eng/doc-ldg/docId/20241101-3-EN",
+      "note": "V.4 supersedes V.3 (24 October 2019), V.2 (2 September 2015) and the circular \"Security Controls related to Internet Banking Services\" (26 May 2016). Until November 2026 OSA's mapping under this id carried the title of another module, TM-G-1 \"General principles for technology risk management\" (24 June 2003, still current), with clause ids TME1.2.1 to TME1.12.5 that match no version of TM-E-1. This mapping replaces it in full under the same id, hkma_tme1, and the same address."
+    },
+    "analysis": {
+      "basis": "OSA's own analysis, from HKMA's text by three independent ratings. NIST's catalogue of registered crosswalks has none for TM-E-1, and HKMA's page for the module links none (checked 1 November 2026).",
+      "checked": "2026-11-01",
+      "texts": [
+        {
+          "title": "Supervisory Policy Manual TM-E-1, Risk Management of E-banking, V.4",
+          "published": "Hong Kong Monetary Authority, 25 October 2024, a statutory guideline issued under section 7(3) of the Banking Ordinance",
+          "url": "https://brdr.hkma.gov.hk/eng/doc-ldg/docId/getPdf/20241101-3-EN/TM-E-1.pdf",
+          "sha256": "e85ce2d25a0a82e4cd87b473ea9f891b68fdf00a36b9264314577f92b77ab6cd"
+        }
+      ],
+      "controls": "SP 800-53 Rev 5.2.0 base controls, current ones only. An enhancement that addresses a section counts for its base control, and the rationale names it. SP 800-53 treats customers as users from outside the organisation, so IA-08 carries their authentication. It states multi-factor, separate-device and replay-resistant authentication only in the enhancements of IA-02, which NIST writes for the organisation's own users. Raters B and C named IA-02 where the module asks for two-factor authentication or a separate device (4.1, 6.1, 7.1 and 7.2), applying those enhancements to customers, and rater A left it out for that reason. AT-02, written for the organisation's own users, is listed for customer education in 4.3 and 7.1 and covers customers in part.",
+      "method": "Each of the 29 sections was rated three times, independently, by AI models working from the text of TM-E-1 V.4 and the control statements. No rater saw another's rating. Each rater read the section with its paragraphs and footnotes, and with the annex it points to. A control is listed for a section where at least two of the three ratings named it. The coverage figure is the median of the three estimates of how much of the section an organisation would meet by putting the listed controls in place. The rationale and gaps were written after the controls were settled, from the raters' reasons and from the gaps at least two of them named.",
+      "pairs_named_by_three": 144,
+      "pairs_named_by_two": 39,
+      "pairs_named_by_one_and_left_out": 35,
+      "pairs_per_rating": {
+        "A": 185,
+        "B": 179,
+        "C": 181
+      },
+      "agreement_measure": "The Jaccard index of each two ratings: the pairs both named, divided by the pairs either named.",
+      "agreement": [
+        {
+          "ratings": "A and B",
+          "jaccard": 0.75,
+          "pairs_named_by_both": 156,
+          "pairs_named_by_either": 208
+        },
+        {
+          "ratings": "A and C",
+          "jaccard": 0.76,
+          "pairs_named_by_both": 158,
+          "pairs_named_by_either": 208
+        },
+        {
+          "ratings": "B and C",
+          "jaccard": 0.77,
+          "pairs_named_by_both": 157,
+          "pairs_named_by_either": 203
+        }
+      ],
+      "coverage_agreement": "The three coverage estimates for a section lie within 10 points of each other in 26 of the 29 sections. They are 15 points apart in 7.4, 8.2 and 9.2.",
+      "pairs_note": "The file lists 183 pairs, the 144 named by all three ratings and the 39 named by two. Four of the 39 are IA-02, in 4.1, 6.1, 7.1 and 7.2, named by raters B and C. 7.2 holds the most pairs, 12, and 6.4 and 9.2 the fewest, 2 each.",
+      "not_mapped": "Sections 1.1 to 1.3 and 2.1 to 2.3. They give the module's background, the types of e-banking and HKMA's supervisory approach, and describe the major risks of e-banking: operational risk, reputation and legal risk, and the risks of the underlying financial services. They set out context, and the requirements they point to come back in the mapped sections. The call in 2.3.2 to watch the effect of e-banking on liquidity risk management returns in 3.1.1 and 6.1.3, and liquidity risk is a financial risk outside SP 800-53. Annexes A and B are read with 3.3 and 9.5, which point to them."
+    }
   },
   "weight_scale": {
     "full": {
@@ -40,814 +116,457 @@
   },
   "clauses": [
     {
-      "id": "TME1.2.1",
-      "title": "Board and Senior Management Oversight of IT",
+      "id": "1.4",
+      "title": "A risk-based approach to e-banking",
       "controls": [
-        "PM-01",
-        "PM-02",
-        "PM-03",
-        "PM-09",
-        "PM-29",
-        "PS-09",
-        "PL-09"
-      ],
-      "coverage_pct": 68,
-      "rationale": "PM-01 information security program plan establishes the organisational security programme. PM-02 assigns a senior information security leadership role. PM-03 addresses resource allocation for security. PM-09 risk management strategy provides the strategic risk framework. PM-29 (new in Rev 5) risk management program leadership roles formalises senior leadership accountability for risk management. PS-09 (new in Rev 5) position descriptions defines security responsibilities in organisational roles. PL-09 (new in Rev 5) central management enables unified governance of security controls.",
-      "gaps": "HKMA TM-E-1 requires specific board-level oversight of IT including board approval of IT strategy, regular board reporting on technology risk posture, and personal accountability of senior management for technology risk. The HKMA three lines of defence model requires distinct first-line (business units), second-line (risk management/compliance), and third-line (internal audit) responsibilities for technology risk. SP 800-53 establishes programme governance but lacks Hong Kong-specific board committee structures, CIO/CTO accountability to the board, and HKMA-mandated reporting frequency to the board."
-    },
-    {
-      "id": "TME1.2.2",
-      "title": "IT Strategy and Planning",
-      "controls": [
-        "PM-07",
-        "PM-08",
-        "PM-11",
-        "PL-07",
-        "PL-08",
-        "SA-02"
-      ],
-      "coverage_pct": 65,
-      "rationale": "PM-07 enterprise architecture provides the strategic IT architecture framework. PM-08 critical infrastructure plan addresses planning for critical systems. PM-11 mission and business process definition links IT to business objectives. PL-07 concept of operations and PL-08 security and privacy architectures provide architectural planning. SA-02 allocation of resources addresses IT investment and resource planning.",
-      "gaps": "HKMA requires authorised institutions to develop a comprehensive IT strategy approved by the board that is aligned with business strategy and covers a three-to-five year horizon. TM-E-1 mandates specific IT strategic planning elements including technology roadmaps, innovation assessment, and alignment with the HKMA's Smart Banking initiatives and Fintech supervisory expectations. SP 800-53 addresses architecture and planning but not the Hong Kong regulatory expectation for board-approved IT strategic plans with defined horizons."
-    },
-    {
-      "id": "TME1.2.3",
-      "title": "IT Risk Management Framework",
-      "controls": [
+        "PL-11",
         "PM-01",
         "PM-09",
         "PM-28",
-        "RA-01",
-        "RA-03",
-        "RA-04",
-        "RA-07",
-        "RA-09",
-        "PL-09",
-        "PL-10",
-        "PL-11"
-      ],
-      "coverage_pct": 78,
-      "rationale": "PM-01 and PM-09 establish the security programme and risk management strategy. PM-28 risk framing provides the organisational context for risk decisions. RA-01 risk assessment policy, RA-03 risk assessment, and RA-04 risk assessment update create a comprehensive risk assessment lifecycle. RA-07 (new in Rev 5) risk response adds explicit risk treatment actions. RA-09 (new in Rev 5) criticality analysis identifies critical components for risk-based prioritisation. PL-09 (new in Rev 5) central management, PL-10 (new in Rev 5) baseline selection, and PL-11 (new in Rev 5) baseline tailoring enable systematic risk-based framework establishment.",
-      "gaps": "HKMA requires the IT risk management framework to be integrated with the institution's overall risk management framework and aligned with the HKMA risk-based supervisory approach. TM-E-1 mandates specific risk appetite statements for technology risk approved by the board, regular risk reporting to the HKMA, and alignment with the C-RAF (Cyber Resilience Assessment Framework) maturity model. SP 800-53 provides strong risk management foundations but does not address C-RAF maturity levels or HKMA-specific risk reporting obligations."
-    },
-    {
-      "id": "TME1.2.4",
-      "title": "IT Steering Committee and Organisational Structure",
-      "controls": [
-        "PM-02",
-        "PM-29",
-        "PS-09",
-        "PL-09"
+        "RA-03"
       ],
       "coverage_pct": 55,
-      "rationale": "PM-02 assigns senior information security leadership. PM-29 (new in Rev 5) risk management program leadership roles formalises leadership accountability. PS-09 (new in Rev 5) position descriptions defines security responsibilities within organisational roles. PL-09 (new in Rev 5) central management enables unified control governance across the organisation.",
-      "gaps": "HKMA TM-E-1 mandates specific governance structures including an IT Steering Committee with board/senior management representation, a Chief Information Officer role with appropriate seniority, and clear organisational reporting lines for IT and information security functions. The requirement for separation between IT development and IT operations is a specific HKMA expectation. SP 800-53 addresses leadership roles but does not prescribe specific committee structures, the CIO role, or organisational separation of IT functions as HKMA requires."
+      "rationale": "PM-09 sets a risk management strategy and applies it across the organisation, which is the risk-based approach the section asks for. PM-28 frames that approach with the risk tolerance, priorities and constraints it works from, this module and other HKMA guidance among them. RA-03 assesses the threats to each e-banking service and their impact, so the controls follow the risk. PM-01's programme plan records the requirements the institution must meet, compliance included. PL-11 tailors the control baseline, which is how general technology controls are refined for e-banking.",
+      "gaps": "The section asks the institution to comply with this module and other HKMA guidance, and to refer to the Code of Banking Practice and banking industry guidelines. SP 800-53 asks for policies consistent with the laws and guidelines that apply, and leaves the choice of those to the organisation. Risk management for the underlying financial services, such as credit and liquidity risk, has no SP 800-53 counterpart."
     },
     {
-      "id": "TME1.2.5",
-      "title": "IT Policies and Standards",
+      "id": "3.1",
+      "title": "Board oversight and resourcing of e-banking",
       "controls": [
-        "AC-01",
-        "AT-01",
-        "AU-01",
-        "CA-01",
-        "CM-01",
-        "CP-01",
-        "IA-01",
-        "IR-01",
-        "MA-01",
-        "MP-01",
-        "PE-01",
-        "PL-01",
+        "CA-06",
         "PM-01",
-        "PS-01",
-        "PT-01",
-        "RA-01",
-        "SA-01",
-        "SC-01",
-        "SI-01",
-        "SR-01"
-      ],
-      "coverage_pct": 85,
-      "rationale": "SP 800-53 mandates comprehensive policies and procedures across all 20 control families through the -01 controls (AC-01 through SR-01). Each family requires documented policies consistent with applicable laws, regulations, and standards, along with procedures to facilitate implementation. PM-01 provides the overarching information security programme plan. PT-01 (new in Rev 5) adds privacy-specific policies. SR-01 (new in Rev 5) adds supply chain risk management policies. This provides thorough coverage of TM-E-1's requirement for a comprehensive IT policy framework.",
-      "gaps": "Minor gap. HKMA requires IT policies to be reviewed at least annually and approved by senior management. TM-E-1 also requires policies to specifically address Hong Kong regulatory requirements including PDPO (Personal Data Privacy Ordinance) compliance and HKMA circular requirements. SP 800-53 policy controls are comprehensive but do not reference Hong Kong-specific regulatory requirements or the HKMA's expectation for policy alignment with local banking ordinances."
-    },
-    {
-      "id": "TME1.2.6",
-      "title": "IT Audit",
-      "controls": [
-        "CA-02",
-        "CA-05",
-        "CA-07",
-        "AU-01",
-        "AU-06",
-        "PM-14"
-      ],
-      "coverage_pct": 70,
-      "rationale": "CA-02 security assessments provides the assessment framework. CA-05 plan of action and milestones tracks remediation. CA-07 continuous monitoring enables ongoing audit capability. AU-01 audit policy and AU-06 audit monitoring, analysis, and reporting support the audit function. PM-14 testing, training, and monitoring provides organisational-level testing and audit coordination.",
-      "gaps": "HKMA TM-E-1 requires an independent IT audit function as part of the three lines of defence model. The internal audit function must have sufficient IT audit expertise, report directly to the Audit Committee of the board, and follow a risk-based IT audit plan. TM-E-1 mandates specific audit coverage of IT governance, cybersecurity, and outsourcing arrangements. SP 800-53 provides assessment and monitoring controls but does not address the HKMA-specific internal audit independence requirements, Audit Committee reporting, or the three lines of defence IT audit expectations."
-    },
-    {
-      "id": "TME1.3.1",
-      "title": "Project Governance and Methodology",
-      "controls": [
-        "SA-03",
-        "SA-04",
-        "SA-08",
-        "SA-15",
-        "PM-07",
-        "PL-07"
-      ],
-      "coverage_pct": 62,
-      "rationale": "SA-03 life cycle support establishes development lifecycle requirements. SA-04 acquisitions and SA-08 security engineering principles ensure security is embedded in project methodology. SA-15 development process, standards, and tools defines development governance. PM-07 enterprise architecture and PL-07 concept of operations support project planning alignment with enterprise strategy.",
-      "gaps": "HKMA TM-E-1 requires a formal IT project management methodology with board/senior management oversight of major IT projects, defined project governance structures (project sponsor, steering committee, project manager), and mandatory security risk assessments at each project phase gate. SP 800-53 addresses security in the development lifecycle but does not cover the broader IT project management governance, project phase gates, budget oversight, or the HKMA expectation for escalation of material project risks to the IT Steering Committee."
-    },
-    {
-      "id": "TME1.3.2",
-      "title": "System Development and Testing",
-      "controls": [
-        "SA-03",
-        "SA-08",
-        "SA-10",
-        "SA-11",
-        "SA-15",
-        "SA-16",
-        "SA-17",
-        "SA-20",
-        "SA-21",
-        "CM-04",
-        "CM-14",
-        "SI-10"
-      ],
-      "coverage_pct": 85,
-      "rationale": "SA-03 life cycle support; SA-08 security engineering principles; SA-10 developer configuration management; SA-11 developer security testing; SA-15 development process, standards, and tools; SA-16 developer-provided training; SA-17 developer security and privacy architecture. SA-20 (new in Rev 5) customized development of critical components addresses bespoke development for high-assurance banking systems. SA-21 (new in Rev 5) developer screening adds vetting for development personnel. CM-04 monitoring configuration changes and CM-14 (new in Rev 5) signed components ensure software integrity. SI-10 information accuracy validates input handling.",
-      "gaps": "Minor gap. HKMA requires separation of development, testing, and production environments with formal promotion procedures between environments. TM-E-1 mandates use of sanitised test data (not production customer data) in development and testing environments. SP 800-53 SA family provides comprehensive development security but does not explicitly mandate the HKMA-specific data sanitisation requirements for test environments or the prohibition on using live customer data in non-production environments."
-    },
-    {
-      "id": "TME1.3.3",
-      "title": "Implementation and Post-Implementation Review",
-      "controls": [
-        "CM-03",
-        "CM-04",
-        "CM-05",
-        "SA-11",
-        "CA-02",
-        "PM-06"
-      ],
-      "coverage_pct": 72,
-      "rationale": "CM-03 configuration change control governs implementation changes. CM-04 monitoring configuration changes tracks implementation impact. CM-05 access restrictions for change controls who can implement. SA-11 developer security testing covers pre-implementation testing. CA-02 security assessments and PM-06 measures of performance support post-implementation review.",
-      "gaps": "HKMA TM-E-1 requires a formal post-implementation review (PIR) for all significant IT projects to assess whether objectives were met, security requirements were satisfied, and lessons learned were captured. The PIR results must be reported to the IT Steering Committee. SP 800-53 addresses change control and assessment but does not mandate the specific post-implementation review process, PIR reporting to governance committees, or the formal lessons learned cycle that HKMA requires."
-    },
-    {
-      "id": "TME1.3.4",
-      "title": "Package Software and Vendor Management",
-      "controls": [
-        "SA-04",
-        "SA-05",
-        "SA-09",
-        "SA-22",
-        "SR-04",
-        "SR-05",
-        "SR-06",
-        "SR-11"
-      ],
-      "coverage_pct": 75,
-      "rationale": "SA-04 acquisitions establishes vendor selection and evaluation criteria. SA-05 information system documentation ensures adequate vendor documentation. SA-09 external information system services governs vendor-provided services. SA-22 unsupported system components addresses end-of-life vendor software management. SR-04 provenance and SR-05 acquisition strategies strengthen vendor evaluation. SR-06 supplier assessments and reviews enables ongoing vendor monitoring. SR-11 component authenticity verifies software integrity.",
-      "gaps": "HKMA requires specific vendor management practices for package software including evaluation of vendor financial stability, ongoing support commitments, and escrow arrangements for source code of critical applications. TM-E-1 mandates that AIs assess vendor concentration risk and maintain contingency plans for vendor failure. SP 800-53 supply chain controls are strong but do not address source code escrow, vendor financial viability assessment, or the HKMA-specific vendor concentration risk requirements."
-    },
-    {
-      "id": "TME1.4.1",
-      "title": "Change Control Process",
-      "controls": [
-        "CM-01",
-        "CM-02",
-        "CM-03",
-        "CM-04",
-        "CM-05",
-        "CM-06",
-        "CM-09",
-        "CM-14"
-      ],
-      "coverage_pct": 88,
-      "rationale": "CM-01 configuration management policy establishes the change control framework. CM-02 baseline configuration defines the controlled baseline. CM-03 configuration change control provides formal change control procedures including approval, testing, and documentation. CM-04 monitoring configuration changes enables detection of unauthorised changes. CM-05 access restrictions for change limits who can make changes. CM-06 configuration settings maintains secure configurations. CM-09 configuration management plan provides the overarching governance. CM-14 (new in Rev 5) signed components verifies integrity of changed components through cryptographic signatures.",
-      "gaps": "Minor gap. HKMA requires a Change Advisory Board (CAB) or equivalent committee to review and approve significant changes. TM-E-1 mandates change impact assessment covering business impact, security impact, and rollback planning. SP 800-53 CM family provides comprehensive change control but does not prescribe the specific CAB governance structure or the HKMA-mandated change categorisation scheme (standard, normal, emergency)."
-    },
-    {
-      "id": "TME1.4.2",
-      "title": "Emergency Change Procedures",
-      "controls": [
-        "CM-03",
-        "CM-05",
-        "AU-02",
-        "AU-12"
-      ],
-      "coverage_pct": 72,
-      "rationale": "CM-03 configuration change control includes provisions for urgent changes with post-implementation review. CM-05 access restrictions for change controls emergency change authorisation. AU-02 auditable events and AU-12 audit record generation ensure emergency changes are fully logged for subsequent review and accountability.",
-      "gaps": "HKMA TM-E-1 requires specific emergency change procedures including retrospective authorisation by appropriate management, mandatory post-implementation review within a defined timeframe, and documented justification for bypassing normal change control. SP 800-53 CM-03 accommodates emergency changes but does not prescribe the specific retrospective approval process, management escalation requirements, or the HKMA expectation for trend analysis of emergency changes to identify systemic issues."
-    },
-    {
-      "id": "TME1.4.3",
-      "title": "Release and Deployment Management",
-      "controls": [
-        "CM-02",
-        "CM-03",
-        "CM-04",
-        "CM-14",
-        "SA-10",
-        "SI-07"
-      ],
-      "coverage_pct": 75,
-      "rationale": "CM-02 baseline configuration defines the target state for releases. CM-03 configuration change control governs the release approval process. CM-04 monitoring configuration changes validates deployment integrity. CM-14 (new in Rev 5) signed components ensures cryptographic verification of release packages. SA-10 developer configuration management covers version control and build management. SI-07 software and information integrity verifies that deployed software matches approved releases.",
-      "gaps": "HKMA requires formal release management procedures including release packaging, version control, deployment scheduling to minimise customer impact, and rollback capability testing. TM-E-1 expects release deployment windows to avoid peak banking hours and critical processing periods (e.g., month-end, CHATS settlement windows). SP 800-53 provides software integrity and change controls but does not address banking-specific deployment scheduling or the HKMA requirement for deployment impact assessment on banking services."
-    },
-    {
-      "id": "TME1.5.1",
-      "title": "Data Centre Operations",
-      "controls": [
-        "PE-01",
-        "PE-02",
-        "PE-03",
-        "PE-04",
-        "PE-06",
-        "PE-07",
-        "PE-08",
-        "PE-09",
-        "PE-10",
-        "PE-11",
-        "PE-12",
-        "PE-13",
-        "PE-14",
-        "PE-15",
-        "PE-17",
-        "PE-18",
-        "PE-23"
-      ],
-      "coverage_pct": 88,
-      "rationale": "The PE family provides comprehensive data centre physical and environmental protection. PE-01 policy; PE-02 and PE-03 physical access authorisation and control; PE-04 transmission medium protection; PE-06 through PE-08 monitoring, visitor control, and access records; PE-09 through PE-15 environmental controls covering power, lighting, fire, HVAC, and water damage. PE-17 alternate work site addresses secondary facilities. PE-18 component location addresses secure placement. PE-23 (new in Rev 5) facility location adds site selection criteria for environmental and man-made threats.",
-      "gaps": "Minor gap. HKMA requires data centres supporting critical banking infrastructure to meet specific resilience standards including geographic separation from primary sites, resistance to natural disasters common in Hong Kong (typhoons, flooding), and compliance with Hong Kong building and fire safety regulations. SP 800-53 PE family is comprehensive but does not address Hong Kong-specific environmental hazards, local building codes, or the HKMA expectation for data centre tier classification aligned with banking criticality."
-    },
-    {
-      "id": "TME1.5.2",
-      "title": "System Monitoring and Job Scheduling",
-      "controls": [
-        "AU-02",
-        "AU-03",
-        "AU-04",
-        "AU-06",
-        "AU-12",
-        "CA-07",
-        "SI-04",
-        "SI-13",
-        "SC-45"
-      ],
-      "coverage_pct": 82,
-      "rationale": "AU-02 auditable events and AU-03 content of audit records define what is monitored. AU-04 audit storage capacity ensures monitoring data retention. AU-06 audit monitoring, analysis, and reporting enables operational monitoring review. AU-12 audit record generation creates the monitoring data. CA-07 continuous monitoring provides the overarching monitoring framework. SI-04 information system monitoring enables real-time system observation. SI-13 (new in Rev 5) predictable failure prevention supports proactive monitoring of system health. SC-45 (new in Rev 5) system time synchronization ensures accurate timestamps for job scheduling and monitoring correlation.",
-      "gaps": "HKMA requires specific operational monitoring of batch processing schedules, end-of-day processing for CHATS (Clearing House Automated Transfer System) and FPS (Faster Payment System) settlement, and automated alerting for job failures. TM-E-1 mandates monitoring of service availability metrics against defined SLAs. SP 800-53 provides strong monitoring capabilities but does not address banking-specific batch processing schedules, payment system settlement monitoring, or the HKMA expectation for monitoring of RTGS (Real-Time Gross Settlement) system connectivity."
-    },
-    {
-      "id": "TME1.5.3",
-      "title": "Capacity and Performance Management",
-      "controls": [
-        "AU-04",
-        "SA-02",
-        "SC-06",
-        "SI-13",
-        "PM-07"
-      ],
-      "coverage_pct": 68,
-      "rationale": "AU-04 audit storage capacity addresses storage capacity planning. SA-02 allocation of resources covers resource planning. SC-06 resource priority enables prioritisation of critical system resources. SI-13 (new in Rev 5) predictable failure prevention enables proactive capacity monitoring by predicting component failures based on utilisation trends. PM-07 enterprise architecture provides the strategic capacity planning framework.",
-      "gaps": "HKMA TM-E-1 requires formal capacity planning processes including demand forecasting, capacity modelling, and proactive capacity augmentation before thresholds are breached. TM-E-1 mandates performance benchmarking against defined service levels and capacity planning to accommodate peak transaction volumes (e.g., IPO settlement surges, year-end processing). SP 800-53 addresses resource allocation and predictive maintenance but does not cover the HKMA-specific capacity planning methodology, performance benchmarking requirements, or capacity planning for Hong Kong market-driven transaction spikes."
-    },
-    {
-      "id": "TME1.5.4",
-      "title": "Problem and Incident Management",
-      "controls": [
-        "IR-01",
-        "IR-04",
-        "IR-05",
-        "IR-06",
-        "IR-07",
-        "IR-08",
-        "IR-09",
-        "SI-02"
-      ],
-      "coverage_pct": 75,
-      "rationale": "IR-01 incident response policy establishes the incident management framework. IR-04 incident handling provides incident management procedures. IR-05 incident monitoring enables ongoing incident tracking. IR-06 incident reporting covers reporting processes. IR-07 incident response assistance provides support mechanisms. IR-08 incident response plan defines the response approach. IR-09 (new in Rev 5) information spillage response adds specific handling for data breach incidents. SI-02 flaw remediation addresses problem resolution through patching.",
-      "gaps": "HKMA TM-E-1 requires separate but linked problem management and incident management processes. Problem management must include root cause analysis, trend analysis, and proactive problem identification. TM-E-1 mandates specific incident reporting to the HKMA for material technology incidents within stipulated timeframes (typically 1 hour for critical incidents affecting banking services). SP 800-53 IR family covers incident handling well but does not differentiate between incident management and problem management, and does not address the specific HKMA incident notification obligations or the timeframes for reporting to the Hong Kong regulator."
-    },
-    {
-      "id": "TME1.6.1",
-      "title": "Business Continuity Planning",
-      "controls": [
-        "CP-01",
-        "CP-02",
-        "CP-03",
-        "PM-08",
-        "PM-11",
-        "RA-09"
-      ],
-      "coverage_pct": 78,
-      "rationale": "CP-01 contingency planning policy establishes the BCP framework. CP-02 contingency plan provides the detailed continuity plan. CP-03 contingency training ensures staff are prepared. PM-08 critical infrastructure plan identifies critical services requiring continuity coverage. PM-11 mission and business process definition links BCP to business functions. RA-09 (new in Rev 5) criticality analysis identifies critical system components supporting essential banking services, enabling prioritised BCP coverage.",
-      "gaps": "HKMA TM-E-1 requires business continuity planning to cover all critical banking services with specific attention to payment and settlement systems (CHATS, FPS, SWIFT), regulatory reporting capabilities, and customer-facing channels. The BCP must be aligned with the HKMA Operational Resilience circular (OR-2) and address important business services. SP 800-53 CP family provides strong contingency planning but does not address the specific Hong Kong banking services that must be covered, HKMA OR-2 alignment, or the regulatory expectation for BCP to maintain the institution's ability to meet HKMA reporting obligations during disruption."
-    },
-    {
-      "id": "TME1.6.2",
-      "title": "Disaster Recovery Planning and RTO/RPO",
-      "controls": [
-        "CP-02",
-        "CP-06",
-        "CP-07",
-        "CP-08",
-        "CP-10",
-        "RA-09",
-        "SC-24",
-        "SI-17"
-      ],
-      "coverage_pct": 80,
-      "rationale": "CP-02 contingency plan includes disaster recovery provisions. CP-06 alternate storage site and CP-07 alternate processing site provide DR infrastructure. CP-08 telecommunications services ensures communications recovery. CP-10 information system recovery and reconstitution defines recovery procedures. RA-09 (new in Rev 5) criticality analysis supports prioritised recovery by identifying critical components. SC-24 (new in Rev 5) fail in known state ensures systems fail to a secure, predictable state facilitating faster recovery. SI-17 (new in Rev 5) fail-safe procedures provide additional failure handling for critical banking systems.",
-      "gaps": "HKMA mandates specific RTO and RPO requirements for critical banking services: payment and settlement systems typically require RTO of 2 hours and RPO near-zero. TM-E-1 requires DR planning to account for Hong Kong-specific disaster scenarios including severe typhoons (Signal 10), major flooding, and pandemic situations. The HKMA also requires DR sites to be geographically separated but within Hong Kong or a location that does not introduce additional cross-border data transfer complications. SP 800-53 covers recovery comprehensively but does not prescribe the specific RTO/RPO targets HKMA expects for banking services or the Hong Kong-specific disaster scenarios."
-    },
-    {
-      "id": "TME1.6.3",
-      "title": "BCP/DR Testing and Maintenance",
-      "controls": [
-        "CP-03",
-        "CP-04",
-        "CP-05",
-        "PM-14",
-        "IR-03"
-      ],
-      "coverage_pct": 82,
-      "rationale": "CP-03 contingency training ensures staff readiness. CP-04 contingency plan testing and exercises provides the testing framework including tabletop, functional, and full-scale exercises. CP-05 contingency plan update ensures plans are maintained current. PM-14 testing, training, and monitoring coordinates organisational testing activities. IR-03 incident response testing validates response procedures.",
-      "gaps": "HKMA TM-E-1 requires annual BCP/DR testing at minimum, with more frequent testing for critical systems. The HKMA expects industry-wide DR testing exercises coordinated across Hong Kong's banking sector, particularly for payment and settlement infrastructure. TM-E-1 mandates that DR test results are reported to the board and the HKMA. SP 800-53 provides comprehensive testing controls but does not address the HKMA requirements for industry-wide coordinated testing, regulatory reporting of DR test results, or the specific test scenarios HKMA expects (including simultaneous failure of primary and secondary sites)."
-    },
-    {
-      "id": "TME1.6.4",
-      "title": "Alternate Processing Sites",
-      "controls": [
-        "CP-06",
-        "CP-07",
-        "CP-08",
-        "PE-17",
-        "PE-23"
-      ],
-      "coverage_pct": 82,
-      "rationale": "CP-06 alternate storage site provides geographically separated data storage. CP-07 alternate processing site establishes recovery processing capability with defined readiness levels. CP-08 telecommunications services ensures communications to alternate sites. PE-17 alternate work site addresses staff relocation. PE-23 (new in Rev 5) facility location adds site selection criteria considering environmental threats and proximity to major infrastructure.",
-      "gaps": "HKMA requires alternate processing sites to be sufficiently separated from primary sites to avoid common-cause failures, while remaining accessible to staff. TM-E-1 addresses the specific Hong Kong geographic constraint — limited land area means DR sites may need to be located outside Hong Kong (typically in Guangdong Province or Singapore), raising cross-border data transfer considerations under the PDPO and Mainland China data protection regulations. SP 800-53 covers alternate sites comprehensively but does not address the HK-specific geographic constraints or the cross-border data implications of DR site location."
-    },
-    {
-      "id": "TME1.6.5",
-      "title": "Data Backup and Recovery",
-      "controls": [
-        "CP-09",
-        "CP-10",
-        "MP-04",
-        "MP-05",
-        "SI-12"
-      ],
-      "coverage_pct": 87,
-      "rationale": "CP-09 information system backup provides comprehensive backup policy including frequency, retention, and testing. CP-10 information system recovery and reconstitution defines recovery procedures. MP-04 media storage and MP-05 media transport govern backup media handling. SI-12 information output handling and retention addresses data retention requirements.",
-      "gaps": "Minor gap. HKMA requires backup strategies to ensure data integrity and availability for critical banking records with retention periods aligned with Hong Kong banking ordinance requirements (typically 7 years for transaction records). TM-E-1 mandates backup encryption and secure offsite storage with access controls. SP 800-53 provides strong backup controls but does not specify the Hong Kong-specific data retention periods mandated by the Banking Ordinance and Companies Ordinance."
-    },
-    {
-      "id": "TME1.7.1",
-      "title": "Information Security Policy and Framework",
-      "controls": [
-        "PL-01",
-        "PL-02",
-        "PL-08",
-        "PL-09",
-        "PM-01",
-        "PM-02",
+        "PM-03",
+        "PM-04",
         "PM-09",
         "PM-13",
-        "PM-28"
+        "PM-29",
+        "RA-03",
+        "SA-02"
       ],
-      "coverage_pct": 85,
-      "rationale": "PL-01 security planning policy establishes the security policy framework. PL-02 system security plan documents security controls for each system. PL-08 security and privacy architectures provides the architectural security framework. PL-09 (new in Rev 5) central management enables unified governance. PM-01 information security programme plan provides the comprehensive security programme. PM-02 assigns senior security leadership. PM-09 risk management strategy links security to risk. PM-13 security and privacy workforce ensures adequate security staffing. PM-28 risk framing contextualises security within organisational risk.",
-      "gaps": "Minor gap. HKMA TM-E-1 requires the information security framework to be aligned with the C-RAF (Cyber Resilience Assessment Framework) maturity model covering inherent risk assessment and maturity assessment across governance, identification, protection, detection, and response/recovery domains. SP 800-53 provides a comprehensive security framework but does not map to the specific C-RAF maturity levels or the HKMA's supervisory expectations for minimum maturity ratings based on the institution's inherent risk profile."
+      "coverage_pct": 60,
+      "rationale": "PM-29 names a senior accountable official for risk and a risk executive function, which gives each risk a clear owner across the business lines and IT. PM-09's strategy, reviewed as the organisation and its technology change, keeps e-banking risks understood and managed. RA-03 assesses them before a service is introduced or enhanced. PM-03 puts security resources into capital planning, and SA-02 allocates what each system needs for its protection. PM-13 builds the staff and expertise to manage the risk. CA-06 has a senior official authorise each system before it operates, the point at which the institution confirms it has the resources and expertise to run it. PM-01's approved programme plan sets out roles, management commitment and compliance. PM-04 tracks remedial action on material control deficiencies for senior management to follow up.",
+      "gaps": "SP 800-53 gives accountability to senior officials, and the module gives oversight to the board or a committee it designates. The section also asks the board and senior management to promote a strong risk culture, and to oversee the reputation, legal and liquidity risks of e-banking as well as its operational risk. It gives the institution primary responsibility for educating and protecting its customers, a customer-facing duty with no SP 800-53 counterpart. Compliance with guidance from the HKMA, other authorities and industry associations is the module's own requirement. For an institution incorporated overseas, local senior management carries the oversight, under the monitoring of its head office (footnote 7)."
     },
     {
-      "id": "TME1.7.2",
-      "title": "Information Classification and Handling",
+      "id": "3.2",
+      "title": "Roles and skills across the three lines of defence",
       "controls": [
-        "AC-15",
-        "AC-16",
-        "MP-01",
-        "MP-02",
-        "MP-03",
-        "MP-04",
-        "MP-05",
-        "MP-06",
-        "MP-08",
-        "RA-02",
-        "SI-12",
-        "CM-12"
-      ],
-      "coverage_pct": 87,
-      "rationale": "AC-15 automated marking and AC-16 automated labeling enable systematic classification. MP-01 through MP-06 and MP-08 provide comprehensive media protection including labelling, storage, transport, and sanitisation. RA-02 security categorisation defines the classification scheme. SI-12 information output handling and retention governs data throughout its lifecycle. CM-12 (new in Rev 5) information location identifies where classified data resides across the infrastructure, enabling effective classification enforcement.",
-      "gaps": "Minor gap. HKMA requires classification aligned with the sensitivity of banking data including customer personal data (governed by PDPO), transaction data, and market-sensitive information. TM-E-1 mandates specific handling procedures for customer data including the PDPO Data Protection Principles. SP 800-53 provides strong classification and handling controls but does not address the Hong Kong PDPO-specific classification requirements or the handling rules for banking-specific data categories."
-    },
-    {
-      "id": "TME1.7.3",
-      "title": "Security Architecture and Controls",
-      "controls": [
-        "PL-08",
-        "SA-08",
-        "SA-17",
-        "SC-02",
-        "SC-03",
-        "SC-07",
-        "SC-32",
-        "SC-39",
-        "SC-46",
-        "SC-49",
-        "SC-50",
-        "SI-03",
-        "SI-04",
-        "SI-07",
-        "SI-16"
-      ],
-      "coverage_pct": 90,
-      "rationale": "PL-08 security and privacy architectures provides the architectural framework. SA-08 security engineering principles and SA-17 developer security architecture ensure security-by-design. SC-02 application partitioning, SC-03 security function isolation, SC-07 boundary protection, SC-32 system partitioning, and SC-39 process isolation provide defence-in-depth architecture. SC-46 (new in Rev 5) cross-domain policy enforcement strengthens boundary controls. SC-49 and SC-50 (new in Rev 5) hardware and software-enforced separation add layered isolation. SI-03 malicious code protection, SI-04 monitoring, SI-07 software integrity, and SI-16 (new in Rev 5) memory protection provide comprehensive technical security controls.",
-      "gaps": "Minimal gap. HKMA requires security architecture to follow defence-in-depth principles with specific attention to network segmentation between internet-facing, internal, and critical banking zones. SP 800-53 provides excellent security architecture coverage. The remaining gap is the HKMA-specific requirement for security architecture to be reviewed by the C-RAF assessment process and aligned with the institution's cyber resilience maturity target."
-    },
-    {
-      "id": "TME1.7.4",
-      "title": "Vulnerability Assessment and Penetration Testing",
-      "controls": [
+        "AT-03",
         "CA-02",
+        "PM-01",
+        "PM-13",
+        "PM-29",
+        "PS-09"
+      ],
+      "coverage_pct": 55,
+      "rationale": "PS-09 writes security roles into position descriptions, and PM-01's programme plan assigns responsibilities across the organisation, so each line of defence knows what it answers for. AT-03 role-based training gives the first line the competence to assess risks and run controls, and gives the second and third lines the technical knowledge they need. PM-13 develops that competence across the workforce. CA-02 assesses whether controls work, with independent assessors under CA-02(01), which is how the second line evaluates the first line's controls and the third line audits them. PM-29's risk executive function takes the organisation-wide view of risk that a second-line risk function holds.",
+      "gaps": "The three lines of defence model itself has no SP 800-53 counterpart. SP 800-53 assigns security roles and responsibilities, and the module asks for accountability set separately for each line, with internal audit as the third. The section also asks the board and senior management to support the second and third lines in building their technical competence."
+    },
+    {
+      "id": "3.3",
+      "title": "Assessing e-banking controls before launch and every year",
+      "controls": [
+        "CA-01",
+        "CA-02",
+        "CA-05",
+        "CA-06",
         "CA-08",
-        "RA-05",
-        "RA-10",
-        "PM-14",
-        "PM-16",
-        "SI-02",
-        "SI-05"
+        "RA-03",
+        "RA-07",
+        "SA-09"
       ],
-      "coverage_pct": 78,
-      "rationale": "CA-02 security assessments provides the assessment framework. CA-08 penetration testing covers external and internal penetration testing. RA-05 vulnerability scanning enables regular vulnerability identification. RA-10 (new in Rev 5) threat hunting adds proactive threat detection capability. PM-14 testing, training, and monitoring coordinates assessment activities. PM-16 threat awareness program provides threat intelligence context. SI-02 flaw remediation drives vulnerability remediation. SI-05 security alerts and advisories keeps the institution informed of new vulnerabilities.",
-      "gaps": "HKMA requires vulnerability assessments and penetration testing at least annually and after significant changes. Beyond standard penetration testing, the HKMA Cyber Fortification Initiative mandates iCAST (intelligence-led Cyber Attack Simulation Testing) for selected institutions, which is a threat intelligence-led red team exercise similar to TIBER-EU and CBEST. iCAST requires certified threat intelligence providers and red team operators approved by the HKMA. SP 800-53 CA-08 covers penetration testing but does not address the iCAST methodology, HKMA-approved tester requirements, or the intelligence-led testing approach mandated under the Cyber Fortification Initiative."
+      "coverage_pct": 75,
+      "rationale": "CA-01 sets the policy and accountability for assessment. CA-02 plans each assessment with its scope and assessors and reports the findings. CA-02(01) asks for independent assessors, and CA-02(03) lets the institution rely on recent assessments by others, as 3.3.1(ii) allows. SA-09 brings outsourced systems and processes into scope by monitoring the service providers' compliance. CA-05 records each finding with its remedial actions and target dates. CA-06 has a senior official accept the residual risk before the service operates, and revisit it when the authorisation is updated. CA-08 penetration testing, by an independent team under CA-08(01), meets 3.3.2. RA-03 gives the formal risk assessment of 3.3.3, and RA-07 responds to the findings within the risk tolerance, so material issues are fixed in time.",
+      "gaps": "The module sets minimum frequencies, and SP 800-53 lets the organisation choose them. It asks for penetration tests each year of Internet banking and of every service delivered over the Internet or a wireless network, and for a formal risk assessment at least once a year. The independent assessment also checks compliance with HKMA guidance, and the assessors must be free to report directly to the board. Where several assessors share the work, the responsible function makes sure their scopes join up. The rest is the module's own detail: a designated senior officer endorses the risk assessment, the report covers the items in Annex A and goes to the HKMA on request, and penetration tests are planned to keep production systems running."
     },
     {
-      "id": "TME1.7.5",
-      "title": "Security Incident Management",
-      "controls": [
-        "IR-01",
-        "IR-02",
-        "IR-03",
-        "IR-04",
-        "IR-05",
-        "IR-06",
-        "IR-07",
-        "IR-08",
-        "IR-09",
-        "AU-06",
-        "SI-04",
-        "PM-16"
-      ],
-      "coverage_pct": 78,
-      "rationale": "IR-01 through IR-09 provide comprehensive incident response capability including policy, training, testing, handling, monitoring, reporting, assistance, planning, and spillage response. AU-06 audit monitoring, analysis, and reporting supports incident detection. SI-04 information system monitoring enables real-time threat detection. PM-16 threat awareness program provides contextual threat intelligence for incident classification.",
-      "gaps": "HKMA TM-E-1 mandates specific incident reporting to the HKMA for major technology incidents including cyber attacks, significant service disruptions, and data breaches. The HKMA expects notification within stipulated timeframes (typically within 1 hour for incidents affecting critical banking services) using prescribed reporting templates. TM-E-1 also requires coordination with the Hong Kong Police Cyber Security and Technology Crime Bureau for criminal incidents and with the Hong Kong Computer Emergency Response Team (HKCERT). SP 800-53 IR family provides strong incident management but does not address the HKMA-specific reporting obligations, timeframes, prescribed templates, or the coordination requirements with Hong Kong law enforcement and HKCERT."
-    },
-    {
-      "id": "TME1.8.1",
-      "title": "User Access Management",
-      "controls": [
-        "AC-01",
-        "AC-02",
-        "AC-03",
-        "AC-05",
-        "AC-06",
-        "AC-13",
-        "AC-24",
-        "IA-04",
-        "PS-04",
-        "PS-05"
-      ],
-      "coverage_pct": 90,
-      "rationale": "AC-01 access control policy establishes the access management framework. AC-02 account management covers user provisioning, modification, and de-provisioning. AC-03 access enforcement ensures access decisions are enforced. AC-05 separation of duties prevents conflicting access. AC-06 least privilege minimises access rights. AC-13 supervision and review enables access reviews. AC-24 access control decisions provides dynamic access determination. IA-04 identifier management governs user identifiers. PS-04 personnel termination and PS-05 personnel transfer ensure timely access revocation.",
-      "gaps": "Minor gap. HKMA requires regular user access reviews (at least annually for all users, quarterly for privileged users) with formal recertification by data/system owners. TM-E-1 mandates that user access requests follow a maker-checker approval process. SP 800-53 provides comprehensive access management controls including AC-13 for review, but does not prescribe the specific HKMA access review frequencies or the maker-checker approval workflow requirement."
-    },
-    {
-      "id": "TME1.8.2",
-      "title": "Privilege Access Management",
+      "id": "4.1",
+      "title": "Authenticating customers and high-risk transactions",
       "controls": [
         "AC-02",
         "AC-05",
-        "AC-06",
-        "AC-13",
-        "AU-02",
-        "AU-03",
-        "AU-12",
-        "AU-14",
+        "AC-07",
+        "CP-13",
         "IA-02",
-        "IA-05"
-      ],
-      "coverage_pct": 88,
-      "rationale": "AC-02 account management with privileged account provisions. AC-05 separation of duties prevents privilege conflicts. AC-06 least privilege restricts privileged access to minimum necessary. AC-13 supervision and review enables privileged access monitoring. AU-02, AU-03, and AU-12 ensure comprehensive audit logging of privileged activities. AU-14 session audit enables recording of privileged user sessions. IA-02 user identification and authentication with multi-factor for privileged users. IA-05 authenticator management governs privileged credentials.",
-      "gaps": "HKMA requires specific controls for privileged access including mandatory multi-factor authentication, time-limited privileged access (just-in-time provisioning), session recording for database administrator and system administrator activities, and dual-control (four-eyes) for critical operations such as database changes and firewall rule modifications. SP 800-53 provides strong privilege controls but does not prescribe the HKMA-specific four-eyes principle for critical operations or the requirement for privileged access to be automatically revoked after a defined period."
-    },
-    {
-      "id": "TME1.8.3",
-      "title": "Authentication Mechanisms",
-      "controls": [
-        "IA-01",
-        "IA-02",
-        "IA-03",
         "IA-05",
-        "IA-06",
-        "IA-07",
         "IA-08",
         "IA-10",
         "IA-11",
         "IA-12"
       ],
-      "coverage_pct": 90,
-      "rationale": "IA-01 identification and authentication policy establishes the authentication framework. IA-02 user identification and authentication covers multi-factor authentication. IA-03 device identification and authentication verifies devices. IA-05 authenticator management governs credential lifecycle. IA-06 authenticator feedback protects authentication information. IA-07 cryptographic module authentication ensures module integrity. IA-08 identification of non-organisational users covers external authentication. IA-10 adaptive authentication supports risk-based authentication. IA-11 re-authentication enforces periodic re-verification. IA-12 identity proofing validates user identity before credential issuance.",
-      "gaps": "Minimal gap. HKMA requires strong authentication mechanisms aligned with Hong Kong banking standards. For internet banking, TM-E-1 mandates two-factor authentication (2FA) using separate channels or devices. SP 800-53 IA family provides comprehensive authentication controls including adaptive and multi-factor authentication. The remaining gap is the HKMA-specific 2FA requirements for internet banking transactions and the requirement for authentication mechanisms to be assessed under the C-RAF maturity model."
+      "coverage_pct": 70,
+      "rationale": "SP 800-53 treats customers as users from outside the organisation, so IA-08 identifies and authenticates them when they open or use an e-banking account. IA-12 verifies their identity with validated evidence at account opening. IA-11 re-authenticates the customer before a high-risk transaction, once per session or before each one where the risk warrants. IA-10 asks for supplemental authentication when set conditions arise, which covers step-up authentication for risky transactions and ambush authentication when access looks suspicious. IA-02's enhancements IA-02(01) and IA-02(02) state multi-factor authentication. NIST writes IA-02 for the organisation's own users, and this mapping applies those enhancements to customers for the module's two-factor rule. IA-05 sets password and PIN strength (IA-05(01)) and protects passwords the institution generates, reissues or resets. AC-05 divides those duties so no one member of staff learns a customer's password. AC-07 limits invalid logon attempts and locks the account. AC-02 controls changes to account details and flags atypical use (AC-02(12)). CP-13 keeps alternative authentication methods ready to deploy quickly when fraud defeats the main one.",
+      "gaps": "SP 800-53 states multi-factor authentication for the organisation's own users, so two-factor authentication for customers is the HKMA's own rule. So is its list of high-risk transactions, with the exception for small-value transfers (footnote 10). The section also asks for payee registration through secure channels with identity checks, and for due diligence to classify high-risk merchants (footnote 9). Reminders to customers whose passwords are long unchanged, and alerts and calls to customers who fail ambush authentication, are customer-facing duties with no SP 800-53 counterpart."
     },
     {
-      "id": "TME1.8.4",
-      "title": "Session Management and Timeout",
+      "id": "4.2",
+      "title": "Alerts to customers about transactions and unusual activity",
       "controls": [
-        "AC-10",
-        "AC-11",
-        "AC-12",
-        "SC-10",
-        "SC-23"
+        "AC-02",
+        "AC-09",
+        "SI-04"
       ],
-      "coverage_pct": 90,
-      "rationale": "AC-10 concurrent session control limits simultaneous sessions. AC-11 session lock provides automated session locking after inactivity. AC-12 session termination automatically ends sessions based on defined conditions. SC-10 network disconnect terminates network connections after inactivity periods. SC-23 session authenticity protects against session hijacking and replay attacks.",
-      "gaps": "Minimal gap. HKMA requires specific session timeout values for internet banking (typically 5-10 minutes of inactivity) and internal systems. TM-E-1 mandates that session management prevents session fixation and session hijacking attacks. SP 800-53 provides comprehensive session management controls. The only remaining gap is the HKMA-prescribed timeout values for banking application sessions."
+      "coverage_pct": 30,
+      "rationale": "SI-04 monitoring finds unusual e-banking activity, such as a sudden change of location, a new device or new login behaviour. AC-02(12) flags atypical use of a customer's account. AC-09 shows customers their previous logon each time they log on, and AC-09(01) to AC-09(04) add failed attempts, account changes and other details, so customers can spot some unusual activity themselves.",
+      "gaps": "The section is about notices to customers, and customer notifications have no SP 800-53 counterpart. AC-09 informs users when they log on, and the module asks for a notice as soon as a customer starts a higher-risk transaction, sent through an effective channel with the transaction type, part of the payee's details and the amount. It also asks for notices of unusual activity, and for risk-based follow-up of undelivered notices."
     },
     {
-      "id": "TME1.8.5",
-      "title": "Remote Access Security",
+      "id": "4.3",
+      "title": "Security advice for customers and action on scams",
       "controls": [
-        "AC-17",
-        "AC-18",
-        "AC-19",
-        "AC-20",
-        "IA-02",
-        "SC-08",
-        "SC-09",
-        "SC-12",
-        "SC-13",
-        "SC-40",
-        "PE-17"
-      ],
-      "coverage_pct": 88,
-      "rationale": "AC-17 remote access controls remote connectivity with encryption and authentication requirements. AC-18 wireless access restrictions governs wireless connectivity. AC-19 access control for portable and mobile devices manages mobile endpoints. AC-20 use of external information systems controls access from external environments. IA-02 user identification and authentication with multi-factor for remote access. SC-08 and SC-09 transmission integrity and confidentiality protect data in transit. SC-12 and SC-13 cryptographic key management and use of cryptography ensure encrypted remote connections. SC-40 (new in Rev 5) wireless link protection adds cryptographic protection for wireless communications. PE-17 alternate work site addresses remote working environments.",
-      "gaps": "Minor gap. HKMA requires remote access controls to specifically address work-from-home arrangements with endpoint security requirements, split-tunnelling restrictions, and data leakage prevention for remote banking operations. TM-E-1 mandates that remote access to critical banking systems requires enhanced authentication and is subject to additional monitoring. SP 800-53 provides comprehensive remote access controls but does not address the HKMA-specific requirements for remote access to banking production systems or the enhanced controls for home-based working arrangements."
-    },
-    {
-      "id": "TME1.9.1",
-      "title": "Cryptographic Policy and Standards",
-      "controls": [
-        "SC-12",
-        "SC-13",
-        "SC-17",
-        "SC-08",
-        "SC-28",
-        "IA-07"
-      ],
-      "coverage_pct": 88,
-      "rationale": "SC-12 cryptographic key establishment and management provides comprehensive key management policy. SC-13 use of cryptography defines cryptographic algorithm and strength requirements. SC-17 public key infrastructure certificates governs PKI usage. SC-08 transmission integrity ensures cryptographic protection of data in transit. SC-28 protection of information at rest covers encryption at rest. IA-07 cryptographic module authentication ensures cryptographic modules meet validation standards (FIPS 140-2/3).",
-      "gaps": "Minor gap. HKMA requires cryptographic standards to be aligned with international standards and regularly reviewed to ensure they remain adequate against evolving threats including quantum computing risks. TM-E-1 mandates specific cryptographic requirements for internet banking and payment systems including compliance with the Payment Card Industry PIN Security Requirements and EMV standards. SP 800-53 provides strong cryptographic controls but does not address HKMA-specific cryptographic requirements for Hong Kong payment systems or the quantum readiness expectations."
-    },
-    {
-      "id": "TME1.9.2",
-      "title": "Key Management",
-      "controls": [
-        "SC-12",
-        "SC-17",
-        "SC-28",
-        "MP-04",
-        "MP-05"
-      ],
-      "coverage_pct": 85,
-      "rationale": "SC-12 cryptographic key establishment and management provides comprehensive key lifecycle management including generation, distribution, storage, rotation, revocation, and destruction. SC-17 public key infrastructure certificates governs digital certificate management. SC-28 protection of information at rest includes encryption key protection. MP-04 media storage and MP-05 media transport govern secure handling of key material on physical media.",
-      "gaps": "Minor gap. HKMA requires key management procedures to include dual-control and split-knowledge for critical cryptographic keys, particularly for HSM (Hardware Security Module) master keys and payment system keys. TM-E-1 mandates key ceremony procedures for critical key generation events. SP 800-53 SC-12 covers key management comprehensively but does not prescribe the specific dual-control, split-knowledge, and key ceremony procedures that HKMA expects for banking-grade cryptographic operations."
-    },
-    {
-      "id": "TME1.9.3",
-      "title": "Digital Signatures and Certificates",
-      "controls": [
-        "SC-17",
-        "SC-13",
-        "AU-10",
-        "IA-09",
-        "SC-16"
-      ],
-      "coverage_pct": 85,
-      "rationale": "SC-17 public key infrastructure certificates provides comprehensive PKI and certificate management. SC-13 use of cryptography covers digital signature algorithms. AU-10 non-repudiation ensures transactions cannot be denied using digital signatures. IA-09 service identification and authentication enables service-level certificate-based authentication. SC-16 transmission of security parameters governs the secure exchange of certificates and security parameters.",
-      "gaps": "Minor gap. HKMA requires digital signatures and certificates to comply with the Hong Kong Electronic Transactions Ordinance (ETO) for legally binding electronic signatures. TM-E-1 mandates use of recognised certification authorities and specific certificate validation procedures for internet banking. SP 800-53 provides strong PKI and digital signature controls but does not address the Hong Kong ETO requirements or the HKMA-specific certification authority recognition standards."
-    },
-    {
-      "id": "TME1.10.1",
-      "title": "Online Banking Security Controls",
-      "controls": [
-        "SC-07",
-        "SC-08",
-        "SC-13",
-        "SC-23",
-        "SC-11",
-        "AC-04",
-        "AC-17",
-        "SI-03",
-        "SI-04",
-        "SI-10",
-        "SI-11"
-      ],
-      "coverage_pct": 72,
-      "rationale": "SC-07 boundary protection provides network segmentation for internet banking infrastructure. SC-08 transmission integrity and SC-13 use of cryptography ensure encrypted communications. SC-23 session authenticity protects banking sessions. SC-11 trusted path provides secure communication channels. AC-04 information flow enforcement controls data flows between internet-facing and internal banking zones. AC-17 remote access governs customer remote connectivity. SI-03 malicious code protection, SI-04 monitoring, SI-10 information accuracy, and SI-11 error handling provide application security controls.",
-      "gaps": "HKMA TM-E-1 has specific internet banking security requirements that extend beyond general IT security controls. These include: mandatory two-factor authentication for high-risk transactions (transfers, payee additions), transaction signing for high-value payments, customer notification of login and transaction activity (SMS/push alerts), anti-phishing measures (personalised security images), fraud detection systems with real-time transaction monitoring, and specific requirements for protecting against man-in-the-browser attacks. SP 800-53 provides strong foundational controls but does not address these banking-specific security measures or the HKMA's e-banking security expectations."
-    },
-    {
-      "id": "TME1.10.2",
-      "title": "Mobile Banking Security",
-      "controls": [
-        "AC-19",
-        "SC-08",
-        "SC-13",
-        "SC-28",
-        "SC-18",
-        "IA-02",
-        "IA-03",
-        "SI-07"
-      ],
-      "coverage_pct": 65,
-      "rationale": "AC-19 access control for portable and mobile devices provides mobile device management policy. SC-08 transmission integrity and SC-13 use of cryptography ensure secure mobile communications. SC-28 protection of information at rest secures data stored on mobile devices. SC-18 mobile code governs mobile application security. IA-02 user identification and authentication covers mobile authentication. IA-03 device identification and authentication enables device binding. SI-07 software and information integrity verifies mobile application integrity.",
-      "gaps": "HKMA requires specific mobile banking security controls including: mobile application hardening (anti-tampering, jailbreak/root detection, code obfuscation), secure local data storage with application-level encryption, certificate pinning to prevent man-in-the-middle attacks, device binding to link mobile banking to authorised devices, and biometric authentication integration. TM-E-1 mandates mobile banking apps be subject to security assessment before release and regularly thereafter. SP 800-53 provides mobile device controls but does not address these banking-specific mobile application security requirements or the HKMA expectations for mobile banking app security testing."
-    },
-    {
-      "id": "TME1.10.3",
-      "title": "Electronic Payment Security",
-      "controls": [
-        "SC-07",
-        "SC-08",
-        "SC-12",
-        "SC-13",
-        "SC-28",
-        "AU-02",
-        "AU-10",
-        "AC-03",
-        "AC-04"
-      ],
-      "coverage_pct": 60,
-      "rationale": "SC-07 boundary protection segments payment processing infrastructure. SC-08 transmission integrity and SC-13 use of cryptography protect payment data in transit. SC-12 key management and SC-28 protection at rest secure payment credentials. AU-02 auditable events and AU-10 non-repudiation provide transaction audit trails. AC-03 access enforcement and AC-04 information flow enforcement control payment system access.",
-      "gaps": "HKMA TM-E-1 has extensive electronic payment security requirements covering FPS (Faster Payment System), CHATS (Clearing House Automated Transfer System), SWIFT connectivity, and card payment processing. Specific gaps include: FPS real-time fraud monitoring requirements, SWIFT Customer Security Programme (CSP) compliance, payment message integrity verification (SWIFT message authentication codes), transaction limits and velocity checks, and compliance with the Hong Kong Stored Value Facility (SVF) licensing requirements. SP 800-53 provides foundational security controls but does not address Hong Kong payment system-specific requirements, FPS/CHATS security standards, or the HKMA's expectations for payment fraud prevention."
-    },
-    {
-      "id": "TME1.10.4",
-      "title": "Two-Factor Authentication for Online Services",
-      "controls": [
-        "IA-02",
+        "AT-02",
+        "AT-03",
+        "AU-13",
         "IA-05",
-        "IA-10",
-        "IA-11",
-        "SC-37"
-      ],
-      "coverage_pct": 75,
-      "rationale": "IA-02 user identification and authentication covers multi-factor authentication requirements. IA-05 authenticator management governs the lifecycle of authentication tokens and devices. IA-10 adaptive authentication enables risk-based step-up authentication for high-risk transactions. IA-11 re-authentication enforces periodic re-verification during sessions. SC-37 out-of-band channels provides the framework for out-of-band authentication delivery (SMS OTP, push notification) used in two-factor authentication.",
-      "gaps": "HKMA mandates two-factor authentication (2FA) for internet banking with specific requirements: 2FA must use separate channels or devices (not just two factors on the same device), high-risk transactions (fund transfers to unregistered payees, limit changes) require transaction signing, and the HKMA expects progressive migration from SMS OTP to more secure methods (hardware tokens, push authentication, biometrics). SP 800-53 covers multi-factor authentication comprehensively but does not address the HKMA-specific 2FA channel separation requirements, transaction signing mandates, or the progression pathway away from SMS-based OTP."
-    },
-    {
-      "id": "TME1.11.1",
-      "title": "ATM Physical Security",
-      "controls": [
-        "PE-01",
-        "PE-02",
-        "PE-03",
-        "PE-06",
-        "PE-20",
-        "SC-41"
-      ],
-      "coverage_pct": 55,
-      "rationale": "PE-01 physical and environmental protection policy provides the physical security framework. PE-02 and PE-03 physical access authorisation and control govern access to ATM locations. PE-06 monitoring physical access enables surveillance of ATM sites. PE-20 (new in Rev 5) asset monitoring and tracking supports ATM asset management and location tracking. SC-41 (new in Rev 5) port and I/O device access restriction controls physical ports on ATM hardware to prevent skimming device attachment.",
-      "gaps": "HKMA TM-E-1 has specific ATM physical security requirements that go well beyond general physical access control. These include: anti-skimming device installation on card readers, PIN shield/privacy guard requirements, CCTV monitoring of ATM locations with defined retention periods, physical tamper detection on ATM cabinets and card slots, cash cassette security with dual-control access, and specific requirements for off-premises ATM locations (convenience stores, shopping centres). SP 800-53 PE family provides general physical security but does not address ATM-specific physical security measures, anti-skimming technology requirements, or the HKMA standards for ATM site security."
-    },
-    {
-      "id": "TME1.11.2",
-      "title": "ATM Transaction Security",
-      "controls": [
-        "SC-08",
-        "SC-12",
-        "SC-13",
-        "SC-28",
-        "AU-02",
-        "AU-10",
-        "AC-03"
-      ],
-      "coverage_pct": 58,
-      "rationale": "SC-08 transmission integrity protects ATM-to-host communications. SC-12 key management and SC-13 use of cryptography cover PIN encryption and key management. SC-28 protection of information at rest secures data stored in ATM hardware. AU-02 auditable events creates transaction audit trails. AU-10 non-repudiation ensures transaction accountability. AC-03 access enforcement controls ATM administrative access.",
-      "gaps": "HKMA requires specific ATM transaction security measures including: point-to-point encryption (P2PE) for PIN data from keypad to HSM, EMV chip transaction processing with fallback restrictions, dynamic currency conversion security, transaction velocity monitoring and geographic anomaly detection, and compliance with card scheme security requirements (Visa, Mastercard, UnionPay, JCB). TM-E-1 mandates ATM software to run on supported operating systems with hardened configurations and application whitelisting. SP 800-53 provides general cryptographic and access controls but does not address ATM-specific transaction security, PIN block encryption standards, EMV processing requirements, or the multi-scheme compliance requirements relevant to Hong Kong's ATM network."
-    },
-    {
-      "id": "TME1.11.3",
-      "title": "Anti-Skimming and Fraud Prevention",
-      "controls": [
-        "PE-03",
-        "PE-06",
-        "PE-20",
-        "SI-04",
-        "SC-41",
-        "IR-04"
+        "IR-04",
+        "IR-06",
+        "PL-04"
       ],
       "coverage_pct": 45,
-      "rationale": "PE-03 physical access control and PE-06 monitoring physical access support surveillance of ATM locations. PE-20 (new in Rev 5) asset monitoring and tracking enables detection of unauthorised modifications to ATM hardware. SI-04 information system monitoring supports detection of unusual ATM transaction patterns. SC-41 (new in Rev 5) port and I/O device access restriction helps prevent attachment of skimming devices to USB or serial ports. IR-04 incident handling covers response to detected skimming or fraud incidents.",
-      "gaps": "HKMA has specific anti-skimming and ATM fraud prevention requirements that are largely outside SP 800-53 scope. These include: mandatory anti-skimming technology (jitter mechanisms, card reader guards, detection sensors), real-time transaction fraud monitoring with neural network/machine learning models, geographic velocity checks for card transactions, coordination with the Joint Financial Intelligence Unit (JFIU) for suspicious transaction reporting, customer fraud notification and card blocking procedures, and liability frameworks for ATM fraud. SP 800-53 provides general monitoring and physical security but does not address the banking-specific ATM fraud prevention technology, Hong Kong law enforcement coordination, or the HKMA's expectations for ATM fraud prevention programmes."
+      "rationale": "PL-04 sets out the rules of behaviour customers acknowledge before access, including their duty to protect their devices and authentication factors. IA-05(h) asks users to take specific steps to protect their authenticators. AT-02 security awareness, kept up to date and drawing on recent scams, supports the periodic advice to customers. NIST writes AT-02 for the organisation's own users, so it covers customers in part. AT-03 trains the officers who answer customers' questions about security. AU-13 monitors open sources, and AU-13(03) detects copies of the institution's websites and apps. IR-04 handles a scam as an incident through to removing the fake items, with IR-04(15) for press releases and public communication. IR-06 reports it to the Police and the HKMA.",
+      "gaps": "Customer education and warnings to the public have no SP 800-53 counterpart. The module asks for security advice that is easy to understand and prominently displayed, sent through several channels, and for the provisions of the Code of Banking Practice. When a scam appears, the institution decides quickly how to warn its customers and the public, and issues any press release within the HKMA's expected timing (footnote 12)."
     },
     {
-      "id": "TME1.12.1",
-      "title": "Outsourcing Risk Assessment and Due Diligence",
+      "id": "4.4",
+      "title": "Tools and terms that protect customers",
       "controls": [
-        "SA-04",
-        "SA-09",
-        "SA-21",
-        "SR-01",
-        "SR-02",
-        "SR-03",
-        "SR-04",
-        "SR-05",
-        "SR-07",
-        "RA-03",
-        "RA-09"
+        "AC-02",
+        "AC-09",
+        "IA-10",
+        "IR-07",
+        "PL-04",
+        "PM-18",
+        "PM-26",
+        "PT-01",
+        "PT-03"
       ],
-      "coverage_pct": 72,
-      "rationale": "SA-04 acquisitions establishes vendor evaluation criteria. SA-09 external information system services governs outsourced services. SA-21 (new in Rev 5) developer screening adds personnel vetting for outsourced providers. SR-01 through SR-05 and SR-07 provide comprehensive supply chain risk management including policy, planning, controls, provenance, and acquisition strategies. RA-03 risk assessment and RA-09 (new in Rev 5) criticality analysis support risk-based evaluation of outsourcing arrangements, identifying which outsourced functions are critical to banking operations.",
-      "gaps": "HKMA TM-E-1 and the HKMA outsourcing circular require specific due diligence for outsourcing including: assessment of the service provider's financial stability, business reputation, and regulatory standing; evaluation of political and country risk for offshore outsourcing; specific assessment of data protection implications under the PDPO for cross-border data transfers; HKMA notification before outsourcing critical banking functions; and assessment of the provider's business continuity and disaster recovery capabilities. SP 800-53 provides strong supply chain controls but does not address the HKMA-specific pre-outsourcing notification requirement, the PDPO cross-border data transfer assessment, or the Hong Kong-specific country risk evaluation for offshore outsourcing."
+      "coverage_pct": 40,
+      "rationale": "AC-09(02) and AC-09(04) show customers their recent logons with times, locations and devices, which gives part of the activity review in 4.4.1. IR-07 offers a support resource where customers get help with possible unauthorised transactions, and PM-26 runs an accessible complaints process with tracked responses. AC-02 disables an account on request and re-enables it under set conditions, and IA-10 asks for stronger authentication before a suspended account is reactivated. PL-04's rules of behaviour, acknowledged before access, carry the terms that set out business customers' responsibilities and security precautions. PM-18's privacy programme and PT-01's processing policy support compliance with the Personal Data (Privacy) Ordinance and the Privacy Commissioner's codes. PT-03 keeps the use of customers' data to its stated purposes.",
+      "gaps": "Liability for unauthorised transactions has no SP 800-53 counterpart. Under the Code of Banking Practice and the Treat Customers Fairly Charter, a personal customer bears a direct loss from an unauthorised transaction only after acting fraudulently or with gross negligence. Business customers need clear terms on disputes and liabilities before the service starts. The section also asks for an activity history customers can search back at least 90 days, and a help channel open at all times. Customers must be able to suspend their own accounts. Check the Ordinance's specific requirements and the Privacy Commissioner's codes against their own text."
     },
     {
-      "id": "TME1.12.2",
-      "title": "Contractual and SLA Requirements",
+      "id": "5.1",
+      "title": "Encryption and integrity of customer data",
       "controls": [
-        "SA-04",
-        "SA-09",
-        "SR-03",
-        "SR-06",
-        "SR-08",
-        "PS-07"
-      ],
-      "coverage_pct": 65,
-      "rationale": "SA-04 acquisitions includes contractual security requirements. SA-09 external information system services defines service-level expectations. SR-03 supply chain controls and processes establishes contractual control requirements. SR-06 supplier assessments and reviews enables performance monitoring against SLAs. SR-08 notification agreements covers incident notification between parties. PS-07 third-party personnel security governs personnel requirements in contracts.",
-      "gaps": "HKMA requires specific contractual provisions for outsourcing arrangements including: HKMA right of access to inspect the service provider's operations and records; data ownership and return provisions; mandatory inclusion of HKMA audit rights in outsourcing contracts; performance penalties and service credit mechanisms; security incident notification to the AI and the HKMA within specified timeframes; provisions for regulatory changes in Hong Kong affecting the outsourced service; and termination and transition provisions including data migration and knowledge transfer. SP 800-53 covers contractual security but does not address the HKMA-mandated regulatory access rights, HKMA audit provisions in contracts, or the Hong Kong-specific contractual requirements."
-    },
-    {
-      "id": "TME1.12.3",
-      "title": "Ongoing Monitoring and Oversight",
-      "controls": [
-        "SR-06",
-        "SR-10",
-        "CA-07",
-        "SA-09",
-        "PM-06",
-        "AU-16"
-      ],
-      "coverage_pct": 72,
-      "rationale": "SR-06 supplier assessments and reviews provides the ongoing vendor monitoring framework. SR-10 inspection of systems or components enables periodic assessment of outsourced environments. CA-07 continuous monitoring extends monitoring capability to outsourced services. SA-09 external information system services maintains oversight of service delivery. PM-06 measures of performance tracks vendor performance metrics. AU-16 cross-organizational audit logging enables audit trail visibility across organisational boundaries with outsourced providers.",
-      "gaps": "HKMA requires ongoing oversight of outsourcing arrangements including: regular on-site assessments of service providers, independent audit reports (SOC 2 Type II or equivalent), performance reporting against SLAs with escalation procedures, annual review of outsourcing risk assessments, and specific oversight of sub-contractors performing critical functions. TM-E-1 mandates that AIs maintain in-house expertise to oversee outsourced functions and avoid over-reliance on service providers. SP 800-53 provides monitoring and assessment controls but does not address the HKMA-specific requirements for maintaining in-house capability or the oversight expectations for sub-contractors."
-    },
-    {
-      "id": "TME1.12.4",
-      "title": "Cloud Computing Governance",
-      "controls": [
-        "SA-09",
-        "AC-20",
-        "CM-12",
-        "CM-13",
-        "SC-07",
+        "IA-05",
+        "SC-08",
+        "SC-12",
+        "SC-13",
         "SC-28",
-        "SR-01",
-        "SR-03"
+        "SI-07"
       ],
-      "coverage_pct": 62,
-      "rationale": "SA-09 external information system services governs cloud service provider relationships. AC-20 use of external information systems controls access from cloud environments. CM-12 (new in Rev 5) information location identifies where data resides across cloud deployments, critical for data residency compliance. CM-13 (new in Rev 5) data action mapping documents data processing in cloud environments. SC-07 boundary protection and SC-28 protection at rest secure cloud connectivity and storage. SR-01 and SR-03 provide supply chain governance for cloud providers.",
-      "gaps": "HKMA has specific cloud computing requirements including: data residency considerations (customer data of Hong Kong residents should ideally be stored in Hong Kong or jurisdictions with adequate data protection laws); encryption key management where the AI retains control of encryption keys (not the cloud provider); multi-cloud and vendor lock-in risk assessment; cloud provider exit strategy and data portability provisions; specific HKMA notification requirements before adopting cloud services for critical banking functions; and assessment against the HKMA Cloud Computing circular. SP 800-53 provides foundational controls for external services but does not address the HKMA-specific cloud governance requirements, data residency expectations, or the regulatory notification process for cloud adoption."
+      "coverage_pct": 85,
+      "rationale": "SC-08 protects customer information on external networks and credentials on internal ones, with encryption under SC-08(01), and protects the integrity of data passed between systems. SC-28(01) encrypts highly sensitive information in storage, mainly login credentials. IA-05(01) sends passwords only over protected channels and stores them with a salted key derivation function. SC-13 sets strong, approved cryptography for each use, to be replaced as algorithms weaken, and SC-12 manages the keys. SI-07 integrity checks detect unauthorised changes to the data the Internet banking system processes.",
+      "gaps": "The module asks for application checks that reconcile data file balances after transaction updates. Where internationally recognised algorithms are impractical, an alternative must be similarly strong and independently assessed (footnote 13)."
     },
     {
-      "id": "TME1.12.5",
-      "title": "Sub-outsourcing and Concentration Risk",
+      "id": "5.2",
+      "title": "Securing the Internet-facing network",
       "controls": [
-        "SR-01",
-        "SR-02",
-        "SR-03",
-        "SR-06",
-        "RA-09"
+        "AC-04",
+        "CA-03",
+        "CM-02",
+        "CM-06",
+        "CM-07",
+        "PL-08",
+        "SC-07",
+        "SI-02",
+        "SI-04"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PL-08 sets the security architecture of the Internet infrastructure. SC-07 puts public-facing components in a demilitarised zone, with managed interfaces for external connections. AC-04 enforces approved information flows within internal networks and to external systems, and CA-03 governs each connection to an external party with an agreement. CM-02 keeps baseline configurations for the network devices, and CM-06 sets them securely. CM-07 keeps each device to the ports and services it needs. SI-04 runs intrusion detection, with SI-04(01) for a system-wide intrusion detection system. SI-02 gives the patch management procedure for systems and infrastructure.",
+      "gaps": "SP 800-53 covers each part of the infrastructure 5.2.1 names. The design of the demilitarised zone is the institution's own."
+    },
+    {
+      "id": "5.3",
+      "title": "Secure development and session controls",
+      "controls": [
+        "AC-10",
+        "AU-02",
+        "AU-03",
+        "SA-03",
+        "SA-08",
+        "SA-11",
+        "SA-15",
+        "SC-23"
+      ],
+      "coverage_pct": 85,
+      "rationale": "SA-03 builds security into the life cycle of the Internet banking system and its apps, from design to implementation. SA-08 applies security engineering principles, the sound industry practice the module points to, such as OWASP's (footnote 14). SA-15 names the development standards that code is reviewed against. SA-11 tests the code before launch, with static analysis (SA-11(01)), independent verification (SA-11(03)) and manual review (SA-11(04)). AC-10 limits each account to one session at a time, and SC-23 protects the authenticity of sessions. AU-02 logs additional login attempts, and AU-03 records their IP address, device type and location.",
+      "gaps": "The module asks for a code reviewer independent of the developers, which SA-11(03) expresses in part. It accepts a documented peer review assisted by automated tools, and asks the institution to make sure a vendor's code review process is adequate, or to review the vendor's code itself (footnote 15)."
+    },
+    {
+      "id": "5.4",
+      "title": "Tracking threats and scanning for vulnerabilities",
+      "controls": [
+        "PM-16",
+        "RA-03",
+        "RA-05",
+        "RA-07",
+        "SI-02",
+        "SI-05"
+      ],
+      "coverage_pct": 90,
+      "rationale": "PM-16's threat awareness programme shares threat intelligence with other organisations, and SI-05 brings in security alerts and advisories. Together they give the systematic monitoring of emerging threats. RA-03, with dynamic threat awareness under RA-03(03), relates those threats to the institution's infrastructure and applications. RA-05 scans the Internet infrastructure and banking systems with automated tools at a set frequency. RA-07 responds to the threats and vulnerabilities found in line with the risk tolerance, and SI-02 fixes the flaws.",
+      "gaps": "SP 800-53 covers what the section asks. The module adds manual techniques to automated scanning where the institution needs them."
+    },
+    {
+      "id": "6.1",
+      "title": "Limits and authentication for funds transfers",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "IA-02",
+        "IA-08",
+        "IA-11"
+      ],
+      "coverage_pct": 40,
+      "rationale": "IA-08 authenticates the customer, and IA-11 re-authenticates them before each high-risk transfer. IA-02's multi-factor enhancements, IA-02(01) and IA-02(02), state the two-factor rule. NIST writes IA-02 for the organisation's own users, and this mapping applies it to customers. AC-03 enforces the transfer limits, and AC-03(02) dual authorisation gives business customers the dual control the module suggests. AC-02(11) usage conditions keep small-value transfers off until a customer opts in. AC-06 least privilege keeps transfer functions off, or limits at zero, for new accounts, and reviewing privileges (AC-06(07)) removes high limits left unused.",
+      "gaps": "The structure of the limits is the HKMA's own, with customers' limits inside a cap the institution sets, and high-value limits reset to zero when unused, normally within 18 months. Customers can lower a default cross-border limit. Telling customers the risk of their limits is a customer-facing duty with no SP 800-53 counterpart. Liquidity risk management for large outflows, intraday and under stress (6.1.3), is a financial risk outside SP 800-53."
+    },
+    {
+      "id": "6.2",
+      "title": "Information and documents customers submit online",
+      "controls": [
+        "IA-12",
+        "RA-03",
+        "SC-08",
+        "SC-13",
+        "SC-28",
+        "SI-03"
+      ],
+      "coverage_pct": 85,
+      "rationale": "RA-03 assesses the risks of accepting information over the Internet before the controls are set. SC-08 protects submitted information and documents in transit, using SC-13's approved cryptography, and SC-28 protects them once stored. SI-03 scans files from outside sources in real time to detect and block malware. IA-12, with identity evidence and its validation (IA-12(02), IA-12(03)), supports asking for supporting documents and extra checks on the customer's identity.",
+      "gaps": "SP 800-53 covers what the section asks. When to ask for supporting documents is the institution's own judgement."
+    },
+    {
+      "id": "6.3",
+      "title": "Linking customers' accounts at other institutions",
+      "controls": [
+        "CA-02",
+        "CA-03",
+        "PT-04",
+        "PT-05",
+        "RA-08",
+        "SA-09",
+        "SC-07"
       ],
       "coverage_pct": 50,
-      "rationale": "SR-01 supply chain policy and SR-02 supply chain risk management plan provide the sub-outsourcing governance framework. SR-03 supply chain controls and processes establishes controls for the extended supply chain. SR-06 supplier assessments and reviews extends monitoring to sub-contractors. RA-09 (new in Rev 5) criticality analysis identifies where critical functions create concentration risk through shared service providers.",
-      "gaps": "HKMA requires specific controls for sub-outsourcing including: contractual right to approve or reject sub-outsourcing of critical functions; visibility into the full outsourcing chain; assessment of concentration risk where multiple AIs use the same service provider for critical functions; HKMA notification of material sub-outsourcing arrangements; and specific controls for fourth-party and nth-party risk. The HKMA also monitors systemic concentration risk across the Hong Kong banking sector where multiple institutions depend on the same cloud or technology providers. SP 800-53 provides supply chain controls but does not address the HKMA-specific sub-outsourcing approval requirements, sector-wide concentration risk assessment, or the regulatory notification obligations for sub-outsourcing."
+      "rationale": "RA-08's privacy impact assessment before launch shows whether the service needs disclosure to customers or their consent. PT-04 obtains that consent, and PT-05 tells customers how the service processes their data. SA-09 requires the partner institution to meet the institution's security requirements and monitors its compliance. CA-03 documents the interface, security requirements and responsibilities of the connection. SC-07 connects to the partner through managed boundary interfaces only, which limits the risk of intrusion. CA-02 assesses the controls independently (CA-02(01)).",
+      "gaps": "Most of the section concerns the business and legal side of the partnership. The institution checks that the business model is acceptable, and observes local and overseas legal requirements, including those on money laundering and terrorist financing. Handling cross-border complaints, sharing liability with the partner for customers' losses, and telling customers the service's risks and limitations are customer-facing duties with no SP 800-53 counterpart."
+    },
+    {
+      "id": "6.4",
+      "title": "Other financial services offered online",
+      "controls": [
+        "RA-03",
+        "SI-10"
+      ],
+      "coverage_pct": 20,
+      "rationale": "RA-03 assesses how delivery over electronic channels, including access from outside Hong Kong, shifts or amplifies the security risk of a new online service. SI-10 validity checks on market price inputs help keep the prices shown online accurate.",
+      "gaps": "The section is mostly about financial and conduct risk, which has no SP 800-53 counterpart. Under Principle 1 of the Treat Customers Fairly Charter, services must meet customers' needs. The institution assesses credit, market, reputation and legal risk, and keeps online prices timely when markets are volatile. Where a service involves activities the Securities and Futures Commission regulates, the SFC's and the HKMA's requirements apply (6.4.2)."
+    },
+    {
+      "id": "7.1",
+      "title": "Mobile banking apps and devices",
+      "controls": [
+        "AT-02",
+        "AU-13",
+        "IA-02",
+        "IA-05",
+        "PL-02",
+        "RA-03",
+        "SI-07"
+      ],
+      "coverage_pct": 50,
+      "rationale": "RA-03 identifies and assesses the risks of the mobile channel and its platforms, and PL-02's security plan records the measures that address them. SI-07 integrity checks, with runtime application self-protection under SI-07(17), help the app resist malware and tampering on the customer's phone. AU-13(03) looks for fake Internet banking apps that copy the institution's. AT-02 awareness tailored to mobile use supports customer education. NIST writes AT-02 for the organisation's own users, so it covers customers in part. For a phone that both opens Internet banking and receives or generates one-time passwords, IA-05 protects the authenticators. IA-02(06) takes one factor from a separate device. NIST writes IA-02 for the organisation's own users, and this mapping applies it to customers.",
+      "gaps": "Customers' phones sit outside the institution's control, and SP 800-53's mobile device controls cover devices the organisation manages. Customer education built for mobile use, and prompt notice to customers about fake apps, are customer-facing duties with no SP 800-53 counterpart."
+    },
+    {
+      "id": "7.2",
+      "title": "Banking through social media and other platforms",
+      "controls": [
+        "CA-02",
+        "CA-03",
+        "IA-02",
+        "IA-08",
+        "RA-08",
+        "SA-09",
+        "SC-07",
+        "SC-08",
+        "SI-03",
+        "SI-04",
+        "SI-12",
+        "SR-06"
+      ],
+      "coverage_pct": 60,
+      "rationale": "SR-06 assesses the platform before the partnership, including its controls and its record on data leakage. RA-08 runs a privacy impact assessment where customer data passes to the platform or is stored there. SA-09 requires the platform to meet the institution's security requirements and monitors its compliance, and CA-03 documents each connection's interface and security requirements. CA-02 gives the rigorous assessment of the connection. SC-07 segregates the institution's network from the platform, and SC-08 protects customer data in transit between them. SI-03 guards against malware arriving through the connection, and SI-04 monitors it for intrusion and data leakage. For banking by chat message, IA-08 authenticates the customer before the institution acts on an instruction, and SI-12 keeps proper records of the instructions. IA-02's multi-factor enhancements state the two-factor rule for high-risk transactions by chat. NIST writes IA-02 for the organisation's own users, and this mapping applies it to customers.",
+      "gaps": "The module asks the institution to weigh the platform's financial condition, and to carry out legal due diligence on local and overseas requirements, personal data privacy among them. These sit outside SP 800-53. Arrangements for customer complaints, and for sharing liability with the platform for customers' losses, are customer-facing duties with no SP 800-53 counterpart."
+    },
+    {
+      "id": "7.3",
+      "title": "ATMs and other self-service machines",
+      "controls": [
+        "RA-03",
+        "RA-05",
+        "SA-22",
+        "SC-07",
+        "SI-03",
+        "SI-05",
+        "SR-09",
+        "SR-10"
+      ],
+      "coverage_pct": 60,
+      "rationale": "RA-03 assesses the risks of self-service terminals regularly, and RA-05 scans the terminals and their hosts for vulnerabilities. SI-05 alerts and advisories keep the institution informed of emerging attacks on terminals. SR-09's tamper protection programme and SR-10's inspections address skimming devices and physical tampering. SI-03 guards against malware implanted on terminals, and SA-22 replaces end-of-support software or arranges continued support. SC-07 protects the hosts and back-end systems that terminals connect to.",
+      "gaps": "Detecting and handling counterfeit banknotes at deposit machines has no SP 800-53 counterpart. The module also asks the institution to prevent disputes with customers caused by confusing transaction processing or by incidents involving banknotes, a customer-facing duty outside SP 800-53."
+    },
+    {
+      "id": "7.4",
+      "title": "Verifying callers to phone banking",
+      "controls": [
+        "AC-05",
+        "AC-06",
+        "IA-05",
+        "IA-08"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IA-08 authenticates each caller before the institution gives account details or carries out a transaction. IA-05 sets the strength of phone PINs, biometrics and challenge questions and protects the answers. AC-06 limits which staff and service providers can see customers' answers. AC-05 separates duties, which limits the chance that the people who ask the questions use the answers to act as the customer.",
+      "gaps": "The design of challenge questions is the HKMA's own detail. The module warns that static answers, or answers in the public domain, raise the risk of impersonation. It prefers dynamic questions that vary between sessions and keep some questions back each time (footnote 21)."
+    },
+    {
+      "id": "7.5",
+      "title": "Contactless payments from mobile devices",
+      "controls": [
+        "CA-02",
+        "PL-02",
+        "RA-03",
+        "SC-08"
+      ],
+      "coverage_pct": 55,
+      "rationale": "RA-03 assesses the security risks of a contactless payment service before launch, and PL-02's security plan records the measures. SC-08 protects payment data on the contactless link from eavesdropping and electronic pick-pocketing. CA-02 control assessments review regularly whether the measures still work.",
+      "gaps": "Loss or theft of the customer's own phone calls for measures of the institution's own, since SP 800-53's device controls cover devices the organisation manages. The module also asks the institution to follow industry guidance from the relevant authorities."
+    },
+    {
+      "id": "7.6",
+      "title": "Securing card payments and alerting cardholders",
+      "controls": [
+        "IA-05",
+        "IA-08",
+        "IA-10",
+        "SI-04"
+      ],
+      "coverage_pct": 40,
+      "rationale": "IA-08 authenticates cardholders for card-not-present transactions. IA-05 makes the authenticator strong enough to resist phishing and malware where merchants use 3-D Secure. SI-04 monitors for unauthorised card-not-present transactions, using data such as IP addresses and phone numbers. IA-10 asks the cardholder for extra confirmation of a suspicious transaction, even one already authenticated.",
+      "gaps": "Notifications to cardholders have no SP 800-53 counterpart. The module asks for timely notices of card-not-present transactions, notice when a card is bound to a mobile payment service, and notices of at least the first three transactions after binding. It also asks for a channel where customers turn card-not-present transactions on or off and set a limit for them."
+    },
+    {
+      "id": "8.1",
+      "title": "Detecting and stopping fraud",
+      "controls": [
+        "AC-02",
+        "AU-06",
+        "IR-04",
+        "PM-16",
+        "SI-04"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-04 gives automated, near real-time monitoring (SI-04(02)) against profiles of normal behaviour (SI-04(13)), adjusted as the risk changes. AC-02(12) flags atypical use of a customer's account. AU-06 reviews and analyses records for unusual activity, and adjusts the review when intelligence or law enforcement information changes the risk. PM-16 brings fraud and scam intelligence from inside and outside the institution into the monitoring rules. IR-04 handles alerts through to containment, such as suspending a transaction, at any hour, and feeds the lessons back.",
+      "gaps": "Alerts to customers have no SP 800-53 counterpart. The module asks the institution to warn customers promptly of a \"High Risk\" result from the Police's anti-fraud search engine, and to contact customers through a reliable channel to verify a transaction. It also asks for enough designated staff with fraud expertise during and after office hours. SP 800-53's monitoring looks for security events, and fraud rules built on each customer's own history and transaction patterns are the module's own."
+    },
+    {
+      "id": "8.2",
+      "title": "Responding to incidents and practising the response",
+      "controls": [
+        "IR-01",
+        "IR-02",
+        "IR-03",
+        "IR-04",
+        "IR-06",
+        "IR-07",
+        "IR-08"
+      ],
+      "coverage_pct": 60,
+      "rationale": "IR-01 sets formal incident response policy and procedures, and IR-08's plan defines reportable incidents, responsibilities and information sharing. IR-04 handles breaches, attacks, fraud and service interruptions, and IR-04(15) manages public relations, press releases included. IR-06 reports incidents inside the institution and to the HKMA. IR-07 support resources, such as hotlines, help affected customers with their questions (footnote 24). IR-03 tests the response capability regularly, and IR-02(01) trains staff with simulated events. IR-08(01) covers deciding when to notify affected individuals.",
+      "gaps": "The module puts the interests of affected customers first. Senior management sets a communication strategy for everyone affected, customers and the media among them. The institution tells affected customers the key facts and the steps they can take, such as how to claim compensation. It issues a press release for a prolonged disruption of a critical service, and notifies the HKMA under the HKMA's own arrangements. These customer-facing duties have no SP 800-53 counterpart."
+    },
+    {
+      "id": "9.1",
+      "title": "Availability and response times for customers",
+      "controls": [
+        "CP-02",
+        "SA-09",
+        "SC-06"
+      ],
+      "coverage_pct": 45,
+      "rationale": "CP-02 plans for continuous service, with capacity planning under CP-02(02) and coordination with service providers' plans under CP-02(07). SA-09 extends the resilience and capacity requirements to service providers and monitors them. SC-06 allocates resources by priority or quota, so time-critical services keep their response times.",
+      "gaps": "Service levels and response times set against customers' expectations are the module's own. So is scaling resilience, capacity planning and performance monitoring to time-critical services such as Internet securities trading. SP 800-53 plans capacity for contingency operations, and the module asks for it in everyday operation."
+    },
+    {
+      "id": "9.2",
+      "title": "Capacity reviews and forecasting",
+      "controls": [
+        "CP-02",
+        "SC-05"
+      ],
+      "coverage_pct": 30,
+      "rationale": "CP-02(02) plans processing and telecommunications capacity, which SP 800-53 frames for contingency operations. SC-05(02) manages capacity, bandwidth and redundancy, and SC-05(03) monitors whether resources are enough, both aimed at denial of service.",
+      "gaps": "SP 800-53 plans capacity for contingencies and denial of service, and the module asks for capacity management as everyday practice. It asks for regular capacity reviews with reports to senior management, utilisation thresholds with precautionary measures, and a forecasting method based on utilisation trends and growth in customers and business. It also suggests a fast-track procurement process for upgrades, and asks for end-to-end stress testing to find bottlenecks."
+    },
+    {
+      "id": "9.3",
+      "title": "Monitoring for performance problems",
+      "controls": [
+        "IR-04",
+        "SC-05",
+        "SI-04"
+      ],
+      "coverage_pct": 35,
+      "rationale": "SI-04 gives automated monitoring with near real-time analysis (SI-04(02)) and alerts to designated staff (SI-04(05)), and SC-05(03) watches whether system resources are enough. IR-04 lets designated staff handle a detected interruption promptly. SI-04 and SC-05 aim at security events and denial of service, so performance measures need adding.",
+      "gaps": "SP 800-53's monitoring controls aim at security, and the module asks for an automated performance monitoring and alert system covering every critical component of e-banking. Designated staff handle the alerts during and after office hours."
+    },
+    {
+      "id": "9.4",
+      "title": "Removing single points of failure",
+      "controls": [
+        "CA-09",
+        "CP-02",
+        "CP-04",
+        "CP-08",
+        "SA-09",
+        "SC-36",
+        "SI-13"
+      ],
+      "coverage_pct": 75,
+      "rationale": "SI-13 provides standby components and failover (SI-13(05)), and SC-36 distributes processing and storage across locations, which removes single points of failure. CP-08(02) chooses alternate telecommunications that lower the chance of sharing a single point of failure with the primary service. CA-09 authorises internal connections and reviews whether each is still needed. CP-04 tests whether the resilience works in practice. CP-02(07) coordinates the contingency plan with service providers' plans, and SA-09 monitors their controls, resilience included.",
+      "gaps": "Where an outsourcing agent supports the service, the module asks the institution to assess the agent's resilience controls as part of its own resilience assessment. SA-09 expresses that in part."
+    },
+    {
+      "id": "9.5",
+      "title": "Keeping e-banking running through disruptions",
+      "controls": [
+        "CA-02",
+        "CM-03",
+        "CP-02",
+        "CP-04",
+        "CP-07",
+        "CP-10",
+        "IR-04",
+        "MA-02",
+        "SC-05",
+        "SI-04"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CP-02 sets recovery objectives and keeps essential functions running (CP-02(05)), and CP-04 tests the disaster recovery plan in regular drills. CP-07 provides an alternate processing site for switching to back-up systems, and CP-10 recovers the systems within the recovery time objective. MA-02 maintains equipment to suppliers' specifications and service intervals. CM-03 tests and approves changes and fall-back procedures before scheduled maintenance (Annex B). SC-05 protects against denial-of-service attacks, with detection under SC-05(03), and SI-04 detects other attacks that could disrupt e-banking. IR-04 responds to them promptly, and CA-02 validates the DDoS controls and reviews them periodically.",
+      "gaps": "The module asks the IT function to agree a service level for availability with the business lines. Advance notice to customers of maintenance outages, and prompt answers to customer and media enquiries (Annex B.4 to B.6), are customer-facing duties with no SP 800-53 counterpart. Alternative channels need the capacity and procedures to serve customers' critical functions while Internet banking is down (9.5.4)."
     }
   ],
   "summary": {
-    "total_clauses": 47,
-    "average_coverage": 75.4,
-    "full_count": 16,
-    "substantial_count": 23,
-    "partial_count": 8,
-    "weak_count": 0,
+    "total_clauses": 29,
+    "average_coverage": 57.8,
+    "full_count": 5,
+    "substantial_count": 5,
+    "partial_count": 15,
+    "weak_count": 4,
     "none_count": 0
   }
 }

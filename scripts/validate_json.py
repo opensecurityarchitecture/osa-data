@@ -94,6 +94,28 @@ def consistency_checks() -> list:
             elif name != titles[rid]:
                 problems.append(f"{entry['id']}: names {rid} {name!r}; its title is {titles[rid]!r}")
 
+    # Quality fields (quality dimensions deck, November 2026): the catalogue ids, building
+    # blocks and threat ids they name exist. The schema checks their form, this their targets.
+    attack_ids = {t["id"] for t in json.load(open(DATA_DIR / "mitre-attack" / "enterprise-attack.json", encoding="utf-8")).get("techniques", [])}
+    for entry in manifest.get("patterns", []):
+        path = DATA_DIR / "patterns" / entry["file"]
+        if not path.exists():
+            continue
+        pattern = json.load(open(path, encoding="utf-8"))
+        threat_ids = {t.get("id") for t in pattern.get("threats", [])}
+        for threat in pattern.get("threats", []):
+            for ref in threat.get("catalogueRefs", []):
+                if ref.get("catalogue") == "mitre-attack" and ref.get("id") not in attack_ids:
+                    problems.append(f"{entry['id']}: threat {threat.get('id')} names ATT&CK {ref.get('id')}, which is not in enterprise-attack.json")
+        for pre in pattern.get("content", {}).get("preconditions", []):
+            if pre.get("pattern") and pre["pattern"] not in titles:
+                problems.append(f"{entry['id']}: a precondition names building block {pre['pattern']}, which is not in the manifest")
+            if pre.get("pattern") == entry["id"]:
+                problems.append(f"{entry['id']}: a precondition names the pattern itself as its building block")
+            for tid in pre.get("removesThreats", []):
+                if tid not in threat_ids:
+                    problems.append(f"{entry['id']}: a precondition removes threat {tid}, which the pattern does not list")
+
     # Each mapping: the coverage file's pairs and the control files' pairs are the same
     control_manifest = json.load(open(DATA_DIR / "controls" / "_manifest.json", encoding="utf-8"))
     mappings = {}

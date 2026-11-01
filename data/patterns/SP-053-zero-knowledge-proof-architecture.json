@@ -345,7 +345,7 @@
   "threats": [
     {
       "id": "T-ZKP-001",
-      "title": "Under-Constrained Circuit Soundness Bug",
+      "name": "Under-Constrained Circuit Soundness Bug",
       "description": "A ZK circuit that fails to constrain all signals allows an attacker to construct a false witness that satisfies the circuit constraints without satisfying the intended statement. This produces a valid-looking proof for a false claim — e.g., proving possession of a secret without knowing it, or proving a balance is positive when it is negative. The 2022 Hermez double-spending bug and 2023 Circom MIMC hash under-constraint are production examples. Unlike smart contract bugs, circuit soundness bugs can be exploited silently with no on-chain evidence.",
       "mitigatedBy": [
         "SA-11",
@@ -356,7 +356,7 @@
     },
     {
       "id": "T-ZKP-002",
-      "title": "Trusted Setup Toxic Waste Retention",
+      "name": "Trusted Setup Toxic Waste Retention",
       "description": "In SNARKs using a structured reference string (Groth16, Marlin), the setup ceremony generates trapdoor parameters ('toxic waste') that must be destroyed. If any participant retains the toxic waste, they can forge valid proofs for any statement without detection — breaking the system's soundness guarantee completely and permanently. A single compromised participant is sufficient if they retained their contribution before it was mixed with others. This is undetectable after the fact.",
       "mitigatedBy": [
         "SC-12",
@@ -367,7 +367,7 @@
     },
     {
       "id": "T-ZKP-003",
-      "title": "Verification Key Substitution Attack",
+      "name": "Verification Key Substitution Attack",
       "description": "An attacker who can replace the verification key used by a verifier (on-chain smart contract or off-chain service) with a key for which they hold the corresponding proving key can forge arbitrary proofs accepted as valid. Attack vectors: mutable verification key storage in smart contract; compromised key distribution channel; supply chain attack on verifier library; governance attack on upgradeable verifier contract. Enables complete system compromise — attacker can prove any statement is true.",
       "mitigatedBy": [
         "SC-13",
@@ -378,7 +378,7 @@
     },
     {
       "id": "T-ZKP-004",
-      "title": "Proving Infrastructure Compromise and Key Extraction",
+      "name": "Proving Infrastructure Compromise and Key Extraction",
       "description": "GPU/FPGA prover clusters are high-value targets holding proving keys (large public parameters) and potentially sensitive witness data (private inputs). Compromise of prover infrastructure could enable: extraction of proving keys to compute proofs externally; privacy breach of witness data for private transaction provers; denial of service (ZK-rollup halts if provers are unavailable); or insertion of malicious proofs that exhaust on-chain gas or exploit verifier edge cases.",
       "mitigatedBy": [
         "SC-28",
@@ -389,7 +389,7 @@
     },
     {
       "id": "T-ZKP-005",
-      "title": "ZK-Rollup Sequencer Censorship and Data Withholding",
+      "name": "ZK-Rollup Sequencer Censorship and Data Withholding",
       "description": "Centralised ZK-rollup sequencers (zkSync Era, StarkNet, Scroll as of 2025) can censor transactions by refusing to include them in batches, or withhold compressed transaction data needed for state reconstruction. Data withholding in validium mode (where data is not posted to L1) can make user funds permanently inaccessible. Censorship resistance requires forced inclusion mechanisms and data availability proofs or commitments.",
       "mitigatedBy": [
         "SC-07",
@@ -400,7 +400,7 @@
     },
     {
       "id": "T-ZKP-006",
-      "title": "Privacy Compromise via Metadata Analysis",
+      "name": "Privacy Compromise via Metadata Analysis",
       "description": "Even with cryptographically perfect ZK privacy, metadata can de-anonymise users: timing correlation between shielded pool entries and exits, IP address logging by nodes, denomination pattern analysis (unique amounts identify specific users), graph analysis of nullifier-to-commitment patterns, and note linkage through timing. Tornado Cash OFAC designation and Samourai Wallet prosecution demonstrate regulatory risk of privacy tools. Compliance mode design (viewing keys, regulatory disclosures) must be incorporated into architecture from the outset.",
       "mitigatedBy": [
         "SC-08",
@@ -411,7 +411,7 @@
     },
     {
       "id": "T-ZKP-007",
-      "title": "ZK Credential Forgery and Revocation Bypass",
+      "name": "ZK Credential Forgery and Revocation Bypass",
       "description": "ZK-based identity credentials (W3C Verifiable Credentials with ZK extensions, BBS+ signatures) must have robust revocation mechanisms. An attacker who forges a ZK credential (e.g., proving KYC completion without actually passing KYC) can access services fraudulently. Revocation bypass — using a revoked credential whose revocation has not been reflected in the ZK revocation registry — is a practical risk in systems with delayed revocation propagation. Nullifier-based revocation schemes must account for nullifier privacy vs. revocation latency tradeoffs.",
       "mitigatedBy": [
         "AC-03",
@@ -422,7 +422,7 @@
     },
     {
       "id": "T-ZKP-008",
-      "title": "GDPR Right to Erasure vs. On-Chain ZK Commitment Immutability",
+      "name": "GDPR Right to Erasure vs. On-Chain ZK Commitment Immutability",
       "description": "ZK commitments posted on public blockchains are immutable — they cannot be erased. If private witness data (containing personal data subject to GDPR Art. 17 right to erasure) is linked to on-chain commitments, a DSAR could require disclosure of witness data, compromising other parties' privacy. Alternatively, the organisation holding witness data must demonstrate that on-chain commitments do not constitute personal data. EU Data Strategy and EDPB guidance on blockchain and GDPR remains unsettled. Design must ensure personal data appears only in off-chain witness files, not in public circuit inputs or on-chain commitments.",
       "mitigatedBy": [
         "PT-02",
@@ -433,7 +433,7 @@
     },
     {
       "id": "T-ZKP-009",
-      "title": "Quantum Vulnerability of SNARK-Based Systems",
+      "name": "Quantum Vulnerability of SNARK-Based Systems",
       "description": "ZK-SNARKs (Groth16, PLONK) rely on elliptic curve pairings (BLS12-381, BN254) that are broken by Shor's algorithm on a sufficiently powerful quantum computer. Unlike classical digital signatures where the exposed data is limited to the public key, a broken SNARK pairing could allow an attacker to forge proofs for the entire system, retroactively invalidating the soundness of all historical proofs. ZK-STARKs (hash-based) are quantum-resistant but produce larger proofs. Hybrid SNARK/STARK architectures and post-quantum curve research (Bandersnatch, Jubjub upgrades) are active mitigations.",
       "mitigatedBy": [
         "SC-13",
@@ -444,7 +444,7 @@
     },
     {
       "id": "T-ZKP-010",
-      "title": "Proof Generation Denial of Service",
+      "name": "Proof Generation Denial of Service",
       "description": "ZK proof generation is computationally intensive. An attacker submitting a large volume of proof generation requests (or crafting adversarially complex witness inputs that maximise prover computation) can exhaust proving infrastructure capacity, causing ZK-rollup transaction processing to halt or ZK application response times to degrade. This is particularly impactful for ZK-rollups where proof generation delay directly blocks transaction finality. Mitigations: resource quotas per proof request, job authentication, circuit complexity limits, prover cluster auto-scaling, and fallback modes when proving capacity is exhausted.",
       "mitigatedBy": [
         "AC-06",

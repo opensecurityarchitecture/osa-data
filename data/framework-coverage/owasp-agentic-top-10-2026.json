@@ -1,0 +1,307 @@
+{
+  "$schema": "../schema/framework-coverage.schema.json",
+  "framework_id": "owasp_agentic_top10_2026",
+  "framework_name": "OWASP Top 10 for Agentic Applications 2026",
+  "metadata": {
+    "source": "SP800-53v5_Control_Mappings",
+    "version": "1.0",
+    "disclaimer": "OSA's own analysis of the OWASP Top 10 for Agentic Applications 2026 (OWASP GenAI Security Project, December 2025) against SP 800-53 Rev 5. Each clause is one of the ten risks, read with the whole of its section in OWASP's text. The coverage figure estimates how much of the risk, and of OWASP's guidance for preventing it, the listed controls express when put in place as written. SP 800-53 sets controls for systems and the people who run them, so coverage is lower where a risk turns on how a model or an agent behaves, as with goal hijack and human-agent trust. Clause ids and titles are OWASP's. Validate with qualified assessors for compliance or audit use.",
+    "jurisdictions": [
+      "GLOBAL"
+    ],
+    "applicability_type": "voluntary",
+    "clause_titles_from": "OWASP Top 10 for Agentic Applications 2026, by the OWASP GenAI Security Project (December 2025), used unchanged under CC BY-SA 4.0",
+    "clause_titles_licence": "CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/",
+    "clause_titles_url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+    "analysis": {
+      "basis": "OSA's own analysis, from OWASP's text by three independent ratings. NIST's catalogue of registered crosswalks has none from this list to SP 800-53 (checked 1 November 2026). The OWASP GenAI Security Project also keeps a crosswalk on GitHub that names SP 800-53 controls for each risk.",
+      "checked": "2026-11-01",
+      "texts": [
+        {
+          "title": "OWASP Top 10 for Agentic Applications 2026",
+          "published": "OWASP GenAI Security Project, Agentic Security Initiative, Version 2026, December 2025",
+          "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+          "sha256": "a2db94cd00b08e0b3a5e5b619afe024bdbcd74503111085705e4f3dd886fcb5c"
+        }
+      ],
+      "controls": "SP 800-53 Rev 5.2.0 base controls, current ones only. An enhancement that addresses a risk counts for its base control, and the rationale names it. For a person approving a high-impact action, all three raters credited AC-03, through AC-03(02) dual authorization, and AC-04, through AC-04(09) human review where the approval gates a flow of information. SP 800-53 names no control for that approval as such.",
+      "method": "Each of the ten risks was rated three times, independently, by AI models working from OWASP's text and the control statements. No rater saw another's rating. A control is listed for a risk where at least two of the three ratings named it. The coverage figure is the median of the three estimates of how much of the risk, and of OWASP's guidance for preventing it, the listed controls express. The rationale and gaps were written after the controls were settled, from the raters' reasons and from the gaps at least two of them named.",
+      "pairs_named_by_three": 89,
+      "pairs_named_by_two": 29,
+      "pairs_named_by_one_and_left_out": 38,
+      "pairs_per_rating": {
+        "A": 123,
+        "B": 119,
+        "C": 121
+      },
+      "agreement_measure": "The Jaccard index of each two ratings: the pairs both named, divided by the pairs either named.",
+      "agreement": [
+        {
+          "ratings": "A and B",
+          "jaccard": 0.66,
+          "pairs_named_by_both": 96,
+          "pairs_named_by_either": 146
+        },
+        {
+          "ratings": "A and C",
+          "jaccard": 0.67,
+          "pairs_named_by_both": 98,
+          "pairs_named_by_either": 146
+        },
+        {
+          "ratings": "B and C",
+          "jaccard": 0.74,
+          "pairs_named_by_both": 102,
+          "pairs_named_by_either": 138
+        }
+      ],
+      "not_mapped": "OWASP's introductory pages and its Appendices A to E."
+    }
+  },
+  "weight_scale": {
+    "full": {
+      "min": 85,
+      "max": 100,
+      "label": "Fully addressed"
+    },
+    "substantial": {
+      "min": 65,
+      "max": 84,
+      "label": "Well addressed, notable gaps"
+    },
+    "partial": {
+      "min": 40,
+      "max": 64,
+      "label": "Partially addressed"
+    },
+    "weak": {
+      "min": 1,
+      "max": 39,
+      "label": "Weakly addressed"
+    },
+    "none": {
+      "min": 0,
+      "max": 0,
+      "label": "No mapping"
+    }
+  },
+  "clauses": [
+    {
+      "id": "ASI01",
+      "title": "Agent Goal Hijack",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-06",
+        "AU-02",
+        "CA-08",
+        "CM-03",
+        "PM-12",
+        "SI-04",
+        "SI-10"
+      ],
+      "coverage_pct": 50,
+      "rationale": "SI-10 validates prompts, documents and retrieved content before they can steer the agent's plan. AC-04 filters what flows in from email, files, web pages and other agents. AC-06 keeps the agent's tools to least privilege, so a hijacked goal can do less harm. AC-03 enforces approved actions, and AC-03(02) puts a person's approval in front of high-impact or goal-changing ones. CM-03 brings system prompts and goal definitions under change control. SI-04 compares goal state and tool use with a baseline and alerts on drift, and AU-02 logs each deviation. CA-08 red-team exercises simulate a goal override. PM-12 adds agents to the insider threat programme.",
+      "gaps": "The root cause is a model that can't reliably tell instructions from content. The risk also needs each planned action checked at run time against the user's original task, with the declared goal and its limits bound to every step. Spotting drift needs the active goal kept as tracked state. SI-10 checks inputs against a defined syntax, so detecting instructions hidden in natural language calls for measures of your own."
+    },
+    {
+      "id": "ASI02",
+      "title": "Tool Misuse and Exploitation",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AC-24",
+        "AU-02",
+        "AU-09",
+        "CM-07",
+        "IA-13",
+        "SC-06",
+        "SC-07",
+        "SC-39",
+        "SI-04",
+        "SI-07",
+        "SI-10"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AC-06 and CM-07 give each tool least privilege and only the functions its task needs, and CM-07(05) keeps an allowlist of approved, version-pinned tools. AC-24 decides on each tool call before it runs, and AC-03 enforces the decision, holding destructive actions for a person's confirmation through AC-03(02). SI-10 validates arguments against the tool's schema, so raw model output never reaches a shell or a database. IA-13 issues short-lived tokens scoped to the tool and the session. SC-39 sandboxes tool execution, and SC-07 lets outbound traffic reach approved destinations only. SC-06 quotas cap rate and token use. SI-07 checks pinned tool descriptions for tampering. SI-04 flags unusual tool chains, such as a database read followed by an external send. AU-02 logs every call, and AU-09 protects the log from change.",
+      "gaps": "The risk also needs a check that each permitted call serves the user's task, judged by its meaning as well as its syntax. Policy needs to see sequences, since tools approved one by one can still form a harmful chain. Tool names need to resolve safely, failing closed on look-alike or ambiguous names. A tool description poisoned at its source passes an integrity check. People approving an action need a dry run or a preview of its effect. Spend limits fit SC-06 only loosely, since SC-06 protects availability."
+    },
+    {
+      "id": "ASI03",
+      "title": "Identity and Privilege Abuse",
+      "controls": [
+        "AC-02",
+        "AC-03",
+        "AC-06",
+        "AC-24",
+        "IA-02",
+        "IA-05",
+        "IA-09",
+        "IA-11",
+        "IA-13",
+        "SC-04",
+        "SI-04",
+        "SI-14"
+      ],
+      "coverage_pct": 70,
+      "rationale": "AC-02 manages each agent as its own account, and AC-02(12) flags atypical use such as newly gained scopes. AC-06 keeps permissions to the task, so a manager agent can't pass its full access to a narrow worker. AC-24 decides on each privileged step, so an agent re-checks relayed instructions before acting on them. AC-03(08) revokes an authorisation when its attributes change, and AC-03(02) puts a person's approval in front of high-privilege actions. IA-02 ties each action to the user the agent acts for. IA-09 authenticates agents as services, which defeats forged agent identities. IA-13 issues short-lived, audience-restricted tokens and verifies them. IA-05 manages agent credentials, and IA-05(13) bars reuse of cached ones. IA-11 asks for re-authentication on a context switch. SI-14 starts each session from a known state and wipes it at the end, and SC-04 stops data held for one session reaching the next. SI-04 detects requests for new scopes, token reuse outside the original task and device-code phishing.",
+      "gaps": "The risk also needs delegation handled as a chain: scope narrows at each hop between agents, and the original user's intent is re-checked before one agent acts on another's behalf. Tokens need binding to a signed intent that names subject, audience, purpose and session, which goes beyond audience restriction. SP 800-53 knows users, devices and services, so an agent's persona and its entry in an agent registry call for measures of your own."
+    },
+    {
+      "id": "ASI04",
+      "title": "Agentic Supply Chain Vulnerabilities",
+      "controls": [
+        "CM-03",
+        "CM-07",
+        "CM-08",
+        "CM-14",
+        "IA-09",
+        "IR-04",
+        "SA-09",
+        "SC-39",
+        "SI-04",
+        "SI-07",
+        "SR-04",
+        "SR-05",
+        "SR-11"
+      ],
+      "coverage_pct": 65,
+      "rationale": "CM-08 keeps an inventory of AI components, the job of an AI bill of materials, and SR-04 records the provenance of models, tools, prompts and datasets. SR-05(02) assesses each component before it is accepted or updated. CM-07(05) allows approved, pinned components only, and CM-14 blocks anything without an approved signature. SR-11 detects counterfeits, such as a typosquatted package or a server posing as a known tool. SI-07 checks signatures and hashes at install and again at run time, and acts on drift. CM-03 puts prompts, orchestration scripts and memory schemas under version control with review. IA-09 authenticates other agents and tool servers before connecting to them. SA-09 holds providers of outside agents, tool servers and registries to the organisation's requirements. SC-39 runs sensitive agents in sandboxes, and SI-04 watches components for anomalies at run time. IR-04 supplies the kill switch that disables a compromised tool, prompt or agent connection wherever it runs.",
+      "gaps": "SP 800-53's supply chain controls assume components are chosen and installed ahead of time. Agents also load tools, prompt templates and peer agents while a task runs, and that live assembly needs checks of its own. Tool descriptions and agent cards need inspecting for hidden instructions. An AI bill of materials needs to record models, prompts and datasets as well as code. Registries of agents and tool servers need a basis for trust, such as signed agent cards."
+    },
+    {
+      "id": "ASI05",
+      "title": "Unexpected Code Execution (RCE)",
+      "controls": [
+        "AC-03",
+        "AC-06",
+        "AU-02",
+        "CM-05",
+        "CM-07",
+        "CM-11",
+        "SA-11",
+        "SC-07",
+        "SC-18",
+        "SC-39",
+        "SI-03",
+        "SI-04",
+        "SI-10"
+      ],
+      "coverage_pct": 70,
+      "rationale": "SI-10 validates and encodes generated code and its inputs, and SI-10(06) blocks injection such as a shell command hidden in a file name. CM-07 bans unsafe functions such as eval in production agents, keeps an allowlist for automatic execution and confines unvetted code. SC-18 treats code fetched or generated at run time as mobile code and stops it running automatically. SC-39 gives each session its own sandbox, and SC-07 limits the sandbox's network access, which blocks reverse shells. AC-06(08) keeps code from running with more privilege than the user who invoked it. CM-05(05) keeps agents from changing production directly. AC-03(02) puts a person's approval in front of elevated runs. SA-11 scans and tests generated code before it runs. CM-11 governs the packages an agent installs, and SI-03 scans them for malicious code. SI-04 watches execution at run time, and AU-02 logs each generation and run.",
+      "gaps": "Code written at run time skips the development pipeline that SA-11 assumes. The risk needs model output tracked as tainted all the way to execution, with a validation gate between writing code and running it. It also needs a way to spot hallucinated code that carries a backdoor. Agent memory systems need safe evaluators in place of eval."
+    },
+    {
+      "id": "ASI06",
+      "title": "Memory & Context Poisoning",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-06",
+        "AC-16",
+        "AU-10",
+        "CA-08",
+        "CP-09",
+        "SC-04",
+        "SC-28",
+        "SI-04",
+        "SI-07",
+        "SI-10",
+        "SI-21"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SI-10 scans every write to memory, the agent's own output included, before it is committed, and SI-10(05) admits authenticated, curated sources only. AC-03 and AC-06 give each task least-privilege access to memory stores. AC-04 keeps flows apart by session and domain, and stops the agent's own output flowing straight back into trusted memory. SC-04 keeps one tenant's memory from reaching another. AC-16 attaches provenance, trust scores and tenant tags to entries, so retrieval can weigh or exclude low-trust content. AU-10(02) binds each entry to whoever produced it. SC-28 protects memory stores at rest, and SI-07 detects unauthorised changes to them. SI-04 flags suspicious updates and unusual write rates. SI-21 expires information that is unverified or no longer needed, which limits how long poison lasts. CP-09 snapshots let a poisoned store roll back. CA-08 tests the paths by which memory can be poisoned.",
+      "gaps": "SP 800-53 treats an agent's memory as ordinary stored data. The risk also needs ways to catch poison that is well formed and arrives through normal channels, down to the level of embeddings. Retrieval needs to weigh entries by trust and let low-trust ones decay, with two signals required before high-impact memory surfaces, such as a provenance score and a person's check. Slow drift in what an agent remembers needs watching across sessions. Re-ingesting the agent's own output needs a rule of its own, beyond AC-04's general flow rules."
+    },
+    {
+      "id": "ASI07",
+      "title": "Insecure Inter-Agent Communication",
+      "controls": [
+        "AC-04",
+        "AU-10",
+        "CM-07",
+        "IA-09",
+        "SC-07",
+        "SC-08",
+        "SC-16",
+        "SC-17",
+        "SC-23",
+        "SC-31",
+        "SI-04",
+        "SI-10"
+      ],
+      "coverage_pct": 70,
+      "rationale": "IA-09 authenticates each agent with its own credentials before any exchange, discovery and coordination messages included. SC-17 issues agent certificates under a policy and trusts approved anchors only, the basis for pinning and signed agent cards. SC-08 encrypts and integrity-protects messages end to end, and SC-08(04) hides traffic patterns. SC-23 protects sessions against hijacking and replay, with identifiers tied to the task. SC-16 binds sender, audience and task context to each message and protects them from forgery. AU-10 binds each message to the agent that sent it. AC-04 sets which agents may exchange which messages. SI-10 validates messages against typed, versioned schemas. CM-07 turns off weak and legacy modes, and SC-07 gateways enforce protocol versions and formats, which together stop downgrade attacks. SC-31 analyses covert channels through which agents could leak or infer data. SI-04 watches for unusual routing and discovery traffic.",
+      "gaps": "The risk also needs checks on what each message means. An authenticated, well-formed message can still carry hidden instructions or a tampered goal, so its intent needs comparing with the one first sent. Agents can also read one instruction as different intents. Discovery needs attested registries and signed agent cards. The protocols agents speak, such as the Model Context Protocol (MCP) and Agent2Agent (A2A), need rules of their own."
+    },
+    {
+      "id": "ASI08",
+      "title": "Cascading Failures",
+      "controls": [
+        "AC-04",
+        "AC-06",
+        "AU-09",
+        "AU-10",
+        "CM-04",
+        "CP-12",
+        "SA-24",
+        "SC-06",
+        "SC-07",
+        "SI-04",
+        "SI-15"
+      ],
+      "coverage_pct": 55,
+      "rationale": "SA-24 designs the system to stay resilient when a model, an agent or an outside service fails. SC-07 segments the network and isolates agent components, so a fault stays inside its trust boundary. AC-06 and scoped APIs limit how far a faulty agent can reach. SI-15 validates each agent's output before it passes downstream, and AC-04(09) holds high-risk outputs for human review. SI-04 detects rapid fan-out, feedback loops and drift from decision baselines. CP-12 drops the system into a restricted safe mode when trouble starts, which works as a circuit breaker, and SC-06 quotas cap the blast radius. CM-04 tests a policy change in a separate environment before it goes live. AU-09 keeps logs of messages and decisions tamper-evident, and AU-10 ties each logged action to the agent that took it, so a cascade can be traced.",
+      "gaps": "The risk needs propagation treated as a failure in its own right, such as fan-out across agents and loops between them. Every action that spreads needs lineage data showing where it came from. Faults can spread faster than people can review them, so circuit breakers between planner and executor need to act on their own. Human oversight tends to weaken after a run of successes, which calls for watching approval habits over time. CM-04 covers impact analysis in general, and replaying recorded agent actions in a copy of production before a policy change goes further."
+    },
+    {
+      "id": "ASI09",
+      "title": "Human-Agent Trust Exploitation",
+      "controls": [
+        "AC-03",
+        "AC-04",
+        "AC-16",
+        "AT-02",
+        "AT-03",
+        "AU-09",
+        "AU-10",
+        "IR-04",
+        "IR-06",
+        "SI-04",
+        "SI-07"
+      ],
+      "coverage_pct": 40,
+      "rationale": "AC-03(02) requires a second, independent approval before risky actions, such as a payment to new bank details. AC-04 blocks network and state-changing calls from a preview, so a read-only preview has no side effects. AC-16 attaches source and time to recommendations and outside data, and SI-07 checks their hashes and signatures, so content without trusted provenance can be blocked. AU-10 binds each recommendation to the agent that made it, and AU-09 protects the records, so the agent's part in an action a person approved stays visible. SI-04 watches for sensitive data in conversations and for actions that stray from approved workflows. IR-06 gives users a way to report manipulative behaviour, and IR-04 can lock down an agent's capabilities while a report is reviewed. AT-02 teaches users about manipulation and the limits of agents, and AT-03 trains the people who oversee them.",
+      "gaps": "SP 800-53 treats people as trained operators of a system. In this risk they are the target, and most of what the risk needs lies in human behaviour. It needs defences against automation bias and against emotional or human-like persuasion by the agent. Explanations need to reflect the agent's real reasoning. Interfaces need confidence cues and risk badges that prompt a second look at high-impact actions, with risk summaries written by the platform instead of the model. The agent's autonomy, and the oversight it gets, need to follow the risk of each situation."
+    },
+    {
+      "id": "ASI10",
+      "title": "Rogue Agents",
+      "controls": [
+        "AC-06",
+        "AU-02",
+        "AU-09",
+        "AU-10",
+        "CP-10",
+        "IA-09",
+        "IR-04",
+        "SC-07",
+        "SC-12",
+        "SC-39",
+        "SI-04"
+      ],
+      "coverage_pct": 50,
+      "rationale": "AC-06 keeps API scopes narrow, with no access to provisioning APIs, so a drifting agent can't copy itself or delete backups. SC-39 runs agents in restricted environments, and SC-07 sets trust zones with strict rules between them, where SC-07(20) can isolate a suspect agent. IA-09 gives each agent a cryptographic identity, so other agents can reject an impostor posing as a monitor or an approver. SC-12 keeps signing keys in a hardware module or key service, with rotation and revocation, so agents never hold long-lived keys. SI-04 runs behavioural detection for collusion, coordinated false signals and excess actions. AU-02 logs every action, tool call and message between agents, AU-09 keeps the log immutable, and AU-10 binds each entry to the agent that acted. IR-04 provides kill switches and quarantine for forensic review, and CP-10 restores a remediated agent to a trusted baseline before it rejoins production.",
+      "gaps": "SP 800-53 assumes a process behaves as designed until someone compromises it. A rogue agent can drift while it holds authorised access. The risk needs checks on behaviour as such, covering goal drift, scheming, reward hacking and collusion between agents. Each action needs checking against a signed manifest of the agent's declared tools and goals, and the agent's behaviour needs testing at intervals with challenge tasks. Self-replication needs a control of its own."
+    }
+  ],
+  "summary": {
+    "total_clauses": 10,
+    "average_coverage": 59.5,
+    "full_count": 0,
+    "substantial_count": 5,
+    "partial_count": 5,
+    "weak_count": 0,
+    "none_count": 0
+  }
+}

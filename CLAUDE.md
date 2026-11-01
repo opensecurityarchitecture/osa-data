@@ -110,6 +110,15 @@ The `new-pattern` skill in `.claude/skills/` walks through each step, with the c
 - `content.keyControlAreas[]` — key areas with inline NIST references
 - `examples{}`, `references[]`, `relatedPatterns[]`
 
+Optional fields for the quality dimensions (review deck at `/decks/quality-dimensions/`, November 2026). None is filled in yet; a pattern gains them as it is reviewed:
+
+- `threats[].catalogueRefs` — the threat's entries in a named catalogue: `mitre-attack` by default, `capec` or `bsi-elementary` as well. The validator checks ATT&CK ids against `data/mitre-attack/enterprise-attack.json`
+- `threats[].status` — `mitigated`, `partially-mitigated` or `residual`; the last two need `reason`
+- `controls[].functions` (`prevent`, `detect`, `respond`), `controls[].tier` (`basic`, `standard`, `advanced`) and `controls[].effort` (`low`, `medium`, `high`)
+- `content.preconditions[]` — the assumptions one by one, each `environment` or `building-block`; a building block names its pattern, and `removesThreats` names the threats it takes over. The validator checks both. `content.assumptions` stays as the prose version
+- `metadata.implementations[]` — places the pattern was built, from implementation reports on osa-data (the issue template of that name)
+- A threat needs `id` and `name`. The key is `name`, not `title`: SP-051 to SP-054 used `title` and their cards printed "undefined" until November 2026
+
 ## SVG Diagram Conventions
 
 **Canonical reference: `data/patterns/SP-000-reference-pattern.json`** — always check this before creating or editing SVGs.

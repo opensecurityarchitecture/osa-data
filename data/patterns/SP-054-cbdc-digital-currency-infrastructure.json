@@ -460,61 +460,61 @@
   "threats": [
     {
       "id": "T-CBDC-001",
-      "title": "Core Ledger Integrity Attack",
+      "name": "Core Ledger Integrity Attack",
       "description": "An attacker — nation-state, insider threat, or compromised administrator — manipulates the central bank core ledger to alter CBDC balances, fabricate transactions, or erase transaction history. This is the highest-consequence attack against CBDC: a successful manipulation of the authoritative ledger undermines the integrity of the national currency itself. Attack vectors include direct database access by privileged insiders, compromise of the ledger application layer, or exploitation of the administrative API. Impact: loss of confidence in the currency, inability to determine true balances, potential systemic financial crisis.",
       "mitigatedBy": ["SC-12", "SC-13", "AC-05", "AU-02", "AU-03", "AU-09", "IA-02", "CM-03"]
     },
     {
       "id": "T-CBDC-002",
-      "title": "CBDC Counterfeiting via Key Compromise",
+      "name": "CBDC Counterfeiting via Key Compromise",
       "description": "An attacker compromises the central bank's CBDC issuance signing key, enabling unlimited creation of cryptographically valid but unauthorised CBDC tokens. Unlike banknote counterfeiting, digital counterfeiting at scale could be undetectable until reconciliation reveals the discrepancy between issued CBDC and backing reserves. Attack vectors include insider key theft, HSM firmware compromise, supply chain attack on key management hardware, or cryptanalytic attack on weak key algorithms. Impact: inflation of the CBDC supply, erosion of backing reserves, potential monetary crisis.",
       "mitigatedBy": ["SC-12", "SC-13", "SC-17", "PE-03", "AC-05", "AU-02", "CA-07", "PM-12"]
     },
     {
       "id": "T-CBDC-003",
-      "title": "Offline Double-Spend Attack",
+      "name": "Offline Double-Spend Attack",
       "description": "An attacker extracts CBDC tokens from a secure element offline wallet — through hardware side-channel attacks, fault injection, physical tampering, or exploitation of a secure element vulnerability — and uses the extracted tokens to make multiple payments before online reconciliation detects the anomaly. The attacker may also attempt to clone a device's secure element to enable parallel spending. Impact: financial loss for merchants and the payment system operator, erosion of trust in offline CBDC capability. The offline detection mechanism can identify double-spend post-facto but cannot always recover the funds.",
       "mitigatedBy": ["SC-12", "SC-28", "PE-03", "PE-04", "IA-05", "CA-07", "AU-03", "IR-04"]
     },
     {
       "id": "T-CBDC-004",
-      "title": "Mass Surveillance via CBDC Transaction Data",
+      "name": "Mass Surveillance via CBDC Transaction Data",
       "description": "An authorised party (central bank, government agency, commercial bank) or an attacker who has compromised CBDC systems uses CBDC transaction data to conduct mass financial surveillance of citizens — tracking spending patterns, associations, political donations, or religious activities. In account-based CBDC without strong privacy controls, every payment is visible to the platform operator by design. The threat is both the technical capability (if built without privacy controls) and the misuse of legitimate data access (by authorised parties exceeding their mandate). Impact: civil liberties violations, chilling effect on legitimate activities, democratic backsliding if used for political targeting.",
       "mitigatedBy": ["PT-01", "PT-02", "PT-03", "AC-04", "AU-02", "AU-09", "AC-06", "IA-02"]
     },
     {
       "id": "T-CBDC-005",
-      "title": "Programmable Money Censorship or Weaponisation",
+      "name": "Programmable Money Censorship or Weaponisation",
       "description": "A malicious insider, compromised administrator, or attacker who has gained control of the CBDC programmability layer deploys or modifies CBDC programmes to censor payments (blocking political donations, news subscriptions, or purchases from targeted merchants), freeze citizen funds, or implement discriminatory spending rules without legislative authority. Alternatively, a bug in an authorised programme could inadvertently freeze funds or cause incorrect automatic transfers. Impact: violation of citizens' right to access their own money, financial exclusion, loss of public trust in CBDC.",
       "mitigatedBy": ["CM-03", "SA-11", "AC-05", "AC-03", "IA-02", "IR-04", "AU-02", "RA-03"]
     },
     {
       "id": "T-CBDC-006",
-      "title": "CBDC-Induced Bank Run Amplification",
+      "name": "CBDC-Induced Bank Run Amplification",
       "description": "During a period of financial stress or loss of confidence in commercial banks, citizens and institutions rapidly convert commercial bank deposits to CBDC at a scale and speed that overwhelms the banking system's liquidity. CBDC's zero counterparty risk makes it a superior safe haven, and the ease of digital transfer enables a bank run at a speed and scale impossible with physical cash. A coordinated campaign — potentially including state-sponsored disinformation — could trigger this at a critical moment. Impact: commercial bank liquidity crisis, potential contagion to the wider financial system, emergency central bank intervention required.",
       "mitigatedBy": ["AC-06", "PM-09", "RA-03", "CA-07", "IR-04", "IR-08", "CP-07"]
     },
     {
       "id": "T-CBDC-007",
-      "title": "CBDC Infrastructure Availability Attack",
+      "name": "CBDC Infrastructure Availability Attack",
       "description": "A nation-state, criminal organisation, or hacktivist deploys a sustained DDoS attack, ransomware, or physical destruction of critical infrastructure against the CBDC platform during a critical payment event (payroll day, tax payment deadline, financial market stress event). The attack aims to deny citizens and businesses access to their digital currency at the worst possible moment, amplifying financial distress and eroding public trust. Attack vectors include volumetric DDoS against API endpoints, ransomware targeting core ledger infrastructure, BGP hijacking of CBDC network connectivity, or physical attacks on data centre facilities. Impact: national payment system outage, inability of citizens to access funds, potential financial crisis amplification.",
       "mitigatedBy": ["SC-07", "CP-07", "CP-09", "CP-10", "CA-07", "IR-04", "IR-08", "CM-02"]
     },
     {
       "id": "T-CBDC-008",
-      "title": "RTGS Gateway Integrity Attack",
+      "name": "RTGS Gateway Integrity Attack",
       "description": "An attacker — positioned through supply chain compromise, insider access, or man-in-the-middle on the CBDC-RTGS integration network — manipulates messages between the CBDC ledger and the RTGS system. A successful attack could debit CBDC without crediting reserves (destroying backing), credit reserves without debiting CBDC (creating unbacked currency), or divert settlement payments. The RTGS integration is high-value and has historically been targeted by sophisticated actors (SWIFT Bangladesh Bank attack, $81M stolen by manipulating SWIFT messages in 2016). Impact: unbalanced CBDC-reserves reconciliation, potential monetary loss, loss of confidence in CBDC settlement finality.",
       "mitigatedBy": ["SC-07", "SC-08", "SC-12", "CA-07", "AU-02", "AU-03", "CM-08", "IR-04"]
     },
     {
       "id": "T-CBDC-009",
-      "title": "Cross-Border CBDC Capital Flow Manipulation",
+      "name": "Cross-Border CBDC Capital Flow Manipulation",
       "description": "State-sponsored actors or criminal organisations exploit CBDC interoperability (multi-CBDC platforms, cross-border payment corridors) to conduct rapid, large-scale cross-border capital flows that bypass capital controls, evade AML/CFT monitoring, or destabilise the exchange rate of the target currency. Unlike traditional cross-border payments — which take days and pass through correspondent banking AML checks — well-designed CBDC interoperability could enable near-instant cross-border settlement that outpaces monitoring capacity. Impact: currency destabilisation, capital flow management failure, AML/CFT compliance failure, potential sanctions evasion.",
       "mitigatedBy": ["AC-04", "AC-06", "AU-02", "CA-07", "IA-08", "PM-09", "RA-03", "IR-06"]
     },
     {
       "id": "T-CBDC-010",
-      "title": "Secure Element Supply Chain Compromise",
+      "name": "Secure Element Supply Chain Compromise",
       "description": "A state-sponsored actor with semiconductor manufacturing capability introduces a hardware backdoor into secure elements used for CBDC offline wallets during the manufacturing process. The backdoor enables the attacker to extract device signing keys or CBDC tokens from any affected device, potentially affecting millions of wallets deployed nationally. The attack is particularly insidious because affected devices pass all functional and security tests but contain covert key exfiltration or cloning capability. Nation-states with advanced semiconductor capabilities (including state-sponsored actors with access to foundry processes) have both the motivation and capability to conduct this attack against national monetary infrastructure. Impact: mass offline CBDC theft, undermining of the entire offline payment capability, potential requirement to recall all affected devices.",
       "mitigatedBy": ["PE-03", "PE-04", "SC-12", "SC-28", "SA-09", "CM-08", "CA-08", "RA-03"]
     }

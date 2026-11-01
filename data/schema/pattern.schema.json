@@ -134,6 +134,25 @@
             "supersededByRelease": {"type": "string"},
             "note": {"type": "string"}
           }
+        },
+        "implementations": {
+          "type": "array",
+          "description": "Places the pattern has been built, as reported by the people who built it, most often through the implementation report template on osa-data. Quality dimension 4, questions 4.4 and 4.5",
+          "items": {
+            "type": "object",
+            "required": ["reported", "source", "tested"],
+            "additionalProperties": false,
+            "properties": {
+              "reported": {"type": "string", "format": "date", "description": "When the report arrived"},
+              "source": {"type": "string", "format": "uri", "description": "The report: an issue on osa-data or another public record"},
+              "organisation": {"type": "string", "description": "Named only with the reporter's consent"},
+              "sector": {"type": "string"},
+              "size": {"type": "string", "enum": ["small", "medium", "large"], "description": "Under 250 people, 250 to 5000, over 5000"},
+              "independent": {"type": "boolean", "description": "Built by someone other than the pattern's authors"},
+              "tested": {"type": "string", "description": "How the build was tested, such as a penetration test, an audit or an incident; \"not yet\" for a new build"},
+              "lessons": {"type": "string", "description": "What the builders changed or would change, and whether the pattern now says it"}
+            }
+          }
         }
       }
     },
@@ -190,6 +209,23 @@
         "threatResistance": {
           "type": "string",
           "description": "Threats addressed by this pattern"
+        },
+        "preconditions": {
+          "type": "array",
+          "description": "The assumptions the pattern relies on, one per entry. Each describes the environment or names the building block that carries a threat. Structured form of assumptions. Quality dimension 1, question 1.3, and dimension 3, question 3.4",
+          "items": {
+            "type": "object",
+            "required": ["kind", "statement"],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {"type": "string", "enum": ["environment", "building-block"], "description": "An assumption about the environment, or a building block the pattern relies on"},
+              "statement": {"type": "string", "description": "The assumption in one sentence"},
+              "pattern": {"type": "string", "pattern": "^SP-[0-9]{3}$", "description": "For a building block: the OSA pattern that provides it"},
+              "removesThreats": {"type": "array", "items": {"type": "string"}, "description": "Ids of this pattern's threats that the assumption takes out of scope or hands to the building block"}
+            },
+            "if": {"properties": {"kind": {"const": "building-block"}}},
+            "then": {"required": ["pattern"]}
+          }
         }
       }
     },
@@ -266,6 +302,23 @@
             "type": "string",
             "enum": ["inbound", "organisational"],
             "description": "Where the control applies, for patterns with an ArchiMate view: on the modelled call path (inbound) or at organisation level"
+          },
+          "functions": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "enum": ["prevent", "detect", "respond"]},
+            "description": "What the control does against the pattern's threats: prevents them, detects them, or supports the response. Lets an adopter choose a prevention-led or an assume-breach approach. Quality dimension 2, question 2.7"
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["basic", "standard", "advanced"],
+            "description": "The tier the control belongs to in this pattern, set by the threats it addresses. A small organisation starts with the basic tier. Quality dimension 2, question 2.6"
+          },
+          "effort": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "description": "Relative effort or cost of putting the control in place for this pattern. Quality dimension 2, question 2.4"
           }
         }
       }
@@ -311,9 +364,10 @@
 
     "threats": {
       "type": "array",
-      "description": "Specific threats addressed (future: link to threat catalogue)",
+      "description": "Specific threats addressed, each with the controls that mitigate it and, where given, its catalogue entry and its status once the pattern is applied",
       "items": {
         "type": "object",
+        "required": ["id", "name"],
         "properties": {
           "id": {"type": "string"},
           "name": {"type": "string"},
@@ -341,8 +395,37 @@
             "type": "string",
             "enum": ["osa", "archimate"],
             "description": "Where the threat comes from; osa when absent"
+          },
+          "catalogueRefs": {
+            "type": "array",
+            "description": "The threat's entries in named threat catalogues. MITRE ATT&CK is the default; CAPEC and BSI's elementary threats may be named as well. The validator checks ATT&CK ids against data/mitre-attack/enterprise-attack.json. Quality dimension 1, question 1.1",
+            "items": {
+              "type": "object",
+              "required": ["catalogue", "id"],
+              "additionalProperties": false,
+              "properties": {
+                "catalogue": {"type": "string", "enum": ["mitre-attack", "capec", "bsi-elementary"]},
+                "id": {"type": "string", "description": "The entry's id in that catalogue: T1566 or T1566.001 for ATT&CK, CAPEC-112, G 0.18 for BSI"}
+              },
+              "allOf": [
+                {"if": {"properties": {"catalogue": {"const": "mitre-attack"}}}, "then": {"properties": {"id": {"pattern": "^T[0-9]{4}(\\.[0-9]{3})?$"}}}},
+                {"if": {"properties": {"catalogue": {"const": "capec"}}}, "then": {"properties": {"id": {"pattern": "^CAPEC-[0-9]+$"}}}},
+                {"if": {"properties": {"catalogue": {"const": "bsi-elementary"}}}, "then": {"properties": {"id": {"pattern": "^G 0\\.[0-9]{1,2}$"}}}}
+              ]
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["mitigated", "partially-mitigated", "residual"],
+            "description": "The postcondition for this threat once the pattern is applied: the controls address it in full, reduce it with a stated gap, or leave it to the adopter. Quality dimension 1, question 1.4"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the threat is partially mitigated or residual: cost, practicality, or out of the pattern's reach. Required with those two statuses"
           }
-        }
+        },
+        "if": {"required": ["status"], "properties": {"status": {"enum": ["partially-mitigated", "residual"]}}},
+        "then": {"required": ["reason"]}
       }
     },
 

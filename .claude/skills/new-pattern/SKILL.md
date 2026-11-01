@@ -34,7 +34,7 @@ Top level: `$schema` (`"../schema/pattern.schema.json"`), `id`, `slug`, `title`,
 
 `controlFamilySummary`: each family code with its count.
 
-`threats`: eight to twelve, each with `id` (`T-XXX-NNN`), `title`, `description` (three to five sentences) and `mitigatedBy`, which names controls from this pattern's list. Give every threat at least one control, and aim for every critical control to mitigate at least one threat: the pattern card lists what each critical control mitigates.
+`threats`: eight to twelve, each with `id` (`T-XXX-NNN`), `name`, `description` (three to five sentences) and `mitigatedBy`. The key is `name`, not `title`: the pattern card prints `name`, and SP-051 to SP-054 showed "undefined" until November 2026, which names controls from this pattern's list. Give every threat at least one control, and aim for every critical control to mitigate at least one threat: the pattern card lists what each critical control mitigates.
 
 `references`: eight to twelve, each with `title`, `url` and `note`. Open every address and confirm it serves the document the title names. In October 2026 a check of all patterns found 27 addresses that returned 404, used in 24 patterns.
 

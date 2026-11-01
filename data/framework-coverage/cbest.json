@@ -5,11 +5,58 @@
   "metadata": {
     "source": "SP800-53v5_Control_Mappings",
     "version": "2.0",
-    "disclaimer": "Based on expert analysis of the CBEST threat intelligence-led penetration testing framework. This mapping follows the 2021 edition. The Bank of England's CBEST Implementation Guide of February 2024 is the current one: it keeps the four phases and adds a RACI annex, a remediation template, third-party scenarios and minimum criteria. OSA has not yet mapped it. CBEST is a methodology framework prescribing how to conduct intelligence-led penetration tests of UK financial infrastructure, not a set of security controls. SP 800-53 addresses penetration testing (CA-08) and vulnerability assessment (RA-05) but not the detailed threat intelligence gathering, red team tradecraft, provider accreditation, or regulatory coordination processes that define CBEST. Coverage reflects conceptual alignment rather than direct control equivalence. Validate with CBEST-accredited threat intelligence and penetration testing providers for regulatory compliance.",
+    "disclaimer": "Based on expert analysis of the CBEST threat intelligence-led penetration testing framework, as the Bank of England's CBEST Implementation Guide, 2024 edition, sets it out (page last updated 25 August 2026). Clauses CBEST.1 to CBEST.10 are OSA's own topics, not the guide's sections. CBEST is a methodology framework prescribing how to conduct intelligence-led penetration tests of UK financial infrastructure, not a set of security controls. SP 800-53 addresses penetration testing (CA-08) and vulnerability assessment (RA-05) but not the detailed threat intelligence gathering, red team tradecraft, provider accreditation, or regulatory coordination processes that define CBEST. Coverage reflects conceptual alignment rather than direct control equivalence. Validate with CBEST-accredited threat intelligence and penetration testing providers for regulatory compliance.",
     "jurisdictions": [
       "GB"
     ],
-    "applicability_type": "mandatory"
+    "applicability_type": "mandatory",
+    "edition": {
+      "used": "CBEST Threat Intelligence-Led Assessments: Implementation Guide, 2024 edition, Bank of England, page last updated 25 August 2026",
+      "url": "https://www.bankofengland.co.uk/financial-stability/operational-resilience-of-the-financial-sector/cbest-threat-intelligence-led-assessments-implementation-guide",
+      "replaced": "The CBEST implementation guide that OSA's registry dated 2021, which this mapping followed until 1 November 2026"
+    },
+    "edition_check": {
+      "checked": "2026-11-01",
+      "basis": "OSA's V13 edition review, rule 3: relabel to the edition in force and edit the clauses that changed.",
+      "sources": [
+        {
+          "title": "CBEST Threat Intelligence-Led Assessments: Implementation Guide for CBEST participants, 2024 edition, Bank of England web page, last updated 25 August 2026",
+          "url": "https://www.bankofengland.co.uk/financial-stability/operational-resilience-of-the-financial-sector/cbest-threat-intelligence-led-assessments-implementation-guide"
+        }
+      ],
+      "changes": "The guide names what the 2024 edition changes: it clarifies the roles and responsibilities of CBEST participants, now set out in a RACI matrix (Annex B), adds guidance on documenting remediation, with a Remediation Plan template, and on third parties that support important business services, with supplementary guidance on outsourcing and third-party scenarios. It keeps the four phases (initiation, threat intelligence, penetration testing and closure) and sets out minimum criteria for a CBEST (Annex A). The page as last updated also accepts The Cyber Scheme's Red Team Manager qualification (CSRTM) beside CREST's CCRTM, citing 2026 sources.",
+      "clauses_edited": [
+        {
+          "id": "CBEST.1",
+          "change": "Gaps rewritten for the Control Group, its coordinator, the executive sponsor, the RACI matrix and the minimum criteria. Controls and coverage unchanged."
+        },
+        {
+          "id": "CBEST.3",
+          "change": "SA-09 added for third parties whose systems come into scope, with the rationale and gaps rewritten for the guide's scoping process. Coverage unchanged."
+        },
+        {
+          "id": "CBEST.6",
+          "change": "Gaps rewritten for the Remediation Plan template, the workshop with the regulator and its supervision of the plan. Controls and coverage unchanged."
+        },
+        {
+          "id": "CBEST.8",
+          "change": "Gaps rewritten for accreditation by the Bank of England, CREST membership and the certified individuals, now including the CSRTM. Controls and coverage unchanged."
+        }
+      ],
+      "clauses_added": [],
+      "clauses_removed": [],
+      "not_used": "The 2021 guide, which was not looked for. The guide's own statement of what the 2024 edition changes is the record used.",
+      "one_rater": {
+        "status": "added by one rater, to be checked by three",
+        "clauses": [
+          "CBEST.3"
+        ],
+        "pairs": [
+          "CBEST.3 SA-09"
+        ],
+        "method": "Rated once from the 2024 guide and the control statement in data/nist/sp800-53-rev5.json, as data/CLAUDE.md describes. Two independent ratings are still to come, and the pair stays if two of three name it."
+      }
+    }
   },
   "weight_scale": {
     "full": {
@@ -55,7 +102,7 @@
       ],
       "coverage_pct": 65,
       "rationale": "PM-01 information security program plan and PM-09 risk management strategy provide the organisational governance framework within which penetration testing sits. PM-02 senior information security officer establishes executive-level accountability. PM-29 (Rev 5) risk management program leadership addresses board-level engagement. PM-14 testing/training/monitoring programme creates governance oversight of testing activities. PL-01 planning policy and PL-02 system security plans establish the documented framework. CA-01 assessment policy and CA-06 authorisation provide the approval framework for security assessments.",
-      "gaps": "CBEST governance requires specific elements not addressed by SP 800-53: board-level sponsorship and engagement with the Bank of England's CBEST process, formal regulatory coordination with the PRA/FCA on test scope and timing, appointment of a CBEST control group with defined roles (white team lead, executive sponsor, regulatory liaison), and adherence to the BoE's CBEST governance model including mandatory pre-engagement meetings with the regulator. SP 800-53 governance controls address security programme oversight but not the regulatory coordination and structured engagement model that CBEST mandates."
+      "gaps": "CBEST governance requires specific elements not addressed by SP 800-53. An executive sponsor is accountable for the assessment. A Control Group runs it, and its coordinator (the CGC) handles governance, quality assurance, project management and stakeholder coordination. The regulator approves any change to the Control Group, and only its members know of the test. The 2024 guide sets each party's duties in a RACI matrix (Annex B) and lists the minimum criteria a test must meet to count as CBEST (Annex A). SP 800-53 governance controls address security programme oversight but not the regulatory coordination and structured engagement model that CBEST mandates."
     },
     {
       "id": "CBEST.2",
@@ -82,11 +129,12 @@
         "RA-09",
         "RA-02",
         "CM-08",
-        "CM-12"
+        "CM-12",
+        "SA-09"
       ],
       "coverage_pct": 68,
-      "rationale": "CA-08 penetration testing directly addresses the need for offensive security testing and scoping. PM-11 mission/business process definition and PM-08 critical infrastructure plan identify the critical functions and systems that should be in scope. RA-09 (Rev 5) criticality analysis identifies the most critical system components. RA-02 security categorisation classifies assets by impact. CM-08 system component inventory and CM-12 (Rev 5) information location support identification of in-scope systems and data flows.",
-      "gaps": "CBEST scoping is driven by threat intelligence rather than generic risk assessment. Gaps include: identification of critical functions as defined by PRA/FCA operational resilience requirements (not generic FIPS 199 categorisation), scenario-based targeting where the penetration test scope is derived from the Threat Intelligence Report's attack scenarios, regulatory agreement on scope with the PRA/FCA before testing commences, exclusion management specific to live financial infrastructure (settlement systems, payment rails, market operations), and iterative scope refinement during the engagement based on intelligence findings. SP 800-53 addresses system inventory and criticality but not intelligence-led scope derivation."
+      "rationale": "CA-08 penetration testing directly addresses the need for offensive security testing and scoping. PM-11 mission/business process definition and PM-08 critical infrastructure plan identify the critical functions and systems that should be in scope. RA-09 (Rev 5) criticality analysis identifies the most critical system components. RA-02 security categorisation classifies assets by impact. CM-08 system component inventory and CM-12 (Rev 5) information location support identification of in-scope systems and data flows. SA-09 external system services covers the oversight of, and agreements with, a service provider whose systems come into scope.",
+      "gaps": "CBEST scoping starts from important business services rather than generic risk assessment. The regulator names the services, the Control Group proposes the key systems behind each one from an impact assessment, and the two agree the compromise actions in a Scope Specification that the executive sponsor signs off. Testing runs on live production systems unless legal or ethical limits apply, and the compromise actions carry through to the threat intelligence scenarios and the test plan. Where a service depends on a third party, the third party may need to join the Control Group under the same secrecy rules, as the guide's supplementary guidance on outsourcing and third-party scenarios describes. SP 800-53 addresses system inventory, criticality and the oversight of external providers, but not this intelligence-led scoping agreed with the regulator."
     },
     {
       "id": "CBEST.4",
@@ -132,7 +180,7 @@
       ],
       "coverage_pct": 72,
       "rationale": "CA-05 plan of action and milestones (POA&M) and PM-04 plan of action milestones process provide structured remediation tracking. RA-05 vulnerability monitoring addresses technical vulnerability identification and reporting. RA-07 (Rev 5) risk response ensures identified risks receive appropriate treatment decisions (accept, mitigate, transfer, avoid). SI-02 flaw remediation addresses patching and technical remediation. PM-31 (Rev 5) continuous improvement drives systematic improvement based on assessment findings.",
-      "gaps": "CBEST findings and remediation have specific requirements beyond SP 800-53's remediation controls. Gaps include: CBEST-structured vulnerability reporting that maps findings to threat intelligence scenarios and adversary TTPs, risk prioritisation calibrated to the likelihood of exploitation by the threat actors identified in the intelligence phase (not generic CVSS scoring), remediation plans that address detection capability gaps identified during the blue team assessment, regulatory reporting of remediation progress to the PRA/FCA, mandatory remediation timelines agreed with the regulator for critical findings, and executive-level remediation accountability aligned with the CBEST governance model."
+      "gaps": "CBEST findings and remediation have specific requirements beyond SP 800-53's remediation controls. The Control Group drafts a Remediation Plan on the regulator's template, drawing on the threat intelligence and penetration test reports and on the weakest areas of the threat intelligence maturity and detection and response assessments. The regulator reviews the draft with the firm in a workshop. The final plan ties each technical finding to business risk and the important business services, records input from the board and senior management, covers tactical and strategic fixes, and applies the lessons to areas outside the test. The regulator then tracks the plan for six to twelve months or longer, and the firm reports progress on the template and confirms when actions close. SP 800-53 covers plans of action and risk response, but not this plan reviewed and supervised by the regulator."
     },
     {
       "id": "CBEST.7",
@@ -161,7 +209,7 @@
       ],
       "coverage_pct": 38,
       "rationale": "SA-04 acquisition process establishes security requirements for service providers. SA-09 external system services governs the use of external service providers. SA-21 (Rev 5) developer screening addresses personnel vetting for external providers. PS-03 personnel screening provides a framework for background checks on testing personnel. PS-07 external personnel security addresses third-party staffing requirements. SR-06 supplier assessments (Rev 5) enables evaluation of provider capability and trustworthiness.",
-      "gaps": "CBEST provider qualification is a highly specific accreditation regime that SP 800-53 does not address. Gaps include: CBEST Threat Intelligence Provider (TIP) accreditation requiring demonstrated financial sector intelligence expertise, track record, and methodology certification, CBEST Penetration Testing Provider (PTP) certification requiring red team capability assessment, operational security evaluation, and financial sector experience, BoE/CREST-managed accreditation process with regular re-assessment and quality assurance reviews, mandatory use of BoE-accredited providers only (no self-assessment or alternative certification), provider conflict-of-interest management ensuring independence from the firm's existing security suppliers, and specific insurance and liability requirements for providers operating against live financial infrastructure. SP 800-53 addresses supplier evaluation generically but the CBEST accreditation regime is a regulatory function entirely outside its scope."
+      "gaps": "CBEST provider qualification is an accreditation regime that SP 800-53 does not address. The Bank of England accredits the threat intelligence and penetration test service providers (TISPs and PTSPs), which must also be members of CREST and keep to its codes of conduct and ethics. Each provider employs certified individuals: a CREST Certified Threat Intelligence Manager (CCTIM) for threat intelligence, and for testing a CREST Certified Red Team Manager (CCRTM) or a Cyber Scheme Red Team Manager (CSRTM), which the guide now accepts as an alternative, with CREST Certified Red Team Specialists (CCRTS). Certified individuals sign off major activities and deliverables. The firm reports any attempt by a provider to manipulate the process to CREST, and a provider reports manipulation by the firm to the regulator. SP 800-53 addresses supplier evaluation in general terms, but the CBEST accreditation regime is a regulatory function outside its scope."
     },
     {
       "id": "CBEST.9",

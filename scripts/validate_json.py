@@ -4,6 +4,7 @@ Validate JSON files against their schemas.
 """
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -45,6 +46,78 @@ def load_schema(schema_path: Path) -> dict:
     """Load a JSON schema file."""
     with open(schema_path, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+
+def consistency_checks() -> list:
+    """Things written in two places must agree. Each check here caught a real slip
+    (1 November 2026): a pattern title that differed from the manifest's, manifest
+    and description counts that no longer matched the control list, and mappings
+    whose coverage file and control files gave different answers."""
+    problems = []
+
+    # Patterns against the pattern manifest, and the counts their descriptions state
+    stated_count = re.compile(r'(?<![\d-])(\d+) NIST (?:SP )?800-53 controls')
+    manifest = json.load(open(DATA_DIR / "patterns" / "_manifest.json", encoding="utf-8"))
+    for entry in manifest.get("patterns", []):
+        path = DATA_DIR / "patterns" / entry["file"]
+        if not path.exists():
+            problems.append(f"{entry['id']}: manifest names {entry['file']}, which does not exist")
+            continue
+        pattern = json.load(open(path, encoding="utf-8"))
+        listed = len(pattern.get("controls", []))
+        if pattern.get("title") != entry.get("title"):
+            problems.append(f"{entry['id']}: title {pattern.get('title')!r} differs from the manifest's {entry.get('title')!r}")
+        if entry.get("controls") != listed:
+            problems.append(f"{entry['id']}: the manifest says {entry.get('controls')} controls, the pattern lists {listed}")
+        for found in stated_count.finditer(pattern.get("description", "")):
+            if int(found.group(1)) != listed:
+                problems.append(f"{entry['id']}: the description says {found.group(0)!r}, the pattern lists {listed}")
+
+    # relatedPatternNames are copies of the related patterns' titles, in the same order
+    titles = {}
+    for entry in manifest.get("patterns", []):
+        path = DATA_DIR / "patterns" / entry["file"]
+        if path.exists():
+            titles[entry["id"]] = json.load(open(path, encoding="utf-8")).get("title")
+    for entry in manifest.get("patterns", []):
+        path = DATA_DIR / "patterns" / entry["file"]
+        if not path.exists():
+            continue
+        pattern = json.load(open(path, encoding="utf-8"))
+        ids, names = pattern.get("relatedPatterns", []), pattern.get("relatedPatternNames", [])
+        if len(ids) != len(names):
+            problems.append(f"{entry['id']}: {len(ids)} relatedPatterns but {len(names)} relatedPatternNames")
+            continue
+        for rid, name in zip(ids, names):
+            if rid not in titles:
+                problems.append(f"{entry['id']}: related pattern {rid} is not in the manifest")
+            elif name != titles[rid]:
+                problems.append(f"{entry['id']}: names {rid} {name!r}; its title is {titles[rid]!r}")
+
+    # Each mapping: the coverage file's pairs and the control files' pairs are the same
+    control_manifest = json.load(open(DATA_DIR / "controls" / "_manifest.json", encoding="utf-8"))
+    mappings = {}
+    for entry in control_manifest.get("controls", []):
+        control = json.load(open(DATA_DIR / "controls" / entry["file"], encoding="utf-8"))
+        mappings[entry["id"]] = control.get("compliance_mappings", {})
+    for path in sorted((DATA_DIR / "framework-coverage").glob("*.json")):
+        coverage = json.load(open(path, encoding="utf-8"))
+        framework = coverage.get("framework_id")
+        if not framework:
+            problems.append(f"{path.name}: no framework_id")
+            continue
+        coverage_pairs = {(cid, clause["id"]) for clause in coverage.get("clauses", []) for cid in clause.get("controls", [])}
+        unknown = sorted({cid for cid, _ in coverage_pairs if cid not in mappings})
+        if unknown:
+            problems.append(f"{path.name}: names controls that are not in the catalogue: {', '.join(unknown)}")
+        control_pairs = {(cid, clause) for cid, cm in mappings.items() for clause in cm.get(framework, [])}
+        only_coverage, only_controls = coverage_pairs - control_pairs, control_pairs - coverage_pairs
+        if only_coverage or only_controls:
+            sample = ", ".join(f"{c} {cl}" for c, cl in sorted(only_coverage | only_controls)[:4])
+            problems.append(f"{path.name}: {len(only_coverage)} pairs only in the coverage file and {len(only_controls)} "
+                            f"only in the control files (such as {sample}); write the control side from the coverage "
+                            f"file, as the add-framework-mapping skill shows")
+    return problems
 
 
 def main():
@@ -144,6 +217,16 @@ def main():
                     continue
             validated += 1
             print(f"  OK: {filepath.name} ({len(data.get('clauses', []))} clauses, {data.get('summary', {}).get('average_coverage', 0)}%)")
+
+    # Patterns against their manifest, and each mapping's two sides
+    if errors == 0:
+        print("\nConsistency:")
+        problems = consistency_checks()
+        for line in problems:
+            print(f"  FAIL: {line}")
+        if not problems:
+            print("  OK: patterns match their manifest, and every mapping's coverage file matches the control files")
+        errors += len(problems)
 
     # Summary
     print(f"\nValidation complete: {validated} files OK, {errors} errors")

@@ -38,13 +38,13 @@ Top level: `$schema` (`"../schema/pattern.schema.json"`), `id`, `slug`, `title`,
 
 `references`: eight to twelve, each with `title`, `url` and `note`. Open every address and confirm it serves the document the title names. In October 2026 a check of all patterns found 27 addresses that returned 404, used in 24 patterns.
 
-`relatedPatterns`: a list of ids as strings (`["SP-029"]`), with `relatedPatternNames` in the same order.
+`relatedPatterns`: a list of ids as strings (`["SP-029"]`), with `relatedPatternNames` in the same order. Each name is the related pattern's title, exactly as it stands.
 
 `context`: `dataTypes`, `protocols`, `assetTypes`, `adversaryProfile`, `regulatoryScope` and `humanFactors`.
 
 ## 4. Manifest
 
-Add `{ "id": "SP-NNN", "title": "...", "status": "draft", "controls": N, "file": "SP-NNN-descriptive-title.json" }` to `data/patterns/_manifest.json` in number order, and raise `total_patterns` by one.
+Add `{ "id": "SP-NNN", "title": "...", "status": "draft", "controls": N, "file": "SP-NNN-descriptive-title.json" }` to `data/patterns/_manifest.json` in number order, and raise `total_patterns` by one. The manifest's `title` is the pattern's title, and `controls` is the length of its control list.
 
 ## 5. Names from NIST, then validate
 
@@ -53,7 +53,7 @@ python3 scripts/sync_nist.py        # writes each control's name as NIST has it
 python3 scripts/validate_json.py    # ends with 0 errors
 ```
 
-The validator compares every control name in a pattern with NIST's, so let the sync write the names.
+The validator compares every control name in a pattern with NIST's, so let the sync write the names. It also checks that the manifest's title and count match the pattern, that a count the description states ("Maps 38 NIST 800-53 controls") matches the control list, and that each related pattern's name matches its title. When a control list changes later, change the description's count and the manifest's with it.
 
 ## 6. The diagram
 

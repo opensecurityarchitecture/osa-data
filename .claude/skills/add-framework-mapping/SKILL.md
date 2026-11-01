@@ -27,7 +27,7 @@ OSA's data is CC BY-SA 4.0. The licence of the framework's text settles what the
 - The Secure Controls Framework: CC BY-ND 4.0 with an end-user licence agreement. Keep pairs derived from it out of OSA's data.
 - BSI Grundschutz++: CC BY-SA 4.0, so the file quotes BSI's titles as `title_de`, with the credit.
 - The Bank of Thailand's notification: under section 7 of Thailand's Copyright Act B.E. 2537, a state body's notification is not a copyright work, so the file quotes its Thai titles as `title_th`.
-- A publisher's mapping file that states no licence: use it for a private cross-check only.
+- A publisher's mapping file that states no licence: use it for a cross-check only (step 3b).
 
 ## 2. Look for a published crosswalk first
 
@@ -71,7 +71,7 @@ Then build the mapping:
 
 Record it under `metadata.analysis`: `basis`, `checked`, `texts`, `method`, `pairs_named_by_three`, `pairs_named_by_two`, `pairs_named_by_one_and_left_out`, `pairs_per_rating`, `agreement_measure`, `agreement`, `coverage_agreement`, `pairs_note`, `not_mapped`, and for a law `commencement`, its dates of application by provision. `data/framework-coverage/cis-controls-v8.json` is the model, and `bot-cyber.json` for a law.
 
-A publisher's own mapping may follow a different method, such as listing every related control. Compare it with OSA's privately, and let a founder decide before any file or page cites it.
+A publisher's own mapping may follow a different method, such as listing every related control. Compare it with OSA's privately, and let a founder decide before any file or page cites it. With a founder's yes, cite the comparison in `metadata.analysis.publisher_mapping`, in OSA's own words: the mapping's title, publisher, address and SHA-256, the date compared, the pairs in each and in both, and the main reasons the two differ. End `analysis.basis` with one sentence that gives the headline figure, since the framework page shows it. `data/framework-coverage/soc2-tsc.json` is the model.
 
 ## 4. Write the coverage file
 

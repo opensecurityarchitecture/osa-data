@@ -27,7 +27,7 @@ OSA's data is CC BY-SA 4.0. The licence of the framework's text settles what the
 - The Secure Controls Framework: CC BY-ND 4.0 with an end-user licence agreement. Keep pairs derived from it out of OSA's data.
 - BSI Grundschutz++: CC BY-SA 4.0, so the file quotes BSI's titles as `title_de`, with the credit.
 - The Bank of Thailand's notification: under section 7 of Thailand's Copyright Act B.E. 2537, a state body's notification is not a copyright work, so the file quotes its Thai titles as `title_th`.
-- A publisher's mapping file that states no licence: use it for a private cross-check only.
+- A publisher's mapping file that states no licence: use it for a cross-check only (step 3b).
 
 ## 2. Look for a published crosswalk first
 
@@ -52,7 +52,7 @@ The brief gives every rater:
 - the same inputs: the official text with the list of clause ids, and the control statements from `data/nist/sp800-53-rev5.json`;
 - a work folder of its own in the session's scratchpad. A rater works from its inputs alone, so it stays out of the other raters' folders, OSA's coverage files and patterns, the web and any publisher's mapping;
 - what to list: current base controls, in the form `AC-02`, whose statements, put in place, directly meet part of what the clause asks. A control that supports the clause or shares its topic stays off the list;
-- the house rules that settle common splits (`data/CLAUDE.md`, "Framework mappings"): a crosswalk pair on an enhancement counts for its base control, and customer authentication maps to IA-08, with IA-02 added where multi-factor or separate-device authentication is asked for;
+- the house rules that settle common splits (`data/CLAUDE.md`, "Framework mappings"): a crosswalk pair on an enhancement counts for its base control; customer authentication maps to IA-08, with IA-02 added where multi-factor or separate-device authentication is asked for; a clause that asks for security policies in general takes PM-01 and every other family's -01 control, with PT-01 too where it covers personal data; and a clause on one topic takes the -01 control of that topic's family only, or of each family the topic draws on;
 - the output, one JSON file: `{"rater", "method_notes", "clauses": [{"id", "controls": [{"id", "rationale"}], "coverage_pct", "gaps"}]}`, where `coverage_pct` estimates how much of the clause an organisation would meet by putting the listed controls in place;
 - a check script for the rater to write and run before it hands back. It confirms that the clause ids match the list, in order, that each control is one of the 300 current base controls (those without `withdrawn` in the extract) and is named once, that each coverage figure is a whole number from 0 to 100, and that the copy check below passes.
 
@@ -65,13 +65,14 @@ For an official text in another language, give every rater the same working Engl
 Then build the mapping:
 
 - Keep each pair that two or more raters name. A clause's coverage is the median of the three estimates.
+- Then apply the house rule for policy clauses, whatever the raters named: each clause that asks for security policies in general gets the full set of -01 controls. Record the pairs the rule adds under `metadata.analysis.policy_rule`, clause by clause, with how many of them a rater had named, and say in `method` that a control is listed where two raters named it or where the rule adds it. `bot-cyber.json` is the model.
 - Once the controls are settled, write the titles, rationale and gaps from the raters' reasons and from the gaps two or more raters named. Writer agents with a checker script do this well. Then have a reviewer read every clause against the control statements: in CIS the review caught a claim that no control statement makes.
 - Check with a script, as each rater does, that no run of seven or more words in a title, rationale or gap matches the source text. Hold titles further off under a licence with no derivatives: each CIS title shares at most three words in a row with CIS's own.
 - Report the agreement of each two raters as a Jaccard index, the pairs both named divided by the pairs either named. So far it has run from 0.66 to 0.87.
 
 Record it under `metadata.analysis`: `basis`, `checked`, `texts`, `method`, `pairs_named_by_three`, `pairs_named_by_two`, `pairs_named_by_one_and_left_out`, `pairs_per_rating`, `agreement_measure`, `agreement`, `coverage_agreement`, `pairs_note`, `not_mapped`, and for a law `commencement`, its dates of application by provision. `data/framework-coverage/cis-controls-v8.json` is the model, and `bot-cyber.json` for a law.
 
-A publisher's own mapping may follow a different method, such as listing every related control. Compare it with OSA's privately, and let a founder decide before any file or page cites it.
+A publisher's own mapping may follow a different method, such as listing every related control. Compare it with OSA's privately, and let a founder decide before any file or page cites it. With a founder's yes, cite the comparison in `metadata.analysis.publisher_mapping`, in OSA's own words: the mapping's title, publisher, address and SHA-256, the date compared, the pairs in each and in both, and the main reasons the two differ. End `analysis.basis` with one sentence that gives the headline figure, since the framework page shows it. `data/framework-coverage/soc2-tsc.json` is the model.
 
 ## 4. Write the coverage file
 

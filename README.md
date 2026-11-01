@@ -25,9 +25,9 @@ Each pattern names the controls that matter for a kind of system, says which are
 
 ## Where the mappings come from
 
-The mappings to ISO/IEC 27001:2022, NIST CSF 2.0, the HIPAA Security Rule and NERC CIP take crosswalks registered in NIST's catalogue (OLIR) as their base. Clauses that OSA adds beyond those crosswalks are recorded in the coverage file, under `metadata.crosswalk_check`, and marked on the site.
+The mappings to ISO/IEC 27001:2022, ISO/IEC 27002:2022 and NIST CSF 2.0 take every pair from crosswalks registered in NIST's catalogue (OLIR). NIST SP 800-171 Rev 3 and the SSDF follow NIST's own references to SP 800-53. The HIPAA Security Rule and NERC CIP take OLIR crosswalks as their base, and the clauses OSA adds beyond them are recorded in the coverage file, under `metadata.crosswalk_check`, and marked on the site.
 
-India's DPDPA, the NIST AI RMF, the EU AI Act, the NCSC CAF, OWASP's Top 10 lists for agentic and LLM applications, HKMA's TM-E-1, BSI's Grundschutz++, the Bank of Thailand's IT risk notification and the CIS Controls v8.1.2 were mapped from their official texts by three ratings, and each file records the texts and the method under `metadata.analysis`. The other mappings are OSA's own analysis. Every coverage file gives its rationale and gaps clause by clause, so you can check the reasoning against the framework's own text. Have a qualified assessor confirm a mapping before you rely on it for compliance or audit.
+India's DPDPA, the NIST AI RMF, the EU AI Act, the NCSC CAF, OWASP's Top 10 lists for agentic and LLM applications, HKMA's TM-E-1, BSI's Grundschutz++, the Bank of Thailand's IT risk notification, AICPA's Trust Services Criteria for SOC 2, the CIS Controls v8.1.2 and PCI DSS v4.0.1 were mapped from their official texts by three ratings, and each file records the texts and the method under `metadata.analysis`. The other mappings are OSA's own analysis. Every coverage file gives its rationale and gaps clause by clause, so you can check the reasoning against the framework's own text. Have a qualified assessor confirm a mapping before you rely on it for compliance or audit.
 
 ## Using the data
 

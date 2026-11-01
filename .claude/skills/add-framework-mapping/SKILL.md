@@ -21,7 +21,7 @@ Agree with the founder:
 
 Search NIST's catalogue of registered crosswalks (OLIR) and the publisher's own site.
 
-- The catalogue as JSON: `https://csrc.nist.gov/extensions/nudp/services/json/olir/informative-reference-catalog`. One entry, with its file's address and SHA-256: `.../informative-reference-catalog/details/{id}`. Send a browser-like User-Agent. The files are `.xlsx`.
+- The catalogue as JSON: `https://csrc.nist.gov/extensions/nudp/services/json/olir/informative-reference-catalog`. One entry, with its file's address and SHA-256: `.../informative-reference-catalog/details/{id}`. Send a User-Agent that names OSA, such as `osa-check/1.0 (+https://www.opensecurityarchitecture.org)`, and never one that poses as a browser. If the server refuses the request, ask a founder to download the file in a browser, or use another official copy. The files are `.xlsx`.
 - Read the licence before taking a crosswalk as the base. CIS's own SP 800-53 mapping, for one, is CC BY-NC-ND, so OSA can use it as a base only with CIS's permission.
 - Note the checksum of the file you used, and whether it matches the catalogue's.
 

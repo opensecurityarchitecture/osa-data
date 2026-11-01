@@ -50,7 +50,7 @@
         }
       ],
       "controls": "SP 800-53 Rev 5.2.0 base controls, current ones only. An enhancement that addresses a requirement counts for its base control, and the rationale names it. The multi-factor authentication requirements for the organisation's own users and administrators, 8.4.1, 8.4.2 and 8.5.1, list IA-02, whose enhancements ask for multi-factor authentication. Customer accounts and remote access that includes customers take IA-08. 8.3.10.1, on passwords as the only factor for customer accounts, lists it with IA-05. 8.4.3, multi-factor authentication for remote access from outside, which takes in vendors and customers, lists it with IA-02, and its rationale says that NIST writes IA-02 for the organisation's own users. Each x.1.1 requirement lists the policy and procedures controls, the -01s, of the families its principal requirement draws on. Each x.1.2 adds PS-09 for the duties in position descriptions, and 9.1.2, 10.1.2 and 11.1.2 add AT-03 for training the people who hold them. RA-03 is listed where PCI DSS lets a targeted risk analysis set how often the work is done, such as 5.3.2.1, 8.6.3 and 11.3.1.1, and where it asks for an assessment of risk itself, such as 12.3.1, 12.3.2 and A2.1.2. SP 800-53 writes its supplier controls from the customer's side. So the duties a service provider owes its customers, in 11.4.7, 12.9.1 and 12.9.2, list controls the provider runs, or SA-09 as the customer's side of the duty, and carry lower coverage.",
-      "method": "Six AI raters worked in two groups of three. One group rated the 136 requirements of Requirements 1 to 8, and the other the 121 of Requirements 9 to 12 and Appendices A1 and A2. Each rater worked on its own, from each requirement's text, applicability notes, customized approach objective and purpose, and from the control statements. None saw another's rating. OSA lists a control for a requirement where at least two of the three raters in its group named it. The coverage figure is the median of the three estimates of how much of the requirement an organisation would meet by putting the listed controls in place. OSA wrote the titles, rationale and gaps after the controls were settled, from the raters' reasons and the gaps at least two of them named.",
+      "method": "Six AI raters worked in two groups of three. One group rated the 136 requirements of Requirements 1 to 8, and the other the 121 of Requirements 9 to 12 and Appendices A1 and A2. Each rater worked on its own, from each requirement's text, applicability notes, customized approach objective and purpose, and from the control statements. None saw another's rating. OSA lists a control for a requirement where at least two of the three raters in its group named it, or where OSA's house rule for policy clauses adds it. The coverage figure is the median of the three estimates of how much of the requirement an organisation would meet by putting the listed controls in place. OSA wrote the titles, rationale and gaps after the controls were settled, from the raters' reasons and the gaps at least two of them named.",
       "pairs_named_by_three": 519,
       "pairs_named_by_two": 50,
       "pairs_named_by_one_and_left_out": 93,
@@ -118,7 +118,24 @@
       ],
       "agreement_by_group_note": "Each group had its own three ratings, A, B and C. The overall figures pool the ratings with the same letter across the two groups. By group, the index runs from 0.83 to 0.87.",
       "coverage_agreement": "The three coverage estimates for a requirement lie within 10 points of each other for 254 of the 257 requirements. The widest spread is 15 points, for 1.2.5, 6.5.6 and 10.6.2.",
-      "pairs_note": "The file lists 569 pairs over 139 controls, the 519 named by all three ratings and the 50 named by two. Every requirement lists at least one control. 177 of the 257 list one or two, and 1.5.1, 6.2.4, 11.1.2 and 12.10.1 list the most, 5 each.",
+      "pairs_note": "The file lists 605 pairs over 145 controls: the 519 named by all three ratings, the 50 named by two and the 36 that OSA's rule for policy clauses adds to 12.1.1 and 12.1.2. Every requirement lists at least one control. 175 of the 257 list one or two. 12.1.1 and 12.1.2 list the most, 19 each, followed by 1.5.1, 6.2.4, 11.1.2 and 12.10.1 with 5 each.",
+      "policy_rule": {
+        "rule": "OSA's house rule for policy clauses, set on 1 November 2026: a clause that asks for security policies in general lists PM-01 with every other family's -01 control, the set NIST's crosswalk gives ISO/IEC 27001:2022 A.5.1, and PT-01 as well where it covers personal data.",
+        "pairs_added": 36,
+        "clauses": [
+          {
+            "clause": "12.1.1",
+            "pairs_added": 18,
+            "named_by_one_rater": 0
+          },
+          {
+            "clause": "12.1.2",
+            "pairs_added": 18,
+            "named_by_one_rater": 0
+          }
+        ],
+        "note": "All three raters named PM-01 alone for each requirement, so the 36 pairs come from the rule. The overall policy covers security as a whole, so PT-01 stays out."
+      },
       "not_mapped": "OSA maps every numbered requirement in force in Requirements 1 to 12 and Appendices A1 and A2, 257 in all. PCI DSS v4.0.1 replaced three requirements on 31 March 2025, and OSA maps their successors: 6.4.1 by 6.4.2, 8.3.10 by 8.3.10.1 and 10.7.1 by 10.7.2. Appendix A3, the designated entities supplemental validation (A3.1.1 to A3.5.1, 20 requirements), applies only to entities that a payment brand or acquirer designates, so OSA leaves it out of this mapping."
     }
   },
@@ -2727,10 +2744,28 @@
       "title": "Information security policy shared with staff and partners",
       "section": "12.1",
       "controls": [
-        "PM-01"
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PL-01",
+        "PM-01",
+        "PS-01",
+        "RA-01",
+        "SA-01",
+        "SC-01",
+        "SI-01",
+        "SR-01"
       ],
       "coverage_pct": 75,
-      "rationale": "PM-01 asks for an organisation-wide information security programme plan that sets out the programme's requirements and the controls that meet them. A senior official approves it. The organisation shares it and keeps it up to date on a cycle it sets.",
+      "rationale": "PM-01 asks for an organisation-wide information security programme plan that sets out the programme's requirements and the controls that meet them. A senior official approves it. The organisation shares it and keeps it up to date on a cycle it sets. The policy controls of the other families, such as AC-01 and IR-01, supply the policy for each topic the overall policy covers, under OSA's rule for policy clauses, which follows NIST's crosswalks.",
       "gaps": "PCI DSS asks for the policy to reach relevant vendors and business partners as well as staff. Send each of them the current version."
     },
     {
@@ -2738,11 +2773,29 @@
       "title": "Yearly review and update of the security policy",
       "section": "12.1",
       "controls": [
-        "PM-01"
+        "AC-01",
+        "AT-01",
+        "AU-01",
+        "CA-01",
+        "CM-01",
+        "CP-01",
+        "IA-01",
+        "IR-01",
+        "MA-01",
+        "MP-01",
+        "PE-01",
+        "PL-01",
+        "PM-01",
+        "PS-01",
+        "RA-01",
+        "SA-01",
+        "SC-01",
+        "SI-01",
+        "SR-01"
       ],
       "coverage_pct": 90,
-      "rationale": "PM-01 has the organisation review and update its information security programme plan at a frequency it sets. The organisation also updates the plan after events it defines, such as a change in business objectives or risk.",
-      "gaps": "PCI DSS sets a review at least every 12 months. Set that frequency in PM-01."
+      "rationale": "PM-01 has the organisation review and update its information security programme plan at a frequency it sets. The organisation also updates the plan after events it defines, such as a change in business objectives or risk. The policy control of each other family, such as AC-01 and IR-01, does the same for the policy on its topic, under OSA's rule for policy clauses, which follows NIST's crosswalks.",
+      "gaps": "PCI DSS sets a review at least every 12 months. Set that frequency in PM-01 and in each policy control."
     },
     {
       "id": "12.1.3",

@@ -43,3 +43,4 @@ Other lookups, each one request:
 - The crosswalk runs from control to clause. The framework card runs from clause to control. For the clauses a set of controls reaches and does not reach, such as a pattern's, send their ids to `/api/v1/crosswalk?controls=AC-02,SI-04&framework=nis2`. A clause reached is a candidate to review, not a finding that it is met.
 - Patterns marked `(draft)` in `llms.txt` are not final.
 - Found an error? Open an issue at https://github.com/opensecurityarchitecture/osa-data/issues with the id, what OSA says and what the source says.
+- Built a pattern? Report it at https://github.com/opensecurityarchitecture/osa-data/issues/new?template=implementation-report.md with what you built, how you tested it and what the pattern should say.

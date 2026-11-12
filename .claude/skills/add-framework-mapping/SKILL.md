@@ -15,8 +15,10 @@ Agree with the founder:
 
 - the id (`^[a-z][a-z0-9_]+$`, such as `eu_ai_act`), the slug (`eu-ai-act`), the name, publisher, version and region;
 - the official text, in the version in force, from the publisher. For EU law use `https://publications.europa.eu/resource/celex/<CELEX>`, because EUR-Lex refuses automated fetches. Where the publisher gives the text out only through a form or a login, a founder downloads it: leave such forms to the founders;
-- the clause level, which is the level at which the framework is applied: articles, paragraphs or subcategories. CIS is applied by its safeguards. SOC 2 is applied by its criteria, each read with its points of focus. Grundschutz++ is applied by its base requirements, with their enhancements folded in, and BOT's IT risk notification by the items of its attachments plus the sections that bind in their own right;
+- the clause level, which is the level at which the framework is applied: articles, paragraphs or subcategories. CIS is applied by its safeguards. SOC 2 is applied by its criteria, each read with its points of focus. Grundschutz++ is applied by its base requirements, with their enhancements folded in. C5:2026 is applied by its 168 criteria, with their optional additional criteria folded in the same way, and BOT's IT risk notification by the items of its attachments plus the sections that bind in their own right;
 - the licences, below.
+
+Where the publisher's versions in two languages differ, rate from one and compare the other with it, sub-criterion by sub-criterion. Two agents shared the work for C5:2026, whose English version 1.0.2 trailed the German 1.1.1. They found 31 small differences, none of which changed a control. Record the version used and the differences in `metadata.edition`.
 
 ### Licences
 
@@ -26,6 +28,7 @@ OSA's data is CC BY-SA 4.0. The licence of the framework's text settles what the
 - HKMA: its terms allow its text to be reproduced unchanged and for non-commercial use, so the titles are OSA's own.
 - The Secure Controls Framework: CC BY-ND 4.0 with an end-user licence agreement. Keep pairs derived from it out of OSA's data.
 - BSI Grundschutz++: CC BY-SA 4.0, so the file quotes BSI's titles as `title_de`, with the credit.
+- BSI C5:2026: CC BY-ND 4.0. As for CIS, the file keeps BSI's criterion and sub-criterion ids, with OSA's own titles, rationale and gaps.
 - The Bank of Thailand's notification: under section 7 of Thailand's Copyright Act B.E. 2537, a state body's notification is not a copyright work, so the file quotes its Thai titles as `title_th`.
 - A publisher's mapping file that states no licence: use it for a cross-check only (step 3b).
 
@@ -54,7 +57,7 @@ The brief gives every rater:
 - what to list: current base controls, in the form `AC-02`, whose statements, put in place, directly meet part of what the clause asks. A control that supports the clause or shares its topic stays off the list;
 - the house rules that settle common splits (`data/CLAUDE.md`, "Framework mappings"): a crosswalk pair on an enhancement counts for its base control; customer authentication maps to IA-08, with IA-02 added where multi-factor or separate-device authentication is asked for; a clause that asks for security policies in general takes PM-01 and every other family's -01 control, with PT-01 too where it covers personal data; and a clause on one topic takes the -01 control of that topic's family only, or of each family the topic draws on;
 - the output, one JSON file: `{"rater", "method_notes", "clauses": [{"id", "controls": [{"id", "rationale"}], "coverage_pct", "gaps"}]}`, where `coverage_pct` estimates how much of the clause an organisation would meet by putting the listed controls in place;
-- a check script for the rater to write and run before it hands back. It confirms that the clause ids match the list, in order, that each control is one of the 300 current base controls (those without `withdrawn` in the extract) and is named once, that each coverage figure is a whole number from 0 to 100, and that the copy check below passes.
+- a check script to run before it hands back. Each rater may write its own, or you can give every rater the same tested script, as C5's raters had. It confirms that the clause ids match the list, in order, that each control is one of the 300 current base controls (those without `withdrawn` in the extract) and is named once, that each coverage figure is a whole number from 0 to 100, and that the copy check below passes.
 
 Rate a large framework in groups of about 120 to 150 clauses, with three raters to a group. Grundschutz++ took five groups.
 
@@ -65,7 +68,7 @@ For an official text in another language, give every rater the same working Engl
 Then build the mapping:
 
 - Keep each pair that two or more raters name. A clause's coverage is the median of the three estimates.
-- Then apply the house rule for policy clauses, whatever the raters named: each clause that asks for security policies in general gets the full set of -01 controls. Record the pairs the rule adds under `metadata.analysis.policy_rule`, clause by clause, with how many of them a rater had named, and say in `method` that a control is listed where two raters named it or where the rule adds it. `bot-cyber.json` is the model.
+- Then apply the house rule for policy clauses, whatever the raters named: each clause that asks for security policies in general gets the full set of -01 controls. The brief gives the raters this rule, so they may name the whole set themselves: two or more did for each of C5's three policy criteria, and the rule added nothing. Record the pairs the rule adds under `metadata.analysis.policy_rule`, clause by clause, with how many of them a rater had named. List the rule's clauses there even when it adds no pairs. Say in `method` that a control is listed where two raters named it or where the rule adds it. `bot-cyber.json` is the model.
 - Once the controls are settled, write the titles, rationale and gaps from the raters' reasons and from the gaps two or more raters named. Writer agents with a checker script do this well. Then have a reviewer read every clause against the control statements: in CIS the review caught a claim that no control statement makes.
 - Check with a script, as each rater does, that no run of seven or more words in a title, rationale or gap matches the source text. Hold titles further off under a licence with no derivatives: each CIS title shares at most three words in a row with CIS's own.
 - Report the agreement of each two raters as a Jaccard index, the pairs both named divided by the pairs either named. So far it has run from 0.66 to 0.87.
